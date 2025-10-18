@@ -79,7 +79,32 @@ A comprehensive modding toolkit and documentation project for SpellForce: The Or
 
 ## 🔄 In Progress Tasks
 
-_(Currently no active tasks)_
+### Phase 3A: Audio Asset Extraction (In Progress - Oct 18, 2025)
+
+**Status**: 🟡 PLANNING COMPLETE - Ready to Execute
+
+**Summary**: Comprehensive plan to extract and catalog 1,000-1,150+ audio files including music, sound effects, and voice acting.
+
+**Scope**:
+- **Music Tracks (MP3):** ~110-130 files
+- **Sound Effects (WAV):** ~800-1,000+ files
+- **Categories:** 20+ types (combat, spells, music, work, ambient, etc.)
+
+**Tools Created**:
+- `src/helper_tools/extract_audio_assets.py` - Scans scripts and PAK data for audio files
+- `src/helper_tools/extract_audio_batch.bat` - Launches SpellforceDataEditor for extraction
+- Complete extraction plan: `AUDIO_EXTRACTION_PLAN.md`
+
+**Next Steps**:
+1. ⏳ Run `extract_audio_assets.py` to generate extraction lists
+2. ⏳ Extract all music tracks (~130 MP3 files)
+3. ⏳ Extract sound effects by category (~800-1,000 WAV files)
+4. ⏳ Convert to modern formats (FLAC, OGG)
+5. ⏳ Create audio catalog and interactive browser
+
+**Documentation**:
+- Master plan: `AUDIO_EXTRACTION_PLAN.md`
+- Extraction lists: `ExtractedAssets/Audio/extraction_lists/` (will be generated)
 
 ---
 
@@ -103,9 +128,15 @@ _(Currently no active tasks)_
 - [ ] Build material/shader documentation
 
 #### Sounds & Music
-- [ ] Extract all sound effects from PAK archives
-- [ ] Extract music tracks
+- ✅ Audio system analysis complete
+- ✅ Created extraction tools (extract_audio_assets.py)
+- ✅ Documented sound categories and organization
+- ✅ Created comprehensive extraction plan
+- [ ] Extract all music tracks (~130 MP3 files)
+- [ ] Extract all sound effects (~800-1,000 WAV files)
 - [ ] Organize by category (combat, ambient, spells, etc.)
+- [ ] Convert to modern formats (FLAC, OGG)
+- [ ] Create audio catalog and browser
 - [ ] Document sound event system integration
 - [ ] Create sound replacement guide
 
