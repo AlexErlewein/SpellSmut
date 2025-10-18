@@ -1,0 +1,76 @@
+LABEL_LOGGED_IN_AS Logged to Steam as:
+LABEL_NOT_LOGGED_IN Not logged to Steam
+BUTTON_MOD_LOADER Mod Loader
+BUTTON_STEAM_WORKSHOP Steam Workshop
+MESSAGEBOX_STEAM_NOT_SUPPORTED Steam is not supported by this application
+MESSAGEBOX_STEAM_NOT_LOGGED_IN Steam is not logged in
+FORM_MOD_LAUNCHER Mod Launcher
+
+LABEL_ACTIVE_MODS Active mods
+LABEL_AVAILABLE_MODS Available mods
+BUTTON_SET_GAME_FOLDER Set game folder
+BUTTON_APPLY Apply
+BUTTON_LAUNCH_GAME Launch game
+MESSAGEBOX_CONFIRM_CHANGES_TITLE Confirm changes
+MESSAGEBOX_CONFIRM_CHANGES_TEXT Mod list was modified. Press OK to apply changes and launch the game, Cancel to abort.
+MESSAGEBOX_LAUNCH_ERROR_TITLE Error
+MESSAGEBOX_LAUNCH_ERROR_TEXT Could not find game executable (game path: {0})
+
+LABEL_USER_WORKSHOP_ITEMS User Workshop items
+LABEL_EULA_NOTICE You must accept Steam Workshop EULA in order to create new Workshop items.
+LABEL_ITEM_TITLE Title
+LABEL_ITEM_DESCRIPTION Description
+LABEL_ITEM_CHANGENOTE Change note
+LABEL_MOD_FILES_LOCATION Mod files location
+LABEL_PREVIEW_IMAGE Workshop preview image
+LABEL_ITEM_VISIBILITY Workshop item visibility
+LABEL_ITEM_TAGS Workshop item tags
+LABEL_ITEM_ID Item ID
+LABEL_STEAM_PREPARING_CONFIG Preparing config
+LABEL_STEAM_PREPARING_CONTENT Preparing content
+LABEL_STEAM_UPLOADING_CONTENT Uploading content
+LABEL_STEAM_UPLOADING_PREVIEW_FILE Uploading preview image
+LABEL_STEAM_COMMITTING_CHANGES Committing changes
+BUTTON_EULA_STATUS Check EULA Status
+BUTTON_CREATE_NEW_ITEM Create new item
+BUTTON_EDIT_DESCRIPTION Edit description
+BUTTON_EDIT_CHANGENOTE Edit change note
+BUTTON_SELECT_LOCATION Select location
+BUTTON_SELECT_IMAGE Select image
+BUTTON_DELETE_ITEM Delete item
+BUTTON_UPDATE Update
+RADIO_HIDDEN Hidden
+RADIO_FRIENDS Friends only
+RADIO_PUBLIC Public
+CHECKBOX_TAG_SINGLEPLAYER Singleplayer
+CHECKBOX_TAG_MULTIPLAYER Multiplayer
+CHECKBOX_TAG_VISUAL_CHANGES Visual changes
+CHECKBOX_TAG_GAMEPLAY_CHANGES Gameplay changes
+CHECKBOX_TAG_NEW_MAPS New maps
+MESSAGEBOX_UPDATE_FAILED_TEXT Some of the required fields are missing or invalid.
+MESSAGEBOX_UPDATE_FAILED_TITLE Error while updating item
+FORM_CHANGE_DESCRIPTION Set new description
+FORM_CHANGE_CHANGENOTE Set change note
+
+BUTTON_OK OK
+BUTTON_CANCEL Cancel
+
+STATUS_READY Ready
+STATUS_GAME_FOLDER_NOT_FOUND Could not find game folder
+STATUS_LOADING_MOD_LIST Loading mod list
+STATUS_LOADING_MOD_INFO Loading mod info
+STATUS_MODS_NOT_LOADED Can't apply changes: Mods are not loaded
+STATUS_CHANGES_APPLIED Changes applied
+STATUS_RETRIEVING_LIST_OF_ITEMS Retrieving list of items
+STATUS_UPDATING_LIST_OF_ITEMS Updating list of items
+STATUS_CHECKING_EULA Checking EULA status
+STATUS_CREATING_ITEM Creating new item
+STATUS_COULD_NOT_RETRIEVE_LIST Could not retrieve list of items
+STATUS_ITEM_CREATED Item created
+STATUS_COULD_NOT_CREATE_ITEM Could not create item
+STATUS_ITEM_DELETED Item deleted
+STATUS_COULD_NOT_DELETE_ITEM Could not delete item
+STATUS_ITEM_UPDATED Item updated
+STATUS_COULD_NOT_UPDATE_ITEM Could not update item
+STATUS_UPDATING_ITEM Updating item
+STATUS_DELETING_ITEM Deleting item

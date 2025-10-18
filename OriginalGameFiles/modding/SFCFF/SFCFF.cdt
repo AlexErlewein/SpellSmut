@@ -1,0 +1,67 @@
+#APP_TXT_DIC:SF1_CFF_CDT
+##########################
+# Chunk description text #
+##########################################################################
+# DO NOT EDIT THE IDs!                                                   #
+# You may localize the text, but there's no guarantee that it will work. #
+##########################################################################
+# 0
+0x00000000=<INVALID CHUNK ID>
+# 2000
+0x000007D0=PlayerMain
+0x000007D1=UnitDependencies
+0x000007D2=Spells
+0x000007D3=Items
+0x000007D4=ItemStats
+0x000007D5=Creos
+0x000007D6=CreoAbilities
+0x000007D7=InventoryEquip
+0x000007D8=InventorySpell
+0x000007D9=InventorySpellBook
+0x000007DA=EquipChar
+0x000007DB=SpellMemory
+0x000007DC=ItemGfx2D
+0x000007DD=ItemChangeList
+0x000007DE=ItemSpells
+0x000007DF=ItemWarStats
+0x000007E0=Strings
+0x000007E1=ItemConditions
+0x000007E2=ItemSpellReference
+0x000007E6=Racevalues
+0x000007E7=FactionsAggro
+0x000007E8=Units
+0x000007E9=UnitEquipment
+0x000007EA=UnitSpells
+0x000007EB=UnitActions
+0x000007EC=UnitMaterials
+0x000007ED=BuildingBase
+0x000007EE=BuildingOutlines
+0x000007EF=BuildingBuildUpPile
+0x000007F0=TextureParams
+0x000007F4=Upgrades
+0x000007F6=Scripts
+0x000007F7=AbilityStringIds
+0x000007F8=UnitLoot
+0x000007F9=Merchants
+0x000007FA=MerchantItems
+0x000007FC=Goods
+0x000007FF=MerchantModifiers
+0x00000800=XPTable
+0x00000801=Heads
+0x00000802=Objects
+0x00000803=NPCs
+0x00000804=Platforms
+0x00000805=Portals
+0x00000806=SpellLines
+0x00000807=Effects
+0x00000808=SpellLineEffects
+0x00000809=ObjectOutlines
+0x0000080A=UILocalisation
+0x0000080B=UIExtToolTips
+0x0000080D=Quests
+0x0000080E=AbilityConditions
+0x0000080F=WeaponTypes
+0x00000810=WeaponMaterials
+0x00000811=ObjectLoot
+0x00000813=CreoSpells
+0x00000818=ItemSets

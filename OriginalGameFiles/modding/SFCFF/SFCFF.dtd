@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT XMLChunk ((
+	UnitDependencies
+	| Spells
+	| Items
+	| ItemStats
+	| Creos
+	| CreoAbilities
+	| ItemGfx2Ds
+	| ItemChangeLists
+	| ItemSpells
+	| ItemWarStats
+	| Strings
+	| ItemConditions
+	| ItemSpellReferences
+	| RaceValues
+	| FactionsAggros
+	| Units
+	| UnitEquipment
+	| UnitSpells
+	| UnitMaterials
+	| BuildingBases
+	| BuildingOutlines
+	| BuildingBuildUpPiles
+	| TextureParams
+	| Upgrades
+	| AbilityStringIds
+	| UnitLoots
+	| Merchants
+	| MerchantItems
+	| Goods
+	| MerchantModifiers
+	| XPTable
+	| Heads
+	| Objects
+	| NPCs
+	| Platforms
+	| Portals
+	| SpellLines
+	| Effects
+	| SpellLineEffects
+	| ObjectOutlines
+	| Localisations
+	| ExtToolTips
+	| Quests
+	| AbilityConditions
+	| WeaponTypes
+	| WeaponMaterials
+	| ObjectLoots
+	| CreoSpells
+	| ItemSets
+)?)>
+
+<!ATTLIST XMLChunk
+	Type CDATA #REQUIRED
+	SubType CDATA #REQUIRED
+	Flags CDATA #REQUIRED
+	Version CDATA #REQUIRED
+>
+
+<!ELEMENT UnitDependencies (UnitDependency*)>
+<!ELEMENT UnitDependency EMPTY>
+<!ATTLIST UnitDependency
+	UnitID CDATA #REQUIRED
+	Count CDATA #REQUIRED
+	BuildingID CDATA #REQUIRED
+>
+
+<!ELEMENT Spells (Spell*)>
+<!ELEMENT Spell (RequiredAbilities, SpellData)>
+<!ATTLIST Spell
+	ID CDATA #REQUIRED
+	SpellLine CDATA #REQUIRED
+	ManaUsage CDATA #REQUIRED
+	CastTime CDATA #REQUIRED
+	RecastTime CDATA #REQUIRED
+	RangeMin CDATA #REQUIRED
+	RangeMax CDATA #REQUIRED
+	Faction CDATA #REQUIRED
+	TargetType CDATA #REQUIRED
+	EffectPower CDATA #IMPLIED
+	EffectRange CDATA #IMPLIED
+>
+
+<!ELEMENT RequiredAbilities (Ability*)>
+<!ELEMENT Ability EMPTY>
+<!ATTLIST Ability
+	ID CDATA #REQUIRED
+	Specialisation CDATA #REQUIRED
+	Level CDATA #REQUIRED
+>
+
+<!ELEMENT SpellData (Data*)>
+<!ELEMENT Data EMPTY>
+<!ATTLIST Data
+	iValue CDATA #REQUIRED
+>
+
+<!ELEMENT Items (Item*)>
+<!ELEMENT Item (ItemCategory)>
+<!ATTLIST Item
+	ItemID CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+	CreoID CDATA #IMPLIED
+	UnitID CDATA #IMPLIED
+	BuildingID CDATA #IMPLIED
+	Flags CDATA #IMPLIED
+	MerchantPurchasePrice CDATA #IMPLIED
+	MerchantSalesPrice CDATA #IMPLIED
+	SetID CDATA #IMPLIED
+>
+
+<!ELEMENT ItemCategory EMPTY>
+<!ATTLIST ItemCategory
+	Category CDATA #REQUIRED
+	SubCategory CDATA #IMPLIED
+>
+
+<!ELEMENT ItemStats (ItemStat*)>
+<!ELEMENT ItemStat EMPTY>
+<!ATTLIST ItemStat
+	ItemID CDATA #REQUIRED
+	Strength CDATA #IMPLIED
+	Stamina CDATA #IMPLIED
+	Agility CDATA #IMPLIED
+	Dexterity CDATA #IMPLIED
+	Life CDATA #IMPLIED
+	Charisma CDATA #IMPLIED
+	Intelligence CDATA #IMPLIED
+	Wisdom CDATA #IMPLIED
+	Mana CDATA #IMPLIED
+	AC CDATA #IMPLIED
+	ResistFire CDATA #IMPLIED
+	ResistIce CDATA #IMPLIED
+	ResistBlackMagic CDATA #IMPLIED
+	ResistMindMagic CDATA #IMPLIED
+	WalkSpeed CDATA #IMPLIED
+	FightSpeed CDATA #IMPLIED
+	CastSpeed CDATA #IMPLIED
+>
+
+<!ELEMENT Creos (Creo*)>
+<!ELEMENT Creo EMPTY>
+<!ATTLIST Creo
+	CreoID CDATA #REQUIRED
+	Level CDATA #REQUIRED
+	Race CDATA #REQUIRED
+	Agility CDATA #REQUIRED
+	Charisma CDATA #REQUIRED
+	Dexterity CDATA #REQUIRED
+	Intelligence CDATA #REQUIRED
+	Stamina CDATA #REQUIRED
+	Strength CDATA #REQUIRED
+	Wisdom CDATA #REQUIRED
+	RandomInit CDATA #IMPLIED
+	ResistFire CDATA #IMPLIED
+	ResistIce CDATA #IMPLIED
+	ResistBlackMagic CDATA #IMPLIED
+	ResistMindMagic CDATA #IMPLIED
+	WalkSpeed CDATA #IMPLIED
+	FightSpeed CDATA #IMPLIED
+	CastSpeed CDATA #IMPLIED
+	Scaling CDATA #IMPLIED
+	ManaUsage CDATA #IMPLIED
+	CastTime CDATA #IMPLIED
+	Flags CDATA #IMPLIED
+	Head CDATA #IMPLIED
+	EquipMode CDATA #IMPLIED
+>
+
+<!ELEMENT CreoAbilities (CreoAbility*)>
+<!ELEMENT CreoAbility (Ability)>
+<!ATTLIST CreoAbility
+	CreoID CDATA #REQUIRED
+>
+
+<!ELEMENT ItemGfx2Ds (ItemGfx2D*)>
+<!ELEMENT ItemGfx2D EMPTY>
+<!ATTLIST ItemGfx2D
+	ItemID CDATA #REQUIRED
+	Count CDATA #REQUIRED
+	DisplayMode CDATA #IMPLIED
+	UseAlphaMesh CDATA #IMPLIED
+	MeshName CDATA #REQUIRED
+>
+
+<!ELEMENT ItemChangeLists (ItemChangeList*)>
+<!ELEMENT ItemChangeList EMPTY>
+<!ATTLIST ItemChangeList
+	ItemID CDATA #REQUIRED
+	NewItemID CDATA #REQUIRED
+>
+
+<!ELEMENT ItemSpells (ItemSpell*)>
+<!ELEMENT ItemSpell EMPTY>
+<!ATTLIST ItemSpell
+	ItemID CDATA #REQUIRED
+	Count CDATA #REQUIRED
+	SpellID CDATA #REQUIRED
+>
+
+<!ELEMENT ItemWarStats (ItemWarStat*)>
+<!ELEMENT ItemWarStat EMPTY>
+<!ATTLIST ItemWarStat
+	ItemID CDATA #REQUIRED
+	DamageMin CDATA #REQUIRED
+	DamageMax CDATA #REQUIRED
+	RangeMin CDATA #IMPLIED
+	RangeMax CDATA #IMPLIED
+	Speed CDATA #IMPLIED
+	WeaponType CDATA #REQUIRED
+	WeaponMaterial CDATA #REQUIRED
+>
+
+<!ELEMENT Strings (String*)>
+<!ELEMENT String EMPTY>
+<!ATTLIST String
+	ID CDATA #REQUIRED
+	Language CDATA #REQUIRED
+	Dialog CDATA #IMPLIED
+	Tag CDATA #IMPLIED
+	String CDATA #REQUIRED
+>
+
+<!ELEMENT ItemConditions (ItemCondition*)>
+<!ELEMENT ItemCondition (Ability?)>
+<!ATTLIST ItemCondition
+	ItemID CDATA #REQUIRED
+	Count CDATA #REQUIRED
+>
+
+<!ELEMENT ItemSpellReferences (ItemSpellReference*)>
+<!ELEMENT ItemSpellReference EMPTY>
+<!ATTLIST ItemSpellReference
+	ItemID CDATA #REQUIRED
+	SpellID CDATA #REQUIRED
+>
+
+<!ELEMENT RaceValues (RaceValue*)>
+<!ELEMENT RaceValue EMPTY>
+<!ATTLIST RaceValue
+	CreoID CDATA #REQUIRED
+	DayVisRange CDATA #IMPLIED
+	NightVisRange CDATA #IMPLIED
+	HearRange CDATA #IMPLIED
+	AggressionRange CDATA #REQUIRED
+	Morale CDATA #REQUIRED
+	AggressionAdaptation CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+	Flags CDATA #REQUIRED
+	Faction CDATA #REQUIRED
+	SensitivityVSBlunt CDATA #IMPLIED
+	SensitivityVSSlash CDATA #IMPLIED
+	AIFlags CDATA #REQUIRED
+	GroupSizeMin CDATA #IMPLIED
+	GroupSizeMax CDATA #IMPLIED
+	GroupChance CDATA #IMPLIED
+	GroupFormationType CDATA #IMPLIED
+	Flee CDATA #IMPLIED
+	RetreatOnDamage CDATA #IMPLIED
+	RetreatFollow CDATA #IMPLIED
+	FightSpeed CDATA #IMPLIED
+>
+
+<!ELEMENT FactionsAggros (FactionsAggro*)>
+<!ELEMENT FactionsAggro EMPTY>
+<!ATTLIST FactionsAggro
+	FactionSource CDATA #REQUIRED
+	FactionTarget CDATA #REQUIRED
+	AggressionValue CDATA #REQUIRED
+>
+
+<!ELEMENT Units (Unit*)>
+<!ELEMENT Unit EMPTY>
+<!ATTLIST Unit
+	UnitID CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+	CreoID CDATA #REQUIRED
+	XP CDATA #REQUIRED
+	XPThreshold CDATA #REQUIRED
+	CoinDropAverage CDATA #REQUIRED
+	CoinDropRandom CDATA #REQUIRED
+	Type CDATA #REQUIRED
+	MeatAmount CDATA #REQUIRED
+	ACBase CDATA #REQUIRED
+	Flags CDATA #REQUIRED
+	Description CDATA #REQUIRED
+>
+
+<!ELEMENT UnitEquipment (UnitEquipmentSlot*)>
+<!ELEMENT UnitEquipmentSlot EMPTY>
+<!ATTLIST UnitEquipmentSlot
+	UnitID CDATA #REQUIRED
+	SlotType CDATA #REQUIRED
+	ItemID CDATA #REQUIRED
+>
+
+<!ELEMENT UnitSpells (UnitSpell*)>
+<!ELEMENT UnitSpell EMPTY>
+<!ATTLIST UnitSpell
+	UnitID CDATA #REQUIRED
+	Count CDATA #REQUIRED
+	SpellID CDATA #REQUIRED
+>
+
+<!ELEMENT UnitMaterials (UnitMaterial*)>
+<!ELEMENT UnitMaterial EMPTY>
+<!ATTLIST UnitMaterial
+	UnitID CDATA #REQUIRED
+	Good CDATA #REQUIRED
+	Count CDATA #REQUIRED
+>
+
+<!ELEMENT BuildingBases (BuildingBase*)>
+<!ELEMENT BuildingBase EMPTY>
+<!ATTLIST BuildingBase
+	BuildingID CDATA #REQUIRED
+	RaceID CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+	UIExtTTId CDATA #IMPLIED
+	LifePoints CDATA #REQUIRED
+	WorkerPlaces CDATA #IMPLIED
+	MaxWorkers CDATA #IMPLIED
+	OutlineCount CDATA #IMPLIED
+	SpecialWalkJobDuration CDATA #IMPLIED
+	DependentBuildingID CDATA #IMPLIED
+	CenterOfRotationX CDATA #IMPLIED
+	CenterOfRotationY CDATA #IMPLIED
+	AngleOffset CDATA #IMPLIED
+	Flags CDATA #IMPLIED
+>
+
+<!ELEMENT BuildingOutlines (BuildingOutline*)>
+<!ELEMENT BuildingOutline (Coords2D+)>
+<!ATTLIST BuildingOutline
+	BuildingID CDATA #REQUIRED
+	OutlineID CDATA #REQUIRED
+	bCastShadow CDATA #REQUIRED
+>
+
+<!ELEMENT Coords2D EMPTY>
+<!ATTLIST Coords2D
+	X CDATA #REQUIRED
+	Y CDATA #REQUIRED
+>
+
+<!ELEMENT BuildingBuildUpPiles (BuildingBuildUpPile*)>
+<!ELEMENT BuildingBuildUpPile EMPTY>
+<!ATTLIST BuildingBuildUpPile
+	BuildingID CDATA #REQUIRED
+	GoodID CDATA #REQUIRED
+	Amount CDATA #REQUIRED
+>
+
+<!ELEMENT TextureParams (TextureParam*)>
+<!ELEMENT TextureParam EMPTY>
+<!ATTLIST TextureParam
+	ID CDATA #REQUIRED
+	BlockValue CDATA #REQUIRED
+	CultivationFlags CDATA #REQUIRED
+>
+
+<!ELEMENT Upgrades (Upgrade*)>
+<!ELEMENT Upgrade EMPTY>
+<!ATTLIST Upgrade
+	UpgradeID CDATA #REQUIRED
+	BuildingID CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+	UIExtTTId CDATA #REQUIRED
+	ResFood CDATA #IMPLIED
+	ResWood CDATA #IMPLIED
+	ResStone CDATA #IMPLIED
+	ResIron CDATA #IMPLIED
+	ResLenya CDATA #IMPLIED
+	ResAria CDATA #IMPLIED
+	ResMithril CDATA #IMPLIED
+	ProductionTime CDATA #IMPLIED
+	MeshName CDATA #REQUIRED
+>
+
+<!ELEMENT AbilityStringIds (AbilityStringId*)>
+<!ELEMENT AbilityStringId EMPTY>
+<!ATTLIST AbilityStringId
+	Ability CDATA #REQUIRED
+	Specialisation CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+>
+
+<!ELEMENT UnitLoots (UnitLoot*)>
+<!ELEMENT UnitLoot EMPTY>
+<!ATTLIST UnitLoot
+	UnitID CDATA #REQUIRED
+	Count CDATA #REQUIRED
+	ItemID1 CDATA #REQUIRED
+	Chance1 CDATA #REQUIRED
+	ItemID2 CDATA #IMPLIED
+	Chance2 CDATA #IMPLIED
+	ItemID3 CDATA #IMPLIED
+	Chance3 CDATA #IMPLIED
+>
+
+<!ELEMENT Merchants (Merchant*)>
+<!ELEMENT Merchant EMPTY>
+<!ATTLIST Merchant
+	MerchantID CDATA #REQUIRED
+	UnitID CDATA #REQUIRED
+>
+
+<!ELEMENT MerchantItems (MerchantItem*)>
+<!ELEMENT MerchantItem EMPTY>
+<!ATTLIST MerchantItem
+	MerchantID CDATA #REQUIRED
+	ItemID CDATA #REQUIRED
+	Count CDATA #REQUIRED
+>
+
+<!ELEMENT Goods (Good*)>
+<!ELEMENT Good EMPTY>
+<!ATTLIST Good
+	ID CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+>
+
+<!ELEMENT MerchantModifiers (MerchantModifier*)>
+<!ELEMENT MerchantModifier EMPTY>
+<!ATTLIST MerchantModifier
+	MerchantID CDATA #REQUIRED
+	ItemCategory CDATA #REQUIRED
+	PriceModifier CDATA #REQUIRED
+>
+
+<!ELEMENT XPTable (XP*)>
+<!ELEMENT XP EMPTY>
+<!ATTLIST XP
+	Level CDATA #REQUIRED
+	XP CDATA #REQUIRED
+	BaseStatMax CDATA #REQUIRED
+	AbilityMax CDATA #REQUIRED
+	HealthFactor CDATA #REQUIRED
+	ManaFactor CDATA #REQUIRED
+	WeaponFactor CDATA #REQUIRED
+	ArmorFactor CDATA #REQUIRED
+>
+
+<!ELEMENT Heads (Head*)>
+<!ELEMENT Head EMPTY>
+<!ATTLIST Head
+	ID CDATA #REQUIRED
+>
+
+<!ELEMENT Objects (Object*)>
+<!ELEMENT Object EMPTY>
+<!ATTLIST Object
+	ObjectID CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+	Flags CDATA #REQUIRED
+	FlattenMode CDATA #IMPLIED
+	OutlineCount CDATA #IMPLIED
+	ResourceAmount CDATA #IMPLIED
+	Width CDATA #IMPLIED
+	Height CDATA #IMPLIED
+	Group CDATA #REQUIRED
+>
+
+<!ELEMENT NPCs (NPC*)>
+<!ELEMENT NPC EMPTY>
+<!ATTLIST NPC
+	ID CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+>
+
+<!ELEMENT Platforms (Platform*)>
+<!ELEMENT Platform EMPTY>
+<!ATTLIST Platform
+	PlatformID CDATA #REQUIRED
+	Type CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+	Filename CDATA #REQUIRED
+>
+
+<!ELEMENT Portals (Portal*)>
+<!ELEMENT Portal EMPTY>
+<!ATTLIST Portal
+	PortalID CDATA #REQUIRED
+	PlatformID CDATA #REQUIRED
+	TargetX CDATA #REQUIRED
+	TargetY CDATA #REQUIRED
+	Flags CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+>
+
+<!ELEMENT SpellLines (SpellLine*)>
+<!ELEMENT SpellLine EMPTY>
+<!ATTLIST SpellLine
+	ID CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+	Flags CDATA #REQUIRED
+	MagicBase CDATA #REQUIRED
+	MinLevel CDATA #REQUIRED
+	MaxLevel CDATA #REQUIRED
+	Availability CDATA #REQUIRED
+	UIExtTTId CDATA #IMPLIED
+	MeshName CDATA #IMPLIED
+>
+
+<!ELEMENT Effects (Effect*)>
+<!ELEMENT Effect EMPTY>
+<!ATTLIST Effect
+	Effect CDATA #REQUIRED
+	Flags CDATA #REQUIRED
+>
+
+<!ELEMENT SpellLineEffects (SpellLineEffect*)>
+<!ELEMENT SpellLineEffect EMPTY>
+<!ATTLIST SpellLineEffect
+	SpellLine CDATA #REQUIRED
+	Type CDATA #REQUIRED
+	Count CDATA #REQUIRED
+	Effect CDATA #REQUIRED
+>
+
+<!ELEMENT ObjectOutlines (ObjectOutline*)>
+<!ELEMENT ObjectOutline (Coords2D+)>
+<!ATTLIST ObjectOutline
+	ObjectID CDATA #REQUIRED
+	OutlineID CDATA #REQUIRED
+	bCastShadow CDATA #REQUIRED
+>
+
+<!ELEMENT Localisations (Localisation*)>
+<!ELEMENT Localisation EMPTY>
+<!ATTLIST Localisation
+	ID CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+>
+
+<!ELEMENT ExtToolTips (ExtToolTip*)>
+<!ELEMENT ExtToolTip EMPTY>
+<!ATTLIST ExtToolTip
+	ID CDATA #REQUIRED
+	HeaderStringId CDATA #REQUIRED
+	TextStringId CDATA #REQUIRED
+>
+
+<!ELEMENT Quests (Quest*)>
+<!ELEMENT Quest EMPTY>
+<!ATTLIST Quest
+	QuestID CDATA #REQUIRED
+	ParentQuestID CDATA #REQUIRED
+	bMainQuestFlag CDATA #REQUIRED
+	TitleStringID CDATA #REQUIRED
+	DetailStringID CDATA #REQUIRED
+	SortOrder CDATA #REQUIRED
+>
+
+<!ELEMENT AbilityConditions (AbilityCondition*)>
+<!ELEMENT AbilityCondition EMPTY>
+<!ATTLIST AbilityCondition
+	Ability CDATA #REQUIRED
+	Level CDATA #REQUIRED
+	Strength CDATA #IMPLIED
+	Stamina CDATA #IMPLIED
+	Agility CDATA #IMPLIED
+	Dexterity CDATA #IMPLIED
+	Charisma CDATA #IMPLIED
+	Intelligence CDATA #IMPLIED
+	Wisdom CDATA #IMPLIED
+>
+
+<!ELEMENT WeaponTypes (WeaponType*)>
+<!ELEMENT WeaponType EMPTY>
+<!ATTLIST WeaponType
+	ID CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+	Sharpness CDATA #IMPLIED
+>
+
+<!ELEMENT WeaponMaterials (WeaponMaterial*)>
+<!ELEMENT WeaponMaterial EMPTY>
+<!ATTLIST WeaponMaterial
+	ID CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+>
+
+<!ELEMENT ObjectLoots (ObjectLoot*)>
+<!ELEMENT ObjectLoot EMPTY>
+<!ATTLIST ObjectLoot
+	ObjectID CDATA #REQUIRED
+	Count CDATA #REQUIRED
+	ItemID1 CDATA #REQUIRED
+	Chance1 CDATA #REQUIRED
+	ItemID2 CDATA #IMPLIED
+	Chance2 CDATA #IMPLIED
+	ItemID3 CDATA #IMPLIED
+	Chance3 CDATA #IMPLIED
+>
+
+<!ELEMENT CreoSpells (CreoSpell*)>
+<!ELEMENT CreoSpell EMPTY>
+<!ATTLIST CreoSpell
+	CreoID CDATA #REQUIRED
+	Count CDATA #REQUIRED
+	SpellID CDATA #REQUIRED
+>
+
+<!ELEMENT ItemSets (ItemSet*)>
+<!ELEMENT ItemSet EMPTY>
+<!ATTLIST ItemSet
+	SetID CDATA #REQUIRED
+	StringID CDATA #REQUIRED
+	Effect CDATA #REQUIRED
+>

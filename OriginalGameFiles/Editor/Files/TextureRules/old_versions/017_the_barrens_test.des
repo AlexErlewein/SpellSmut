@@ -1,0 +1,82 @@
+// felsen am rand
+[Rule229]
+{
+	Priority = 229
+	Height = 0, 12
+	Steep = 30.0, 90.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 9
+}
+[Rule230]
+{
+	Priority = 230
+	Height = 0, 12
+	Steep = 20.0, 30.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 7
+}
+
+// innerer rand, stein plus gras
+[Rule237]
+{
+	Priority = 237
+	Height = 9, 13
+	Steep = 8.0, 15.0
+	Percent = 5000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 10
+}
+[Rule238]
+{
+	Priority = 238
+	Height = 9, 11
+	Steep = 0.0, 10.0
+	Percent = 3300
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 5
+}
+[Rule239]
+{
+	Priority = 239
+	Height = 9, 11
+	Steep = 0.0, 10.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 6
+}
+
+// äusserer rand, sandstrand
+[Rule240]
+{
+	Priority = 240
+	Height = 0, 8
+	Steep = 8.0, 40.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 30
+}
+[Rule241]
+{
+	Priority = 241
+	Height = 0, 80
+	Steep = 0.0, 10.0
+	Percent = 10000
+	Term1 = 0	
+	Term2 = 0
+	Marker = 0
+	Texture = 26
+}

@@ -1,0 +1,56 @@
+// DES file '..\Editor\files\Config.des'.
+// Do not modify.
+
+[System]
+{
+	Screensize = 0
+}
+
+[Smooth]
+{
+	Main = 60
+	Diagonal = 5
+	Vertical = 5
+	Percentage = 20
+}
+
+[Windows]
+{
+	BrushSettings = 400.000000, 270.000000
+	BrushSettingsVis = 0
+	HeightSettings = 400.000000, 270.000000
+	HeightSettingsVis = 0
+	QuickSelect = 400.000000, 270.000000
+	QuickSelectVis = 0
+	Textures = 400.000000, 270.000000
+	TexturesVis = 0
+	Figures = 400.000000, 270.000000
+	FiguresVis = 0
+	Buildings = 400.000000, 270.000000
+	BuildingsVis = 0
+	Objects = 400.000000, 270.000000
+	ObjectsVis = 0
+	HeightMap = 400.000000, 270.000000
+	HeightMapVis = 0
+	WeatherSettings = 400.000000, 270.000000
+	WeatherVis = 0
+	SplineTool = 400.000000, 270.000000
+	SplineVis = 0
+	AutoTexturer = 400.000000, 270.000000
+	AutoTextureVis = 0
+	FigureList = 400.000000, 270.000000
+	FigureListVis = 0
+	ObjectList = 400.000000, 270.000000
+	ObjectListVis = 0
+	ObjectProperties = 400.000000, 270.000000
+	ObjectPropertiesVis = 0
+	FigureProperties = 400.000000, 270.000000
+	BuildingProperties = 400.000000, 270.000000
+	WaterProperties = 400.000000, 270.000000
+	SpawnObjectProperties = 400.000000, 270.000000
+	SpawnSettings = 400.000000, 270.000000
+	SpawnSettingsVis = 0
+	DeathMatch = 400.000000, 270.000000
+	Coop = 400.000000, 270.000000
+}
+

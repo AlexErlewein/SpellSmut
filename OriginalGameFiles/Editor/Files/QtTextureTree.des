@@ -1,0 +1,43 @@
+//  Consts / Types
+//	art_0 = 0;//Transparency
+//	art_1 = 1;//Base Texture
+//	art_2 = 2;//Grass1
+//	art_3 = 3;//Grass2
+//	art_4 = 4;//Rock1
+//	art_5 = 5;//Rock2
+//	art_6 = 6;//RedRock1
+//	art_7 = 7;//RedRock2
+//	art_8 = 8;//Snow1
+//	art_9 = 9;//Snow2
+//	art_10 = 10;//Desert1
+//	art_11 = 11;//RockDesert
+//	art_12 = 12;//Desert2
+//	art_13 = 13;//Mud1
+//	art_14 = 14;//Mud2
+//	art_15 = 15;//Water
+//	art_16 = 16;//Earth
+//	Use(example):
+
+//	T1 = 1, 2means BasisTexture<->Grass1
+//	T2 = 12, 6means Desert<->RedRock1
+
+	
+[Data]
+{
+	T0 = 0.0, 1.0
+	T1 = 1.0, 2.0
+	T2 = 2.0, 3.0
+	T3 = 3.0, 4.0
+	T4 = 4.0, 5.0
+	T5 = 5.0, 6.0
+	T6 = 6.0, 7.0
+	T7 = 7.0, 8.0
+	T8 = 8.0, 9.0
+	T9 = 9.0, 10.0
+	T10 = 10.0, 11.0
+	T11 = 11.0, 12.0
+	T12 = 12.0, 13.0
+	T13 = 13.0, 14.0
+	T14 = 14.0, 15.0
+	T15 = 15.0, 16.0
+}

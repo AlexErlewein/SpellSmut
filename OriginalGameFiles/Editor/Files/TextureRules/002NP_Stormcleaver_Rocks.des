@@ -1,0 +1,1009 @@
+// File created by ExportAutoTexture()
+// DO NOT MODIFY! ... modify .lua instead!
+
+// Created 43 Rules with 18 Passes and 19/1 (Base/Mix) Textures.
+
+// textures used:
+// base  :  3, 10, 13, 14, 15, 16, 17, 19, 20, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 
+// mix   : 39, 
+
+// unused:  1,  2,  4,  5,  6,  7,  8,  9, 11, 12, 18, 21, 
+
+[Rule1]
+{
+	Priority	= 1
+	Height		= 1, 7
+	Steep		= 0, 20
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 5
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 1
+	ObjectMax	= 1
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 20
+	}
+}
+
+[Rule2]
+{
+	Priority	= 2
+	Height		= 1, 200
+	Steep		= 0, 20
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 200
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 20
+	}
+}
+
+// schnee auf bergen
+[Rule3]
+{
+	Priority	= 3
+	Height		= 34, 255
+	Steep		= 0, 90
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 10
+	}
+}
+
+[Rule4]
+{
+	Priority	= 3
+	Height		= 29, 255
+	Steep		= 0, 90
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 39
+	}
+}
+
+// Rules für 002 NP stormcleaver rocks
+[Rule5]
+{
+	Priority	= 4
+	Height		= 5, 7
+	Steep		= 18, 32
+	Percent		= 7500
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 23
+	}
+}
+
+// beckenböden
+[Rule6]
+{
+	Priority	= 5
+	Height		= 1, 4
+	Steep		= 0, 10
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 3
+	}
+}
+
+[Rule7]
+{
+	Priority	= 5
+	Height		= 1, 3
+	Steep		= 10, 50
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 19
+	}
+}
+
+// flecken ins gras
+[Rule8]
+{
+	Priority	= 6
+	Height		= 1, 18
+	Steep		= 1, 3
+	Percent		= 1500
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 249
+	Texture		= 0
+	}
+}
+
+[Rule9]
+{
+	Priority	= 7
+	Height		= 1, 18
+	Steep		= 0, 5
+	Percent		= 8000
+
+	[Terms]
+	{
+	Range		= 1
+	Condition	= 249
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 248
+	Texture		= 0
+	}
+}
+
+[Rule10]
+{
+	Priority	= 8
+	Height		= 1, 18
+	Steep		= 0, 5
+	Percent		= 4000
+
+	[Terms]
+	{
+	Range		= 1
+	Condition	= 248
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 247
+	Texture		= 0
+	}
+}
+
+[Rule11]
+{
+	Priority	= 9
+	Height		= 1, 18
+	Steep		= 0, 5
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 247
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 15
+	}
+}
+
+[Rule12]
+{
+	Priority	= 9
+	Height		= 1, 18
+	Steep		= 0, 5
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 248
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 15
+	}
+}
+
+[Rule13]
+{
+	Priority	= 9
+	Height		= 1, 18
+	Steep		= 0, 5
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 249
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 15
+	}
+}
+
+// hochgebirge verschönern
+[Rule14]
+{
+	Priority	= 10
+	Height		= 19, 200
+	Steep		= 8, 20
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 250
+	Texture		= 0
+	}
+}
+
+[Rule15]
+{
+	Priority	= 11
+	Height		= 19, 200
+	Steep		= 8, 20
+	Percent		= 1000
+
+	[Terms]
+	{
+	Range		= 2
+	Condition	= 250
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 251
+	Texture		= 0
+	}
+}
+
+[Rule16]
+{
+	Priority	= 12
+	Height		= 19, 200
+	Steep		= 12, 16
+	Percent		= 5000
+
+	[Terms]
+	{
+	Range		= 1
+	Condition	= 250
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 252
+	Texture		= 0
+	}
+}
+
+[Rule17]
+{
+	Priority	= 12
+	Height		= 19, 200
+	Steep		= 12, 16
+	Percent		= 5000
+
+	[Terms]
+	{
+	Range		= 1
+	Condition	= 251
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 252
+	Texture		= 0
+	}
+}
+
+[Rule18]
+{
+	Priority	= 13
+	Height		= 19, 200
+	Steep		= 12, 16
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 1
+	Condition	= 250
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 22
+	}
+}
+
+[Rule19]
+{
+	Priority	= 13
+	Height		= 19, 200
+	Steep		= 12, 16
+	Percent		= 5000
+
+	[Terms]
+	{
+	Range		= 1
+	Condition	= 251
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 22
+	}
+}
+
+[Rule20]
+{
+	Priority	= 13
+	Height		= 19, 200
+	Steep		= 8, 20
+	Percent		= 2000
+
+	[Terms]
+	{
+	Range		= 1
+	Condition	= 250
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 22
+	}
+}
+
+// grünland im gebirge
+[Rule21]
+{
+	Priority	= 14
+	Height		= 19, 200
+	Steep		= 0, 12
+	Percent		= 3000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 24
+	}
+}
+
+[Rule22]
+{
+	Priority	= 14
+	Height		= 19, 200
+	Steep		= 8, 20
+	Percent		= 3000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 25
+	}
+}
+
+// ab höhe 19 nur nach steepness texturen auf die landschaft klatschen
+[Rule23]
+{
+	Priority	= 15
+	Height		= 19, 200
+	Steep		= 0, 15
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 30
+	}
+}
+
+[Rule24]
+{
+	Priority	= 15
+	Height		= 19, 200
+	Steep		= 15, 25
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 30
+	}
+}
+
+[Rule25]
+{
+	Priority	= 15
+	Height		= 19, 200
+	Steep		= 25, 40
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 28
+	}
+}
+
+[Rule26]
+{
+	Priority	= 15
+	Height		= 19, 200
+	Steep		= 40, 55
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 26
+	}
+}
+
+[Rule27]
+{
+	Priority	= 15
+	Height		= 19, 200
+	Steep		= 55, 90
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 27
+	}
+}
+
+// ab höhe 10 nur nach steepness texturen auf die landschaft
+[Rule28]
+{
+	Priority	= 16
+	Height		= 10, 200
+	Steep		= 0, 6
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 13
+	}
+}
+
+[Rule29]
+{
+	Priority	= 16
+	Height		= 10, 200
+	Steep		= 6, 24
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 15
+	}
+}
+
+[Rule30]
+{
+	Priority	= 16
+	Height		= 10, 200
+	Steep		= 24, 35
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 31
+	}
+}
+
+[Rule31]
+{
+	Priority	= 16
+	Height		= 10, 200
+	Steep		= 35, 50
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 29
+	}
+}
+
+[Rule32]
+{
+	Priority	= 16
+	Height		= 10, 200
+	Steep		= 50, 90
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 27
+	}
+}
+
+// nur nach steepness texturen auf die landschaft klatschen
+[Rule33]
+{
+	Priority	= 17
+	Height		= 1, 255
+	Steep		= 0, 3
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 15
+	}
+}
+
+[Rule34]
+{
+	Priority	= 17
+	Height		= 1, 255
+	Steep		= 3, 7
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 14
+	}
+}
+
+[Rule35]
+{
+	Priority	= 17
+	Height		= 1, 255
+	Steep		= 7, 12
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 16
+	}
+}
+
+[Rule36]
+{
+	Priority	= 17
+	Height		= 1, 255
+	Steep		= 12, 15
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 17
+	}
+}
+
+[Rule37]
+{
+	Priority	= 17
+	Height		= 1, 255
+	Steep		= 15, 22
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 15
+	}
+}
+
+[Rule38]
+{
+	Priority	= 17
+	Height		= 1, 255
+	Steep		= 22, 35
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 31
+	}
+}
+
+[Rule39]
+{
+	Priority	= 17
+	Height		= 1, 255
+	Steep		= 35, 40
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 29
+	}
+}
+
+[Rule40]
+{
+	Priority	= 17
+	Height		= 1, 255
+	Steep		= 40, 45
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 28
+	}
+}
+
+[Rule41]
+{
+	Priority	= 17
+	Height		= 1, 255
+	Steep		= 45, 55
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 26
+	}
+}
+
+[Rule42]
+{
+	Priority	= 17
+	Height		= 1, 255
+	Steep		= 55, 90
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 27
+	}
+}
+
+[Rule43]
+{
+	Priority	= 18
+	Height		= 1, 255
+	Steep		= 0, 90
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 3
+	}
+}
+

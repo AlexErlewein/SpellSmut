@@ -1,0 +1,493 @@
+// TEST FILE
+// 002 NP stormcleaver rocks
+
+[Rule140]
+{
+	Priority = 50
+	Height = 5, 7
+	Steep = 22.0, 28.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 18
+}
+
+
+// beckenböden
+[Rule150]
+{
+	Priority = 55
+	Height = 1, 4
+	Steep = 0.0, 10.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 3
+}
+[Rule151]
+{
+	Priority = 55
+	Height = 1, 3
+	Steep = 10.0, 50.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 19
+}
+
+
+// flecken ins gras
+[Rule170]
+{
+	Priority = 65
+	Height = 1, 20
+	Steep = 1.0, 3.0
+	Percent = 1500
+	Term1 = 0
+	Term2 = 0
+	Marker = 249
+	Texture = 0
+}
+[Rule171]
+{
+	Priority = 66
+	Height = 1, 20
+	Steep = 0.0, 5.0
+	Percent = 8000
+	Term1 = 1
+	Term2 = 249
+	Marker = 248
+	Texture = 0
+}
+[Rule172]
+{
+	Priority = 67
+	Height = 1, 20
+	Steep = 0.0, 5.0
+	Percent = 4000
+	Term1 = 1
+	Term2 = 248
+	Marker = 247
+	Texture = 0
+}
+[Rule173]
+{
+	Priority = 68
+	Height = 1, 20
+	Steep = 0.0, 5.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 247
+	Marker = 0
+	Texture = 15
+}
+[Rule174]
+{
+	Priority = 68
+	Height = 1, 20
+	Steep = 0.0, 5.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 248
+	Marker = 0
+	Texture = 15
+}
+[Rule175]
+{
+	Priority = 68
+	Height = 1, 20
+	Steep = 0.0, 5.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 249
+	Marker = 0
+	Texture = 15
+}
+
+
+// hochgebirge verschönern
+[Rule180]
+{
+	Priority = 70
+	Height = 18, 200
+	Steep = 8.0, 20.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 250
+	Texture = 0
+}
+[Rule181]
+{
+	Priority = 71
+	Height = 18, 200
+	Steep = 8.0, 20.0
+	Percent = 1000
+	Term1 = 2
+	Term2 = 250
+	Marker = 251
+	Texture = 0
+}
+[Rule182]
+{
+	Priority = 72
+	Height = 18, 200
+	Steep = 12.0, 16.0
+	Percent = 5000
+	Term1 = 1
+	Term2 = 250
+	Marker = 252
+	Texture = 0
+}
+[Rule183]
+{
+	Priority = 72
+	Height = 18, 200
+	Steep = 12.0, 16.0
+	Percent = 5000
+	Term1 = 1
+	Term2 = 251
+	Marker = 252
+	Texture = 0
+}
+[Rule184]
+{
+	Priority = 73
+	Height = 18, 200
+	Steep = 12.0, 16.0
+	Percent = 10000
+	Term1 = 1
+	Term2 = 250
+	Marker = 0
+	Texture = 22
+}
+[Rule185]
+{
+	Priority = 73
+	Height = 18, 200
+	Steep = 12.0, 16.0
+	Percent = 5000
+	Term1 = 1
+	Term2 = 251
+	Marker = 0
+	Texture = 22
+}
+[Rule186]
+{
+	Priority = 73
+	Height = 18, 200
+	Steep = 8.0, 20.0
+	Percent = 2000
+	Term1 = 1
+	Term2 = 250
+	Marker = 0
+	Texture = 22
+}
+
+// grünland im gebirge
+[Rule190]
+{
+	Priority = 75
+	Height = 18, 200
+	Steep = 0.0, 12.0
+	Percent = 3000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 24
+}
+[Rule191]
+{
+	Priority = 75
+	Height = 18, 200
+	Steep = 8.0, 20.0
+	Percent = 3000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 25
+}
+
+
+
+// ab höhe 18 nur nach steepness texturen auf die landschaft klatschen
+[Rule200]
+{
+	Priority = 80
+	Height = 18, 200
+	Steep = 0.0, 15.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 31
+}
+[Rule201]
+{
+	Priority = 80
+	Height = 18, 200
+	Steep = 15.0, 25.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 30
+}
+[Rule202]
+{
+	Priority = 80
+	Height = 18, 200
+	Steep = 25.0, 40.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 28
+}
+[Rule203]
+{
+	Priority = 80
+	Height = 18, 200
+	Steep = 40.0, 55.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 26
+}
+[Rule204]
+{
+	Priority = 80
+	Height = 18, 200
+	Steep = 55.0, 90.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 27
+}
+
+
+
+// ab höhe 10 nur nach steepness texturen auf die landschaft
+[Rule218]
+{
+	Priority = 90
+	Height = 10, 200
+	Steep = 0.0, 3.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 13
+}
+[Rule221]
+{
+	Priority = 90
+	Height = 10, 200
+	Steep = 3.0, 6.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 13
+}
+[Rule222]
+{
+	Priority = 90
+	Height = 10, 200
+	Steep = 6.0, 18.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 15
+}
+[Rule225]
+{
+	Priority = 90
+	Height = 10, 200
+	Steep = 18.0, 22.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 31
+}
+[Rule226]
+{
+	Priority = 90
+	Height = 10, 200
+	Steep = 22.0, 32.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 31
+}
+[Rule227]
+{
+	Priority = 90
+	Height = 10, 200
+	Steep = 32.0, 50.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 29
+}
+[Rule228]
+{
+	Priority = 90
+	Height = 10, 200
+	Steep = 28.0, 50.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 27
+}
+
+
+
+// nur nach steepness texturen auf die landschaft klatschen
+[Rule230]
+{
+	Priority = 95
+	Height = 1, 200
+	Steep = 0.0, 3.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 5
+}
+[Rule232]
+{
+	Priority = 95
+	Height = 1, 200
+	Steep = 3.0, 7.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 14
+}
+[Rule233]
+{
+	Priority = 95
+	Height = 1, 200
+	Steep = 7.0, 12.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 16
+}
+[Rule234]
+{
+	Priority = 95
+	Height = 1, 200
+	Steep = 12.0, 15.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 17
+}
+[Rule235]
+{
+	Priority = 95
+	Height = 1, 200
+	Steep = 15.0, 22.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 15
+}
+[Rule236]
+{
+	Priority = 95
+	Height = 1, 200
+	Steep = 22.0, 28.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 31
+}
+[Rule237]
+{
+	Priority = 95
+	Height = 1, 200
+	Steep = 28.0, 35.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 31
+}
+[Rule238]
+{
+	Priority = 95
+	Height = 1, 200
+	Steep = 35.0, 40.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 29
+}
+[Rule239]
+{
+	Priority = 95
+	Height = 1, 200
+	Steep = 40.0, 45.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 28
+}
+[Rule240]
+{
+	Priority = 95
+	Height = 1, 200
+	Steep = 45.0, 55.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 26
+}
+[Rule241]
+{
+	Priority = 95
+	Height = 1, 200
+	Steep = 55.0, 90.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 27
+}
+
+
+
+
+// LAST PASS - fill the holes with grass....................................
+[Rule250]
+{
+	Priority = 100
+	Height = 1, 200
+	Steep = 0.0, 90.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 19
+}

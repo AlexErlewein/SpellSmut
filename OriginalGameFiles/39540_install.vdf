@@ -1,0 +1,50 @@
+"Installscript"
+{
+	"Registry"
+	{
+		"HKEY_CURRENT_USER\\Software\\JoWooD\\Spellforce - Diamond Edition"
+		{
+			"string"
+			{
+				"InstallPath"		"%INSTALLDIR%\\"
+			}
+		}
+		"HKEY_LOCAL_MACHINE\\SOFTWARE\\JoWood\\Spellforce - Diamond Edition"
+		{
+			"string"
+			{
+				"InstallPath"		"%INSTALLDIR%\\"
+			}
+		}
+		"HKEY_LOCAL_MACHINE\\SOFTWARE\\JoWood\\SpellForce Platinum"
+		{
+			"string"
+			{
+				"Install"		"%INSTALLDIR%\\"
+				"Pak"		"%INSTALLDIR%\\pak\\"
+				"RunCmd"		"%INSTALLDIR%\\spellforce.exe"
+				"Language"		"%INSTALLDIR%\\sound\\speech\\"
+			}
+		}
+	}
+	"Run Process"
+	{
+		"DirectX"
+		{
+			"Process 1"		"%INSTALLDIR%\\redist\\DirectX9\\DXSETUP.exe"
+			"Command 1"		"/silent"
+			"NoCleanUp"		"1"
+		}
+		"Arcade"
+		{
+			"Process 1"		"%INSTALLDIR%\\redist\\ArcadeInstallSPELLFORCE13f.EXE"
+			"Command 1"		""
+			"NoCleanUp"		"1"
+			"IgnoreExitCode"		"1"
+		}
+	}
+}
+"kvsignatures"
+{
+	"Installscript"		"6c3f3d70b5bcc14dd98ccf8bedd77140bd0be9801249e1c93f853bb8461de88575d5cdc9f6bc04328299829b63356bf75d41537f5a6956f52b8e72e71ee097f25be08bf653b423f4c0d6debd5be8a6399c64cdb20c679b9ad7546f1700cee77463e23a84ac84f3632aa6fad8ebcca342fa43cefba7a3c85e1f733781be19642e"
+}

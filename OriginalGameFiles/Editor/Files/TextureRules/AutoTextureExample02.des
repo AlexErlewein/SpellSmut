@@ -1,0 +1,241 @@
+// File created by ExportAutoTexture()
+// DO NOT MODIFY! ... modify .lua instead!
+
+// Created 10 Rules with 1 Passes and 10/0 (Base/Mix) Textures.
+
+// textures used:
+// base  :  4,  5,  6, 11, 13, 16, 20, 27, 30, 31, 
+// mix   : 
+
+// unused:  1,  2,  3,  7,  8,  9, 10, 12, 14, 15, 17, 18, 19, 21, 22, 23, 24, 25, 26, 28, 29, 
+
+[Rule1]
+{
+	Priority	= 1
+	Height		= 1, 255
+	Steep		= 0, 1
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 6
+	}
+}
+
+[Rule2]
+{
+	Priority	= 1
+	Height		= 1, 255
+	Steep		= 1, 4
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 30
+	}
+}
+
+[Rule3]
+{
+	Priority	= 1
+	Height		= 1, 255
+	Steep		= 4, 8
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 5
+	}
+}
+
+[Rule4]
+{
+	Priority	= 1
+	Height		= 1, 255
+	Steep		= 8, 14
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 13
+	}
+}
+
+[Rule5]
+{
+	Priority	= 1
+	Height		= 1, 255
+	Steep		= 14, 20
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 4
+	}
+}
+
+[Rule6]
+{
+	Priority	= 1
+	Height		= 1, 255
+	Steep		= 20, 28
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 16
+	}
+}
+
+[Rule7]
+{
+	Priority	= 1
+	Height		= 1, 255
+	Steep		= 28, 34
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 31
+	}
+}
+
+[Rule8]
+{
+	Priority	= 1
+	Height		= 1, 255
+	Steep		= 34, 40
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 20
+	}
+}
+
+[Rule9]
+{
+	Priority	= 1
+	Height		= 1, 255
+	Steep		= 40, 52
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 27
+	}
+}
+
+[Rule10]
+{
+	Priority	= 1
+	Height		= 1, 255
+	Steep		= 52, 90
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 11
+	}
+}
+

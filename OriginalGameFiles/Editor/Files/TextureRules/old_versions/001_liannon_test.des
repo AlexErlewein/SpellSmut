@@ -1,0 +1,243 @@
+// texturübergang berg-grass
+[Rule10]
+{
+	Priority = 10
+	Height = 0, 23
+	Steep = 15.0, 60.0
+	Percent = 10000
+	Term1 = 1
+	Term2 = 10
+	Marker = 0
+	Texture = 16
+}
+[Rule14]
+{
+	Priority = 14
+	Height = 0, 22
+	Steep = 16.0, 32.0
+	Percent = 3500
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 15
+}
+
+// hohe berge
+[Rule150]
+{
+	Priority = 150
+	Height = 21, 25
+	Steep = 0.0, 25.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 18
+}
+
+[Rule152]
+{
+	Priority = 152
+	Height = 25, 85
+	Steep = 0.0, 30.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 9
+}
+
+
+// gebirgswald
+[Rule182]
+{
+	Priority = 182
+	Height = 12, 21
+	Steep = 0.0, 15.0
+	Percent = 10000
+	Term1 = 1
+	Term2 = 16
+	Marker = 0
+	Texture = 25
+}
+[Rule183]
+{
+	Priority = 183
+	Height = 12, 21
+	Steep = 0.0, 15.0
+	Percent = 2500
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 6
+}
+[Rule184]
+{
+	Priority = 184
+	Height = 12, 21
+	Steep = 0.0, 15.0
+	Percent = 10000
+	Term1 = 1
+	Term2 = 16
+	Marker = 0
+	Texture = 25
+}
+[Rule185]
+{
+	Priority = 185
+	Height = 12, 21
+	Steep = 0.0, 15.0
+	Percent = 500
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 16
+}
+
+// fluss texturierung
+[Rule190]
+{
+	Priority = 190
+	Height = 4, 5
+	Steep = 0.0, 15.0
+	Percent = 8500
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 5
+}
+
+[Rule191]
+{
+	Priority = 191
+	Height = 4, 5
+	Steep = 0.0, 6.0
+	Percent = 10000
+	Term1 = 4
+	Term2 = 5
+	Marker = 0
+	Texture = 27
+}
+
+
+
+// grundtexturierung (nur steepness)
+[Rule200]
+{
+	Priority = 200
+	Height = 1.0, 250.0
+	Steep = 0.0, 2.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 2
+}
+
+[Rule217]
+{
+	Priority = 217
+	Height = 0.0, 200.0
+	Steep = 50.0, 90.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 12
+}
+
+[Rule218]
+{
+	Priority = 248
+	Height = 0.0, 500.0
+	Steep = 35.0, 50.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 31
+}
+
+[Rule219]
+{
+	Priority = 249
+	Height = 0.0, 500.0
+	Steep = 25.0, 35.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 10
+}
+
+[Rule220]
+{
+	Priority = 250
+	Height = 0.0, 500.0
+	Steep = 15.0, 25.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 17
+}
+
+[Rule221]
+{
+	Priority = 251
+	Height = 0.0, 500.0
+	Steep = 12.0, 15.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 6
+}
+
+[Rule222]
+{
+	Priority = 252
+	Height = 0.0, 500.0
+	Steep = 9.0, 12.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 4
+}
+
+[Rule223]
+{
+	Priority = 253
+	Height = 0.0, 500.0
+	Steep = 6.0, 9.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 21
+}
+
+[Rule224]
+{
+	Priority = 254
+	Height = 0.0, 500.0
+	Steep = 3.0, 6.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 3
+}
+
+[Rule225]
+{
+	Priority = 255
+	Height = 0.0, 500.0
+	Steep = 0.0, 3.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 2
+}

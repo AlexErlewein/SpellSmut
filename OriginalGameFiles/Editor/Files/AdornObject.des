@@ -1,0 +1,1708 @@
+[AdornType1]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1026
+	}
+}
+
+[AdornType2]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1027
+	}
+}
+
+[AdornType3]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1039
+	}
+}
+
+[AdornType4]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1040
+	}
+}
+
+[AdornType5]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1041
+	}
+}
+
+[AdornType6]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1026
+	}
+}
+
+[AdornType7]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1029
+	}
+}
+
+[AdornType8]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1028
+	}
+}
+
+[AdornType9]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1044
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1045
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1046
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1127
+	}
+	[Object5]
+	{
+		P = 102
+		I = 1126
+	}
+	[Object6]
+	{
+		P = 102
+		I = 1062
+	}
+	[Object7]
+	{
+		P = 102
+		I = 1063
+	}
+	[Object8]
+	{
+		P = 102
+		I = 1032
+	}
+	[Object9]
+	{
+		P = 102
+		I = 1046
+	}
+	[Object10]
+	{
+		P = 102
+		I = 1064
+	}
+}
+
+[AdornType10]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1047
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1048
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1049
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1047
+	}
+	[Object5]
+	{
+		P = 102
+		I = 1032
+	}
+	[Object6]
+	{
+		P = 102
+		I = 1033
+	}
+	[Object7]
+	{
+		P = 102
+		I = 1131
+	}
+	[Object8]
+	{
+		P = 102
+		I = 1128
+	}
+	[Object9]
+	{
+		P = 102
+		I = 1049
+	}
+	[Object10]
+	{
+		P = 102
+		I = 1038
+	}
+}
+
+[AdornType11]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1044
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1045
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1046
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1047
+	}
+	[Object5]
+	{
+		P = 102
+		I = 1047
+	}
+	[Object6]
+	{
+		P = 102
+		I = 1048
+	}
+	[Object7]
+	{
+		P = 102
+		I = 1048
+	}
+	[Object8]
+	{
+		P = 102
+		I = 1049
+	}
+	[Object9]
+	{
+		P = 102
+		I = 1049
+	}
+	[Object10]
+	{
+		P = 102
+		I = 1062
+	}
+	[Object11]
+	{
+		P = 102
+		I = 1063
+	}
+	[Object12]
+	{
+		P = 102
+		I = 1064
+	}
+	[Object13]
+	{
+		P = 102
+		I = 1127
+	}
+	[Object14]
+	{
+		P = 102
+		I = 1128
+	}
+	[Object15]
+	{
+		P = 102
+		I = 1131
+	}
+	[Object16]
+	{
+		P = 102
+		I = 1038
+	}
+	[Object17]
+	{
+		P = 102
+		I = 1030
+	}
+	[Object18]
+	{
+		P = 102
+		I = 1036
+	}
+	[Object19]
+	{
+		P = 102
+		I = 1030
+	}
+	[Object20]
+	{
+		P = 102
+		I = 1038
+	}
+}
+
+[AdornType12]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1038
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1040
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1042
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1030
+	}
+	[Object5]
+	{
+		P = 102
+		I = 1035
+	}
+	[Object6]
+	{
+		P = 102
+		I = 1030
+	}
+	[Object7]
+	{
+		P = 102
+		I = 1076
+	}
+	[Object8]
+	{
+		P = 102
+		I = 1077
+	}
+	[Object9]
+	{
+		P = 102
+		I = 1078
+	}
+	[Object10]
+	{
+		P = 102
+		I = 1038
+	}
+	[Object11]
+	{
+		P = 102
+		I = 1076
+	}
+	[Object12]
+	{
+		P = 102
+		I = 1038
+	}
+}
+
+[AdornType13]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1038
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1038
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1040
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1040
+	}
+	[Object5]
+	{
+		P = 102
+		I = 1076
+	}
+	[Object6]
+	{
+		P = 102
+		I = 1076
+	}
+	[Object7]
+	{
+		P = 102
+		I = 1077
+	}
+	[Object8]
+	{
+		P = 102
+		I = 1077
+	}
+	[Object9]
+	{
+		P = 102
+		I = 1078
+	}
+	[Object10]
+	{
+		P = 102
+		I = 1078
+	}
+	[Object11]
+	{
+		P = 102
+		I = 1030
+	}
+	[Object12]
+	{
+		P = 102
+		I = 1030
+	}
+}
+
+[AdornType14]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1042
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1076
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1038
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1077
+	}
+	[Object5]
+	{
+		P = 102
+		I = 1033
+	}
+	[Object6]
+	{
+		P = 102
+		I = 1031
+	}
+	[Object7]
+	{
+		P = 102
+		I = 1032
+	}
+	[Object8]
+	{
+		P = 102
+		I = 1030
+	}
+}
+
+[AdornType15]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1036
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1036
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1076
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1034
+	}
+	[Object5]
+	{
+		P = 102
+		I = 1038
+	}
+	[Object6]
+	{
+		P = 102
+		I = 1042
+	}
+	[Object7]
+	{
+		P = 102
+		I = 1036
+	}
+	[Object8]
+	{
+		P = 102
+		I = 1036
+	}
+}
+
+[AdornType16]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1035
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1133
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1132
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1077
+	}
+	[Object5]
+	{
+		P = 102
+		I = 1121
+	}
+	[Object6]
+	{
+		P = 102
+		I = 1036
+	}
+	[Object7]
+	{
+		P = 102
+		I = 1037
+	}
+	[Object8]
+	{
+		P = 102
+		I = 1035
+	}
+	[Object9]
+	{
+		P = 102
+		I = 1076
+	}
+	[Object10]
+	{
+		P = 51
+		I = 1039
+	}
+	[Object11]
+	{
+		P = 102
+		I = 1038
+	}
+	[Object12]
+	{
+		P = 102
+		I = 1040
+	}
+	[Object13]
+	{
+		P = 102
+		I = 1030
+	}
+	[Object14]
+	{
+		P = 102
+		I = 1130
+	}
+	[Object15]
+	{
+		P = 102
+		I = 1077
+	}
+}
+
+[AdornType17]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1089
+	}
+	[Object2]
+	{
+		P = 255
+		I = 1090
+	}
+}
+
+[AdornType18]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1092
+	}
+	[Object2]
+	{
+		P = 255
+		I = 1091
+	}
+	[Object3]
+	{
+		P = 255
+		I = 1083
+	}
+}
+
+[AdornType19]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1105
+	}
+}
+
+[AdornType20]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1106
+	}
+}
+
+[AdornType21]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1088
+	}
+}
+
+[AdornType22]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1089
+	}
+}
+
+[AdornType23]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1097
+	}
+}
+
+[AdornType24]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1110
+	}
+}
+
+[AdornType25]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1110
+	}
+}
+
+[AdornType26]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1024
+	}
+	[Object2]
+	{
+		P = 255
+		I = 1024
+	}
+	[Object3]
+	{
+		P = 255
+		I = 1024
+	}
+}
+
+[AdornType27]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1093
+	}
+}
+
+[AdornType28]
+{
+	[Object1]
+	{
+		P = 38
+		I = 1076
+	}
+	[Object2]
+	{
+		P = 38
+		I = 1077
+	}
+	[Object3]
+	{
+		P = 38
+		I = 1078
+	}
+}
+
+[AdornType29]
+{
+	[Object1]
+	{
+		P = 63
+		I = 1094
+	}
+	[Object2]
+	{
+		P = 63
+		I = 1076
+	}
+}
+
+[AdornType30]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1150
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1151
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1152
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1153
+	}
+}
+
+[AdornType31]
+{
+	[Object1]
+	{
+		P = 63
+		I = 1150
+	}
+	[Object2]
+	{
+		P = 63
+		I = 1151
+	}
+}
+
+[AdornType32]
+{
+	[Object1]
+	{
+		P = 63
+		I = 1152
+	}
+	[Object2]
+	{
+		P = 63
+		I = 1153
+	}
+}
+
+[AdornType33]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1146
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1147
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1148
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1149
+	}
+}
+
+[AdornType34]
+{
+	[Object1]
+	{
+		P = 63
+		I = 1146
+	}
+	[Object2]
+	{
+		P = 63
+		I = 1147
+	}
+}
+
+[AdornType35]
+{
+	[Object1]
+	{
+		P = 63
+		I = 1148
+	}
+	[Object2]
+	{
+		P = 63
+		I = 1149
+	}
+}
+
+[AdornType36]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1125
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1126
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1127
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1128
+	}
+}
+
+[AdornType37]
+{
+	[Object1]
+	{
+		P = 63
+		I = 1125
+	}
+	[Object2]
+	{
+		P = 63
+		I = 1126
+	}
+}
+
+[AdornType38]
+{
+	[Object1]
+	{
+		P = 63
+		I = 1127
+	}
+	[Object2]
+	{
+		P = 63
+		I = 1128
+	}
+}
+
+[AdornType39]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1129
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1130
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1131
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1132
+	}
+}
+
+[AdornType40]
+{
+	[Object1]
+	{
+		P = 63
+		I = 1129
+	}
+	[Object2]
+	{
+		P = 63
+		I = 1130
+	}
+}
+
+[AdornType41]
+{
+	[Object1]
+	{
+		P = 63
+		I = 1131
+	}
+	[Object2]
+	{
+		P = 63
+		I = 1132
+	}
+}
+
+[AdornType42]
+{
+	[Object1]
+	{
+		P = 38
+		I = 1116
+	}
+	[Object2]
+	{
+		P = 38
+		I = 1115
+	}
+	[Object3]
+	{
+		P = 38
+		I = 1114
+	}
+	[Object4]
+	{
+		P = 38
+		I = 1113
+	}
+	[Object5]
+	{
+		P = 38
+		I = 1117
+	}
+	[Object6]
+	{
+		P = 38
+		I = 1118
+	}
+	[Object7]
+	{
+		P = 38
+		I = 1119
+	}
+	[Object8]
+	{
+		P = 38
+		I = 1120
+	}
+	[Object9]
+	{
+		P = 38
+		I = 1121
+	}
+	[Object10]
+	{
+		P = 38
+		I = 1122
+	}
+	[Object11]
+	{
+		P = 38
+		I = 1123
+	}
+	[Object12]
+	{
+		P = 38
+		I = 1124
+	}
+}
+
+[AdornType43]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1116
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1115
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1114
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1113
+	}
+}
+
+[AdornType44]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1117
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1118
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1119
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1120
+	}
+}
+
+[AdornType45]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1121
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1122
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1123
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1124
+	}
+}
+
+[AdornType46]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1133
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1134
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1135
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1136
+	}
+	[Object5]
+	{
+		P = 102
+		I = 1137
+	}
+}
+
+[AdornType47]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1138
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1139
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1140
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1141
+	}
+}
+
+[AdornType48]
+{
+	[Object1]
+	{
+		P = 0
+		I = 1142
+	}
+	[Object2]
+	{
+		P = 0
+		I = 1143
+	}
+	[Object3]
+	{
+		P = 0
+		I = 1144
+	}
+	[Object4]
+	{
+		P = 0
+		I = 1145
+	}
+}
+
+[AdornType49]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1154
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1155
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1156
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1157
+	}
+}
+
+[AdornType50]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1158
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1159
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1160
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1161
+	}
+}
+
+[AdornType51]
+{
+	[Object1]
+	{
+		P = 102
+		I = 1162
+	}
+	[Object2]
+	{
+		P = 102
+		I = 1163
+	}
+	[Object3]
+	{
+		P = 102
+		I = 1164
+	}
+	[Object4]
+	{
+		P = 102
+		I = 1165
+	}
+}
+
+[AdornType52]
+{
+	[Object1]
+	{
+		P = 45
+		I = 1154
+	}
+	[Object2]
+	{
+		P = 45
+		I = 1155
+	}
+	[Object3]
+	{
+		P = 45
+		I = 1156
+	}
+	[Object4]
+	{
+		P = 45
+		I = 1157
+	}
+	[Object5]
+	{
+		P = 45
+		I = 1158
+	}
+	[Object6]
+	{
+		P = 45
+		I = 1159
+	}
+	[Object7]
+	{
+		P = 45
+		I = 1160
+	}
+	[Object8]
+	{
+		P = 45
+		I = 1161
+	}
+	[Object9]
+	{
+		P = 45
+		I = 1162
+	}
+	[Object10]
+	{
+		P = 45
+		I = 1163
+	}
+	[Object11]
+	{
+		P = 45
+		I = 1164
+	}
+	[Object12]
+	{
+		P = 45
+		I = 1165
+	}
+	[Object13]
+	{
+		P = 45
+		I = 1039
+	}
+	[Object14]
+	{
+		P = 45
+		I = 1093
+	}
+	[Object15]
+	{
+		P = 45
+		I = 1089
+	}
+	[Object16]
+	{
+		P = 38
+		I = 1138
+	}
+	[Object17]
+	{
+		P = 38
+		I = 1139
+	}
+	[Object18]
+	{
+		P = 38
+		I = 1140
+	}
+	[Object19]
+	{
+		P = 38
+		I = 1141
+	}
+	[Object20]
+	{
+		P = 25
+		I = 1129
+	}
+	[Object21]
+	{
+		P = 25
+		I = 1130
+	}
+	[Object22]
+	{
+		P = 25
+		I = 1127
+	}
+	[Object23]
+	{
+		P = 25
+		I = 1128
+	}
+}
+
+[AdornType53]
+{
+	[Object1]
+	{
+		P = 45
+		I = 1154
+	}
+	[Object2]
+	{
+		P = 45
+		I = 1155
+	}
+	[Object3]
+	{
+		P = 45
+		I = 1156
+	}
+	[Object4]
+	{
+		P = 45
+		I = 1157
+	}
+	[Object5]
+	{
+		P = 45
+		I = 1158
+	}
+	[Object6]
+	{
+		P = 45
+		I = 1159
+	}
+	[Object7]
+	{
+		P = 45
+		I = 1160
+	}
+	[Object8]
+	{
+		P = 45
+		I = 1161
+	}
+	[Object9]
+	{
+		P = 45
+		I = 1162
+	}
+	[Object10]
+	{
+		P = 45
+		I = 1163
+	}
+	[Object11]
+	{
+		P = 45
+		I = 1164
+	}
+	[Object12]
+	{
+		P = 45
+		I = 1165
+	}
+	[Object13]
+	{
+		P = 45
+		I = 1039
+	}
+	[Object14]
+	{
+		P = 45
+		I = 1093
+	}
+	[Object15]
+	{
+		P = 38
+		I = 1138
+	}
+	[Object16]
+	{
+		P = 38
+		I = 1139
+	}
+	[Object17]
+	{
+		P = 38
+		I = 1140
+	}
+	[Object18]
+	{
+		P = 38
+		I = 1141
+	}
+}
+
+[AdornType54]
+{
+	[Object1]
+	{
+		P = 89
+		I = 1044
+	}
+	[Object2]
+	{
+		P = 89
+		I = 1045
+	}
+	[Object3]
+	{
+		P = 76
+		I = 1046
+	}
+}
+
+[AdornType55]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1166
+	}
+}
+
+[AdornType56]
+{
+	[Object1]
+	{
+		P = 63
+		I = 1167
+	}
+	[Object2]
+	{
+		P = 63
+		I = 1168
+	}
+	[Object3]
+	{
+		P = 63
+		I = 1169
+	}
+	[Object4]
+	{
+		P = 63
+		I = 1170
+	}
+}
+
+[AdornType57]
+{
+	[Object1]
+	{
+		P = 63
+		I = 1171
+	}
+	[Object2]
+	{
+		P = 63
+		I = 1172
+	}
+	[Object3]
+	{
+		P = 63
+		I = 1173
+	}
+	[Object4]
+	{
+		P = 63
+		I = 1174
+	}
+}
+
+[AdornType58]
+{
+	[Object1]
+	{
+		P = 63
+		I = 1175
+	}
+	[Object2]
+	{
+		P = 63
+		I = 1176
+	}
+	[Object3]
+	{
+		P = 63
+		I = 1177
+	}
+	[Object4]
+	{
+		P = 63
+		I = 1178
+	}
+}
+
+[AdornType59]
+{
+	[Object1]
+	{
+		P = 63
+		I = 1167
+	}
+	[Object2]
+	{
+		P = 63
+		I = 1168
+	}
+	[Object3]
+	{
+		P = 63
+		I = 1169
+	}
+	[Object4]
+	{
+		P = 63
+		I = 1170
+	}
+	[Object5]
+	{
+		P = 63
+		I = 1171
+	}
+	[Object6]
+	{
+		P = 63
+		I = 1172
+	}
+	[Object7]
+	{
+		P = 63
+		I = 1173
+	}
+	[Object8]
+	{
+		P = 63
+		I = 1174
+	}
+	[Object9]
+	{
+		P = 63
+		I = 1175
+	}
+	[Object10]
+	{
+		P = 63
+		I = 1176
+	}
+	[Object11]
+	{
+		P = 63
+		I = 1177
+	}
+	[Object12]
+	{
+		P = 63
+		I = 1178
+	}
+}
+
+[AdornType60]
+{
+	[Object1]
+	{
+		P = 127
+		I = 1179
+	}
+	[Object2]
+	{
+		P = 127
+		I = 1180
+	}
+}
+
+[AdornType61]
+{
+	[Object1]
+	{
+		P = 127
+		I = 1181
+	}
+	[Object2]
+	{
+		P = 127
+		I = 1182
+	}
+}
+
+[AdornType62]
+{
+	[Object1]
+	{
+		P = 127
+		I = 1183
+	}
+	[Object2]
+	{
+		P = 127
+		I = 1184
+	}
+}
+
+[AdornType63]
+{
+	[Object1]
+	{
+		P = 127
+		I = 1185
+	}
+	[Object2]
+	{
+		P = 127
+		I = 1186
+	}
+}
+
+[AdornType64]
+{
+	[Object1]
+	{
+		P = 127
+		I = 1187
+	}
+	[Object2]
+	{
+		P = 127
+		I = 1188
+	}
+}
+
+[AdornType65]
+{
+	[Object1]
+	{
+		P = 127
+		I = 1189
+	}
+	[Object2]
+	{
+		P = 127
+		I = 1190
+	}
+}
+
+[AdornType66]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1191
+	}
+}
+
+[AdornType67]
+{
+	[Object1]
+	{
+		P = 255
+		I = 1192
+	}
+}
+

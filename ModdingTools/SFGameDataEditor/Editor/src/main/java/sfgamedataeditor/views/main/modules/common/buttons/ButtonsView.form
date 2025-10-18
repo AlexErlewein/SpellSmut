@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="sfgamedataeditor.views.main.modules.common.buttons.ButtonsView">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridBagLayout">
+    <constraints>
+      <xy x="518" y="256" width="600" height="50"/>
+    </constraints>
+    <properties>
+      <alignmentX value="0.0"/>
+      <alignmentY value="1.0"/>
+      <enabled value="true"/>
+      <maximumSize width="600" height="40"/>
+      <minimumSize width="600" height="40"/>
+      <opaque value="true"/>
+      <preferredSize width="600" height="40"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="b11f0" class="javax.swing.JButton" binding="loadSfmodFileButton" default-binding="true">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="10" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag top="5" left="5" bottom="5" right="5" weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <horizontalAlignment value="0"/>
+          <horizontalTextPosition value="11"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <maximumSize width="200" height="25"/>
+          <minimumSize width="200" height="25"/>
+          <preferredSize width="200" height="25"/>
+          <text value="Load .sfmod-file"/>
+        </properties>
+      </component>
+      <component id="60649" class="javax.swing.JButton" binding="createSfmodFileButton" default-binding="true">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="6" fill="0" indent="0" use-parent-layout="false"/>
+          <gridbag top="5" left="5" bottom="5" right="5" weightx="1.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <maximumSize width="200" height="25"/>
+          <minimumSize width="200" height="25"/>
+          <preferredSize width="200" height="25"/>
+          <text value="Create .sfmod-file"/>
+        </properties>
+      </component>
+      <component id="93b62" class="javax.swing.JButton" binding="createModificatedFileButton">
+        <constraints>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+        <properties>
+          <inheritsPopupMenu value="false"/>
+          <margin top="0" left="0" bottom="0" right="0"/>
+          <maximumSize width="200" height="25"/>
+          <minimumSize width="200" height="25"/>
+          <preferredSize width="200" height="25"/>
+          <text value="Create .mod-file"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

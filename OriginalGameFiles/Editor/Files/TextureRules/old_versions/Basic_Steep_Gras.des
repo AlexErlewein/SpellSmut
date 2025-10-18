@@ -1,0 +1,283 @@
+// BASIC STEEPNESS RULES
+// file is processed bottom up!
+
+
+// BASIC STEEPNESS VARIATION RULES
+// on top of the BASIC STEEPNESS RULES apply some variation in
+// texturing to create a more diverse look
+
+// mix grass texture 2 on texture 3 area
+[Rule150]
+{
+	Priority = 150
+	Height = 0, 100
+	Steep = 2.0, 4.0
+	Percent = 2500
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 2
+}
+// mix grass texture 3 on texture 2 area
+[Rule151]
+{
+	Priority = 151
+	Height = 0, 100
+	Steep = 0.0, 1.0
+	Percent = 2500
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 3
+}
+// mix grass texture 3 on texture 4 area
+[Rule152]
+{
+	Priority = 152
+	Height = 0, 100
+	Steep = 6.0, 7.0
+	Percent = 2500
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 3
+}
+// mix grass texture 3 on texture 4 area only slightly at steeper angles
+[Rule153]
+{
+	Priority = 153
+	Height = 0, 100
+	Steep = 7.0, 10.0
+	Percent = 2000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 3
+}
+// mix grass texture 4 on texture 5 area
+[Rule154]
+{
+	Priority = 154
+	Height = 0, 100
+	Steep = 12.0, 14.0
+	Percent = 4000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 4
+}
+// mix grass texture 4 on texture 5 area
+[Rule155]
+{
+	Priority = 155
+	Height = 0, 100
+	Steep = 14.0, 16.0
+	Percent = 2000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 4
+}
+// mix grass-dirt texture 5 on grass-stone texture 6 area
+[Rule156]
+{
+	Priority = 156
+	Height = 0, 100
+	Steep = 17.0, 19.0
+	Percent = 3000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 5
+}
+// mix grass-dirt texture 5 on grass-stone texture 6 area
+[Rule157]
+{
+	Priority = 157
+	Height = 0, 100
+	Steep = 19.0, 22.0
+	Percent = 750
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 5
+}
+
+// mix grass-stone texture 6 on stone area
+[Rule160]
+{
+	Priority = 160
+	Height = 0, 100
+	Steep = 30.0, 35.0
+	Percent = 1500
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 6
+}
+
+// mix grass-stone texture 6 on stone area
+[Rule161]
+{
+	Priority = 161
+	Height = 0, 100
+	Steep = 35.0, 40.0
+	Percent = 500
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 6
+}
+
+// mix steilhang stone mit umliegendem fels
+[Rule169]
+{
+	Priority = 169
+	Height = 0, 100
+	Steep = 54.0, 60.0
+	Percent = 500
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 8
+}
+[Rule170]
+{
+	Priority = 170
+	Height = 0, 100
+	Steep = 40.0, 50.0
+	Percent = 1000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 9
+}
+[Rule171]
+{
+	Priority = 171
+	Height = 0, 100
+	Steep = 50.0, 55.0
+	Percent = 2500
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 9
+}
+
+
+
+
+// BASIC STEEPNESS RULES
+// these rules apply to the whole map regardless of height
+// the range 0-90° is seperated into 9 different textures (tex 2-10)
+// the different steep levels where each texture is applied may
+// need to be tweaked for the map this autotexturer is used for
+
+// flachstes gras
+[Rule200]
+{
+	Priority = 200
+	Height = 0, 100
+	Steep = 0.0, 1.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 2
+}
+// gras auf flacher ebene mit sanfter steigung
+[Rule201]
+{
+	Priority = 201
+	Height = 0, 100
+	Steep = 2.0, 6.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 3
+}
+// mit dreck "geflecktes" gras auf leichten steigungen
+[Rule202]
+{
+	Priority = 202
+	Height = 0, 100
+	Steep = 6.0, 12.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 4
+}
+// "dreckiges" gras an hängen, übergang zu gras-fels
+[Rule203]
+{
+	Priority = 203
+	Height = 0, 100
+	Steep = 12.0, 17.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 5
+}
+// gras-fels übergangstextur an übergang zu steileren hängen
+[Rule204]
+{
+	Priority = 204
+	Height = 0, 100
+	Steep = 17.0, 30.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 6
+}
+// steinige felstextur
+[Rule205]
+{
+	Priority = 205
+	Height = 0, 100
+	Steep = 30.0, 42.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 7
+}
+// felsige felstextur
+[Rule206]
+{
+	Priority = 206
+	Height = 0, 100
+	Steep = 42.0, 55.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 8
+}
+// hochgebirgssteilhangtextur ;)
+[Rule207]
+{
+	Priority = 207
+	Height = 0, 100
+	Steep = 55.0, 65.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 9
+}
+// zu steil, wenn diese textur (schnee) gesetzt ist, bitte höhe korrigieren!
+[Rule208]
+{
+	Priority = 208
+	Height = 0, 100
+	Steep = 65.0, 90.0
+	Percent = 10000
+	Term1 = 0
+	Term2 = 0
+	Marker = 0
+	Texture = 10
+}

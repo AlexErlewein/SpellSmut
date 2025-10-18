@@ -1,0 +1,29 @@
+# SpellForce - Exclude large binary game files
+
+# PAK archives (too large for GitHub)
+*.pak
+
+# Executables and DLLs (game binaries)
+*.exe
+*.dll
+
+# Video files
+*.bik
+
+# Texture files (can be large)
+*.dds
+*.tga
+
+# Other binary formats
+*.ico
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Keep these important files (override above patterns if needed)
+# Use git add -f to force add if needed

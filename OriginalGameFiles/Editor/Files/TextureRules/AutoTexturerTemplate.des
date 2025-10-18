@@ -1,0 +1,102 @@
+// File created by ExportAutoTexture()
+// DO NOT MODIFY! ... modify .lua instead!
+
+// Created 4 Rules with 2 Passes and 3/1 (Base/Mix) Textures.
+
+// Also los gehts!
+[Rule1]
+{
+	Priority	= 1
+	Height		= 10, 20
+	Steep		= 0, 5
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 2
+	}
+}
+
+[Rule2]
+{
+	Priority	= 1
+	Height		= 10, 20
+	Steep		= 5, 9
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 4
+	}
+}
+
+// Mehrzeilige comments
+// gehen auch aber halt nur
+// so wie hier!
+[Rule3]
+{
+	Priority	= 1
+	Height		= 20, 30
+	Steep		= 16, 20
+	Percent		= 10000
+
+	[Terms]
+	{
+	Range		= 0
+	Condition	= 0
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 27
+	}
+}
+
+// hier gehts weiter...
+[Rule4]
+{
+	Priority	= 2
+	Height		= 1, 255
+	Steep		= 0, 90
+	Percent		= 2000
+
+	[Terms]
+	{
+	Range		= -2
+	Condition	= 27
+	ExposureMin	= 0
+	ExposureMax	= 0
+	ObjectMin	= 0
+	ObjectMax	= 0
+	}
+	[Result]
+	{
+	Marker		= 0
+	Texture		= 35
+	}
+}
+
