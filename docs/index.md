@@ -6,6 +6,8 @@ Welcome to the comprehensive modding documentation for **SpellForce: The Order o
 
 ## 📚 Table of Contents
 
+[[_TOC_]]
+
 ### 🎮 Game Systems
 
 #### [Quest System Guide](SpellForce_Quest_System_Guide.md)
@@ -303,6 +305,6 @@ Whether you're creating a single custom spell or a full campaign, these guides w
 
 ---
 
-**Last Updated**: October 2025  
-**Game Version**: SpellForce Platinum Edition (Steam)  
+**Last Updated**: October 2025
+**Game Version**: SpellForce Platinum Edition (Steam)
 **Documentation Version**: 1.0
