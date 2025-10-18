@@ -586,4 +586,607 @@ Category 2016 text content uses **Windows-1252 encoding** (fixed byte arrays).
 
 ---
 
+---
+
+## 11. IMPORT/BI-DIRECTIONAL CONVERSION STRATEGY
+
+**Updated:** 2025-10-18
+**Goal:** Enable importing JSON/CSV data back into GameData.cff format for creating custom weapons, items, and game data.
+
+### 11.1 Import Architecture
+
+#### Import Flow
+```
+JSON/CSV Files
+    ↓
+Parse & Validate
+    ↓
+Resolve Foreign Keys
+    ↓
+Create Category Structs
+    ↓
+Build SFGameDataNew
+    ↓
+Save to GameData.cff
+```
+
+#### Key Challenges
+
+1. **Foreign Key Validation**
+   - All NameID/TextID references must exist in Category 2016
+   - Item references must exist in Category 2003
+   - Spell references must exist in Category 2002
+   - Unit references must exist in Category 2024/2005
+   - etc.
+
+2. **ID Assignment**
+   - New items need unique IDs that don't conflict with existing data
+   - Auto-increment from highest existing ID, or
+   - Allow user to specify ID ranges
+
+3. **Multi-Valued Categories**
+   - JSON arrays → multiple sub-items in CategoryBaseMultiple
+   - Must generate correct sub-IDs (EquipmentIndex, EffectIndex, etc.)
+
+4. **Dependency Resolution**
+   - Import order matters (see Section 11.3)
+   - Circular dependencies (Items ← → Units)
+   - Missing dependencies must be created or error
+
+5. **Data Validation**
+   - Type checking (ushort ranges, byte limits)
+   - Required fields
+   - Valid enum values
+   - Text encoding (Windows-1252, 1250, 1251)
+
+6. **Encoding Issues**
+   - Category 2016 text uses legacy encodings
+   - Fixed-size byte arrays (50, 512 chars)
+   - Null-terminated strings
+
+---
+
+### 11.2 Import Data Models
+
+#### JSON Input Format for Weapons
+
+```json
+{
+  "weapons": [
+    {
+      "id": null,  // null = auto-assign
+      "name": {
+        "english": "Legendary Sword of Doom",
+        "german": "Legendäres Schwert des Untergangs",
+        "russian": "Легендарный Меч Гибели"
+      },
+      "type": "1H Sword",  // lookup by name in Category 2063
+      "material": "Adamantium",  // lookup by name in Category 2064
+      "damage": {
+        "min": 50,
+        "max": 75
+      },
+      "range": {
+        "min": 0,
+        "max": 1
+      },
+      "speed": 120,
+      "value": {
+        "sell": 5000,
+        "buy": 10000
+      },
+      "stats": {  // optional
+        "strength": 5,
+        "agility": 3,
+        "resistFire": 10
+      },
+      "effects": [  // optional
+        {
+          "effectName": "Fire Damage",  // lookup by spell name
+          "effectId": null  // or specify ID directly
+        }
+      ],
+      "requirements": [  // optional
+        {
+          "skillMajor": "Sword Mastery",
+          "skillMinor": "One-Handed",
+          "level": 10
+        }
+      ],
+      "ui": {  // optional
+        "handle": "icon_sword_legendary",
+        "scaledDown": false
+      }
+    }
+  ]
+}
+```
+
+#### CSV Input Format for Weapons
+
+```csv
+WeaponID,Name_EN,Name_DE,Name_RU,Type,Material,MinDamage,MaxDamage,MinRange,MaxRange,Speed,SellValue,BuyValue,Strength,Agility,UIHandle
+,Legendary Sword of Doom,Legendäres Schwert des Untergangs,Легендарный Меч Гибели,1H Sword,Adamantium,50,75,0,1,120,5000,10000,5,3,icon_sword_legendary
+```
+
+**Note:** CSV format is more limited - cannot handle multi-valued fields (effects, requirements) easily.
+
+---
+
+### 11.3 Import Dependency Order
+
+To safely import custom data, categories must be imported in dependency order:
+
+**Phase 1: Foundational Data**
+1. ✅ **Category 2016** - Text entries (names, descriptions)
+   - Create text entries for all custom item names
+   - Generate unique TextIDs
+
+**Phase 2: Lookup Tables**
+2. ✅ **Category 2063** - Weapon types (if creating new type)
+3. ✅ **Category 2064** - Weapon materials (if creating new material)
+4. ✅ **Category 2039** - Skills (if creating new skill requirements)
+5. ✅ **Category 2054** - Spell lines (if creating new spell lines)
+
+**Phase 3: Core Entities**
+6. ✅ **Category 2002** - Spells (if weapon effects reference new spells)
+7. ✅ **Category 2003** - Items (base item entries)
+
+**Phase 4: Item Extensions**
+8. ✅ **Category 2015** - Weapon data (for weapons from 2003)
+9. ✅ **Category 2004** - Item stats (optional, for items with bonuses)
+10. ✅ **Category 2012** - Item UI (optional, for custom icons)
+11. ✅ **Category 2014** - Weapon effects (optional, for magical weapons)
+12. ✅ **Category 2017** - Item requirements (optional, for skill-locked items)
+
+---
+
+### 11.4 Import Implementation
+
+#### Importer Architecture
+
+```csharp
+public class GameDataImporter
+{
+    private SFGameDataNew gamedata;
+    private Dictionary<string, ushort> textIdMap;  // name → TextID
+    private Dictionary<string, ushort> weaponTypeMap;  // type name → TypeID
+    private Dictionary<string, ushort> weaponMaterialMap;  // material name → MaterialID
+    private ushort nextItemId;
+    private ushort nextTextId;
+
+    public GameDataImporter(SFGameDataNew existingGameData)
+    {
+        gamedata = existingGameData;
+        BuildLookupMaps();
+    }
+
+    public void ImportWeapons(string jsonPath)
+    {
+        // 1. Parse JSON
+        var weaponsJson = File.ReadAllText(jsonPath);
+        var weapons = JsonSerializer.Deserialize<List<WeaponData>>(weaponsJson);
+
+        // 2. Validate and assign IDs
+        foreach (var weapon in weapons)
+        {
+            if (weapon.Id == null)
+            {
+                weapon.Id = nextItemId++;
+            }
+            ValidateWeapon(weapon);
+        }
+
+        // 3. Create text entries (Category 2016)
+        foreach (var weapon in weapons)
+        {
+            CreateTextEntries(weapon);
+        }
+
+        // 4. Create lookup entries if needed (Categories 2063, 2064)
+        foreach (var weapon in weapons)
+        {
+            EnsureWeaponTypExists(weapon.Type);
+            EnsureWeaponMaterialExists(weapon.Material);
+        }
+
+        // 5. Create item entries (Category 2003)
+        foreach (var weapon in weapons)
+        {
+            CreateItemEntry(weapon);
+        }
+
+        // 6. Create weapon data (Category 2015)
+        foreach (var weapon in weapons)
+        {
+            CreateWeaponDataEntry(weapon);
+        }
+
+        // 7. Create optional extensions
+        foreach (var weapon in weapons)
+        {
+            if (weapon.Stats != null)
+                CreateItemStatsEntry(weapon);
+            if (weapon.Effects != null && weapon.Effects.Count > 0)
+                CreateWeaponEffects(weapon);
+            if (weapon.Requirements != null && weapon.Requirements.Count > 0)
+                CreateItemRequirements(weapon);
+            if (weapon.UI != null)
+                CreateItemUIEntry(weapon);
+        }
+    }
+
+    private void CreateTextEntries(WeaponData weapon)
+    {
+        ushort textId = nextTextId++;
+
+        // English
+        var enText = new Category2016Item();
+        enText.TextID = textId;
+        enText.LanguageID = 0;  // English
+        SetTextContent(enText, weapon.Name.English);
+        gamedata.c2016.AddSubItem(..., enText);
+
+        // German (if provided)
+        if (!string.IsNullOrEmpty(weapon.Name.German))
+        {
+            var deText = new Category2016Item();
+            deText.TextID = textId;
+            deText.LanguageID = 1;  // German
+            SetTextContent(deText, weapon.Name.German);
+            gamedata.c2016.AddSubItem(..., deText);
+        }
+
+        // Russian (if provided)
+        if (!string.IsNullOrEmpty(weapon.Name.Russian))
+        {
+            var ruText = new Category2016Item();
+            ruText.TextID = textId;
+            ruText.LanguageID = 5;  // Russian
+            SetTextContent(ruText, weapon.Name.Russian, Encoding.GetEncoding(1251));
+            gamedata.c2016.AddSubItem(..., ruText);
+        }
+
+        textIdMap[weapon.Name.English] = textId;
+    }
+
+    private unsafe void SetTextContent(Category2016Item item, string text, Encoding encoding = null)
+    {
+        if (encoding == null)
+            encoding = Encoding.GetEncoding(1252);
+
+        byte[] bytes = encoding.GetBytes(text);
+        if (bytes.Length > 512)
+            throw new Exception($"Text content too long: {text}");
+
+        fixed (byte* dest = item.Content)
+        {
+            for (int i = 0; i < bytes.Length; i++)
+                dest[i] = bytes[i];
+            // Null-terminate
+            if (bytes.Length < 512)
+                dest[bytes.Length] = 0;
+        }
+    }
+
+    private void CreateItemEntry(WeaponData weapon)
+    {
+        var item = new Category2003Item();
+        item.ItemID = weapon.Id.Value;
+        item.ItemType1 = 1;  // Weapon type (verify correct value)
+        item.ItemType2 = 0;
+        item.NameID = textIdMap[weapon.Name.English];
+        item.SellValue = weapon.Value.Sell;
+        item.BuyValue = weapon.Value.Buy;
+        // ... other fields
+
+        gamedata.c2003.AddItem(..., item);
+    }
+
+    private void CreateWeaponDataEntry(WeaponData weapon)
+    {
+        var weaponData = new Category2015Item();
+        weaponData.ItemID = weapon.Id.Value;
+        weaponData.MinDamage = weapon.Damage.Min;
+        weaponData.MaxDamage = weapon.Damage.Max;
+        weaponData.MinRange = weapon.Range.Min;
+        weaponData.MaxRange = weapon.Range.Max;
+        weaponData.WeaponSpeed = weapon.Speed;
+        weaponData.WeaponType = weaponTypeMap[weapon.Type];
+        weaponData.WeaponMaterial = weaponMaterialMap[weapon.Material];
+
+        gamedata.c2015.AddItem(..., weaponData);
+    }
+
+    private void CreateWeaponEffects(WeaponData weapon)
+    {
+        for (byte i = 0; i < weapon.Effects.Count; i++)
+        {
+            var effect = weapon.Effects[i];
+            var effectItem = new Category2014Item();
+            effectItem.ItemID = weapon.Id.Value;
+            effectItem.EffectIndex = i;
+            effectItem.EffectID = ResolveSpellId(effect.EffectName);
+
+            gamedata.c2014.AddSubItem(..., effectItem);
+        }
+    }
+}
+```
+
+---
+
+### 11.5 Validation Rules
+
+#### ID Validation
+- `ushort` range: 0-65535
+- `byte` range: 0-255
+- IDs must be unique within category
+- Cannot use ID 0 (reserved/invalid in many contexts)
+
+#### Text Validation
+- Name must not be empty
+- Text content ≤ 512 bytes (after encoding)
+- Handle strings ≤ 50 bytes (after encoding)
+- Valid encoding for language
+
+#### Weapon Validation
+- MinDamage ≤ MaxDamage
+- MinRange ≤ MaxRange
+- Speed > 0
+- Valid weapon type (exists in 2063 or will be created)
+- Valid material (exists in 2064 or will be created)
+
+#### Foreign Key Validation
+- All referenced TextIDs must exist
+- All referenced weapon types must exist
+- All referenced materials must exist
+- All referenced effect/spell IDs must exist
+
+---
+
+### 11.6 Conflict Resolution Strategies
+
+#### Strategy 1: Merge Mode
+- Import data merges with existing GameData
+- New IDs assigned automatically
+- Existing items untouched
+- **Use case:** Adding new weapons to existing game
+
+#### Strategy 2: Replace Mode
+- Import data replaces specific category
+- Can overwrite existing items with same ID
+- **Use case:** Modifying existing weapons
+
+#### Strategy 3: ID Range Reservation
+- Reserve ID ranges for custom content (e.g., 50000-60000)
+- Prevents conflicts with base game content
+- **Use case:** Large mods with many custom items
+
+---
+
+### 11.7 Error Handling
+
+#### Validation Errors
+- Report all validation errors before import
+- Don't partially import (all-or-nothing)
+- Generate detailed error report:
+  ```
+  Error: Weapon "Legendary Sword of Doom"
+  - MinDamage (100) exceeds MaxDamage (75)
+  - Weapon type "Triple-Bladed Axe" does not exist
+  - Effect "Super Fire" references non-existent spell ID
+  ```
+
+#### Missing Dependencies
+- Option 1: **Fail fast** - abort import if dependencies missing
+- Option 2: **Auto-create** - create stub entries for missing lookups
+- Option 3: **Interactive** - prompt user to provide missing data
+
+#### ID Conflicts
+- Detect ID conflicts before import
+- Options:
+  - Auto-reassign conflicting IDs
+  - Prompt user to resolve
+  - Abort import
+
+---
+
+### 11.8 Testing Strategy
+
+#### Unit Tests
+- Text encoding/decoding
+- ID assignment
+- Foreign key resolution
+- Multi-valued field handling
+
+#### Integration Tests
+- Import weapon → export → verify JSON matches
+- Import weapon → save GameData.cff → load in game
+- Import with missing dependencies
+- Import with ID conflicts
+- Import multi-language text
+
+#### Test Data Sets
+- **Minimal Weapon** - Only required fields
+- **Full Weapon** - All optional fields populated
+- **Multi-Effect Weapon** - Multiple effects
+- **High-Requirement Weapon** - Multiple skill requirements
+- **Invalid Weapon** - Various validation failures
+
+---
+
+### 11.9 CLI Interface for Import
+
+```bash
+# Import weapons from JSON (merge mode)
+SpellforceGameDataExporter.exe --import "custom_weapons.json" --gamedata "Gamedata.cff" --output "Gamedata_modified.cff" --mode merge
+
+# Import weapons with ID range reservation
+SpellforceGameDataExporter.exe --import "custom_weapons.json" --gamedata "Gamedata.cff" --output "Gamedata_modified.cff" --id-range 50000-60000
+
+# Validate without importing
+SpellforceGameDataExporter.exe --validate "custom_weapons.json" --gamedata "Gamedata.cff"
+
+# Import with dependency auto-creation
+SpellforceGameDataExporter.exe --import "custom_weapons.json" --gamedata "Gamedata.cff" --output "Gamedata_modified.cff" --auto-create-deps
+
+# Interactive import (prompts for missing dependencies)
+SpellforceGameDataExporter.exe --import "custom_weapons.json" --gamedata "Gamedata.cff" --output "Gamedata_modified.cff" --interactive
+```
+
+---
+
+### 11.10 GUI Integration for Import
+
+**SpelllforceCFFEditor** menu additions:
+- **File → Import → Weapons from JSON...**
+- **File → Import → Items from JSON...**
+- **File → Import → Units from JSON...**
+- **File → Import → Spells from JSON...**
+
+**Import Dialog:**
+- File selector (JSON/CSV)
+- Mode selection (merge/replace)
+- ID assignment strategy
+- Dependency handling options
+- Validation results preview
+- Conflict resolution UI
+
+---
+
+### 11.11 Round-Trip Testing
+
+**Goal:** Ensure export → import → export produces identical data
+
+**Test Process:**
+1. Export weapons from vanilla GameData.cff to JSON
+2. Import the exported JSON into a new GameData.cff
+3. Export weapons again from new GameData.cff
+4. Compare JSON files - should be identical (allowing for formatting)
+
+**Potential Issues:**
+- Floating-point precision
+- Text encoding inconsistencies
+- Field ordering
+- Default value handling
+
+---
+
+### 11.12 Advanced Import Features
+
+#### Batch Import
+- Import multiple JSON files in sequence
+- Combine weapons, armor, items into one GameData
+
+#### Template System
+- Define weapon templates (e.g., "Iron Weapon", "Legendary Weapon")
+- Inherit properties from templates
+- Override specific fields
+
+```json
+{
+  "templates": {
+    "IronWeapon": {
+      "material": "Iron",
+      "value": { "sell": 50, "buy": 100 }
+    }
+  },
+  "weapons": [
+    {
+      "template": "IronWeapon",
+      "name": "Iron Sword",
+      "type": "1H Sword",
+      "damage": { "min": 10, "max": 15 }
+    }
+  ]
+}
+```
+
+#### Scripted Generation
+- Use C# scripting to generate items programmatically
+- Useful for creating item sets, progression curves
+
+```csharp
+// Generate 10 iron swords with increasing damage
+for (int i = 1; i <= 10; i++)
+{
+    var weapon = new WeaponData {
+        Name = $"Iron Sword +{i}",
+        Damage = { Min = 10 + i*2, Max = 15 + i*2 },
+        // ...
+    };
+    importer.ImportWeapon(weapon);
+}
+```
+
+---
+
+### 11.13 Import Implementation Phases
+
+**Phase 1: Weapon Import (MVP)**
+- Import JSON → GameData.cff
+- Categories: 2003, 2015, 2016, 2063, 2064
+- Basic validation
+- Merge mode only
+
+**Phase 2: Extended Weapon Import**
+- Add Categories: 2004, 2012, 2014, 2017
+- Multi-valued fields (effects, requirements)
+- CSV support
+
+**Phase 3: Other Entity Types**
+- Units (2024, 2005, 2025, 2026)
+- Spells (2002, 2054)
+- Buildings (2029, 2030, 2031)
+
+**Phase 4: Advanced Features**
+- Replace mode
+- ID range reservation
+- Template system
+- Batch import
+- GUI integration
+
+---
+
+### 11.14 Import Deliverables
+
+1. ✅ `GameDataImporter.cs` - Core importer class
+2. ✅ `WeaponImporter.cs` - Weapon-specific importer
+3. ✅ `ForeignKeyResolver.cs` - Dependency resolution
+4. ✅ `ValidationEngine.cs` - Data validation
+5. ✅ CLI argument parsing for `--import`
+6. ✅ Import dialog form (GUI)
+7. ✅ Documentation - Import JSON schema
+8. ✅ Unit tests
+9. ✅ Integration tests
+10. ✅ Example JSON files
+
+---
+
+### 11.15 Import Risks & Mitigations
+
+| Risk | Impact | Mitigation |
+|------|--------|-----------|
+| Corrupt existing GameData | **CRITICAL** | Always backup original, validate before save |
+| ID conflicts | High | Auto-detect conflicts, provide resolution options |
+| Missing dependencies | Medium | Validate before import, auto-create option |
+| Invalid data types | Medium | Strong validation, type checking |
+| Encoding issues | Low | Test with all language sets, proper encoding handling |
+| Game crashes from bad data | **CRITICAL** | Extensive testing, validate against game constraints |
+
+---
+
+### 11.16 Next Steps for Import
+
+1. **Implement basic weapon importer** (Category 2003, 2015, 2016)
+2. **Create validation framework**
+3. **Test with simple weapon import**
+4. **Load modified GameData in actual game** - verify it works!
+5. **Extend to multi-valued categories** (effects, requirements)
+6. **Add GUI dialog**
+7. **Implement other entity importers**
+
+---
+
 **End of Plan**

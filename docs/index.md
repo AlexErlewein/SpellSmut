@@ -16,6 +16,8 @@ Welcome to the comprehensive modding documentation for **SpellForce: The Order o
   - [Campaign System Guide](#campaign-system-guide)
   - [Quest & Campaign Creation Guide](#quest--campaign-creation-guide)
   - [Multiplayer & FreeGame Guide](#multiplayer--freegame-guide)
+- [📊 Data Reference](#-data-reference)
+  - [Categories Overview](#categories-overview)
 - [🚀 Quick Start Guides](#-quick-start-guides)
   - [For Beginners](#for-beginners)
   - [For Intermediate Modders](#for-intermediate-modders)
@@ -145,6 +147,30 @@ Create multiplayer maps and FreeGame (skirmish) content.
 
 ---
 
+## 📊 Data Reference
+
+#### [Categories Overview](CATEGORIES_OVERVIEW.md)
+Complete reference for all 50 GameData categories in SpellForce's data system.
+
+**Topics Covered:**
+- Item system (armor, weapons, accessories, consumables)
+- Spell and effect data structures
+- Unit and hero definitions
+- Building and object data
+- Quest and dialogue systems
+- UI and text localization
+- Category relationships and foreign keys
+- Data structure specifications
+
+**Key Categories:**
+- **Items**: General info (2003), armor stats (2004), UI data (2012), weapon effects (2014)
+- **Spells**: Spell data (2002), job spells (2025), spell lines (2026)
+- **Units**: Hero stats (2005), worker types (2006), unit definitions (2017)
+- **Buildings**: Building data (2029), upgrades (2027)
+- **Text**: Localized strings (2016), quest text (2031)
+
+---
+
 ## 🚀 Quick Start Guides
 
 ### For Beginners
@@ -228,6 +254,7 @@ SpellForce/
 - Study **Spell System Guide**
 - Create 3-5 custom spells
 - Experiment with different spell types
+- Reference **Categories Overview** to understand data structures
 
 ### Phase 3: Content (Week 5-6)
 - Follow **Race Creation Guide** to create a basic race
@@ -296,6 +323,9 @@ SpellForce/
 - **Story/Campaigns**: → [Campaign System Guide](SpellForce_Campaign_System_Guide.md) or [Quest & Campaign Creation](SpellForce_Quest_Campaign_Creation_Guide.md)
 - **Multiplayer**: → [Multiplayer & FreeGame Guide](SpellForce_Multiplayer_FreeGame_Guide.md)
 - **New Races**: → [Race Creation Guide](Race_Creation_Guide.md)
+- **Data Structures/GameData**: → [Categories Overview](CATEGORIES_OVERVIEW.md)
+- **Items/Weapons/Armor**: → [Categories Overview](CATEGORIES_OVERVIEW.md) (Categories 2003-2014)
+- **Units/Heroes/Buildings**: → [Categories Overview](CATEGORIES_OVERVIEW.md) (Categories 2005-2006, 2017, 2029)
 
 ### By Skill Level
 - **Beginner**: Quest System → Sound System → Spell System
