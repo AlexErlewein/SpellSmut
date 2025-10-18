@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Map Editor - Decorations mode</h1>
+<p>Aside from entities, there's one more type of objects you can place on the map - <b>decorations</b>. These can't interact with any other objects on the map, and are there purely as eye candy.</p>
+<img src="img/mapeditordecals.png">
+<ul>
+  <li>A. Decoration brush</li>
+  <li>B. Decoration groups</li>
+  <li>C. Decoration selector</li>
+  <li>D. Selected group panel</li>
+</ul>
+
+<h2>A. Decoration brush</h2>
+<p>This is similar to the brush in Terrain and Textures mode. See <a href="mapeditor_terrain.html#HMAP">Map Editor - Terrain mode</a> for parameter details.</p>
+<p>Clicking on decoration with <b>right mouse button</b> will select the group this decoration belongs to.</p>
+
+<h2>B. Decoration groups</h2>
+<p>There are 254 decoration groups per map, though usually much less of them are needed. If a decoration group has any object assigned to it, it is colored <dec_green>green</dec_green>.</p>
+<p>A special empty group X, denoted by <dec_red>red</dec_red> color, is placed at the beginning of the panel. Painting with this group on the terrain removes any decorations placed there before.</p>
+<p>Selecting any group (except group X) from the panel will show objects assigned to it in the <i>selected group panel</i>.</p>
+
+<h2>C. Decoration selector</h2>
+<p>You can choose decorations to include with selected decoration group in this panel.</p>
+
+<h2>D. Selected group panel</h2>
+<p>When you select a decoration group, a grid of objects is displayed. Each row in the grid contains object ID and its weight in the group. For every row in the group, a decoration with given object ID has a chance of spawning on every terrain cell that is painted with the selected group (weight 0 - 0% chance, weight 255 - 100% chance). Up to 30 rows per decoration can be defined per group.</p>
+<p>You can freely modify decoration group's object IDs and weights.</p>
+</body>

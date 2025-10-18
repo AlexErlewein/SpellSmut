@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Map Editor - Entities mode</h1>
+<p>Every map is home to <b>entities</b>. Entity is any map element which can be somehow interacted with in the game. There are 7 types of entites, each of which has its own user interface in the editor, however they do share some things.</p>
+<ol>
+  <li><a href="#UNITS">Units</a></li>
+  <li><a href="#BUILDINGS">Buildings</a></li>
+  <li><a href="#OBJECTS">Objects</a></li>
+  <li><a href="#COOPCAMPS">Coop camps</a></li>
+  <li><a href="#BINDSTONES">Bindstones</a></li>
+  <li><a href="#PORTALS">Portals</a></li>
+  <li><a href="#MONUMENTS">Monuments</a></li>
+</ol>
+<img src="img/mapeditentity.png">
+<ul>
+  <li>A. Entity placement panel</li>
+  <li>B. Entity type selection panel</li>
+  <li>C. Entity properties panel</li>
+  <li>D. Entity list</li>
+  <li>E. Selected entity</li>  
+</ul>
+
+<h2>A. Entity placement panel</h2>
+<p>Every entity mode has the option to show/hide entity preview at the 3D cursor. When unchecked, a preview of the selected entity type follows the 3D cursor.</p>
+<img src="img/mapeditentitypreview.png">
+<p>Unit, object, and building entity modes can specify entity ID manually in the <i>ID</i> field.</p>
+<p>These three modes also have access to quick select. When you select an entity type, you can press <b>Ctrl+(1, 2, ...)</b> to assign the ID to a quick select slot. You can press <b>(1, 2, ...)</b> to select entity type associated with the ID in the given quick select slot. These quick select slots are unique for each of the entity modes.</p>
+
+<h2>B. Entity type selection panel</h2>
+<p>Unit, object and building entity modes have a type selection panel, which contains groups of entity types. Unit and building entity types are grouped by race, object entity types are grouped by the object resource path (see category 34. in gamedata).</p>
+<p>Under the list of entity types there's a search tool. You can find all entity types by name or by group name by typing the name (or a part of it) there.</p>
+<img src="img/mapeditorentitytypesearch.png">
+
+<h2>C. Entity properties panel</h2>
+<p>Every entity mode has different properties, and will be explained in respective entity mode description.</p>
+
+<h2>D. Entity list</h2>
+<p>Entity list contains all entities on the map, respective to the entity mode. Selecting an entity from the list will move camera to view the entity.</p>
+<p>Additionally, in unit, object, and building entity modes, you can search for entities by name using the controls below the list.</p>
+
+<h2>E. Selected entity</h2>
+<p>In a given entity mode, you can select entities respective to that mode. Click on them with <b>left mouse button</b> to select the entity. Clicking on them with <b>right mouse button</b> will remove the entity (<warning>with the exception of bindstones, see <a href="#BINDSTONES">5. Bindstones</a></warning>). Holding <b>Shift</b> and clicking <b>left mouse button</b> anywhere on the map will move the selected entity there, as long as the terrain is walkable and no other entity is placed there. Clicking on any terrain with <b>right mouse button</b> will deselect currently selected entity.</p>
+
+<h2 id="UNITS">1. Units</h2>
+<img src="img/mapeditentityunit.png">
+<ul>
+  <li><b>Unit ID</b> is the ID of the unit you placed. Changing the ID will change selected unit to the unit with that ID.</li>
+  <li><b>NPC ID</b> is the ID used by scripting system. See <a href="#NPCSYS">NPC system</a>.</li>
+  <li><b>Position</b> displays the current position of selected unit.</li>
+  <li><unknown><b>Flags</b>, <b>Unknown</b>, <b>Group</b> and <b>Unknown2</b> are not fully understood...</unknown></li>
+</ul>
+
+<h2 id="BUILDINGS">2. Buildings</h2>
+<img src="img/mapeditentitybuilding.png">
+<ul>
+  <li><b>Building ID</b> is the ID of the building you placed. Changing the ID will change selected building to the building with that ID.</li>
+  <li><b>NPC ID</b> is the ID used by scripting system. See <a href="#NPCSYS">NPC system</a>.</li>
+  <li><b>Position</b> displays the current position of selected building.</li>
+  <li><b>Angle</b> determines the apparent angle of the building.</li>
+  <li><b>Level</b> is the level of the building. Building HP scales with level.</li>
+  <li><b>Race ID</b> is the race ID of the building. Used in campaign only, otherwise the race is inherited from the race assigned to the building in the gamedata (category 24.)</li>
+</ul>
+
+<h2 id="OBJECTS">3. Objects</h2>
+<img src="img/mapeditentityobjectangle.png">
+<p><b>A. Placement angle</b> - you can specify initial angle the new objects will be placed at. Checking <i>Random angle</i> will set initial angle for new objects at random.</p>
+<img src="img/mapeditentityobject.png">
+<ul>
+  <li><b>Object ID</b> is the ID of the object you placed. Changing the ID will change selected object to the object with that ID.</li>
+  <li><b>NPC ID</b> is the ID used by scripting system. See <a href="#NPCSYS">NPC system</a>.</li>
+  <li><b>Position</b> displays the current position of selected object.</li>
+  <li><b>Angle</b> determines the apparent angle of the object.</li>
+  <li><unknown><b>Unknown</b> is not fully understood...</unknown></li>
+</ul>
+
+<h2 id="COOPCAMPS">4. Coop camps</h2>
+<p>Coop camps are used only for maps of type COOP. See Map Editor - Metadata mode.</p>
+<img src="img/mapeditentitycoopcampsedit.png">
+<p><b>A. Edit coop camp types...</b> - you can view available coop camp types and edit them using this option. See <a href="index.html#SQLMODSPAWN">SQL Modifier - GdRtsCoopSpawnGroup.lua</a>.</p>
+<img src="img/mapeditentitycoopcamps.png">
+<ul>
+  <li><b>Camp type</b> is the ID of the coop camp you placed. Changing the ID will change selected coop camp type.</li>
+  <li><b>Position</b> displays the current position of selected object.</li>
+  <li><unknown><b>Unknown</b> is not fully understood, however at least 1 and at most 6 coop camps on the map should have this set to 1, and remaining camps should have this set to 0.</unknown></li>
+</ul>
+
+<h2 id="BINDSTONES">5. Bindstones</h2>
+<p>Bindstones are used as spawn points for players. You can't remove a bindstone as long as the player that is assigned to it is a member of any team in any team composition (see <a href="mapeditor_metadata.html#TEAMCOMP">Map Editor - Metadata mode</a>).</p>
+<img src="img/mapeditentitybindstone.png">
+<ul>
+  <li><b>Text ID</b> is the text that is displayed in quick travel menu in the game.</li>
+  <li><b>Position</b> displays the current position of selected bindstone.</li>
+  <li><b>Angle</b> determines the apparent angle of the bindstone.</li>
+  <li><unknown><b>Unknown</b> is not fully understood...</unknown></li>
+</ul>
+
+<h2 id="PORTALS">6. Portals</h2>
+<p>Portals are links between different maps in campaign mode. In free game mode, a special Portal to Return is usually placed.</p>
+<img src="img/mapeditentityportal.png">
+<ul>
+  <li><b>Portal ID</b> is the ID of the portal you placed. Changing the ID will change selected portal to the portal with that ID.</li>
+  <li><b>Position</b> displays the current position of selected portal.</li>
+  <li><b>Angle</b> determines the apparent angle of the portal.</li>
+</ul>
+
+<h2 id="MONUMENTS">7. Monuments</h2>
+<p>Monuments are objects that can be activated by player to summon workers and fighters at his command. Hero monument is the place where you summon your runic heroes.</p>
+<img src="img/mapeditentitymonumenttype.png">
+<p><b>A. Monument type</b> - to place a monument of given type, you must first select its type in this panel.</p>
+<img src="img/mapeditentitymonument.png">
+<ul>
+  <li><b>Position</b> displays the current position of selected monument.</li>
+  <li><b>Angle</b> determines the apparent angle of the monument.</li>
+</ul>
+
+<h2 id="NPCSYS">NPC system</h2>
+<p>Here is a short description on how to assign NPC IDs to entities and how to open NPC scripts.</p>
+<p>Every unit, building and object can be assigned NPC ID. This ID is unique per map.</p>
+<p>Every map is assigned to a unique platform, its ID can be found in category 39. Map data in GameData Editor If a map is not assigned to any platform, an implicit platform ID 6666 is used.</p>
+<p>Every platform script is located in folder <b>C:/SpellForce/script/pXXXX/</b>, where XXXX is platform ID. In this folder, you can find, among other scripts, numerous files named <b>n####.lua</b>, where #### is NPC ID.</p>
+<p>You can open NPC scripts using <i>Open script</i> button in Entity Properties panel. If this NPC ID doesn't exist on the map, this button will create one for this entity, in respective platform folder. <warning>Lua files must have a default program (for example, Notepad++) assigned to the filetype before you use this button.</warning></p>
+  
+</body>

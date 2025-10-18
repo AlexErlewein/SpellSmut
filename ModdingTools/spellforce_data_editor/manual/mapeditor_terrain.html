@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Map Editor - Terrain mode</h1>
+<p>Every map in SpellForce starts with terrain. In terrain mode, you can modify 4 aspects of the map:</p>
+<ol>
+  <li>Heightmap</li>
+  <li>Terrain flags</li>
+  <li>Lakes</li>
+  <li>Weather</li>
+</ol>
+
+<h2 id="HMAP">1. Heightmap</h2>
+<p>Heightmap is part of the terrain that defines terrain elevation. Together with terrain textures, it is the first thing players notice about the terrain.</p>
+<p>Pressing and holding <b>left</b> or <b>right mouse button</b> will apply terrain modification, depending on brush settings.</p>
+<img src="img/mapedithmap.png">
+<ul>
+  <li>A. <b>Size</b> controls the radius of the brush.</li>
+  <img src="img/mapedithmapsize.png">
+  <li>B. <b>Shape</b> sets the shape of the brush.</li>
+  <img src="img/mapedithmapshape.png">
+  <li>C. <b>Interpolation</b> sets the interpolation of the brush.</li>
+  <img src="img/mapedithmapinterpolation.png">
+  <li>D. <b>Mode</b> sets the mode of the brush.</li>
+  <img src="img/mapedithmapmode.png">
+  <li>E. <b>Strength (raise mode)</b> sets the strength of the brush. The higher the strength, the more the brush will modify the terrain. <b>Value (set mode)</b> sets the height to which the brush will set the terrain. Use <b>right mouse button</b> on the terrain to set this value from the terrain. <b>Strength (%) (smooth mode)</b> sets the strength of the brush. The higher the strength, the more the brush will smooth the terrain.
+  <img src="img/mapedithmapstrength.png">
+</ul>
+<p>In addition, if <b>Shift</b> is held while either of mouse buttons is pressed, the currently selected terrain modification will be applied to <warning>all</warning> terrain equally, regardless of brush settings. If <b>Ctrl</b> is held while either of mouse buttons is pressed, the currently selected terrain modification will be applied only once, even if the mouse button is held - this helps in precise editing.</p>
+
+<p>Editing terrain can also affect surrounding lakes, shrinking/expanding, splitting, or removing them in the process. Be mindful of that while editing terrain.</p>
+
+<h2>2. Terrain flags</h2>
+<p>Terrain flags control the way units move around the map, and which parts of the terrain will be obscured in fog of war.</p>
+<p>Pressing and holding <b>left</b> or <b>right mouse button</b> will apply terrain flags, depending on brush settings.</p>
+<img src="img/mapeditflags.png">
+<ul>
+  <li><b>Size</b> and <b>Shape</b> control the radius and shape of the brush, exactly the same as heightmap brush.</li>
+  <li><b>Flag type</b> selects the type of the flag modified by the brush.
+  <ul>
+    <li><b>Movement flag</b> blocks the units from moving over the terrain. There are two types of movement flags: <i>Tile</i> movement flags, which can't be modified in Terrain editor mode, and <i>Custom</i> movement flags, which you set using <b>left mouse button</b> and clear using <b>right mouse button</b></li>
+	<li><b>Vision flag</b> blocks unit vision through the terrain, and obscures terrain behind it in fog of war. There is one type of vision flags: <i>Custom</i> vision flags, which you set using <b>left mouse button</b> and clear using <b>right mouse button</b></li>
+  </ul></li>
+  <img src="img/mapeditflagsexample.png">
+</ul>
+
+<h2>3. Lakes</h2>
+<p>Lakes denote areas covered by water. This does not include the ocean found beyond the map bounds.</p>
+<p>While in flood mode, clicking on a terrain with <b>left mouse button</b> will attempt to create a lake at the water level equal to the height of the terrain at cursor position, while <b>right mouse button</b> will remove the lake hovered by cursor. Holding <b>Shift</b> will show you an approximation of the level of the lake that would be created.</p>
+<p> While in select mode, clicking on a lake with <b>left mouse button</b> will select the lake for individual edition, while <b>right mouse button</b> will deselect currently selected lake.</b>
+<img src="img/mapeditlake.png">
+<ul>
+  <li><b>Lake type</b> denotes the type of the currently selected lake. You can choose from 4 predefined types: water, swamp, lava, and ice.</li>
+</ul>
+<p>Notice the flags around and in the lake. Green flags around the lake denote <b>shore</b>, yellow flags in the lake denote <b>shallow water</b>, red flags denote <b>deep water</b>. Units in game are allowed to walk on shallow water, but not in deep water. The depth limit for shallow water is 50.</p>
+
+<h2>4. Weather</h2>
+<p>Every map in the game is assigned weather settings. There are 8 available weather presets, and you can set the weights which indicate the chance for each weather type to occur.</p>
+<img src="img/mapeditweather.png">
+<p>When you save the map, the weights are modified so the sum of all weights is always equal to 100.</p>
+<p>Additionally, you can preview atmosphere by changing values in the <i>Atmosphere preview</i>.</p>
+
+<h2 id="IMPORTHMAP">Import heightmap</h2>
+<p>You can import a heightmap from a file by selecting <b>Tools -> Import heightmap</b> from the menu strip.</p>
+<img src="img/mapedithmapimport.png">
+<p><b>Select heightmap</b> - Choose heightmap file. It can be either a BMP or PNG file.</p>
+<p><b>Heightmap scale</b> - This value determines the factor by which pixel value is multiplied to obtain height.</p>
+<p><b>Height offset</b> - This value determines how much the pixel value is shifted down. Effectively, all heights will be lowered by Heightmap scale * Height offset.</p>
+<p><warning>Only by clicking <b>Accept</b> the changes the changes will be saved. Closing the window in any other way will discard the changes.</warning></p>
+<p><warning>As of now, importing a heightmap can't be undone.</warning></p>
+
+<h2>Export heightmap</h2>
+<p>You can export a heightmap from a file by selecting <b>Tools -> Export heightmap</b> from the menu strip.</p>
+<img src="img/mapedithmapexport.png">
+<p><b>Heightmap scale</b> - This value determines the factor by which height is divided to obtain pixel value.</p>
+<p><b>Height offset</b> - This value determines how much the height value is shifted up. Effectively, all pixel values will be increased by Heightmap scale / Height offset. Height 0 is alawys encoded as pixel with value 0.</p>
+
+<p>Effectively, heightmap exported with given settings can be imported using those settings. The only problem is precision limit of pixel values (pixel values 0-255 can't encode height values 0-65535). This can be mitigated by increasing Height offset on export/import and modifying Heightmap scale to compensate.</p>
