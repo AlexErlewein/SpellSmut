@@ -1,0 +1,18 @@
+# SpellForce Audio Assets - WORK_BUILD
+# Total files: 12
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+work_build_stone_01.wav
+work_build_stone_02.wav
+work_build_stone_03.wav
+work_build_stone_04.wav
+work_build_stone_05.wav
+work_build_stone_06.wav
+work_build_wood_01.wav
+work_build_wood_02.wav
+work_build_wood_03.wav
+work_build_wood_04.wav
+work_build_wood_05.wav
+work_build_wood_06.wav

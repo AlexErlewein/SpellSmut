@@ -1,0 +1,28 @@
+# SpellForce Audio Assets - BATTLE_CHAR
+# Total files: 22
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+battle_char_f_att_01.wav
+battle_char_f_att_02.wav
+battle_char_f_att_03.wav
+battle_char_f_att_04.wav
+battle_char_f_die_01, battle_char_f_die_02.wav
+battle_char_f_hit_01.wav
+battle_char_f_hit_02.wav
+battle_char_f_hit_03.wav
+battle_char_f_hit_04.wav
+battle_char_f_hit_05.wav
+battle_char_f_hit_06.wav
+battle_char_m_att_01.wav
+battle_char_m_att_02.wav
+battle_char_m_att_03.wav
+battle_char_m_att_04.wav
+battle_char_m_die_01, battle_char_m_die_02.wav
+battle_char_m_hit_01.wav
+battle_char_m_hit_02.wav
+battle_char_m_hit_03.wav
+battle_char_m_hit_04.wav
+battle_char_m_hit_05.wav
+battle_char_m_hit_06.wav

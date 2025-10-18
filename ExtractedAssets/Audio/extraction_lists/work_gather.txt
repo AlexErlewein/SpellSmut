@@ -1,0 +1,26 @@
+# SpellForce Audio Assets - WORK_GATHER
+# Total files: 20
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+work_cut_stone_mason_01.wav
+work_cut_stone_mason_02.wav
+work_cut_stone_worker_01.wav
+work_cut_stone_worker_02.wav
+work_cut_tree_cutter_01.wav
+work_cut_tree_cutter_02.wav
+work_cut_tree_cutter_03.wav
+work_cut_tree_cutter_04.wav
+work_cut_tree_worker_01.wav
+work_cut_tree_worker_02.wav
+work_get_bronze_01.wav
+work_get_bronze_02.wav
+work_get_coal_01.wav
+work_get_coal_02.wav
+work_get_food_01.wav
+work_get_food_02.wav
+work_get_iron_01.wav
+work_get_iron_02.wav
+work_get_ore_01.wav
+work_get_ore_02.wav

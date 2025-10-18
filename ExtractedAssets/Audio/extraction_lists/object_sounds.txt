@@ -1,0 +1,25 @@
+# SpellForce Audio Assets - OBJECT_SOUNDS
+# Total files: 19
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+object_bindstone_on.wav
+object_campfire_loop_01.wav
+object_colosseum_cheers3.wav
+object_empyria_crowd_1.wav
+object_empyria_crowd_2.wav
+object_firetower_shot_01.wav
+object_firetower_shot_02.wav
+object_firetower_shot_03.wav
+object_icetower_shot_01.wav
+object_icetower_shot_02.wav
+object_icetower_shot_03.wav
+object_obelisk_loop.wav
+object_portal_stone.wav
+object_portal_wood.wav
+object_torch_loop_01.wav
+object_torch_off.wav
+object_zuuhl_wing_01.wav
+object_zuuhl_wing_02.wav
+object_zuuhl_wing_03.wav

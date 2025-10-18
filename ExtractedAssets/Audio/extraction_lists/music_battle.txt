@@ -1,0 +1,17 @@
+# SpellForce Audio Assets - MUSIC_BATTLE
+# Total files: 11
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+battle_blade.mp3
+battle_music1.mp3
+battle_music2.mp3
+battle_of_the_undead.mp3
+battle_on.mp3
+battlefields.mp3
+close_combat.mp3
+combat_and_fight.mp3
+combat_music1.mp3
+combat_music2.mp3
+ogre_battle.mp3

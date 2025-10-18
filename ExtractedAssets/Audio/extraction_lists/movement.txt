@@ -1,0 +1,22 @@
+# SpellForce Audio Assets - MOVEMENT
+# Total files: 16
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+step_blade_01.wav
+step_blade_02.wav
+step_blade_03.wav
+step_blade_04.wav
+step_normal_01.wav
+step_normal_02.wav
+step_normal_03.wav
+step_normal_04.wav
+step_talon_01.wav
+step_talon_02.wav
+step_talon_03.wav
+step_talon_04.wav
+step_titan_01.wav
+step_titan_02.wav
+step_titan_03.wav
+step_titan_04.wav

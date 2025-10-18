@@ -1,0 +1,9 @@
+# SpellForce Audio Assets - MUSIC_THEME
+# Total files: 3
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+army_of_darkness.mp3
+death_music.mp3
+spellforce.mp3

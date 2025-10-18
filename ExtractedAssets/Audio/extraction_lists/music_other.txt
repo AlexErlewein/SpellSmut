@@ -1,0 +1,37 @@
+# SpellForce Audio Assets - MUSIC_OTHER
+# Total files: 31
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+arena.mp3
+atmo_oasis.mp3
+black_gate.mp3
+bone_temple.mp3
+bone_temple_whisper.mp3
+call_of_the_dead.mp3
+celtic_march.mp3
+city_of_souls.mp3
+deadzone.mp3
+despair.mp3
+doomsday.mp3
+dungeon_dimension.mp3
+elves_and_angels.mp3
+empyria.mp3
+entry_silence.mp3
+era_of_the_orcs.mp3
+forbidden_zone.mp3
+human_village.mp3
+ice_elves.mp3
+kraga_and_braga.mp3
+night_silence.mp3
+order_of_dawn.mp3
+red_legion.mp3
+rune_master.mp3
+runewarrior.mp3
+sharrowdale.mp3
+strategy_and_gameplay.mp3
+the_clockwork_crypts.mp3
+the_gorge.mp3
+the_kathai.mp3
+whisper.mp3

@@ -1,0 +1,9 @@
+# SpellForce Audio Assets - SPELL_MELEE
+# Total files: 3
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+spell_melee_berserk.wav
+spell_melee_damageprotect.wav
+spell_melee_heal.wav

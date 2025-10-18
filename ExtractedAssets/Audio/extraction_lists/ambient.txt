@@ -1,0 +1,15 @@
+# SpellForce Audio Assets - AMBIENT
+# Total files: 9
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+atmo_lava_loop_01.wav
+atmo_lava_loop_02.wav
+atmo_lava_loop_03.wav
+atmo_swamp_loop_01.wav
+atmo_swamp_loop_02.wav
+atmo_swamp_loop_03.wav
+atmo_water_loop_01.wav
+atmo_water_loop_02.wav
+atmo_water_loop_03.wav

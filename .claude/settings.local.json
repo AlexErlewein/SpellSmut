@@ -12,7 +12,22 @@
       "Bash(dir /B \"H:\\SpellSmut\\OriginalGameFiles\")",
       "Bash(findstr /E \"sound music audio\")",
       "Bash(dir \"H:\\SpellSmut\\OriginalGameFiles\\pak\" /S)",
-      "Bash(python -m py_compile src/helper_tools/extract_audio_assets.py)"
+      "Bash(python -m py_compile src/helper_tools/extract_audio_assets.py)",
+      "Bash(python src/helper_tools/extract_audio_assets.py)",
+      "Bash(dir /B \"H:\\SpellSmut\\OriginalGameFiles\\pak\")",
+      "Bash(xxd -l 256 \"H:\\SpellSmut\\OriginalGameFiles\\pak\\sf0.pak\")",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Bash(where /R \"C:\\Program Files\" Dup5.exe)",
+      "Bash(where /R \"C:\\Program Files (x86)\" Dup5.exe)",
+      "Read(//h/**)",
+      "Read(//c/Program Files (x86)/Dragon UnPACKer 5/**)",
+      "Read(//c/Program Files (x86)/Dragon UnPACKer 5/utils/**)",
+      "Bash(\"C:\\Program Files (x86)\\Dragon UnPACKer 5\\drgunpack5.exe\" --help)",
+      "Bash(\"C:\\Program Files (x86)\\Dragon UnPACKer 5\\utils\\duppi.exe\" --help)",
+      "Bash(\"C:\\Program Files (x86)\\Dragon UnPACKer 5\\utils\\duppi.exe\" /?)",
+      "Read(//h//**)",
+      "Bash(python -m py_compile src/helper_tools/bulk_extract_paks.py)"
     ]
   },
   "outputStyle": "default"

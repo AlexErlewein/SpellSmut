@@ -1,0 +1,7 @@
+# SpellForce Audio Assets - MUSIC_MENU
+# Total files: 1
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+elvensong_menu.mp3

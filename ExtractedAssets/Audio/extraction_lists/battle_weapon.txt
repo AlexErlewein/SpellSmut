@@ -1,0 +1,12 @@
+# SpellForce Audio Assets - BATTLE_WEAPON
+# Total files: 6
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+battle_weapon_miss_axe.wav
+battle_weapon_miss_fist.wav
+battle_weapon_miss_hammer.wav
+battle_weapon_miss_sword_01.wav
+battle_weapon_miss_sword_02.wav
+battle_weapon_miss_sword_03.wav

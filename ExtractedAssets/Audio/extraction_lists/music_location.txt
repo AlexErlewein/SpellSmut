@@ -1,0 +1,30 @@
+# SpellForce Audio Assets - MUSIC_LOCATION
+# Total files: 24
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+entry_desertworld.mp3
+entry_iceworld.mp3
+entry_lavaworld.mp3
+entry_mountainworld.mp3
+entry_swampworld.mp3
+entry_waterworld.mp3
+entry_waterworld2.mp3
+location_loop_silence.mp3
+location_opener_silence.mp3
+plain_darkened.mp3
+plain_desertworld.mp3
+plain_enchanted.mp3
+plain_iceworld.mp3
+plain_lavaworld.mp3
+plain_mountainworld.mp3
+plain_mystified.mp3
+plain_silence.mp3
+plain_swampworld.mp3
+plain_waterworld.mp3
+plain_waterworld2.mp3
+plain_world.mp3
+plains_of_blackwater.mp3
+plains_of_devastation.mp3
+plains_of_myth.mp3

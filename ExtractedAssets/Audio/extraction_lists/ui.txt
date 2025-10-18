@@ -1,0 +1,8 @@
+# SpellForce Audio Assets - UI
+# Total files: 2
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+ui_summon_hero.wav
+ui_summon_worker.wav

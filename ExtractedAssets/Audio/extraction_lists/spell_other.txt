@@ -1,0 +1,12 @@
+# SpellForce Audio Assets - SPELL_OTHER
+# Total files: 6
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+spell_arrow_amok.wav
+spell_dragonicebreath.wav
+spell_dummy_silence.wav
+spell_magicprotect.wav
+spell_resist.wav
+spell_spawn_destroyed.wav
