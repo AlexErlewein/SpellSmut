@@ -22,7 +22,7 @@ REM
 REM You can use these lists as a reference for which files to extract.
 
 echo Starting SpellforceDataEditor...
-cd /d "%~dp0ModdingTools\spellforce_data_editor\bin"
+cd /d "%~dp0..\..\ModdingTools\spellforce_data_editor\bin"
 
 REM Set extract directory in config
 echo Updating config.txt with extract directory...

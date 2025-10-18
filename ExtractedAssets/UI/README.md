@@ -24,7 +24,7 @@ This directory contains the extracted UI assets from SpellForce: Platinum Editio
 
 ### Method 1: Using SpellforceDataEditor (Recommended)
 
-1. Run `extract_ui_batch.bat` to launch SpellforceDataEditor
+1. Run `src/helper_tools/extract_ui_batch.bat` to launch SpellforceDataEditor
 2. Go to the "Asset Viewer" tab
 3. Wait for PAK files to load (first time may take 5-10 minutes)
 4. Search for specific assets using the filter box:

@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(python extract_ui_assets.py)",
-      "Bash(python batch_extract_ui.py)"
+      "Bash(python batch_extract_ui.py)",
+      "Bash(git mv extract_ui_assets.py src/helper_tools/)",
+      "Bash(git mv batch_extract_ui.py src/helper_tools/)",
+      "Bash(git mv extract_ui_batch.bat src/helper_tools/)",
+      "Bash(git add MODDING_PLAN.md UI_EXTRACTION_SUMMARY.md ExtractedAssets/UI/README.md src/helper_tools/extract_ui_batch.bat)",
+      "Bash(python -m py_compile src/helper_tools/extract_ui_assets.py)",
+      "Bash(python -m py_compile src/helper_tools/batch_extract_ui.py)"
     ]
   },
   "outputStyle": "default"

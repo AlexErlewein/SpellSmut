@@ -42,6 +42,14 @@ SpellSmut/
 3. **Experiment**: Try creating simple quests and spells
 4. **Build up**: Gradually work towards more complex mods
 
+## 📋 Project Plan
+
+See **[MODDING_PLAN.md](MODDING_PLAN.md)** for:
+- Completed tasks and achievements
+- Current work in progress
+- Future roadmap and milestones
+- UI asset extraction status (✅ Complete - 683 assets cataloged!)
+
 ## 🤝 Contributing
 
 Contributions to documentation and tools are welcome! Feel free to:

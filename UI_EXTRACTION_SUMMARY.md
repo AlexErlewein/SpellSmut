@@ -34,20 +34,20 @@ Assets organized into 11 categories:
 ### 3. Tools Created
 
 #### Python Scripts
-1. **extract_ui_assets.py**
+1. **src/helper_tools/extract_ui_assets.py**
    - Scans pakdata.dat for UI-related files
    - Uses regex pattern matching to identify UI assets
    - Searches for keywords: ui, menu, button, icon, interface, cursor, etc.
    - Generates comprehensive list of all UI assets
 
-2. **batch_extract_ui.py**
+2. **src/helper_tools/batch_extract_ui.py**
    - Categorizes UI assets into 11 groups
    - Creates individual extraction lists per category
    - Generates README.md with instructions
    - Creates batch script for easy extraction
 
 #### Batch Script
-- **extract_ui_batch.bat**
+- **src/helper_tools/extract_ui_batch.bat**
   - Launches SpellforceDataEditor
   - Configures extraction directory
   - Provides step-by-step instructions
@@ -124,7 +124,7 @@ Located in `H:\SpellSmut\ExtractedAssets\UI\extraction_lists\`:
 
 ### Method 1: Using SpellforceDataEditor (Recommended)
 
-1. Run `extract_ui_batch.bat`
+1. Run `src/helper_tools/extract_ui_batch.bat`
 2. Wait for PAK loading (5-10 minutes first time)
 3. Go to "Asset Viewer" tab
 4. Search for assets (e.g., "ui_cursor" for all cursors)
@@ -158,7 +158,7 @@ Located in `H:\SpellSmut\ExtractedAssets\UI\extraction_lists\`:
 
 ### Immediate Actions
 1. ✅ Review extraction lists in `ExtractedAssets/UI/extraction_lists/`
-2. ⏳ Run `extract_ui_batch.bat` to launch extractor
+2. ⏳ Run `src/helper_tools/extract_ui_batch.bat` to launch extractor
 3. ⏳ Extract priority assets (cursors, buttons, icons)
 4. ⏳ Convert DDS to PNG for easy viewing/editing
 
@@ -197,9 +197,11 @@ Located in `H:\SpellSmut\ExtractedAssets\UI\extraction_lists\`:
 
 ```
 H:\SpellSmut\
-├── extract_ui_assets.py          # Initial discovery script
-├── batch_extract_ui.py            # Categorization script
-├── extract_ui_batch.bat           # Launch script
+├── src\
+│   └── helper_tools\
+│       ├── extract_ui_assets.py   # Initial discovery script
+│       ├── batch_extract_ui.py    # Categorization script
+│       └── extract_ui_batch.bat   # Launch script
 ├── UI_EXTRACTION_SUMMARY.md       # This file
 └── ExtractedAssets\
     └── UI\
