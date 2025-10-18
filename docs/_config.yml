@@ -39,3 +39,9 @@ exclude:
   - Gemfile.lock
   - node_modules
   - vendor
+
+# Custom header banner
+banner_image: /SpellSmut/assets/images/banner.jpg
+
+# Favicon (browser tab icon)
+favicon: /SpellSmut/assets/images/favicon.ico
