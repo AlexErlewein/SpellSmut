@@ -89,6 +89,7 @@ Design your race:
 See key files section above for specific edits.
 
 **Example animation library structure:**
+{% raw %}
 ```lua
 local YourRaceAnims = {
     base_name = "figure_yourrace",
@@ -105,6 +106,7 @@ local YourRaceAnims = {
 }
 Movies.figure_yourrace = CreateMovieLib(YourRaceAnims)
 ```
+{% endraw %}
 
 ### Phase 4: Asset Creation
 
