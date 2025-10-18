@@ -1,0 +1,13 @@
+# SpellForce Audio Assets - SPELL_RESOLVE
+# Total files: 7
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+spell_resolve_air.wav
+spell_resolve_black.wav
+spell_resolve_earth.wav
+spell_resolve_extincttower.wav
+spell_resolve_fire.wav
+spell_resolve_ice.wav
+spell_resolve_white.wav

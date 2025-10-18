@@ -1,0 +1,10 @@
+# SpellForce Audio Assets - OTHER
+# Total files: 4
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+destroy_house_03.wav
+destroy_house_burn_02.wav
+dummy_silence.wav
+world_enter_portal.wav

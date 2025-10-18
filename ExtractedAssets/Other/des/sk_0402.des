@@ -1,0 +1,40 @@
+
+[Equipment]
+{
+	
+	//Hero0 == Avatar
+
+	//Slot1	== right hand
+	//Slot2	== chest
+	//Slot5	== legs (nicht bei Magiern!)
+
+	[Hero0]
+	{
+		//Slot, ItemId
+		Data0 = 1, 3179 // Stab des Lichts
+		Data1 = 2, 578  // Apprentice Robe
+	}
+
+
+}
+
+[Spells]
+{
+	
+	[Spellbook]
+	{
+		Data0 = 1572   // Scroll Thornshield Lvl 1
+	}
+
+	[Memorized]
+	{
+		// Avatar, max 10 spells
+		[Hero0]
+		{
+			Data0 = 1565   // Spell Thornshield Lvl 1
+		}
+
+
+		
+	}
+}

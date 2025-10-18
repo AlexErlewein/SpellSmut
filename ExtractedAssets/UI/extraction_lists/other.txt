@@ -1,0 +1,47 @@
+# OTHER Assets
+# Total: 43 files
+# ==================================================================
+
+ui_attention.dds
+ui_btn_alpha_actionspell_l1.tga
+ui_btn_alpha_actionspell_l2.tga
+ui_btn_alpha_actionspell_l3.tga
+ui_btn_alpha_actionspell_l4.tga
+ui_btn_alpha_actionspell_l5.tga
+ui_btn_alpha_actionspell_l6.tga
+ui_btn_qs_action_alpha_l1.tga
+ui_btn_qs_action_alpha_l2.tga
+ui_btn_qs_action_alpha_l3.tga
+ui_btn_qs_action_alpha_l4.tga
+ui_btn_qs_action_alpha_l5.tga
+ui_btn_qs_action_alpha_l6.tga
+ui_dia_baggin.dds
+ui_dia_coin.dds
+ui_info.dds
+ui_minimap.dds
+ui_oth0.dds
+ui_oth1.dds
+ui_oth2.dds
+ui_oth3.dds
+ui_oth4.dds
+ui_oth5.dds
+ui_oth6.dds
+ui_oth7.dds
+ui_oth8.dds
+ui_oth_minimap_effect_circle2.dds
+ui_question.dds
+ui_savegame_menu0.dds
+ui_savegame_menu1.dds
+ui_savegame_menu10.dds
+ui_savegame_menu11.dds
+ui_savegame_menu12.dds
+ui_savegame_menu13.dds
+ui_savegame_menu14.dds
+ui_savegame_menu2.dds
+ui_savegame_menu3.dds
+ui_savegame_menu4.dds
+ui_savegame_menu5.dds
+ui_savegame_menu6.dds
+ui_savegame_menu7.dds
+ui_savegame_menu8.dds
+ui_savegame_menu9.dds

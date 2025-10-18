@@ -1,0 +1,18 @@
+# SpellForce Audio Assets - IDLE
+# Total files: 12
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+idle_npc_blademinion_01.wav
+idle_npc_blademinion_02.wav
+idle_npc_blademinion_03.wav
+idle_npc_blademinion_04.wav
+idle_npc_bladeweaver_01.wav
+idle_npc_bladeweaver_02.wav
+idle_npc_bladeweaver_03.wav
+idle_npc_bladeweaver_04.wav
+idle_npc_manticore_01.wav
+idle_npc_manticore_02.wav
+idle_npc_orcdrummer_01.wav
+idle_npc_orcdrummer_02.wav

@@ -1,0 +1,11 @@
+# SpellForce Audio Assets - WORK_OTHER
+# Total files: 5
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+work_cattlebreeding.wav
+work_fisherman_01.wav
+work_fisherman_02.wav
+work_smith.wav
+work_smithhold.wav

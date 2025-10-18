@@ -1,0 +1,42 @@
+# SpellForce Audio Assets - BATTLE_TITAN
+# Total files: 36
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+battle_titan_darkelf_att_01.wav
+battle_titan_darkelf_att_02.wav
+battle_titan_darkelf_die.wav
+battle_titan_darkelf_hit_01.wav
+battle_titan_darkelf_hit_02.wav
+battle_titan_darkelf_hit_03.wav
+battle_titan_dwarf_att_01.wav
+battle_titan_dwarf_att_02.wav
+battle_titan_dwarf_die.wav
+battle_titan_dwarf_hit_01.wav
+battle_titan_dwarf_hit_02.wav
+battle_titan_dwarf_hit_03.wav
+battle_titan_elf_att_01.wav
+battle_titan_elf_att_02.wav
+battle_titan_elf_die.wav
+battle_titan_elf_hit_01.wav
+battle_titan_elf_hit_02.wav
+battle_titan_elf_hit_03.wav
+battle_titan_human_att_01.wav
+battle_titan_human_att_02.wav
+battle_titan_human_die.wav
+battle_titan_human_hit_01.wav
+battle_titan_human_hit_02.wav
+battle_titan_human_hit_03.wav
+battle_titan_orc_att_01.wav
+battle_titan_orc_att_02.wav
+battle_titan_orc_die.wav
+battle_titan_orc_hit_01.wav
+battle_titan_orc_hit_02.wav
+battle_titan_orc_hit_03.wav
+battle_titan_troll_att_01.wav
+battle_titan_troll_att_02.wav
+battle_titan_troll_die.wav
+battle_titan_troll_hit_01.wav
+battle_titan_troll_hit_02.wav
+battle_titan_troll_hit_03.wav

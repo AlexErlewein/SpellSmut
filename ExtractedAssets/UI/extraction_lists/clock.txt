@@ -1,0 +1,12 @@
+# CLOCK Assets
+# Total: 8 files
+# ==================================================================
+
+ui_clock_sunmoon_l1.tga
+ui_clock_sunmoon_l2.tga
+ui_clock_sunmoon_l3.tga
+ui_clock_sunmoon_l4.tga
+ui_clock_sunmoon_l5.tga
+ui_clock_sunmoon_l6.tga
+ui_clock_sunmoon_l7.tga
+ui_clock_sunmoon_l8.tga

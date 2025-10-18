@@ -1,0 +1,13 @@
+# SpellForce Audio Assets - SPELL_CAST
+# Total files: 7
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+spell_cast_air.wav
+spell_cast_black.wav
+spell_cast_earth.wav
+spell_cast_fire.wav
+spell_cast_ice.wav
+spell_cast_mental.wav
+spell_cast_white.wav

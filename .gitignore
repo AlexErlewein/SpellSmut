@@ -11,8 +11,7 @@
 *.bik
 
 # Texture files (can be large)
-*.dds
-*.tga
+
 
 # Other binary formats
 *.ico

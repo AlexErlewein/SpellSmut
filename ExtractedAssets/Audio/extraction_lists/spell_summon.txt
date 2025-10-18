@@ -1,0 +1,7 @@
+# SpellForce Audio Assets - SPELL_SUMMON
+# Total files: 1
+#
+# Use this list with SpellforceDataEditor to extract these assets
+#
+
+spell_summon.wav

@@ -1,0 +1,214 @@
+[Creo]
+{
+	[Scrolls]
+	{
+		Data0 = 784
+		Data1 = 869
+		Data2 = 776
+		Data3 = 761
+		Data4 = 773
+		Data5 = 766
+		Data6 = 769
+		Data7 = 780
+		Data8 = 753
+		Data9 = 750
+		Data10 = 775
+		Data11 = 757
+	}
+	[Runeboard]
+	{
+	}
+}
+
+[Misc]
+{
+}
+
+[Equipment]
+{
+	[Items]
+	{
+		Data0 = 0, 720
+		Data1 = 1, 694
+		Data2 = 2, 3171
+		Data3 = 3, 626
+		Data4 = 4, 574
+		Data5 = 5, 536
+		Data6 = 6, 584
+		Data7 = 7, 2348
+		Data8 = 8, 2608
+		Data9 = 9, 2339
+		Data10 = 10, 3180
+		Data11 = 11, 3179
+		Data12 = 12, 678
+		Data13 = 13, 568
+		Data14 = 14, 558
+		Data15 = 15, 679
+		Data16 = 16, 685
+		Data17 = 17, 583
+		Data18 = 18, 2340
+		Data19 = 19, 720
+		Data20 = 20, 695
+		Data21 = 21, 725
+		Data22 = 22, 730
+		Data23 = 23, 579
+		Data24 = 24, 569
+		Data25 = 25, 625
+		Data26 = 26, 701
+		Data27 = 27, 703
+		Data28 = 28, 2346
+		Data29 = 29, 2344
+		Data30 = 30, 666
+		Data31 = 31, 640
+		Data32 = 32, 641
+		Data33 = 33, 689
+		Data34 = 34, 568
+		Data35 = 35, 693
+		Data36 = 36, 533
+		Data37 = 37, 678
+		Data38 = 38, 573
+		Data39 = 39, 528
+		Data40 = 40, 529
+		Data41 = 41, 530
+		Data42 = 42, 533
+		Data43 = 43, 583
+		Data44 = 44, 563
+		Data45 = 45, 2607
+		Data46 = 46, 724
+		Data47 = 47, 678
+		Data48 = 48, 684
+		Data49 = 49, 2325
+		Data50 = 50, 733
+		Data51 = 51, 737
+		Data52 = 52, 578
+		Data53 = 53, 558
+		Data54 = 54, 2326
+		Data55 = 55, 2327
+		Data56 = 56, 702
+		Data57 = 57, 2343
+	}
+}
+
+[Spells]
+{
+	[Scrolls]
+	{
+		Data0 = 0, 1478
+		Data1 = 1, 2104
+		Data2 = 2, 1962
+		Data3 = 3, 1519
+		Data4 = 4, 1575
+		Data5 = 5, 1961
+		Data6 = 6, 179
+		Data7 = 7, 2301
+		Data8 = 8, 2305
+		Data9 = 9, 1628
+		Data10 = 10, 2293
+		Data11 = 11, 1547
+	}
+}
+
+[Plans]
+{
+	[Scrolls]
+	{
+	}
+	[Building]
+	{
+		[Race0]
+		{
+			Data0 = 280
+			Data1 = 271
+			Data2 = 167
+			Data3 = 262
+			Data4 = 270
+			Data5 = 263
+			Data6 = 275
+			Data7 = 169
+			Data8 = 260
+			Data9 = 2928
+			Data10 = 267
+			Data11 = 255
+			Data12 = 257
+			Data13 = 277
+			Data14 = 949
+			Data15 = 251
+			Data16 = 247
+			Data17 = 249
+			Data18 = 171
+			Data19 = 266
+			Data20 = 273
+			Data21 = 253
+		}
+		[Race2]
+		{
+			Data0 = 951
+			Data1 = 977
+			Data2 = 985
+			Data3 = 975
+			Data4 = 967
+			Data5 = 969
+			Data6 = 963
+		}
+	}
+	[Unit]
+	{
+		[Race0]
+		{
+			Data0 = 1271
+			Data1 = 1273
+			Data2 = 1265
+			Data3 = 1261
+			Data4 = 1263
+			Data5 = 1267
+			Data6 = 1259
+			Data7 = 1269
+		}
+		[Race2]
+		{
+			Data0 = 1285
+			Data1 = 1289
+		}
+	}
+}
+
+[Character]
+{
+	Level	 = 8
+	XP		 = 4000
+	Name	 = "WhiteMage8_TheShiel"
+	Female	 = 0
+
+	Head	 = 7
+
+	Gold	 = 0
+	Silver	 = 9
+	Copper	 = 40
+
+	Str	 = 25
+	Sta	 = 34
+	Dex	 = 32
+	Agi	 = 27
+	Wis	 = 47
+	Int	 = 40
+	Cha	 = 35
+
+	ResFire			 = 30
+	ResIce			 = 30
+	ResMindMagic	 = 30
+	ResBlackMagic	 = 30
+
+	WalkSpeed		 = 100
+	FightSpeed		 = 100
+	CastSpeed		 = 100
+
+	[Ability4] // Weisse Magiekunst
+	{
+		Level = 4
+
+		Data0 = 1, 4 // Life 
+		Data1 = 2, 4 // Nature 
+		Data2 = 3, 4 // Boons 
+	}
+}
+
