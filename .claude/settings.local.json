@@ -31,7 +31,9 @@
       "Bash(python src/helper_tools/bulk_extract_paks.py)",
       "Bash(python src/helper_tools/bulk_extract_paks.py --auto)",
       "Bash(python -u src/helper_tools/bulk_extract_paks.py --auto)",
-      "Bash(python src/helper_tools/organize_extracted_files.py)"
+      "Bash(python src/helper_tools/organize_extracted_files.py)",
+      "Bash(python src/helper_tools/organize_by_extraction_lists.py)",
+      "Bash(python src/helper_tools/organize_all_extracted_files.py)"
     ]
   },
   "outputStyle": "default"

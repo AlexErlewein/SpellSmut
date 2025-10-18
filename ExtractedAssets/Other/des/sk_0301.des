@@ -1,0 +1,20 @@
+
+[Equipment]
+{
+	
+	//Hero0 == Avatar
+
+	//Slot1	== right hand
+	//Slot2	== chest
+	//Slot5	== legs (nicht bei Magiern!)
+
+	[Hero0]
+	{
+		//Slot, ItemId
+		Data0 = 3, 693   // Weapon Bow Newbie
+		Data1 = 2, 558   // Chest Warrior Newbie
+		Data2 = 5, 528   // Legs Warrior Newbie
+	}
+
+
+}
