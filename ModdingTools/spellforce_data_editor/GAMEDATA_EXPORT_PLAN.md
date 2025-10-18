@@ -1189,4 +1189,1971 @@ for (int i = 1; i <= 10; i++)
 
 ---
 
+## 12. ASSET INTEGRATION & RELATIONAL DATABASE STRATEGY
+
+**Updated:** 2025-10-18
+**Goal:** Include all asset references (icons, models, textures, sounds) in the export and design a comprehensive relational database where all relationships can be queried.
+
+---
+
+### 12.1 Asset System Architecture Analysis
+
+#### PAK File System Overview
+
+SpellForce stores all game assets in numbered PAK archives with **priority loading** (higher numbers override lower):
+
+**Asset Type → PAK File Mapping:**
+
+| Asset Type | File Extensions | PAK Files | Resource Path |
+|------------|----------------|-----------|---------------|
+| **Textures** | `.dds`, `.tga` | sf0, sf1, sf22, sf25, sf32, sf35 | `texture/` |
+| **3D Models** | `.msb` | sf8, sf22, sf32 | `mesh/` |
+| **Animations** | `.bob` | sf5, sf22, sf32 | `animation/` |
+| **Skeletons** | `.bor` | sf4, sf22, sf32 | `animation/` |
+| **Skins** | `.msb` | sf8, sf22, sf32 | `skinning/b20/` |
+| **Bone Indices** | `.bsi` | sf8, sf22, sf32 | `skinning/b20/` |
+| **Music** | `.mp3` | sf3, sf20, sf30 | `sound/` |
+| **Sound Effects** | `.wav` | sf2, sf20, sf30 | `sound/` |
+| **Speech (Battle)** | `.wav` | sf2, sf23, sf33 | `sound/speech/battle/` |
+| **Speech (NPC)** | `.mp3` | sf10, sf20, sf23, sf33 | `sound/speech/` |
+| **Speech (Player)** | `.mp3` | sf10, sf23, sf33 | `sound/speech/male/`, `sound/speech/female/` |
+
+**Access Methods:**
+- `SFUnPak.LoadFileFind(filename, pakfiles)` - Load asset by name from PAK
+- `SFResourceManager.<Type>.Get(name)` - Load and cache typed resources
+- `SFUnPak.ListAllWithExtension(path, ext, pak_filter)` - List all assets of type
+
+---
+
+### 12.2 Asset References in CFF Categories
+
+#### Item/Weapon Assets
+
+| Category | Field Name | Asset Type | Resolution Method |
+|----------|------------|------------|-------------------|
+| **2012** | `UIHandle` (64 bytes) | **Icon texture** | `texture/ui/` + UIHandle + `.tga` or `.dds` |
+| **2024** | `Handle` (40 bytes) | **Unit 3D model** | `mesh/` + Handle + `.msb` |
+| **2050** | `Handle` (40 bytes) | **Object 3D model** | `mesh/` + Handle + `.msb` |
+| **2054** | `UIHandle` (40 bytes) | **Spell icon** | `texture/ui/` + UIHandle + `.tga` or `.dds` |
+
+**Icon Naming Conventions:**
+- Item icons: `figure_item_<type>_<name>` (e.g., `figure_item_sword_iron`)
+- Spell icons: `figure_spell_<school>_<name>` (e.g., `figure_spell_fire_fireball`)
+- UI icons: `ui_<category>_<name>` (e.g., `ui_button_attack`)
+
+**3D Model Handles:**
+- Units: `figure_<race>_<type>` (e.g., `figure_human_warrior`)
+- Objects: `object_<category>_<name>` (e.g., `object_building_tower`)
+- Weapons: Not directly stored; visual is part of unit equipment rendering
+
+---
+
+### 12.3 Complete Entity Relationship Map
+
+#### Core Entity Types
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                       GAME DATABASE                         │
+└─────────────────────────────────────────────────────────────┘
+
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│    ITEMS     │◄───►│    WEAPONS   │     │    ARMOR     │
+│  (Cat 2003)  │     │  (Cat 2015)  │     │  (Cat 2004)  │
+└──────┬───────┘     └──────┬───────┘     └──────┬───────┘
+       │                    │                    │
+       │ NameID             │ ItemID             │ ItemID
+       ▼                    ▼                    ▼
+┌──────────────────────────────────────────────────────────┐
+│                    TEXT DATABASE                         │
+│                    (Category 2016)                       │
+│  TextID + LanguageID → Localized String                 │
+└──────────────────────────────────────────────────────────┘
+
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│   ITEM UI    │     │ WEAPON TYPES │     │  MATERIALS   │
+│  (Cat 2012)  │     │  (Cat 2063)  │     │  (Cat 2064)  │
+│  UIHandle ───┼────►│   (Icons)    │     │   (Lookup)   │
+└──────────────┘     └──────────────┘     └──────────────┘
+       │
+       │ UIHandle
+       ▼
+┌──────────────────────────────────────────────────────────┐
+│                  TEXTURE ASSETS (PAK)                    │
+│          texture/ui/<UIHandle>.tga or .dds              │
+└──────────────────────────────────────────────────────────┘
+
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│ WEAPON EFFECTS│    │    SPELLS    │     │  SPELL LINES │
+│  (Cat 2014)  │────►│  (Cat 2002)  │◄────│  (Cat 2047)  │
+│  EffectID    │     │   SpellID    │     │ SpellLineID  │
+└──────────────┘     └──────┬───────┘     └──────────────┘
+                            │
+                            │ UIHandle
+                            ▼
+                     ┌──────────────┐
+                     │  SPELL UI    │
+                     │  (Cat 2054)  │
+                     │  (Icons)     │
+                     └──────────────┘
+
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│    UNITS     │◄───►│  UNIT STATS  │     │ UNIT EQUIP   │
+│  (Cat 2024)  │     │  (Cat 2005)  │     │  (Cat 2025)  │
+│   Handle ────┼─┐   │              │◄────│  ItemID      │
+└──────────────┘ │   └──────────────┘     └──────────────┘
+                 │
+                 │ Handle
+                 ▼
+        ┌──────────────────────────────────────┐
+        │      3D MODEL ASSETS (PAK)          │
+        │    mesh/<Handle>.msb + .bor         │
+        └──────────────────────────────────────┘
+
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│  BUILDINGS   │     │BUILDING STATS│     │BUILDING COSTS│
+│  (Cat 2029)  │────►│  (Cat 2030)  │     │  (Cat 2031)  │
+│              │     │              │     │ ResourceType │
+└──────────────┘     └──────────────┘     └──────────────┘
+
+┌──────────────┐     ┌──────────────┐
+│  MERCHANTS   │────►│ MERCHANT INV │
+│  (Cat 2041)  │     │  (Cat 2042)  │
+│              │     │   ItemID ────┼───► ITEMS (2003)
+└──────────────┘     └──────────────┘
+
+┌──────────────┐     ┌──────────────┐
+│    RACES     │────►│  RACE DATA   │
+│  (Cat 2022)  │     │  (Cat 2023)  │
+│              │     │  (Bonuses)   │
+└──────────────┘     └──────────────┘
+
+┌──────────────┐
+│   OBJECTS    │
+│  (Cat 2050)  │
+│  Handle ─────┼───► 3D MODELS (PAK)
+└──────────────┘
+```
+
+---
+
+### 12.4 Relational Database Schema Design
+
+#### Database Technology Options
+
+**Option A: SQLite** (Recommended for MVP)
+- **Pros:** Serverless, portable, single file, fast queries, full SQL support
+- **Cons:** Single writer (fine for export use case)
+- **Use Case:** Export GameData.cff → single `.sqlite` database file
+
+**Option B: PostgreSQL / MySQL**
+- **Pros:** Multi-user, advanced queries, materialized views
+- **Cons:** Requires server setup, more complex
+- **Use Case:** Central mod database, web API backend
+
+**Option C: JSON + Search Index**
+- **Pros:** Human-readable, easy to version control
+- **Cons:** Slower queries, no native JOIN operations
+- **Use Case:** Documentation, wiki generation
+
+**Recommendation:** **SQLite for local use** + **JSON for sharing/documentation**
+
+---
+
+#### Schema Design (SQL DDL)
+
+```sql
+-- ============================================================
+-- TEXT DATABASE (multilingual strings)
+-- ============================================================
+CREATE TABLE texts (
+    text_id INTEGER NOT NULL,
+    language_id INTEGER NOT NULL,
+    language_name TEXT,
+    content TEXT NOT NULL,
+    PRIMARY KEY (text_id, language_id)
+);
+
+CREATE INDEX idx_texts_content ON texts(content);
+
+-- ============================================================
+-- ITEMS (base item data)
+-- ============================================================
+CREATE TABLE items (
+    item_id INTEGER PRIMARY KEY,
+    name_text_id INTEGER,
+    item_type_1 INTEGER,
+    item_type_2 INTEGER,
+    sell_value INTEGER,
+    buy_value INTEGER,
+    item_set_id INTEGER,
+    -- Add all fields from Category2003
+    FOREIGN KEY (name_text_id) REFERENCES texts(text_id)
+);
+
+CREATE TABLE item_names (
+    item_id INTEGER NOT NULL,
+    language_id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    PRIMARY KEY (item_id, language_id),
+    FOREIGN KEY (item_id) REFERENCES items(item_id)
+);
+
+CREATE INDEX idx_items_type ON items(item_type_1, item_type_2);
+
+-- ============================================================
+-- WEAPON DATA
+-- ============================================================
+CREATE TABLE weapon_types (
+    weapon_type_id INTEGER PRIMARY KEY,
+    name_text_id INTEGER,
+    sharpness INTEGER,
+    FOREIGN KEY (name_text_id) REFERENCES texts(text_id)
+);
+
+CREATE TABLE weapon_materials (
+    material_id INTEGER PRIMARY KEY,
+    name_text_id INTEGER,
+    FOREIGN KEY (name_text_id) REFERENCES texts(text_id)
+);
+
+CREATE TABLE weapons (
+    item_id INTEGER PRIMARY KEY,
+    min_damage INTEGER,
+    max_damage INTEGER,
+    min_range INTEGER,
+    max_range INTEGER,
+    weapon_speed INTEGER,
+    weapon_type_id INTEGER,
+    weapon_material_id INTEGER,
+    FOREIGN KEY (item_id) REFERENCES items(item_id),
+    FOREIGN KEY (weapon_type_id) REFERENCES weapon_types(weapon_type_id),
+    FOREIGN KEY (weapon_material_id) REFERENCES weapon_materials(material_id)
+);
+
+-- ============================================================
+-- ITEM STATS (bonuses)
+-- ============================================================
+CREATE TABLE item_stats (
+    item_id INTEGER PRIMARY KEY,
+    strength INTEGER DEFAULT 0,
+    stamina INTEGER DEFAULT 0,
+    agility INTEGER DEFAULT 0,
+    dexterity INTEGER DEFAULT 0,
+    health INTEGER DEFAULT 0,
+    charisma INTEGER DEFAULT 0,
+    intelligence INTEGER DEFAULT 0,
+    wisdom INTEGER DEFAULT 0,
+    mana INTEGER DEFAULT 0,
+    armor INTEGER DEFAULT 0,
+    resist_fire INTEGER DEFAULT 0,
+    resist_ice INTEGER DEFAULT 0,
+    resist_black INTEGER DEFAULT 0,
+    resist_mind INTEGER DEFAULT 0,
+    speed_walk INTEGER DEFAULT 0,
+    speed_fight INTEGER DEFAULT 0,
+    speed_cast INTEGER DEFAULT 0,
+    FOREIGN KEY (item_id) REFERENCES items(item_id)
+);
+
+-- ============================================================
+-- ITEM UI (icons, visuals)
+-- ============================================================
+CREATE TABLE item_ui (
+    item_id INTEGER NOT NULL,
+    ui_index INTEGER NOT NULL,
+    ui_handle TEXT NOT NULL,
+    is_scaled_down BOOLEAN,
+    icon_path TEXT,  -- Resolved: texture/ui/<ui_handle>.tga
+    PRIMARY KEY (item_id, ui_index),
+    FOREIGN KEY (item_id) REFERENCES items(item_id)
+);
+
+CREATE INDEX idx_item_ui_handle ON item_ui(ui_handle);
+
+-- ============================================================
+-- WEAPON EFFECTS
+-- ============================================================
+CREATE TABLE weapon_effects (
+    item_id INTEGER NOT NULL,
+    effect_index INTEGER NOT NULL,
+    effect_id INTEGER NOT NULL,
+    effect_name TEXT,
+    PRIMARY KEY (item_id, effect_index),
+    FOREIGN KEY (item_id) REFERENCES weapons(item_id),
+    FOREIGN KEY (effect_id) REFERENCES spells(spell_id)
+);
+
+-- ============================================================
+-- SPELLS
+-- ============================================================
+CREATE TABLE spells (
+    spell_id INTEGER PRIMARY KEY,
+    name_text_id INTEGER,
+    spell_line_id INTEGER,
+    mana_cost INTEGER,
+    cast_time INTEGER,
+    cooldown INTEGER,
+    -- Add all fields from Category2002
+    FOREIGN KEY (name_text_id) REFERENCES texts(text_id),
+    FOREIGN KEY (spell_line_id) REFERENCES spell_lines(spell_line_id)
+);
+
+CREATE TABLE spell_lines (
+    spell_line_id INTEGER PRIMARY KEY,
+    name_text_id INTEGER,
+    ui_handle TEXT,
+    icon_path TEXT,
+    FOREIGN KEY (name_text_id) REFERENCES texts(text_id)
+);
+
+CREATE TABLE spell_ui (
+    spell_line_id INTEGER PRIMARY KEY,
+    ui_handle TEXT,
+    icon_path TEXT,  -- Resolved: texture/ui/<ui_handle>.tga
+    FOREIGN KEY (spell_line_id) REFERENCES spell_lines(spell_line_id)
+);
+
+-- ============================================================
+-- UNITS
+-- ============================================================
+CREATE TABLE units (
+    unit_id INTEGER PRIMARY KEY,
+    name_text_id INTEGER,
+    stats_id INTEGER,
+    handle TEXT NOT NULL,
+    experience_gain INTEGER,
+    copper_loot INTEGER,
+    armor INTEGER,
+    model_path TEXT,  -- Resolved: mesh/<handle>.msb
+    FOREIGN KEY (name_text_id) REFERENCES texts(text_id),
+    FOREIGN KEY (stats_id) REFERENCES unit_stats(stats_id)
+);
+
+CREATE TABLE unit_stats (
+    stats_id INTEGER PRIMARY KEY,
+    health INTEGER,
+    mana INTEGER,
+    strength INTEGER,
+    agility INTEGER,
+    -- Add all stat fields from Category2005
+);
+
+CREATE TABLE unit_equipment (
+    unit_id INTEGER NOT NULL,
+    equipment_index INTEGER NOT NULL,
+    item_id INTEGER NOT NULL,
+    PRIMARY KEY (unit_id, equipment_index),
+    FOREIGN KEY (unit_id) REFERENCES units(unit_id),
+    FOREIGN KEY (item_id) REFERENCES items(item_id)
+);
+
+CREATE TABLE unit_spells (
+    unit_id INTEGER NOT NULL,
+    spell_index INTEGER NOT NULL,
+    spell_id INTEGER NOT NULL,
+    PRIMARY KEY (unit_id, spell_index),
+    FOREIGN KEY (unit_id) REFERENCES units(unit_id),
+    FOREIGN KEY (spell_id) REFERENCES spells(spell_id)
+);
+
+-- ============================================================
+-- BUILDINGS
+-- ============================================================
+CREATE TABLE buildings (
+    building_id INTEGER PRIMARY KEY,
+    name_text_id INTEGER,
+    -- Add fields from Category2029
+    FOREIGN KEY (name_text_id) REFERENCES texts(text_id)
+);
+
+CREATE TABLE building_costs (
+    building_id INTEGER NOT NULL,
+    cost_index INTEGER NOT NULL,
+    resource_type INTEGER,
+    resource_amount INTEGER,
+    PRIMARY KEY (building_id, cost_index),
+    FOREIGN KEY (building_id) REFERENCES buildings(building_id)
+);
+
+-- ============================================================
+-- MERCHANTS
+-- ============================================================
+CREATE TABLE merchants (
+    merchant_id INTEGER PRIMARY KEY,
+    name_text_id INTEGER,
+    FOREIGN KEY (name_text_id) REFERENCES texts(text_id)
+);
+
+CREATE TABLE merchant_inventory (
+    merchant_id INTEGER NOT NULL,
+    inventory_index INTEGER NOT NULL,
+    item_id INTEGER NOT NULL,
+    quantity INTEGER,
+    PRIMARY KEY (merchant_id, inventory_index),
+    FOREIGN KEY (merchant_id) REFERENCES merchants(merchant_id),
+    FOREIGN KEY (item_id) REFERENCES items(item_id)
+);
+
+-- ============================================================
+-- ASSETS (resolved from PAK files)
+-- ============================================================
+CREATE TABLE assets (
+    asset_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    asset_type TEXT NOT NULL,  -- 'texture', 'model', 'sound', 'animation'
+    asset_name TEXT NOT NULL,
+    pak_file TEXT,
+    file_path TEXT NOT NULL,
+    file_size INTEGER,
+    UNIQUE(asset_type, asset_name)
+);
+
+CREATE INDEX idx_assets_name ON assets(asset_name);
+CREATE INDEX idx_assets_type ON assets(asset_type);
+
+-- Link items to their icon assets
+CREATE TABLE item_assets (
+    item_id INTEGER NOT NULL,
+    asset_id INTEGER NOT NULL,
+    asset_role TEXT,  -- 'icon', 'model', etc.
+    FOREIGN KEY (item_id) REFERENCES items(item_id),
+    FOREIGN KEY (asset_id) REFERENCES assets(asset_id)
+);
+
+-- Link units to their model/animation assets
+CREATE TABLE unit_assets (
+    unit_id INTEGER NOT NULL,
+    asset_id INTEGER NOT NULL,
+    asset_role TEXT,  -- 'model', 'skeleton', 'animation'
+    FOREIGN KEY (unit_id) REFERENCES units(unit_id),
+    FOREIGN KEY (asset_id) REFERENCES assets(asset_id)
+);
+
+-- ============================================================
+-- VIEWS (convenient queries)
+-- ============================================================
+
+-- Complete weapon view with all related data
+CREATE VIEW v_weapons_full AS
+SELECT
+    w.item_id,
+    in_en.name AS name_english,
+    in_de.name AS name_german,
+    in_ru.name AS name_russian,
+    wt.weapon_type_id,
+    wt_en.content AS weapon_type,
+    wm.material_id,
+    wm_en.content AS weapon_material,
+    w.min_damage,
+    w.max_damage,
+    w.min_range,
+    w.max_range,
+    w.weapon_speed,
+    i.sell_value,
+    i.buy_value,
+    s.strength,
+    s.agility,
+    s.armor,
+    ui.ui_handle,
+    ui.icon_path,
+    a.file_path AS icon_file_path
+FROM weapons w
+INNER JOIN items i ON w.item_id = i.item_id
+LEFT JOIN item_names in_en ON i.item_id = in_en.item_id AND in_en.language_id = 0
+LEFT JOIN item_names in_de ON i.item_id = in_de.item_id AND in_de.language_id = 1
+LEFT JOIN item_names in_ru ON i.item_id = in_ru.item_id AND in_ru.language_id = 5
+LEFT JOIN weapon_types wt ON w.weapon_type_id = wt.weapon_type_id
+LEFT JOIN texts wt_en ON wt.name_text_id = wt_en.text_id AND wt_en.language_id = 0
+LEFT JOIN weapon_materials wm ON w.weapon_material_id = wm.material_id
+LEFT JOIN texts wm_en ON wm.name_text_id = wm_en.text_id AND wm_en.language_id = 0
+LEFT JOIN item_stats s ON w.item_id = s.item_id
+LEFT JOIN item_ui ui ON w.item_id = ui.item_id AND ui.ui_index = 0
+LEFT JOIN item_assets ia ON w.item_id = ia.item_id AND ia.asset_role = 'icon'
+LEFT JOIN assets a ON ia.asset_id = a.asset_id;
+
+-- Units with all equipment
+CREATE VIEW v_units_with_equipment AS
+SELECT
+    u.unit_id,
+    u_en.content AS name,
+    u.handle,
+    u.model_path,
+    ue.equipment_index,
+    i.item_id,
+    i_en.content AS item_name,
+    w.min_damage,
+    w.max_damage
+FROM units u
+LEFT JOIN texts u_en ON u.name_text_id = u_en.text_id AND u_en.language_id = 0
+LEFT JOIN unit_equipment ue ON u.unit_id = ue.unit_id
+LEFT JOIN items i ON ue.item_id = i.item_id
+LEFT JOIN texts i_en ON i.name_text_id = i_en.text_id AND i_en.language_id = 0
+LEFT JOIN weapons w ON i.item_id = w.item_id;
+
+-- Merchants with their inventory
+CREATE VIEW v_merchant_inventory AS
+SELECT
+    m.merchant_id,
+    m_en.content AS merchant_name,
+    mi.inventory_index,
+    i.item_id,
+    i_en.content AS item_name,
+    i.sell_value,
+    i.buy_value
+FROM merchants m
+INNER JOIN texts m_en ON m.name_text_id = m_en.text_id AND m_en.language_id = 0
+INNER JOIN merchant_inventory mi ON m.merchant_id = mi.merchant_id
+INNER JOIN items i ON mi.item_id = i.item_id
+INNER JOIN texts i_en ON i.name_text_id = i_en.text_id AND i_en.language_id = 0;
+```
+
+---
+
+### 12.5 Asset Extraction & Database Population
+
+#### Asset Extraction Process
+
+```csharp
+public class AssetExtractor
+{
+    private SQLiteConnection db;
+    private Dictionary<string, int> assetCache = new Dictionary<string, int>();
+
+    public void ExtractAllAssets()
+    {
+        // 1. Scan PAK files for all assets
+        LogInfo("Extracting textures...");
+        ExtractAssetType("texture", ".tga|.dds", new[] {"sf0.pak", "sf1.pak", "sf22.pak", "sf32.pak"});
+
+        LogInfo("Extracting 3D models...");
+        ExtractAssetType("model", ".msb", new[] {"sf8.pak", "sf22.pak", "sf32.pak"});
+
+        LogInfo("Extracting sounds...");
+        ExtractAssetType("sound", ".wav|.mp3", new[] {"sf2.pak", "sf3.pak", "sf20.pak", "sf30.pak"});
+
+        LogInfo("Extracting animations...");
+        ExtractAssetType("animation", ".bob", new[] {"sf5.pak", "sf22.pak", "sf32.pak"});
+    }
+
+    private void ExtractAssetType(string assetType, string extensions, string[] pakFiles)
+    {
+        foreach (string ext in extensions.Split('|'))
+        {
+            var files = SFUnPak.ListAllWithExtension("", ext, pakFiles);
+            foreach (string file in files)
+            {
+                string assetName = Path.GetFileNameWithoutExtension(file);
+                string pakFile = FindPakContainingFile(file, pakFiles);
+
+                // Insert into database
+                using (var cmd = db.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT OR IGNORE INTO assets (asset_type, asset_name, pak_file, file_path)
+                        VALUES (@type, @name, @pak, @path)
+                    ";
+                    cmd.Parameters.AddWithValue("@type", assetType);
+                    cmd.Parameters.AddWithValue("@name", assetName);
+                    cmd.Parameters.AddWithValue("@pak", pakFile);
+                    cmd.Parameters.AddWithValue("@path", file);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+    }
+
+    public int ResolveAssetID(string assetType, string assetName)
+    {
+        string key = $"{assetType}:{assetName}";
+        if (assetCache.TryGetValue(key, out int assetId))
+            return assetId;
+
+        using (var cmd = db.CreateCommand())
+        {
+            cmd.CommandText = "SELECT asset_id FROM assets WHERE asset_type = @type AND asset_name = @name";
+            cmd.Parameters.AddWithValue("@type", assetType);
+            cmd.Parameters.AddWithValue("@name", assetName);
+            var result = cmd.ExecuteScalar();
+            if (result != null)
+            {
+                assetId = Convert.ToInt32(result);
+                assetCache[key] = assetId;
+                return assetId;
+            }
+        }
+        return -1;  // Asset not found
+    }
+
+    public void LinkItemAssets()
+    {
+        // Link item icons from Category 2012
+        var itemUICategory = SFCategoryManager.gamedata.c2012;
+        for (int i = 0; i < itemUICategory.GetNumOfItems(); i++)
+        {
+            var uiItem = itemUICategory[i];
+            string uiHandle = uiItem.GetHandleString().TrimEnd('\0');
+
+            if (string.IsNullOrEmpty(uiHandle))
+                continue;
+
+            // Try to find icon in texture assets
+            int assetId = ResolveAssetID("texture", uiHandle);
+            if (assetId == -1)
+            {
+                // Try with ui/ prefix
+                assetId = ResolveAssetID("texture", $"ui/{uiHandle}");
+            }
+
+            if (assetId != -1)
+            {
+                LinkAsset(uiItem.ItemID, assetId, "icon");
+            }
+        }
+    }
+
+    public void LinkUnitAssets()
+    {
+        // Link unit models from Category 2024
+        var unitCategory = SFCategoryManager.gamedata.c2024;
+        for (int i = 0; i < unitCategory.GetNumOfItems(); i++)
+        {
+            var unit = unitCategory[i];
+            string handle = unit.GetHandleString().TrimEnd('\0');
+
+            if (string.IsNullOrEmpty(handle))
+                continue;
+
+            // Find 3D model
+            int modelAssetId = ResolveAssetID("model", handle);
+            if (modelAssetId != -1)
+            {
+                LinkUnitAsset(unit.UnitID, modelAssetId, "model");
+            }
+
+            // Find skeleton
+            int skelAssetId = ResolveAssetID("animation", handle);
+            if (skelAssetId != -1)
+            {
+                LinkUnitAsset(unit.UnitID, skelAssetId, "skeleton");
+            }
+        }
+    }
+
+    private void LinkAsset(int itemId, int assetId, string role)
+    {
+        using (var cmd = db.CreateCommand())
+        {
+            cmd.CommandText = @"
+                INSERT OR REPLACE INTO item_assets (item_id, asset_id, asset_role)
+                VALUES (@item_id, @asset_id, @role)
+            ";
+            cmd.Parameters.AddWithValue("@item_id", itemId);
+            cmd.Parameters.AddWithValue("@asset_id", assetId);
+            cmd.Parameters.AddWithValue("@role", role);
+            cmd.ExecuteNonQuery();
+        }
+    }
+
+    private void LinkUnitAsset(int unitId, int assetId, string role)
+    {
+        using (var cmd = db.CreateCommand())
+        {
+            cmd.CommandText = @"
+                INSERT OR REPLACE INTO unit_assets (unit_id, asset_id, asset_role)
+                VALUES (@unit_id, @asset_id, @role)
+            ";
+            cmd.Parameters.AddWithValue("@unit_id", unitId);
+            cmd.Parameters.AddWithValue("@asset_id", assetId);
+            cmd.Parameters.AddWithValue("@role", role);
+            cmd.ExecuteNonQuery();
+        }
+    }
+}
+```
+
+---
+
+### 12.6 Enhanced Export Formats with Assets
+
+#### JSON Export with Asset Links
+
+```json
+{
+  "weapons": [
+    {
+      "id": 123,
+      "name": {
+        "english": "Iron Sword",
+        "german": "Eisenschwert",
+        "russian": "Железный Меч"
+      },
+      "type": "1H Sword",
+      "material": "Iron",
+      "damage": { "min": 10, "max": 15 },
+      "range": { "min": 0, "max": 1 },
+      "speed": 100,
+      "value": { "sell": 50, "buy": 100 },
+      "stats": {
+        "strength": 0,
+        "agility": 2
+      },
+      "assets": {
+        "icon": {
+          "handle": "figure_item_sword_iron",
+          "path": "texture/ui/figure_item_sword_iron.tga",
+          "pak_file": "sf1.pak",
+          "url": "file://extracted/texture/ui/figure_item_sword_iron.tga"
+        }
+      }
+    }
+  ]
+}
+```
+
+#### SQLite Query Examples
+
+```sql
+-- Find all weapons with fire damage effects
+SELECT
+    w.item_id,
+    in_en.name,
+    w.min_damage,
+    w.max_damage,
+    s_en.content AS effect_name
+FROM weapons w
+INNER JOIN item_names in_en ON w.item_id = in_en.item_id AND in_en.language_id = 0
+INNER JOIN weapon_effects we ON w.item_id = we.item_id
+INNER JOIN spells s ON we.effect_id = s.spell_id
+INNER JOIN texts s_en ON s.name_text_id = s_en.text_id AND s_en.language_id = 0
+WHERE s_en.content LIKE '%Fire%';
+
+-- Find all items without icons
+SELECT
+    i.item_id,
+    in_en.name
+FROM items i
+LEFT JOIN item_names in_en ON i.item_id = in_en.item_id AND in_en.language_id = 0
+LEFT JOIN item_assets ia ON i.item_id = ia.item_id AND ia.asset_role = 'icon'
+WHERE ia.asset_id IS NULL;
+
+-- List all units that can equip a specific weapon type
+SELECT DISTINCT
+    u.unit_id,
+    u_en.content AS unit_name,
+    i_en.content AS weapon_name
+FROM units u
+INNER JOIN texts u_en ON u.name_text_id = u_en.text_id AND u_en.language_id = 0
+INNER JOIN unit_equipment ue ON u.unit_id = ue.unit_id
+INNER JOIN items i ON ue.item_id = i.item_id
+INNER JOIN texts i_en ON i.name_text_id = i_en.text_id AND i_en.language_id = 0
+INNER JOIN weapons w ON i.item_id = w.item_id
+INNER JOIN weapon_types wt ON w.weapon_type_id = wt.weapon_type_id
+INNER JOIN texts wt_en ON wt.name_text_id = wt_en.text_id AND wt_en.language_id = 0
+WHERE wt_en.content = '1H Sword';
+
+-- Calculate average damage by weapon type
+SELECT
+    wt_en.content AS weapon_type,
+    COUNT(*) AS count,
+    AVG((w.min_damage + w.max_damage) / 2.0) AS avg_damage,
+    MIN(w.min_damage) AS min_dmg,
+    MAX(w.max_damage) AS max_dmg
+FROM weapons w
+INNER JOIN weapon_types wt ON w.weapon_type_id = wt.weapon_type_id
+INNER JOIN texts wt_en ON wt.name_text_id = wt_en.text_id AND wt_en.language_id = 0
+GROUP BY wt_en.content
+ORDER BY avg_damage DESC;
+```
+
+---
+
+### 12.7 Export Tool Enhancements
+
+#### CLI Extensions
+
+```bash
+# Export to SQLite database with all assets
+SpellforceGameDataExporter.exe --input "Gamedata.cff" --game-dir "H:\SpellSmut\OriginalGameFiles" --output "gamedata.db" --format sqlite --include-assets
+
+# Export only specific tables to JSON
+SpellforceGameDataExporter.exe --input "gamedata.db" --output "weapons.json" --tables weapons,weapon_effects --format json
+
+# Extract assets referenced by items
+SpellforceGameDataExporter.exe --input "gamedata.db" --output "extracted_assets/" --extract-assets --filter "type=texture,role=icon"
+
+# Generate data dictionary (schema documentation)
+SpellforceGameDataExporter.exe --input "gamedata.db" --output "schema.html" --generate-docs
+```
+
+**New CLI Arguments:**
+- `--game-dir <path>` - Game directory for PAK file access
+- `--include-assets` - Scan PAK files and link assets
+- `--extract-assets` - Extract asset files to disk
+- `--tables <list>` - Export specific tables only
+- `--generate-docs` - Generate schema documentation
+
+---
+
+### 12.8 Asset Browser Integration
+
+#### Web-Based Database Explorer
+
+Create a simple web interface to browse the exported database:
+
+**Technology Stack:**
+- **Backend:** ASP.NET Core minimal API OR Python Flask
+- **Database:** SQLite (read-only)
+- **Frontend:** HTML + JavaScript (Vue.js/React optional)
+
+**Features:**
+- Search items/weapons by name
+- Filter by type, damage range, value
+- View all relationships (weapon → effects → spells)
+- Display icons inline (served from extracted assets)
+- Export filtered results to JSON/CSV
+- Compare weapons side-by-side
+- Visualize item stat distributions (charts)
+
+**Example Routes:**
+```
+GET  /api/weapons              - List all weapons
+GET  /api/weapons/{id}         - Get weapon details with all relations
+GET  /api/items/search?q=sword - Search items
+GET  /api/units/{id}/equipment - Get unit equipment
+GET  /assets/icons/{handle}    - Serve icon image
+GET  /                         - Web UI
+```
+
+---
+
+### 12.9 Implementation Phases (Extended)
+
+**Phase 1: Database Schema & Basic Export** ✅ (Weeks 1-2)
+1. Create SQLite schema
+2. Implement category → table exporters
+3. Export items, weapons, spells, units
+4. Test data integrity
+
+**Phase 2: Asset Scanning & Linking** (Weeks 3-4)
+1. Implement PAK file scanning
+2. Populate `assets` table
+3. Link items to icons (Category 2012)
+4. Link units to models (Category 2024)
+5. Link spells to icons (Category 2054)
+
+**Phase 3: Advanced Queries & Views** (Week 5)
+1. Create SQL views for common queries
+2. Implement full-text search on names/descriptions
+3. Add query performance indexes
+4. Test complex JOINs
+
+**Phase 4: Asset Extraction** (Week 6)
+1. Extract referenced assets to disk
+2. Convert textures to web-friendly formats (TGA → PNG)
+3. Generate thumbnails
+4. Create asset manifest
+
+**Phase 5: Web Interface** (Weeks 7-8)
+1. Create REST API
+2. Build web UI
+3. Implement search/filter
+4. Add icon display
+5. Deploy locally
+
+**Phase 6: Documentation & Tools** (Week 9)
+1. Generate schema documentation
+2. Create SQL query cookbook
+3. Write modding guide using database
+4. Add import validation against DB
+
+---
+
+### 12.10 Database Export Benefits
+
+#### For Modders
+- **Query capabilities:** Find all items with specific stats
+- **Data mining:** Analyze game balance (damage curves, price/performance)
+- **Validation:** Check for orphaned references before import
+- **Documentation:** Auto-generate item/spell wikis
+
+#### For Developers
+- **Testing:** Query database for test cases
+- **Balance tools:** Analyze stat distributions
+- **Asset audit:** Find missing/unused assets
+- **Migration:** Easy conversion to other formats
+
+#### For Community
+- **Wiki generation:** Auto-populate game wikis
+- **Build calculators:** Character/equipment optimizer tools
+- **Lore research:** Extract all text for translation/analysis
+- **Mod compatibility:** Detect ID conflicts between mods
+
+---
+
+### 12.11 Asset Export Deliverables
+
+1. ✅ **SQLite schema definition** (SQL DDL)
+2. ✅ **Database exporter** (CFF → SQLite)
+3. ✅ **Asset scanner** (PAK → assets table)
+4. ✅ **Asset linker** (items/units → assets)
+5. ✅ **Asset extractor** (PAK → disk files)
+6. ✅ **SQL query examples** (cookbook)
+7. ✅ **Web API** (REST endpoints)
+8. ✅ **Web UI** (browser interface)
+9. ✅ **Schema documentation** (auto-generated)
+10. ✅ **Example queries** (modding cookbook)
+
+---
+
+### 12.12 Comprehensive Testing Strategy
+
+**Testing Philosophy:** Every component must be tested either with automated unit tests OR manual testing before proceeding to the next phase. No untested code should advance.
+
+---
+
+#### 12.12.1 Unit Testing Framework Setup
+
+**Test Framework:** xUnit or NUnit for .NET 8.0
+
+**Project Structure:**
+```
+SpellforceGameDataExporter.Tests/
+├── CategoryExport/
+│   ├── WeaponExporterTests.cs
+│   ├── ItemExporterTests.cs
+│   ├── SpellExporterTests.cs
+│   └── UnitExporterTests.cs
+├── AssetManagement/
+│   ├── AssetExtractorTests.cs
+│   ├── AssetLinkerTests.cs
+│   └── PakScannerTests.cs
+├── Database/
+│   ├── SchemaTests.cs
+│   ├── QueryTests.cs
+│   └── DataIntegrityTests.cs
+├── Import/
+│   ├── WeaponImporterTests.cs
+│   ├── ValidationTests.cs
+│   └── ForeignKeyResolverTests.cs
+├── Fixtures/
+│   ├── TestGameData.cff (small test file)
+│   ├── TestPakFile.pak (minimal PAK)
+│   └── TestDatabaseFactory.cs
+└── SpellforceGameDataExporter.Tests.csproj
+```
+
+**Dependencies:**
+- `xUnit` (or `NUnit`)
+- `FluentAssertions` (for readable assertions)
+- `Moq` (for mocking dependencies)
+- `System.Data.SQLite` (for database tests)
+
+---
+
+#### 12.12.2 Phase 1 Testing: Basic Category Export
+
+**MUST PASS BEFORE PROCEEDING TO PHASE 2**
+
+##### Unit Tests (Automated)
+
+**Test: `CategoryLoading_Tests.cs`**
+```csharp
+[Fact]
+public void LoadGameDataCFF_ValidFile_ReturnsGameData()
+{
+    // Arrange
+    string testFile = "Fixtures/TestGameData.cff";
+
+    // Act
+    var result = SFCategoryManager.LoadCFF(testFile);
+
+    // Assert
+    result.Should().NotBeNull();
+    result.c2003.Should().NotBeNull(); // Items category
+}
+
+[Fact]
+public void LoadGameDataCFF_InvalidFile_ThrowsException()
+{
+    // Arrange
+    string testFile = "nonexistent.cff";
+
+    // Act & Assert
+    Assert.Throws<FileNotFoundException>(() => SFCategoryManager.LoadCFF(testFile));
+}
+
+[Fact]
+public void Category2016_TextResolution_ReturnsCorrectText()
+{
+    // Arrange
+    LoadTestGameData();
+    ushort testTextId = 1; // Known text ID in test data
+
+    // Act
+    string text = SFCategoryManager.GetTextByLanguage(testTextId, 0); // English
+
+    // Assert
+    text.Should().NotBeNullOrEmpty();
+}
+```
+
+**Test: `WeaponExporter_Tests.cs`**
+```csharp
+[Fact]
+public void ExportWeapons_ToJSON_ValidStructure()
+{
+    // Arrange
+    LoadTestGameData();
+    var exporter = new WeaponExporter(ExportFormat.JSON);
+
+    // Act
+    string json = exporter.Export();
+    var weapons = JsonSerializer.Deserialize<List<WeaponData>>(json);
+
+    // Assert
+    weapons.Should().NotBeEmpty();
+    weapons.First().Name.Should().NotBeNullOrEmpty();
+    weapons.First().MinDamage.Should().BeGreaterThanOrEqualTo(0);
+    weapons.First().MaxDamage.Should().BeGreaterThanOrEqualTo(weapons.First().MinDamage);
+}
+
+[Fact]
+public void ExportWeapons_CrossCategoryLookup_ResolvesWeaponType()
+{
+    // Arrange
+    LoadTestGameData();
+    var exporter = new WeaponExporter(ExportFormat.JSON);
+
+    // Act
+    var weapons = exporter.ExportToModel();
+
+    // Assert
+    weapons.Where(w => w.WeaponTypeId > 0)
+           .All(w => !string.IsNullOrEmpty(w.Type))
+           .Should().BeTrue("All weapons with type ID should resolve to type name");
+}
+
+[Fact]
+public void ExportWeapons_TextResolution_AllLanguages()
+{
+    // Arrange
+    LoadTestGameData();
+    var exporter = new WeaponExporter(ExportFormat.JSON);
+
+    // Act
+    var weapons = exporter.ExportToModel();
+    var firstWeapon = weapons.First();
+
+    // Assert
+    firstWeapon.Name.English.Should().NotBeNullOrEmpty();
+    // German and Russian may be null if not in test data, that's OK
+}
+```
+
+**Test: `CSV_Export_Tests.cs`**
+```csharp
+[Fact]
+public void ExportWeapons_ToCSV_ValidFormat()
+{
+    // Arrange
+    LoadTestGameData();
+    var exporter = new WeaponExporter(ExportFormat.CSV);
+
+    // Act
+    string csv = exporter.Export();
+
+    // Assert
+    csv.Should().Contain("WeaponID,Name,Type,Material"); // Header
+    csv.Split('\n').Should().HaveCountGreaterThan(1); // At least header + 1 row
+}
+
+[Fact]
+public void ExportWeapons_ToCSV_NoEscapingIssues()
+{
+    // Arrange
+    LoadTestGameData();
+    var exporter = new WeaponExporter(ExportFormat.CSV);
+
+    // Act
+    string csv = exporter.Export();
+
+    // Assert
+    // Names with commas should be quoted
+    csv.Should().NotContain("\",\"\""); // Improper escaping
+}
+```
+
+##### Manual Tests (Checklist)
+
+**MANUAL TEST 1: Export Full GameData.cff**
+- [ ] Export weapons from real `Gamedata.cff` to JSON
+- [ ] Verify file is created
+- [ ] Open JSON in text editor - confirm valid JSON syntax
+- [ ] Check first 5 weapons have:
+  - [ ] Valid name (not null/empty)
+  - [ ] MinDamage ≤ MaxDamage
+  - [ ] Weapon type resolved to name (not just ID)
+  - [ ] Material resolved to name
+
+**MANUAL TEST 2: Export to CSV**
+- [ ] Export weapons to CSV
+- [ ] Open in Excel/LibreOffice
+- [ ] Verify columns aligned correctly
+- [ ] Check for data corruption (encoding issues, garbled text)
+- [ ] Verify Russian/German text displays correctly
+
+**MANUAL TEST 3: Cross-Reference with Game**
+- [ ] Pick 3 random weapons from export
+- [ ] Launch SpellForce game
+- [ ] Find those weapons in-game
+- [ ] Verify stats match (damage, speed, name)
+
+---
+
+#### 12.12.3 Phase 2 Testing: Asset Scanning & Linking
+
+**MUST PASS BEFORE PROCEEDING TO PHASE 3**
+
+##### Unit Tests (Automated)
+
+**Test: `PakScanner_Tests.cs`**
+```csharp
+[Fact]
+public void ScanPakFile_ValidPak_ReturnsAssetList()
+{
+    // Arrange
+    var scanner = new PakScanner();
+    string[] pakFiles = { "sf1.pak" };
+
+    // Act
+    var assets = scanner.ScanPakForAssets("texture", ".tga", pakFiles);
+
+    // Assert
+    assets.Should().NotBeEmpty();
+    assets.All(a => a.AssetType == "texture").Should().BeTrue();
+    assets.All(a => a.FilePath.EndsWith(".tga")).Should().BeTrue();
+}
+
+[Fact]
+public void ListAllWithExtension_MultipleExtensions_ReturnsAll()
+{
+    // Arrange
+    var scanner = new PakScanner();
+
+    // Act
+    var textures = scanner.ListAllWithExtension("texture/ui", ".tga|.dds", new[] {"sf1.pak"});
+
+    // Assert
+    textures.Should().Contain(t => t.EndsWith(".tga"));
+    textures.Should().Contain(t => t.EndsWith(".dds"));
+}
+```
+
+**Test: `AssetLinker_Tests.cs`**
+```csharp
+[Fact]
+public void LinkItemAssets_ValidUIHandle_FindsIcon()
+{
+    // Arrange
+    LoadTestGameData();
+    var db = CreateTestDatabase();
+    var linker = new AssetLinker(db);
+
+    // Populate test assets
+    InsertTestAsset("texture", "figure_item_sword_iron", "texture/ui/figure_item_sword_iron.tga");
+
+    // Act
+    linker.LinkItemAssets();
+
+    // Assert
+    var links = db.Query("SELECT * FROM item_assets WHERE asset_role = 'icon'");
+    links.Should().NotBeEmpty();
+}
+
+[Fact]
+public void LinkItemAssets_MissingIcon_DoesNotCrash()
+{
+    // Arrange
+    LoadTestGameData();
+    var db = CreateTestDatabase();
+    var linker = new AssetLinker(db);
+
+    // Act (no assets in database)
+    Action act = () => linker.LinkItemAssets();
+
+    // Assert
+    act.Should().NotThrow();
+}
+
+[Fact]
+public void ResolveAssetID_CachedLookup_UsesCache()
+{
+    // Arrange
+    var db = CreateTestDatabase();
+    var linker = new AssetLinker(db);
+    InsertTestAsset("texture", "test_icon", "texture/test.tga");
+
+    // Act
+    int firstCall = linker.ResolveAssetID("texture", "test_icon");
+    int secondCall = linker.ResolveAssetID("texture", "test_icon");
+
+    // Assert
+    firstCall.Should().Be(secondCall);
+    // Verify cache was used (could mock database to ensure only 1 query)
+}
+```
+
+**Test: `AssetExtractor_Tests.cs`**
+```csharp
+[Fact]
+public void ExtractAsset_FromPak_CreatesFile()
+{
+    // Arrange
+    var extractor = new AssetExtractor();
+    string outputPath = Path.GetTempFileName();
+
+    // Act
+    int result = extractor.ExtractAsset("sf1.pak", "texture/ui/test.tga", outputPath);
+
+    // Assert
+    result.Should().Be(0);
+    File.Exists(outputPath).Should().BeTrue();
+
+    // Cleanup
+    File.Delete(outputPath);
+}
+```
+
+##### Manual Tests (Checklist)
+
+**MANUAL TEST 4: Asset Scanning**
+- [ ] Run asset scanner on real PAK files
+- [ ] Verify console output shows progress
+- [ ] Check `assets` table in database:
+  - [ ] Contains textures from sf1.pak
+  - [ ] Contains models from sf8.pak
+  - [ ] Contains sounds from sf2.pak
+- [ ] Verify asset counts match expected (compare to game file browser)
+
+**MANUAL TEST 5: Asset Linking**
+- [ ] Run asset linker
+- [ ] Query `item_assets` table:
+  - [ ] At least 50% of items have icon links
+  - [ ] No NULL asset_id values
+- [ ] Query `unit_assets` table:
+  - [ ] Major units have model links
+- [ ] Check for orphaned assets (assets with no links) - log count
+
+**MANUAL TEST 6: Asset Extraction**
+- [ ] Extract 5 item icons to disk
+- [ ] Verify TGA files open in image viewer
+- [ ] Check file sizes are reasonable (not 0 bytes)
+- [ ] Verify icons match in-game appearance
+
+---
+
+#### 12.12.4 Phase 3 Testing: Database Schema & Queries
+
+**MUST PASS BEFORE PROCEEDING TO PHASE 4**
+
+##### Unit Tests (Automated)
+
+**Test: `DatabaseSchema_Tests.cs`**
+```csharp
+[Fact]
+public void CreateSchema_ValidSQL_NoErrors()
+{
+    // Arrange
+    var db = new SQLiteConnection(":memory:");
+    db.Open();
+
+    // Act
+    var schemaSQL = File.ReadAllText("schema.sql");
+    Action act = () => db.ExecuteNonQuery(schemaSQL);
+
+    // Assert
+    act.Should().NotThrow();
+}
+
+[Fact]
+public void Schema_AllTables_Exist()
+{
+    // Arrange
+    var db = CreateTestDatabase();
+
+    // Act
+    var tables = db.Query("SELECT name FROM sqlite_master WHERE type='table'");
+
+    // Assert
+    tables.Should().Contain("items");
+    tables.Should().Contain("weapons");
+    tables.Should().Contain("weapon_effects");
+    tables.Should().Contain("spells");
+    tables.Should().Contain("units");
+    tables.Should().Contain("assets");
+    tables.Should().Contain("item_assets");
+}
+
+[Fact]
+public void Schema_AllViews_Exist()
+{
+    // Arrange
+    var db = CreateTestDatabase();
+
+    // Act
+    var views = db.Query("SELECT name FROM sqlite_master WHERE type='view'");
+
+    // Assert
+    views.Should().Contain("v_weapons_full");
+    views.Should().Contain("v_units_with_equipment");
+    views.Should().Contain("v_merchant_inventory");
+}
+
+[Fact]
+public void Schema_ForeignKeys_Enforced()
+{
+    // Arrange
+    var db = CreateTestDatabase();
+    db.ExecuteNonQuery("PRAGMA foreign_keys = ON");
+
+    // Act & Assert - inserting item with invalid text_id should fail
+    Action act = () => db.ExecuteNonQuery(@"
+        INSERT INTO items (item_id, name_text_id) VALUES (1, 99999)
+    ");
+
+    act.Should().Throw<SQLiteException>()
+       .WithMessage("*FOREIGN KEY constraint failed*");
+}
+```
+
+**Test: `QueryTests.cs`**
+```csharp
+[Fact]
+public void Query_WeaponsFull_JoinsCorrectly()
+{
+    // Arrange
+    var db = CreateAndPopulateTestDatabase();
+
+    // Act
+    var weapons = db.Query("SELECT * FROM v_weapons_full");
+
+    // Assert
+    weapons.Should().NotBeEmpty();
+    weapons.First()["name_english"].Should().NotBeNullOrEmpty();
+    weapons.First()["weapon_type"].Should().NotBeNullOrEmpty();
+}
+
+[Fact]
+public void Query_FindWeaponsWithFireDamage_ReturnsMatches()
+{
+    // Arrange
+    var db = CreateAndPopulateTestDatabase();
+
+    // Act
+    var query = @"
+        SELECT w.item_id, in_en.name
+        FROM weapons w
+        INNER JOIN item_names in_en ON w.item_id = in_en.item_id
+        INNER JOIN weapon_effects we ON w.item_id = we.item_id
+        WHERE we.effect_name LIKE '%Fire%'
+    ";
+    var results = db.Query(query);
+
+    // Assert
+    results.Should().NotBeEmpty();
+}
+
+[Fact]
+public void Query_AverageDamageByType_CalculatesCorrectly()
+{
+    // Arrange
+    var db = CreateAndPopulateTestDatabase();
+    InsertTestWeapon(1, "1H Sword", 10, 15);
+    InsertTestWeapon(2, "1H Sword", 12, 18);
+
+    // Act
+    var query = @"
+        SELECT weapon_type, AVG((min_damage + max_damage) / 2.0) as avg_dmg
+        FROM v_weapons_full
+        GROUP BY weapon_type
+    ";
+    var results = db.Query(query);
+
+    // Assert
+    var swordRow = results.First(r => r["weapon_type"] == "1H Sword");
+    swordRow["avg_dmg"].Should().BeApproximately(13.75, 0.1);
+}
+```
+
+**Test: `DataIntegrity_Tests.cs`**
+```csharp
+[Fact]
+public void DataIntegrity_NoOrphanedWeapons_AllHaveItems()
+{
+    // Arrange
+    var db = CreateAndPopulateTestDatabase();
+
+    // Act
+    var orphans = db.Query(@"
+        SELECT w.item_id FROM weapons w
+        LEFT JOIN items i ON w.item_id = i.item_id
+        WHERE i.item_id IS NULL
+    ");
+
+    // Assert
+    orphans.Should().BeEmpty("All weapons must have corresponding item entries");
+}
+
+[Fact]
+public void DataIntegrity_NoInvalidTextReferences()
+{
+    // Arrange
+    var db = CreateAndPopulateTestDatabase();
+
+    // Act
+    var invalid = db.Query(@"
+        SELECT i.item_id FROM items i
+        WHERE i.name_text_id NOT IN (SELECT DISTINCT text_id FROM texts)
+    ");
+
+    // Assert
+    invalid.Should().BeEmpty("All name_text_id must reference existing texts");
+}
+
+[Fact]
+public void DataIntegrity_WeaponDamageLogical()
+{
+    // Arrange
+    var db = CreateAndPopulateTestDatabase();
+
+    // Act
+    var invalid = db.Query(@"
+        SELECT item_id FROM weapons
+        WHERE min_damage > max_damage OR min_damage < 0
+    ");
+
+    // Assert
+    invalid.Should().BeEmpty("MinDamage must be ≤ MaxDamage and ≥ 0");
+}
+```
+
+##### Manual Tests (Checklist)
+
+**MANUAL TEST 7: Database Export**
+- [ ] Export full GameData.cff to SQLite
+- [ ] Verify .db file is created
+- [ ] Open in DB Browser for SQLite
+- [ ] Check table counts:
+  - [ ] `items` table has 1000+ rows
+  - [ ] `weapons` table has 200+ rows
+  - [ ] `texts` table has 5000+ rows
+  - [ ] `assets` table has 10000+ rows
+
+**MANUAL TEST 8: Query Performance**
+- [ ] Run `v_weapons_full` view - should complete in < 1 second
+- [ ] Run complex JOIN queries - verify results
+- [ ] Test search query on item names - should be fast
+
+**MANUAL TEST 9: Data Accuracy**
+- [ ] Query 5 random weapons from database
+- [ ] Cross-reference with original CFF file (open in editor)
+- [ ] Verify all stats match exactly
+
+---
+
+#### 12.12.5 Phase 4 Testing: Import & Validation
+
+**MUST PASS BEFORE PROCEEDING TO PHASE 5**
+
+##### Unit Tests (Automated)
+
+**Test: `WeaponImporter_Tests.cs`**
+```csharp
+[Fact]
+public void ImportWeapon_ValidJSON_CreatesEntries()
+{
+    // Arrange
+    var db = CreateTestDatabase();
+    var importer = new WeaponImporter(db);
+    var json = @"{
+        ""name"": {""english"": ""Test Sword""},
+        ""damage"": {""min"": 10, ""max"": 15},
+        ""type"": ""1H Sword"",
+        ""material"": ""Iron""
+    }";
+
+    // Act
+    int itemId = importer.ImportFromJSON(json);
+
+    // Assert
+    itemId.Should().BeGreaterThan(0);
+
+    var weapon = db.QuerySingle("SELECT * FROM weapons WHERE item_id = @id", itemId);
+    weapon.Should().NotBeNull();
+    weapon["min_damage"].Should().Be(10);
+}
+
+[Fact]
+public void ImportWeapon_InvalidData_ThrowsValidationException()
+{
+    // Arrange
+    var db = CreateTestDatabase();
+    var importer = new WeaponImporter(db);
+    var json = @"{
+        ""name"": {""english"": ""Bad Weapon""},
+        ""damage"": {""min"": 100, ""max"": 50}
+    }";
+
+    // Act & Assert
+    Action act = () => importer.ImportFromJSON(json);
+    act.Should().Throw<ValidationException>()
+       .WithMessage("*MinDamage cannot exceed MaxDamage*");
+}
+
+[Fact]
+public void ImportWeapon_MissingDependency_CreatesOrFails()
+{
+    // Arrange
+    var db = CreateTestDatabase();
+    var importer = new WeaponImporter(db, autoCreateDeps: false);
+    var json = @"{
+        ""name"": {""english"": ""Mythril Sword""},
+        ""material"": ""Mythril""
+    }";
+
+    // Act & Assert
+    Action act = () => importer.ImportFromJSON(json);
+    act.Should().Throw<ValidationException>()
+       .WithMessage("*Material 'Mythril' does not exist*");
+}
+```
+
+**Test: `ValidationEngine_Tests.cs`**
+```csharp
+[Fact]
+public void ValidateWeapon_AllFieldsValid_PassesValidation()
+{
+    // Arrange
+    var validator = new ValidationEngine();
+    var weapon = new WeaponData {
+        Name = new MultilingualText { English = "Test" },
+        MinDamage = 10,
+        MaxDamage = 15,
+        Speed = 100
+    };
+
+    // Act
+    var errors = validator.Validate(weapon);
+
+    // Assert
+    errors.Should().BeEmpty();
+}
+
+[Fact]
+public void ValidateWeapon_EmptyName_FailsValidation()
+{
+    // Arrange
+    var validator = new ValidationEngine();
+    var weapon = new WeaponData {
+        Name = new MultilingualText { English = "" },
+        MinDamage = 10,
+        MaxDamage = 15
+    };
+
+    // Act
+    var errors = validator.Validate(weapon);
+
+    // Assert
+    errors.Should().Contain(e => e.Contains("Name is required"));
+}
+
+[Fact]
+public void ValidateWeapon_DamageInverted_FailsValidation()
+{
+    // Arrange
+    var validator = new ValidationEngine();
+    var weapon = new WeaponData {
+        Name = new MultilingualText { English = "Test" },
+        MinDamage = 50,
+        MaxDamage = 10
+    };
+
+    // Act
+    var errors = validator.Validate(weapon);
+
+    // Assert
+    errors.Should().Contain(e => e.Contains("MinDamage"));
+}
+```
+
+**Test: `RoundTrip_Tests.cs`**
+```csharp
+[Fact]
+public void RoundTrip_ExportThenImport_DataMatches()
+{
+    // Arrange
+    var originalDb = CreateAndPopulateTestDatabase();
+    var exporter = new WeaponExporter(originalDb);
+
+    // Act - Export
+    string json = exporter.ExportToJSON();
+
+    // Import into new database
+    var newDb = CreateTestDatabase();
+    var importer = new WeaponImporter(newDb);
+    importer.ImportFromJSON(json);
+
+    // Assert - Query both databases
+    var originalWeapons = originalDb.Query("SELECT * FROM v_weapons_full ORDER BY item_id");
+    var importedWeapons = newDb.Query("SELECT * FROM v_weapons_full ORDER BY item_id");
+
+    originalWeapons.Count().Should().Be(importedWeapons.Count());
+
+    for (int i = 0; i < originalWeapons.Count(); i++)
+    {
+        var orig = originalWeapons[i];
+        var imported = importedWeapons[i];
+
+        imported["name_english"].Should().Be(orig["name_english"]);
+        imported["min_damage"].Should().Be(orig["min_damage"]);
+        imported["max_damage"].Should().Be(orig["max_damage"]);
+    }
+}
+```
+
+##### Manual Tests (Checklist)
+
+**MANUAL TEST 10: JSON Import**
+- [ ] Create test JSON with 3 custom weapons
+- [ ] Import using CLI tool
+- [ ] Verify weapons appear in database
+- [ ] Check all fields populated correctly
+- [ ] Verify text entries created in all languages
+
+**MANUAL TEST 11: Validation**
+- [ ] Try importing weapon with MinDamage > MaxDamage - should fail with error
+- [ ] Try importing weapon with empty name - should fail
+- [ ] Try importing weapon with invalid type - should fail
+- [ ] Verify error messages are clear and helpful
+
+**MANUAL TEST 12: Import Into Game**
+- [ ] Import custom weapon into GameData.cff
+- [ ] Save modified GameData.cff
+- [ ] Copy to game directory
+- [ ] Launch SpellForce
+- [ ] Use console/editor to spawn custom weapon
+- [ ] Verify weapon works in-game (CRITICAL!)
+
+---
+
+#### 12.12.6 Phase 5 Testing: Web Interface
+
+**MUST PASS BEFORE PROCEEDING TO PHASE 6**
+
+##### Automated Tests
+
+**Test: `API_Tests.cs`**
+```csharp
+[Fact]
+public async Task API_GetWeapons_ReturnsJSON()
+{
+    // Arrange
+    var client = CreateTestAPIClient();
+
+    // Act
+    var response = await client.GetAsync("/api/weapons");
+
+    // Assert
+    response.StatusCode.Should().Be(HttpStatusCode.OK);
+    response.Content.Headers.ContentType.MediaType.Should().Be("application/json");
+}
+
+[Fact]
+public async Task API_GetWeaponByID_ReturnsWeapon()
+{
+    // Arrange
+    var client = CreateTestAPIClient();
+
+    // Act
+    var response = await client.GetAsync("/api/weapons/123");
+    var weapon = await response.Content.ReadAsAsync<WeaponData>();
+
+    // Assert
+    response.StatusCode.Should().Be(HttpStatusCode.OK);
+    weapon.Id.Should().Be(123);
+}
+
+[Fact]
+public async Task API_SearchWeapons_FiltersCorrectly()
+{
+    // Arrange
+    var client = CreateTestAPIClient();
+
+    // Act
+    var response = await client.GetAsync("/api/items/search?q=sword");
+    var items = await response.Content.ReadAsAsync<List<ItemData>>();
+
+    // Assert
+    items.Should().NotBeEmpty();
+    items.All(i => i.Name.ToLower().Contains("sword")).Should().BeTrue();
+}
+```
+
+##### Manual Tests (Checklist)
+
+**MANUAL TEST 13: Web UI**
+- [ ] Launch web server
+- [ ] Open browser to http://localhost:5000
+- [ ] Home page loads without errors
+- [ ] Search for "sword" - results appear
+- [ ] Click on a weapon - detail page loads
+- [ ] Verify icon displays (if available)
+- [ ] Test pagination (if implemented)
+
+**MANUAL TEST 14: API Endpoints**
+- [ ] GET /api/weapons - returns JSON array
+- [ ] GET /api/weapons/123 - returns single weapon
+- [ ] GET /api/items/search?q=iron - returns filtered results
+- [ ] GET /api/units/1/equipment - returns unit equipment
+- [ ] GET /assets/icons/figure_item_sword - serves image
+
+**MANUAL TEST 15: Cross-Browser Testing**
+- [ ] Test in Chrome - works correctly
+- [ ] Test in Firefox - works correctly
+- [ ] Test in Edge - works correctly
+- [ ] Responsive design on mobile (optional)
+
+---
+
+#### 12.12.7 Integration Testing: End-to-End
+
+**FINAL TESTS BEFORE RELEASE**
+
+##### Manual Integration Tests
+
+**INTEGRATION TEST 1: Full Export Pipeline**
+- [ ] Start with vanilla GameData.cff
+- [ ] Export to SQLite database with assets
+- [ ] Verify database contains:
+  - [ ] All items (compare count to CFF)
+  - [ ] All weapons with stats
+  - [ ] All spells
+  - [ ] All units
+  - [ ] Asset links
+- [ ] Export subset to JSON
+- [ ] Verify JSON is valid and complete
+
+**INTEGRATION TEST 2: Full Import Pipeline**
+- [ ] Create custom weapons in JSON
+- [ ] Import into new GameData.cff
+- [ ] Export back to JSON
+- [ ] Compare original JSON to exported JSON - should match
+- [ ] Load modified GameData.cff in game
+- [ ] Verify custom weapons work
+
+**INTEGRATION TEST 3: Asset Extraction Pipeline**
+- [ ] Export database with assets
+- [ ] Extract all weapon icons to folder
+- [ ] Verify 200+ icon files created
+- [ ] Random sample 10 icons - open in viewer
+- [ ] Check file sizes reasonable
+
+**INTEGRATION TEST 4: Web Interface Full Flow**
+- [ ] Export database
+- [ ] Launch web server
+- [ ] Search for weapon
+- [ ] View weapon details
+- [ ] Export weapon to JSON via UI
+- [ ] Modify JSON
+- [ ] Import modified weapon
+- [ ] Refresh database
+- [ ] Verify changes appear in UI
+
+---
+
+#### 12.12.8 Performance Testing
+
+##### Performance Benchmarks
+
+**BENCHMARK TEST 1: Export Speed**
+- [ ] Export full GameData.cff to JSON
+- [ ] Measure time - should complete in < 30 seconds
+- [ ] Export to SQLite - should complete in < 60 seconds
+- [ ] Export with asset scanning - should complete in < 5 minutes
+
+**BENCHMARK TEST 2: Import Speed**
+- [ ] Import 100 weapons from JSON
+- [ ] Measure time - should complete in < 10 seconds
+- [ ] Import 1000 items - should complete in < 60 seconds
+
+**BENCHMARK TEST 3: Query Performance**
+- [ ] Run complex JOIN query (v_weapons_full)
+- [ ] Should return results in < 500ms
+- [ ] Search query by name - should complete in < 100ms
+
+---
+
+#### 12.12.9 Testing Checklist by Phase
+
+**Phase 1: Basic Export**
+- [ ] All unit tests pass (CategoryLoading, WeaponExporter, CSV_Export)
+- [ ] MANUAL TEST 1 completed
+- [ ] MANUAL TEST 2 completed
+- [ ] MANUAL TEST 3 completed
+- ✅ **Approved to proceed to Phase 2**
+
+**Phase 2: Asset Scanning**
+- [ ] All unit tests pass (PakScanner, AssetLinker, AssetExtractor)
+- [ ] MANUAL TEST 4 completed
+- [ ] MANUAL TEST 5 completed
+- [ ] MANUAL TEST 6 completed
+- ✅ **Approved to proceed to Phase 3**
+
+**Phase 3: Database Schema**
+- [ ] All unit tests pass (DatabaseSchema, QueryTests, DataIntegrity)
+- [ ] MANUAL TEST 7 completed
+- [ ] MANUAL TEST 8 completed
+- [ ] MANUAL TEST 9 completed
+- ✅ **Approved to proceed to Phase 4**
+
+**Phase 4: Import & Validation**
+- [ ] All unit tests pass (WeaponImporter, ValidationEngine, RoundTrip)
+- [ ] MANUAL TEST 10 completed
+- [ ] MANUAL TEST 11 completed
+- [ ] MANUAL TEST 12 completed ⚠️ **CRITICAL: Must work in-game!**
+- ✅ **Approved to proceed to Phase 5**
+
+**Phase 5: Web Interface**
+- [ ] All unit tests pass (API_Tests)
+- [ ] MANUAL TEST 13 completed
+- [ ] MANUAL TEST 14 completed
+- [ ] MANUAL TEST 15 completed
+- ✅ **Approved to proceed to Phase 6**
+
+**Phase 6: Final Release**
+- [ ] INTEGRATION TEST 1 completed
+- [ ] INTEGRATION TEST 2 completed
+- [ ] INTEGRATION TEST 3 completed
+- [ ] INTEGRATION TEST 4 completed
+- [ ] BENCHMARK TEST 1 completed
+- [ ] BENCHMARK TEST 2 completed
+- [ ] BENCHMARK TEST 3 completed
+- [ ] All documentation complete
+- ✅ **APPROVED FOR RELEASE**
+
+---
+
+#### 12.12.10 Test Data Management
+
+**Test Fixtures Required:**
+
+1. **TestGameData.cff** (100 KB)
+   - 50 items (weapons, armor, consumables)
+   - 10 spells
+   - 10 units
+   - Text entries in English, German, Russian
+   - Should be minimal but representative
+
+2. **TestPakFile.pak** (1 MB)
+   - 10 texture assets (item icons)
+   - 5 model assets (.msb files)
+   - 5 sound files
+   - Should include items referenced in TestGameData.cff
+
+3. **TestDatabase.db**
+   - Pre-populated SQLite database
+   - 100 items, 50 weapons, 20 spells, 20 units
+   - Used for query testing
+
+**Test Data Setup:**
+```csharp
+public class TestDataFactory
+{
+    public static SQLiteConnection CreateTestDatabase()
+    {
+        var db = new SQLiteConnection(":memory:");
+        db.Open();
+
+        // Load schema
+        var schema = File.ReadAllText("schema.sql");
+        db.ExecuteNonQuery(schema);
+
+        // Populate with test data
+        PopulateTestData(db);
+
+        return db;
+    }
+
+    private static void PopulateTestData(SQLiteConnection db)
+    {
+        // Insert test texts
+        db.ExecuteNonQuery(@"
+            INSERT INTO texts (text_id, language_id, language_name, content)
+            VALUES
+                (1, 0, 'English', 'Iron Sword'),
+                (1, 1, 'German', 'Eisenschwert'),
+                (2, 0, 'English', '1H Sword')
+        ");
+
+        // Insert test items
+        db.ExecuteNonQuery(@"
+            INSERT INTO items (item_id, name_text_id, sell_value, buy_value)
+            VALUES (100, 1, 50, 100)
+        ");
+
+        // Insert test weapons
+        db.ExecuteNonQuery(@"
+            INSERT INTO weapons (item_id, min_damage, max_damage, weapon_type_id)
+            VALUES (100, 10, 15, 1)
+        ");
+    }
+}
+```
+
+---
+
+#### 12.12.11 Continuous Testing Strategy
+
+**During Development:**
+- Run unit tests after every code change
+- Use Test-Driven Development (TDD) where possible:
+  1. Write failing test
+  2. Implement feature
+  3. Test passes
+  4. Refactor
+
+**Before Committing:**
+- [ ] All unit tests pass
+- [ ] Code coverage > 70%
+- [ ] No compiler warnings
+
+**Before Merging to Main:**
+- [ ] All unit tests pass
+- [ ] Relevant manual tests completed
+- [ ] Code reviewed
+- [ ] Documentation updated
+
+---
+
+### 12.13 Future Enhancements
+
+#### Advanced Asset Features
+- **3D model preview** in web UI (Three.js)
+- **Sound playback** inline
+- **Texture preview** with transparency
+- **Animation viewer** (skeleton + animation)
+
+#### Data Analysis Tools
+- **Balance analyzer:** Detect overpowered items
+- **Price calculator:** Suggest balanced sell/buy values
+- **Stat distribution charts:** Visualize item progression
+- **Mod conflict detector:** Check ID overlaps
+
+#### Integration with Game
+- **Live reload:** Export → reimport → test in-game
+- **Hot reloading:** Modify database, apply changes without restart
+- **In-game console:** Query database from game
+
+---
+
 **End of Plan**
