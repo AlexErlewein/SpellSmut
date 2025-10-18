@@ -6,9 +6,53 @@ Welcome to the comprehensive modding documentation for **SpellForce: The Order o
 
 ## 📚 Table of Contents
 
-[[_TOC_]]
+- [📚 Table of Contents](#-table-of-contents)
+- [🎮 Game Systems](#-game-systems)
+  - [Quest System Guide](#quest-system-guide)
+  - [Spell System Guide](#spell-system-guide)
+  - [Sound System Guide](#sound-system-guide)
+- [🛠️ Content Creation](#️-content-creation)
+  - [Race Creation Guide](#race-creation-guide)
+  - [Campaign System Guide](#campaign-system-guide)
+  - [Quest & Campaign Creation Guide](#quest--campaign-creation-guide)
+  - [Multiplayer & FreeGame Guide](#multiplayer--freegame-guide)
+- [🚀 Quick Start Guides](#-quick-start-guides)
+  - [For Beginners](#for-beginners)
+  - [For Intermediate Modders](#for-intermediate-modders)
+  - [For Advanced Modders](#for-advanced-modders)
+- [📖 Documentation Format](#-documentation-format)
+- [🛠️ Required Tools](#️-required-tools)
+  - [Essential](#essential)
+  - [Recommended](#recommended)
+- [📁 Project Structure](#-project-structure)
+- [🎓 Learning Path](#-learning-path)
+  - [Phase 1: Foundations (Week 1-2)](#phase-1-foundations-week-1-2)
+  - [Phase 2: Systems (Week 3-4)](#phase-2-systems-week-3-4)
+  - [Phase 3: Content (Week 5-6)](#phase-3-content-week-5-6)
+  - [Phase 4: Integration (Week 7-8)](#phase-4-integration-week-7-8)
+  - [Phase 5: Polish (Week 9+)](#phase-5-polish-week-9)
+- [🤝 Community Resources](#-community-resources)
+  - [Official](#official)
+  - [Fan Resources](#fan-resources)
+- [💾 Modding Workflow](#-modding-workflow)
+  - [1. Planning](#1-planning)
+  - [2. Development](#2-development)
+  - [3. Integration](#3-integration)
+  - [4. Packaging](#4-packaging)
+  - [5. Distribution](#5-distribution)
+- [🔍 Finding Information](#-finding-information)
+  - [By Topic](#by-topic)
+  - [By Skill Level](#by-skill-level)
+- [⚙️ Technical Reference](#️-technical-reference)
+  - [Lua Scripting](#lua-scripting)
+  - [File Formats](#file-formats)
+  - [Key Systems](#key-systems)
+- [📝 Contributing to Documentation](#-contributing-to-documentation)
+- [🎮 Happy Modding!](#-happy-modding)
 
-### 🎮 Game Systems
+---
+
+## 🎮 Game Systems
 
 #### [Quest System Guide](SpellForce_Quest_System_Guide.md)
 Learn how to create quests, dialogue systems, and interactive storytelling elements.

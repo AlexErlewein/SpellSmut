@@ -1,0 +1,9 @@
+theme: jekyll-theme-cayman
+title: SpellForce Modding Documentation
+description: Comprehensive guides for creating custom content in SpellForce Platinum Edition
+
+# Custom header banner
+banner_image: /assets/images/banner.jpg
+
+# Favicon (browser tab icon)
+favicon: /assets/images/favicon.ico
