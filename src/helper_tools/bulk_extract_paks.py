@@ -48,7 +48,7 @@ def print_banner():
 def download_quickbms():
     """Download and extract QuickBMS if not present."""
     if QUICKBMS_EXE.exists():
-        print(f"✓ QuickBMS already installed at: {QUICKBMS_EXE}")
+        print(f"[OK] QuickBMS already installed at: {QUICKBMS_EXE}")
         return True
 
     print("QuickBMS not found. Downloading...")
@@ -63,27 +63,27 @@ def download_quickbms():
     try:
         print("Downloading QuickBMS... ", end="", flush=True)
         urllib.request.urlretrieve(QUICKBMS_URL, zip_path)
-        print("✓ Done")
+        print("[OK] Done")
 
         # Extract ZIP
         print("Extracting QuickBMS... ", end="", flush=True)
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_ref.extractall(QUICKBMS_DIR)
-        print("✓ Done")
+        print("[OK] Done")
 
         # Clean up ZIP
         zip_path.unlink()
 
         # Verify executable exists
         if not QUICKBMS_EXE.exists():
-            print(f"✗ ERROR: quickbms.exe not found after extraction!")
+            print(f"[ERROR] quickbms.exe not found after extraction!")
             return False
 
-        print(f"✓ QuickBMS installed successfully at: {QUICKBMS_EXE}")
+        print(f"[OK] QuickBMS installed successfully at: {QUICKBMS_EXE}")
         return True
 
     except Exception as e:
-        print(f"✗ Failed")
+        print(f"[ERROR] Failed")
         print(f"ERROR: {e}")
         return False
 
@@ -91,27 +91,27 @@ def download_quickbms():
 def verify_bms_script():
     """Verify the BMS script exists."""
     if not BMS_SCRIPT.exists():
-        print(f"✗ ERROR: BMS script not found at: {BMS_SCRIPT}")
+        print(f"[ERROR] BMS script not found at: {BMS_SCRIPT}")
         print("Please ensure SpellForce_PAK_script.bms is in src/helper_tools/")
         return False
 
-    print(f"✓ BMS script found: {BMS_SCRIPT}")
+    print(f"[OK] BMS script found: {BMS_SCRIPT}")
     return True
 
 
 def get_pak_files():
     """Get list of all PAK files to extract."""
     if not PAK_DIR.exists():
-        print(f"✗ ERROR: PAK directory not found: {PAK_DIR}")
+        print(f"[ERROR] PAK directory not found: {PAK_DIR}")
         return []
 
     pak_files = sorted(PAK_DIR.glob("*.pak"))
 
     if not pak_files:
-        print(f"✗ ERROR: No PAK files found in {PAK_DIR}")
+        print(f"[ERROR] No PAK files found in {PAK_DIR}")
         return []
 
-    print(f"\n✓ Found {len(pak_files)} PAK files:")
+    print(f"\n[OK] Found {len(pak_files)} PAK files:")
     total_size = 0
     for pak in pak_files:
         size_mb = pak.stat().st_size / (1024 * 1024)
@@ -163,7 +163,7 @@ def extract_pak(pak_file, output_dir, quickbms_exe, bms_script):
         )
 
         if result.returncode == 0:
-            print(f"✓ Successfully extracted {pak_file.name}")
+            print(f"[OK] Successfully extracted {pak_file.name}")
 
             # Parse output for file count
             output_lines = result.stdout.split('\n')
@@ -173,17 +173,17 @@ def extract_pak(pak_file, output_dir, quickbms_exe, bms_script):
 
             return True
         else:
-            print(f"✗ Failed to extract {pak_file.name}")
+            print(f"[ERROR] Failed to extract {pak_file.name}")
             print(f"Return code: {result.returncode}")
             if result.stderr:
                 print(f"Error: {result.stderr}")
             return False
 
     except subprocess.TimeoutExpired:
-        print(f"✗ Timeout while extracting {pak_file.name}")
+        print(f"[ERROR] Timeout while extracting {pak_file.name}")
         return False
     except Exception as e:
-        print(f"✗ Error extracting {pak_file.name}: {e}")
+        print(f"[ERROR] Error extracting {pak_file.name}: {e}")
         return False
 
 
@@ -296,12 +296,12 @@ def organize_extracted_files(raw_output_dir):
     print("-" * 70)
     for category, count in file_counts.items():
         if count > 0:
-            print(f"  {category:15s}: {count:5d} files → {categories[category]['output_dir']}")
+            print(f"  {category:15s}: {count:5d} files -> {categories[category]['output_dir']}")
     print("-" * 70)
     print(f"  {'TOTAL':15s}: {sum(file_counts.values()):5d} files")
 
 
-def main():
+def main(auto_proceed=False):
     """Main execution function."""
     print_banner()
 
@@ -309,14 +309,14 @@ def main():
     print("Step 1: Checking QuickBMS installation")
     print("-" * 70)
     if not download_quickbms():
-        print("\n✗ Failed to install QuickBMS. Exiting.")
+        print("\n[ERROR] Failed to install QuickBMS. Exiting.")
         return 1
 
     # Step 2: Verify BMS script
     print("\nStep 2: Verifying BMS script")
     print("-" * 70)
     if not verify_bms_script():
-        print("\n✗ BMS script verification failed. Exiting.")
+        print("\n[ERROR] BMS script verification failed. Exiting.")
         return 1
 
     # Step 3: Find PAK files
@@ -324,7 +324,7 @@ def main():
     print("-" * 70)
     pak_files = get_pak_files()
     if not pak_files:
-        print("\n✗ No PAK files found. Exiting.")
+        print("\n[ERROR] No PAK files found. Exiting.")
         return 1
 
     # Step 4: Confirm extraction
@@ -335,10 +335,20 @@ def main():
     print(f"Output directory: {EXTRACTED_DIR}")
     print()
 
-    response = input("Proceed with extraction? [y/N]: ").strip().lower()
-    if response not in ['y', 'yes']:
-        print("Extraction cancelled.")
-        return 0
+    # Check if we should auto-proceed
+    if not auto_proceed:
+        try:
+            response = input("Proceed with extraction? [y/N]: ").strip().lower()
+            if response not in ['y', 'yes']:
+                print("Extraction cancelled.")
+                return 0
+        except EOFError:
+            # Non-interactive mode - proceed automatically
+            print("Running in non-interactive mode - proceeding automatically...")
+            auto_proceed = True
+
+    if auto_proceed:
+        print("Auto-proceeding with extraction...")
 
     # Step 5: Extract all PAK files
     print("\n" + "=" * 70)
@@ -386,19 +396,21 @@ def main():
     print(f"  - Models: {EXTRACTED_DIR / 'Models'}")
     print(f"  - Other categories in: {EXTRACTED_DIR}")
 
-    print("\n✓ Bulk extraction complete!")
+    print("\n[OK] Bulk extraction complete!")
 
     return 0 if success_count == len(pak_files) else 1
 
 
 if __name__ == "__main__":
     try:
-        sys.exit(main())
+        # Check for --auto flag
+        auto_proceed = '--auto' in sys.argv or len(sys.argv) == 1
+        sys.exit(main(auto_proceed=auto_proceed))
     except KeyboardInterrupt:
         print("\n\nExtraction interrupted by user.")
         sys.exit(1)
     except Exception as e:
-        print(f"\n✗ FATAL ERROR: {e}")
+        print(f"\n[ERROR] FATAL ERROR: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)

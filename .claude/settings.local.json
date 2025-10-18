@@ -27,7 +27,11 @@
       "Bash(\"C:\\Program Files (x86)\\Dragon UnPACKer 5\\utils\\duppi.exe\" --help)",
       "Bash(\"C:\\Program Files (x86)\\Dragon UnPACKer 5\\utils\\duppi.exe\" /?)",
       "Read(//h//**)",
-      "Bash(python -m py_compile src/helper_tools/bulk_extract_paks.py)"
+      "Bash(python -m py_compile src/helper_tools/bulk_extract_paks.py)",
+      "Bash(python src/helper_tools/bulk_extract_paks.py)",
+      "Bash(python src/helper_tools/bulk_extract_paks.py --auto)",
+      "Bash(python -u src/helper_tools/bulk_extract_paks.py --auto)",
+      "Bash(python src/helper_tools/organize_extracted_files.py)"
     ]
   },
   "outputStyle": "default"
