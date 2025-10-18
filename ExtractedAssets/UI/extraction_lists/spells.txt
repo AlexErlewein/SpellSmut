@@ -1,0 +1,22 @@
+# SPELLS Assets
+# Total: 18 files
+# ==================================================================
+
+ui_spell0.dds
+ui_spell1.dds
+ui_spell10.dds
+ui_spell11.dds
+ui_spell12.dds
+ui_spell13.dds
+ui_spell14.dds
+ui_spell15.dds
+ui_spell16.dds
+ui_spell17.dds
+ui_spell2.dds
+ui_spell3.dds
+ui_spell4.dds
+ui_spell5.dds
+ui_spell6.dds
+ui_spell7.dds
+ui_spell8.dds
+ui_spell9.dds

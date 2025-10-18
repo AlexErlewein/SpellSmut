@@ -1,0 +1,37 @@
+# CURSORS Assets
+# Total: 33 files
+# ==================================================================
+
+ui_cursor_areaspell_disabled.tga
+ui_cursor_areaspell_enabled.tga
+ui_cursor_axe_disabled.tga
+ui_cursor_axe_enabled.tga
+ui_cursor_buildhouse_disabled.tga
+ui_cursor_buildhouse_enabled.tga
+ui_cursor_castcreo_disabled.tga
+ui_cursor_castcreo_enabled.tga
+ui_cursor_castspell_disabled.tga
+ui_cursor_castspell_enabled.tga
+ui_cursor_dropoff.tga
+ui_cursor_dropon.tga
+ui_cursor_grab_disabled.tga
+ui_cursor_grab_enabled.tga
+ui_cursor_hammer_disabled.tga
+ui_cursor_hammer_enabled.tga
+ui_cursor_pickaxe_disabled.tga
+ui_cursor_pickaxe_enabled.tga
+ui_cursor_pointer_castspell.tga
+ui_cursor_pointer_castspell_valid.tga
+ui_cursor_pointer_click.tga
+ui_cursor_pointer_default.tga
+ui_cursor_pointer_disabled.tga
+ui_cursor_pointer_enabled.tga
+ui_cursor_pointer_norecastspell.tga
+ui_cursor_rotate_disabled.tga
+ui_cursor_rotate_enabled.tga
+ui_cursor_scroll_disabled.tga
+ui_cursor_scroll_enabled.tga
+ui_cursor_setrallypoint_disabled.tga
+ui_cursor_setrallypoint_enabled.tga
+ui_cursor_target_disabled.tga
+ui_cursor_target_enabled.tga

@@ -1,0 +1,30 @@
+# SPLASHSCREENS Assets
+# Total: 26 files
+# ==================================================================
+
+ui_splashscreen0_l8.tga
+ui_splashscreen0_l9.tga
+ui_splashscreen10_l8.tga
+ui_splashscreen10_l9.tga
+ui_splashscreen11_l8.tga
+ui_splashscreen11_l9.tga
+ui_splashscreen12_l8.tga
+ui_splashscreen12_l9.tga
+ui_splashscreen1_l8.tga
+ui_splashscreen1_l9.tga
+ui_splashscreen2_l8.tga
+ui_splashscreen2_l9.tga
+ui_splashscreen3_l8.tga
+ui_splashscreen3_l9.tga
+ui_splashscreen4_l8.tga
+ui_splashscreen4_l9.tga
+ui_splashscreen5_l8.tga
+ui_splashscreen5_l9.tga
+ui_splashscreen6_l8.tga
+ui_splashscreen6_l9.tga
+ui_splashscreen7_l8.tga
+ui_splashscreen7_l9.tga
+ui_splashscreen8_l8.tga
+ui_splashscreen8_l9.tga
+ui_splashscreen9_l8.tga
+ui_splashscreen9_l9.tga

@@ -1,3 +1,9 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(python extract_ui_assets.py)",
+      "Bash(python batch_extract_ui.py)"
+    ]
+  },
   "outputStyle": "default"
 }
