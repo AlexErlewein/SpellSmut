@@ -44,7 +44,9 @@
       "Bash(python -c \"from tirganach import GameData; from tirganach.types import *; gd = GameData(''H:/SpellSmut/OriginalGameFiles/data/GameData.cff''); print(''[OK] Library works!''); print(f''Spells: {len(gd.spells)}''); print(f''Items: {len(gd.items)}''); print(f''Creatures: {len(gd.creatures)}'')\")",
       "Bash(cat \"H:\\SpellSmut\\ModdingTools\\tirganach\\pyproject.toml\")",
       "Bash(pip uninstall -y tirganach)",
-      "Bash(python -c \"from tirganach import GameData; print(''[OK] TiganachReloaded library loaded successfully!''); gd = GameData(''H:/SpellSmut/OriginalGameFiles/data/GameData.cff''); print(f''[OK] Loaded GameData.cff with {len(gd.items)} items'')\")"
+      "Bash(python -c \"from tirganach import GameData; print(''[OK] TiganachReloaded library loaded successfully!''); gd = GameData(''H:/SpellSmut/OriginalGameFiles/data/GameData.cff''); print(f''[OK] Loaded GameData.cff with {len(gd.items)} items'')\")",
+      "Bash(python export_to_xml.py)",
+      "Bash(python search_xml_data.py)"
     ]
   },
   "outputStyle": "default"
