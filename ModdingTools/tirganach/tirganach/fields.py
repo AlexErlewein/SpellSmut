@@ -69,10 +69,18 @@ class StringField(Field):
 
 	def parse_bytes(self, byte_source: bytes, parent_entity=None):
 		assert len(byte_source) == self.len_bytes
-		return byte_source.rstrip(b'\x00').decode('windows-1252')
+		# Try windows-1252 first, fallback to latin-1 (which accepts all byte values)
+		try:
+			return byte_source.rstrip(b'\x00').decode('windows-1252')
+		except UnicodeDecodeError:
+			return byte_source.rstrip(b'\x00').decode('latin-1', errors='replace')
 
 	def dump_bytes(self, source: str):
-		result = source.encode('windows-1252').ljust(self.len_bytes, b'\x00')
+		# Try windows-1252 first, fallback to latin-1 for compatibility
+		try:
+			result = source.encode('windows-1252').ljust(self.len_bytes, b'\x00')
+		except UnicodeEncodeError:
+			result = source.encode('latin-1', errors='replace').ljust(self.len_bytes, b'\x00')
 		assert len(result) == self.len_bytes
 		return result
 

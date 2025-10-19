@@ -33,7 +33,15 @@
       "Bash(python -u src/helper_tools/bulk_extract_paks.py --auto)",
       "Bash(python src/helper_tools/organize_extracted_files.py)",
       "Bash(python src/helper_tools/organize_by_extraction_lists.py)",
-      "Bash(python src/helper_tools/organize_all_extracted_files.py)"
+      "Bash(python src/helper_tools/organize_all_extracted_files.py)",
+      "Bash(dir \"H:\\SpellSmut\\ModdingTools\\tirganach\" /B)",
+      "Bash(pip --version)",
+      "Bash(pip install -e .)",
+      "Bash(python test_cff_extract.py)",
+      "Bash(python cff_modding_examples.py)",
+      "Bash(python create_mod.py)",
+      "Bash(dir \"H:\\SpellSmut\\ModdedGameFiles\" /B)",
+      "Bash(python -c \"from tirganach import GameData; from tirganach.types import *; gd = GameData(''H:/SpellSmut/OriginalGameFiles/data/GameData.cff''); print(''[OK] Library works!''); print(f''Spells: {len(gd.spells)}''); print(f''Items: {len(gd.items)}''); print(f''Creatures: {len(gd.creatures)}'')\")"
     ]
   },
   "outputStyle": "default"
