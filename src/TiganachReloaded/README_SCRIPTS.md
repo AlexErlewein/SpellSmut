@@ -31,7 +31,7 @@ This folder contains the **tirganach** library and all CFF modding scripts.
 
 ### 1. Test Installation
 ```bash
-cd H:\SpellSmut\ModdingTools\TiganachReloaded
+cd H:\SpellSmut\src\TiganachReloaded
 python test_cff_extract.py
 ```
 
@@ -289,7 +289,7 @@ pip install -e .
 ### Scripts don't run
 ```bash
 # Make sure you're in the correct directory
-cd H:\SpellSmut\ModdingTools\TiganachReloaded
+cd H:\SpellSmut\src\TiganachReloaded
 
 # Then run
 python test_cff_extract.py

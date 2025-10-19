@@ -11,7 +11,7 @@ This is a modified version of the original [tirganach](https://github.com/leszek
 ### Option 1: Editable Install (Recommended for Development)
 
 ```bash
-cd H:\SpellSmut\ModdingTools\TiganachReloaded
+cd H:\SpellSmut\src\TiganachReloaded
 pip install -e .
 ```
 
@@ -20,7 +20,7 @@ This installs the library in "editable" mode, meaning changes to the source code
 ### Option 2: Regular Install
 
 ```bash
-pip install H:\SpellSmut\ModdingTools\TiganachReloaded
+pip install H:\SpellSmut\src\TiganachReloaded
 ```
 
 ## Quick Test
@@ -66,8 +66,8 @@ gd.save('H:/SpellSmut/ModdedGameFiles/GameData_modified.cff')
 ## Documentation
 
 For complete documentation, see:
-- **../../CFF_MODDING_GUIDE.md** - Full modding guide
-- **../../CFF_QUICK_REFERENCE.md** - Quick reference
+- **../../docs/CFFExtraction/CFF_MODDING_GUIDE.md** - Full modding guide
+- **../../docs/CFFExtraction/CFF_QUICK_REFERENCE.md** - Quick reference
 - **EXPLANATION.md** - Technical file format details
 - **README.md** - Original library documentation
 
@@ -123,9 +123,9 @@ MIT License (same as original tirganach)
 
 ## Support
 
-For modding help, see the main documentation files in the project root:
-- `H:\SpellSmut\CFF_MODDING_GUIDE.md`
-- `H:\SpellSmut\CFF_QUICK_REFERENCE.md`
+For modding help, see the main documentation files:
+- `H:\SpellSmut\docs\CFFExtraction\CFF_MODDING_GUIDE.md`
+- `H:\SpellSmut\docs\CFFExtraction\CFF_QUICK_REFERENCE.md`
 
 For library-specific issues, check:
 - `EXPLANATION.md` - File format details
