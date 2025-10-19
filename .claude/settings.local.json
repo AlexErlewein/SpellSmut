@@ -46,7 +46,9 @@
       "Bash(pip uninstall -y tirganach)",
       "Bash(python -c \"from tirganach import GameData; print(''[OK] TiganachReloaded library loaded successfully!''); gd = GameData(''H:/SpellSmut/OriginalGameFiles/data/GameData.cff''); print(f''[OK] Loaded GameData.cff with {len(gd.items)} items'')\")",
       "Bash(python export_to_xml.py)",
-      "Bash(python search_xml_data.py)"
+      "Bash(python search_xml_data.py)",
+      "Bash(pip install PySide6)",
+      "Bash(python run_cff_editor.py)"
     ]
   },
   "outputStyle": "default"
