@@ -28,20 +28,20 @@ Quick navigation to all documentation and scripts for GameData.cff modding.
 ### Library Documentation
 | File | Description | Location |
 |------|-------------|----------|
-| **README_INSTALLATION.md** | Installation guide | `ModdingTools/TiganachReloaded/` |
-| **EXPLANATION.md** | CFF file format details | `ModdingTools/TiganachReloaded/` |
-| **README.md** | Original library docs | `ModdingTools/TiganachReloaded/` |
+| **README_INSTALLATION.md** | Installation guide | `src/TiganachReloaded/` |
+| **EXPLANATION.md** | CFF file format details | `src/TiganachReloaded/` |
+| **README.md** | Original library docs | `src/TiganachReloaded/` |
 
 ---
 
 ## 🛠️ Scripts
 
-### Test & Example Scripts (in ModdingTools/TiganachReloaded/)
+### Test & Example Scripts (in src/TiganachReloaded/)
 | File | Purpose | Usage |
 |------|---------|-------|
-| **test_cff_extract.py** | Verify library works | `cd ModdingTools\TiganachReloaded && python test_cff_extract.py` |
-| **cff_modding_examples.py** | 7 working examples | `cd ModdingTools\TiganachReloaded && python cff_modding_examples.py` |
-| **create_mod.py** | Mod creation template | `cd ModdingTools\TiganachReloaded && python create_mod.py` |
+| **test_cff_extract.py** | Verify library works | `cd src\TiganachReloaded && python test_cff_extract.py` |
+| **cff_modding_examples.py** | 7 working examples | `cd src\TiganachReloaded && python cff_modding_examples.py` |
+| **create_mod.py** | Mod creation template | `cd src\TiganachReloaded && python create_mod.py` |
 
 ---
 
@@ -51,12 +51,13 @@ Quick navigation to all documentation and scripts for GameData.cff modding.
 H:\SpellSmut\
 │
 ├── Documentation (Start Here!)
-│   ├── INDEX.md                         # ← You are here
-│   ├── README_CFF_MODDING.md            # Main README
-│   ├── CFF_MODDING_GUIDE.md             # Complete guide
-│   ├── CFF_QUICK_REFERENCE.md           # Quick ref
-│   ├── CFF_EXTRACTION_SUMMARY.md        # Technical summary
-│   └── TIGANACH_RELOADED_SETUP.md       # Setup guide
+│   └── docs\CFFExtraction\
+│       ├── INDEX.md                         # ← You are here
+│       ├── README_CFF_MODDING.md            # Main README
+│       ├── CFF_MODDING_GUIDE.md             # Complete guide
+│       ├── CFF_QUICK_REFERENCE.md           # Quick ref
+│       ├── CFF_EXTRACTION_SUMMARY.md        # Technical summary
+│       └── TIGANACH_RELOADED_SETUP.md       # Setup guide
 │
 ├── Game Files
 │   ├── OriginalGameFiles\
@@ -66,16 +67,18 @@ H:\SpellSmut\
 │   └── ModdedGameFiles\                 # Your mods
 │       └── GameData_*.cff               # Modified files
 │
-└── Tools
-    └── ModdingTools\
-        └── TiganachReloaded\            # CFF library + scripts
-            ├── tirganach\               # Library source code
-            ├── test_cff_extract.py      # Test script
-            ├── cff_modding_examples.py  # Examples
-            ├── create_mod.py            # Mod template
-            ├── README_INSTALLATION.md
-            ├── EXPLANATION.md
-            └── README.md
+└── Source Code
+    └── src\
+        ├── TiganachReloaded\            # CFF library + scripts
+        │   ├── tirganach\               # Library source code
+        │   ├── test_cff_extract.py      # Test script
+        │   ├── cff_modding_examples.py  # Examples
+        │   ├── create_mod.py            # Mod template
+        │   ├── README_INSTALLATION.md
+        │   ├── EXPLANATION.md
+        │   └── README.md
+        ├── helper_tools\                # Helper scripts
+        └── luas\                        # Lua modifications
 ```
 
 ---
@@ -110,24 +113,24 @@ H:\SpellSmut\
 
 **Test if everything works**
 ```bash
-cd H:\SpellSmut\ModdingTools\TiganachReloaded
+cd H:\SpellSmut\src\TiganachReloaded
 python test_cff_extract.py
 ```
-→ See: `ModdingTools/TiganachReloaded/test_cff_extract.py`
+→ See: `src/TiganachReloaded/test_cff_extract.py`
 
 **Learn query patterns**
 ```bash
-cd H:\SpellSmut\ModdingTools\TiganachReloaded
+cd H:\SpellSmut\src\TiganachReloaded
 python cff_modding_examples.py
 ```
-→ See: `ModdingTools/TiganachReloaded/cff_modding_examples.py`
+→ See: `src/TiganachReloaded/cff_modding_examples.py`
 
 **Create my first mod**
 ```bash
-cd H:\SpellSmut\ModdingTools\TiganachReloaded
+cd H:\SpellSmut\src\TiganachReloaded
 python create_mod.py
 ```
-→ See: `ModdingTools/TiganachReloaded/create_mod.py`
+→ See: `src/TiganachReloaded/create_mod.py`
 
 **Find specific items/spells**
 → See: [CFF_MODDING_GUIDE.md](CFF_MODDING_GUIDE.md) → Query Data section
@@ -145,7 +148,7 @@ python create_mod.py
 → See: [CFF_QUICK_REFERENCE.md](CFF_QUICK_REFERENCE.md) → Common Enums
 
 **Understand the file format**
-→ See: `ModdingTools/TiganachReloaded/EXPLANATION.md`
+→ See: `src/TiganachReloaded/EXPLANATION.md`
 
 **Troubleshoot errors**
 → See: [CFF_MODDING_GUIDE.md](CFF_MODDING_GUIDE.md) → Troubleshooting section
@@ -176,14 +179,14 @@ python create_mod.py
 - [Setup Guide](TIGANACH_RELOADED_SETUP.md)
 
 ### Scripts
-- [Test Script](ModdingTools/TiganachReloaded/test_cff_extract.py)
-- [Examples](ModdingTools/TiganachReloaded/cff_modding_examples.py)
-- [Mod Creator](ModdingTools/TiganachReloaded/create_mod.py)
+- [Test Script](../../src/TiganachReloaded/test_cff_extract.py)
+- [Examples](../../src/TiganachReloaded/cff_modding_examples.py)
+- [Mod Creator](../../src/TiganachReloaded/create_mod.py)
 
 ### Library
-- [Installation](ModdingTools/TiganachReloaded/README_INSTALLATION.md)
-- [File Format](ModdingTools/TiganachReloaded/EXPLANATION.md)
-- [Source Code](ModdingTools/TiganachReloaded/tirganach/)
+- [Installation](../../src/TiganachReloaded/README_INSTALLATION.md)
+- [File Format](../../src/TiganachReloaded/EXPLANATION.md)
+- [Source Code](../../src/TiganachReloaded/tirganach/)
 
 ---
 
@@ -206,7 +209,7 @@ python create_mod.py
    - [README_CFF_MODDING.md](README_CFF_MODDING.md) → Troubleshooting
 
 4. **Check file locations:**
-   - Library: `ModdingTools/TiganachReloaded/`
+   - Library: `src/TiganachReloaded/`
    - Original CFF: `OriginalGameFiles/data/GameData.cff`
    - Modded CFF: `ModdedGameFiles/`
 
@@ -218,7 +221,7 @@ python create_mod.py
 
 1. **Verify Installation**
    ```bash
-   cd H:\SpellSmut\ModdingTools\TiganachReloaded
+   cd H:\SpellSmut\src\TiganachReloaded
    python test_cff_extract.py
    ```
 
@@ -227,7 +230,7 @@ python create_mod.py
 
 3. **Create Your First Mod**
    ```bash
-   cd H:\SpellSmut\ModdingTools\TiganachReloaded
+   cd H:\SpellSmut\src\TiganachReloaded
    python create_mod.py
    ```
 

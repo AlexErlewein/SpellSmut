@@ -57,6 +57,8 @@ A comprehensive modding toolkit and documentation project for SpellForce: The Or
 - Complete extraction lists for each category
 - User documentation (README.md)
 
+**Note:** TiganachReloaded CFF library moved to `src/TiganachReloaded/`
+
 **File Formats**:
 - TGA (Targa): 33 files - Cursors, menu backgrounds
 - DDS (DirectDraw Surface): 650 files - Most UI graphics

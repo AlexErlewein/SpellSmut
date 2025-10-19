@@ -237,6 +237,8 @@ Tools and libraries for working with SpellForce's CFF game data format.
 #### [TiganachReloaded Setup](CFFExtraction/TIGANACH_RELOADED_SETUP.md)
 Setup guide for the TiganachReloaded Python library - the primary tool for CFF file manipulation.
 
+**Location:** `src/TiganachReloaded/`
+
 **Topics Covered:**
 - Installation and setup
 - Basic usage examples

@@ -2,19 +2,19 @@
 
 ## Summary
 
-The CFF modding library has been successfully moved to `ModdingTools\TiganachReloaded\` and is fully operational.
+The CFF modding library has been successfully moved to `src\TiganachReloaded\` and is fully operational.
 
 ---
 
 ## What Was Done
 
 ### 1. ✅ Created TiganachReloaded Folder
-- **Location:** `H:\SpellSmut\ModdingTools\TiganachReloaded\`
+- **Location:** `H:\SpellSmut\src\TiganachReloaded\`
 - **Contents:** Complete tirganach library with bug fixes
 
 ### 2. ✅ Library Installation
 - Uninstalled old installation from `ModdingTools/tirganach/`
-- Reinstalled from new location `ModdingTools/TiganachReloaded/`
+- Reinstalled from new location `src/TiganachReloaded/`
 - Verified functionality with test scripts
 
 ### 3. ✅ Updated Documentation
@@ -22,7 +22,7 @@ All documentation files now reference the new location:
 - `CFF_MODDING_GUIDE.md` - Updated installation path
 - `CFF_EXTRACTION_SUMMARY.md` - Updated references
 - `README_CFF_MODDING.md` - Updated directory structure
-- Created `ModdingTools/TiganachReloaded/README_INSTALLATION.md`
+- Created `src/TiganachReloaded/README_INSTALLATION.md`
 
 ### 4. ✅ Verified Functionality
 - Library loads correctly from new location
@@ -36,7 +36,7 @@ All documentation files now reference the new location:
 
 ```
 H:\SpellSmut\
-├── ModdingTools\
+├── src\
 │   ├── TiganachReloaded\          # ← CFF modding library (NEW LOCATION)
 │   │   ├── tirganach\             # Main library code
 │   │   │   ├── __init__.py
@@ -51,7 +51,10 @@ H:\SpellSmut\
 │   │   ├── EXPLANATION.md         # File format details
 │   │   └── README_INSTALLATION.md # Installation guide
 │   │
-│   └── tirganach\                 # Old location (can be removed)
+│   ├── helper_tools\              # Helper scripts
+│   └── luas\                      # Lua modifications
+│
+├── ModdingTools\                  # Third-party tools and references
 │
 ├── OriginalGameFiles\
 │   └── data\
@@ -76,20 +79,20 @@ H:\SpellSmut\
 
 ### Current Installation (Already Done)
 ```bash
-cd H:\SpellSmut\ModdingTools\TiganachReloaded
+cd H:\SpellSmut\src\TiganachReloaded
 pip install -e .
 ```
 
 ### Reinstall if Needed
 ```bash
 pip uninstall -y tirganach
-cd H:\SpellSmut\ModdingTools\TiganachReloaded
+cd H:\SpellSmut\src\TiganachReloaded
 pip install -e .
 ```
 
 ### Verify Installation
 ```bash
-cd H:\SpellSmut\ModdingTools\TiganachReloaded
+cd H:\SpellSmut\src\TiganachReloaded
 python test_cff_extract.py
 ```
 
@@ -171,16 +174,17 @@ These fixes prevent crashes when reading/writing CFF files with non-standard cha
 
 ## Cleanup Options
 
-### Optional: Remove Old tirganach Folder
+### Optional: Clean Up Old Locations
 
-The old `ModdingTools/tirganach/` folder is no longer needed. You can remove it:
+The old `ModdingTools/tirganach/` and `ModdingTools/TiganachReloaded/` folders are no longer needed. The library is now in `src/TiganachReloaded/`.
 
 ```bash
-# WARNING: Only do this if you're sure TiganachReloaded works!
+# WARNING: Only do this if you're sure the new location works!
 rm -rf "H:\SpellSmut\ModdingTools\tirganach"
+# TiganachReloaded was already moved to src/
 ```
 
-**Recommendation:** Keep it for now as a backup until you've created and tested a few mods.
+**Recommendation:** Keep old folders for now as backups until you've created and tested a few mods.
 
 ---
 
@@ -202,7 +206,7 @@ rm -rf "H:\SpellSmut\ModdingTools\tirganach"
 
 ### 1. Create Your First Mod
 ```bash
-cd H:\SpellSmut\ModdingTools\TiganachReloaded
+cd H:\SpellSmut\src\TiganachReloaded
 python create_mod.py
 ```
 Edit the file to uncomment the modifications you want, then run it.
@@ -213,7 +217,7 @@ Edit the file to uncomment the modifications you want, then run it.
 
 ### 3. Experiment
 ```bash
-cd H:\SpellSmut\ModdingTools\TiganachReloaded
+cd H:\SpellSmut\src\TiganachReloaded
 python cff_modding_examples.py
 ```
 Try the examples to learn the query patterns.
@@ -228,14 +232,14 @@ Once you create something cool, document it and share!
 ### "Module not found: tirganach"
 ```bash
 # Reinstall the library
-cd H:\SpellSmut\ModdingTools\TiganachReloaded
+cd H:\SpellSmut\src\TiganachReloaded
 pip install -e .
 ```
 
 ### Test Scripts Don't Work
 ```bash
 # Verify you're in the correct directory
-cd H:\SpellSmut\ModdingTools\TiganachReloaded
+cd H:\SpellSmut\src\TiganachReloaded
 python test_cff_extract.py
 ```
 
@@ -245,7 +249,7 @@ python test_cff_extract.py
 pip show tirganach
 
 # Should show:
-# Location: H:\SpellSmut\ModdingTools\TiganachReloaded
+# Location: H:\SpellSmut\src\TiganachReloaded
 ```
 
 ---
@@ -269,7 +273,7 @@ MIT License (maintained from original)
 
 🎉 **TiganachReloaded is ready to use!**
 
-- ✅ Installed in `ModdingTools/TiganachReloaded/`
+- ✅ Installed in `src/TiganachReloaded/`
 - ✅ All documentation updated
 - ✅ Fully tested and working
 - ✅ Ready to create mods

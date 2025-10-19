@@ -52,21 +52,21 @@ H:\SpellSmut\OriginalGameFiles\data\GameData.cff  (97 MB)
 
 ### Modding Tools
 ```
-H:\SpellSmut\ModdingTools\TiganachReloaded\       (Python library)
+H:\SpellSmut\src\TiganachReloaded\       (Python library)
 ```
 
 ### Documentation
 ```
-H:\SpellSmut\CFF_MODDING_GUIDE.md                 (Full guide)
-H:\SpellSmut\CFF_QUICK_REFERENCE.md               (Quick reference)
-H:\SpellSmut\CFF_EXTRACTION_SUMMARY.md            (This file)
+H:\SpellSmut\docs\CFFExtraction\CFF_MODDING_GUIDE.md                 (Full guide)
+H:\SpellSmut\docs\CFFExtraction\CFF_QUICK_REFERENCE.md               (Quick reference)
+H:\SpellSmut\docs\CFFExtraction\CFF_EXTRACTION_SUMMARY.md            (This file)
 ```
 
 ### Scripts (in TiganachReloaded folder)
 ```
-H:\SpellSmut\ModdingTools\TiganachReloaded\test_cff_extract.py       (Test script)
-H:\SpellSmut\ModdingTools\TiganachReloaded\cff_modding_examples.py   (Examples)
-H:\SpellSmut\ModdingTools\TiganachReloaded\create_mod.py             (Mod template)
+H:\SpellSmut\src\TiganachReloaded\test_cff_extract.py       (Test script)
+H:\SpellSmut\src\TiganachReloaded\cff_modding_examples.py   (Examples)
+H:\SpellSmut\src\TiganachReloaded\create_mod.py             (Mod template)
 ```
 
 ### Output Directory
@@ -81,7 +81,7 @@ H:\SpellSmut\ModdedGameFiles\                     (Your mods go here)
 ### 1. Create Your First Mod
 
 ```bash
-cd H:\SpellSmut\ModdingTools\TiganachReloaded
+cd H:\SpellSmut\src\TiganachReloaded
 # Edit the create_mod.py file and uncomment the modifications you want
 # Then run:
 python create_mod.py
@@ -309,10 +309,10 @@ The library supports:
 ## Resources
 
 ### Documentation
-- **Full Guide:** `CFF_MODDING_GUIDE.md`
-- **Quick Reference:** `CFF_QUICK_REFERENCE.md`
-- **File Structure:** `ModdingTools/TiganachReloaded/EXPLANATION.md`
-- **Library README:** `ModdingTools/TiganachReloaded/README.md`
+- **Full Guide:** `docs/CFFExtraction/CFF_MODDING_GUIDE.md`
+- **Quick Reference:** `docs/CFFExtraction/CFF_QUICK_REFERENCE.md`
+- **File Structure:** `src/TiganachReloaded/EXPLANATION.md`
+- **Library README:** `src/TiganachReloaded/README.md`
 
 ### Source Code
 - **Structure Parser:** `tirganach/structure.py`
