@@ -52,7 +52,7 @@ H:\SpellSmut\OriginalGameFiles\data\GameData.cff  (97 MB)
 
 ### Modding Tools
 ```
-H:\SpellSmut\ModdingTools\tirganach\              (Python library)
+H:\SpellSmut\ModdingTools\TiganachReloaded\       (Python library)
 ```
 
 ### Documentation
@@ -62,11 +62,11 @@ H:\SpellSmut\CFF_QUICK_REFERENCE.md               (Quick reference)
 H:\SpellSmut\CFF_EXTRACTION_SUMMARY.md            (This file)
 ```
 
-### Scripts
+### Scripts (in TiganachReloaded folder)
 ```
-H:\SpellSmut\test_cff_extract.py                  (Test script)
-H:\SpellSmut\cff_modding_examples.py              (Examples)
-H:\SpellSmut\create_mod.py                        (Mod template)
+H:\SpellSmut\ModdingTools\TiganachReloaded\test_cff_extract.py       (Test script)
+H:\SpellSmut\ModdingTools\TiganachReloaded\cff_modding_examples.py   (Examples)
+H:\SpellSmut\ModdingTools\TiganachReloaded\create_mod.py             (Mod template)
 ```
 
 ### Output Directory
@@ -81,9 +81,10 @@ H:\SpellSmut\ModdedGameFiles\                     (Your mods go here)
 ### 1. Create Your First Mod
 
 ```bash
+cd H:\SpellSmut\ModdingTools\TiganachReloaded
 # Edit the create_mod.py file and uncomment the modifications you want
 # Then run:
-python H:\SpellSmut\create_mod.py
+python create_mod.py
 ```
 
 ### 2. Test Your Mod
@@ -310,8 +311,8 @@ The library supports:
 ### Documentation
 - **Full Guide:** `CFF_MODDING_GUIDE.md`
 - **Quick Reference:** `CFF_QUICK_REFERENCE.md`
-- **File Structure:** `ModdingTools/tirganach/EXPLANATION.md`
-- **Library README:** `ModdingTools/tirganach/README.md`
+- **File Structure:** `ModdingTools/TiganachReloaded/EXPLANATION.md`
+- **Library README:** `ModdingTools/TiganachReloaded/README.md`
 
 ### Source Code
 - **Structure Parser:** `tirganach/structure.py`

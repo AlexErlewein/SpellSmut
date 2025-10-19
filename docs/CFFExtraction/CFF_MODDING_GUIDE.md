@@ -18,9 +18,9 @@ This file uses a custom binary format that acts like a relational database.
 
 ## Tools Required
 
-### tirganach Python Library
+### TiganachReloaded Python Library
 
-The **tirganach** library (located in `ModdingTools/tirganach/`) is a complete solution for:
+The **tirganach** library (located in `ModdingTools/TiganachReloaded/`) is a complete solution for:
 - ✅ **Unpacking** the CFF file into Python objects
 - ✅ **Reading and querying** all game data
 - ✅ **Modifying** any values
@@ -28,7 +28,7 @@ The **tirganach** library (located in `ModdingTools/tirganach/`) is a complete s
 
 **Installation:**
 ```bash
-cd H:\SpellSmut\ModdingTools\tirganach
+cd H:\SpellSmut\ModdingTools\TiganachReloaded
 pip install -e .
 ```
 

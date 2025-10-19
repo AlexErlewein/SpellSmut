@@ -17,19 +17,19 @@ A complete Python-based modding solution that allows you to:
 - **CFF_QUICK_REFERENCE.md** - Quick reference card for common tasks
 - **CFF_EXTRACTION_SUMMARY.md** - Setup summary and technical details
 
-### Scripts
+### Scripts (in ModdingTools/TiganachReloaded/)
 - **test_cff_extract.py** - Test that everything works
 - **cff_modding_examples.py** - 7 examples of querying and modifying data
 - **create_mod.py** - Ready-to-use template for creating mods
 
 ### Tools
-- **ModdingTools/tirganach/** - Python library for CFF file manipulation
+- **ModdingTools/TiganachReloaded/** - Python library for CFF file manipulation
 
 ## 🚀 Quick Start (3 Steps)
 
 ### 1. Verify Installation
 ```bash
-cd H:\SpellSmut
+cd H:\SpellSmut\ModdingTools\TiganachReloaded
 python test_cff_extract.py
 ```
 
@@ -43,6 +43,7 @@ Total Items: 7101
 
 ### 2. Explore Examples
 ```bash
+cd H:\SpellSmut\ModdingTools\TiganachReloaded
 python cff_modding_examples.py
 ```
 
@@ -55,6 +56,7 @@ This shows you how to:
 
 ### 3. Create Your First Mod
 ```bash
+cd H:\SpellSmut\ModdingTools\TiganachReloaded
 # Edit create_mod.py (uncomment the modifications you want)
 python create_mod.py
 ```
@@ -134,10 +136,11 @@ H:\SpellSmut\
 │       └── GameData.cff          # Original game data (97 MB)
 ├── ModdedGameFiles\              # Your mods go here
 ├── ModdingTools\
-│   └── tirganach\                # Python library
-├── test_cff_extract.py           # Test script
-├── cff_modding_examples.py       # Examples
-├── create_mod.py                 # Mod template
+│   └── TiganachReloaded\         # Python library
+│       ├── tirganach\            # Library code
+│       ├── test_cff_extract.py  # Test script
+│       ├── cff_modding_examples.py  # Examples
+│       └── create_mod.py        # Mod template
 ├── CFF_MODDING_GUIDE.md          # Full guide
 ├── CFF_QUICK_REFERENCE.md        # Quick ref
 └── CFF_EXTRACTION_SUMMARY.md     # Technical summary
@@ -154,7 +157,7 @@ H:\SpellSmut\
 - Check file size (should be ~97MB)
 
 **Script errors?**
-- Make sure tirganach is installed: `pip install -e ModdingTools/tirganach`
+- Make sure tirganach is installed: `pip install -e ModdingTools/TiganachReloaded`
 - Check Python version: `python --version` (need 3.11+)
 
 ## 📚 Resources
