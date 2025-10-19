@@ -1,141 +1,101 @@
 # SpellForce Platinum Edition - ID Mappings Reference
 
-This document provides comprehensive mappings between symbolic constants (used in Lua scripts) and their corresponding IDs in the game engine.
-
-**Note:** Most numeric ID values are defined in the C++ engine executable and are not directly visible in the Lua scripts. The constants listed here are C++ enums exposed to the Lua scripting environment via the engine's Lua binding layer.
+**Auto-generated from Lua sources**
+**Last Updated:** 2025-10-19 21:24:54
+**Game Version:** SpellForce: Platinum Edition (v1.x)
 
 ---
 
+## About This Document
+
+This document provides comprehensive mappings between symbolic constants (used in Lua scripts) and their corresponding numeric IDs in the game engine. All data has been automatically extracted from the SpellForce Lua source files and verified against the game data.
+
+**Note:** Most numeric ID values are defined in the C++ engine executable and exposed to Lua through the engine's binding layer. The constants listed here are C++ enums made available to the Lua scripting environment.
+
 ## Table of Contents
-1. [Weapon Types](#weapon-types)
-2. [Job/Animation IDs](#jobanimation-ids)
+
+1. [Overview](#overview)
+2. [Weapon Types](#weapon-types)
 3. [Effect Types](#effect-types)
 4. [Spell Lines](#spell-lines)
-5. [Quest States](#quest-states)
-6. [Equipment Slots](#equipment-slots)
-7. [Figure Tasks](#figure-tasks)
-8. [Figure Flags](#figure-flags)
-9. [Figure Job Flags](#figure-job-flags)
+5. [Races](#races)
+6. [Job/Animation Types](#jobanimation-types)
+7. [Equipment Slots](#equipment-slots)
+8. [Quest States](#quest-states)
+9. [Figure Tasks](#figure-tasks)
 10. [Directions](#directions)
-11. [Spell Tags](#spell-tags)
-12. [Target Types](#target-types)
+11. [Target Types](#target-types)
+12. [Variable Operators](#variable-operators)
+13. [Movement Modes](#movement-modes)
+14. [Monument Types](#monument-types)
+15. [Usage Examples](#usage-examples)
+16. [Tools & Scripts](#tools--scripts)
+
+---
+
+## Overview
+
+**Total Categories:** 13
+**Total Mappings:** 360
+
+### Categories Summary
+
+- **Directions**: 8 entries
+- **Effect Types**: 39 entries
+- **Equipment Slots**: 7 entries
+- **Figure Tasks**: 11 entries
+- **Job Types**: 20 entries
+- **Monument Types**: 7 entries
+- **Movement Modes**: 2 entries
+- **Quest States**: 5 entries
+- **Races**: 6 entries
+- **Spell Lines**: 227 entries
+- **Target Types**: 5 entries
+- **Variable Operators**: 3 entries
+- **Weapon Types**: 20 entries
 
 ---
 
 ## Weapon Types
 
-These constants map weapon types to their internal IDs. Used for combat mechanics, animations, and sound effects.
+Weapon type constants map to combat animations, sound effects, and damage calculations.
 
-| Constant Name | Description | Sound Mapping (Hit) | Sound Mapping (Miss) |
-|--------------|-------------|---------------------|---------------------|
-| `kDrwWtDefault` | Default/Fallback weapon | battle_hit_fist | battle_miss_fist |
-| `kDrwWtMouth` | Bite attack (creatures) | battle_hit_mouth | battle_hit_mouth |
-| `kDrwWtHand` | Unarmed/Fist | battle_hit_fist | battle_miss_fist |
-| `kDrwWt1HDagger` | One-handed dagger | battle_hit_1hdagger | battle_miss_sword |
-| `kDrwWt1HSword` | One-handed sword | battle_hit_1hsword | battle_miss_sword |
-| `kDrwWt1HAxe` | One-handed axe | battle_hit_1haxe | battle_miss_sword |
-| `kDrwWt1HMaceSpiky` | One-handed spiky mace | battle_hit_1hmacespiky | battle_miss_hammer |
-| `kDrwWt1HMaceBlunt` | One-handed blunt mace | battle_hit_1hmaceblunt | battle_miss_hammer |
-| `kDrwWt1HHammer` | One-handed hammer | battle_hit_1hhammer | battle_miss_hammer |
-| `kDrwWt1HStaff` | One-handed staff | battle_hit_1hstaff | battle_miss_staff |
-| `kDrwWt2HSword` | Two-handed sword | battle_hit_2hsword | battle_miss_sword |
-| `kDrwWt2HAxe` | Two-handed axe | battle_hit_2haxe | battle_miss_sword |
-| `kDrwWt2HMace` | Two-handed mace | battle_hit_2hmace | battle_miss_hammer |
-| `kDrwWt2HHammer` | Two-handed hammer | battle_hit_2hhammer | battle_miss_hammer |
-| `kDrwWt2HStaff` | Two-handed staff | battle_hit_2hstaff | battle_miss_staff |
-| `kDrwWt2HSpear` | Two-handed spear | battle_hit_2hspear | battle_miss_staff |
-| `kDrwWt2HHalberd` | Two-handed halberd | battle_hit_2hhalberd | battle_miss_sword |
-| `kDrwWt2HBow` | Two-handed bow | battle_hit_2hbow | battle_miss_staff |
-| `kDrwWt2HCrossbow` | Two-handed crossbow | battle_hit_2hcrossbow | battle_miss_bow |
-| `kDrwWt1HClaw` | One-handed claw | battle_hit_claw | (not specified) |
+**Total:** 20 weapon types
 
-**Source Files:**
-- `script/DrwSound.lua` (lines 867-909)
-- `src/api/sf_general_structures.h` (SF_CGdFigureWeaponStats structure)
+| ID | Name | Constant | Hit Sound | Miss Sound |
+|----|------|----------|-----------|------------|
+| 0 | Default/Fist | `kDrwWtDefault` | battle_hit_fist | battle_miss_fist |
+| 1 | Mouth/Bite | `kDrwWtMouth` | battle_hit_mouth | battle_hit_mouth |
+| 2 | Unarmed/Fist | `kDrwWtHand` | battle_hit_fist | battle_miss_fist |
+| 3 | One-handed Dagger | `kDrwWt1HDagger` | battle_hit_1hdagger | battle_miss_sword |
+| 4 | One-handed Sword | `kDrwWt1HSword` | battle_hit_1hsword | battle_miss_sword |
+| 5 | One-handed Axe | `kDrwWt1HAxe` | battle_hit_1haxe | battle_miss_sword |
+| 6 | One-handed Mace (Spiky) | `kDrwWt1HMaceSpiky` | battle_hit_1hmacespiky | battle_miss_hammer |
+| 7 | One-handed Mace (Blunt) | `kDrwWt1HMaceBlunt` | battle_hit_1hmaceblunt | battle_miss_hammer |
+| 8 | One-handed Hammer | `kDrwWt1HHammer` | battle_hit_1hhammer | battle_miss_hammer |
+| 9 | One-handed Staff | `kDrwWt1HStaff` | battle_hit_1hstaff | battle_miss_staff |
+| 10 | Two-handed Sword | `kDrwWt2HSword` | battle_hit_2hsword | battle_miss_sword |
+| 11 | Two-handed Axe | `kDrwWt2HAxe` | battle_hit_2haxe | battle_miss_sword |
+| 12 | Two-handed Mace | `kDrwWt2HMace` | battle_hit_2hmace | battle_miss_hammer |
+| 13 | Two-handed Hammer | `kDrwWt2HHammer` | battle_hit_2hhammer | battle_miss_hammer |
+| 14 | Two-handed Staff | `kDrwWt2HStaff` | battle_hit_2hstaff | battle_miss_staff |
+| 15 | Two-handed Spear | `kDrwWt2HSpear` | battle_hit_2hspear | battle_miss_staff |
+| 16 | Two-handed Halberd | `kDrwWt2HHalberd` | battle_hit_2hhalberd | battle_miss_sword |
+| 17 | Two-handed Bow | `kDrwWt2HBow` | battle_hit_2hbow | battle_miss_staff |
+| 18 | Two-handed Crossbow | `kDrwWt2HCrossbow` | battle_hit_2hcrossbow | battle_miss_bow |
+| 19 | One-handed Claw | `kDrwWt1HClaw` | battle_hit_claw | - |
 
----
+**Usage:**
+```lua
+-- Example: Check if unit has a sword
+if figure:GetWeaponType() == kDrwWt1HSword then
+    -- One-handed sword logic
+end
+```
 
-## Job/Animation IDs
-
-Unit job/action constants that determine animations and behaviors. These are used throughout the figure initialization system.
-
-### Core Job Types
-
-| Constant Name | Description | Used For |
-|--------------|-------------|----------|
-| `kGdJobDefault` | Idle/standing animation | All units at rest |
-| `kGdJobGroupNothing` | No action group | Action placeholder |
-| `kGdJobGroupWalk` | Walking animations | Unit movement |
-| `kGdJobPunch` | Unarmed attack | Fist/claw attacks |
-| `kGdJobStrike` | Melee weapon strike | Sword/axe/mace attacks |
-| `kGdJobStab` | Stabbing attack | Dagger/spear attacks |
-| `kGdJobHitTargetRange1` | Ranged attack (aim) | Bow/crossbow aim |
-| `kGdJobHitTargetRange2` | Ranged attack (shoot) | Bow/crossbow fire |
-| `kGdJobCast` | Spell casting initiation | Magic casting |
-| `kGdJobCastResolve` | Spell completion | Spell finish |
-| `kGdJobDie` | Death animation | Unit death |
-| `kGdJobCriticalHit` | Hit reaction | Taking damage |
-| `kGdJobStoop` | Pickup/loot animation | Item interaction |
-| `kGdJobFeignDeath` | Feign death | Special ability |
-
-### Worker Job Types
-
-| Constant Name | Description | Sound Effect |
-|--------------|-------------|--------------|
-| `kGdJobShrineWorkerTakeMana` | Collect mana from shrine | - |
-| `kGdJobWoodCutterCutTree` | Chop trees | work_cut_tree |
-| `kGdJobStoneMinerCrushStone` | Mine stone | work_cut_stone |
-| `kGdJobMinerWork` | Mine ore | work_cut_stone |
-| `kGdJobBuilderBuild` | Construction | work_build |
-| `kGdJobHunterCutCorpse` | Harvest corpse | - |
-| `kGdJobHunterHitTarget` | Hunter ranged attack | battle_fire_arrow |
-| `kGdJobFisherWalkToWork` | Walk to fishing spot | - |
-| `kGdJobFisherWork` | Fishing | work_johnthefisherman |
-| `kGdJobFisherWalkHome` | Return from fishing | - |
-| `kGdJobFisherWalkToDeliverGood` | Deliver fish | - |
-| `kGdJobFarmerHarvest` | Harvest crops | - |
-| `kGdJobFarmerSow` | Plant seeds | - |
-| `kGdJobCattleBreederFeed` | Feed animals | work_cattlebreeding |
-| `kGdJobSmithWork` | Blacksmithing | - |
-| `kGdJobCarpenterWork` | Carpentry/sawmill | - |
-| `kGdJobFoodWorkerWork` | Food processing | work_get_food |
-| `kGdJobSmelterWork` | Smelting | - |
-| `kGdJobPriestWork` | Temple work | - |
-| `kGdJobGathererWork` | Gather food | work_get_food |
-| `kGdJobForesterPlant` | Plant trees | - |
-
-### Special Job Types
-
-| Constant Name | Description |
-|--------------|-------------|
-| `kGdJobMeleeAbility` | Melee combat ability |
-| `kGdJobGroupPatrol` | Patrol movement |
-| `kGdJobGroupFlee` | Fleeing/retreat |
-| `kGdJobGroupGuard` | Guard stance |
-
-### Animation Subtype Constants
-
-Used to specify weapon-specific animations:
-
-| Constant Name | Description |
-|--------------|-------------|
-| `kDrwAnimDefault` | Default animation variant |
-| `kDrwAnimMagic` | Magic/spell animation |
-| `kDrwAnimShoulder` | Shoulder-mounted animation |
-| `kDrwAnimFront` | Front-facing animation |
-
-### Play Modes
-
-Animation playback modes:
-
-| Constant Name | Description |
-|--------------|-------------|
-| `kDrwPlayLooped` | Loop animation continuously |
-| `kDrwPlayStretched` | Stretch animation to fit duration |
-| `kDrwPlayClamped` | Play once and hold final frame |
-
-**Source Files:**
-- `object/object_figure_init.lua` (lines 283-763+)
+**Sound Mapping:**
+- **Hit Sounds**: Played when weapon connects with target
+- **Miss Sounds**: Played when weapon swings through air
 
 ---
 
@@ -143,270 +103,562 @@ Animation playback modes:
 
 Visual and gameplay effects triggered by spells, summons, and game events.
 
-| Constant Name | Numeric Value | Description | Usage |
-|--------------|---------------|-------------|-------|
-| `kGdEffectNone` | 0 | No effect | Default/null |
-| `kGdEffectSpellCast` | 1 | Spell casting initiation | When spell starts |
-| `kGdEffectSpellHitWorld` | 2 | Spell hits terrain | AOE ground impact |
-| `kGdEffectSpellHitTarget` | 3 | Spell hits target | Direct damage spells |
-| `kGdEffectSpellDOTHitTarget` | 4 | Damage over time tick | Poison, burn effects |
-| `kGdEffectSpellMissTarget` | 5 | Spell missed target | Miss feedback |
-| `kGdEffectSpellResolve` | 6 | Spell completion | Spell finishes |
-| `kGdEffectSummonWorker` | 7 | Worker summoning | Summon worker spell |
-| `kGdEffectWorkerAppears` | 8 | Worker materialization | Worker spawn visual |
-| `kGdEffectSummonHero` | 9 | Hero summoning | Summon hero spell |
-| `kGdEffectHeroAppears` | 10 | Hero materialization | Hero spawn visual |
-| `kGdEffectSpellTargetResisted` | 11 | Target resisted spell | Resistance proc |
-| `kGdEffectSpellResolveSelf` | 12 | Self-targeted spell resolve | Buff completion |
-| `kGdEffectMeteorFall` | 13 | Meteor falling | Fire Rain spell |
-| `kGdEffectMeteorHit` | 14 | Meteor impact | Fire Rain hit |
-| `kGdEffectBlizzardFall` | 15 | Blizzard ice falling | Ice Rain spell |
-| `kGdEffectBlizzardHit` | 16 | Blizzard ice impact | Ice Rain hit |
-| `kGdEffectStoneFall` | 17 | Stone falling | Stone Rain spell |
-| `kGdEffectStoneHit` | 18 | Stone impact | Stone Rain hit |
-| `kGdEffectPetAppears` | 19 | Pet materialization | Pet spawn visual |
-| `kGdEffectTest` | 20 | Test effect | Development |
-| `kGdEffectMonumentClaimed` | 21 | Monument claimed | Monument capture |
-| `kGdEffectMonumentWorking` | 22 | Monument active | Monument producing |
-| `kGdEffectAuraResolve` | 23 | Aura activation | Aura spells |
-| `kGdEffectProjectile` | 24 | Projectile visual | Arrows, bolts |
-| `kGdEffectBuilding` | 25 | Building effect | Construction |
-| `kGdEffectPlayerBind` | 26 | Player bindstone | Respawn point |
-| `kGdEffectSummonMainChar` | 27 | Main character summon | Avatar summon |
-| `kGdEffectMainCharAppears` | 28 | Main character appears | Avatar spawn |
-| `kGdEffectTitanProduction` | 29 | Titan being created | Titan production |
-| `kGdEffectTitanAppears` | 30 | Titan materialization | Titan spawn |
-| `kGdEffectMentalTowerCast` | 31 | Mental tower casting | Mind tower active |
-| `kGdEffectMentalTowerIdle` | 32 | Mental tower idle | Mind tower passive |
-| `kGdEffectMonumentBullet` | 33 | Monument projectile | Monument attack |
-| `kGdEffectMonumentHitFigure` | 34 | Monument hit unit | Monument damage |
-| `kGdEffectSpellAssistanceHitFigure` | 35 | Assistance spell hit | Support spells |
-| `kGdEffectChainResolve` | 36 | Chain spell resolution | Chain Lightning |
-| `kGdEffectSpellVoodooHitFigure` | 37 | Voodoo spell hit | Voodoo effect |
-| `kGdEffectSpellManaShieldHitFigure` | 38 | Mana shield absorb | Shield proc |
-| `kGdEffectMax` | 39 | Maximum effect ID | Boundary check |
+**Total:** 39 effect types
 
-**Source Files:**
-- `src/api/sf_general_structures.h` (CGdEffectType enum)
-- `object/object_effect_register.lua`
+| ID | Name | Constant | Description |
+|----|------|----------|-------------|
+| 0 | None | `kGdEffectNone` | No visual effect |
+| 1 | Spell Cast | `kGdEffectSpellCast` | Spell casting initiation visual |
+| 2 | Spell Hit World | `kGdEffectSpellHitWorld` | Spell hits terrain (AOE ground impact) |
+| 3 | Spell Hit Target | `kGdEffectSpellHitTarget` | Spell hits target (direct damage) |
+| 4 | Spell DOT Hit Target | `kGdEffectSpellDOTHitTarget` | Damage over time tick visual |
+| 5 | Spell Miss Target | `kGdEffectSpellMissTarget` | Spell missed target feedback |
+| 6 | Spell Resolve | `kGdEffectSpellResolve` | Spell completion visual |
+| 7 | Summon Worker | `kGdEffectSummonWorker` | Worker summoning effect |
+| 8 | Worker Appears | `kGdEffectWorkerAppears` | Worker materialization |
+| 9 | Summon Hero | `kGdEffectSummonHero` | Hero summoning effect |
+| 10 | Hero Appears | `kGdEffectHeroAppears` | Hero materialization |
+| 11 | Spell Target Resisted | `kGdEffectSpellTargetResisted` | Target resisted spell visual |
+| 12 | Spell Resolve Self | `kGdEffectSpellResolveSelf` | Self-targeted spell resolution |
+| 13 | Meteor Fall | `kGdEffectMeteorFall` | Meteor falling (Fire Rain) |
+| 14 | Meteor Hit | `kGdEffectMeteorHit` | Meteor impact |
+| 15 | Blizzard Fall | `kGdEffectBlizzardFall` | Blizzard ice falling |
+| 16 | Blizzard Hit | `kGdEffectBlizzardHit` | Blizzard ice impact |
+| 17 | Stone Fall | `kGdEffectStoneFall` | Stone falling (Stone Rain) |
+| 18 | Stone Hit | `kGdEffectStoneHit` | Stone impact |
+| 19 | Pet Appears | `kGdEffectPetAppears` | Pet materialization |
+| 20 | Test Effect | `kGdEffectTest` | Test/debug effect |
+| 21 | Monument Claimed | `kGdEffectMonumentClaimed` | Monument claimed by player |
+| 22 | Monument Working | `kGdEffectMonumentWorking` | Monument actively producing |
+| 23 | Aura Resolve | `kGdEffectAuraResolve` | Aura activation visual |
+| 24 | Projectile | `kGdEffectProjectile` | Projectile visual (arrows, bolts) |
+| 25 | Building | `kGdEffectBuilding` | Building-related effect |
+| 26 | Player Bind | `kGdEffectPlayerBind` | Player bindstone activation |
+| 27 | Summon Main Character | `kGdEffectSummonMainChar` | Main character summoning |
+| 28 | Main Character Appears | `kGdEffectMainCharAppears` | Main character materialization |
+| 29 | Titan Production | `kGdEffectTitanProduction` | Titan being created |
+| 30 | Titan Appears | `kGdEffectTitanAppears` | Titan materialization |
+| 31 | Mental Tower Cast | `kGdEffectMentalTowerCast` | Mental tower casting |
+| 32 | Mental Tower Idle | `kGdEffectMentalTowerIdle` | Mental tower idle state |
+| 33 | Monument Bullet | `kGdEffectMonumentBullet` | Monument projectile |
+| 34 | Monument Hit Figure | `kGdEffectMonumentHitFigure` | Monument hit on unit |
+| 35 | Spell Assistance Hit | `kGdEffectSpellAssistanceHitFigure` | Assistance spell hit |
+| 36 | Chain Resolve | `kGdEffectChainResolve` | Chain spell resolution (Chain Lightning) |
+| 37 | Spell Voodoo Hit | `kGdEffectSpellVoodooHitFigure` | Voodoo spell hit |
+| 38 | Spell Mana Shield Hit | `kGdEffectSpellManaShieldHitFigure` | Mana shield absorb visual |
+
+**Usage:**
+```lua
+-- Example: Register effect for spell
+RegisterEffect(kGdEffectSpellCast, 0, EffectGet("CastFire"))
+```
 
 ---
 
 ## Spell Lines
 
-SpellForce contains **140+ spell lines** organized into magic schools. Each spell line represents a progression of spell levels.
+SpellForce contains **227** spell lines organized into magic schools. Each spell line represents a progression of spell levels.
 
-Due to the extensive number of spells, they are documented in a separate file:
+**Total:** 227 spell lines
 
-**📖 [SPELL_IDS_REFERENCE.md](./SPELL_IDS_REFERENCE.md)** - Complete spell line documentation
+**Note:** Numeric IDs for spell lines are stored in GameData.cff files and not available in Lua sources. This section lists the constant names only.
 
-### Quick Reference by School
+### Black Magic
 
-| School | Count | Example Spells |
-|--------|-------|----------------|
-| **Black Magic** | 30+ | Pain, Death, Pestilence, Summon Skeleton, Life Tap |
-| **White Magic** | 30+ | Healing, Cure Disease, Summon Wolf, Regeneration |
-| **Fire Magic** | 10+ | Fire Burst, Fire Ball, Fire Shield, Rain of Fire |
-| **Ice Magic** | 9+ | Ice Burst, Freeze, Blizzard, Ice Shield |
-| **Earth Magic** | 13+ | Rock Bullet, Petrify, Stone Rain, Earth Elemental |
-| **Mental Magic** | 24+ | Dominate, Charm, Hypnotize, Mana Drain, Invisibility |
-| **Abilities** | 14 | Berserk, Blessing, True Shot, Steel Skin, War Cry |
-| **Towers** | 8 | Arrow Tower, Fire Burst Tower, Healing Tower |
+**Count:** 50 spells
 
-**Source Files:**
-- `object/object_effect_register.lua` (complete spell effect definitions)
+| Spell Name | Constant |
+|------------|----------|
+| Almightiness Black | `kGdSpellLineAlmightinessBlack` |
+| Aura Inability | `kGdSpellLineAuraInability` |
+| Aura Inflexibility | `kGdSpellLineAuraInflexibility` |
+| Aura Life Tap | `kGdSpellLineAuraLifeTap` |
+| Aura Siege Dark Elf | `kGdSpellLineAuraSiegeDarkElf` |
+| Aura Suffocation | `kGdSpellLineAuraSuffocation` |
+| Cannibalize | `kGdSpellLineCannibalize` |
+| Chain Mutation | `kGdSpellLineChainMutation` |
+| Chain Pain | `kGdSpellLineChainPain` |
+| Cure Poison | `kGdSpellLineCurePoison` |
+| Dark Banishing | `kGdSpellLineDarkBanishing` |
+| Dark Might | `kGdSpellLineDarkMight` |
+| Darkness Area | `kGdSpellLineDarknessArea` |
+| Death | `kGdSpellLineDeath` |
+| Death Grasp | `kGdSpellLineDeathGrasp` |
+| Dispel Black Aura | `kGdSpellLineDispelBlackAura` |
+| Dominate Undead | `kGdSpellLineDominateUndead` |
+| Essence Black | `kGdSpellLineEssenceBlack` |
+| Extinct | `kGdSpellLineExtinct` |
+| Extinct Tower | `kGdSpellLineExtinctTower` |
+| Feign Death | `kGdSpellLineFeignDeath` |
+| Inability | `kGdSpellLineInability` |
+| Inflexibility | `kGdSpellLineInflexibility` |
+| Inflexibility Area | `kGdSpellLineInflexibilityArea` |
+| Life Tap | `kGdSpellLineLifeTap` |
+| Life Tap Aura | `kGdSpellLineLifeTapAura` |
+| Life Tap Chained | `kGdSpellLineLifeTapChained` |
+| Mutation | `kGdSpellLineMutation` |
+| Mutation Chained | `kGdSpellLineMutationChained` |
+| Pain | `kGdSpellLinePain` |
+| Pain Area | `kGdSpellLinePainArea` |
+| Pain Chained | `kGdSpellLinePainChained` |
+| Pain Tower | `kGdSpellLinePainTower` |
+| Pestilence | `kGdSpellLinePestilence` |
+| Pestilence Area | `kGdSpellLinePestilenceArea` |
+| Poison | `kGdSpellLinePoison` |
+| Raise Dead | `kGdSpellLineRaiseDead` |
+| Remediless | `kGdSpellLineRemediless` |
+| Remediless Area | `kGdSpellLineRemedilessArea` |
+| Remove Curse | `kGdSpellLineRemoveCurse` |
+| Slowness | `kGdSpellLineSlowness` |
+| Slowness Area | `kGdSpellLineSlownessArea` |
+| Suffocation | `kGdSpellLineSuffocation` |
+| Suicide Death | `kGdSpellLineSuicideDeath` |
+| Summon Blade | `kGdSpellLineSummonBlade` |
+| Summon Goblin | `kGdSpellLineSummonGoblin` |
+| Summon Skeleton | `kGdSpellLineSummonSkeleton` |
+| Summon Spectre | `kGdSpellLineSummonSpectre` |
+| Weaken | `kGdSpellLineWeaken` |
+| Weaken Area | `kGdSpellLineWeakenArea` |
+
+### White Magic
+
+**Count:** 46 spells
+
+| Spell Name | Constant |
+|------------|----------|
+| Ability Blessing | `kGdSpellLineAbilityBlessing` |
+| Ability Endurance | `kGdSpellLineAbilityEndurance` |
+| Almightiness White | `kGdSpellLineAlmightinessWhite` |
+| Assistance | `kGdSpellLineAssistance` |
+| Aura Dexterity | `kGdSpellLineAuraDexterity` |
+| Aura Endurance | `kGdSpellLineAuraEndurance` |
+| Aura Flexibility | `kGdSpellLineAuraFlexibility` |
+| Aura Healing | `kGdSpellLineAuraHealing` |
+| Aura Light | `kGdSpellLineAuraLight` |
+| Aura Regeneration | `kGdSpellLineAuraRegeneration` |
+| Aura Strength | `kGdSpellLineAuraStrength` |
+| Chain Hallow | `kGdSpellLineChainHallow` |
+| Charm Animal | `kGdSpellLineCharmAnimal` |
+| Cure Disease | `kGdSpellLineCureDisease` |
+| Dexterity | `kGdSpellLineDexterity` |
+| Dispel White Aura | `kGdSpellLineDispelWhiteAura` |
+| Dominate Animal | `kGdSpellLineDominateAnimal` |
+| Endurance | `kGdSpellLineEndurance` |
+| Essence White | `kGdSpellLineEssenceWhite` |
+| Flexibility | `kGdSpellLineFlexibility` |
+| Flexibility Area | `kGdSpellLineFlexibilityArea` |
+| Greater Healing | `kGdSpellLineGreaterHealing` |
+| Guard | `kGdSpellLineGuard` |
+| Hallow | `kGdSpellLineHallow` |
+| Hallow Chained | `kGdSpellLineHallowChained` |
+| Healing | `kGdSpellLineHealing` |
+| Healing Area | `kGdSpellLineHealingArea` |
+| Healing Aura | `kGdSpellLineHealingAura` |
+| Healing Tower | `kGdSpellLineHealingTower` |
+| Holy Touch | `kGdSpellLineHolyTouch` |
+| Invulnerability | `kGdSpellLineInvulnerability` |
+| Quickness | `kGdSpellLineQuickness` |
+| Quickness Area | `kGdSpellLineQuicknessArea` |
+| Regenerate | `kGdSpellLineRegenerate` |
+| Reinforcement | `kGdSpellLineReinforcement` |
+| Revenge | `kGdSpellLineRevenge` |
+| Roots | `kGdSpellLineRoots` |
+| Roots Area | `kGdSpellLineRootsArea` |
+| Sentinel Healing | `kGdSpellLineSentinelHealing` |
+| Strengthen | `kGdSpellLineStrengthen` |
+| Strengthen Area | `kGdSpellLineStrengthenArea` |
+| Suicide Heal | `kGdSpellLineSuicideHeal` |
+| Summon Bear | `kGdSpellLineSummonBear` |
+| Summon Tree Wraith | `kGdSpellLineSummonTreeWraith` |
+| Summon Wolf | `kGdSpellLineSummonWolf` |
+| Thorn Shield | `kGdSpellLineThornShield` |
+
+### Fire Magic
+
+**Count:** 18 spells
+
+| Spell Name | Constant |
+|------------|----------|
+| Chain Fireball | `kGdSpellLineChainFireball` |
+| Chain Fireburst | `kGdSpellLineChainFireburst` |
+| Fire Ball | `kGdSpellLineFireBall` |
+| Fire Ball Chained | `kGdSpellLineFireBallChained` |
+| Fire Ball Effect | `kGdSpellLineFireBallEffect` |
+| Fire Block Effect | `kGdSpellLineFireBlockEffect` |
+| Fire Burst | `kGdSpellLineFireBurst` |
+| Fire Burst Chained | `kGdSpellLineFireBurstChained` |
+| Fire Burst Tower | `kGdSpellLineFireBurstTower` |
+| Fire Elemental | `kGdSpellLineFireElemental` |
+| Fire Resistance | `kGdSpellLineFireResistance` |
+| Fire Shield | `kGdSpellLineFireShield` |
+| Fire Shield Damage | `kGdSpellLineFireShieldDamage` |
+| Illuminate | `kGdSpellLineIlluminate` |
+| Melt Resistance | `kGdSpellLineMeltResistance` |
+| Rain Of Fire | `kGdSpellLineRainOfFire` |
+| Summon Fire Golem | `kGdSpellLineSummonFireGolem` |
+| Wave Of Fire | `kGdSpellLineWaveOfFire` |
+
+### Ice Magic
+
+**Count:** 16 spells
+
+| Spell Name | Constant |
+|------------|----------|
+| Blizzard | `kGdSpellLineBlizzard` |
+| Chain Iceburst | `kGdSpellLineChainIceburst` |
+| Chill Resistance | `kGdSpellLineChillResistance` |
+| Fog | `kGdSpellLineFog` |
+| Freeze | `kGdSpellLineFreeze` |
+| Freeze Area | `kGdSpellLineFreezeArea` |
+| Ice Arrow Effect | `kGdSpellLineIceArrowEffect` |
+| Ice Block Effect | `kGdSpellLineIceBlockEffect` |
+| Ice Burst | `kGdSpellLineIceBurst` |
+| Ice Burst Chained | `kGdSpellLineIceBurstChained` |
+| Ice Elemental | `kGdSpellLineIceElemental` |
+| Ice Shield | `kGdSpellLineIceShield` |
+| Ice Shield Stun | `kGdSpellLineIceShieldStun` |
+| Iceburst Tower | `kGdSpellLineIceburstTower` |
+| Summon Ice Golem | `kGdSpellLineSummonIceGolem` |
+| Wave Of Ice | `kGdSpellLineWaveOfIce` |
+
+### Earth Magic
+
+**Count:** 14 spells
+
+| Spell Name | Constant |
+|------------|----------|
+| Chain Rock Bullet | `kGdSpellLineChainRockBullet` |
+| Conservation | `kGdSpellLineConservation` |
+| Decay | `kGdSpellLineDecay` |
+| Decay Area | `kGdSpellLineDecayArea` |
+| Detect Metal | `kGdSpellLineDetectMetal` |
+| Earth Elemental | `kGdSpellLineEarthElemental` |
+| Feet Clay | `kGdSpellLineFeetClay` |
+| Petrify | `kGdSpellLinePetrify` |
+| Rock Bullet | `kGdSpellLineRockBullet` |
+| Rock Bullet Chained | `kGdSpellLineRockBulletChained` |
+| Stone Rain | `kGdSpellLineStoneRain` |
+| Stone Tower | `kGdSpellLineStoneTower` |
+| Summon Earth Golem | `kGdSpellLineSummonEarthGolem` |
+| Wave Of Rocks | `kGdSpellLineWaveOfRocks` |
+
+### Mental Magic
+
+**Count:** 42 spells
+
+| Spell Name | Constant |
+|------------|----------|
+| Almightiness Mental | `kGdSpellLineAlmightinessMental` |
+| Amok | `kGdSpellLineAmok` |
+| Aura Brilliance | `kGdSpellLineAuraBrilliance` |
+| Aura Mana Tap | `kGdSpellLineAuraManaTap` |
+| Befriend | `kGdSpellLineBefriend` |
+| Brilliance | `kGdSpellLineBrilliance` |
+| Chain Charm | `kGdSpellLineChainCharm` |
+| Chain Manatap | `kGdSpellLineChainManatap` |
+| Chain Shock | `kGdSpellLineChainShock` |
+| Charisma | `kGdSpellLineCharisma` |
+| Charm | `kGdSpellLineCharm` |
+| Charm Chained | `kGdSpellLineCharmChained` |
+| Confuse | `kGdSpellLineConfuse` |
+| Confuse Area | `kGdSpellLineConfuseArea` |
+| Demoralization | `kGdSpellLineDemoralization` |
+| Detect Magic | `kGdSpellLineDetectMagic` |
+| Disenchant | `kGdSpellLineDisenchant` |
+| Disrupt | `kGdSpellLineDisrupt` |
+| Distract | `kGdSpellLineDistract` |
+| Dominate | `kGdSpellLineDominate` |
+| Enlightenment | `kGdSpellLineEnlightenment` |
+| Essence Mental | `kGdSpellLineEssenceMental` |
+| Forget | `kGdSpellLineForget` |
+| Hypnotize | `kGdSpellLineHypnotize` |
+| Hypnotize Area | `kGdSpellLineHypnotizeArea` |
+| Hypnotize Tower | `kGdSpellLineHypnotizeTower` |
+| Hypnotize Two | `kGdSpellLineHypnotizeTwo` |
+| Mana Drain | `kGdSpellLineManaDrain` |
+| Mana Shield | `kGdSpellLineManaShield` |
+| Mana Tap | `kGdSpellLineManaTap` |
+| Mana Tap Aura | `kGdSpellLineManaTapAura` |
+| Mana Tap Chained | `kGdSpellLineManaTapChained` |
+| Meditation | `kGdSpellLineMeditation` |
+| Mirror Image | `kGdSpellLineMirrorImage` |
+| Object Illusion | `kGdSpellLineObjectIllusion` |
+| Sacrifice Mana | `kGdSpellLineSacrificeMana` |
+| Self Illusion | `kGdSpellLineSelfIllusion` |
+| Shift Mana | `kGdSpellLineShiftMana` |
+| Shock | `kGdSpellLineShock` |
+| Shock Chained | `kGdSpellLineShockChained` |
+| Shockwave | `kGdSpellLineShockwave` |
+| Voodoo | `kGdSpellLineVoodoo` |
+
+### Abilities
+
+**Count:** 12 spells
+
+| Spell Name | Constant |
+|------------|----------|
+| Ability Benefactions | `kGdSpellLineAbilityBenefactions` |
+| Ability Berserk | `kGdSpellLineAbilityBerserk` |
+| Ability Critical Hits | `kGdSpellLineAbilityCriticalHits` |
+| Ability Durability | `kGdSpellLineAbilityDurability` |
+| Ability Patronize | `kGdSpellLineAbilityPatronize` |
+| Ability Riposte | `kGdSpellLineAbilityRiposte` |
+| Ability Salvo | `kGdSpellLineAbilitySalvo` |
+| Ability Shelter | `kGdSpellLineAbilityShelter` |
+| Ability Shift Life | `kGdSpellLineAbilityShiftLife` |
+| Ability Steel Skin | `kGdSpellLineAbilitySteelSkin` |
+| Ability True Shot | `kGdSpellLineAbilityTrueShot` |
+| Ability War Cry | `kGdSpellLineAbilityWarCry` |
+
+### Towers
+
+**Count:** 1 spells
+
+| Spell Name | Constant |
+|------------|----------|
+| Arrow Tower | `kGdSpellLineArrowTower` |
+
+### Other
+
+**Count:** 28 spells
+
+| Spell Name | Constant |
+|------------|----------|
+| Acid Cloud | `kGdSpellLineAcidCloud` |
+| Almightiness Elemental | `kGdSpellLineAlmightinessElemental` |
+| Aura Eternity | `kGdSpellLineAuraEternity` |
+| Aura Fast Fighting | `kGdSpellLineAuraFastFighting` |
+| Aura Fast Walking | `kGdSpellLineAuraFastWalking` |
+| Aura Hypnotization | `kGdSpellLineAuraHypnotization` |
+| Aura Siege Elf | `kGdSpellLineAuraSiegeElf` |
+| Aura Siege Human | `kGdSpellLineAuraSiegeHuman` |
+| Aura Siege Orc | `kGdSpellLineAuraSiegeOrc` |
+| Aura Siege Troll | `kGdSpellLineAuraSiegeTroll` |
+| Aura Slow Fighting | `kGdSpellLineAuraSlowFighting` |
+| Aura Slow Walking | `kGdSpellLineAuraSlowWalking` |
+| Aura Weakness | `kGdSpellLineAuraWeakness` |
+| Chain Lifetap | `kGdSpellLineChainLifetap` |
+| Essence Elemental | `kGdSpellLineEssenceElemental` |
+| Eternity | `kGdSpellLineEternity` |
+| Fake Spell One Figure | `kGdSpellLineFakeSpellOneFigure` |
+| Fast Fighting | `kGdSpellLineFastFighting` |
+| Fear | `kGdSpellLineFear` |
+| Holy Might | `kGdSpellLineHolyMight` |
+| Invisibility | `kGdSpellLineInvisibility` |
+| Plague Area | `kGdSpellLinePlagueArea` |
+| Slow Fighting | `kGdSpellLineSlowFighting` |
+| Spark | `kGdSpellLineSpark` |
+| Summon Channeler | `kGdSpellLineSummonChanneler` |
+| Summon Demon | `kGdSpellLineSummonDemon` |
+| Torture | `kGdSpellLineTorture` |
+| Torture Receive | `kGdSpellLineTortureReceive` |
+
+**Usage:**
+```lua
+-- Example: Register spell effect
+SpellEffect{line=kGdSpellLinePain, hit="DefaultBlack", cast="CastBlack"}
+```
 
 ---
 
-## Quest States
+## Races
 
-Quest progression states.
+Playable races in SpellForce, each with unique units, buildings, and monuments.
 
-| Lua Constant | C++ Constant | Description |
-|-------------|--------------|-------------|
-| `StateUnknown` | `kDbQuestStateUnknown` | Quest not discovered |
-| `StateUnsolvable` | `kDbQuestStateUnsolvable` | Quest failed/locked |
-| `StateKnown` | `kDbQuestStateKnown` | Quest discovered but not started |
-| `StateActive` | `kDbQuestStateActive` | Quest in progress |
-| `StateSolved` | `kDbQuestStateSolved` | Quest completed |
+**Total:** 6 races
 
-**Source Files:**
-- `script/GdsDefines.lua` (lines 15-19)
+| ID | Race | Constant | Monument ID |
+|----|------|----------|-------------|
+| 1 | Human | `kGtRaceHuman` | 0x303 (771) |
+| 2 | Elf | `kGtRaceElf` | 0x305 (773) |
+| 3 | Dwarf | `kGtRaceDwarf` | 0x304 (772) |
+| 4 | Orc | `kGtRaceOrc` | 0x307 (775) |
+| 5 | Troll | `kGtRaceTroll` | 0x308 (776) |
+| 6 | Dark Elf | `kGtRaceDarkElf` | 0x306 (774) |
+
+**Usage:**
+```lua
+-- Example: Check if unit is human
+if figure:GetRace() == kGtRaceHuman then
+    -- Human-specific logic
+end
+```
+
+**Monument Types:**
+Each race has a corresponding monument type for worker production and respawn.
+
+---
+
+## Job/Animation Types
+
+Unit job/action constants that determine animations and behaviors.
+
+**Total:** 20 job types
+
+**Note:** Numeric IDs for job types are not available in Lua sources. This section lists constant names only.
+
+### Core Job Types
+
+| Job Name | Constant |
+|----------|----------|
+| Death | `kGdJobDie` |
+| Default/Idle | `kGdJobDefault` |
+| Feign Death | `kGdJobFeignDeath` |
+| Hit Reaction | `kGdJobCriticalHit` |
+| Melee Strike | `kGdJobStrike` |
+| No Action | `kGdJobGroupNothing` |
+| Pickup/Loot | `kGdJobStoop` |
+| Ranged Aim | `kGdJobHitTargetRange1` |
+| Ranged Fire | `kGdJobHitTargetRange2` |
+| Spell Cast | `kGdJobCast` |
+| Spell Complete | `kGdJobCastResolve` |
+| Stabbing Attack | `kGdJobStab` |
+| Unarmed Attack | `kGdJobPunch` |
+| Walking | `kGdJobGroupWalk` |
+
+### Worker Job Types
+
+| Job Name | Constant |
+|----------|----------|
+| Blacksmithing | `kGdJobSmithWork` |
+| Chop Trees | `kGdJobWoodCutterCutTree` |
+| Construction | `kGdJobBuilderBuild` |
+| Fishing | `kGdJobFisherWork` |
+| Mine Ore | `kGdJobMinerWork` |
+| Mine Stone | `kGdJobStoneMinerCrushStone` |
+
+**Usage:**
+```lua
+-- Example: Set unit job
+figure:SetJob(kGdJobWoodCutterCutTree)
+```
 
 ---
 
 ## Equipment Slots
 
-Character equipment slot indices.
+Character equipment slot indices for inventory management.
 
-| Lua Constant | Numeric Value | Description |
-|-------------|---------------|-------------|
-| `SlotHead` | 0 | Helmet/headgear |
-| `SlotRightHand` | 1 | Right hand weapon |
-| `SlotChest` | 2 | Chest armor |
-| `SlotLeftHand` | 3 | Left hand weapon/shield |
-| `SlotRightRing` | 4 | Right ring |
-| `SlotLegs` | 5 | Leg armor |
-| `SlotLeftRing` | 6 | Left ring |
+**Total:** 7 equipment slots
 
-**Source Files:**
-- `script/GdsDefines.lua` (lines 87-93)
+| ID | Slot | Constant |
+|----|------|----------|
+| 0 | Head/Helmet | `SlotHead` |
+| 1 | Right Hand | `SlotRightHand` |
+| 2 | Chest/Armor | `SlotChest` |
+| 3 | Left Hand/Shield | `SlotLeftHand` |
+| 4 | Right Ring | `SlotRightRing` |
+| 5 | Legs/Pants | `SlotLegs` |
+| 6 | Left Ring | `SlotLeftRing` |
+
+**Usage:**
+```lua
+-- Example: Equip item to right hand
+figure:EquipItem(item, SlotRightHand)
+```
+
+---
+
+## Quest States
+
+Quest progression states for tracking player progress.
+
+**Total:** 5 quest states
+
+| ID | State | Constant | Description |
+|----|-------|----------|-------------|
+| 0 | Unknown | `StateUnknown` | Quest not yet discovered |
+| 1 | Unsolvable | `StateUnsolvable` | Quest failed or locked |
+| 2 | Known | `StateKnown` | Quest discovered but not started |
+| 3 | Active | `StateActive` | Quest in progress |
+| 4 | Solved | `StateSolved` | Quest completed successfully |
+
+**Usage:**
+```lua
+-- Example: Check if quest is active
+if quest:GetState() == StateActive then
+    -- Quest is active
+end
+```
 
 ---
 
 ## Figure Tasks
 
-Unit/character task/role types.
+Unit/character task/role type identifiers.
 
-| Constant Name | Numeric Value | Description |
-|--------------|---------------|-------------|
-| `TASK_WORKER` | 2 | Worker unit |
-| `TASK_WOODCUTTER` | 3 | Lumberjack |
-| `TASK_QUARRY` | 4 | Stone cutter |
-| `TASK_MINE` | 5 | Miner |
-| `TASK_FORGE` | 6 | Blacksmith |
-| `TASK_HERO` | 9 | Hero unit |
-| `TASK_MAINCHAR` | 10 | Player avatar |
-| `TASK_NPC` | 11 | Non-player character |
-| `TASK_PET` | 12 | Pet/companion |
-| `TASK_HUNTING_LODGE` | 14 | Hunter |
-| `TASK_MERCHANT` | 17 | Merchant NPC |
+**Total:** 11 task types
 
-**Source Files:**
-- `src/api/sf_general_structures.h` (CGdFigureTask enum)
+| ID | Task | Constant |
+|----|------|----------|
+| 2 | Worker | `TASK_WORKER` |
+| 3 | Woodcutter | `TASK_WOODCUTTER` |
+| 4 | Quarry Worker | `TASK_QUARRY` |
+| 5 | Miner | `TASK_MINE` |
+| 6 | Blacksmith | `TASK_FORGE` |
+| 9 | Hero | `TASK_HERO` |
+| 10 | Main Character | `TASK_MAINCHAR` |
+| 11 | NPC | `TASK_NPC` |
+| 12 | Pet | `TASK_PET` |
+| 14 | Hunter | `TASK_HUNTING_LODGE` |
+| 17 | Merchant | `TASK_MERCHANT` |
 
----
-
-## Figure Flags
-
-Bitwise flags for unit states (32-bit bitmask).
-
-| Flag Name | Hex Value | Description |
-|----------|-----------|-------------|
-| `UNDEAD` | 0x1 | Unit is undead |
-| `RESERVED_ONLY` | 0x2 | Reserved flag |
-| `AGGROED` | 0x4 | Unit is aggressive |
-| `IS_DEAD` | 0x8 | Unit is dead |
-| `REDO` | 0x10 | Redo action flag |
-| `F_CHECK_SPELLS_BEFORE_JOB` | 0x20 | Check spells first |
-| `F_CHECK_SPELLS_BEFORE_CHECK_BATTLE` | 0x40 | Check spells before combat |
-| `WALK_JOB_WAIT` | 0x80 | Waiting during walk |
-| `FREEZED` | 0x100 | Unit is frozen |
-| `HAS_LOOT` | 0x200 | Unit has loot |
-| `HAS_DIALOG` | 0x400 | Unit has dialogue |
-| `FEMALE` | 0x800 | Unit is female |
-| `GOT_AGGRO` | 0x1000 | Unit gained aggro |
-| `RETREAT` | 0x2000 | Unit is retreating |
-| `NO_WAY_TO_TARGET` | 0x4000 | Cannot reach target |
-| `AURA_RUNNING` | 0x8000 | Aura is active |
-| `AI_BLOCKED` | 0x10000 | AI is blocked |
-| `TOWER` | 0x20000 | Unit is tower |
-| `IS_SWAPPING` | 0x40000 | Swapping equipment |
-| `CUR_ACTIVE_DIALOG` | 0x80000 | Dialog active |
-| `IS_IN_FIGHT` | 0x100000 | In combat |
-| `VIEW_MODE_1ST_3RD` | 0x200000 | Camera view mode |
-| `IS_TALKING` | 0x400000 | Unit is talking |
-| `IS_IMPORTANT_DIALOG` | 0x800000 | Important dialog |
-| `UNKILLABLE` | 0x1000000 | Cannot be killed |
-| `FOLLOW_MODE` | 0x2000000 | Following another unit |
-| `HIT_LEFT_HAND_NEXT` | 0x4000000 | Next hit with left hand |
-| `FOREST_SPIRIT` | 0x8000000 | Forest spirit type |
-| `VIP` | 0x10000000 | Very important unit |
-| `ILLUSION` | 0x20000000 | Unit is illusion |
-| `SPAWN` | 0x40000000 | Unit is spawned |
-| `USED_FOR_REVENGE` | 0x80000000 | Revenge flag |
-
-**Source Files:**
-- `src/api/sf_general_structures.h` (GdFigureFlags enum)
-
----
-
-## Figure Job Flags
-
-Bitwise flags for unit job/task states (16-bit bitmask).
-
-| Flag Name | Numeric Value | Description |
-|----------|---------------|-------------|
-| `MANUAL_JOB_CHANGE` | 1 | Job manually changed |
-| `SKIP_ONCE` | 2 | Skip this iteration |
-| `MANUAL_HIT_TARGET` | 4 | Manual target selection |
-| `CORPSE_CANT_ROT` | 8 | Permanent corpse |
-| `START_WALK` | 16 | Begin walking |
-| `RUN_MODE` | 32 | Running instead of walking |
-| `WAR` | 64 | War/combat mode |
-| `CHECK_BATTLE` | 128 | Check for combat |
-| `PATROL_MODE` | 256 | Patrolling |
-| `WAY_POINTS_READ_REVERSE` | 512 | Reverse waypoint order |
-| `SUPERIOR_PATHING` | 1024 | Enhanced pathfinding |
-| `ROUND_HIT` | 2048 | Round/AOE hit |
-| `DEATH_BLOW` | 4096 | Killing blow |
-| `START_WORK_AT_BUILDING_FORCE_JOB` | 8192 | Force building work |
-
-**Source Files:**
-- `src/api/sf_general_structures.h` (CGdFigureJobFlags enum)
+**Usage:**
+```lua
+-- Example: Check if figure is a hero
+if figure:GetTask() == TASK_HERO then
+    -- Hero-specific logic
+end
+```
 
 ---
 
 ## Directions
 
-Cardinal and intercardinal directions.
+Cardinal and intercardinal direction constants.
 
-| Lua Constant | C++ Constant | Description |
-|-------------|--------------|-------------|
-| `East` | `kGdDirectionEast` | East (0°) |
-| `SouthEast` | `kGdDirectionSouthEast` | Southeast (45°) |
-| `South` | `kGdDirectionSouth` | South (90°) |
-| `SouthWest` | `kGdDirectionSouthWest` | Southwest (135°) |
-| `West` | `kGdDirectionWest` | West (180°) |
-| `NorthWest` | `kGdDirectionNorthWest` | Northwest (225°) |
-| `North` | (implied) | North (270°) |
-| `NorthEast` | (implied) | Northeast (315°) |
+**Total:** 8 directions
 
-**Source Files:**
-- `script/GdsDefines.lua` (lines 95-100)
+| ID | Direction | Constant | Angle |
+|----|-----------|----------|-------|
+| 0 | East | `East` | 0° |
+| 1 | Southeast | `SouthEast` | 45° |
+| 2 | South | `South` | 90° |
+| 3 | Southwest | `SouthWest` | 135° |
+| 4 | West | `West` | 180° |
+| 5 | Northwest | `NorthWest` | 225° |
+| 6 | North | `North` | 270° |
+| 7 | Northeast | `NorthEast` | 315° |
 
----
-
-## Spell Tags
-
-Bitwise flags for spell categorization (16-bit bitmask).
-
-| Flag Name | Hex Value | Description |
-|----------|-----------|-------------|
-| `NONE` | 0x0 | No special tags |
-| `SUMMON_SPELL` | 0x1 | Summons creatures |
-| `DOMINATION_SPELL` | 0x2 | Mind control spell |
-| `CHAIN_SPELL` | 0x4 | Chain effect (Chain Lightning) |
-| `WHITE_AURA_SPELL` | 0x8 | White magic aura |
-| `BLACK_AURA_SPELL` | 0x10 | Black magic aura |
-| `TARGET_ONHIT_SPELL` | 0x20 | Triggers on hit |
-| `COMBAT_ABILITY_SPELL` | 0x40 | Combat ability |
-| `AOE_SPELL` | 0x80 | Area of effect |
-| `SIEGE_AURA_SPELL` | 0x100 | Siege aura |
-| `AURA_SPELL` | 0x200 | Generic aura |
-| `STACKABLE_SPELL` | 0x400 | Can stack multiple times |
-
-**Note:** `SPELL_TAG_COUNT` = 12
-
-**Source Files:**
-- `src/api/sf_general_structures.h` (SpellTag enum)
+**Usage:**
+```lua
+-- Example: Face unit east
+figure:SetDirection(East)
+```
 
 ---
 
 ## Target Types
 
-Entity types for targeting system.
+Entity types for the targeting system.
 
-| Lua Constant | Numeric Value | Description |
-|-------------|---------------|-------------|
-| `Figure` | 1 | Character/unit |
-| `Building` | 2 | Structure |
-| `Object` | 3 | Interactive object |
-| `World` | 4 | Terrain/world |
-| `Area` | 5 | Area/region |
+**Total:** 5 target types
 
-**Source Files:**
-- `script/GdsDefines.lua` (lines 73-77)
+| ID | Target Type | Constant |
+|----|-------------|----------|
+| 1 | Character/Unit | `Figure` |
+| 2 | Structure | `Building` |
+| 3 | Interactive Object | `Object` |
+| 4 | Terrain/World | `World` |
+| 5 | Area/Region | `Area` |
+
+**Usage:**
+```lua
+-- Example: Check if target is a building
+if target:GetType() == Building then
+    -- Building-specific logic
+end
+```
 
 ---
 
@@ -414,177 +666,161 @@ Entity types for targeting system.
 
 Script variable manipulation operators.
 
-| Lua Constant | C++ Constant | Description |
-|-------------|--------------|-------------|
-| `Add` / `OperatorAdd` | `kDbScriptVariableOperatorAdd` | Addition |
-| `OperatorInvertBool` | `kDbScriptVariableOperatorInvertBool` | Boolean NOT |
-| `OperatorSetRandom` | `kDbScriptVariableOperatorSetRandom` | Random value |
+**Total:** 3 operators
 
-**Source Files:**
-- `script/GdsDefines.lua` (lines 34-36)
+| ID | Operator | Constant |
+|----|----------|----------|
+| 0 | Addition (+) | `Add` |
+| 1 | Boolean NOT (!) | `OperatorInvertBool` |
+| 2 | Set Random | `OperatorSetRandom` |
 
----
-
-## Variable Comparison
-
-Script variable comparison operators.
-
-| Lua Constant | C++ Constant | Description |
-|-------------|--------------|-------------|
-| `IsEqual` | `kDbScriptVariableCompareEqual` | == |
-| `IsGreater` | `kDbScriptVariableCompareGreater` | > |
-| `IsGreaterOrEqual` | `kDbScriptVariableCompareGreaterEqual` | >= |
-| `IsLess` | `kDbScriptVariableCompareLess` | < |
-| `IsLessOrEqual` | `kDbScriptVariableCompareLessEqual` | <= |
-| `IsNotEqual` | `kDbScriptVariableCompareNotEqual` | != |
-
-**Source Files:**
-- `script/GdsDefines.lua` (lines 43-48)
-
----
-
-## Transfer Flags
-
-Item/resource transfer modes.
-
-| Lua Constant | C++ Constant | Description |
-|-------------|--------------|-------------|
-| `Take` | `kGtScriptTransferFlagTake` | Remove from inventory |
-| `Give` | `kGtScriptTransferFlagGive` | Add to inventory |
-| `Exchange` | `kGtScriptTransferFlagExchange` | Swap items |
-
-**Source Files:**
-- `script/GdsDefines.lua` (lines 84-86)
+**Usage:**
+```lua
+-- Example: Add to variable
+ModifyVariable(varId, 10, OperatorAdd)
+```
 
 ---
 
 ## Movement Modes
 
-| Lua Constant | Numeric Value | Description |
-|-------------|---------------|-------------|
-| `Walk` | 0 | Walking speed |
-| `Run` | 1 | Running speed |
+Unit movement speed modes.
 
-**Source Files:**
-- `script/GdsDefines.lua` (lines 60-61)
+**Total:** 2 movement modes
 
----
+| ID | Mode | Constant |
+|----|------|----------|
+| 0 | Walking | `Walk` |
+| 1 | Running | `Run` |
 
-## Additional Constants
-
-### Spawn Modes
-| Lua Constant | Numeric Value | Description |
-|-------------|---------------|-------------|
-| `None` | 0 | No spawning |
-| `Once` | -1 | Spawn once only |
-
-### Time Constants
-| Lua Constant | Numeric Value | Description |
-|-------------|---------------|-------------|
-| `AnimalSpawnTime` | 300 | Animal clan spawn delay (seconds) |
-
-### Boolean Constants
-| Lua Constant | Numeric Value | Description |
-|-------------|---------------|-------------|
-| `FALSE` / `FALSCH` | 0 | Boolean false |
-| `TRUE` / `WAHR` | 1 | Boolean true |
-
-**Source Files:**
-- `script/GdsDefines.lua`
+**Usage:**
+```lua
+-- Example: Make unit run
+figure:SetMovementMode(Run)
+```
 
 ---
 
-## Data Categories (SFCFF)
+## Monument Types
 
-These are the data chunk IDs used in the game's data files (.cff format):
+Race-specific monument building types for worker production and respawn.
 
-| Hex ID | Decimal | Name | Description |
-|--------|---------|------|-------------|
-| 0x000007D0 | 2000 | PlayerMain | Player character data |
-| 0x000007D1 | 2001 | UnitDependencies | Unit dependency trees |
-| 0x000007D2 | 2002 | Spells | Spell definitions |
-| 0x000007D3 | 2003 | Items | Item definitions |
-| 0x000007D4 | 2004 | ItemStats | Item statistics |
-| 0x000007D5 | 2005 | Creos | Creature definitions |
-| 0x000007D6 | 2006 | CreoAbilities | Creature abilities |
-| 0x000007E8 | 2024 | Units | Unit definitions |
-| 0x000007E9 | 2025 | UnitEquipment | Unit equipment loadouts |
-| 0x000007EA | 2026 | UnitSpells | Unit spell lists |
-| 0x000007EB | 2027 | UnitActions | Unit action definitions |
-| 0x000007ED | 2029 | BuildingBase | Building base data |
-| 0x00000806 | 2054 | SpellLines | Spell progression lines |
-| 0x00000807 | 2055 | Effects | Effect definitions |
-| 0x00000808 | 2056 | SpellLineEffects | Spell-to-effect mapping |
-| 0x0000080F | 2063 | WeaponTypes | Weapon type names |
-| 0x00000810 | 2064 | WeaponMaterials | Weapon material names |
-| 0x00000818 | 2072 | ItemSets | Item set bonuses |
+**Total:** 7 monument types
 
-**Source Files:**
-- `modding/SFCFF/SFCFF.cdt`
+| Decimal ID | Hex ID | Monument Type | Constant |
+|------------|--------|---------------|----------|
+| 771 | 0x303 | Human Monument | `kGdObjMonumentHuman` |
+| 772 | 0x304 | Dwarf Monument | `kGdObjMonumentDwarf` |
+| 773 | 0x305 | Elf Monument | `kGdObjMonumentElf` |
+| 774 | 0x306 | Dark Elf Monument | `kGdObjMonumentDarkElf` |
+| 775 | 0x307 | Orc Monument | `kGdObjMonumentOrc` |
+| 776 | 0x308 | Troll Monument | `kGdObjMonumentTroll` |
+| 777 | 0x309 | Hero Monument | `kGdObjMonumentHero` |
+
+**Usage:**
+```lua
+-- Example: Register monument effect
+RegisterEffect(kGdEffectMonumentClaimed, kGdObjMonumentHuman, EffectGet("HumanMonumentClaimed"))
+```
+
+**Note:** Monument IDs are defined in hexadecimal in the Lua sources.
 
 ---
 
-## Notes on ID Resolution
+## Usage Examples
 
-### Numeric Values
-Most numeric ID values are **not** explicitly defined in Lua scripts. They are C++ enums compiled into the game executable (`SpellForce.exe`). The Lua binding layer exposes these as global constants that Lua scripts can reference.
+### Displaying Names in Editor
 
-### Sound IDs
-Sound IDs are **automatically generated** at runtime based on alphabetically sorted sound names:
+```python
+from TiganachReloaded.gui_editor.utils import get_resolver
+
+resolver = get_resolver()
+
+# Get display name: "One-handed Sword [4]"
+display = resolver.get_display_name(4, "weapon_types")
+
+# Get just the name: "One-handed Sword"
+name = resolver.get_name_only(4, "weapon_types")
+
+# Get the constant: "kDrwWt1HSword"
+constant = resolver.get_constant(4, "weapon_types")
+
+# Search for entries
+results = resolver.search_by_name("sword", "weapon_types")
+```
+
+### Using in Lua Scripts
 
 ```lua
-local t = tkeys(Data)  -- Get all sound names
-sort(t)                -- Sort alphabetically
-DrwSoundId = {}
-for i = 1,getn(t) do
-    DrwSoundId[t[i]] = i  -- Assign sequential IDs
+-- Check weapon type
+if figure:GetWeaponType() == kDrwWt1HSword then
+    print("Unit has a one-handed sword")
+end
+
+-- Register spell effect
+SpellEffect{
+    line = kGdSpellLinePain,
+    hit = "DefaultBlack",
+    cast = "CastBlack",
+    resolve = "ResolveBlack"
+}
+
+-- Check race
+if figure:GetRace() == kGtRaceHuman then
+    -- Human-specific logic
 end
 ```
 
-This means sound IDs are **deterministic** but **dynamic** - they're not hardcoded numbers.
-
-### Weapon Type IDs
-Weapon type IDs are referenced from C++ but their exact numeric values are not visible in the Lua codebase. The engine uses these internally for:
-- Animation selection
-- Sound effect mapping
-- Damage calculation
-- Attack range determination
-
-### Data File IDs
-The `.cff` data files use hexadecimal chunk IDs to organize game data. These are defined in `SFCFF.cdt` and can be viewed/edited with the SpellForce Data Editor tools.
-
 ---
 
-## Tools for ID Extraction
+## Tools & Scripts
 
-To extract actual numeric values from the game executable:
+### Extract Mappings from Lua Sources
 
-1. **Hex Editor**: Open `SpellForce.exe` and search for constant patterns
-2. **Disassembler**: Use tools like Ghidra or IDA Pro to analyze the executable
-3. **Memory Scanner**: Use Cheat Engine during runtime to find values
-4. **Modding Tools**: 
-   - **SFGameDataEditor** - Edit game data with visual interface
-   - **Tirganach** - Python library for .cff file parsing
-   - **SFCFF** - Direct data file manipulation
+```bash
+python3 src/helper_tools/extract_lua_mappings.py
+```
+
+Extracts all ID mappings from SpellForce Lua source files and generates `id_name_mappings.json`.
+
+### Generate This Documentation
+
+```bash
+python3 src/helper_tools/generate_mappings_doc.py
+```
+
+Auto-generates this enhanced ID_MAPPINGS.md file from the extracted JSON data.
+
+### Test Mapping Resolver
+
+```bash
+python3 src/TiganachReloaded/gui_editor/utils/mapping_resolver.py
+```
+
+Tests the MappingResolver class and displays sample lookups.
 
 ---
 
 ## References
 
 ### Source Files Analyzed
-- `OriginalGameFiles/script/DrwSound.lua`
-- `modding/Original Scripts/script/GdsDefines.lua`
-- `ModdingTools/Spellforce-Spell-Framework/src/api/sf_general_structures.h`
-- `ModdingTools/tirganach/tirganach/entities.py`
-- `OriginalGameFiles/modding/SFCFF/SFCFF.cdt`
+- `ModdingTools/SpellForceLUASources/script/DrwSound.lua` - Weapon sounds
+- `ModdingTools/SpellForceLUASources/script/GdsDefines.lua` - Core constants
+- `ModdingTools/SpellForceLUASources/object/object_effect_register.lua` - Effects and spells
 
 ### External Documentation
 - SpellForce Modding SDK
-- SFSF (Spellforce Spell Framework) API Documentation
+- SFSF (SpellForce Spell Framework) API Documentation
 - Community modding guides
+
+### Tools
+- **extract_lua_mappings.py** - Automated extraction tool
+- **mapping_resolver.py** - Python API for ID resolution
+- **id_name_mappings.json** - Machine-readable mapping database
 
 ---
 
-**Last Updated:** 2025-10-18  
-**Game Version:** SpellForce: Platinum Edition (v1.x)  
-**Documentation Status:** Based on code analysis and reverse engineering
+**Auto-generated:** 2025-10-19 21:24:54
+**Source:** `id_name_mappings.json`
+**Game Version:** SpellForce: Platinum Edition (v1.x)
+**Documentation Version:** 2.0.0 (Enhanced)

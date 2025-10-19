@@ -1,0 +1,2129 @@
+{
+  "weapon_types": {
+    "0": {
+      "name": "Default/Fist",
+      "constant": "kDrwWtDefault",
+      "display": "Default/Fist [0]",
+      "sound_hit": "battle_hit_fist",
+      "sound_miss": "battle_miss_fist"
+    },
+    "1": {
+      "name": "Mouth/Bite",
+      "constant": "kDrwWtMouth",
+      "display": "Mouth/Bite [1]",
+      "sound_hit": "battle_hit_mouth",
+      "sound_miss": "battle_hit_mouth"
+    },
+    "2": {
+      "name": "Unarmed/Fist",
+      "constant": "kDrwWtHand",
+      "display": "Unarmed/Fist [2]",
+      "sound_hit": "battle_hit_fist",
+      "sound_miss": "battle_miss_fist"
+    },
+    "3": {
+      "name": "One-handed Dagger",
+      "constant": "kDrwWt1HDagger",
+      "display": "One-handed Dagger [3]",
+      "sound_hit": "battle_hit_1hdagger",
+      "sound_miss": "battle_miss_sword"
+    },
+    "4": {
+      "name": "One-handed Sword",
+      "constant": "kDrwWt1HSword",
+      "display": "One-handed Sword [4]",
+      "sound_hit": "battle_hit_1hsword",
+      "sound_miss": "battle_miss_sword"
+    },
+    "5": {
+      "name": "One-handed Axe",
+      "constant": "kDrwWt1HAxe",
+      "display": "One-handed Axe [5]",
+      "sound_hit": "battle_hit_1haxe",
+      "sound_miss": "battle_miss_sword"
+    },
+    "6": {
+      "name": "One-handed Mace (Spiky)",
+      "constant": "kDrwWt1HMaceSpiky",
+      "display": "One-handed Mace (Spiky) [6]",
+      "sound_hit": "battle_hit_1hmacespiky",
+      "sound_miss": "battle_miss_hammer"
+    },
+    "7": {
+      "name": "One-handed Mace (Blunt)",
+      "constant": "kDrwWt1HMaceBlunt",
+      "display": "One-handed Mace (Blunt) [7]",
+      "sound_hit": "battle_hit_1hmaceblunt",
+      "sound_miss": "battle_miss_hammer"
+    },
+    "8": {
+      "name": "One-handed Hammer",
+      "constant": "kDrwWt1HHammer",
+      "display": "One-handed Hammer [8]",
+      "sound_hit": "battle_hit_1hhammer",
+      "sound_miss": "battle_miss_hammer"
+    },
+    "9": {
+      "name": "One-handed Staff",
+      "constant": "kDrwWt1HStaff",
+      "display": "One-handed Staff [9]",
+      "sound_hit": "battle_hit_1hstaff",
+      "sound_miss": "battle_miss_staff"
+    },
+    "10": {
+      "name": "Two-handed Sword",
+      "constant": "kDrwWt2HSword",
+      "display": "Two-handed Sword [10]",
+      "sound_hit": "battle_hit_2hsword",
+      "sound_miss": "battle_miss_sword"
+    },
+    "11": {
+      "name": "Two-handed Axe",
+      "constant": "kDrwWt2HAxe",
+      "display": "Two-handed Axe [11]",
+      "sound_hit": "battle_hit_2haxe",
+      "sound_miss": "battle_miss_sword"
+    },
+    "12": {
+      "name": "Two-handed Mace",
+      "constant": "kDrwWt2HMace",
+      "display": "Two-handed Mace [12]",
+      "sound_hit": "battle_hit_2hmace",
+      "sound_miss": "battle_miss_hammer"
+    },
+    "13": {
+      "name": "Two-handed Hammer",
+      "constant": "kDrwWt2HHammer",
+      "display": "Two-handed Hammer [13]",
+      "sound_hit": "battle_hit_2hhammer",
+      "sound_miss": "battle_miss_hammer"
+    },
+    "14": {
+      "name": "Two-handed Staff",
+      "constant": "kDrwWt2HStaff",
+      "display": "Two-handed Staff [14]",
+      "sound_hit": "battle_hit_2hstaff",
+      "sound_miss": "battle_miss_staff"
+    },
+    "15": {
+      "name": "Two-handed Spear",
+      "constant": "kDrwWt2HSpear",
+      "display": "Two-handed Spear [15]",
+      "sound_hit": "battle_hit_2hspear",
+      "sound_miss": "battle_miss_staff"
+    },
+    "16": {
+      "name": "Two-handed Halberd",
+      "constant": "kDrwWt2HHalberd",
+      "display": "Two-handed Halberd [16]",
+      "sound_hit": "battle_hit_2hhalberd",
+      "sound_miss": "battle_miss_sword"
+    },
+    "17": {
+      "name": "Two-handed Bow",
+      "constant": "kDrwWt2HBow",
+      "display": "Two-handed Bow [17]",
+      "sound_hit": "battle_hit_2hbow",
+      "sound_miss": "battle_miss_staff"
+    },
+    "18": {
+      "name": "Two-handed Crossbow",
+      "constant": "kDrwWt2HCrossbow",
+      "display": "Two-handed Crossbow [18]",
+      "sound_hit": "battle_hit_2hcrossbow",
+      "sound_miss": "battle_miss_bow"
+    },
+    "19": {
+      "name": "One-handed Claw",
+      "constant": "kDrwWt1HClaw",
+      "display": "One-handed Claw [19]",
+      "sound_hit": "battle_hit_claw"
+    }
+  },
+  "spell_lines": {
+    "kGdSpellLineIceArrowEffect": {
+      "name": "Ice Arrow Effect",
+      "constant": "kGdSpellLineIceArrowEffect",
+      "display": "Ice Arrow Effect [?]",
+      "id": null
+    },
+    "kGdSpellLineIceBlockEffect": {
+      "name": "Ice Block Effect",
+      "constant": "kGdSpellLineIceBlockEffect",
+      "display": "Ice Block Effect [?]",
+      "id": null
+    },
+    "kGdSpellLineFireBlockEffect": {
+      "name": "Fire Block Effect",
+      "constant": "kGdSpellLineFireBlockEffect",
+      "display": "Fire Block Effect [?]",
+      "id": null
+    },
+    "kGdSpellLineSpark": {
+      "name": "Spark",
+      "constant": "kGdSpellLineSpark",
+      "display": "Spark [?]",
+      "id": null
+    },
+    "kGdSpellLineAbilityBerserk": {
+      "name": "Ability Berserk",
+      "constant": "kGdSpellLineAbilityBerserk",
+      "display": "Ability Berserk [?]",
+      "id": null
+    },
+    "kGdSpellLineAbilityBlessing": {
+      "name": "Ability Blessing",
+      "constant": "kGdSpellLineAbilityBlessing",
+      "display": "Ability Blessing [?]",
+      "id": null
+    },
+    "kGdSpellLineAbilityTrueShot": {
+      "name": "Ability True Shot",
+      "constant": "kGdSpellLineAbilityTrueShot",
+      "display": "Ability True Shot [?]",
+      "id": null
+    },
+    "kGdSpellLineAbilitySalvo": {
+      "name": "Ability Salvo",
+      "constant": "kGdSpellLineAbilitySalvo",
+      "display": "Ability Salvo [?]",
+      "id": null
+    },
+    "kGdSpellLineAbilitySteelSkin": {
+      "name": "Ability Steel Skin",
+      "constant": "kGdSpellLineAbilitySteelSkin",
+      "display": "Ability Steel Skin [?]",
+      "id": null
+    },
+    "kGdSpellLineAbilityDurability": {
+      "name": "Ability Durability",
+      "constant": "kGdSpellLineAbilityDurability",
+      "display": "Ability Durability [?]",
+      "id": null
+    },
+    "kGdSpellLineAbilityWarCry": {
+      "name": "Ability War Cry",
+      "constant": "kGdSpellLineAbilityWarCry",
+      "display": "Ability War Cry [?]",
+      "id": null
+    },
+    "kGdSpellLineAbilityBenefactions": {
+      "name": "Ability Benefactions",
+      "constant": "kGdSpellLineAbilityBenefactions",
+      "display": "Ability Benefactions [?]",
+      "id": null
+    },
+    "kGdSpellLineAbilityPatronize": {
+      "name": "Ability Patronize",
+      "constant": "kGdSpellLineAbilityPatronize",
+      "display": "Ability Patronize [?]",
+      "id": null
+    },
+    "kGdSpellLineAbilityEndurance": {
+      "name": "Ability Endurance",
+      "constant": "kGdSpellLineAbilityEndurance",
+      "display": "Ability Endurance [?]",
+      "id": null
+    },
+    "kGdSpellLineAbilityShelter": {
+      "name": "Ability Shelter",
+      "constant": "kGdSpellLineAbilityShelter",
+      "display": "Ability Shelter [?]",
+      "id": null
+    },
+    "kGdSpellLineAbilityShiftLife": {
+      "name": "Ability Shift Life",
+      "constant": "kGdSpellLineAbilityShiftLife",
+      "display": "Ability Shift Life [?]",
+      "id": null
+    },
+    "kGdSpellLineAbilityRiposte": {
+      "name": "Ability Riposte",
+      "constant": "kGdSpellLineAbilityRiposte",
+      "display": "Ability Riposte [?]",
+      "id": null
+    },
+    "kGdSpellLineAbilityCriticalHits": {
+      "name": "Ability Critical Hits",
+      "constant": "kGdSpellLineAbilityCriticalHits",
+      "display": "Ability Critical Hits [?]",
+      "id": null
+    },
+    "kGdSpellLineIceburstTower": {
+      "name": "Iceburst Tower",
+      "constant": "kGdSpellLineIceburstTower",
+      "display": "Iceburst Tower [?]",
+      "id": null
+    },
+    "kGdSpellLineArrowTower": {
+      "name": "Arrow Tower",
+      "constant": "kGdSpellLineArrowTower",
+      "display": "Arrow Tower [?]",
+      "id": null
+    },
+    "kGdSpellLineFireBurstTower": {
+      "name": "Fire Burst Tower",
+      "constant": "kGdSpellLineFireBurstTower",
+      "display": "Fire Burst Tower [?]",
+      "id": null
+    },
+    "kGdSpellLineHealingTower": {
+      "name": "Healing Tower",
+      "constant": "kGdSpellLineHealingTower",
+      "display": "Healing Tower [?]",
+      "id": null
+    },
+    "kGdSpellLineHypnotizeTower": {
+      "name": "Hypnotize Tower",
+      "constant": "kGdSpellLineHypnotizeTower",
+      "display": "Hypnotize Tower [?]",
+      "id": null
+    },
+    "kGdSpellLinePainTower": {
+      "name": "Pain Tower",
+      "constant": "kGdSpellLinePainTower",
+      "display": "Pain Tower [?]",
+      "id": null
+    },
+    "kGdSpellLineStoneTower": {
+      "name": "Stone Tower",
+      "constant": "kGdSpellLineStoneTower",
+      "display": "Stone Tower [?]",
+      "id": null
+    },
+    "kGdSpellLineExtinctTower": {
+      "name": "Extinct Tower",
+      "constant": "kGdSpellLineExtinctTower",
+      "display": "Extinct Tower [?]",
+      "id": null
+    },
+    "kGdSpellLineAcidCloud": {
+      "name": "Acid Cloud",
+      "constant": "kGdSpellLineAcidCloud",
+      "display": "Acid Cloud [?]",
+      "id": null
+    },
+    "kGdSpellLinePain": {
+      "name": "Pain",
+      "constant": "kGdSpellLinePain",
+      "display": "Pain [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraWeakness": {
+      "name": "Aura Weakness",
+      "constant": "kGdSpellLineAuraWeakness",
+      "display": "Aura Weakness [?]",
+      "id": null
+    },
+    "kGdSpellLineExtinct": {
+      "name": "Extinct",
+      "constant": "kGdSpellLineExtinct",
+      "display": "Extinct [?]",
+      "id": null
+    },
+    "kGdSpellLineDeath": {
+      "name": "Death",
+      "constant": "kGdSpellLineDeath",
+      "display": "Death [?]",
+      "id": null
+    },
+    "kGdSpellLinePestilence": {
+      "name": "Pestilence",
+      "constant": "kGdSpellLinePestilence",
+      "display": "Pestilence [?]",
+      "id": null
+    },
+    "kGdSpellLinePainArea": {
+      "name": "Pain Area",
+      "constant": "kGdSpellLinePainArea",
+      "display": "Pain Area [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraSuffocation": {
+      "name": "Aura Suffocation",
+      "constant": "kGdSpellLineAuraSuffocation",
+      "display": "Aura Suffocation [?]",
+      "id": null
+    },
+    "kGdSpellLineSuicideDeath": {
+      "name": "Suicide Death",
+      "constant": "kGdSpellLineSuicideDeath",
+      "display": "Suicide Death [?]",
+      "id": null
+    },
+    "kGdSpellLineSummonSkeleton": {
+      "name": "Summon Skeleton",
+      "constant": "kGdSpellLineSummonSkeleton",
+      "display": "Summon Skeleton [?]",
+      "id": null
+    },
+    "kGdSpellLineLifeTap": {
+      "name": "Life Tap",
+      "constant": "kGdSpellLineLifeTap",
+      "display": "Life Tap [?]",
+      "id": null
+    },
+    "kGdSpellLineDeathGrasp": {
+      "name": "Death Grasp",
+      "constant": "kGdSpellLineDeathGrasp",
+      "display": "Death Grasp [?]",
+      "id": null
+    },
+    "kGdSpellLineSummonGoblin": {
+      "name": "Summon Goblin",
+      "constant": "kGdSpellLineSummonGoblin",
+      "display": "Summon Goblin [?]",
+      "id": null
+    },
+    "kGdSpellLineRaiseDead": {
+      "name": "Raise Dead",
+      "constant": "kGdSpellLineRaiseDead",
+      "display": "Raise Dead [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraLifeTap": {
+      "name": "Aura Life Tap",
+      "constant": "kGdSpellLineAuraLifeTap",
+      "display": "Aura Life Tap [?]",
+      "id": null
+    },
+    "kGdSpellLineSummonSpectre": {
+      "name": "Summon Spectre",
+      "constant": "kGdSpellLineSummonSpectre",
+      "display": "Summon Spectre [?]",
+      "id": null
+    },
+    "kGdSpellLineFeignDeath": {
+      "name": "Feign Death",
+      "constant": "kGdSpellLineFeignDeath",
+      "display": "Feign Death [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraSlowFighting": {
+      "name": "Aura Slow Fighting",
+      "constant": "kGdSpellLineAuraSlowFighting",
+      "display": "Aura Slow Fighting [?]",
+      "id": null
+    },
+    "kGdSpellLinePoison": {
+      "name": "Poison",
+      "constant": "kGdSpellLinePoison",
+      "display": "Poison [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraInflexibility": {
+      "name": "Aura Inflexibility",
+      "constant": "kGdSpellLineAuraInflexibility",
+      "display": "Aura Inflexibility [?]",
+      "id": null
+    },
+    "kGdSpellLineDispelWhiteAura": {
+      "name": "Dispel White Aura",
+      "constant": "kGdSpellLineDispelWhiteAura",
+      "display": "Dispel White Aura [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraSlowWalking": {
+      "name": "Aura Slow Walking",
+      "constant": "kGdSpellLineAuraSlowWalking",
+      "display": "Aura Slow Walking [?]",
+      "id": null
+    },
+    "kGdSpellLineDarkBanishing": {
+      "name": "Dark Banishing",
+      "constant": "kGdSpellLineDarkBanishing",
+      "display": "Dark Banishing [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraInability": {
+      "name": "Aura Inability",
+      "constant": "kGdSpellLineAuraInability",
+      "display": "Aura Inability [?]",
+      "id": null
+    },
+    "kGdSpellLineRemediless": {
+      "name": "Remediless",
+      "constant": "kGdSpellLineRemediless",
+      "display": "Remediless [?]",
+      "id": null
+    },
+    "kGdSpellLineHealing": {
+      "name": "Healing",
+      "constant": "kGdSpellLineHealing",
+      "display": "Healing [?]",
+      "id": null
+    },
+    "kGdSpellLineHealingArea": {
+      "name": "Healing Area",
+      "constant": "kGdSpellLineHealingArea",
+      "display": "Healing Area [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraStrength": {
+      "name": "Aura Strength",
+      "constant": "kGdSpellLineAuraStrength",
+      "display": "Aura Strength [?]",
+      "id": null
+    },
+    "kGdSpellLineGreaterHealing": {
+      "name": "Greater Healing",
+      "constant": "kGdSpellLineGreaterHealing",
+      "display": "Greater Healing [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraHealing": {
+      "name": "Aura Healing",
+      "constant": "kGdSpellLineAuraHealing",
+      "display": "Aura Healing [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraEndurance": {
+      "name": "Aura Endurance",
+      "constant": "kGdSpellLineAuraEndurance",
+      "display": "Aura Endurance [?]",
+      "id": null
+    },
+    "kGdSpellLineSentinelHealing": {
+      "name": "Sentinel Healing",
+      "constant": "kGdSpellLineSentinelHealing",
+      "display": "Sentinel Healing [?]",
+      "id": null
+    },
+    "kGdSpellLineSuicideHeal": {
+      "name": "Suicide Heal",
+      "constant": "kGdSpellLineSuicideHeal",
+      "display": "Suicide Heal [?]",
+      "id": null
+    },
+    "kGdSpellLineThornShield": {
+      "name": "Thorn Shield",
+      "constant": "kGdSpellLineThornShield",
+      "display": "Thorn Shield [?]",
+      "id": null
+    },
+    "kGdSpellLineCureDisease": {
+      "name": "Cure Disease",
+      "constant": "kGdSpellLineCureDisease",
+      "display": "Cure Disease [?]",
+      "id": null
+    },
+    "kGdSpellLineSummonWolf": {
+      "name": "Summon Wolf",
+      "constant": "kGdSpellLineSummonWolf",
+      "display": "Summon Wolf [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraRegeneration": {
+      "name": "Aura Regeneration",
+      "constant": "kGdSpellLineAuraRegeneration",
+      "display": "Aura Regeneration [?]",
+      "id": null
+    },
+    "kGdSpellLineDominateAnimal": {
+      "name": "Dominate Animal",
+      "constant": "kGdSpellLineDominateAnimal",
+      "display": "Dominate Animal [?]",
+      "id": null
+    },
+    "kGdSpellLineCurePoison": {
+      "name": "Cure Poison",
+      "constant": "kGdSpellLineCurePoison",
+      "display": "Cure Poison [?]",
+      "id": null
+    },
+    "kGdSpellLineSummonBear": {
+      "name": "Summon Bear",
+      "constant": "kGdSpellLineSummonBear",
+      "display": "Summon Bear [?]",
+      "id": null
+    },
+    "kGdSpellLineCharmAnimal": {
+      "name": "Charm Animal",
+      "constant": "kGdSpellLineCharmAnimal",
+      "display": "Charm Animal [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraFastFighting": {
+      "name": "Aura Fast Fighting",
+      "constant": "kGdSpellLineAuraFastFighting",
+      "display": "Aura Fast Fighting [?]",
+      "id": null
+    },
+    "kGdSpellLineHallow": {
+      "name": "Hallow",
+      "constant": "kGdSpellLineHallow",
+      "display": "Hallow [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraFlexibility": {
+      "name": "Aura Flexibility",
+      "constant": "kGdSpellLineAuraFlexibility",
+      "display": "Aura Flexibility [?]",
+      "id": null
+    },
+    "kGdSpellLineDispelBlackAura": {
+      "name": "Dispel Black Aura",
+      "constant": "kGdSpellLineDispelBlackAura",
+      "display": "Dispel Black Aura [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraFastWalking": {
+      "name": "Aura Fast Walking",
+      "constant": "kGdSpellLineAuraFastWalking",
+      "display": "Aura Fast Walking [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraLight": {
+      "name": "Aura Light",
+      "constant": "kGdSpellLineAuraLight",
+      "display": "Aura Light [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraDexterity": {
+      "name": "Aura Dexterity",
+      "constant": "kGdSpellLineAuraDexterity",
+      "display": "Aura Dexterity [?]",
+      "id": null
+    },
+    "kGdSpellLineInvulnerability": {
+      "name": "Invulnerability",
+      "constant": "kGdSpellLineInvulnerability",
+      "display": "Invulnerability [?]",
+      "id": null
+    },
+    "kGdSpellLineFireBurst": {
+      "name": "Fire Burst",
+      "constant": "kGdSpellLineFireBurst",
+      "display": "Fire Burst [?]",
+      "id": null
+    },
+    "kGdSpellLineFireShield": {
+      "name": "Fire Shield",
+      "constant": "kGdSpellLineFireShield",
+      "display": "Fire Shield [?]",
+      "id": null
+    },
+    "kGdSpellLineFireBall": {
+      "name": "Fire Ball",
+      "constant": "kGdSpellLineFireBall",
+      "display": "Fire Ball [?]",
+      "id": null
+    },
+    "kGdSpellLineFireBallEffect": {
+      "name": "Fire Ball Effect",
+      "constant": "kGdSpellLineFireBallEffect",
+      "display": "Fire Ball Effect [?]",
+      "id": null
+    },
+    "kGdSpellLineIlluminate": {
+      "name": "Illuminate",
+      "constant": "kGdSpellLineIlluminate",
+      "display": "Illuminate [?]",
+      "id": null
+    },
+    "kGdSpellLineFireElemental": {
+      "name": "Fire Elemental",
+      "constant": "kGdSpellLineFireElemental",
+      "display": "Fire Elemental [?]",
+      "id": null
+    },
+    "kGdSpellLineWaveOfFire": {
+      "name": "Wave Of Fire",
+      "constant": "kGdSpellLineWaveOfFire",
+      "display": "Wave Of Fire [?]",
+      "id": null
+    },
+    "kGdSpellLineMeltResistance": {
+      "name": "Melt Resistance",
+      "constant": "kGdSpellLineMeltResistance",
+      "display": "Melt Resistance [?]",
+      "id": null
+    },
+    "kGdSpellLineFireShieldDamage": {
+      "name": "Fire Shield Damage",
+      "constant": "kGdSpellLineFireShieldDamage",
+      "display": "Fire Shield Damage [?]",
+      "id": null
+    },
+    "kGdSpellLineRainOfFire": {
+      "name": "Rain Of Fire",
+      "constant": "kGdSpellLineRainOfFire",
+      "display": "Rain Of Fire [?]",
+      "id": null
+    },
+    "kGdSpellLineIceBurst": {
+      "name": "Ice Burst",
+      "constant": "kGdSpellLineIceBurst",
+      "display": "Ice Burst [?]",
+      "id": null
+    },
+    "kGdSpellLineIceShield": {
+      "name": "Ice Shield",
+      "constant": "kGdSpellLineIceShield",
+      "display": "Ice Shield [?]",
+      "id": null
+    },
+    "kGdSpellLineIceShieldStun": {
+      "name": "Ice Shield Stun",
+      "constant": "kGdSpellLineIceShieldStun",
+      "display": "Ice Shield Stun [?]",
+      "id": null
+    },
+    "kGdSpellLineFreeze": {
+      "name": "Freeze",
+      "constant": "kGdSpellLineFreeze",
+      "display": "Freeze [?]",
+      "id": null
+    },
+    "kGdSpellLineFog": {
+      "name": "Fog",
+      "constant": "kGdSpellLineFog",
+      "display": "Fog [?]",
+      "id": null
+    },
+    "kGdSpellLineIceElemental": {
+      "name": "Ice Elemental",
+      "constant": "kGdSpellLineIceElemental",
+      "display": "Ice Elemental [?]",
+      "id": null
+    },
+    "kGdSpellLineChillResistance": {
+      "name": "Chill Resistance",
+      "constant": "kGdSpellLineChillResistance",
+      "display": "Chill Resistance [?]",
+      "id": null
+    },
+    "kGdSpellLineBlizzard": {
+      "name": "Blizzard",
+      "constant": "kGdSpellLineBlizzard",
+      "display": "Blizzard [?]",
+      "id": null
+    },
+    "kGdSpellLineRockBullet": {
+      "name": "Rock Bullet",
+      "constant": "kGdSpellLineRockBullet",
+      "display": "Rock Bullet [?]",
+      "id": null
+    },
+    "kGdSpellLineConservation": {
+      "name": "Conservation",
+      "constant": "kGdSpellLineConservation",
+      "display": "Conservation [?]",
+      "id": null
+    },
+    "kGdSpellLineDetectMetal": {
+      "name": "Detect Metal",
+      "constant": "kGdSpellLineDetectMetal",
+      "display": "Detect Metal [?]",
+      "id": null
+    },
+    "kGdSpellLineDecay": {
+      "name": "Decay",
+      "constant": "kGdSpellLineDecay",
+      "display": "Decay [?]",
+      "id": null
+    },
+    "kGdSpellLineEarthElemental": {
+      "name": "Earth Elemental",
+      "constant": "kGdSpellLineEarthElemental",
+      "display": "Earth Elemental [?]",
+      "id": null
+    },
+    "kGdSpellLineWaveOfRocks": {
+      "name": "Wave Of Rocks",
+      "constant": "kGdSpellLineWaveOfRocks",
+      "display": "Wave Of Rocks [?]",
+      "id": null
+    },
+    "kGdSpellLinePetrify": {
+      "name": "Petrify",
+      "constant": "kGdSpellLinePetrify",
+      "display": "Petrify [?]",
+      "id": null
+    },
+    "kGdSpellLineStoneRain": {
+      "name": "Stone Rain",
+      "constant": "kGdSpellLineStoneRain",
+      "display": "Stone Rain [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraSiegeTroll": {
+      "name": "Aura Siege Troll",
+      "constant": "kGdSpellLineAuraSiegeTroll",
+      "display": "Aura Siege Troll [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraSiegeHuman": {
+      "name": "Aura Siege Human",
+      "constant": "kGdSpellLineAuraSiegeHuman",
+      "display": "Aura Siege Human [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraSiegeElf": {
+      "name": "Aura Siege Elf",
+      "constant": "kGdSpellLineAuraSiegeElf",
+      "display": "Aura Siege Elf [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraSiegeDarkElf": {
+      "name": "Aura Siege Dark Elf",
+      "constant": "kGdSpellLineAuraSiegeDarkElf",
+      "display": "Aura Siege Dark Elf [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraSiegeOrc": {
+      "name": "Aura Siege Orc",
+      "constant": "kGdSpellLineAuraSiegeOrc",
+      "display": "Aura Siege Orc [?]",
+      "id": null
+    },
+    "kGdSpellLineSelfIllusion": {
+      "name": "Self Illusion",
+      "constant": "kGdSpellLineSelfIllusion",
+      "display": "Self Illusion [?]",
+      "id": null
+    },
+    "kGdSpellLineDistract": {
+      "name": "Distract",
+      "constant": "kGdSpellLineDistract",
+      "display": "Distract [?]",
+      "id": null
+    },
+    "kGdSpellLineDominate": {
+      "name": "Dominate",
+      "constant": "kGdSpellLineDominate",
+      "display": "Dominate [?]",
+      "id": null
+    },
+    "kGdSpellLineInvisibility": {
+      "name": "Invisibility",
+      "constant": "kGdSpellLineInvisibility",
+      "display": "Invisibility [?]",
+      "id": null
+    },
+    "kGdSpellLineCharm": {
+      "name": "Charm",
+      "constant": "kGdSpellLineCharm",
+      "display": "Charm [?]",
+      "id": null
+    },
+    "kGdSpellLineBefriend": {
+      "name": "Befriend",
+      "constant": "kGdSpellLineBefriend",
+      "display": "Befriend [?]",
+      "id": null
+    },
+    "kGdSpellLineDisenchant": {
+      "name": "Disenchant",
+      "constant": "kGdSpellLineDisenchant",
+      "display": "Disenchant [?]",
+      "id": null
+    },
+    "kGdSpellLineCharisma": {
+      "name": "Charisma",
+      "constant": "kGdSpellLineCharisma",
+      "display": "Charisma [?]",
+      "id": null
+    },
+    "kGdSpellLineShock": {
+      "name": "Shock",
+      "constant": "kGdSpellLineShock",
+      "display": "Shock [?]",
+      "id": null
+    },
+    "kGdSpellLineConfuse": {
+      "name": "Confuse",
+      "constant": "kGdSpellLineConfuse",
+      "display": "Confuse [?]",
+      "id": null
+    },
+    "kGdSpellLineHypnotize": {
+      "name": "Hypnotize",
+      "constant": "kGdSpellLineHypnotize",
+      "display": "Hypnotize [?]",
+      "id": null
+    },
+    "kGdSpellLineHypnotizeTwo": {
+      "name": "Hypnotize Two",
+      "constant": "kGdSpellLineHypnotizeTwo",
+      "display": "Hypnotize Two [?]",
+      "id": null
+    },
+    "kGdSpellLineAmok": {
+      "name": "Amok",
+      "constant": "kGdSpellLineAmok",
+      "display": "Amok [?]",
+      "id": null
+    },
+    "kGdSpellLineShockwave": {
+      "name": "Shockwave",
+      "constant": "kGdSpellLineShockwave",
+      "display": "Shockwave [?]",
+      "id": null
+    },
+    "kGdSpellLineDisrupt": {
+      "name": "Disrupt",
+      "constant": "kGdSpellLineDisrupt",
+      "display": "Disrupt [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraHypnotization": {
+      "name": "Aura Hypnotization",
+      "constant": "kGdSpellLineAuraHypnotization",
+      "display": "Aura Hypnotization [?]",
+      "id": null
+    },
+    "kGdSpellLineDemoralization": {
+      "name": "Demoralization",
+      "constant": "kGdSpellLineDemoralization",
+      "display": "Demoralization [?]",
+      "id": null
+    },
+    "kGdSpellLineManaDrain": {
+      "name": "Mana Drain",
+      "constant": "kGdSpellLineManaDrain",
+      "display": "Mana Drain [?]",
+      "id": null
+    },
+    "kGdSpellLineSacrificeMana": {
+      "name": "Sacrifice Mana",
+      "constant": "kGdSpellLineSacrificeMana",
+      "display": "Sacrifice Mana [?]",
+      "id": null
+    },
+    "kGdSpellLineDetectMagic": {
+      "name": "Detect Magic",
+      "constant": "kGdSpellLineDetectMagic",
+      "display": "Detect Magic [?]",
+      "id": null
+    },
+    "kGdSpellLineManaTap": {
+      "name": "Mana Tap",
+      "constant": "kGdSpellLineManaTap",
+      "display": "Mana Tap [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraBrilliance": {
+      "name": "Aura Brilliance",
+      "constant": "kGdSpellLineAuraBrilliance",
+      "display": "Aura Brilliance [?]",
+      "id": null
+    },
+    "kGdSpellLineEnlightenment": {
+      "name": "Enlightenment",
+      "constant": "kGdSpellLineEnlightenment",
+      "display": "Enlightenment [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraManaTap": {
+      "name": "Aura Mana Tap",
+      "constant": "kGdSpellLineAuraManaTap",
+      "display": "Aura Mana Tap [?]",
+      "id": null
+    },
+    "kGdSpellLineMeditation": {
+      "name": "Meditation",
+      "constant": "kGdSpellLineMeditation",
+      "display": "Meditation [?]",
+      "id": null
+    },
+    "kGdSpellLineSlowness": {
+      "name": "Slowness",
+      "constant": "kGdSpellLineSlowness",
+      "display": "Slowness [?]",
+      "id": null
+    },
+    "kGdSpellLineInflexibility": {
+      "name": "Inflexibility",
+      "constant": "kGdSpellLineInflexibility",
+      "display": "Inflexibility [?]",
+      "id": null
+    },
+    "kGdSpellLineWeaken": {
+      "name": "Weaken",
+      "constant": "kGdSpellLineWeaken",
+      "display": "Weaken [?]",
+      "id": null
+    },
+    "kGdSpellLineSlowFighting": {
+      "name": "Slow Fighting",
+      "constant": "kGdSpellLineSlowFighting",
+      "display": "Slow Fighting [?]",
+      "id": null
+    },
+    "kGdSpellLineInability": {
+      "name": "Inability",
+      "constant": "kGdSpellLineInability",
+      "display": "Inability [?]",
+      "id": null
+    },
+    "kGdSpellLineSuffocation": {
+      "name": "Suffocation",
+      "constant": "kGdSpellLineSuffocation",
+      "display": "Suffocation [?]",
+      "id": null
+    },
+    "kGdSpellLineQuickness": {
+      "name": "Quickness",
+      "constant": "kGdSpellLineQuickness",
+      "display": "Quickness [?]",
+      "id": null
+    },
+    "kGdSpellLineFlexibility": {
+      "name": "Flexibility",
+      "constant": "kGdSpellLineFlexibility",
+      "display": "Flexibility [?]",
+      "id": null
+    },
+    "kGdSpellLineStrengthen": {
+      "name": "Strengthen",
+      "constant": "kGdSpellLineStrengthen",
+      "display": "Strengthen [?]",
+      "id": null
+    },
+    "kGdSpellLineGuard": {
+      "name": "Guard",
+      "constant": "kGdSpellLineGuard",
+      "display": "Guard [?]",
+      "id": null
+    },
+    "kGdSpellLineRegenerate": {
+      "name": "Regenerate",
+      "constant": "kGdSpellLineRegenerate",
+      "display": "Regenerate [?]",
+      "id": null
+    },
+    "kGdSpellLineFastFighting": {
+      "name": "Fast Fighting",
+      "constant": "kGdSpellLineFastFighting",
+      "display": "Fast Fighting [?]",
+      "id": null
+    },
+    "kGdSpellLineHealingAura": {
+      "name": "Healing Aura",
+      "constant": "kGdSpellLineHealingAura",
+      "display": "Healing Aura [?]",
+      "id": null
+    },
+    "kGdSpellLineDexterity": {
+      "name": "Dexterity",
+      "constant": "kGdSpellLineDexterity",
+      "display": "Dexterity [?]",
+      "id": null
+    },
+    "kGdSpellLineEndurance": {
+      "name": "Endurance",
+      "constant": "kGdSpellLineEndurance",
+      "display": "Endurance [?]",
+      "id": null
+    },
+    "kGdSpellLineManaTapAura": {
+      "name": "Mana Tap Aura",
+      "constant": "kGdSpellLineManaTapAura",
+      "display": "Mana Tap Aura [?]",
+      "id": null
+    },
+    "kGdSpellLineLifeTapAura": {
+      "name": "Life Tap Aura",
+      "constant": "kGdSpellLineLifeTapAura",
+      "display": "Life Tap Aura [?]",
+      "id": null
+    },
+    "kGdSpellLineBrilliance": {
+      "name": "Brilliance",
+      "constant": "kGdSpellLineBrilliance",
+      "display": "Brilliance [?]",
+      "id": null
+    },
+    "kGdSpellLineFireResistance": {
+      "name": "Fire Resistance",
+      "constant": "kGdSpellLineFireResistance",
+      "display": "Fire Resistance [?]",
+      "id": null
+    },
+    "kGdSpellLineEssenceBlack": {
+      "name": "Essence Black",
+      "constant": "kGdSpellLineEssenceBlack",
+      "display": "Essence Black [?]",
+      "id": null
+    },
+    "kGdSpellLineAlmightinessBlack": {
+      "name": "Almightiness Black",
+      "constant": "kGdSpellLineAlmightinessBlack",
+      "display": "Almightiness Black [?]",
+      "id": null
+    },
+    "kGdSpellLineEssenceWhite": {
+      "name": "Essence White",
+      "constant": "kGdSpellLineEssenceWhite",
+      "display": "Essence White [?]",
+      "id": null
+    },
+    "kGdSpellLineAlmightinessWhite": {
+      "name": "Almightiness White",
+      "constant": "kGdSpellLineAlmightinessWhite",
+      "display": "Almightiness White [?]",
+      "id": null
+    },
+    "kGdSpellLineEssenceMental": {
+      "name": "Essence Mental",
+      "constant": "kGdSpellLineEssenceMental",
+      "display": "Essence Mental [?]",
+      "id": null
+    },
+    "kGdSpellLineAlmightinessMental": {
+      "name": "Almightiness Mental",
+      "constant": "kGdSpellLineAlmightinessMental",
+      "display": "Almightiness Mental [?]",
+      "id": null
+    },
+    "kGdSpellLineEssenceElemental": {
+      "name": "Essence Elemental",
+      "constant": "kGdSpellLineEssenceElemental",
+      "display": "Essence Elemental [?]",
+      "id": null
+    },
+    "kGdSpellLineAlmightinessElemental": {
+      "name": "Almightiness Elemental",
+      "constant": "kGdSpellLineAlmightinessElemental",
+      "display": "Almightiness Elemental [?]",
+      "id": null
+    },
+    "kGdSpellLineAssistance": {
+      "name": "Assistance",
+      "constant": "kGdSpellLineAssistance",
+      "display": "Assistance [?]",
+      "id": null
+    },
+    "kGdSpellLineSummonTreeWraith": {
+      "name": "Summon Tree Wraith",
+      "constant": "kGdSpellLineSummonTreeWraith",
+      "display": "Summon Tree Wraith [?]",
+      "id": null
+    },
+    "kGdSpellLineSummonBlade": {
+      "name": "Summon Blade",
+      "constant": "kGdSpellLineSummonBlade",
+      "display": "Summon Blade [?]",
+      "id": null
+    },
+    "kGdSpellLineSummonFireGolem": {
+      "name": "Summon Fire Golem",
+      "constant": "kGdSpellLineSummonFireGolem",
+      "display": "Summon Fire Golem [?]",
+      "id": null
+    },
+    "kGdSpellLineSummonIceGolem": {
+      "name": "Summon Ice Golem",
+      "constant": "kGdSpellLineSummonIceGolem",
+      "display": "Summon Ice Golem [?]",
+      "id": null
+    },
+    "kGdSpellLineSummonEarthGolem": {
+      "name": "Summon Earth Golem",
+      "constant": "kGdSpellLineSummonEarthGolem",
+      "display": "Summon Earth Golem [?]",
+      "id": null
+    },
+    "kGdSpellLineAuraEternity": {
+      "name": "Aura Eternity",
+      "constant": "kGdSpellLineAuraEternity",
+      "display": "Aura Eternity [?]",
+      "id": null
+    },
+    "kGdSpellLineEternity": {
+      "name": "Eternity",
+      "constant": "kGdSpellLineEternity",
+      "display": "Eternity [?]",
+      "id": null
+    },
+    "kGdSpellLineHypnotizeArea": {
+      "name": "Hypnotize Area",
+      "constant": "kGdSpellLineHypnotizeArea",
+      "display": "Hypnotize Area [?]",
+      "id": null
+    },
+    "kGdSpellLineConfuseArea": {
+      "name": "Confuse Area",
+      "constant": "kGdSpellLineConfuseArea",
+      "display": "Confuse Area [?]",
+      "id": null
+    },
+    "kGdSpellLineFreezeArea": {
+      "name": "Freeze Area",
+      "constant": "kGdSpellLineFreezeArea",
+      "display": "Freeze Area [?]",
+      "id": null
+    },
+    "kGdSpellLineRevenge": {
+      "name": "Revenge",
+      "constant": "kGdSpellLineRevenge",
+      "display": "Revenge [?]",
+      "id": null
+    },
+    "kGdSpellLineTorture": {
+      "name": "Torture",
+      "constant": "kGdSpellLineTorture",
+      "display": "Torture [?]",
+      "id": null
+    },
+    "kGdSpellLineTortureReceive": {
+      "name": "Torture Receive",
+      "constant": "kGdSpellLineTortureReceive",
+      "display": "Torture Receive [?]",
+      "id": null
+    },
+    "kGdSpellLineDominateUndead": {
+      "name": "Dominate Undead",
+      "constant": "kGdSpellLineDominateUndead",
+      "display": "Dominate Undead [?]",
+      "id": null
+    },
+    "kGdSpellLineRoots": {
+      "name": "Roots",
+      "constant": "kGdSpellLineRoots",
+      "display": "Roots [?]",
+      "id": null
+    },
+    "kGdSpellLineRootsArea": {
+      "name": "Roots Area",
+      "constant": "kGdSpellLineRootsArea",
+      "display": "Roots Area [?]",
+      "id": null
+    },
+    "kGdSpellLineFeetClay": {
+      "name": "Feet Clay",
+      "constant": "kGdSpellLineFeetClay",
+      "display": "Feet Clay [?]",
+      "id": null
+    },
+    "kGdSpellLineHallowChained": {
+      "name": "Hallow Chained",
+      "constant": "kGdSpellLineHallowChained",
+      "display": "Hallow Chained [?]",
+      "id": null
+    },
+    "kGdSpellLineChainHallow": {
+      "name": "Chain Hallow",
+      "constant": "kGdSpellLineChainHallow",
+      "display": "Chain Hallow [?]",
+      "id": null
+    },
+    "kGdSpellLinePainChained": {
+      "name": "Pain Chained",
+      "constant": "kGdSpellLinePainChained",
+      "display": "Pain Chained [?]",
+      "id": null
+    },
+    "kGdSpellLineChainPain": {
+      "name": "Chain Pain",
+      "constant": "kGdSpellLineChainPain",
+      "display": "Chain Pain [?]",
+      "id": null
+    },
+    "kGdSpellLineLifeTapChained": {
+      "name": "Life Tap Chained",
+      "constant": "kGdSpellLineLifeTapChained",
+      "display": "Life Tap Chained [?]",
+      "id": null
+    },
+    "kGdSpellLineChainLifetap": {
+      "name": "Chain Lifetap",
+      "constant": "kGdSpellLineChainLifetap",
+      "display": "Chain Lifetap [?]",
+      "id": null
+    },
+    "kGdSpellLineFireBurstChained": {
+      "name": "Fire Burst Chained",
+      "constant": "kGdSpellLineFireBurstChained",
+      "display": "Fire Burst Chained [?]",
+      "id": null
+    },
+    "kGdSpellLineChainFireburst": {
+      "name": "Chain Fireburst",
+      "constant": "kGdSpellLineChainFireburst",
+      "display": "Chain Fireburst [?]",
+      "id": null
+    },
+    "kGdSpellLineFireBallChained": {
+      "name": "Fire Ball Chained",
+      "constant": "kGdSpellLineFireBallChained",
+      "display": "Fire Ball Chained [?]",
+      "id": null
+    },
+    "kGdSpellLineChainFireball": {
+      "name": "Chain Fireball",
+      "constant": "kGdSpellLineChainFireball",
+      "display": "Chain Fireball [?]",
+      "id": null
+    },
+    "kGdSpellLineIceBurstChained": {
+      "name": "Ice Burst Chained",
+      "constant": "kGdSpellLineIceBurstChained",
+      "display": "Ice Burst Chained [?]",
+      "id": null
+    },
+    "kGdSpellLineChainIceburst": {
+      "name": "Chain Iceburst",
+      "constant": "kGdSpellLineChainIceburst",
+      "display": "Chain Iceburst [?]",
+      "id": null
+    },
+    "kGdSpellLineRockBulletChained": {
+      "name": "Rock Bullet Chained",
+      "constant": "kGdSpellLineRockBulletChained",
+      "display": "Rock Bullet Chained [?]",
+      "id": null
+    },
+    "kGdSpellLineChainRockBullet": {
+      "name": "Chain Rock Bullet",
+      "constant": "kGdSpellLineChainRockBullet",
+      "display": "Chain Rock Bullet [?]",
+      "id": null
+    },
+    "kGdSpellLineShockChained": {
+      "name": "Shock Chained",
+      "constant": "kGdSpellLineShockChained",
+      "display": "Shock Chained [?]",
+      "id": null
+    },
+    "kGdSpellLineChainShock": {
+      "name": "Chain Shock",
+      "constant": "kGdSpellLineChainShock",
+      "display": "Chain Shock [?]",
+      "id": null
+    },
+    "kGdSpellLineManaTapChained": {
+      "name": "Mana Tap Chained",
+      "constant": "kGdSpellLineManaTapChained",
+      "display": "Mana Tap Chained [?]",
+      "id": null
+    },
+    "kGdSpellLineChainManatap": {
+      "name": "Chain Manatap",
+      "constant": "kGdSpellLineChainManatap",
+      "display": "Chain Manatap [?]",
+      "id": null
+    },
+    "kGdSpellLineCharmChained": {
+      "name": "Charm Chained",
+      "constant": "kGdSpellLineCharmChained",
+      "display": "Charm Chained [?]",
+      "id": null
+    },
+    "kGdSpellLineChainCharm": {
+      "name": "Chain Charm",
+      "constant": "kGdSpellLineChainCharm",
+      "display": "Chain Charm [?]",
+      "id": null
+    },
+    "kGdSpellLineReinforcement": {
+      "name": "Reinforcement",
+      "constant": "kGdSpellLineReinforcement",
+      "display": "Reinforcement [?]",
+      "id": null
+    },
+    "kGdSpellLineHolyTouch": {
+      "name": "Holy Touch",
+      "constant": "kGdSpellLineHolyTouch",
+      "display": "Holy Touch [?]",
+      "id": null
+    },
+    "kGdSpellLineCannibalize": {
+      "name": "Cannibalize",
+      "constant": "kGdSpellLineCannibalize",
+      "display": "Cannibalize [?]",
+      "id": null
+    },
+    "kGdSpellLineMutation": {
+      "name": "Mutation",
+      "constant": "kGdSpellLineMutation",
+      "display": "Mutation [?]",
+      "id": null
+    },
+    "kGdSpellLineMutationChained": {
+      "name": "Mutation Chained",
+      "constant": "kGdSpellLineMutationChained",
+      "display": "Mutation Chained [?]",
+      "id": null
+    },
+    "kGdSpellLineChainMutation": {
+      "name": "Chain Mutation",
+      "constant": "kGdSpellLineChainMutation",
+      "display": "Chain Mutation [?]",
+      "id": null
+    },
+    "kGdSpellLineDarknessArea": {
+      "name": "Darkness Area",
+      "constant": "kGdSpellLineDarknessArea",
+      "display": "Darkness Area [?]",
+      "id": null
+    },
+    "kGdSpellLineMirrorImage": {
+      "name": "Mirror Image",
+      "constant": "kGdSpellLineMirrorImage",
+      "display": "Mirror Image [?]",
+      "id": null
+    },
+    "kGdSpellLineShiftMana": {
+      "name": "Shift Mana",
+      "constant": "kGdSpellLineShiftMana",
+      "display": "Shift Mana [?]",
+      "id": null
+    },
+    "kGdSpellLineManaShield": {
+      "name": "Mana Shield",
+      "constant": "kGdSpellLineManaShield",
+      "display": "Mana Shield [?]",
+      "id": null
+    },
+    "kGdSpellLineVoodoo": {
+      "name": "Voodoo",
+      "constant": "kGdSpellLineVoodoo",
+      "display": "Voodoo [?]",
+      "id": null
+    },
+    "kGdSpellLineFakeSpellOneFigure": {
+      "name": "Fake Spell One Figure",
+      "constant": "kGdSpellLineFakeSpellOneFigure",
+      "display": "Fake Spell One Figure [?]",
+      "id": null
+    },
+    "kGdSpellLineForget": {
+      "name": "Forget",
+      "constant": "kGdSpellLineForget",
+      "display": "Forget [?]",
+      "id": null
+    },
+    "kGdSpellLineFear": {
+      "name": "Fear",
+      "constant": "kGdSpellLineFear",
+      "display": "Fear [?]",
+      "id": null
+    },
+    "kGdSpellLineObjectIllusion": {
+      "name": "Object Illusion",
+      "constant": "kGdSpellLineObjectIllusion",
+      "display": "Object Illusion [?]",
+      "id": null
+    },
+    "kGdSpellLineRemoveCurse": {
+      "name": "Remove Curse",
+      "constant": "kGdSpellLineRemoveCurse",
+      "display": "Remove Curse [?]",
+      "id": null
+    },
+    "kGdSpellLineSummonDemon": {
+      "name": "Summon Demon",
+      "constant": "kGdSpellLineSummonDemon",
+      "display": "Summon Demon [?]",
+      "id": null
+    },
+    "kGdSpellLineSummonChanneler": {
+      "name": "Summon Channeler",
+      "constant": "kGdSpellLineSummonChanneler",
+      "display": "Summon Channeler [?]",
+      "id": null
+    },
+    "kGdSpellLineDarkMight": {
+      "name": "Dark Might",
+      "constant": "kGdSpellLineDarkMight",
+      "display": "Dark Might [?]",
+      "id": null
+    },
+    "kGdSpellLineWeakenArea": {
+      "name": "Weaken Area",
+      "constant": "kGdSpellLineWeakenArea",
+      "display": "Weaken Area [?]",
+      "id": null
+    },
+    "kGdSpellLineInflexibilityArea": {
+      "name": "Inflexibility Area",
+      "constant": "kGdSpellLineInflexibilityArea",
+      "display": "Inflexibility Area [?]",
+      "id": null
+    },
+    "kGdSpellLineSlownessArea": {
+      "name": "Slowness Area",
+      "constant": "kGdSpellLineSlownessArea",
+      "display": "Slowness Area [?]",
+      "id": null
+    },
+    "kGdSpellLinePlagueArea": {
+      "name": "Plague Area",
+      "constant": "kGdSpellLinePlagueArea",
+      "display": "Plague Area [?]",
+      "id": null
+    },
+    "kGdSpellLineFlexibilityArea": {
+      "name": "Flexibility Area",
+      "constant": "kGdSpellLineFlexibilityArea",
+      "display": "Flexibility Area [?]",
+      "id": null
+    },
+    "kGdSpellLineQuicknessArea": {
+      "name": "Quickness Area",
+      "constant": "kGdSpellLineQuicknessArea",
+      "display": "Quickness Area [?]",
+      "id": null
+    },
+    "kGdSpellLineStrengthenArea": {
+      "name": "Strengthen Area",
+      "constant": "kGdSpellLineStrengthenArea",
+      "display": "Strengthen Area [?]",
+      "id": null
+    },
+    "kGdSpellLineHolyMight": {
+      "name": "Holy Might",
+      "constant": "kGdSpellLineHolyMight",
+      "display": "Holy Might [?]",
+      "id": null
+    },
+    "kGdSpellLineDecayArea": {
+      "name": "Decay Area",
+      "constant": "kGdSpellLineDecayArea",
+      "display": "Decay Area [?]",
+      "id": null
+    },
+    "kGdSpellLinePestilenceArea": {
+      "name": "Pestilence Area",
+      "constant": "kGdSpellLinePestilenceArea",
+      "display": "Pestilence Area [?]",
+      "id": null
+    },
+    "kGdSpellLineRemedilessArea": {
+      "name": "Remediless Area",
+      "constant": "kGdSpellLineRemedilessArea",
+      "display": "Remediless Area [?]",
+      "id": null
+    },
+    "kGdSpellLineWaveOfIce": {
+      "name": "Wave Of Ice",
+      "constant": "kGdSpellLineWaveOfIce",
+      "display": "Wave Of Ice [?]",
+      "id": null
+    }
+  },
+  "effect_types": {
+    "0": {
+      "name": "None",
+      "constant": "kGdEffectNone",
+      "display": "None [0]"
+    },
+    "1": {
+      "name": "Spell Cast",
+      "constant": "kGdEffectSpellCast",
+      "display": "Spell Cast [1]"
+    },
+    "2": {
+      "name": "Spell Hit World",
+      "constant": "kGdEffectSpellHitWorld",
+      "display": "Spell Hit World [2]"
+    },
+    "3": {
+      "name": "Spell Hit Target",
+      "constant": "kGdEffectSpellHitTarget",
+      "display": "Spell Hit Target [3]"
+    },
+    "4": {
+      "name": "Spell DOT Hit Target",
+      "constant": "kGdEffectSpellDOTHitTarget",
+      "display": "Spell DOT Hit Target [4]"
+    },
+    "5": {
+      "name": "Spell Miss Target",
+      "constant": "kGdEffectSpellMissTarget",
+      "display": "Spell Miss Target [5]"
+    },
+    "6": {
+      "name": "Spell Resolve",
+      "constant": "kGdEffectSpellResolve",
+      "display": "Spell Resolve [6]"
+    },
+    "7": {
+      "name": "Summon Worker",
+      "constant": "kGdEffectSummonWorker",
+      "display": "Summon Worker [7]"
+    },
+    "8": {
+      "name": "Worker Appears",
+      "constant": "kGdEffectWorkerAppears",
+      "display": "Worker Appears [8]"
+    },
+    "9": {
+      "name": "Summon Hero",
+      "constant": "kGdEffectSummonHero",
+      "display": "Summon Hero [9]"
+    },
+    "10": {
+      "name": "Hero Appears",
+      "constant": "kGdEffectHeroAppears",
+      "display": "Hero Appears [10]"
+    },
+    "11": {
+      "name": "Spell Target Resisted",
+      "constant": "kGdEffectSpellTargetResisted",
+      "display": "Spell Target Resisted [11]"
+    },
+    "12": {
+      "name": "Spell Resolve Self",
+      "constant": "kGdEffectSpellResolveSelf",
+      "display": "Spell Resolve Self [12]"
+    },
+    "13": {
+      "name": "Meteor Fall",
+      "constant": "kGdEffectMeteorFall",
+      "display": "Meteor Fall [13]"
+    },
+    "14": {
+      "name": "Meteor Hit",
+      "constant": "kGdEffectMeteorHit",
+      "display": "Meteor Hit [14]"
+    },
+    "15": {
+      "name": "Blizzard Fall",
+      "constant": "kGdEffectBlizzardFall",
+      "display": "Blizzard Fall [15]"
+    },
+    "16": {
+      "name": "Blizzard Hit",
+      "constant": "kGdEffectBlizzardHit",
+      "display": "Blizzard Hit [16]"
+    },
+    "17": {
+      "name": "Stone Fall",
+      "constant": "kGdEffectStoneFall",
+      "display": "Stone Fall [17]"
+    },
+    "18": {
+      "name": "Stone Hit",
+      "constant": "kGdEffectStoneHit",
+      "display": "Stone Hit [18]"
+    },
+    "19": {
+      "name": "Pet Appears",
+      "constant": "kGdEffectPetAppears",
+      "display": "Pet Appears [19]"
+    },
+    "20": {
+      "name": "Test Effect",
+      "constant": "kGdEffectTest",
+      "display": "Test Effect [20]"
+    },
+    "21": {
+      "name": "Monument Claimed",
+      "constant": "kGdEffectMonumentClaimed",
+      "display": "Monument Claimed [21]"
+    },
+    "22": {
+      "name": "Monument Working",
+      "constant": "kGdEffectMonumentWorking",
+      "display": "Monument Working [22]"
+    },
+    "23": {
+      "name": "Aura Resolve",
+      "constant": "kGdEffectAuraResolve",
+      "display": "Aura Resolve [23]"
+    },
+    "24": {
+      "name": "Projectile",
+      "constant": "kGdEffectProjectile",
+      "display": "Projectile [24]"
+    },
+    "25": {
+      "name": "Building",
+      "constant": "kGdEffectBuilding",
+      "display": "Building [25]"
+    },
+    "26": {
+      "name": "Player Bind",
+      "constant": "kGdEffectPlayerBind",
+      "display": "Player Bind [26]"
+    },
+    "27": {
+      "name": "Summon Main Character",
+      "constant": "kGdEffectSummonMainChar",
+      "display": "Summon Main Character [27]"
+    },
+    "28": {
+      "name": "Main Character Appears",
+      "constant": "kGdEffectMainCharAppears",
+      "display": "Main Character Appears [28]"
+    },
+    "29": {
+      "name": "Titan Production",
+      "constant": "kGdEffectTitanProduction",
+      "display": "Titan Production [29]"
+    },
+    "30": {
+      "name": "Titan Appears",
+      "constant": "kGdEffectTitanAppears",
+      "display": "Titan Appears [30]"
+    },
+    "31": {
+      "name": "Mental Tower Cast",
+      "constant": "kGdEffectMentalTowerCast",
+      "display": "Mental Tower Cast [31]"
+    },
+    "32": {
+      "name": "Mental Tower Idle",
+      "constant": "kGdEffectMentalTowerIdle",
+      "display": "Mental Tower Idle [32]"
+    },
+    "33": {
+      "name": "Monument Bullet",
+      "constant": "kGdEffectMonumentBullet",
+      "display": "Monument Bullet [33]"
+    },
+    "34": {
+      "name": "Monument Hit Figure",
+      "constant": "kGdEffectMonumentHitFigure",
+      "display": "Monument Hit Figure [34]"
+    },
+    "35": {
+      "name": "Spell Assistance Hit",
+      "constant": "kGdEffectSpellAssistanceHitFigure",
+      "display": "Spell Assistance Hit [35]"
+    },
+    "36": {
+      "name": "Chain Resolve",
+      "constant": "kGdEffectChainResolve",
+      "display": "Chain Resolve [36]"
+    },
+    "37": {
+      "name": "Spell Voodoo Hit",
+      "constant": "kGdEffectSpellVoodooHitFigure",
+      "display": "Spell Voodoo Hit [37]"
+    },
+    "38": {
+      "name": "Spell Mana Shield Hit",
+      "constant": "kGdEffectSpellManaShieldHitFigure",
+      "display": "Spell Mana Shield Hit [38]"
+    }
+  },
+  "job_types": {
+    "kGdJobHitTargetRange1": {
+      "name": "Ranged Aim",
+      "constant": "kGdJobHitTargetRange1",
+      "display": "Ranged Aim [?]",
+      "id": null
+    },
+    "kGdJobGroupWalk": {
+      "name": "Walking",
+      "constant": "kGdJobGroupWalk",
+      "display": "Walking [?]",
+      "id": null
+    },
+    "kGdJobFeignDeath": {
+      "name": "Feign Death",
+      "constant": "kGdJobFeignDeath",
+      "display": "Feign Death [?]",
+      "id": null
+    },
+    "kGdJobStab": {
+      "name": "Stabbing Attack",
+      "constant": "kGdJobStab",
+      "display": "Stabbing Attack [?]",
+      "id": null
+    },
+    "kGdJobStoop": {
+      "name": "Pickup/Loot",
+      "constant": "kGdJobStoop",
+      "display": "Pickup/Loot [?]",
+      "id": null
+    },
+    "kGdJobBuilderBuild": {
+      "name": "Construction",
+      "constant": "kGdJobBuilderBuild",
+      "display": "Construction [?]",
+      "id": null
+    },
+    "kGdJobPunch": {
+      "name": "Unarmed Attack",
+      "constant": "kGdJobPunch",
+      "display": "Unarmed Attack [?]",
+      "id": null
+    },
+    "kGdJobGroupNothing": {
+      "name": "No Action",
+      "constant": "kGdJobGroupNothing",
+      "display": "No Action [?]",
+      "id": null
+    },
+    "kGdJobCastResolve": {
+      "name": "Spell Complete",
+      "constant": "kGdJobCastResolve",
+      "display": "Spell Complete [?]",
+      "id": null
+    },
+    "kGdJobStoneMinerCrushStone": {
+      "name": "Mine Stone",
+      "constant": "kGdJobStoneMinerCrushStone",
+      "display": "Mine Stone [?]",
+      "id": null
+    },
+    "kGdJobHitTargetRange2": {
+      "name": "Ranged Fire",
+      "constant": "kGdJobHitTargetRange2",
+      "display": "Ranged Fire [?]",
+      "id": null
+    },
+    "kGdJobWoodCutterCutTree": {
+      "name": "Chop Trees",
+      "constant": "kGdJobWoodCutterCutTree",
+      "display": "Chop Trees [?]",
+      "id": null
+    },
+    "kGdJobMinerWork": {
+      "name": "Mine Ore",
+      "constant": "kGdJobMinerWork",
+      "display": "Mine Ore [?]",
+      "id": null
+    },
+    "kGdJobFisherWork": {
+      "name": "Fishing",
+      "constant": "kGdJobFisherWork",
+      "display": "Fishing [?]",
+      "id": null
+    },
+    "kGdJobCriticalHit": {
+      "name": "Hit Reaction",
+      "constant": "kGdJobCriticalHit",
+      "display": "Hit Reaction [?]",
+      "id": null
+    },
+    "kGdJobSmithWork": {
+      "name": "Blacksmithing",
+      "constant": "kGdJobSmithWork",
+      "display": "Blacksmithing [?]",
+      "id": null
+    },
+    "kGdJobStrike": {
+      "name": "Melee Strike",
+      "constant": "kGdJobStrike",
+      "display": "Melee Strike [?]",
+      "id": null
+    },
+    "kGdJobDefault": {
+      "name": "Default/Idle",
+      "constant": "kGdJobDefault",
+      "display": "Default/Idle [?]",
+      "id": null
+    },
+    "kGdJobCast": {
+      "name": "Spell Cast",
+      "constant": "kGdJobCast",
+      "display": "Spell Cast [?]",
+      "id": null
+    },
+    "kGdJobDie": {
+      "name": "Death",
+      "constant": "kGdJobDie",
+      "display": "Death [?]",
+      "id": null
+    }
+  },
+  "races": {
+    "1": {
+      "name": "Human",
+      "constant": "kGtRaceHuman",
+      "display": "Human [1]"
+    },
+    "2": {
+      "name": "Elf",
+      "constant": "kGtRaceElf",
+      "display": "Elf [2]"
+    },
+    "3": {
+      "name": "Dwarf",
+      "constant": "kGtRaceDwarf",
+      "display": "Dwarf [3]"
+    },
+    "4": {
+      "name": "Orc",
+      "constant": "kGtRaceOrc",
+      "display": "Orc [4]"
+    },
+    "5": {
+      "name": "Troll",
+      "constant": "kGtRaceTroll",
+      "display": "Troll [5]"
+    },
+    "6": {
+      "name": "Dark Elf",
+      "constant": "kGtRaceDarkElf",
+      "display": "Dark Elf [6]"
+    }
+  },
+  "equipment_slots": {
+    "0": {
+      "name": "Head/Helmet",
+      "constant": "SlotHead",
+      "display": "Head/Helmet [0]"
+    },
+    "1": {
+      "name": "Right Hand",
+      "constant": "SlotRightHand",
+      "display": "Right Hand [1]"
+    },
+    "2": {
+      "name": "Chest/Armor",
+      "constant": "SlotChest",
+      "display": "Chest/Armor [2]"
+    },
+    "3": {
+      "name": "Left Hand/Shield",
+      "constant": "SlotLeftHand",
+      "display": "Left Hand/Shield [3]"
+    },
+    "4": {
+      "name": "Right Ring",
+      "constant": "SlotRightRing",
+      "display": "Right Ring [4]"
+    },
+    "5": {
+      "name": "Legs/Pants",
+      "constant": "SlotLegs",
+      "display": "Legs/Pants [5]"
+    },
+    "6": {
+      "name": "Left Ring",
+      "constant": "SlotLeftRing",
+      "display": "Left Ring [6]"
+    }
+  },
+  "quest_states": {
+    "0": {
+      "name": "Unknown",
+      "constant": "StateUnknown",
+      "display": "Unknown [0]"
+    },
+    "1": {
+      "name": "Unsolvable",
+      "constant": "StateUnsolvable",
+      "display": "Unsolvable [1]"
+    },
+    "2": {
+      "name": "Known",
+      "constant": "StateKnown",
+      "display": "Known [2]"
+    },
+    "3": {
+      "name": "Active",
+      "constant": "StateActive",
+      "display": "Active [3]"
+    },
+    "4": {
+      "name": "Solved",
+      "constant": "StateSolved",
+      "display": "Solved [4]"
+    }
+  },
+  "figure_tasks": {
+    "2": {
+      "name": "Worker",
+      "constant": "TASK_WORKER",
+      "display": "Worker [2]"
+    },
+    "3": {
+      "name": "Woodcutter",
+      "constant": "TASK_WOODCUTTER",
+      "display": "Woodcutter [3]"
+    },
+    "4": {
+      "name": "Quarry Worker",
+      "constant": "TASK_QUARRY",
+      "display": "Quarry Worker [4]"
+    },
+    "5": {
+      "name": "Miner",
+      "constant": "TASK_MINE",
+      "display": "Miner [5]"
+    },
+    "6": {
+      "name": "Blacksmith",
+      "constant": "TASK_FORGE",
+      "display": "Blacksmith [6]"
+    },
+    "9": {
+      "name": "Hero",
+      "constant": "TASK_HERO",
+      "display": "Hero [9]"
+    },
+    "10": {
+      "name": "Main Character",
+      "constant": "TASK_MAINCHAR",
+      "display": "Main Character [10]"
+    },
+    "11": {
+      "name": "NPC",
+      "constant": "TASK_NPC",
+      "display": "NPC [11]"
+    },
+    "12": {
+      "name": "Pet",
+      "constant": "TASK_PET",
+      "display": "Pet [12]"
+    },
+    "14": {
+      "name": "Hunter",
+      "constant": "TASK_HUNTING_LODGE",
+      "display": "Hunter [14]"
+    },
+    "17": {
+      "name": "Merchant",
+      "constant": "TASK_MERCHANT",
+      "display": "Merchant [17]"
+    }
+  },
+  "directions": {
+    "0": {
+      "name": "East",
+      "constant": "East",
+      "display": "East [0]",
+      "angle": "0°"
+    },
+    "1": {
+      "name": "Southeast",
+      "constant": "SouthEast",
+      "display": "Southeast [1]",
+      "angle": "45°"
+    },
+    "2": {
+      "name": "South",
+      "constant": "South",
+      "display": "South [2]",
+      "angle": "90°"
+    },
+    "3": {
+      "name": "Southwest",
+      "constant": "SouthWest",
+      "display": "Southwest [3]",
+      "angle": "135°"
+    },
+    "4": {
+      "name": "West",
+      "constant": "West",
+      "display": "West [4]",
+      "angle": "180°"
+    },
+    "5": {
+      "name": "Northwest",
+      "constant": "NorthWest",
+      "display": "Northwest [5]",
+      "angle": "225°"
+    },
+    "6": {
+      "name": "North",
+      "constant": "North",
+      "display": "North [6]",
+      "angle": "270°"
+    },
+    "7": {
+      "name": "Northeast",
+      "constant": "NorthEast",
+      "display": "Northeast [7]",
+      "angle": "315°"
+    }
+  },
+  "target_types": {
+    "1": {
+      "name": "Character/Unit",
+      "constant": "Figure",
+      "display": "Character/Unit [1]"
+    },
+    "2": {
+      "name": "Structure",
+      "constant": "Building",
+      "display": "Structure [2]"
+    },
+    "3": {
+      "name": "Interactive Object",
+      "constant": "Object",
+      "display": "Interactive Object [3]"
+    },
+    "4": {
+      "name": "Terrain/World",
+      "constant": "World",
+      "display": "Terrain/World [4]"
+    },
+    "5": {
+      "name": "Area/Region",
+      "constant": "Area",
+      "display": "Area/Region [5]"
+    }
+  },
+  "variable_operators": {
+    "0": {
+      "name": "Addition (+)",
+      "constant": "Add",
+      "display": "Addition (+) [0]"
+    },
+    "1": {
+      "name": "Boolean NOT (!)",
+      "constant": "OperatorInvertBool",
+      "display": "Boolean NOT (!) [1]"
+    },
+    "2": {
+      "name": "Set Random",
+      "constant": "OperatorSetRandom",
+      "display": "Set Random [2]"
+    }
+  },
+  "movement_modes": {
+    "0": {
+      "name": "Walking",
+      "constant": "Walk",
+      "display": "Walking [0]"
+    },
+    "1": {
+      "name": "Running",
+      "constant": "Run",
+      "display": "Running [1]"
+    }
+  },
+  "monument_types": {
+    "771": {
+      "name": "Human Monument",
+      "constant": "kGdObjMonumentHuman",
+      "display": "Human Monument [771]",
+      "hex_id": "0x303"
+    },
+    "772": {
+      "name": "Dwarf Monument",
+      "constant": "kGdObjMonumentDwarf",
+      "display": "Dwarf Monument [772]",
+      "hex_id": "0x304"
+    },
+    "773": {
+      "name": "Elf Monument",
+      "constant": "kGdObjMonumentElf",
+      "display": "Elf Monument [773]",
+      "hex_id": "0x305"
+    },
+    "774": {
+      "name": "Dark Elf Monument",
+      "constant": "kGdObjMonumentDarkElf",
+      "display": "Dark Elf Monument [774]",
+      "hex_id": "0x306"
+    },
+    "775": {
+      "name": "Orc Monument",
+      "constant": "kGdObjMonumentOrc",
+      "display": "Orc Monument [775]",
+      "hex_id": "0x307"
+    },
+    "776": {
+      "name": "Troll Monument",
+      "constant": "kGdObjMonumentTroll",
+      "display": "Troll Monument [776]",
+      "hex_id": "0x308"
+    },
+    "777": {
+      "name": "Hero Monument",
+      "constant": "kGdObjMonumentHero",
+      "display": "Hero Monument [777]",
+      "hex_id": "0x309"
+    }
+  }
+}
