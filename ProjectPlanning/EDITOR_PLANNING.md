@@ -24,7 +24,7 @@
 4. **Element Detail Editor**
    - Display all properties of selected element
    - Editable fields with type validation
-   - Enum dropdowns (ItemType, School, Race, etc.)
+   - Enum dropdowns with known values (ItemType, EquipmentType, School, Race, WeaponType, etc.)
    - Save/Cancel changes
    - Highlight modified fields
 
@@ -34,6 +34,449 @@
    - Delete elements (with warning)
    - Compare two CFF files
    - Undo/Redo functionality
+
+---
+
+## Known Enum Values for Key Categories
+
+### Weapon Types (for weapons table)
+- 0: No Weapon / Unarmed
+- 1: Mouth (Bite)
+- 2: Fist
+- 3: Dagger
+- 4: 1H Sword
+- 5: 2H Sword
+- 6: 1H Axe
+- 7: 2H Axe
+- 8: 1H Mace
+- 9: 2H Mace
+- 10: Staff
+- 11: 1H Hammer
+- 12: 2H Hammer
+- 13: Spiky 1H Mace
+- 14: Blunt 1H Mace
+- 15: 1H Spear
+- 16: 2H Spear
+- 17: Halberd
+- 18: Bow
+- 19: Crossbow
+- 20: Claws
+- 21: Unknown
+
+### Weapon Materials (for weapons table)
+- 1: Iron
+- 2: Steel
+- 3: Silver
+- 4: Obsidian
+- 5: Elven Steel
+- 6: Dwarven Steel
+- 7: Mithril
+
+### Armor Types (for armor table)
+- (To be determined from actual armor enum data)
+
+### Armor Materials (for armor table)
+- (To be determined from actual armor enum data)
+
+### Item Types (for items table)
+- 1: EQUIPMENT
+- 2: RUNE_INVENTORY
+- 3: RUNE_ADDED
+- 4: SCROLL
+- 5: SPELL
+- 6: UNIT_PLAN_INVENTORY
+- 7: BUILDING_PLAN_INVENTORY
+- 8: UNIT_PLAN_ADDED
+- 9: BUILDING_PLAN_ADDED
+- 10: QUEST_ITEM
+- 11: BLANK_SCROLL
+
+### Equipment Types (for items table item_subtype when ItemType is EQUIPMENT)
+- 0: NOTHING
+- 1: HELMET
+- 2: UPPER (Upper Body Armor)
+- 3: LOWER (Lower Body Armor)
+- 6: RING
+- 7: ONEHANDED_WEAPON
+- 8: TWOHANDED_WEAPON
+- 9: SHIELD
+- 10: FULL_BODY
+- 11: FIGURE_NPC
+- 12: BOW
+- 13: FIGURE_HERO
+
+### Rune/Plan Types (for items table item_subtype when ItemType is RUNE_INVENTORY, RUNE_ADDED, etc.)
+- 0: HEROES
+- 1: HUMANS
+- 2: ELVES
+- 3: DWARVES
+- 4: ORCS
+- 5: TROLLS
+- 6: DARKELVES
+
+### Equipment Slots (for equipment placement)
+- 0: HELMET
+- 1: RIGHT_HAND
+- 2: CHEST
+- 3: LEFT_HAND
+- 4: RIGHT_RING
+- 5: LEGS
+- 6: LEFT_RING
+- 12: UNKNOWN
+
+### Schools/Skills (for character abilities)
+- (0, 0): LEVEL_ONLY
+- (0, 1): UNKNOWN
+- (1, 0): LIGHT_COMBAT
+- (1, 1): PIERCING_WEAPONS
+- (1, 2): LIGHT_BLADE_WEAPONS
+- (1, 3): LIGHT_BLUNT_WEAPONS
+- (1, 4): LIGHT_ARMOR
+- (2, 0): HEAVY_COMBAT
+- (2, 1): HEAVY_BLADE_WEAPONS
+- (2, 2): HEAVY_BLUNT_WEAPONS
+- (2, 3): HEAVY_ARMOR
+- (2, 4): SHIELDS
+- (3, 0): RANGED_COMBAT
+- (3, 1): BOWS
+- (3, 2): CROSSBOWS
+- (4, 0): WHITE_MAGIC
+- (4, 1): LIFE
+- (4, 2): NATURE
+- (4, 3): BOONS
+- (5, 0): ELEMENTAL_MAGIC
+- (5, 1): FIRE
+- (5, 2): ICE
+- (5, 3): EARTH
+- (6, 0): MIND_MAGIC
+- (6, 1): ENCHANTMENT
+- (6, 2): OFFENSIVE
+- (6, 3): DEFENSIVE
+- (7, 0): BLACK_MAGIC
+- (7, 1): DEATH
+- (7, 2): NECROMANCY
+- (7, 3): CURSE
+
+### Races
+- 1: HUMANS
+- 2: DWARVES
+- 3: ELVES
+- 4: TROLLS
+- 5: ORCS
+- 6: DARKELVES
+
+### Resources
+- 0: UNKNOWN
+- 1: WOOD
+- 2: STONE
+- 3: LOGS
+- 4: MOONSILVER
+- 5: FOOD
+- 6: BERRIES
+- 7: IRON
+- 8: TREES
+- 9: GRAIN
+- 10: UNKNOWN1
+- 11: FISH
+- 15: MUSHROOMS
+- 16: MEAT
+- 18: ARIA
+- 19: LENYA
+- 47: UNKNOWN2
+- 73: UNKNOWN3
+
+### Gender
+- 0: MALE
+- 1: FEMALE
+- 2: MALE_ESSENTIAL
+- 3: FEMALE_ESSENTIAL
+
+### Slot Configuration
+- 1: ALL
+- 2: HANDS_AND_RINGS
+- 3: NONE
+
+---
+
+## Spell Naming Convention
+
+### UI Handle Format
+Spell UI handles follow the format: `ui_spell_[ELEMENT]_[CATEGORY]_[NAME]`
+- **ELEMENT**: Two-letter abbreviation for the magic school
+- **CATEGORY**: Spell category within the school
+- **NAME**: Actual spell name
+
+### Elements (Magic Schools)
+- **BM**: Black Magic (Necromancy, Death, Curses)
+- **EM**: Elemental Magic (Fire, Ice, Earth)
+- **MM**: Mind Magic (Enchantment, Offensive, Defensive)
+- **WM**: White Magic (Life, Nature, Blessings)
+- **melee**: Melee combat enhancements
+
+### Spell Categories and Names
+
+#### Black Magic (BM)
+**Curse:**
+- 4. AuraSlowWalking
+- 5. Poison
+- 34. AuraInflexibility
+- 36. DarkBanishing
+- 37. AuraSlowWalking
+- 38. AuraInflexibility
+- 41. Remediless
+- 94. AuraSlowFighting
+- 95. AuraInflexibility
+- 96. DispelWhiteAura
+- 97. AuraSlowWalking
+- 98. AuraInability
+- 100. AuraInability
+- 101. AuraSlowFighting
+- 199. Mutation
+- 200. AreaOfDarkness
+- 201. Mutation_chain
+- 233. Mutation
+
+**Death:**
+- 3. Death
+- 18. Pain
+- 23. Pestilence
+- 28. AreaPain
+- 35. AuraWeakness
+- 39. AuraWeakness
+- 81. Extinct
+- 88. AuraWeakness
+- 89. AuraSuffocation
+- 90. SuicideDeath
+- 99. AuraSuffocation
+- 162. Pain
+- 171. Extinct
+- 193. Pain_chain
+- 194. Cannibalize
+- 195. Torture
+- 240. Pain
+
+**Necro:**
+- 19. LifeTap
+- 20. SummonGoblin
+- 29. SummonSkeleton
+- 30. RaiseDead
+- 32. DeathGrasp
+- 91. AuraLifeTap
+- 92. SummonSpectre
+- 93. FeignDeath
+- 146. LifeTap
+- 196. LifeTap_chain
+- 197. DominateUndead
+- 198. SummonBlade
+- 231. LifeTap
+
+#### Elemental Magic (EM)
+**Earth:**
+- 16. Decay
+- 17. Decay
+- 25. Petrify
+- 76. StoneRain
+- 82. DetectMetal
+- 139. RockBullet
+- 140. Conservation
+- 141. EarthElemental
+- 142. WaveOfRocks
+- 208. RockBullet_chain
+- 209. SummonEarthGolem
+- 210. FeetOfClay
+- 236. RockBullet
+
+**Fire:**
+- 1. FireBurst
+- 11. Illuminate
+- 12. FireShield
+- 13. FireBall
+- 60. FireShield
+- 73. RainOfFire
+- 133. FireElemental
+- 134. WaveOfFire
+- 135. MeltResistance
+- 147. FireBall
+- 159. FireBurst
+- 170. FireBurst
+- 173. FireResistance
+- 202. FireBurst_chain
+- 203. SummonFireGolem
+- 204. FireBall_chain
+- 234. FireBurst
+- 239. FireBall
+
+**Ice:**
+- 9. Freeze
+- 10. Fog
+- 14. IceBurst
+- 15. IceShield
+- 22. IceShield
+- 74. Blizzard
+- 136. IceElemental
+- 137. WaveOfIce
+- 138. ChillResistance
+- 145. IceBurst
+- 168. IceBurst
+- 169. IceBurst
+- 205. IceBurst_chain
+- 206. SummonIceGolem
+- 207. AreaFreeze
+- 235. IceBurst
+
+#### Mind Magic (MM)
+**Defensive:**
+- 65. Brilliance
+- 66. SacrificeMana
+- 67. Manatap
+- 68. Manadrain
+- 83. DetectMagic
+- 129. AuraBrilliance
+- 130. Enlightenment
+- 131. AuraManatap
+- 132. Meditation
+- 172. Manatap
+- 217. Manatap_chain
+- 218. Manashield
+- 219. Manashift
+- 232. Manatap
+
+**Enchantment:**
+- 63. SelfIllusion
+- 86. Invisible
+- 119. Distract
+- 120. Dominate
+- 121. ObjectIllusion
+- 122. Charm
+- 123. Befriend
+- 124. Disentchant
+- 125. Charisma
+- 211. GreaterIllusion
+- 212. Charm_chain
+- 213. Voodoo
+- 237. Charm
+
+**Offensive:**
+- 21. Hypnotize
+- 69. Shock
+- 70. Disrupt
+- 72. Confuse
+- 79. Amok
+- 126. Shockwave
+- 127. AuraHypnotization
+- 128. Demoralization
+- 161. Hypnotize
+- 167. Hypnotize
+- 214. Shock_chain
+- 215. AreaHypnotize
+- 216. AreaConfuse
+- 238. Shock
+
+#### White Magic (WM)
+**Blessing:**
+- 6. Invulnerability
+- 48. AuraFastWalking
+- 49. AuraFastWalking
+- 50. Flexibility
+- 51. AuraFlexibility
+- 58. Hallow
+- 110. AuraFastFighting
+- 111. AuraFlexibility
+- 112. DispelBlackAura
+- 113. AuraFastWalking
+- 114. AuraLight
+- 115. AuraDexterity
+- 116. AuraDexterity
+- 118. AuraFastFighting
+- 164. ProtectFromBlack
+- 190. Hallow_chain
+- 191. Reinforcement
+- 192. AuraOfEternity
+- 229. AuraOfEternity
+- 230. Hallow
+
+**Life:**
+- 2. Healing
+- 43. AreaHealing
+- 44. SentinelHealing
+- 45. GreaterHealing
+- 52. AuraStrength
+- 53. AuraStrength
+- 102. AuraStrength
+- 103. AuraHealing
+- 104. AuraEndurance
+- 105. SuicideHeal
+- 117. AuraEndurance
+- 144. Healing
+- 166. Healing
+- 184. Assistance
+- 185. HolyTouch
+- 186. Revenge
+
+**Nature:**
+- 7. CurePoison
+- 24. CureDisease
+- 46. CharmAnimal
+- 47. ThornShield
+- 56. AuraRegeneration
+- 61. ThornShield
+- 106. TransformWolf
+- 107. AuraRegeneration
+- 108. DominateAnimal
+- 109. TransformBear
+- 187. AreaRoots
+- 188. SummonTreewrath
+- 189. Roots
+
+#### Melee Combat Enhancements (melee)
+**berserk:**
+- 148. Unknown
+- 152. Unknown
+
+**blessing:**
+- 149. Unknown
+- 153. Unknown
+
+**shelter:**
+- 150. Unknown
+- 154. Unknown
+
+**durability:**
+- 151. Unknown
+- 155. Unknown
+
+**trueshot:**
+- 156. Unknown
+
+**steelskin:**
+- 157. Unknown
+
+**salvo:**
+- 158. Unknown
+
+**shiftlife:**
+- 220. Unknown
+
+**riposte:**
+- 221. Unknown
+
+**criticalhits:**
+- 222. Unknown
+
+### Template for Future Category Reference
+This format can be reused for weapons and armor, with appropriate naming conventions and category breakdowns:
+
+#### Weapon Naming Convention
+- Format: `ui_weapon_[TYPE]_[MATERIAL]_[NAME]`
+- **TYPE**: Weapon type (Dagger, Sword, Axe, etc.)
+- **MATERIAL**: Weapon material (Iron, Steel, etc.)
+- **NAME**: Specific weapon name
+
+#### Armor Naming Convention  
+- Format: `ui_armor_[TYPE]_[MATERIAL]_[NAME]`
+- **TYPE**: Armor type (Helmet, Chest, etc.)
+- **MATERIAL**: Armor material (Leather, Chain, Plate, etc.)  
+- **NAME**: Specific armor name
 
 ---
 
