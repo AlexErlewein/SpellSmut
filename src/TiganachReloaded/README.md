@@ -6,6 +6,42 @@ Information about the file structure was gathered from
 
 If you're here to reverse engineer the file / create your own library, have a look at [this short explanation](./EXPLANATION.md).
 
+## Exporting to JSON/XML
+
+You can export the entire GameData.cff to JSON or XML format for analysis:
+
+```bash
+# Export to JSON (easy to parse programmatically)
+python export_to_json.py
+
+# Export to XML (human-readable)
+python export_to_xml.py
+```
+
+This will create `GameData.json` or `GameData.xml` with all game data including:
+- Spells, items, armor, weapons
+- Creatures, buildings, NPCs
+- Localization strings
+- Quest data, maps, and more
+
+Example using exported JSON:
+```python
+import json
+
+with open("GameData.json") as f:
+    data = json.load(f)
+
+# Access spells
+spells = data["spells"]
+print(f"Total spells: {len(spells)}")
+
+# Find a specific spell
+fireball = [s for s in spells if s["spell_id"] == 1][0]
+print(f"Mana cost: {fireball['mana']}")
+```
+
+## Editing GameData
+
 Here's how you use `tirganach`:
 
 ```python
