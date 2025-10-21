@@ -15,7 +15,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 try:
-    from PySide6.QtWidgets import QApplication, QMainWindow, QSplitter, QTreeWidget, QTreeWidgetItem, QTableWidget, QTableWidgetItem, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton, QFileDialog, QMessageBox, QProgressBar, QStatusBar
+    from PySide6.QtWidgets import QApplication, QMainWindow, QSplitter, QTreeWidget, QTreeWidgetItem, QTableWidget, QTableWidgetItem, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton, QFileDialog, QMessageBox, QProgressBar, QStatusBar, QLineEdit
     from PySide6.QtCore import Qt, QThread, Signal
     from PySide6.QtGui import QAction, QIcon, QColor, QPalette
 except ImportError:
@@ -52,6 +52,11 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.game_data = None
         self.modified = False
+        self.current_category = None
+        self.all_elements = []
+        self.filtered_elements = []
+        self.current_page = 0
+        self.page_size = 50
 
         self.setWindowTitle("SpellForce CFF Editor")
         self.setGeometry(100, 100, 1200, 800)
@@ -68,11 +73,43 @@ class MainWindow(QMainWindow):
         self.category_tree.itemClicked.connect(self.on_category_selected)
         layout.addWidget(self.category_tree, 1)
 
-        # Center panel: Element table
+        # Center panel: Element table with search
+        center_widget = QWidget()
+        center_layout = QVBoxLayout(center_widget)
+
+        # Search box
+        self.search_box = QLineEdit()
+        self.search_box.setPlaceholderText("Search elements...")
+        self.search_box.textChanged.connect(self.filter_elements)
+        center_layout.addWidget(self.search_box)
+
+        # Element table
         self.element_table = QTableWidget()
         self.element_table.setColumnCount(3)
         self.element_table.setHorizontalHeaderLabels(["ID", "Name", "Type"])
-        layout.addWidget(self.element_table, 2)
+        self.element_table.itemClicked.connect(self.on_element_selected)
+        center_layout.addWidget(self.element_table)
+
+        # Pagination controls
+        pagination_widget = QWidget()
+        pagination_layout = QHBoxLayout(pagination_widget)
+
+        self.prev_button = QPushButton("Previous")
+        self.prev_button.clicked.connect(self.previous_page)
+        self.prev_button.setEnabled(False)
+        pagination_layout.addWidget(self.prev_button)
+
+        self.page_label = QLabel("Page 1 of 1")
+        pagination_layout.addWidget(self.page_label)
+
+        self.next_button = QPushButton("Next")
+        self.next_button.clicked.connect(self.next_page)
+        self.next_button.setEnabled(False)
+        pagination_layout.addWidget(self.next_button)
+
+        center_layout.addWidget(pagination_widget)
+
+        layout.addWidget(center_widget, 2)
 
         # Right panel: Properties
         self.properties_widget = QWidget()
@@ -200,75 +237,48 @@ class MainWindow(QMainWindow):
         self.populate_element_table(category)
 
     def populate_element_table(self, category):
-        """Populate the element table for selected category"""
+        """Populate the element table for selected category with pagination"""
         if not self.game_data:
             return
 
-        self.element_table.setRowCount(0)
+        self.current_category = category
+        self.current_page = 0
 
         # Get data for category
         if category == "items":
-            data = self.game_data.items
+            self.all_elements = self.game_data.items
             self.element_table.setColumnCount(3)
             self.element_table.setHorizontalHeaderLabels(["ID", "Name", "Type"])
         elif category == "spells":
-            data = self.game_data.spells
+            self.all_elements = self.game_data.spells
             self.element_table.setColumnCount(3)
             self.element_table.setHorizontalHeaderLabels(["ID", "Name", "School"])
         elif category == "creatures":
-            data = self.game_data.creatures
+            self.all_elements = self.game_data.creatures
             self.element_table.setColumnCount(3)
             self.element_table.setHorizontalHeaderLabels(["ID", "Name", "Race"])
         elif category == "buildings":
-            data = self.game_data.buildings
+            self.all_elements = self.game_data.buildings
             self.element_table.setColumnCount(3)
             self.element_table.setHorizontalHeaderLabels(["ID", "Name", "Race"])
         elif category == "armor":
-            data = self.game_data.armor
+            self.all_elements = self.game_data.armor
             self.element_table.setColumnCount(3)
             self.element_table.setHorizontalHeaderLabels(["ID", "Name", "Type"])
         elif category == "weapons":
-            data = self.game_data.weapons
+            self.all_elements = self.game_data.weapons
             self.element_table.setColumnCount(3)
             self.element_table.setHorizontalHeaderLabels(["ID", "Name", "Type"])
         elif category == "localization":
-            data = self.game_data.localisation[:1000]  # Limit localization for performance
+            self.all_elements = self.game_data.localisation[:1000]  # Limit for performance
             self.element_table.setColumnCount(3)
             self.element_table.setHorizontalHeaderLabels(["ID", "Language", "Text"])
         else:
             return
 
-        # Populate table
-        self.element_table.setRowCount(len(data))
-        for row, item in enumerate(data):
-            if category == "items":
-                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.item_id)))
-                self.element_table.setItem(row, 1, QTableWidgetItem("Item Name"))  # TODO: Resolve from localization
-                self.element_table.setItem(row, 2, QTableWidgetItem(str(item.item_type)))
-            elif category == "spells":
-                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.spell_id)))
-                self.element_table.setItem(row, 1, QTableWidgetItem("Spell Name"))  # TODO: Resolve
-                self.element_table.setItem(row, 2, QTableWidgetItem("School"))  # TODO: Resolve
-            elif category == "creatures":
-                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.unit_id)))
-                self.element_table.setItem(row, 1, QTableWidgetItem("Creature Name"))  # TODO: Resolve
-                self.element_table.setItem(row, 2, QTableWidgetItem("Race"))  # TODO: Resolve
-            elif category == "buildings":
-                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.building_id)))
-                self.element_table.setItem(row, 1, QTableWidgetItem("Building Name"))  # TODO: Resolve
-                self.element_table.setItem(row, 2, QTableWidgetItem("Race"))  # TODO: Resolve
-            elif category == "armor":
-                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.item_id)))
-                self.element_table.setItem(row, 1, QTableWidgetItem("Armor Name"))  # TODO: Resolve
-                self.element_table.setItem(row, 2, QTableWidgetItem("Type"))  # TODO: Resolve
-            elif category == "weapons":
-                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.item_id)))
-                self.element_table.setItem(row, 1, QTableWidgetItem("Weapon Name"))  # TODO: Resolve
-                self.element_table.setItem(row, 2, QTableWidgetItem(str(item.weapon_type)))
-            elif category == "localization":
-                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.text_id)))
-                self.element_table.setItem(row, 1, QTableWidgetItem(str(item.language)))
-                self.element_table.setItem(row, 2, QTableWidgetItem(item.text[:50]))  # Truncate long text
+        # Apply initial filter
+        self.filter_elements()
+        self.update_pagination()
 
     def save_file(self):
         """Save the CFF file"""
@@ -277,6 +287,98 @@ class MainWindow(QMainWindow):
 
         # TODO: Implement save functionality
         QMessageBox.information(self, "Save", "Save functionality not yet implemented")
+
+    def filter_elements(self):
+        """Filter elements based on search text"""
+        search_text = self.search_box.text().lower()
+        if not search_text:
+            self.filtered_elements = self.all_elements
+        else:
+            self.filtered_elements = []
+            for item in self.all_elements:
+                # Simple search in string representation
+                if search_text in str(item).lower():
+                    self.filtered_elements.append(item)
+
+        self.current_page = 0
+        self.update_pagination()
+
+    def update_pagination(self):
+        """Update the table with current page data"""
+        total_elements = len(self.filtered_elements)
+        total_pages = (total_elements + self.page_size - 1) // self.page_size
+
+        # Update page label
+        if total_pages == 0:
+            self.page_label.setText("No results")
+        else:
+            self.page_label.setText(f"Page {self.current_page + 1} of {total_pages}")
+
+        # Update navigation buttons
+        self.prev_button.setEnabled(self.current_page > 0)
+        self.next_button.setEnabled(self.current_page < total_pages - 1)
+
+        # Calculate slice for current page
+        start_idx = self.current_page * self.page_size
+        end_idx = min(start_idx + self.page_size, total_elements)
+
+        # Populate table
+        self.element_table.setRowCount(end_idx - start_idx)
+        for row, item in enumerate(self.filtered_elements[start_idx:end_idx]):
+            if self.current_category == "items":
+                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.item_id)))
+                self.element_table.setItem(row, 1, QTableWidgetItem("Item Name"))  # TODO: Resolve
+                self.element_table.setItem(row, 2, QTableWidgetItem(str(item.item_type)))
+            elif self.current_category == "spells":
+                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.spell_id)))
+                self.element_table.setItem(row, 1, QTableWidgetItem("Spell Name"))  # TODO: Resolve
+                self.element_table.setItem(row, 2, QTableWidgetItem("School"))  # TODO: Resolve
+            elif self.current_category == "creatures":
+                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.unit_id)))
+                self.element_table.setItem(row, 1, QTableWidgetItem("Creature Name"))  # TODO: Resolve
+                self.element_table.setItem(row, 2, QTableWidgetItem("Race"))  # TODO: Resolve
+            elif self.current_category == "buildings":
+                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.building_id)))
+                self.element_table.setItem(row, 1, QTableWidgetItem("Building Name"))  # TODO: Resolve
+                self.element_table.setItem(row, 2, QTableWidgetItem("Race"))  # TODO: Resolve
+            elif self.current_category == "armor":
+                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.item_id)))
+                self.element_table.setItem(row, 1, QTableWidgetItem("Armor Name"))  # TODO: Resolve
+                self.element_table.setItem(row, 2, QTableWidgetItem("Type"))  # TODO: Resolve
+            elif self.current_category == "weapons":
+                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.item_id)))
+                self.element_table.setItem(row, 1, QTableWidgetItem("Weapon Name"))  # TODO: Resolve
+                self.element_table.setItem(row, 2, QTableWidgetItem(str(item.weapon_type)))
+            elif self.current_category == "localization":
+                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.text_id)))
+                self.element_table.setItem(row, 1, QTableWidgetItem(str(item.language)))
+                self.element_table.setItem(row, 2, QTableWidgetItem(item.text[:50]))
+
+    def previous_page(self):
+        """Go to previous page"""
+        if self.current_page > 0:
+            self.current_page -= 1
+            self.update_pagination()
+
+    def next_page(self):
+        """Go to next page"""
+        total_pages = (len(self.filtered_elements) + self.page_size - 1) // self.page_size
+        if self.current_page < total_pages - 1:
+            self.current_page += 1
+            self.update_pagination()
+
+    def on_element_selected(self, item):
+        """Handle element selection for details view"""
+        row = item.row()
+        start_idx = self.current_page * self.page_size
+        element = self.filtered_elements[start_idx + row]
+        self.show_element_details(element)
+
+    def show_element_details(self, element):
+        """Show element details in properties panel"""
+        # Clear previous details
+        # TODO: Implement detailed property view
+        self.status_bar.showMessage(f"Selected element: {element}")
 
     def load_weapon_data(self):
         """Load and display weapon data from JSON or dynamically"""
