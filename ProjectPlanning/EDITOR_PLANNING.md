@@ -814,48 +814,17 @@ This format can be reused for weapons and armor, with appropriate naming convent
 
 ## Development Plan
 
-### Phase 1: Core Functionality (GUI - PyQt6)
+### Phase 1: Core Functionality (GUI - PySide6) ✅ COMPLETE
+- See [GUI_EDITOR_PLAN.md](./GUI_EDITOR_PLAN.md) for details
 
-**Week 1: Foundation**
-- [ ] File loading with progress bar
-- [ ] Category tree view (43 tables)
-- [ ] Basic table display
+### Phase 2: Advanced Features ⏳ PENDING
+- See [GUI_EDITOR_PLAN.md](./GUI_EDITOR_PLAN.md) for details
 
-**Week 2: Navigation**
-- [ ] Element list with search/filter
-- [ ] Pagination for large tables
-- [ ] Click to view details
+### Phase 3: TUI Version (Textual) ⏳ PENDING
+- See [TUI_EDITOR_PLAN.md](./TUI_EDITOR_PLAN.md) for details
 
-**Week 3: Editing**
-- [ ] Property display/edit panel
-- [ ] Type validation (int, string, enum)
-- [ ] Save modifications
-
-**Week 4: Polish**
-- [ ] Dark mode theme
-- [ ] Error handling
-- [ ] Save confirmations
-- [ ] Recent files menu
-
-### Phase 2: Advanced Features
-
-**Week 5-6:**
-- [ ] Add new elements
-- [ ] Clone elements
-- [ ] Delete elements
-- [ ] Undo/redo
-
-**Week 7:**
-- [ ] Compare two CFF files
-- [ ] Export to XML
-- [ ] Import from XML (maybe)
-
-### Phase 3: TUI Version (Textual)
-
-**Week 8-9:**
-- [ ] Port core functionality to Textual
-- [ ] Simplified interface for terminal
-- [ ] Basic editing capabilities
+## Data Extraction and Analysis ✅ COMPLETE
+- See [DATA_EXTRACTION_PLAN.md](./DATA_EXTRACTION_PLAN.md) for details
 
 ---
 
