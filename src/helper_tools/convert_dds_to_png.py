@@ -119,27 +119,30 @@ class DDSConverter:
             self.log(f"Directory not found: {input_dir}", "ERROR")
             return
 
-        # Find all DDS files
+        # Find all DDS and TGA files
         pattern = '**/*.dds' if recursive else '*.dds'
         dds_files = list(input_dir.glob(pattern))
+        tga_pattern = '**/*.tga' if recursive else '*.tga'
+        tga_files = list(input_dir.glob(tga_pattern))
+        all_files = dds_files + tga_files
 
-        if not dds_files:
-            self.log(f"No DDS files found in {input_dir}", "WARNING")
+        if not all_files:
+            self.log(f"No DDS or TGA files found in {input_dir}", "WARNING")
             return
 
-        self.log(f"Found {len(dds_files)} DDS files to convert", "INFO")
-        self.stats['total'] = len(dds_files)
+        self.log(f"Found {len(all_files)} files to convert ({len(dds_files)} DDS, {len(tga_files)} TGA)", "INFO")
+        self.stats['total'] = len(all_files)
 
         # Convert each file
-        for i, dds_path in enumerate(dds_files, 1):
+        for i, file_path in enumerate(all_files, 1):
             # Calculate relative path to preserve directory structure
-            rel_path = dds_path.relative_to(input_dir)
+            rel_path = file_path.relative_to(input_dir)
             output_path = output_dir / rel_path.with_suffix('.png')
 
             if self.verbose:
-                print(f"\n[{i}/{len(dds_files)}] Processing: {rel_path}")
+                print(f"\n[{i}/{len(all_files)}] Processing: {rel_path}")
 
-            self.convert_file(dds_path, output_path, overwrite)
+            self.convert_file(file_path, output_path, overwrite)
 
     def print_summary(self):
         """Print conversion statistics"""

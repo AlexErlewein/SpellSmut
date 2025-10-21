@@ -207,7 +207,7 @@ def organize_extracted_files(raw_output_dir):
         'UI': {
             'extensions': ['.dds', '.tga'],
             'patterns': ['ui_', 'font_'],  # Must start with these
-            'output_dir': EXTRACTED_DIR / 'UI' / 'extracted'
+            'output_dir': EXTRACTED_DIR / 'UI' / 'extracted' / 'ui_files'  # Temporary, will organize further
         },
         'Textures': {
             'extensions': ['.dds', '.tga'],
@@ -263,8 +263,39 @@ def organize_extracted_files(raw_output_dir):
                     if any(file_lower.startswith(pat) for pat in rules['exclude_patterns']):
                         continue
 
-                # Move file to category folder
-                dest_dir = rules['output_dir']
+                # For UI files, organize into subcategories
+                if category == 'UI':
+                    # Determine subcategory based on filename
+                    filename = source_path.name.lower()
+                    if filename.startswith('ui_item') or filename.startswith('ui_itm'):
+                        subcategory = 'items'
+                    elif filename.startswith('ui_cursor'):
+                        subcategory = 'cursors'
+                    elif filename.startswith('ui_clock'):
+                        subcategory = 'clock'
+                    elif filename.startswith('ui_bgr'):
+                        subcategory = 'backgrounds'
+                    elif filename.startswith('ui_btn'):
+                        subcategory = 'buttons'
+                    elif filename.startswith('ui_spell'):
+                        subcategory = 'spells'
+                    elif filename.startswith('ui_mainmenu'):
+                        subcategory = 'mainmenu'
+                    elif filename.startswith('ui_splashscreen'):
+                        subcategory = 'splashscreens'
+                    elif filename.startswith('ui_cnt'):
+                        subcategory = 'containers'
+                    elif filename.startswith('ui_logo'):
+                        subcategory = 'logos'
+                    elif filename.startswith('font_'):
+                        subcategory = 'fonts'
+                    else:
+                        subcategory = 'other'
+
+                    dest_dir = rules['output_dir'].parent / subcategory / 'dds'
+                else:
+                    dest_dir = rules['output_dir']
+
                 dest_dir.mkdir(parents=True, exist_ok=True)
 
                 # Preserve subdirectory structure relative to PAK
