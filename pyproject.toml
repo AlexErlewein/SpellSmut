@@ -1,0 +1,75 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "TirganachReloaded"
+version = "0.1.0"
+description = "SpellForce CFF Editor and related tools"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "SpellSmut Team"},
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+]
+requires-python = ">=3.9"
+dependencies = [
+    "PySide6>=6.0.0",
+    "textual>=0.40.0",  # For future TUI version
+    "pillow>=10.0.0",   # For image processing
+    "pyyaml>=6.0",      # For configuration files
+]
+
+[project.scripts]
+tirganach-gui = "TirganachReloaded.gui_editor.main:main"
+tirganach-tui = "TirganachReloaded.tui_editor.main:main"  # If implemented later
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/TirganachReloaded"]
+
+[tool.hatch.envs.default]
+dependencies = [
+    "PySide6",
+    "textual",
+    "pillow",
+    "pyyaml",
+]
+
+[tool.hatch.envs.dev]
+dependencies = [
+    "pytest",
+    "black",
+    "isort",
+    "mypy",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
