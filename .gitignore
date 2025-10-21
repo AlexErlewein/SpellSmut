@@ -24,5 +24,15 @@ desktop.ini
 # Logs
 *.log
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+
 # Keep these important files (override above patterns if needed)
 # Use git add -f to force add if needed
