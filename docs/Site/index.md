@@ -61,7 +61,7 @@ Welcome to the comprehensive modding documentation for **SpellForce: The Order o
 
 ## 🎮 Game Systems
 
-#### [Quest System Guide](SpellForce_Quest_System_Guide.md)
+#### [Quest System Guide](Guides/SpellForce_Quest_System_Guide.md)
 Learn how to create quests, dialogue systems, and interactive storytelling elements.
 
 **Topics Covered:**
@@ -73,7 +73,7 @@ Learn how to create quests, dialogue systems, and interactive storytelling eleme
 
 ---
 
-#### [Spell System Guide](SpellForce_Spell_System_Guide.md)
+#### [Spell System Guide](Guides/SpellForce_Spell_System_Guide.md)
 Complete guide to SpellForce's magic system and creating custom spells.
 
 **Topics Covered:**
@@ -85,7 +85,7 @@ Complete guide to SpellForce's magic system and creating custom spells.
 
 ---
 
-#### [Sound System Guide](SOUND_SYSTEM_GUIDE.md)
+#### [Sound System Guide](Guides/SOUND_SYSTEM_GUIDE.md)
 Everything you need to know about audio in SpellForce - from sound effects to music to voice acting.
 
 **Topics Covered:**
@@ -102,7 +102,7 @@ Everything you need to know about audio in SpellForce - from sound effects to mu
 
 ### 🛠️ Content Creation
 
-#### [Race Creation Guide](Race_Creation_Guide.md)
+#### [Race Creation Guide](Guides/Race_Creation_Guide.md)
 Step-by-step guide to creating entirely new playable races.
 
 **Topics Covered:**
@@ -114,7 +114,7 @@ Step-by-step guide to creating entirely new playable races.
 
 ---
 
-#### [Campaign System Guide](SpellForce_Campaign_System_Guide.md)
+#### [Campaign System Guide](Guides/SpellForce_Campaign_System_Guide.md)
 Master the campaign creation system for story-driven experiences.
 
 **Topics Covered:**
@@ -127,7 +127,7 @@ Master the campaign creation system for story-driven experiences.
 
 ---
 
-#### [Quest & Campaign Creation Guide](SpellForce_Quest_Campaign_Creation_Guide.md)
+#### [Quest & Campaign Creation Guide](Guides/SpellForce_Quest_Campaign_Creation_Guide.md)
 Comprehensive guide combining quests and campaigns into cohesive experiences.
 
 **Topics Covered:**
@@ -139,7 +139,7 @@ Comprehensive guide combining quests and campaigns into cohesive experiences.
 
 ---
 
-#### [Multiplayer & FreeGame Guide](SpellForce_Multiplayer_FreeGame_Guide.md)
+#### [Multiplayer & FreeGame Guide](Guides/SpellForce_Multiplayer_FreeGame_Guide.md)
 Create multiplayer maps and FreeGame (skirmish) content.
 
 **Topics Covered:**
@@ -158,10 +158,10 @@ Create multiplayer maps and FreeGame (skirmish) content.
 
 SpellForce stores all game data in CFF (Custom File Format) files. This section provides comprehensive documentation for understanding and modding these files.
 
-#### [CFF Modding Index](CFFExtraction/INDEX.md)
+#### [CFF Modding Index](Extraction/INDEX.md)
 Central hub for all CFF-related documentation, including setup guides, tutorials, and reference materials.
 
-#### [Categories Overview](CFFExtraction/CATEGORIES_OVERVIEW.md)
+#### [Categories Overview](Extraction/CATEGORIES_OVERVIEW.md)
 Complete reference for all 50 GameData categories in SpellForce's data system.
 
 **Topics Covered:**
@@ -181,7 +181,7 @@ Complete reference for all 50 GameData categories in SpellForce's data system.
 - **Buildings**: Building data (2029), upgrades (2027)
 - **Text**: Localized strings (2016), quest text (2031)
 
-#### [Category Relationships](CFFExtraction/CATEGORY_RELATIONSHIPS.md)
+#### [Category Relationships](Extraction/CATEGORY_RELATIONSHIPS.md)
 Understanding how different categories link together through foreign keys and references.
 
 **Topics Covered:**
@@ -190,15 +190,15 @@ Understanding how different categories link together through foreign keys and re
 - Data integrity considerations
 - Common relationship patterns
 
-#### [CFF Quick Reference](CFFExtraction/CFF_QUICK_REFERENCE.md)
+#### [CFF Quick Reference](Extraction/CFF_QUICK_REFERENCE.md)
 Quick lookup guide for common CFF operations and category IDs.
 
 ### Spell & Item IDs
 
-#### [Spell IDs Reference](SPELL_IDS_REFERENCE.md)
+#### [Spell IDs Reference](Guides/SPELL_IDS_REFERENCE.md)
 Complete listing of all spell IDs in the game for reference when creating quests, items, or custom content.
 
-#### [ID Mappings](ID_MAPPINGS.md)
+#### [ID Mappings](Project/ID_MAPPINGS.md)
 Comprehensive mapping of game IDs across different systems (items, spells, units, etc.).
 
 ---
@@ -209,7 +209,7 @@ Comprehensive mapping of game IDs across different systems (items, spells, units
 
 Learn how to extract and work with game assets from PAK files.
 
-#### [Bulk Extraction Guide](AssetsExtraction/BULK_EXTRACTION_GUIDE.md)
+#### [Bulk Extraction Guide](Extraction/BULK_EXTRACTION_GUIDE.md)
 Complete guide for extracting all game assets at once using automated tools.
 
 **Topics Covered:**
@@ -218,23 +218,23 @@ Complete guide for extracting all game assets at once using automated tools.
 - Organizing extracted files
 - Troubleshooting common issues
 
-#### [UI Extraction Summary](AssetsExtraction/UI_EXTRACTION_SUMMARY.md)
+#### [UI Extraction Summary](Extraction/UI_EXTRACTION_SUMMARY.md)
 Documentation of UI asset extraction process and findings.
 
-#### [Audio Extraction Plan](AssetsExtraction/AUDIO_EXTRACTION_PLAN.md)
+#### [Audio Extraction Plan](Extraction/AUDIO_EXTRACTION_PLAN.md)
 Guide for extracting and working with audio files (sound effects, music, voice).
 
-#### [Extraction Success Summary](AssetsExtraction/EXTRACTION_SUCCESS.md)
+#### [Extraction Success Summary](Extraction/EXTRACTION_SUCCESS.md)
 Overview of successfully extracted assets and their organization.
 
-#### [Organization Summary](AssetsExtraction/ORGANIZATION_SUMMARY.md)
+#### [Organization Summary](Extraction/ORGANIZATION_SUMMARY.md)
 How extracted assets are organized and categorized for easy access.
 
 ### CFF Modding Tools
 
 Tools and libraries for working with SpellForce's CFF game data format.
 
-#### [TiganachReloaded Setup](CFFExtraction/TIGANACH_RELOADED_SETUP.md)
+#### [TiganachReloaded Setup](Extraction/TIGANACH_RELOADED_SETUP.md)
 Setup guide for the TiganachReloaded Python library - the primary tool for CFF file manipulation.
 
 **Location:** `src/TiganachReloaded/`
@@ -245,7 +245,7 @@ Setup guide for the TiganachReloaded Python library - the primary tool for CFF f
 - API reference
 - Creating your first mod
 
-#### [CFF Modding Guide](CFFExtraction/CFF_MODDING_GUIDE.md)
+#### [CFF Modding Guide](Extraction/CFF_MODDING_GUIDE.md)
 Comprehensive guide to modding CFF files using TiganachReloaded.
 
 **Topics Covered:**
@@ -255,10 +255,10 @@ Comprehensive guide to modding CFF files using TiganachReloaded.
 - Creating custom content
 - Advanced techniques
 
-#### [CFF Extraction Summary](CFFExtraction/CFF_EXTRACTION_SUMMARY.md)
+#### [CFF Extraction Summary](Extraction/CFF_EXTRACTION_SUMMARY.md)
 Summary of CFF extraction capabilities and tools.
 
-#### [README - CFF Modding](CFFExtraction/README_CFF_MODDING.md)
+#### [README - CFF Modding](Extraction/README_CFF_MODDING.md)
 Quick-start guide and overview of the CFF modding system.
 
 ---
@@ -266,17 +266,17 @@ Quick-start guide and overview of the CFF modding system.
 ## 🚀 Quick Start Guides
 
 ### For Beginners
-1. Start with the **[Quest System Guide](SpellForce_Quest_System_Guide.md)** to learn basic scripting
-2. Move to **[Sound System Guide](SOUND_SYSTEM_GUIDE.md)** to add audio to your content
-3. Try creating a simple custom spell using the **[Spell System Guide](SpellForce_Spell_System_Guide.md)**
+1. Start with the **[Quest System Guide](Guides/SpellForce_Quest_System_Guide.md)** to learn basic scripting
+2. Move to **[Sound System Guide](Guides/SOUND_SYSTEM_GUIDE.md)** to add audio to your content
+3. Try creating a simple custom spell using the **[Spell System Guide](Guides/SpellForce_Spell_System_Guide.md)**
 
 ### For Intermediate Modders
-1. Create custom content with **[Race Creation Guide](Race_Creation_Guide.md)**
-2. Build story-driven experiences with **[Campaign System Guide](SpellForce_Campaign_System_Guide.md)**
-3. Design multiplayer experiences with **[Multiplayer & FreeGame Guide](SpellForce_Multiplayer_FreeGame_Guide.md)**
+1. Create custom content with **[Race Creation Guide](Guides/Race_Creation_Guide.md)**
+2. Build story-driven experiences with **[Campaign System Guide](Guides/SpellForce_Campaign_System_Guide.md)**
+3. Design multiplayer experiences with **[Multiplayer & FreeGame Guide](Guides/SpellForce_Multiplayer_FreeGame_Guide.md)**
 
 ### For Advanced Modders
-1. Combine everything in **[Quest & Campaign Creation Guide](SpellForce_Quest_Campaign_Creation_Guide.md)**
+1. Combine everything in **[Quest & Campaign Creation Guide](Guides/SpellForce_Quest_Campaign_Creation_Guide.md)**
 2. Create total conversions using all guides together
 
 ---
@@ -344,35 +344,35 @@ SpellForce/
 - Read **Quest System Guide** cover to cover
 - Create a simple quest with dialogue
 - Add sound effects using **Sound System Guide**
-- Use **[Bulk Extraction Guide](AssetsExtraction/BULK_EXTRACTION_GUIDE.md)** to extract game assets for reference
-- Familiarize yourself with **[Spell IDs Reference](SPELL_IDS_REFERENCE.md)** and **[ID Mappings](ID_MAPPINGS.md)**
+- Use **[Bulk Extraction Guide](Extraction/BULK_EXTRACTION_GUIDE.md)** to extract game assets for reference
+- Familiarize yourself with **[Spell IDs Reference](Guides/SPELL_IDS_REFERENCE.md)** and **[ID Mappings](Project/ID_MAPPINGS.md)**
 
 ### Phase 2: Systems (Week 3-4)
 - Study **Spell System Guide**
 - Create 3-5 custom spells
 - Experiment with different spell types
-- Set up **[TiganachReloaded](CFFExtraction/TIGANACH_RELOADED_SETUP.md)** library
-- Reference **[Categories Overview](CFFExtraction/CATEGORIES_OVERVIEW.md)** to understand data structures
-- Use **[CFF Quick Reference](CFFExtraction/CFF_QUICK_REFERENCE.md)** for common operations
+- Set up **[TiganachReloaded](Extraction/TIGANACH_RELOADED_SETUP.md)** library
+- Reference **[Categories Overview](Extraction/CATEGORIES_OVERVIEW.md)** to understand data structures
+- Use **[CFF Quick Reference](Extraction/CFF_QUICK_REFERENCE.md)** for common operations
 
 ### Phase 3: Content (Week 5-6)
 - Follow **Race Creation Guide** to create a basic race
 - Design a small campaign using **Campaign System Guide**
-- Learn **[CFF Modding](CFFExtraction/CFF_MODDING_GUIDE.md)** to modify game data directly
-- Extract and customize UI assets using **[UI Extraction Summary](AssetsExtraction/UI_EXTRACTION_SUMMARY.md)**
+- Learn **[CFF Modding](Extraction/CFF_MODDING_GUIDE.md)** to modify game data directly
+- Extract and customize UI assets using **[UI Extraction Summary](Extraction/UI_EXTRACTION_SUMMARY.md)**
 
 ### Phase 4: Integration (Week 7-8)
 - Use **Quest & Campaign Creation Guide** to build a complete experience
 - Add custom audio, spells, and races together
-- Study **[Category Relationships](CFFExtraction/CATEGORY_RELATIONSHIPS.md)** for advanced data linking
-- Extract and integrate custom audio using **[Audio Extraction Plan](AssetsExtraction/AUDIO_EXTRACTION_PLAN.md)**
+- Study **[Category Relationships](Extraction/CATEGORY_RELATIONSHIPS.md)** for advanced data linking
+- Extract and integrate custom audio using **[Audio Extraction Plan](Extraction/AUDIO_EXTRACTION_PLAN.md)**
 
 ### Phase 5: Polish (Week 9+)
 - Test thoroughly
 - Balance gameplay using CFF data modifications
 - Optimize performance
 - Package for distribution
-- Document your mod using the structure from **[CFF Index](CFFExtraction/INDEX.md)**
+- Document your mod using the structure from **[CFF Index](Extraction/INDEX.md)**
 
 ---
 
@@ -421,32 +421,32 @@ SpellForce/
 ## 🔍 Finding Information
 
 ### By Topic
-- **Audio/Sound**: → [Sound System Guide](SOUND_SYSTEM_GUIDE.md) | [Audio Extraction](AssetsExtraction/AUDIO_EXTRACTION_PLAN.md)
-- **Magic/Spells**: → [Spell System Guide](SpellForce_Spell_System_Guide.md) | [Spell IDs](SPELL_IDS_REFERENCE.md)
-- **Quests/NPCs**: → [Quest System Guide](SpellForce_Quest_System_Guide.md)
-- **Story/Campaigns**: → [Campaign System Guide](SpellForce_Campaign_System_Guide.md) | [Quest & Campaign Creation](SpellForce_Quest_Campaign_Creation_Guide.md)
-- **Multiplayer**: → [Multiplayer & FreeGame Guide](SpellForce_Multiplayer_FreeGame_Guide.md)
-- **New Races**: → [Race Creation Guide](Race_Creation_Guide.md)
-- **Data Structures/GameData**: → [Categories Overview](CFFExtraction/CATEGORIES_OVERVIEW.md) | [CFF Index](CFFExtraction/INDEX.md)
-- **Items/Weapons/Armor**: → [Categories Overview](CFFExtraction/CATEGORIES_OVERVIEW.md) | [ID Mappings](ID_MAPPINGS.md)
-- **Units/Heroes/Buildings**: → [Categories Overview](CFFExtraction/CATEGORIES_OVERVIEW.md) (Categories 2005-2006, 2017, 2029)
-- **Asset Extraction**: → [Bulk Extraction Guide](AssetsExtraction/BULK_EXTRACTION_GUIDE.md) | [Extraction Success](AssetsExtraction/EXTRACTION_SUCCESS.md)
-- **CFF File Modding**: → [CFF Modding Guide](CFFExtraction/CFF_MODDING_GUIDE.md) | [TiganachReloaded Setup](CFFExtraction/TIGANACH_RELOADED_SETUP.md)
-- **UI Assets**: → [UI Extraction Summary](AssetsExtraction/UI_EXTRACTION_SUMMARY.md)
+- **Audio/Sound**: → [Sound System Guide](Guides/SOUND_SYSTEM_GUIDE.md) | [Audio Extraction](Extraction/AUDIO_EXTRACTION_PLAN.md)
+- **Magic/Spells**: → [Spell System Guide](Guides/SpellForce_Spell_System_Guide.md) | [Spell IDs](Guides/SPELL_IDS_REFERENCE.md)
+- **Quests/NPCs**: → [Quest System Guide](Guides/SpellForce_Quest_System_Guide.md)
+- **Story/Campaigns**: → [Campaign System Guide](Guides/SpellForce_Campaign_System_Guide.md) | [Quest & Campaign Creation](Guides/SpellForce_Quest_Campaign_Creation_Guide.md)
+- **Multiplayer**: → [Multiplayer & FreeGame Guide](Guides/SpellForce_Multiplayer_FreeGame_Guide.md)
+- **New Races**: → [Race Creation Guide](Guides/Race_Creation_Guide.md)
+- **Data Structures/GameData**: → [Categories Overview](Extraction/CATEGORIES_OVERVIEW.md) | [CFF Index](Extraction/INDEX.md)
+- **Items/Weapons/Armor**: → [Categories Overview](Extraction/CATEGORIES_OVERVIEW.md) | [ID Mappings](Project/ID_MAPPINGS.md)
+- **Units/Heroes/Buildings**: → [Categories Overview](Extraction/CATEGORIES_OVERVIEW.md) (Categories 2005-2006, 2017, 2029)
+- **Asset Extraction**: → [Bulk Extraction Guide](Extraction/BULK_EXTRACTION_GUIDE.md) | [Extraction Success](Extraction/EXTRACTION_SUCCESS.md)
+- **CFF File Modding**: → [CFF Modding Guide](Extraction/CFF_MODDING_GUIDE.md) | [TiganachReloaded Setup](Extraction/TIGANACH_RELOADED_SETUP.md)
+- **UI Assets**: → [UI Extraction Summary](Extraction/UI_EXTRACTION_SUMMARY.md)
 
 ### By Skill Level
 - **Beginner**:
   - Quest System → Sound System → Spell System
-  - [Bulk Extraction Guide](AssetsExtraction/BULK_EXTRACTION_GUIDE.md) to extract game assets
-  - [Spell IDs Reference](SPELL_IDS_REFERENCE.md) for quick lookups
+  - [Bulk Extraction Guide](Extraction/BULK_EXTRACTION_GUIDE.md) to extract game assets
+  - [Spell IDs Reference](Guides/SPELL_IDS_REFERENCE.md) for quick lookups
 - **Intermediate**:
   - Race Creation → Campaign System → Multiplayer
-  - [CFF Modding Guide](CFFExtraction/CFF_MODDING_GUIDE.md) to modify game data
-  - [TiganachReloaded Setup](CFFExtraction/TIGANACH_RELOADED_SETUP.md) for advanced data editing
+  - [CFF Modding Guide](Extraction/CFF_MODDING_GUIDE.md) to modify game data
+  - [TiganachReloaded Setup](Extraction/TIGANACH_RELOADED_SETUP.md) for advanced data editing
 - **Advanced**:
   - Quest & Campaign Creation (combines all systems)
-  - [Categories Overview](CFFExtraction/CATEGORIES_OVERVIEW.md) for deep data structure understanding
-  - [Category Relationships](CFFExtraction/CATEGORY_RELATIONSHIPS.md) for complex cross-system mods
+  - [Categories Overview](Extraction/CATEGORIES_OVERVIEW.md) for deep data structure understanding
+  - [Category Relationships](Extraction/CATEGORY_RELATIONSHIPS.md) for complex cross-system mods
 
 ---
 
