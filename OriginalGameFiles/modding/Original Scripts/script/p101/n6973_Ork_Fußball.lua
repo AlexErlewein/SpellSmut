@@ -4,7 +4,6 @@
 
 
 --wenn alle auf Position, dann Startschuß
-
 OnEvent
 {
 	NotInDialog = FALSE,
@@ -31,7 +30,7 @@ OnEvent
 --Spiel beginnt/hört auf
 OnToggleEvent
 {
-	NotInDialog = FALSE, UpdateInterval = 10,
+	NotInDialog = FALSE , UpdateInterval = 10 ,
 	OnConditions = 
 	{
 		IsGlobalFlagTrue {Name = "P101SpielLaeuft", UpdateInterval = 10},
@@ -102,8 +101,8 @@ OnEvent
 	},
 	Actions = 
 	{
-		Goto {X = 225, Y = 239, NpcId = 7758, Range = 0, WalkMode = Run, GotoMode = GotoForced, XRand = 0 , YRand = 0}, --BasePunkt2
-		SetEffect{Effect = "Lightning", Length = 200, TargetType = World, X = 216, Y = 212},	--Punkt für Goblin-Effekt
+		Goto {X = 225, Y = 239, NpcId = 7758 , Range = 0 , WalkMode = Run , GotoMode = GotoForced, XRand = 0 , YRand = 0}, --BasePunkt2
+		SetEffect{Effect = "Lightning", Length = 200 , TargetType = World , X = 216, Y = 212},	--Punkt für Goblin-Effekt
 		IncreaseGlobalCounter{Name = "P101CounterGoblinPunkte", Step = 1},
 		SetGlobalFlagTrue{Name = "P101GoblinPunkt3Los"},
 		SetGlobalFlagFalse{Name = "P101GoblinPunkt2Los"},
@@ -117,13 +116,13 @@ OnEvent
 	NotInDialog = FALSE , 
 	Conditions = 
 	{
-		FigureInRange{X = 225, Y = 239, NpcId = 7758, Range = 0},
+		FigureInRange{X = 225, Y = 239, NpcId = 7758 , Range = 0},
 		IsGlobalFlagTrue{Name = "P101GoblinPunkt3Los", UpdateInterval = 10}
 	},
 	Actions = 
 	{
-		Goto {X = 207, Y = 221, NpcId = 7758, Range = 0, WalkMode = Run , GotoMode = GotoForced, XRand = 0, YRand = 0},--BasePunkt3
-		SetEffect{Effect = "Lightning", Length = 200, TargetType = World , X = 225, Y = 239},	 --Punkt für Goblin-Effekt
+		Goto {X = 207, Y = 221, NpcId = 7758 , Range = 0 , WalkMode = Run , GotoMode = GotoForced, XRand = 0 , YRand = 0},--BasePunkt3
+		SetEffect{Effect = "Lightning", Length = 200 , TargetType = World , X = 225, Y = 239},	 --Punkt für Goblin-Effekt
 		IncreaseGlobalCounter{ Name = "P101CounterGoblinPunkte", Step = 1},
 		SetGlobalFlagTrue{Name = "P101GoblinPunkt4Los"},
 		SetGlobalFlagFalse{Name = "P101GoblinPunkt3Los"},
@@ -137,13 +136,13 @@ OnEvent
 	NotInDialog = FALSE ,
 	Conditions = 
 	{
-		FigureInRange{X = 207, Y = 221, NpcId = 7758, Range = 0},
+		FigureInRange{X = 207, Y = 221, NpcId = 7758 , Range = 0},
 		IsGlobalFlagTrue{Name = "P101GoblinPunkt4Los", UpdateInterval = 10}
 	},
 	Actions = 
 	{
-		Goto {X = 235, Y = 230, NpcId = 7758, Range = 0 , WalkMode = Run , GotoMode = GotoForced, XRand = 0 , YRand = 0}, --BasePunkt4
-		SetEffect{Effect = "Lightning", Length = 200, TargetType = World , X = 207, Y = 221},	 --Punkt für Goblin-Effekt
+		Goto {X = 235, Y = 230, NpcId = 7758 , Range = 0 , WalkMode = Run , GotoMode = GotoForced, XRand = 0 , YRand = 0}, --BasePunkt4
+		SetEffect{Effect = "Lightning", Length = 200 , TargetType = World , X = 207, Y = 221},	 --Punkt für Goblin-Effekt
 		IncreaseGlobalCounter{ Name = "P101CounterGoblinPunkte", Step = 1},
 		SetGlobalFlagTrue{Name = "P101GoblinPunkt5Los"},
 		SetGlobalFlagFalse{Name = "P101GoblinPunkt4Los"},
@@ -156,13 +155,13 @@ OnEvent
 	NotInDialog = FALSE ,
 	Conditions = 
 	{
-		FigureInRange{X = 235, Y = 230, NpcId = 7758, Range = 0},
+		FigureInRange{X = 235, Y = 230, NpcId = 7758 , Range = 0},
 		IsGlobalFlagTrue{Name = "P101GoblinPunkt5Los", UpdateInterval = 10}
 	},
 	Actions = 
 	{
-		SetEffect{Effect = "Lightning", Length = 200, TargetType = World, X = 235, Y = 230},	--Punkt für Goblin-Effekt 
-		IncreaseGlobalCounter{Name = "P101CounterGoblinPunkte", Step = 1},
+		SetEffect{Effect = "Lightning", Length = 200 , TargetType = World , X = 235, Y = 230},	--Punkt für Goblin-Effekt 
+		IncreaseGlobalCounter{ Name = "P101CounterGoblinPunkte", Step = 1},
 		IncreaseGlobalCounter{Name = "P101GoblinRundenCounter", Step = 1},
 		SetGlobalFlagFalse{Name = "P101GoblinPunkt5Los"},
 	} 
@@ -172,7 +171,7 @@ OnEvent
 --wenn Ball tot, dann Flag
 OnEvent
 {
-	NotInDialog = FALSE, 
+	NotInDialog = FALSE , 
 	Conditions = 
 	{
 		FigureDead{NpcId = 7758},
@@ -187,7 +186,7 @@ OnEvent
 --wenn Ball tot, dann Counter Orks hoch
 OnEvent
 {
-	NotInDialog = FALSE, 
+	NotInDialog = FALSE , 
 	Conditions = 
 	{
 		--FigureDead{NpcId = 7758},
@@ -215,10 +214,10 @@ OnEvent
 -- wenn 3 Runden für Orks
 OnOneTimeEvent
 {
-	NotInDialog = FALSE, UpdateInterval = 10,
+	NotInDialog = FALSE , UpdateInterval = 10 ,
 	Conditions = 
 	{
-		IsGlobalCounter{Name = "P101OrkRundenCounter", Value = 3, Operator = IsGreaterOrEqual, UpdateInterval = 10},
+		IsGlobalCounter{ Name = "P101OrkRundenCounter", Value = 3, Operator = IsGreaterOrEqual, UpdateInterval = 10},
 	},
 	Actions = 
 	{
@@ -275,10 +274,10 @@ OnOneTimeEvent
 --Orks ziehen zum Feiern in die Stadt
 OnOneTimeEvent
 {
-	NotInDialog = FALSE, UpdateInterval = 10,
+	NotInDialog = FALSE , UpdateInterval = 10 ,
 	Conditions = 
 	{
-		IsGlobalTimeElapsed {Name = "P101OrksGewonnen", Seconds = 50, UpdateInterval = 10},
+		IsGlobalTimeElapsed {Name = "P101OrksGewonnen", Seconds = 50, UpdateInterval = 10 },
 		--FigureInRange{X = 232, Y = 234, NpcId = 6981, Range = 2},
 		--FigureInRange{X = 232, Y = 234, NpcId = 6974, Range = 3},
 		--FigureInRange{X = 232, Y = 234, NpcId = 6979, Range = 3},
@@ -332,7 +331,7 @@ OnOneTimeEvent
 --wenn 3 Runden für Goblins
 OnOneTimeEvent
 {
-	NotInDialog = FALSE, UpdateInterval = 10,
+	NotInDialog = FALSE , UpdateInterval = 10 ,
 	Conditions = 
 	{
 		IsGlobalCounter{ Name = "P101GoblinRundenCounter", Value = 3, Operator = IsGreaterOrEqual, UpdateInterval = 10},
@@ -360,16 +359,16 @@ OnOneTimeEvent
 --Goblins ab nach Hause
 OnOneTimeEvent
 {
-	NotInDialog = FALSE, UpdateInterval = 10,
+	NotInDialog = FALSE , UpdateInterval = 10 ,
 	Conditions = 
 	{
 		--IsGlobalFlagTrue{Name = "P101GoblinsGewinnen", UpdateInterval = 20},
-		FigureInRange{X = 221, Y = 229, NpcId = 7758, Range = 2},
-		FigureInRange{X = 222, Y = 230, NpcId = 8234, Range = 2},
-		FigureInRange{X = 219, Y = 224, NpcId = 8235, Range = 2},
-		FigureInRange{X = 221, Y = 222, NpcId = 8236, Range = 2},
-		FigureInRange{X = 227, Y = 224, NpcId = 8237, Range = 2},
-		FigureInRange{X = 225, Y = 224, NpcId = 8238, Range = 2},
+		FigureInRange{X = 221, Y = 229, NpcId = 7758, Range = 2, },
+		FigureInRange{X = 222, Y = 230, NpcId = 8234, Range = 2, },
+		FigureInRange{X = 219, Y = 224, NpcId = 8235, Range = 2, },
+		FigureInRange{X = 221, Y = 222, NpcId = 8236, Range = 2, },
+		FigureInRange{X = 227, Y = 224, NpcId = 8237, Range = 2, },
+		FigureInRange{X = 232, Y = 234, NpcId = 8238, Range = 2, },
 		
 	},
 	Actions = 
