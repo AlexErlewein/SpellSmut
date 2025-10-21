@@ -62,12 +62,12 @@ This document outlines the file organization conventions for the SpellSmut (Spel
 - Helper tools
 - Modding utilities
 - Core application code
-- Active development libraries (TiganachReloaded, etc.)
+- Active development libraries (TirganachReloaded, etc.)
 
 **Subfolder Structure:**
 - `src/helper_tools/` - Standalone helper scripts
 - `src/luas/` - Lua scripts and modifications
-- `src/TiganachReloaded/` - CFF editing library and tools
+- `TirganachReloaded/` - CFF editing library and tools
 - Additional subdirectories as needed for different modules
 
 ---

@@ -858,7 +858,7 @@ RegisterEffect(kGdEffectMonumentClaimed, kGdObjMonumentHuman, EffectGet("HumanMo
 ### Displaying Names in Editor
 
 ```python
-from TiganachReloaded.gui_editor.utils import get_resolver
+from TirganachReloaded.gui_editor.utils import get_resolver
 
 resolver = get_resolver()
 
@@ -920,7 +920,7 @@ Auto-generates this enhanced ID_MAPPINGS.md file from the extracted JSON data.
 ### Test Mapping Resolver
 
 ```bash
-python3 src/TiganachReloaded/gui_editor/utils/mapping_resolver.py
+python3 TirganachReloaded/gui_editor/utils/mapping_resolver.py
 ```
 
 Tests the MappingResolver class and displays sample lookups.
@@ -976,7 +976,7 @@ def main():
     )
     parser.add_argument(
         "--mappings",
-        default="src/TiganachReloaded/data/id_name_mappings.json",
+        default="TirganachReloaded/data/id_name_mappings.json",
         help="Path to JSON mappings file",
     )
     parser.add_argument(

@@ -6,7 +6,7 @@ This document summarizes the extraction of weapon data from the SpellForce Plati
 ## Approach
 
 ### 1. Initial Setup
-- Used the TiganachReloaded Python library to load the `GameData.cff` file
+- Used the TirganachReloaded Python library to load the `GameData.cff` file
 - Leveraged existing JSON export (`GameData.json`) for item data from c2003
 - Cross-referenced with live GameData object for weapon-specific categories
 

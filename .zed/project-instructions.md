@@ -116,7 +116,7 @@ SpellSmut/
 ├── src/                        # Source code & utilities
 │   ├── helper_tools/           # Standalone helper scripts
 │   ├── luas/                   # Lua scripts and modifications
-│   └── TiganachReloaded/       # CFF editing library and tools
+│   └── TirganachReloaded/       # CFF editing library and tools
 ├── ExtractedAssets/            # Assets extracted from PAK files
 │   ├── UI/                     # User interface assets
 │   ├── Audio/                  # Sound effects, music, voice
@@ -179,12 +179,12 @@ SpellSmut/
 - Helper tools
 - Modding utilities
 - Core application code
-- Active development libraries (TiganachReloaded, etc.)
+- Active development libraries (TirganachReloaded, etc.)
 
 **Subfolder Structure:**
 - `src/helper_tools/` - Standalone helper scripts
 - `src/luas/` - Lua scripts and modifications
-- `src/TiganachReloaded/` - CFF editing library and tools
+- `TirganachReloaded/` - CFF editing library and tools
 - Additional subdirectories as needed for different modules
 
 ### 4. Extracted Assets → `ExtractedAssets/`

@@ -44,13 +44,13 @@
 - ✅ Movement Modes (2) - walk/run
 - ✅ Monument Types (7) - race monuments
 
-**Output:** `src/TiganachReloaded/data/id_name_mappings.json` (360+ entries)
+**Output:** `TirganachReloaded/data/id_name_mappings.json` (360+ entries)
 
 ---
 
 ### 2. JSON Mapping Database ✅
 
-**File:** `src/TiganachReloaded/data/id_name_mappings.json`
+**File:** `TirganachReloaded/data/id_name_mappings.json`
 
 **Structure:**
 ```json
@@ -75,7 +75,7 @@
 
 ### 3. MappingResolver Utility Class ✅
 
-**File:** `src/TiganachReloaded/gui_editor/utils/mapping_resolver.py`
+**File:** `TirganachReloaded/gui_editor/utils/mapping_resolver.py`
 
 **API Methods:**
 ```python
@@ -255,9 +255,9 @@ Slot ID 1    →  "Right Hand [1]"
 ### Created:
 1. ✅ `src/helper_tools/extract_lua_mappings.py` (580 lines)
 2. ✅ `src/helper_tools/generate_mappings_doc.py` (650 lines)
-3. ✅ `src/TiganachReloaded/gui_editor/utils/__init__.py`
-4. ✅ `src/TiganachReloaded/gui_editor/utils/mapping_resolver.py` (420 lines)
-5. ✅ `src/TiganachReloaded/data/id_name_mappings.json` (360+ entries)
+3. ✅ `TirganachReloaded/gui_editor/utils/__init__.py`
+4. ✅ `TirganachReloaded/gui_editor/utils/mapping_resolver.py` (420 lines)
+5. ✅ `TirganachReloaded/data/id_name_mappings.json` (360+ entries)
 6. ✅ `docs/IMPLEMENTATION_SUMMARY.md`
 7. ✅ `docs/COMPLETION_REPORT.md` (this file)
 
@@ -275,7 +275,7 @@ python3 src/helper_tools/extract_lua_mappings.py
 ✅ Extracted 360+ mappings across 13 categories
 
 # Test resolver
-python3 src/TiganachReloaded/gui_editor/utils/mapping_resolver.py
+python3 TirganachReloaded/gui_editor/utils/mapping_resolver.py
 ✅ All lookups working correctly
 ✅ Search functionality verified
 ✅ Category detection working
@@ -313,7 +313,7 @@ python3 src/helper_tools/generate_mappings_doc.py
 
 **3. Use in Editor Code:**
 ```python
-from TiganachReloaded.gui_editor.utils import get_resolver
+from TirganachReloaded.gui_editor.utils import get_resolver
 
 resolver = get_resolver()
 display = resolver.get_display_name(4, "weapon_types")
@@ -415,7 +415,7 @@ display = resolver.get_display_name(4, "weapon_types")
 **Scripts:**
 - Extractor: `src/helper_tools/extract_lua_mappings.py --help`
 - Generator: `src/helper_tools/generate_mappings_doc.py --help`
-- Resolver test: `src/TiganachReloaded/gui_editor/utils/mapping_resolver.py`
+- Resolver test: `TirganachReloaded/gui_editor/utils/mapping_resolver.py`
 
 ---
 

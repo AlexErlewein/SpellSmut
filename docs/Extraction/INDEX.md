@@ -28,20 +28,20 @@ Quick navigation to all documentation and scripts for GameData.cff modding.
 ### Library Documentation
 | File | Description | Location |
 |------|-------------|----------|
-| **README_INSTALLATION.md** | Installation guide | `src/TiganachReloaded/` |
-| **EXPLANATION.md** | CFF file format details | `src/TiganachReloaded/` |
-| **README.md** | Original library docs | `src/TiganachReloaded/` |
+| **README_INSTALLATION.md** | Installation guide | `TirganachReloaded/` |
+| **EXPLANATION.md** | CFF file format details | `TirganachReloaded/` |
+| **README.md** | Original library docs | `TirganachReloaded/` |
 
 ---
 
 ## 🛠️ Scripts
 
-### Test & Example Scripts (in src/TiganachReloaded/)
+### Test & Example Scripts (in TirganachReloaded/)
 | File | Purpose | Usage |
 |------|---------|-------|
-| **test_cff_extract.py** | Verify library works | `cd src\TiganachReloaded && python test_cff_extract.py` |
-| **cff_modding_examples.py** | 7 working examples | `cd src\TiganachReloaded && python cff_modding_examples.py` |
-| **create_mod.py** | Mod creation template | `cd src\TiganachReloaded && python create_mod.py` |
+| **test_cff_extract.py** | Verify library works | `cd src\TirganachReloaded && python test_cff_extract.py` |
+| **cff_modding_examples.py** | 7 working examples | `cd src\TirganachReloaded && python cff_modding_examples.py` |
+| **create_mod.py** | Mod creation template | `cd src\TirganachReloaded && python create_mod.py` |
 
 ---
 
@@ -69,7 +69,7 @@ H:\SpellSmut\
 │
 └── Source Code
     └── src\
-        ├── TiganachReloaded\            # CFF library + scripts
+        ├── TirganachReloaded\            # CFF library + scripts
         │   ├── tirganach\               # Library source code
         │   ├── test_cff_extract.py      # Test script
         │   ├── cff_modding_examples.py  # Examples
@@ -101,8 +101,8 @@ H:\SpellSmut\
 - **Available Tables:** [CFF_MODDING_GUIDE.md](CFF_MODDING_GUIDE.md) → Available Tables section
 
 ### Advanced
-- **File Format:** `ModdingTools/TiganachReloaded/EXPLANATION.md`
-- **Source Code:** `ModdingTools/TiganachReloaded/tirganach/`
+- **File Format:** `ModdingTools/TirganachReloaded/EXPLANATION.md`
+- **Source Code:** `ModdingTools/TirganachReloaded/tirganach/`
 - **Technical Details:** [CFF_EXTRACTION_SUMMARY.md](CFF_EXTRACTION_SUMMARY.md)
 
 ---
@@ -113,24 +113,24 @@ H:\SpellSmut\
 
 **Test if everything works**
 ```bash
-cd H:\SpellSmut\src\TiganachReloaded
+cd H:\SpellSmut\src\TirganachReloaded
 python test_cff_extract.py
 ```
-→ See: `src/TiganachReloaded/test_cff_extract.py`
+→ See: `TirganachReloaded/test_cff_extract.py`
 
 **Learn query patterns**
 ```bash
-cd H:\SpellSmut\src\TiganachReloaded
+cd H:\SpellSmut\src\TirganachReloaded
 python cff_modding_examples.py
 ```
-→ See: `src/TiganachReloaded/cff_modding_examples.py`
+→ See: `TirganachReloaded/cff_modding_examples.py`
 
 **Create my first mod**
 ```bash
-cd H:\SpellSmut\src\TiganachReloaded
+cd H:\SpellSmut\src\TirganachReloaded
 python create_mod.py
 ```
-→ See: `src/TiganachReloaded/create_mod.py`
+→ See: `TirganachReloaded/create_mod.py`
 
 **Find specific items/spells**
 → See: [CFF_MODDING_GUIDE.md](CFF_MODDING_GUIDE.md) → Query Data section
@@ -148,7 +148,7 @@ python create_mod.py
 → See: [CFF_QUICK_REFERENCE.md](CFF_QUICK_REFERENCE.md) → Common Enums
 
 **Understand the file format**
-→ See: `src/TiganachReloaded/EXPLANATION.md`
+→ See: `TirganachReloaded/EXPLANATION.md`
 
 **Troubleshoot errors**
 → See: [CFF_MODDING_GUIDE.md](CFF_MODDING_GUIDE.md) → Troubleshooting section
@@ -179,14 +179,14 @@ python create_mod.py
 - [Setup Guide](TIGANACH_RELOADED_SETUP.md)
 
 ### Scripts
-- [Test Script](../../src/TiganachReloaded/test_cff_extract.py)
-- [Examples](../../src/TiganachReloaded/cff_modding_examples.py)
-- [Mod Creator](../../src/TiganachReloaded/create_mod.py)
+- [Test Script](../../TirganachReloaded/test_cff_extract.py)
+- [Examples](../../TirganachReloaded/cff_modding_examples.py)
+- [Mod Creator](../../TirganachReloaded/create_mod.py)
 
 ### Library
-- [Installation](../../src/TiganachReloaded/README_INSTALLATION.md)
-- [File Format](../../src/TiganachReloaded/EXPLANATION.md)
-- [Source Code](../../src/TiganachReloaded/tirganach/)
+- [Installation](../../TirganachReloaded/README_INSTALLATION.md)
+- [File Format](../../TirganachReloaded/EXPLANATION.md)
+- [Source Code](../../TirganachReloaded/tirganach/)
 
 ---
 
@@ -209,7 +209,7 @@ python create_mod.py
    - [README_CFF_MODDING.md](README_CFF_MODDING.md) → Troubleshooting
 
 4. **Check file locations:**
-   - Library: `src/TiganachReloaded/`
+   - Library: `TirganachReloaded/`
    - Original CFF: `OriginalGameFiles/data/GameData.cff`
    - Modded CFF: `ModdedGameFiles/`
 
@@ -221,7 +221,7 @@ python create_mod.py
 
 1. **Verify Installation**
    ```bash
-   cd H:\SpellSmut\src\TiganachReloaded
+   cd H:\SpellSmut\src\TirganachReloaded
    python test_cff_extract.py
    ```
 
@@ -230,7 +230,7 @@ python create_mod.py
 
 3. **Create Your First Mod**
    ```bash
-   cd H:\SpellSmut\src\TiganachReloaded
+   cd H:\SpellSmut\src\TirganachReloaded
    python create_mod.py
    ```
 

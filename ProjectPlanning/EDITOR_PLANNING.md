@@ -931,7 +931,7 @@ pip install textual
 ## File Structure
 
 ```
-H:\SpellSmut\src\TiganachReloaded\
+H:\SpellSmut\src\TirganachReloaded\
 ├── gui_editor/
 │   ├── __init__.py
 │   ├── main.py              # Entry point

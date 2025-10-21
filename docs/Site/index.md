@@ -234,10 +234,10 @@ How extracted assets are organized and categorized for easy access.
 
 Tools and libraries for working with SpellForce's CFF game data format.
 
-#### [TiganachReloaded Setup](Extraction/TIGANACH_RELOADED_SETUP.md)
-Setup guide for the TiganachReloaded Python library - the primary tool for CFF file manipulation.
+#### [TirganachReloaded Setup](Extraction/TIGANACH_RELOADED_SETUP.md)
+Setup guide for the TirganachReloaded Python library - the primary tool for CFF file manipulation.
 
-**Location:** `src/TiganachReloaded/`
+**Location:** `TirganachReloaded/`
 
 **Topics Covered:**
 - Installation and setup
@@ -246,7 +246,7 @@ Setup guide for the TiganachReloaded Python library - the primary tool for CFF f
 - Creating your first mod
 
 #### [CFF Modding Guide](Extraction/CFF_MODDING_GUIDE.md)
-Comprehensive guide to modding CFF files using TiganachReloaded.
+Comprehensive guide to modding CFF files using TirganachReloaded.
 
 **Topics Covered:**
 - Understanding CFF structure
@@ -299,10 +299,10 @@ Each guide includes:
 - **SpellForce Platinum Edition** (Steam AppID: 39540)
 - **Text Editor** (VS Code, Notepad++, Sublime Text)
 - **Lua 4.0** knowledge (scripting language)
-- **Python 3.8+** - For TiganachReloaded CFF modding library
+- **Python 3.8+** - For TirganachReloaded CFF modding library
 
 ### Recommended
-- **TiganachReloaded** - Python library for CFF file editing ([Setup Guide](CFFExtraction/TIGANACH_RELOADED_SETUP.md))
+- **TirganachReloaded** - Python library for CFF file editing ([Setup Guide](CFFExtraction/TIGANACH_RELOADED_SETUP.md))
 - **Dragon UnPACKer** - Extract assets from PAK archives ([Extraction Guide](AssetsExtraction/BULK_EXTRACTION_GUIDE.md))
 - **FilePacker Tool** (`tool_filepacker.exe`) - Create PAK archives
 - **SFGameDataEditor** - Edit game data (units, spells, items)
@@ -351,7 +351,7 @@ SpellForce/
 - Study **Spell System Guide**
 - Create 3-5 custom spells
 - Experiment with different spell types
-- Set up **[TiganachReloaded](Extraction/TIGANACH_RELOADED_SETUP.md)** library
+- Set up **[TirganachReloaded](Extraction/TIGANACH_RELOADED_SETUP.md)** library
 - Reference **[Categories Overview](Extraction/CATEGORIES_OVERVIEW.md)** to understand data structures
 - Use **[CFF Quick Reference](Extraction/CFF_QUICK_REFERENCE.md)** for common operations
 
@@ -431,7 +431,7 @@ SpellForce/
 - **Items/Weapons/Armor**: → [Categories Overview](Extraction/CATEGORIES_OVERVIEW.md) | [ID Mappings](Project/ID_MAPPINGS.md)
 - **Units/Heroes/Buildings**: → [Categories Overview](Extraction/CATEGORIES_OVERVIEW.md) (Categories 2005-2006, 2017, 2029)
 - **Asset Extraction**: → [Bulk Extraction Guide](Extraction/BULK_EXTRACTION_GUIDE.md) | [Extraction Success](Extraction/EXTRACTION_SUCCESS.md)
-- **CFF File Modding**: → [CFF Modding Guide](Extraction/CFF_MODDING_GUIDE.md) | [TiganachReloaded Setup](Extraction/TIGANACH_RELOADED_SETUP.md)
+- **CFF File Modding**: → [CFF Modding Guide](Extraction/CFF_MODDING_GUIDE.md) | [TirganachReloaded Setup](Extraction/TIGANACH_RELOADED_SETUP.md)
 - **UI Assets**: → [UI Extraction Summary](Extraction/UI_EXTRACTION_SUMMARY.md)
 
 ### By Skill Level
@@ -442,7 +442,7 @@ SpellForce/
 - **Intermediate**:
   - Race Creation → Campaign System → Multiplayer
   - [CFF Modding Guide](Extraction/CFF_MODDING_GUIDE.md) to modify game data
-  - [TiganachReloaded Setup](Extraction/TIGANACH_RELOADED_SETUP.md) for advanced data editing
+  - [TirganachReloaded Setup](Extraction/TIGANACH_RELOADED_SETUP.md) for advanced data editing
 - **Advanced**:
   - Quest & Campaign Creation (combines all systems)
   - [Categories Overview](Extraction/CATEGORIES_OVERVIEW.md) for deep data structure understanding

@@ -57,7 +57,7 @@ A comprehensive modding toolkit and documentation project for SpellForce: The Or
 - Complete extraction lists for each category
 - User documentation (README.md)
 
-**Note:** TiganachReloaded CFF library moved to `src/TiganachReloaded/`
+**Note:** TirganachReloaded CFF library moved to `TirganachReloaded/`
 
 **File Formats**:
 - TGA (Targa): 33 files - Cursors, menu backgrounds

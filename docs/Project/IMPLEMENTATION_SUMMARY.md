@@ -43,13 +43,13 @@ Enhance the GameData.cff editor to display human-readable names alongside IDs fo
 python3 src/helper_tools/extract_lua_mappings.py
 ```
 
-**Output:** `src/TiganachReloaded/data/id_name_mappings.json`
+**Output:** `TirganachReloaded/data/id_name_mappings.json`
 
 ---
 
 ### 2. JSON Mapping Database
 
-**Location:** `src/TiganachReloaded/data/id_name_mappings.json`
+**Location:** `TirganachReloaded/data/id_name_mappings.json`
 
 **Format:**
 ```json
@@ -76,14 +76,14 @@ python3 src/helper_tools/extract_lua_mappings.py
 
 ### 3. MappingResolver Utility Class
 
-**Location:** `src/TiganachReloaded/gui_editor/utils/mapping_resolver.py`
+**Location:** `TirganachReloaded/gui_editor/utils/mapping_resolver.py`
 
 **Purpose:** Provides convenient API for resolving IDs to names in the editor.
 
 **Key Methods:**
 
 ```python
-from TiganachReloaded.gui_editor.utils import MappingResolver
+from TirganachReloaded.gui_editor.utils import MappingResolver
 
 resolver = MappingResolver()
 
@@ -144,7 +144,7 @@ is_id = resolver.is_id_field("weapon_type")
 ```
 SpellSmut/
 ├── src/
-│   ├── TiganachReloaded/
+│   ├── TirganachReloaded/
 │   │   ├── data/
 │   │   │   └── id_name_mappings.json       # ✅ Generated mappings
 │   │   └── gui_editor/
@@ -248,7 +248,7 @@ ID: 2 →  Display: "South [2]"       (90°)
 
 #### Example 1: Property Editor Field
 ```python
-from TiganachReloaded.gui_editor.utils import get_resolver
+from TirganachReloaded.gui_editor.utils import get_resolver
 
 class PropertyEditorWidget(QWidget):
     def create_field_widget(self, field_name, field_value, field_type):
@@ -344,7 +344,7 @@ def populate_table(self, elements):
 python3 src/helper_tools/extract_lua_mappings.py
 
 # Test resolver
-python3 src/TiganachReloaded/gui_editor/utils/mapping_resolver.py
+python3 TirganachReloaded/gui_editor/utils/mapping_resolver.py
 ```
 
 ### Expected Output

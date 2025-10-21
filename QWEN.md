@@ -31,7 +31,7 @@ SpellSmut/
 ├── ProjectPlanning/               # Project plans and roadmaps
 ├── src/                           # Python scripts and modding utilities
 │   ├── helper_tools/              # Asset extraction and organization scripts
-│   └── TiganachReloaded/          # CFF editing library and tools
+│   └── TirganachReloaded/          # CFF editing library and tools
 ├── .claude/                       # Claude-specific settings
 ├── .crush/                        # Database files
 ├── README.md                      # Project overview
@@ -61,7 +61,7 @@ Contains comprehensive guides for:
 - Organized by asset type for easy access and modification
 
 ### Modding Tools (src/)
-#### TiganachReloaded
+#### TirganachReloaded
 A comprehensive CFF (Configuration File Format) editing library with:
 - CFF Editor (GUI and command-line)
 - JSON and XML export capabilities
@@ -93,7 +93,7 @@ The project is primarily a documentation and tooling effort rather than a compil
 
 1. **Python Scripts**: Most tools are Python-based and can be run directly
    ```bash
-   python src/TiganachReloaded/run_cff_editor.py
+   python TirganachReloaded/run_cff_editor.py
    python src/helper_tools/batch_extract_ui.py
    ```
 
@@ -136,7 +136,7 @@ Based on game architecture analysis, SpellSmut supports:
 6. **Multiplayer & FreeGame**: Design skirmish and multiplayer maps
 
 ### CFF File Modding
-The TiganachReloaded library provides tools to:
+The TirganachReloaded library provides tools to:
 - Edit game configuration files
 - Export data to JSON/XML formats
 - Create new game content
@@ -170,7 +170,7 @@ The TiganachReloaded library provides tools to:
 1. Ensure Python 3.x is installed
 2. Navigate to the project directory
 3. Run desired Python scripts from `src/`
-4. Use the TiganachReloaded editor for CFF files
+4. Use the TirganachReloaded editor for CFF files
 
 ### For Asset Extraction
 1. Place original game files in `OriginalGameFiles/`
@@ -204,7 +204,7 @@ The project welcomes contributions to documentation and tools. See the README.md
 - Multiplayer & FreeGame Guide
 
 ### Key Scripts in src/
-- `TiganachReloaded/` - CFF editor and game data tools
+- `TirganachReloaded/` - CFF editor and game data tools
 - `helper_tools/` - Asset extraction and organization utilities
 - Various batch files for automation
 

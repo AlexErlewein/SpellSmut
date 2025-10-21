@@ -17,19 +17,19 @@ A complete Python-based modding solution that allows you to:
 - **CFF_QUICK_REFERENCE.md** - Quick reference card for common tasks
 - **CFF_EXTRACTION_SUMMARY.md** - Setup summary and technical details
 
-### Scripts (in src/TiganachReloaded/)
+### Scripts (in TirganachReloaded/)
 - **test_cff_extract.py** - Test that everything works
 - **cff_modding_examples.py** - 7 examples of querying and modifying data
 - **create_mod.py** - Ready-to-use template for creating mods
 
 ### Tools
-- **src/TiganachReloaded/** - Python library for CFF file manipulation
+- **TirganachReloaded/** - Python library for CFF file manipulation
 
 ## 🚀 Quick Start (3 Steps)
 
 ### 1. Verify Installation
 ```bash
-cd H:\SpellSmut\src\TiganachReloaded
+cd H:\SpellSmut\src\TirganachReloaded
 python test_cff_extract.py
 ```
 
@@ -43,7 +43,7 @@ Total Items: 7101
 
 ### 2. Explore Examples
 ```bash
-cd H:\SpellSmut\src\TiganachReloaded
+cd H:\SpellSmut\src\TirganachReloaded
 python cff_modding_examples.py
 ```
 
@@ -56,7 +56,7 @@ This shows you how to:
 
 ### 3. Create Your First Mod
 ```bash
-cd H:\SpellSmut\src\TiganachReloaded
+cd H:\SpellSmut\src\TirganachReloaded
 # Edit create_mod.py (uncomment the modifications you want)
 python create_mod.py
 ```
@@ -136,7 +136,7 @@ H:\SpellSmut\
 │       └── GameData.cff          # Original game data (97 MB)
 ├── ModdedGameFiles\              # Your mods go here
 ├── ModdingTools\
-│   └── TiganachReloaded\         # Python library
+│   └── TirganachReloaded\         # Python library
 │       ├── tirganach\            # Library code
 │       ├── test_cff_extract.py  # Test script
 │       ├── cff_modding_examples.py  # Examples
@@ -157,7 +157,7 @@ H:\SpellSmut\
 - Check file size (should be ~97MB)
 
 **Script errors?**
-- Make sure tirganach is installed: `pip install -e src/TiganachReloaded`
+- Make sure tirganach is installed: `pip install -e TirganachReloaded`
 - Check Python version: `python --version` (need 3.11+)
 
 ## 📚 Resources

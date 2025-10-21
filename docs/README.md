@@ -38,8 +38,8 @@ Development tools and editor configurations.
 ## Quick Access
 
 - **[CFF Editor Planning](../ProjectPlanning/EDITOR_PLANNING.md)**: GUI/TUI editor development
-- **[Weapon Data Extraction](../src/TiganachReloaded/WEAPON_EXTRACTION_SUMMARY.md)**: Complete weapon dataset
-- **[Category References](../src/TiganachReloaded/CATEGORY_REFERENCES_TABLE.md)**: Data relationship mapping
+- **[Weapon Data Extraction](../TirganachReloaded/WEAPON_EXTRACTION_SUMMARY.md)**: Complete weapon dataset
+- **[Category References](../TirganachReloaded/CATEGORY_REFERENCES_TABLE.md)**: Data relationship mapping
 
 ## Contributing
 

@@ -3,8 +3,8 @@
 ## Build/Test Commands
 
 ```bash
-# Python (TiganachReloaded CFF editor)
-cd src/TiganachReloaded
+# Python (TirganachReloaded CFF editor)
+cd TirganachReloaded
 python test_cff_extract.py                    # Test CFF loading
 python export_to_json.py                      # Export GameData to JSON
 python export_to_xml.py                       # Export GameData to XML

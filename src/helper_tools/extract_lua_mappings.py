@@ -666,7 +666,7 @@ def main():
     )
     parser.add_argument(
         "--output",
-        default="src/TiganachReloaded/data/id_name_mappings.json",
+        default="TirganachReloaded/data/id_name_mappings.json",
         help="Output JSON file path",
     )
 
