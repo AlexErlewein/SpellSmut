@@ -1,0 +1,85 @@
+Freezing development for quite some time
+
+alpha-9 (21.07.2017)
+ - Translated many French GUI localizations (thanks to Berzetoberze)
+ - Added localization of "Extinct", "Pain Tower", "Extinct Tower", "Pain Area", "Tower Stone", "Arrow Tower", "Protection Black", "Stone Rain", "Blizzard", "Rain of Fire" spells
+ - Added ability to change weapon (like Everflame, Earthblade) stats
+ - Added orbs (as weapons)
+ - Added all other races creatures images, like Skeletions, Shial Elves, Winterguard etc.
+ - Added races images
+ - Added determination of language locale based on user's operation system locale
+ - Added localization of creatures/items directly from Gamedata.cff
+ - Added memorizing of previously selected file names of Gamedata.cff and sf-mod files
+ - Added switching localization in real time (a bit hanging of UI is acceptable)
+
+alpha-8 (02.05.2017)
+ - Added search over all database (chests, buildings, creatures, items)
+ - Merchant parameters merged into creatures
+ - Added filtering component on modules view
+ - Fixed absence of CreaturesWidget in summoning elemental spells
+ - Added stub for "Unknown Item 3105" which parameters are not presented in Gamedata.cff, but item with its id should be dropped by one of in-game chests
+ - Fixed correct creature and item extraction via names in corresponding widgets extended number of suggestion from 10 to 50 added more accurate search for name
+ - Added almost all creatures images except some creatures from races Mages, Mixed Race, Shaal Duhn Elves, Shial elves, Skeletons, Uroks, Winterguard
+
+alpha-7 (12.03.2017):
+ - Fixed behaviour of chest/corpse loot mapping; by mistake it was the same objects with same offset range in file
+ - As side effect - chest loot parameters view are now correctly shows only treasure chests
+ - Fixed orcs/trolls race mapping in workers runes widget
+
+alpha-6 (10.03.2017):
+ - Added chest corpse loot objects
+ - Added some creatures's images and almost all siege and massive unit's images
+ - Added hero's images for almost all The Order of Dawn runes
+ - Added all 7 possible skills parsing and 4 possible spells parsing for hero runes
+ - Fixed equipment widget - extended panel, ability to show all types of runes and plans, disabling "go to parameters" button if object has no parameters
+ - Added worker runes/heroes runes race widget
+ - Fixed behaviour of spell parameters view - added ability to change any school requirement and actually viewing changes in process
+
+alpha-5 (07.03.2017):
+ - Added ability to change unit and building plans parameters
+ - Added ability to change workers and heroes runes as well as their characteristics, skills and spells
+ - Added ability to change actual spell-objects, that appear in user's spellbook
+ - Separated weapons by item types (1H weapon > 1H mace, 1H dagger, 1H sword etc.) in equipment widget; \
+    also added alphabetical sorting in item types and weapon types
+ - Reverted separation of language information from alpha-4, as result - faster start up
+ - Separated xdeltaencoder and editor in different maven modules, removed some unused images, as result - lesser size of result jar-file
+ - Fixed merchant names selection - now all in-game merchants are available
+ - Fixed weapons types, item, creature selection
+ - Rewritten spells view, as result - possible to track all spell requirements
+
+alpha-4 (22.02.2017):
+ - Separated weapons by item types (1H weapon > 1H mace, 1H dagger, 1H sword etc.)
+ - Extended merchant, spells, buildings images
+ - Updated spell parameters for Eternity, AbilitySalvo, DominateUndead, all Aura-like spells, FireburstTower, HealingTower, HypnotizeTower (thanks "leszekd25" for this data)
+ - Added auras target, requirement building widgets
+ - Completely rewritten spell scroll view to look more like spell parameters view; also fixed it - only "spell scroll" objects are now displayed, not confuse with "spell"-objects
+ - Added buildings parameters (HP, race, resources requirements, producing units)
+ - Added icons cache and icon aliases - as result reduced memory consumption
+ - Separated language information (localization) in separate code module and database, more CPU consumption, but _possibly_ lesser memory consumption and smoother rendering
+ - Added alphabetical sorting in races, unit races, creature names, unit names widgets
+ - Fixed incorrect subviews rendering when subview has no more children views, i.e. all Treewraith's buildings races changed to Trolls
+
+alpha-3 (10.02.2017):
+ - Changed editing buyout/sell price of all items from "copper amount" to "gold/silver/copper amount"
+ - Added ability to change item's belongings to item sets
+ - Fixed merchant reselection (based on selected vending items)
+ - Fixed races reselected (based on selected creature)
+ - Fixed armor parameters view crush, if item has no armor parameters (also no respective widgets and panels will be drawn)
+ - Complete redesign of UI from comboBox-like to panel-like-style
+
+alpha-2 (19.01.2017):
+ - Editing creatures loot drop
+ - Extended ability to change ALL weapon and armor requirements and effects
+ - Added all in-game spells, including all auras from level 1 to 12, like LifeTap aura;
+    as side effect - correct behaviour of Units/Dark elves/Deathknight and Units/Dark elves/Deathknight (Upgrade) views
+    and any other low-level scrolls views
+
+alpha-1 (30.12.2016)
+ - Editing skill requirements, i.e how many strength you need to level-up your Heavy Combat Art skill to level 7
+ - Editing spell parameters, i.e. how far you can cast your "Fireball" or how many hops can make "Chain Pain"
+ - Editing creature common parameters, spells, equipment, i.e. how many strength has "Blade Nightmare", how to make Lena/Urias mortal, how to make Eloni Watcher bite you with poisonous claw
+ - Editing unit common parameters, i.e. how change what blades hold dark elves assassin and how to make orc drummers mass heal instead of war crying
+ - Editing ARMOR, WEAPONS and MISCELLANEOUS common parameters, i.e. how many strength "Amra's armor" gives you and for how much you can sell/buyout it or how far "Heartseeker" can shoot
+ - Creating compact sf-mod files, which stores your modifications
+ - Loading sf-mod files created by other users
+ - Merging sf-mod files with your GameData.cff files to get modificated data, which you can test in game

@@ -1,0 +1,192 @@
+# SpellForce LUA Sources Overview
+
+This document provides an overview of the LUA source files available in the SpellForce modding tools, organized by folder.
+
+## Objects Folder
+
+The `object` folder contains the following files:
+
+- check_building.lua
+- object_building_init.lua
+- object_effect_area.lua
+- object_effect_aura.lua
+- object_effect_cast.lua
+- object_effect_gates.lua
+- object_effect_helper.lua
+- object_effect_init.lua
+- object_effect_lakes.lua
+- object_effect_lantern.lua
+- object_effect_mesh.lua
+- object_effect_monument.lua
+- object_effect_register.lua
+- object_effect_resolve.lua
+- object_effect_standard.lua
+- object_effect_test2.lua
+- object_effect_tests.lua
+- object_effect_unitattachments.lua
+- object_effect_weapon.lua
+- object_equipment_init.lua
+- object_figure_init.lua
+- object_nature_init.lua
+- object_resource_init.lua
+- object_scripteffects.lua
+- object_test_init.lua
+
+## Scripts Folder
+
+The `script` folder contains the following files and directories:
+
+### Root Level Files
+- Ai.lua.sample
+- AiFreeGame.lua
+- AiHelper.lua
+- CameraPlayerDeath.lua
+- ConLakesInit.lua
+- consysteminit.lua
+- ConTool.lua
+- conuserinit.lua.sample
+- ConWeatherInit.lua
+- DrwFiles.lua
+- DrwLibraryInit.lua
+- DrwSound.lua
+- EditorInit.lua
+- effectlist.lua
+- FahrendeHaendler.lua
+- GdsActions.lua
+- GdsBase.lua
+- GdsCameraHelper.lua
+- GdsConditions.lua
+- GdsDailyJobSequence.lua
+- GdsDefines.lua
+- GdsDefines2.lua
+- GdsDialogSystem.lua
+- GdsDump.lua
+- GdsEffects.lua
+- GdsGlobalEventSystem.lua
+- GdsGlobalPatchEvents.lua
+- GdsHelper.lua
+- GdsPatchSystem.lua
+- GdsQuestRewards.lua
+- GdsRespawnSystem.lua
+- GdsRtsCoopSpawnGroups.lua
+- GdsRtsCoopSpawnHelper.lua
+- GdsRtsCoopSpawnSystem.lua
+- GdsRtsMPAnimalSpawning.lua
+- GdsRtsSpawnSystem.lua
+- GdsStateSystem.lua
+- GdsVariables.lua
+- GdsVariableStates.lua
+- Hadeko.lua
+- HeiligeStaetteWorkaround.lua
+- Irfit.lua
+- object_blending_init.lua
+- SndEnvSounds.lua
+- SndSystemInit.lua
+- SndTracks.lua
+- SndTrackTransitions.lua
+- SndTransitionEngine.lua
+- sql_building.lua
+- sql_effect.lua
+- sql_good.lua
+- sql_head.lua
+- sql_item.lua
+- sql_object.lua
+- sql_race.lua
+- sql_spellline.lua
+- sql_unit.lua
+- tool_lua.lua
+- UiDebugInfo.lua
+- UiDebugShortcuts.lua
+- UiGameMenu.lua
+- UiInit.lua
+- UiLoadSave.lua
+- UiSystemInit.lua
+- Weather0.lua
+- Weather1.lua
+- Weather2.lua
+- Weather3.lua
+- Weather4.lua
+- Weather5.lua
+- Weather6.lua
+- Weather7.lua
+
+### Script Subdirectories
+- !test
+- P0
+- p1
+- p2
+- p4
+- p5
+- P6
+- P7
+- P9
+- P10
+- P11
+- P12
+- P15
+- P19
+- p16
+- p17
+- p21
+- P23
+- P25
+- P27
+- P30
+- p32
+- p59
+- p62
+- P63
+- p65
+- P66
+- p6666
+- P67
+- p68
+- p69
+- P70
+- P71
+- p72
+- P73
+- p74
+- P75
+- P77
+- P78
+- P79
+- P81
+- p82
+- p84
+- P85
+- P86
+- p88
+- p101
+- P102
+- P103
+- P104
+- P105
+- P107
+- P108
+- P109
+- P110
+- P111
+- P113
+- P115
+- P116
+- P200
+- P201
+- P202
+- p203
+- p204
+- P205
+- P206
+- P207
+- P208
+- P209
+- P210
+- P211
+- P212
+- P213
+- p300
+- p309
+- p310
+- P502
+
+Note: This overview provides a directory structure listing. Each subdirectory may contain additional LUA files related to specific game scenarios, characters, effects, or events.

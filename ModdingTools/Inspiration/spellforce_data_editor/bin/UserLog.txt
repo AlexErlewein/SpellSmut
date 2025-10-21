@@ -1,0 +1,86 @@
+[INFO] Main: Program.Main(): session start time: 11:33:14
+[INFO] Main: Settings.Load() called
+[INFO] SFUnPak: SFUnPak.SpecifyGameDirectory() called, directory: H:\SpellSmut\OriginalGameFiles
+[INFO] SFUnPak: SFUnPak.SpecifyGameDirectory(): Directory specified, loading data
+[INFO] SFUnPak: SFPakMap.Clear() called
+[INFO] SFUnPak: SFUnPak.SpecifyGameDirectory(): Pak map loaded
+[INFO] Main: MainForm() called
+[INFO] SFResources: SFResourceManager.ListAllFilesystemResources() called
+[INFO] SFResources: SFResourceManager.ListAllFilesystemResources(): Textures found: 75
+[INFO] SFResources: SFResourceManager.ListAllFilesystemResources(): Models found: 63
+[INFO] SFResources: SFResourceManager.ListAllFilesystemResources(): Animations found: 0
+[INFO] SFResources: SFResourceManager.ListAllFilesystemResources(): BSI files found: 0
+[INFO] SFResources: SFResourceManager.ListAllFilesystemResources(): Skins found: 0
+[INFO] SFResources: SFResourceManager.ListAllFilesystemResources(): Skeletons found: 0
+[INFO] SFResources: SFResourceManager.ListAllFilesystemResources(): Music files found: 0
+[INFO] SFResources: SFResourceManager.ListAllFilesystemResources(): Sound files found: 0
+[INFO] Main: TotalMemoryUsage(): 
+    Current total memory used: 55701504 bytes 
+    Current managed memory used: 14581764 bytes
+[INFO] Main: TotalMemoryUsage(): Logging resource usage
+[INFO] SFResources: Resource memory usage (bytes, RAM): TEXTURES 0, 3D MODELS 0, SKELETONS 0, ANIMATIONS 0, SKINS 0, BSI0, SOUNDS 0
+[INFO] SFResources: Resource memory usage (bytes, device): TEXTURES 0, 3D MODELS 0, SKELETONS 0, ANIMATIONS 0, SKINS 0, BSI0, SOUNDS 0
+[INFO] Main: MainForm.getVersion_completed(): Editor is up-to-date
+[INFO] SFUnPak: SFUnPak.SpecifyGameDirectory() called, directory: H:\SpellSmut\OriginalGameFiles
+[INFO] SFUnPak: SFUnPak.SpecifyGameDirectory(): Directory is up-to-date
+[INFO] SFResources: SFResourceManager.ListAllFilesystemResources() called
+[WARNING] SFResources: SFResourceManager.ListAllFilesystemResources(): Already loaded
+[INFO] Main: Settings.Save() called
+[INFO] SFCFF: SFGameDataNew.Load() called
+[INFO] SFChunkFile: SFChunkFile.OpenFile() called
+[INFO] SFCFF: SFGameDataNew.Import() called
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2002, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2054, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2056, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2005, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2006, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2067, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2003, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2004, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2013, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2015, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2017, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2014, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2012, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2018, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2016, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2022, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2023, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2024, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2025, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2026, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2028, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2040, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2001, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2029, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkByID() called (id = 2030, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkByID(): Found chunk, chunk type: 2, data length: 11428
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2031, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2039, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2062, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2041, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2042, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2047, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2044, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2048, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2050, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkByID() called (id = 2057, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkByID(): Found chunk, chunk type: 2, data length: 2463
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2065, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2051, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2052, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2053, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2055, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2058, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2059, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2061, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2063, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2064, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2032, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2049, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2036, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.GetChunkSpanByID() called (id = 2072, occurence id = 0)
+[INFO] SFChunkFile: SFChunkFile.Close() called
+[INFO] SFCFF: SFGameDataNew.Unload() called
+[INFO] SFLua: SFLuaEnvironment.UnloadSQL() called
+[INFO] Main: Program.Main(): session finish time: 11:44:09

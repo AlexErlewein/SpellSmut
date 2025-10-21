@@ -1,0 +1,85 @@
+body
+{
+	background-color: rgb(240, 240, 240);
+	background-image: linear-gradient(to right, rgb(0, 0, 0, 0.15), rgb(0, 0, 0, 0), rgb(0, 0, 0, 0), rgb(0, 0, 0, 0), rgb(0, 0, 0, 0.15));
+	padding-left: 20%;
+	padding-right: 20%;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 14px;
+}
+
+img
+{
+	border-style: dashed;
+	border-width: 1px;
+	border-color: rgb(150, 150, 150);
+	display: block;
+	max-width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+p
+{
+	text-align: justify;
+}
+
+orange
+{
+	background-color: Orange;
+}
+
+yellow
+{
+	background-color: Yellow;
+}
+
+elem_added
+{
+	background-color: rgb(100, 200, 100)
+}
+
+elem_changed
+{
+	background-color: rgb(200, 200, 100)
+}
+
+elem_removed
+{
+	background-color: rgb(200, 100, 100)
+}
+
+crimson
+{
+	color: #DC143C;
+}
+
+red
+{
+	color: Red;
+}
+
+warning
+{
+	background-color: rgb(240, 0, 0, 0.2);
+}
+
+unknown
+{
+	background-color: rgb(240, 240, 0, 0.2);
+}
+
+dec_purple
+{
+	background-color: rgb(240, 25, 240, 0.5);
+}
+
+dec_green
+{
+	background-color: rgb(50, 240, 50, 0.6);
+}
+
+dec_red
+{
+	background-color: rgb(200, 25, 25, 0.6);
+}

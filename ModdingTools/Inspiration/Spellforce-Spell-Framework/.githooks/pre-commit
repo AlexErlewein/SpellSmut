@@ -1,0 +1,34 @@
+#!/bin/bash
+
+clean() {
+  if [ -d "bin" ]; then
+    rm -rf bin/*
+  fi
+
+  if [ -d "lib" ]; then
+    rm -rf lib/*
+  fi
+
+  if [ -d "obj" ]; then
+    rm -rf obj/*
+  fi
+}
+
+function check_compile() {
+	mingw32-make > /dev/null;
+	if [ $? -ne 0 ]; then
+		echo "|=========== FAILED TO COMPILE ===========|"
+		exit 1;
+	else
+		echo "|============ Commit Accepted ============|"
+		exit 0;
+	fi
+}
+
+echo "|======== Cleaning Compile Output ========|"
+
+clean
+
+echo "|=== Checking if Codebase will Compile ===|";
+
+check_compile

@@ -1,40 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python extract_ui_assets.py)",
-      "Bash(python batch_extract_ui.py)",
-      "Bash(git mv extract_ui_assets.py src/helper_tools/)",
-      "Bash(git mv batch_extract_ui.py src/helper_tools/)",
-      "Bash(git mv extract_ui_batch.bat src/helper_tools/)",
-      "Bash(git add MODDING_PLAN.md UI_EXTRACTION_SUMMARY.md ExtractedAssets/UI/README.md src/helper_tools/extract_ui_batch.bat)",
-      "Bash(python -m py_compile src/helper_tools/extract_ui_assets.py)",
-      "Bash(python -m py_compile src/helper_tools/batch_extract_ui.py)",
-      "Bash(dir /B \"H:\\SpellSmut\\OriginalGameFiles\")",
-      "Bash(findstr /E \"sound music audio\")",
-      "Bash(dir \"H:\\SpellSmut\\OriginalGameFiles\\pak\" /S)",
-      "Bash(python -m py_compile src/helper_tools/extract_audio_assets.py)",
-      "Bash(python src/helper_tools/extract_audio_assets.py)",
-      "Bash(dir /B \"H:\\SpellSmut\\OriginalGameFiles\\pak\")",
-      "Bash(xxd -l 256 \"H:\\SpellSmut\\OriginalGameFiles\\pak\\sf0.pak\")",
-      "WebSearch",
-      "WebFetch(domain:github.com)",
-      "Bash(where /R \"C:\\Program Files\" Dup5.exe)",
-      "Bash(where /R \"C:\\Program Files (x86)\" Dup5.exe)",
-      "Read(//h/**)",
-      "Read(//c/Program Files (x86)/Dragon UnPACKer 5/**)",
-      "Read(//c/Program Files (x86)/Dragon UnPACKer 5/utils/**)",
-      "Bash(\"C:\\Program Files (x86)\\Dragon UnPACKer 5\\drgunpack5.exe\" --help)",
-      "Bash(\"C:\\Program Files (x86)\\Dragon UnPACKer 5\\utils\\duppi.exe\" --help)",
-      "Bash(\"C:\\Program Files (x86)\\Dragon UnPACKer 5\\utils\\duppi.exe\" /?)",
-      "Read(//h//**)",
-      "Bash(python -m py_compile src/helper_tools/bulk_extract_paks.py)",
-      "Bash(python src/helper_tools/bulk_extract_paks.py)",
-      "Bash(python src/helper_tools/bulk_extract_paks.py --auto)",
-      "Bash(python -u src/helper_tools/bulk_extract_paks.py --auto)",
-      "Bash(python src/helper_tools/organize_extracted_files.py)",
-      "Bash(python src/helper_tools/organize_by_extraction_lists.py)",
-      "Bash(python src/helper_tools/organize_all_extracted_files.py)"
-    ]
+      "Bash(dir \"H:\\SpellSmut\\ProjectPlanning\" /B)",
+      "Bash(dir \"H:\\SpellSmut\\docs\" /B)"
+    ],
+    "deny": [],
+    "ask": []
   },
   "outputStyle": "default"
 }

@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tirganach"
+version = "0.0.0"
+description = "A Python library for easier editing of the SpellForce GameData.cff"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "MIT"}
+authors = [
+    {name = "Original tirganach authors"},
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["tirganach*"]
