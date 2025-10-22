@@ -1,8 +1,5 @@
 # SpellForce - Exclude large binary game files
 
-# PAK archives (too large for GitHub)
-*.pak
-
 # Executables and DLLs (game binaries)
 *.exe
 *.dll
