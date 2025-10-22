@@ -10,7 +10,10 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from tirganach import GameData
 from tirganach.types import *
 from typing import List, Dict, Any, Optional
-from PySide6.QtCore import QObject, Signal
+from PySide6.QtCore import QObject, Signal, Qt
+from PySide6.QtGui import QPixmap, QIcon
+from PySide6.QtCore import Qt
+from pathlib import Path
 
 
 class CFFDataModel(QObject):
@@ -29,6 +32,11 @@ class CFFDataModel(QObject):
         self.modified = False
         self.current_category: Optional[str] = None
         self.current_element_index: Optional[int] = None
+
+        # Icon-related attributes
+        self.icon_cache = {}  # Cache for loaded QPixmap objects
+        self.project_root = Path(__file__).parent.parent.parent.parent
+        self.ui_assets_dir = self.project_root / "ExtractedAssets" / "UI" / "extracted"
 
     def load_file(self, file_path: str) -> bool:
         """Load a CFF file"""
@@ -137,3 +145,188 @@ class CFFDataModel(QObject):
     def get_file_path(self) -> Optional[str]:
         """Get current file path"""
         return self.file_path
+
+    # Icon-related methods
+
+    def get_icon_path(self, category: str, element: Any) -> Optional[str]:
+        """
+        Get icon path for an element.
+
+        Args:
+            category: Category name (e.g., "items", "weapons", "spells")
+            element: The element object
+
+        Returns:
+            Path to PNG file or None
+        """
+        if not self.game_data:
+            return None
+
+        # Get element ID based on category
+        element_id = self._get_element_id(category, element)
+        if element_id is None:
+            return None
+
+        # Look up in item_ui table for items/weapons/armor
+        if category in ["items", "weapons", "armor"]:
+            ui_entry = self._find_item_ui_entry(element_id)
+            if ui_entry:
+                handle = ui_entry.get("item_ui_handle")
+                if handle:
+                    return self._resolve_icon_path(handle, "items")
+
+        # Look up in spell_names table for spells
+        elif category == "spells":
+            spell = self._find_spell_entry(element_id)
+            if spell and spell.get("spell_ui_handle"):
+                handle = spell["spell_ui_handle"]
+                return self._resolve_icon_path(handle, "spells")
+
+        return None
+
+    def get_icon_pixmap(self, category: str, element: Any, size=(64, 64)) -> Optional[QPixmap]:
+        """
+        Get QPixmap for display in GUI.
+        Uses cache for performance.
+
+        Args:
+            category: Category name
+            element: Element object
+            size: Desired size as (width, height) tuple
+
+        Returns:
+            QPixmap object or None
+        """
+        cache_key = f"{category}_{id(element)}_{size}"
+        if cache_key in self.icon_cache:
+            return self.icon_cache[cache_key]
+
+        icon_path = self.get_icon_path(category, element)
+        if icon_path and Path(icon_path).exists():
+            pixmap = QPixmap(icon_path)
+            if not pixmap.isNull():
+                pixmap = pixmap.scaled(size[0], size[1])
+                self.icon_cache[cache_key] = pixmap
+                return pixmap
+
+        # Return fallback icon
+        return self._get_fallback_icon(category, size)
+
+    def get_icon_icon(self, category: str, element: Any, size=(64, 64)) -> QIcon:
+        """
+        Get QIcon for display in GUI elements like buttons.
+
+        Args:
+            category: Category name
+            element: Element object
+            size: Desired size as (width, height) tuple
+
+        Returns:
+            QIcon object
+        """
+        pixmap = self.get_icon_pixmap(category, element, size)
+        if pixmap:
+            return QIcon(pixmap)
+        return QIcon()
+
+    def _get_element_id(self, category: str, element: Any) -> Optional[int]:
+        """Extract ID from element based on category."""
+        try:
+            # Common ID field names
+            id_fields = ["id", "item_id", "spell_id", "weapon_id", "armor_id"]
+
+            for field_name in id_fields:
+                if hasattr(element, field_name):
+                    return getattr(element, field_name)
+
+            # Try index-based ID for some categories
+            if hasattr(element, '_index'):
+                return element._index
+
+        except Exception:
+            pass
+
+        return None
+
+    def _find_item_ui_entry(self, item_id: int) -> Optional[Dict]:
+        """Find item_ui entry by item_id."""
+        try:
+            item_ui_table = self.get_table("item_ui")
+            if item_ui_table:
+                for entry in item_ui_table:
+                    if getattr(entry, "item_id", None) == item_id and getattr(entry, "item_ui_index", None) == 1:
+                        return {
+                            "item_id": getattr(entry, "item_id", 0),
+                            "item_ui_index": getattr(entry, "item_ui_index", 0),
+                            "item_ui_handle": getattr(entry, "item_ui_handle", ""),
+                            "scaled_down": getattr(entry, "scaled_down", 0)
+                        }
+        except Exception:
+            pass
+        return None
+
+    def _find_spell_entry(self, spell_id: int) -> Optional[Dict]:
+        """Find spell entry by spell_id."""
+        try:
+            spells_table = self.get_table("spells")
+            if spells_table:
+                for spell in spells_table:
+                    if getattr(spell, "spell_id", None) == spell_id:
+                        return {
+                            "spell_id": getattr(spell, "spell_id", 0),
+                            "spell_name_id": getattr(spell, "spell_name_id", 0),
+                            "spell_ui_handle": getattr(spell, "spell_ui_handle", "")
+                        }
+        except Exception:
+            pass
+        return None
+
+    def _resolve_icon_path(self, handle: str, category: str) -> Optional[str]:
+        """
+        Convert UI handle to file path.
+        Direct lookup: UIHandle IS the filename.
+        """
+        if not handle:
+            return None
+
+        # Direct lookup: handle + .png
+        icon_path = self.ui_assets_dir / category / f"{handle}.png"
+
+        if icon_path.exists():
+            return str(icon_path)
+
+        return None
+
+    def _get_fallback_icon(self, category: str, size) -> Optional[QPixmap]:
+        """
+        Get fallback icon for missing assets.
+
+        Args:
+            category: Category name
+            size: Desired size tuple
+
+        Returns:
+            QPixmap of fallback icon or None
+        """
+        fallback_dir = self.ui_assets_dir.parent / "fallback_icons"
+        fallback_files = {
+            "items": "ui_item_unknown.png",
+            "weapons": "ui_weapon_unknown.png",
+            "armor": "ui_armor_unknown.png",
+            "spells": "ui_spell_unknown.png"
+        }
+
+        fallback_file = fallback_files.get(category, "ui_unknown.png")
+        fallback_path = fallback_dir / fallback_file
+
+        if fallback_path.exists():
+            pixmap = QPixmap(str(fallback_path))
+            if not pixmap.isNull():
+                pixmap = pixmap.scaled(size[0], size[1])
+                return pixmap
+
+        return None
+
+    def clear_icon_cache(self):
+        """Clear the icon cache to free memory."""
+        self.icon_cache.clear()

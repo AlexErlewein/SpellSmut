@@ -7,6 +7,7 @@ from PySide6.QtWidgets import (QWidget, QVBoxLayout, QFormLayout, QLineEdit,
                                QSpinBox, QComboBox, QPushButton, QScrollArea,
                                QLabel, QHBoxLayout, QMessageBox)
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QPixmap
 import enum
 
 
@@ -33,7 +34,14 @@ class PropertyEditorWidget(QWidget):
         # Scroll area for properties
         scroll = QScrollArea()
         scroll.setWidgetResizable(True)
-        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+
+        # Icon display
+        self.icon_label = QLabel()
+        self.icon_label.setFixedSize(128, 128)
+        self.icon_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.icon_label.setStyleSheet("border: 2px solid #555; background: #222;")
+        layout.addWidget(self.icon_label)
 
         # Properties container
         self.props_widget = QWidget()
@@ -74,8 +82,9 @@ class PropertyEditorWidget(QWidget):
         # Clear existing widgets
         while self.props_layout.count():
             item = self.props_layout.takeAt(0)
-            if item.widget():
-                item.widget().deleteLater()
+            widget = item.widget()
+            if widget:
+                widget.deleteLater()
 
         self.field_widgets.clear()
 
@@ -84,6 +93,13 @@ class PropertyEditorWidget(QWidget):
             self.save_button.setEnabled(False)
             self.cancel_button.setEnabled(False)
             return
+
+        # Load and display icon
+        icon_pixmap = self.data_model.get_icon_pixmap(self.current_category, self.current_element, size=(128, 128))
+        if icon_pixmap:
+            self.icon_label.setPixmap(icon_pixmap)
+        else:
+            self.icon_label.setText("No Icon")
 
         # Update header
         element_name = "Unknown"

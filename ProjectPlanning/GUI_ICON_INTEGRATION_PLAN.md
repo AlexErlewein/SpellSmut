@@ -44,7 +44,7 @@ We need to display item/weapon/spell icons in the GUI editor alongside the data 
 ### 3. Extracted UI Assets
 **Location**: `ExtractedAssets/UI/extracted/`
 
-**Directory Structure**:
+**Current Directory Structure** (numbered names):
 ```
 UI/extracted/
 ├── items/
@@ -63,7 +63,23 @@ UI/extracted/
 └── other categories...
 ```
 
-**Note**: Files are numbered (ui_item0.png) NOT named by handle. We need a mapping!
+**Target Directory Structure** (after re-extraction with original names):
+```
+UI/extracted/
+├── items/
+│   ├── ui_item_equip_weapon_dagger_flame.png
+│   ├── ui_item_equip_armor_chest_chain.png
+│   └── ... (original filenames)
+├── spells/
+│   ├── ui_spell_EM_Fire_FireBurst.png
+│   ├── ui_spell_WM_Life_Healing.png
+│   └── ... (original filenames)
+├── cursors/
+├── backgrounds/
+└── ... (preserved existing categories)
+```
+
+**Note**: After re-extraction, files will be named by their UI handles, eliminating the need for mapping!
 
 ## The Missing Link Problem
 
@@ -141,26 +157,73 @@ def convert_dds_to_png(input_dir, output_dir):
             os.system(f'magick convert "{dds_file}" "{png_path}"')
 ```
 
-**Step 1.3**: Organize by Category
+**Step 1.2b**: Rotate PNGs by 180 degrees
+```python
+# In src/helper_tools/rotate_ui_pngs.py
+from PIL import Image
+from pathlib import Path
+
+def rotate_pngs_180(input_dir):
+    """
+    Rotate all UI PNGs by 180 degrees (SpellForce uses inverted Y-axis).
+    Modifies files in-place.
+    """
+    for png_file in Path(input_dir).rglob("*.png"):
+        if png_file.name.startswith("ui_"):
+            print(f"Rotating: {png_file.name}")
+            with Image.open(png_file) as img:
+                rotated = img.rotate(180)
+                rotated.save(png_file)
+```
+
+**Step 1.3**: Organize by Category (Preserve Existing Structure)
 ```python
 def organize_ui_assets(source_dir, target_dir):
     """
-    Organize UI assets into categories.
+    Organize UI assets into categories while preserving existing folder structure.
+    The existing ExtractedAssets/UI/extracted/ structure should be maintained.
     """
+    # Since we're re-extracting with original names, we can use the existing
+    # categorization logic but ensure it matches the current structure:
+    # ExtractedAssets/UI/extracted/
+    # ├── items/ (ui_item_* files)
+    # ├── spells/ (ui_spell_* files)
+    # ├── cursors/ (ui_cursor_* files)
+    # ├── backgrounds/ (ui_bgr_* files)
+    # └── etc.
+
     categories = {
-        "items": ["ui_item_"],
+        "items": ["ui_item_", "ui_itm_"],
         "spells": ["ui_spell_"],
-        "buildings": ["ui_building_"],
-        "other": ["ui_"]
+        "cursors": ["ui_cursor_"],
+        "backgrounds": ["ui_bgr_"],
+        "buttons": ["ui_btn_"],
+        "mainmenu": ["ui_mainmenu_"],
+        "containers": ["ui_cnt_"],
+        "logos": ["ui_logo_"],
+        "fonts": ["font_"],
+        "other": ["ui_"]  # Catch-all for ui_ files
     }
-    
-    for png_file in Path(source_dir).glob("ui_*.png"):
+
+    for png_file in Path(source_dir).rglob("*.png"):
+        if not png_file.name.startswith("ui_") and not png_file.name.startswith("font_"):
+            continue
+
+        # Determine category based on filename prefix
+        categorized = False
         for category, prefixes in categories.items():
             if any(png_file.name.startswith(p) for p in prefixes):
                 target = target_dir / category / png_file.name
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy(png_file, target)
+                categorized = True
                 break
+
+        # If not categorized, put in "other"
+        if not categorized:
+            target = target_dir / "other" / png_file.name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy(png_file, target)
 ```
 
 **Step 1.4**: Fallback Icon System
@@ -371,28 +434,48 @@ def extract_with_names(pak_file, output_dir):
 
 ## Data Flow Diagram
 
+**After Re-extraction with Original Names** (No mapping needed):
+
 ```
 ┌─────────────┐
 │ GameData.cff│
 └──────┬──────┘
-       │
-       ├─→ items table (item_id: 27)
-       │
-       ├─→ item_ui table (item_id: 27, handle: "ui_item_equip_weapon_dagger_flame")
-       │
-       └─→ weapons table (item_id: 27, damage: 10-25)
+        │
+        ├─→ items table (item_id: 27)
+        │
+        ├─→ item_ui table (item_id: 27, handle: "ui_item_equip_weapon_dagger_flame")
+        │
+        └─→ weapons table (item_id: 27, damage: 10-25)
+
+┌─────────────────────────────────────────────────────┐
+│ExtractedAssets/UI/extracted/items/ui_item_equip_weapon_dagger_flame.png│
+└─────────────────────────────┬───────────────────────┘
+                              │
+                              └─→ Displayed in GUI (direct lookup!)
+```
+
+**Legacy Data Flow** (if using existing numbered files):
+
+```
+┌─────────────┐
+│ GameData.cff│
+└──────┬──────┘
+        │
+        ├─→ item_ui table (handle: "ui_item_equip_weapon_dagger_flame")
+        │
+        └─→ Lookup in mapping
 
 ┌──────────────────┐
 │ui_icon_mapping.json│
 └────────┬──────────┘
-         │
-         └─→ {"ui_item_equip_weapon_dagger_flame": "ui_item27.png"}
+          │
+          └─→ {"ui_item_equip_weapon_dagger_flame": "ui_item27.png"}
 
 ┌─────────────────────────┐
 │ExtractedAssets/UI/extracted/items/png/ui_item27.png│
 └────────────┬────────────┘
-             │
-             └─→ Displayed in GUI
+              │
+              └─→ Displayed in GUI
 ```
 
 ## Testing Plan
@@ -423,36 +506,144 @@ def extract_with_names(pak_file, output_dir):
 ### New Files to Create
 ```
 TirganachReloaded/
-├── ui_icon_mapping.json          # NEW: Handle → filename mapping
 └── tirganach/
     └── gamedata.py                # MODIFY: Add icon methods
 
 src/helper_tools/
-└── generate_ui_mapping.py         # NEW: Create mapping from PAK
+├── extract_ui_with_names.py       # NEW: Re-extract UI assets with original names
+├── convert_ui_textures.py         # NEW: DDS → PNG conversion
+├── rotate_ui_pngs.py              # NEW: 180° rotation for PNGs
+└── organize_ui_assets.py          # NEW: Organize by category
 
 ExtractedAssets/UI/
 ├── fallback_icons/                # NEW: Default icons
 │   ├── ui_item_unknown.png
 │   ├── ui_spell_unknown.png
 │   └── ui_weapon_unknown.png
-└── extracted/
-    ├── items/png/                 # EXISTS: Item icons
-    └── spells/png/                # EXISTS: Spell icons
+├── extracted/                     # PRESERVE: Existing structure
+│   ├── items/                     # ui_item_* files
+│   ├── spells/                    # ui_spell_* files
+│   ├── cursors/                   # ui_cursor_* files
+│   └── ...                        # Other existing categories
+└── raw_reextraction/              # NEW: Raw QuickBMS output with original names
 ```
 
-## Next Steps
+## Implementation Status
 
-1. **Immediate**: Create `generate_ui_mapping.py` script
-2. **Then**: Extend GameData class with icon methods
-3. **Then**: Add icon display to property editor
-4. **Finally**: Add icon column to table view
+### ✅ Phase 1: Asset Re-extraction (Scripts Created)
+- **extract_ui_with_names.py**: QuickBMS extraction with original filenames
+- **convert_ui_textures.py**: DDS to PNG conversion
+- **rotate_ui_pngs.py**: 180° PNG rotation for SpellForce Y-axis
+- **organize_ui_assets.py**: Category-based organization
+- **run_ui_icon_integration.bat**: Complete pipeline batch script
 
-## Questions to Resolve
+### ✅ Phase 2: Code Integration (Completed)
+- **Extended CFFDataModel** with icon lookup methods (`get_icon_path`, `get_icon_pixmap`, etc.)
+- **Added icon column** to ElementTableWidget (32x32 icons)
+- **Added icon display** to PropertyEditorWidget (128x128 icons)
+- **Implemented caching** for performance
+- **Added fallback system** for missing icons
 
-1. **Mapping Source**: Can we extract handle→index mapping from PAK headers, or do we need to parse CFF more deeply?
-2. **Icon Size**: What sizes do we need? (64x64 for table, 128x128 for panel?)
-3. **Categories**: Do buildings/creatures also have UI icons we should support?
-4. **Caching**: Should we pre-load all icons or lazy-load on demand?
+### 🔄 Phase 3: Testing & Polish (Ready for Testing)
+1. **Run extraction pipeline** on Windows
+2. **Test icon loading** for items, spells, weapons
+3. **Verify performance** with icon caching
+4. **Test fallback icons** for missing assets
+
+## Windows Execution Instructions
+
+1. **Copy scripts to Windows**:
+   ```bash
+   # From macOS/Linux, copy to Windows machine:
+   scp src/helper_tools/extract_ui_with_names.py windows_machine:
+   scp src/helper_tools/convert_ui_textures.py windows_machine:
+   scp src/helper_tools/rotate_ui_pngs.py windows_machine:
+   scp src/helper_tools/organize_ui_assets.py windows_machine:
+   scp src/helper_tools/run_ui_icon_integration.bat windows_machine:
+   ```
+
+2. **Install dependencies on Windows**:
+   ```cmd
+   pip install Pillow
+   # Install ImageMagick from: https://imagemagick.org/script/download.php#windows
+   ```
+
+3. **Run the complete pipeline**:
+   ```cmd
+   run_ui_icon_integration.bat
+   ```
+
+4. **Copy results back**:
+   ```bash
+   # Copy ExtractedAssets/UI/extracted/ back to your project
+   ```
+
+## File Locations (Final)
+
+### Scripts Created
+```
+src/helper_tools/
+├── extract_ui_with_names.py       # QuickBMS extraction with original names
+├── convert_ui_textures.py         # DDS → PNG conversion
+├── rotate_ui_pngs.py              # 180° PNG rotation
+├── organize_ui_assets.py          # Category organization
+└── run_ui_icon_integration.bat    # Complete pipeline runner
+```
+
+### Modified Files
+```
+TirganachReloaded/cff_editor/
+├── data_model.py                   # Added icon methods
+├── widgets/
+│   ├── element_table.py            # Added icon column
+│   └── property_editor.py          # Added icon display
+```
+
+### Output Locations
+```
+ExtractedAssets/UI/
+├── extracted/                      # Final organized assets
+│   ├── items/                      # ui_item_* files
+│   ├── spells/                     # ui_spell_* files
+│   ├── cursors/                    # ui_cursor_* files
+│   └── ...                         # Other categories
+├── fallback_icons/                 # Default icons for missing assets
+└── raw_reextraction/               # Raw QuickBMS output (temporary)
+```
+
+## Implementation Decisions Made
+
+1. **Icon Sizes**: 
+   - Table view: 32x32 pixels (compact display)
+   - Property editor: 128x128 pixels (detailed view)
+   - Both use aspect ratio preservation
+
+2. **Categories Supported**:
+   - Items (weapons, armor, consumables)
+   - Spells (all magic schools)
+   - Cursors, backgrounds, buttons, etc.
+   - Extensible for buildings/creatures if needed
+
+3. **Caching Strategy**:
+   - Lazy loading on demand
+   - Per-element caching with size-specific keys
+   - Memory-efficient (clears on category change)
+
+4. **PNG Rotation**:
+   - 180° rotation applied to all UI PNGs
+   - Compensates for SpellForce's inverted Y-axis
+   - Applied after DDS conversion
+
+## Testing Checklist
+
+- [ ] Run extraction pipeline on Windows
+- [ ] Verify DDS → PNG conversion works
+- [ ] Check PNG rotation is correct
+- [ ] Test icon display in table view
+- [ ] Test icon display in property editor
+- [ ] Verify fallback icons for missing assets
+- [ ] Test performance with large item lists
+- [ ] Check icon caching functionality
 
 ## Estimated Effort
 

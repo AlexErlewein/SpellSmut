@@ -6,6 +6,7 @@ Displays all elements in the selected category
 from PySide6.QtWidgets import (QWidget, QVBoxLayout, QTableWidget, QTableWidgetItem,
                                QLineEdit, QHBoxLayout, QLabel, QPushButton)
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QPixmap
 
 
 class ElementTableWidget(QWidget):
@@ -32,8 +33,8 @@ class ElementTableWidget(QWidget):
         # Table
         self.table = QTableWidget()
         self.table.setAlternatingRowColors(True)
-        self.table.setSelectionBehavior(QTableWidget.SelectRows)
-        self.table.setSelectionMode(QTableWidget.SingleSelection)
+        self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
+        self.table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
         self.table.itemSelectionChanged.connect(self.on_selection_changed)
         layout.addWidget(self.table)
 
@@ -84,9 +85,9 @@ class ElementTableWidget(QWidget):
         # Determine which fields to show (limit to important ones)
         display_fields = self.get_display_fields(sample)
 
-        # Setup table
-        self.table.setColumnCount(len(display_fields))
-        self.table.setHorizontalHeaderLabels(display_fields)
+        # Setup table with icon column
+        self.table.setColumnCount(len(display_fields) + 1)  # +1 for icon column
+        self.table.setHorizontalHeaderLabels(["Icon"] + display_fields)
 
         # Calculate page range
         start_idx = self.current_page * self.page_size
@@ -98,16 +99,27 @@ class ElementTableWidget(QWidget):
         for row_idx, element_idx in enumerate(range(start_idx, end_idx)):
             element = self.filtered_elements[element_idx]
 
+            # Icon cell (column 0)
+            icon_label = QLabel()
+            icon_pixmap = self.data_model.get_icon_pixmap(self.data_model.current_category, element, size=(32, 32))
+            if icon_pixmap:
+                icon_label.setPixmap(icon_pixmap)
+            else:
+                icon_label.setText("No Icon")
+            icon_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            self.table.setCellWidget(row_idx, 0, icon_label)
+
+            # Data cells (starting from column 1)
             for col_idx, field_name in enumerate(display_fields):
                 try:
                     value = getattr(element, field_name)
                     item = QTableWidgetItem(str(value))
-                    item.setFlags(item.flags() & ~Qt.ItemIsEditable)  # Read-only
-                    item.setData(Qt.UserRole, element_idx)  # Store actual index
-                    self.table.setItem(row_idx, col_idx, item)
+                    item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)  # Read-only
+                    item.setData(Qt.ItemDataRole.UserRole, element_idx)  # Store actual index
+                    self.table.setItem(row_idx, col_idx + 1, item)  # +1 because icon is column 0
                 except:
                     item = QTableWidgetItem("")
-                    self.table.setItem(row_idx, col_idx, item)
+                    self.table.setItem(row_idx, col_idx + 1, item)
 
         # Resize columns
         self.table.resizeColumnsToContents()
@@ -195,16 +207,23 @@ class ElementTableWidget(QWidget):
 
     def on_selection_changed(self):
         """Handle element selection"""
-        selected = self.table.selectedItems()
-        if selected:
-            # Get actual element index from first item in row
-            element_idx = selected[0].data(Qt.UserRole)
-            if element_idx is not None:
-                self.data_model.current_element_index = element_idx
-                self.data_model.element_selected.emit(
-                    self.data_model.current_category,
-                    element_idx
-                )
+        selected_rows = set()
+        for item in self.table.selectedItems():
+            selected_rows.add(self.table.row(item))
+
+        if selected_rows:
+            # Get the first selected row
+            row = list(selected_rows)[0]
+            # Get element index from the first data column (column 1, since 0 is icon)
+            first_data_item = self.table.item(row, 1)
+            if first_data_item:
+                element_idx = first_data_item.data(Qt.ItemDataRole.UserRole)
+                if element_idx is not None:
+                    self.data_model.current_element_index = element_idx
+                    self.data_model.element_selected.emit(
+                        self.data_model.current_category,
+                        element_idx
+                    )
 
     def refresh(self):
         """Refresh the table"""
