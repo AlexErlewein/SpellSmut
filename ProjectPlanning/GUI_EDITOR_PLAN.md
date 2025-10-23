@@ -16,16 +16,30 @@ Detailed plan for the PySide6-based GUI editor for SpellForce CFF files.
 - ✅ Pagination system (50 items per page)
 - ✅ Click-to-view details (basic selection)
 
-### Phase 3: Editing - IN PROGRESS
-- 🔄 Property display/edit panel
-- ⏳ Type validation (int, string, enum)
-- ⏳ Save modifications
+### Phase 3: Editing - COMPLETE
+- ✅ Property display/edit panel
+- ✅ Type validation (int, string, enum)
+- ✅ Save modifications
+- ✅ Multilingual support (6 languages)
 
-### Phase 4: Polish - PENDING
-- ⏳ Dark mode theme
-- ⏳ Error handling improvements
-- ⏳ Save confirmations
+### Phase 4: Polish - MOSTLY COMPLETE
+- ✅ Dark mode theme
+- 🔄 Error handling improvements
+- ✅ Save confirmations
 - ⏳ Recent files menu
+
+### Phase 5: Advanced Features - PENDING
+- ⏳ Add new elements functionality
+- ⏳ Clone existing elements
+- ⏳ Delete elements (with confirmation)
+- ⏳ Undo/Redo functionality
+- ⏳ Global search across all categories
+- ⏳ Batch edit selected elements
+- ⏳ Compare two CFF files side-by-side
+- ⏳ Export category to CSV
+- ⏳ Import from CSV
+- ⏳ Custom column selection
+- ⏳ Favorites/bookmarks
 
 ## Technical Implementation
 
@@ -41,13 +55,20 @@ Detailed plan for the PySide6-based GUI editor for SpellForce CFF files.
 3. **Search & Filter**: Real-time filtering across all visible data
 4. **Pagination**: Handles large datasets (176k+ localization entries)
 5. **Weapon Integration**: Automatic loading of enhanced weapon data
+6. **Multilingual Support**: Dynamic language switching for all localised content (6 languages)
+7. **Property Editing**: Full CRUD operations with type validation
+8. **Dark Theme**: Professional dark UI with consistent styling
 
 ### Current Capabilities
 - Browse all categories (items, spells, creatures, buildings, armor, weapons, localization)
 - Search within any category
 - Paginate through results
-- View basic element information
-- Load weapon data automatically
+- View and edit element properties with type validation
+- Load weapon and armor data automatically
+- Multilingual interface (German, English, French, Spanish, Italian, _HAEGAR)
+- Real-time language switching for all localised content
+- Dark theme with professional styling
+- Save modifications with confirmation dialogs
 
 ## Next Development Steps
 

@@ -133,22 +133,23 @@ class ElementTableWidget(QWidget):
         self.update_pagination()
 
     def _get_element_name(self, element) -> str:
-        """Extract name from element, trying common name fields"""
-        # Special handling for weapons - check mapping first
-        if self.data_model.current_category == "weapons":
-            if hasattr(element, 'item_id'):
-                weapon_name = self.data_model.get_weapon_name(element.item_id)
-                if weapon_name:
-                    return weapon_name
+        """Extract name from element, trying localised text first, then common name fields"""
+        # Try to get localised name using the data model's localisation method
+        localised_name = self.data_model.get_localised_text(element, 'name')
+        if localised_name:
+            return localised_name
 
-        # Special handling for armor - check mapping first
-        if self.data_model.current_category == "armor":
-            if hasattr(element, 'item_id'):
-                armor_name = self.data_model.get_armor_name(element.item_id)
-                if armor_name:
-                    return armor_name
+        # Special handling for weapons and armor using enhanced JSON data
+        if hasattr(element, 'item_id'):
+            weapon_name = self.data_model.get_weapon_name(element.item_id)
+            if weapon_name:
+                return weapon_name
 
-        # Try common name fields in order of preference
+            armor_name = self.data_model.get_armor_name(element.item_id)
+            if armor_name:
+                return armor_name
+
+        # Try common name fields in order of preference (fallback for non-localised entities)
         name_fields = ['name', 'item_name', 'spell_name', 'creature_name', 'building_name']
 
         for field_name in name_fields:
@@ -158,14 +159,13 @@ class ElementTableWidget(QWidget):
                     return str(name_value)
 
         # Fallback: try to construct a name from ID fields
-        id_fields = ['item_id', 'spell_id', 'creature_id', 'building_id']
+        id_fields = ['id', 'item_id', 'spell_id', 'creature_id', 'building_id', 'quest_id', 'npc_id']
         for field_name in id_fields:
             if hasattr(element, field_name):
                 id_value = getattr(element, field_name)
-                if id_value is not None:
+                if id_value is not None and id_value != 0:
                     return f"{field_name.replace('_id', '').title()} {id_value}"
 
-        # Last resort
         return "Unknown"
 
     def get_display_fields(self, element) -> list:

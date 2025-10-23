@@ -10,7 +10,7 @@ Built with **PySide6** (Qt framework) for a professional, native look and excell
 
 ## Features
 
-### ✅ Current Features (v1.0)
+### ✅ Current Features (v1.1)
 
 - **3-Panel Layout**
   - Left: Category browser (43 tables)
@@ -44,6 +44,17 @@ Built with **PySide6** (Qt framework) for a professional, native look and excell
     - Spin boxes for integers
     - Dropdowns for enums/booleans
   - Save/Cancel buttons
+
+- **Multilingual Support**
+  - Language switching menu (German, English, French, Spanish, Italian, _HAEGAR)
+  - Dynamic localisation for all text content
+  - Real-time language switching for:
+    - Spell names and descriptions
+    - Weapon and armor names
+    - Building names and descriptions
+    - Quest names and dialogues
+    - NPC names and race names
+  - Persistent language preferences
 
 - **Dark Theme**
   - Modern dark UI
@@ -133,6 +144,34 @@ python run_cff_editor.py
 | `F5` | Refresh view |
 | `Ctrl+Q` | Quit |
 
+## Language Support
+
+The editor supports **6 languages** from the game's localisation system:
+
+- **German (Deutsch)** - Most extensive localisation
+- **English** - Default/fallback language
+- **French (Français)** - Full localisation
+- **Spanish (Español)** - Full localisation
+- **Italian (Italiano)** - Full localisation
+- **_HAEGAR** - Possibly Russian/Cyrillic
+
+### Switching Languages
+
+1. Click **Language** menu in the menu bar
+2. Select your preferred language
+3. All text content updates immediately:
+   - Spell names and descriptions
+   - Weapon and armor names
+   - Building names and descriptions
+   - Quest names and dialogue text
+   - NPC names and race names
+
+### Language Persistence
+
+- Your language choice is saved and restored between sessions
+- Falls back to English if selected language text is missing
+- No restart required - changes apply instantly
+
 ---
 
 ## UI Layout
@@ -141,7 +180,7 @@ python run_cff_editor.py
 ┌────────────────────────────────────────────────────────────────┐
 │  SpellForce GameData.cff Editor                    [─][□][×]  │
 ├────────────────────────────────────────────────────────────────┤
-│  File  Edit  View  Tools  Help                                │
+│  File  Edit  Language  View  Tools  Help                     │
 ├────────────────────────────────────────────────────────────────┤
 │ ┌─Categories────┬─Element List────────┬─Properties──────────┐ │
 │ │               │                     │                     │ │
@@ -471,6 +510,17 @@ Same as TirganachReloaded (MIT License)
 ---
 
 ## Changelog
+
+### v1.1.0 (2025-10-23)
+
+**Multilingual Support Release**
+- ✅ Language switching menu (6 languages)
+- ✅ Dynamic localisation for all text content
+- ✅ Real-time language switching
+- ✅ Persistent language preferences
+- ✅ Enhanced spell, weapon, armor, building name display
+- ✅ Quest dialogue localisation support
+- ✅ Improved text fallback system
 
 ### v1.0.0 (2025-10-19)
 

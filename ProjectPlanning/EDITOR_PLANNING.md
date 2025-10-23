@@ -11,6 +11,7 @@ This document provides a high-level overview of the SpellForce CFF Editor projec
 - **Category Browser**: Navigate 43+ data tables (spells, items, creatures, etc.)
 - **Element Viewer**: Display and search elements within categories
 - **Property Editor**: View and edit element properties with validation
+- **Multilingual Support**: Language switching for all localised content (6 languages)
 - **Data Integrity**: Handle large datasets (176k+ localization entries)
 
 ### Technical Approach
@@ -41,13 +42,19 @@ Spells follow the format `ui_spell_[ELEMENT]_[CATEGORY]_[NAME]` where:
 - Element list with search and pagination
 - See [GUI_EDITOR_PLAN.md](./GUI_EDITOR_PLAN.md) for details
 
-### Phase 2: Editing and Saving ⏳ IN PROGRESS
+### Phase 2: Editing and Saving ✅ COMPLETE
 - Property editing with type validation
 - Save modifications to CFF files
 - See [GUI_EDITOR_PLAN.md](./GUI_EDITOR_PLAN.md) for details
 
 ### Phase 2.5: Name Display Enhancement ✅ COMPLETE
 - Load 719 weapon names and 635 armor names
+
+### Phase 3: Multilingual Support ✅ COMPLETE
+- Language switching menu (6 languages: German, English, French, Spanish, Italian, _HAEGAR)
+- Dynamic localisation for all text content
+- Real-time language switching for spells, weapons, armor, buildings, quests, NPCs
+- Persistent language preferences
 - Display "Flameblade Dagger" instead of "Item 27"
 - Integrate name resolution into ElementTableWidget
 - Real-time name display for improved usability

@@ -6,10 +6,11 @@ from PySide6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
                                 QSplitter, QMenuBar, QMenu, QFileDialog,
                                 QMessageBox, QStatusBar, QLabel)
 from PySide6.QtCore import Qt, QSize
-from PySide6.QtGui import QAction
+from PySide6.QtGui import QAction, QActionGroup
 from pathlib import Path
 
 from .data_model import CFFDataModel
+from tirganach.types import Language
 from .widgets.category_tree import CategoryTreeWidget
 from .widgets.element_table import ElementTableWidget
 from .widgets.property_editor import PropertyEditorWidget
@@ -122,12 +123,46 @@ class MainWindow(QMainWindow):
         refresh_action.triggered.connect(self.refresh_view)
         edit_menu.addAction(refresh_action)
 
+        # Language menu
+        language_menu = menubar.addMenu("&Language")
+        self._setup_language_menu(language_menu)
+
         # Help menu
         help_menu = menubar.addMenu("&Help")
 
         about_action = QAction("&About", self)
         about_action.triggered.connect(self.show_about)
         help_menu.addAction(about_action)
+
+    def _setup_language_menu(self, language_menu):
+        """Setup language selection menu"""
+        # Language options
+        languages = [
+            ("&German", Language.GERMAN),
+            ("&English", Language.ENGLISH),
+            ("&French", Language.FRENCH),
+            ("&Spanish", Language.SPANISH),
+            ("&Italian", Language.ITALIAN),
+            ("&_HAEGAR", Language._HAEGAR)
+        ]
+
+        # Create action group for radio button behavior
+        language_group = QActionGroup(self)
+        language_group.setExclusive(True)
+
+        for lang_name, lang_enum in languages:
+            action = QAction(lang_name, self)
+            action.setCheckable(True)
+            action.setChecked(self.data_model.get_current_language() == lang_enum)
+            action.triggered.connect(lambda checked, lang=lang_enum: self._on_language_selected(lang))
+            language_menu.addAction(action)
+            language_group.addAction(action)
+
+    def _on_language_selected(self, language: Language):
+        """Handle language selection"""
+        self.data_model.set_current_language(language)
+        self.statusBar.showMessage(f"Language changed to {language.name}", 2000)
+        self.refresh_view()
 
     def setup_statusbar(self):
         """Setup status bar"""
@@ -151,6 +186,7 @@ class MainWindow(QMainWindow):
         self.data_model.data_loaded.connect(self.on_data_loaded)
         self.data_model.data_modified.connect(self.on_data_modified)
         self.data_model.category_changed.connect(self.on_category_changed)
+        self.data_model.language_changed.connect(self.on_language_changed)
 
     def open_file(self):
         """Open CFF file dialog"""
@@ -233,6 +269,11 @@ class MainWindow(QMainWindow):
             self.quest_details.hide()
             # Reset to 3-panel layout
             self.adjust_splitter_for_normal()
+
+    def on_language_changed(self, language):
+        """Called when language changes"""
+        # Refresh all views to show text in new language
+        self.refresh_view()
 
     def adjust_splitter_for_quests(self):
         """Adjust splitter sizes when showing quest details"""

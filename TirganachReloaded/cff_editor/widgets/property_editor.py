@@ -103,7 +103,11 @@ class PropertyEditorWidget(QWidget):
 
         # Update header
         element_name = "Unknown"
-        if hasattr(self.current_element, 'name'):
+        # Try localised name first
+        localised_name = self.data_model.get_localised_text(self.current_element, 'name')
+        if localised_name:
+            element_name = localised_name
+        elif hasattr(self.current_element, 'name'):
             element_name = str(self.current_element.name)
         elif hasattr(self.current_element, 'spell_id'):
             element_name = f"Spell ID: {self.current_element.spell_id}"

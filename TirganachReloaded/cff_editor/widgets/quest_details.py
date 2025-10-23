@@ -258,10 +258,11 @@ class QuestDetailsWidget(QWidget):
                     dialogue_name = getattr(entry, 'dialogue_name', '')
                     text = getattr(entry, 'text', '')
 
-                    # Check if this is an English entry
+                    # Check if this matches the current language setting
                     try:
                         language = getattr(entry, 'language', None)
-                        if language and getattr(language, 'value', None) == (1,):  # ENGLISH
+                        current_lang = self.data_model.get_current_language()
+                        if language and language == current_lang:
                             english_entries.append((dialogue_name, text))
                     except:
                         # If language check fails, include the entry anyway

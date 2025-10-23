@@ -25,6 +25,7 @@ class CFFDataModel(QObject):
     data_modified = Signal()
     category_changed = Signal(str)
     element_selected = Signal(str, int)
+    language_changed = Signal(Language)
 
     def __init__(self):
         super().__init__()
@@ -39,8 +40,28 @@ class CFFDataModel(QObject):
         self.project_root = Path(__file__).parent.parent.parent
         self.ui_assets_dir = self.project_root / "ExtractedAssets" / "UI" / "extracted"
 
-        # Settings for remembering last opened file
+        # Settings for remembering last opened file and language
         self.settings = QSettings("SpellSmut", "TirganachReloaded")
+        self.current_language = self._load_language_setting()
+
+    def _load_language_setting(self) -> Language:
+        """Load current language from settings, default to ENGLISH"""
+        language_value = self.settings.value("current_language", 1)  # Default to ENGLISH (1)
+        try:
+            return Language(language_value)
+        except ValueError:
+            return Language.ENGLISH
+
+    def set_current_language(self, language: Language):
+        """Set the current language and save to settings"""
+        if self.current_language != language:
+            self.current_language = language
+            self.settings.setValue("current_language", language.value)
+            self.language_changed.emit(language)
+
+    def get_current_language(self) -> Language:
+        """Get the current language"""
+        return self.current_language
 
         # Weapon name mapping
         self.weapon_name_mapping: Dict[int, str] = {}
@@ -172,7 +193,16 @@ class CFFDataModel(QObject):
         fields = []
         for field_name in sorted(element._fields.keys()):
             try:
-                value = getattr(element, field_name)
+                # Special handling for localised fields
+                if field_name in ['name', 'description']:
+                    localised_value = self.get_localised_text(element, field_name)
+                    if localised_value is not None:
+                        value = localised_value
+                    else:
+                        value = getattr(element, field_name)
+                else:
+                    value = getattr(element, field_name)
+
                 field_info = element._fields[field_name]
                 fields.append((field_name, value, field_info))
             except Exception as e:
@@ -436,6 +466,63 @@ class CFFDataModel(QObject):
             if not pixmap.isNull():
                 pixmap = pixmap.scaled(size[0], size[1])
                 return pixmap
+
+        return None
+
+    def get_localised_text(self, entity: Any, field_name: str) -> Optional[str]:
+        """
+        Get localised text for an entity field based on current language setting.
+
+        Args:
+            entity: The entity object
+            field_name: The field name (e.g., 'name', 'description')
+
+        Returns:
+            Localised text string or None if not found
+        """
+        if not self.game_data or not entity:
+            return None
+
+        try:
+            # Get the text_id from the entity
+            text_id_field = None
+            if field_name == 'name':
+                # Try different possible text_id field names
+                for possible_field in ['name_id', 'text_id', 'spell_name_id']:
+                    if hasattr(entity, possible_field):
+                        text_id = getattr(entity, possible_field)
+                        if text_id and text_id != 0:
+                            text_id_field = possible_field
+                            break
+            elif field_name == 'description':
+                # For descriptions, try description_id
+                if hasattr(entity, 'description_id'):
+                    text_id = getattr(entity, 'description_id')
+                    if text_id and text_id != 0:
+                        text_id_field = 'description_id'
+
+            if text_id_field is None:
+                return None
+
+            text_id = getattr(entity, text_id_field)
+
+            # Query localisation table for current language
+            localisation_table = self.get_table('localisation')
+            if localisation_table:
+                for entry in localisation_table:
+                    if (getattr(entry, 'text_id', None) == text_id and
+                        getattr(entry, 'language', None) == self.current_language):
+                        return getattr(entry, 'text', '')
+
+            # Fallback to English if current language not found
+            if self.current_language != Language.ENGLISH and localisation_table:
+                for entry in localisation_table:
+                    if (getattr(entry, 'text_id', None) == text_id and
+                        getattr(entry, 'language', None) == Language.ENGLISH):
+                        return getattr(entry, 'text', '')
+
+        except Exception as e:
+            print(f"Error getting localised text: {e}")
 
         return None
 
