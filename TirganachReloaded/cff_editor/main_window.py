@@ -13,6 +13,7 @@ from .data_model import CFFDataModel
 from .widgets.category_tree import CategoryTreeWidget
 from .widgets.element_table import ElementTableWidget
 from .widgets.property_editor import PropertyEditorWidget
+from .widgets.quest_details import QuestDetailsWidget
 
 
 class MainWindow(QMainWindow):
@@ -73,8 +74,14 @@ class MainWindow(QMainWindow):
         self.property_editor = PropertyEditorWidget(self.data_model)
         splitter.addWidget(self.property_editor)
 
-        # Set initial sizes (25%, 40%, 35%)
-        splitter.setSizes([300, 500, 400])
+        # 4th panel - Quest details (initially hidden)
+        self.quest_details = QuestDetailsWidget(self.data_model)
+        self.quest_details.hide()  # Hidden by default
+        self.quest_details.setMinimumWidth(150)  # Ensure minimum width when visible
+        splitter.addWidget(self.quest_details)
+
+        # Set initial sizes (20%, 35%, 30%, 15%)
+        splitter.setSizes([250, 400, 350, 150])
 
         main_layout.addWidget(splitter)
 
@@ -143,6 +150,7 @@ class MainWindow(QMainWindow):
         """Setup signal/slot connections"""
         self.data_model.data_loaded.connect(self.on_data_loaded)
         self.data_model.data_modified.connect(self.on_data_modified)
+        self.data_model.category_changed.connect(self.on_category_changed)
 
     def open_file(self):
         """Open CFF file dialog"""
@@ -202,6 +210,7 @@ class MainWindow(QMainWindow):
         self.category_tree.refresh()
         self.element_table.refresh()
         self.property_editor.refresh()
+        self.quest_details.update_quest_details()  # Refresh quest details if visible
 
     def on_data_loaded(self):
         """Called when data is loaded"""
@@ -212,6 +221,36 @@ class MainWindow(QMainWindow):
     def on_data_modified(self):
         """Called when data is modified"""
         self.update_status()
+
+    def on_category_changed(self, category):
+        """Called when category changes"""
+        # Show/hide quest details panel based on category
+        if category == "quests":
+            self.quest_details.show()
+            # Adjust splitter sizes to accommodate 4th panel
+            self.adjust_splitter_for_quests()
+        else:
+            self.quest_details.hide()
+            # Reset to 3-panel layout
+            self.adjust_splitter_for_normal()
+
+    def adjust_splitter_for_quests(self):
+        """Adjust splitter sizes when showing quest details"""
+        # Find the splitter containing our widgets
+        for child in self.findChildren(QSplitter):
+            if self.category_tree in [child.widget(i) for i in range(child.count())]:
+                # Set sizes: categories, elements, properties, quest details
+                child.setSizes([200, 350, 300, 200])
+                break
+
+    def adjust_splitter_for_normal(self):
+        """Adjust splitter sizes for normal 3-panel layout"""
+        # Find the splitter containing our widgets
+        for child in self.findChildren(QSplitter):
+            if self.category_tree in [child.widget(i) for i in range(child.count())]:
+                # Set sizes: categories, elements, properties (hide quest details)
+                child.setSizes([250, 400, 400, 0])
+                break
 
     def update_status(self):
         """Update status bar"""
