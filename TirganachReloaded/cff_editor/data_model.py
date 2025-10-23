@@ -44,6 +44,8 @@ class CFFDataModel(QObject):
 
         # Weapon name mapping
         self.weapon_name_mapping: Dict[int, str] = {}
+        # Armor name mapping
+        self.armor_name_mapping: Dict[int, str] = {}
 
     def load_file(self, file_path: str) -> bool:
         """Load a CFF file"""
@@ -54,6 +56,8 @@ class CFFDataModel(QObject):
 
             # Load weapon name mapping
             self._load_weapon_names()
+            # Load armor name mapping
+            self._load_armor_names()
 
             # Save as last opened file
             self.settings.setValue("last_opened_file", file_path)
@@ -91,6 +95,35 @@ class CFFDataModel(QObject):
     def get_weapon_name(self, item_id: int) -> Optional[str]:
         """Get weapon name by item_id"""
         return self.weapon_name_mapping.get(item_id)
+
+    def _load_armor_names(self):
+        """Load armor name mapping from enhanced_armor.json"""
+        try:
+            # Look for the file in the TirganachReloaded directory
+            armor_json_path = Path(__file__).parent.parent / "enhanced_armor.json"
+            if armor_json_path.exists():
+                with open(armor_json_path, 'r', encoding='utf-8') as f:
+                    armor_data = json.load(f)
+
+                # Create mapping from item_id to name
+                self.armor_name_mapping = {}
+                for armor in armor_data:
+                    item_id = armor.get('item_id')
+                    name = armor.get('name')
+                    if item_id is not None and name:
+                        self.armor_name_mapping[item_id] = name
+
+                print(f"Loaded {len(self.armor_name_mapping)} armor names")
+            else:
+                print("enhanced_armor.json not found, armor names will not be available")
+                self.armor_name_mapping = {}
+        except Exception as e:
+            print(f"Error loading armor names: {e}")
+            self.armor_name_mapping = {}
+
+    def get_armor_name(self, item_id: int) -> Optional[str]:
+        """Get armor name by item_id"""
+        return self.armor_name_mapping.get(item_id)
 
     def get_categories(self) -> List[tuple]:
         """Returns list of (category_name, count) tuples"""

@@ -141,6 +141,13 @@ class ElementTableWidget(QWidget):
                 if weapon_name:
                     return weapon_name
 
+        # Special handling for armor - check mapping first
+        if self.data_model.current_category == "armor":
+            if hasattr(element, 'item_id'):
+                armor_name = self.data_model.get_armor_name(element.item_id)
+                if armor_name:
+                    return armor_name
+
         # Try common name fields in order of preference
         name_fields = ['name', 'item_name', 'spell_name', 'creature_name', 'building_name']
 
