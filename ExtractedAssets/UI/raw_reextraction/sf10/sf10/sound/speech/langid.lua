@@ -1,0 +1,4 @@
+LangId =
+{
+	ClientLanguage = 0,
+}

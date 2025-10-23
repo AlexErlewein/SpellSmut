@@ -21,7 +21,8 @@ from pathlib import Path
 # Configuration
 SCRIPT_DIR = Path(__file__).parent
 PROJECT_ROOT = SCRIPT_DIR.parent.parent
-SOURCE_DIR = PROJECT_ROOT / "ExtractedAssets" / "UI" / "raw_reextraction" / "_ui_assets"
+# The source is now the extracted directory itself (files are already there)
+SOURCE_DIR = PROJECT_ROOT / "ExtractedAssets" / "UI" / "extracted"
 TARGET_DIR = PROJECT_ROOT / "ExtractedAssets" / "UI" / "extracted"
 
 
@@ -36,15 +37,15 @@ def print_banner():
 def get_category_mapping():
     """Get the mapping of filename prefixes to categories."""
     return {
-        "items": ["ui_item_", "ui_itm_"],
-        "spells": ["ui_spell_"],
-        "cursors": ["ui_cursor_"],
-        "backgrounds": ["ui_bgr_"],
-        "buttons": ["ui_btn_"],
-        "mainmenu": ["ui_mainmenu_"],
-        "containers": ["ui_cnt_"],
-        "logos": ["ui_logo_"],
-        "fonts": ["font_"],
+        "items": ["ui_item"],
+        "spells": ["ui_spell"],
+        "cursors": ["ui_cursor"],
+        "backgrounds": ["ui_bgr"],
+        "buttons": ["ui_btn"],
+        "mainmenu": ["ui_mainmenu"],
+        "containers": ["ui_cnt"],
+        "logos": ["ui_logo"],
+        "fonts": ["font"],
         "other": ["ui_"],  # Catch-all for ui_ files not in other categories
     }
 

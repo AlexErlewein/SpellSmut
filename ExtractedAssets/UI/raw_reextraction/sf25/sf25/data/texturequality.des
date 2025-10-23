@@ -1,0 +1,235 @@
+[VeryHigh]
+{
+	NumOfEntries = 8
+	[Texture0]
+	{
+		Prefix = "landscape"
+		Level = 0
+	}
+
+	[Texture1]
+	{
+		Prefix = "building"
+		Level = 0
+	}
+
+	[Texture2]
+	{
+		Prefix = "figure"
+		Level = 0
+	}
+	[Texture3]
+	{
+		Prefix = "nature"
+		Level = 0
+	}
+	[Texture4]
+	{
+		Prefix = "worlditem"
+		Level = 0
+	}
+	[Texture5]
+	{
+		Prefix = "equipment"
+		Level = 0
+	}
+	[Texture6]
+	{
+		Prefix = "effect"
+		Level = 0
+	}
+	[Texture7]
+	{
+		Prefix = "ui"
+		Level = 0
+	}
+}
+
+[High]
+{
+	NumOfEntries = 8
+	[Texture0]
+	{
+		Prefix = "landscape"
+		Level = 0
+	}
+
+	[Texture1]
+	{
+		Prefix = "building"
+		Level = 0
+	}
+
+	[Texture2]
+	{
+		Prefix = "figure"
+		Level = -1
+	}
+	[Texture3]
+	{
+		Prefix = "nature"
+		Level = -1
+	}
+	[Texture4]
+	{
+		Prefix = "worlditem"
+		Level = -1
+	}
+	[Texture5]
+	{
+		Prefix = "equipment"
+		Level = 0
+	}
+	[Texture6]
+	{
+		Prefix = "effect"
+		Level = 0
+	}
+	[Texture7]
+	{
+		Prefix = "ui"
+		Level = 0
+	}
+}
+
+[Normal]
+{
+	NumOfEntries = 8
+	[Texture0]
+	{
+		Prefix = "landscape"
+		Level = -1
+	}
+
+	[Texture1]
+	{
+		Prefix = "building"
+		Level = -2
+	}
+
+	[Texture2]
+	{
+		Prefix = "figure"
+		Level = -2
+	}
+	[Texture3]
+	{
+		Prefix = "nature"
+		Level = -1
+	}
+	[Texture4]
+	{
+		Prefix = "worlditem"
+		Level = -1
+	}
+	[Texture5]
+	{
+		Prefix = "equipment"
+		Level = -1
+	}
+	[Texture6]
+	{
+		Prefix = "effect"
+		Level = -1
+	}
+	[Texture7]
+	{
+		Prefix = "ui"
+		Level = 0
+	}
+}
+
+[Low]
+{
+	NumOfEntries = 8
+	[Texture0]
+	{
+		Prefix = "landscape"
+		Level = -2
+	}
+
+	[Texture1]
+	{
+		Prefix = "building"
+		Level = -2
+	}
+
+	[Texture2]
+	{
+		Prefix = "figure"
+		Level = -2
+	}
+	[Texture3]
+	{
+		Prefix = "nature"
+		Level = -2
+	}
+	[Texture4]
+	{
+		Prefix = "worlditem"
+		Level = -2
+	}
+	[Texture5]
+	{
+		Prefix = "equipment"
+		Level = -1
+	}
+	[Texture6]
+	{
+		Prefix = "effect"
+		Level = -1
+	}
+	[Texture7]
+	{
+		Prefix = "ui"
+		Level = -1
+	}
+}
+
+[VeryLow]
+{
+	NumOfEntries = 8
+	[Texture0]
+	{
+		Prefix = "landscape"
+		Level = -3
+	}
+
+	[Texture1]
+	{
+		Prefix = "building"
+		Level = -3
+	}
+
+	[Texture2]
+	{
+		Prefix = "figure"
+		Level = -3
+	}
+	[Texture3]
+	{
+		Prefix = "nature"
+		Level = -3
+	}
+	[Texture4]
+	{
+		Prefix = "worlditem"
+		Level = -3
+	}
+	[Texture5]
+	{
+		Prefix = "equipment"
+		Level = -3
+	}
+	[Texture6]
+	{
+		Prefix = "effect"
+		Level = -1
+	}
+	[Texture7]
+	{
+		Prefix = "ui"
+		Level = -1
+	}
+}
+

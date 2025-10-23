@@ -1,0 +1,181 @@
+[Creo]
+{
+	[Scrolls]
+	{
+		Data0 = 783
+		Data1 = 776
+		Data2 = 761
+		Data3 = 773
+		Data4 = 766
+		Data5 = 769
+		Data6 = 780
+		Data7 = 753
+		Data8 = 750
+	}
+	[Runeboard]
+	{
+	}
+}
+
+[Misc]
+{
+}
+
+[Equipment]
+{
+	[Items]
+	{
+		Data0 = 0, 694
+		Data1 = 1, 3171
+		Data2 = 2, 3179
+		Data3 = 3, 679
+		Data4 = 4, 685
+		Data5 = 5, 2340
+		Data6 = 6, 720
+		Data7 = 7, 695
+		Data8 = 8, 725
+		Data9 = 9, 730
+		Data10 = 10, 579
+		Data11 = 11, 568
+		Data12 = 12, 678
+		Data13 = 13, 569
+		Data14 = 14, 558
+		Data15 = 15, 583
+		Data16 = 16, 625
+		Data17 = 17, 701
+		Data18 = 18, 703
+		Data19 = 19, 2346
+		Data20 = 20, 2344
+		Data21 = 21, 666
+		Data22 = 22, 640
+		Data23 = 23, 641
+		Data24 = 24, 689
+		Data25 = 25, 568
+		Data26 = 26, 693
+		Data27 = 27, 533
+		Data28 = 28, 678
+		Data29 = 29, 573
+		Data30 = 30, 528
+		Data31 = 31, 529
+		Data32 = 32, 530
+		Data33 = 33, 533
+		Data34 = 34, 583
+		Data35 = 35, 563
+		Data36 = 36, 2607
+		Data37 = 37, 724
+		Data38 = 38, 678
+		Data39 = 39, 684
+		Data40 = 40, 2325
+		Data41 = 41, 733
+		Data42 = 42, 737
+		Data43 = 43, 578
+		Data44 = 44, 558
+		Data45 = 45, 2326
+		Data46 = 46, 2327
+		Data47 = 47, 702
+		Data48 = 48, 2343
+	}
+}
+
+[Spells]
+{
+	[Scrolls]
+	{
+		Data0 = 0, 1587
+		Data1 = 1, 1938
+		Data2 = 2, 1466
+		Data3 = 3, 1857
+		Data4 = 4, 1502
+		Data5 = 5, 197
+		Data6 = 6, 239
+		Data7 = 7, 1560
+		Data8 = 8, 233
+	}
+}
+
+[Plans]
+{
+	[Scrolls]
+	{
+	}
+	[Building]
+	{
+		[Race0]
+		{
+			Data0 = 280
+			Data1 = 271
+			Data2 = 167
+			Data3 = 262
+			Data4 = 270
+			Data5 = 263
+			Data6 = 275
+			Data7 = 169
+			Data8 = 260
+			Data9 = 2928
+			Data10 = 267
+			Data11 = 255
+			Data12 = 257
+			Data13 = 277
+			Data14 = 949
+			Data15 = 251
+			Data16 = 247
+			Data17 = 249
+			Data18 = 171
+			Data19 = 266
+		}
+	}
+	[Unit]
+	{
+		[Race0]
+		{
+			Data0 = 1271
+			Data1 = 1273
+			Data2 = 1265
+			Data3 = 1261
+			Data4 = 1263
+			Data5 = 1267
+		}
+	}
+}
+
+[Character]
+{
+	Check	 = 0
+	Level	 = 6
+	XP		 = 1500
+	Name	 = "BlackMage6_Leafshade"
+	Female	 = 0
+
+	Head	 = 11
+
+	Gold	 = 0
+	Silver	 = 6
+	Copper	 = 20
+
+	Str	 = 25
+	Sta	 = 33
+	Dex	 = 32
+	Agi	 = 25
+	Wis	 = 45
+	Int	 = 45
+	Cha	 = 25
+
+	ResFire			 = 30
+	ResIce			 = 30
+	ResMindMagic	 = 30
+	ResBlackMagic	 = 30
+
+	WalkSpeed		 = 100
+	FightSpeed		 = 100
+	CastSpeed		 = 100
+
+	[Ability7] // Schwarze Magiekunst
+	{
+		Level = 3
+
+		Data0 = 1, 3 // Death 
+		Data1 = 2, 3 // Necromancy 
+		Data2 = 3, 3 // Curse 
+	}
+}
+

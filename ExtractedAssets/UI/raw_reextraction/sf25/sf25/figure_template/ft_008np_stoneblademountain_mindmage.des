@@ -1,0 +1,253 @@
+[Creo]
+{
+	[Scrolls]
+	{
+		Data0 = 841
+		Data1 = 872
+		Data2 = 870
+		Data3 = 787
+		Data4 = 784
+		Data5 = 869
+		Data6 = 776
+		Data7 = 761
+		Data8 = 773
+		Data9 = 766
+		Data10 = 769
+		Data11 = 780
+		Data12 = 753
+		Data13 = 750
+		Data14 = 775
+		Data15 = 757
+		Data16 = 770
+		Data17 = 3571
+		Data18 = 774
+		Data19 = 763
+	}
+	[Runeboard]
+	{
+	}
+}
+
+[Misc]
+{
+}
+
+[Equipment]
+{
+	[Items]
+	{
+		Data0 = 0, 696
+		Data1 = 1, 720
+		Data2 = 2, 721
+		Data3 = 3, 2352
+		Data4 = 4, 3171
+		Data5 = 5, 579
+		Data6 = 6, 584
+		Data7 = 7, 574
+		Data8 = 8, 559
+		Data9 = 9, 2352
+		Data10 = 10, 3180
+		Data11 = 11, 601
+		Data12 = 12, 600
+		Data13 = 13, 527
+		Data14 = 14, 605
+		Data15 = 15, 615
+		Data16 = 16, 678
+		Data17 = 17, 568
+		Data18 = 18, 558
+		Data19 = 19, 536
+		Data20 = 20, 535
+		Data21 = 21, 583
+		Data22 = 22, 534
+		Data23 = 23, 539
+		Data24 = 24, 2347
+		Data25 = 25, 738
+		Data26 = 26, 2339
+		Data27 = 27, 679
+		Data28 = 28, 2342
+		Data29 = 29, 667
+		Data30 = 30, 720
+		Data31 = 31, 696
+		Data32 = 32, 533
+		Data33 = 33, 529
+		Data34 = 34, 528
+		Data35 = 35, 530
+		Data36 = 36, 539
+		Data37 = 37, 583
+		Data38 = 38, 573
+		Data39 = 39, 2341
+		Data40 = 40, 2346
+		Data41 = 41, 2344
+		Data42 = 42, 679
+		Data43 = 43, 661
+		Data44 = 44, 2347
+		Data45 = 45, 694
+		Data46 = 46, 2341
+		Data47 = 47, 2607
+		Data48 = 48, 678
+		Data49 = 49, 684
+		Data50 = 50, 2325
+		Data51 = 51, 733
+		Data52 = 52, 737
+		Data53 = 53, 719
+		Data54 = 54, 693
+		Data55 = 55, 578
+		Data56 = 56, 558
+		Data57 = 57, 2326
+		Data58 = 58, 2327
+	}
+}
+
+[Spells]
+{
+	[Scrolls]
+	{
+		Data0 = 0, 1717
+		Data1 = 1, 2800
+		Data2 = 2, 1643
+		Data3 = 3, 199
+		Data4 = 4, 301
+		Data5 = 5, 2878
+		Data6 = 6, 1604
+		Data7 = 7, 2417
+		Data8 = 8, 2182
+		Data9 = 9, 1535
+		Data10 = 10, 2142
+		Data11 = 11, 1531
+		Data12 = 12, 1599
+	}
+}
+
+[Plans]
+{
+	[Scrolls]
+	{
+	}
+	[Building]
+	{
+		[Race0]
+		{
+			Data0 = 280
+			Data1 = 271
+			Data2 = 167
+			Data3 = 262
+			Data4 = 270
+			Data5 = 263
+			Data6 = 275
+			Data7 = 169
+			Data8 = 260
+			Data9 = 2928
+			Data10 = 267
+			Data11 = 255
+			Data12 = 257
+			Data13 = 277
+			Data14 = 949
+			Data15 = 251
+			Data16 = 247
+			Data17 = 249
+			Data18 = 171
+			Data19 = 266
+			Data20 = 273
+			Data21 = 253
+		}
+		[Race1]
+		{
+			Data0 = 999
+			Data1 = 1009
+			Data2 = 1015
+		}
+		[Race2]
+		{
+			Data0 = 951
+			Data1 = 977
+			Data2 = 985
+			Data3 = 975
+			Data4 = 967
+			Data5 = 969
+			Data6 = 963
+			Data7 = 965
+			Data8 = 981
+			Data9 = 988
+			Data10 = 956
+			Data11 = 990
+			Data12 = 952
+			Data13 = 954
+			Data14 = 958
+			Data15 = 973
+			Data16 = 971
+			Data17 = 961
+			Data18 = 986
+		}
+	}
+	[Unit]
+	{
+		[Race0]
+		{
+			Data0 = 1271
+			Data1 = 1273
+			Data2 = 1261
+			Data3 = 1263
+			Data4 = 1259
+			Data5 = 1269
+			Data6 = 1265
+			Data7 = 1267
+		}
+		[Race1]
+		{
+			Data0 = 1333
+			Data1 = 1337
+		}
+		[Race2]
+		{
+			Data0 = 1285
+			Data1 = 1289
+			Data2 = 1279
+			Data3 = 1275
+			Data4 = 1283
+			Data5 = 1287
+			Data6 = 1281
+		}
+	}
+}
+
+[Character]
+{
+	Check	 = 0
+	Level	 = 12
+	XP		 = 18000
+	Name	 = "MindMage12_StonebladeMountain"
+	Female	 = 1
+
+	Head	 = 7
+
+	Gold	 = 0
+	Silver	 = 37
+	Copper	 = 50
+
+	Str	 = 25
+	Sta	 = 32
+	Dex	 = 31
+	Agi	 = 28
+	Wis	 = 43
+	Int	 = 48
+	Cha	 = 53
+
+	ResFire			 = 30
+	ResIce			 = 30
+	ResMindMagic	 = 30
+	ResBlackMagic	 = 30
+
+	WalkSpeed		 = 100
+	FightSpeed		 = 100
+	CastSpeed		 = 100
+
+	[Ability6] // Mentale Magiekunst
+	{
+		Level = 6
+
+		Data0 = 1, 6 // Enchantment 
+		Data1 = 2, 6 // Offensive 
+		Data2 = 3, 6 // Defensive 
+	}
+}
+
