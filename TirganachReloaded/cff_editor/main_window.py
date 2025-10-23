@@ -3,10 +3,11 @@ Main Window for CFF Editor
 """
 
 from PySide6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-                               QSplitter, QMenuBar, QMenu, QFileDialog,
-                               QMessageBox, QStatusBar, QLabel)
+                                QSplitter, QMenuBar, QMenu, QFileDialog,
+                                QMessageBox, QStatusBar, QLabel)
 from PySide6.QtCore import Qt, QSize
 from PySide6.QtGui import QAction
+from pathlib import Path
 
 from .data_model import CFFDataModel
 from .widgets.category_tree import CategoryTreeWidget
@@ -33,6 +34,19 @@ class MainWindow(QMainWindow):
 
         # Apply dark theme
         self.apply_dark_theme()
+
+        # Auto-load default file
+        self.auto_load_default_file()
+
+    def auto_load_default_file(self):
+        """Automatically load the default file on startup"""
+        default_file = self.data_model.get_default_file_path()
+        if default_file and Path(default_file).exists():
+            self.statusBar.showMessage("Loading default file...")
+            if self.data_model.load_file(default_file):
+                self.statusBar.showMessage("Default file loaded successfully", 3000)
+            else:
+                self.statusBar.showMessage("Failed to load default file", 3000)
 
     def setup_ui(self):
         """Setup the main UI layout"""
@@ -132,10 +146,14 @@ class MainWindow(QMainWindow):
 
     def open_file(self):
         """Open CFF file dialog"""
+        # Get default directory (last opened file's directory or fallback)
+        default_file = self.data_model.get_default_file_path()
+        default_dir = str(Path(default_file).parent) if default_file else "H:/SpellSmut/OriginalGameFiles/data"
+
         file_path, _ = QFileDialog.getOpenFileName(
             self,
             "Open GameData.cff",
-            "H:/SpellSmut/OriginalGameFiles/data",
+            default_dir,
             "CFF Files (*.cff);;All Files (*)"
         )
 

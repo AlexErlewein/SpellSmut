@@ -545,10 +545,20 @@ ExtractedAssets/UI/
 - **Added fallback system** for missing icons
 
 ### 🔄 Phase 3: Testing & Polish (Ready for Testing)
-1. **Run extraction pipeline** on Windows
+1. **CRITICAL: Run extraction pipeline on Windows** - PAK files are Windows-only format, must use Windows machine to extract with original filenames
 2. **Test icon loading** for items, spells, weapons
 3. **Verify performance** with icon caching
 4. **Test fallback icons** for missing assets
+
+### Windows Extraction Requirement
+
+**IMPORTANT**: The current icon system uses hash-based mapping to numbered PNG files because the PAK files cannot be properly extracted on macOS. To get correctly named icons (e.g., `ui_item_equip_weapon_dagger_flame.png`), the extraction must be done on Windows.
+
+**Action Required**:
+- Use Windows machine with SpellForce installed
+- Run the extraction scripts in `src/helper_tools/`
+- Copy the properly named assets back to the project
+- This will eliminate the need for hash-based mapping and provide direct filename lookup
 
 ## Windows Execution Instructions
 

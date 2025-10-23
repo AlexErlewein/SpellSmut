@@ -3,7 +3,7 @@ import types
 from enum import Enum
 from typing import Type, Callable
 
-from tirganach.types import UnknownEnumMember
+from .types import UnknownEnumMember
 
 debug_missing_enum_members = {}
 

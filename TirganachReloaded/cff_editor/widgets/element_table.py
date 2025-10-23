@@ -85,9 +85,9 @@ class ElementTableWidget(QWidget):
         # Determine which fields to show (limit to important ones)
         display_fields = self.get_display_fields(sample)
 
-        # Setup table with icon column
-        self.table.setColumnCount(len(display_fields) + 1)  # +1 for icon column
-        self.table.setHorizontalHeaderLabels(["Icon"] + display_fields)
+        # Setup table with icon and name columns
+        self.table.setColumnCount(len(display_fields) + 2)  # +2 for icon and name columns
+        self.table.setHorizontalHeaderLabels(["Icon", "Name"] + display_fields)
 
         # Calculate page range
         start_idx = self.current_page * self.page_size
@@ -109,29 +109,65 @@ class ElementTableWidget(QWidget):
             icon_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
             self.table.setCellWidget(row_idx, 0, icon_label)
 
-            # Data cells (starting from column 1)
+            # Name cell (column 1)
+            name_text = self._get_element_name(element)
+            name_item = QTableWidgetItem(name_text)
+            name_item.setFlags(name_item.flags() & ~Qt.ItemFlag.ItemIsEditable)  # Read-only
+            name_item.setData(Qt.ItemDataRole.UserRole, element_idx)  # Store actual index
+            self.table.setItem(row_idx, 1, name_item)
+
+            # Data cells (starting from column 2)
             for col_idx, field_name in enumerate(display_fields):
                 try:
                     value = getattr(element, field_name)
                     item = QTableWidgetItem(str(value))
                     item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)  # Read-only
                     item.setData(Qt.ItemDataRole.UserRole, element_idx)  # Store actual index
-                    self.table.setItem(row_idx, col_idx + 1, item)  # +1 because icon is column 0
+                    self.table.setItem(row_idx, col_idx + 2, item)  # +2 because icon and name are columns 0-1
                 except:
                     item = QTableWidgetItem("")
-                    self.table.setItem(row_idx, col_idx + 1, item)
+                    self.table.setItem(row_idx, col_idx + 2, item)
 
         # Resize columns
         self.table.resizeColumnsToContents()
         self.update_pagination()
 
+    def _get_element_name(self, element) -> str:
+        """Extract name from element, trying common name fields"""
+        # Special handling for weapons - check mapping first
+        if self.data_model.current_category == "weapons":
+            if hasattr(element, 'item_id'):
+                weapon_name = self.data_model.get_weapon_name(element.item_id)
+                if weapon_name:
+                    return weapon_name
+
+        # Try common name fields in order of preference
+        name_fields = ['name', 'item_name', 'spell_name', 'creature_name', 'building_name']
+
+        for field_name in name_fields:
+            if hasattr(element, field_name):
+                name_value = getattr(element, field_name)
+                if name_value:
+                    return str(name_value)
+
+        # Fallback: try to construct a name from ID fields
+        id_fields = ['item_id', 'spell_id', 'creature_id', 'building_id']
+        for field_name in id_fields:
+            if hasattr(element, field_name):
+                id_value = getattr(element, field_name)
+                if id_value is not None:
+                    return f"{field_name.replace('_id', '').title()} {id_value}"
+
+        # Last resort
+        return "Unknown"
+
     def get_display_fields(self, element) -> list:
         """Get list of fields to display (first 6 important ones)"""
         fields = list(element._fields.keys())
 
-        # Prioritize certain fields
+        # Prioritize certain fields (excluding 'name' since it's shown in dedicated column)
         priority_fields = ['item_id', 'spell_id', 'creature_id', 'building_id',
-                          'name', 'level', 'item_type', 'item_subtype']
+                          'level', 'item_type', 'item_subtype']
 
         # Get priority fields that exist
         display = []
@@ -214,10 +250,10 @@ class ElementTableWidget(QWidget):
         if selected_rows:
             # Get the first selected row
             row = list(selected_rows)[0]
-            # Get element index from the first data column (column 1, since 0 is icon)
-            first_data_item = self.table.item(row, 1)
-            if first_data_item:
-                element_idx = first_data_item.data(Qt.ItemDataRole.UserRole)
+            # Get element index from the name column (column 1, since 0 is icon)
+            name_item = self.table.item(row, 1)
+            if name_item:
+                element_idx = name_item.data(Qt.ItemDataRole.UserRole)
                 if element_idx is not None:
                     self.data_model.current_element_index = element_idx
                     self.data_model.element_selected.emit(

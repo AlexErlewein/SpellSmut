@@ -2,7 +2,7 @@ import hashlib
 from os import PathLike
 from typing import Type, get_origin, get_args, TypeVar, Generic
 
-from tirganach.entities import Armor, Localisation, Entity, ItemRequirement, Building, BuildingRequirement, Creature, \
+from .entities import Armor, Localisation, Entity, ItemRequirement, Building, BuildingRequirement, Creature, \
 	CreatureStats, CreatureResourceRequirement, CreatureEquipment, CreatureSkill, Item, CreatureSpell, Spell, HeroSpell, \
 	SpellName, Upgrade, ItemInstall, Weapon, ItemEffect, ItemUI, SpellEffect, RaceDB, UnitBuildingRequirement, Skill, \
 	SkillRequirement, ResourceName, Level, NPCName, Map, Portal, Description, AdvancedDescription, Quest, \

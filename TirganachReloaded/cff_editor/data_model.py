@@ -5,12 +5,13 @@ Manages loaded GameData and provides interface for GUI
 
 import sys
 import os
+import json
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
 from tirganach import GameData
 from tirganach.types import *
 from typing import List, Dict, Any, Optional
-from PySide6.QtCore import QObject, Signal, Qt
+from PySide6.QtCore import QObject, Signal, Qt, QSettings
 from PySide6.QtGui import QPixmap, QIcon
 from PySide6.QtCore import Qt
 from pathlib import Path
@@ -35,8 +36,14 @@ class CFFDataModel(QObject):
 
         # Icon-related attributes
         self.icon_cache = {}  # Cache for loaded QPixmap objects
-        self.project_root = Path(__file__).parent.parent.parent.parent
+        self.project_root = Path(__file__).parent.parent.parent
         self.ui_assets_dir = self.project_root / "ExtractedAssets" / "UI" / "extracted"
+
+        # Settings for remembering last opened file
+        self.settings = QSettings("SpellSmut", "TirganachReloaded")
+
+        # Weapon name mapping
+        self.weapon_name_mapping: Dict[int, str] = {}
 
     def load_file(self, file_path: str) -> bool:
         """Load a CFF file"""
@@ -44,11 +51,46 @@ class CFFDataModel(QObject):
             self.game_data = GameData(file_path)
             self.file_path = file_path
             self.modified = False
+
+            # Load weapon name mapping
+            self._load_weapon_names()
+
+            # Save as last opened file
+            self.settings.setValue("last_opened_file", file_path)
             self.data_loaded.emit()
             return True
         except Exception as e:
             print(f"Error loading file: {e}")
             return False
+
+    def _load_weapon_names(self):
+        """Load weapon name mapping from enhanced_weapons.json"""
+        try:
+            # Look for the file in the TirganachReloaded directory
+            weapons_json_path = Path(__file__).parent.parent / "enhanced_weapons.json"
+            if weapons_json_path.exists():
+                with open(weapons_json_path, 'r', encoding='utf-8') as f:
+                    weapons_data = json.load(f)
+
+                # Create mapping from item_id to name
+                self.weapon_name_mapping = {}
+                for weapon in weapons_data:
+                    item_id = weapon.get('item_id')
+                    name = weapon.get('name')
+                    if item_id is not None and name:
+                        self.weapon_name_mapping[item_id] = name
+
+                print(f"Loaded {len(self.weapon_name_mapping)} weapon names")
+            else:
+                print("enhanced_weapons.json not found, weapon names will not be available")
+                self.weapon_name_mapping = {}
+        except Exception as e:
+            print(f"Error loading weapon names: {e}")
+            self.weapon_name_mapping = {}
+
+    def get_weapon_name(self, item_id: int) -> Optional[str]:
+        """Get weapon name by item_id"""
+        return self.weapon_name_mapping.get(item_id)
 
     def get_categories(self) -> List[tuple]:
         """Returns list of (category_name, count) tuples"""
@@ -145,6 +187,19 @@ class CFFDataModel(QObject):
     def get_file_path(self) -> Optional[str]:
         """Get current file path"""
         return self.file_path
+
+    def get_last_opened_file(self) -> Optional[str]:
+        """Get the last opened file path from settings"""
+        return self.settings.value("last_opened_file")
+
+    def get_default_file_path(self) -> str:
+        """Get the default file path (last opened or fallback)"""
+        last_file = self.get_last_opened_file()
+        if last_file and Path(last_file).exists():
+            return last_file
+        # Fallback to original GameData.cff
+        default_path = self.project_root / "OriginalGameFiles" / "data" / "GameData.cff"
+        return str(default_path)
 
     # Icon-related methods
 
