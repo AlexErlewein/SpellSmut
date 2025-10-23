@@ -1,10 +1,10 @@
 #!/bin/bash
 # Shell script to run the complete UI icon integration pipeline
-# This script runs on macOS/Linux
+# This script works on macOS and Linux
 #
 # Pipeline:
 # 1. Extract UI assets with original names
-# 2. Convert DDS to PNG
+# 2. Convert DDS to PNG (parallel processing)
 # 3. Rotate PNGs by 180 degrees
 # 4. Organize by category
 #
@@ -12,7 +12,7 @@
 # - UV package manager installed (project standard)
 # - ImageMagick installed (for DDS conversion)
 # - Pillow installed (for PNG rotation)
-# - PAK files available in OriginalGameFiles/pak/
+# - SpellForce game installed
 
 set -e  # Exit on error
 
@@ -27,40 +27,9 @@ if [ ! -f "extract_ui_with_names.py" ]; then
     exit 1
 fi
 
-# Check UV
-if ! command -v uv &> /dev/null; then
-    echo "ERROR: UV package manager not found. Please install UV."
-    echo "Visit: https://github.com/astral-sh/uv"
-    exit 1
-fi
-
-# Check ImageMagick
-if ! command -v magick &> /dev/null; then
-    echo "WARNING: ImageMagick not found."
-    echo "Install with: brew install imagemagick (macOS) or apt install imagemagick (Linux)"
-    echo
-    read -p "Continue anyway? [y/N]: " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        exit 1
-    fi
-fi
-
-# Check Pillow
-if ! uv run python -c "from PIL import Image" 2>/dev/null; then
-    echo "WARNING: Pillow not found."
-    echo "Install with: uv pip install Pillow"
-    echo
-    read -p "Continue anyway? [y/N]: " -n 1 -r
-    echo
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        exit 1
-    fi
-fi
-
 echo "Step 1: Extracting UI assets with original filenames..."
 echo
-uv run extract_ui_with_names.py
+uv run extract_ui_with_names.py --yes
 if [ $? -ne 0 ]; then
     echo "ERROR: UI asset extraction failed"
     exit 1
@@ -69,9 +38,9 @@ echo
 echo "Step 1 completed successfully."
 echo
 
-echo "Step 2: Converting DDS files to PNG..."
+echo "Step 2: Converting DDS files to PNG (parallel processing)..."
 echo
-uv run convert_ui_textures.py
+uv run convert_ui_textures.py --yes
 if [ $? -ne 0 ]; then
     echo "ERROR: DDS to PNG conversion failed"
     exit 1
@@ -108,16 +77,14 @@ echo "========================================"
 echo
 echo "Next steps:"
 echo "1. Verify the extracted assets have correct filenames"
-echo "2. Run the GUI editor to test icon display"
-echo "3. Check icons appear in both table and property editor"
+echo "2. Run the GUI editor to test icon display:"
+echo "   cd ../../TirganachReloaded"
+echo "   uv run tirganach"
+echo "3. Verify icons appear in both table and property editor"
 echo
 echo "Extracted assets location:"
 echo "  ExtractedAssets/UI/extracted/"
 echo
-echo "To test:"
-echo "  cd ../../TirganachReloaded"
-echo "  uv run tirganach"
+echo "Fallback icons location:"
+echo "  ExtractedAssets/UI/fallback_icons/"
 echo
-
-echo "Done! Press any key to exit..."
-read -n 1 -s

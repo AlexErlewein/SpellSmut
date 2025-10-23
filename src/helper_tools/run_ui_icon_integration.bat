@@ -28,7 +28,7 @@ if not exist "extract_ui_with_names.py" (
 
 echo Step 1: Extracting UI assets with original filenames...
 echo.
-uv run extract_ui_with_names.py
+uv run extract_ui_with_names.py --yes
 if errorlevel 1 (
     echo ERROR: UI asset extraction failed
     pause
@@ -38,9 +38,9 @@ echo.
 echo Step 1 completed successfully.
 echo.
 
-echo Step 2: Converting DDS files to PNG...
+echo Step 2: Converting DDS files to PNG (parallel processing)...
 echo.
-uv run convert_ui_textures.py
+uv run convert_ui_textures.py --yes
 if errorlevel 1 (
     echo ERROR: DDS to PNG conversion failed
     pause

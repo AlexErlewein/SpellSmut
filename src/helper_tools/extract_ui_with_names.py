@@ -3,7 +3,10 @@ Script to extract UI assets from SpellForce PAK files with original filenames.
 This script will be run on Windows where the game is installed.
 
 Usage:
-    uv run extract_ui_with_names.py
+    uv run extract_ui_with_names.py [--yes|-y]
+
+Arguments:
+    --yes, -y    Skip confirmation prompt and proceed automatically
 
 Requirements:
 - UV package manager (project standard)
@@ -21,6 +24,7 @@ import urllib.request
 import zipfile
 from pathlib import Path
 import shutil
+import argparse
 
 # Configuration
 SCRIPT_DIR = Path(__file__).parent
@@ -284,6 +288,18 @@ def filter_ui_assets(raw_dir, ui_output_dir):
 
 def main():
     """Main execution function."""
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(
+        description="Extract UI assets from SpellForce PAK files with original filenames"
+    )
+    parser.add_argument(
+        "--yes",
+        "-y",
+        action="store_true",
+        help="Skip confirmation prompt and proceed automatically",
+    )
+    args = parser.parse_args()
+
     print_banner()
 
     # Step 1: Read game path
@@ -327,8 +343,11 @@ def main():
     # Auto-proceed in non-interactive mode (for CI/CD or automated runs)
     import os
 
-    if os.environ.get("CI") or not sys.stdin.isatty():
-        print("Running in non-interactive mode - proceeding automatically...")
+    if args.yes or os.environ.get("CI") or not sys.stdin.isatty():
+        if args.yes:
+            print("Auto-confirming due to --yes flag...")
+        else:
+            print("Running in non-interactive mode - proceeding automatically...")
         response = "y"
     else:
         response = input("Proceed with UI asset extraction? [y/N]: ").strip().lower()
@@ -365,7 +384,31 @@ def main():
         if ui_temp_dir.exists():
             print(f"\nMoving UI assets to final location: {FINAL_OUTPUT}")
             if FINAL_OUTPUT.exists():
-                shutil.rmtree(FINAL_OUTPUT)
+                # Use more robust directory removal for Windows
+                import stat
+
+                def remove_readonly(func, path, _):
+                    """Clear readonly bit and retry deletion."""
+                    os.chmod(path, stat.S_IWRITE)
+                    func(path)
+
+                try:
+                    shutil.rmtree(FINAL_OUTPUT, onerror=remove_readonly)
+                except Exception as e:
+                    print(f"Warning: Could not remove existing directory: {e}")
+                    print("Attempting to merge instead...")
+                    # If removal fails, just merge the contents
+                    for item in ui_temp_dir.iterdir():
+                        dest = FINAL_OUTPUT / item.name
+                        if dest.exists():
+                            if dest.is_dir():
+                                shutil.rmtree(dest, onerror=remove_readonly)
+                            else:
+                                dest.unlink()
+                        shutil.move(str(item), str(dest))
+                    ui_temp_dir.rmdir()
+                    return
+
             shutil.move(str(ui_temp_dir), str(FINAL_OUTPUT))
 
     # Step 8: Summary

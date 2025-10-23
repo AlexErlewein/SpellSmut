@@ -8,7 +8,11 @@ Requirements:
 - Run after extract_ui_with_names.py
 
 Usage:
-    uv run convert_ui_textures.py
+    uv run convert_ui_textures.py [--yes] [--workers N]
+
+Arguments:
+    --yes, -y        Skip confirmation prompts
+    --workers N      Number of parallel workers (default: CPU count)
 
 Author: SpellSmut Modding Project
 """
@@ -17,6 +21,10 @@ import os
 import sys
 import subprocess
 from pathlib import Path
+import argparse
+import platform
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import multiprocessing
 
 # Configuration
 SCRIPT_DIR = Path(__file__).parent
@@ -33,41 +41,51 @@ def print_banner():
 
 
 def check_imagemagick():
-    """Check if ImageMagick is available."""
+    """Check if ImageMagick is available (cross-platform)."""
+    # On macOS/Linux, the command might be 'convert' instead of 'magick'
+    commands_to_try = ["magick", "convert"]
+
+    for cmd in commands_to_try:
+        try:
+            result = subprocess.run(
+                [cmd, "-version"],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+            )
+            if result.returncode == 0:
+                print(f"[OK] ImageMagick found (using '{cmd}' command)")
+                return cmd
+        except FileNotFoundError:
+            continue
+
+    print("[WARNING] ImageMagick not found")
+    return None
+
+
+def convert_with_imagemagick(dds_file, png_file, magick_cmd):
+    """Convert DDS to PNG using ImageMagick."""
     try:
+        # Build command based on which ImageMagick command is available
+        if magick_cmd == "magick":
+            cmd = ["magick", "convert", str(dds_file), str(png_file)]
+        else:  # convert command (macOS/Linux)
+            cmd = ["convert", str(dds_file), str(png_file)]
+
         result = subprocess.run(
-            ["magick", "-version"],
+            cmd,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
-        )
-        if result.returncode == 0:
-            print("[OK] ImageMagick found")
-            return True
-        else:
-            print("[WARNING] ImageMagick not found or not working")
-            return False
-    except FileNotFoundError:
-        print("[WARNING] ImageMagick (magick command) not found")
-        return False
-
-
-def convert_with_imagemagick(dds_file, png_file):
-    """Convert DDS to PNG using ImageMagick."""
-    try:
-        cmd = ["magick", "convert", str(dds_file), str(png_file)]
-        result = subprocess.run(
-            cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+            timeout=30,  # Add timeout to prevent hanging
         )
 
         if result.returncode == 0:
             return True
         else:
-            print(f"  [ERROR] ImageMagick conversion failed: {result.stderr}")
             return False
 
     except Exception as e:
-        print(f"  [ERROR] ImageMagick conversion error: {e}")
         return False
 
 
@@ -86,8 +104,28 @@ def convert_with_pillow(dds_file, png_file):
         return False
 
 
-def convert_dds_files():
-    """Convert all DDS files to PNG."""
+def convert_single_file(args):
+    """Convert a single DDS file to PNG (for parallel processing)."""
+    dds_file, magick_cmd = args
+    png_file = dds_file.with_suffix(".png")
+
+    # Skip if PNG already exists
+    if png_file.exists():
+        return (True, dds_file.name, "skipped")
+
+    success = False
+
+    if magick_cmd:
+        success = convert_with_imagemagick(dds_file, png_file, magick_cmd)
+
+    if success:
+        return (True, dds_file.name, "converted")
+    else:
+        return (False, dds_file.name, "failed")
+
+
+def convert_dds_files(num_workers=None):
+    """Convert all DDS files to PNG using parallel processing."""
     if not UI_DIR.exists():
         print(f"[ERROR] UI directory not found: {UI_DIR}")
         print("Please run extract_ui_with_names.py first.")
@@ -99,6 +137,9 @@ def convert_dds_files():
     dds_files = list(UI_DIR.rglob("*.dds"))
     dds_files.extend(UI_DIR.rglob("*.DDS"))  # Case insensitive
 
+    # Remove duplicates
+    dds_files = list(set(dds_files))
+
     if not dds_files:
         print("[WARNING] No DDS files found")
         return True
@@ -106,71 +147,103 @@ def convert_dds_files():
     print(f"Found {len(dds_files)} DDS files to convert")
 
     # Check for ImageMagick
-    has_imagemagick = check_imagemagick()
+    magick_cmd = check_imagemagick()
+
+    if not magick_cmd:
+        print("[ERROR] ImageMagick is required for conversion")
+        return False
+
+    # Determine number of workers
+    if num_workers is None:
+        num_workers = multiprocessing.cpu_count()
+
+    print(f"Using {num_workers} parallel workers")
+    print()
 
     success_count = 0
     error_count = 0
+    skipped_count = 0
 
-    for i, dds_file in enumerate(dds_files, 1):
-        # Create PNG path (same directory, same name, .png extension)
-        png_file = dds_file.with_suffix(".png")
+    # Prepare arguments for parallel processing
+    tasks = [(dds_file, magick_cmd) for dds_file in dds_files]
 
-        print(f"[{i}/{len(dds_files)}] Converting: {dds_file.name} → {png_file.name}")
+    # Process files in parallel
+    with ThreadPoolExecutor(max_workers=num_workers) as executor:
+        futures = {executor.submit(convert_single_file, task): task for task in tasks}
 
-        success = False
+        completed = 0
+        for future in as_completed(futures):
+            completed += 1
+            success, filename, status = future.result()
 
-        # Try ImageMagick first
-        if has_imagemagick:
-            success = convert_with_imagemagick(dds_file, png_file)
+            if success:
+                if status == "skipped":
+                    skipped_count += 1
+                else:
+                    success_count += 1
+            else:
+                error_count += 1
 
-        # Fallback to Pillow
-        if not success:
-            success = convert_with_pillow(dds_file, png_file)
+            # Print progress every 100 files
+            if completed % 100 == 0 or completed == len(dds_files):
+                print(
+                    f"Progress: {completed}/{len(dds_files)} files processed "
+                    f"(✓ {success_count} | ⊘ {skipped_count} | ✗ {error_count})"
+                )
 
-        if success:
-            success_count += 1
-            # Optionally remove the original DDS file
-            # dds_file.unlink()  # Uncomment to delete DDS after conversion
-        else:
-            error_count += 1
-
-    print("\nConversion Summary:")
+    print("\n" + "=" * 70)
+    print("Conversion Summary:")
     print(f"  Total files: {len(dds_files)}")
-    print(f"  Successful: {success_count}")
+    print(f"  Converted: {success_count}")
+    print(f"  Skipped (already exist): {skipped_count}")
     print(f"  Failed: {error_count}")
 
     if error_count > 0:
         print(f"\n[WARNING] {error_count} files failed to convert")
-        print("You may need to install ImageMagick or DDS plugins for Pillow")
 
     return error_count == 0
 
 
 def main():
     """Main execution function."""
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(
+        description="Convert DDS UI textures to PNG format with parallel processing"
+    )
+    parser.add_argument(
+        "--yes", "-y", action="store_true", help="Skip confirmation prompts"
+    )
+    parser.add_argument(
+        "--workers",
+        "-w",
+        type=int,
+        default=None,
+        help="Number of parallel workers (default: CPU count)",
+    )
+    args = parser.parse_args()
+
     print_banner()
 
     print("Step 1: Checking conversion tools")
     print("-" * 70)
 
-    if not check_imagemagick():
-        print("\n[WARNING] ImageMagick not available.")
-        print("Installing ImageMagick is recommended for best results.")
-        print("On Windows: winget install ImageMagick.ImageMagick")
-        print("            or: choco install imagemagick")
-        print("On macOS: brew install imagemagick")
-        print("On Ubuntu: sudo apt install imagemagick")
-        print()
+    magick_cmd = check_imagemagick()
 
-        response = input("Continue anyway? [y/N]: ").strip().lower()
-        if response not in ["y", "yes"]:
-            print("Conversion cancelled.")
-            return 1
+    if not magick_cmd:
+        print("\n[ERROR] ImageMagick not available.")
+        print("Installing ImageMagick is required for DDS conversion.")
+        print()
+        print("Installation instructions:")
+        print("  Windows: winget install ImageMagick.ImageMagick")
+        print("           or: choco install imagemagick")
+        print("  macOS:   brew install imagemagick")
+        print("  Ubuntu:  sudo apt install imagemagick")
+        return 1
 
     print("\nStep 2: Converting DDS files to PNG")
     print("-" * 70)
 
-    if convert_dds_files():
+    if convert_dds_files(num_workers=args.workers):
         print("\n" + "=" * 70)
         print("CONVERSION COMPLETE")
         print("=" * 70)
