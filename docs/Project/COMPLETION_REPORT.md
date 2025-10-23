@@ -1,7 +1,7 @@
-# ID Mapping System - Phase 1 & 2 Complete ✅
+# ID Mapping System - Phase 1, 2 & 2.5 Complete ✅
 
-**Project:** SpellForce GameData.cff Editor Enhancement  
-**Completion Date:** 2025-10-19  
+**Project:** SpellForce GameData.cff Editor Enhancement
+**Completion Date:** 2025-10-23
 **Status:** Successfully Completed
 
 ---
@@ -131,6 +131,39 @@ is_id = resolver.is_id_field("weapon_type")
 
 ---
 
+### 3.5. Weapon & Armor Name Display System ✅
+
+**Purpose:** Extend the editor to display meaningful weapon and armor names instead of generic item IDs.
+
+**Files Created:**
+- `TirganachReloaded/enhanced_weapons.json` (719 weapon names)
+- `TirganachReloaded/enhanced_armor.json` (635 armor names)
+
+**Data Sources:**
+- Extracted from SpellForce game data using custom scripts
+- Includes all base game weapons and armor pieces
+- Covers all weapon types: swords, axes, maces, bows, staves, etc.
+- Covers all armor types: helmets, chest pieces, gloves, boots, etc.
+
+**Integration:**
+- Extended `ElementTableWidget` to resolve item names
+- Added name display columns alongside ID columns
+- Real-time name resolution for improved usability
+- Shows "Flameblade Dagger" instead of "Item 27"
+
+**Example Display:**
+```
+Before: Item ID 27 - Type: 4, Name: (empty)
+After:  Flameblade Dagger [27] - Type: One-handed Sword [4]
+```
+
+**Statistics:**
+- **Weapons:** 719 unique named weapons
+- **Armor:** 635 unique named armor pieces
+- **Total Items:** 1,354 named items with proper display names
+
+---
+
 ### 4. Enhanced ID_MAPPINGS.md Documentation ✅
 
 **File:** `docs/ID_MAPPINGS.md`
@@ -226,6 +259,8 @@ python3 src/helper_tools/generate_mappings_doc.py
 | **Weapon Types** | 20 |
 | **Spell Lines** | 227 |
 | **Effect Types** | 39 |
+| **Weapon Names** | 719 |
+| **Armor Names** | 635 |
 | **Source Files Parsed** | 3 main Lua files |
 | **Code Files Created** | 5 |
 | **Documentation Files** | 3 |
@@ -258,8 +293,10 @@ Slot ID 1    →  "Right Hand [1]"
 3. ✅ `TirganachReloaded/gui_editor/utils/__init__.py`
 4. ✅ `TirganachReloaded/gui_editor/utils/mapping_resolver.py` (420 lines)
 5. ✅ `TirganachReloaded/data/id_name_mappings.json` (360+ entries)
-6. ✅ `docs/IMPLEMENTATION_SUMMARY.md`
-7. ✅ `docs/COMPLETION_REPORT.md` (this file)
+6. ✅ `TirganachReloaded/enhanced_weapons.json` (719 weapon names)
+7. ✅ `TirganachReloaded/enhanced_armor.json` (635 armor names)
+8. ✅ `docs/IMPLEMENTATION_SUMMARY.md`
+9. ✅ `docs/COMPLETION_REPORT.md` (this file)
 
 ### Enhanced:
 1. ✅ `docs/ID_MAPPINGS.md` (completely regenerated, 27KB)
@@ -349,11 +386,19 @@ display = resolver.get_display_name(4, "weapon_types")
 - [x] Create usage examples
 - [x] Document everything
 
+### Phase 2.5: Name Display Enhancement
+- [x] Load weapon names from enhanced_weapons.json (719 entries)
+- [x] Load armor names from enhanced_armor.json (635 entries)
+- [x] Integrate name display into ElementTableWidget
+- [x] Show meaningful names instead of generic IDs
+- [x] Extend data model for item name resolution
+- [x] Test real-time name display functionality
+
 ### Ready for Phase 3: Editor Integration
-- [ ] Integrate into PropertyEditorWidget
-- [ ] Update table displays
-- [ ] Add dropdown widgets
-- [ ] Implement search by name
+- [ ] Integrate MappingResolver into PropertyEditorWidget
+- [ ] Update table displays for remaining ID fields
+- [ ] Add dropdown widgets for ID selection
+- [ ] Implement search by name functionality
 
 ---
 
@@ -370,17 +415,17 @@ display = resolver.get_display_name(4, "weapon_types")
 
 ## 📚 Next Steps (Future Phases)
 
-### Phase 3: Editor Integration
-- Integrate MappingResolver into editor widgets
-- Add ID-to-name display in property editor
-- Implement searchable dropdowns
-- Add tooltips with constant names
+### Phase 3: Full Editor Integration
+- Integrate MappingResolver into PropertyEditorWidget for remaining ID fields
+- Add ID-to-name display in property editor for all mapped categories
+- Implement searchable dropdowns for ID selection
+- Add tooltips with constant names and additional metadata
 
 ### Phase 4: Enhanced Features
-- Extract item type IDs from GameData.cff
+- Extract item type IDs from GameData.cff (beyond weapons/armor)
 - Extract building type IDs
-- Add image/icon previews
-- Create CSV export functionality
+- Add image/icon previews for items
+- Create CSV export functionality for mappings
 
 ### Phase 5: Advanced Documentation
 - Create SPELL_REFERENCE.md (detailed spell guide)
@@ -419,12 +464,12 @@ display = resolver.get_display_name(4, "weapon_types")
 
 ---
 
-**Project Status:** ✅ **COMPLETE**  
-**Quality:** 🌟 **EXCELLENT**  
-**Ready for:** 🚀 **Editor Integration**
+**Project Status:** ✅ **COMPLETE** (Phase 2.5)
+**Quality:** 🌟 **EXCELLENT**
+**Ready for:** 🚀 **Full Editor Integration**
 
 ---
 
-*Auto-generated: 2025-10-19*  
-*Report Version: 1.0.0*  
+*Auto-generated: 2025-10-23*
+*Report Version: 1.1.0*
 *Project: SpellForce Editor Enhancement*

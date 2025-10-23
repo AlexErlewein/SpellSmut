@@ -46,6 +46,12 @@ Spells follow the format `ui_spell_[ELEMENT]_[CATEGORY]_[NAME]` where:
 - Save modifications to CFF files
 - See [GUI_EDITOR_PLAN.md](./GUI_EDITOR_PLAN.md) for details
 
+### Phase 2.5: Name Display Enhancement ✅ COMPLETE
+- Load 719 weapon names and 635 armor names
+- Display "Flameblade Dagger" instead of "Item 27"
+- Integrate name resolution into ElementTableWidget
+- Real-time name display for improved usability
+
 ### Phase 3: Advanced Features ⏳ PENDING
 - Add/clone/delete elements
 - Undo/redo functionality
@@ -113,12 +119,15 @@ src/TirganachReloaded/
 - ✅ Provides intuitive navigation for 43+ categories
 - ✅ Supports editing with proper validation
 - ✅ Maintains data integrity during save operations
+- ✅ Displays meaningful names for 719 weapons and 635 armor pieces
+- ✅ Shows "Flameblade Dagger" instead of generic "Item 27"
 
 ## Next Steps
 
 1. **Complete Phase 2**: Finish property editing and save functionality
-2. **User Testing**: Validate with actual CFF files and workflows
-3. **Polish**: Add dark mode, error handling, and user preferences
-4. **Documentation**: Create user guide and API reference
+2. **Phase 3**: Implement MappingResolver for all remaining ID fields (races, effects, etc.)
+3. **User Testing**: Validate with actual CFF files and workflows
+4. **Polish**: Add dark mode, error handling, and user preferences
+5. **Documentation**: Create user guide and API reference
 
 For detailed implementation details, see [GUI_EDITOR_PLAN.md](./GUI_EDITOR_PLAN.md).
