@@ -28,6 +28,7 @@ dependencies = [
     "textual>=0.40.0",  # For future TUI version
     "pillow>=10.0.0",   # For image processing
     "pyyaml>=6.0",      # For configuration files
+    "pytest>=7.0.0",
 ]
 
 [project.scripts]
