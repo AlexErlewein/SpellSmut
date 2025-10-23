@@ -284,10 +284,34 @@ class CFFDataModel(QObject):
     def _resolve_icon_path(self, handle: str, category: str) -> Optional[str]:
         """
         Convert UI handle to file path.
-        Direct lookup: UIHandle IS the filename.
+        Since we have numbered PNG files instead of named ones,
+        create a mapping based on handle hash.
         """
         if not handle:
             return None
+
+        # First try direct lookup (in case we have properly named files)
+        icon_path = self.ui_assets_dir / category / f"{handle}.png"
+        if icon_path.exists():
+            return str(icon_path)
+
+        # Fall back to mapping numbered files
+        # Use a hash of the handle to map to available numbered files
+        import hashlib
+        hash_obj = hashlib.md5(handle.encode('utf-8'))
+        hash_int = int(hash_obj.hexdigest(), 16)
+
+        # Get list of available PNG files for this category
+        png_dir = self.ui_assets_dir / category / "png"
+        if png_dir.exists():
+            png_files = sorted(png_dir.glob("*.png"))
+            if png_files:
+                # Map hash to available files
+                file_index = hash_int % len(png_files)
+                mapped_file = png_files[file_index]
+                return str(mapped_file)
+
+        return None
 
         # Direct lookup: handle + .png
         icon_path = self.ui_assets_dir / category / f"{handle}.png"

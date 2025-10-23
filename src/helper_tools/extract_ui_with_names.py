@@ -26,7 +26,12 @@ SCRIPT_DIR = Path(__file__).parent
 PROJECT_ROOT = SCRIPT_DIR.parent.parent
 TOOLS_DIR = PROJECT_ROOT / "ModdingTools"
 QUICKBMS_DIR = TOOLS_DIR / "quickbms"
-QUICKBMS_EXE = QUICKBMS_DIR / "quickbms.exe"
+# Use macOS executable on macOS, Windows .exe on Windows
+import platform
+if platform.system() == "Windows":
+    QUICKBMS_EXE = QUICKBMS_DIR / "quickbms.exe"
+else:
+    QUICKBMS_EXE = QUICKBMS_DIR / "quickbms"
 BMS_SCRIPT = SCRIPT_DIR / "SpellForce_PAK_script.bms"
 
 # Game installation (from gamepath.txt)
@@ -51,9 +56,20 @@ def print_banner():
 
 
 def read_game_path():
-    """Read the game installation path from gamepath.txt."""
+    """Read the game installation path from gamepath.txt or use local PAK files."""
     global GAME_DIR, PAK_DIR
 
+    # First try to use local PAK files (macOS development environment)
+    local_pak_dir = PROJECT_ROOT / "OriginalGameFiles" / "pak"
+    if local_pak_dir.exists():
+        print("[OK] Using local PAK files (macOS development environment)")
+        GAME_DIR = PROJECT_ROOT / "OriginalGameFiles"
+        PAK_DIR = local_pak_dir
+        print(f"[OK] Game directory: {GAME_DIR}")
+        print(f"[OK] PAK directory: {PAK_DIR}")
+        return True
+
+    # Fallback to gamepath.txt for Windows compatibility
     gamepath_file = PROJECT_ROOT / "OriginalGameFiles" / "gamepath.txt"
     if not gamepath_file.exists():
         print(f"[ERROR] gamepath.txt not found: {gamepath_file}")
@@ -310,10 +326,16 @@ def main():
     print(f"UI output: {FINAL_OUTPUT}")
     print()
 
-    response = input("Proceed with UI asset extraction? [y/N]: ").strip().lower()
-    if response not in ['y', 'yes']:
-        print("Extraction cancelled.")
-        return 0
+    # Auto-proceed in non-interactive mode (for CI/CD or automated runs)
+    import os
+    if os.environ.get('CI') or not sys.stdin.isatty():
+        print("Running in non-interactive mode - proceeding automatically...")
+        response = 'y'
+    else:
+        response = input("Proceed with UI asset extraction? [y/N]: ").strip().lower()
+        if response not in ['y', 'yes']:
+            print("Extraction cancelled.")
+            return 0
 
     # Step 6: Extract all PAK files
     print("\n" + "=" * 70)

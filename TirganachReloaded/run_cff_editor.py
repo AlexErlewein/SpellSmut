@@ -11,12 +11,8 @@ Usage:
 import sys
 import os
 
-# Add the cff_editor directory to the path
-editor_dir = os.path.join(os.path.dirname(__file__), 'cff_editor')
-sys.path.insert(0, editor_dir)
-
 from PySide6.QtWidgets import QApplication
-from main_window import MainWindow
+from cff_editor.main_window import MainWindow
 
 
 def main():

@@ -31,8 +31,8 @@ dependencies = [
 ]
 
 [project.scripts]
-tirganach-gui = "tirganachreloaded.gui_editor.main:main"
-tirganach-tui = "TirganachReloaded.tui_editor.main:main"  # If implemented later
+tirganach = "TirganachReloaded.cff_editor.main:main"
+tirganach-gui = "TirganachReloaded.cff_editor.main:main"
 
 [project.optional-dependencies]
 dev = [
@@ -43,7 +43,7 @@ dev = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/tirganachreloaded"]
+packages = ["TirganachReloaded"]
 
 [tool.hatch.envs.default]
 dependencies = [

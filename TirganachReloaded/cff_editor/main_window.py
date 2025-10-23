@@ -8,10 +8,10 @@ from PySide6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
 from PySide6.QtCore import Qt, QSize
 from PySide6.QtGui import QAction
 
-from data_model import CFFDataModel
-from widgets.category_tree import CategoryTreeWidget
-from widgets.element_table import ElementTableWidget
-from widgets.property_editor import PropertyEditorWidget
+from .data_model import CFFDataModel
+from .widgets.category_tree import CategoryTreeWidget
+from .widgets.element_table import ElementTableWidget
+from .widgets.property_editor import PropertyEditorWidget
 
 
 class MainWindow(QMainWindow):
