@@ -266,7 +266,7 @@ Verify these specific files exist (examples):
 
 - [ ] Launch GUI editor
   ```bash
-  uv run -m tirganach.gui_editor
+  uv run tirganach
   ```
 
 - [ ] Wait for GUI to load

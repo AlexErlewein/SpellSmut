@@ -416,7 +416,7 @@ After successful re-extraction:
 1. ✅ **Test in GUI Editor**
    ```bash
    cd TirganachReloaded
-   uv run -m tirganach.gui_editor
+   uv run tirganach
    ```
 
 2. ✅ **Verify Icon Display**

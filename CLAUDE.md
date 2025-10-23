@@ -27,7 +27,7 @@ uv pip install Pillow imagemagick
 uv run extract_ui_with_names.py
 
 # Run a module
-uv run -m tirganach.gui_editor
+uv run tirganach
 ```
 
 **Why UV?**

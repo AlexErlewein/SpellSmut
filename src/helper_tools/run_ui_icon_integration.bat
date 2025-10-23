@@ -82,7 +82,7 @@ echo Next steps:
 echo 1. Verify the extracted assets have correct filenames
 echo 2. Run the GUI editor to test icon display:
 echo    cd ..\..\TirganachReloaded
-echo    uv run -m tirganach.gui_editor
+echo    uv run tirganach
 echo 3. Verify icons appear in both table and property editor
 echo.
 echo Extracted assets location:

@@ -92,7 +92,7 @@ ls ExtractedAssets/UI/extracted/spells/ | head -5
 
 ```bash
 cd TirganachReloaded
-uv run -m tirganach.gui_editor
+uv run tirganach
 ```
 
 **Verify:**
@@ -149,7 +149,7 @@ cd SpellSmut/src/helper_tools
 
 # 4. Test in GUI
 cd ../../TirganachReloaded
-uv run -m tirganach.gui_editor
+uv run tirganach
 ```
 
 **Done! Icons should now display with original filenames! 🎉**

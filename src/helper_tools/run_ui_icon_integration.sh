@@ -116,7 +116,7 @@ echo "  ExtractedAssets/UI/extracted/"
 echo
 echo "To test:"
 echo "  cd ../../TirganachReloaded"
-echo "  uv run -m tirganach.gui_editor"
+echo "  uv run tirganach"
 echo
 
 echo "Done! Press any key to exit..."

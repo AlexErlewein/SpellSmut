@@ -207,7 +207,7 @@ After successful extraction:
 
 ```bash
 cd TirganachReloaded
-uv run -m tirganach.gui_editor
+uv run tirganach
 ```
 
 **Verify in GUI:**
@@ -308,7 +308,7 @@ Once extraction is complete, the icon system works as follows:
    - Test a few icons manually
 
 2. ✅ **Test in GUI Editor**
-   - Launch: `uv run -m tirganach.gui_editor`
+   - Launch: `uv run tirganach`
    - Open Items category
    - Verify icons display
    - Check property editor shows large icon

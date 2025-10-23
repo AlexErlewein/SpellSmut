@@ -55,7 +55,7 @@ uv run script.py
 uv run script.py --arg value
 
 # Run Python module
-uv run -m tirganach.gui_editor
+uv run tirganach
 
 # Execute Python code
 uv run python -c "print('Hello')"
@@ -92,7 +92,7 @@ uv run organize_ui_assets.py
 ### GUI Editor
 ```bash
 cd TirganachReloaded
-uv run -m tirganach.gui_editor
+uv run tirganach
 ```
 
 ### Install Dependencies

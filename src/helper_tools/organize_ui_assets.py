@@ -162,7 +162,7 @@ def main():
         print("\nNext steps:")
         print("1. Test in GUI editor:")
         print("   cd ../../TirganachReloaded")
-        print("   uv run -m tirganach.gui_editor")
+        print("   uv run tirganach")
         print("2. Verify icons display correctly")
         return 0
     else:

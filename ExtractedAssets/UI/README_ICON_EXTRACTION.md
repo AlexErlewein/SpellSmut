@@ -174,7 +174,7 @@ After extraction, test in the GUI editor:
 
 ```bash
 cd TirganachReloaded
-uv run -m tirganach.gui_editor
+uv run tirganach
 ```
 
 **Verify:**

@@ -87,7 +87,7 @@ Changed from `python` to `uv run` for all script executions.
 
 | Before (python) | After (UV) |
 |-----------------|------------|
-| `python -m tirganach.gui_editor` | `uv run -m tirganach.gui_editor` |
+| `python -m tirganach.gui_editor` | `uv run tirganach` |
 | `python -m pytest` | `uv run -m pytest` |
 
 ---
@@ -158,7 +158,7 @@ uv run organize_ui_assets.py
 
 ```bash
 cd TirganachReloaded
-uv run -m tirganach.gui_editor
+uv run tirganach
 ```
 
 ---
@@ -270,7 +270,7 @@ uv run script.py
 uv pip install package-name
 
 # Launch GUI
-uv run -m tirganach.gui_editor
+uv run tirganach
 ```
 
 ---
