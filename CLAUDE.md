@@ -6,6 +6,38 @@ This is a **SpellForce Platinum Edition** game distribution, a fantasy real-time
 
 ---
 
+## Project Rules & Standards
+
+### Python Environment Management
+
+**ALWAYS use UV for Python package management and execution.**
+
+- **Install packages**: `uv pip install <package>` (NOT `pip install`)
+- **Run scripts**: `uv run <script.py>` (NOT `python <script.py>`)
+- **Create venv**: `uv venv` (NOT `python -m venv`)
+- **Sync deps**: `uv pip sync requirements.txt`
+- **Execute modules**: `uv run -m <module>` (NOT `python -m <module>`)
+
+**Examples:**
+```bash
+# Install dependencies
+uv pip install Pillow imagemagick
+
+# Run a script
+uv run extract_ui_with_names.py
+
+# Run a module
+uv run -m tirganach.gui_editor
+```
+
+**Why UV?**
+- Faster than pip (10-100x)
+- Better dependency resolution
+- Consistent across environments
+- Project-standard tool
+
+---
+
 ## Project Architecture
 
 ### Technology Stack
@@ -18,6 +50,7 @@ This is a **SpellForce Platinum Edition** game distribution, a fantasy real-time
 6. **Networking**: GameSpy multiplayer infrastructure
 7. **Standard Library**: STLport (portable STL implementation)
 8. **Smart Pointers**: Boost Smart Pointer Library
+9. **Python Environment**: UV package manager (project standard)
 
 ### Architectural Pattern
 

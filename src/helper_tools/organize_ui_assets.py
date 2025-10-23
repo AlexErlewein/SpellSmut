@@ -3,11 +3,12 @@ Organize UI assets into categories while preserving existing folder structure.
 This script organizes the re-extracted UI assets with original names into the existing category structure.
 
 Requirements:
+- UV package manager (project standard)
 - Run after rotate_ui_pngs.py
 - Preserves existing ExtractedAssets/UI/extracted/ structure
 
 Usage:
-    python organize_ui_assets.py
+    uv run organize_ui_assets.py
 
 Author: SpellSmut Modding Project
 """
@@ -44,7 +45,7 @@ def get_category_mapping():
         "containers": ["ui_cnt_"],
         "logos": ["ui_logo_"],
         "fonts": ["font_"],
-        "other": ["ui_"]  # Catch-all for ui_ files not in other categories
+        "other": ["ui_"],  # Catch-all for ui_ files not in other categories
     }
 
 
@@ -157,10 +158,12 @@ def main():
         print("\n" + "=" * 70)
         print("ORGANIZATION COMPLETE")
         print("=" * 70)
-        print("UI assets are now organized in: {TARGET_DIR}")
+        print(f"UI assets are now organized in: {TARGET_DIR}")
         print("\nNext steps:")
-        print("1. Proceed to Phase 2: Extend GameData class")
-        print("2. Add icon display to GUI editor")
+        print("1. Test in GUI editor:")
+        print("   cd ../../TirganachReloaded")
+        print("   uv run -m tirganach.gui_editor")
+        print("2. Verify icons display correctly")
         return 0
     else:
         print("\n[WARNING] Organization completed with issues")
@@ -176,5 +179,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\n[ERROR] FATAL ERROR: {e}")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)

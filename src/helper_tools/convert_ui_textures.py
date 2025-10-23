@@ -3,11 +3,12 @@ Convert DDS UI textures to PNG format.
 This script converts all DDS files in the UI extracted directory to PNG.
 
 Requirements:
+- UV package manager (project standard)
 - ImageMagick (magick command) or Pillow with DDS support
 - Run after extract_ui_with_names.py
 
 Usage:
-    python convert_ui_textures.py
+    uv run convert_ui_textures.py
 
 Author: SpellSmut Modding Project
 """
@@ -38,7 +39,7 @@ def check_imagemagick():
             ["magick", "-version"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            text=True
+            text=True,
         )
         if result.returncode == 0:
             print("[OK] ImageMagick found")
@@ -56,10 +57,7 @@ def convert_with_imagemagick(dds_file, png_file):
     try:
         cmd = ["magick", "convert", str(dds_file), str(png_file)]
         result = subprocess.run(
-            cmd,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True
+            cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
         )
 
         if result.returncode == 0:
@@ -115,7 +113,7 @@ def convert_dds_files():
 
     for i, dds_file in enumerate(dds_files, 1):
         # Create PNG path (same directory, same name, .png extension)
-        png_file = dds_file.with_suffix('.png')
+        png_file = dds_file.with_suffix(".png")
 
         print(f"[{i}/{len(dds_files)}] Converting: {dds_file.name} → {png_file.name}")
 
@@ -158,13 +156,14 @@ def main():
     if not check_imagemagick():
         print("\n[WARNING] ImageMagick not available.")
         print("Installing ImageMagick is recommended for best results.")
-        print("On Windows: choco install imagemagick")
+        print("On Windows: winget install ImageMagick.ImageMagick")
+        print("            or: choco install imagemagick")
         print("On macOS: brew install imagemagick")
         print("On Ubuntu: sudo apt install imagemagick")
         print()
 
         response = input("Continue anyway? [y/N]: ").strip().lower()
-        if response not in ['y', 'yes']:
+        if response not in ["y", "yes"]:
             print("Conversion cancelled.")
             return 1
 
@@ -176,6 +175,7 @@ def main():
         print("CONVERSION COMPLETE")
         print("=" * 70)
         print("Next step: Run rotate_ui_pngs.py to rotate PNGs by 180°")
+        print("Command: uv run rotate_ui_pngs.py")
         return 0
     else:
         print("\n[ERROR] Conversion failed")
@@ -191,5 +191,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\n[ERROR] FATAL ERROR: {e}")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)

@@ -3,9 +3,10 @@ Script to extract UI assets from SpellForce PAK files with original filenames.
 This script will be run on Windows where the game is installed.
 
 Usage:
-    python extract_ui_with_names.py
+    uv run extract_ui_with_names.py
 
 Requirements:
+- UV package manager (project standard)
 - QuickBMS installed (will be downloaded automatically)
 - SpellForce game installed
 - Run from Windows environment
@@ -28,6 +29,7 @@ TOOLS_DIR = PROJECT_ROOT / "ModdingTools"
 QUICKBMS_DIR = TOOLS_DIR / "quickbms"
 # Use macOS executable on macOS, Windows .exe on Windows
 import platform
+
 if platform.system() == "Windows":
     QUICKBMS_EXE = QUICKBMS_DIR / "quickbms.exe"
 else:
@@ -76,10 +78,10 @@ def read_game_path():
         print("Please ensure the game path is configured.")
         return False
 
-    with open(gamepath_file, 'r') as f:
+    with open(gamepath_file, "r") as f:
         line = f.read().strip()
         # Format: "39540 D:\SteamLibrary\steamapps\common\Spellforce Platinum Edition"
-        parts = line.split(' ', 1)
+        parts = line.split(" ", 1)
         if len(parts) >= 2:
             GAME_DIR = Path(parts[1])
             PAK_DIR = GAME_DIR / "pak"
@@ -119,7 +121,7 @@ def download_quickbms():
 
         # Extract ZIP
         print("Extracting QuickBMS... ", end="", flush=True)
-        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        with zipfile.ZipFile(zip_path, "r") as zip_ref:
             zip_ref.extractall(QUICKBMS_DIR)
         print("[OK] Done")
 
@@ -170,7 +172,7 @@ def get_pak_files():
         total_size += size_mb
         print(f"  - {pak.name:15s} ({size_mb:7.1f} MB)")
 
-    print(f"\nTotal size: {total_size:7.1f} MB ({total_size/1024:.2f} GB)")
+    print(f"\nTotal size: {total_size:7.1f} MB ({total_size / 1024:.2f} GB)")
 
     return pak_files
 
@@ -199,7 +201,7 @@ def extract_pak(pak_file, output_dir):
         "-o",  # Overwrite files without asking
         str(BMS_SCRIPT),
         str(pak_file),
-        str(output_dir)
+        str(output_dir),
     ]
 
     try:
@@ -209,16 +211,16 @@ def extract_pak(pak_file, output_dir):
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
-            timeout=600  # 10 minute timeout per file
+            timeout=600,  # 10 minute timeout per file
         )
 
         if result.returncode == 0:
             print(f"[OK] Successfully extracted {pak_file.name}")
 
             # Parse output for file count
-            output_lines = result.stdout.split('\n')
+            output_lines = result.stdout.split("\n")
             for line in output_lines:
-                if 'files found' in line.lower() or 'extracted' in line.lower():
+                if "files found" in line.lower() or "extracted" in line.lower():
                     print(f"  {line.strip()}")
 
             return True
@@ -258,12 +260,8 @@ def filter_ui_assets(raw_dir, ui_output_dir):
 
             # Check if it's a UI-related file
             is_ui_asset = (
-                file_lower.startswith('ui_') or
-                file_lower.startswith('font_')
-            ) and (
-                file_lower.endswith('.dds') or
-                file_lower.endswith('.tga')
-            )
+                file_lower.startswith("ui_") or file_lower.startswith("font_")
+            ) and (file_lower.endswith(".dds") or file_lower.endswith(".tga"))
 
             if is_ui_asset:
                 source_path = Path(root) / file
@@ -328,12 +326,13 @@ def main():
 
     # Auto-proceed in non-interactive mode (for CI/CD or automated runs)
     import os
-    if os.environ.get('CI') or not sys.stdin.isatty():
+
+    if os.environ.get("CI") or not sys.stdin.isatty():
         print("Running in non-interactive mode - proceeding automatically...")
-        response = 'y'
+        response = "y"
     else:
         response = input("Proceed with UI asset extraction? [y/N]: ").strip().lower()
-        if response not in ['y', 'yes']:
+        if response not in ["y", "yes"]:
             print("Extraction cancelled.")
             return 0
 
@@ -383,8 +382,11 @@ def main():
     print(f"\nUI assets extracted to: {FINAL_OUTPUT}")
     print("\nNext steps:")
     print("1. Run convert_ui_textures.py to convert DDS to PNG")
+    print("   Command: uv run convert_ui_textures.py")
     print("2. Run rotate_ui_pngs.py to rotate PNGs by 180°")
+    print("   Command: uv run rotate_ui_pngs.py")
     print("3. Run organize_ui_assets.py to organize by category")
+    print("   Command: uv run organize_ui_assets.py")
 
     print("\n[OK] UI asset extraction complete!")
 
@@ -400,5 +402,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\n[ERROR] FATAL ERROR: {e}")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)

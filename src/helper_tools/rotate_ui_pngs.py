@@ -3,11 +3,12 @@ Rotate UI PNG files by 180 degrees.
 SpellForce uses an inverted Y-axis, so UI elements need to be rotated.
 
 Requirements:
+- UV package manager (project standard)
 - Pillow (PIL) library
 - Run after convert_ui_textures.py
 
 Usage:
-    python rotate_ui_pngs.py
+    uv run rotate_ui_pngs.py
 
 Author: SpellSmut Modding Project
 """
@@ -112,6 +113,7 @@ def main():
         print("ROTATION COMPLETE")
         print("=" * 70)
         print("Next step: Run organize_ui_assets.py to organize by category")
+        print("Command: uv run organize_ui_assets.py")
         return 0
     else:
         print("\n[ERROR] Rotation failed")
@@ -127,5 +129,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"\n[ERROR] FATAL ERROR: {e}")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)

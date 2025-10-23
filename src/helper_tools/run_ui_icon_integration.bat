@@ -9,7 +9,7 @@ REM 3. Rotate PNGs by 180 degrees
 REM 4. Organize by category
 REM
 REM Requirements:
-REM - Python 3 installed
+REM - UV package manager installed (project standard)
 REM - ImageMagick installed (for DDS conversion)
 REM - Pillow installed (for PNG rotation)
 REM - SpellForce game installed
@@ -28,7 +28,7 @@ if not exist "extract_ui_with_names.py" (
 
 echo Step 1: Extracting UI assets with original filenames...
 echo.
-python extract_ui_with_names.py
+uv run extract_ui_with_names.py
 if errorlevel 1 (
     echo ERROR: UI asset extraction failed
     pause
@@ -40,7 +40,7 @@ echo.
 
 echo Step 2: Converting DDS files to PNG...
 echo.
-python convert_ui_textures.py
+uv run convert_ui_textures.py
 if errorlevel 1 (
     echo ERROR: DDS to PNG conversion failed
     pause
@@ -52,7 +52,7 @@ echo.
 
 echo Step 3: Rotating PNGs by 180 degrees...
 echo.
-python rotate_ui_pngs.py
+uv run rotate_ui_pngs.py
 if errorlevel 1 (
     echo ERROR: PNG rotation failed
     pause
@@ -64,7 +64,7 @@ echo.
 
 echo Step 4: Organizing assets by category...
 echo.
-python organize_ui_assets.py
+uv run organize_ui_assets.py
 if errorlevel 1 (
     echo ERROR: Asset organization failed
     pause
@@ -79,8 +79,10 @@ echo UI ICON INTEGRATION COMPLETE!
 echo ========================================
 echo.
 echo Next steps:
-echo 1. Copy the extracted assets to your project
-echo 2. Run the GUI editor to test icon display
+echo 1. Verify the extracted assets have correct filenames
+echo 2. Run the GUI editor to test icon display:
+echo    cd ..\..\TirganachReloaded
+echo    uv run -m tirganach.gui_editor
 echo 3. Verify icons appear in both table and property editor
 echo.
 echo Extracted assets location:
