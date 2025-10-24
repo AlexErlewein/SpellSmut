@@ -63,7 +63,10 @@ def extract_icons_from_atlas(
     atlas_png: Path,
     output_dir: Path,
     grid_size: int = 8,
-    icon_size: int = 32
+    icon_size: int = 32,
+    offset_x: int = 0,
+    offset_y: int = 0,
+    rotate: int = 0
 ) -> list[Path]:
     """
     Extract individual icons from a texture atlas.
@@ -71,8 +74,11 @@ def extract_icons_from_atlas(
     Args:
         atlas_png: Path to atlas PNG file
         output_dir: Directory to save extracted icons
-        grid_size: Number of icons per row/column (default 8 for 256x256 atlas with 32x32 icons)
-        icon_size: Size of each icon in pixels
+        grid_size: Number of icons per row/column (default 8 for items, 4 for spells)
+        icon_size: Size of each icon in pixels (32 for items, 64 for spells)
+        offset_x: X offset in pixels (0 for items, 3 for spells)
+        offset_y: Y offset in pixels (0 for items, 3 for spells)
+        rotate: Rotation angle in degrees (0, 90, 180, 270)
         
     Returns:
         List of paths to extracted icon files
@@ -90,12 +96,20 @@ def extract_icons_from_atlas(
         
         for row in range(grid_size):
             for col in range(grid_size):
-                # Calculate position in atlas
-                x = col * icon_size
-                y = row * icon_size
+                # Calculate position in atlas with offset
+                x = offset_x + (col * icon_size)
+                y = offset_y + (row * icon_size)
+                
+                # Check bounds
+                if x + icon_size > atlas.size[0] or y + icon_size > atlas.size[1]:
+                    continue  # Skip icons that exceed bounds
                 
                 # Extract icon
                 icon = atlas.crop((x, y, x + icon_size, y + icon_size))
+                
+                # Apply rotation if specified
+                if rotate != 0:
+                    icon = icon.rotate(rotate, expand=False)
                 
                 # Calculate index (1-based to match game's item_ui_index)
                 index = row * grid_size + col + 1
@@ -184,14 +198,31 @@ def main():
                 print("✓")
                 stats['atlases_converted'] += 1
                 
-                # Extract icons from atlas
+                # Extract icons from atlas with category-specific settings
                 print(f"  [{cat_name}_{atlas_num}] Extracting icons...", end=" ", flush=True)
-                extracted = extract_icons_from_atlas(
-                    temp_png,
-                    atlas_output,
-                    grid_size=8,
-                    icon_size=32
-                )
+                
+                # Spell atlases use different settings than item atlases
+                if cat_name == 'spell':
+                    # Spells: 64x64 icons, 4x4 grid, (3,3) offset, rotated 180°
+                    extracted = extract_icons_from_atlas(
+                        temp_png,
+                        atlas_output,
+                        grid_size=4,
+                        icon_size=64,
+                        offset_x=3,
+                        offset_y=3,
+                        rotate=180
+                    )
+                else:
+                    # Items and others: 32x32 icons, 8x8 grid, no offset
+                    extracted = extract_icons_from_atlas(
+                        temp_png,
+                        atlas_output,
+                        grid_size=8,
+                        icon_size=32,
+                        offset_x=0,
+                        offset_y=0
+                    )
                 
                 if extracted:
                     print(f"✓ ({len(extracted)} icons)")

@@ -39,6 +39,14 @@ class CFFDataModel(QObject):
         self.icon_cache = {}  # Cache for loaded QPixmap objects
         self.project_root = Path(__file__).parent.parent.parent
         self.ui_assets_dir = self.project_root / "ExtractedAssets" / "UI" / "extracted"
+        self.icons_root = self.project_root / "ExtractedAssets" / "UI" / "icons_extracted"
+        self.data_dir = self.project_root / "TirganachReloaded" / "data"
+        
+        # Load icon mappings and analysis data
+        self.icon_mapping = {}
+        self.icon_index = {}
+        self.verified_mappings = {}
+        self._load_icon_data()
 
         # Settings for remembering last opened file and language
         self.settings = QSettings("SpellSmut", "TirganachReloaded")
@@ -145,6 +153,45 @@ class CFFDataModel(QObject):
     def get_armor_name(self, item_id: int) -> Optional[str]:
         """Get armor name by item_id"""
         return self.armor_name_mapping.get(item_id)
+
+    def _load_icon_data(self):
+        """Load icon mapping and analysis data."""
+        try:
+            # Load icon mapping
+            mapping_path = self.data_dir / "ui_icon_mapping.json"
+            if mapping_path.exists():
+                with open(mapping_path, 'r') as f:
+                    self.icon_mapping = json.load(f)
+                print(f"Loaded icon mapping: {len(self.icon_mapping.get('item_to_icons', {}))} items")
+            else:
+                print(f"Icon mapping not found: {mapping_path}")
+                self.icon_mapping = {}
+            
+            # Load icon index
+            index_path = self.icons_root / "icon_index.json"
+            if index_path.exists():
+                with open(index_path, 'r') as f:
+                    self.icon_index = json.load(f)
+                print(f"Loaded icon index: {len(self.icon_index.get('icons', {}))} icons")
+            else:
+                print(f"Icon index not found: {index_path}")
+                self.icon_index = {}
+            
+            # Load verified mappings
+            verified_path = self.data_dir / "verified_icon_mappings.json"
+            if verified_path.exists():
+                with open(verified_path, 'r') as f:
+                    self.verified_mappings = json.load(f)
+                print(f"Loaded verified mappings: {len(self.verified_mappings)} items")
+            else:
+                print("No verified mappings found (run interactive_icon_mapper.py to create)")
+                self.verified_mappings = {}
+                
+        except Exception as e:
+            print(f"Error loading icon data: {e}")
+            self.icon_mapping = {}
+            self.icon_index = {}
+            self.verified_mappings = {}
 
     def get_categories(self) -> List[tuple]:
         """Returns list of (category_name, count) tuples"""
@@ -269,9 +316,15 @@ class CFFDataModel(QObject):
     def get_icon_path(self, category: str, element: Any) -> Optional[str]:
         """
         Get icon path for an element.
+        
+        Priority order:
+        1. Verified mappings (manually confirmed icons)
+        2. Automatic mapping (based on handles)
+        3. First non-empty icon from any atlas
+        4. Fallback placeholder
 
         Args:
-            category: Category name (e.g., "items", "weapons", "spells")
+            category: Category name (e.g., "items", "weapons", "armor")
             element: The element object
 
         Returns:
@@ -285,20 +338,55 @@ class CFFDataModel(QObject):
         if element_id is None:
             return None
 
+        # PRIORITY 1: Check verified mappings first
+        item_id_str = str(element_id)
+        if item_id_str in self.verified_mappings:
+            # Get primary icon (index 1)
+            if '1' in self.verified_mappings[item_id_str]:
+                icon_rel_path = self.verified_mappings[item_id_str]['1']
+                icon_path = self.icons_root / icon_rel_path
+                if icon_path.exists():
+                    return str(icon_path)
+
+        # PRIORITY 2: Try automatic mapping based on handle
+        handle = None
+        
         # Look up in item_ui table for items/weapons/armor
         if category in ["items", "weapons", "armor"]:
             ui_entry = self._find_item_ui_entry(element_id)
             if ui_entry:
                 handle = ui_entry.get("item_ui_handle")
-                if handle:
-                    return self._resolve_icon_path(handle, "items")
 
         # Look up in spell_names table for spells
         elif category == "spells":
             spell = self._find_spell_entry(element_id)
-            if spell and spell.get("spell_ui_handle"):
-                handle = spell["spell_ui_handle"]
-                return self._resolve_icon_path(handle, "spells")
+            if spell:
+                handle = spell.get("spell_ui_handle")
+
+        if handle:
+            resolved_path = self._resolve_icon_path(handle, category)
+            if resolved_path:
+                return resolved_path
+
+        # PRIORITY 3: Try finding first non-empty icon from icon_mapping
+        if item_id_str in self.icon_mapping.get('item_to_icons', {}):
+            icons = self.icon_mapping['item_to_icons'][item_id_str]
+            for icon_data in icons:
+                if icon_data.get('index') == 1:  # Primary icon
+                    # Try different atlases until we find a non-empty one
+                    icon_category = 'item' if handle and handle.startswith('ui_item_') else \
+                                   'spell' if handle and handle.startswith('ui_spell_') else 'item'
+                    
+                    # Try up to 10 atlases
+                    for atlas_num in range(10):
+                        icon_path = self.icons_root / icon_category / f"atlas_{atlas_num}" / f"icon_{icon_data['index']:03d}.png"
+                        if icon_path.exists():
+                            # Check if not empty
+                            icon_key = f"{icon_category}_{atlas_num}_{icon_data['index']:03d}"
+                            if icon_key in self.icon_index.get('icons', {}):
+                                icon_info = self.icon_index['icons'][icon_key]
+                                if not icon_info.get('is_empty', False):
+                                    return str(icon_path)
 
         return None
 
