@@ -209,20 +209,31 @@ def extract_pak(pak_file, output_dir):
     ]
 
     try:
-        # Run QuickBMS
+        # Run QuickBMS with stdin to handle filename encoding issues
+        # Send newlines to auto-accept renamed files for files with invalid characters
         result = subprocess.run(
             cmd,
+            input=b"\n" * 200,  # Send 200 newlines as bytes to handle multiple prompts
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            text=True,
             timeout=600,  # 10 minute timeout per file
         )
 
-        if result.returncode == 0:
+        # Decode output with error handling (PAK files may contain non-UTF8 filenames)
+        stdout_text = result.stdout.decode('utf-8', errors='replace')
+        stderr_text = result.stderr.decode('utf-8', errors='replace')
+        
+        # Count how many files had naming issues
+        rename_count = stdout_text.count("it's not possible to create that file")
+
+        if result.returncode == 0 or rename_count > 0:
             print(f"[OK] Successfully extracted {pak_file.name}")
+            
+            if rename_count > 0:
+                print(f"  [WARNING] {rename_count} file(s) auto-renamed due to invalid characters")
 
             # Parse output for file count
-            output_lines = result.stdout.split("\n")
+            output_lines = stdout_text.split("\n")
             for line in output_lines:
                 if "files found" in line.lower() or "extracted" in line.lower():
                     print(f"  {line.strip()}")
@@ -231,8 +242,8 @@ def extract_pak(pak_file, output_dir):
         else:
             print(f"[ERROR] Failed to extract {pak_file.name}")
             print(f"Return code: {result.returncode}")
-            if result.stderr:
-                print(f"Error: {result.stderr}")
+            if stderr_text:
+                print(f"Error: {stderr_text}")
             return False
 
     except subprocess.TimeoutExpired:
@@ -367,10 +378,8 @@ def main():
     for i, pak_file in enumerate(pak_files, 1):
         print(f"\n[{i}/{len(pak_files)}] ", end="")
 
-        # Extract to subdirectory named after PAK
-        pak_output = RAW_OUTPUT / pak_file.stem
-
-        if extract_pak(pak_file, pak_output):
+        # Extract directly to raw output directory (no subdirectory per PAK)
+        if extract_pak(pak_file, RAW_OUTPUT):
             success_count += 1
         else:
             failed_paks.append(pak_file.name)

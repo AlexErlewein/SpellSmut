@@ -1,0 +1,276 @@
+[Creo]
+{
+	[Scrolls]
+	{
+		Data0 = 926
+		Data1 = 844
+		Data2 = 790
+		Data3 = 776
+		Data4 = 761
+		Data5 = 773
+		Data6 = 766
+		Data7 = 769
+		Data8 = 780
+		Data9 = 753
+		Data10 = 750
+		Data11 = 775
+		Data12 = 757
+		Data13 = 770
+		Data14 = 3571
+		Data15 = 774
+		Data16 = 763
+		Data17 = 2737
+		Data18 = 755
+		Data19 = 751
+		Data20 = 765
+		Data21 = 778
+		Data22 = 3306
+		Data23 = 767
+	}
+	[Runeboard]
+	{
+	}
+}
+
+[Misc]
+{
+}
+
+[Equipment]
+{
+	[Items]
+	{
+		Data0 = 0, 721
+		Data1 = 1, 698
+		Data2 = 2, 696
+		Data3 = 3, 551
+		Data4 = 4, 2594
+		Data5 = 5, 707
+		Data6 = 6, 742
+		Data7 = 7, 663
+		Data8 = 8, 2375
+		Data9 = 9, 691
+		Data10 = 10, 570
+		Data11 = 11, 585
+		Data12 = 12, 545
+		Data13 = 13, 3181
+		Data14 = 14, 726
+		Data15 = 15, 31
+		Data16 = 16, 697
+		Data17 = 17, 739
+		Data18 = 18, 662
+		Data19 = 19, 686
+		Data20 = 20, 735
+		Data21 = 21, 540
+		Data22 = 22, 542
+		Data23 = 23, 580
+		Data24 = 24, 560
+		Data25 = 25, 570
+		Data26 = 26, 585
+		Data27 = 27, 565
+		Data28 = 28, 2352
+		Data29 = 29, 3171
+		Data30 = 30, 579
+		Data31 = 31, 584
+		Data32 = 32, 574
+		Data33 = 33, 559
+		Data34 = 34, 2352
+		Data35 = 35, 3180
+		Data36 = 36, 601
+		Data37 = 37, 600
+		Data38 = 38, 527
+		Data39 = 39, 605
+		Data40 = 40, 615
+		Data41 = 41, 678
+		Data42 = 42, 568
+		Data43 = 43, 558
+		Data44 = 44, 536
+		Data45 = 45, 535
+		Data46 = 46, 583
+		Data47 = 47, 539
+		Data48 = 48, 679
+		Data49 = 49, 2342
+		Data50 = 50, 720
+		Data51 = 51, 696
+		Data52 = 52, 533
+		Data53 = 53, 529
+		Data54 = 54, 539
+		Data55 = 55, 583
+		Data56 = 56, 573
+		Data57 = 57, 2347
+		Data58 = 58, 678
+		Data59 = 59, 684
+	}
+}
+
+[Plans]
+{
+	[Scrolls]
+	{
+	}
+	[Building]
+	{
+		[Race0]
+		{
+			Data0 = 280
+			Data1 = 271
+			Data2 = 167
+			Data3 = 262
+			Data4 = 270
+			Data5 = 263
+			Data6 = 275
+			Data7 = 169
+			Data8 = 260
+			Data9 = 2928
+			Data10 = 267
+			Data11 = 255
+			Data12 = 257
+			Data13 = 277
+			Data14 = 949
+			Data15 = 251
+			Data16 = 247
+			Data17 = 249
+			Data18 = 171
+			Data19 = 266
+			Data20 = 273
+			Data21 = 253
+		}
+		[Race1]
+		{
+			Data0 = 999
+			Data1 = 1009
+			Data2 = 1015
+			Data3 = 992
+			Data4 = 1007
+			Data5 = 1005
+			Data6 = 1010
+			Data7 = 2982
+			Data8 = 994
+			Data9 = 1002
+			Data10 = 1012
+			Data11 = 1001
+			Data12 = 1016
+			Data13 = 996
+		}
+		[Race2]
+		{
+			Data0 = 951
+			Data1 = 977
+			Data2 = 985
+			Data3 = 975
+			Data4 = 967
+			Data5 = 969
+			Data6 = 963
+			Data7 = 965
+			Data8 = 981
+			Data9 = 988
+			Data10 = 956
+			Data11 = 990
+			Data12 = 952
+			Data13 = 954
+			Data14 = 958
+			Data15 = 973
+			Data16 = 971
+			Data17 = 961
+			Data18 = 986
+		}
+		[Race3]
+		{
+			Data0 = 1021
+			Data1 = 1027
+			Data2 = 1037
+			Data3 = 1035
+			Data4 = 1031
+			Data5 = 1039
+			Data6 = 1045
+			Data7 = 1047
+			Data8 = 1043
+			Data9 = 1041
+			Data10 = 2934
+		}
+	}
+	[Unit]
+	{
+		[Race0]
+		{
+			Data0 = 1271
+			Data1 = 1273
+			Data2 = 1261
+			Data3 = 1263
+			Data4 = 1259
+			Data5 = 1269
+			Data6 = 1265
+			Data7 = 1267
+		}
+		[Race1]
+		{
+			Data0 = 1333
+			Data1 = 1337
+			Data2 = 1335
+			Data3 = 1325
+			Data4 = 1327
+			Data5 = 1323
+			Data6 = 1331
+			Data7 = 1329
+		}
+		[Race2]
+		{
+			Data0 = 1285
+			Data1 = 1289
+			Data2 = 1279
+			Data3 = 1275
+			Data4 = 1283
+			Data5 = 1287
+			Data6 = 1281
+			Data7 = 1277
+		}
+		[Race3]
+		{
+			Data0 = 1301
+			Data1 = 1299
+			Data2 = 1297
+		}
+	}
+}
+
+[Character]
+{
+	Level	 = 17
+	XP		 = 58000
+	Name	 = "HeavyFighter17_Mulandir"
+	Female	 = 0
+
+	Head	 = 8
+
+	Gold	 = 1
+	Silver	 = 60
+	Copper	 = 50
+
+	Str	 = 59
+	Sta	 = 59
+	Dex	 = 46
+	Agi	 = 46
+	Wis	 = 25
+	Int	 = 25
+	Cha	 = 25
+
+	ResFire			 = 30
+	ResIce			 = 30
+	ResMindMagic	 = 30
+	ResBlackMagic	 = 30
+
+	WalkSpeed		 = 100
+	FightSpeed		 = 100
+	CastSpeed		 = 100
+
+	[Ability2] // Schwere Kriegskunst
+	{
+		Level = 7
+
+		Data0 = 1, 7 // LargeBlade 
+		Data1 = 2, 6 // LargeBlunt 
+		Data2 = 3, 7 // HeavyArmor 
+		Data3 = 4, 7 // Shield 
+	}
+}
+

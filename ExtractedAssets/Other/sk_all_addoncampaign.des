@@ -1,0 +1,246 @@
+[Creo]
+{
+	[Runeboard]
+	{
+	
+	[WorkerRace0]
+		{
+			Creo = 781 // Creo Human Workers 1
+		}
+	
+	[WorkerRace1]
+		{
+			Creo = 3760 // Creo Dwarf Workers 1
+		}
+	
+	[WorkerRace2]
+		{
+			Creo = 3759 // Creo Elf Workers 1
+		}
+	
+	[WorkerRace3]
+		{
+			Creo = 3654 // Creo Orc Workers 1
+		}
+	
+	[WorkerRace4]
+		{
+			Creo = 3762 // Creo Troll Workers 1
+		}
+	
+	[WorkerRace5]
+		{
+			Creo = 3761 // Creo Darkelf Workers 1
+		}
+	}
+}
+
+
+
+[Plans]
+{
+	[Building]
+	{
+		//Race0 == Human
+		//Race1 == Dwarf
+		//Race2 == Elf
+		//Race3 == Orc
+		//Race4 == Troll
+		//Race5 == Darkelf
+		
+		[Race0]
+		{
+			//Item
+			
+			Data0 = 279		// Human Buildingplan Woodcutterhut+
+			Data1 = 263		// Human Buildingplan Quarry+
+			Data2 = 166		// Human Buildingplan Huntinglodge+
+			Data3 = 168		// Human Buildingplan Fisherhut+
+			Data4 = 271		// Human Buildingplan Mine+
+			Data5 = 275		// Human Buildingplan Forge+
+			Data6 = 269		// Human Buildingplan HeadquarterSmall+			
+			Data7  = 265	// Human Buildingplan SawMill+
+			
+			Data8  = 259	// Human Buildingplan Foodstore+
+			Data9 = 277	// Human Buildingplan SmeltingWorks+
+			Data10 = 267	// Human Buildingplan Shrine+
+			Data11 = 255	// Human Buildingplan Temple+
+			Data12 = 949    // Human Buildingplan TowerWhiteMagic+
+			Data13 = 2928   // Human Buildingplan Schießbahn+
+			Data14  = 257	// Human Buildingplan HeadquarterMedium+
+			Data15 = 249	// Human Buildingplan Fisherhut Master+
+			
+			Data16 = 273    // Human Buildingplan Rüstkammer+
+			Data17 = 251    // Human Buildingplan Akademie+
+			Data18  = 170	// Human Buildingplan Cattlebreeding+	
+			Data19  = 247	// Human Buildingplan Grain Farm+
+		}
+		
+		[Race1]
+		{
+			//Item
+			Data0 = 999		// Dwarf Buildingplan Quarry+
+			Data1 = 1007	// Dwarf Buildingplan SwineFarm+
+			Data2 = 1009	// Dwarf Buildingplan Mine+
+			Data3 = 1015    // Dwarf Buildingplan Forge+
+			Data4 = 993		// Dwarf Buildingplan Headquarter Small+
+			Data5 = 1002	// Dwarf Buildingplan Stonemasonhut+
+			Data6 = 1004 	// Dwarf Building Foodstore+
+			Data7 = 1011 	// Dwarf Buildingplan Zwergensilbermine+
+			
+			Data8 = 1013	// Dwarf Buildingplan SmeltingWorks+
+			Data9 = 2983  	// Dwarf Buildingplan Mondsilberschmiede+
+			Data10 = 994	// Dwarf Buildingplan Headquarter Medium+
+			Data11 = 1001  	// Dwarf Buildingplan Große Waffenkammer+
+			Data12 = 1017  	// Dwarf Buildingplan Sanktuarium+
+		}
+		
+		[Race2]
+		{
+			//Item
+			
+			Data0 = 966  // Elf WoodcutterHut+
+			Data1 = 968  // Elf Huntinglodge+
+			Data2 = 974  // Elf Gathererhut+
+			Data3 = 976  // Elf Armory+
+			Data4 = 951  // Elf Buildingplan Headquarter Small+
+			Data5 = 956  	// Elf Forester+
+			Data6 = 990 	// Elf Sawmill+
+			Data7 = 962 	// Elf Foodstore+
+			
+			Data8 = 964 	// Elf LenyaGatherer+
+			Data9 = 980  	// Elf Druidhouse+
+			Data10 = 989 	// Elf Buildingplan Bogenwerkstatt+
+			Data11 = 959 	// Elf Woodcutterhat Master+
+			Data12 = 973 	// Elf Huntinglodge Master+
+			Data13 = 971  // Elf Buildingplan Eisenlager+
+			Data14 = 961  // Elf Buildingplan Schule der Alten+
+
+		}
+
+		[Race3]
+		{
+			//Item
+			
+			Data0 = 1027	// Orc Buildingplan WoodCutterHut+
+			Data1 = 1033	// Orc Buildingplan HuntingLodge+
+			Data2 = 1035	// Orc Buildingplan FisherHut+
+			Data3 = 2934    // Orc Buildingplan Keulenschnitzer+
+			Data4 = 1031	// Orc Buildingplan FoodStore+
+			Data5 = 1043	// Orc Buildingplan Shrine+
+			Data6 = 1045	// Orc Buildingplan ShamanHut+
+		}
+
+		[Race4]
+		{
+			//Item
+			
+			Data0 = 1057	// Troll Buildingplan Woodcutter Hut+
+			Data1 = 1059	// Troll Buildingplan Quarry+
+			Data2 = 1063	// Troll Buildingplan Hunting Lodge+
+			Data3 = 1069	// Troll Buildingplan Clubmaker+
+			Data4 = 1051	// Troll Buildingplan Headquarter Small+
+			Data5 = 1065   // Troll Buildingplan Steinwerkstatt+
+		}
+
+		[Race5]
+		{
+			//Item
+			
+			Data0 = 1080	// Darkelf Building Quarry+
+			Data1 = 1090	// Darkelf Buildingplan Breeder+
+			Data2 = 1094	// Darkelf Building Mine+
+			Data3 = 1096	// Darkelf Building Forge+
+			Data4 = 1074	// Darkelf Building HeadQuarterSmall+
+			Data5 = 1084	// Darkelf Building StoneMasonHut+
+			Data6 = 1086	// Darkelf Building Foodstore+
+			Data7 = 1082	// Darkelf Building Mine Mithril+
+			
+			Data8 = 1092	// Darkelf Building SmeltingWorks+
+			Data9 = 1104	// Darkelf Building OnyxShrine+
+			Data10 = 1106	// Darkelf Building OnyxTower+
+			Data11 = 1113   // Darkelf Buildingplan Schwarze Schule+
+			Data12 = 1076	// Darkelf Building HeadQuarterMedium+
+			Data13 = 1103   // Darkelf Buildingplan Schattenschmiede+
+			Data14 = 1101   // Darkelf Buildingplan Arkanum+
+			Data15 = 1073   // Darkelf Buildingplan Mondsilberwerkstatt+
+			
+			Data16 = 1088	// Darkelf Building Fungus Farm+
+		}
+
+	}
+
+	[Unit]
+	{
+		//Race0 == Human
+		//Race1 == Dwarf
+		//Race2 == Elf
+		//Race3 == Orc
+		//Race4 == Troll
+		//Race5 == Darkelf
+		
+		[Race0]
+		{
+			//Item
+			Data0 = 1271 // Recruit+
+			Data1 = 1273 // Scout+
+			Data2 = 1261 // Cleric+
+			Data3 = 1263 // Enchanter+
+			Data4 = 1259 // Armsman+
+			Data5 = 1265 // Marksman+
+			Data6 = 1267 // Mentalist+	
+		}
+
+		[Race1]
+		{
+			//Item
+			Data0 = 1333 // Militia+
+			Data1 = 1337 // Watchman+
+			Data2 = 1335 // Warrior+
+			Data3 = 1323 // Battlepriest+
+			Data4 = 1325 // Defender+
+			Data5 = 1327 // Demolisher+
+			Data6 = 1331 // Elite+
+		}
+
+		[Race2]
+		{
+			//Item
+			Data0 = 1285 // Ranger+
+			Data1 = 1279 // Healer+
+			Data2 = 1289 // Warder+
+			Data3 = 1281 // Magician+
+		}
+		
+		[Race3]
+		{
+			//Item
+			Data0 = 1299 // Thug+
+			Data1 = 1301 // Totem+
+		}
+		
+		[Race4]
+		{
+			//Item
+
+			Data0 = 1353 // Thrower+
+			Data1 = 1351 // Smaser+
+			Data2 = 1349 // Rowdy+
+			Data3 = 1345 // Devastator+
+		}
+		
+		[Race5]
+		{
+			//Item
+			Data0 = 1319 // Sorcerer+
+			Data1 = 1311 // Darkblade+
+			Data2 = 1307 // Assassin+
+			Data3 = 1317 // Necromancer+
+			Data4 = 1313 // Deathknight+
+			Data5 = 1309 // Battlemaster+
+			Data6 = 1321 // Warlock+
+		}
+		
+	}
+
+}

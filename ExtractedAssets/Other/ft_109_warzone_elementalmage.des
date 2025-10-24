@@ -1,0 +1,393 @@
+[Creo]
+{
+	[Scrolls]
+	{
+		Data0 = 3746
+		Data1 = 3625
+		Data2 = 927
+		Data3 = 845
+		Data4 = 864
+		Data5 = 876
+		Data6 = 791
+		Data7 = 776
+		Data8 = 761
+		Data9 = 773
+		Data10 = 766
+		Data11 = 769
+		Data12 = 780
+		Data13 = 753
+		Data14 = 750
+		Data15 = 775
+		Data16 = 757
+		Data17 = 770
+		Data18 = 3571
+		Data19 = 774
+		Data20 = 763
+		Data21 = 2737
+		Data22 = 755
+		Data23 = 751
+		Data24 = 765
+		Data25 = 778
+		Data26 = 3306
+		Data27 = 767
+		Data28 = 758
+		Data29 = 777
+	}
+	[Runeboard]
+	{
+	}
+}
+
+[Misc]
+{
+}
+
+[Equipment]
+{
+	[Items]
+	{
+		Data0 = 0, 3675
+		Data1 = 1, 3722
+		Data2 = 2, 617
+		Data3 = 3, 3771
+		Data4 = 4, 3679
+		Data5 = 5, 581
+		Data6 = 6, 3873
+		Data7 = 7, 3872
+		Data8 = 8, 3870
+		Data9 = 9, 3871
+		Data10 = 10, 3630
+		Data11 = 11, 3593
+		Data12 = 12, 3605
+		Data13 = 13, 3603
+		Data14 = 14, 3693
+		Data15 = 15, 3686
+		Data16 = 16, 3675
+		Data17 = 17, 3635
+		Data18 = 18, 3630
+		Data19 = 19, 3771
+		Data20 = 20, 3739
+		Data21 = 21, 3736
+		Data22 = 22, 3728
+		Data23 = 23, 3722
+		Data24 = 24, 3713
+		Data25 = 25, 3708
+		Data26 = 26, 3684
+		Data27 = 27, 3682
+		Data28 = 28, 3685
+		Data29 = 29, 3712
+		Data30 = 30, 3731
+		Data31 = 31, 3734
+		Data32 = 32, 3735
+		Data33 = 33, 3707
+		Data34 = 34, 3733
+		Data35 = 35, 3697
+		Data36 = 36, 721
+		Data37 = 37, 698
+		Data38 = 38, 551
+		Data39 = 39, 2594
+		Data40 = 40, 707
+		Data41 = 41, 742
+		Data42 = 42, 663
+		Data43 = 43, 2375
+		Data44 = 44, 691
+		Data45 = 45, 570
+		Data46 = 46, 585
+		Data47 = 47, 545
+		Data48 = 48, 3181
+		Data49 = 49, 726
+		Data50 = 50, 31
+		Data51 = 51, 697
+		Data52 = 52, 739
+		Data53 = 53, 662
+		Data54 = 54, 686
+		Data55 = 55, 735
+		Data56 = 56, 540
+		Data57 = 57, 542
+		Data58 = 58, 580
+		Data59 = 59, 560
+		Data60 = 60, 570
+		Data61 = 61, 585
+		Data62 = 62, 565
+		Data63 = 63, 2352
+		Data64 = 64, 3171
+		Data65 = 65, 579
+		Data66 = 66, 584
+		Data67 = 67, 574
+		Data68 = 68, 559
+		Data69 = 69, 2352
+		Data70 = 70, 3180
+		Data71 = 71, 601
+		Data72 = 72, 600
+		Data73 = 73, 527
+		Data74 = 74, 605
+		Data75 = 75, 615
+		Data76 = 76, 678
+		Data77 = 77, 568
+		Data78 = 78, 558
+		Data79 = 79, 536
+		Data80 = 80, 535
+		Data81 = 81, 583
+		Data82 = 82, 539
+		Data83 = 83, 679
+		Data84 = 84, 2342
+		Data85 = 85, 720
+		Data86 = 86, 696
+		Data87 = 87, 533
+		Data88 = 88, 529
+		Data89 = 89, 539
+		Data90 = 90, 583
+		Data91 = 91, 573
+		Data92 = 92, 2347
+		Data93 = 93, 678
+		Data94 = 94, 684
+	}
+}
+
+[Spells]
+{
+	[Scrolls]
+	{
+		Data0 = 0, 3910
+		Data1 = 1, 3934
+		Data2 = 2, 2040
+		Data3 = 3, 1903
+		Data4 = 4, 1989
+		Data5 = 5, 1758
+		Data6 = 6, 2366
+		Data7 = 7, 3000
+		Data8 = 8, 1922
+		Data9 = 9, 1650
+		Data10 = 10, 2022
+		Data11 = 11, 1967
+		Data12 = 12, 2489
+		Data13 = 13, 2407
+		Data14 = 14, 2561
+		Data15 = 15, 2858
+		Data16 = 16, 1613
+		Data17 = 17, 1856
+		Data18 = 18, 1500
+	}
+}
+
+[Plans]
+{
+	[Scrolls]
+	{
+	}
+	[Building]
+	{
+		[Race0]
+		{
+			Data0 = 280
+			Data1 = 271
+			Data2 = 167
+			Data3 = 262
+			Data4 = 270
+			Data5 = 263
+			Data6 = 275
+			Data7 = 169
+			Data8 = 260
+			Data9 = 2928
+			Data10 = 267
+			Data11 = 255
+			Data12 = 257
+			Data13 = 277
+			Data14 = 949
+			Data15 = 251
+			Data16 = 247
+			Data17 = 249
+			Data18 = 171
+			Data19 = 266
+			Data20 = 273
+			Data21 = 253
+		}
+		[Race1]
+		{
+			Data0 = 999
+			Data1 = 1009
+			Data2 = 1015
+			Data3 = 992
+			Data4 = 1007
+			Data5 = 1005
+			Data6 = 1010
+			Data7 = 2982
+			Data8 = 994
+			Data9 = 1002
+			Data10 = 1012
+			Data11 = 1001
+			Data12 = 1016
+			Data13 = 996
+		}
+		[Race2]
+		{
+			Data0 = 951
+			Data1 = 977
+			Data2 = 985
+			Data3 = 975
+			Data4 = 967
+			Data5 = 969
+			Data6 = 963
+			Data7 = 965
+			Data8 = 981
+			Data9 = 988
+			Data10 = 956
+			Data11 = 990
+			Data12 = 952
+			Data13 = 958
+			Data14 = 973
+			Data15 = 971
+			Data16 = 961
+		}
+		[Race3]
+		{
+			Data0 = 1021
+			Data1 = 1027
+			Data2 = 1033
+			Data3 = 1043
+			Data4 = 1035
+			Data5 = 1031
+			Data6 = 2934
+			Data7 = 1045
+			Data8 = 1023
+			Data9 = 1039
+			Data10 = 1041
+			Data11 = 1019
+		}
+		[Race4]
+		{
+			Data0 = 1051
+			Data1 = 1059
+			Data2 = 1057
+			Data3 = 1063
+			Data4 = 1069
+			Data5 = 1065
+		}
+		[Race5]
+		{
+			Data0 = 1075
+			Data1 = 1105
+			Data2 = 1081
+			Data3 = 1107
+			Data4 = 1095
+			Data5 = 1091
+			Data6 = 1097
+			Data7 = 1087
+			Data8 = 1113
+			Data9 = 1077
+			Data10 = 1083
+			Data11 = 1089
+			Data12 = 1085
+			Data13 = 1103
+			Data14 = 1073
+			Data15 = 1093
+			Data16 = 1101
+		}
+	}
+	[Unit]
+	{
+		[Race0]
+		{
+			Data0 = 1271
+			Data1 = 1273
+			Data2 = 1261
+			Data3 = 1263
+			Data4 = 1259
+			Data5 = 1269
+			Data6 = 1265
+			Data7 = 1267
+		}
+		[Race1]
+		{
+			Data0 = 1333
+			Data1 = 1337
+			Data2 = 1335
+			Data3 = 1325
+			Data4 = 1327
+			Data5 = 1323
+			Data6 = 1331
+			Data7 = 1329
+		}
+		[Race2]
+		{
+			Data0 = 1285
+			Data1 = 1289
+			Data2 = 1281
+			Data3 = 1279
+			Data4 = 1283
+			Data5 = 1287
+		}
+		[Race3]
+		{
+			Data0 = 1299
+			Data1 = 1301
+			Data2 = 1293
+			Data3 = 1291
+		}
+		[Race4]
+		{
+			Data0 = 1349
+			Data1 = 1351
+			Data2 = 1353
+			Data3 = 1345
+		}
+		[Race5]
+		{
+			Data0 = 1319
+			Data1 = 1307
+			Data2 = 1311
+			Data3 = 1317
+			Data4 = 1313
+			Data5 = 1309
+			Data6 = 1321
+		}
+	}
+}
+
+[Character]
+{
+	Check	 = 0
+	Level	 = 18
+	XP		 = 69000
+	Name	 = "ElementalMage18_Warzone"
+	Female	 = 0
+
+	Head	 = 18
+
+	Gold	 = 2
+	Silver	 = 0
+	Copper	 = 50
+
+	Str	 = 25
+	Sta	 = 39
+	Dex	 = 38
+	Agi	 = 25
+	Wis	 = 69
+	Int	 = 69
+	Cha	 = 25
+
+	ResFire			 = 30
+	ResIce			 = 30
+	ResMindMagic	 = 30
+	ResBlackMagic	 = 30
+
+	WalkSpeed		 = 100
+	FightSpeed		 = 100
+	CastSpeed		 = 100
+
+	[Ability5] // Elementare Magiekunst
+	{
+		Level = 8
+
+		Data0 = 1, 8 // Fire 
+		Data1 = 2, 8 // Ice 
+		Data2 = 3, 8 // Earth 
+	}
+	[Ability7] // Schwarze Magiekunst
+	{
+		Level = 2
+
+		Data0 = 2, 2 // Necromancy 
+	}
+}
+

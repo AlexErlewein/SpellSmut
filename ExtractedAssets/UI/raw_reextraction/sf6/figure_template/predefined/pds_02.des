@@ -1,0 +1,60 @@
+   // Heavy Fighter mit Feuermagie
+
+[Equipment]
+{
+	
+	//Hero0 == Avatar
+
+	//Slot1	== right hand
+	//Slot2	== chest
+	//Slot5	== legs (nicht bei Magiern!)
+
+	[Hero0]
+	{
+		//Slot, ItemId
+		Data0 = 1, 2341  // 2H-Sword Newbie 1
+		Data1 = 2, 558   // Chest Warrior Newbie
+		Data2 = 5, 528   // Legs Warrior Newbie
+	}
+
+
+}
+
+[Character]
+{
+	//Misc
+	Level = 1
+	Name = "Fire Warrior"
+	Female = 0
+	Head = 8
+
+	//Stats
+	Str = 40
+	Sta = 35
+	Dex = 30
+	Agi = 25
+	Wis = 25
+	Int = 25
+	Cha = 25
+
+	//Resistances
+	ResFire = 30
+	ResIce = 30
+	ResMindMagic = 30
+	ResBlackMagic = 30
+
+	//Speed values (in percent)
+	WalkSpeed = 100
+	FightSpeed = 100
+	CastSpeed = 110
+
+
+	[Ability2]
+	{
+		Level = 1
+
+		//Spezialization, Level
+		Data0 = 1, 1
+	}
+
+}

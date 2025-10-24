@@ -1,0 +1,756 @@
+[Creo]
+{
+
+	[Scrolls]
+	{
+		Data0 = 3951
+		Data1 = 3953
+		Data2 = 4111
+		Data3 = 4112
+		Data4 = 4113
+		Data5 = 4114
+		Data6 = 4115
+		Data7 = 3625
+		Data8 = 3746
+	}
+	
+	[Runeboard]
+	{
+		[Hero1]
+		{
+			Creo = 750	// Hero Priest 5
+		}
+
+		[Hero2]
+		{
+			Creo = 757	// Hero Mentalist 8
+		}
+
+		[Hero3]
+		{
+			Creo = 775	// Hero Warlock 7
+		}
+
+		[Hero4]
+		{
+			Creo = 780	// Hero Warrior 5
+		}
+
+		[Hero5]
+		{
+			Creo = 2737	// Hero Ranger 8	
+		}
+
+		//0 == Human
+		//1 == Dwarf
+		//2 == Elf
+		//3 == Orc
+		//4 == Troll
+		//5 == Darkelf
+
+		[WorkerRace0]
+		{
+			Creo = 801
+		}
+
+		
+		[WorkerRace1]
+		{
+			Creo = 881
+		}
+
+		[WorkerRace2]
+		{
+			Creo = 910
+		}
+
+		
+		[WorkerRace3]
+		{
+			Creo = 936
+		}
+		
+		
+		[WorkerRace4]
+		{
+			Creo = 890
+		}
+		
+		
+		[WorkerRace5]
+		{
+			Creo = 899
+		}
+	}
+}
+
+[Equipment]
+{
+	[Items]
+	{
+		//Slot, ItemId
+		Data0  =    0, 3593
+		Data1  =    1, 3594
+		Data2  =    2, 3601
+		Data3  =    3, 3603
+		Data4  =    4, 3604
+		Data5  =    5, 3605
+		Data6  =    6, 3606
+		Data7  =    7, 3607
+		Data8  =    8, 3608
+		Data9  =    9, 3609
+		Data10 =   10, 3612
+		Data11 =   11, 3615
+		Data12 =   12, 3626
+		Data13 =   13, 3628
+		Data14 =   14, 3629
+		Data15 =   15, 3630
+		Data16 =   16, 3635
+		Data17 =   17, 3636
+		Data18 =   18, 3637
+		Data19 =   19, 3638
+		Data20 =   20, 3639
+		Data21 =   21, 3642
+		Data22 =   22, 3649
+		Data23 =   23, 3650
+		Data24 =   24, 3671
+		Data25 =   25, 3675
+		Data26 =   26, 3676
+		Data27 =   27, 3677
+		Data28 =   28, 3679
+		Data29 =   29, 3680
+		Data30 =   30, 3681
+		Data31 =   31, 3682
+		Data32 =   32, 3682
+		Data33 =   33, 3684
+		Data34 =   34, 3685
+		Data35 =   35, 3686
+		Data36 =   36, 3687
+		Data37 =   37, 3688
+		Data38 =   38, 3689
+		Data39 =   39, 3690
+		Data40 =   40, 3691
+		Data41 =   41, 3692
+		Data42 =   42, 3693
+		Data43 =   43, 3694
+		Data44 =   44, 3695
+		Data45 =   45, 3696
+		Data46 =   46, 3697
+		Data47 =   47, 3698
+		Data48 =   48, 3699
+		Data49 =   49, 3706
+		Data50 =   50, 3707
+		Data51 =   51, 3708
+		Data52 =   52, 3709
+		Data53 =   53, 3710
+		Data54 =   54, 3711
+		Data55 =   55, 3712
+		Data56 =   56, 3713
+		Data57 =   57, 3714
+		Data58 =   58, 3715
+		Data59 =   59, 3716
+		Data60 =   60, 3721
+		Data61 =   61, 3722
+		Data62 =   62, 3723
+		Data63 =   63, 3724
+		Data64 =   64, 3725
+		Data65 =   65, 3726
+		Data66 =   66, 3727
+		Data67 =   67, 3728
+		Data68 =   68, 3729
+		Data69 =   69, 3730
+		Data70 =   70, 3731
+		Data71 =   71, 3733
+		Data72 =   72, 3734
+		Data73 =   73, 3735
+		Data74 =   74, 3736
+		Data75 =   75, 3737
+		Data76 =   76, 3738
+		Data77 =   77, 3739
+		Data78 =   78, 3740
+		Data79 =   79, 3741
+		Data80 =   80, 3742
+		Data81 =   81, 3745
+		Data82 =   82, 3749
+		Data83 =   83, 3750
+		Data84 =   84, 3751
+		Data85 =   85, 3752
+		Data86 =   86, 3753
+		Data87 =   87, 3754
+		Data88 =   88, 3763
+		Data89 =   89, 3764
+		Data90 =   90, 3769
+		Data91 =   91, 3770
+		Data92 =   92, 3771
+		Data93 =   93, 3772
+		Data94 =   94, 3773
+		Data95 =   95, 3781
+		Data96 =   96, 3782
+		Data97 =  97, 3783
+		Data98 =  98, 3784
+		Data99 =  99, 3785
+		Data100 = 100, 3786
+		Data101 = 101, 3787
+		Data102 = 102, 3788
+		Data103 = 103, 3789
+		Data104 = 104, 3793
+		Data105 = 105, 3794
+		Data106 = 106, 3795
+		Data107 = 107, 3796
+		Data108 = 108, 3797
+		Data109 = 109, 3798
+		Data110 = 110, 3799
+		Data111 = 111, 3800
+		Data112 = 112, 3801
+		Data113 = 113, 3809
+		Data114 = 114, 3810
+		Data115 = 115, 3811
+		Data116 = 116, 3812
+		Data117 = 117, 3813
+		Data118 = 118, 3814
+		Data119 = 119, 3815
+		Data120 = 120, 3816
+		Data121 = 121, 3817
+		Data122 = 122, 3867
+		Data123 = 123, 3868
+		Data124 = 124, 3869
+		Data125 = 125, 3870
+		Data126 = 126, 3871
+		Data127 = 127, 3872
+        Data128 = 128, 3873
+		Data129 = 129, 4090
+		Data130 = 130, 4091
+		Data131 = 131, 4092
+		Data132 = 132, 4094
+		Data133 = 133, 4095
+		Data134 = 134, 27
+		Data135 = 135, 28
+		Data136 = 136, 3595
+		Data137 = 137, 3596
+		Data138 = 138, 3597
+		Data139 = 139, 3598
+		Data140 = 140, 3599
+		Data141 = 141, 3600
+		Data142 = 142, 3610
+		Data143 = 143, 3611
+		Data144 = 144, 3613
+		Data145 = 145, 3614
+		Data146 = 146, 3631
+		Data147 = 147, 3632
+		Data148 = 148, 3640
+		Data149 = 149, 3641
+		Data150 = 150, 4409
+		Data151 = 151, 4410
+		Data152 = 152, 4411
+		Data153 = 153, 4412
+		Data154 = 154, 4413
+		Data155 = 155, 4414
+		Data156 = 156, 4415
+		Data157 = 157, 4416
+		Data158 = 158, 4417
+		Data159 = 159, 4418
+		Data160 = 160, 4419
+		Data161 = 161, 4420
+		Data162 = 162, 3649
+		Data163 = 163, 3638
+		
+	}
+
+	//Hero0 == Avatar
+	//Hero1 == Hero1
+	//Hero2 == Hero2
+	//Hero3 == Hero3
+	//Hero4 == Hero4
+	//Hero5 == Hero5
+
+	//Slot0	== helmet
+	//Slot1	== right hand
+	//Slot2	== chest
+	//Slot3	== left hand
+	//Slot4	== right ring
+	//Slot5	== legs
+	//Slot6	== left ring
+
+	[Hero0]
+	{
+		//Slot, ItemId
+		Data0 = 1, 660  // 1H-Sword Newbie Leicht
+		Data1 = 2, 385  // Chest of MainChar
+		Data2 = 5, 536  // Legs Lowend Hybrid
+	}
+	
+	[Hero1]
+	{
+		//Slot, ItemId
+		Data0 = 1, 678 // Weapon 1H-Staff Newbie
+		Data1 = 2, 578  // Chest Caster Newbie
+	}
+	
+	
+	[Hero2]
+	{
+		//Slot, ItemId
+		
+		Data0 = 1, 684 // Weapon 1H-Dagger Newbie
+		Data1 = 2, 584 // Chest Everyone Lowend
+		Data2 = 3, 703  // Shield Lowend Caster
+		Data3 = 5, 536 // Legs Lowend Hybrid
+	}
+	
+	[Hero3]
+	{
+		//Slot, ItemId
+		
+		Data0 = 1, 678 // Weapon 1H-Staff Newbie
+		Data1 = 2, 573	// Chest Priest Newbie
+		Data2 = 3, 701  // Shield Newbie+ Caster
+		
+	}
+	
+	[Hero4]
+	{
+		//Slot, ItemId
+		
+		Data0 = 1, 725 // Weapon 2H-Sword Lowend
+		Data1 = 2, 568  // Chest Hybrid Newbie
+		Data2 = 5, 533 // Legs Newbie Everyone
+		
+	}
+	
+	[Hero5]
+	{
+		//Slot, ItemId
+		
+		Data0 = 1, 670 // Weapon 1H-Hammer Newbie
+		Data1 = 2, 583  // Chest Everyone Newbie
+		Data2 = 3, 693  // Weapon Bow Newbie
+		Data3 = 5, 528 // Legs Newbie Warrior
+	}
+	
+}
+
+[Spells]
+{
+	
+	[Spellbook]
+	{	
+		Data0 = 2036   // Scroll Fireburst Lvl 4
+		Data1 = 1899   // Scroll Fireshield Lvl 4
+		Data2 = 1985   // Scroll Fireball Lvl 4
+		Data3 = 1615   // Scroll Illuminate Lvl 4
+		Data4 = 1476   // Scroll Healing Lvl 3
+		Data5 = 2103   // Scroll Area Healing Lvl 3
+		Data6 = 2101   // Scroll Aura of Strength Lvl 3
+		
+	}
+
+}
+
+[Plans]
+{
+	[Scrolls]
+	{
+		//Slot, ItemId
+		Data0 = 0, 166
+		Data1 = 1, 168
+		Data2 = 2, 170
+	}
+
+	[Building]
+	{
+		//Race0 == Human
+		//Race1 == Dwarf
+		//Race2 == Elf
+		//Race3 == Orc
+		//Race4 == Troll
+		//Race5 == Darkelf
+		
+		[Race0]
+		{
+			//Item
+			
+			Data0 = 279		// Human Buildingplan Woodcutterhut
+			Data1 = 263		// Human Buildingplan Quarry
+			Data2 = 166		// Human Buildingplan Huntinglodge
+			Data3 = 168		// Human Buildingplan Fisherhut
+			Data4 = 271		// Human Buildingplan Mine
+			Data5 = 275		// Human Buildingplan Forge
+			Data6 = 261		// Human Buildingplan Tower Crossbow
+			Data7 = 269		// Human Buildingplan HeadquarterSmall
+			
+			Data8  = 265	// Human Buildingplan SawMill
+			Data9  = 259	// Human Buildingplan Foodstore
+			Data10 = 277	// Human Buildingplan SmeltingWorks
+			Data11 = 267	// Human Buildingplan Shrine
+			Data12 = 255	// Human Buildingplan Temple
+			Data13 = 949    // Human Buildingplan TowerWhiteMagic
+			Data14 = 2928   // Human Buildingplan Schießbahn
+			Data15  = 257	// Human Buildingplan HeadquarterMedium
+			
+			Data16 = 249	// Human Buildingplan Fisherhut Master
+			Data17 = 273    // Human Buildingplan Rüstkammer
+			Data18 = 251    // Human Buildingplan Akademie
+			Data19  = 253	// Human Buildingplan HeadquarterLarge
+			Data20  = 170	// Human Buildingplan Cattlebreeding	
+			Data21  = 247	// Human Buildingplan Grain Farm
+			Data22  = 4691  // Human Buildingplan Swarm
+			Data23  = 4709  // Human Buildingplan Gebäudezerstörer
+		}
+		
+		[Race1]
+		{
+			//Item
+			Data0 = 999		// Dwarf Buildingplan Quarry
+			Data1 = 1007	// Dwarf Buildingplan SwineFarm
+			Data2 = 1009	// Dwarf Buildingplan Mine
+			Data3 = 1015    // Dwarf Buildingplan Forge
+			Data4 = 993		// Dwarf Buildingplan Headquarter Small
+			Data5 = 0
+			Data6 = 0
+			Data7 = 0
+			
+			Data8 = 1002	// Dwarf Buildingplan Stonemasonhut
+			Data9 = 1004 	// Dwarf Building Foodstore
+			Data10 = 1011 	// Dwarf Buildingplan Zwergensilbermine
+			Data11 = 1013	// Dwarf Buildingplan SmeltingWorks
+			Data12 = 2983  	// Dwarf Buildingplan Mondsilberschmiede
+			Data13 = 994	// Dwarf Buildingplan Headquarter Medium
+			Data14 = 0
+			Data15 = 0
+			
+			Data16 = 1001  	// Dwarf Buildingplan Große Waffenkammer
+			Data17 = 1017  	// Dwarf Buildingplan Sanktuarium
+			Data18 = 997	// Dwarf Buildingplan HeadquarterLarge
+			Data19 = 4687   // Dwarf Buildingplan Swarm
+			Data20 = 4705   // Dwarf Buildingplan Gebäudezerstörer
+		}
+		
+		[Race2]
+		{
+			//Item
+			
+			Data0 = 966  // Elf WoodcutterHut
+			Data1 = 968  // Elf Huntinglodge
+			Data2 = 974  // Elf Gathererhut
+			Data3 = 976  // Elf Armory
+			Data4 = 984  // Elf Tower Bow
+			Data5 = 951  // Elf Buildingplan Headquarter Small
+			Data6 = 0
+			Data7 = 0
+			
+			Data8 = 956  	// Elf Forester
+			Data9 = 990 	// Elf Sawmill
+			Data10 = 962 	// Elf Foodstore
+			Data11 = 964 	// Elf LenyaGatherer
+			Data12 = 980  	// Elf Druidhouse
+			Data13 = 987  	// Elf Tower IceMagic
+			Data14 = 989 	// Elf Buildingplan Schützenhalle
+			Data15 = 953  	// Elf Buildingplan Headquarter Medium
+			
+			Data16 = 959 // Elf Woodcutterhat Master
+			Data17 = 973 // Elf Huntinglodge Master
+			Data18 = 971  // Elf Buildingplan Eisenlager
+			Data19 = 961  // Elf Buildingplan Schule der Alten
+			Data20 = 955  // Elf Buildingplan Headquarter Large
+			Data21 = 4689 // Elf Buildingplan Swarm
+			Data22 = 4707 // Elf Buildingplan Gebäudezerstörer
+		}
+
+		[Race3]
+		{
+			//Item
+			
+			Data0 = 1027	// Orc Buildingplan WoodCutterHut
+			Data1 = 1033	// Orc Buildingplan HuntingLodge
+			Data2 = 1035	// Orc Buildingplan FisherHut
+			Data3 = 1039	// Orc Buildingplan Mine
+			Data4 = 2934    // Orc Buildingplan Keulenschnitzer
+			Data5 = 1041	// Orc Buildingplan Forge
+			Data6 = 1047	// Orc Buildingplan TowerFireMagic
+			Data7 = 1021	// Orc Buildingplan HeadQuarterSmall
+			
+			Data8 = 1031	// Orc Buildingplan FoodStore
+			Data9 = 1029 	// Orc Buildingplan SmeltingWorks
+			Data10 = 1043	// Orc Buildingplan Shrine
+			Data11 = 1045	// Orc Buildingplan ShamanHut
+			Data12 = 1019   // Orc Buildingplan Ruhmeshalle
+			Data13 = 1023	// Orc Buildingplan HeadQuarterMedium
+			Data14 = 0
+			Data15 = 0
+			
+			Data16 = 1049   // Orc Buildingplan Blutheiligtum
+			Data17 = 2932   // Orc Buildingplan Dunkle Schmiede
+			Data18 = 1025	// Orc Buildingplan HeadQuarterLarge
+			Data19 = 1037	// Orc Buildingplan BoarBreeding
+			Data20 = 4693   // Orc Buildingplan Swarm
+			Data21 = 4711   // Orc Buildingplan Gebäudezerstörer
+		}
+
+		[Race4]
+		{
+			//Item
+			
+			Data0 = 1057	// Troll Buildingplan Woodcutter Hut
+			Data1 = 1059	// Troll Buildingplan Quarry
+			Data2 = 1063	// Troll Buildingplan Hunting Lodge
+			Data3 = 1067	// Troll Buildingplan Corpse Collector
+			Data4 = 1069	// Troll Buildingplan Clubmaker
+			Data5 = 1051	// Troll Buildingplan Headquarter Small
+			Data6 = 0
+			Data7 = 0
+			
+			Data8 = 1061	// Troll Buildingplan Foodstore
+			Data9 = 1071	// Troll Buildingplan Tower Stone
+			Data10 = 1065   // Troll Buildingplan Steinwerkstatt
+			Data11 = 1053	// Troll Buildingplan Headquarter Medium
+			Data12 = 0
+			Data13 = 0
+			Data14 = 0
+			Data15 = 0
+			
+			Data16 = 2936	// Troll Buildingplan Eisenhaus
+			Data17 = 2938   // Troll Buildingplan Waffenlager
+			Data18 = 1055	// Troll Buildingplan Headquarter Large
+			Data19 = 4695   // Troll Buildingplan Swarm
+			Data20 = 4701   // Troll Buildingplan Gebäudezerstörer
+		}
+
+		[Race5]
+		{
+			//Item
+			
+			Data0 = 1080	// Darkelf Building Quarry
+			Data1 = 1090	// Darkelf Buildingplan Breeder
+			Data2 = 1094	// Darkelf Building Mine
+			Data3 = 1096	// Darkelf Building Forge
+			Data4 = 1108	// Darkelf TowerBlackMagic
+			Data5 = 1074	// Darkelf Building HeadQuarterSmall
+			Data6 = 0
+			Data7 = 0
+			
+			Data8 = 1084	// Darkelf Building StoneMasonHut
+			Data9 = 1086	// Darkelf Building Foodstore
+			Data10 = 1082	// Darkelf Building Mine Mithril
+			Data11 = 1092	// Darkelf Building SmeltingWorks
+			Data12 = 1104	// Darkelf Building OnyxShrine
+			Data13 = 1106	// Darkelf Building OnyxTower
+			Data14 = 1113   // Darkelf Buildingplan Schwarze Schule
+			Data15 = 1076	// Darkelf Building HeadQuarterMedium
+			
+			Data16 = 1103   // Darkelf Buildingplan Schattenschmiede
+			Data17 = 1101   // Darkelf Buildingplan Arkanum
+			Data18 = 1073   // Darkelf Buildingplan Mondsilberwerkstatt
+			Data19 = 1078	// Darkelf Building HeadQuarterLarge
+			Data20 = 1088	// Darkelf Building Fungus Farm
+			Data21 = 1110	// Darkelf TowerMentalMagic
+			Data22 = 4685   // Darkelf Buildingplan Swarm
+			Data23 = 4703   // Darkelf Buildingplan Gebäudezerstörer
+		}
+
+	}
+
+	[Unit]
+	{
+		//Race0 == Human
+		//Race1 == Dwarf
+		//Race2 == Elf
+		//Race3 == Orc
+		//Race4 == Troll
+		//Race5 == Darkelf
+		
+		[Race0]
+		{
+			//Item
+			Data0 = 1271 // Recruit
+			Data1 = 1273 // Scout
+			Data2 = 1261 // Cleric
+			Data3 = 1263 // Enchanter
+			Data4 = 1259 // Armsman
+			Data5 = 1265 // Marksman
+			Data6 = 1269 // Paladin
+			Data7 = 1267 // Mentalist	
+		}
+
+		[Race1]
+		{
+			//Item
+			Data0 = 1333 // Militia
+			Data1 = 1337 // Watchman
+			Data2 = 1335 // Warrior
+			Data3 = 1323 // Battlepriest
+			Data4 = 1325 // Defender
+			Data5 = 1327 // Demolisher
+			Data6 = 1331 // Elite
+			Data7 = 1329 // Elder
+		}
+
+		[Race2]
+		{
+			//Item
+			Data0 = 1285 // Ranger
+			Data1 = 1279 // Healer
+			Data2 = 1289 // Warder
+			Data3 = 1275 // Archer
+			Data4 = 1281 // Magician
+			Data5 = 1283 // Protector
+			Data6 = 1287 // Wanderer
+			Data7 = 1277 // Druid
+
+		}
+		
+		[Race3]
+		{
+			//Item
+			Data0 = 1299 // Thug
+			Data1 = 1301 // Totem
+			Data2 = 1297 // Spearman
+			Data3 = 1291 // Drummer
+			Data4 = 1293 // Fighter
+			Data5 = 1295 // Firemaster
+			Data6 = 1303 // Veteran
+			Data7 = 1305 // Warsinger
+		}
+		
+		[Race4]
+		{
+			//Item
+			Data0 = 1339 // Bouncer
+			Data1 = 1341 // Champion
+			Data2 = 1343 // Destroyer
+			Data3 = 1345 // Devastator
+			Data4 = 1347 // Hurler
+			Data5 = 1349 // Rowdy
+			Data6 = 1351 // Smaser
+			Data7 = 1353 // Thrower
+		}
+		
+		[Race5]
+		{
+			//Item
+			Data0 = 1319 // Sorcerer
+			Data1 = 1311 // Darkblade
+			Data2 = 1307 // Assassin
+			Data3 = 1317 // Necromancer
+			Data4 = 1313 // Deathknight
+			Data5 = 1309 // Battlemaster
+			Data6 = 1321 // Warlock
+			Data7 = 1315 // Havoc
+		}
+		
+	}
+
+}
+
+[Misc]
+{
+	//Id, Count
+	Data0 = 2001, 1
+}
+
+
+[Character]
+{
+	//Misc
+	Check = 0 //plausibility check
+	Level = 30
+	Name = "Kalle Hopp"
+	Female = 1
+	Head = 25
+
+	//Stats
+	Str = 40
+	Sta = 48
+	Dex = 44
+	Agi = 52
+	Wis = 55
+	Int = 56
+	Cha = 40
+
+	//Resistances
+	ResFire = 30
+	ResIce = 30
+	ResMindMagic = 30
+	ResBlackMagic = 30
+
+	//Speed values (in percent)
+	WalkSpeed = 100
+	FightSpeed = 100
+	CastSpeed = 100
+
+	//Abilities
+	//
+	// **********************************************************************************
+	// Rules: 
+	// - Each main ability and spec needs a level. The spec level must not exceed the ability
+	//	 level. If no level is set, it is being assumed to 1.
+	// - The sum of all main abilities and specs must not exceed 10.
+	// - Main ability and specs are 1 based
+	// - Lookup trace file for errors
+	// **********************************************************************************
+	//
+	//Ability1 = Leichte Kriegskunst
+	//	Spec1 = Stichwaffen
+	//	Spec2 = Kleine Schwerter und Äxte
+	//	Spec3 = Kleine Schlagwaffen
+	//	Spec4 = Leichte Rüstungen
+	//	Spec5 = Kleine Schilde
+	//	Spec6 = Waffenloser Kampf
+	//Ability2 = Schwere Kriegskunst
+	//	Spec1 = Grosse Schwerter und Äxte
+	//	Spec2 = Grosse Schlagwaffen und Stangen
+	//	Spec3 = Schwere Rüstungen
+	//	Spec4 = Grosse Schilde
+	//Ability3 = Fernkampf
+	//	Spec1 = Bogen
+	//	Spec2 = Armbrust
+	//	Spec3 = Schleudern
+	//	Spec4 = Bewegliche Rüstungen
+	//Ability4 = Weisse Magie
+	//	Spec1 = Leben
+	//	Spec2 = Stärkung
+	//	Spec3 = Segnung
+	//	Spec4 = Natur
+	//Ability5 = Elementarmagie
+	//	Spec1 = Feuer
+	//	Spec2 = Eis
+	//	Spec3 = Erde
+	//	Spec4 = Luft
+	//Ability6 = Mentalmagie
+	//	Spec1 = Verzauberung
+	//	Spec2 = Illusionen
+	//	Spec3 = Offensiv
+	//	Spec4 = Defensiv
+	//Ability7 = Schwarze Magie
+	//	Spec1 = Tod
+	//	Spec2 = Schwächung
+	//	Spec3 = Fluch
+	//	Spec4 = Nekromantie
+
+	
+
+	[Ability2]
+	{
+		Level = 12
+
+		//Spezialization, Level
+		Data0 = 4, 12
+	}
+
+	[Ability4]
+	{
+		Level = 8
+
+		//Spezialization, Level
+		Data0 = 1, 8
+	}
+
+	[Ability1]
+	{
+		Level = 1
+
+		//Spezialization, Level
+		Data0 = 2, 1
+		
+	}
+
+}
