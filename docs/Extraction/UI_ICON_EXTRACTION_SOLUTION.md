@@ -163,11 +163,13 @@ From analyzing `GameData.json` `item_ui` table:
 ### Texture Atlas Grid Layout
 
 **Confirmed Specifications**:
-- Atlas size: 256×256 pixels
-- Grid: 8×8 (64 icons total)
-- Icon size: 32×32 pixels
+- Atlas size: 256×256 pixels (for most categories)
+- Grid: 8×8 (64 icons total) for most categories
+- Icon size: 32×32 pixels (for most categories)
 - Format: DDS (DXT1/DXT3/DXT5 compression)
 - Indexing: Row-major order (left-to-right, top-to-bottom)
+
+**Note**: Some categories like `itm` (items) may have different grid patterns. Based on recent analysis, the `itm` category appears to use a 16x16 grid instead of the standard 8x8 grid. Different categories may have different grid densities, sizes, and offsets.
 
 **Index Calculation**:
 ```python
@@ -197,6 +199,18 @@ y = row * 32
 
 3. **UI Elements**: `ui_{type}_{identifier}`
    - Examples: `ui_btn_unit20`, `ui_bgr89`, `ui_oth1`
+
+**Category Abbreviations**:
+- `bgr` (Backgrounds): Background images used in UI screens and menus
+- `btn` (Buttons): Interactive button elements in the user interface
+- `oth` (Others): Miscellaneous UI elements that don't fit into specific categories
+- `cnt` (Contour/Containers): Frame elements, borders, containers, or panel outlines
+- `itm` (Items): Icons and graphics representing in-game items, including weapons, armor, consumables
+- `logo`: Logos, emblems, symbols, and other branded graphic elements
+
+**Special Note about `itm` category**:
+- May use a different grid pattern (possibly 16x16 grid instead of 8x8)
+- Some items appear longer but not broader, others are square
 
 ### Statistics
 
@@ -390,6 +404,16 @@ We successfully solved the UI icon extraction problem by:
 - GUI implementation in `data_model.py` (estimated: 1-2 hours)
 - Visual verification of mappings (optional)
 - Empty icon filtering (optional enhancement)
+
+---
+
+### Additional Technical Notes
+
+**Icon Rotation**: All icons are rotated by 180 degrees during extraction to correct for the inverted Y-axis used in SpellForce textures. This ensures icons appear right-side-up in the GUI.
+
+**Offsets**: A (3,3) offset is used for centering, particularly for spell icons. Different categories may use different offsets, though this requires further investigation.
+
+**Grid Patterns**: While most categories use an 8x8 grid (64 icons in 256x256 atlases), some categories like `itm` may use different grid patterns, possibly 16x16, with items that can be longer but not broader, or square.
 
 ---
 
