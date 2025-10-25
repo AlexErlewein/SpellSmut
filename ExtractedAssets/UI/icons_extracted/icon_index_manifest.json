@@ -1,0 +1,82 @@
+{
+  "total_icons": 10530,
+  "num_files": 10,
+  "icons_per_file": 1053,
+  "stats": {
+    "atlases_found": 16,
+    "atlases_converted": 16,
+    "icons_extracted": 4096,
+    "categories": {
+      "bgr": 1161,
+      "btn": 77,
+      "cnt": 37,
+      "item": 432,
+      "itm": 16,
+      "logo": 4,
+      "oth": 9,
+      "spell": 73
+    }
+  },
+  "files": [
+    {
+      "file": "icon_index_part_00.json",
+      "start_index": 0,
+      "end_index": 1052,
+      "icon_count": 1053
+    },
+    {
+      "file": "icon_index_part_01.json",
+      "start_index": 1053,
+      "end_index": 2105,
+      "icon_count": 1053
+    },
+    {
+      "file": "icon_index_part_02.json",
+      "start_index": 2106,
+      "end_index": 3158,
+      "icon_count": 1053
+    },
+    {
+      "file": "icon_index_part_03.json",
+      "start_index": 3159,
+      "end_index": 4211,
+      "icon_count": 1053
+    },
+    {
+      "file": "icon_index_part_04.json",
+      "start_index": 4212,
+      "end_index": 5264,
+      "icon_count": 1053
+    },
+    {
+      "file": "icon_index_part_05.json",
+      "start_index": 5265,
+      "end_index": 6317,
+      "icon_count": 1053
+    },
+    {
+      "file": "icon_index_part_06.json",
+      "start_index": 6318,
+      "end_index": 7370,
+      "icon_count": 1053
+    },
+    {
+      "file": "icon_index_part_07.json",
+      "start_index": 7371,
+      "end_index": 8423,
+      "icon_count": 1053
+    },
+    {
+      "file": "icon_index_part_08.json",
+      "start_index": 8424,
+      "end_index": 9476,
+      "icon_count": 1053
+    },
+    {
+      "file": "icon_index_part_09.json",
+      "start_index": 9477,
+      "end_index": 10529,
+      "icon_count": 1053
+    }
+  ]
+}

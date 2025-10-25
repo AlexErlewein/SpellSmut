@@ -41,7 +41,7 @@ class CFFDataModel(QObject):
         self.ui_assets_dir = self.project_root / "ExtractedAssets" / "UI" / "extracted"
         self.icons_root = self.project_root / "ExtractedAssets" / "UI" / "icons_extracted"
         self.data_dir = self.project_root / "TirganachReloaded" / "data"
-        
+
         # Load icon mappings and analysis data
         self.icon_mapping = {}
         self.icon_index = {}
@@ -166,17 +166,24 @@ class CFFDataModel(QObject):
             else:
                 print(f"Icon mapping not found: {mapping_path}")
                 self.icon_mapping = {}
-            
-            # Load icon index
-            index_path = self.icons_root / "icon_index.json"
-            if index_path.exists():
-                with open(index_path, 'r') as f:
-                    self.icon_index = json.load(f)
-                print(f"Loaded icon index: {len(self.icon_index.get('icons', {}))} icons")
+
+            # Load icon index (check for split files first)
+            manifest_path = self.icons_root / "icon_index_manifest.json"
+            if manifest_path.exists():
+                # Load from split files
+                self.icon_index = self._load_split_icon_index()
+                print(f"Loaded split icon index: {len(self.icon_index.get('icons', {}))} icons")
+            else:
+                # Load single file
+                index_path = self.icons_root / "icon_index.json"
+                if index_path.exists():
+                    with open(index_path, 'r') as f:
+                        self.icon_index = json.load(f)
+                    print(f"Loaded icon index: {len(self.icon_index.get('icons', {}))} icons")
             else:
                 print(f"Icon index not found: {index_path}")
                 self.icon_index = {}
-            
+
             # Load verified mappings
             verified_path = self.data_dir / "verified_icon_mappings.json"
             if verified_path.exists():
@@ -186,12 +193,38 @@ class CFFDataModel(QObject):
             else:
                 print("No verified mappings found (run interactive_icon_mapper.py to create)")
                 self.verified_mappings = {}
-                
+
         except Exception as e:
             print(f"Error loading icon data: {e}")
             self.icon_mapping = {}
             self.icon_index = {}
             self.verified_mappings = {}
+
+    def _load_split_icon_index(self) -> dict:
+        """
+        Load icon index from split files.
+
+        Returns:
+            Combined icon index data with stats and icons
+        """
+        manifest_path = self.icons_root / "icon_index_manifest.json"
+
+        with open(manifest_path, 'r') as f:
+            manifest = json.load(f)
+
+        # Combine all icons from split files
+        all_icons = {}
+
+        for file_info in manifest["files"]:
+            file_path = self.icons_root / file_info["file"]
+            with open(file_path, 'r') as f:
+                part_data = json.load(f)
+                all_icons.update(part_data["icons"])
+
+        return {
+            "stats": manifest["stats"],
+            "icons": all_icons
+        }
 
     def get_categories(self) -> List[tuple]:
         """Returns list of (category_name, count) tuples"""
@@ -316,7 +349,7 @@ class CFFDataModel(QObject):
     def get_icon_path(self, category: str, element: Any) -> Optional[str]:
         """
         Get icon path for an element.
-        
+
         Priority order:
         1. Verified mappings (manually confirmed icons)
         2. Automatic mapping (based on handles)
@@ -350,7 +383,7 @@ class CFFDataModel(QObject):
 
         # PRIORITY 2: Try automatic mapping based on handle
         handle = None
-        
+
         # Look up in item_ui table for items/weapons/armor
         if category in ["items", "weapons", "armor"]:
             ui_entry = self._find_item_ui_entry(element_id)
@@ -374,9 +407,10 @@ class CFFDataModel(QObject):
             for icon_data in icons:
                 if icon_data.get('index') == 1:  # Primary icon
                     # Try different atlases until we find a non-empty one
-                    icon_category = 'item' if handle and handle.startswith('ui_item_') else \
+                    handle = icon_data.get('handle', '')
+                    icon_category = 'itm' if handle and handle.startswith('ui_item_') else \
                                    'spell' if handle and handle.startswith('ui_spell_') else 'item'
-                    
+
                     # Try up to 10 atlases
                     for atlas_num in range(10):
                         icon_path = self.icons_root / icon_category / f"atlas_{atlas_num}" / f"icon_{icon_data['index']:03d}.png"

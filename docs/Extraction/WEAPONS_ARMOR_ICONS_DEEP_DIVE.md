@@ -37,10 +37,9 @@ This document provides a comprehensive analysis of how weapons and armor icons a
 
 ### Special Category: `itm`
 - The `itm` category exists in the icon index data (`icon_index.json`) with 16 atlases
-- May use different extraction parameters than standard `item` category
-- Based on analysis, potentially uses 16x16 grid pattern instead of 8x8
-- Icons may be longer but not broader, or square in shape
-- Requires further investigation to determine exact extraction settings
+- Uses 16x16 grid pattern of 16x16px icons (256 icons per atlas)
+- Confirmed through analysis and extraction with modified script
+- Icons are square in shape, smaller than standard items
 
 ## Potential Issues and Challenges
 
@@ -94,6 +93,8 @@ Use `visual_category_inspector.py` to convert sample `itm` atlases to PNG for ma
 
 ## Conclusion
 
-The weapons and armor icons in SpellForce Platinum Edition follow a complex categorization system where most equipment uses the standard `ui_item` category with 8x8 grids of 32x32px icons. However, the existence of an `itm` category with potentially different extraction parameters represents a special case that requires further investigation to ensure proper extraction and display in the modding tools.
+The weapons and armor icons in SpellForce Platinum Edition follow a complex categorization system where most equipment uses the standard `ui_item` category with 8x8 grids of 32x32px icons. Armor icons, however, appear to have the same size as spell icons (64x64px), which is different from standard item icons (32x32px). This suggests armor icons may be categorized under the `spell` category or use spell-sized dimensions.
 
-The main challenge lies in the missing direct mapping between game data and specific atlas numbers, requiring a fallback system that tries multiple potential locations for each icon. Understanding the `itm` category's specific extraction parameters is crucial for complete weapon and armor icon support.
+The `itm` category uses a 16x16 grid pattern of 16x16px icons (256 icons per atlas), confirmed through analysis and extraction. This is a special case that requires specific extraction parameters to ensure proper display in the modding tools.
+
+The main challenge lies in the missing direct mapping between game data and specific atlas numbers, requiring a fallback system that tries multiple potential locations for each icon. Understanding the `itm` category's specific extraction parameters and confirming armor icon dimensions is crucial for complete weapon and armor icon support.

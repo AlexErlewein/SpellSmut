@@ -334,7 +334,7 @@ class MainWindow(QMainWindow):
                 self.element_table.setItem(row, 1, QTableWidgetItem("Spell Name"))  # TODO: Resolve
                 self.element_table.setItem(row, 2, QTableWidgetItem("School"))  # TODO: Resolve
             elif self.current_category == "creatures":
-                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.unit_id)))
+                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.creature_id)))
                 self.element_table.setItem(row, 1, QTableWidgetItem("Creature Name"))  # TODO: Resolve
                 self.element_table.setItem(row, 2, QTableWidgetItem("Race"))  # TODO: Resolve
             elif self.current_category == "buildings":

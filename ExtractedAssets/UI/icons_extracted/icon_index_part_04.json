@@ -1,0 +1,6326 @@
+{
+  "file_index": 4,
+  "start_index": 4212,
+  "end_index": 5264,
+  "icon_count": 1053,
+  "icons": {
+    "item_12_026": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 26,
+      "path": "item/atlas_12/icon_026.png"
+    },
+    "item_12_032": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 32,
+      "path": "item/atlas_12/icon_032.png"
+    },
+    "item_12_055": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 55,
+      "path": "item/atlas_12/icon_055.png"
+    },
+    "item_12_041": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 41,
+      "path": "item/atlas_12/icon_041.png"
+    },
+    "item_12_040": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 40,
+      "path": "item/atlas_12/icon_040.png"
+    },
+    "item_12_054": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 54,
+      "path": "item/atlas_12/icon_054.png"
+    },
+    "item_12_042": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 42,
+      "path": "item/atlas_12/icon_042.png"
+    },
+    "item_12_056": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 56,
+      "path": "item/atlas_12/icon_056.png"
+    },
+    "item_12_057": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 57,
+      "path": "item/atlas_12/icon_057.png"
+    },
+    "item_12_043": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 43,
+      "path": "item/atlas_12/icon_043.png"
+    },
+    "item_12_047": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 47,
+      "path": "item/atlas_12/icon_047.png"
+    },
+    "item_12_053": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 53,
+      "path": "item/atlas_12/icon_053.png"
+    },
+    "item_12_052": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 52,
+      "path": "item/atlas_12/icon_052.png"
+    },
+    "item_12_046": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 46,
+      "path": "item/atlas_12/icon_046.png"
+    },
+    "item_12_050": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 50,
+      "path": "item/atlas_12/icon_050.png"
+    },
+    "item_12_044": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 44,
+      "path": "item/atlas_12/icon_044.png"
+    },
+    "item_12_045": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 45,
+      "path": "item/atlas_12/icon_045.png"
+    },
+    "item_12_051": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 51,
+      "path": "item/atlas_12/icon_051.png"
+    },
+    "item_12_060": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 60,
+      "path": "item/atlas_12/icon_060.png"
+    },
+    "item_12_048": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 48,
+      "path": "item/atlas_12/icon_048.png"
+    },
+    "item_12_049": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 49,
+      "path": "item/atlas_12/icon_049.png"
+    },
+    "item_12_061": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 61,
+      "path": "item/atlas_12/icon_061.png"
+    },
+    "item_12_063": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 63,
+      "path": "item/atlas_12/icon_063.png"
+    },
+    "item_12_062": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 62,
+      "path": "item/atlas_12/icon_062.png"
+    },
+    "item_12_059": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 59,
+      "path": "item/atlas_12/icon_059.png"
+    },
+    "item_12_064": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 64,
+      "path": "item/atlas_12/icon_064.png"
+    },
+    "item_12_058": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 58,
+      "path": "item/atlas_12/icon_058.png"
+    },
+    "item_12_017": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 17,
+      "path": "item/atlas_12/icon_017.png"
+    },
+    "item_12_003": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 3,
+      "path": "item/atlas_12/icon_003.png"
+    },
+    "item_12_002": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 2,
+      "path": "item/atlas_12/icon_002.png"
+    },
+    "item_12_016": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 16,
+      "path": "item/atlas_12/icon_016.png"
+    },
+    "item_12_014": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 14,
+      "path": "item/atlas_12/icon_014.png"
+    },
+    "item_12_028": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 28,
+      "path": "item/atlas_12/icon_028.png"
+    },
+    "item_12_029": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 29,
+      "path": "item/atlas_12/icon_029.png"
+    },
+    "item_12_015": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 15,
+      "path": "item/atlas_12/icon_015.png"
+    },
+    "item_12_001": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 1,
+      "path": "item/atlas_12/icon_001.png"
+    },
+    "item_12_039": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 39,
+      "path": "item/atlas_12/icon_039.png"
+    },
+    "item_12_005": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 5,
+      "path": "item/atlas_12/icon_005.png"
+    },
+    "item_12_011": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 11,
+      "path": "item/atlas_12/icon_011.png"
+    },
+    "item_12_010": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 10,
+      "path": "item/atlas_12/icon_010.png"
+    },
+    "item_12_004": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 4,
+      "path": "item/atlas_12/icon_004.png"
+    },
+    "item_12_038": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 38,
+      "path": "item/atlas_12/icon_038.png"
+    },
+    "item_12_012": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 12,
+      "path": "item/atlas_12/icon_012.png"
+    },
+    "item_12_006": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 6,
+      "path": "item/atlas_12/icon_006.png"
+    },
+    "item_12_007": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 7,
+      "path": "item/atlas_12/icon_007.png"
+    },
+    "item_12_013": {
+      "category": "item",
+      "atlas_number": "12",
+      "icon_index": 13,
+      "path": "item/atlas_12/icon_013.png"
+    },
+    "item_24_036": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 36,
+      "path": "item/atlas_24/icon_036.png"
+    },
+    "item_24_022": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 22,
+      "path": "item/atlas_24/icon_022.png"
+    },
+    "item_24_023": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 23,
+      "path": "item/atlas_24/icon_023.png"
+    },
+    "item_24_037": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 37,
+      "path": "item/atlas_24/icon_037.png"
+    },
+    "item_24_021": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 21,
+      "path": "item/atlas_24/icon_021.png"
+    },
+    "item_24_035": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 35,
+      "path": "item/atlas_24/icon_035.png"
+    },
+    "item_24_009": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 9,
+      "path": "item/atlas_24/icon_009.png"
+    },
+    "item_24_008": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 8,
+      "path": "item/atlas_24/icon_008.png"
+    },
+    "item_24_034": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 34,
+      "path": "item/atlas_24/icon_034.png"
+    },
+    "item_24_020": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 20,
+      "path": "item/atlas_24/icon_020.png"
+    },
+    "item_24_018": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 18,
+      "path": "item/atlas_24/icon_018.png"
+    },
+    "item_24_024": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 24,
+      "path": "item/atlas_24/icon_024.png"
+    },
+    "item_24_030": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 30,
+      "path": "item/atlas_24/icon_030.png"
+    },
+    "item_24_031": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 31,
+      "path": "item/atlas_24/icon_031.png"
+    },
+    "item_24_025": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 25,
+      "path": "item/atlas_24/icon_025.png"
+    },
+    "item_24_019": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 19,
+      "path": "item/atlas_24/icon_019.png"
+    },
+    "item_24_033": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 33,
+      "path": "item/atlas_24/icon_033.png"
+    },
+    "item_24_027": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 27,
+      "path": "item/atlas_24/icon_027.png"
+    },
+    "item_24_026": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 26,
+      "path": "item/atlas_24/icon_026.png"
+    },
+    "item_24_032": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 32,
+      "path": "item/atlas_24/icon_032.png"
+    },
+    "item_24_055": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 55,
+      "path": "item/atlas_24/icon_055.png"
+    },
+    "item_24_041": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 41,
+      "path": "item/atlas_24/icon_041.png"
+    },
+    "item_24_040": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 40,
+      "path": "item/atlas_24/icon_040.png"
+    },
+    "item_24_054": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 54,
+      "path": "item/atlas_24/icon_054.png"
+    },
+    "item_24_042": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 42,
+      "path": "item/atlas_24/icon_042.png"
+    },
+    "item_24_056": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 56,
+      "path": "item/atlas_24/icon_056.png"
+    },
+    "item_24_057": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 57,
+      "path": "item/atlas_24/icon_057.png"
+    },
+    "item_24_043": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 43,
+      "path": "item/atlas_24/icon_043.png"
+    },
+    "item_24_047": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 47,
+      "path": "item/atlas_24/icon_047.png"
+    },
+    "item_24_053": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 53,
+      "path": "item/atlas_24/icon_053.png"
+    },
+    "item_24_052": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 52,
+      "path": "item/atlas_24/icon_052.png"
+    },
+    "item_24_046": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 46,
+      "path": "item/atlas_24/icon_046.png"
+    },
+    "item_24_050": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 50,
+      "path": "item/atlas_24/icon_050.png"
+    },
+    "item_24_044": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 44,
+      "path": "item/atlas_24/icon_044.png"
+    },
+    "item_24_045": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 45,
+      "path": "item/atlas_24/icon_045.png"
+    },
+    "item_24_051": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 51,
+      "path": "item/atlas_24/icon_051.png"
+    },
+    "item_24_060": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 60,
+      "path": "item/atlas_24/icon_060.png"
+    },
+    "item_24_048": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 48,
+      "path": "item/atlas_24/icon_048.png"
+    },
+    "item_24_049": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 49,
+      "path": "item/atlas_24/icon_049.png"
+    },
+    "item_24_061": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 61,
+      "path": "item/atlas_24/icon_061.png"
+    },
+    "item_24_063": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 63,
+      "path": "item/atlas_24/icon_063.png"
+    },
+    "item_24_062": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 62,
+      "path": "item/atlas_24/icon_062.png"
+    },
+    "item_24_059": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 59,
+      "path": "item/atlas_24/icon_059.png"
+    },
+    "item_24_064": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 64,
+      "path": "item/atlas_24/icon_064.png"
+    },
+    "item_24_058": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 58,
+      "path": "item/atlas_24/icon_058.png"
+    },
+    "item_24_017": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 17,
+      "path": "item/atlas_24/icon_017.png"
+    },
+    "item_24_003": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 3,
+      "path": "item/atlas_24/icon_003.png"
+    },
+    "item_24_002": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 2,
+      "path": "item/atlas_24/icon_002.png"
+    },
+    "item_24_016": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 16,
+      "path": "item/atlas_24/icon_016.png"
+    },
+    "item_24_014": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 14,
+      "path": "item/atlas_24/icon_014.png"
+    },
+    "item_24_028": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 28,
+      "path": "item/atlas_24/icon_028.png"
+    },
+    "item_24_029": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 29,
+      "path": "item/atlas_24/icon_029.png"
+    },
+    "item_24_015": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 15,
+      "path": "item/atlas_24/icon_015.png"
+    },
+    "item_24_001": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 1,
+      "path": "item/atlas_24/icon_001.png"
+    },
+    "item_24_039": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 39,
+      "path": "item/atlas_24/icon_039.png"
+    },
+    "item_24_005": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 5,
+      "path": "item/atlas_24/icon_005.png"
+    },
+    "item_24_011": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 11,
+      "path": "item/atlas_24/icon_011.png"
+    },
+    "item_24_010": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 10,
+      "path": "item/atlas_24/icon_010.png"
+    },
+    "item_24_004": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 4,
+      "path": "item/atlas_24/icon_004.png"
+    },
+    "item_24_038": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 38,
+      "path": "item/atlas_24/icon_038.png"
+    },
+    "item_24_012": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 12,
+      "path": "item/atlas_24/icon_012.png"
+    },
+    "item_24_006": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 6,
+      "path": "item/atlas_24/icon_006.png"
+    },
+    "item_24_007": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 7,
+      "path": "item/atlas_24/icon_007.png"
+    },
+    "item_24_013": {
+      "category": "item",
+      "atlas_number": "24",
+      "icon_index": 13,
+      "path": "item/atlas_24/icon_013.png"
+    },
+    "item_23_036": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 36,
+      "path": "item/atlas_23/icon_036.png"
+    },
+    "item_23_022": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 22,
+      "path": "item/atlas_23/icon_022.png"
+    },
+    "item_23_023": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 23,
+      "path": "item/atlas_23/icon_023.png"
+    },
+    "item_23_037": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 37,
+      "path": "item/atlas_23/icon_037.png"
+    },
+    "item_23_021": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 21,
+      "path": "item/atlas_23/icon_021.png"
+    },
+    "item_23_035": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 35,
+      "path": "item/atlas_23/icon_035.png"
+    },
+    "item_23_009": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 9,
+      "path": "item/atlas_23/icon_009.png"
+    },
+    "item_23_008": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 8,
+      "path": "item/atlas_23/icon_008.png"
+    },
+    "item_23_034": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 34,
+      "path": "item/atlas_23/icon_034.png"
+    },
+    "item_23_020": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 20,
+      "path": "item/atlas_23/icon_020.png"
+    },
+    "item_23_018": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 18,
+      "path": "item/atlas_23/icon_018.png"
+    },
+    "item_23_024": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 24,
+      "path": "item/atlas_23/icon_024.png"
+    },
+    "item_23_030": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 30,
+      "path": "item/atlas_23/icon_030.png"
+    },
+    "item_23_031": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 31,
+      "path": "item/atlas_23/icon_031.png"
+    },
+    "item_23_025": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 25,
+      "path": "item/atlas_23/icon_025.png"
+    },
+    "item_23_019": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 19,
+      "path": "item/atlas_23/icon_019.png"
+    },
+    "item_23_033": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 33,
+      "path": "item/atlas_23/icon_033.png"
+    },
+    "item_23_027": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 27,
+      "path": "item/atlas_23/icon_027.png"
+    },
+    "item_23_026": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 26,
+      "path": "item/atlas_23/icon_026.png"
+    },
+    "item_23_032": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 32,
+      "path": "item/atlas_23/icon_032.png"
+    },
+    "item_23_055": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 55,
+      "path": "item/atlas_23/icon_055.png"
+    },
+    "item_23_041": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 41,
+      "path": "item/atlas_23/icon_041.png"
+    },
+    "item_23_040": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 40,
+      "path": "item/atlas_23/icon_040.png"
+    },
+    "item_23_054": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 54,
+      "path": "item/atlas_23/icon_054.png"
+    },
+    "item_23_042": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 42,
+      "path": "item/atlas_23/icon_042.png"
+    },
+    "item_23_056": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 56,
+      "path": "item/atlas_23/icon_056.png"
+    },
+    "item_23_057": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 57,
+      "path": "item/atlas_23/icon_057.png"
+    },
+    "item_23_043": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 43,
+      "path": "item/atlas_23/icon_043.png"
+    },
+    "item_23_047": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 47,
+      "path": "item/atlas_23/icon_047.png"
+    },
+    "item_23_053": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 53,
+      "path": "item/atlas_23/icon_053.png"
+    },
+    "item_23_052": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 52,
+      "path": "item/atlas_23/icon_052.png"
+    },
+    "item_23_046": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 46,
+      "path": "item/atlas_23/icon_046.png"
+    },
+    "item_23_050": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 50,
+      "path": "item/atlas_23/icon_050.png"
+    },
+    "item_23_044": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 44,
+      "path": "item/atlas_23/icon_044.png"
+    },
+    "item_23_045": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 45,
+      "path": "item/atlas_23/icon_045.png"
+    },
+    "item_23_051": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 51,
+      "path": "item/atlas_23/icon_051.png"
+    },
+    "item_23_060": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 60,
+      "path": "item/atlas_23/icon_060.png"
+    },
+    "item_23_048": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 48,
+      "path": "item/atlas_23/icon_048.png"
+    },
+    "item_23_049": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 49,
+      "path": "item/atlas_23/icon_049.png"
+    },
+    "item_23_061": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 61,
+      "path": "item/atlas_23/icon_061.png"
+    },
+    "item_23_063": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 63,
+      "path": "item/atlas_23/icon_063.png"
+    },
+    "item_23_062": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 62,
+      "path": "item/atlas_23/icon_062.png"
+    },
+    "item_23_059": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 59,
+      "path": "item/atlas_23/icon_059.png"
+    },
+    "item_23_064": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 64,
+      "path": "item/atlas_23/icon_064.png"
+    },
+    "item_23_058": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 58,
+      "path": "item/atlas_23/icon_058.png"
+    },
+    "item_23_017": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 17,
+      "path": "item/atlas_23/icon_017.png"
+    },
+    "item_23_003": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 3,
+      "path": "item/atlas_23/icon_003.png"
+    },
+    "item_23_002": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 2,
+      "path": "item/atlas_23/icon_002.png"
+    },
+    "item_23_016": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 16,
+      "path": "item/atlas_23/icon_016.png"
+    },
+    "item_23_014": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 14,
+      "path": "item/atlas_23/icon_014.png"
+    },
+    "item_23_028": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 28,
+      "path": "item/atlas_23/icon_028.png"
+    },
+    "item_23_029": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 29,
+      "path": "item/atlas_23/icon_029.png"
+    },
+    "item_23_015": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 15,
+      "path": "item/atlas_23/icon_015.png"
+    },
+    "item_23_001": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 1,
+      "path": "item/atlas_23/icon_001.png"
+    },
+    "item_23_039": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 39,
+      "path": "item/atlas_23/icon_039.png"
+    },
+    "item_23_005": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 5,
+      "path": "item/atlas_23/icon_005.png"
+    },
+    "item_23_011": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 11,
+      "path": "item/atlas_23/icon_011.png"
+    },
+    "item_23_010": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 10,
+      "path": "item/atlas_23/icon_010.png"
+    },
+    "item_23_004": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 4,
+      "path": "item/atlas_23/icon_004.png"
+    },
+    "item_23_038": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 38,
+      "path": "item/atlas_23/icon_038.png"
+    },
+    "item_23_012": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 12,
+      "path": "item/atlas_23/icon_012.png"
+    },
+    "item_23_006": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 6,
+      "path": "item/atlas_23/icon_006.png"
+    },
+    "item_23_007": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 7,
+      "path": "item/atlas_23/icon_007.png"
+    },
+    "item_23_013": {
+      "category": "item",
+      "atlas_number": "23",
+      "icon_index": 13,
+      "path": "item/atlas_23/icon_013.png"
+    },
+    "item_2_036": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 36,
+      "path": "item/atlas_2/icon_036.png"
+    },
+    "item_2_022": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 22,
+      "path": "item/atlas_2/icon_022.png"
+    },
+    "item_2_023": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 23,
+      "path": "item/atlas_2/icon_023.png"
+    },
+    "item_2_037": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 37,
+      "path": "item/atlas_2/icon_037.png"
+    },
+    "item_2_021": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 21,
+      "path": "item/atlas_2/icon_021.png"
+    },
+    "item_2_035": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 35,
+      "path": "item/atlas_2/icon_035.png"
+    },
+    "item_2_009": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 9,
+      "path": "item/atlas_2/icon_009.png"
+    },
+    "item_2_008": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 8,
+      "path": "item/atlas_2/icon_008.png"
+    },
+    "item_2_034": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 34,
+      "path": "item/atlas_2/icon_034.png"
+    },
+    "item_2_020": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 20,
+      "path": "item/atlas_2/icon_020.png"
+    },
+    "item_2_018": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 18,
+      "path": "item/atlas_2/icon_018.png"
+    },
+    "item_2_024": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 24,
+      "path": "item/atlas_2/icon_024.png"
+    },
+    "item_2_030": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 30,
+      "path": "item/atlas_2/icon_030.png"
+    },
+    "item_2_031": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 31,
+      "path": "item/atlas_2/icon_031.png"
+    },
+    "item_2_025": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 25,
+      "path": "item/atlas_2/icon_025.png"
+    },
+    "item_2_019": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 19,
+      "path": "item/atlas_2/icon_019.png"
+    },
+    "item_2_033": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 33,
+      "path": "item/atlas_2/icon_033.png"
+    },
+    "item_2_027": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 27,
+      "path": "item/atlas_2/icon_027.png"
+    },
+    "item_2_026": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 26,
+      "path": "item/atlas_2/icon_026.png"
+    },
+    "item_2_032": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 32,
+      "path": "item/atlas_2/icon_032.png"
+    },
+    "item_2_055": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 55,
+      "path": "item/atlas_2/icon_055.png"
+    },
+    "item_2_041": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 41,
+      "path": "item/atlas_2/icon_041.png"
+    },
+    "item_2_040": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 40,
+      "path": "item/atlas_2/icon_040.png"
+    },
+    "item_2_054": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 54,
+      "path": "item/atlas_2/icon_054.png"
+    },
+    "item_2_042": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 42,
+      "path": "item/atlas_2/icon_042.png"
+    },
+    "item_2_056": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 56,
+      "path": "item/atlas_2/icon_056.png"
+    },
+    "item_2_057": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 57,
+      "path": "item/atlas_2/icon_057.png"
+    },
+    "item_2_043": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 43,
+      "path": "item/atlas_2/icon_043.png"
+    },
+    "item_2_047": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 47,
+      "path": "item/atlas_2/icon_047.png"
+    },
+    "item_2_053": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 53,
+      "path": "item/atlas_2/icon_053.png"
+    },
+    "item_2_052": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 52,
+      "path": "item/atlas_2/icon_052.png"
+    },
+    "item_2_046": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 46,
+      "path": "item/atlas_2/icon_046.png"
+    },
+    "item_2_050": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 50,
+      "path": "item/atlas_2/icon_050.png"
+    },
+    "item_2_044": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 44,
+      "path": "item/atlas_2/icon_044.png"
+    },
+    "item_2_045": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 45,
+      "path": "item/atlas_2/icon_045.png"
+    },
+    "item_2_051": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 51,
+      "path": "item/atlas_2/icon_051.png"
+    },
+    "item_2_060": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 60,
+      "path": "item/atlas_2/icon_060.png"
+    },
+    "item_2_048": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 48,
+      "path": "item/atlas_2/icon_048.png"
+    },
+    "item_2_049": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 49,
+      "path": "item/atlas_2/icon_049.png"
+    },
+    "item_2_061": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 61,
+      "path": "item/atlas_2/icon_061.png"
+    },
+    "item_2_063": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 63,
+      "path": "item/atlas_2/icon_063.png"
+    },
+    "item_2_062": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 62,
+      "path": "item/atlas_2/icon_062.png"
+    },
+    "item_2_059": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 59,
+      "path": "item/atlas_2/icon_059.png"
+    },
+    "item_2_064": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 64,
+      "path": "item/atlas_2/icon_064.png"
+    },
+    "item_2_058": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 58,
+      "path": "item/atlas_2/icon_058.png"
+    },
+    "item_2_017": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 17,
+      "path": "item/atlas_2/icon_017.png"
+    },
+    "item_2_003": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 3,
+      "path": "item/atlas_2/icon_003.png"
+    },
+    "item_2_002": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 2,
+      "path": "item/atlas_2/icon_002.png"
+    },
+    "item_2_016": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 16,
+      "path": "item/atlas_2/icon_016.png"
+    },
+    "item_2_014": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 14,
+      "path": "item/atlas_2/icon_014.png"
+    },
+    "item_2_028": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 28,
+      "path": "item/atlas_2/icon_028.png"
+    },
+    "item_2_029": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 29,
+      "path": "item/atlas_2/icon_029.png"
+    },
+    "item_2_015": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 15,
+      "path": "item/atlas_2/icon_015.png"
+    },
+    "item_2_001": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 1,
+      "path": "item/atlas_2/icon_001.png"
+    },
+    "item_2_039": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 39,
+      "path": "item/atlas_2/icon_039.png"
+    },
+    "item_2_005": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 5,
+      "path": "item/atlas_2/icon_005.png"
+    },
+    "item_2_011": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 11,
+      "path": "item/atlas_2/icon_011.png"
+    },
+    "item_2_010": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 10,
+      "path": "item/atlas_2/icon_010.png"
+    },
+    "item_2_004": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 4,
+      "path": "item/atlas_2/icon_004.png"
+    },
+    "item_2_038": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 38,
+      "path": "item/atlas_2/icon_038.png"
+    },
+    "item_2_012": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 12,
+      "path": "item/atlas_2/icon_012.png"
+    },
+    "item_2_006": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 6,
+      "path": "item/atlas_2/icon_006.png"
+    },
+    "item_2_007": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 7,
+      "path": "item/atlas_2/icon_007.png"
+    },
+    "item_2_013": {
+      "category": "item",
+      "atlas_number": "2",
+      "icon_index": 13,
+      "path": "item/atlas_2/icon_013.png"
+    },
+    "item_40_036": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 36,
+      "path": "item/atlas_40/icon_036.png"
+    },
+    "item_40_022": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 22,
+      "path": "item/atlas_40/icon_022.png"
+    },
+    "item_40_023": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 23,
+      "path": "item/atlas_40/icon_023.png"
+    },
+    "item_40_037": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 37,
+      "path": "item/atlas_40/icon_037.png"
+    },
+    "item_40_021": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 21,
+      "path": "item/atlas_40/icon_021.png"
+    },
+    "item_40_035": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 35,
+      "path": "item/atlas_40/icon_035.png"
+    },
+    "item_40_009": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 9,
+      "path": "item/atlas_40/icon_009.png"
+    },
+    "item_40_008": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 8,
+      "path": "item/atlas_40/icon_008.png"
+    },
+    "item_40_034": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 34,
+      "path": "item/atlas_40/icon_034.png"
+    },
+    "item_40_020": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 20,
+      "path": "item/atlas_40/icon_020.png"
+    },
+    "item_40_018": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 18,
+      "path": "item/atlas_40/icon_018.png"
+    },
+    "item_40_024": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 24,
+      "path": "item/atlas_40/icon_024.png"
+    },
+    "item_40_030": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 30,
+      "path": "item/atlas_40/icon_030.png"
+    },
+    "item_40_031": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 31,
+      "path": "item/atlas_40/icon_031.png"
+    },
+    "item_40_025": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 25,
+      "path": "item/atlas_40/icon_025.png"
+    },
+    "item_40_019": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 19,
+      "path": "item/atlas_40/icon_019.png"
+    },
+    "item_40_033": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 33,
+      "path": "item/atlas_40/icon_033.png"
+    },
+    "item_40_027": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 27,
+      "path": "item/atlas_40/icon_027.png"
+    },
+    "item_40_026": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 26,
+      "path": "item/atlas_40/icon_026.png"
+    },
+    "item_40_032": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 32,
+      "path": "item/atlas_40/icon_032.png"
+    },
+    "item_40_055": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 55,
+      "path": "item/atlas_40/icon_055.png"
+    },
+    "item_40_041": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 41,
+      "path": "item/atlas_40/icon_041.png"
+    },
+    "item_40_040": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 40,
+      "path": "item/atlas_40/icon_040.png"
+    },
+    "item_40_054": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 54,
+      "path": "item/atlas_40/icon_054.png"
+    },
+    "item_40_042": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 42,
+      "path": "item/atlas_40/icon_042.png"
+    },
+    "item_40_056": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 56,
+      "path": "item/atlas_40/icon_056.png"
+    },
+    "item_40_057": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 57,
+      "path": "item/atlas_40/icon_057.png"
+    },
+    "item_40_043": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 43,
+      "path": "item/atlas_40/icon_043.png"
+    },
+    "item_40_047": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 47,
+      "path": "item/atlas_40/icon_047.png"
+    },
+    "item_40_053": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 53,
+      "path": "item/atlas_40/icon_053.png"
+    },
+    "item_40_052": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 52,
+      "path": "item/atlas_40/icon_052.png"
+    },
+    "item_40_046": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 46,
+      "path": "item/atlas_40/icon_046.png"
+    },
+    "item_40_050": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 50,
+      "path": "item/atlas_40/icon_050.png"
+    },
+    "item_40_044": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 44,
+      "path": "item/atlas_40/icon_044.png"
+    },
+    "item_40_045": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 45,
+      "path": "item/atlas_40/icon_045.png"
+    },
+    "item_40_051": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 51,
+      "path": "item/atlas_40/icon_051.png"
+    },
+    "item_40_060": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 60,
+      "path": "item/atlas_40/icon_060.png"
+    },
+    "item_40_048": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 48,
+      "path": "item/atlas_40/icon_048.png"
+    },
+    "item_40_049": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 49,
+      "path": "item/atlas_40/icon_049.png"
+    },
+    "item_40_061": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 61,
+      "path": "item/atlas_40/icon_061.png"
+    },
+    "item_40_063": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 63,
+      "path": "item/atlas_40/icon_063.png"
+    },
+    "item_40_062": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 62,
+      "path": "item/atlas_40/icon_062.png"
+    },
+    "item_40_059": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 59,
+      "path": "item/atlas_40/icon_059.png"
+    },
+    "item_40_064": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 64,
+      "path": "item/atlas_40/icon_064.png"
+    },
+    "item_40_058": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 58,
+      "path": "item/atlas_40/icon_058.png"
+    },
+    "item_40_017": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 17,
+      "path": "item/atlas_40/icon_017.png"
+    },
+    "item_40_003": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 3,
+      "path": "item/atlas_40/icon_003.png"
+    },
+    "item_40_002": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 2,
+      "path": "item/atlas_40/icon_002.png"
+    },
+    "item_40_016": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 16,
+      "path": "item/atlas_40/icon_016.png"
+    },
+    "item_40_014": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 14,
+      "path": "item/atlas_40/icon_014.png"
+    },
+    "item_40_028": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 28,
+      "path": "item/atlas_40/icon_028.png"
+    },
+    "item_40_029": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 29,
+      "path": "item/atlas_40/icon_029.png"
+    },
+    "item_40_015": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 15,
+      "path": "item/atlas_40/icon_015.png"
+    },
+    "item_40_001": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 1,
+      "path": "item/atlas_40/icon_001.png"
+    },
+    "item_40_039": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 39,
+      "path": "item/atlas_40/icon_039.png"
+    },
+    "item_40_005": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 5,
+      "path": "item/atlas_40/icon_005.png"
+    },
+    "item_40_011": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 11,
+      "path": "item/atlas_40/icon_011.png"
+    },
+    "item_40_010": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 10,
+      "path": "item/atlas_40/icon_010.png"
+    },
+    "item_40_004": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 4,
+      "path": "item/atlas_40/icon_004.png"
+    },
+    "item_40_038": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 38,
+      "path": "item/atlas_40/icon_038.png"
+    },
+    "item_40_012": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 12,
+      "path": "item/atlas_40/icon_012.png"
+    },
+    "item_40_006": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 6,
+      "path": "item/atlas_40/icon_006.png"
+    },
+    "item_40_007": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 7,
+      "path": "item/atlas_40/icon_007.png"
+    },
+    "item_40_013": {
+      "category": "item",
+      "atlas_number": "40",
+      "icon_index": 13,
+      "path": "item/atlas_40/icon_013.png"
+    },
+    "item_78_036": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 36,
+      "path": "item/atlas_78/icon_036.png"
+    },
+    "item_78_022": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 22,
+      "path": "item/atlas_78/icon_022.png"
+    },
+    "item_78_023": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 23,
+      "path": "item/atlas_78/icon_023.png"
+    },
+    "item_78_037": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 37,
+      "path": "item/atlas_78/icon_037.png"
+    },
+    "item_78_021": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 21,
+      "path": "item/atlas_78/icon_021.png"
+    },
+    "item_78_035": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 35,
+      "path": "item/atlas_78/icon_035.png"
+    },
+    "item_78_009": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 9,
+      "path": "item/atlas_78/icon_009.png"
+    },
+    "item_78_008": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 8,
+      "path": "item/atlas_78/icon_008.png"
+    },
+    "item_78_034": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 34,
+      "path": "item/atlas_78/icon_034.png"
+    },
+    "item_78_020": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 20,
+      "path": "item/atlas_78/icon_020.png"
+    },
+    "item_78_018": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 18,
+      "path": "item/atlas_78/icon_018.png"
+    },
+    "item_78_024": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 24,
+      "path": "item/atlas_78/icon_024.png"
+    },
+    "item_78_030": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 30,
+      "path": "item/atlas_78/icon_030.png"
+    },
+    "item_78_031": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 31,
+      "path": "item/atlas_78/icon_031.png"
+    },
+    "item_78_025": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 25,
+      "path": "item/atlas_78/icon_025.png"
+    },
+    "item_78_019": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 19,
+      "path": "item/atlas_78/icon_019.png"
+    },
+    "item_78_033": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 33,
+      "path": "item/atlas_78/icon_033.png"
+    },
+    "item_78_027": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 27,
+      "path": "item/atlas_78/icon_027.png"
+    },
+    "item_78_026": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 26,
+      "path": "item/atlas_78/icon_026.png"
+    },
+    "item_78_032": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 32,
+      "path": "item/atlas_78/icon_032.png"
+    },
+    "item_78_055": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 55,
+      "path": "item/atlas_78/icon_055.png"
+    },
+    "item_78_041": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 41,
+      "path": "item/atlas_78/icon_041.png"
+    },
+    "item_78_040": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 40,
+      "path": "item/atlas_78/icon_040.png"
+    },
+    "item_78_054": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 54,
+      "path": "item/atlas_78/icon_054.png"
+    },
+    "item_78_042": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 42,
+      "path": "item/atlas_78/icon_042.png"
+    },
+    "item_78_056": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 56,
+      "path": "item/atlas_78/icon_056.png"
+    },
+    "item_78_057": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 57,
+      "path": "item/atlas_78/icon_057.png"
+    },
+    "item_78_043": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 43,
+      "path": "item/atlas_78/icon_043.png"
+    },
+    "item_78_047": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 47,
+      "path": "item/atlas_78/icon_047.png"
+    },
+    "item_78_053": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 53,
+      "path": "item/atlas_78/icon_053.png"
+    },
+    "item_78_052": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 52,
+      "path": "item/atlas_78/icon_052.png"
+    },
+    "item_78_046": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 46,
+      "path": "item/atlas_78/icon_046.png"
+    },
+    "item_78_050": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 50,
+      "path": "item/atlas_78/icon_050.png"
+    },
+    "item_78_044": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 44,
+      "path": "item/atlas_78/icon_044.png"
+    },
+    "item_78_045": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 45,
+      "path": "item/atlas_78/icon_045.png"
+    },
+    "item_78_051": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 51,
+      "path": "item/atlas_78/icon_051.png"
+    },
+    "item_78_060": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 60,
+      "path": "item/atlas_78/icon_060.png"
+    },
+    "item_78_048": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 48,
+      "path": "item/atlas_78/icon_048.png"
+    },
+    "item_78_049": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 49,
+      "path": "item/atlas_78/icon_049.png"
+    },
+    "item_78_061": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 61,
+      "path": "item/atlas_78/icon_061.png"
+    },
+    "item_78_063": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 63,
+      "path": "item/atlas_78/icon_063.png"
+    },
+    "item_78_062": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 62,
+      "path": "item/atlas_78/icon_062.png"
+    },
+    "item_78_059": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 59,
+      "path": "item/atlas_78/icon_059.png"
+    },
+    "item_78_064": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 64,
+      "path": "item/atlas_78/icon_064.png"
+    },
+    "item_78_058": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 58,
+      "path": "item/atlas_78/icon_058.png"
+    },
+    "item_78_017": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 17,
+      "path": "item/atlas_78/icon_017.png"
+    },
+    "item_78_003": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 3,
+      "path": "item/atlas_78/icon_003.png"
+    },
+    "item_78_002": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 2,
+      "path": "item/atlas_78/icon_002.png"
+    },
+    "item_78_016": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 16,
+      "path": "item/atlas_78/icon_016.png"
+    },
+    "item_78_014": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 14,
+      "path": "item/atlas_78/icon_014.png"
+    },
+    "item_78_028": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 28,
+      "path": "item/atlas_78/icon_028.png"
+    },
+    "item_78_029": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 29,
+      "path": "item/atlas_78/icon_029.png"
+    },
+    "item_78_015": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 15,
+      "path": "item/atlas_78/icon_015.png"
+    },
+    "item_78_001": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 1,
+      "path": "item/atlas_78/icon_001.png"
+    },
+    "item_78_039": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 39,
+      "path": "item/atlas_78/icon_039.png"
+    },
+    "item_78_005": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 5,
+      "path": "item/atlas_78/icon_005.png"
+    },
+    "item_78_011": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 11,
+      "path": "item/atlas_78/icon_011.png"
+    },
+    "item_78_010": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 10,
+      "path": "item/atlas_78/icon_010.png"
+    },
+    "item_78_004": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 4,
+      "path": "item/atlas_78/icon_004.png"
+    },
+    "item_78_038": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 38,
+      "path": "item/atlas_78/icon_038.png"
+    },
+    "item_78_012": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 12,
+      "path": "item/atlas_78/icon_012.png"
+    },
+    "item_78_006": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 6,
+      "path": "item/atlas_78/icon_006.png"
+    },
+    "item_78_007": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 7,
+      "path": "item/atlas_78/icon_007.png"
+    },
+    "item_78_013": {
+      "category": "item",
+      "atlas_number": "78",
+      "icon_index": 13,
+      "path": "item/atlas_78/icon_013.png"
+    },
+    "item_47_036": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 36,
+      "path": "item/atlas_47/icon_036.png"
+    },
+    "item_47_022": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 22,
+      "path": "item/atlas_47/icon_022.png"
+    },
+    "item_47_023": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 23,
+      "path": "item/atlas_47/icon_023.png"
+    },
+    "item_47_037": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 37,
+      "path": "item/atlas_47/icon_037.png"
+    },
+    "item_47_021": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 21,
+      "path": "item/atlas_47/icon_021.png"
+    },
+    "item_47_035": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 35,
+      "path": "item/atlas_47/icon_035.png"
+    },
+    "item_47_009": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 9,
+      "path": "item/atlas_47/icon_009.png"
+    },
+    "item_47_008": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 8,
+      "path": "item/atlas_47/icon_008.png"
+    },
+    "item_47_034": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 34,
+      "path": "item/atlas_47/icon_034.png"
+    },
+    "item_47_020": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 20,
+      "path": "item/atlas_47/icon_020.png"
+    },
+    "item_47_018": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 18,
+      "path": "item/atlas_47/icon_018.png"
+    },
+    "item_47_024": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 24,
+      "path": "item/atlas_47/icon_024.png"
+    },
+    "item_47_030": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 30,
+      "path": "item/atlas_47/icon_030.png"
+    },
+    "item_47_031": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 31,
+      "path": "item/atlas_47/icon_031.png"
+    },
+    "item_47_025": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 25,
+      "path": "item/atlas_47/icon_025.png"
+    },
+    "item_47_019": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 19,
+      "path": "item/atlas_47/icon_019.png"
+    },
+    "item_47_033": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 33,
+      "path": "item/atlas_47/icon_033.png"
+    },
+    "item_47_027": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 27,
+      "path": "item/atlas_47/icon_027.png"
+    },
+    "item_47_026": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 26,
+      "path": "item/atlas_47/icon_026.png"
+    },
+    "item_47_032": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 32,
+      "path": "item/atlas_47/icon_032.png"
+    },
+    "item_47_055": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 55,
+      "path": "item/atlas_47/icon_055.png"
+    },
+    "item_47_041": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 41,
+      "path": "item/atlas_47/icon_041.png"
+    },
+    "item_47_040": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 40,
+      "path": "item/atlas_47/icon_040.png"
+    },
+    "item_47_054": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 54,
+      "path": "item/atlas_47/icon_054.png"
+    },
+    "item_47_042": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 42,
+      "path": "item/atlas_47/icon_042.png"
+    },
+    "item_47_056": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 56,
+      "path": "item/atlas_47/icon_056.png"
+    },
+    "item_47_057": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 57,
+      "path": "item/atlas_47/icon_057.png"
+    },
+    "item_47_043": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 43,
+      "path": "item/atlas_47/icon_043.png"
+    },
+    "item_47_047": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 47,
+      "path": "item/atlas_47/icon_047.png"
+    },
+    "item_47_053": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 53,
+      "path": "item/atlas_47/icon_053.png"
+    },
+    "item_47_052": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 52,
+      "path": "item/atlas_47/icon_052.png"
+    },
+    "item_47_046": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 46,
+      "path": "item/atlas_47/icon_046.png"
+    },
+    "item_47_050": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 50,
+      "path": "item/atlas_47/icon_050.png"
+    },
+    "item_47_044": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 44,
+      "path": "item/atlas_47/icon_044.png"
+    },
+    "item_47_045": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 45,
+      "path": "item/atlas_47/icon_045.png"
+    },
+    "item_47_051": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 51,
+      "path": "item/atlas_47/icon_051.png"
+    },
+    "item_47_060": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 60,
+      "path": "item/atlas_47/icon_060.png"
+    },
+    "item_47_048": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 48,
+      "path": "item/atlas_47/icon_048.png"
+    },
+    "item_47_049": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 49,
+      "path": "item/atlas_47/icon_049.png"
+    },
+    "item_47_061": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 61,
+      "path": "item/atlas_47/icon_061.png"
+    },
+    "item_47_063": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 63,
+      "path": "item/atlas_47/icon_063.png"
+    },
+    "item_47_062": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 62,
+      "path": "item/atlas_47/icon_062.png"
+    },
+    "item_47_059": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 59,
+      "path": "item/atlas_47/icon_059.png"
+    },
+    "item_47_064": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 64,
+      "path": "item/atlas_47/icon_064.png"
+    },
+    "item_47_058": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 58,
+      "path": "item/atlas_47/icon_058.png"
+    },
+    "item_47_017": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 17,
+      "path": "item/atlas_47/icon_017.png"
+    },
+    "item_47_003": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 3,
+      "path": "item/atlas_47/icon_003.png"
+    },
+    "item_47_002": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 2,
+      "path": "item/atlas_47/icon_002.png"
+    },
+    "item_47_016": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 16,
+      "path": "item/atlas_47/icon_016.png"
+    },
+    "item_47_014": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 14,
+      "path": "item/atlas_47/icon_014.png"
+    },
+    "item_47_028": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 28,
+      "path": "item/atlas_47/icon_028.png"
+    },
+    "item_47_029": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 29,
+      "path": "item/atlas_47/icon_029.png"
+    },
+    "item_47_015": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 15,
+      "path": "item/atlas_47/icon_015.png"
+    },
+    "item_47_001": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 1,
+      "path": "item/atlas_47/icon_001.png"
+    },
+    "item_47_039": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 39,
+      "path": "item/atlas_47/icon_039.png"
+    },
+    "item_47_005": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 5,
+      "path": "item/atlas_47/icon_005.png"
+    },
+    "item_47_011": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 11,
+      "path": "item/atlas_47/icon_011.png"
+    },
+    "item_47_010": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 10,
+      "path": "item/atlas_47/icon_010.png"
+    },
+    "item_47_004": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 4,
+      "path": "item/atlas_47/icon_004.png"
+    },
+    "item_47_038": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 38,
+      "path": "item/atlas_47/icon_038.png"
+    },
+    "item_47_012": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 12,
+      "path": "item/atlas_47/icon_012.png"
+    },
+    "item_47_006": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 6,
+      "path": "item/atlas_47/icon_006.png"
+    },
+    "item_47_007": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 7,
+      "path": "item/atlas_47/icon_007.png"
+    },
+    "item_47_013": {
+      "category": "item",
+      "atlas_number": "47",
+      "icon_index": 13,
+      "path": "item/atlas_47/icon_013.png"
+    },
+    "item_5_036": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 36,
+      "path": "item/atlas_5/icon_036.png"
+    },
+    "item_5_022": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 22,
+      "path": "item/atlas_5/icon_022.png"
+    },
+    "item_5_023": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 23,
+      "path": "item/atlas_5/icon_023.png"
+    },
+    "item_5_037": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 37,
+      "path": "item/atlas_5/icon_037.png"
+    },
+    "item_5_021": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 21,
+      "path": "item/atlas_5/icon_021.png"
+    },
+    "item_5_035": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 35,
+      "path": "item/atlas_5/icon_035.png"
+    },
+    "item_5_009": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 9,
+      "path": "item/atlas_5/icon_009.png"
+    },
+    "item_5_008": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 8,
+      "path": "item/atlas_5/icon_008.png"
+    },
+    "item_5_034": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 34,
+      "path": "item/atlas_5/icon_034.png"
+    },
+    "item_5_020": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 20,
+      "path": "item/atlas_5/icon_020.png"
+    },
+    "item_5_018": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 18,
+      "path": "item/atlas_5/icon_018.png"
+    },
+    "item_5_024": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 24,
+      "path": "item/atlas_5/icon_024.png"
+    },
+    "item_5_030": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 30,
+      "path": "item/atlas_5/icon_030.png"
+    },
+    "item_5_031": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 31,
+      "path": "item/atlas_5/icon_031.png"
+    },
+    "item_5_025": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 25,
+      "path": "item/atlas_5/icon_025.png"
+    },
+    "item_5_019": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 19,
+      "path": "item/atlas_5/icon_019.png"
+    },
+    "item_5_033": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 33,
+      "path": "item/atlas_5/icon_033.png"
+    },
+    "item_5_027": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 27,
+      "path": "item/atlas_5/icon_027.png"
+    },
+    "item_5_026": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 26,
+      "path": "item/atlas_5/icon_026.png"
+    },
+    "item_5_032": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 32,
+      "path": "item/atlas_5/icon_032.png"
+    },
+    "item_5_055": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 55,
+      "path": "item/atlas_5/icon_055.png"
+    },
+    "item_5_041": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 41,
+      "path": "item/atlas_5/icon_041.png"
+    },
+    "item_5_040": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 40,
+      "path": "item/atlas_5/icon_040.png"
+    },
+    "item_5_054": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 54,
+      "path": "item/atlas_5/icon_054.png"
+    },
+    "item_5_042": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 42,
+      "path": "item/atlas_5/icon_042.png"
+    },
+    "item_5_056": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 56,
+      "path": "item/atlas_5/icon_056.png"
+    },
+    "item_5_057": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 57,
+      "path": "item/atlas_5/icon_057.png"
+    },
+    "item_5_043": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 43,
+      "path": "item/atlas_5/icon_043.png"
+    },
+    "item_5_047": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 47,
+      "path": "item/atlas_5/icon_047.png"
+    },
+    "item_5_053": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 53,
+      "path": "item/atlas_5/icon_053.png"
+    },
+    "item_5_052": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 52,
+      "path": "item/atlas_5/icon_052.png"
+    },
+    "item_5_046": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 46,
+      "path": "item/atlas_5/icon_046.png"
+    },
+    "item_5_050": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 50,
+      "path": "item/atlas_5/icon_050.png"
+    },
+    "item_5_044": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 44,
+      "path": "item/atlas_5/icon_044.png"
+    },
+    "item_5_045": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 45,
+      "path": "item/atlas_5/icon_045.png"
+    },
+    "item_5_051": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 51,
+      "path": "item/atlas_5/icon_051.png"
+    },
+    "item_5_060": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 60,
+      "path": "item/atlas_5/icon_060.png"
+    },
+    "item_5_048": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 48,
+      "path": "item/atlas_5/icon_048.png"
+    },
+    "item_5_049": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 49,
+      "path": "item/atlas_5/icon_049.png"
+    },
+    "item_5_061": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 61,
+      "path": "item/atlas_5/icon_061.png"
+    },
+    "item_5_063": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 63,
+      "path": "item/atlas_5/icon_063.png"
+    },
+    "item_5_062": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 62,
+      "path": "item/atlas_5/icon_062.png"
+    },
+    "item_5_059": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 59,
+      "path": "item/atlas_5/icon_059.png"
+    },
+    "item_5_064": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 64,
+      "path": "item/atlas_5/icon_064.png"
+    },
+    "item_5_058": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 58,
+      "path": "item/atlas_5/icon_058.png"
+    },
+    "item_5_017": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 17,
+      "path": "item/atlas_5/icon_017.png"
+    },
+    "item_5_003": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 3,
+      "path": "item/atlas_5/icon_003.png"
+    },
+    "item_5_002": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 2,
+      "path": "item/atlas_5/icon_002.png"
+    },
+    "item_5_016": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 16,
+      "path": "item/atlas_5/icon_016.png"
+    },
+    "item_5_014": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 14,
+      "path": "item/atlas_5/icon_014.png"
+    },
+    "item_5_028": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 28,
+      "path": "item/atlas_5/icon_028.png"
+    },
+    "item_5_029": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 29,
+      "path": "item/atlas_5/icon_029.png"
+    },
+    "item_5_015": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 15,
+      "path": "item/atlas_5/icon_015.png"
+    },
+    "item_5_001": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 1,
+      "path": "item/atlas_5/icon_001.png"
+    },
+    "item_5_039": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 39,
+      "path": "item/atlas_5/icon_039.png"
+    },
+    "item_5_005": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 5,
+      "path": "item/atlas_5/icon_005.png"
+    },
+    "item_5_011": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 11,
+      "path": "item/atlas_5/icon_011.png"
+    },
+    "item_5_010": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 10,
+      "path": "item/atlas_5/icon_010.png"
+    },
+    "item_5_004": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 4,
+      "path": "item/atlas_5/icon_004.png"
+    },
+    "item_5_038": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 38,
+      "path": "item/atlas_5/icon_038.png"
+    },
+    "item_5_012": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 12,
+      "path": "item/atlas_5/icon_012.png"
+    },
+    "item_5_006": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 6,
+      "path": "item/atlas_5/icon_006.png"
+    },
+    "item_5_007": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 7,
+      "path": "item/atlas_5/icon_007.png"
+    },
+    "item_5_013": {
+      "category": "item",
+      "atlas_number": "5",
+      "icon_index": 13,
+      "path": "item/atlas_5/icon_013.png"
+    },
+    "item_71_036": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 36,
+      "path": "item/atlas_71/icon_036.png"
+    },
+    "item_71_022": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 22,
+      "path": "item/atlas_71/icon_022.png"
+    },
+    "item_71_023": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 23,
+      "path": "item/atlas_71/icon_023.png"
+    },
+    "item_71_037": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 37,
+      "path": "item/atlas_71/icon_037.png"
+    },
+    "item_71_021": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 21,
+      "path": "item/atlas_71/icon_021.png"
+    },
+    "item_71_035": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 35,
+      "path": "item/atlas_71/icon_035.png"
+    },
+    "item_71_009": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 9,
+      "path": "item/atlas_71/icon_009.png"
+    },
+    "item_71_008": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 8,
+      "path": "item/atlas_71/icon_008.png"
+    },
+    "item_71_034": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 34,
+      "path": "item/atlas_71/icon_034.png"
+    },
+    "item_71_020": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 20,
+      "path": "item/atlas_71/icon_020.png"
+    },
+    "item_71_018": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 18,
+      "path": "item/atlas_71/icon_018.png"
+    },
+    "item_71_024": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 24,
+      "path": "item/atlas_71/icon_024.png"
+    },
+    "item_71_030": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 30,
+      "path": "item/atlas_71/icon_030.png"
+    },
+    "item_71_031": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 31,
+      "path": "item/atlas_71/icon_031.png"
+    },
+    "item_71_025": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 25,
+      "path": "item/atlas_71/icon_025.png"
+    },
+    "item_71_019": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 19,
+      "path": "item/atlas_71/icon_019.png"
+    },
+    "item_71_033": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 33,
+      "path": "item/atlas_71/icon_033.png"
+    },
+    "item_71_027": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 27,
+      "path": "item/atlas_71/icon_027.png"
+    },
+    "item_71_026": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 26,
+      "path": "item/atlas_71/icon_026.png"
+    },
+    "item_71_032": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 32,
+      "path": "item/atlas_71/icon_032.png"
+    },
+    "item_71_055": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 55,
+      "path": "item/atlas_71/icon_055.png"
+    },
+    "item_71_041": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 41,
+      "path": "item/atlas_71/icon_041.png"
+    },
+    "item_71_040": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 40,
+      "path": "item/atlas_71/icon_040.png"
+    },
+    "item_71_054": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 54,
+      "path": "item/atlas_71/icon_054.png"
+    },
+    "item_71_042": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 42,
+      "path": "item/atlas_71/icon_042.png"
+    },
+    "item_71_056": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 56,
+      "path": "item/atlas_71/icon_056.png"
+    },
+    "item_71_057": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 57,
+      "path": "item/atlas_71/icon_057.png"
+    },
+    "item_71_043": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 43,
+      "path": "item/atlas_71/icon_043.png"
+    },
+    "item_71_047": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 47,
+      "path": "item/atlas_71/icon_047.png"
+    },
+    "item_71_053": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 53,
+      "path": "item/atlas_71/icon_053.png"
+    },
+    "item_71_052": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 52,
+      "path": "item/atlas_71/icon_052.png"
+    },
+    "item_71_046": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 46,
+      "path": "item/atlas_71/icon_046.png"
+    },
+    "item_71_050": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 50,
+      "path": "item/atlas_71/icon_050.png"
+    },
+    "item_71_044": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 44,
+      "path": "item/atlas_71/icon_044.png"
+    },
+    "item_71_045": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 45,
+      "path": "item/atlas_71/icon_045.png"
+    },
+    "item_71_051": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 51,
+      "path": "item/atlas_71/icon_051.png"
+    },
+    "item_71_060": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 60,
+      "path": "item/atlas_71/icon_060.png"
+    },
+    "item_71_048": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 48,
+      "path": "item/atlas_71/icon_048.png"
+    },
+    "item_71_049": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 49,
+      "path": "item/atlas_71/icon_049.png"
+    },
+    "item_71_061": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 61,
+      "path": "item/atlas_71/icon_061.png"
+    },
+    "item_71_063": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 63,
+      "path": "item/atlas_71/icon_063.png"
+    },
+    "item_71_062": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 62,
+      "path": "item/atlas_71/icon_062.png"
+    },
+    "item_71_059": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 59,
+      "path": "item/atlas_71/icon_059.png"
+    },
+    "item_71_064": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 64,
+      "path": "item/atlas_71/icon_064.png"
+    },
+    "item_71_058": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 58,
+      "path": "item/atlas_71/icon_058.png"
+    },
+    "item_71_017": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 17,
+      "path": "item/atlas_71/icon_017.png"
+    },
+    "item_71_003": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 3,
+      "path": "item/atlas_71/icon_003.png"
+    },
+    "item_71_002": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 2,
+      "path": "item/atlas_71/icon_002.png"
+    },
+    "item_71_016": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 16,
+      "path": "item/atlas_71/icon_016.png"
+    },
+    "item_71_014": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 14,
+      "path": "item/atlas_71/icon_014.png"
+    },
+    "item_71_028": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 28,
+      "path": "item/atlas_71/icon_028.png"
+    },
+    "item_71_029": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 29,
+      "path": "item/atlas_71/icon_029.png"
+    },
+    "item_71_015": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 15,
+      "path": "item/atlas_71/icon_015.png"
+    },
+    "item_71_001": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 1,
+      "path": "item/atlas_71/icon_001.png"
+    },
+    "item_71_039": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 39,
+      "path": "item/atlas_71/icon_039.png"
+    },
+    "item_71_005": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 5,
+      "path": "item/atlas_71/icon_005.png"
+    },
+    "item_71_011": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 11,
+      "path": "item/atlas_71/icon_011.png"
+    },
+    "item_71_010": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 10,
+      "path": "item/atlas_71/icon_010.png"
+    },
+    "item_71_004": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 4,
+      "path": "item/atlas_71/icon_004.png"
+    },
+    "item_71_038": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 38,
+      "path": "item/atlas_71/icon_038.png"
+    },
+    "item_71_012": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 12,
+      "path": "item/atlas_71/icon_012.png"
+    },
+    "item_71_006": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 6,
+      "path": "item/atlas_71/icon_006.png"
+    },
+    "item_71_007": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 7,
+      "path": "item/atlas_71/icon_007.png"
+    },
+    "item_71_013": {
+      "category": "item",
+      "atlas_number": "71",
+      "icon_index": 13,
+      "path": "item/atlas_71/icon_013.png"
+    },
+    "item_85_036": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 36,
+      "path": "item/atlas_85/icon_036.png"
+    },
+    "item_85_022": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 22,
+      "path": "item/atlas_85/icon_022.png"
+    },
+    "item_85_023": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 23,
+      "path": "item/atlas_85/icon_023.png"
+    },
+    "item_85_037": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 37,
+      "path": "item/atlas_85/icon_037.png"
+    },
+    "item_85_021": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 21,
+      "path": "item/atlas_85/icon_021.png"
+    },
+    "item_85_035": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 35,
+      "path": "item/atlas_85/icon_035.png"
+    },
+    "item_85_009": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 9,
+      "path": "item/atlas_85/icon_009.png"
+    },
+    "item_85_008": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 8,
+      "path": "item/atlas_85/icon_008.png"
+    },
+    "item_85_034": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 34,
+      "path": "item/atlas_85/icon_034.png"
+    },
+    "item_85_020": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 20,
+      "path": "item/atlas_85/icon_020.png"
+    },
+    "item_85_018": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 18,
+      "path": "item/atlas_85/icon_018.png"
+    },
+    "item_85_024": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 24,
+      "path": "item/atlas_85/icon_024.png"
+    },
+    "item_85_030": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 30,
+      "path": "item/atlas_85/icon_030.png"
+    },
+    "item_85_031": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 31,
+      "path": "item/atlas_85/icon_031.png"
+    },
+    "item_85_025": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 25,
+      "path": "item/atlas_85/icon_025.png"
+    },
+    "item_85_019": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 19,
+      "path": "item/atlas_85/icon_019.png"
+    },
+    "item_85_033": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 33,
+      "path": "item/atlas_85/icon_033.png"
+    },
+    "item_85_027": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 27,
+      "path": "item/atlas_85/icon_027.png"
+    },
+    "item_85_026": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 26,
+      "path": "item/atlas_85/icon_026.png"
+    },
+    "item_85_032": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 32,
+      "path": "item/atlas_85/icon_032.png"
+    },
+    "item_85_055": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 55,
+      "path": "item/atlas_85/icon_055.png"
+    },
+    "item_85_041": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 41,
+      "path": "item/atlas_85/icon_041.png"
+    },
+    "item_85_040": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 40,
+      "path": "item/atlas_85/icon_040.png"
+    },
+    "item_85_054": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 54,
+      "path": "item/atlas_85/icon_054.png"
+    },
+    "item_85_042": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 42,
+      "path": "item/atlas_85/icon_042.png"
+    },
+    "item_85_056": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 56,
+      "path": "item/atlas_85/icon_056.png"
+    },
+    "item_85_057": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 57,
+      "path": "item/atlas_85/icon_057.png"
+    },
+    "item_85_043": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 43,
+      "path": "item/atlas_85/icon_043.png"
+    },
+    "item_85_047": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 47,
+      "path": "item/atlas_85/icon_047.png"
+    },
+    "item_85_053": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 53,
+      "path": "item/atlas_85/icon_053.png"
+    },
+    "item_85_052": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 52,
+      "path": "item/atlas_85/icon_052.png"
+    },
+    "item_85_046": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 46,
+      "path": "item/atlas_85/icon_046.png"
+    },
+    "item_85_050": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 50,
+      "path": "item/atlas_85/icon_050.png"
+    },
+    "item_85_044": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 44,
+      "path": "item/atlas_85/icon_044.png"
+    },
+    "item_85_045": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 45,
+      "path": "item/atlas_85/icon_045.png"
+    },
+    "item_85_051": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 51,
+      "path": "item/atlas_85/icon_051.png"
+    },
+    "item_85_060": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 60,
+      "path": "item/atlas_85/icon_060.png"
+    },
+    "item_85_048": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 48,
+      "path": "item/atlas_85/icon_048.png"
+    },
+    "item_85_049": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 49,
+      "path": "item/atlas_85/icon_049.png"
+    },
+    "item_85_061": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 61,
+      "path": "item/atlas_85/icon_061.png"
+    },
+    "item_85_063": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 63,
+      "path": "item/atlas_85/icon_063.png"
+    },
+    "item_85_062": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 62,
+      "path": "item/atlas_85/icon_062.png"
+    },
+    "item_85_059": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 59,
+      "path": "item/atlas_85/icon_059.png"
+    },
+    "item_85_064": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 64,
+      "path": "item/atlas_85/icon_064.png"
+    },
+    "item_85_058": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 58,
+      "path": "item/atlas_85/icon_058.png"
+    },
+    "item_85_017": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 17,
+      "path": "item/atlas_85/icon_017.png"
+    },
+    "item_85_003": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 3,
+      "path": "item/atlas_85/icon_003.png"
+    },
+    "item_85_002": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 2,
+      "path": "item/atlas_85/icon_002.png"
+    },
+    "item_85_016": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 16,
+      "path": "item/atlas_85/icon_016.png"
+    },
+    "item_85_014": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 14,
+      "path": "item/atlas_85/icon_014.png"
+    },
+    "item_85_028": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 28,
+      "path": "item/atlas_85/icon_028.png"
+    },
+    "item_85_029": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 29,
+      "path": "item/atlas_85/icon_029.png"
+    },
+    "item_85_015": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 15,
+      "path": "item/atlas_85/icon_015.png"
+    },
+    "item_85_001": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 1,
+      "path": "item/atlas_85/icon_001.png"
+    },
+    "item_85_039": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 39,
+      "path": "item/atlas_85/icon_039.png"
+    },
+    "item_85_005": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 5,
+      "path": "item/atlas_85/icon_005.png"
+    },
+    "item_85_011": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 11,
+      "path": "item/atlas_85/icon_011.png"
+    },
+    "item_85_010": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 10,
+      "path": "item/atlas_85/icon_010.png"
+    },
+    "item_85_004": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 4,
+      "path": "item/atlas_85/icon_004.png"
+    },
+    "item_85_038": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 38,
+      "path": "item/atlas_85/icon_038.png"
+    },
+    "item_85_012": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 12,
+      "path": "item/atlas_85/icon_012.png"
+    },
+    "item_85_006": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 6,
+      "path": "item/atlas_85/icon_006.png"
+    },
+    "item_85_007": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 7,
+      "path": "item/atlas_85/icon_007.png"
+    },
+    "item_85_013": {
+      "category": "item",
+      "atlas_number": "85",
+      "icon_index": 13,
+      "path": "item/atlas_85/icon_013.png"
+    },
+    "item_49_036": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 36,
+      "path": "item/atlas_49/icon_036.png"
+    },
+    "item_49_022": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 22,
+      "path": "item/atlas_49/icon_022.png"
+    },
+    "item_49_023": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 23,
+      "path": "item/atlas_49/icon_023.png"
+    },
+    "item_49_037": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 37,
+      "path": "item/atlas_49/icon_037.png"
+    },
+    "item_49_021": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 21,
+      "path": "item/atlas_49/icon_021.png"
+    },
+    "item_49_035": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 35,
+      "path": "item/atlas_49/icon_035.png"
+    },
+    "item_49_009": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 9,
+      "path": "item/atlas_49/icon_009.png"
+    },
+    "item_49_008": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 8,
+      "path": "item/atlas_49/icon_008.png"
+    },
+    "item_49_034": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 34,
+      "path": "item/atlas_49/icon_034.png"
+    },
+    "item_49_020": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 20,
+      "path": "item/atlas_49/icon_020.png"
+    },
+    "item_49_018": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 18,
+      "path": "item/atlas_49/icon_018.png"
+    },
+    "item_49_024": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 24,
+      "path": "item/atlas_49/icon_024.png"
+    },
+    "item_49_030": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 30,
+      "path": "item/atlas_49/icon_030.png"
+    },
+    "item_49_031": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 31,
+      "path": "item/atlas_49/icon_031.png"
+    },
+    "item_49_025": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 25,
+      "path": "item/atlas_49/icon_025.png"
+    },
+    "item_49_019": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 19,
+      "path": "item/atlas_49/icon_019.png"
+    },
+    "item_49_033": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 33,
+      "path": "item/atlas_49/icon_033.png"
+    },
+    "item_49_027": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 27,
+      "path": "item/atlas_49/icon_027.png"
+    },
+    "item_49_026": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 26,
+      "path": "item/atlas_49/icon_026.png"
+    },
+    "item_49_032": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 32,
+      "path": "item/atlas_49/icon_032.png"
+    },
+    "item_49_055": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 55,
+      "path": "item/atlas_49/icon_055.png"
+    },
+    "item_49_041": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 41,
+      "path": "item/atlas_49/icon_041.png"
+    },
+    "item_49_040": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 40,
+      "path": "item/atlas_49/icon_040.png"
+    },
+    "item_49_054": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 54,
+      "path": "item/atlas_49/icon_054.png"
+    },
+    "item_49_042": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 42,
+      "path": "item/atlas_49/icon_042.png"
+    },
+    "item_49_056": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 56,
+      "path": "item/atlas_49/icon_056.png"
+    },
+    "item_49_057": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 57,
+      "path": "item/atlas_49/icon_057.png"
+    },
+    "item_49_043": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 43,
+      "path": "item/atlas_49/icon_043.png"
+    },
+    "item_49_047": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 47,
+      "path": "item/atlas_49/icon_047.png"
+    },
+    "item_49_053": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 53,
+      "path": "item/atlas_49/icon_053.png"
+    },
+    "item_49_052": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 52,
+      "path": "item/atlas_49/icon_052.png"
+    },
+    "item_49_046": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 46,
+      "path": "item/atlas_49/icon_046.png"
+    },
+    "item_49_050": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 50,
+      "path": "item/atlas_49/icon_050.png"
+    },
+    "item_49_044": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 44,
+      "path": "item/atlas_49/icon_044.png"
+    },
+    "item_49_045": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 45,
+      "path": "item/atlas_49/icon_045.png"
+    },
+    "item_49_051": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 51,
+      "path": "item/atlas_49/icon_051.png"
+    },
+    "item_49_060": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 60,
+      "path": "item/atlas_49/icon_060.png"
+    },
+    "item_49_048": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 48,
+      "path": "item/atlas_49/icon_048.png"
+    },
+    "item_49_049": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 49,
+      "path": "item/atlas_49/icon_049.png"
+    },
+    "item_49_061": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 61,
+      "path": "item/atlas_49/icon_061.png"
+    },
+    "item_49_063": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 63,
+      "path": "item/atlas_49/icon_063.png"
+    },
+    "item_49_062": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 62,
+      "path": "item/atlas_49/icon_062.png"
+    },
+    "item_49_059": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 59,
+      "path": "item/atlas_49/icon_059.png"
+    },
+    "item_49_064": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 64,
+      "path": "item/atlas_49/icon_064.png"
+    },
+    "item_49_058": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 58,
+      "path": "item/atlas_49/icon_058.png"
+    },
+    "item_49_017": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 17,
+      "path": "item/atlas_49/icon_017.png"
+    },
+    "item_49_003": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 3,
+      "path": "item/atlas_49/icon_003.png"
+    },
+    "item_49_002": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 2,
+      "path": "item/atlas_49/icon_002.png"
+    },
+    "item_49_016": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 16,
+      "path": "item/atlas_49/icon_016.png"
+    },
+    "item_49_014": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 14,
+      "path": "item/atlas_49/icon_014.png"
+    },
+    "item_49_028": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 28,
+      "path": "item/atlas_49/icon_028.png"
+    },
+    "item_49_029": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 29,
+      "path": "item/atlas_49/icon_029.png"
+    },
+    "item_49_015": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 15,
+      "path": "item/atlas_49/icon_015.png"
+    },
+    "item_49_001": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 1,
+      "path": "item/atlas_49/icon_001.png"
+    },
+    "item_49_039": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 39,
+      "path": "item/atlas_49/icon_039.png"
+    },
+    "item_49_005": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 5,
+      "path": "item/atlas_49/icon_005.png"
+    },
+    "item_49_011": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 11,
+      "path": "item/atlas_49/icon_011.png"
+    },
+    "item_49_010": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 10,
+      "path": "item/atlas_49/icon_010.png"
+    },
+    "item_49_004": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 4,
+      "path": "item/atlas_49/icon_004.png"
+    },
+    "item_49_038": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 38,
+      "path": "item/atlas_49/icon_038.png"
+    },
+    "item_49_012": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 12,
+      "path": "item/atlas_49/icon_012.png"
+    },
+    "item_49_006": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 6,
+      "path": "item/atlas_49/icon_006.png"
+    },
+    "item_49_007": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 7,
+      "path": "item/atlas_49/icon_007.png"
+    },
+    "item_49_013": {
+      "category": "item",
+      "atlas_number": "49",
+      "icon_index": 13,
+      "path": "item/atlas_49/icon_013.png"
+    },
+    "item_82_036": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 36,
+      "path": "item/atlas_82/icon_036.png"
+    },
+    "item_82_022": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 22,
+      "path": "item/atlas_82/icon_022.png"
+    },
+    "item_82_023": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 23,
+      "path": "item/atlas_82/icon_023.png"
+    },
+    "item_82_037": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 37,
+      "path": "item/atlas_82/icon_037.png"
+    },
+    "item_82_021": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 21,
+      "path": "item/atlas_82/icon_021.png"
+    },
+    "item_82_035": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 35,
+      "path": "item/atlas_82/icon_035.png"
+    },
+    "item_82_009": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 9,
+      "path": "item/atlas_82/icon_009.png"
+    },
+    "item_82_008": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 8,
+      "path": "item/atlas_82/icon_008.png"
+    },
+    "item_82_034": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 34,
+      "path": "item/atlas_82/icon_034.png"
+    },
+    "item_82_020": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 20,
+      "path": "item/atlas_82/icon_020.png"
+    },
+    "item_82_018": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 18,
+      "path": "item/atlas_82/icon_018.png"
+    },
+    "item_82_024": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 24,
+      "path": "item/atlas_82/icon_024.png"
+    },
+    "item_82_030": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 30,
+      "path": "item/atlas_82/icon_030.png"
+    },
+    "item_82_031": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 31,
+      "path": "item/atlas_82/icon_031.png"
+    },
+    "item_82_025": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 25,
+      "path": "item/atlas_82/icon_025.png"
+    },
+    "item_82_019": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 19,
+      "path": "item/atlas_82/icon_019.png"
+    },
+    "item_82_033": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 33,
+      "path": "item/atlas_82/icon_033.png"
+    },
+    "item_82_027": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 27,
+      "path": "item/atlas_82/icon_027.png"
+    },
+    "item_82_026": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 26,
+      "path": "item/atlas_82/icon_026.png"
+    },
+    "item_82_032": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 32,
+      "path": "item/atlas_82/icon_032.png"
+    },
+    "item_82_055": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 55,
+      "path": "item/atlas_82/icon_055.png"
+    },
+    "item_82_041": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 41,
+      "path": "item/atlas_82/icon_041.png"
+    },
+    "item_82_040": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 40,
+      "path": "item/atlas_82/icon_040.png"
+    },
+    "item_82_054": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 54,
+      "path": "item/atlas_82/icon_054.png"
+    },
+    "item_82_042": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 42,
+      "path": "item/atlas_82/icon_042.png"
+    },
+    "item_82_056": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 56,
+      "path": "item/atlas_82/icon_056.png"
+    },
+    "item_82_057": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 57,
+      "path": "item/atlas_82/icon_057.png"
+    },
+    "item_82_043": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 43,
+      "path": "item/atlas_82/icon_043.png"
+    },
+    "item_82_047": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 47,
+      "path": "item/atlas_82/icon_047.png"
+    },
+    "item_82_053": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 53,
+      "path": "item/atlas_82/icon_053.png"
+    },
+    "item_82_052": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 52,
+      "path": "item/atlas_82/icon_052.png"
+    },
+    "item_82_046": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 46,
+      "path": "item/atlas_82/icon_046.png"
+    },
+    "item_82_050": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 50,
+      "path": "item/atlas_82/icon_050.png"
+    },
+    "item_82_044": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 44,
+      "path": "item/atlas_82/icon_044.png"
+    },
+    "item_82_045": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 45,
+      "path": "item/atlas_82/icon_045.png"
+    },
+    "item_82_051": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 51,
+      "path": "item/atlas_82/icon_051.png"
+    },
+    "item_82_060": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 60,
+      "path": "item/atlas_82/icon_060.png"
+    },
+    "item_82_048": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 48,
+      "path": "item/atlas_82/icon_048.png"
+    },
+    "item_82_049": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 49,
+      "path": "item/atlas_82/icon_049.png"
+    },
+    "item_82_061": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 61,
+      "path": "item/atlas_82/icon_061.png"
+    },
+    "item_82_063": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 63,
+      "path": "item/atlas_82/icon_063.png"
+    },
+    "item_82_062": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 62,
+      "path": "item/atlas_82/icon_062.png"
+    },
+    "item_82_059": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 59,
+      "path": "item/atlas_82/icon_059.png"
+    },
+    "item_82_064": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 64,
+      "path": "item/atlas_82/icon_064.png"
+    },
+    "item_82_058": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 58,
+      "path": "item/atlas_82/icon_058.png"
+    },
+    "item_82_017": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 17,
+      "path": "item/atlas_82/icon_017.png"
+    },
+    "item_82_003": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 3,
+      "path": "item/atlas_82/icon_003.png"
+    },
+    "item_82_002": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 2,
+      "path": "item/atlas_82/icon_002.png"
+    },
+    "item_82_016": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 16,
+      "path": "item/atlas_82/icon_016.png"
+    },
+    "item_82_014": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 14,
+      "path": "item/atlas_82/icon_014.png"
+    },
+    "item_82_028": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 28,
+      "path": "item/atlas_82/icon_028.png"
+    },
+    "item_82_029": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 29,
+      "path": "item/atlas_82/icon_029.png"
+    },
+    "item_82_015": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 15,
+      "path": "item/atlas_82/icon_015.png"
+    },
+    "item_82_001": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 1,
+      "path": "item/atlas_82/icon_001.png"
+    },
+    "item_82_039": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 39,
+      "path": "item/atlas_82/icon_039.png"
+    },
+    "item_82_005": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 5,
+      "path": "item/atlas_82/icon_005.png"
+    },
+    "item_82_011": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 11,
+      "path": "item/atlas_82/icon_011.png"
+    },
+    "item_82_010": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 10,
+      "path": "item/atlas_82/icon_010.png"
+    },
+    "item_82_004": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 4,
+      "path": "item/atlas_82/icon_004.png"
+    },
+    "item_82_038": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 38,
+      "path": "item/atlas_82/icon_038.png"
+    },
+    "item_82_012": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 12,
+      "path": "item/atlas_82/icon_012.png"
+    },
+    "item_82_006": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 6,
+      "path": "item/atlas_82/icon_006.png"
+    },
+    "item_82_007": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 7,
+      "path": "item/atlas_82/icon_007.png"
+    },
+    "item_82_013": {
+      "category": "item",
+      "atlas_number": "82",
+      "icon_index": 13,
+      "path": "item/atlas_82/icon_013.png"
+    },
+    "item_76_036": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 36,
+      "path": "item/atlas_76/icon_036.png"
+    },
+    "item_76_022": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 22,
+      "path": "item/atlas_76/icon_022.png"
+    },
+    "item_76_023": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 23,
+      "path": "item/atlas_76/icon_023.png"
+    },
+    "item_76_037": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 37,
+      "path": "item/atlas_76/icon_037.png"
+    },
+    "item_76_021": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 21,
+      "path": "item/atlas_76/icon_021.png"
+    },
+    "item_76_035": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 35,
+      "path": "item/atlas_76/icon_035.png"
+    },
+    "item_76_009": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 9,
+      "path": "item/atlas_76/icon_009.png"
+    },
+    "item_76_008": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 8,
+      "path": "item/atlas_76/icon_008.png"
+    },
+    "item_76_034": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 34,
+      "path": "item/atlas_76/icon_034.png"
+    },
+    "item_76_020": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 20,
+      "path": "item/atlas_76/icon_020.png"
+    },
+    "item_76_018": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 18,
+      "path": "item/atlas_76/icon_018.png"
+    },
+    "item_76_024": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 24,
+      "path": "item/atlas_76/icon_024.png"
+    },
+    "item_76_030": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 30,
+      "path": "item/atlas_76/icon_030.png"
+    },
+    "item_76_031": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 31,
+      "path": "item/atlas_76/icon_031.png"
+    },
+    "item_76_025": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 25,
+      "path": "item/atlas_76/icon_025.png"
+    },
+    "item_76_019": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 19,
+      "path": "item/atlas_76/icon_019.png"
+    },
+    "item_76_033": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 33,
+      "path": "item/atlas_76/icon_033.png"
+    },
+    "item_76_027": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 27,
+      "path": "item/atlas_76/icon_027.png"
+    },
+    "item_76_026": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 26,
+      "path": "item/atlas_76/icon_026.png"
+    },
+    "item_76_032": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 32,
+      "path": "item/atlas_76/icon_032.png"
+    },
+    "item_76_055": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 55,
+      "path": "item/atlas_76/icon_055.png"
+    },
+    "item_76_041": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 41,
+      "path": "item/atlas_76/icon_041.png"
+    },
+    "item_76_040": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 40,
+      "path": "item/atlas_76/icon_040.png"
+    },
+    "item_76_054": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 54,
+      "path": "item/atlas_76/icon_054.png"
+    },
+    "item_76_042": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 42,
+      "path": "item/atlas_76/icon_042.png"
+    },
+    "item_76_056": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 56,
+      "path": "item/atlas_76/icon_056.png"
+    },
+    "item_76_057": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 57,
+      "path": "item/atlas_76/icon_057.png"
+    },
+    "item_76_043": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 43,
+      "path": "item/atlas_76/icon_043.png"
+    },
+    "item_76_047": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 47,
+      "path": "item/atlas_76/icon_047.png"
+    },
+    "item_76_053": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 53,
+      "path": "item/atlas_76/icon_053.png"
+    },
+    "item_76_052": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 52,
+      "path": "item/atlas_76/icon_052.png"
+    },
+    "item_76_046": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 46,
+      "path": "item/atlas_76/icon_046.png"
+    },
+    "item_76_050": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 50,
+      "path": "item/atlas_76/icon_050.png"
+    },
+    "item_76_044": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 44,
+      "path": "item/atlas_76/icon_044.png"
+    },
+    "item_76_045": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 45,
+      "path": "item/atlas_76/icon_045.png"
+    },
+    "item_76_051": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 51,
+      "path": "item/atlas_76/icon_051.png"
+    },
+    "item_76_060": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 60,
+      "path": "item/atlas_76/icon_060.png"
+    },
+    "item_76_048": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 48,
+      "path": "item/atlas_76/icon_048.png"
+    },
+    "item_76_049": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 49,
+      "path": "item/atlas_76/icon_049.png"
+    },
+    "item_76_061": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 61,
+      "path": "item/atlas_76/icon_061.png"
+    },
+    "item_76_063": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 63,
+      "path": "item/atlas_76/icon_063.png"
+    },
+    "item_76_062": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 62,
+      "path": "item/atlas_76/icon_062.png"
+    },
+    "item_76_059": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 59,
+      "path": "item/atlas_76/icon_059.png"
+    },
+    "item_76_064": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 64,
+      "path": "item/atlas_76/icon_064.png"
+    },
+    "item_76_058": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 58,
+      "path": "item/atlas_76/icon_058.png"
+    },
+    "item_76_017": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 17,
+      "path": "item/atlas_76/icon_017.png"
+    },
+    "item_76_003": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 3,
+      "path": "item/atlas_76/icon_003.png"
+    },
+    "item_76_002": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 2,
+      "path": "item/atlas_76/icon_002.png"
+    },
+    "item_76_016": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 16,
+      "path": "item/atlas_76/icon_016.png"
+    },
+    "item_76_014": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 14,
+      "path": "item/atlas_76/icon_014.png"
+    },
+    "item_76_028": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 28,
+      "path": "item/atlas_76/icon_028.png"
+    },
+    "item_76_029": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 29,
+      "path": "item/atlas_76/icon_029.png"
+    },
+    "item_76_015": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 15,
+      "path": "item/atlas_76/icon_015.png"
+    },
+    "item_76_001": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 1,
+      "path": "item/atlas_76/icon_001.png"
+    },
+    "item_76_039": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 39,
+      "path": "item/atlas_76/icon_039.png"
+    },
+    "item_76_005": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 5,
+      "path": "item/atlas_76/icon_005.png"
+    },
+    "item_76_011": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 11,
+      "path": "item/atlas_76/icon_011.png"
+    },
+    "item_76_010": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 10,
+      "path": "item/atlas_76/icon_010.png"
+    },
+    "item_76_004": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 4,
+      "path": "item/atlas_76/icon_004.png"
+    },
+    "item_76_038": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 38,
+      "path": "item/atlas_76/icon_038.png"
+    },
+    "item_76_012": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 12,
+      "path": "item/atlas_76/icon_012.png"
+    },
+    "item_76_006": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 6,
+      "path": "item/atlas_76/icon_006.png"
+    },
+    "item_76_007": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 7,
+      "path": "item/atlas_76/icon_007.png"
+    },
+    "item_76_013": {
+      "category": "item",
+      "atlas_number": "76",
+      "icon_index": 13,
+      "path": "item/atlas_76/icon_013.png"
+    },
+    "item_22_036": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 36,
+      "path": "item/atlas_22/icon_036.png"
+    },
+    "item_22_022": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 22,
+      "path": "item/atlas_22/icon_022.png"
+    },
+    "item_22_023": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 23,
+      "path": "item/atlas_22/icon_023.png"
+    },
+    "item_22_037": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 37,
+      "path": "item/atlas_22/icon_037.png"
+    },
+    "item_22_021": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 21,
+      "path": "item/atlas_22/icon_021.png"
+    },
+    "item_22_035": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 35,
+      "path": "item/atlas_22/icon_035.png"
+    },
+    "item_22_009": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 9,
+      "path": "item/atlas_22/icon_009.png"
+    },
+    "item_22_008": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 8,
+      "path": "item/atlas_22/icon_008.png"
+    },
+    "item_22_034": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 34,
+      "path": "item/atlas_22/icon_034.png"
+    },
+    "item_22_020": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 20,
+      "path": "item/atlas_22/icon_020.png"
+    },
+    "item_22_018": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 18,
+      "path": "item/atlas_22/icon_018.png"
+    },
+    "item_22_024": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 24,
+      "path": "item/atlas_22/icon_024.png"
+    },
+    "item_22_030": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 30,
+      "path": "item/atlas_22/icon_030.png"
+    },
+    "item_22_031": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 31,
+      "path": "item/atlas_22/icon_031.png"
+    },
+    "item_22_025": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 25,
+      "path": "item/atlas_22/icon_025.png"
+    },
+    "item_22_019": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 19,
+      "path": "item/atlas_22/icon_019.png"
+    },
+    "item_22_033": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 33,
+      "path": "item/atlas_22/icon_033.png"
+    },
+    "item_22_027": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 27,
+      "path": "item/atlas_22/icon_027.png"
+    },
+    "item_22_026": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 26,
+      "path": "item/atlas_22/icon_026.png"
+    },
+    "item_22_032": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 32,
+      "path": "item/atlas_22/icon_032.png"
+    },
+    "item_22_055": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 55,
+      "path": "item/atlas_22/icon_055.png"
+    },
+    "item_22_041": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 41,
+      "path": "item/atlas_22/icon_041.png"
+    },
+    "item_22_040": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 40,
+      "path": "item/atlas_22/icon_040.png"
+    },
+    "item_22_054": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 54,
+      "path": "item/atlas_22/icon_054.png"
+    },
+    "item_22_042": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 42,
+      "path": "item/atlas_22/icon_042.png"
+    },
+    "item_22_056": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 56,
+      "path": "item/atlas_22/icon_056.png"
+    },
+    "item_22_057": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 57,
+      "path": "item/atlas_22/icon_057.png"
+    },
+    "item_22_043": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 43,
+      "path": "item/atlas_22/icon_043.png"
+    },
+    "item_22_047": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 47,
+      "path": "item/atlas_22/icon_047.png"
+    },
+    "item_22_053": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 53,
+      "path": "item/atlas_22/icon_053.png"
+    },
+    "item_22_052": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 52,
+      "path": "item/atlas_22/icon_052.png"
+    },
+    "item_22_046": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 46,
+      "path": "item/atlas_22/icon_046.png"
+    },
+    "item_22_050": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 50,
+      "path": "item/atlas_22/icon_050.png"
+    },
+    "item_22_044": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 44,
+      "path": "item/atlas_22/icon_044.png"
+    },
+    "item_22_045": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 45,
+      "path": "item/atlas_22/icon_045.png"
+    },
+    "item_22_051": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 51,
+      "path": "item/atlas_22/icon_051.png"
+    },
+    "item_22_060": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 60,
+      "path": "item/atlas_22/icon_060.png"
+    },
+    "item_22_048": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 48,
+      "path": "item/atlas_22/icon_048.png"
+    },
+    "item_22_049": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 49,
+      "path": "item/atlas_22/icon_049.png"
+    },
+    "item_22_061": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 61,
+      "path": "item/atlas_22/icon_061.png"
+    },
+    "item_22_063": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 63,
+      "path": "item/atlas_22/icon_063.png"
+    },
+    "item_22_062": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 62,
+      "path": "item/atlas_22/icon_062.png"
+    },
+    "item_22_059": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 59,
+      "path": "item/atlas_22/icon_059.png"
+    },
+    "item_22_064": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 64,
+      "path": "item/atlas_22/icon_064.png"
+    },
+    "item_22_058": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 58,
+      "path": "item/atlas_22/icon_058.png"
+    },
+    "item_22_017": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 17,
+      "path": "item/atlas_22/icon_017.png"
+    },
+    "item_22_003": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 3,
+      "path": "item/atlas_22/icon_003.png"
+    },
+    "item_22_002": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 2,
+      "path": "item/atlas_22/icon_002.png"
+    },
+    "item_22_016": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 16,
+      "path": "item/atlas_22/icon_016.png"
+    },
+    "item_22_014": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 14,
+      "path": "item/atlas_22/icon_014.png"
+    },
+    "item_22_028": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 28,
+      "path": "item/atlas_22/icon_028.png"
+    },
+    "item_22_029": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 29,
+      "path": "item/atlas_22/icon_029.png"
+    },
+    "item_22_015": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 15,
+      "path": "item/atlas_22/icon_015.png"
+    },
+    "item_22_001": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 1,
+      "path": "item/atlas_22/icon_001.png"
+    },
+    "item_22_039": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 39,
+      "path": "item/atlas_22/icon_039.png"
+    },
+    "item_22_005": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 5,
+      "path": "item/atlas_22/icon_005.png"
+    },
+    "item_22_011": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 11,
+      "path": "item/atlas_22/icon_011.png"
+    },
+    "item_22_010": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 10,
+      "path": "item/atlas_22/icon_010.png"
+    },
+    "item_22_004": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 4,
+      "path": "item/atlas_22/icon_004.png"
+    },
+    "item_22_038": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 38,
+      "path": "item/atlas_22/icon_038.png"
+    },
+    "item_22_012": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 12,
+      "path": "item/atlas_22/icon_012.png"
+    },
+    "item_22_006": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 6,
+      "path": "item/atlas_22/icon_006.png"
+    },
+    "item_22_007": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 7,
+      "path": "item/atlas_22/icon_007.png"
+    },
+    "item_22_013": {
+      "category": "item",
+      "atlas_number": "22",
+      "icon_index": 13,
+      "path": "item/atlas_22/icon_013.png"
+    },
+    "item_25_036": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 36,
+      "path": "item/atlas_25/icon_036.png"
+    },
+    "item_25_022": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 22,
+      "path": "item/atlas_25/icon_022.png"
+    },
+    "item_25_023": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 23,
+      "path": "item/atlas_25/icon_023.png"
+    },
+    "item_25_037": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 37,
+      "path": "item/atlas_25/icon_037.png"
+    },
+    "item_25_021": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 21,
+      "path": "item/atlas_25/icon_021.png"
+    },
+    "item_25_035": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 35,
+      "path": "item/atlas_25/icon_035.png"
+    },
+    "item_25_009": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 9,
+      "path": "item/atlas_25/icon_009.png"
+    },
+    "item_25_008": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 8,
+      "path": "item/atlas_25/icon_008.png"
+    },
+    "item_25_034": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 34,
+      "path": "item/atlas_25/icon_034.png"
+    },
+    "item_25_020": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 20,
+      "path": "item/atlas_25/icon_020.png"
+    },
+    "item_25_018": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 18,
+      "path": "item/atlas_25/icon_018.png"
+    },
+    "item_25_024": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 24,
+      "path": "item/atlas_25/icon_024.png"
+    },
+    "item_25_030": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 30,
+      "path": "item/atlas_25/icon_030.png"
+    },
+    "item_25_031": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 31,
+      "path": "item/atlas_25/icon_031.png"
+    },
+    "item_25_025": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 25,
+      "path": "item/atlas_25/icon_025.png"
+    },
+    "item_25_019": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 19,
+      "path": "item/atlas_25/icon_019.png"
+    },
+    "item_25_033": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 33,
+      "path": "item/atlas_25/icon_033.png"
+    },
+    "item_25_027": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 27,
+      "path": "item/atlas_25/icon_027.png"
+    },
+    "item_25_026": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 26,
+      "path": "item/atlas_25/icon_026.png"
+    },
+    "item_25_032": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 32,
+      "path": "item/atlas_25/icon_032.png"
+    },
+    "item_25_055": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 55,
+      "path": "item/atlas_25/icon_055.png"
+    },
+    "item_25_041": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 41,
+      "path": "item/atlas_25/icon_041.png"
+    },
+    "item_25_040": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 40,
+      "path": "item/atlas_25/icon_040.png"
+    },
+    "item_25_054": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 54,
+      "path": "item/atlas_25/icon_054.png"
+    },
+    "item_25_042": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 42,
+      "path": "item/atlas_25/icon_042.png"
+    },
+    "item_25_056": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 56,
+      "path": "item/atlas_25/icon_056.png"
+    },
+    "item_25_057": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 57,
+      "path": "item/atlas_25/icon_057.png"
+    },
+    "item_25_043": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 43,
+      "path": "item/atlas_25/icon_043.png"
+    },
+    "item_25_047": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 47,
+      "path": "item/atlas_25/icon_047.png"
+    },
+    "item_25_053": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 53,
+      "path": "item/atlas_25/icon_053.png"
+    },
+    "item_25_052": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 52,
+      "path": "item/atlas_25/icon_052.png"
+    },
+    "item_25_046": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 46,
+      "path": "item/atlas_25/icon_046.png"
+    },
+    "item_25_050": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 50,
+      "path": "item/atlas_25/icon_050.png"
+    },
+    "item_25_044": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 44,
+      "path": "item/atlas_25/icon_044.png"
+    },
+    "item_25_045": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 45,
+      "path": "item/atlas_25/icon_045.png"
+    },
+    "item_25_051": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 51,
+      "path": "item/atlas_25/icon_051.png"
+    },
+    "item_25_060": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 60,
+      "path": "item/atlas_25/icon_060.png"
+    },
+    "item_25_048": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 48,
+      "path": "item/atlas_25/icon_048.png"
+    },
+    "item_25_049": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 49,
+      "path": "item/atlas_25/icon_049.png"
+    },
+    "item_25_061": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 61,
+      "path": "item/atlas_25/icon_061.png"
+    },
+    "item_25_063": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 63,
+      "path": "item/atlas_25/icon_063.png"
+    },
+    "item_25_062": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 62,
+      "path": "item/atlas_25/icon_062.png"
+    },
+    "item_25_059": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 59,
+      "path": "item/atlas_25/icon_059.png"
+    },
+    "item_25_064": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 64,
+      "path": "item/atlas_25/icon_064.png"
+    },
+    "item_25_058": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 58,
+      "path": "item/atlas_25/icon_058.png"
+    },
+    "item_25_017": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 17,
+      "path": "item/atlas_25/icon_017.png"
+    },
+    "item_25_003": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 3,
+      "path": "item/atlas_25/icon_003.png"
+    },
+    "item_25_002": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 2,
+      "path": "item/atlas_25/icon_002.png"
+    },
+    "item_25_016": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 16,
+      "path": "item/atlas_25/icon_016.png"
+    },
+    "item_25_014": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 14,
+      "path": "item/atlas_25/icon_014.png"
+    },
+    "item_25_028": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 28,
+      "path": "item/atlas_25/icon_028.png"
+    },
+    "item_25_029": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 29,
+      "path": "item/atlas_25/icon_029.png"
+    },
+    "item_25_015": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 15,
+      "path": "item/atlas_25/icon_015.png"
+    },
+    "item_25_001": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 1,
+      "path": "item/atlas_25/icon_001.png"
+    },
+    "item_25_039": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 39,
+      "path": "item/atlas_25/icon_039.png"
+    },
+    "item_25_005": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 5,
+      "path": "item/atlas_25/icon_005.png"
+    },
+    "item_25_011": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 11,
+      "path": "item/atlas_25/icon_011.png"
+    },
+    "item_25_010": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 10,
+      "path": "item/atlas_25/icon_010.png"
+    },
+    "item_25_004": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 4,
+      "path": "item/atlas_25/icon_004.png"
+    },
+    "item_25_038": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 38,
+      "path": "item/atlas_25/icon_038.png"
+    },
+    "item_25_012": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 12,
+      "path": "item/atlas_25/icon_012.png"
+    },
+    "item_25_006": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 6,
+      "path": "item/atlas_25/icon_006.png"
+    },
+    "item_25_007": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 7,
+      "path": "item/atlas_25/icon_007.png"
+    },
+    "item_25_013": {
+      "category": "item",
+      "atlas_number": "25",
+      "icon_index": 13,
+      "path": "item/atlas_25/icon_013.png"
+    },
+    "item_13_036": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 36,
+      "path": "item/atlas_13/icon_036.png"
+    },
+    "item_13_022": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 22,
+      "path": "item/atlas_13/icon_022.png"
+    },
+    "item_13_023": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 23,
+      "path": "item/atlas_13/icon_023.png"
+    },
+    "item_13_037": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 37,
+      "path": "item/atlas_13/icon_037.png"
+    },
+    "item_13_021": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 21,
+      "path": "item/atlas_13/icon_021.png"
+    },
+    "item_13_035": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 35,
+      "path": "item/atlas_13/icon_035.png"
+    },
+    "item_13_009": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 9,
+      "path": "item/atlas_13/icon_009.png"
+    },
+    "item_13_008": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 8,
+      "path": "item/atlas_13/icon_008.png"
+    },
+    "item_13_034": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 34,
+      "path": "item/atlas_13/icon_034.png"
+    },
+    "item_13_020": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 20,
+      "path": "item/atlas_13/icon_020.png"
+    },
+    "item_13_018": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 18,
+      "path": "item/atlas_13/icon_018.png"
+    },
+    "item_13_024": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 24,
+      "path": "item/atlas_13/icon_024.png"
+    },
+    "item_13_030": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 30,
+      "path": "item/atlas_13/icon_030.png"
+    },
+    "item_13_031": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 31,
+      "path": "item/atlas_13/icon_031.png"
+    },
+    "item_13_025": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 25,
+      "path": "item/atlas_13/icon_025.png"
+    },
+    "item_13_019": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 19,
+      "path": "item/atlas_13/icon_019.png"
+    },
+    "item_13_033": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 33,
+      "path": "item/atlas_13/icon_033.png"
+    },
+    "item_13_027": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 27,
+      "path": "item/atlas_13/icon_027.png"
+    },
+    "item_13_026": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 26,
+      "path": "item/atlas_13/icon_026.png"
+    },
+    "item_13_032": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 32,
+      "path": "item/atlas_13/icon_032.png"
+    },
+    "item_13_055": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 55,
+      "path": "item/atlas_13/icon_055.png"
+    },
+    "item_13_041": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 41,
+      "path": "item/atlas_13/icon_041.png"
+    },
+    "item_13_040": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 40,
+      "path": "item/atlas_13/icon_040.png"
+    },
+    "item_13_054": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 54,
+      "path": "item/atlas_13/icon_054.png"
+    },
+    "item_13_042": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 42,
+      "path": "item/atlas_13/icon_042.png"
+    },
+    "item_13_056": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 56,
+      "path": "item/atlas_13/icon_056.png"
+    },
+    "item_13_057": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 57,
+      "path": "item/atlas_13/icon_057.png"
+    },
+    "item_13_043": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 43,
+      "path": "item/atlas_13/icon_043.png"
+    },
+    "item_13_047": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 47,
+      "path": "item/atlas_13/icon_047.png"
+    },
+    "item_13_053": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 53,
+      "path": "item/atlas_13/icon_053.png"
+    },
+    "item_13_052": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 52,
+      "path": "item/atlas_13/icon_052.png"
+    },
+    "item_13_046": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 46,
+      "path": "item/atlas_13/icon_046.png"
+    },
+    "item_13_050": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 50,
+      "path": "item/atlas_13/icon_050.png"
+    },
+    "item_13_044": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 44,
+      "path": "item/atlas_13/icon_044.png"
+    },
+    "item_13_045": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 45,
+      "path": "item/atlas_13/icon_045.png"
+    },
+    "item_13_051": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 51,
+      "path": "item/atlas_13/icon_051.png"
+    },
+    "item_13_060": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 60,
+      "path": "item/atlas_13/icon_060.png"
+    },
+    "item_13_048": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 48,
+      "path": "item/atlas_13/icon_048.png"
+    },
+    "item_13_049": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 49,
+      "path": "item/atlas_13/icon_049.png"
+    },
+    "item_13_061": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 61,
+      "path": "item/atlas_13/icon_061.png"
+    },
+    "item_13_063": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 63,
+      "path": "item/atlas_13/icon_063.png"
+    },
+    "item_13_062": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 62,
+      "path": "item/atlas_13/icon_062.png"
+    },
+    "item_13_059": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 59,
+      "path": "item/atlas_13/icon_059.png"
+    },
+    "item_13_064": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 64,
+      "path": "item/atlas_13/icon_064.png"
+    },
+    "item_13_058": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 58,
+      "path": "item/atlas_13/icon_058.png"
+    },
+    "item_13_017": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 17,
+      "path": "item/atlas_13/icon_017.png"
+    },
+    "item_13_003": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 3,
+      "path": "item/atlas_13/icon_003.png"
+    },
+    "item_13_002": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 2,
+      "path": "item/atlas_13/icon_002.png"
+    },
+    "item_13_016": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 16,
+      "path": "item/atlas_13/icon_016.png"
+    },
+    "item_13_014": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 14,
+      "path": "item/atlas_13/icon_014.png"
+    },
+    "item_13_028": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 28,
+      "path": "item/atlas_13/icon_028.png"
+    },
+    "item_13_029": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 29,
+      "path": "item/atlas_13/icon_029.png"
+    },
+    "item_13_015": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 15,
+      "path": "item/atlas_13/icon_015.png"
+    },
+    "item_13_001": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 1,
+      "path": "item/atlas_13/icon_001.png"
+    },
+    "item_13_039": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 39,
+      "path": "item/atlas_13/icon_039.png"
+    },
+    "item_13_005": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 5,
+      "path": "item/atlas_13/icon_005.png"
+    },
+    "item_13_011": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 11,
+      "path": "item/atlas_13/icon_011.png"
+    },
+    "item_13_010": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 10,
+      "path": "item/atlas_13/icon_010.png"
+    },
+    "item_13_004": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 4,
+      "path": "item/atlas_13/icon_004.png"
+    },
+    "item_13_038": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 38,
+      "path": "item/atlas_13/icon_038.png"
+    },
+    "item_13_012": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 12,
+      "path": "item/atlas_13/icon_012.png"
+    },
+    "item_13_006": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 6,
+      "path": "item/atlas_13/icon_006.png"
+    },
+    "item_13_007": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 7,
+      "path": "item/atlas_13/icon_007.png"
+    },
+    "item_13_013": {
+      "category": "item",
+      "atlas_number": "13",
+      "icon_index": 13,
+      "path": "item/atlas_13/icon_013.png"
+    },
+    "item_14_036": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 36,
+      "path": "item/atlas_14/icon_036.png"
+    },
+    "item_14_022": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 22,
+      "path": "item/atlas_14/icon_022.png"
+    },
+    "item_14_023": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 23,
+      "path": "item/atlas_14/icon_023.png"
+    },
+    "item_14_037": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 37,
+      "path": "item/atlas_14/icon_037.png"
+    },
+    "item_14_021": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 21,
+      "path": "item/atlas_14/icon_021.png"
+    },
+    "item_14_035": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 35,
+      "path": "item/atlas_14/icon_035.png"
+    },
+    "item_14_009": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 9,
+      "path": "item/atlas_14/icon_009.png"
+    },
+    "item_14_008": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 8,
+      "path": "item/atlas_14/icon_008.png"
+    },
+    "item_14_034": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 34,
+      "path": "item/atlas_14/icon_034.png"
+    },
+    "item_14_020": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 20,
+      "path": "item/atlas_14/icon_020.png"
+    },
+    "item_14_018": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 18,
+      "path": "item/atlas_14/icon_018.png"
+    },
+    "item_14_024": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 24,
+      "path": "item/atlas_14/icon_024.png"
+    },
+    "item_14_030": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 30,
+      "path": "item/atlas_14/icon_030.png"
+    },
+    "item_14_031": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 31,
+      "path": "item/atlas_14/icon_031.png"
+    },
+    "item_14_025": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 25,
+      "path": "item/atlas_14/icon_025.png"
+    },
+    "item_14_019": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 19,
+      "path": "item/atlas_14/icon_019.png"
+    },
+    "item_14_033": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 33,
+      "path": "item/atlas_14/icon_033.png"
+    },
+    "item_14_027": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 27,
+      "path": "item/atlas_14/icon_027.png"
+    },
+    "item_14_026": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 26,
+      "path": "item/atlas_14/icon_026.png"
+    },
+    "item_14_032": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 32,
+      "path": "item/atlas_14/icon_032.png"
+    },
+    "item_14_055": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 55,
+      "path": "item/atlas_14/icon_055.png"
+    },
+    "item_14_041": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 41,
+      "path": "item/atlas_14/icon_041.png"
+    },
+    "item_14_040": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 40,
+      "path": "item/atlas_14/icon_040.png"
+    },
+    "item_14_054": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 54,
+      "path": "item/atlas_14/icon_054.png"
+    },
+    "item_14_042": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 42,
+      "path": "item/atlas_14/icon_042.png"
+    },
+    "item_14_056": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 56,
+      "path": "item/atlas_14/icon_056.png"
+    },
+    "item_14_057": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 57,
+      "path": "item/atlas_14/icon_057.png"
+    },
+    "item_14_043": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 43,
+      "path": "item/atlas_14/icon_043.png"
+    },
+    "item_14_047": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 47,
+      "path": "item/atlas_14/icon_047.png"
+    },
+    "item_14_053": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 53,
+      "path": "item/atlas_14/icon_053.png"
+    },
+    "item_14_052": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 52,
+      "path": "item/atlas_14/icon_052.png"
+    },
+    "item_14_046": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 46,
+      "path": "item/atlas_14/icon_046.png"
+    },
+    "item_14_050": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 50,
+      "path": "item/atlas_14/icon_050.png"
+    },
+    "item_14_044": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 44,
+      "path": "item/atlas_14/icon_044.png"
+    },
+    "item_14_045": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 45,
+      "path": "item/atlas_14/icon_045.png"
+    },
+    "item_14_051": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 51,
+      "path": "item/atlas_14/icon_051.png"
+    },
+    "item_14_060": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 60,
+      "path": "item/atlas_14/icon_060.png"
+    },
+    "item_14_048": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 48,
+      "path": "item/atlas_14/icon_048.png"
+    },
+    "item_14_049": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 49,
+      "path": "item/atlas_14/icon_049.png"
+    },
+    "item_14_061": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 61,
+      "path": "item/atlas_14/icon_061.png"
+    },
+    "item_14_063": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 63,
+      "path": "item/atlas_14/icon_063.png"
+    },
+    "item_14_062": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 62,
+      "path": "item/atlas_14/icon_062.png"
+    },
+    "item_14_059": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 59,
+      "path": "item/atlas_14/icon_059.png"
+    },
+    "item_14_064": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 64,
+      "path": "item/atlas_14/icon_064.png"
+    },
+    "item_14_058": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 58,
+      "path": "item/atlas_14/icon_058.png"
+    },
+    "item_14_017": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 17,
+      "path": "item/atlas_14/icon_017.png"
+    },
+    "item_14_003": {
+      "category": "item",
+      "atlas_number": "14",
+      "icon_index": 3,
+      "path": "item/atlas_14/icon_003.png"
+    }
+  }
+}

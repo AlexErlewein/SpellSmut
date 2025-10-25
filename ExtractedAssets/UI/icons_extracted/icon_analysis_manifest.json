@@ -1,0 +1,79 @@
+{
+  "total_analyses": 10530,
+  "num_files": 10,
+  "analyses_per_file": 1053,
+  "summary": {
+    "total_icons": 10530,
+    "empty_count": 3908,
+    "duplicate_groups": 79,
+    "total_duplicates": 87,
+    "empty_by_reason": {
+      "fully_transparent": 3205,
+      "mostly_transparent": 695,
+      "solid_color": 5,
+      "low_content": 3
+    }
+  },
+  "files": [
+    {
+      "file": "icon_analysis_part_00.json",
+      "start_index": 0,
+      "end_index": 1052,
+      "analysis_count": 1053
+    },
+    {
+      "file": "icon_analysis_part_01.json",
+      "start_index": 1053,
+      "end_index": 2105,
+      "analysis_count": 1053
+    },
+    {
+      "file": "icon_analysis_part_02.json",
+      "start_index": 2106,
+      "end_index": 3158,
+      "analysis_count": 1053
+    },
+    {
+      "file": "icon_analysis_part_03.json",
+      "start_index": 3159,
+      "end_index": 4211,
+      "analysis_count": 1053
+    },
+    {
+      "file": "icon_analysis_part_04.json",
+      "start_index": 4212,
+      "end_index": 5264,
+      "analysis_count": 1053
+    },
+    {
+      "file": "icon_analysis_part_05.json",
+      "start_index": 5265,
+      "end_index": 6317,
+      "analysis_count": 1053
+    },
+    {
+      "file": "icon_analysis_part_06.json",
+      "start_index": 6318,
+      "end_index": 7370,
+      "analysis_count": 1053
+    },
+    {
+      "file": "icon_analysis_part_07.json",
+      "start_index": 7371,
+      "end_index": 8423,
+      "analysis_count": 1053
+    },
+    {
+      "file": "icon_analysis_part_08.json",
+      "start_index": 8424,
+      "end_index": 9476,
+      "analysis_count": 1053
+    },
+    {
+      "file": "icon_analysis_part_09.json",
+      "start_index": 9477,
+      "end_index": 10529,
+      "analysis_count": 1053
+    }
+  ]
+}
