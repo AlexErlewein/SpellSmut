@@ -59,6 +59,10 @@ Contains comprehensive guides for:
 ### Asset Extraction (ExtractedAssets/)
 - Extracted UI elements, audio, textures, and models from game PAK files
 - Organized by asset type for easy access and modification
+- **Texture Atlases**: 16 ITM (item) atlases extracted with 4096+ individual icons
+- **Weapon Reassembly**: Automated detection and reassembly of 1x2 and 1x4 weapon icons
+- **Icon System**: Individual PNG extraction with proper indexing and organization
+- **Categorization**: Assets organized by type (items, spells, UI elements, etc.)
 
 ### Modding Tools (src/)
 #### TirganachReloaded
@@ -75,6 +79,9 @@ Python and batch scripts for:
 - Audio asset extraction
 - File organization and categorization
 - Lua mappings extraction
+- Texture atlas extraction (16 ITM atlases, 4096+ icons)
+- Weapon icon reassembly (1x2 and 1x4 weapon patterns)
+- Icon indexing and organization system
 
 ## Development Process
 
