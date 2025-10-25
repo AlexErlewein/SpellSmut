@@ -518,28 +518,51 @@ After extraction:
 
 ---
 
-## Status: READY TO EXECUTE ✅
+## Status: EXTRACTION WORKS, MAPPING MISSING ⚠️
 
-Everything is in place. All scripts, tools, and documentation ready.
+**ITM Extraction:** ✅ **SUCCESSFUL** - 4096 icons extracted, weapons reassembled
+**Spell Mapping:** ❓ **UNKNOWN** - No atlas information found in GameData
+**Handle-to-Icon Mapping:** ❌ **MISSING** - Critical gap between UI handles and atlas positions
 
-**To begin:**
+### Key Findings (2025-10-25)
 
-```batch
-cd H:\SpellSmut\src\helper_tools
-run_ui_icon_integration.bat
-```
+#### ✅ ITM (Item) Icons
+- **16 atlases** extracted successfully (256×256 pixels each)
+- **4096 individual icons** extracted (16×16 pixel grid)
+- **Weapon reassembly** working: 1x2 (32×16) and 1x4 (64×16) weapons detected and combined
+- **Pattern analysis** successful: 30-46 pairs and 5-36 quads per atlas
 
-**Or on macOS/Linux:**
+#### ❌ Mapping Challenge
+- **GameData exports** contain `item_ui_handle` and `item_ui_index` but **no atlas numbers**
+- **Spell data** has `spell_ui_handle` but **no atlas information**
+- **Missing link**: Which atlas file contains which icons?
+- **Cannot automate** full pipeline without handle-to-atlas mapping
 
-```bash
-cd SpellSmut/src/helper_tools
-./run_ui_icon_integration.sh
-```
+#### 🎯 Current Capabilities
+- Extract and convert DDS → PNG ✅
+- Detect multi-part weapons ✅
+- Reassemble weapon icons ✅
+- Basic placeholder mapping created ✅
 
-**Let's extract those icons! 🚀**
+### Next Steps Required
+
+1. **Find Real Mapping** 🔍
+   - Search original game files for atlas-to-handle relationships
+   - Check PAK file headers or embedded data
+   - Reverse engineer from game's icon loading system
+
+2. **Alternative Approaches** 🛠️
+   - Manual mapping with visual verification
+   - On-demand icon lookup system
+   - Community-assisted mapping project
+
+3. **Spell Investigation** 📚
+   - Extract spell atlases (ui_spell8.dds, ui_spell9.dds)
+   - Test 4×4 grid extraction with 64×64 icons
+   - Check for spell-specific mapping patterns
 
 ---
 
-**Document Version:** 1.0  
-**Last Updated:** 2024-01-20  
-**Status:** Complete and Ready
+**Document Version:** 1.1  
+**Last Updated:** 2025-10-25  
+**Status:** Extraction Working, Mapping Required

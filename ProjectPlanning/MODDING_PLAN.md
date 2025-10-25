@@ -35,20 +35,25 @@ A comprehensive modding toolkit and documentation project for SpellForce: The Or
 - Developed automated extraction tools
 - Generated comprehensive documentation
 
-**Asset Categories**:
+**Asset Categories** (Updated 2025-10-25):
 | Category | Count | Description |
 |----------|-------|-------------|
 | Backgrounds | 255 | UI panels, windows, dialogs |
-| Items | 114 | Inventory item icons |
+| Items | 4096+ | ITM atlas icons (16 atlases × 256 icons each) |
 | Main Menu | 79 | Menu background images |
 | Buttons | 65 | Interactive button graphics |
 | Other UI | 43 | Miscellaneous UI elements |
 | Containers | 37 | Character/container frames |
 | Cursors | 33 | Mouse cursor states |
 | Splash Screens | 26 | Loading screens |
-| Spells | 18 | Spell icons |
+| Spells | 18+ | Spell atlases (ui_spell8.dds, ui_spell9.dds) |
 | Clock | 8 | Time/day-night indicators |
 | Logos | 5 | Game branding |
+
+**Icon System Status**:
+- ✅ **ITM Extraction**: 4096 icons extracted, weapons reassembled
+- ⚠️ **Mapping Gap**: Handle-to-atlas mapping missing (atlas numbers not in GameData exports)
+- 🔍 **Investigation Needed**: Find atlas assignment data in original game files
 
 **Tools Created**:
 - `src/helper_tools/extract_ui_assets.py` - Scans pakdata.dat for UI files
@@ -256,23 +261,36 @@ ExtractedAssets/
 
 ## 🎨 UI Asset Extraction - Detailed Roadmap
 
-### ⏳ Immediate Next Steps (Phase 3A)
+### ✅ Completed Achievements (2025-10-25)
 
-1. **Extract Priority Assets** (Week 1)
-   - [ ] Extract all cursor files (33 files)
-   - [ ] Extract all button files (65 files)
-   - [ ] Extract item icons (114 files)
-   - [ ] Test extraction quality and format
+1. **ITM Icon Extraction** (COMPLETED)
+    - [x] Extracted 4096+ ITM icons from 16 atlases
+    - [x] Implemented weapon reassembly (1x2 and 1x4 weapons)
+    - [x] Created automated pattern detection
+    - [x] DDS → PNG conversion pipeline working
 
-2. **Batch Conversion** (Week 1-2)
-   - [ ] Create Python script for DDS → PNG conversion
-   - [ ] Test with ImageMagick or Python PIL
-   - [ ] Batch convert all extracted assets
-   - [ ] Verify output quality
+2. **Technical Infrastructure** (COMPLETED)
+    - [x] Created Python scripts for atlas extraction
+    - [x] ImageMagick integration for DDS conversion
+    - [x] 180° rotation correction for SpellForce Y-axis
+    - [x] Grid-based extraction algorithms
 
-3. **Visual Documentation** (Week 2)
-   - [ ] Create HTML catalog page with thumbnails
-   - [ ] Generate sprite sheets/atlases for each category
+### ⏳ Current Challenges (Phase 3B)
+
+1. **Mapping Discovery** (URGENT)
+    - [ ] Find atlas-to-handle mapping in game files
+    - [ ] Locate missing `item_ui_texture` field data
+    - [ ] Reverse engineer icon loading system
+
+2. **Spell Icon Investigation**
+    - [ ] Extract ui_spell8.dds, ui_spell9.dds atlases
+    - [ ] Test 4×4 grid extraction (64×64 icons)
+    - [ ] Find spell-to-atlas relationships
+
+3. **Integration Completion**
+    - [ ] Connect extracted icons to CFF editor
+    - [ ] Implement fallback mapping system
+    - [ ] Create manual mapping interface
    - [ ] Document texture sizes and formats
    - [ ] Create interactive asset browser
 

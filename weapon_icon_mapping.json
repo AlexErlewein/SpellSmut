@@ -1,0 +1,722 @@
+{
+  "ui_item_equip_weapon_axe_great": {
+    "atlas": 0,
+    "index": 1,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_001.png"
+  },
+  "ui_item_equip_weapon_axe_mithril": {
+    "atlas": 0,
+    "index": 2,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_002.png"
+  },
+  "ui_item_equip_weapon_beastman_hammer": {
+    "atlas": 0,
+    "index": 3,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_003.png"
+  },
+  "ui_item_equip_weapon_bonecrusher_sword": {
+    "atlas": 0,
+    "index": 4,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_004.png"
+  },
+  "ui_item_equip_weapon_chaosaxe": {
+    "atlas": 0,
+    "index": 5,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_005.png"
+  },
+  "ui_item_equip_weapon_chaosblade": {
+    "atlas": 0,
+    "index": 6,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_006.png"
+  },
+  "ui_item_equip_weapon_cleaver": {
+    "atlas": 0,
+    "index": 7,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_007.png"
+  },
+  "ui_item_equip_weapon_club_bone": {
+    "atlas": 0,
+    "index": 8,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_008.png"
+  },
+  "ui_item_equip_weapon_club_crystal": {
+    "atlas": 0,
+    "index": 9,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_009.png"
+  },
+  "ui_item_equip_weapon_crossbow_bone": {
+    "atlas": 0,
+    "index": 10,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_010.png"
+  },
+  "ui_item_equip_weapon_dagger01": {
+    "atlas": 0,
+    "index": 11,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_011.png"
+  },
+  "ui_item_equip_weapon_dagger02": {
+    "atlas": 0,
+    "index": 12,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_012.png"
+  },
+  "ui_item_equip_weapon_dagger03": {
+    "atlas": 0,
+    "index": 13,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_013.png"
+  },
+  "ui_item_equip_weapon_dagger04": {
+    "atlas": 0,
+    "index": 14,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_014.png"
+  },
+  "ui_item_equip_weapon_dagger_bone": {
+    "atlas": 0,
+    "index": 15,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_015.png"
+  },
+  "ui_item_equip_weapon_dagger_flame": {
+    "atlas": 0,
+    "index": 16,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_016.png"
+  },
+  "ui_item_equip_weapon_darkelf_dagger": {
+    "atlas": 0,
+    "index": 17,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_017.png"
+  },
+  "ui_item_equip_weapon_darkelf_mace": {
+    "atlas": 0,
+    "index": 18,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_018.png"
+  },
+  "ui_item_equip_weapon_darkelf_staff": {
+    "atlas": 0,
+    "index": 19,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_019.png"
+  },
+  "ui_item_equip_weapon_darkelf_sword": {
+    "atlas": 0,
+    "index": 20,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_020.png"
+  },
+  "ui_item_equip_weapon_dwarf_hammer": {
+    "atlas": 0,
+    "index": 21,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_021.png"
+  },
+  "ui_item_equip_weapon_dwarf_shield": {
+    "atlas": 0,
+    "index": 22,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_022.png"
+  },
+  "ui_item_equip_weapon_dwarf_sword": {
+    "atlas": 0,
+    "index": 23,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_023.png"
+  },
+  "ui_item_equip_weapon_dwarf_twohandbattleaxe": {
+    "atlas": 0,
+    "index": 24,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_024.png"
+  },
+  "ui_item_equip_weapon_dwarf_warhammer": {
+    "atlas": 0,
+    "index": 25,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_025.png"
+  },
+  "ui_item_equip_weapon_elf_druidstaff": {
+    "atlas": 0,
+    "index": 26,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_026.png"
+  },
+  "ui_item_equip_weapon_elf_longbow": {
+    "atlas": 0,
+    "index": 27,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_027.png"
+  },
+  "ui_item_equip_weapon_elf_longbow_masterbow": {
+    "atlas": 0,
+    "index": 28,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_028.png"
+  },
+  "ui_item_equip_weapon_elf_longbow_wood": {
+    "atlas": 0,
+    "index": 29,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_029.png"
+  },
+  "ui_item_equip_weapon_fightingstaff_crystal": {
+    "atlas": 0,
+    "index": 30,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_030.png"
+  },
+  "ui_item_equip_weapon_firecrystal": {
+    "atlas": 0,
+    "index": 31,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_031.png"
+  },
+  "ui_item_equip_weapon_flail": {
+    "atlas": 0,
+    "index": 32,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_032.png"
+  },
+  "ui_item_equip_weapon_flamberge": {
+    "atlas": 0,
+    "index": 33,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_033.png"
+  },
+  "ui_item_equip_weapon_ghoul_mace": {
+    "atlas": 0,
+    "index": 34,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_034.png"
+  },
+  "ui_item_equip_weapon_ghoul_twohandmace": {
+    "atlas": 0,
+    "index": 35,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_035.png"
+  },
+  "ui_item_equip_weapon_goblin_cudgel": {
+    "atlas": 0,
+    "index": 36,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_036.png"
+  },
+  "ui_item_equip_weapon_hammer_flame": {
+    "atlas": 0,
+    "index": 37,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_037.png"
+  },
+  "ui_item_equip_weapon_hammer_oldrusty": {
+    "atlas": 0,
+    "index": 38,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_038.png"
+  },
+  "ui_item_equip_weapon_handaxe": {
+    "atlas": 0,
+    "index": 39,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_039.png"
+  },
+  "ui_item_equip_weapon_hero_claymore": {
+    "atlas": 0,
+    "index": 40,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_040.png"
+  },
+  "ui_item_equip_weapon_hero_crossbow02": {
+    "atlas": 0,
+    "index": 41,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_041.png"
+  },
+  "ui_item_equip_weapon_hero_doubledragon_shield": {
+    "atlas": 0,
+    "index": 42,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_042.png"
+  },
+  "ui_item_equip_weapon_hero_dragonshield": {
+    "atlas": 0,
+    "index": 43,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_043.png"
+  },
+  "ui_item_equip_weapon_hero_magestaff": {
+    "atlas": 0,
+    "index": 44,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_044.png"
+  },
+  "ui_item_equip_weapon_hero_shield": {
+    "atlas": 0,
+    "index": 45,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_045.png"
+  },
+  "ui_item_equip_weapon_hero_shield_dark": {
+    "atlas": 0,
+    "index": 46,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_046.png"
+  },
+  "ui_item_equip_weapon_hero_shield_goldblue": {
+    "atlas": 0,
+    "index": 47,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_047.png"
+  },
+  "ui_item_equip_weapon_hero_shield_purple": {
+    "atlas": 0,
+    "index": 48,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_048.png"
+  },
+  "ui_item_equip_weapon_hero_sword1": {
+    "atlas": 0,
+    "index": 49,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_049.png"
+  },
+  "ui_item_equip_weapon_hero_sword2": {
+    "atlas": 0,
+    "index": 50,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_050.png"
+  },
+  "ui_item_equip_weapon_hero_tabernacleshield": {
+    "atlas": 0,
+    "index": 51,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_051.png"
+  },
+  "ui_item_equip_weapon_hero_tabernacleshield_blue": {
+    "atlas": 0,
+    "index": 52,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_052.png"
+  },
+  "ui_item_equip_weapon_hero_tabernacleshield_turquoise": {
+    "atlas": 0,
+    "index": 53,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_053.png"
+  },
+  "ui_item_equip_weapon_hero_tabernaclestaff": {
+    "atlas": 0,
+    "index": 54,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_054.png"
+  },
+  "ui_item_equip_weapon_hero_vampireshield": {
+    "atlas": 0,
+    "index": 55,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_055.png"
+  },
+  "ui_item_equip_weapon_hero_vampireshield_black": {
+    "atlas": 0,
+    "index": 56,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_056.png"
+  },
+  "ui_item_equip_weapon_human_battleaxe": {
+    "atlas": 0,
+    "index": 57,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_057.png"
+  },
+  "ui_item_equip_weapon_human_crossbow": {
+    "atlas": 0,
+    "index": 58,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_058.png"
+  },
+  "ui_item_equip_weapon_human_shortsword": {
+    "atlas": 0,
+    "index": 59,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_059.png"
+  },
+  "ui_item_equip_weapon_human_sword": {
+    "atlas": 0,
+    "index": 60,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_060.png"
+  },
+  "ui_item_equip_weapon_katana": {
+    "atlas": 0,
+    "index": 61,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_061.png"
+  },
+  "ui_item_equip_weapon_longbow01": {
+    "atlas": 0,
+    "index": 62,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_062.png"
+  },
+  "ui_item_equip_weapon_longbow02": {
+    "atlas": 0,
+    "index": 63,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_063.png"
+  },
+  "ui_item_equip_weapon_longbow03": {
+    "atlas": 0,
+    "index": 64,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_064.png"
+  },
+  "ui_item_equip_weapon_longbow04": {
+    "atlas": 0,
+    "index": 65,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_065.png"
+  },
+  "ui_item_equip_weapon_longbow_bone": {
+    "atlas": 0,
+    "index": 66,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_066.png"
+  },
+  "ui_item_equip_weapon_longbow_crystal": {
+    "atlas": 0,
+    "index": 67,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_067.png"
+  },
+  "ui_item_equip_weapon_magestaff01": {
+    "atlas": 0,
+    "index": 68,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_068.png"
+  },
+  "ui_item_equip_weapon_magestaff02": {
+    "atlas": 0,
+    "index": 69,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_069.png"
+  },
+  "ui_item_equip_weapon_magestaff03": {
+    "atlas": 0,
+    "index": 70,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_070.png"
+  },
+  "ui_item_equip_weapon_naginata": {
+    "atlas": 0,
+    "index": 71,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_071.png"
+  },
+  "ui_item_equip_weapon_necrostaff": {
+    "atlas": 0,
+    "index": 72,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_072.png"
+  },
+  "ui_item_equip_weapon_nodachi": {
+    "atlas": 0,
+    "index": 73,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_073.png"
+  },
+  "ui_item_equip_weapon_orb_ivory": {
+    "atlas": 0,
+    "index": 74,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_074.png"
+  },
+  "ui_item_equip_weapon_orb_metal": {
+    "atlas": 0,
+    "index": 75,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_075.png"
+  },
+  "ui_item_equip_weapon_orb_metal02": {
+    "atlas": 0,
+    "index": 76,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_076.png"
+  },
+  "ui_item_equip_weapon_orb_organic": {
+    "atlas": 0,
+    "index": 77,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_077.png"
+  },
+  "ui_item_equip_weapon_orc_cudget": {
+    "atlas": 0,
+    "index": 78,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_078.png"
+  },
+  "ui_item_equip_weapon_orc_dagger": {
+    "atlas": 0,
+    "index": 79,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_079.png"
+  },
+  "ui_item_equip_weapon_orc_metalmace": {
+    "atlas": 0,
+    "index": 80,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_080.png"
+  },
+  "ui_item_equip_weapon_orc_saber": {
+    "atlas": 0,
+    "index": 81,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_081.png"
+  },
+  "ui_item_equip_weapon_orc_shamanstaff": {
+    "atlas": 0,
+    "index": 82,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_082.png"
+  },
+  "ui_item_equip_weapon_orc_shield": {
+    "atlas": 0,
+    "index": 83,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_083.png"
+  },
+  "ui_item_equip_weapon_orc_shield02": {
+    "atlas": 0,
+    "index": 84,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_084.png"
+  },
+  "ui_item_equip_weapon_orc_shield03": {
+    "atlas": 0,
+    "index": 85,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_085.png"
+  },
+  "ui_item_equip_weapon_orc_spear": {
+    "atlas": 0,
+    "index": 86,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_086.png"
+  },
+  "ui_item_equip_weapon_orc_totem": {
+    "atlas": 0,
+    "index": 87,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_087.png"
+  },
+  "ui_item_equip_weapon_orc_wooden_club": {
+    "atlas": 0,
+    "index": 88,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_088.png"
+  },
+  "ui_item_equip_weapon_ravenpecker": {
+    "atlas": 0,
+    "index": 89,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_089.png"
+  },
+  "ui_item_equip_weapon_runeaxe": {
+    "atlas": 0,
+    "index": 90,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_090.png"
+  },
+  "ui_item_equip_weapon_runesword": {
+    "atlas": 0,
+    "index": 91,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_091.png"
+  },
+  "ui_item_equip_weapon_rusty_axe": {
+    "atlas": 0,
+    "index": 92,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_092.png"
+  },
+  "ui_item_equip_weapon_saber_oriental": {
+    "atlas": 0,
+    "index": 93,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_093.png"
+  },
+  "ui_item_equip_weapon_sceptre_ivory": {
+    "atlas": 0,
+    "index": 94,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_094.png"
+  },
+  "ui_item_equip_weapon_sceptre_metal": {
+    "atlas": 0,
+    "index": 95,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_095.png"
+  },
+  "ui_item_equip_weapon_sceptre_metal02": {
+    "atlas": 0,
+    "index": 96,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_096.png"
+  },
+  "ui_item_equip_weapon_shield02": {
+    "atlas": 0,
+    "index": 97,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_097.png"
+  },
+  "ui_item_equip_weapon_shield03": {
+    "atlas": 0,
+    "index": 98,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_098.png"
+  },
+  "ui_item_equip_weapon_shield_bone": {
+    "atlas": 0,
+    "index": 99,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_099.png"
+  },
+  "ui_item_equip_weapon_shield_bone02": {
+    "atlas": 0,
+    "index": 100,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_100.png"
+  },
+  "ui_item_equip_weapon_shield_bone03": {
+    "atlas": 0,
+    "index": 101,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_101.png"
+  },
+  "ui_item_equip_weapon_shield_chaos": {
+    "atlas": 0,
+    "index": 102,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_102.png"
+  },
+  "ui_item_equip_weapon_shield_chaos_gold": {
+    "atlas": 0,
+    "index": 103,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_103.png"
+  },
+  "ui_item_equip_weapon_shield_crystal": {
+    "atlas": 0,
+    "index": 104,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_104.png"
+  },
+  "ui_item_equip_weapon_shield_jewels_01": {
+    "atlas": 0,
+    "index": 105,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_105.png"
+  },
+  "ui_item_equip_weapon_shield_jewels_02": {
+    "atlas": 0,
+    "index": 106,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_106.png"
+  },
+  "ui_item_equip_weapon_shield_jewels_broken": {
+    "atlas": 0,
+    "index": 107,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_107.png"
+  },
+  "ui_item_equip_weapon_shield_jewels_empty": {
+    "atlas": 0,
+    "index": 108,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_108.png"
+  },
+  "ui_item_equip_weapon_shield_jewels_full": {
+    "atlas": 0,
+    "index": 109,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_109.png"
+  },
+  "ui_item_equip_weapon_shield_mithril": {
+    "atlas": 0,
+    "index": 110,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_110.png"
+  },
+  "ui_item_equip_weapon_shield_spike": {
+    "atlas": 0,
+    "index": 111,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_111.png"
+  },
+  "ui_item_equip_weapon_shield_spike02": {
+    "atlas": 0,
+    "index": 112,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_112.png"
+  },
+  "ui_item_equip_weapon_shortbow": {
+    "atlas": 0,
+    "index": 113,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_113.png"
+  },
+  "ui_item_equip_weapon_skeleton_metalmace": {
+    "atlas": 0,
+    "index": 114,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_114.png"
+  },
+  "ui_item_equip_weapon_skeleton_shortsword": {
+    "atlas": 0,
+    "index": 115,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_115.png"
+  },
+  "ui_item_equip_weapon_skeleton_sword": {
+    "atlas": 0,
+    "index": 116,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_116.png"
+  },
+  "ui_item_equip_weapon_skeleton_twohandmace": {
+    "atlas": 0,
+    "index": 117,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_117.png"
+  },
+  "ui_item_equip_weapon_soulforgers_hammer": {
+    "atlas": 0,
+    "index": 118,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_118.png"
+  },
+  "ui_item_equip_weapon_spear_01": {
+    "atlas": 0,
+    "index": 119,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_119.png"
+  },
+  "ui_item_equip_weapon_spear_02": {
+    "atlas": 0,
+    "index": 120,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_120.png"
+  },
+  "ui_item_equip_weapon_spikeaxe": {
+    "atlas": 0,
+    "index": 121,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_121.png"
+  },
+  "ui_item_equip_weapon_staff01": {
+    "atlas": 0,
+    "index": 122,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_122.png"
+  },
+  "ui_item_equip_weapon_staff02": {
+    "atlas": 0,
+    "index": 123,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_123.png"
+  },
+  "ui_item_equip_weapon_staff03": {
+    "atlas": 0,
+    "index": 124,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_124.png"
+  },
+  "ui_item_equip_weapon_staff04": {
+    "atlas": 0,
+    "index": 125,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_125.png"
+  },
+  "ui_item_equip_weapon_staff_bone": {
+    "atlas": 0,
+    "index": 126,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_126.png"
+  },
+  "ui_item_equip_weapon_staff_jewels_01": {
+    "atlas": 0,
+    "index": 127,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_127.png"
+  },
+  "ui_item_equip_weapon_staff_jewels_02": {
+    "atlas": 0,
+    "index": 128,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_128.png"
+  },
+  "ui_item_equip_weapon_staff_jewels_broken": {
+    "atlas": 0,
+    "index": 129,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_129.png"
+  },
+  "ui_item_equip_weapon_staff_jewels_empty": {
+    "atlas": 0,
+    "index": 130,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_130.png"
+  },
+  "ui_item_equip_weapon_staff_jewels_full": {
+    "atlas": 0,
+    "index": 131,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_131.png"
+  },
+  "ui_item_equip_weapon_staff_magiceye": {
+    "atlas": 0,
+    "index": 132,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_132.png"
+  },
+  "ui_item_equip_weapon_sword_crystal": {
+    "atlas": 0,
+    "index": 133,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_133.png"
+  },
+  "ui_item_equip_weapon_sword_fire01": {
+    "atlas": 0,
+    "index": 134,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_134.png"
+  },
+  "ui_item_equip_weapon_sword_fire02": {
+    "atlas": 0,
+    "index": 135,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_135.png"
+  },
+  "ui_item_equip_weapon_sword_flame": {
+    "atlas": 0,
+    "index": 136,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_136.png"
+  },
+  "ui_item_equip_weapon_sword_ice": {
+    "atlas": 0,
+    "index": 137,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_137.png"
+  },
+  "ui_item_equip_weapon_sword_shadowpulse": {
+    "atlas": 0,
+    "index": 138,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_138.png"
+  },
+  "ui_item_equip_weapon_sword_teeth": {
+    "atlas": 0,
+    "index": 139,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_139.png"
+  },
+  "ui_item_equip_weapon_troll_club": {
+    "atlas": 0,
+    "index": 140,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_140.png"
+  },
+  "ui_item_equip_weapon_troll_mace": {
+    "atlas": 0,
+    "index": 141,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_141.png"
+  },
+  "ui_item_equip_weapon_troll_metalmace": {
+    "atlas": 0,
+    "index": 142,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_142.png"
+  },
+  "ui_item_equip_weapon_warhammer": {
+    "atlas": 0,
+    "index": 143,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_143.png"
+  },
+  "ui_item_equip_weapon_yumi": {
+    "atlas": 0,
+    "index": 144,
+    "path": "ExtractedAssets/UI/itm_icons_extracted/atlas_0/icon_144.png"
+  }
+}

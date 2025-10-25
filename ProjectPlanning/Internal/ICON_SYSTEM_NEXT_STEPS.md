@@ -125,48 +125,58 @@
 
 **Goal**: Create comprehensive handle-to-icon lookup system
 
-**Current State**:
-- Icons extracted and indexed
-- Icon index has: category, atlas_number, icon_index, path
-- GameData.json has: item handles, item_ui_index values
-- NO direct connection between handle and actual icon file
+**Current State (2025-10-25)**:
+- ✅ **ITM icons extracted**: 4096 icons from 16 atlases, weapons reassembled
+- ✅ **Extraction pipeline working**: DDS→PNG, weapon detection, reassembly
+- ❌ **Critical gap identified**: No atlas numbers in GameData exports
+- ❌ **Handle-to-atlas mapping missing**: Cannot connect UI handles to icon files
 
-**Architecture Plan**:
+**Key Discovery**: GameData exports lack atlas information. The `item_ui_texture` field (atlas number) is not included in the JSON export.
 
-### Phase 1: Automatic Mapping
-Build mapping from GameData.json analysis:
+### Updated Architecture Plan
 
+#### Phase 1: Find Missing Atlas Data 🔍
+**URGENT**: Locate atlas mapping information
+- Search original game files for atlas assignments
+- Check PAK file structures or embedded data
+- Reverse engineer from C++ game code
+- Look for Lua scripts with atlas mappings
+
+#### Phase 2: ITM Mapping Solution
+Since ITM extraction works, create mapping for items:
 ```python
-# GameData.json structure (example):
+# Current GameData (missing atlas info):
 {
-  "item_equip_weapon_dagger_flame": {
-    "item_ui_category": "ui_item",  # -> category = "item"
-    "item_ui_texture": 14,           # -> atlas_number = "14"
-    "item_ui_index": 3               # -> icon_index = 3
-  }
+  "item_id": 27,
+  "item_ui_index": 1,
+  "item_ui_handle": "ui_item_equip_weapon_dagger_flame",
+  "scaled_down": 0
 }
 
-# Generates lookup:
-{
-  "item_equip_weapon_dagger_flame": {
-    "icon_key": "item_14_003",
-    "icon_path": "item/atlas_14/icon_003.png",
-    "confidence": "automatic"
-  }
-}
+# Needed: atlas number discovery
+# Possible approaches:
+# 1. Visual pattern matching
+# 2. Item ID range analysis
+# 3. Manual mapping with verification
 ```
 
-### Phase 2: Smart Fallbacks
-For items without icon data:
-- Name similarity matching
-- Category-based defaults
-- Visual feature detection
+#### Phase 3: Spell Mapping Investigation
+Spells use different system (4×4 grid, 64×64 icons):
+- Extract ui_spell8.dds, ui_spell9.dds
+- Test grid extraction
+- Find spell-to-atlas relationships
 
-### Phase 3: Manual Overrides
-Integrate verified mappings:
-- Priority: verified > automatic > fallback
-- Track verification status
-- Allow community contributions
+#### Phase 4: Fallback Systems
+For unmapped icons:
+- Name-based similarity matching
+- Category defaults (weapon → sword icon, etc.)
+- Placeholder icons with "needs mapping" indicators
+
+#### Phase 5: Manual Override System
+Community-assisted mapping:
+- Web interface for icon verification
+- Confidence scoring for mappings
+- Version control for mapping database
 
 ### Phase 4: API
 Create lookup functions:
