@@ -37,10 +37,10 @@ class CFFDataModel(QObject):
 
         # Icon-related attributes
         self.icon_cache = {}  # Cache for loaded QPixmap objects
-        self.project_root = Path(__file__).parent.parent.parent
+        self.project_root = Path(__file__).parent.parent.parent.parent
         self.ui_assets_dir = self.project_root / "ExtractedAssets" / "UI" / "extracted"
         self.icons_root = self.project_root / "ExtractedAssets" / "UI" / "icons_extracted"
-        self.data_dir = self.project_root / "TirganachReloaded" / "data"
+        self.data_dir = self.project_root / "src" / "TirganachReloaded" / "data"
 
         # Load icon mappings and analysis data
         self.icon_mapping = {}
@@ -391,7 +391,7 @@ class CFFDataModel(QObject):
                 handle = ui_entry.get("item_ui_handle")
 
         # Look up in spell_names table for spells
-        elif category == "spells":
+        elif category == "spell":
             spell = self._find_spell_entry(element_id)
             if spell:
                 handle = spell.get("spell_ui_handle")
@@ -549,7 +549,7 @@ class CFFDataModel(QObject):
             return str(icon_path)
 
         # For spell category, use the ui_icon_mapping.json to find the correct icon
-        if category == "spells" and handle.startswith('ui_spell_'):
+        if category == "spell" and handle.startswith('ui_spell_'):
             # Look up in our verified icon mapping
             # The mapping provides detailed paths for spell handles
             if self.icon_mapping and 'detailed_mapping' in self.icon_mapping:
@@ -620,7 +620,7 @@ class CFFDataModel(QObject):
             "items": "ui_item_unknown.png",
             "weapons": "ui_weapon_unknown.png",
             "armor": "ui_armor_unknown.png",
-            "spells": "ui_spell_unknown.png"
+            "spell": "ui_spell_unknown.png"
         }
 
         fallback_file = fallback_files.get(category, "ui_unknown.png")

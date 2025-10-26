@@ -131,7 +131,8 @@ def extract_icons_from_atlas(
 def main():
     """Main extraction process."""
 
-    project_root = Path(__file__).parent.parent.parent
+    script_dir = Path(__file__).parent
+    project_root = script_dir.parent.parent.parent
     extracted_ui = project_root / "ExtractedAssets" / "UI" / "extracted"
     output_root = project_root / "ExtractedAssets" / "UI" / "icons_extracted"
 
@@ -178,7 +179,7 @@ def main():
     print()
 
     # Process each category
-    for cat_name in ["itm"]:  # Focus on itm first
+    for cat_name in ["spell", "itm"]:  # Process spells and items
         if cat_name not in by_category:
             print(f"⚠ Category '{cat_name}' not found, skipping")
             continue

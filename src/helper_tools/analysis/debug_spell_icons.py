@@ -95,7 +95,7 @@ def check_ui_mapping(project_root):
     print("CHECKING UI ICON MAPPING")
     print("=" * 60)
     
-    mapping_path = project_root / "TirganachReloaded" / "data" / "ui_icon_mapping.json"
+    mapping_path = project_root / "src" / "TirganachReloaded" / "data" / "ui_icon_mapping.json"
     
     if not mapping_path.exists():
         print(f"❌ UI icon mapping not found: {mapping_path}")
@@ -149,7 +149,7 @@ def check_spell_data(project_root):
     print("CHECKING SPELL GAME DATA")
     print("=" * 60)
     
-    gamedata_path = project_root / "TirganachReloaded" / "GameData.json"
+    gamedata_path = project_root / "src" / "TirganachReloaded" / "GameData.json"
     
     if not gamedata_path.exists():
         print(f"❌ GameData not found: {gamedata_path}")
@@ -189,7 +189,8 @@ def main():
     print("SpellForce GUI Spell Icon Debug Tool")
     print("=" * 50)
     
-    project_root = Path(__file__).parent.parent.parent
+    script_dir = Path(__file__).parent
+    project_root = script_dir.parent.parent.parent
     print(f"Project root: {project_root}")
     print()
     
