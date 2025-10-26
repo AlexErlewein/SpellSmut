@@ -21,7 +21,7 @@ pause
 
 cd /d "%~dp0..\..\"
 
-python src\helper_tools\bulk_extract_paks.py
+python src\helper_tools\extraction\bulk_extract_paks.py
 
 echo.
 echo ===============================================================

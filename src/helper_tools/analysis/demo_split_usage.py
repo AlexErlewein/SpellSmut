@@ -13,7 +13,15 @@ import sys
 from pathlib import Path
 
 # Add the helper_tools directory to the path
-sys.path.insert(0, str(Path(__file__).parent))
+import sys
+import tempfile
+from pathlib import Path
+
+# Add helper_tools to path
+project_root = Path(__file__).parent.parent.parent
+helper_tools_path = project_root / "src" / "helper_tools"
+sys.path.insert(0, str(helper_tools_path))
+sys.path.insert(0, str(helper_tools_path / "utils"))
 
 from icon_split_utils import (
     find_icon,

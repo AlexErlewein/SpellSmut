@@ -203,8 +203,8 @@ This is expected and allows for higher quality editing. If disk space is a conce
 
 This tool complements other SpellForce extraction tools:
 
-1. **Extract textures**: `bulk_extract_paks.py` → extracts DDS files from PAK archives
-2. **Convert to PNG**: `convert_dds_to_png.py` → converts DDS to editable format
+1. **Extract textures**: `extraction/bulk_extract_paks.py` → extracts DDS files from PAK archives
+2. **Convert to PNG**: `conversion/convert_dds_to_png.py` → converts DDS to editable format
 3. **Edit textures**: Use any image editor (Photoshop, GIMP, etc.)
 4. **Convert back**: Use external tools to create modified DDS files
 5. **Repack**: Create custom PAK files with modified assets

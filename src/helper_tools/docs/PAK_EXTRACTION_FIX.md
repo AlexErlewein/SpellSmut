@@ -39,7 +39,7 @@ When QuickBMS encountered these filenames:
 
 ## Solution
 
-The fix involves two changes to `bulk_extract_paks.py`:
+The fix involves two changes to `extraction/bulk_extract_paks.py`:
 
 ### 1. Provide Stdin Input to Auto-Accept Renamed Files
 
@@ -124,7 +124,7 @@ The stdin input approach was chosen because:
 
 ## Files Modified
 
-- `bulk_extract_paks.py` - Lines 137-195 (extract_pak function)
+- `extraction/bulk_extract_paks.py` - Lines 137-195 (extract_pak function)
   - Added stdin input handling
   - Added output encoding error handling
   - Added rename count reporting

@@ -20,7 +20,9 @@ from pathlib import Path
 
 # Add helper_tools to path
 project_root = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(project_root / "src" / "helper_tools"))
+helper_tools_path = project_root / "src" / "helper_tools"
+sys.path.insert(0, str(helper_tools_path))
+sys.path.insert(0, str(helper_tools_path / "utils"))
 
 from icon_split_utils import (
     find_icon,

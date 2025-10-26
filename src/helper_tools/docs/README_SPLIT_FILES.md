@@ -43,7 +43,7 @@ ExtractedAssets/UI/icons_extracted/
 
 ```bash
 # Run the updated extraction script
-uv run src/helper_tools/extract_icons_from_atlases.py
+uv run src/helper_tools/extraction/extract_icons_from_atlases.py
 ```
 
 This will automatically create split files instead of a single large `icon_index.json`.
@@ -225,10 +225,10 @@ If split files get corrupted:
 Edit the scripts and change the `num_files` parameter:
 
 ```python
-# In extract_icons_from_atlases.py
+# In extraction/extract_icons_from_atlases.py
 split_icon_index(output_root, index_data, num_files=20)  # 20 parts instead of 10
 
-# In filter_empty_icons.py
+# In organization/filter_empty_icons.py
 split_icon_analysis(icons_root, output_data, num_files=20)  # 20 parts instead of 10
 ```
 
