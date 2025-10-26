@@ -167,6 +167,7 @@ ExtractedAssets/
 #### Textures & Materials
 - ✅ Extract all texture files (6,602 DDS/TGA files extracted!)
 - ✅ Complete ITM (item) texture atlas extraction (16 atlases, 4096+ icons)
+- ✅ Complete spell texture atlas extraction (18 atlases, 657 icons)
 - ✅ Weapon reassembly working (1x2 and 1x4 weapons)
 - [ ] Categorize by type (terrain, units, buildings, effects)
 - [ ] Document texture naming conventions
@@ -284,6 +285,35 @@ ExtractedAssets/
     - [x] Icon indexing and organization system
     - [x] Automated extraction pipeline for ITM category
 
+### ✅ Completed Achievements (2025-10-25)
+
+1. **ITM Icon Extraction** (COMPLETED)
+    - [x] Extracted 4096+ ITM icons from 16 atlases
+    - [x] Implemented weapon reassembly (1x2 and 1x4 weapons)
+    - [x] Created automated pattern detection
+    - [x] DDS → PNG conversion pipeline working
+    - [x] Grid extraction algorithms (16x16 grid, 16x16px icons)
+    - [x] Atlas statistics and metadata collection
+    - [x] Icon indexing system with 4096+ entries
+    - [x] Individual icon extraction with proper naming
+
+2. **Spell Icon Extraction** (COMPLETED)
+    - [x] Extracted 657 spell icons from 18 atlases
+    - [x] Implemented 4×4 grid extraction (64×64 icons with 2px offset)
+    - [x] Identified 9 active slots per atlas (positions 1,2,3,5,6,7,9,10,11)
+    - [x] Implemented spell-specific extraction pipeline
+
+3. **Technical Infrastructure** (COMPLETED)
+    - [x] Created Python scripts for atlas extraction
+    - [x] ImageMagick integration for DDS conversion
+    - [x] 180° rotation correction for SpellForce Y-axis
+    - [x] Grid-based extraction algorithms
+    - [x] Weapon pattern detection and reassembly
+    - [x] Icon indexing and organization system
+    - [x] Automated extraction pipeline for ITM category
+    - [x] Automated extraction pipeline for spell category
+    - [x] 180° rotation applied to spell icons for consistency
+
 ### ⏳ Current Challenges (Phase 3B)
 
 1. **Mapping Discovery** (URGENT)
@@ -292,14 +322,20 @@ ExtractedAssets/
     - [ ] Reverse engineer icon loading system
     - [ ] Connect game data handles to specific atlas locations
 
-2. **Spell Icon Investigation**
-    - [ ] Extract ui_spell8.dds, ui_spell9.dds atlases
-    - [ ] Test 4×4 grid extraction (64×64 icons)
-    - [ ] Find spell-to-atlas relationships
-    - [ ] Implement spell-specific extraction pipeline
+2. **ITM Extraction Refinement** (HIGH PRIORITY)
+    - [ ] Replace current ITM extraction script with improved version
+    - [ ] Current extraction has alignment/offset issues
+    - [ ] Weapon reassembly needs optimization
+    - [ ] Verify icon quality and positioning
 
-3. **Integration Completion**
-    - [ ] Connect extracted icons to CFF editor
+3. **Spell Icon GUI Integration** (HIGH PRIORITY)
+    - [ ] Debug why spell icons aren't displaying in GUI
+    - [ ] Verify icon mapping is correctly loaded
+    - [ ] Check GUI icon resolution paths
+    - [ ] Test spell category icon display
+
+4. **Integration Completion**
+    - [ ] Connect extracted icons to CFF editor (Partially working)
     - [ ] Implement fallback mapping system
     - [ ] Create manual mapping interface
    - [ ] Document texture sizes and formats

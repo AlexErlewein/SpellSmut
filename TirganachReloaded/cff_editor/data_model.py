@@ -180,9 +180,9 @@ class CFFDataModel(QObject):
                     with open(index_path, 'r') as f:
                         self.icon_index = json.load(f)
                     print(f"Loaded icon index: {len(self.icon_index.get('icons', {}))} icons")
-            else:
-                print(f"Icon index not found: {index_path}")
-                self.icon_index = {}
+                else:
+                    print(f"Icon index not found: {index_path}")
+                    self.icon_index = {}
 
             # Load verified mappings
             verified_path = self.data_dir / "verified_icon_mappings.json"
@@ -535,6 +535,42 @@ class CFFDataModel(QObject):
         if icon_path.exists():
             return str(icon_path)
 
+        # For spell category, use the ui_icon_mapping.json to find the correct icon
+        if category == "spells" and handle.startswith('ui_spell_'):
+            # Look up in our verified icon mapping
+            # The mapping provides detailed paths for spell handles
+            if self.icon_mapping and 'detailed_mapping' in self.icon_mapping:
+                detailed = self.icon_mapping['detailed_mapping']
+                # Look for exact handle match
+                for mapping_key, mapping_data in detailed.items():
+                    if mapping_data.get('handle') == handle:
+                        # Found exact match, try the mapped path
+                        icon_path = self.icons_root / mapping_data['path']
+                        if icon_path.exists():
+                            return str(icon_path)
+                        
+                        # Try alternative paths if primary doesn't exist
+                        if 'alternatives' in mapping_data:
+                            for alt_path in mapping_data['alternatives']:
+                                alt_icon_path = self.icons_root / alt_path
+                                if alt_icon_path.exists():
+                                    return str(alt_icon_path)
+            
+            # Fallback: Look in spell directories systematically
+            spell_icons_root = self.icons_root / "spell"
+            if spell_icons_root.exists():
+                # Try different atlases (0-17 based on our extraction)
+                for atlas_num in range(18):
+                    atlas_dir = spell_icons_root / f"atlas_{atlas_num}"
+                    if atlas_dir.exists():
+                        # Try different icon indices (1-16 based on 4x4 grid)
+                        for icon_idx in range(1, 17):
+                            icon_file = atlas_dir / f"icon_{icon_idx:03d}.png"
+                            if icon_file.exists():
+                                # Return first valid icon as fallback
+                                return str(icon_file)
+
+        # For other categories, use the mapping approach
         # Fall back to mapping numbered files
         # Use a hash of the handle to map to available numbered files
         import hashlib
@@ -552,12 +588,6 @@ class CFFDataModel(QObject):
                 return str(mapped_file)
 
         return None
-
-        # Direct lookup: handle + .png
-        icon_path = self.ui_assets_dir / category / f"{handle}.png"
-
-        if icon_path.exists():
-            return str(icon_path)
 
         return None
 
