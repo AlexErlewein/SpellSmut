@@ -29,6 +29,7 @@ __pycache__/
 .Python
 env/
 venv/
+.venv/
 *.egg-info/
 
 # Keep these important files (override above patterns if needed)

@@ -1,113 +1,88 @@
 # Quest Editor Component
 
 ## Overview
-Interactive quest creation and editing system with hierarchical quest trees and branching dialog systems, transforming the current read-only quest viewer into a full-featured quest design tool.
+
+The Quest Editor is an interactive system for creating and managing quests. It transforms the existing read-only viewer into a full-featured design tool, enabling hierarchical quest trees and branching dialog systems.
 
 ## Current Status: 🔄 IN PROGRESS (Phase 1)
 
-### ✅ Completed (Phase 1)
-- **Quest Structure Analysis**: Hierarchical relationships via parent_quest_id and sub_quests
-- **Data Model Design**: QuestNode and DialogNode classes with serialization support
-- **Quest Tree Editor**: Interactive tree widget with drag-drop reordering and CRUD operations
-- **Dialog Branching System**: Conversation tree visualization with branching logic
+### Completed Milestones
+- ✅ **Quest Structure Analysis**: Mapped hierarchical relationships using `parent_quest_id` and `sub_quests`.
+- ✅ **Initial Data Model**: Designed `QuestNode` and `DialogNode` classes with serialization support.
+- ✅ **UI/UX Design**: Prototyped interactive tree widgets and conversation flow visualizations.
 
-### 🔄 In Progress
-- Complete data models and validation logic
-- Build interactive quest tree widget
-- Implement dialog editor widget
-- Add quest creation wizards
+### Roadmap
+- 🔄 **Phase 1 (In Progress)**:
+  - Complete data models with validation logic.
+  - Build interactive quest tree widget with drag-drop functionality.
+  - Implement dialog editor widget with branching visualization.
+- 📋 **Phase 2**:
+  - Develop quest creation wizards and templates.
+  - Implement full dialog editing with conditional branching.
+  - Add save/load functionality for quest hierarchies.
+- 📋 **Phase 3**:
+  - Introduce robust validation for quest logic and dependencies.
+  - Optimize performance for large quest trees.
+  - Conduct comprehensive testing and bug fixing.
+- 📋 **Phase 4**:
+  - Integrate the editor into the main application.
+  - Finalize user documentation and release.
 
-### 📋 Planned (Phase 2-4)
-- Quest creation wizards and templates
-- Full dialog editing with conditional branching
-- Save/load quest hierarchies
-- Validation for quest logic and dependencies
+## Key Features
 
-## Key Features Planned
+### 1. Visual Quest Tree Editor
+- **Hierarchical Management**: Visually organize quests in parent-child relationships.
+- **Intuitive Editing**: Add, edit, delete, and reorder quests with drag-drop and context menus.
+- **Clear Visualization**: At-a-glance understanding of complex quest chains.
 
-### Quest Tree Editor
-- **Hierarchical Display**: Parent-child quest relationships
-- **Interactive Editing**: Add, edit, delete, reorder quests
-- **Drag-Drop Support**: Visual reparenting and reordering
-- **Context Menus**: Right-click operations for all quest actions
+### 2. Branching Dialog Editor
+- **Conversation Flow**: Design complex dialogs with a node-based graphical editor.
+- **Conditional Logic**: Implement branching narratives based on player choices and game state.
+- **Role Distinction**: Clearly separate NPC and player dialog for better readability.
 
-### Dialog Branching Editor
-- **Conversation Trees**: Visual dialog flow representation
-- **Branching Logic**: Multiple response options and outcomes
-- **NPC/Player Distinction**: Clear visual separation of speakers
-- **Validation**: Dialog flow consistency checking
-
-### Quest Creation Tools
-- **Templates**: Pre-built quest structures for common patterns
-- **Wizards**: Guided quest creation process
-- **Validation**: Real-time checking of quest logic and dependencies
+### 3. Smart Creation Tools
+- **Templates & Wizards**: Accelerate quest creation with pre-built structures and guided processes.
+- **Real-time Validation**: Instantly check for logical errors and dependency conflicts.
 
 ## Technical Architecture
 
 ### Data Models
-- **QuestNode**: Hierarchical quest representation with serialization
-- **DialogNode**: Conversation tree node with branching support
-- **QuestHierarchy**: Complete quest structure with relationships
+- **QuestNode**: Represents a single quest in the hierarchy, managing its properties and relationships.
+- **DialogNode**: Represents a point in a conversation, handling branching and speaker roles.
+- **QuestHierarchy**: A container for the entire quest structure, managing serialization and validation.
+
+### Key Algorithms
+- **Graph Traversal**: Algorithms to validate quest and dialog graphs, detecting loops, dead ends, and orphaned nodes.
+- **Topological Sort**: To ensure correct quest order and dependency resolution.
 
 ### Widget Components
-- **QuestTreeEditorWidget**: Interactive hierarchical quest editor
-- **DialogBranchingEditorWidget**: Conversation tree editor
-- **Enhanced QuestDetailsWidget**: Unified quest information display
+- **QuestTreeEditorWidget**: The main interactive widget for editing the quest hierarchy.
+- **DialogBranchingEditorWidget**: The graphical editor for conversation trees.
+- **EnhancedQuestDetailsWidget**: A unified panel for displaying and editing quest information.
 
 ### Integration Points
-- **Main Window**: Dedicated "Quest Editor" tab
-- **Data Model**: Extended CFFDataModel with quest-specific methods
-- **File Operations**: Save quest changes to CFF files
+- **Main Window**: A dedicated "Quest Editor" tab for easy access.
+- **CFFDataModel**: Extended to include methods for reading and writing quest-specific data.
+- **File Operations**: Save and load quest changes to and from CFF files.
 
 ## Data Structure Analysis
 
 ### Quest Relationships
-- **Parent-Child**: Via `parent_quest_id` and `sub_quests` fields
-- **Ordering**: `order_index` for sort order within hierarchy
-- **Localization**: Names from `localisation` table, descriptions from `advanced_descriptions`
+- **Parent-Child**: Linked via `parent_quest_id` and `sub_quests` fields.
+- **Ordering**: `order_index` determines the sequence of quests within a hierarchy.
+- **Localization**: Names and descriptions are sourced from the `localisation` and `advanced_descriptions` tables.
 
 ### Dialog Structure
-- **Naming Convention**: Sequential dialogs (character001, character002, etc.)
-- **Conversation Flow**: Alternating NPC lines and player choices
-- **Player Choices**: Marked with "PC" suffix (ashawe001PC)
-- **Branching**: Each choice can lead to different NPC responses
-
-## Implementation Plan
-
-### Phase 1: Core Implementation (Current)
-- ✅ Quest structure analysis
-- ✅ Basic tree editor design
-- ✅ Dialog branching design
-- 🔄 Complete data models and widgets
-
-### Phase 2: Advanced Features
-- Quest creation wizards
-- Full dialog editing
-- Save/load functionality
-- Validation systems
-
-### Phase 3: Polish and Testing
-- UI/UX improvements
-- Performance optimization
-- Comprehensive testing
-- Documentation
-
-### Phase 4: Integration and Release
-- Main editor integration
-- User documentation
-- Final release
-
-## Dependencies
-- **PySide6**: GUI framework for tree and dialog editors
-- **Tirganach**: CFF data access for quest tables
-- **Python 3.8+**: Base runtime requirements
+- **Flow Control**: Dialog sequences are managed through a naming convention (e.g., `character001`, `character002`).
+- **Player Choices**: Player responses are identified by a "PC" suffix (e.g., `ashawe001PC`), enabling branching.
 
 ## Success Metrics
-- **Quest Creation**: All quest creation operations work correctly
-- **Dialog Branching**: Complex conversation trees display properly
-- **Save/Load**: Quest hierarchies preserve data integrity
-- **Integration**: Seamless integration with main editor
-- **Performance**: UI remains responsive with large quest trees
+
+- **Functionality**: All quest creation, editing, and deletion operations are fully functional and stable.
+- **Usability**: The UI is intuitive and allows for the creation of complex quest hierarchies with at least 5 levels of nesting.
+- **Data Integrity**: Saving and loading quest hierarchies preserves all data and relationships without corruption.
+- **Performance**: The UI remains responsive (<100ms latency) when handling quest trees with over 500 nodes.
+- **Validation**: The system correctly identifies and reports at least 95% of common quest logic errors (e.g., broken links, circular dependencies).
 
 ## Files Consolidated From
 - `Internal/QUEST_EDITOR_PLAN.md` (summarized from 370-line detailed plan)

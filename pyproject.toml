@@ -25,7 +25,6 @@ classifiers = [
 requires-python = ">=3.9"
 dependencies = [
     "PySide6>=6.0.0",
-    "textual>=0.40.0",  # For future TUI version
     "pillow>=10.0.0",   # For image processing
     "pyyaml>=6.0",      # For configuration files
     "pytest>=7.0.0",
@@ -48,7 +47,6 @@ source = "src"
 [tool.hatch.envs.default]
 dependencies = [
     "PySide6",
-    "textual",
     "pillow",
     "pyyaml",
 ]
