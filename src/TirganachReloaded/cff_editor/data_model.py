@@ -366,6 +366,14 @@ class CFFDataModel(QObject):
         if not self.game_data:
             return None
 
+        # Map table names to icon category names
+        category_mapping = {
+            "spells": "spell",  # spells table -> spell icons
+            "items": "item",    # items table -> item icons
+            # Add more mappings as needed
+        }
+        icon_category = category_mapping.get(category, category)
+
         # Get element ID based on category
         element_id = self._get_element_id(category, element)
         if element_id is None:
@@ -391,13 +399,13 @@ class CFFDataModel(QObject):
                 handle = ui_entry.get("item_ui_handle")
 
         # Look up in spell_names table for spells
-        elif category == "spell":
+        elif category == "spells":
             spell = self._find_spell_entry(element_id)
             if spell:
                 handle = spell.get("spell_ui_handle")
 
         if handle:
-            resolved_path = self._resolve_icon_path(handle, category)
+            resolved_path = self._resolve_icon_path(handle, icon_category)
             if resolved_path:
                 return resolved_path
 
@@ -408,15 +416,16 @@ class CFFDataModel(QObject):
                 if icon_data.get('index') == 1:  # Primary icon
                     # Try different atlases until we find a non-empty one
                     handle = icon_data.get('handle', '')
-                    icon_category = 'itm' if handle and handle.startswith('ui_item_') else \
-                                   'spell' if handle and handle.startswith('ui_spell_') else 'item'
+                    # Use the already mapped icon_category, but determine the subdirectory
+                    icon_subdir = 'itm' if handle and handle.startswith('ui_item_') else \
+                                 'spell' if handle and handle.startswith('ui_spell_') else 'item'
 
                     # Try up to 10 atlases
                     for atlas_num in range(10):
-                        icon_path = self.icons_root / icon_category / f"atlas_{atlas_num}" / f"icon_{icon_data['index']:03d}.png"
+                        icon_path = self.icons_root / icon_subdir / f"atlas_{atlas_num}" / f"icon_{icon_data['index']:03d}.png"
                         if icon_path.exists():
                             # Check if not empty
-                            icon_key = f"{icon_category}_{atlas_num}_{icon_data['index']:03d}"
+                            icon_key = f"{icon_subdir}_{atlas_num}_{icon_data['index']:03d}"
                             if icon_key in self.icon_index.get('icons', {}):
                                 icon_info = self.icon_index['icons'][icon_key]
                                 if not icon_info.get('is_empty', False):
@@ -520,10 +529,17 @@ class CFFDataModel(QObject):
                             item_to_icons = self.icon_mapping.get('item_to_icons', {})
                             spell_id_str = str(spell_id)
                             if spell_id_str in item_to_icons:
-                                # Use the first icon handle for this spell
                                 icons = item_to_icons[spell_id_str]
                                 if icons and len(icons) > 0:
-                                    ui_handle = icons[0].get('handle', '')
+                                    # Prefer spell handles over item handles
+                                    for icon in icons:
+                                        handle = icon.get('handle', '')
+                                        if handle.startswith('ui_spell_'):
+                                            ui_handle = handle
+                                            break
+                                    # If no spell handle found, use the first icon as fallback
+                                    if not ui_handle:
+                                        ui_handle = icons[0].get('handle', '')
 
                         return {
                             "spell_id": getattr(spell, "spell_id", 0),
@@ -548,40 +564,53 @@ class CFFDataModel(QObject):
         if icon_path.exists():
             return str(icon_path)
 
-        # For spell category, use the ui_icon_mapping.json to find the correct icon
-        if category == "spell" and handle.startswith('ui_spell_'):
-            # Look up in our verified icon mapping
-            # The mapping provides detailed paths for spell handles
-            if self.icon_mapping and 'detailed_mapping' in self.icon_mapping:
-                detailed = self.icon_mapping['detailed_mapping']
-                # Look for exact handle match
-                for mapping_key, mapping_data in detailed.items():
-                    if mapping_data.get('handle') == handle:
-                        # Found exact match, try the mapped path
-                        icon_path = self.icons_root / mapping_data['path']
-                        if icon_path.exists():
-                            return str(icon_path)
-                        
-                        # Try alternative paths if primary doesn't exist
-                        if 'alternatives' in mapping_data:
-                            for alt_path in mapping_data['alternatives']:
-                                alt_icon_path = self.icons_root / alt_path
-                                if alt_icon_path.exists():
-                                    return str(alt_icon_path)
-            
-            # Fallback: Look in spell directories systematically
-            spell_icons_root = self.icons_root / "spell"
-            if spell_icons_root.exists():
-                # Try different atlases (0-17 based on our extraction)
-                for atlas_num in range(18):
-                    atlas_dir = spell_icons_root / f"atlas_{atlas_num}"
-                    if atlas_dir.exists():
-                        # Try different icon indices (1-16 based on 4x4 grid)
-                        for icon_idx in range(1, 17):
-                            icon_file = atlas_dir / f"icon_{icon_idx:03d}.png"
-                            if icon_file.exists():
-                                # Return first valid icon as fallback
-                                return str(icon_file)
+        # For spell category, handle different types of handles
+        if category == "spell":
+            # If it's a spell handle, look in spell directories
+            if handle.startswith('ui_spell_'):
+                # Look up in our verified icon mapping
+                # The mapping provides detailed paths for spell handles
+                if self.icon_mapping and 'detailed_mapping' in self.icon_mapping:
+                    detailed = self.icon_mapping['detailed_mapping']
+                    # Look for exact handle match
+                    for mapping_key, mapping_data in detailed.items():
+                        if mapping_data.get('handle') == handle:
+                            # Found exact match, try the mapped path
+                            icon_path = self.icons_root / mapping_data['path']
+                            if icon_path.exists():
+                                return str(icon_path)
+
+                            # Try alternative paths if primary doesn't exist
+                            if 'alternatives' in mapping_data:
+                                for alt_path in mapping_data['alternatives']:
+                                    alt_icon_path = self.icons_root / alt_path
+                                    if alt_icon_path.exists():
+                                        return str(alt_icon_path)
+
+                # Fallback: Use handle-based selection from available spell icons
+                spell_icons_root = self.icons_root / "spell"
+                if spell_icons_root.exists():
+                    # Get all available spell icon files
+                    all_spell_icons = []
+                    for atlas_num in range(18):
+                        atlas_dir = spell_icons_root / f"atlas_{atlas_num}"
+                        if atlas_dir.exists():
+                            for icon_idx in range(1, 17):
+                                icon_file = atlas_dir / f"icon_{icon_idx:03d}.png"
+                                if icon_file.exists():
+                                    all_spell_icons.append(icon_file)
+
+                    if all_spell_icons:
+                        # Use hash of handle to deterministically select an icon
+                        import hashlib
+                        hash_obj = hashlib.md5(handle.encode('utf-8'))
+                        hash_int = int(hash_obj.hexdigest(), 16)
+                        selected_index = hash_int % len(all_spell_icons)
+                        return str(all_spell_icons[selected_index])
+
+            # If it's an item handle (like ui_item_spellscroll), resolve as item icon
+            elif handle.startswith('ui_item_'):
+                return self._resolve_icon_path(handle, "item")
 
         # For other categories, use the mapping approach
         # Fall back to mapping numbered files

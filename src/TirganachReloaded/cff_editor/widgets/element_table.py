@@ -6,7 +6,7 @@ Displays all elements in the selected category
 from PySide6.QtWidgets import (QWidget, QVBoxLayout, QTableWidget, QTableWidgetItem,
                                QLineEdit, QHBoxLayout, QLabel, QPushButton)
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QPixmap
+from PySide6.QtGui import QPixmap, QIcon
 
 
 class ElementTableWidget(QWidget):
@@ -65,6 +65,8 @@ class ElementTableWidget(QWidget):
         self.filtered_elements = self.current_elements[:]
         self.current_page = 0
         self.search_box.clear()
+        # Clear icon cache when category changes to ensure fresh loading
+        self.data_model.clear_icon_cache()
         self.populate_table()
 
     def populate_table(self):
@@ -100,14 +102,16 @@ class ElementTableWidget(QWidget):
             element = self.filtered_elements[element_idx]
 
             # Icon cell (column 0)
-            icon_label = QLabel()
             icon_pixmap = self.data_model.get_icon_pixmap(self.data_model.current_category, element, size=(32, 32))
             if icon_pixmap:
-                icon_label.setPixmap(icon_pixmap)
+                # Use QTableWidgetItem with decoration role
+                icon_item = QTableWidgetItem()
+                icon_item.setData(Qt.ItemDataRole.DecorationRole, icon_pixmap)
+                self.table.setItem(row_idx, 0, icon_item)
             else:
-                icon_label.setText("No Icon")
-            icon_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-            self.table.setCellWidget(row_idx, 0, icon_label)
+                # Fallback to text
+                icon_item = QTableWidgetItem("No Icon")
+                self.table.setItem(row_idx, 0, icon_item)
 
             # Name cell (column 1)
             name_text = self._get_element_name(element)
@@ -130,6 +134,15 @@ class ElementTableWidget(QWidget):
 
         # Resize columns
         self.table.resizeColumnsToContents()
+
+        # Ensure icon column is wide enough for 32x32 icons
+        if self.table.columnCount() > 0:
+            self.table.setColumnWidth(0, max(self.table.columnWidth(0), 40))  # Minimum 40px for icon column
+
+        # Set row height to accommodate icons
+        for row in range(self.table.rowCount()):
+            self.table.setRowHeight(row, max(self.table.rowHeight(row), 36))  # Minimum 36px for icon rows
+
         self.update_pagination()
 
     def _get_element_name(self, element) -> str:
