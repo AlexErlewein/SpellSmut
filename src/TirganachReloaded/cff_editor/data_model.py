@@ -512,10 +512,23 @@ class CFFDataModel(QObject):
             if spells_table:
                 for spell in spells_table:
                     if getattr(spell, "spell_id", None) == spell_id:
+                        # Get the UI handle from the spell data
+                        ui_handle = getattr(spell, "spell_ui_handle", "")
+
+                        # If spell_ui_handle is empty, try to look it up in the icon mapping
+                        if not ui_handle and self.icon_mapping:
+                            item_to_icons = self.icon_mapping.get('item_to_icons', {})
+                            spell_id_str = str(spell_id)
+                            if spell_id_str in item_to_icons:
+                                # Use the first icon handle for this spell
+                                icons = item_to_icons[spell_id_str]
+                                if icons and len(icons) > 0:
+                                    ui_handle = icons[0].get('handle', '')
+
                         return {
                             "spell_id": getattr(spell, "spell_id", 0),
                             "spell_name_id": getattr(spell, "spell_name_id", 0),
-                            "spell_ui_handle": getattr(spell, "spell_ui_handle", "")
+                            "spell_ui_handle": ui_handle
                         }
         except Exception:
             pass

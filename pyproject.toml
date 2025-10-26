@@ -31,9 +31,7 @@ dependencies = [
     "pytest>=7.0.0",
 ]
 
-[project.scripts]
-tirganach = "TirganachReloaded.cff_editor.main:main"
-tirganach-gui = "TirganachReloaded.cff_editor.main:main"
+
 
 [project.optional-dependencies]
 dev = [
@@ -45,6 +43,7 @@ dev = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["TirganachReloaded"]
+source = "src"
 
 [tool.hatch.envs.default]
 dependencies = [
@@ -74,3 +73,7 @@ line_length = 88
 python_version = "3.9"
 warn_return_any = true
 warn_unused_configs = true
+
+
+[project.scripts]
+tirganach = "tirganach:main"

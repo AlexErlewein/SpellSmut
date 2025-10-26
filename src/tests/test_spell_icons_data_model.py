@@ -50,19 +50,29 @@ def test_spell_icon_loading():
     
     print(f"\n✓ Found 'spells' table with {len(spells_table)} entries")
     
-    # Try to find a few spell entries to test
+    # Try to find spells that have UI handles in the icon mapping
     test_spells = []
-    for i, spell in enumerate(spells_table[:50]):  # Test first 50 to find ones with UI handles
-        spell_id = getattr(spell, "spell_id", None)
-        ui_handle = getattr(spell, "spell_ui_handle", "")
-        if spell_id is not None and ui_handle:  # Only include spells with UI handles
-            test_spells.append((spell_id, spell))
-            if len(test_spells) >= 5:  # Get first 5 with handles
-                break
+    if data_model.icon_mapping:
+        item_to_icons = data_model.icon_mapping.get('item_to_icons', {})
+        for spell in spells_table[:100]:  # Check first 100 spells
+            spell_id = getattr(spell, "spell_id", None)
+            if spell_id is not None:
+                spell_id_str = str(spell_id)
+                # Check if this spell ID has an icon mapping
+                if spell_id_str in item_to_icons:
+                    icons = item_to_icons[spell_id_str]
+                    # Look for spell handles
+                    for icon in icons:
+                        handle = icon.get('handle', '')
+                        if handle.startswith('ui_spell_'):
+                            test_spells.append((spell_id, spell))
+                            break
+                    if len(test_spells) >= 5:  # Get first 5 with spell handles
+                        break
 
     # If no spells have handles, fall back to first 5
     if not test_spells:
-        print("No spells found with UI handles, using first 5 spells for testing...")
+        print("No spells found with UI handles in icon mapping, using first 5 spells for testing...")
         for i, spell in enumerate(spells_table[:5]):
             spell_id = getattr(spell, "spell_id", None)
             if spell_id is not None:
@@ -103,18 +113,20 @@ def test_spell_icon_loading():
     
     print(f"\nResults: {success_count}/{len(test_spells)} spell icons successfully located")
 
-    # Note: The binary CFF data doesn't contain spell_ui_handle values
-    # This appears to be a limitation of the current data format
-    # The icon loading logic works, but requires UI handles which aren't populated
-    if success_count == 0:
-        print("\n⚠️  NOTE: No spell UI handles found in binary CFF data.")
-        print("   This appears to be expected - UI handles may be in a different file")
-        print("   or generated at runtime by the game.")
-        print("   The icon resolution logic is working correctly when handles are present.")
+    # Check if we found any UI handles at all
+    handles_found = sum(1 for _, spell in test_spells if data_model._find_spell_entry(getattr(spell, "spell_id", 0)).get("spell_ui_handle", ""))
 
-    # For now, we'll pass the test since the core functionality (data loading) works
-    # The icon resolution would work if UI handles were available
-    assert True, "Test completed - data loading works, icon handles not present in CFF"
+    if handles_found > 0:
+        print(f"\n✅ SUCCESS: Found {handles_found} spells with UI handles!")
+        print("   The spell_ui_handle population from icon mapping is working correctly.")
+        if success_count == 0:
+            print("   ⚠️  Note: Icon files may not be extracted yet, but handle lookup works.")
+    else:
+        print("\n⚠️  NOTE: No spell UI handles found.")
+        print("   This may indicate missing icon mapping data.")
+
+    # Test passes if we can load data and find handles (icon resolution is separate)
+    assert handles_found > 0, f"Expected to find UI handles for spells, but found {handles_found}"
     return  # Explicitly return None for pytest compatibility
 
 def main():
