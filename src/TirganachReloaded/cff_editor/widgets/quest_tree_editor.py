@@ -6,7 +6,9 @@ Interactive hierarchical quest tree view with drag-drop editing capabilities
 from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel,
                                QTreeWidget, QTreeWidgetItem, QPushButton,
                                QMenu, QMessageBox, QInputDialog, QSplitter,
-                               QGroupBox, QTextEdit, QLineEdit, QComboBox)
+                               QGroupBox, QTextEdit, QLineEdit, QComboBox,
+                               QTabWidget)
+from .dialog_branching_editor import DialogBranchingEditorWidget
 from PySide6.QtCore import Qt, Signal, QPoint
 from PySide6.QtGui import QAction, QIcon
 from typing import Optional, List, Dict, Any
@@ -17,7 +19,8 @@ class QuestNode:
     """Data model for quest nodes in the tree"""
 
     def __init__(self, quest_id: Optional[int] = None, name: str = "", description: str = "",
-                 parent_id: Optional[int] = None, order_index: int = 0, is_new: bool = False):
+                 parent_id: Optional[int] = None, order_index: int = 0, is_new: bool = False, 
+                 dialog_nodes: Optional[List['DialogNode']] = None):
         self.quest_id = quest_id
         self.name = name
         self.description = description
@@ -25,6 +28,7 @@ class QuestNode:
         self.order_index = order_index
         self.is_new = is_new  # Flag for newly created quests
         self.children: List['QuestNode'] = []
+        self.dialog_nodes: List['DialogNode'] = dialog_nodes or []  # Associated dialog nodes
         self.original_data: Dict[str, Any] = {}  # Store original quest data
 
     def to_dict(self) -> Dict[str, Any]:
@@ -36,19 +40,23 @@ class QuestNode:
             'parent_id': self.parent_id,
             'order_index': self.order_index,
             'is_new': self.is_new,
+            'dialog_nodes': [dialog_node.to_dict() for dialog_node in self.dialog_nodes],
             'children': [child.to_dict() for child in self.children]
         }
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> 'QuestNode':
         """Create from dictionary"""
+        from .dialog_branching_editor import DialogNode  # Import here to avoid circular import
+        
         node = cls(
             quest_id=data.get('quest_id'),
             name=data.get('name', ''),
             description=data.get('description', ''),
             parent_id=data.get('parent_id'),
             order_index=data.get('order_index', 0),
-            is_new=data.get('is_new', False)
+            is_new=data.get('is_new', False),
+            dialog_nodes=[DialogNode.from_dict(dialog_data) for dialog_data in data.get('dialog_nodes', [])]
         )
         node.children = [cls.from_dict(child) for child in data.get('children', [])]
         return node
@@ -63,6 +71,17 @@ class QuestNode:
         """Remove a child node"""
         if child in self.children:
             self.children.remove(child)
+
+    def add_dialog_node(self, dialog_node: 'DialogNode'):
+        """Add a dialog node to this quest"""
+        self.dialog_nodes.append(dialog_node)
+        # Sort dialog nodes if needed by some criteria
+        # self.dialog_nodes.sort(key=lambda x: x.dialogue_name)
+
+    def remove_dialog_node(self, dialog_node: 'DialogNode'):
+        """Remove a dialog node from this quest"""
+        if dialog_node in self.dialog_nodes:
+            self.dialog_nodes.remove(dialog_node)
 
     def get_next_quest_id(self) -> int:
         """Get next available quest ID (simple increment)"""
@@ -379,21 +398,28 @@ class QuestTreeEditorWidget(QWidget):
         layout.addWidget(splitter)
 
     def setup_properties_ui(self, layout):
-        """Setup the quest properties UI"""
+        """Setup the quest properties UI with tabs for properties and dialogs"""
+        # Create tab widget
+        tab_widget = QTabWidget()
+        
+        # Quest properties tab
+        properties_tab = QWidget()
+        properties_layout = QVBoxLayout(properties_tab)
+        
         # Quest ID
         id_layout = QHBoxLayout()
         id_layout.addWidget(QLabel("Quest ID:"))
         self.quest_id_edit = QLineEdit()
         self.quest_id_edit.setReadOnly(True)  # IDs are auto-generated
         id_layout.addWidget(self.quest_id_edit)
-        layout.addLayout(id_layout)
+        properties_layout.addLayout(id_layout)
 
         # Quest Name
         name_layout = QHBoxLayout()
         name_layout.addWidget(QLabel("Name:"))
         self.quest_name_edit = QLineEdit()
         name_layout.addWidget(self.quest_name_edit)
-        layout.addLayout(name_layout)
+        properties_layout.addLayout(name_layout)
 
         # Description
         desc_layout = QVBoxLayout()
@@ -401,7 +427,7 @@ class QuestTreeEditorWidget(QWidget):
         self.description_edit = QTextEdit()
         self.description_edit.setMaximumHeight(100)
         desc_layout.addWidget(self.description_edit)
-        layout.addLayout(desc_layout)
+        properties_layout.addLayout(desc_layout)
 
         # Parent quest selector
         parent_layout = QHBoxLayout()
@@ -409,21 +435,41 @@ class QuestTreeEditorWidget(QWidget):
         self.parent_combo = QComboBox()
         self.parent_combo.addItem("None (Main Quest)", None)
         parent_layout.addWidget(self.parent_combo)
-        layout.addLayout(parent_layout)
+        properties_layout.addLayout(parent_layout)
 
-        # Buttons
-        buttons_layout = QHBoxLayout()
+        # Properties buttons
+        properties_buttons_layout = QHBoxLayout()
 
         self.update_btn = QPushButton("Update Quest")
         self.update_btn.setToolTip("Update quest properties")
-        buttons_layout.addWidget(self.update_btn)
+        properties_buttons_layout.addWidget(self.update_btn)
 
         self.delete_btn = QPushButton("Delete Quest")
         self.delete_btn.setToolTip("Delete this quest and all subquests")
-        buttons_layout.addWidget(self.delete_btn)
+        properties_buttons_layout.addWidget(self.delete_btn)
 
-        buttons_layout.addStretch()
-        layout.addLayout(buttons_layout)
+        properties_buttons_layout.addStretch()
+        properties_layout.addLayout(properties_buttons_layout)
+        
+        # Add properties tab
+        tab_widget.addTab(properties_tab, "Properties")
+        
+        # Dialogs tab
+        dialogs_tab = QWidget()
+        dialogs_layout = QVBoxLayout(dialogs_tab)
+        
+        # Create dialog branching editor
+        self.dialog_editor = DialogBranchingEditorWidget(self.data_model)
+        dialogs_layout.addWidget(self.dialog_editor)
+        
+        # Add dialogs tab
+        tab_widget.addTab(dialogs_tab, "Dialogs")
+        
+        # Add tab widget to main layout
+        layout.addWidget(tab_widget)
+        
+        # Connect to dialog editor signals
+        self.dialog_editor.dialogs_modified.connect(self.on_quests_modified)
 
     def setup_connections(self):
         """Setup signal connections"""
@@ -436,6 +482,9 @@ class QuestTreeEditorWidget(QWidget):
 
         self.update_btn.clicked.connect(self.update_quest_properties)
         self.delete_btn.clicked.connect(self.delete_selected_quest)
+        
+        # Connect to language changes
+        self.data_model.language_changed.connect(self.on_language_changed)
 
     def load_quests(self):
         """Load quests from the CFF data model"""
@@ -473,6 +522,8 @@ class QuestTreeEditorWidget(QWidget):
             if quest_id is None:
                 continue
 
+            # Get any related dialogues for this quest
+            # For now, we'll create empty dialog nodes - they can be populated when the quest is selected
             node = QuestNode(
                 quest_id=quest_id,
                 name=getattr(quest, 'name', f'Quest {quest_id}'),
@@ -616,6 +667,10 @@ class QuestTreeEditorWidget(QWidget):
                 self.parent_combo.setCurrentIndex(index)
         else:
             self.parent_combo.setCurrentIndex(0)  # None
+        
+        # Update dialog editor with quest's dialog nodes
+        self.dialog_editor.current_dialog_nodes = quest_node.dialog_nodes
+        self.dialog_editor.dialog_tree.load_dialog_tree(quest_node.dialog_nodes)
 
     def update_quest_properties(self):
         """Update quest properties from UI"""
@@ -638,6 +693,9 @@ class QuestTreeEditorWidget(QWidget):
             # TODO: Handle parent change (reparenting logic)
             quest_node.parent_id = new_parent_id
 
+        # Update dialog nodes from the dialog editor
+        quest_node.dialog_nodes = self.dialog_editor.current_dialog_nodes
+
         # Update tree display
         current_item.setText(0, quest_node.name or f"Quest {quest_node.quest_id}")
 
@@ -648,6 +706,16 @@ class QuestTreeEditorWidget(QWidget):
         current_item = self.quest_tree.currentItem()
         if current_item:
             self.quest_tree.delete_quest(current_item)
+
+    def on_language_changed(self, language):
+        """Handle language change"""
+        # Update UI to reflect new language - names and descriptions may need updating
+        # This will be handled by refreshing the currently selected quest
+        current_item = self.quest_tree.currentItem()
+        if current_item:
+            quest_node = current_item.data(0, Qt.UserRole)
+            if quest_node:
+                self.update_properties_ui(quest_node)
 
     def on_quests_modified(self):
         """Handle quest modifications"""

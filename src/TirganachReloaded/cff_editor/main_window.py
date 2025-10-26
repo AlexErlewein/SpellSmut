@@ -15,6 +15,7 @@ from .widgets.category_tree import CategoryTreeWidget
 from .widgets.element_table import ElementTableWidget
 from .widgets.property_editor import PropertyEditorWidget
 from .widgets.quest_details import QuestDetailsWidget
+from .widgets.quest_editor import QuestEditorWidget
 
 
 class MainWindow(QMainWindow):
@@ -126,6 +127,14 @@ class MainWindow(QMainWindow):
         # Language menu
         language_menu = menubar.addMenu("&Language")
         self._setup_language_menu(language_menu)
+
+        # View menu
+        view_menu = menubar.addMenu("&View")
+        
+        quest_editor_action = QAction("&Quest Editor", self)
+        quest_editor_action.setShortcut("Ctrl+Q, E")
+        quest_editor_action.triggered.connect(self.show_quest_editor)
+        view_menu.addAction(quest_editor_action)
 
         # Help menu
         help_menu = menubar.addMenu("&Help")
@@ -312,6 +321,24 @@ class MainWindow(QMainWindow):
             self.stats_label.setText(f"{len(elements)} entries")
         else:
             self.stats_label.setText("")
+
+    def show_quest_editor(self):
+        """Show the integrated quest editor"""
+        # Create the quest editor widget if it doesn't exist
+        if not hasattr(self, 'quest_editor_widget'):
+            from .widgets.quest_editor import QuestEditorWidget
+            self.quest_editor_widget = QuestEditorWidget(self.data_model)
+            
+            # Store the current central widget to restore later
+            self.original_central_widget = self.centralWidget()
+        
+        # Set the quest editor as the central widget
+        self.setCentralWidget(self.quest_editor_widget)
+
+    def show_main_interface(self):
+        """Show the main interface with category tree, element table, etc."""
+        if hasattr(self, 'original_central_widget'):
+            self.setCentralWidget(self.original_central_widget)
 
     def show_about(self):
         """Show about dialog"""

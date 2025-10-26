@@ -450,6 +450,9 @@ class DialogBranchingEditorWidget(QWidget):
 
         self.speaker_combo.currentTextChanged.connect(self.on_speaker_changed)
         self.dialog_text_edit.textChanged.connect(self.update_preview)
+        
+        # Connect to language changes
+        self.data_model.language_changed.connect(self.on_language_changed)
 
     def add_root_dialog(self):
         """Add a new root-level dialog"""
@@ -476,13 +479,53 @@ class DialogBranchingEditorWidget(QWidget):
 
     def load_from_selected_quest(self):
         """Load dialogs related to the currently selected quest"""
-        # This would need integration with the quest selection system
-        # For now, show a placeholder
-        QMessageBox.information(
-            self, "Load from Quest",
-            "This feature will load dialogs associated with the currently selected quest.\n\n"
-            "Integration with quest selection system needed."
-        )
+        try:
+            # Get the currently selected language
+            current_language = self.data_model.get_current_language()
+            
+            # Get localisation table to find quest-related dialogs
+            localisation_table = self.data_model.get_elements('localisation')
+            if not localisation_table:
+                QMessageBox.information(self, "Load from Quest", "No localisation data available.")
+                return
+
+            # Look for dialogs that are in the current language
+            current_dialogs = []
+            for entry in localisation_table:
+                if (getattr(entry, 'is_dialogue', False) and 
+                    getattr(entry, 'language', None) == current_language):
+                    
+                    dialogue_name = getattr(entry, 'dialogue_name', '')
+                    text_content = getattr(entry, 'text', '')
+                    
+                    if dialogue_name and text_content:
+                        # Create a base dialog node for each dialogue entry
+                        dialog_node = DialogNode(
+                            dialogue_name=dialogue_name,
+                            text=text_content,
+                            speaker="NPC"  # Default to NPC
+                        )
+                        current_dialogs.append(dialog_node)
+
+            # Load these dialogs into the tree
+            if current_dialogs:
+                self.current_dialog_nodes = current_dialogs
+                self.dialog_tree.load_dialog_tree(current_dialogs)
+                QMessageBox.information(
+                    self, "Load from Quest", 
+                    f"Loaded {len(current_dialogs)} dialogs in {current_language.name} language."
+                )
+            else:
+                QMessageBox.information(
+                    self, "Load from Quest", 
+                    f"No dialogs found in {current_language.name} language."
+                )
+
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Error", 
+                f"Failed to load dialogs: {str(e)}"
+            )
 
     def save_dialogs(self):
         """Save dialog tree changes"""
@@ -641,6 +684,13 @@ class DialogBranchingEditorWidget(QWidget):
         current_item = self.dialog_tree.currentItem()
         if current_item:
             self.dialog_tree.delete_dialog(current_item)
+
+    def on_language_changed(self, language):
+        """Handle language change"""
+        # Update the view to show dialogs in the new language
+        # This could reload the dialogs for the selected quest
+        if hasattr(self, 'current_quest_node'):
+            self.load_from_selected_quest()
 
     def on_dialogs_modified(self):
         """Handle dialog modifications"""

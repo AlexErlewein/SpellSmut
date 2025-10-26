@@ -242,65 +242,90 @@ class QuestDetailsWidget(QWidget):
             if not localisation_table:
                 return dialogs
 
-            # Find dialogs related to this quest
-            quest_id_str = str(quest_id)
+            # Get quests table to understand dialog naming patterns
+            quests_table = self.data_model.get_elements('quests')
+            if not quests_table:
+                return dialogs
 
-            # Strategy: Show quest-related dialogues by looking for quest keywords in text
-            # Since dialogue names don't directly correspond to quest IDs, we'll show
-            # dialogues that contain quest-related words
+            # Find the specific quest to understand its connections
+            current_quest = None
+            for quest in quests_table:
+                if getattr(quest, 'quest_id', None) == quest_id:
+                    current_quest = quest
+                    break
 
-            quest_keywords = ['quest', 'mission', 'task', 'objective', 'duty', 'assignment']
-            english_entries = []  # Focus on English entries for cleaner display
+            if not current_quest:
+                return dialogs
 
-            # First, collect English dialogue entries (language.value == 1 for ENGLISH)
+            # Get the currently selected language
+            current_language = self.data_model.get_current_language()
+
+            # Get quest name ID and description ID to find related text
+            quest_name_id = getattr(current_quest, 'name_id', None)
+            quest_description_id = getattr(current_quest, 'description_id', None)
+
+            # For SpellForce, dialogues are often linked to quests through text IDs or naming conventions
+            # Look for localised text that might be related to this quest in the current language
             for entry in localisation_table:
-                if getattr(entry, 'is_dialogue', False):
-                    dialogue_name = getattr(entry, 'dialogue_name', '')
-                    text = getattr(entry, 'text', '')
+                text_id = getattr(entry, 'text_id', None)
+                text_content = getattr(entry, 'text', '')
+                dialogue_name = getattr(entry, 'dialogue_name', '')
+                is_dialogue = getattr(entry, 'is_dialogue', False)
+                entry_language = getattr(entry, 'language', None)
 
-                    # Check if this matches the current language setting
-                    try:
-                        language = getattr(entry, 'language', None)
-                        current_lang = self.data_model.get_current_language()
-                        if language and language == current_lang:
-                            english_entries.append((dialogue_name, text))
-                    except:
-                        # If language check fails, include the entry anyway
-                        english_entries.append((dialogue_name, text))
+                # Check if this entry is in the currently selected language
+                if entry_language != current_language:
+                    continue  # Skip entries in other languages
 
-            # Look for quest-related content in English dialogues
-            for dialogue_name, text in english_entries:
-                if not text:
-                    continue
-
-                text_lower = text.lower()
-
-                # Check if text contains quest-related keywords
-                if any(keyword in text_lower for keyword in quest_keywords):
-                    dialogs.append((dialogue_name or "Unnamed Dialog", text))
-
-                    # Limit results to keep UI manageable
-                    if len(dialogs) >= 15:
-                        break
-
-            # If no quest-related dialogs found, show some general NPC dialogues
-            if not dialogs:
-                npc_keywords = ['hello', 'greetings', 'welcome', 'need help', 'looking for']
-                for dialogue_name, text in english_entries[:100]:  # Check first 100 English entries
-                    if not text:
+                # Check if this entry is related to the current quest
+                if is_dialogue and text_content:
+                    # First, check if the dialogue name contains the quest ID
+                    if str(quest_id) in dialogue_name:
+                        dialogs.append((dialogue_name, text_content))
                         continue
 
-                    text_lower = text.lower()
-                    if any(keyword in text_lower for keyword in npc_keywords):
-                        dialogs.append((dialogue_name or "Unnamed Dialog", text))
-                        if len(dialogs) >= 10:
-                            break
+                    # Check if the text content mentions the quest name directly
+                    if quest_name_id is not None and text_id == quest_name_id:
+                        dialogs.append((dialogue_name or "Quest Name", text_content))
+                        continue
 
-            # Final fallback: show any English dialogues if still no matches
-            if not dialogs:
-                for dialogue_name, text in english_entries[:20]:  # Show first 20 English dialogues
-                    if text:
-                        dialogs.append((dialogue_name or "Unnamed Dialog", text))
+                    # Check if the text content mentions the quest description
+                    if quest_description_id is not None and text_id == quest_description_id:
+                        dialogs.append((dialogue_name or "Quest Description", text_content))
+                        continue
+
+                    # Look for text that might be related to this quest by keywords
+                    # In SpellForce, quests often have related dialog entries with similar terms
+                    quest_name = getattr(current_quest, 'name', '').lower()
+                    if quest_name and quest_name in text_content.lower():
+                        dialogs.append((dialogue_name or "Related Dialog", text_content))
+                        continue
+
+            # If we couldn't directly link dialogs, try by quest name and related terms
+            if not dialogs and current_quest:
+                quest_name = getattr(current_quest, 'name', '').lower()
+                quest_keywords = []
+                
+                if quest_name:
+                    # Add the quest name as a keyword to search for
+                    quest_keywords.append(quest_name)
+                    # Add common quest-related terms that might appear with the quest name
+                    quest_keywords.extend(['quest', 'mission', 'task', 'objective', 'duty', 'assignment', 'complete', 'find', 'kill', 'bring'])
+                
+                for entry in localisation_table:
+                    # Only consider entries in the current language
+                    if (getattr(entry, 'is_dialogue', False) and 
+                        getattr(entry, 'language', None) == current_language):
+                        
+                        text_content = getattr(entry, 'text', '').lower()
+                        dialogue_name = getattr(entry, 'dialogue_name', '')
+                        
+                        if text_content and any(keyword in text_content for keyword in quest_keywords):
+                            dialogs.append((dialogue_name or "Potential Match", getattr(entry, 'text', '')))
+                            
+                            # Limit results to keep UI manageable
+                            if len(dialogs) >= 20:
+                                break
 
         except Exception as e:
             print(f"Error finding quest dialogs: {e}")

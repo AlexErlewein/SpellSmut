@@ -4,19 +4,23 @@
 
 The Quest Editor is an interactive system for creating and managing quests. It transforms the existing read-only viewer into a full-featured design tool, enabling hierarchical quest trees and branching dialog systems.
 
-## Current Status: 🔄 IN PROGRESS (Phase 1)
+## Current Status: 🔄 IN PROGRESS (Phase 2)
 
 ### Completed Milestones
 - ✅ **Quest Structure Analysis**: Mapped hierarchical relationships using `parent_quest_id` and `sub_quests`.
 - ✅ **Initial Data Model**: Designed `QuestNode` and `DialogNode` classes with serialization support.
 - ✅ **UI/UX Design**: Prototyped interactive tree widgets and conversation flow visualizations.
+- ✅ **Quest Tree Implementation**: Built interactive quest tree widget with drag-drop functionality.
+- ✅ **Dialog Editor Integration**: Implemented dialog editor widget with branching visualization and language filtering.
+- ✅ **Data Model Enhancement**: Enhanced `QuestNode` to include `dialog_nodes` property for better quest-dialog association.
 
 ### Roadmap
-- 🔄 **Phase 1 (In Progress)**:
-  - Complete data models with validation logic.
-  - Build interactive quest tree widget with drag-drop functionality.
-  - Implement dialog editor widget with branching visualization.
-- 📋 **Phase 2**:
+- 🔄 **Phase 1 (Completed)**:
+  - ✅ Complete data models with validation logic.
+  - ✅ Build interactive quest tree widget with drag-drop functionality.
+  - ✅ Implement dialog editor widget with branching visualization.
+- 🔄 **Phase 2 (In Progress)**:
+  - Implement language filtering for dialog entries to show only the selected language.
   - Develop quest creation wizards and templates.
   - Implement full dialog editing with conditional branching.
   - Add save/load functionality for quest hierarchies.

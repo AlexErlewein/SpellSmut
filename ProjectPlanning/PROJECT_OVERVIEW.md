@@ -81,16 +81,19 @@ SpellForce Modding Project
 
 ## 4. Quest Editor Enhancement
 
-**Status**: 🔄 **IN PROGRESS** (Phase 1/4)
+**Status**: 🔄 **IN PROGRESS** (Phase 2/4)
 
 ### Completed Milestones
 - ✅ **Quest Structure Analysis**: Mapped hierarchical relationships using `parent_quest_id` and `sub_quests`.
 - ✅ **Initial Data Model**: Designed `QuestNode` and `DialogNode` classes with serialization support.
 - ✅ **UI/UX Design**: Prototyped interactive tree widgets and conversation flow visualizations.
+- ✅ **Quest Tree Implementation**: Built interactive quest tree widget with drag-drop functionality.
+- ✅ **Dialog Editor Integration**: Implemented dialog editor widget with branching visualization and language filtering.
+- ✅ **Data Model Enhancement**: Enhanced `QuestNode` to include `dialog_nodes` property for better quest-dialog association.
 
 ### Roadmap
-- 🔄 **Phase 1 (In Progress)**: Complete data models and build interactive widgets.
-- 📋 **Phase 2**: Develop creation wizards, templates, and full dialog editing.
+- ✅ **Phase 1**: Complete data models and build interactive widgets.
+- 🔄 **Phase 2 (In Progress)**: Implement language filtering, creation wizards, templates, and full dialog editing.
 - 📋 **Phase 3**: Implement validation, optimization, and testing.
 - 📋 **Phase 4**: Integrate into the main application and release.
 
