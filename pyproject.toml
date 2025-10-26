@@ -75,5 +75,4 @@ warn_return_any = true
 warn_unused_configs = true
 
 
-[project.scripts]
-tirganach = "tirganach:main"
+
