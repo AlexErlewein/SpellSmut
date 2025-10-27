@@ -1,92 +1,77 @@
-# Quest Editor Component
+# Quest Editor Enhancements Plan
 
 ## Overview
+This plan outlines enhancements to the existing Quest Editor based on analysis of SpellForce quest system guides and current codebase. The goal is to add missing data fields, improve UI visuals, enable quest bundling, and support a custom quest creator tool for generating Lua scripts.
 
-The Quest Editor is an interactive system for creating and managing quests. It transforms the existing read-only viewer into a full-featured design tool, enabling hierarchical quest trees and branching dialog systems.
+## Current State Analysis
+- **Existing Features**: Quest hierarchy tree, basic properties (ID, name, description), dialog branching editor.
+- **Missing Elements**: Rewards (XP, Items, Money), requirements (conditions like PlayerHasItem, QuestState), visual dialogue enhancements, quest bundling by type/campaign.
+- **Source**: Based on docs/Guides/SpellForce_Quest_System_Guide.md, docs/Guides/SpellForce_Quest_Campaign_Creation_Guide.md, and src/TirganachReloaded/cff_editor/widgets/quest_*.py.
 
-## Current Status: 🔄 IN PROGRESS (Phase 2)
+## Planned Enhancements
 
-### Completed Milestones
-- ✅ **Quest Structure Analysis**: Mapped hierarchical relationships using `parent_quest_id` and `sub_quests`.
-- ✅ **Initial Data Model**: Designed `QuestNode` and `DialogNode` classes with serialization support.
-- ✅ **UI/UX Design**: Prototyped interactive tree widgets and conversation flow visualizations.
-- ✅ **Quest Tree Implementation**: Built interactive quest tree widget with drag-drop functionality.
-- ✅ **Dialog Editor Integration**: Implemented dialog editor widget with branching visualization and language filtering.
-- ✅ **Data Model Enhancement**: Enhanced `QuestNode` to include `dialog_nodes` property for better quest-dialog association.
+### 1. Add Missing Quest Data Fields
+- **Rewards Integration**:
+  - Add fields in quest properties UI for XP, Items, Money (from GdsQuestRewards.lua).
+  - UI: Dropdowns for item selection, input fields for amounts, triggered by SetRewardFlagTrue.
+  - Implementation: Extend QuestNode class to include reward data; update save/load logic to sync with CFF.
+- **Requirements/Conditions**:
+  - Add condition builder in properties tab for prerequisites (e.g., PlayerHasItem, QuestState, FigureAlive).
+  - UI: Tree or list for adding/removing conditions; validate against GdsConditions.lua functions.
+  - Implementation: New ConditionNode class; integrate with dialog editor for branching based on conditions.
 
-### Roadmap
-- 🔄 **Phase 1 (Completed)**:
-  - ✅ Complete data models with validation logic.
-  - ✅ Build interactive quest tree widget with drag-drop functionality.
-  - ✅ Implement dialog editor widget with branching visualization.
-- 🔄 **Phase 2 (In Progress)**:
-  - Implement language filtering for dialog entries to show only the selected language.
-  - Develop quest creation wizards and templates.
-  - Implement full dialog editing with conditional branching.
-  - Add save/load functionality for quest hierarchies.
-- 📋 **Phase 3**:
-  - Introduce robust validation for quest logic and dependencies.
-  - Optimize performance for large quest trees.
-  - Conduct comprehensive testing and bug fixing.
-- 📋 **Phase 4**:
-  - Integrate the editor into the main application.
-  - Finalize user documentation and release.
+### 2. Visual Enhancements for Quest Dialogues
+- **Branching Choices**:
+  - Enhance DialogBranchingEditorWidget with visual buttons for player choices (e.g., styled QButtons with icons for accept/decline).
+  - Add tooltips, colors (green for positive, red for negative), and animations for better appeal.
+  - Implementation: Use QButtonGroup for choices; add icons from UI assets; support multi-language previews.
+- **Overall UI**:
+  - Improve tree view with icons (e.g., quest icons, dialogue bubbles); add search/filter for dialogues.
+  - Ensure responsive design for large quest trees.
 
-## Key Features
+### 3. Quest Bundling in Overview
+- **Grouping Options**:
+  - Add filters/tabs in QuestTreeEditorWidget: By type (Main, Side, Sub-quest), campaign, map (e.g., P9 Northern Windwalls).
+  - UI: QComboBox for filters, collapsible groups in tree; color-coding (e.g., blue for main quests).
+  - Implementation: Extend QuestNode with type/campaign fields; update load_quest_hierarchy to support grouping.
 
-### 1. Visual Quest Tree Editor
-- **Hierarchical Management**: Visually organize quests in parent-child relationships.
-- **Intuitive Editing**: Add, edit, delete, and reorder quests with drag-drop and context menus.
-- **Clear Visualization**: At-a-glance understanding of complex quest chains.
+### 4. Custom Quest Creator Editor
+- **Overview**: Standalone tool or tab in QuestEditorWidget to generate Lua scripts from GUI inputs, enabling non-coders to create quests.
+- **Features**:
+  - Input forms for quest basics (ID, name, description), objectives, rewards, requirements.
+  - Visual condition/action builder (drag-drop from GdsActions.lua/GdsConditions.lua).
+  - Preview and export Lua script (e.g., for nXXXX.lua files).
+  - Integration: Generate QuestNode and DialogNode objects; export to script/ directory.
+- **Implementation Steps**:
+  1. Create QuestCreatorWidget class.
+  2. Build form UIs for each section.
+  3. Add Lua generation logic (template-based from guides).
+  4. Test with sample quests; integrate with existing editor for editing generated quests.
 
-### 2. Branching Dialog Editor
-- **Conversation Flow**: Design complex dialogs with a node-based graphical editor.
-- **Conditional Logic**: Implement branching narratives based on player choices and game state.
-- **Role Distinction**: Clearly separate NPC and player dialog for better readability.
+## Implementation Timeline
+1. **Phase 1**: Add rewards/requirements fields (1-2 weeks).
+2. **Phase 2**: Enhance dialogue visuals (1 week).
+3. **Phase 3**: Implement quest bundling (1 week).
+4. **Phase 4**: Build quest creator tool (2-3 weeks).
+5. **Testing**: Validate against SpellForce Lua scripts; ensure CFF compatibility.
 
-### 3. Smart Creation Tools
-- **Templates & Wizards**: Accelerate quest creation with pre-built structures and guided processes.
-- **Real-time Validation**: Instantly check for logical errors and dependency conflicts.
+## Dependencies
+- Update src/TirganachReloaded/cff_editor/widgets/quest_*.py.
+- Reference docs/Guides/ for Lua syntax.
+- Ensure compatibility with existing CFF data model.
 
-## Technical Architecture
+## Risks and Mitigations
+- **Complexity**: Start with simple additions; use modular design.
+- **Testing**: Use sample quests from guides; validate Lua output.
+- **User Feedback**: Iterate based on modder needs.
 
-### Data Models
-- **QuestNode**: Represents a single quest in the hierarchy, managing its properties and relationships.
-- **DialogNode**: Represents a point in a conversation, handling branching and speaker roles.
-- **QuestHierarchy**: A container for the entire quest structure, managing serialization and validation.
+## Next Steps
+- Review and update Components/QUEST_EDITOR.md with this content.
+- Assign tasks in project management tool.
+- Gather feedback from team on priorities.
 
-### Key Algorithms
-- **Graph Traversal**: Algorithms to validate quest and dialog graphs, detecting loops, dead ends, and orphaned nodes.
-- **Topological Sort**: To ensure correct quest order and dependency resolution.
+---
 
-### Widget Components
-- **QuestTreeEditorWidget**: The main interactive widget for editing the quest hierarchy.
-- **DialogBranchingEditorWidget**: The graphical editor for conversation trees.
-- **EnhancedQuestDetailsWidget**: A unified panel for displaying and editing quest information.
-
-### Integration Points
-- **Main Window**: A dedicated "Quest Editor" tab for easy access.
-- **CFFDataModel**: Extended to include methods for reading and writing quest-specific data.
-- **File Operations**: Save and load quest changes to and from CFF files.
-
-## Data Structure Analysis
-
-### Quest Relationships
-- **Parent-Child**: Linked via `parent_quest_id` and `sub_quests` fields.
-- **Ordering**: `order_index` determines the sequence of quests within a hierarchy.
-- **Localization**: Names and descriptions are sourced from the `localisation` and `advanced_descriptions` tables.
-
-### Dialog Structure
-- **Flow Control**: Dialog sequences are managed through a naming convention (e.g., `character001`, `character002`).
-- **Player Choices**: Player responses are identified by a "PC" suffix (e.g., `ashawe001PC`), enabling branching.
-
-## Success Metrics
-
-- **Functionality**: All quest creation, editing, and deletion operations are fully functional and stable.
-- **Usability**: The UI is intuitive and allows for the creation of complex quest hierarchies with at least 5 levels of nesting.
-- **Data Integrity**: Saving and loading quest hierarchies preserves all data and relationships without corruption.
-- **Performance**: The UI remains responsive (<100ms latency) when handling quest trees with over 500 nodes.
-- **Validation**: The system correctly identifies and reports at least 95% of common quest logic errors (e.g., broken links, circular dependencies).
-
-## Files Consolidated From
-- `Internal/QUEST_EDITOR_PLAN.md` (summarized from 370-line detailed plan)
+**Document Version**: 1.0  
+**Last Updated**: Current Session  
+**Author**: SpellSmut Development Team
