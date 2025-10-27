@@ -83,6 +83,19 @@ Python and batch scripts for:
 - Weapon icon reassembly (1x2 and 1x4 weapon patterns)
 - Icon indexing and organization system
 
+#### Creator Tools (New!)
+Comprehensive modding creation systems:
+- **Quest Creator** - 6-phase wizard for custom quests
+- **Spell Creator** - 7-phase "Spell Wizard" with 1-15 level progression
+- **Weapon Creator** - 7-phase "Weapon Forge" with edit-existing feature
+- **Armor Creator** - 7-phase "Armor Forge" for custom armor pieces
+- **NPC Creator** - 7-phase "NPC Workshop" system
+- **Universal Savefile System** - ModSave Framework (.quest, .spell, .weapon, etc.)
+- **Utility Tools Suite** - Modder's Toolbox with asset management, testing, and automation tools
+- **ID Management System** - Centralized ID allocation to prevent conflicts
+
+All creator tools integrate with shared components and follow consistent design principles.
+
 ## Development Process
 
 ### File Organization Rules
