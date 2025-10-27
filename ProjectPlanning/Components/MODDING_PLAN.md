@@ -217,14 +217,35 @@ ExtractedAssets/
 #### Content Creation Tools
 - ✅ Visual quest editor (with rewards, requirements, dialogues, Lua generation)
 - ✅ Dialogue tree editor (branching conversations with visual enhancements)
-- 🟡 Quest Creator System (wizard-style quest building with test map) - **IN PLANNING**
-  - [ ] Phase 1: Wizard interface (5-step guided creation)
+- 🟡 **ID Management System** (shared across all creators) - **PLANNING COMPLETE** ⭐
+  - [ ] Phase 1: Core ID Manager class
+  - [ ] Phase 2: ID Manager UI widget
+  - [ ] Phase 3: Integration with all creators
+  - [ ] Phase 4: Project file persistence (project_ids.json)
+  - [ ] Phase 5: Migration tool for existing projects
+- 🟡 Quest Creator System (wizard-style quest building with test map) - **PLANNING COMPLETE**
+  - [ ] Phase 1: Wizard interface (5-step guided creation) + ID Manager integration
   - [ ] Phase 2: Test map generation (P999 with NPCs and objects)
   - [ ] Phase 3: Dialogue choice builder (branching conversations)
   - [ ] Phase 4: Quest step hierarchy (visual flow editor)
   - [ ] Phase 5: Lua export & in-game testing
   - [ ] Phase 6: Templates, validation, and polish
-- [ ] Spell designer GUI
+- 🟡 Spell Creator System (Spell Wizard™ for custom spells) - **PLANNING COMPLETE**
+  - [ ] Phase 1: Wizard interface (6-step spell creation) + ID Manager integration
+  - [ ] Phase 2: Level progression system (1-15 levels with auto-scaling)
+  - [ ] Phase 3: Visual effects builder (VFX templates)
+  - [ ] Phase 4: Sound effects integration (audio browser)
+  - [ ] Phase 5: Lua script export & validation
+  - [ ] Phase 6: Spell templates & balance calculator
+  - [ ] Phase 7: Testing & polish
+- 🟡 Weapon Creator System (Weapon Forge for custom weapons) - **PLANNING COMPLETE**
+  - [ ] Phase 1: Wizard interface (6-step weapon creation) + ID Manager integration
+  - [ ] Phase 2: Edit existing weapons (load 719 weapons, save under new ID)
+  - [ ] Phase 3: New weapon types creator (beyond 20 base types)
+  - [ ] Phase 4: Material system (custom weapon materials)
+  - [ ] Phase 5: CFF export system
+  - [ ] Phase 6: Weapon validation & balance calculator
+  - [ ] Phase 7: Icon assignment & sound mapping
 - [ ] Race/unit creator wizard
 - [ ] Map editor enhancements
 
