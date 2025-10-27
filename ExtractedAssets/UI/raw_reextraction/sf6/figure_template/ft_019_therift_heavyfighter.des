@@ -1,0 +1,304 @@
+[Creo]
+{
+	[Scrolls]
+	{
+		Data0 = 855
+		Data1 = 854
+		Data2 = 927
+		Data3 = 926
+		Data4 = 776
+		Data5 = 761
+		Data6 = 773
+		Data7 = 766
+		Data8 = 769
+		Data9 = 780
+		Data10 = 753
+		Data11 = 750
+		Data12 = 775
+		Data13 = 757
+		Data14 = 770
+		Data15 = 3571
+		Data16 = 774
+		Data17 = 763
+		Data18 = 2737
+		Data19 = 755
+		Data20 = 751
+		Data21 = 765
+		Data22 = 778
+		Data23 = 3306
+		Data24 = 767
+		Data25 = 758
+		Data26 = 777
+	}
+	[Runeboard]
+	{
+	}
+}
+
+[Misc]
+{
+}
+
+[Equipment]
+{
+	[Items]
+	{
+		Data0 = 0, 721
+		Data1 = 1, 698
+		Data2 = 2, 560
+		Data3 = 3, 551
+		Data4 = 4, 586
+		Data5 = 5, 709
+		Data6 = 6, 2594
+		Data7 = 7, 707
+		Data8 = 8, 742
+		Data9 = 9, 663
+		Data10 = 10, 2375
+		Data11 = 11, 691
+		Data12 = 12, 570
+		Data13 = 13, 585
+		Data14 = 14, 545
+		Data15 = 15, 3181
+		Data16 = 16, 726
+		Data17 = 17, 31
+		Data18 = 18, 697
+		Data19 = 19, 739
+		Data20 = 20, 662
+		Data21 = 21, 686
+		Data22 = 22, 735
+		Data23 = 23, 540
+		Data24 = 24, 542
+		Data25 = 25, 580
+		Data26 = 26, 570
+		Data27 = 27, 585
+		Data28 = 28, 565
+		Data29 = 29, 2352
+		Data30 = 30, 3171
+		Data31 = 31, 579
+		Data32 = 32, 584
+		Data33 = 33, 574
+		Data34 = 34, 559
+		Data35 = 35, 2352
+		Data36 = 36, 3180
+		Data37 = 37, 601
+		Data38 = 38, 600
+		Data39 = 39, 527
+		Data40 = 40, 605
+		Data41 = 41, 615
+		Data42 = 42, 678
+		Data43 = 43, 568
+		Data44 = 44, 558
+		Data45 = 45, 536
+		Data46 = 46, 535
+		Data47 = 47, 583
+		Data48 = 48, 539
+		Data49 = 49, 679
+		Data50 = 50, 2342
+		Data51 = 51, 720
+		Data52 = 52, 696
+		Data53 = 53, 533
+		Data54 = 54, 529
+		Data55 = 55, 539
+		Data56 = 56, 583
+		Data57 = 57, 573
+		Data58 = 58, 2347
+		Data59 = 59, 678
+		Data60 = 60, 684
+	}
+}
+
+[Plans]
+{
+	[Scrolls]
+	{
+	}
+	[Building]
+	{
+		[Race0]
+		{
+			Data0 = 280
+			Data1 = 271
+			Data2 = 167
+			Data3 = 262
+			Data4 = 270
+			Data5 = 263
+			Data6 = 275
+			Data7 = 169
+			Data8 = 260
+			Data9 = 2928
+			Data10 = 267
+			Data11 = 255
+			Data12 = 257
+			Data13 = 277
+			Data14 = 949
+			Data15 = 251
+			Data16 = 247
+			Data17 = 249
+			Data18 = 171
+			Data19 = 266
+			Data20 = 273
+			Data21 = 253
+		}
+		[Race1]
+		{
+			Data0 = 999
+			Data1 = 1009
+			Data2 = 1015
+			Data3 = 992
+			Data4 = 1007
+			Data5 = 1005
+			Data6 = 1010
+			Data7 = 2982
+			Data8 = 994
+			Data9 = 1002
+			Data10 = 1012
+			Data11 = 1001
+			Data12 = 1016
+			Data13 = 996
+		}
+		[Race2]
+		{
+			Data0 = 951
+			Data1 = 977
+			Data2 = 985
+			Data3 = 975
+			Data4 = 967
+			Data5 = 969
+			Data6 = 963
+			Data7 = 965
+			Data8 = 981
+			Data9 = 988
+			Data10 = 956
+			Data11 = 990
+			Data12 = 952
+			Data13 = 954
+			Data14 = 958
+			Data15 = 973
+			Data16 = 971
+			Data17 = 961
+			Data18 = 986
+		}
+		[Race3]
+		{
+			Data0 = 1021
+			Data1 = 1027
+			Data2 = 1037
+			Data3 = 1035
+			Data4 = 1031
+			Data5 = 1039
+			Data6 = 1045
+			Data7 = 1047
+			Data8 = 1043
+			Data9 = 1041
+			Data10 = 2934
+			Data11 = 1023
+			Data12 = 1029
+			Data13 = 1033
+			Data14 = 1049
+			Data15 = 1019
+		}
+		[Race4]
+		{
+			Data0 = 1051
+			Data1 = 1059
+			Data2 = 1057
+			Data3 = 1063
+			Data4 = 1069
+			Data5 = 1065
+		}
+	}
+	[Unit]
+	{
+		[Race0]
+		{
+			Data0 = 1271
+			Data1 = 1273
+			Data2 = 1261
+			Data3 = 1263
+			Data4 = 1259
+			Data5 = 1269
+			Data6 = 1265
+			Data7 = 1267
+		}
+		[Race1]
+		{
+			Data0 = 1333
+			Data1 = 1337
+			Data2 = 1335
+			Data3 = 1325
+			Data4 = 1327
+			Data5 = 1323
+			Data6 = 1331
+			Data7 = 1329
+		}
+		[Race2]
+		{
+			Data0 = 1285
+			Data1 = 1289
+			Data2 = 1279
+			Data3 = 1275
+			Data4 = 1283
+			Data5 = 1287
+			Data6 = 1281
+			Data7 = 1277
+		}
+		[Race3]
+		{
+			Data0 = 1301
+			Data1 = 1299
+			Data2 = 1297
+			Data3 = 1293
+			Data4 = 1295
+			Data5 = 1291
+		}
+		[Race4]
+		{
+			Data0 = 1349
+			Data1 = 1351
+			Data2 = 1353
+			Data3 = 1345
+		}
+	}
+}
+
+[Character]
+{
+	Level	 = 19
+	XP		 = 81000
+	Name	 = "HeavyFighter19_TheRift"
+	Female	 = 1
+
+	Head	 = 20
+
+	Gold	 = 2
+	Silver	 = 80
+	Copper	 = 50
+
+	Str	 = 62
+	Sta	 = 62
+	Dex	 = 48
+	Agi	 = 48
+	Wis	 = 25
+	Int	 = 25
+	Cha	 = 25
+
+	ResFire			 = 30
+	ResIce			 = 30
+	ResMindMagic	 = 30
+	ResBlackMagic	 = 30
+
+	WalkSpeed		 = 100
+	FightSpeed		 = 100
+	CastSpeed		 = 100
+
+	[Ability2] // Schwere Kriegskunst
+	{
+		Level = 8
+
+		Data0 = 1, 8 // LargeBlade 
+		Data1 = 2, 7 // LargeBlunt 
+		Data2 = 3, 8 // HeavyArmor 
+		Data3 = 4, 7 // Shield 
+	}
+}
+

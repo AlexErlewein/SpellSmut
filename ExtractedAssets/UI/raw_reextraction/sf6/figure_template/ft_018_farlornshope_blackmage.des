@@ -1,0 +1,307 @@
+[Creo]
+{
+	[Scrolls]
+	{
+		Data0 = 926
+		Data1 = 844
+		Data2 = 776
+		Data3 = 761
+		Data4 = 773
+		Data5 = 766
+		Data6 = 769
+		Data7 = 780
+		Data8 = 753
+		Data9 = 750
+		Data10 = 775
+		Data11 = 757
+		Data12 = 770
+		Data13 = 3571
+		Data14 = 774
+		Data15 = 763
+		Data16 = 2737
+		Data17 = 755
+		Data18 = 751
+		Data19 = 765
+		Data20 = 778
+		Data21 = 3306
+		Data22 = 767
+		Data23 = 758
+		Data24 = 777
+	}
+	[Runeboard]
+	{
+	}
+}
+
+[Misc]
+{
+}
+
+[Equipment]
+{
+	[Items]
+	{
+		Data0 = 0, 721
+		Data1 = 1, 698
+		Data2 = 2, 551
+		Data3 = 3, 2594
+		Data4 = 4, 707
+		Data5 = 5, 742
+		Data6 = 6, 663
+		Data7 = 7, 2375
+		Data8 = 8, 691
+		Data9 = 9, 570
+		Data10 = 10, 585
+		Data11 = 11, 545
+		Data12 = 12, 3181
+		Data13 = 13, 726
+		Data14 = 14, 31
+		Data15 = 15, 697
+		Data16 = 16, 739
+		Data17 = 17, 662
+		Data18 = 18, 686
+		Data19 = 19, 735
+		Data20 = 20, 540
+		Data21 = 21, 542
+		Data22 = 22, 580
+		Data23 = 23, 560
+		Data24 = 24, 570
+		Data25 = 25, 585
+		Data26 = 26, 565
+		Data27 = 27, 2352
+		Data28 = 28, 3171
+		Data29 = 29, 579
+		Data30 = 30, 584
+		Data31 = 31, 574
+		Data32 = 32, 559
+		Data33 = 33, 2352
+		Data34 = 34, 3180
+		Data35 = 35, 601
+		Data36 = 36, 600
+		Data37 = 37, 527
+		Data38 = 38, 605
+		Data39 = 39, 615
+		Data40 = 40, 678
+		Data41 = 41, 568
+		Data42 = 42, 558
+		Data43 = 43, 536
+		Data44 = 44, 535
+		Data45 = 45, 583
+		Data46 = 46, 539
+		Data47 = 47, 679
+		Data48 = 48, 2342
+		Data49 = 49, 720
+		Data50 = 50, 696
+		Data51 = 51, 533
+		Data52 = 52, 529
+		Data53 = 53, 539
+		Data54 = 54, 583
+		Data55 = 55, 573
+		Data56 = 56, 2347
+		Data57 = 57, 678
+		Data58 = 58, 684
+	}
+}
+
+[Spells]
+{
+	[Scrolls]
+	{
+		Data0 = 0, 1883
+		Data1 = 1, 1743
+		Data2 = 2, 1729
+		Data3 = 3, 1944
+		Data4 = 4, 1749
+		Data5 = 5, 1670
+		Data6 = 6, 1861
+		Data7 = 7, 1768
+		Data8 = 8, 2080
+		Data9 = 9, 2569
+		Data10 = 10, 2085
+		Data11 = 11, 2285
+		Data12 = 12, 195
+		Data13 = 13, 209
+		Data14 = 14, 1806
+		Data15 = 15, 2133
+		Data16 = 16, 187
+		Data17 = 17, 129
+		Data18 = 18, 1897
+	}
+}
+
+[Plans]
+{
+	[Scrolls]
+	{
+	}
+	[Building]
+	{
+		[Race0]
+		{
+			Data0 = 280
+			Data1 = 271
+			Data2 = 167
+			Data3 = 262
+			Data4 = 270
+			Data5 = 263
+			Data6 = 275
+			Data7 = 169
+			Data8 = 260
+			Data9 = 2928
+			Data10 = 267
+			Data11 = 255
+			Data12 = 257
+			Data13 = 277
+			Data14 = 949
+			Data15 = 251
+			Data16 = 247
+			Data17 = 249
+			Data18 = 171
+			Data19 = 266
+			Data20 = 273
+			Data21 = 253
+		}
+		[Race1]
+		{
+			Data0 = 999
+			Data1 = 1009
+			Data2 = 1015
+			Data3 = 992
+			Data4 = 1007
+			Data5 = 1005
+			Data6 = 1010
+			Data7 = 2982
+			Data8 = 994
+			Data9 = 1002
+			Data10 = 1012
+			Data11 = 1001
+			Data12 = 1016
+			Data13 = 996
+		}
+		[Race2]
+		{
+			Data0 = 951
+			Data1 = 977
+			Data2 = 985
+			Data3 = 975
+			Data4 = 967
+			Data5 = 969
+			Data6 = 963
+			Data7 = 965
+			Data8 = 981
+			Data9 = 988
+			Data10 = 956
+			Data11 = 990
+			Data12 = 952
+			Data13 = 954
+			Data14 = 958
+			Data15 = 973
+			Data16 = 971
+			Data17 = 961
+			Data18 = 986
+		}
+		[Race3]
+		{
+			Data0 = 1021
+			Data1 = 1027
+			Data2 = 1037
+			Data3 = 1035
+			Data4 = 1031
+			Data5 = 1039
+			Data6 = 1045
+			Data7 = 1047
+			Data8 = 1043
+			Data9 = 1041
+			Data10 = 2934
+		}
+	}
+	[Unit]
+	{
+		[Race0]
+		{
+			Data0 = 1271
+			Data1 = 1273
+			Data2 = 1261
+			Data3 = 1263
+			Data4 = 1259
+			Data5 = 1269
+			Data6 = 1265
+			Data7 = 1267
+		}
+		[Race1]
+		{
+			Data0 = 1333
+			Data1 = 1337
+			Data2 = 1335
+			Data3 = 1325
+			Data4 = 1327
+			Data5 = 1323
+			Data6 = 1331
+			Data7 = 1329
+		}
+		[Race2]
+		{
+			Data0 = 1285
+			Data1 = 1289
+			Data2 = 1279
+			Data3 = 1275
+			Data4 = 1283
+			Data5 = 1287
+			Data6 = 1281
+			Data7 = 1277
+		}
+		[Race3]
+		{
+			Data0 = 1301
+			Data1 = 1299
+			Data2 = 1297
+		}
+	}
+}
+
+[Character]
+{
+	Level	 = 18
+	XP		 = 69000
+	Name	 = "BlackMage18_FarlornsHope"
+	Female	 = 1
+
+	Head	 = 17
+
+	Gold	 = 2
+	Silver	 = 0
+	Copper	 = 50
+
+	Str	 = 25
+	Sta	 = 39
+	Dex	 = 38
+	Agi	 = 25
+	Wis	 = 69
+	Int	 = 69
+	Cha	 = 25
+
+	ResFire			 = 30
+	ResIce			 = 30
+	ResMindMagic	 = 30
+	ResBlackMagic	 = 30
+
+	WalkSpeed		 = 100
+	FightSpeed		 = 100
+	CastSpeed		 = 100
+
+	[Ability5] // Elementare Magiekunst
+	{
+		Level = 2
+
+		Data0 = 1, 2 // Fire 
+	}
+	[Ability7] // Schwarze Magiekunst
+	{
+		Level = 8
+
+		Data0 = 1, 8 // Death 
+		Data1 = 2, 8 // Necromancy 
+		Data2 = 3, 8 // Curse 
+	}
+}
+

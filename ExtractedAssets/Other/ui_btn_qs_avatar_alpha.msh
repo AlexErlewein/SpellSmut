@@ -1,0 +1,76 @@
+[Vertex]
+{
+	NumOfV = 4
+	V0 = -0.500000, 0.0, 0.500000
+	V1 = 53.500000, 0.0, 0.500000
+	V2 = -0.500000, 0.0, -61.500000
+	V3 = 53.500000, 0.0, -61.500000
+}
+
+[Material]
+{
+	[SortOrder]
+	{
+		M0=0
+	}
+	NumOfM = 1
+	[M0]
+	{
+		Name = "ui_btn_qs_avatar_alpha.tga"
+		Diffuse = 1.000000, 1.000000, 1.000000
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 0.98
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "ONE_INVSRCALPHA"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "ui_btn_qs_avatar_alpha.tga"
+			Amount = 1.000000
+			Bitmap = "ui_btn_qs_avatar_alpha.tga"
+			MappingType = "Explicit"
+			TilingU = 0.000000
+			TilingV = 0.000000
+			Filter = "None"
+		}
+		_SED_ShowColorRed = 255
+		_SED_ShowColorGreen = 255
+		_SED_ShowColorBlue = 255
+	}
+}
+
+[Polygon]
+{
+	NumOfP = 2
+	[P0]
+	{
+		G = 0
+		V0 = 0
+		V1 = 3
+		V2 = 2
+		M = 0
+		P0 = 0.000000, 0.999990
+		P1 = 0.999990, 0.000000
+		P2 = 0.000000, 0.000000
+	}
+
+	[P1]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 3
+		M = 0
+		P0 = 0.000000, 0.999990
+		P1 = 0.999990, 0.999990
+		P2 = 0.999990, 0.000000
+	}
+
+}

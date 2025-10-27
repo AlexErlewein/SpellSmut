@@ -1,0 +1,526 @@
+[Creo]
+{
+	[Scrolls]
+	{
+		//Slot, ItemId
+		Data0 = 785	// Die Human-Worker-Creos im Inventory.
+		Data1 = 920	// Unwichtig für Preview, da nur die
+		Data2 = 854	// unten im Runeboard eingetragenen
+		Data3 = 865	// Runen zur Vorführung verwendet werden.
+		Data4 = 844
+		Data5 = 880	
+		Data6 = 795
+		Data7 = 931
+		Data8 = 869
+		Data9 = 873
+		Data10 = 877
+		Data11 = 781
+		Data12 = 792
+		Data13 = 923
+		Data14 = 929
+	}
+
+	[Runeboard]
+	{
+		[Hero1]
+		{
+			Creo = 777
+		}
+
+		[Hero2]
+		{
+			Creo = 770
+		}
+
+		[Hero3]
+		{
+			Creo = 763
+		}
+
+		[Hero4]
+		{
+			Creo = 751
+		}
+
+		[Hero5]
+		{
+			Creo = 772
+		}
+
+		//0 == Human
+		//1 == Dwarf
+		//2 == Elf
+		//3 == Orc
+		//4 == Troll
+		//5 == Darkelf
+
+		[WorkerRace0]
+		{
+			Creo = 807
+		}
+
+		[WorkerRace2]
+		{
+			Creo = 916
+		}
+
+		[WorkerRace3]
+		{
+			Creo = 940
+		}
+
+	}
+
+}
+
+[Equipment]
+{
+	[Items]
+	{
+		//Slot, ItemId
+		Data0 = 0, 635
+		Data1 = 1, 700
+		Data2 = 2, 644
+	}
+
+	//Hero0 == Avatar
+	//Hero1 == Hero1
+	//Hero2 == Hero2
+	//Hero3 == Hero3
+	//Hero4 == Hero4
+	//Hero5 == Hero5
+
+	//Slot0	== helmet
+	//Slot1	== right hand
+	//Slot2	== chest
+	//Slot3	== left hand
+	//Slot4	== right ring
+	//Slot5	== legs
+	//Slot6	== left ring
+
+	[Hero0]
+	{
+		//Slot, ItemId
+		Data0 = 0, 623  // Head Caster Highend
+		Data1 = 1, 682  // Weapon Onehanded Staff Highend
+		Data2 = 2, 385  // Sonic Robe of MainChar
+		Data3 = 3, 711  // Shield Highend Warrior
+		Data4 = 4, 653  // Ring Highend Everyone
+		Data5 = 5, 550  // Legs Highend Caster
+		Data6 = 6, 642  // Ring Mid Warrior
+	}
+
+	[Hero1]
+	{
+		//Slot, ItemId
+		Data0 = 0, 613   // Head Hybrid Highend
+		Data1 = 1, 680   // Weapon Onehanded Staff Mid
+		Data2 = 2,  77   // Robe of Vampire Mage
+		Data3 = 3, 709   // Shield Highend Caster
+		Data4 = 4, 646   // Right Mid Caster
+		Data5 = 5, 548   // Legs Highend Hybrid
+		Data6 = 6, 647   // Ring Mid Everyone
+	}
+
+	[Hero2]
+	{
+		//Slot, ItemId
+		Data0 = 0, 628   // Head Everyone Highend
+		Data1 = 1, 664   // Weapon Onehanded Sword Highend
+		Data2 = 2,  79   // Robe of Soulknight
+		Data3 = 3, 706   // Shield Mid Caster
+		Data4 = 4, 647   // Ring Mid Everyone
+		Data5 = 5, 546   // Legs Highend Warrior
+		Data6 = 6, 644   // Ring Mid Hybrid
+	}
+
+	[Hero3]
+	{
+		//Slot, ItemId
+		Data0 = 0, 603   // Head Warrior Highend
+		Data1 = 1, 662   // Weapon Onehanded Sword Mid
+		Data2 = 2, 378   // Chestplate of Paladiness
+		Data3 = 3, 708   // Shield Mid Warrior
+		Data4 = 4, 643	 // Ring Mid Rogue
+		Data5 = 5, 551   // Legs Highend Everyone
+		Data6 = 6, 638   // Ring Lowend Hybrid
+	}
+
+	[Hero4]
+	{
+		//Slot, ItemId
+		Data0 = 0, 607   // Head Rogue Mid
+		Data1 = 1, 663   // Weapon Onehanded Sword Mid 2
+		Data2 = 2, 80    // Chestplate of Warrior Lvl 15
+		Data3 = 3, 705   // Shield Lowend Warrior
+		Data4 = 4, 636   // Ring Lowend Warrior
+		Data5 = 5, 540   // Legs Mid Warrior
+		Data6 = 6, 641   // Ring Lowend Everyone
+	}
+
+	[Hero5]
+	{
+		//Slot, ItemId
+		Data0 = 0, 627   // Head Everyone Mid
+		Data1 = 1, 672   // Weapon Onehanded Hammer Mid
+		Data2 = 2, 78
+		Data3 = 3, 702   // Shield Newbie Warrior
+		Data4 = 4, 642   // Ring Mid Warrior
+		Data5 = 5, 545   // Legs Mid Everyone
+		Data6 = 6, 635   // Ring Newbie Everyone
+	}
+
+}
+
+[Spells]
+{
+	[Scrolls]
+	{
+		//Slot, ItemId
+		Data0 = 0, 111
+		Data1 = 1, 291
+		Data2 = 2, 293
+	}
+
+	[Spellbook]
+	{
+		Data0 = 111
+		Data1 = 291
+		Data2 = 293
+		Data3 = 297
+		Data4 = 307
+		Data5 = 125
+		Data6 = 221
+		Data7 = 299
+		Data8 = 103
+		Data9 = 107
+		Data10 = 109
+		Data11 = 305
+		Data12 = 34
+		Data13 = 123
+		Data14 = 119
+		Data15 = 33
+		Data16 = 231
+		Data17 = 105
+		Data18 = 32
+		Data19 = 40
+		Data20 = 113
+		Data21 = 117
+		Data22 = 121
+		Data23 = 177
+		Data24 = 179
+		Data25 = 181
+		Data26 = 183
+		Data27 = 185
+		Data28 = 187
+		Data29 = 189
+		Data30 = 191
+		Data31 = 193
+		Data32 = 195
+		Data33 = 197
+		Data34 = 199
+		Data35 = 201
+		Data36 = 203
+		Data37 = 205
+		Data38 = 207
+		Data39 = 209
+		Data40 = 211
+		Data41 = 213
+		Data42 = 215
+		Data43 = 219
+		Data44 = 223
+		Data45 = 225
+		Data46 = 227
+		Data47 = 229
+		Data48 = 233
+		Data49 = 235
+		Data50 = 237
+		Data51 = 241
+		Data52 = 243
+		Data53 = 287
+		Data54 = 289
+		Data55 = 295
+		Data56 = 301
+		Data57 = 303
+		Data58 = 309
+		Data59 = 311
+		Data60 = 313
+		Data61 = 315
+	}
+
+	[Memorized]
+	{
+		//Hero0 == Avatar, max 10 spells
+		//Hero1 == Hero1, max 3 spells
+		//Hero2 == Hero2, max 3 spells
+		//Hero3 == Hero3, max 3 spells
+		//Hero4 == Hero4, max 3 spells
+		//Hero5 == Hero5, max 3 spells
+
+		[Hero0]
+		{
+			Data0 = 112
+			Data1 = 292
+			Data2 = 294
+			Data3 = 298
+			Data4 = 308
+			Data5 = 126
+			Data6 = 318
+			Data7 = 300
+			Data8 = 104
+			Data9 = 284
+		}
+
+		[Hero1]
+		{
+			Data0 = 108
+			Data1 = 110
+			Data2 = 306
+		}
+
+		[Hero2]
+		{
+			Data0 = 44
+			Data1 = 124
+			Data2 = 120
+		}
+
+		[Hero3]
+		{
+			Data0 = 43
+		}
+
+		[Hero4]
+		{
+			Data0 = 232
+			Data1 = 106
+		}
+
+	}
+
+}
+
+[Plans]
+{
+	[Scrolls]
+	{
+		//Slot, ItemId
+		Data0 = 0, 166
+		Data1 = 1, 168
+		Data2 = 2, 170
+	}
+
+	[Building]
+	{
+		//Race0 == Human
+		//Race1 == Dwarf
+		//Race2 == Elf
+		//Race3 == Orc
+		//Race4 == Troll
+		//Race5 == Darkelf
+		
+		[Race0]
+		{
+			//Item
+			Data0 = 166
+			Data1 = 168
+			Data2 = 170
+			Data3 = 247
+			Data4 = 249
+			Data5 = 251
+			Data6 = 253
+			Data7 = 255
+			Data8 = 257
+			Data9 = 259
+			Data10 = 261
+			Data11 = 263
+			Data12 = 265
+			Data13 = 267
+			Data14 = 269
+			Data15 = 271
+			Data16 = 273
+			Data17 = 275
+			Data18 = 277
+			Data19 = 279
+		}
+
+		[Race2]
+		{
+			//Item
+			Data0 = 951
+			Data1 = 953
+			Data2 = 955
+			Data3 = 957
+			Data4 = 959
+			Data5 = 961
+			Data6 = 963
+			Data7 = 965
+			Data8 = 967
+			Data9 = 969
+			Data10 = 971
+			Data11 = 973
+			Data12 = 975
+			Data13 = 977
+			Data14 = 979
+			Data15 = 981
+			Data16 = 983
+			Data17 = 985
+			Data18 = 987
+			Data19 = 989
+			Data20 = 991
+		}
+
+		[Race3]
+		{
+			//Item
+			Data0 = 1021
+			Data1 = 1023
+			Data2 = 1025
+			Data3 = 1027
+			Data4 = 1029
+			Data5 = 1031
+			Data6 = 1033
+			Data7 = 1035
+			Data8 = 1037
+			Data9 = 1039
+			Data10 = 1041
+			Data11 = 1043
+			Data12 = 1045
+			Data13 = 1047
+			Data14 = 1049
+			Data15 = 1019
+		}
+
+	}
+
+	[Unit]
+	{
+		//Race0 == Human
+		//Race1 == Dwarf
+		//Race2 == Elf
+		//Race3 == Orc
+		//Race4 == Troll
+		//Race5 == Darkelf
+		
+		[Race0]
+		{
+			//Item
+			Data0 = 1259
+			Data1 = 1261
+			Data2 = 1263
+			Data3 = 1265
+			Data4 = 1267
+			Data5 = 1269
+			Data6 = 1271
+			Data7 = 1273
+		}
+
+	}
+
+}
+
+[Misc]
+{
+	//Id, Count
+	Data0 = 245, 10
+	Data1 = 246, 20
+}
+
+[xCharacter]
+{
+	//Misc
+	Level = 20
+	Name = "Munkel"
+	Female = 0
+
+	//Stats
+	Str = 35
+	Sta = 40
+	Dex = 40
+	Agi = 45
+	Wis = 55
+	Int = 65
+	Cha = 50
+
+	//Resistances
+	ResFire = 30
+	ResIce = 30
+	ResMindMagic = 30
+	ResBlackMagic = 30
+
+	//Speed values (in percent)
+	WalkSpeed = 100
+	FightSpeed = 100
+	CastSpeed = 100
+
+	//Abilities
+	//
+	// **********************************************************************************
+	// Rules: 
+	// - Each main ability and spec needs a level. The spec level must not exceed the ability
+	//	 level. If no level is set, it is being assumed to 1.
+	// - The sum of all main abilities and specs must not exceed 10.
+	// - Main ability and specs are 1 based
+	// - Lookup trace file for errors
+	// **********************************************************************************
+	//
+	//Ability1 = Leichte Kriegskunst
+	//	Spec1 = Stichwaffen
+	//	Spec2 = Kleine Schwerter und Äxte
+	//	Spec3 = Kleine Schlagwaffen
+	//	Spec4 = Leichte Rüstungen
+	//	Spec5 = Kleine Schilde
+	//	Spec6 = Waffenloser Kampf
+	//Ability2 = Schwere Kriegskunst
+	//	Spec1 = Grosse Schwerter und Äxte
+	//	Spec2 = Grosse Schlagwaffen und Stangen
+	//	Spec3 = Schwere Rüstungen
+	//	Spec4 = Grosse Schilde
+	//Ability3 = Fernkampf
+	//	Spec1 = Bogen
+	//	Spec2 = Armbrust
+	//	Spec3 = Schleudern
+	//	Spec4 = Bewegliche Rüstungen
+	//Ability4 = Weisse Magie
+	//	Spec1 = Leben
+	//	Spec2 = Stärkung
+	//	Spec3 = Segnung
+	//	Spec4 = Natur
+	//Ability5 = Elementarmagie
+	//	Spec1 = Feuer
+	//	Spec2 = Eis
+	//	Spec3 = Erde
+	//	Spec4 = Luft
+	//Ability6 = Mentalmagie
+	//	Spec1 = Verzauberung
+	//	Spec2 = Illusionen
+	//	Spec3 = Offensiv
+	//	Spec4 = Defensiv
+	//Ability7 = Schwarze Magie
+	//	Spec1 = Tod
+	//	Spec2 = Schwächung
+	//	Spec3 = Fluch
+	//	Spec4 = Nekromantie
+
+	[Ability1]
+	{
+		Level = 5
+
+		//Spezialization, Level
+		Data0 = 1, 2
+		Data1 = 3, 3
+	}
+
+	[Ability2]
+	{
+		Level = 1 
+
+		//Spezialization, Level
+		Data0 = 2, 1
+	}
+
+	[Ability3]
+	{
+		Level = 1
+	}
+}

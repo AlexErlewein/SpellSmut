@@ -1,0 +1,10270 @@
+[Vertex]
+{
+	NumOfV = 4
+	V0 = 11.000000, 0.0, -11.000000
+	V1 = 0.0, 0.0, -11.000000
+	V2 = 0.0, 0.0, 0.0
+	V3 = 11.000000, 0.0, 0.0
+}
+
+[Polygon]
+{
+	NumOfP = 201
+	[P0]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 0
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P1]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 1
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P2]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 2
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P3]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 3
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P4]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 4
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P5]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 5
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P6]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 6
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P7]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 7
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P8]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 8
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P9]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 9
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P10]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 10
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P11]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 11
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P12]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 12
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P13]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 13
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P14]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 14
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P15]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 15
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P16]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 16
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P17]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 17
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P18]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 18
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P19]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 19
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P20]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 20
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P21]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 21
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P22]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 22
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P23]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 23
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P24]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 24
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P25]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 25
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P26]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 26
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P27]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 27
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P28]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 28
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P29]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 29
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P30]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 30
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P31]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 31
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P32]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 32
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P33]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 33
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P34]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 34
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P35]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 35
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P36]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 36
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P37]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 37
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P38]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 38
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P39]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 39
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P40]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 40
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P41]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 41
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P42]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 42
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P43]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 43
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P44]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 44
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P45]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 45
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P46]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 46
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P47]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 47
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P48]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 48
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P49]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 49
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P50]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 50
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P51]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 51
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P52]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 52
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P53]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 53
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P54]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 54
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P55]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 55
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P56]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 56
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P57]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 57
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P58]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 58
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P59]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 59
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P60]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 60
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P61]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 61
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P62]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 62
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P63]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 63
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P64]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 64
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P65]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 65
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P66]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 66
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P67]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 67
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P68]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 68
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P69]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 69
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P70]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 70
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P71]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 71
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P72]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 72
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P73]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 73
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P74]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 74
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P75]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 75
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P76]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 76
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P77]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 77
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P78]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 78
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P79]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 79
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P80]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 80
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P81]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 81
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P82]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 82
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P83]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 83
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P84]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 84
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P85]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 85
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P86]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 86
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P87]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 87
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P88]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 88
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P89]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 89
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P90]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 90
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P91]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 91
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P92]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 92
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P93]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 93
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P94]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 94
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P95]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 95
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P96]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 96
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P97]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 97
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P98]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 98
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P99]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 99
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P100]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 100
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P101]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 101
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P102]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 102
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P103]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 103
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P104]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 104
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P105]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 105
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P106]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 106
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P107]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 107
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P108]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 108
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P109]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 109
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P110]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 110
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P111]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 111
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P112]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 112
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P113]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 113
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P114]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 114
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P115]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 115
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P116]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 116
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P117]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 117
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P118]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 118
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P119]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 119
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P120]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 120
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P121]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 121
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P122]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 122
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P123]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 123
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P124]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 124
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P125]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 125
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P126]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 126
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P127]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 127
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P128]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 128
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P129]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 129
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P130]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 130
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P131]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 131
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P132]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 132
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P133]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 133
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P134]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 134
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P135]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 135
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P136]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 136
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P137]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 137
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P138]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 138
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P139]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 139
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P140]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 140
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P141]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 141
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P142]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 142
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P143]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 143
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P144]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 144
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P145]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 145
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P146]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 146
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P147]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 147
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P148]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 148
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P149]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 149
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P150]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 150
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P151]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 151
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P152]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 152
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P153]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 153
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P154]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 154
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P155]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 155
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P156]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 156
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P157]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 157
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P158]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 158
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P159]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 159
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P160]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 160
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P161]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 161
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P162]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 162
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P163]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 163
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P164]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 164
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P165]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 165
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P166]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 166
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P167]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 167
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P168]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 168
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P169]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 169
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P170]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 170
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P171]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 171
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P172]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 172
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P173]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 173
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P174]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 174
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P175]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 175
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P176]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 176
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P177]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 177
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P178]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 178
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P179]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 179
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P180]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 180
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P181]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 181
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P182]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 182
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P183]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 183
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P184]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 184
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P185]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 185
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P186]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 186
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P187]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 187
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P188]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 188
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P189]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 189
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P190]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 190
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P191]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 191
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P192]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 192
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P193]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 193
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P194]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 194
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P195]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 195
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P196]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 196
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P197]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 197
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P198]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 198
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P199]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 199
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+	[P200]
+	{
+		G = 0
+		V0 = 0
+		V1 = 1
+		V2 = 2
+		M = 200
+		P0 = 1.0, 0.0
+		P1 = 0.0, 0.0
+		P2 = 0.0, 1.0
+	}
+}
+
+[Material]
+{
+	NumOfM = 201
+	[M0]
+	{
+		Name = "special case for transparency + world detail"
+		Diffuse = 1.000000, 1.000000, 1.000000
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_transparency"
+			Amount = 1.000000
+			Bitmap = "landscape_island_transparency"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+			UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_worldD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_worldD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M1]
+	{
+		Name = "base"
+		Diffuse = 0.431373, 0.450980, 0.360784
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_001_base"
+			Amount = 1.000000
+			Bitmap = "landscape_island_001_base"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_001_baseD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_001_baseD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M101]
+	{
+		Name = "base_alpha"
+		Diffuse 0.431373, 0.450980, 0.360784
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_001_baseD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_001_baseD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M2]
+	{
+		Name = "grass"
+		Diffuse = 0.388235, 0.462745, 0.090196
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_002_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_002_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_002_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_002_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M102]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.388235, 0.462745, 0.090196
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_002_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_002_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M3]
+	{
+		Name = "grass"
+		Diffuse = 0.419608, 0.450980, 0.090196
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_003_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_003_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_003_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_003_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M103]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.419608, 0.450980, 0.090196
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_003_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_003_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M4]
+	{
+		Name = "grass"
+		Diffuse = 0.443137, 0.423529, 0.078431
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_004_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_004_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_004_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_004_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M104]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.443137, 0.423529, 0.078431
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_004_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_004_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M5]
+	{
+		Name = "grass"
+		Diffuse = 0.380392, 0.427451, 0.101961
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_005_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_005_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_005_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_005_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M105]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.380392, 0.427451, 0.101961
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_005_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_005_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M6]
+	{
+		Name = "grass"
+		Diffuse = 0.423529, 0.419608, 0.133333
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_006_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_006_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_006_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_006_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M106]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.423529, 0.419608, 0.133333
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_006_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_006_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M7]
+	{
+		Name = "stone"
+		Diffuse = 0.431373, 0.450980, 0.360784
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_007_stone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_007_stone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_007_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_007_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M107]
+	{
+		Name = "stone_alpha"
+		Diffuse 0.431373, 0.450980, 0.360784
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_007_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_007_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M8]
+	{
+		Name = "stone"
+		Diffuse = 0.498039, 0.466667, 0.411765
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_008_stone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_008_stone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_008_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_008_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M108]
+	{
+		Name = "stone_alpha"
+		Diffuse 0.498039, 0.466667, 0.411765
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_008_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_008_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M9]
+	{
+		Name = "stone"
+		Diffuse = 0.423529, 0.419608, 0.341176
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_009_stone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_009_stone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_009_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_009_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M109]
+	{
+		Name = "stone_alpha"
+		Diffuse 0.423529, 0.419608, 0.341176
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_009_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_009_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M10]
+	{
+		Name = "stone"
+		Diffuse = 0.462745, 0.462745, 0.337255
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_010_stone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_010_stone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_010_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_010_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M110]
+	{
+		Name = "stone_alpha"
+		Diffuse 0.462745, 0.462745, 0.337255
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_010_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_010_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M11]
+	{
+		Name = "stone"
+		Diffuse = 0.486275, 0.419608, 0.349020
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_011_stone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_011_stone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_011_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_011_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M111]
+	{
+		Name = "stone_alpha"
+		Diffuse 0.486275, 0.419608, 0.349020
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_011_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_011_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M12]
+	{
+		Name = "stone"
+		Diffuse = 0.494118, 0.478431, 0.321569
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_012_stone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_012_stone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_012_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_012_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M112]
+	{
+		Name = "stone_alpha"
+		Diffuse 0.494118, 0.478431, 0.321569
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_012_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_012_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M13]
+	{
+		Name = "stone"
+		Diffuse = 0.419608, 0.392157, 0.254902
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_013_stone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_013_stone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_013_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_013_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M113]
+	{
+		Name = "stone_alpha"
+		Diffuse 0.419608, 0.392157, 0.254902
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_013_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_013_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M14]
+	{
+		Name = "stone"
+		Diffuse = 0.423529, 0.392157, 0.282353
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_014_stone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_014_stone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_014_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_014_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M114]
+	{
+		Name = "stone_alpha"
+		Diffuse 0.423529, 0.392157, 0.282353
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_014_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_014_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M15]
+	{
+		Name = "stone"
+		Diffuse = 0.435294, 0.443137, 0.258824
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_015_stone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_015_stone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_015_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_015_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M115]
+	{
+		Name = "stone_alpha"
+		Diffuse 0.435294, 0.443137, 0.258824
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_015_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_015_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M16]
+	{
+		Name = "desert"
+		Diffuse = 0.541176, 0.556863, 0.490196
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_016_desert"
+			Amount = 1.000000
+			Bitmap = "landscape_island_016_desert"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_016_desertD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_016_desertD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M116]
+	{
+		Name = "desert_alpha"
+		Diffuse 0.541176, 0.556863, 0.490196
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_016_desertD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_016_desertD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M17]
+	{
+		Name = "desert"
+		Diffuse = 0.419608, 0.396078, 0.254902
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_017_desert"
+			Amount = 1.000000
+			Bitmap = "landscape_island_017_desert"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_017_desertD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_017_desertD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M117]
+	{
+		Name = "desert_alpha"
+		Diffuse 0.419608, 0.396078, 0.254902
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_017_desertD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_017_desertD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M18]
+	{
+		Name = "path"
+		Diffuse = 0.454902, 0.431373, 0.376471
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_018_path"
+			Amount = 1.000000
+			Bitmap = "landscape_island_018_path"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_018_pathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_018_pathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M118]
+	{
+		Name = "path_alpha"
+		Diffuse 0.454902, 0.431373, 0.376471
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_018_pathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_018_pathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M19]
+	{
+		Name = "snow"
+		Diffuse = 0.592157, 0.705882, 0.796078
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_019_snow"
+			Amount = 1.000000
+			Bitmap = "landscape_island_019_snow"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_019_snowD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_019_snowD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M119]
+	{
+		Name = "snow_alpha"
+		Diffuse 0.592157, 0.705882, 0.796078
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_019_snowD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_019_snowD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M20]
+	{
+		Name = "snow"
+		Diffuse = 0.505882, 0.643137, 0.760784
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_020_snow"
+			Amount = 1.000000
+			Bitmap = "landscape_island_020_snow"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_020_snowD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_020_snowD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M120]
+	{
+		Name = "snow_alpha"
+		Diffuse 0.505882, 0.643137, 0.760784
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_020_snowD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_020_snowD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M21]
+	{
+		Name = "glacier"
+		Diffuse = 0.549020, 0.650980, 0.733333
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_021_glacier"
+			Amount = 1.000000
+			Bitmap = "landscape_island_021_glacier"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_021_glacierD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_021_glacierD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M121]
+	{
+		Name = "glacier_alpha"
+		Diffuse 0.549020, 0.650980, 0.733333
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_021_glacierD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_021_glacierD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M22]
+	{
+		Name = "loam"
+		Diffuse = 0.400000, 0.368627, 0.239216
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_022_loam"
+			Amount = 1.000000
+			Bitmap = "landscape_island_022_loam"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_022_loamD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_022_loamD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M122]
+	{
+		Name = "loam_alpha"
+		Diffuse 0.400000, 0.368627, 0.239216
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_022_loamD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_022_loamD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M23]
+	{
+		Name = "loam"
+		Diffuse = 0.501961, 0.474510, 0.298039
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_023_loam"
+			Amount = 1.000000
+			Bitmap = "landscape_island_023_loam"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_023_loamD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_023_loamD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M123]
+	{
+		Name = "loam_alpha"
+		Diffuse 0.501961, 0.474510, 0.298039
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_023_loamD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_023_loamD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M24]
+	{
+		Name = "lake"
+		Diffuse = 0.403922, 0.384314, 0.223529
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_024_lake"
+			Amount = 1.000000
+			Bitmap = "landscape_island_024_lake"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_024_lakeD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_024_lakeD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M124]
+	{
+		Name = "lake_alpha"
+		Diffuse 0.403922, 0.384314, 0.223529
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_024_lakeD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_024_lakeD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M25]
+	{
+		Name = "flowers"
+		Diffuse = 0.501961, 0.356863, 0.250980
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_025_flowers"
+			Amount = 1.000000
+			Bitmap = "landscape_island_025_flowers"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_025_flowersD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_025_flowersD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M125]
+	{
+		Name = "flowers_alpha"
+		Diffuse 0.501961, 0.356863, 0.250980
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_025_flowersD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_025_flowersD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M26]
+	{
+		Name = "hay"
+		Diffuse = 0.443137, 0.352941, 0.231373
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_026_hay"
+			Amount = 1.000000
+			Bitmap = "landscape_island_026_hay"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_026_hayD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_026_hayD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M126]
+	{
+		Name = "hay_alpha"
+		Diffuse 0.443137, 0.352941, 0.231373
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_026_hayD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_026_hayD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M27]
+	{
+		Name = "mud"
+		Diffuse = 0.305882, 0.352941, 0.254902
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_027_mud"
+			Amount = 1.000000
+			Bitmap = "landscape_island_027_mud"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_027_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_027_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M127]
+	{
+		Name = "mud_alpha"
+		Diffuse 0.305882, 0.352941, 0.254902
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_027_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_027_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M28]
+	{
+		Name = "mud"
+		Diffuse = 0.423529, 0.423529, 0.396078
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_028_mud"
+			Amount = 1.000000
+			Bitmap = "landscape_island_028_mud"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_028_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_028_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M128]
+	{
+		Name = "mud_alpha"
+		Diffuse 0.423529, 0.423529, 0.396078
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_028_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_028_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M29]
+	{
+		Name = "mud"
+		Diffuse = 0.388235, 0.384314, 0.294118
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_029_mud"
+			Amount = 1.000000
+			Bitmap = "landscape_island_029_mud"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_029_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_029_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M129]
+	{
+		Name = "mud_alpha"
+		Diffuse 0.388235, 0.384314, 0.294118
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_029_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_029_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M30]
+	{
+		Name = "mud"
+		Diffuse = 0.407843, 0.411765, 0.313725
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_030_mud"
+			Amount = 1.000000
+			Bitmap = "landscape_island_030_mud"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_030_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_030_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M130]
+	{
+		Name = "mud_alpha"
+		Diffuse 0.407843, 0.411765, 0.313725
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_030_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_030_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M31]
+	{
+		Name = "desert"
+		Diffuse = 0.458824, 0.454902, 0.341176
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_031_desert"
+			Amount = 1.000000
+			Bitmap = "landscape_island_031_desert"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_031_desertD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_031_desertD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M131]
+	{
+		Name = "desert_alpha"
+		Diffuse 0.458824, 0.454902, 0.341176
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_031_desertD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_031_desertD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M32]
+	{
+		Name = "rock"
+		Diffuse = 0.466667, 0.458824, 0.337255
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_032_rock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_032_rock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_032_rockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_032_rockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M132]
+	{
+		Name = "rock_alpha"
+		Diffuse 0.466667, 0.458824, 0.337255
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_032_rockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_032_rockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M33]
+	{
+		Name = "grassrock"
+		Diffuse = 0.423529, 0.439216, 0.239216
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_033_grassrock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_033_grassrock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_033_grassrockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_033_grassrockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M133]
+	{
+		Name = "grassrock_alpha"
+		Diffuse 0.423529, 0.439216, 0.239216
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_033_grassrockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_033_grassrockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M34]
+	{
+		Name = "lavarock"
+		Diffuse = 0.313725, 0.321569, 0.231373
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_034_lavarock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_034_lavarock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_034_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_034_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M134]
+	{
+		Name = "lavarock_alpha"
+		Diffuse 0.313725, 0.321569, 0.231373
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_034_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_034_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M35]
+	{
+		Name = "lavarock"
+		Diffuse = 0.678431, 0.533333, 0.368627
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_035_lavarock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_035_lavarock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_035_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_035_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M135]
+	{
+		Name = "lavarock_alpha"
+		Diffuse 0.678431, 0.533333, 0.368627
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_035_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_035_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M36]
+	{
+		Name = "lavarock"
+		Diffuse = 0.301961, 0.301961, 0.258824
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_036_lavarock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_036_lavarock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_036_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_036_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M136]
+	{
+		Name = "lavarock_alpha"
+		Diffuse 0.301961, 0.301961, 0.258824
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_036_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_036_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M37]
+	{
+		Name = "lavarock"
+		Diffuse = 0.203922, 0.203922, 0.192157
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_037_lavarock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_037_lavarock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_037_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_037_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M137]
+	{
+		Name = "lavarock_alpha"
+		Diffuse 0.203922, 0.203922, 0.192157
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_037_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_037_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M38]
+	{
+		Name = "lavarock"
+		Diffuse = 0.176471, 0.176471, 0.172549
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_038_lavarock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_038_lavarock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_038_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_038_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M138]
+	{
+		Name = "lavarock_alpha"
+		Diffuse 0.176471, 0.176471, 0.172549
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_038_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_038_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M39]
+	{
+		Name = "lavarock"
+		Diffuse = 0.184314, 0.184314, 0.180392
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_039_lavarock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_039_lavarock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_039_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_039_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M139]
+	{
+		Name = "lavarock_alpha"
+		Diffuse 0.184314, 0.184314, 0.180392
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_039_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_039_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M40]
+	{
+		Name = "lavarock"
+		Diffuse = 0.172549, 0.172549, 0.168627
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_040_lavarock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_040_lavarock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_040_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_040_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M140]
+	{
+		Name = "lavarock_alpha"
+		Diffuse 0.172549, 0.172549, 0.168627
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_040_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_040_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M41]
+	{
+		Name = "lavarock"
+		Diffuse = 0.188235, 0.172549, 0.164706
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_041_lavarock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_041_lavarock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_041_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_041_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M141]
+	{
+		Name = "lavarock_alpha"
+		Diffuse 0.188235, 0.172549, 0.164706
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_041_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_041_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M42]
+	{
+		Name = "lavarock"
+		Diffuse = 0.219608, 0.160784, 0.137255
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_042_lavarock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_042_lavarock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_042_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_042_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M142]
+	{
+		Name = "lavarock_alpha"
+		Diffuse 0.219608, 0.160784, 0.137255
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_042_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_042_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M43]
+	{
+		Name = "lavarock"
+		Diffuse = 0.309804, 0.207843, 0.121569
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_043_lavarock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_043_lavarock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_043_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_043_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M143]
+	{
+		Name = "lavarock_alpha"
+		Diffuse 0.309804, 0.207843, 0.121569
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_043_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_043_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M44]
+	{
+		Name = "lavapath"
+		Diffuse = 0.235294, 0.235294, 0.239216
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_044_lavapath"
+			Amount = 1.000000
+			Bitmap = "landscape_island_044_lavapath"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_044_lavapathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_044_lavapathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M144]
+	{
+		Name = "lavapath_alpha"
+		Diffuse 0.235294, 0.235294, 0.239216
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_044_lavapathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_044_lavapathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M45]
+	{
+		Name = "lavarock"
+		Diffuse = 0.160784, 0.160784, 0.160784
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_045_lavarock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_045_lavarock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_045_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_045_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M145]
+	{
+		Name = "lavarock_alpha"
+		Diffuse 0.160784, 0.160784, 0.160784
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_045_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_045_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M46]
+	{
+		Name = "lavapath"
+		Diffuse = 0.160784, 0.160784, 0.160784
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_046_lavapath"
+			Amount = 1.000000
+			Bitmap = "landscape_island_046_lavapath"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_046_lavapathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_046_lavapathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M146]
+	{
+		Name = "lavapath_alpha"
+		Diffuse 0.160784, 0.160784, 0.160784
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_046_lavapathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_046_lavapathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M47]
+	{
+		Name = "lavarock"
+		Diffuse = 0.235294, 0.235294, 0.200000
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_047_lavarock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_047_lavarock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_047_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_047_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M147]
+	{
+		Name = "lavarock_alpha"
+		Diffuse 0.235294, 0.235294, 0.200000
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_047_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_047_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M48]
+	{
+		Name = "lavarock"
+		Diffuse = 0.192157, 0.192157, 0.219608
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_048_lavarock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_048_lavarock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_048_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_048_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M148]
+	{
+		Name = "lavarock_alpha"
+		Diffuse 0.192157, 0.192157, 0.219608
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_048_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_048_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M49]
+	{
+		Name = "lavarock"
+		Diffuse = 0.698039, 0.568627, 0.411765
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_049_lavarock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_049_lavarock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_049_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_049_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M149]
+	{
+		Name = "lavarock_alpha"
+		Diffuse 0.698039, 0.568627, 0.411765
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_049_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_049_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M50]
+	{
+		Name = "lavapath"
+		Diffuse = 0.192157, 0.203922, 0.219608
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_050_lavapath"
+			Amount = 1.000000
+			Bitmap = "landscape_island_050_lavapath"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_050_lavapathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_050_lavapathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M150]
+	{
+		Name = "lavapath_alpha"
+		Diffuse 0.192157, 0.203922, 0.219608
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_050_lavapathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_050_lavapathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M51]
+	{
+		Name = "lavasand"
+		Diffuse = 0.215686, 0.227451, 0.247059
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_051_lavasand"
+			Amount = 1.000000
+			Bitmap = "landscape_island_051_lavasand"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_051_lavasandD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_051_lavasandD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M151]
+	{
+		Name = "lavasand_alpha"
+		Diffuse 0.215686, 0.227451, 0.247059
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_051_lavasandD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_051_lavasandD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M52]
+	{
+		Name = "lavarock"
+		Diffuse = 0.223529, 0.231373, 0.247059
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_052_lavarock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_052_lavarock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_052_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_052_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M152]
+	{
+		Name = "lavarock_alpha"
+		Diffuse 0.223529, 0.231373, 0.247059
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_052_lavarockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_052_lavarockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M53]
+	{
+		Name = "path"
+		Diffuse = 0.333333, 0.349020, 0.254902
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_053_path"
+			Amount = 1.000000
+			Bitmap = "landscape_island_053_path"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_053_pathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_053_pathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M153]
+	{
+		Name = "path_alpha"
+		Diffuse 0.333333, 0.349020, 0.254902
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_053_pathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_053_pathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M54]
+	{
+		Name = "mud"
+		Diffuse = 0.372549, 0.376471, 0.192157
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_054_mud"
+			Amount = 1.000000
+			Bitmap = "landscape_island_054_mud"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_054_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_054_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M154]
+	{
+		Name = "mud_alpha"
+		Diffuse 0.372549, 0.376471, 0.192157
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_054_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_054_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M55]
+	{
+		Name = "path"
+		Diffuse = 0.380392, 0.317647, 0.176471
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_055_path"
+			Amount = 1.000000
+			Bitmap = "landscape_island_055_path"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_055_pathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_055_pathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M155]
+	{
+		Name = "path_alpha"
+		Diffuse 0.380392, 0.317647, 0.176471
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_055_pathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_055_pathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M56]
+	{
+		Name = "mud"
+		Diffuse = 0.439216, 0.372549, 0.235294
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_056_mud"
+			Amount = 1.000000
+			Bitmap = "landscape_island_056_mud"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_056_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_056_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M156]
+	{
+		Name = "mud_alpha"
+		Diffuse 0.439216, 0.372549, 0.235294
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_056_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_056_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M57]
+	{
+		Name = "desert"
+		Diffuse = 0.462745, 0.462745, 0.337255
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_057_desert"
+			Amount = 1.000000
+			Bitmap = "landscape_island_057_desert"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_057_desertD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_057_desertD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M157]
+	{
+		Name = "desert_alpha"
+		Diffuse 0.462745, 0.462745, 0.337255
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_057_desertD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_057_desertD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M58]
+	{
+		Name = "sand"
+		Diffuse = 0.670588, 0.533333, 0.372549
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_058_sand"
+			Amount = 1.000000
+			Bitmap = "landscape_island_058_sand"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_058_sandD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_058_sandD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M158]
+	{
+		Name = "sand_alpha"
+		Diffuse 0.670588, 0.533333, 0.372549
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_058_sandD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_058_sandD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M59]
+	{
+		Name = "grass"
+		Diffuse = 0.356863, 0.431373, 0.164706
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_059_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_059_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_059_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_059_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M159]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.356863, 0.431373, 0.164706
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_059_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_059_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M60]
+	{
+		Name = "grass"
+		Diffuse = 0.364706, 0.458824, 0.152941
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_060_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_060_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_060_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_060_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M160]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.364706, 0.458824, 0.152941
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_060_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_060_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M61]
+	{
+		Name = "grass"
+		Diffuse = 0.325490, 0.454902, 0.149020
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_061_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_061_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_061_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_061_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M161]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.325490, 0.454902, 0.149020
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_061_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_061_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M62]
+	{
+		Name = "grassrock"
+		Diffuse = 0.541176, 0.486275, 0.364706
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_062_grassrock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_062_grassrock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_062_grassrockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_062_grassrockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M162]
+	{
+		Name = "grassrock_alpha"
+		Diffuse 0.541176, 0.486275, 0.364706
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_062_grassrockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_062_grassrockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M63]
+	{
+		Name = "grassrock"
+		Diffuse = 0.615686, 0.509804, 0.325490
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_063_grassrock"
+			Amount = 1.000000
+			Bitmap = "landscape_island_063_grassrock"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_063_grassrockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_063_grassrockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M163]
+	{
+		Name = "grassrock_alpha"
+		Diffuse 0.615686, 0.509804, 0.325490
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_063_grassrockD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_063_grassrockD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M64]
+	{
+		Name = "grass"
+		Diffuse = 0.584314, 0.462745, 0.258824
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_064_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_064_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_064_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_064_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M164]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.584314, 0.462745, 0.258824
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_064_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_064_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M65]
+	{
+		Name = "grass"
+		Diffuse = 0.313725, 0.403922, 0.203922
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_065_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_065_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_065_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_065_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M165]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.313725, 0.403922, 0.203922
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_065_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_065_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M66]
+	{
+		Name = "grass"
+		Diffuse = 0.376471, 0.458824, 0.156863
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_066_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_066_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_066_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_066_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M166]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.376471, 0.458824, 0.156863
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_066_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_066_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M67]
+	{
+		Name = "grass"
+		Diffuse = 0.368627, 0.458824, 0.121569
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_067_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_067_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_067_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_067_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M167]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.368627, 0.458824, 0.121569
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_067_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_067_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M68]
+	{
+		Name = "grass"
+		Diffuse = 0.372549, 0.450980, 0.172549
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_068_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_068_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_068_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_068_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M168]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.372549, 0.450980, 0.172549
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_068_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_068_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M69]
+	{
+		Name = "grass"
+		Diffuse = 0.400000, 0.400000, 0.294118
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_069_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_069_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_069_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_069_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M169]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.400000, 0.400000, 0.294118
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_069_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_069_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M70]
+	{
+		Name = "grass"
+		Diffuse = 0.415686, 0.419608, 0.082353
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_070_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_070_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_070_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_070_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M170]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.415686, 0.419608, 0.082353
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_070_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_070_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M71]
+	{
+		Name = "grass"
+		Diffuse = 0.407843, 0.384314, 0.364706
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_071_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_071_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_071_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_071_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M171]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.407843, 0.384314, 0.364706
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_071_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_071_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M72]
+	{
+		Name = "grass"
+		Diffuse = 0.313725, 0.439216, 0.180392
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_072_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_072_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_072_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_072_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M172]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.313725, 0.439216, 0.180392
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_072_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_072_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M73]
+	{
+		Name = "grass"
+		Diffuse = 0.333333, 0.435294, 0.090196
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_073_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_073_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_073_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_073_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M173]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.333333, 0.435294, 0.090196
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_073_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_073_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M74]
+	{
+		Name = "drymud"
+		Diffuse = 0.431373, 0.372549, 0.192157
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_074_drymud"
+			Amount = 1.000000
+			Bitmap = "landscape_island_074_drymud"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_074_drymudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_074_drymudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M174]
+	{
+		Name = "drymud_alpha"
+		Diffuse 0.431373, 0.372549, 0.192157
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_074_drymudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_074_drymudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M75]
+	{
+		Name = "stonemud"
+		Diffuse = 0.411765, 0.384314, 0.270588
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_075_stonemud"
+			Amount = 1.000000
+			Bitmap = "landscape_island_075_stonemud"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_075_stonemudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_075_stonemudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M175]
+	{
+		Name = "stonemud_alpha"
+		Diffuse 0.411765, 0.384314, 0.270588
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_075_stonemudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_075_stonemudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M76]
+	{
+		Name = "stonemud"
+		Diffuse = 0.529412, 0.419608, 0.258824
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_076_stonemud"
+			Amount = 1.000000
+			Bitmap = "landscape_island_076_stonemud"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_076_stonemudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_076_stonemudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M176]
+	{
+		Name = "stonemud_alpha"
+		Diffuse 0.529412, 0.419608, 0.258824
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_076_stonemudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_076_stonemudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M77]
+	{
+		Name = "stonegrass"
+		Diffuse = 0.368627, 0.447059, 0.176471
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_077_stonegrass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_077_stonegrass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_077_stonegrassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_077_stonegrassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M177]
+	{
+		Name = "stonegrass_alpha"
+		Diffuse 0.368627, 0.447059, 0.176471
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_077_stonegrassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_077_stonegrassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M78]
+	{
+		Name = "stonemud"
+		Diffuse = 0.447059, 0.388235, 0.219608
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_078_stonemud"
+			Amount = 1.000000
+			Bitmap = "landscape_island_078_stonemud"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_078_stonemudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_078_stonemudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M178]
+	{
+		Name = "stonemud_alpha"
+		Diffuse 0.447059, 0.388235, 0.219608
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_078_stonemudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_078_stonemudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M79]
+	{
+		Name = "stonemud"
+		Diffuse = 0.458824, 0.407843, 0.282353
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_079_stonemud"
+			Amount = 1.000000
+			Bitmap = "landscape_island_079_stonemud"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_079_stonemudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_079_stonemudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M179]
+	{
+		Name = "stonemud_alpha"
+		Diffuse 0.458824, 0.407843, 0.282353
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_079_stonemudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_079_stonemudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M80]
+	{
+		Name = "stonegrass"
+		Diffuse = 0.368627, 0.435294, 0.235294
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_080_stonegrass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_080_stonegrass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_080_stonegrassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_080_stonegrassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M180]
+	{
+		Name = "stonegrass_alpha"
+		Diffuse 0.368627, 0.435294, 0.235294
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_080_stonegrassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_080_stonegrassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M81]
+	{
+		Name = "bluestone"
+		Diffuse = 0.305882, 0.286275, 0.329412
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_081_bluestone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_081_bluestone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_081_bluestoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_081_bluestoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M181]
+	{
+		Name = "bluestone_alpha"
+		Diffuse 0.305882, 0.286275, 0.329412
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_081_bluestoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_081_bluestoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M82]
+	{
+		Name = "stonegrass"
+		Diffuse = 0.454902, 0.431373, 0.376471
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_082_stonegrass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_082_stonegrass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_082_stonegrassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_082_stonegrassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M182]
+	{
+		Name = "stonegrass_alpha"
+		Diffuse 0.454902, 0.431373, 0.376471
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_082_stonegrassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_082_stonegrassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M83]
+	{
+		Name = "grass"
+		Diffuse = 0.454902, 0.431373, 0.376471
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_083_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_083_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_083_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_083_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M183]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.454902, 0.431373, 0.376471
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_083_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_083_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M84]
+	{
+		Name = "stone"
+		Diffuse = 0.372549, 0.447059, 0.352941
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_084_stone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_084_stone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_084_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_084_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M184]
+	{
+		Name = "stone_alpha"
+		Diffuse 0.372549, 0.447059, 0.352941
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_084_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_084_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M85]
+	{
+		Name = "grass"
+		Diffuse = 0.321569, 0.447059, 0.200000
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_085_grass"
+			Amount = 1.000000
+			Bitmap = "landscape_island_085_grass"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_085_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_085_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M185]
+	{
+		Name = "grass_alpha"
+		Diffuse 0.321569, 0.447059, 0.200000
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_085_grassD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_085_grassD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M86]
+	{
+		Name = "stone"
+		Diffuse = 0.403922, 0.380392, 0.356863
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_086_stone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_086_stone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_086_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_086_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M186]
+	{
+		Name = "stone_alpha"
+		Diffuse 0.403922, 0.380392, 0.356863
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_086_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_086_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M87]
+	{
+		Name = "stone"
+		Diffuse = 0.431373, 0.407843, 0.372549
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_087_stone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_087_stone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_087_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_087_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M187]
+	{
+		Name = "stone_alpha"
+		Diffuse 0.431373, 0.407843, 0.372549
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_087_stoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_087_stoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M88]
+	{
+		Name = "path"
+		Diffuse = 0.360784, 0.329412, 0.215686
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_088_path"
+			Amount = 1.000000
+			Bitmap = "landscape_island_088_path"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_088_pathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_088_pathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M188]
+	{
+		Name = "path_alpha"
+		Diffuse 0.360784, 0.329412, 0.215686
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_088_pathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_088_pathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M89]
+	{
+		Name = "redstone"
+		Diffuse = 0.560784, 0.431373, 0.266667
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_089_redstone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_089_redstone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_089_redstoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_089_redstoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M189]
+	{
+		Name = "redstone_alpha"
+		Diffuse 0.560784, 0.431373, 0.266667
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_089_redstoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_089_redstoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M90]
+	{
+		Name = "redstone"
+		Diffuse = 0.647059, 0.498039, 0.321569
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_090_redstone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_090_redstone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_090_redstoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_090_redstoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M190]
+	{
+		Name = "redstone_alpha"
+		Diffuse 0.647059, 0.498039, 0.321569
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_090_redstoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_090_redstoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M91]
+	{
+		Name = "redstone"
+		Diffuse = 0.478431, 0.423529, 0.325490
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_091_redstone"
+			Amount = 1.000000
+			Bitmap = "landscape_island_091_redstone"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_091_redstoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_091_redstoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M191]
+	{
+		Name = "redstone_alpha"
+		Diffuse 0.478431, 0.423529, 0.325490
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_091_redstoneD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_091_redstoneD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M92]
+	{
+		Name = "path"
+		Diffuse = 0.392157, 0.407843, 0.396078
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_092_path"
+			Amount = 1.000000
+			Bitmap = "landscape_island_092_path"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_092_pathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_092_pathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M192]
+	{
+		Name = "path_alpha"
+		Diffuse 0.392157, 0.407843, 0.396078
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_092_pathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_092_pathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M93]
+	{
+		Name = "path"
+		Diffuse = 0.392157, 0.407843, 0.396078
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_093_path"
+			Amount = 1.000000
+			Bitmap = "landscape_island_093_path"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_093_pathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_093_pathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M193]
+	{
+		Name = "path_alpha"
+		Diffuse 0.392157, 0.407843, 0.396078
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_093_pathD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_093_pathD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M94]
+	{
+		Name = "glacier"
+		Diffuse = 0.545098, 0.643137, 0.737255
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_094_glacier"
+			Amount = 1.000000
+			Bitmap = "landscape_island_094_glacier"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_094_glacierD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_094_glacierD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M194]
+	{
+		Name = "glacier_alpha"
+		Diffuse 0.545098, 0.643137, 0.737255
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_094_glacierD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_094_glacierD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M95]
+	{
+		Name = "glacier"
+		Diffuse = 0.556863, 0.662745, 0.749020
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_095_glacier"
+			Amount = 1.000000
+			Bitmap = "landscape_island_095_glacier"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_095_glacierD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_095_glacierD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M195]
+	{
+		Name = "glacier_alpha"
+		Diffuse 0.556863, 0.662745, 0.749020
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_095_glacierD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_095_glacierD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M96]
+	{
+		Name = "glacier"
+		Diffuse = 0.478431, 0.639216, 0.776471
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_096_glacier"
+			Amount = 1.000000
+			Bitmap = "landscape_island_096_glacier"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_096_glacierD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_096_glacierD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M196]
+	{
+		Name = "glacier_alpha"
+		Diffuse 0.478431, 0.639216, 0.776471
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_096_glacierD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_096_glacierD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M97]
+	{
+		Name = "glacier"
+		Diffuse = 0.545098, 0.650980, 0.741176
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_097_glacier"
+			Amount = 1.000000
+			Bitmap = "landscape_island_097_glacier"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_097_glacierD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_097_glacierD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M197]
+	{
+		Name = "glacier_alpha"
+		Diffuse 0.545098, 0.650980, 0.741176
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_097_glacierD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_097_glacierD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M98]
+	{
+		Name = "glacier"
+		Diffuse = 0.549020, 0.654902, 0.745098
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_098_glacier"
+			Amount = 1.000000
+			Bitmap = "landscape_island_098_glacier"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_098_glacierD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_098_glacierD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M198]
+	{
+		Name = "glacier_alpha"
+		Diffuse 0.549020, 0.654902, 0.745098
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_098_glacierD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_098_glacierD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M99]
+	{
+		Name = "mud"
+		Diffuse = 0.564706, 0.329412, 0.133333
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_099_mud"
+			Amount = 1.000000
+			Bitmap = "landscape_island_099_mud"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_099_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_099_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M199]
+	{
+		Name = "mud_alpha"
+		Diffuse 0.564706, 0.329412, 0.133333
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_099_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_099_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M100]
+	{
+		Name = "mud"
+		Diffuse = 0.564706, 0.329412, 0.133333
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_100_mud"
+			Amount = 1.000000
+			Bitmap = "landscape_island_100_mud"
+			MappingType = "Explicit"
+			TilingU = 16.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = "landscape_island_100_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_100_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+	[M200]
+	{
+		Name = "mud_alpha"
+		Diffuse 0.564706, 0.329412, 0.133333
+		Specular = 1.000000, 1.000000, 1.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "Filter"
+		DepthBias = 0
+		DepthBuffered = 0
+		[Map_Diffuse]
+		{
+			Name = "landscape_island_100_mudD"
+			Amount = 1.000000
+			Bitmap = "landscape_island_100_mudD"
+			MappingType = "Explicit"
+			TilingU = 4.000000
+			TilingV = 1.000000
+			Filter = "None"
+		UserData = 1
+		}
+
+		[Map_Bump]
+		{
+			Name = ""
+			Amount = 1.000000
+			Bitmap = ""
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "None"
+		}
+
+	}
+}
+

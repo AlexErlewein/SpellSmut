@@ -59,6 +59,10 @@ Contains comprehensive guides for:
 ### Asset Extraction (ExtractedAssets/)
 - Extracted UI elements, audio, textures, and models from game PAK files
 - Organized by asset type for easy access and modification
+- **Texture Atlases**: 16 ITM (item) atlases extracted with 4096+ individual icons
+- **Weapon Reassembly**: Automated detection and reassembly of 1x2 and 1x4 weapon icons
+- **Icon System**: Individual PNG extraction with proper indexing and organization
+- **Categorization**: Assets organized by type (items, spells, UI elements, etc.)
 
 ### Modding Tools (src/)
 #### TirganachReloaded
@@ -75,6 +79,22 @@ Python and batch scripts for:
 - Audio asset extraction
 - File organization and categorization
 - Lua mappings extraction
+- Texture atlas extraction (16 ITM atlases, 4096+ icons)
+- Weapon icon reassembly (1x2 and 1x4 weapon patterns)
+- Icon indexing and organization system
+
+#### Creator Tools (New!)
+Comprehensive modding creation systems:
+- **Quest Creator** - 6-phase wizard for custom quests
+- **Spell Creator** - 7-phase "Spell Wizard" with 1-15 level progression
+- **Weapon Creator** - 7-phase "Weapon Forge" with edit-existing feature
+- **Armor Creator** - 7-phase "Armor Forge" for custom armor pieces
+- **NPC Creator** - 7-phase "NPC Workshop" system
+- **Universal Savefile System** - ModSave Framework (.quest, .spell, .weapon, etc.)
+- **Utility Tools Suite** - Modder's Toolbox with asset management, testing, and automation tools
+- **ID Management System** - Centralized ID allocation to prevent conflicts
+
+All creator tools integrate with shared components and follow consistent design principles.
 
 ## Development Process
 

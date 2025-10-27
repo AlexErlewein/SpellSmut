@@ -62,17 +62,37 @@ This document outlines the file organization conventions for the SpellSmut (Spel
 - Helper tools
 - Modding utilities
 - Core application code
-- Active development libraries (TirganachReloaded, etc.)
+- Active development libraries
+- Test files
 
 **Subfolder Structure:**
-- `src/helper_tools/` - Standalone helper scripts
-- `src/luas/` - Lua scripts and modifications
-- `TirganachReloaded/` - CFF editing library and tools
+- `src/helper_tools/` - Standalone helper scripts and utilities
+- `src/TirganachReloaded/` - CFF editing library and tools
+- `src/tests/` - All test files and test configuration
+- `src/luas/` - Lua scripts and modifications (future)
 - Additional subdirectories as needed for different modules
 
 ---
 
-### 4. Extracted Assets
+### 4. Test Files
+**Location:** `tests/`
+
+**What goes here:**
+- All pytest test files
+- Test fixtures and configuration
+- Test data and mock files
+- Integration tests
+- Unit tests
+
+**Naming Convention:**
+- `test_*.py` - Test files
+- `conftest.py` - Pytest configuration and shared fixtures
+
+**Rule:** ALL test-related files MUST be placed in the `tests/` folder. No test files should exist in `src/` or other directories.
+
+---
+
+### 5. Extracted Assets
 **Location:** `ExtractedAssets/`
 
 **What goes here:**
@@ -89,7 +109,7 @@ This document outlines the file organization conventions for the SpellSmut (Spel
 
 ---
 
-### 5. Modding Tools
+### 6. Modding Tools
 **Location:** `ModdingTools/`
 
 **What goes here:**
@@ -101,7 +121,7 @@ This document outlines the file organization conventions for the SpellSmut (Spel
 
 ---
 
-### 6. Original Game Files
+### 7. Original Game Files
 **Location:** `OriginalGameFiles/`
 
 **What goes here:**
@@ -114,7 +134,7 @@ This document outlines the file organization conventions for the SpellSmut (Spel
 
 ---
 
-### 7. Modded Game Files
+### 8. Modded Game Files
 **Location:** `ModdedGameFiles/`
 
 **What goes here:**
@@ -131,6 +151,7 @@ This document outlines the file organization conventions for the SpellSmut (Spel
 | Planning documents | `ProjectPlanning/` | No |
 | Documentation/Guides | `docs/` | **Yes** - organize by topic |
 | Source code | `src/` | **Yes** - organize by purpose |
+| Test files | `src/tests/` | No |
 | Extracted assets | `ExtractedAssets/` | **Yes** - organize by type |
 | Modding tools | `ModdingTools/` | **Yes** - one per tool |
 | Original game files | `OriginalGameFiles/` | Maintain game structure |

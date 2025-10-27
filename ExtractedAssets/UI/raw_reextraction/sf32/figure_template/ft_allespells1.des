@@ -1,0 +1,648 @@
+[Creo]
+{
+	[Scrolls]
+	{
+		//Slot, ItemId	
+		Data0 = 785	// Die Human-Worker-Creos im Inventory.
+		Data1 = 754	// Unwichtig für Preview, da nur die
+		Data2 = 854	// unten im Runeboard eingetragenen
+		Data3 = 865	// Runen zur Vorführung verwendet werden.
+		Data4 = 844
+		Data5 = 880	
+		Data6 = 795
+		Data7 = 931
+		Data8 = 869
+		Data9 = 873
+		Data10 = 877
+		Data11 = 781
+		Data12 = 792
+		Data13 = 923
+		Data14 = 929
+	}
+
+	[Runeboard]
+	{
+		[Hero1]
+		{
+			Creo = 760  // Rune Hero Priest 23
+		}
+
+		[Hero2]
+		{
+			Creo = 765  // Rune Hero Ranger 24
+		}
+
+		[Hero3]
+		{
+			Creo = 779  // Rune Hero Warrior 17
+		}
+
+		[Hero4]
+		{
+			Creo = 768  // Rune Hero Rogue 19
+		}
+
+		[Hero5]
+		{
+			Creo = 753  // Rune 
+		}
+
+
+		//0 == Human
+		//1 == Dwarf
+		//2 == Elf
+		//3 == Orc
+		//4 == Troll
+		//5 == Darkelf
+
+		[WorkerRace0]
+		{
+			Creo = 810  // Summon Human Workers Lvl 15
+		}
+
+		[WorkerRace1]
+		{
+			Creo = 889  // Summon Dwarven Workers Lvl 15  
+		}
+
+		[WorkerRace2]
+		{
+			Creo = 919  // Summon Elfish Workers Lvl 15 
+		}
+		[WorkerRace3]
+		{
+			Creo = 943  // Summon Orcish Workers Lvl 15
+		}
+		[WorkerRace4]
+		{
+			Creo = 898  // Summon Troll Workers Lvl 15 
+		}
+		[WorkerRace5]
+		{
+			Creo = 907  // Summon Dark Elf Workers Lvl 15
+		}
+	}
+
+}
+
+[Equipment]
+{
+	[Items]
+	{
+		//Slot, ItemId
+		Data0 = 0, 546
+		Data1 = 1, 551
+		Data2 = 2, 547
+		Data3 = 3, 545
+		Data4 = 4, 628
+		Data5 = 5, 629
+		Data6 = 6, 618
+		Data7 = 7, 603
+		Data8 = 8, 628
+		Data9 = 9, 732
+		Data10 = 10, 740
+		Data11 = 11, 692
+		Data12 = 12, 688
+		Data13 = 13, 669
+		Data14 = 14, 664
+		Data15 = 15, 682
+		Data16 = 16, 709
+		Data17 = 17, 710
+		Data18 = 18, 711
+		Data19 = 19, 652
+		Data20 = 20, 653
+		Data21 = 21, 650
+		Data22 = 22, 649
+		Data23 = 23, 648
+	}
+
+	//Hero0 == Avatar
+	//Hero1 == Hero1
+	//Hero2 == Hero2
+	//Hero3 == Hero3
+	//Hero4 == Hero4
+	//Hero5 == Hero5
+
+	//Slot0	== helmet
+	//Slot1	== right hand
+	//Slot2	== chest
+	//Slot3	== left hand
+	//Slot4	== right ring
+	//Slot5	== legs
+	//Slot6	== left ring
+
+
+
+	[Hero0]
+	{
+		//Slot, ItemId
+		Data0 = 0, 619  // Head Priest Ultra
+		Data1 = 2, 385  // Sonic Robe of MainChar
+		Data2 = 3, 692  // Weapon Onehanded Orb Highend
+		Data3 = 4, 657  // Ring Ultra Priest
+		Data4 = 6, 657  // Ring Ultra Priest
+	}
+
+	[Hero1]
+	{
+		//Slot, ItemId
+		Data0 = 2,  77   // Robe of Vampire Mage
+	}
+
+	[Hero2]
+	{
+		//Slot, ItemId
+		Data0 = 2,  79   // Robe of Soulknight
+	}
+
+	[Hero3]
+	{
+		//Slot, ItemId
+		Data0 = 2, 378   // Chestplate of Paladiness
+	}
+
+	[Hero4]
+	{
+		//Slot, ItemId
+		Data0 = 2, 80    // Chestplate of Warrior Lvl 15
+	}
+
+	[Hero5]
+	{
+		//Slot, ItemId
+		Data0 = 2, 78
+	}
+
+}
+
+[Spells]
+{
+	[Scrolls]
+	{
+		//Slot, ItemId
+		Data0 = 0, 291    // Scroll Sacrifice Mana Lvl 9
+		Data1 = 1, 293    // Scroll Manatap Lvl 9
+		Data2 = 2, 297    // Scroll Shock Lvl 9
+		Data3 = 3, 125    // Scroll Hypnotize Lvl 9
+		Data4 = 4, 215    // Scroll Area Healing Lvl 9
+		Data5 = 5, 219    // Scroll Greater Healing Lvl 9
+		Data6 = 6, 41     // Scroll Fog Lvl 9
+		Data7 = 7, 37     // Scroll Invulnerability Lvl 9
+		Data8 = 8, 1420   // Scroll Extinct Lvl 9
+		Data9 = 9, 123    // Scroll Summon Undead Goblin Lvl 7
+		Data10 = 10, 305  // Scroll Rain of Fire Lvl 7
+		Data11 = 11, 189  // Scroll Area Pain Lvl 7
+		Data12 = 12, 121  // Scroll Lifetap Lvl 7
+		Data13 = 13, 1419 // Scroll Thorn Shield Lvl 7
+		Data14 = 14, 243  // Scroll Hallow Lvl 7
+		Data15 = 15, 105  // Scroll Illuminate Lvl 7
+	}
+
+	[Spellbook]
+	{
+		Data0 = 1993	// Scroll Fireball Lvl 12
+		Data1 = 2044	// Scroll Fireburst Lvl 12
+		Data2 = 1906	// Scroll Fireshield Lvl 12
+		Data3 = 2026	// Scroll Freeze Lvl 12
+		Data4 = 1832	// Scroll Petrify Lvl 12
+		Data5 = 2234	// Scroll Acid Cloud Lvl 12
+		Data6 = 1794	// Scroll Rain of Fire Lvl 12
+		Data7 = 1878	// Scroll Greater Healing Lvl 12
+		Data8 = 1664	// Scroll Hallow Lvl 12
+		Data9 = 2143	// Scroll Charm Animal Lvl 12
+		Data10 = 1970	// Scroll Fog Lvl 12
+		Data11 = 1842	// Scroll Thorn Shield Lvl 12
+		Data12 = 1800	// Scroll Invulnerability Lvl 12
+		Data13 = 2188	// Scroll Amok Lvl 12
+		Data14 = 1870	// Scroll Hypnotize Lvl 12
+		Data15 = 2121	// Scroll Disrupt Lvl 12
+		Data16 = 1692	// Scroll Sacrifice Mana Lvl 12
+		Data17 = 1722	// Scroll Shock Lvl 12
+		Data18 = 1702	// Scroll Manatap Lvl 12
+		Data19 = 1772	// Scroll Lifetap Lvl 12
+		Data20 = 1864	// Scroll Summon Skeleton Lvl 12
+		Data21 = 1752	// Scroll Pestilence Lvl 12
+		Data22 = 1732	// Scroll Extinct Lvl 12
+		Data23 = 1948	// Scroll Death Lvl 12
+		Data24 = 1674	// Scroll Area Pain Lvl 12
+		Data25 = 1531	// Scroll Aura of Brilliance Lvl 6
+		Data26 = 1551	// Scroll Aura of Dexterity Lvl 10
+		Data27 = 231	// Scroll Aura of Endurance Lvl 8
+		Data28 = 2305	// Scroll Aura of Fast Fighting Lvl 4
+		Data29 = 2243	// Scroll Aura of Fast Walking Lvl 6
+		Data30 = 1546	// Scroll Aura of Flexibility Lvl 5
+		Data31 = 2056	// Scroll Aura of Healing Lvl 7
+		Data32 = 1530	// Scroll Aura of Hypnotization Lvl 10
+		Data33 = 1624	// Scroll Aura of Inability Lvl 10
+		Data34 = 209	// Scroll Aura of Inflexibility Lvl 8
+		Data35 = 1516	// Scroll Aura of Lifetap Lvl 9
+		Data36 = 1799	// Scroll Aura of Light Lvl 10
+		Data37 = 1532	// Scroll Aura of Manatap Lvl 10
+		Data38 = 36	// Scroll Aura of Regeneration Lvl 5
+		Data39 = 1552	// Scroll Aura of Slow Fighting Lvl 9
+		Data40 = 37	// Scroll Aura of Slow Walking Lvl 6
+		Data41 = 2057	// Scroll Aura of Strength Lvl 6
+		Data42 = 1450	// Scroll Aura of Suffocation Lvl 10
+		Data43 = 1745	// Scroll Aura of Weakness Lvl 10
+		Data44 = 2311	// Scroll Charisma Lvl 12
+		Data45 = 2142	// Scroll Charm Lvl 6
+		Data46 = 313	// Scroll Chill Resistance Lvl 10
+		Data47 = 1825	// Scroll Confuse Lvl 4
+		Data48 = 2054	// Scroll Conservation Lvl 9
+		Data49 = 2058	// Scroll Cure Disease Lvl 8
+		Data50 = 38	// Scroll Cure Poison Lvl 8
+		Data51 = 1826	// Scroll Detect Magic Lvl 4
+		Data52 = 113	// Scroll Detect Metal Lvl 4
+		Data53 = 1548	// Scroll Dispel Black Aura Lvl 8
+		Data54 = 2129	// Scroll Dispel White Aura Lvl 10
+		Data55 = 1823	// Scroll Distract Lvl 4
+		Data56 = 2289	// Scroll Dominate Animal Lvl 8
+		Data57 = 1828	// Scroll Dominate Lvl 4
+		Data58 = 2299	// Scroll Earth Elemental Lvl 9
+		Data59 = 289	// Scroll Enlightenment Lvl 9
+		Data60 = 2055	// Scroll Fire Elemental Lvl 9
+		Data61 = 1614	// Scroll Ice Elemental Lvl 6
+		Data62 = 317	// Scroll Meditation Lvl 12
+		Data63 = 2053	// Scroll Melt Resistance Lvl 10
+		Data64 = 2247	// Scroll Rock Bullet Lvl 9
+		Data65 = 2279	// Scroll Self Illusion Lvl 7
+		Data66 = 1639	// Scroll Shockwave Lvl 9
+		Data67 = 1456	// Scroll Suicide Death Lvl 12
+		Data68 = 1517	// Scroll Suicide Heal Lvl 12
+		Data69 = 2241	// Scroll Summon Spectre Lvl 10
+		Data70 = 315	// Scroll Transform to Bear Lvl 10
+		Data71 = 179	// Scroll Transform to Wolf Lvl 4
+		Data72 = 2303	// Scroll Wave of Fire Lvl 9
+		Data73 = 299	// Sroll Wave of Ice Lvl 8
+		Data74 = 1613	// Scroll Wave of Rocks Lvl 8
+		Data75 = 2309	// Scroll Self Illusion Lvl 10
+		Data76 = 2277	// Scroll Manadrain Lvl 10
+		Data77 = 1550	// Scroll Sentinel Healing Lvl 12
+		Data78 = 1810	// Scroll Poison Lvl 12
+		Data79 = 187	// Scroll Dark Banishing Lvl 8
+		Data80 = 2265	// Scroll Death Grasp Lvl 12
+		Data81 = 2263	// Scroll Raise Dead Lvl 12
+		Data82 = 2261	// Scroll Remediless Lvl 12
+		Data83 = 1762	// Scroll Illuminate Lvl 12
+		Data84 = 1926	// Scroll Iceburst Lvl 12
+		Data85 = 1654	// Scroll Iceshield Lvl 12
+		Data86 = 2287	// Scroll Blizzard Lvl 9
+		Data87 = 115	// Scroll Decay Lvl 4
+		Data88 = 2281	// Scroll Stone Rain Lvl 12
+		Data89 = 3492   // Scroll Invisibility Lvl 12
+		Data90 = 3529   // Scroll Demorilasation Lvl 12
+		Data91 = 3994   // Scroll Black Essence Lvl 12
+		Data92 = 3969   // Scroll Black Almightiness Lvl 12
+		Data93 = 3938   // Scroll Elemental Almightiness Lvl 12
+		Data94 = 3914   // Scroll Elemental Essence Lvl 12
+		Data95 = 4018   // Scroll Mental Essence Lvl 12
+		Data96 = 3890   // Scroll Mental Almightiness Lvl 12
+		Data97 = 4042   // Scroll White Almightiness LVl 12
+		Data98 = 4066   // Scroll White Essence Lvl 12
+		Data99 = 4145   // Scroll FireResistance
+		Data100 = 6748  // Scroll Summon Earth Golem Lvl 13
+		Data101 = 6716  // Scroll Summon Fire Golem Lvl 13
+		Data102 = 6732  // Scroll Summon Ice Golem Lvl 13
+		Data103 = 6492  // Scroll Summon Treewraith Lvl 13
+		Data104 = 7036  // Scroll Summon Blade Lvl 13
+		Data105 = 6540  // Scroll Assistance Lvl 13
+		Data106 = 6556  // Scroll Holy Touch Lvl 13
+		Data107 = 6604  // Scroll Aura of Eternity Lvl 13
+		Data108 = 6620  // Scroll Cannibalize Lvl 13
+		Data109 = 7020  // Scroll Dominate Undead Lvl 13
+		Data110 = 6700  // Scroll Area of Darkness Lvl 13
+		Data111 = 6844  // Scroll AreaFreeze Lvl 13
+		Data112 = 6476  // Scroll Roots Lvl 13
+		Data113 = 6572  // Scroll Revenge Lvl 13
+		Data114 = 6636  // Scroll Torture Lvl 13
+		Data115 = 6764  // Scroll Feet of Clay Lvl 13
+		Data116 = 6972  // Scroll Area Hypnotize Lvl 13
+		Data117 = 6988  // Scroll Area Confuse Lvl 13
+		Data118 = 6588  // Scroll Reinforcement Lvl 13
+		Data119 = 6668  // Scroll Mutation Lvl 13
+		Data120 = 6940  // Scroll Mana Shield Lvl 13
+		Data121 = 6860  // Scroll Greater Illusion Lvl 13
+		Data122 = 6508  // Scroll Chain Roots Lvl 13
+		Data123 = 6780  // Scroll Chain Rock Bullet Lvl 13
+		Data124 = 6652  // Scroll Chain Pain Lvl 13
+		Data125 = 6684  // Scroll Chain Mutation Lvl 13
+		Data126 = 6908  // Scroll Chain Manatap Lvl 13
+		Data127 = 7004  // Scroll Chain Lifetap Lvl 13
+		Data128 = 6796  // Scroll Chain Iceburst Lvl 13
+		Data129 = 6524  // Scroll Chain Hallow Lvl 13
+		Data130 = 6812  // Scroll Chain Fireburst Lvl 13
+		Data131 = 6828  // Scroll Chain Fireball Lvl 13
+		Data132 = 6876  // Scroll Chain Charm Lvl 13
+		Data133 = 6892  // Scroll Chain Shock Lvl 13
+		Data134 = 6924  // Scroll Voodoo Lvl 13
+		Data135 = 6956  // Scroll Shift Mana Lvl 13
+	}
+
+	[Memorized]
+	{
+		//Hero0 == Avatar, max 10 spells
+		//Hero1 == Hero1, max 3 spells
+		//Hero2 == Hero2, max 3 spells
+		//Hero3 == Hero3, max 3 spells
+		//Hero4 == Hero4, max 3 spells
+		//Hero5 == Hero5, max 3 spells
+
+		[Hero0]
+		{
+			Data0 = 1540	
+			Data1 = 1510	
+			Data2 = 1511	
+			Data3 = 2302	
+			Data4 = 1537	
+			Data5 = 224
+			Data6 = 2244
+			Data7 = 2090
+			Data8 = 232
+			Data9 = 1818
+		}
+
+	}
+
+}
+
+[Plans]
+{
+	[Scrolls]
+	{
+	}
+	[Building]
+	{
+		[Race0]
+		{
+			Data0 = 280
+			Data1 = 271
+			Data2 = 167
+			Data3 = 262
+			Data4 = 270
+			Data5 = 263
+			Data6 = 275
+			Data7 = 169
+			Data8 = 260
+			Data9 = 2928
+			Data10 = 267
+			Data11 = 255
+			Data12 = 257
+			Data13 = 277
+			Data14 = 949
+			Data15 = 251
+			Data16 = 247
+			Data17 = 249
+			Data18 = 171
+			Data19 = 266
+			Data20 = 273
+			Data21 = 253
+			Data22 = 4691
+			Data23 = 4709
+		}
+		[Race1]
+		{
+			Data0 = 999
+			Data1 = 1009
+			Data2 = 1015
+			Data3 = 992
+			Data4 = 1007
+			Data5 = 1005
+			Data6 = 1010
+			Data7 = 2982
+			Data8 = 994
+			Data9 = 1002
+			Data10 = 1012
+			Data11 = 1001
+			Data12 = 1016
+			Data13 = 996
+			Data14 = 4687
+			Data15 = 4705
+		}
+		[Race2]
+		{
+			Data0 = 951
+			Data1 = 977
+			Data2 = 985
+			Data3 = 975
+			Data4 = 967
+			Data5 = 969
+			Data6 = 963
+			Data7 = 965
+			Data8 = 981
+			Data9 = 988
+			Data10 = 956
+			Data11 = 990
+			Data12 = 952
+			Data13 = 954
+			Data14 = 958
+			Data15 = 973
+			Data16 = 971
+			Data17 = 961
+			Data18 = 986
+			Data19 = 4689
+			Data20 = 4707
+		}
+		[Race3]
+		{
+			Data0 = 1021
+			Data1 = 1027
+			Data2 = 1037
+			Data3 = 1035
+			Data4 = 1031
+			Data5 = 1039
+			Data6 = 1045
+			Data7 = 1047
+			Data8 = 1043
+			Data9 = 1041
+			Data10 = 2934
+			Data11 = 1023
+			Data12 = 1029
+			Data13 = 1033
+			Data14 = 1049
+			Data15 = 1019
+			Data16 = 1025
+			Data17 = 2932
+			Data18 = 4693
+			Data19 = 4711
+		}
+		[Race4]
+		{
+			Data0 = 1057
+			Data1 = 1059
+			Data2 = 1063
+			Data3 = 1067
+			Data4 = 1069
+			Data5 = 1051
+			Data6 = 1061
+			Data7 = 1071
+			Data8 = 1065
+			Data9 = 1053
+			Data10 = 2936
+			Data11 = 1055
+			Data12 = 2938
+			Data13 = 4695
+			Data14 = 4701
+		}
+		[Race5]
+		{
+			Data0 = 1075
+			Data1 = 1105
+			Data2 = 1109
+			Data3 = 1111
+			Data4 = 1081
+			Data5 = 1107
+			Data6 = 1095
+			Data7 = 1091
+			Data8 = 1097
+			Data9 = 1087
+			Data10 = 1113
+			Data11 = 1077
+			Data12 = 1083
+			Data13 = 1089
+			Data14 = 1085
+			Data15 = 1103
+			Data16 = 1073
+			Data17 = 1079
+			Data18 = 1093
+			Data19 = 1101
+			Data20 = 4685
+			Data21 = 4703
+		}
+	}
+	[Unit]
+	{
+		[Race0]
+		{
+			Data0 = 1271
+			Data1 = 1273
+			Data2 = 1265
+			Data3 = 1261
+			Data4 = 1263
+			Data5 = 1267
+			Data6 = 1259
+			Data7 = 1269
+		}
+		[Race1]
+		{
+			Data0 = 1333
+			Data1 = 1337
+			Data2 = 1335
+			Data3 = 1325
+			Data4 = 1331
+			Data5 = 1327
+			Data6 = 1329
+			Data7 = 1323
+		}
+		[Race2]
+		{
+			Data0 = 1285
+			Data1 = 1289
+			Data2 = 1279
+			Data3 = 1275
+			Data4 = 1281
+			Data5 = 1277
+			Data6 = 1287
+			Data7 = 1283
+		}
+		[Race3]
+		{
+			Data0 = 1299
+			Data1 = 1293
+			Data2 = 1297
+			Data3 = 1301
+			Data4 = 1291
+			Data5 = 1295
+			Data6 = 1305
+			Data7 = 1303
+		}
+		[Race4]
+		{
+			Data0 = 1349
+			Data1 = 1351
+			Data2 = 1353
+			Data3 = 1339
+			Data4 = 1345
+			Data5 = 1347
+			Data6 = 1343
+			Data7 = 1341
+		}
+		[Race5]
+		{
+			Data0 = 1307
+			Data1 = 1311
+			Data2 = 1319
+			Data3 = 1317
+			Data4 = 1321
+			Data5 = 1313
+			Data6 = 1309
+			Data7 = 1315
+		}
+	}
+}
+
+
+[Misc]
+{
+	//Id, Count
+	//Data0 = 245, 10
+	//Data1 = 246, 20
+}
+
+
+[Character]
+{
+	Check = 0 //plausibility check
+	Level	= 35
+	Name	= "Priest Master"
+	Female	= 0
+
+	Str	= 30
+	Sta	= 32
+	Dex = 32
+	Agi = 34
+	Wis = 68
+	Int = 65
+	Cha = 34
+
+	ResFire			= 30
+	ResIce			= 30
+	ResMindMagic	= 30
+	ResBlackMagic	= 30
+
+	WalkSpeed		= 100
+	FightSpeed		= 100
+	CastSpeed		= 100
+
+
+	//Abilities
+	//
+	// **********************************************************************************
+	// Rules: 
+	// - Each main ability and spec needs a level. The spec level must not exceed the ability
+	//	 level. If no level is set, it is being assumed to 1.
+	// - The sum of all main abilities and specs must not exceed 10.
+	// - Main ability and specs are 1 based
+	// - Lookup trace file for errors
+	// **********************************************************************************
+	//
+
+	
+	[Ability4]	// Weisse Magie
+	{
+		Level = 13 		// Level ohne Spezialisierung
+		
+		Data0 = 1,13		//	Leben, Level
+		Data1 = 2,13		//	Naturmagie, Level
+		Data2 = 3,13		//	Segnung, Level
+	}
+	
+	[Ability5]	// Elementarmagie
+	{
+		Level = 13		// Level ohne Spezialisierung
+		
+		Data0 = 1,13		//	Leben, Level
+		Data1 = 2,13		//	Naturmagie, Level
+		Data2 = 3,13		//	Segnung, Level
+	}
+	
+}

@@ -1,0 +1,79 @@
+[Creo]
+{
+	[Scrolls]
+	{
+	}
+	[Runeboard]
+	{
+	}
+}
+
+[Misc]
+{
+}
+
+[Equipment]
+{
+
+	//Hero0 == Avatar
+
+	//Slot0	== helmet
+	//Slot1	== right hand
+	//Slot2	== chest
+	//Slot3	== left hand
+	//Slot4	== right ring
+	//Slot5	== legs
+	//Slot6	== left ring
+
+	[Hero0]
+	{
+		//Slot, ItemId
+		Data0 = 0, 3770 // Helm der Grubenkämpfer
+		Data1 = 1, 31   // Fahlmond
+		Data2 = 2, 565  // Runenpanzer
+		Data3 = 3, 3650 // Blutschild
+		Data4 = 4, 643  // Einbrecherring 
+		Data5 = 5, 541  // Verstärkte Lederbeinlinge
+		Data6 = 6, 647  // Grauer Ring
+	}
+}
+
+
+[Character]
+{
+	Level	 = 15
+	XP		 = 39000
+	Name	 = "ArenaFighter"
+	Female	 = 1
+
+	Head	 = 18
+
+
+	Str	 = 50
+	Sta	 = 50
+	Dex	 = 50
+	Agi	 = 50
+	Wis	 = 25
+	Int	 = 25
+	Cha	 = 25
+
+	ResFire			 = 30
+	ResIce			 = 30
+	ResMindMagic	 = 30
+	ResBlackMagic	 = 30
+
+	WalkSpeed		 = 100
+	FightSpeed		 = 100
+	CastSpeed		 = 100
+
+	[Ability1] // Leichte Kriegskunst
+	{
+		Level = 7
+
+		Data0 = 1, 4 // Piercing 
+		Data1 = 2, 7 // LightBlade 
+		Data2 = 3, 5 // LightBlunt 
+		Data3 = 4, 7 // LightArmor 
+	}
+}
+

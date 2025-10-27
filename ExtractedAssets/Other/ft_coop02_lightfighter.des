@@ -1,0 +1,200 @@
+[Creo]
+{
+	[Scrolls]
+	{
+		Data0 = 782
+		Data1 = 3828
+		Data2 = 3823
+		Data3 = 3655
+		Data4 = 3834
+		Data5 = 3821
+		Data6 = 776
+	}
+	[Runeboard]
+	{
+	}
+}
+
+[Misc]
+{
+}
+
+[Equipment]
+{
+	[Items]
+	{
+		Data0 = 0, 719
+		Data1 = 1, 3179
+		Data2 = 2, 633
+		Data3 = 3, 630
+		Data4 = 4, 568
+		Data5 = 5, 528
+		Data6 = 6, 529
+		Data7 = 7, 678
+		Data8 = 8, 583
+		Data9 = 9, 530
+		Data10 = 10, 533
+		Data11 = 11, 533
+		Data12 = 12, 558
+		Data13 = 13, 678
+		Data14 = 14, 684
+		Data15 = 15, 2325
+		Data16 = 16, 733
+		Data17 = 17, 737
+		Data18 = 18, 578
+		Data19 = 19, 558
+		Data20 = 20, 2326
+		Data21 = 21, 2327
+		Data22 = 22, 702
+		Data23 = 23, 2343
+	}
+}
+
+[Plans]
+{
+	[Scrolls]
+	{
+	}
+	[Building]
+	{
+		[Race0]
+		{
+			Data0 = 279
+			Data1 = 263
+			Data2 = 166
+			Data3 = 168
+			Data4 = 271
+			Data5 = 275
+			Data6 = 261
+			Data7 = 269
+			Data8 = 259
+		}
+		[Race1]
+		{
+			Data0 = 999
+			Data1 = 1007
+			Data2 = 1009
+			Data3 = 1015
+			Data4 = 993
+			Data5 = 1004
+		}
+		[Race2]
+		{
+			Data0 = 966
+			Data1 = 968
+			Data2 = 974
+			Data3 = 976
+			Data4 = 984
+			Data5 = 951
+			Data6 = 962
+		}
+		[Race3]
+		{
+			Data0 = 1027
+			Data1 = 1033
+			Data2 = 1035
+			Data3 = 1039
+			Data4 = 2934
+			Data5 = 1041
+			Data6 = 1047
+			Data7 = 1021
+			Data8 = 1031
+		}
+		[Race4]
+		{
+			Data0 = 1057
+			Data1 = 1059
+			Data2 = 1063
+			Data3 = 1067
+			Data4 = 1069
+			Data5 = 1051
+			Data6 = 1061
+			Data7 = 1071
+		}
+		[Race5]
+		{
+			Data0 = 1080
+			Data1 = 1090
+			Data2 = 1094
+			Data3 = 1096
+			Data4 = 1108
+			Data5 = 1074
+			Data6 = 1086
+		}
+	}
+	[Unit]
+	{
+		[Race0]
+		{
+			Data0 = 1271
+			Data1 = 1273
+		}
+		[Race1]
+		{
+			Data0 = 1333
+			Data1 = 1337
+		}
+		[Race2]
+		{
+			Data0 = 1285
+			Data1 = 1289
+		}
+		[Race3]
+		{
+			Data0 = 1299
+			Data1 = 1293
+			Data2 = 1297
+		}
+		[Race4]
+		{
+			Data0 = 1349
+			Data1 = 1351
+		}
+		[Race5]
+		{
+			Data0 = 1307
+		}
+	}
+}
+
+[Character]
+{
+	Check	 = 0
+	Level	 = 3
+	XP		 = 165
+	Name	 = "LightFighter3_Coop02"
+	Female	 = 0
+
+	Head	 = 3
+
+	Gold	 = 0
+	Silver	 = 50
+	Copper	 = 0
+
+	Str	 = 32
+	Sta	 = 32
+	Dex	 = 38
+	Agi	 = 38
+	Wis	 = 25
+	Int	 = 25
+	Cha	 = 25
+
+	ResFire			 = 30
+	ResIce			 = 30
+	ResMindMagic	 = 30
+	ResBlackMagic	 = 30
+
+	WalkSpeed		 = 100
+	FightSpeed		 = 100
+	CastSpeed		 = 100
+
+	[Ability1] // Leichte Kriegskunst
+	{
+		Level = 1
+
+		Data0 = 1, 1 // Piercing 
+		Data1 = 3, 1 // LightBlunt 
+		Data2 = 4, 1 // LightArmor 
+	}
+}
+

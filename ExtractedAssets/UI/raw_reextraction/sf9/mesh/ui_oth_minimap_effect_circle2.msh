@@ -1,0 +1,73 @@
+// saved by Phenomic Krass Viewer:// Phenomic Krass Postprocessor:
+// 3DS-MAX Massive DES-File Object Exporter
+// Filename: "button.max"
+// 
+[Material]
+{
+	NumOfM = 1
+	[M0]
+	{
+		Name = "ui_oth_minimap_effect_circle2"
+		Diffuse = 1.000000, 1.000000, 1.000000
+		Specular= 0.000000, 0.000000, 0.000000
+		Shine = 0.000000
+		ShineStrength = 0.000000
+		Opacity = 1.000000
+		ShadingType = "Blinn"
+		FalloffType = "In"
+		FalloffFactor = 0.000000
+		OneSided = 1
+		SelfIllumination = 0.000000
+		TrancparencyType = "SRCALPHA_INVSRCALPHA"
+		DepthBias = 0
+		DepthBuffered = 1
+		[Map_Diffuse]
+		{
+			Name = "ui_oth_minimap_effect_circle2"
+			Amount = 1.000000
+			Bitmap = "ui_oth_minimap_effect_circle2"
+			MappingType = "Explicit"
+			TilingU = 1.000000
+			TilingV = 1.000000
+			Filter = "Pyramidal"
+			UserData = 1
+		}
+	}
+}
+
+// Node Name: Plane01
+[Vertex]
+{
+	NumOfV = 4
+	V0 = 0.000000, -0.000001, -32.000000
+	V1 = 32.000000, -0.000001, -32.000000
+	V2 = 0.000000, 0.000001, -0.000001
+	V3 = 32.000000, 0.000001, -0.000001
+}
+[Polygon]
+{
+	NumOfP = 2
+		_SED_NewVersion = 1
+	[P0]
+	{
+		V0 = 3
+		V1 = 0
+		V2 = 2
+		G = 0
+		M = 0
+		P0 = 0.999501, 0.999500
+		P1 = 0.000500, 0.000500
+		P2 = 0.000500, 0.999501
+	}
+	[P1]
+	{
+		V0 = 0
+		V1 = 3
+		V2 = 1
+		G = 0
+		M = 0
+		P0 = 0.000500, 0.000500
+		P1 = 0.999501, 0.999500
+		P2 = 0.999500, 0.000500
+	}
+}

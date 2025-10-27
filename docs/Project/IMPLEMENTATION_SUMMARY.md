@@ -1,7 +1,7 @@
 # ID Mapping System - Implementation Summary
 
-**Date:** 2025-10-19  
-**Status:** ✅ Phase 1 Complete - Data Extraction & Resolver Ready
+**Date:** 2025-10-23
+**Status:** ✅ Phase 1 & 2.5 Complete - Name Display Enhancement Ready
 
 ---
 
@@ -139,6 +139,36 @@ is_id = resolver.is_id_field("weapon_type")
 
 ---
 
+### 3.5. Weapon & Armor Name Display System
+
+**Purpose:** Display meaningful weapon and armor names in the editor instead of generic item IDs.
+
+**Data Sources:**
+- `TirganachReloaded/enhanced_weapons.json` - 719 weapon names
+- `TirganachReloaded/enhanced_armor.json` - 635 armor names
+
+**Integration:**
+- Extended `ElementTableWidget` to resolve and display item names
+- Added name columns alongside existing ID columns
+- Real-time name resolution for improved user experience
+
+**Example Transformation:**
+```
+Before: Item 27 - Type: 4, Name: (empty)
+After:  Flameblade Dagger [27] - Type: One-handed Sword [4], Name: Flameblade Dagger
+```
+
+**Statistics:**
+- **Weapons:** 719 unique named weapons (swords, axes, maces, bows, staves, etc.)
+- **Armor:** 635 unique named armor pieces (helmets, chest, gloves, boots, etc.)
+- **Total:** 1,354 items with proper display names
+
+**Files Created:**
+- `TirganachReloaded/enhanced_weapons.json`
+- `TirganachReloaded/enhanced_armor.json`
+
+---
+
 ## 📁 Project Structure
 
 ```
@@ -147,6 +177,8 @@ SpellSmut/
 │   ├── TirganachReloaded/
 │   │   ├── data/
 │   │   │   └── id_name_mappings.json       # ✅ Generated mappings
+│   │   ├── enhanced_weapons.json           # ✅ 719 weapon names
+│   │   ├── enhanced_armor.json             # ✅ 635 armor names
 │   │   └── gui_editor/
 │   │       └── utils/
 │   │           ├── __init__.py              # ✅ Package init
@@ -205,8 +237,10 @@ The extractor parses these Lua files:
 | Variable Operators | 3 | ✅ Yes |
 | Movement Modes | 2 | ✅ Yes |
 | Monument Types | 7 | ✅ Yes (hex) |
+| **Weapon Names** | **719** | ✅ Yes |
+| **Armor Names** | **635** | ✅ Yes |
 
-**Total Mappings:** 360+
+**Total Mappings:** 360+ | **Total Item Names:** 1,354
 
 ---
 
@@ -301,9 +335,16 @@ def populate_table(self, elements):
 
 ## 📝 Next Steps
 
-### Phase 2: Editor Integration (Pending)
-- [ ] Integrate MappingResolver into PropertyEditorWidget
-- [ ] Update ElementTableWidget to show resolved names
+### Phase 2.5: Name Display Enhancement ✅ COMPLETE
+- [x] Load 719 weapon names from enhanced_weapons.json
+- [x] Load 635 armor names from enhanced_armor.json
+- [x] Integrate name display into ElementTableWidget
+- [x] Show meaningful names instead of generic IDs
+- [x] Extend data model for item name resolution
+
+### Phase 3: Full Editor Integration (Pending)
+- [ ] Integrate MappingResolver into PropertyEditorWidget for remaining ID fields
+- [ ] Update ElementTableWidget to show resolved names for all categories
 - [ ] Add search by name functionality
 - [ ] Create ID field custom widget with dropdown
 - [ ] Add tooltips showing constant names
@@ -378,7 +419,14 @@ python3 TirganachReloaded/gui_editor/utils/mapping_resolver.py
 - [x] Test all functionality
 - [x] Document implementation
 
-**Ready for Phase 2:** Editor integration
+✅ **Phase 2.5 Complete:**
+- [x] Load weapon names from enhanced_weapons.json (719 entries)
+- [x] Load armor names from enhanced_armor.json (635 entries)
+- [x] Integrate name display into ElementTableWidget
+- [x] Show meaningful names instead of generic IDs
+- [x] Test real-time name display functionality
+
+**Ready for Phase 3:** Full editor integration
 
 ---
 
@@ -396,6 +444,6 @@ python3 TirganachReloaded/gui_editor/utils/mapping_resolver.py
 
 ---
 
-**Last Updated:** 2025-10-19  
-**Author:** Alex + Claude  
-**Version:** 1.0.0
+**Last Updated:** 2025-10-23
+**Author:** Alex + Claude
+**Version:** 1.1.0

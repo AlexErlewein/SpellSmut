@@ -1,0 +1,201 @@
+[Creo]
+{	
+
+	[Runeboard]
+	{
+	
+		[Hero1]
+		{
+			Creo = 750		// Rune Priest Marticus
+		}
+
+		[Hero2]
+		{
+			Creo = 3306 	// Rune Warlock Warlock Noemi
+		}
+
+		[Hero3]
+		{
+			Creo = 766		// Rune Ranger Caitlyn
+		}
+
+		//0 == Human
+		//1 == Dwarf
+		//2 == Elf
+		//3 == Orc
+		//4 == Troll
+		//5 == Darkelf
+
+		[WorkerRace0]
+		{
+			Creo = 798
+		}
+
+	}
+}
+
+
+[Equipment]
+{
+	//Hero0 == Avatar
+	//Hero1 == Hero1
+	//Hero2 == Hero2
+	//Hero3 == Hero3
+	//Hero4 == Hero4
+	//Hero5 == Hero5
+
+	//Slot0	== helmet
+	//Slot1	== right hand
+	//Slot2	== chest
+	//Slot3	== left hand
+	//Slot4	== right ring
+	//Slot5	== legs
+	//Slot6	== left ring
+
+	[Hero0]
+	{
+		//Slot, ItemId
+		Data0 = 1, 2341 // 2H-Sword
+		Data1 = 2, 569  // Chest
+		Data2 = 5, 528  // Legs
+	}
+	
+	[Hero1]
+	{
+		//Slot, ItemId
+		Data0 = 1, 678  // Weapon 1H-Staff Newbie
+		Data1 = 2, 579  // Grüne Robe
+	}
+	
+	
+	[Hero2]
+	{
+		//Slot, ItemId
+		
+		Data0 = 1, 684 // Weapon 1H-Dagger Newbie
+		Data1 = 2, 573 // Rote Robe
+		Data2 = 3, 689 // Orb
+	}
+	
+	[Hero3]
+	{
+		//Slot, ItemId
+		
+		Data0 = 2, 583	// Chest
+		Data2 = 5, 533  // Feine Tuchhose
+		Data1 = 3, 693  // Hornbogen
+		
+	}
+	
+	
+}
+
+[Spells]
+{
+	
+	[Memorized]
+	{
+		// Avatar, max 10 spells
+		[Hero0]
+		{
+			Data0 = 42  	// Spell Fireburst Lvl 3
+			Data1 = 1888	// Spell Fireshield Lvl 3
+			Data2 = 1973	// Spell Fireball Lvl 3
+			Data3 = 2246	// Spell Rock Bullet Lvl 3
+			Data4 = 108	 	// Spell Conservation Lvl 3
+		}
+
+	}
+	
+}
+
+[Plans]
+{
+	[Scrolls]
+	{
+	}
+	[Building]
+	{
+		[Race0]
+		{
+			Data0 = 280
+			Data1 = 271
+			Data2 = 167
+			Data3 = 262
+			Data4 = 270
+			Data5 = 263
+			Data6 = 275
+			Data7 = 169
+			Data8 = 260
+			Data9 = 2928
+			Data10 = 267
+			Data11 = 255
+			Data12 = 257
+			Data13 = 277
+			Data14 = 949
+			Data15 = 251
+			Data16 = 247
+			Data17 = 249
+			Data18 = 171
+			Data19 = 266
+		}
+	}
+	[Unit]
+	{
+		[Race0]
+		{
+			Data0 = 1271
+			Data1 = 1273
+			Data2 = 1265
+			Data3 = 1261
+			Data4 = 1263
+			Data5 = 1267
+		}
+	}
+}
+
+[Character]
+{
+	Level	 = 6
+	XP		 = 4994
+	Name	 = "Leafshade Press"
+	Female	 = 0
+
+	Gold	 = 0
+	Silver	 = 6
+	Copper	 = 20
+
+	Str	 = 35
+	Sta	 = 33
+	Dex	 = 32
+	Agi	 = 25
+	Wis	 = 40
+	Int	 = 40
+	Cha	 = 25
+
+	ResFire			 = 30
+	ResIce			 = 30
+	ResMindMagic	 = 30
+	ResBlackMagic	 = 30
+
+	WalkSpeed		 = 100
+	FightSpeed		 = 100
+	CastSpeed		 = 100
+
+	[Ability5] // Elementare Magiekunst
+	{
+		Level = 3
+
+		Data0 = 1, 3 // Fire 
+		Data1 = 3, 3 // Earth 
+	}
+	
+	[Ability2] // Schwere Kriegskunst
+	{
+		Level = 2
+
+		Data0 = 1, 1 // Grosse Schwerter und Äxte  
+	}
+	
+}
+
