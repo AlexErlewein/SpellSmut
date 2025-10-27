@@ -217,6 +217,13 @@ ExtractedAssets/
 #### Content Creation Tools
 - ✅ Visual quest editor (with rewards, requirements, dialogues, Lua generation)
 - ✅ Dialogue tree editor (branching conversations with visual enhancements)
+- 🟡 Quest Creator System (wizard-style quest building with test map) - **IN PLANNING**
+  - [ ] Phase 1: Wizard interface (5-step guided creation)
+  - [ ] Phase 2: Test map generation (P999 with NPCs and objects)
+  - [ ] Phase 3: Dialogue choice builder (branching conversations)
+  - [ ] Phase 4: Quest step hierarchy (visual flow editor)
+  - [ ] Phase 5: Lua export & in-game testing
+  - [ ] Phase 6: Templates, validation, and polish
 - [ ] Spell designer GUI
 - [ ] Race/unit creator wizard
 - [ ] Map editor enhancements
@@ -231,10 +238,11 @@ ExtractedAssets/
 ### Phase 6: Example Mods & Tutorials
 
 #### Tutorial Mods
-- [ ] "Hello World" - Basic quest mod
+- [ ] "Hello World" - Basic quest mod (will use Quest Creator System)
+- [ ] "The Hunter's Request" - Fetch quest example (Quest Creator demo)
 - [ ] "Fireball+" - Custom spell mod
 - [ ] "Dark Elves Reborn" - Race modification
-- [ ] "Mystic Isles" - Custom campaign (3-5 quests)
+- [ ] "Mystic Isles" - Custom campaign (3-5 quests, created with Quest Creator)
 - [ ] "Arena Master" - Multiplayer map pack
 
 #### Reference Implementations
