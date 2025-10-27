@@ -136,6 +136,14 @@ class MainWindow(QMainWindow):
         quest_editor_action.triggered.connect(self.show_quest_editor)
         view_menu.addAction(quest_editor_action)
 
+        view_menu.addSeparator()
+
+        spell_wizard_action = QAction("Spell &Wizard", self)
+        spell_wizard_action.setShortcut("Ctrl+W")
+        spell_wizard_action.setStatusTip("Create custom spells with the Spell Wizard")
+        spell_wizard_action.triggered.connect(self.show_spell_wizard)
+        view_menu.addAction(spell_wizard_action)
+
         # Help menu
         help_menu = menubar.addMenu("&Help")
 
@@ -334,6 +342,30 @@ class MainWindow(QMainWindow):
         
         # Set the quest editor as the central widget
         self.setCentralWidget(self.quest_editor_widget)
+
+    def show_spell_wizard(self):
+        """Show the Spell Creation Wizard"""
+        try:
+            from .widgets.spell_creator_wizard import SpellCreatorWizard
+
+            # Create and show the spell wizard
+            wizard = SpellCreatorWizard(self)
+
+            # Connect to spell creation signal
+            wizard.spellCreated.connect(self.on_spell_created)
+
+            # Show the wizard
+            wizard.exec()
+
+        except Exception as e:
+            QMessageBox.critical(self, "Spell Wizard Error",
+                               f"Failed to open Spell Wizard:\n{str(e)}")
+
+    def on_spell_created(self, spell_data):
+        """Handle spell creation completion"""
+        QMessageBox.information(self, "Spell Created",
+                               f"Spell '{spell_data.spell_name}' has been created!\n\n"
+                               f"Check the 'exported_spells' folder for the generated Lua files.")
 
     def show_main_interface(self):
         """Show the main interface with category tree, element table, etc."""

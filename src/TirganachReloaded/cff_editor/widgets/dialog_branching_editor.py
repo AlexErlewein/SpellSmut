@@ -7,7 +7,7 @@ from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel,
                                QTreeWidget, QTreeWidgetItem, QPushButton,
                                QMenu, QMessageBox, QInputDialog, QSplitter,
                                QGroupBox, QTextEdit, QComboBox, QListWidget,
-                               QListWidgetItem, QScrollArea, QFrame)
+                               QListWidgetItem, QScrollArea, QFrame, QLineEdit)
 from PySide6.QtCore import Qt, Signal, QPoint
 from PySide6.QtGui import QAction, QIcon, QFont
 from typing import Optional, List, Dict, Any, Tuple
