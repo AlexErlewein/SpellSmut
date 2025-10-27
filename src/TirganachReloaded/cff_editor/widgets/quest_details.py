@@ -34,7 +34,7 @@ class QuestDetailsWidget(QWidget):
         layout.addWidget(self.title_label)
 
         # Create splitter for main content
-        splitter = QSplitter(Qt.Vertical)
+        splitter = QSplitter(Qt.Orientation.Vertical)
 
         # Top section - Basic quest info
         self.setup_basic_info_section()

@@ -215,8 +215,8 @@ ExtractedAssets/
 - [ ] Sound browser and player
 
 #### Content Creation Tools
-- [ ] Visual quest editor
-- [ ] Dialogue tree editor
+- ✅ Visual quest editor (with rewards, requirements, dialogues, Lua generation)
+- ✅ Dialogue tree editor (branching conversations with visual enhancements)
 - [ ] Spell designer GUI
 - [ ] Race/unit creator wizard
 - [ ] Map editor enhancements
@@ -391,6 +391,7 @@ ExtractedAssets/
 
 ### Q4 2025
 - ✅ Complete UI asset extraction (DONE)
+- ✅ Complete quest editor enhancements (DONE)
 - ⏳ Extract 3D models and textures
 - ⏳ Document file formats
 - ⏳ Release PAK extraction tool v1.0
@@ -472,6 +473,6 @@ _(To be filled in as requests come in)_
 ---
 
 **Status**: 🟢 Active Development
-**Current Phase**: Phase 3 - Asset Extraction
-**Next Milestone**: Complete UI asset extraction pipeline
+**Current Phase**: Phase 5 - Modding Tools Development
+**Next Milestone**: Complete quest editor enhancements
 

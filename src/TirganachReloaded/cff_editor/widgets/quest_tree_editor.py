@@ -4,13 +4,14 @@ Interactive hierarchical quest tree view with drag-drop editing capabilities
 """
 
 from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel,
-                               QTreeWidget, QTreeWidgetItem, QPushButton,
-                               QMenu, QMessageBox, QInputDialog, QSplitter,
-                               QGroupBox, QTextEdit, QLineEdit, QComboBox,
-                               QTabWidget)
-from .dialog_branching_editor import DialogBranchingEditorWidget
+                                QTreeWidget, QTreeWidgetItem, QPushButton,
+                                QMenu, QMessageBox, QInputDialog, QSplitter,
+                                QGroupBox, QTextEdit, QLineEdit, QComboBox,
+                                QTabWidget, QListWidget)
+from .dialog_branching_editor import DialogBranchingEditorWidget, DialogNode
 from PySide6.QtCore import Qt, Signal, QPoint
 from PySide6.QtGui import QAction, QIcon
+from PySide6.QtWidgets import QTreeWidget, QTreeWidgetItem, QPushButton, QMenu, QMessageBox, QInputDialog, QSplitter, QGroupBox, QTextEdit, QLineEdit, QComboBox, QTabWidget
 from typing import Optional, List, Dict, Any
 import json
 
@@ -19,8 +20,9 @@ class QuestNode:
     """Data model for quest nodes in the tree"""
 
     def __init__(self, quest_id: Optional[int] = None, name: str = "", description: str = "",
-                 parent_id: Optional[int] = None, order_index: int = 0, is_new: bool = False, 
-                 dialog_nodes: Optional[List['DialogNode']] = None):
+                  parent_id: Optional[int] = None, order_index: int = 0, is_new: bool = False,
+                  dialog_nodes: Optional[List[DialogNode]] = None, rewards: Optional[Dict[str, Any]] = None,
+                  requirements: Optional[List[Dict[str, Any]]] = None):
         self.quest_id = quest_id
         self.name = name
         self.description = description
@@ -28,8 +30,10 @@ class QuestNode:
         self.order_index = order_index
         self.is_new = is_new  # Flag for newly created quests
         self.children: List['QuestNode'] = []
-        self.dialog_nodes: List['DialogNode'] = dialog_nodes or []  # Associated dialog nodes
+        self.dialog_nodes: List[DialogNode] = dialog_nodes or []  # Associated dialog nodes
         self.original_data: Dict[str, Any] = {}  # Store original quest data
+        self.rewards: Dict[str, Any] = rewards or {}  # Rewards data (XP, Items, Money)
+        self.requirements: List[Dict[str, Any]] = requirements or []  # Requirements/conditions
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for serialization"""
@@ -41,7 +45,9 @@ class QuestNode:
             'order_index': self.order_index,
             'is_new': self.is_new,
             'dialog_nodes': [dialog_node.to_dict() for dialog_node in self.dialog_nodes],
-            'children': [child.to_dict() for child in self.children]
+            'children': [child.to_dict() for child in self.children],
+            'rewards': self.rewards,
+            'requirements': self.requirements
         }
 
     @classmethod
@@ -56,7 +62,9 @@ class QuestNode:
             parent_id=data.get('parent_id'),
             order_index=data.get('order_index', 0),
             is_new=data.get('is_new', False),
-            dialog_nodes=[DialogNode.from_dict(dialog_data) for dialog_data in data.get('dialog_nodes', [])]
+            dialog_nodes=[DialogNode.from_dict(dialog_data) for dialog_data in data.get('dialog_nodes', [])],
+            rewards=data.get('rewards', {}),
+            requirements=data.get('requirements', [])
         )
         node.children = [cls.from_dict(child) for child in data.get('children', [])]
         return node
@@ -114,8 +122,8 @@ class QuestTreeWidget(QTreeWidget):
         self.setDragEnabled(True)
         self.setAcceptDrops(True)
         self.setDropIndicatorShown(True)
-        self.setSelectionMode(QTreeWidget.SingleSelection)
-        self.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.setSelectionMode(QTreeWidget.SelectionMode.SingleSelection)
+        self.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
 
         # Set column widths
         self.setColumnWidth(0, 250)  # Name
@@ -146,7 +154,7 @@ class QuestTreeWidget(QTreeWidget):
 
         # Set quest name (editable)
         item.setText(0, quest_node.name or f"Quest {quest_node.quest_id}")
-        item.setFlags(item.flags() | Qt.ItemIsEditable)
+        item.setFlags(item.flags() | Qt.ItemFlag.ItemIsEditable)
 
         # Set quest ID
         item.setText(1, str(quest_node.quest_id) if quest_node.quest_id else "New")
@@ -165,7 +173,7 @@ class QuestTreeWidget(QTreeWidget):
             item.setText(3, "Existing")
 
         # Store reference to quest node
-        item.setData(0, Qt.UserRole, quest_node)
+        item.setData(0, Qt.ItemDataRole.UserRole, quest_node)
 
         return item
 
@@ -223,7 +231,7 @@ class QuestTreeWidget(QTreeWidget):
 
         if parent_item:
             # Add as subquest
-            parent_node = parent_item.data(0, Qt.UserRole)
+            parent_node = parent_item.data(0, Qt.ItemDataRole.UserRole)
             parent_node.add_child(new_quest)
             child_item = self.create_tree_item(new_quest)
             parent_item.addChild(child_item)
@@ -241,7 +249,7 @@ class QuestTreeWidget(QTreeWidget):
 
     def edit_quest(self, item: QTreeWidgetItem):
         """Edit quest properties"""
-        quest_node = item.data(0, Qt.UserRole)
+        quest_node = item.data(0, Qt.ItemDataRole.UserRole)
         if not quest_node:
             return
 
@@ -250,7 +258,7 @@ class QuestTreeWidget(QTreeWidget):
 
     def delete_quest(self, item: QTreeWidgetItem):
         """Delete a quest"""
-        quest_node = item.data(0, Qt.UserRole)
+        quest_node = item.data(0, Qt.ItemDataRole.UserRole)
         if not quest_node:
             return
 
@@ -258,14 +266,14 @@ class QuestTreeWidget(QTreeWidget):
         reply = QMessageBox.question(
             self, "Delete Quest",
             f"Are you sure you want to delete quest '{quest_node.name}' and all its subquests?",
-            QMessageBox.Yes | QMessageBox.No
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
 
-        if reply == QMessageBox.Yes:
+        if reply == QMessageBox.StandardButton.Yes:
             # Remove from parent
             parent = item.parent()
             if parent:
-                parent_node = parent.data(0, Qt.UserRole)
+                parent_node = parent.data(0, Qt.ItemDataRole.UserRole)
                 parent_node.remove_child(quest_node)
                 parent.removeChild(item)
             else:
@@ -282,7 +290,7 @@ class QuestTreeWidget(QTreeWidget):
         all_nodes = []
         for i in range(self.topLevelItemCount()):
             root_item = self.topLevelItem(i)
-            root_node = root_item.data(0, Qt.UserRole)
+            root_node = root_item.data(0, Qt.ItemDataRole.UserRole)
             if root_node:
                 all_nodes.extend(root_node.get_all_nodes())
 
@@ -296,14 +304,14 @@ class QuestTreeWidget(QTreeWidget):
         """Handle item selection change"""
         current_item = self.currentItem()
         if current_item:
-            quest_node = current_item.data(0, Qt.UserRole)
+            quest_node = current_item.data(0, Qt.ItemDataRole.UserRole)
             if quest_node:
                 self.quest_selected.emit(quest_node)
 
     def on_item_changed(self, item: QTreeWidgetItem, column: int):
         """Handle item text changes"""
         if column == 0:  # Name column
-            quest_node = item.data(0, Qt.UserRole)
+            quest_node = item.data(0, Qt.ItemDataRole.UserRole)
             if quest_node:
                 new_name = item.text(0)
                 quest_node.name = new_name
@@ -314,7 +322,7 @@ class QuestTreeWidget(QTreeWidget):
         root_quests = []
         for i in range(self.topLevelItemCount()):
             item = self.topLevelItem(i)
-            node = item.data(0, Qt.UserRole)
+            node = item.data(0, Qt.ItemDataRole.UserRole)
             if node:
                 root_quests.append(node)
         return root_quests
@@ -372,7 +380,7 @@ class QuestTreeEditorWidget(QWidget):
         layout.addLayout(toolbar_layout)
 
         # Main content splitter
-        splitter = QSplitter(Qt.Horizontal)
+        splitter = QSplitter(Qt.Orientation.Horizontal)
 
         # Left side - Quest tree
         tree_group = QGroupBox("Quest Hierarchy")
@@ -398,14 +406,14 @@ class QuestTreeEditorWidget(QWidget):
         layout.addWidget(splitter)
 
     def setup_properties_ui(self, layout):
-        """Setup the quest properties UI with tabs for properties and dialogs"""
+        """Setup the quest properties UI with tabs for properties, rewards, requirements, and dialogs"""
         # Create tab widget
         tab_widget = QTabWidget()
-        
+
         # Quest properties tab
         properties_tab = QWidget()
         properties_layout = QVBoxLayout(properties_tab)
-        
+
         # Quest ID
         id_layout = QHBoxLayout()
         id_layout.addWidget(QLabel("Quest ID:"))
@@ -449,25 +457,101 @@ class QuestTreeEditorWidget(QWidget):
         properties_buttons_layout.addWidget(self.delete_btn)
 
         properties_buttons_layout.addStretch()
+
+        # Generate Lua script button
+        self.generate_lua_btn = QPushButton("Generate Lua Script")
+        self.generate_lua_btn.setToolTip("Generate Lua script for this quest")
+        properties_buttons_layout.addWidget(self.generate_lua_btn)
+
         properties_layout.addLayout(properties_buttons_layout)
-        
+
         # Add properties tab
         tab_widget.addTab(properties_tab, "Properties")
-        
+
+        # Rewards tab
+        rewards_tab = QWidget()
+        rewards_layout = QVBoxLayout(rewards_tab)
+
+        # XP reward
+        xp_layout = QHBoxLayout()
+        xp_layout.addWidget(QLabel("XP Reward:"))
+        self.xp_edit = QLineEdit()
+        self.xp_edit.setPlaceholderText("Enter XP amount")
+        xp_layout.addWidget(self.xp_edit)
+        rewards_layout.addLayout(xp_layout)
+
+        # Items reward
+        items_layout = QVBoxLayout()
+        items_layout.addWidget(QLabel("Item Rewards (comma-separated IDs):"))
+        self.items_edit = QLineEdit()
+        self.items_edit.setPlaceholderText("e.g., 100, 200, 300")
+        items_layout.addWidget(self.items_edit)
+        rewards_layout.addLayout(items_layout)
+
+        # Money reward
+        money_layout = QVBoxLayout()
+        money_layout.addWidget(QLabel("Money Rewards:"))
+        gold_layout = QHBoxLayout()
+        gold_layout.addWidget(QLabel("Gold:"))
+        self.gold_edit = QLineEdit()
+        self.gold_edit.setPlaceholderText("0")
+        gold_layout.addWidget(self.gold_edit)
+        money_layout.addLayout(gold_layout)
+        silver_layout = QHBoxLayout()
+        silver_layout.addWidget(QLabel("Silver:"))
+        self.silver_edit = QLineEdit()
+        self.silver_edit.setPlaceholderText("0")
+        silver_layout.addWidget(self.silver_edit)
+        money_layout.addLayout(silver_layout)
+        copper_layout = QHBoxLayout()
+        copper_layout.addWidget(QLabel("Copper:"))
+        self.copper_edit = QLineEdit()
+        self.copper_edit.setPlaceholderText("0")
+        copper_layout.addWidget(self.copper_edit)
+        money_layout.addLayout(copper_layout)
+        rewards_layout.addLayout(money_layout)
+
+        rewards_layout.addStretch()
+        tab_widget.addTab(rewards_tab, "Rewards")
+
+        # Requirements tab
+        requirements_tab = QWidget()
+        requirements_layout = QVBoxLayout(requirements_tab)
+
+        # Requirements list
+        requirements_layout.addWidget(QLabel("Quest Requirements:"))
+        self.requirements_list = QListWidget()
+        self.requirements_list.setMaximumHeight(150)
+        requirements_layout.addWidget(self.requirements_list)
+
+        # Add requirement button
+        add_req_layout = QHBoxLayout()
+        self.add_requirement_btn = QPushButton("Add Requirement")
+        self.add_requirement_btn.setToolTip("Add a new requirement condition")
+        add_req_layout.addWidget(self.add_requirement_btn)
+        self.remove_requirement_btn = QPushButton("Remove Selected")
+        self.remove_requirement_btn.setToolTip("Remove selected requirement")
+        add_req_layout.addWidget(self.remove_requirement_btn)
+        add_req_layout.addStretch()
+        requirements_layout.addLayout(add_req_layout)
+
+        requirements_layout.addStretch()
+        tab_widget.addTab(requirements_tab, "Requirements")
+
         # Dialogs tab
         dialogs_tab = QWidget()
         dialogs_layout = QVBoxLayout(dialogs_tab)
-        
+
         # Create dialog branching editor
         self.dialog_editor = DialogBranchingEditorWidget(self.data_model)
         dialogs_layout.addWidget(self.dialog_editor)
-        
+
         # Add dialogs tab
         tab_widget.addTab(dialogs_tab, "Dialogs")
-        
+
         # Add tab widget to main layout
         layout.addWidget(tab_widget)
-        
+
         # Connect to dialog editor signals
         self.dialog_editor.dialogs_modified.connect(self.on_quests_modified)
 
@@ -482,7 +566,10 @@ class QuestTreeEditorWidget(QWidget):
 
         self.update_btn.clicked.connect(self.update_quest_properties)
         self.delete_btn.clicked.connect(self.delete_selected_quest)
-        
+        self.add_requirement_btn.clicked.connect(self.add_requirement)
+        self.remove_requirement_btn.clicked.connect(self.remove_requirement)
+        self.generate_lua_btn.clicked.connect(self.generate_lua_script)
+
         # Connect to language changes
         self.data_model.language_changed.connect(self.on_language_changed)
 
@@ -667,7 +754,19 @@ class QuestTreeEditorWidget(QWidget):
                 self.parent_combo.setCurrentIndex(index)
         else:
             self.parent_combo.setCurrentIndex(0)  # None
-        
+
+        # Update rewards fields
+        self.xp_edit.setText(str(quest_node.rewards.get('xp', 0)))
+        self.items_edit.setText(', '.join(map(str, quest_node.rewards.get('items', []))))
+        self.gold_edit.setText(str(quest_node.rewards.get('gold', 0)))
+        self.silver_edit.setText(str(quest_node.rewards.get('silver', 0)))
+        self.copper_edit.setText(str(quest_node.rewards.get('copper', 0)))
+
+        # Update requirements list
+        self.requirements_list.clear()
+        for req in quest_node.requirements:
+            self.requirements_list.addItem(req.get('condition', ''))
+
         # Update dialog editor with quest's dialog nodes
         self.dialog_editor.current_dialog_nodes = quest_node.dialog_nodes
         self.dialog_editor.dialog_tree.load_dialog_tree(quest_node.dialog_nodes)
@@ -679,7 +778,7 @@ class QuestTreeEditorWidget(QWidget):
             QMessageBox.warning(self, "No Selection", "Please select a quest to update.")
             return
 
-        quest_node = current_item.data(0, Qt.UserRole)
+        quest_node = current_item.data(0, Qt.ItemDataRole.UserRole)
         if not quest_node:
             return
 
@@ -692,6 +791,31 @@ class QuestTreeEditorWidget(QWidget):
         if new_parent_id != quest_node.parent_id:
             # TODO: Handle parent change (reparenting logic)
             quest_node.parent_id = new_parent_id
+
+        # Update rewards
+        try:
+            quest_node.rewards['xp'] = int(self.xp_edit.text()) if self.xp_edit.text() else 0
+        except ValueError:
+            quest_node.rewards['xp'] = 0
+        try:
+            quest_node.rewards['items'] = [int(i.strip()) for i in self.items_edit.text().split(',') if i.strip()]
+        except ValueError:
+            quest_node.rewards['items'] = []
+        try:
+            quest_node.rewards['gold'] = int(self.gold_edit.text()) if self.gold_edit.text() else 0
+        except ValueError:
+            quest_node.rewards['gold'] = 0
+        try:
+            quest_node.rewards['silver'] = int(self.silver_edit.text()) if self.silver_edit.text() else 0
+        except ValueError:
+            quest_node.rewards['silver'] = 0
+        try:
+            quest_node.rewards['copper'] = int(self.copper_edit.text()) if self.copper_edit.text() else 0
+        except ValueError:
+            quest_node.rewards['copper'] = 0
+
+        # Update requirements
+        quest_node.requirements = [{"condition": self.requirements_list.item(i).text()} for i in range(self.requirements_list.count())]
 
         # Update dialog nodes from the dialog editor
         quest_node.dialog_nodes = self.dialog_editor.current_dialog_nodes
@@ -713,7 +837,7 @@ class QuestTreeEditorWidget(QWidget):
         # This will be handled by refreshing the currently selected quest
         current_item = self.quest_tree.currentItem()
         if current_item:
-            quest_node = current_item.data(0, Qt.UserRole)
+            quest_node = current_item.data(0, Qt.ItemDataRole.UserRole)
             if quest_node:
                 self.update_properties_ui(quest_node)
 
@@ -721,3 +845,109 @@ class QuestTreeEditorWidget(QWidget):
         """Handle quest modifications"""
         self.update_parent_combo()
         self.quests_modified.emit()
+
+    def generate_lua_script(self):
+        """Generate Lua script for the current quest"""
+        current_item = self.quest_tree.currentItem()
+        if not current_item:
+            QMessageBox.warning(self, "No Selection", "Please select a quest to generate Lua script.")
+            return
+
+        quest_node = current_item.data(0, Qt.ItemDataRole.UserRole)
+        if not quest_node:
+            return
+
+        # Generate Lua script
+        lua_script = self._generate_quest_lua(quest_node)
+
+        # Show in a dialog
+        dialog = QInputDialog()
+        dialog.setWindowTitle("Generated Lua Script")
+        dialog.setLabelText("Copy the Lua script below:")
+        dialog.setTextValue(lua_script)
+        dialog.setOption(QInputDialog.TextSelect, True)
+        dialog.exec()
+
+    def _generate_quest_lua(self, quest_node: QuestNode) -> str:
+        """Generate Lua script for a quest node"""
+        script = f"-- Quest: {quest_node.name}\n"
+        script += f"QuestId = {quest_node.quest_id}\n\n"
+
+        # Rewards
+        if quest_node.rewards:
+            script += "-- Rewards\n"
+            if 'xp' in quest_node.rewards and quest_node.rewards['xp'] > 0:
+                script += f"SetRewardFlagTrue('QuestRewardXP', {quest_node.rewards['xp']})\n"
+            if 'items' in quest_node.rewards and quest_node.rewards['items']:
+                for item_id in quest_node.rewards['items']:
+                    script += f"SetRewardFlagTrue('QuestRewardItem', {item_id})\n"
+            if 'gold' in quest_node.rewards and quest_node.rewards['gold'] > 0:
+                script += f"SetRewardFlagTrue('QuestRewardGold', {quest_node.rewards['gold']})\n"
+            if 'silver' in quest_node.rewards and quest_node.rewards['silver'] > 0:
+                script += f"SetRewardFlagTrue('QuestRewardSilver', {quest_node.rewards['silver']})\n"
+            if 'copper' in quest_node.rewards and quest_node.rewards['copper'] > 0:
+                script += f"SetRewardFlagTrue('QuestRewardCopper', {quest_node.rewards['copper']})\n"
+            script += "\n"
+
+        # Requirements
+        if quest_node.requirements:
+            script += "-- Requirements\n"
+            for req in quest_node.requirements:
+                script += f"-- Requirement: {req.get('condition', '')}\n"
+            script += "\n"
+
+        # Dialogs
+        if quest_node.dialog_nodes:
+            script += "-- Dialogs\n"
+            for dialog in quest_node.dialog_nodes:
+                script += f"-- Dialog: {dialog.dialogue_name}\n"
+                script += f"-- Text: {dialog.text}\n"
+                script += f"-- Speaker: {dialog.speaker}\n"
+                if dialog.children:
+                    script += f"-- Branches: {len(dialog.children)}\n"
+                script += "\n"
+
+        return script
+
+    def add_requirement(self):
+        """Add a new requirement"""
+        current_item = self.quest_tree.currentItem()
+        if not current_item:
+            QMessageBox.warning(self, "No Selection", "Please select a quest to add a requirement.")
+            return
+
+        quest_node = current_item.data(0, Qt.ItemDataRole.UserRole)
+        if not quest_node:
+            return
+
+        # Simple requirement input
+        condition, ok = QInputDialog.getText(
+            self, "Add Requirement",
+            "Enter requirement condition (e.g., 'PlayerHasItem{ItemId = 100}'):"
+        )
+
+        if ok and condition:
+            quest_node.requirements.append({"condition": condition})
+            self.requirements_list.addItem(condition)
+            self.on_quests_modified()
+
+    def remove_requirement(self):
+        """Remove selected requirement"""
+        current_item = self.requirements_list.currentItem()
+        if not current_item:
+            QMessageBox.warning(self, "No Selection", "Please select a requirement to remove.")
+            return
+
+        current_item = self.quest_tree.currentItem()
+        if not current_item:
+            return
+
+        quest_node = current_item.data(0, Qt.ItemDataRole.UserRole)
+        if not quest_node:
+            return
+
+        row = self.requirements_list.currentRow()
+        if row >= 0:
+            del quest_node.requirements[row]
+            self.requirements_list.takeItem(row)
+            self.on_quests_modified()
