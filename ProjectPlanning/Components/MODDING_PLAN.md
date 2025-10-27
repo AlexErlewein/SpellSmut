@@ -246,6 +246,28 @@ ExtractedAssets/
   - [ ] Phase 5: CFF export system
   - [ ] Phase 6: Weapon validation & balance calculator
   - [ ] Phase 7: Icon assignment & sound mapping
+- 🟡 Armor Creator System (Armor Forge for custom armor) - **PLANNING COMPLETE**
+  - [ ] Phase 1: Mode selection & ID assignment (via ID Manager)
+  - [ ] Phase 2: Basic properties & classification
+  - [ ] Phase 3: Core stat bonuses
+  - [ ] Phase 4: Resistance & defense systems
+  - [ ] Phase 5: Speed & mobility modifiers
+  - [ ] Phase 6: Visual properties & materials
+  - [ ] Phase 7: Advanced features & export
+- 🟡 NPC Creator System (NPC Workshop for custom characters) - **PLANNING COMPLETE**
+  - [ ] Phase 1: Mode selection & ID assignment (via ID Manager)
+  - [ ] Phase 2: Basic identity & classification
+  - [ ] Phase 3: Base statistics
+  - [ ] Phase 4: Combat & skills
+  - [ ] Phase 5: Appearance & voice (RESEARCH NEEDED)
+  - [ ] Phase 6: Behavior & interaction
+  - [ ] Phase 7: Advanced features & export
+- 🟡 Building Creator System (Construction Kit for custom structures) - **RESEARCH NEEDED**
+  - [ ] Phase 1: Research & feasibility study
+  - [ ] Phase 2: Requirements definition (if feasible)
+  - [ ] Phase 3: Basic creation tools (if feasible)
+  - [ ] Phase 4: Advanced features (if feasible)
+  - [ ] Phase 5: Integration & testing (if feasible)
 - [ ] Race/unit creator wizard
 - [ ] Map editor enhancements
 
@@ -255,6 +277,17 @@ ExtractedAssets/
 - [ ] Automated build system for mods
 - [ ] Mod packaging tool
 - [ ] Version control best practices guide
+- 🟡 Universal Savefile System (ModSave Framework) - **PLANNING COMPLETE**
+  - [ ] Phase 1: Core save manager and common format structure
+  - [ ] Phase 2: Individual format implementations
+  - [ ] Phase 3: Integration with creator tools
+  - [ ] Phase 4: Validation and error handling
+  - [ ] Phase 5: Sharing and import/export functionality
+  - [ ] Phase 6: Testing and documentation
+- 🟡 Utility Tools Suite (Modder's Toolbox) - **PLANNING COMPLETE**
+  - [ ] Phase 1: Essential tools (CFF Validator, Batch Processor, Conflict Detector)
+  - [ ] Phase 2: Enhancement tools (State Inspector, Stat Balancer, Localization)
+  - [ ] Phase 3: Advanced tools (Data Miner, Performance Monitor, Mod Packager)
 
 ### Phase 6: Example Mods & Tutorials
 
@@ -482,13 +515,14 @@ _(To be filled in as requests come in)_
 
 ## 📊 Project Statistics
 
-**Documentation Pages**: 15+
+**Documentation Pages**: 20+ (with 5 new system plans)
 **Guides Created**: 7 major guides
 **Assets Cataloged**: 683 UI assets
 **Tools Developed**: 5 (extraction, categorization, automation)
 **Code Written**: ~400 lines Python
 **Project Duration**: 4+ months
-**Last Updated**: October 18, 2025
+**New System Plans**: 6 (Quest, Spell, Weapon, Armor, NPC, Savefile, Utilities)
+**Last Updated**: October 27, 2025
 
 ---
 

@@ -64,45 +64,119 @@ Every armor piece can modify:
 
 ---
 
-## Wizard Steps
+## The 7-Phase Armor Forge
 
+### Phase 1: Mode Selection & ID Assignment
 ```
-Step 1: Mode & ID Assignment
-  ├─ Create New / Edit Existing / Duplicate
-  ├─ ID Assignment (via ID Manager)
-  │   └─ Range: 20000-29999 (10,000 capacity)
-  └─ Armor Browser (if Edit mode)
+Mode Options:
+  ├─ Create New Armor
+  ├─ Edit Existing Armor (from `enhanced_armor.json`)
+  └─ Duplicate Existing Armor
+  
+ID Assignment:
+  ├─ Auto-assign next available (via ID Manager)
+  ├─ Manual override allowed (validated by ID Manager)
+  └─ Range: 20000-29999 (10,000 capacity)
+  
+Armor Browser (for Edit/Duplicate modes):
+  ├─ Filter by slot, type, material
+  ├─ Search by name
+  └─ Preview selected armor
+```
 
-Step 2: Basic Properties
-  ├─ Armor Name
-  ├─ Armor Slot (Head/Chest/Legs/Feet/Ring/Shield)
-  ├─ Armor Type (Cloth/Leather/Chain/Plate)
-  ├─ Material (Leather, Iron, Steel, Mithril, etc.)
-  └─ Description
+### Phase 2: Basic Properties & Classification
+```
+Naming & Identity:
+  ├─ Armor Name (max 32 chars)
+  ├─ Display Name (for tooltips)
+  └─ Description (flavor text)
 
-Step 3: Stat Bonuses
-  ├─ Primary Stats (Str/Sta/Agi/Dex/Int/Wis/Cha)
-  ├─ Derived Stats (Health/Mana/Armor)
-  ├─ Resistances (Fire/Ice/Black/Mind)
-  └─ Speed Modifiers (Run/Fight/Cast)
+Slot & Type Classification:
+  ├─ Equipment Slot (Head/Chest/Legs/Feet/Ring/Shield)
+  ├─ Armor Type (Cloth/Leather/Chain/Plate/Magic)
+  └─ Material Category (Leather/Iron/Steel/Mithril/etc.)
 
-Step 4: Requirements & Value
-  ├─ Stat Requirements (level, class restrictions)
-  ├─ Economic Value (sell/buy)
-  ├─ Rarity (Common → Legendary)
-  └─ Item Set (optional)
+Quality & Rarity:
+  ├─ Tier (Common/Rare/Epic/Legendary/Unique)
+  ├─ Base Level Requirement
+  └─ Class Restrictions (optional)
+```
 
-Step 5: Visual & Effects
-  ├─ Icon Assignment (browse extracted icons)
-  ├─ 3D Model (armor mesh)
-  ├─ Texture (armor appearance)
+### Phase 3: Core Stat Bonuses
+```
+Primary Stats:
+  ├─ Strength
+  ├─ Stamina
+  ├─ Agility
+  ├─ Dexterity
+  ├─ Intelligence
+  ├─ Wisdom
+  └─ Charisma
+
+Derived Stats:
+  ├─ Health Bonus (+HP)
+  ├─ Mana Bonus (+MP)
+  ├─ Base Armor Value (physical defense)
+  └─ Additional Stats (Speed, etc.)
+```
+
+### Phase 4: Resistance & Defense Systems
+```
+Elemental Resistances:
+  ├─ Fire Resistance (%)
+  ├─ Ice Resistance (%)
+  ├─ Black Magic Resistance (%)
+  └─ Mind Magic Resistance (%)
+
+Defense Mechanics:
+  ├─ Physical Damage Reduction (%)
+  ├─ Magic Damage Reduction (%)
+  └─ Critical Hit Reduction (%)
+```
+
+### Phase 5: Speed & Mobility Modifiers
+```
+Speed Modifiers:
+  ├─ Run Speed (% change)
+  ├─ Fight Speed (% change)
+  ├─ Cast Speed (% change)
+  └─ Movement Speed Cap (can't exceed 100%)
+
+Special Movement Bonuses:
+  ├─ Stealth Bonus (harder to detect)
+  ├─ Swimming Speed (if applicable)
+  └─ Jump Height (if applicable)
+```
+
+### Phase 6: Visual Properties & Materials
+```
+Visual Components:
+  ├─ Icon Selection (from ExtractedAssets/UI/)
+  ├─ 3D Model Reference (mesh file)
+  ├─ Texture Assignment (diffuse map)
+  └─ Normal Map (for lighting)
+
+Material Properties:
+  ├─ Material Name (for crafting)
+  ├─ Visual Appearance (color/shininess)
+  ├─ Sound Effects (equip/unequip)
   └─ Special Effects (glow, particles)
+```
 
-Step 6: Review & Export
-  ├─ Stat Summary
-  ├─ Balance Rating
-  ├─ Validation
-  └─ Export to CFF + Savefile
+### Phase 7: Advanced Features & Export
+```
+Advanced Features:
+  ├─ Item Set Assignment (create/join sets)
+  ├─ Set Bonuses (for 2/3/4-piece bonuses)
+  ├─ Special Abilities (passive effects)
+  └─ Enchantment Slots (if applicable)
+
+Export & Validation:
+  ├─ Stat Balance Rating (0-100%)
+  ├─ Game Compatibility Check
+  ├─ Export to CFF format
+  ├─ Save to .armor file
+  └─ Add to ID Manager registry
 ```
 
 ---
@@ -128,11 +202,11 @@ Set Bonuses:
 
 ## Implementation Timeline
 
-**Week 1**: Core wizard + ID Manager integration  
-**Week 2**: Stat system + edit existing feature  
-**Week 3**: Material system + armor sets  
-**Week 4**: Visual/icon assignment  
-**Week 5**: CFF export + validation  
+**Week 1**: Phases 1-2 (Mode selection, basic properties) + ID Manager integration  
+**Week 2**: Phases 3-4 (Stat system, resistances) + edit existing feature  
+**Week 3**: Phases 5-6 (Speed modifiers, visual properties) + material system  
+**Week 4**: Phase 7 (Advanced features) + armor sets implementation  
+**Week 5**: CFF export + validation + savefile system integration  
 **Week 6**: Testing + polish
 
 ---
@@ -155,6 +229,6 @@ Set Bonuses:
 
 ---
 
-**Document Version**: 1.0  
+**Document Version**: 1.1  
 **Created**: 2025-10-27  
-**Status**: 🟡 Planning Complete - Ready for Implementation
+**Status**: ✅ Planning Complete - Ready for Implementation
