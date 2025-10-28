@@ -1,16 +1,17 @@
 """
 Integrated Quest Editor Widget
-Combines quest tree editing with dialog branching editor
+Combines quest tree editing with dialog branching editor and quest creator
 """
 
 from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel,
                                QTabWidget, QSplitter, QGroupBox)
 from .quest_tree_editor import QuestTreeEditorWidget
 from .dialog_branching_editor import DialogBranchingEditorWidget
+from .quest_creator import QuestCreatorWidget
 
 
 class QuestEditorWidget(QWidget):
-    """Main integrated quest editor widget with quest tree and dialog editor"""
+    """Main integrated quest editor widget with quest tree, dialog editor, and quest creator"""
 
     def __init__(self, data_model):
         super().__init__()
@@ -38,6 +39,20 @@ class QuestEditorWidget(QWidget):
         # Tab 2: Standalone Dialog Editor
         self.dialog_editor = DialogBranchingEditorWidget(self.data_model)
         self.tab_widget.addTab(self.dialog_editor, "Dialog Editor")
+
+        # Tab 3: Quest Creator
+        self.quest_creator = QuestCreatorWidget(self.data_model)
+        quest_creator_tab = self.tab_widget.addTab(self.quest_creator, "Quest Creator")
+        
+        # Set icon for the quest creator tab
+        try:
+            from PySide6.QtGui import QIcon
+            import os
+            icon_path = os.path.join(os.path.dirname(__file__), "..", "icons", "quest_icon.png")
+            if os.path.exists(icon_path):
+                self.tab_widget.setTabIcon(quest_creator_tab, QIcon(icon_path))
+        except Exception as e:
+            print(f"Could not load quest creator icon: {e}")
 
         layout.addWidget(self.tab_widget)
 
