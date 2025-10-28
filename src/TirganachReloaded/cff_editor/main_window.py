@@ -18,14 +18,14 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-from ..tirganach.types import Language
 
+from ..tirganach.types import Language
 from .data_model import CFFDataModel
+from .widgets.building_wizard import BuildingWizard
 from .widgets.category_tree import CategoryTreeWidget
 from .widgets.element_table import ElementTableWidget
 from .widgets.property_editor import PropertyEditorWidget
 from .widgets.quest_details import QuestDetailsWidget
-from .widgets.building_wizard import BuildingWizard
 
 
 class MainWindow(QMainWindow):
@@ -179,7 +179,9 @@ class MainWindow(QMainWindow):
         tools_menu.addSeparator()
         npc_creator_action = QAction("&NPC Creator", self)
         npc_creator_action.setShortcut("Ctrl+N, C")
-        npc_creator_action.setStatusTip("Create and edit custom NPCs with the NPC Creator Wizard")
+        npc_creator_action.setStatusTip(
+            "Create and edit custom NPCs with the NPC Creator Wizard"
+        )
         npc_creator_action.triggered.connect(self.show_npc_creator)
         tools_menu.addAction(npc_creator_action)
 
@@ -522,6 +524,7 @@ class MainWindow(QMainWindow):
         """Show the building wizard"""
         try:
             from .shared.id_manager import IDManager
+
             wizard = BuildingWizard(self)
             result = wizard.exec()
 
@@ -530,8 +533,8 @@ class MainWindow(QMainWindow):
                     self,
                     "Success",
                     "Building created successfully!",
-				)
-		except ImportError as e:
+                )
+        except ImportError as e:
             QMessageBox.warning(
                 self, "Import Error", f"Failed to load building: {str(e)}"
             )
@@ -554,7 +557,7 @@ class MainWindow(QMainWindow):
             wizard = NpcCreatorWizard(self.id_manager, self)
             result = wizard.exec()
 
-            if result == QDialog.Accepted and hasattr(wizard, 'npc_data'):
+            if result == QDialog.Accepted and hasattr(wizard, "npc_data"):
                 QMessageBox.information(
                     self,
                     "Success",
@@ -570,7 +573,6 @@ class MainWindow(QMainWindow):
             QMessageBox.critical(
                 self, "Error", f"An error occurred while creating NPC: {str(e)}"
             )
-        
 
     def show_main_interface(self):
         """Show the main interface with category tree, element table, etc."""
