@@ -19,7 +19,7 @@ The Building Wizard will be a 6-step guided process, enabling users to:
 
 ## 3. Implementation Phases
 
-### Phase 1: Wizard Foundation & Core Stats (Week 1)
+### Phase 1: Wizard Foundation & Core Stats (Week 1) - COMPLETED
 
 - **Task 1.1: Create the Wizard UI Shell**
   - Create a new `BuildingWizard` class inheriting from `QWizard`.
@@ -35,7 +35,7 @@ The Building Wizard will be a 6-step guided process, enabling users to:
     - `required_building_id` (dropdown of existing buildings)
   - Create a `BuildingData` dataclass to hold the wizard's state.
 
-### Phase 2: Asset & Resource Integration (Week 2)
+### Phase 2: Asset & Resource Integration (Week 2) - UI IMPLEMENTED
 
 - **Task 2.1: Implement Step 2: Visuals & Assets**
   - Create a UI for asset selection.
@@ -48,7 +48,7 @@ The Building Wizard will be a 6-step guided process, enabling users to:
   - Allow users to add multiple resource requirements (e.g., Wood, Stone, Iron).
   - This page will write to the "building costs" data category, linking resource types and amounts to the `building_id`.
 
-### Phase 3: Function Definition (Weeks 3-4)
+### Phase 3: Function Definition (Weeks 3-4) - UI IMPLEMENTED
 
 - **Task 3.1: Implement Step 4: Functions & Buttons**
   - This is the most complex step. Create a UI to add "buttons" to the building's production menu.
@@ -61,7 +61,7 @@ The Building Wizard will be a 6-step guided process, enabling users to:
     - The wizard creates a button and links it to the appropriate action (this may require further research into the upgrade system).
   - The UI will allow setting resource costs and time for each button action.
 
-### Phase 4: Automation & Export (Week 5)
+### Phase 4: Automation & Export (Week 5) - UI IMPLEMENTED
 
 - **Task 4.1: Implement Step 5: Building Plan**
   - This step will be mostly automated.
