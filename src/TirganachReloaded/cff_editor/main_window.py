@@ -2,20 +2,29 @@
 Main Window for CFF Editor
 """
 
-from PySide6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-                                QSplitter, QMenuBar, QMenu, QFileDialog,
-                                QMessageBox, QStatusBar, QLabel)
-from PySide6.QtCore import Qt, QSize
-from PySide6.QtGui import QAction, QActionGroup
 from pathlib import Path
 
-from .data_model import CFFDataModel
+from PySide6.QtCore import QSize, Qt
+from PySide6.QtGui import QAction, QActionGroup
+from PySide6.QtWidgets import (
+    QDialog,
+    QFileDialog,
+    QLabel,
+    QMainWindow,
+    QMessageBox,
+    QPushButton,
+    QSplitter,
+    QStatusBar,
+    QVBoxLayout,
+    QWidget,
+)
 from tirganach.types import Language
+
+from .data_model import CFFDataModel
 from .widgets.category_tree import CategoryTreeWidget
 from .widgets.element_table import ElementTableWidget
 from .widgets.property_editor import PropertyEditorWidget
 from .widgets.quest_details import QuestDetailsWidget
-from .widgets.quest_editor import QuestEditorWidget
 
 
 class MainWindow(QMainWindow):
@@ -130,7 +139,7 @@ class MainWindow(QMainWindow):
 
         # View menu
         view_menu = menubar.addMenu("&View")
-        
+
         quest_editor_action = QAction("&Quest Editor", self)
         quest_editor_action.setShortcut("Ctrl+Q, E")
         quest_editor_action.triggered.connect(self.show_quest_editor)
@@ -143,6 +152,21 @@ class MainWindow(QMainWindow):
         spell_wizard_action.setStatusTip("Create custom spells with the Spell Wizard")
         spell_wizard_action.triggered.connect(self.show_spell_wizard)
         view_menu.addAction(spell_wizard_action)
+
+        # Tools menu
+        tools_menu = menubar.addMenu("&Tools")
+
+        armor_forge_action = QAction("&Armor Forge", self)
+        armor_forge_action.setShortcut("Ctrl+A, F")
+        armor_forge_action.setStatusTip("Create and edit custom armor pieces")
+        armor_forge_action.triggered.connect(self.show_armor_forge)
+        tools_menu.addAction(armor_forge_action)
+
+        id_manager_action = QAction("&ID Manager", self)
+        id_manager_action.setShortcut("Ctrl+I, M")
+        id_manager_action.setStatusTip("Manage unique IDs for all content types")
+        id_manager_action.triggered.connect(self.show_id_manager)
+        tools_menu.addAction(id_manager_action)
 
         # Help menu
         help_menu = menubar.addMenu("&Help")
@@ -160,7 +184,7 @@ class MainWindow(QMainWindow):
             ("&French", Language.FRENCH),
             ("&Spanish", Language.SPANISH),
             ("&Italian", Language.ITALIAN),
-            ("&_HAEGAR", Language._HAEGAR)
+            ("&_HAEGAR", Language._HAEGAR),
         ]
 
         # Create action group for radio button behavior
@@ -171,7 +195,9 @@ class MainWindow(QMainWindow):
             action = QAction(lang_name, self)
             action.setCheckable(True)
             action.setChecked(self.data_model.get_current_language() == lang_enum)
-            action.triggered.connect(lambda checked, lang=lang_enum: self._on_language_selected(lang))
+            action.triggered.connect(
+                lambda checked, lang=lang_enum: self._on_language_selected(lang)
+            )
             language_menu.addAction(action)
             language_group.addAction(action)
 
@@ -209,13 +235,14 @@ class MainWindow(QMainWindow):
         """Open CFF file dialog"""
         # Get default directory (last opened file's directory or fallback)
         default_file = self.data_model.get_default_file_path()
-        default_dir = str(Path(default_file).parent) if default_file else "H:/SpellSmut/OriginalGameFiles/data"
+        default_dir = (
+            str(Path(default_file).parent)
+            if default_file
+            else "H:/SpellSmut/OriginalGameFiles/data"
+        )
 
         file_path, _ = QFileDialog.getOpenFileName(
-            self,
-            "Open GameData.cff",
-            default_dir,
-            "CFF Files (*.cff);;All Files (*)"
+            self, "Open GameData.cff", default_dir, "CFF Files (*.cff);;All Files (*)"
         )
 
         if file_path:
@@ -248,7 +275,7 @@ class MainWindow(QMainWindow):
             self,
             "Save GameData.cff As",
             "H:/SpellSmut/ModdedGameFiles",
-            "CFF Files (*.cff);;All Files (*)"
+            "CFF Files (*.cff);;All Files (*)",
         )
 
         if file_path:
@@ -333,13 +360,14 @@ class MainWindow(QMainWindow):
     def show_quest_editor(self):
         """Show the integrated quest editor"""
         # Create the quest editor widget if it doesn't exist
-        if not hasattr(self, 'quest_editor_widget'):
+        if not hasattr(self, "quest_editor_widget"):
             from .widgets.quest_editor import QuestEditorWidget
+
             self.quest_editor_widget = QuestEditorWidget(self.data_model)
-            
+
             # Store the current central widget to restore later
             self.original_central_widget = self.centralWidget()
-        
+
         # Set the quest editor as the central widget
         self.setCentralWidget(self.quest_editor_widget)
 
@@ -358,18 +386,89 @@ class MainWindow(QMainWindow):
             wizard.exec()
 
         except Exception as e:
-            QMessageBox.critical(self, "Spell Wizard Error",
-                               f"Failed to open Spell Wizard:\n{str(e)}")
+            QMessageBox.critical(
+                self, "Spell Wizard Error", f"Failed to open Spell Wizard:\n{str(e)}"
+            )
 
     def on_spell_created(self, spell_data):
         """Handle spell creation completion"""
-        QMessageBox.information(self, "Spell Created",
-                               f"Spell '{spell_data.spell_name}' has been created!\n\n"
-                               f"Check the 'exported_spells' folder for the generated Lua files.")
+        QMessageBox.information(
+            self,
+            "Spell Created",
+            f"Spell '{spell_data.spell_name}' has been created!\n\n"
+            f"Check the 'exported_spells' folder for the generated Lua files.",
+        )
+
+    def show_armor_forge(self):
+        """Show the armor forge wizard"""
+        try:
+            from .shared.id_manager import IDManager
+            from .widgets.armor_forge_wizard import ArmorForgeWizard
+
+            # Initialize ID manager if not already done
+            if not hasattr(self, "id_manager"):
+                self.id_manager = IDManager("project_ids.json")
+
+            # Create and show the armor forge wizard
+            wizard = ArmorForgeWizard(self.id_manager, self)
+            result = wizard.exec()
+
+            if result == wizard.Accepted:
+                QMessageBox.information(
+                    self,
+                    "Success",
+                    "Armor created successfully!\n\n"
+                    "The armor has been saved and is ready for use in-game.",
+                )
+
+        except ImportError as e:
+            QMessageBox.warning(
+                self, "Import Error", f"Failed to load armor forge: {str(e)}"
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Error", f"An error occurred while creating armor: {str(e)}"
+            )
+
+    def show_id_manager(self):
+        """Show the ID manager widget"""
+        try:
+            from .shared.id_manager import IDManager
+            from .shared.id_manager_widget import IDManagerWidget
+
+            # Initialize ID manager if not already done
+            if not hasattr(self, "id_manager"):
+                self.id_manager = IDManager("project_ids.json")
+
+            # Create and show the ID manager dialog
+            dialog = QDialog(self)
+            dialog.setWindowTitle("ID Management System")
+            dialog.resize(600, 400)
+
+            layout = QVBoxLayout()
+            id_widget = IDManagerWidget(self.id_manager)
+            layout.addWidget(id_widget)
+
+            # Add close button
+            close_btn = QPushButton("Close")
+            close_btn.clicked.connect(dialog.accept)
+            layout.addWidget(close_btn)
+
+            dialog.setLayout(layout)
+            dialog.exec()
+
+        except ImportError as e:
+            QMessageBox.warning(
+                self, "Import Error", f"Failed to load ID manager: {str(e)}"
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Error", f"An error occurred in ID manager: {str(e)}"
+            )
 
     def show_main_interface(self):
         """Show the main interface with category tree, element table, etc."""
-        if hasattr(self, 'original_central_widget'):
+        if hasattr(self, "original_central_widget"):
             self.setCentralWidget(self.original_central_widget)
 
     def show_about(self):
@@ -380,7 +479,7 @@ class MainWindow(QMainWindow):
             "<h3>SpellForce GameData.cff Editor</h3>"
             "<p>Version 1.0.0</p>"
             "<p>A modern GUI editor for SpellForce Platinum Edition game data files.</p>"
-            "<p>Built with PySide6 and the tirganach library.</p>"
+            "<p>Built with PySide6 and the tirganach library.</p>",
         )
 
     def closeEvent(self, event):
@@ -390,7 +489,7 @@ class MainWindow(QMainWindow):
                 self,
                 "Unsaved Changes",
                 "You have unsaved changes. Do you want to save before exiting?",
-                QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel
+                QMessageBox.Save | QMessageBox.Discard | QMessageBox.Cancel,
             )
 
             if reply == QMessageBox.Save:
