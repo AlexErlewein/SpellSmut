@@ -60,6 +60,17 @@ def test_spell_creation_system():
         print(f"   School: {spell_data.magic_school.name}")
         print(f"   Type: {spell_data.spell_type.value}")
 
+        # Set base stats for level 1 before scaling
+        print("\n📊 Setting base stats for level 1...")
+        if spell_data.levels:
+            spell_data.levels[0].damage_min = 20
+            spell_data.levels[0].damage_max = 25
+            spell_data.levels[0].mana_cost = 10
+            spell_data.levels[0].cooldown = 3.0
+            spell_data.levels[0].cast_time = 1.5
+            spell_data.levels[0].range = 25.0
+            print(f"✅ Base stats set: {spell_data.levels[0].damage_min}-{spell_data.levels[0].damage_max} dmg")
+
         # Apply scaling
         print("\n📊 Applying level scaling...")
         spell_data.apply_scaling()
