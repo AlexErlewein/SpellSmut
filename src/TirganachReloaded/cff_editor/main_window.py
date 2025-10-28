@@ -18,7 +18,7 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-from tirganach.types import Language
+from ..tirganach.types import Language
 
 from .data_model import CFFDataModel
 from .widgets.category_tree import CategoryTreeWidget
@@ -177,6 +177,11 @@ class MainWindow(QMainWindow):
         tools_menu.addAction(weapon_forge_action)
 
         tools_menu.addSeparator()
+        npc_creator_action = QAction("&NPC Creator", self)
+        npc_creator_action.setShortcut("Ctrl+N, C")
+        npc_creator_action.setStatusTip("Create and edit custom NPCs with the NPC Creator Wizard")
+        npc_creator_action.triggered.connect(self.show_npc_creator)
+        tools_menu.addAction(npc_creator_action)
 
         id_manager_action = QAction("&ID Manager", self)
         id_manager_action.setShortcut("Ctrl+I, M")
@@ -525,16 +530,47 @@ class MainWindow(QMainWindow):
                     self,
                     "Success",
                     "Building created successfully!",
-                )
-
-        except ImportError as e:
+				)
+		except ImportError as e:
             QMessageBox.warning(
-                self, "Import Error", f"Failed to load building wizard: {str(e)}"
+                self, "Import Error", f"Failed to load building: {str(e)}"
             )
         except Exception as e:
             QMessageBox.critical(
                 self, "Error", f"An error occurred while creating building: {str(e)}"
             )
+
+    def show_npc_creator(self):
+        """Show the NPC Creator wizard"""
+        try:
+            from .shared.id_manager import IDManager
+            from .widgets.npc_creator_wizard import NpcCreatorWizard
+
+            # Initialize ID manager if not already done
+            if not hasattr(self, "id_manager"):
+                self.id_manager = IDManager("project_ids.json")
+
+            # Create and show the NPC creator wizard
+            wizard = NpcCreatorWizard(self.id_manager, self)
+            result = wizard.exec()
+
+            if result == QDialog.Accepted and hasattr(wizard, 'npc_data'):
+                QMessageBox.information(
+                    self,
+                    "Success",
+                    f"NPC '{wizard.npc_data.name}' created successfully!\n\n"
+                    "The NPC data has been collected and is ready for export.",
+                )
+
+        except ImportError as e:
+            QMessageBox.warning(
+                self, "Import Error", f"Failed to load NPC wizard: {str(e)}"
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Error", f"An error occurred while creating NPC: {str(e)}"
+            )
+        
 
     def show_main_interface(self):
         """Show the main interface with category tree, element table, etc."""
