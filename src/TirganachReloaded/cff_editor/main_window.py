@@ -162,6 +162,12 @@ class MainWindow(QMainWindow):
         armor_forge_action.triggered.connect(self.show_armor_forge)
         tools_menu.addAction(armor_forge_action)
 
+        weapon_forge_action = QAction("&Weapon Forge", self)
+        weapon_forge_action.setShortcut("Ctrl+W, F")
+        weapon_forge_action.setStatusTip("Create and edit custom weapons")
+        weapon_forge_action.triggered.connect(self.show_weapon_forge)
+        tools_menu.addAction(weapon_forge_action)
+
         id_manager_action = QAction("&ID Manager", self)
         id_manager_action.setShortcut("Ctrl+I, M")
         id_manager_action.setStatusTip("Manage unique IDs for all content types")
@@ -464,6 +470,37 @@ class MainWindow(QMainWindow):
         except Exception as e:
             QMessageBox.critical(
                 self, "Error", f"An error occurred in ID manager: {str(e)}"
+            )
+
+    def show_weapon_forge(self):
+        """Show the weapon forge wizard"""
+        try:
+            from .shared.id_manager import IDManager
+            from .widgets.weapon_forge_wizard import WeaponForgeWizard
+
+            # Initialize ID manager if not already done
+            if not hasattr(self, "id_manager"):
+                self.id_manager = IDManager("project_ids.json")
+
+            # Create and show the weapon forge wizard
+            wizard = WeaponForgeWizard(self.id_manager, self)
+            result = wizard.exec()
+
+            if result == wizard.Accepted:
+                QMessageBox.information(
+                    self,
+                    "Success",
+                    "Weapon created successfully!\n\n"
+                    "The weapon has been saved and is ready for use in-game.",
+                )
+
+        except ImportError as e:
+            QMessageBox.warning(
+                self, "Import Error", f"Failed to load weapon forge: {str(e)}"
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Error", f"An error occurred while creating weapon: {str(e)}"
             )
 
     def show_main_interface(self):
