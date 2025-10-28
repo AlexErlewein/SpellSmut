@@ -3,6 +3,8 @@
     "allow": [
       "Bash(dir \"H:\\SpellSmut\\ProjectPlanning\" /B)",
       "Bash(dir \"H:\\SpellSmut\\docs\" /B)",
+      "Bash(uv run:*)",
+      "Bash(git add:*)"
       "Bash(uv run python:*)"
     ],
     "deny": [],
