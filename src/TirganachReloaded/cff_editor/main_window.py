@@ -25,6 +25,7 @@ from .widgets.category_tree import CategoryTreeWidget
 from .widgets.element_table import ElementTableWidget
 from .widgets.property_editor import PropertyEditorWidget
 from .widgets.quest_details import QuestDetailsWidget
+from .widgets.building_wizard import BuildingWizard
 
 
 class MainWindow(QMainWindow):
@@ -156,6 +157,13 @@ class MainWindow(QMainWindow):
         # Tools menu
         tools_menu = menubar.addMenu("&Tools")
 
+        building_wizard_action = QAction("&Building Wizard", self)
+        building_wizard_action.setStatusTip("Create and edit custom buildings")
+        building_wizard_action.triggered.connect(self.show_building_wizard)
+        tools_menu.addAction(building_wizard_action)
+
+        tools_menu.addSeparator()
+
         armor_forge_action = QAction("&Armor Forge", self)
         armor_forge_action.setShortcut("Ctrl+A, F")
         armor_forge_action.setStatusTip("Create and edit custom armor pieces")
@@ -167,6 +175,8 @@ class MainWindow(QMainWindow):
         weapon_forge_action.setStatusTip("Create and edit custom weapons")
         weapon_forge_action.triggered.connect(self.show_weapon_forge)
         tools_menu.addAction(weapon_forge_action)
+
+        tools_menu.addSeparator()
 
         id_manager_action = QAction("&ID Manager", self)
         id_manager_action.setShortcut("Ctrl+I, M")
@@ -501,6 +511,29 @@ class MainWindow(QMainWindow):
         except Exception as e:
             QMessageBox.critical(
                 self, "Error", f"An error occurred while creating weapon: {str(e)}"
+            )
+
+    def show_building_wizard(self):
+        """Show the building wizard"""
+        try:
+            from .shared.id_manager import IDManager
+            wizard = BuildingWizard(self)
+            result = wizard.exec()
+
+            if result == wizard.Accepted:
+                QMessageBox.information(
+                    self,
+                    "Success",
+                    "Building created successfully!",
+                )
+
+        except ImportError as e:
+            QMessageBox.warning(
+                self, "Import Error", f"Failed to load building wizard: {str(e)}"
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Error", f"An error occurred while creating building: {str(e)}"
             )
 
     def show_main_interface(self):
