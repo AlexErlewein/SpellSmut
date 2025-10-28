@@ -16,6 +16,10 @@ from PySide6.QtWidgets import (
     QWizard,
     QWizardPage,
 )
+from PySide6.QtCore import QDir
+import json
+from pathlib import Path
+from datetime import datetime
 
 from ..exporters.weapon_loader import WeaponLoader
 from ..models.weapon_creation_data import (
@@ -23,9 +27,12 @@ from ..models.weapon_creation_data import (
     DamageType,
     Rarity,
     WeaponHands,
+    WeaponCreationData,
+    WeaponRequirements,
 )
 from ..shared.id_manager import ContentType, IDManager
 from .weapon_browser_dialog import WeaponBrowserDialog
+from .weapon_validation import WeaponValidator
 
 
 class WeaponForgeWizard(QWizard):
@@ -45,9 +52,143 @@ class WeaponForgeWizard(QWizard):
         self.addPage(ReviewExportPage())
 
     def done(self, result):
-        if result == QDialog.DialogCode.Rejected and self.weapon_id:
+        if result == QDialog.DialogCode.Accepted:
+            # Export weapon data when user clicks Finish
+            if self.weapon_data:
+                success = self.export_weapon()
+                if not success:
+                    # Export failed, don't close wizard yet
+                    return
+        elif result == QDialog.DialogCode.Rejected and self.weapon_id:
+            # Release ID if cancelled
             self.id_manager.release_id(ContentType.WEAPON, self.weapon_id)
         super().done(result)
+
+    def export_weapon(self) -> bool:
+        """Export weapon to JSON (and eventually CFF)"""
+        try:
+            # Get export page to check options
+            export_page = self.page(5)  # ReviewExportPage
+
+            # For now, we only support JSON export
+            if export_page.export_json_radio.isChecked():
+                return self.export_to_json()
+            else:
+                QMessageBox.warning(
+                    self,
+                    "Export Not Available",
+                    "CFF export is not yet implemented. Please use JSON export."
+                )
+                return False
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Export Failed",
+                f"Failed to export weapon:\n{str(e)}"
+            )
+            return False
+
+    def export_to_json(self) -> bool:
+        """Export weapon data to JSON file"""
+        try:
+            # Create weapons directory if it doesn't exist
+            weapons_dir = Path("custom_weapons")
+            weapons_dir.mkdir(exist_ok=True)
+
+            # Generate filename from weapon name
+            safe_name = "".join(
+                c if c.isalnum() or c in (' ', '-', '_') else '_'
+                for c in self.weapon_data.weapon_name
+            )
+            safe_name = safe_name.replace(' ', '_').lower()
+            filename = f"weapon_{self.weapon_data.weapon_id}_{safe_name}.json"
+            filepath = weapons_dir / filename
+
+            # Add metadata
+            self.weapon_data.created_date = datetime.now().isoformat()
+            self.weapon_data.modified_date = datetime.now().isoformat()
+            self.weapon_data.author = "CFF Editor - Weapon Forge"
+
+            # Convert weapon data to dict
+            weapon_dict = {
+                "weapon_id": self.weapon_data.weapon_id,
+                "creation_mode": self.weapon_data.creation_mode,
+                "source_weapon_id": self.weapon_data.source_weapon_id,
+                "weapon_name": self.weapon_data.weapon_name,
+                "weapon_type_id": self.weapon_data.weapon_type_id,
+                "weapon_type_name": self.weapon_data.weapon_type_name,
+                "weapon_material_id": self.weapon_data.weapon_material_id,
+                "weapon_material_name": self.weapon_data.weapon_material_name,
+                "hands": self.weapon_data.hands.value,
+                "damage_category": self.weapon_data.damage_category.value,
+                "description": self.weapon_data.description,
+                "min_damage": self.weapon_data.min_damage,
+                "max_damage": self.weapon_data.max_damage,
+                "damage_type": self.weapon_data.damage_type.value,
+                "attack_speed": self.weapon_data.attack_speed,
+                "min_range": self.weapon_data.min_range,
+                "max_range": self.weapon_data.max_range,
+                "attack_arc": self.weapon_data.attack_arc,
+                "critical_chance": self.weapon_data.critical_chance,
+                "armor_penetration": self.weapon_data.armor_penetration,
+                "knockback_chance": self.weapon_data.knockback_chance,
+                "requirements": {
+                    "strength": self.weapon_data.requirements.strength,
+                    "dexterity": self.weapon_data.requirements.dexterity,
+                    "intelligence": self.weapon_data.requirements.intelligence,
+                    "level": self.weapon_data.requirements.level
+                },
+                "sell_value": self.weapon_data.sell_value,
+                "buy_value": self.weapon_data.buy_value,
+                "rarity": self.weapon_data.rarity.value,
+                "effects": [
+                    {
+                        "effect_id": e.effect_id,
+                        "effect_name": e.effect_name,
+                        "value": e.value,
+                        "duration": e.duration
+                    }
+                    for e in self.weapon_data.effects
+                ],
+                "item_set_id": self.weapon_data.item_set_id,
+                "icon_handle": self.weapon_data.icon_handle,
+                "hit_sound": self.weapon_data.hit_sound,
+                "miss_sound": self.weapon_data.miss_sound,
+                "equip_sound": self.weapon_data.equip_sound,
+                "model_file": self.weapon_data.model_file,
+                "trail_effect": self.weapon_data.trail_effect,
+                "impact_effect": self.weapon_data.impact_effect,
+                "created_date": self.weapon_data.created_date,
+                "modified_date": self.weapon_data.modified_date,
+                "author": self.weapon_data.author,
+                "version": self.weapon_data.version
+            }
+
+            # Write to file
+            with open(filepath, 'w', encoding='utf-8') as f:
+                json.dump(weapon_dict, f, indent=2, ensure_ascii=False)
+
+            # Show success message
+            QMessageBox.information(
+                self,
+                "Export Successful",
+                f"Weapon exported successfully!\n\n"
+                f"File: {filepath}\n"
+                f"Weapon ID: {self.weapon_data.weapon_id}\n"
+                f"Name: {self.weapon_data.weapon_name}\n\n"
+                f"DPS: {self.weapon_data.calculate_dps():.1f}\n"
+                f"Balance Rating: {self.weapon_data.get_balance_rating()}/100"
+            )
+
+            return True
+
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Export Failed",
+                f"Failed to export weapon to JSON:\n{str(e)}"
+            )
+            return False
 
 
 class ModeSelectionPage(QWizardPage):
@@ -461,22 +602,270 @@ class ReviewExportPage(QWizardPage):
         self.setSubTitle("Review the final weapon and export it to the game data.")
 
         layout = QVBoxLayout()
+
+        # Weapon Summary Section
         layout.addWidget(QLabel("Weapon Summary:"))
         self.summary_text = QTextEdit()
         self.summary_text.setReadOnly(True)
+        self.summary_text.setMinimumHeight(200)
         layout.addWidget(self.summary_text)
 
+        # Validation Results Section
         layout.addWidget(QLabel("Validation Results:"))
         self.validation_text = QTextEdit()
         self.validation_text.setReadOnly(True)
+        self.validation_text.setMinimumHeight(120)
         layout.addWidget(self.validation_text)
+
+        # Export Options Section
+        export_group = QGroupBox("Export Options")
+        export_layout = QVBoxLayout()
+
+        self.export_json_radio = QRadioButton("Export to JSON only")
+        self.export_cff_radio = QRadioButton("Export to CFF only (not yet implemented)")
+        self.export_both_radio = QRadioButton("Export to both JSON and CFF")
+
+        self.export_json_radio.setChecked(True)
+        self.export_cff_radio.setEnabled(False)  # Disable until CFF export is implemented
+        self.export_both_radio.setEnabled(False)
+
+        export_layout.addWidget(self.export_json_radio)
+        export_layout.addWidget(self.export_cff_radio)
+        export_layout.addWidget(self.export_both_radio)
+
+        export_group.setLayout(export_layout)
+        layout.addWidget(export_group)
 
         self.setLayout(layout)
 
     def initializePage(self):
-        # In a real implementation, we would gather all data from previous pages
-        # and populate the summary and validation text edits.
-        self.summary_text.setText("This is a placeholder for the weapon summary.")
-        self.validation_text.setText(
-            "This is a placeholder for the validation results."
+        """Gather all weapon data, display summary and validation results"""
+        wizard = self.wizard()
+
+        # Build weapon data from all pages
+        weapon_data = self.build_weapon_data_from_wizard()
+
+        # Store in wizard for export
+        wizard.weapon_data = weapon_data
+
+        # Display summary
+        summary_html = self.format_weapon_summary(weapon_data)
+        self.summary_text.setHtml(summary_html)
+
+        # Run validation and display results
+        validator = WeaponValidator(wizard.id_manager)
+        errors, warnings = validator.validate(weapon_data)
+        validation_html = self.format_validation(errors, warnings)
+        self.validation_text.setHtml(validation_html)
+
+    def build_weapon_data_from_wizard(self) -> WeaponCreationData:
+        """Gather data from all wizard pages and build WeaponCreationData object"""
+        wizard = self.wizard()
+
+        # Get references to all pages
+        mode_page = wizard.page(0)  # ModeSelectionPage
+        basic_page = wizard.page(1)  # BasicPropertiesPage
+        combat_page = wizard.page(2)  # CombatStatsPage
+        req_page = wizard.page(3)    # RequirementsValuePage
+        visual_page = wizard.page(4)  # VisualAudioPage
+
+        # Determine creation mode
+        if mode_page.new_weapon_radio.isChecked():
+            creation_mode = "new"
+            source_weapon_id = None
+        elif mode_page.edit_weapon_radio.isChecked():
+            creation_mode = "edit"
+            source_weapon_id = getattr(wizard, 'source_weapon', None)
+            source_weapon_id = source_weapon_id.weapon_id if source_weapon_id else None
+        else:
+            creation_mode = "duplicate"
+            source_weapon_id = getattr(wizard, 'source_weapon', None)
+            source_weapon_id = source_weapon_id.weapon_id if source_weapon_id else None
+
+        # Build requirements
+        requirements = WeaponRequirements(
+            strength=req_page.str_spin.value(),
+            dexterity=req_page.dex_spin.value(),
+            intelligence=req_page.int_spin.value(),
+            level=req_page.level_spin.value()
         )
+
+        # Build weapon data
+        weapon_data = WeaponCreationData(
+            # Step 1: Mode & ID
+            weapon_id=wizard.weapon_id,
+            creation_mode=creation_mode,
+            source_weapon_id=source_weapon_id,
+
+            # Step 2: Basic Properties
+            weapon_name=basic_page.name_edit.text(),
+            weapon_type_id=basic_page.type_combo.currentIndex() + 1,  # Adjust for 0-based index
+            weapon_type_name=basic_page.type_combo.currentText(),
+            weapon_material_id=basic_page.material_combo.currentIndex() + 1,
+            weapon_material_name=basic_page.material_combo.currentText(),
+            hands=WeaponHands(basic_page.hands_combo.currentText()),
+            damage_category=DamageCategory(basic_page.category_combo.currentText()),
+            description=basic_page.description_edit.toPlainText(),
+
+            # Step 3: Combat Stats
+            min_damage=combat_page.min_damage_spin.value(),
+            max_damage=combat_page.max_damage_spin.value(),
+            damage_type=DamageType(combat_page.damage_type_combo.currentText()),
+            attack_speed=combat_page.speed_spin.value(),
+            min_range=combat_page.min_range_spin.value(),
+            max_range=combat_page.max_range_spin.value(),
+            attack_arc=combat_page.arc_spin.value(),
+            critical_chance=combat_page.crit_spin.value(),
+            armor_penetration=combat_page.armor_pen_spin.value(),
+            knockback_chance=combat_page.knockback_spin.value(),
+
+            # Step 4: Requirements & Value
+            requirements=requirements,
+            sell_value=req_page.sell_value_spin.value(),
+            buy_value=req_page.buy_value_spin.value(),
+            rarity=Rarity(req_page.rarity_combo.currentText()),
+            effects=[],  # TODO: Populate from effects widget when implemented
+
+            # Step 5: Visual & Audio (placeholders for now)
+            icon_handle="",
+            hit_sound="battle_hit_1hsword",
+            miss_sound="battle_miss_sword",
+            equip_sound="",
+            model_file="",
+            trail_effect="",
+            impact_effect=""
+        )
+
+        return weapon_data
+
+    def format_weapon_summary(self, weapon: WeaponCreationData) -> str:
+        """Format weapon data as HTML summary"""
+        dps = weapon.calculate_dps()
+        balance = weapon.get_balance_rating()
+
+        html = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif;">
+            <h2 style="color: #2c3e50;">{weapon.weapon_name}</h2>
+
+            <h3 style="color: #34495e;">Basic Information</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr><td><b>ID:</b></td><td>{weapon.weapon_id}</td></tr>
+                <tr><td><b>Type:</b></td><td>{weapon.weapon_type_name} ({weapon.hands.value})</td></tr>
+                <tr><td><b>Material:</b></td><td>{weapon.weapon_material_name}</td></tr>
+                <tr><td><b>Category:</b></td><td>{weapon.damage_category.value.capitalize()}</td></tr>
+                <tr><td><b>Rarity:</b></td><td style="color: {self._get_rarity_color(weapon.rarity)};">
+                    {weapon.rarity.value.capitalize()}</td></tr>
+            </table>
+
+            <h3 style="color: #34495e;">Combat Stats</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr><td><b>Damage:</b></td><td>{weapon.min_damage} - {weapon.max_damage}
+                    ({weapon.damage_type.value})</td></tr>
+                <tr><td><b>Attack Speed:</b></td><td>{weapon.attack_speed}
+                    ({self._speed_rating(weapon.attack_speed)})</td></tr>
+                <tr><td><b>Range:</b></td><td>{weapon.min_range} - {weapon.max_range}</td></tr>
+                <tr><td><b>Attack Arc:</b></td><td>{weapon.attack_arc}°</td></tr>
+                <tr><td><b>DPS:</b></td><td style="color: #e74c3c; font-weight: bold;">
+                    {dps:.1f}</td></tr>
+            </table>
+
+            <h3 style="color: #34495e;">Special Properties</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr><td><b>Critical Chance:</b></td><td>{weapon.critical_chance}%</td></tr>
+                <tr><td><b>Armor Penetration:</b></td><td>{weapon.armor_penetration}%</td></tr>
+                <tr><td><b>Knockback Chance:</b></td><td>{weapon.knockback_chance}%</td></tr>
+            </table>
+
+            <h3 style="color: #34495e;">Requirements</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr><td><b>Strength:</b></td><td>{weapon.requirements.strength}</td></tr>
+                <tr><td><b>Dexterity:</b></td><td>{weapon.requirements.dexterity}</td></tr>
+                <tr><td><b>Intelligence:</b></td><td>{weapon.requirements.intelligence}</td></tr>
+                <tr><td><b>Level:</b></td><td>{weapon.requirements.level}</td></tr>
+            </table>
+
+            <h3 style="color: #34495e;">Economy</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr><td><b>Sell Value:</b></td><td>{weapon.sell_value} gold</td></tr>
+                <tr><td><b>Buy Value:</b></td><td>{weapon.buy_value} gold</td></tr>
+            </table>
+
+            <h3 style="color: #34495e;">Balance Assessment</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr><td><b>Balance Rating:</b></td><td>{balance} / 100</td></tr>
+                <tr><td><b>Assessment:</b></td><td>{self._balance_assessment(balance)}</td></tr>
+            </table>
+        </body>
+        </html>
+        """
+
+        return html
+
+    def format_validation(self, errors: list[str], warnings: list[str]) -> str:
+        """Format validation results as HTML"""
+        if not errors and not warnings:
+            html = """
+            <html>
+            <body style="font-family: Arial, sans-serif;">
+                <p style="color: #27ae60; font-size: 14pt; font-weight: bold;">
+                    ✓ Weapon is valid and ready for export!
+                </p>
+            </body>
+            </html>
+            """
+            return html
+
+        html = "<html><body style='font-family: Arial, sans-serif;'>"
+
+        if errors:
+            html += "<h3 style='color: #e74c3c;'>❌ Errors (must fix before export):</h3><ul>"
+            for error in errors:
+                html += f"<li style='color: #e74c3c;'>{error}</li>"
+            html += "</ul>"
+
+        if warnings:
+            html += "<h3 style='color: #f39c12;'>⚠️ Warnings (review recommended):</h3><ul>"
+            for warning in warnings:
+                html += f"<li style='color: #f39c12;'>{warning}</li>"
+            html += "</ul>"
+
+        html += "</body></html>"
+        return html
+
+    def _get_rarity_color(self, rarity: Rarity) -> str:
+        """Get color code for rarity"""
+        colors = {
+            Rarity.COMMON: "#95a5a6",
+            Rarity.UNCOMMON: "#2ecc71",
+            Rarity.RARE: "#3498db",
+            Rarity.EPIC: "#9b59b6",
+            Rarity.LEGENDARY: "#f39c12"
+        }
+        return colors.get(rarity, "#000000")
+
+    def _speed_rating(self, speed: int) -> str:
+        """Convert speed value to rating"""
+        if speed < 50:
+            return "Very Fast"
+        elif speed < 80:
+            return "Fast"
+        elif speed < 120:
+            return "Normal"
+        elif speed < 160:
+            return "Slow"
+        else:
+            return "Very Slow"
+
+    def _balance_assessment(self, rating: int) -> str:
+        """Get balance assessment text"""
+        if rating < 20:
+            return "Underpowered"
+        elif rating < 40:
+            return "Weak"
+        elif rating < 60:
+            return "Balanced"
+        elif rating < 80:
+            return "Strong"
+        else:
+            return "Overpowered"
