@@ -4,7 +4,10 @@ Wrapper script for TirganachReloaded
 """
 
 # Import and run the main function
-from .cff_editor.main import main as tirganach_main
+try:
+    from .cff_editor.main import main as tirganach_main
+except ImportError:
+    from cff_editor.main import main as tirganach_main
 
 def main():
     """Main entry point for the wrapper"""

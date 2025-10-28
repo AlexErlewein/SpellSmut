@@ -577,9 +577,17 @@ class VisualMaterialsPage(QWizardPage):
         visual_group = QGroupBox("Visual Components")
         visual_layout = QFormLayout()
 
+        # Icon selection with browser
+        icon_layout = QHBoxLayout()
         self.icon_edit = QLineEdit()
         self.icon_edit.setPlaceholderText("e.g., ui_item_equip_armor_chest_dragon")
-        visual_layout.addRow("Icon Handle:", self.icon_edit)
+        icon_layout.addWidget(self.icon_edit)
+        
+        self.icon_browse_btn = QPushButton("🔍 Browse...")
+        self.icon_browse_btn.clicked.connect(self.open_icon_browser)
+        icon_layout.addWidget(self.icon_browse_btn)
+        
+        visual_layout.addRow("Icon Handle:", icon_layout)
 
         self.mesh_edit = QLineEdit()
         self.mesh_edit.setPlaceholderText("3D model file path")
@@ -658,6 +666,36 @@ class VisualMaterialsPage(QWizardPage):
         current_row = self.effects_list.currentRow()
         if current_row >= 0:
             self.effects_list.takeItem(current_row)
+
+    def open_icon_browser(self):
+        """Open icon browser dialog"""
+        try:
+            # Import the icon browser dialog
+            from .icon_browser import IconBrowserDialog
+            
+            # Get the main window to access the data model
+            main_window = self.window()
+            if hasattr(main_window, 'data_model'):
+                dialog = IconBrowserDialog(main_window.data_model, "item", self)
+                dialog.iconSelected.connect(self.on_icon_selected)
+                dialog.exec()
+            else:
+                # Try to get data_model from parent wizard
+                wizard = self.wizard()
+                if wizard and hasattr(wizard, 'parent') and hasattr(wizard.parent(), 'data_model'):
+                    dialog = IconBrowserDialog(wizard.parent().data_model, "item", self)
+                    dialog.iconSelected.connect(self.on_icon_selected)
+                    dialog.exec()
+                else:
+                    QMessageBox.warning(self, "Icon Browser",
+                                      "Data model not available. Cannot open icon browser.")
+        except Exception as e:
+            QMessageBox.critical(self, "Icon Browser Error",
+                              f"Failed to open icon browser:\n{str(e)}")
+
+    def on_icon_selected(self, icon_handle: str):
+        """Handle icon selection from browser"""
+        self.icon_edit.setText(icon_handle)
 
     def validatePage(self):
         """Save visual data"""

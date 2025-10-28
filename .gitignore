@@ -35,3 +35,4 @@ venv/
 # Keep these important files (override above patterns if needed)
 # Use git add -f to force add if needed
 .rsworktree/
+test_cff_export/
