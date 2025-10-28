@@ -22,10 +22,10 @@ The **Weapon Forge** has been successfully integrated into the CFF Editor main a
 
 ### What's In Progress 🟡
 
-- 🟡 **Weapon Browser Dialog** - Browse/edit 719 existing weapons
-- 🟡 **CFF Binary Export** - Export to GameData.cff format
-- 🟡 **Visual & Audio Page** - Icon browser, sound preview (placeholders)
-- 🟡 **Review & Export Page** - Final validation display (placeholders)
+- 🟡 **Weapon Browser Dialog** - Browse/edit 719 existing weapons (UI complete, needs wizard integration)
+- 🟡 **CFF Binary Export** - Export to GameData.cff format (stub methods exist)
+- 🟡 **Visual & Audio Page** - Icon browser, sound preview (basic UI, needs functionality)
+- 🟡 **Review & Export Page** - Final validation display (basic UI, needs validation display)
 
 ---
 
@@ -277,31 +277,169 @@ effective_damage = dps * (1 - req_penalty)
 
 ### Immediate Priorities
 
-1. **Complete Weapon Browser Dialog** (Phase 3)
-   - Load 719 existing weapons from `enhanced_weapons.json`
-   - Search/filter by name, type, rarity
-   - Click to edit existing weapon
-   - Save under new ID
+#### **Task 1: Complete Weapon Browser Integration** ⚔️ NEXT UP
 
-2. **Complete Visual & Audio Page** (Phase 5)
-   - Icon browser (4096+ extracted icons)
-   - Sound preview player
-   - 3D model selection
+The WeaponBrowserDialog UI is complete and functional. Need to integrate it with the wizard:
 
-3. **Complete Review & Export Page** (Phase 6)
-   - Display validation summary
-   - Show calculated stats (DPS, balance rating)
-   - Export options (JSON, CFF)
-   - Comparison with similar weapons
+**Step 1.1: Add imports to weapon_forge_wizard.py**
+```python
+from PySide6.QtWidgets import QPushButton, QMessageBox
+from ..exporters.weapon_loader import WeaponLoader
+from .weapon_browser_dialog import WeaponBrowserDialog
+```
 
-4. **Implement CFF Binary Export** (Phase 6)
-   - Export to GameData.cff format
-   - Categories to implement:
-     - `2003`: Item General Info
-     - `2015`: Weapon Combat Data
-     - `2016`: Text entries (name, description)
-     - `2063`: Weapon Type (if custom)
-     - `2064`: Material (if custom)
+**Step 1.2: Update ModeSelectionPage.__init__**
+Add these instance variables:
+```python
+self.selected_weapon_data = None
+self.weapon_loader = WeaponLoader()
+```
+
+Add browse button after mode radio buttons:
+```python
+browse_layout = QHBoxLayout()
+self.browse_button = QPushButton("Browse Weapons...")
+self.browse_button.clicked.connect(self.browse_weapons)
+self.browse_button.setEnabled(False)
+browse_layout.addWidget(self.browse_button)
+mode_layout.addLayout(browse_layout)
+
+self.selected_weapon_label = QLabel("No weapon selected")
+self.selected_weapon_label.setStyleSheet("color: gray; font-style: italic;")
+mode_layout.addWidget(self.selected_weapon_label)
+
+# Enable browse button when edit/duplicate modes selected
+self.edit_weapon_radio.toggled.connect(self.on_mode_changed)
+self.duplicate_weapon_radio.toggled.connect(self.on_mode_changed)
+```
+
+**Step 1.3: Add methods to ModeSelectionPage**
+```python
+def on_mode_changed(self):
+    """Enable/disable browse button based on mode"""
+    is_edit_or_dup = self.edit_weapon_radio.isChecked() or self.duplicate_weapon_radio.isChecked()
+    self.browse_button.setEnabled(is_edit_or_dup)
+    if not is_edit_or_dup:
+        self.selected_weapon_data = None
+        self.selected_weapon_label.setText("No weapon selected")
+
+def browse_weapons(self):
+    """Open weapon browser dialog"""
+    dialog = WeaponBrowserDialog(self)
+    if dialog.exec() == QDialog.DialogCode.Accepted:
+        weapon_dict = dialog.get_selected_weapon()
+        if weapon_dict:
+            self.selected_weapon_data = self.weapon_loader.load_weapon(weapon_dict['item_id'])
+            self.selected_weapon_label.setText(f"Selected: {weapon_dict['name']}")
+            self.selected_weapon_label.setStyleSheet("color: green; font-weight: bold;")
+
+def validatePage(self):
+    """Validate before moving to next page"""
+    if (self.edit_weapon_radio.isChecked() or self.duplicate_weapon_radio.isChecked()):
+        if self.selected_weapon_data is None:
+            QMessageBox.warning(self, "No Weapon", "Please select a weapon")
+            return False
+    
+    wizard = self.wizard()
+    wizard.creation_mode = "new" if self.new_weapon_radio.isChecked() else "edit" if self.edit_weapon_radio.isChecked() else "duplicate"
+    wizard.source_weapon = self.selected_weapon_data
+    
+    # Allocate ID
+    if self.auto_id_radio.isChecked():
+        wizard.weapon_id = self.id_manager.allocate_id(ContentType.WEAPON)
+    else:
+        # Handle manual ID...
+    return True
+```
+
+**Step 1.4: Add initializePage to BasicPropertiesPage**
+```python
+def initializePage(self):
+    """Populate from source weapon if editing/duplicating"""
+    wizard = self.wizard()
+    if hasattr(wizard, 'source_weapon') and wizard.source_weapon:
+        weapon = wizard.source_weapon
+        self.weapon_name_edit.setText(weapon.weapon_name)
+        # ... populate other fields
+```
+
+**Step 1.5: Add initializePage to CombatStatsPage** (same pattern)
+
+**Estimated Time**: 2-3 hours
+
+---
+
+#### **Task 2: Complete Visual & Audio Page** 🎨
+
+Current state: Placeholder UI with QLineEdit widgets
+
+**Step 2.1: Implement Icon Browser**
+- Create `IconBrowserDialog` class
+- Load icons from `ExtractedAssets/UI/Icons/`
+- Display in grid with preview
+- Return selected icon path
+
+**Step 2.2: Add Icon Selection to Page**
+```python
+icon_layout = QHBoxLayout()
+self.icon_edit = QLineEdit()
+browse_icon_btn = QPushButton("Browse...")
+browse_icon_btn.clicked.connect(self.browse_icon)
+icon_layout.addWidget(self.icon_edit)
+icon_layout.addWidget(browse_icon_btn)
+layout.addRow("Icon:", icon_layout)
+```
+
+**Step 2.3: Sound Effect Selection**
+- Dropdown with weapon sound categories
+- Preview button to play sound
+
+**Estimated Time**: 3-4 hours
+
+---
+
+#### **Task 3: Complete Review & Export Page** 📋
+
+**Step 3.1: Gather Data from All Pages**
+```python
+def initializePage(self):
+    wizard = self.wizard()
+    # Collect data from all previous pages
+    weapon_data = self.build_weapon_data_from_wizard()
+    
+    # Display summary
+    self.summary_text.setHtml(self.format_weapon_summary(weapon_data))
+    
+    # Run validation
+    validator = WeaponValidator(wizard.id_manager)
+    errors, warnings = validator.validate(weapon_data)
+    self.validation_text.setHtml(self.format_validation(errors, warnings))
+```
+
+**Step 3.2: Add Export Options**
+- Radio buttons: JSON only / CFF only / Both
+- Export button with progress feedback
+
+**Estimated Time**: 2-3 hours
+
+---
+
+#### **Task 4: Implement CFF Binary Export** 💾
+
+**Step 4.1: Complete weapon_cff_exporter.py**
+Implement placeholder methods:
+- `export_item_general_info()` - Category 2003
+- `export_weapon_combat_data()` - Category 2015
+- `export_text_entries()` - Category 2016
+- `export_weapon_type()` - Category 2063 (if custom)
+- `export_material()` - Category 2064 (if custom)
+
+**Step 4.2: Binary Format Research**
+- Study existing CFF structure
+- Document binary format for each category
+- Test with hex editor
+
+**Estimated Time**: 6-8 hours (complex)
 
 ### Testing Priorities
 
@@ -326,26 +464,33 @@ effective_damage = dps * (1 - req_penalty)
 
 ## Known Issues & Limitations
 
-### Current Limitations
+### Current Limitations & Workarounds
 
-1. **No Edit Mode Yet** 🟡
-   - Can create new weapons
-   - Cannot yet load/edit existing weapons from database
-   - **Solution**: Implement `WeaponBrowserDialog` with `weapon_loader.load_weapon(weapon_id)`
+1. **Edit Mode Not Integrated** 🟡
+   - ✅ WeaponBrowserDialog exists and works (719 weapons)
+   - ✅ WeaponLoader.load_weapon() works
+   - ❌ Not connected to wizard yet
+   - **Workaround**: Use test script to browse/load weapons
+   - **ETA to Fix**: 2-3 hours (see Task 1 above)
 
 2. **Placeholder UI Pages** 🟡
-   - Visual & Audio page has placeholder UI
-   - Review & Export page has placeholder UI
-   - **Solution**: Implement full UI with icon browser, sound player, validation display
+   - Visual & Audio page has basic layout
+   - Review & Export page has basic layout
+   - Missing: Icon browser, validation display, export logic
+   - **Workaround**: Skip these pages, use defaults
+   - **ETA to Fix**: 5-7 hours (see Tasks 2-3 above)
 
 3. **No CFF Export** 🟡
-   - Can save to JSON
-   - Cannot yet export to binary CFF
-   - **Solution**: Implement `WeaponCFFExporter` methods for categories 2003, 2015, 2016
+   - ✅ JSON export/import works perfectly
+   - ❌ CFF binary export not implemented
+   - **Workaround**: Manual CFF editing or use JSON for testing
+   - **ETA to Fix**: 6-8 hours (see Task 4 above)
 
 4. **No In-Game Testing** 🔴
    - Cannot verify weapons work in-game yet
-   - **Solution**: Test weapon spawn in SpellForce
+   - Depends on CFF export being complete
+   - **Workaround**: None yet
+   - **ETA to Fix**: After CFF export (+ 2-3 hours testing)
 
 ### Workarounds
 
@@ -398,6 +543,38 @@ The Weapon Forge is **successfully integrated** and ready for use! The core func
 
 ---
 
-**Last Updated**: 2025-01-XX  
+## Quick Start Guide for Developers
+
+### To Complete Browser Integration (Task 1):
+
+1. **Open**: `src/TirganachReloaded/cff_editor/widgets/weapon_forge_wizard.py`
+2. **Add imports** at top (lines 1-30)
+3. **Modify** `ModeSelectionPage.__init__()` (around line 50)
+4. **Add methods**: `on_mode_changed()`, `browse_weapons()`, `validatePage()`
+5. **Test**: Run wizard, click Edit mode, click Browse, select weapon
+6. **Verify**: Weapon name should populate in Basic Properties page
+
+### To Test Current Functionality:
+
+```bash
+# Run test suite
+uv run python src/TirganachReloaded/test_weapon_forge.py
+
+# Run wizard manually
+uv run python src/TirganachReloaded/cff_editor/main.py
+# Then: Tools → Weapon Forge
+```
+
+### Files to Focus On:
+
+- `weapon_forge_wizard.py` - Main wizard (needs browser integration)
+- `weapon_browser_dialog.py` - Already complete ✅
+- `weapon_loader.py` - Already complete ✅
+- `weapon_cff_exporter.py` - Needs implementation
+- `weapon_validation.py` - Already complete ✅
+
+---
+
+**Last Updated**: 2025-01-20  
 **Contributors**: Claude, Alex  
-**Version**: 1.0.0
+**Version**: 1.1.0 (Updated with detailed task breakdown)
