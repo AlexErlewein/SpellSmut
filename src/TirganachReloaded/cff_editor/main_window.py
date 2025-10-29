@@ -186,6 +186,11 @@ class MainWindow(QMainWindow):
         building_wizard_action.triggered.connect(self.show_building_wizard)
         tools_menu.addAction(building_wizard_action)
 
+        race_creator_action = QAction("&Race Creator", self)
+        race_creator_action.setStatusTip("Create and edit custom races")
+        race_creator_action.triggered.connect(self.show_race_creator)
+        tools_menu.addAction(race_creator_action)
+
         tools_menu.addSeparator()
 
         id_manager_action = QAction("&ID Manager", self)
@@ -568,6 +573,37 @@ class MainWindow(QMainWindow):
         except Exception as e:
             QMessageBox.critical(
                 self, "Error", f"An error occurred while creating building: {str(e)}"
+            )
+
+    def show_race_creator(self):
+        """Show the Race Creator wizard"""
+        try:
+            from .shared.id_manager import IDManager
+            from .widgets.race_creator_wizard import RaceCreatorWizard
+
+            # Initialize ID manager if not already done
+            if not hasattr(self, "id_manager"):
+                self.id_manager = IDManager("project_ids.json")
+
+            # Create and show the race creator wizard
+            wizard = RaceCreatorWizard(self.id_manager, self)
+            result = wizard.exec()
+
+            if result == wizard.Accepted and hasattr(wizard, "race_data"):
+                QMessageBox.information(
+                    self,
+                    "Success",
+                    f"Race '{wizard.race_data.race_name}' created successfully!\n\n"
+                    "The race data has been collected and is ready for export.",
+                )
+
+        except ImportError as e:
+            QMessageBox.warning(
+                self, "Import Error", f"Failed to load race creator: {str(e)}"
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Error", f"An error occurred while creating race: {str(e)}"
             )
 
     def show_npc_creator(self):

@@ -19,6 +19,7 @@ class ContentType(Enum):
     NPC = "npc"
     CREATURE = "creature"
     BUILDING = "building"
+    RACE = "race"
 
 
 class IDRange:
@@ -39,6 +40,7 @@ class IDRange:
     CUSTOM_NPCS = (40000, 49999)
     CUSTOM_CREATURES = (50000, 59999)
     CUSTOM_BUILDINGS = (60000, 69999)
+    CUSTOM_RACES = (7, 99)  # Race IDs start from 7 (since 1-6 are official races)
 
 
 class IDManager:
@@ -186,5 +188,6 @@ class IDManager:
             ContentType.NPC: IDRange.CUSTOM_NPCS,
             ContentType.CREATURE: IDRange.CUSTOM_CREATURES,
             ContentType.BUILDING: IDRange.CUSTOM_BUILDINGS,
+            ContentType.RACE: IDRange.CUSTOM_RACES,
         }
         return range_map.get(content_type, (0, 0))
