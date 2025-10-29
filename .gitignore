@@ -1,5 +1,5 @@
 # SpellForce - Exclude large binary game files
-
+*.pak
 # Executables and DLLs (game binaries)
 *.exe
 *.dll
