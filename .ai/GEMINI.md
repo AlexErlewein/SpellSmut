@@ -1,5 +1,20 @@
 # Gemini Code Assistant Context
 
+## 📍 File Location Notice
+
+**This file is located at:** `.ai/GEMINI.md`
+
+**Purpose:** Instructions specifically for Gemini CLI / Google's Gemini AI assistant
+
+**Note:** Other AI assistants have their own instruction files:
+- Claude Code → `.ai/CLAUDE.md`
+- Qwen → `.ai/QWEN.md`
+- Crush → `.ai/CRUSH.md`
+
+All AI instruction files are in the `.ai/` hidden folder, separate from user documentation.
+
+---
+
 This document provides a comprehensive overview of the SpellSmut project, a modding toolkit for **SpellForce: The Order of Dawn - Platinum Edition**.
 
 ## Project Overview

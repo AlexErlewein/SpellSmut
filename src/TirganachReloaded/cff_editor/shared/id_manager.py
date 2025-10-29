@@ -2,15 +2,31 @@
 ID Management System - Shared across all content creators
 """
 
-from enum import Enum
-from typing import Dict, List, Optional, Set
 import json
 import os
+from enum import Enum
 from pathlib import Path
+from typing import Dict, List, Optional, Set
+
+
+def get_default_project_ids_path() -> str:
+    """
+    Get the default path for project_ids.json in the data directory.
+
+    Returns:
+        Absolute path to project_ids.json in the data directory
+    """
+    # Get path relative to this file: shared/id_manager.py
+    current_file = Path(__file__)
+    # Navigate: shared/ -> cff_editor/ -> TirganachReloaded/ -> data/
+    data_dir = current_file.parent.parent.parent / "data"
+    data_dir.mkdir(exist_ok=True)
+    return str(data_dir / "project_ids.json")
 
 
 class ContentType(Enum):
     """Types of game content that need unique IDs"""
+
     QUEST = "quest"
     SPELL = "spell"
     WEAPON = "weapon"
@@ -46,8 +62,18 @@ class IDRange:
 class IDManager:
     """Manages unique ID allocation across all content types"""
 
-    def __init__(self, project_file: str = "project_ids.json"):
-        self.project_file = project_file
+    def __init__(self, project_file: Optional[str] = None):
+        """
+        Initialize ID Manager.
+
+        Args:
+            project_file: Path to project_ids.json file. If None, uses default location
+                         in src/TirganachReloaded/data/project_ids.json
+        """
+        if project_file is None:
+            self.project_file = get_default_project_ids_path()
+        else:
+            self.project_file = project_file
         self.allocated_ids: Dict[ContentType, Set[int]] = {}
         self.load()
 
@@ -55,7 +81,7 @@ class IDManager:
         """Load existing ID allocations from project file"""
         try:
             if os.path.exists(self.project_file):
-                with open(self.project_file, 'r') as f:
+                with open(self.project_file, "r") as f:
                     data = json.load(f)
                     for content_type_str, id_list in data.items():
                         content_type = ContentType(content_type_str)
@@ -80,7 +106,7 @@ class IDManager:
         if dir_path:
             os.makedirs(dir_path, exist_ok=True)
 
-        with open(self.project_file, 'w') as f:
+        with open(self.project_file, "w") as f:
             json.dump(data, f, indent=2)
 
     def get_next_id(self, content_type: ContentType) -> int:
@@ -95,9 +121,13 @@ class IDManager:
             if candidate_id not in self.allocated_ids[content_type]:
                 return candidate_id
 
-        raise ValueError(f"No available IDs in range {start}-{end} for {content_type.value}")
+        raise ValueError(
+            f"No available IDs in range {start}-{end} for {content_type.value}"
+        )
 
-    def allocate_id(self, content_type: ContentType, requested_id: Optional[int] = None) -> int:
+    def allocate_id(
+        self, content_type: ContentType, requested_id: Optional[int] = None
+    ) -> int:
         """
         Allocate an ID (auto-assign or use requested ID)
 
@@ -118,10 +148,14 @@ class IDManager:
         else:
             # Validate requested ID
             if not self.is_valid_id(content_type, requested_id):
-                raise ValueError(f"ID {requested_id} is out of valid range for {content_type.value}")
+                raise ValueError(
+                    f"ID {requested_id} is out of valid range for {content_type.value}"
+                )
 
             if self.is_id_used(content_type, requested_id):
-                raise ValueError(f"ID {requested_id} is already in use for {content_type.value}")
+                raise ValueError(
+                    f"ID {requested_id} is already in use for {content_type.value}"
+                )
 
             new_id = requested_id
 
@@ -172,7 +206,7 @@ class IDManager:
                 "total_capacity": total,
                 "used": used,
                 "available": available,
-                "usage_percent": round((used / total) * 100, 1) if total > 0 else 0
+                "usage_percent": round((used / total) * 100, 1) if total > 0 else 0,
             }
 
         return stats

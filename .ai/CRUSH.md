@@ -1,5 +1,20 @@
 # CRUSH.md - SpellSmut Development Guide
 
+## 📍 File Location Notice
+
+**This file is located at:** `.ai/CRUSH.md`
+
+**Purpose:** Instructions specifically for Crush AI assistant
+
+**Note:** Other AI assistants have their own instruction files:
+- Claude Code → `.ai/CLAUDE.md`
+- Gemini CLI → `.ai/GEMINI.md`
+- Qwen → `.ai/QWEN.md`
+
+All AI instruction files are in the `.ai/` hidden folder, separate from user documentation.
+
+---
+
 ## Build/Test Commands
 
 ```bash

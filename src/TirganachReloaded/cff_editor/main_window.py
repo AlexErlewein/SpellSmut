@@ -462,7 +462,7 @@ class MainWindow(QMainWindow):
 
             # Initialize ID manager if not already done
             if not hasattr(self, "id_manager"):
-                self.id_manager = IDManager("project_ids.json")
+                self.id_manager = IDManager()
 
             # Create and show the armor forge wizard
             wizard = ArmorForgeWizard(self.id_manager, self)
@@ -493,7 +493,7 @@ class MainWindow(QMainWindow):
 
             # Initialize ID manager if not already done
             if not hasattr(self, "id_manager"):
-                self.id_manager = IDManager("project_ids.json")
+                self.id_manager = IDManager()
 
             # Create and show the ID manager dialog
             dialog = QDialog(self)
@@ -529,7 +529,7 @@ class MainWindow(QMainWindow):
 
             # Initialize ID manager if not already done
             if not hasattr(self, "id_manager"):
-                self.id_manager = IDManager("project_ids.json")
+                self.id_manager = IDManager()
 
             # Create and show the weapon forge wizard
             wizard = WeaponForgeWizard(self.id_manager, self)
@@ -583,7 +583,7 @@ class MainWindow(QMainWindow):
 
             # Initialize ID manager if not already done
             if not hasattr(self, "id_manager"):
-                self.id_manager = IDManager("project_ids.json")
+                self.id_manager = IDManager()
 
             # Create and show the race creator wizard
             wizard = RaceCreatorWizard(self.id_manager, self)
@@ -614,7 +614,7 @@ class MainWindow(QMainWindow):
 
             # Initialize ID manager if not already done
             if not hasattr(self, "id_manager"):
-                self.id_manager = IDManager("project_ids.json")
+                self.id_manager = IDManager()
 
             # Create and show the NPC creator wizard
             wizard = NpcCreatorWizard(self.id_manager, self)

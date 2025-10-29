@@ -1,5 +1,20 @@
 # SpellSmut - SpellForce Modding Project Context
 
+## 📍 File Location Notice
+
+**This file is located at:** `.ai/QWEN.md`
+
+**Purpose:** Instructions specifically for Qwen AI assistant
+
+**Note:** Other AI assistants have their own instruction files:
+- Claude Code → `.ai/CLAUDE.md`
+- Gemini CLI → `.ai/GEMINI.md`
+- Crush → `.ai/CRUSH.md`
+
+All AI instruction files are in the `.ai/` hidden folder, separate from user documentation.
+
+---
+
 ## Project Overview
 
 SpellSmut is a comprehensive modding project and documentation repository for **SpellForce: The Order of Dawn - Platinum Edition**, a fantasy RTS/RPG hybrid released in 2005. The project provides tools, documentation, and resources for creating custom content and modifications for the game.

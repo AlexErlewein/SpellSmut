@@ -1,5 +1,20 @@
 # SpellForce Platinum Edition - Codebase Analysis
 
+## 📍 File Location Notice
+
+**This file is located at:** `.ai/CLAUDE.md`
+
+**Purpose:** Instructions specifically for Claude Code / Claude AI (Anthropic's assistant)
+
+**Note:** Other AI assistants have their own instruction files:
+- Gemini CLI → `.ai/GEMINI.md`
+- Qwen → `.ai/QWEN.md`
+- Crush → `.ai/CRUSH.md`
+
+All AI instruction files are in the `.ai/` hidden folder, separate from user documentation.
+
+---
+
 ## Executive Summary
 
 This is a **SpellForce Platinum Edition** game distribution, a fantasy real-time strategy/RPG hybrid released in 2005. The codebase represents a modding-friendly game architecture built on C++ with Lua scripting for game logic extensibility. The game is Steam-enabled (App ID: 39540) and includes comprehensive mod support infrastructure.
