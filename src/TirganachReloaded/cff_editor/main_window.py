@@ -33,8 +33,8 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("SpellForce GameData.cff Editor")
-        self.setMinimumSize(QSize(1200, 700))
+        self.setWindowTitle("TirganachReloaded: SpellForce GameData Editor")
+        self.setMinimumSize(QSize(1500, 900))
 
         # Data model
         self.data_model = CFFDataModel()
@@ -141,26 +141,22 @@ class MainWindow(QMainWindow):
         # View menu
         view_menu = menubar.addMenu("&View")
 
+        # Tools menu
+        tools_menu = menubar.addMenu("&Tools")
+
         quest_editor_action = QAction("&Quest Editor", self)
         quest_editor_action.setShortcut("Ctrl+Q, E")
+        quest_editor_action.setStatusTip("Edit quests with the integrated Quest Editor")
         quest_editor_action.triggered.connect(self.show_quest_editor)
-        view_menu.addAction(quest_editor_action)
+        tools_menu.addAction(quest_editor_action)
 
-        view_menu.addSeparator()
+        tools_menu.addSeparator()
 
         spell_wizard_action = QAction("Spell &Wizard", self)
         spell_wizard_action.setShortcut("Ctrl+W")
         spell_wizard_action.setStatusTip("Create custom spells with the Spell Wizard")
         spell_wizard_action.triggered.connect(self.show_spell_wizard)
-        view_menu.addAction(spell_wizard_action)
-
-        # Tools menu
-        tools_menu = menubar.addMenu("&Tools")
-
-        building_wizard_action = QAction("&Building Wizard", self)
-        building_wizard_action.setStatusTip("Create and edit custom buildings")
-        building_wizard_action.triggered.connect(self.show_building_wizard)
-        tools_menu.addAction(building_wizard_action)
+        tools_menu.addAction(spell_wizard_action)
 
         tools_menu.addSeparator()
 
@@ -184,6 +180,18 @@ class MainWindow(QMainWindow):
         )
         npc_creator_action.triggered.connect(self.show_npc_creator)
         tools_menu.addAction(npc_creator_action)
+
+        building_wizard_action = QAction("&Building Wizard", self)
+        building_wizard_action.setStatusTip("Create and edit custom buildings")
+        building_wizard_action.triggered.connect(self.show_building_wizard)
+        tools_menu.addAction(building_wizard_action)
+
+        race_creator_action = QAction("&Race Creator", self)
+        race_creator_action.setStatusTip("Create and edit custom races")
+        race_creator_action.triggered.connect(self.show_race_creator)
+        tools_menu.addAction(race_creator_action)
+
+        tools_menu.addSeparator()
 
         id_manager_action = QAction("&ID Manager", self)
         id_manager_action.setShortcut("Ctrl+I, M")
@@ -381,18 +389,42 @@ class MainWindow(QMainWindow):
             self.stats_label.setText("")
 
     def show_quest_editor(self):
-        """Show the integrated quest editor"""
-        # Create the quest editor widget if it doesn't exist
-        if not hasattr(self, "quest_editor_widget"):
+        """Show the integrated quest editor in a separate window"""
+        try:
             from .widgets.quest_editor import QuestEditorWidget
 
-            self.quest_editor_widget = QuestEditorWidget(self.data_model)
+            # Create a new window for the quest editor
+            if (
+                not hasattr(self, "quest_editor_window")
+                or not self.quest_editor_window.isVisible()
+            ):
+                from PySide6.QtWidgets import QDialog
 
-            # Store the current central widget to restore later
-            self.original_central_widget = self.centralWidget()
+                self.quest_editor_window = QDialog(self)
+                self.quest_editor_window.setWindowTitle("Quest Editor")
+                self.quest_editor_window.setMinimumSize(1000, 700)
 
-        # Set the quest editor as the central widget
-        self.setCentralWidget(self.quest_editor_widget)
+                # Create layout for the dialog
+                from PySide6.QtWidgets import QVBoxLayout
+
+                layout = QVBoxLayout(self.quest_editor_window)
+                layout.setContentsMargins(0, 0, 0, 0)
+
+                # Create and add the quest editor widget
+                quest_editor_widget = QuestEditorWidget(self.data_model)
+                layout.addWidget(quest_editor_widget)
+
+                self.quest_editor_window.setLayout(layout)
+
+            # Show the quest editor window
+            self.quest_editor_window.show()
+            self.quest_editor_window.raise_()
+            self.quest_editor_window.activateWindow()
+
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Quest Editor Error", f"Failed to open Quest Editor:\n{str(e)}"
+            )
 
     def show_spell_wizard(self):
         """Show the Spell Creation Wizard"""
@@ -541,6 +573,37 @@ class MainWindow(QMainWindow):
         except Exception as e:
             QMessageBox.critical(
                 self, "Error", f"An error occurred while creating building: {str(e)}"
+            )
+
+    def show_race_creator(self):
+        """Show the Race Creator wizard"""
+        try:
+            from .shared.id_manager import IDManager
+            from .widgets.race_creator_wizard import RaceCreatorWizard
+
+            # Initialize ID manager if not already done
+            if not hasattr(self, "id_manager"):
+                self.id_manager = IDManager("project_ids.json")
+
+            # Create and show the race creator wizard
+            wizard = RaceCreatorWizard(self.id_manager, self)
+            result = wizard.exec()
+
+            if result == wizard.Accepted and hasattr(wizard, "race_data"):
+                QMessageBox.information(
+                    self,
+                    "Success",
+                    f"Race '{wizard.race_data.race_name}' created successfully!\n\n"
+                    "The race data has been collected and is ready for export.",
+                )
+
+        except ImportError as e:
+            QMessageBox.warning(
+                self, "Import Error", f"Failed to load race creator: {str(e)}"
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Error", f"An error occurred while creating race: {str(e)}"
             )
 
     def show_npc_creator(self):

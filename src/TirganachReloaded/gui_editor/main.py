@@ -8,16 +8,33 @@ Built with PySide6 for professional, native look.
 """
 
 import sys
-import os
 from pathlib import Path
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 try:
-    from PySide6.QtWidgets import QApplication, QMainWindow, QSplitter, QTreeWidget, QTreeWidgetItem, QTableWidget, QTableWidgetItem, QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton, QFileDialog, QMessageBox, QProgressBar, QStatusBar, QLineEdit
     from PySide6.QtCore import Qt, QThread, Signal
-    from PySide6.QtGui import QAction, QIcon, QColor, QPalette
+    from PySide6.QtGui import QAction, QColor, QIcon, QPalette
+    from PySide6.QtWidgets import (
+        QApplication,
+        QFileDialog,
+        QHBoxLayout,
+        QLabel,
+        QLineEdit,
+        QMainWindow,
+        QMessageBox,
+        QProgressBar,
+        QPushButton,
+        QSplitter,
+        QStatusBar,
+        QTableWidget,
+        QTableWidgetItem,
+        QTreeWidget,
+        QTreeWidgetItem,
+        QVBoxLayout,
+        QWidget,
+    )
 except ImportError:
     print("Error: PySide6 not installed. Run: pip install PySide6")
     sys.exit(1)
@@ -27,6 +44,7 @@ from tirganach import GameData
 
 class CFFLoaderThread(QThread):
     """Background thread for loading CFF files"""
+
     progress_updated = Signal(int, str)
     loading_finished = Signal(object)
     loading_error = Signal(str)
@@ -58,8 +76,8 @@ class MainWindow(QMainWindow):
         self.current_page = 0
         self.page_size = 50
 
-        self.setWindowTitle("SpellForce CFF Editor")
-        self.setGeometry(100, 100, 1200, 800)
+        self.setWindowTitle("Tirganach Reloaded: SpellForce GameData Editor")
+        self.setGeometry(100, 100, 1800, 1200)
 
         # Create central widget and layout
         central_widget = QWidget()
@@ -167,7 +185,9 @@ class MainWindow(QMainWindow):
 
     def load_initial_file(self):
         """Load the default CFF file if it exists"""
-        default_path = Path(__file__).parent.parent / "OriginalGameFiles" / "data" / "GameData.cff"
+        default_path = (
+            Path(__file__).parent.parent / "OriginalGameFiles" / "data" / "GameData.cff"
+        )
         if default_path.exists():
             self.load_cff_file(str(default_path))
 
@@ -207,7 +227,9 @@ class MainWindow(QMainWindow):
     def on_loading_error(self, error):
         """Handle loading error"""
         self.progress_bar.setVisible(False)
-        QMessageBox.critical(self, "Loading Error", f"Failed to load CFF file:\n{error}")
+        QMessageBox.critical(
+            self, "Loading Error", f"Failed to load CFF file:\n{error}"
+        )
 
     def populate_category_tree(self):
         """Populate the category tree with loaded data"""
@@ -270,7 +292,9 @@ class MainWindow(QMainWindow):
             self.element_table.setColumnCount(3)
             self.element_table.setHorizontalHeaderLabels(["ID", "Name", "Type"])
         elif category == "localization":
-            self.all_elements = self.game_data.localisation[:1000]  # Limit for performance
+            self.all_elements = self.game_data.localisation[
+                :1000
+            ]  # Limit for performance
             self.element_table.setColumnCount(3)
             self.element_table.setHorizontalHeaderLabels(["ID", "Language", "Text"])
         else:
@@ -327,28 +351,56 @@ class MainWindow(QMainWindow):
         for row, item in enumerate(self.filtered_elements[start_idx:end_idx]):
             if self.current_category == "items":
                 self.element_table.setItem(row, 0, QTableWidgetItem(str(item.item_id)))
-                self.element_table.setItem(row, 1, QTableWidgetItem("Item Name"))  # TODO: Resolve
-                self.element_table.setItem(row, 2, QTableWidgetItem(str(item.item_type)))
+                self.element_table.setItem(
+                    row, 1, QTableWidgetItem("Item Name")
+                )  # TODO: Resolve
+                self.element_table.setItem(
+                    row, 2, QTableWidgetItem(str(item.item_type))
+                )
             elif self.current_category == "spells":
                 self.element_table.setItem(row, 0, QTableWidgetItem(str(item.spell_id)))
-                self.element_table.setItem(row, 1, QTableWidgetItem("Spell Name"))  # TODO: Resolve
-                self.element_table.setItem(row, 2, QTableWidgetItem("School"))  # TODO: Resolve
+                self.element_table.setItem(
+                    row, 1, QTableWidgetItem("Spell Name")
+                )  # TODO: Resolve
+                self.element_table.setItem(
+                    row, 2, QTableWidgetItem("School")
+                )  # TODO: Resolve
             elif self.current_category == "creatures":
-                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.creature_id)))
-                self.element_table.setItem(row, 1, QTableWidgetItem("Creature Name"))  # TODO: Resolve
-                self.element_table.setItem(row, 2, QTableWidgetItem("Race"))  # TODO: Resolve
+                self.element_table.setItem(
+                    row, 0, QTableWidgetItem(str(item.creature_id))
+                )
+                self.element_table.setItem(
+                    row, 1, QTableWidgetItem("Creature Name")
+                )  # TODO: Resolve
+                self.element_table.setItem(
+                    row, 2, QTableWidgetItem("Race")
+                )  # TODO: Resolve
             elif self.current_category == "buildings":
-                self.element_table.setItem(row, 0, QTableWidgetItem(str(item.building_id)))
-                self.element_table.setItem(row, 1, QTableWidgetItem("Building Name"))  # TODO: Resolve
-                self.element_table.setItem(row, 2, QTableWidgetItem("Race"))  # TODO: Resolve
+                self.element_table.setItem(
+                    row, 0, QTableWidgetItem(str(item.building_id))
+                )
+                self.element_table.setItem(
+                    row, 1, QTableWidgetItem("Building Name")
+                )  # TODO: Resolve
+                self.element_table.setItem(
+                    row, 2, QTableWidgetItem("Race")
+                )  # TODO: Resolve
             elif self.current_category == "armor":
                 self.element_table.setItem(row, 0, QTableWidgetItem(str(item.item_id)))
-                self.element_table.setItem(row, 1, QTableWidgetItem("Armor Name"))  # TODO: Resolve
-                self.element_table.setItem(row, 2, QTableWidgetItem("Type"))  # TODO: Resolve
+                self.element_table.setItem(
+                    row, 1, QTableWidgetItem("Armor Name")
+                )  # TODO: Resolve
+                self.element_table.setItem(
+                    row, 2, QTableWidgetItem("Type")
+                )  # TODO: Resolve
             elif self.current_category == "weapons":
                 self.element_table.setItem(row, 0, QTableWidgetItem(str(item.item_id)))
-                self.element_table.setItem(row, 1, QTableWidgetItem("Weapon Name"))  # TODO: Resolve
-                self.element_table.setItem(row, 2, QTableWidgetItem(str(item.weapon_type)))
+                self.element_table.setItem(
+                    row, 1, QTableWidgetItem("Weapon Name")
+                )  # TODO: Resolve
+                self.element_table.setItem(
+                    row, 2, QTableWidgetItem(str(item.weapon_type))
+                )
             elif self.current_category == "localization":
                 self.element_table.setItem(row, 0, QTableWidgetItem(str(item.text_id)))
                 self.element_table.setItem(row, 1, QTableWidgetItem(str(item.language)))
@@ -362,7 +414,9 @@ class MainWindow(QMainWindow):
 
     def next_page(self):
         """Go to next page"""
-        total_pages = (len(self.filtered_elements) + self.page_size - 1) // self.page_size
+        total_pages = (
+            len(self.filtered_elements) + self.page_size - 1
+        ) // self.page_size
         if self.current_page < total_pages - 1:
             self.current_page += 1
             self.update_pagination()
@@ -389,26 +443,36 @@ class MainWindow(QMainWindow):
         weapons_file = Path(__file__).parent.parent / "enhanced_weapons.json"
         if weapons_file.exists():
             try:
-                with open(weapons_file, 'r', encoding='utf-8') as f:
+                with open(weapons_file, "r", encoding="utf-8") as f:
                     weapons = json.load(f)
 
                 # Switch to weapons category and populate
                 self.populate_element_table("weapons")
                 self.element_table.setRowCount(len(weapons))
                 for row, weapon in enumerate(weapons):
-                    self.element_table.setItem(row, 0, QTableWidgetItem(str(weapon['item_id'])))
-                    self.element_table.setItem(row, 1, QTableWidgetItem(weapon['name']))
-                    self.element_table.setItem(row, 2, QTableWidgetItem(weapon['weapon_type_name']))
+                    self.element_table.setItem(
+                        row, 0, QTableWidgetItem(str(weapon["item_id"]))
+                    )
+                    self.element_table.setItem(row, 1, QTableWidgetItem(weapon["name"]))
+                    self.element_table.setItem(
+                        row, 2, QTableWidgetItem(weapon["weapon_type_name"])
+                    )
 
                 self.status_bar.showMessage(f"Loaded {len(weapons)} weapons from JSON")
                 return
             except Exception as e:
-                QMessageBox.warning(self, "JSON Load Error", f"Failed to load JSON: {str(e)}\nFalling back to dynamic loading.")
+                QMessageBox.warning(
+                    self,
+                    "JSON Load Error",
+                    f"Failed to load JSON: {str(e)}\nFalling back to dynamic loading.",
+                )
 
         # Fallback: Load dynamically from CFF
         if self.game_data:
             self.populate_element_table("weapons")
-            self.status_bar.showMessage(f"Loaded {len(self.game_data.weapons)} weapons from CFF")
+            self.status_bar.showMessage(
+                f"Loaded {len(self.game_data.weapons)} weapons from CFF"
+            )
         else:
             QMessageBox.warning(self, "No Data", "No game data loaded")
 
