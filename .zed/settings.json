@@ -1,5 +1,57 @@
-// Folder-specific settings
-//
-// For a full list of overridable settings, and general information on folder-specific settings,
-// see the documentation: https://zed.dev/docs/configuring-zed#settings-files
-{}
+{
+  "languages": {
+    "Lua": {
+      "language_servers": ["lua-language-server"],
+      "tab_size": 4,
+      "hard_tabs": false
+    }
+  },
+  "lsp": {
+    "lua-language-server": {
+      "settings": {
+        "Lua.runtime.version": "Lua 5.1",
+        "Lua.runtime.path": ["?.lua", "?/init.lua"],
+        "Lua.diagnostics.globals": [
+          "print",
+          "getn",
+          "tremove",
+          "tinsert",
+          "globals",
+          "doscript",
+          "dir_readdirectory",
+          "readfile",
+          "strsplit",
+          "gsub",
+          "strfind",
+          "strsub",
+          "strlen",
+          "strjoin",
+          "list_concat",
+          "list_append",
+          "list_insert",
+          "list_converttoset",
+          "sort",
+          "tkeys",
+          "UtlMod",
+          "ObjectLibrary",
+          "SoundLibrary",
+          "DrwSoundId",
+          "SndDrwEventSamples"
+        ],
+        "Lua.diagnostics.disable": ["lowercase-global", "undefined-global"],
+        "Lua.workspace.library": ["ModdingTools/SpellForceLUASources/script", "OriginalGameFiles/script"],
+        "Lua.workspace.maxPreload": 10000,
+        "Lua.workspace.preloadFileSize": 5000,
+        "Lua.workspace.checkThirdParty": false,
+        "Lua.workspace.ignoreDir": [".git", ".vscode", ".zed", "node_modules", "dist", "build", "__pycache__"],
+        "Lua.completion.enable": true,
+        "Lua.completion.callSnippet": "Replace",
+        "Lua.completion.keywordSnippet": "Replace",
+        "Lua.hint.enable": true,
+        "Lua.hint.setType": true,
+        "Lua.format.enable": false,
+        "Lua.telemetry.enable": false
+      }
+    }
+  }
+}

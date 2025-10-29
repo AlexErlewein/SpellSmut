@@ -1,0 +1,88 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "runtime": {
+    "version": "Lua 5.1",
+    "path": [
+      "?.lua",
+      "?/init.lua"
+    ]
+  },
+  "diagnostics": {
+    "enable": true,
+    "globals": [
+      "print",
+      "getn",
+      "tremove",
+      "tinsert",
+      "globals",
+      "doscript",
+      "dir_readdirectory",
+      "readfile",
+      "strsplit",
+      "gsub",
+      "strfind",
+      "strsub",
+      "strlen",
+      "strjoin",
+      "list_concat",
+      "list_append",
+      "list_insert",
+      "list_converttoset",
+      "sort",
+      "tkeys",
+      "UtlMod",
+      "ObjectLibrary",
+      "SoundLibrary",
+      "DrwSoundId",
+      "SndDrwEventSamples",
+      "BattleSoundDir",
+      "BattleSoundFile",
+      "BattleSounds",
+      "BonesDir",
+      "BonesFile",
+      "Bones",
+      "AnimsDir",
+      "AnimsFile",
+      "Anims",
+      "MeshesDir",
+      "MeshesFile",
+      "Meshes"
+    ],
+    "disable": [
+      "lowercase-global",
+      "undefined-global"
+    ]
+  },
+  "workspace": {
+    "library": [
+      "ModdingTools/SpellForceLUASources/script",
+      "OriginalGameFiles/script"
+    ],
+    "maxPreload": 5000,
+    "preloadFileSize": 2000,
+    "checkThirdParty": false,
+    "ignoreDir": [
+      ".git",
+      ".vscode",
+      ".zed",
+      "node_modules",
+      "dist",
+      "build"
+    ]
+  },
+  "completion": {
+    "enable": true,
+    "callSnippet": "Replace",
+    "keywordSnippet": "Replace"
+  },
+  "hint": {
+    "enable": true,
+    "setType": true
+  },
+  "format": {
+    "enable": false
+  },
+  "telemetry": {
+    "enable": false
+  }
+}
