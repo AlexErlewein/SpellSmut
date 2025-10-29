@@ -32,7 +32,11 @@ venv/
 .venv/
 *.egg-info/
 
+# Test artifacts (should be in src/tests/test_outputs/, but ignore if created in root)
+test_spell_export/
+test_template_export/
+test_cff_export/
+
 # Keep these important files (override above patterns if needed)
 # Use git add -f to force add if needed
 .rsworktree/
-test_cff_export/

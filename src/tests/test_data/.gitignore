@@ -1,0 +1,18 @@
+# Pytest cache directory
+.pytest_cache/
+
+# Pytest temporary files
+tmp/
+
+# Coverage data files
+.coverage
+.coverage.*
+htmlcov/
+
+# Test output files (keep the directory structure but ignore generated files)
+*.pyc
+__pycache__/
+
+# Keep the actual test data files that are committed
+!test_integration_ids.json
+!test_weapon_ids.json

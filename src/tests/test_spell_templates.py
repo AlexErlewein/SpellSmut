@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 """
-Test script for SpellForce Spell Templates
+Test script for Spell Template System
 """
 
-import sys
 import os
+import sys
+from pathlib import Path
 
 # Add the source directory to Python path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
+
+# Define test output directory
+TEST_OUTPUT_DIR = Path(__file__).parent / "test_outputs" / "test_template_export"
+
 
 def test_spell_templates():
     """Test the spell template system"""
@@ -17,10 +22,14 @@ def test_spell_templates():
 
     try:
         # Import our modules
-        from TirganachReloaded.cff_editor.models.spell_templates import (
-            SpellTemplateLibrary, get_spell_template, get_available_templates
+        from TirganachReloaded.cff_editor.exporters.spell_lua_exporter import (
+            SpellLuaExporter,
         )
-        from TirganachReloaded.cff_editor.exporters.spell_lua_exporter import SpellLuaExporter
+        from TirganachReloaded.cff_editor.models.spell_templates import (
+            SpellTemplateLibrary,
+            get_available_templates,
+            get_spell_template,
+        )
 
         print("✅ Template imports successful")
 
@@ -53,15 +62,23 @@ def test_spell_templates():
             # Show level 1 and max level stats
             level_1 = fireball_spell.levels[0]
             level_15 = fireball_spell.levels[-1]
-            print(f"   Level 1: {level_1.damage_min}-{level_1.damage_max} dmg, {level_1.mana_cost} mana")
-            print(f"   Level 15: {level_15.damage_min}-{level_15.damage_max} dmg, {level_15.mana_cost} mana")
+            print(
+                f"   Level 1: {level_1.damage_min}-{level_1.damage_max} dmg, {level_1.mana_cost} mana"
+            )
+            print(
+                f"   Level 15: {level_15.damage_min}-{level_15.damage_max} dmg, {level_15.mana_cost} mana"
+            )
 
             # Export the template spell
             print("\n💾 Exporting template spell...")
-            exporter = SpellLuaExporter("test_template_export")
+            # Ensure output directory exists
+            TEST_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+            exporter = SpellLuaExporter(str(TEST_OUTPUT_DIR))
             exported_files = exporter.export_to_files(fireball_spell)
 
-            print(f"✅ Template export complete. Generated {len(exported_files)} files:")
+            print(
+                f"✅ Template export complete. Generated {len(exported_files)} files:"
+            )
             for file_path in exported_files:
                 file_size = os.path.getsize(file_path)
                 print(f"   📄 {os.path.basename(file_path)} ({file_size} bytes)")
@@ -81,7 +98,9 @@ def test_spell_templates():
             print(f"   Duration: {regen_spell.duration} seconds")
 
             level_10 = regen_spell.levels[9]  # Level 10
-            print(f"   Level 10: {level_10.damage_min} HP/sec regen, {level_10.mana_cost} mana, {level_10.duration}s duration")
+            print(
+                f"   Level 10: {level_10.damage_min} HP/sec regen, {level_10.mana_cost} mana, {level_10.duration}s duration"
+            )
 
         # Test template filtering
         print("\n🔍 Testing template filtering...")
@@ -97,6 +116,7 @@ def test_spell_templates():
     except Exception as e:
         print(f"❌ Template test failed with error: {e}")
         import traceback
+
         traceback.print_exc()
         return False
 

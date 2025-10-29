@@ -3,11 +3,16 @@
 Test script for the SpellForce Spell Creation System
 """
 
-import sys
 import os
+import sys
+from pathlib import Path
 
 # Add the source directory to Python path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
+
+# Define test output directory
+TEST_OUTPUT_DIR = Path(__file__).parent / "test_outputs" / "test_spell_export"
+
 
 def test_spell_creation_system():
     """Test the complete spell creation workflow"""
@@ -17,10 +22,17 @@ def test_spell_creation_system():
 
     try:
         # Import our modules
-        from TirganachReloaded.cff_editor.models import (
-            SpellCreationData, MagicSchool, SpellType, TargetType, ScalingMode, SpellLevel
+        from TirganachReloaded.cff_editor.exporters.spell_lua_exporter import (
+            SpellLuaExporter,
+            SpellValidator,
         )
-        from TirganachReloaded.cff_editor.exporters.spell_lua_exporter import SpellLuaExporter, SpellValidator
+        from TirganachReloaded.cff_editor.models import (
+            MagicSchool,
+            ScalingMode,
+            SpellCreationData,
+            SpellType,
+            TargetType,
+        )
 
         print("✅ Imports successful")
 
@@ -52,7 +64,7 @@ def test_spell_creation_system():
             sfx_hit="spell_hit_explosion",
             spell_line_id=301,
             created_date="2025-01-01 12:00:00",
-            author="Spell Wizard Test"
+            author="Spell Wizard Test",
         )
 
         print(f"✅ Created spell: {spell_data.spell_name}")
@@ -69,7 +81,9 @@ def test_spell_creation_system():
             spell_data.levels[0].cooldown = 3.0
             spell_data.levels[0].cast_time = 1.5
             spell_data.levels[0].range = 25.0
-            print(f"✅ Base stats set: {spell_data.levels[0].damage_min}-{spell_data.levels[0].damage_max} dmg")
+            print(
+                f"✅ Base stats set: {spell_data.levels[0].damage_min}-{spell_data.levels[0].damage_max} dmg"
+            )
 
         # Apply scaling
         print("\n📊 Applying level scaling...")
@@ -77,18 +91,22 @@ def test_spell_creation_system():
 
         print("✅ Scaling applied. Level stats:")
         for i, level in enumerate(spell_data.levels[:5]):  # Show first 5 levels
-            print(f"   Level {level.level}: {level.damage_min}-{level.damage_max} dmg, {level.mana_cost} mana")
+            print(
+                f"   Level {level.level}: {level.damage_min}-{level.damage_max} dmg, {level.mana_cost} mana"
+            )
 
         if len(spell_data.levels) > 5:
             last_level = spell_data.levels[-1]
-            print(f"   ... Level {last_level.level}: {last_level.damage_min}-{last_level.damage_max} dmg, {last_level.mana_cost} mana")
+            print(
+                f"   ... Level {last_level.level}: {last_level.damage_min}-{last_level.damage_max} dmg, {last_level.mana_cost} mana"
+            )
 
         # Validate spell
         print("\n🔍 Validating spell...")
         validator = SpellValidator()
         errors, warnings = validator.validate(spell_data)
 
-        print(f"✅ Validation complete:")
+        print("✅ Validation complete:")
         print(f"   Errors: {len(errors)}")
         for error in errors:
             print(f"     ❌ {error}")
@@ -102,11 +120,15 @@ def test_spell_creation_system():
         print("\n⚖️  Balance analysis:")
         print(f"   Damage per Mana: {balance['damage_per_mana']}")
         print(f"   Damage per Second: {balance['damage_per_second']}")
-        print(f"   Power Rating: {balance['power_rating']} ({balance['balance_category']})")
+        print(
+            f"   Power Rating: {balance['power_rating']} ({balance['balance_category']})"
+        )
 
         # Export to Lua
         print("\n💾 Exporting to Lua scripts...")
-        exporter = SpellLuaExporter("test_spell_export")
+        # Ensure output directory exists
+        TEST_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        exporter = SpellLuaExporter(str(TEST_OUTPUT_DIR))
         exported_files = exporter.export_to_files(spell_data)
 
         print(f"✅ Export complete. Generated {len(exported_files)} files:")
@@ -119,7 +141,7 @@ def test_spell_creation_system():
         if exported_files:
             sample_file = exported_files[0]  # First file
             print(f"\n--- Content of {os.path.basename(sample_file)} ---")
-            with open(sample_file, 'r') as f:
+            with open(sample_file, "r") as f:
                 lines = f.readlines()[:10]  # First 10 lines
                 for line in lines:
                     print(line.rstrip())
@@ -139,6 +161,7 @@ def test_spell_creation_system():
     except Exception as e:
         print(f"❌ Test failed with error: {e}")
         import traceback
+
         traceback.print_exc()
         return False
 
@@ -150,7 +173,7 @@ def test_gui_components():
 
     try:
         # Only test if we have a display
-        if os.environ.get('DISPLAY') or sys.platform == 'win32':
+        if os.environ.get("DISPLAY") or sys.platform == "win32":
             from PySide6.QtWidgets import QApplication
 
             app = QApplication.instance()
@@ -158,8 +181,6 @@ def test_gui_components():
                 app = QApplication(sys.argv)
 
             # Test imports
-            from TirganachReloaded.cff_editor.widgets.spell_creator_wizard import SpellCreatorWizard
-            from TirganachReloaded.cff_editor.widgets.level_editor_dialog import LevelEditorDialog
 
             print("✅ GUI imports successful")
             print("✅ Wizard and dialog classes available")

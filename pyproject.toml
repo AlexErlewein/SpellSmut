@@ -72,5 +72,37 @@ python_version = "3.9"
 warn_return_any = true
 warn_unused_configs = true
 
+[tool.pytest.ini_options]
+testpaths = ["src/tests"]
+pythonpath = ["src"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+cache_dir = "src/tests/test_data/.pytest_cache"
+addopts = [
+    "--verbose",
+    "--tb=short",
+    "--basetemp=src/tests/test_data/tmp",
+]
+markers = [
+    "gui: marks tests that require GUI (deselect with '-m \"not gui\"')",
+    "integration: marks tests that require external resources",
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
 
+[tool.coverage.run]
+source = ["src"]
+data_file = "src/tests/test_data/.coverage"
 
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
+
+[tool.coverage.html]
+directory = "src/tests/test_data/htmlcov"

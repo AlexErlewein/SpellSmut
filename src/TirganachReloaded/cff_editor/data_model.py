@@ -3,18 +3,19 @@ Data Model for CFF Editor
 Manages loaded GameData and provides interface for GUI
 """
 
-import sys
-import os
 import json
+import os
+import sys
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+from PySide6.QtCore import QObject, QSettings, Signal
+from PySide6.QtGui import QIcon, QPixmap
 from tirganach import GameData
 from tirganach.types import *
-from typing import List, Dict, Any, Optional
-from PySide6.QtCore import QObject, Signal, Qt, QSettings
-from PySide6.QtGui import QPixmap, QIcon
-from PySide6.QtCore import Qt
-from pathlib import Path
 
 
 class CFFDataModel(QObject):
@@ -39,7 +40,9 @@ class CFFDataModel(QObject):
         self.icon_cache = {}  # Cache for loaded QPixmap objects
         self.project_root = Path(__file__).parent.parent.parent.parent
         self.ui_assets_dir = self.project_root / "ExtractedAssets" / "UI" / "extracted"
-        self.icons_root = self.project_root / "ExtractedAssets" / "UI" / "icons_extracted"
+        self.icons_root = (
+            self.project_root / "ExtractedAssets" / "UI" / "icons_extracted"
+        )
         self.data_dir = self.project_root / "src" / "TirganachReloaded" / "data"
 
         # Load icon mappings and analysis data
@@ -54,7 +57,9 @@ class CFFDataModel(QObject):
 
     def _load_language_setting(self) -> Language:
         """Load current language from settings, default to ENGLISH"""
-        language_value = self.settings.value("current_language", 1)  # Default to ENGLISH (1)
+        language_value = self.settings.value(
+            "current_language", 1
+        )  # Default to ENGLISH (1)
         try:
             return Language(language_value)
         except ValueError:
@@ -102,20 +107,22 @@ class CFFDataModel(QObject):
             # Look for the file in the TirganachReloaded directory
             weapons_json_path = Path(__file__).parent.parent / "enhanced_weapons.json"
             if weapons_json_path.exists():
-                with open(weapons_json_path, 'r', encoding='utf-8') as f:
+                with open(weapons_json_path, "r", encoding="utf-8") as f:
                     weapons_data = json.load(f)
 
                 # Create mapping from item_id to name
                 self.weapon_name_mapping = {}
                 for weapon in weapons_data:
-                    item_id = weapon.get('item_id')
-                    name = weapon.get('name')
+                    item_id = weapon.get("item_id")
+                    name = weapon.get("name")
                     if item_id is not None and name:
                         self.weapon_name_mapping[item_id] = name
 
                 print(f"Loaded {len(self.weapon_name_mapping)} weapon names")
             else:
-                print("enhanced_weapons.json not found, weapon names will not be available")
+                print(
+                    "enhanced_weapons.json not found, weapon names will not be available"
+                )
                 self.weapon_name_mapping = {}
         except Exception as e:
             print(f"Error loading weapon names: {e}")
@@ -131,20 +138,33 @@ class CFFDataModel(QObject):
             # Look for the file in the TirganachReloaded directory
             armor_json_path = Path(__file__).parent.parent / "enhanced_armor.json"
             if armor_json_path.exists():
-                with open(armor_json_path, 'r', encoding='utf-8') as f:
+                with open(armor_json_path, "r", encoding="utf-8") as f:
                     armor_data = json.load(f)
 
                 # Create mapping from item_id to name
                 self.armor_name_mapping = {}
-                for armor in armor_data:
-                    item_id = armor.get('item_id')
-                    name = armor.get('name')
+
+                # Handle both old format (list) and new format (dict with 'armors' key)
+                if isinstance(armor_data, dict) and "armors" in armor_data:
+                    armors_list = armor_data["armors"]
+                elif isinstance(armor_data, list):
+                    armors_list = armor_data
+                else:
+                    print("Unexpected armor data format")
+                    armors_list = []
+
+                for armor in armors_list:
+                    # Try both 'item_id' and 'id' fields
+                    item_id = armor.get("item_id") or armor.get("id")
+                    name = armor.get("name")
                     if item_id is not None and name:
                         self.armor_name_mapping[item_id] = name
 
                 print(f"Loaded {len(self.armor_name_mapping)} armor names")
             else:
-                print("enhanced_armor.json not found, armor names will not be available")
+                print(
+                    "enhanced_armor.json not found, armor names will not be available"
+                )
                 self.armor_name_mapping = {}
         except Exception as e:
             print(f"Error loading armor names: {e}")
@@ -160,9 +180,11 @@ class CFFDataModel(QObject):
             # Load icon mapping
             mapping_path = self.data_dir / "ui_icon_mapping.json"
             if mapping_path.exists():
-                with open(mapping_path, 'r') as f:
+                with open(mapping_path, "r") as f:
                     self.icon_mapping = json.load(f)
-                print(f"Loaded icon mapping: {len(self.icon_mapping.get('item_to_icons', {}))} items")
+                print(
+                    f"Loaded icon mapping: {len(self.icon_mapping.get('item_to_icons', {}))} items"
+                )
             else:
                 print(f"Icon mapping not found: {mapping_path}")
                 self.icon_mapping = {}
@@ -172,14 +194,18 @@ class CFFDataModel(QObject):
             if manifest_path.exists():
                 # Load from split files
                 self.icon_index = self._load_split_icon_index()
-                print(f"Loaded split icon index: {len(self.icon_index.get('icons', {}))} icons")
+                print(
+                    f"Loaded split icon index: {len(self.icon_index.get('icons', {}))} icons"
+                )
             else:
                 # Load single file
                 index_path = self.icons_root / "icon_index.json"
                 if index_path.exists():
-                    with open(index_path, 'r') as f:
+                    with open(index_path, "r") as f:
                         self.icon_index = json.load(f)
-                    print(f"Loaded icon index: {len(self.icon_index.get('icons', {}))} icons")
+                    print(
+                        f"Loaded icon index: {len(self.icon_index.get('icons', {}))} icons"
+                    )
                 else:
                     print(f"Icon index not found: {index_path}")
                     self.icon_index = {}
@@ -187,11 +213,13 @@ class CFFDataModel(QObject):
             # Load verified mappings
             verified_path = self.data_dir / "verified_icon_mappings.json"
             if verified_path.exists():
-                with open(verified_path, 'r') as f:
+                with open(verified_path, "r") as f:
                     self.verified_mappings = json.load(f)
                 print(f"Loaded verified mappings: {len(self.verified_mappings)} items")
             else:
-                print("No verified mappings found (run interactive_icon_mapper.py to create)")
+                print(
+                    "No verified mappings found (run interactive_icon_mapper.py to create)"
+                )
                 self.verified_mappings = {}
 
         except Exception as e:
@@ -209,7 +237,7 @@ class CFFDataModel(QObject):
         """
         manifest_path = self.icons_root / "icon_index_manifest.json"
 
-        with open(manifest_path, 'r') as f:
+        with open(manifest_path, "r") as f:
             manifest = json.load(f)
 
         # Combine all icons from split files
@@ -217,14 +245,11 @@ class CFFDataModel(QObject):
 
         for file_info in manifest["files"]:
             file_path = self.icons_root / file_info["file"]
-            with open(file_path, 'r') as f:
+            with open(file_path, "r") as f:
                 part_data = json.load(f)
                 all_icons.update(part_data["icons"])
 
-        return {
-            "stats": manifest["stats"],
-            "icons": all_icons
-        }
+        return {"stats": manifest["stats"], "icons": all_icons}
 
     def get_categories(self) -> List[tuple]:
         """Returns list of (category_name, count) tuples"""
@@ -236,7 +261,7 @@ class CFFDataModel(QObject):
             table = getattr(self.game_data, table_name)
             count = len(table)
             # Make name more readable
-            display_name = table_name.replace('_', ' ').title()
+            display_name = table_name.replace("_", " ").title()
             categories.append((table_name, display_name, count))
 
         return categories
@@ -274,7 +299,7 @@ class CFFDataModel(QObject):
         for field_name in sorted(element._fields.keys()):
             try:
                 # Special handling for localised fields
-                if field_name in ['name', 'description']:
+                if field_name in ["name", "description"]:
                     localised_value = self.get_localised_text(element, field_name)
                     if localised_value is not None:
                         value = localised_value
@@ -290,7 +315,9 @@ class CFFDataModel(QObject):
 
         return fields
 
-    def update_element_field(self, category: str, index: int, field_name: str, new_value: Any) -> bool:
+    def update_element_field(
+        self, category: str, index: int, field_name: str, new_value: Any
+    ) -> bool:
         """Update a field value in an element"""
         try:
             element = self.get_element_by_index(category, index)
@@ -369,7 +396,7 @@ class CFFDataModel(QObject):
         # Map table names to icon category names
         category_mapping = {
             "spells": "spell",  # spells table -> spell icons
-            "items": "item",    # items table -> item icons
+            "items": "item",  # items table -> item icons
             # Add more mappings as needed
         }
         icon_category = category_mapping.get(category, category)
@@ -383,8 +410,8 @@ class CFFDataModel(QObject):
         item_id_str = str(element_id)
         if item_id_str in self.verified_mappings:
             # Get primary icon (index 1)
-            if '1' in self.verified_mappings[item_id_str]:
-                icon_rel_path = self.verified_mappings[item_id_str]['1']
+            if "1" in self.verified_mappings[item_id_str]:
+                icon_rel_path = self.verified_mappings[item_id_str]["1"]
                 icon_path = self.icons_root / icon_rel_path
                 if icon_path.exists():
                     return str(icon_path)
@@ -410,30 +437,44 @@ class CFFDataModel(QObject):
                 return resolved_path
 
         # PRIORITY 3: Try finding first non-empty icon from icon_mapping
-        if item_id_str in self.icon_mapping.get('item_to_icons', {}):
-            icons = self.icon_mapping['item_to_icons'][item_id_str]
+        if item_id_str in self.icon_mapping.get("item_to_icons", {}):
+            icons = self.icon_mapping["item_to_icons"][item_id_str]
             for icon_data in icons:
-                if icon_data.get('index') == 1:  # Primary icon
+                if icon_data.get("index") == 1:  # Primary icon
                     # Try different atlases until we find a non-empty one
-                    handle = icon_data.get('handle', '')
+                    handle = icon_data.get("handle", "")
                     # Use the already mapped icon_category, but determine the subdirectory
-                    icon_subdir = 'itm' if handle and handle.startswith('ui_item_') else \
-                                 'spell' if handle and handle.startswith('ui_spell_') else 'item'
+                    icon_subdir = (
+                        "itm"
+                        if handle and handle.startswith("ui_item_")
+                        else "spell"
+                        if handle and handle.startswith("ui_spell_")
+                        else "item"
+                    )
 
                     # Try up to 10 atlases
                     for atlas_num in range(10):
-                        icon_path = self.icons_root / icon_subdir / f"atlas_{atlas_num}" / f"icon_{icon_data['index']:03d}.png"
+                        icon_path = (
+                            self.icons_root
+                            / icon_subdir
+                            / f"atlas_{atlas_num}"
+                            / f"icon_{icon_data['index']:03d}.png"
+                        )
                         if icon_path.exists():
                             # Check if not empty
-                            icon_key = f"{icon_subdir}_{atlas_num}_{icon_data['index']:03d}"
-                            if icon_key in self.icon_index.get('icons', {}):
-                                icon_info = self.icon_index['icons'][icon_key]
-                                if not icon_info.get('is_empty', False):
+                            icon_key = (
+                                f"{icon_subdir}_{atlas_num}_{icon_data['index']:03d}"
+                            )
+                            if icon_key in self.icon_index.get("icons", {}):
+                                icon_info = self.icon_index["icons"][icon_key]
+                                if not icon_info.get("is_empty", False):
                                     return str(icon_path)
 
         return None
 
-    def get_icon_pixmap(self, category: str, element: Any, size=(64, 64)) -> Optional[QPixmap]:
+    def get_icon_pixmap(
+        self, category: str, element: Any, size=(64, 64)
+    ) -> Optional[QPixmap]:
         """
         Get QPixmap for display in GUI.
         Uses cache for performance.
@@ -489,7 +530,7 @@ class CFFDataModel(QObject):
                     return getattr(element, field_name)
 
             # Try index-based ID for some categories
-            if hasattr(element, '_index'):
+            if hasattr(element, "_index"):
                 return element._index
 
         except Exception:
@@ -503,12 +544,15 @@ class CFFDataModel(QObject):
             item_ui_table = self.get_table("item_ui")
             if item_ui_table:
                 for entry in item_ui_table:
-                    if getattr(entry, "item_id", None) == item_id and getattr(entry, "item_ui_index", None) == 1:
+                    if (
+                        getattr(entry, "item_id", None) == item_id
+                        and getattr(entry, "item_ui_index", None) == 1
+                    ):
                         return {
                             "item_id": getattr(entry, "item_id", 0),
                             "item_ui_index": getattr(entry, "item_ui_index", 0),
                             "item_ui_handle": getattr(entry, "item_ui_handle", ""),
-                            "scaled_down": getattr(entry, "scaled_down", 0)
+                            "scaled_down": getattr(entry, "scaled_down", 0),
                         }
         except Exception:
             pass
@@ -526,25 +570,25 @@ class CFFDataModel(QObject):
 
                         # If spell_ui_handle is empty, try to look it up in the icon mapping
                         if not ui_handle and self.icon_mapping:
-                            item_to_icons = self.icon_mapping.get('item_to_icons', {})
+                            item_to_icons = self.icon_mapping.get("item_to_icons", {})
                             spell_id_str = str(spell_id)
                             if spell_id_str in item_to_icons:
                                 icons = item_to_icons[spell_id_str]
                                 if icons and len(icons) > 0:
                                     # Prefer spell handles over item handles
                                     for icon in icons:
-                                        handle = icon.get('handle', '')
-                                        if handle.startswith('ui_spell_'):
+                                        handle = icon.get("handle", "")
+                                        if handle.startswith("ui_spell_"):
                                             ui_handle = handle
                                             break
                                     # If no spell handle found, use the first icon as fallback
                                     if not ui_handle:
-                                        ui_handle = icons[0].get('handle', '')
+                                        ui_handle = icons[0].get("handle", "")
 
                         return {
                             "spell_id": getattr(spell, "spell_id", 0),
                             "spell_name_id": getattr(spell, "spell_name_id", 0),
-                            "spell_ui_handle": ui_handle
+                            "spell_ui_handle": ui_handle,
                         }
         except Exception:
             pass
@@ -567,22 +611,22 @@ class CFFDataModel(QObject):
         # For spell category, handle different types of handles
         if category == "spell":
             # If it's a spell handle, look in spell directories
-            if handle.startswith('ui_spell_'):
+            if handle.startswith("ui_spell_"):
                 # Look up in our verified icon mapping
                 # The mapping provides detailed paths for spell handles
-                if self.icon_mapping and 'detailed_mapping' in self.icon_mapping:
-                    detailed = self.icon_mapping['detailed_mapping']
+                if self.icon_mapping and "detailed_mapping" in self.icon_mapping:
+                    detailed = self.icon_mapping["detailed_mapping"]
                     # Look for exact handle match
                     for mapping_key, mapping_data in detailed.items():
-                        if mapping_data.get('handle') == handle:
+                        if mapping_data.get("handle") == handle:
                             # Found exact match, try the mapped path
-                            icon_path = self.icons_root / mapping_data['path']
+                            icon_path = self.icons_root / mapping_data["path"]
                             if icon_path.exists():
                                 return str(icon_path)
 
                             # Try alternative paths if primary doesn't exist
-                            if 'alternatives' in mapping_data:
-                                for alt_path in mapping_data['alternatives']:
+                            if "alternatives" in mapping_data:
+                                for alt_path in mapping_data["alternatives"]:
                                     alt_icon_path = self.icons_root / alt_path
                                     if alt_icon_path.exists():
                                         return str(alt_icon_path)
@@ -603,20 +647,22 @@ class CFFDataModel(QObject):
                     if all_spell_icons:
                         # Use hash of handle to deterministically select an icon
                         import hashlib
-                        hash_obj = hashlib.md5(handle.encode('utf-8'))
+
+                        hash_obj = hashlib.md5(handle.encode("utf-8"))
                         hash_int = int(hash_obj.hexdigest(), 16)
                         selected_index = hash_int % len(all_spell_icons)
                         return str(all_spell_icons[selected_index])
 
             # If it's an item handle (like ui_item_spellscroll), resolve as item icon
-            elif handle.startswith('ui_item_'):
+            elif handle.startswith("ui_item_"):
                 return self._resolve_icon_path(handle, "item")
 
         # For other categories, use the mapping approach
         # Fall back to mapping numbered files
         # Use a hash of the handle to map to available numbered files
         import hashlib
-        hash_obj = hashlib.md5(handle.encode('utf-8'))
+
+        hash_obj = hashlib.md5(handle.encode("utf-8"))
         hash_int = int(hash_obj.hexdigest(), 16)
 
         # Get list of available PNG files for this category
@@ -649,7 +695,7 @@ class CFFDataModel(QObject):
             "items": "ui_item_unknown.png",
             "weapons": "ui_weapon_unknown.png",
             "armor": "ui_armor_unknown.png",
-            "spell": "ui_spell_unknown.png"
+            "spell": "ui_spell_unknown.png",
         }
 
         fallback_file = fallback_files.get(category, "ui_unknown.png")
@@ -680,20 +726,20 @@ class CFFDataModel(QObject):
         try:
             # Get the text_id from the entity
             text_id_field = None
-            if field_name == 'name':
+            if field_name == "name":
                 # Try different possible text_id field names
-                for possible_field in ['name_id', 'text_id', 'spell_name_id']:
+                for possible_field in ["name_id", "text_id", "spell_name_id"]:
                     if hasattr(entity, possible_field):
                         text_id = getattr(entity, possible_field)
                         if text_id and text_id != 0:
                             text_id_field = possible_field
                             break
-            elif field_name == 'description':
+            elif field_name == "description":
                 # For descriptions, try description_id
-                if hasattr(entity, 'description_id'):
-                    text_id = getattr(entity, 'description_id')
+                if hasattr(entity, "description_id"):
+                    text_id = getattr(entity, "description_id")
                     if text_id and text_id != 0:
-                        text_id_field = 'description_id'
+                        text_id_field = "description_id"
 
             if text_id_field is None:
                 return None
@@ -701,19 +747,23 @@ class CFFDataModel(QObject):
             text_id = getattr(entity, text_id_field)
 
             # Query localisation table for current language
-            localisation_table = self.get_table('localisation')
+            localisation_table = self.get_table("localisation")
             if localisation_table:
                 for entry in localisation_table:
-                    if (getattr(entry, 'text_id', None) == text_id and
-                        getattr(entry, 'language', None) == self.current_language):
-                        return getattr(entry, 'text', '')
+                    if (
+                        getattr(entry, "text_id", None) == text_id
+                        and getattr(entry, "language", None) == self.current_language
+                    ):
+                        return getattr(entry, "text", "")
 
             # Fallback to English if current language not found
             if self.current_language != Language.ENGLISH and localisation_table:
                 for entry in localisation_table:
-                    if (getattr(entry, 'text_id', None) == text_id and
-                        getattr(entry, 'language', None) == Language.ENGLISH):
-                        return getattr(entry, 'text', '')
+                    if (
+                        getattr(entry, "text_id", None) == text_id
+                        and getattr(entry, "language", None) == Language.ENGLISH
+                    ):
+                        return getattr(entry, "text", "")
 
         except Exception as e:
             print(f"Error getting localised text: {e}")

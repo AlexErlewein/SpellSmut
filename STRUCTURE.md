@@ -40,9 +40,15 @@ src/tests/
 │   ├── test_weapon_*.py         # Weapon system tests
 │   └── test_widget_*.py         # Widget tests
 │
-├── test_data/                    # Test input data
-│   ├── test_integration_ids.json
-│   └── test_weapon_ids.json
+├── test_data/                    # Test data & pytest artifacts
+│   ├── README.md                 # Test data documentation
+│   ├── .gitignore                # Ignore pytest outputs
+│   ├── test_integration_ids.json # Test data (committed)
+│   ├── test_weapon_ids.json      # Test data (committed)
+│   ├── .pytest_cache/            # Pytest cache (gitignored)
+│   ├── tmp/                      # Pytest temp files (gitignored)
+│   ├── .coverage                 # Coverage data (gitignored)
+│   └── htmlcov/                  # Coverage reports (gitignored)
 │
 ├── test_outputs/                 # Test outputs (gitignored)
 │   ├── test_export/
