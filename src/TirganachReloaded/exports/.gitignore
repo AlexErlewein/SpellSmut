@@ -1,0 +1,12 @@
+# Large export files - regenerate from GameData.cff as needed
+GameData.json
+GameData.xml
+c2003_items.json
+
+# Keep the README
+!README.md
+
+# Any other exported data files
+*.json
+*.xml
+*.cff

@@ -1,34 +1,82 @@
-A Python library for easier editing of the SpellForce `GameData.cff`.
+# TirganachReloaded
 
-Information about the file structure was gathered from
+A Python library and GUI editor for modding SpellForce Platinum Edition's `GameData.cff` files.
+
+## Features
+
+- 🎨 **GUI Editor** - Professional PySide6-based editor with dark theme
+- 📝 **Python Library** - Programmatic access to game data
+- 🔧 **Creation Wizards** - Create weapons, armor, spells, quests, NPCs, and more
+- 📊 **Data Export** - Export to JSON/XML for analysis
+- 🎯 **ID Management** - Automatic ID allocation to prevent conflicts
+
+## Directory Structure
+
+```
+TirganachReloaded/
+├── README.md                 # This file
+├── cff_editor/              # GUI editor application
+├── tirganach/               # Core CFF parsing library
+├── data/                    # Reference data files
+├── docs/                    # Documentation
+├── examples/                # Example scripts and utilities
+├── tests/                   # Unit tests
+└── exports/                 # Exported data files (gitignored)
+```
+
+## Quick Start
+
+### Launch the GUI Editor
+
+```bash
+cd src/TirganachReloaded
+python run_cff_editor.py
+```
+
+Or from project root:
+```bash
+uv run python src/TirganachReloaded/run_cff_editor.py
+```
+
+### Documentation
+
+- **[CFF Editor Guide](docs/CFF_EDITOR_README.md)** - Complete editor documentation
+- **[Installation Guide](docs/INSTALLATION.md)** - Setup instructions
+- **[Format Comparison](docs/FORMAT_COMPARISON.md)** - JSON vs XML vs CFF
+- **[CFF Format Explanation](docs/CFF_FORMAT_EXPLANATION.md)** - File structure details
+- **[Scripts Guide](docs/SCRIPTS_GUIDE.md)** - Using utility scripts
+
+## Credits
+
+Information about the CFF file structure was gathered from:
 * [Hokan-Ashir/SFGameDataEditor](https://github.com/Hokan-Ashir/SFGameDataEditor)
 * [leszekd25/spellforce_data_editor](https://github.com/leszekd25/spellforce_data_editor)
 
-If you're here to reverse engineer the file / create your own library, have a look at [this short explanation](./EXPLANATION.md).
-
 ## Exporting to JSON/XML
 
-You can export the entire GameData.cff to JSON or XML format for analysis:
+Export GameData.cff to JSON or XML format for analysis:
 
 ```bash
-# Export to JSON (easy to parse programmatically)
-python export_to_json.py
+# Export to JSON (fastest: 2-3s load time)
+python examples/export_to_json.py path/to/GameData.cff
 
-# Export to XML (human-readable)
-python export_to_xml.py
+# Export to XML (human-readable: 10-15s load time)
+python examples/export_to_xml.py path/to/GameData.cff
 ```
 
-This will create `GameData.json` or `GameData.xml` with all game data including:
-- Spells, items, armor, weapons
-- Creatures, buildings, NPCs
-- Localization strings
-- Quest data, maps, and more
+Exported files are saved to `exports/` directory:
+- `exports/GameData.json` (73 MB) - Machine-readable, fastest loading
+- `exports/GameData.xml` (63 MB) - Human-readable, good for diffs
+- `exports/c2003_items.json` (3.3 MB) - Item reference data
 
-Example using exported JSON:
+See [examples/README.md](examples/README.md) for more export scripts and usage examples.
+
+### Using Exported JSON
+
 ```python
 import json
 
-with open("GameData.json") as f:
+with open("exports/GameData.json") as f:
     data = json.load(f)
 
 # Access spells
@@ -39,6 +87,8 @@ print(f"Total spells: {len(spells)}")
 fireball = [s for s in spells if s["spell_id"] == 1][0]
 print(f"Mana cost: {fireball['mana']}")
 ```
+
+See [docs/JSON_EXPORT_GUIDE.md](docs/JSON_EXPORT_GUIDE.md) for detailed JSON usage.
 
 ## Editing GameData
 
@@ -88,6 +138,41 @@ gd.save("/games/SpellForce/data/GameData.cff")
 
 Compare two versions:
 
-```shell
+```bash
 python -m tirganach.compare GameData.cff GameData_patched.cff
 ```
+
+## More Examples
+
+Check the [examples/](examples/) directory for:
+- `cff_modding_examples.py` - Collection of modding examples
+- `create_mod.py` - Mod creation template
+- `search_xml_data.py` - Search utility for XML exports
+- `example_use_json.py` - JSON data analysis examples
+
+## Testing
+
+```bash
+# Run TirganachReloaded-specific tests
+python tests/test_armor_forge.py
+python tests/test_weapon_forge.py
+
+# Or use pytest
+pytest src/TirganachReloaded/tests/ -v
+```
+
+See [tests/README.md](tests/README.md) for more information.
+
+## Project Structure
+
+- **cff_editor/** - GUI application with wizards and editors
+- **tirganach/** - Core library for CFF file parsing
+- **data/** - Reference data (ID mappings, icon mappings, project IDs)
+- **docs/** - Documentation files
+- **examples/** - Example scripts and utilities
+- **tests/** - Unit tests for components
+- **exports/** - Exported data files (gitignored)
+
+## License
+
+See [LICENSE](LICENSE) file for details.

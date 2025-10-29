@@ -105,39 +105,71 @@ docs/
 ```
 src/
 ├── TirganachReloaded/
+│   ├── README.md                # Main README (updated)
+│   ├── LICENSE                  # Project license
+│   ├── run_cff_editor.py       # Launch GUI editor
+│   │
 │   ├── cff_editor/              # CFF Editor GUI application
-│   │   ├── main.py
 │   │   ├── main_window.py
 │   │   ├── data_model.py
-│   │   │
 │   │   ├── widgets/             # GUI widgets
 │   │   │   ├── quest_editor.py
 │   │   │   ├── spell_creator_wizard.py
 │   │   │   ├── weapon_forge_wizard.py
 │   │   │   └── docs/            # Widget-specific documentation
-│   │   │
 │   │   ├── models/              # Data models
 │   │   ├── exporters/           # Export functionality
-│   │   ├── shared/              # Shared utilities
+│   │   ├── shared/              # Shared utilities (ID manager, etc.)
 │   │   └── templates/           # Templates
 │   │
-│   ├── data/                    # Reference data files
-│   │   ├── README.md            # Data directory documentation
-│   │   ├── id_name_mappings.json       # ID to name mappings
-│   │   ├── project_ids.json     # Project ID tracking (used by wizards)
-│   │   ├── ui_icon_mapping.json        # UI icon mappings
-│   │   └── weapon_icon_mapping.json    # Weapon icon atlas data
-│   │
-│   ├── tirganach/               # Core library
+│   ├── tirganach/               # Core CFF parsing library
 │   │   ├── __init__.py
 │   │   ├── entities.py
 │   │   ├── fields.py
 │   │   ├── structure.py
 │   │   └── types.py
 │   │
-│   └── [other modules]
+│   ├── data/                    # Reference data files
+│   │   ├── README.md            # Data directory documentation
+│   │   ├── MIGRATION_NOTE.md    # project_ids.json migration notes
+│   │   ├── id_name_mappings.json       # ID to name mappings
+│   │   ├── project_ids.json     # Project ID tracking (used by wizards)
+│   │   ├── ui_icon_mapping.json        # UI icon mappings (43 MB)
+│   │   └── weapon_icon_mapping.json    # Weapon icon atlas data
+│   │
+│   ├── docs/                    # Documentation
+│   │   ├── CFF_EDITOR_README.md
+│   │   ├── CFF_FORMAT_EXPLANATION.md
+│   │   ├── FORMAT_COMPARISON.md
+│   │   ├── JSON_EXPORT_GUIDE.md
+│   │   ├── XML_EXPORT_GUIDE.md
+│   │   ├── INSTALLATION.md
+│   │   └── SCRIPTS_GUIDE.md
+│   │
+│   ├── examples/                # Example scripts & utilities
+│   │   ├── README.md
+│   │   ├── cff_modding_examples.py
+│   │   ├── export_to_json.py
+│   │   ├── export_to_xml.py
+│   │   └── [other examples]
+│   │
+│   ├── tests/                   # TirganachReloaded-specific tests
+│   │   ├── README.md
+│   │   ├── test_armor_forge.py
+│   │   └── test_weapon_forge.py
+│   │
+│   ├── exports/                 # Exported data (gitignored)
+│   │   ├── README.md
+│   │   ├── .gitignore
+│   │   ├── GameData.json        # 73 MB (gitignored)
+│   │   ├── GameData.xml         # 63 MB (gitignored)
+│   │   └── c2003_items.json     # 3.3 MB (gitignored)
+│   │
+│   ├── armor_forge.py           # Armor creation system
+│   ├── enhanced_armor.json      # Active armor database (656 KB)
+│   └── enhanced_weapons.json    # Active weapon database (349 KB)
 │
-└── tests/                        # All test files (see above)
+└── tests/                        # Main test suite (see Tests section)
 ```
 
 ---
