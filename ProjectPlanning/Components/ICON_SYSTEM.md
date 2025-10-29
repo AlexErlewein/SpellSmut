@@ -4,16 +4,21 @@
 
 A comprehensive icon extraction and integration system for SpellForce UI assets, enabling visual representation of game data in the GUI editor.
 
-## Current Status: ✅ EXTRACTION WORKING, ⚠️ MAPPING REQUIRED
+## Current Status: ⚠️ MAPPING & INTEGRATION PENDING
 
 ### Achievements
 - ✅ **Successful Extraction**: Extracted 4096+ ITM icons and 657 spell icons from their respective atlases.
 - ✅ **Weapon Reassembly**: Implemented a robust system for reassembling multi-part weapon icons.
-- ✅ **GUI Integration**: Basic icon display is functional within the GUI editor.
+- ✅ **Rotation Correction**: All extracted icons are rotated 180° to correct for SpellForce's inverted Y-axis.
+- ✅ **Data Model Fix**: The `_resolve_icon_path` method in the data model was fixed and can now locate spell icon files on the filesystem.
 
 ### Critical Challenge: Handle-to-Atlas Mapping
 - **The Gap**: GameData exports provide `item_ui_handle` and `item_ui_index`, but critically lack the atlas number required to link an item to its icon.
-- **Impact**: This prevents the GUI editor from automatically displaying the correct icon for a given item or spell.
+- **Impact**: This prevents the GUI editor from automatically displaying the correct icon for a given item or spell. This is the project's #1 blocker.
+
+### Secondary Issues
+- ⚠️ **Spell Icon Display**: Although the data model can now *find* spell icon files, GUI testing is still required to confirm they *display* correctly. The specific mapping of a spell handle to the *correct* icon is not guaranteed.
+- ⚠️ **ITM Icon Quality**: The current ITM extraction script has alignment and offset issues that affect the visual quality of some item icons.
 
 ## Roadmap
 
@@ -27,35 +32,28 @@ A comprehensive icon extraction and integration system for SpellForce UI assets,
 ### Phase 2: Complete GUI Integration
 - **Objective**: Ensure all icons are correctly displayed in the GUI editor.
 - **Tasks**:
-  - 🐞 **Debug Display Issues**: Resolve any remaining issues with spell icon rendering.
+  - 🐞 **Debug Spell Icon Display**: Run GUI tests to verify spell icons appear and are mapped correctly.
   - 🔄 **Implement Mapping Logic**: Integrate the chosen mapping solution into the data loading process.
-  - 🖼️ **Fallback System**: Implement a fallback mechanism for missing or unmapped icons.
+  - ✨ **Refine ITM Extraction**: Fix alignment/offset issues in the ITM extraction script.
 
 ### Phase 3: Optimization and Refinement
 - **Objective**: Improve the performance and usability of the icon system.
 - **Tasks**:
   - ⚡ **Caching**: Develop an icon caching system to reduce load times.
   - 🚀 **Performance Tuning**: Optimize the icon loading and rendering pipeline.
-  - ✨ **UI Enhancements**: Add features like icon previews and tooltips.
+  - 🖼️ **Fallback System**: Implement a robust fallback mechanism for missing or unmapped icons.
 
 ## Technical Details
 
 ### Icon Atlases
 - **ITM (Item) Atlases**: 16 atlases (`ui_item18.dds` to `ui_item33.dds`) with a 16x16 grid of 16x16 pixel icons. Supports weapon icons spanning multiple cells.
-- **Spell Atlases**: 2 atlases (`ui_spell8.dds`, `ui_spell9.dds`) with a 4x4 grid of 64x64 pixel icons.
+- **Spell Atlases**: 18 atlases (`ui_spell0.dds` to `ui_spell17.dds`) with a 4x4 grid of 64x64 pixel icons.
 
-### Extraction Pipeline
-- **PAK Extraction**: A custom QuickBMS script extracts files from the game's PAK archives.
-- **Image Conversion**: ImageMagick is used to convert DDS files to PNG format.
-- **Rotation Correction**: A 180° rotation is applied to correct for SpellForce's inverted Y-axis.
-
-### Quantitative Results
-- **Total Usable Icons**: 1,695 icons have been successfully extracted and processed, including 969 reassembled weapon icons.
-
-## Tools and Scripts
-- `extract_itm_icons.py`: Extracts and reassembles ITM icons.
-- `extract_icons_from_atlases.py`: A general framework for atlas extraction.
-- `bulk_extract_paks.py`: Automates the PAK extraction process.
+### Data Integration Points
+1.  **GameData.json**: Contains `item_ui_handle` and `spell_ui_handle` fields.
+2.  **ui_icon_mapping.json**: Maps handles to icon files.
+3.  **icon_index.json**: Contains metadata about all extracted icons.
+4.  **CFFDataModel**: The Python class responsible for resolving handles to file paths.
 
 ## Success Metrics
 
@@ -69,3 +67,5 @@ A comprehensive icon extraction and integration system for SpellForce UI assets,
 - `ICON_INVESTIGATION_PLAN.md`
 - `Internal/ICON_EXTRACTION_*` (8 files)
 - `GUI/ICON_*_SUMMARY.md` (2 files)
+- `PENDING_ISSUES.md`
+- `SPELL_ICON_PROGRESS_SUMMARY.md`

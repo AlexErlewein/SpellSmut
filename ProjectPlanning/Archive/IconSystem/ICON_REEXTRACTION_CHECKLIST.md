@@ -1,3 +1,11 @@
+> **⚠️ OUTDATED PLAN ⚠️**
+> 
+> This document outlines the original icon integration plan, which was based on the assumption that re-extracting assets with original filenames would be sufficient. **This assumption was proven incomplete.**
+> 
+> **The primary blocker is now the handle-to-atlas mapping.** We need to discover how the game links an item's UI handle to a specific texture atlas file.
+> 
+> For the current status and plan, please see **[ICON_SYSTEM.md](./ICON_SYSTEM.md)**.
+
 # Icon Re-extraction Execution Checklist
 
 **Project**: SpellSmut - SpellForce Modding Tool  
