@@ -64,7 +64,7 @@ class QuestDetailsWidget(QWidget):
         splitter.addWidget(self.hierarchy_group)
 
         # Set splitter proportions
-        splitter.setSizes([200, 300, 200])
+        splitter.setSizes([150, 350, 200])
 
         layout.addWidget(splitter)
 
@@ -111,6 +111,11 @@ class QuestDetailsWidget(QWidget):
         self.load_dialogs_button.setEnabled(False)
         button_layout.addWidget(self.load_dialogs_button)
 
+        self.view_dialog_button = QPushButton("View in Window")
+        self.view_dialog_button.clicked.connect(self.open_dialog_viewer)
+        self.view_dialog_button.setEnabled(False)
+        button_layout.addWidget(self.view_dialog_button)
+
         self.dialogs_status = QLabel("Select a quest to view dialogs")
         self.dialogs_status.setStyleSheet("color: gray; font-style: italic;")
         button_layout.addWidget(self.dialogs_status)
@@ -119,8 +124,9 @@ class QuestDetailsWidget(QWidget):
 
         # Dialogs tree
         self.dialogs_tree = QTreeWidget()
-        self.dialogs_tree.setHeaderLabels(["Dialog Name", "Text"])
+        self.dialogs_tree.setHeaderLabels(["Dialog Name", "Text Preview"])
         self.dialogs_tree.setAlternatingRowColors(True)
+        self.dialogs_tree.itemDoubleClicked.connect(self.on_dialog_double_clicked)
         layout.addWidget(self.dialogs_tree)
 
     def setup_hierarchy_section(self):
@@ -224,11 +230,17 @@ class QuestDetailsWidget(QWidget):
         QApplication.processEvents()
 
         # Find dialogs related to this quest
-        dialogs = self.find_quest_dialogs(quest_id)
+        self.current_dialogs = self.find_quest_dialogs(quest_id)
 
         self.dialogs_tree.clear()
-        for dialog_name, dialog_text in dialogs:
-            item = QTreeWidgetItem([dialog_name, dialog_text])
+        for dialog_name, dialog_text in self.current_dialogs:
+            # Show truncated text preview
+            preview = (
+                dialog_text[:100] + "..." if len(dialog_text) > 100 else dialog_text
+            )
+            item = QTreeWidgetItem([dialog_name, preview])
+            # Store full text in user data
+            item.setData(0, Qt.ItemDataRole.UserRole, dialog_text)
             self.dialogs_tree.addTopLevelItem(item)
 
         # Resize columns
@@ -236,21 +248,72 @@ class QuestDetailsWidget(QWidget):
         self.dialogs_tree.resizeColumnToContents(1)
 
         # Expand if few items
-        if len(dialogs) <= 5:
+        if len(self.current_dialogs) <= 5:
             self.dialogs_tree.expandAll()
 
-        if dialogs:
-            self.dialogs_status.setText(f"Loaded {len(dialogs)} dialog(s)")
+        if self.current_dialogs:
+            self.dialogs_status.setText(f"Loaded {len(self.current_dialogs)} dialog(s)")
+            self.view_dialog_button.setEnabled(True)
         else:
             self.dialogs_status.setText("No dialogs found for this quest")
+            self.view_dialog_button.setEnabled(False)
 
     def update_dialogs(self):
         """Update quest dialogs - kept for compatibility but now uses lazy loading"""
         # This is now handled by load_dialogs_on_demand
         pass
 
+    def on_dialog_double_clicked(self, item, column):
+        """Handle double-click on dialog item"""
+        dialog_name = item.text(0)
+        dialog_text = item.data(0, Qt.ItemDataRole.UserRole)
+        if dialog_text:
+            self.show_dialog_window(dialog_name, dialog_text)
+
+    def open_dialog_viewer(self):
+        """Open dialog viewer window with all quest dialogs"""
+        if not hasattr(self, "current_dialogs") or not self.current_dialogs:
+            return
+
+        quest_name = self.data_model.safe_get_text_field(self.current_quest, "name")
+        if not quest_name:
+            quest_name = f"Quest {getattr(self.current_quest, 'quest_id', 'Unknown')}"
+
+        self.show_dialog_window(f"Dialogs for: {quest_name}", self.format_all_dialogs())
+
+    def format_all_dialogs(self):
+        """Format all dialogs for display"""
+        if not hasattr(self, "current_dialogs") or not self.current_dialogs:
+            return "No dialogs loaded."
+
+        formatted = []
+        for dialog_name, dialog_text in self.current_dialogs:
+            formatted.append(f"=== {dialog_name} ===\n{dialog_text}\n")
+        return "\n".join(formatted)
+
+    def show_dialog_window(self, title, text):
+        """Show dialog text in a separate window"""
+        from PySide6.QtWidgets import QDialog, QPushButton, QTextEdit, QVBoxLayout
+
+        dialog = QDialog(self)
+        dialog.setWindowTitle(title)
+        dialog.setMinimumSize(700, 500)
+
+        layout = QVBoxLayout(dialog)
+
+        text_edit = QTextEdit()
+        text_edit.setPlainText(text)
+        text_edit.setReadOnly(True)
+        layout.addWidget(text_edit)
+
+        close_button = QPushButton("Close")
+        close_button.clicked.connect(dialog.accept)
+        layout.addWidget(close_button)
+
+        dialog.exec()
+
     def update_hierarchy(self):
-        """Update quest hierarchy"""
+        """Update quest hierarchy using safe lookups"""
         self.hierarchy_tree.clear()
 
         if not self.current_quest:
@@ -260,27 +323,45 @@ class QuestDetailsWidget(QWidget):
         if not quest_id:
             return
 
-        # Add parent quest if exists
-        parent_quest = getattr(self.current_quest, "parent_quest", None)
-        if parent_quest:
-            parent_id = getattr(parent_quest, "quest_id", "Unknown")
-            parent_name = getattr(parent_quest, "name", f"Quest {parent_id}")
-            parent_item = QTreeWidgetItem([str(parent_name), str(parent_id), "Parent"])
-            self.hierarchy_tree.addTopLevelItem(parent_item)
+        # Get parent quest ID directly instead of using Relation
+        parent_quest_id = getattr(self.current_quest, "parent_quest_id", 0)
+        if parent_quest_id and parent_quest_id != 0:
+            # Find parent quest in the quests table
+            quests_table = self.data_model.get_elements("quests")
+            parent_quest = None
+            for quest in quests_table:
+                if getattr(quest, "quest_id", None) == parent_quest_id:
+                    parent_quest = quest
+                    break
+
+            if parent_quest:
+                parent_name = self.data_model.safe_get_text_field(parent_quest, "name")
+                if not parent_name:
+                    parent_name = f"Quest {parent_quest_id}"
+                parent_item = QTreeWidgetItem(
+                    [str(parent_name), str(parent_quest_id), "Parent"]
+                )
+                self.hierarchy_tree.addTopLevelItem(parent_item)
 
         # Add current quest
-        current_name = getattr(self.current_quest, "name", f"Quest {quest_id}")
+        current_name = self.data_model.safe_get_text_field(self.current_quest, "name")
+        if not current_name:
+            current_name = f"Quest {quest_id}"
         current_item = QTreeWidgetItem([str(current_name), str(quest_id), "Current"])
         current_item.setBackground(0, self.palette().highlight())
         self.hierarchy_tree.addTopLevelItem(current_item)
 
-        # Add sub-quests
-        sub_quests = getattr(self.current_quest, "sub_quests", [])
-        for sub_quest in sub_quests:
-            sub_id = getattr(sub_quest, "quest_id", "Unknown")
-            sub_name = getattr(sub_quest, "name", f"Quest {sub_id}")
-            sub_item = QTreeWidgetItem([str(sub_name), str(sub_id), "Sub-quest"])
-            current_item.addChild(sub_item)
+        # Find sub-quests by searching for quests with matching parent_quest_id
+        quests_table = self.data_model.get_elements("quests")
+        for quest in quests_table:
+            quest_parent_id = getattr(quest, "parent_quest_id", 0)
+            if quest_parent_id == quest_id:
+                sub_id = getattr(quest, "quest_id", "Unknown")
+                sub_name = self.data_model.safe_get_text_field(quest, "name")
+                if not sub_name:
+                    sub_name = f"Quest {sub_id}"
+                sub_item = QTreeWidgetItem([str(sub_name), str(sub_id), "Sub-quest"])
+                current_item.addChild(sub_item)
 
         # Resize columns
         self.hierarchy_tree.resizeColumnToContents(0)
@@ -438,6 +519,9 @@ class QuestDetailsWidget(QWidget):
         self.quest_name_label.setText("None")
         self.description_text.clear()
         self.dialogs_tree.clear()
-        self.dialogs_status.setText("Click 'Load Dialogs' to view quest dialogs")
-        self.load_dialogs_button.setEnabled(True)
+        self.dialogs_status.setText("Select a quest to view dialogs")
+        self.load_dialogs_button.setEnabled(False)
+        self.view_dialog_button.setEnabled(False)
         self.hierarchy_tree.clear()
+        if hasattr(self, "current_dialogs"):
+            self.current_dialogs = []
