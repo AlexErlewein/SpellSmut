@@ -20,6 +20,15 @@ from PySide6.QtGui import QIcon, QPixmap
 from tirganach import GameData
 from tirganach.types import *
 
+# Import Lua data manager for quest scripts
+try:
+    from .lua_parser.lua_data_manager import LuaDataManager
+
+    LUA_MANAGER_AVAILABLE = True
+except ImportError:
+    LUA_MANAGER_AVAILABLE = False
+    LuaDataManager = None
+
 # Cache version for invalidation when cache format changes
 CACHE_VERSION = "1.0.0"
 
@@ -92,6 +101,13 @@ class CFFDataModel(QObject):
 
         # Advanced descriptions index for fast lookups
         self.advanced_descriptions_index = None
+
+        # Lua data manager for quest scripts
+        self.lua_data_manager = None
+        self.lua_quest_directory = None
+        if LUA_MANAGER_AVAILABLE:
+            lua_cache_dir = self.cache_dir / "lua_cache"
+            self.lua_data_manager = LuaDataManager(cache_dir=lua_cache_dir)
 
     def _load_language_setting(self) -> Language:
         """Load current language from settings, default to ENGLISH"""
@@ -1385,3 +1401,84 @@ class CFFDataModel(QObject):
                 info["db_cache"]["size"] += file.stat().st_size
 
         return info
+
+    # Lua Quest Data Methods
+
+    def set_lua_quest_directory(self, lua_dir: Path):
+        """Set the directory containing Lua quest scripts"""
+        if not LUA_MANAGER_AVAILABLE:
+            print("Warning: Lua data manager not available")
+            return False
+
+        self.lua_quest_directory = Path(lua_dir)
+        if not self.lua_quest_directory.exists():
+            print(f"Warning: Lua quest directory not found: {lua_dir}")
+            return False
+
+        return True
+
+    def load_lua_quest_data(self, force_refresh: bool = False) -> int:
+        """
+        Load quest data from Lua scripts
+
+        Args:
+            force_refresh: If True, reparse all Lua files
+
+        Returns:
+            Number of quests parsed, or 0 if failed
+        """
+        if not LUA_MANAGER_AVAILABLE or not self.lua_data_manager:
+            print("Warning: Lua data manager not available")
+            return 0
+
+        if not self.lua_quest_directory:
+            print(
+                "Warning: Lua quest directory not set. Use set_lua_quest_directory() first"
+            )
+            return 0
+
+        try:
+            count = self.lua_data_manager.parse_lua_directory(
+                self.lua_quest_directory, force_refresh=force_refresh
+            )
+            print(f"Loaded Lua data for {count} quests")
+            return count
+        except Exception as e:
+            print(f"Error loading Lua quest data: {e}")
+            return 0
+
+    def get_lua_quest_data(self, quest_id: int):
+        """
+        Get Lua quest data for a specific quest ID
+
+        Returns:
+            QuestData object or None if not found
+        """
+        if not LUA_MANAGER_AVAILABLE or not self.lua_data_manager:
+            return None
+
+        try:
+            return self.lua_data_manager.get_quest(quest_id)
+        except Exception as e:
+            print(f"Error getting Lua quest data for quest {quest_id}: {e}")
+            return None
+
+    def has_lua_data(self) -> bool:
+        """Check if Lua data is available and loaded"""
+        if not LUA_MANAGER_AVAILABLE or not self.lua_data_manager:
+            return False
+
+        return (
+            self.lua_data_manager.cache_loaded
+            and len(self.lua_data_manager.quest_cache) > 0
+        )
+
+    def get_all_lua_quest_ids(self) -> List[int]:
+        """Get all quest IDs that have Lua data"""
+        if not LUA_MANAGER_AVAILABLE or not self.lua_data_manager:
+            return []
+
+        try:
+            return list(self.lua_data_manager.quest_cache.keys())
+        except Exception:
+            return []

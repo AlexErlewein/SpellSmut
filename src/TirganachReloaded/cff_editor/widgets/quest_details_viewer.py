@@ -430,10 +430,20 @@ class QuestDetailsViewer(QWidget):
         """Update quest giver information"""
         quest = self.current_quest
 
+        # Try to get Lua quest data first
+        quest_id = getattr(quest, "quest_id", None)
+        lua_data = None
+        if quest_id and self.data_model.has_lua_data():
+            lua_data = self.data_model.get_lua_quest_data(quest_id)
+
         # Try to get quest giver NPC ID
-        giver_id = getattr(quest, "quest_giver_id", None)
-        if not giver_id:
-            giver_id = getattr(quest, "npc_id", None)
+        giver_id = None
+        if lua_data and lua_data.npc_id:
+            giver_id = lua_data.npc_id
+        else:
+            giver_id = getattr(quest, "quest_giver_id", None)
+            if not giver_id:
+                giver_id = getattr(quest, "npc_id", None)
 
         if giver_id:
             self.quest_giver_id_label.setText(str(giver_id))
@@ -442,12 +452,16 @@ class QuestDetailsViewer(QWidget):
             self.quest_giver_label.setText(f"NPC {giver_id}")
         else:
             self.quest_giver_id_label.setText("-")
-            self.quest_giver_label.setText("Unknown")
+            self.quest_giver_label.setText("Unknown (check Lua scripts)")
 
         # Location/Map
-        location = getattr(quest, "map", None)
-        if not location:
-            location = getattr(quest, "platform", None)
+        location = None
+        if lua_data and lua_data.platform:
+            location = lua_data.platform
+        else:
+            location = getattr(quest, "map", None)
+            if not location:
+                location = getattr(quest, "platform", None)
         if location:
             self.quest_location_label.setText(str(location))
         else:
@@ -457,6 +471,12 @@ class QuestDetailsViewer(QWidget):
         """Update requirements to accept quest"""
         quest = self.current_quest
         self.accept_requirements_list.clear()
+
+        # Try to get Lua quest data first
+        quest_id = getattr(quest, "quest_id", None)
+        lua_data = None
+        if quest_id and self.data_model.has_lua_data():
+            lua_data = self.data_model.get_lua_quest_data(quest_id)
 
         # Minimum level
         min_level = getattr(quest, "min_level", None)
@@ -472,82 +492,144 @@ class QuestDetailsViewer(QWidget):
         else:
             self.required_quest_label.setText("None")
 
-        # Other requirements
-        requirements = getattr(quest, "requirements", None)
-        if requirements:
-            if isinstance(requirements, list):
-                for req in requirements:
-                    if isinstance(req, dict):
-                        condition = req.get("condition", str(req))
-                        self.accept_requirements_list.addItem(condition)
-                    else:
-                        self.accept_requirements_list.addItem(str(req))
-            else:
-                self.accept_requirements_list.addItem(str(requirements))
+        # Check Lua data for requirements
+        if lua_data and lua_data.requirements:
+            for req in lua_data.requirements:
+                req_text = f"[Lua] {req.description}"
+                if req.requirement_type != "Unknown":
+                    req_text += f" (Type: {req.requirement_type})"
+                if req.value:
+                    req_text += f" - Value: {req.value}"
+                self.accept_requirements_list.addItem(req_text)
+        else:
+            # Fall back to CFF data
+            requirements = getattr(quest, "requirements", None)
+            if requirements:
+                if isinstance(requirements, list):
+                    for req in requirements:
+                        if isinstance(req, dict):
+                            condition = req.get("condition", str(req))
+                            self.accept_requirements_list.addItem(condition)
+                        else:
+                            self.accept_requirements_list.addItem(str(req))
+                else:
+                    self.accept_requirements_list.addItem(str(requirements))
 
         if self.accept_requirements_list.count() == 0:
-            self.accept_requirements_list.addItem("No special requirements")
+            self.accept_requirements_list.addItem(
+                "No special requirements (check Lua scripts)"
+            )
 
     def update_objectives(self):
         """Update quest objectives/completion requirements"""
         quest = self.current_quest
         self.objectives_tree.clear()
 
-        # Get objectives
-        objectives = getattr(quest, "objectives", None)
-        if objectives:
-            if isinstance(objectives, list):
-                for i, obj in enumerate(objectives):
-                    if isinstance(obj, dict):
-                        obj_type = obj.get("type", "Unknown")
-                        target = obj.get("target", "-")
-                        count = obj.get("count", "-")
-                        description = obj.get("description", f"Objective {i + 1}")
-                        item = QTreeWidgetItem(
-                            [description, obj_type, str(target), str(count)]
-                        )
-                        self.objectives_tree.addTopLevelItem(item)
-                    else:
-                        item = QTreeWidgetItem([str(obj), "-", "-", "-"])
-                        self.objectives_tree.addTopLevelItem(item)
-            else:
-                item = QTreeWidgetItem([str(objectives), "-", "-", "-"])
+        # Try to get Lua quest data first
+        quest_id = getattr(quest, "quest_id", None)
+        lua_data = None
+        if quest_id and self.data_model.has_lua_data():
+            lua_data = self.data_model.get_lua_quest_data(quest_id)
+
+        # Check Lua data for objectives
+        if lua_data and lua_data.objectives:
+            for obj in lua_data.objectives:
+                description = f"[Lua] {obj.description}"
+                obj_type = obj.objective_type
+                target = obj.target if obj.target else "-"
+                count = str(obj.count) if obj.count > 1 else "-"
+                item = QTreeWidgetItem([description, obj_type, target, count])
                 self.objectives_tree.addTopLevelItem(item)
+        else:
+            # Fall back to CFF data
+            objectives = getattr(quest, "objectives", None)
+            if objectives:
+                if isinstance(objectives, list):
+                    for i, obj in enumerate(objectives):
+                        if isinstance(obj, dict):
+                            obj_type = obj.get("type", "Unknown")
+                            target = obj.get("target", "-")
+                            count = obj.get("count", "-")
+                            description = obj.get("description", f"Objective {i + 1}")
+                            item = QTreeWidgetItem(
+                                [description, obj_type, str(target), str(count)]
+                            )
+                            self.objectives_tree.addTopLevelItem(item)
+                        else:
+                            item = QTreeWidgetItem([str(obj), "-", "-", "-"])
+                            self.objectives_tree.addTopLevelItem(item)
+                else:
+                    item = QTreeWidgetItem([str(objectives), "-", "-", "-"])
+                    self.objectives_tree.addTopLevelItem(item)
 
         if self.objectives_tree.topLevelItemCount() == 0:
-            item = QTreeWidgetItem(["No objectives defined", "-", "-", "-"])
+            item = QTreeWidgetItem(
+                ["No objectives defined (check Lua scripts)", "-", "-", "-"]
+            )
             self.objectives_tree.addTopLevelItem(item)
 
     def update_rewards(self):
         """Update quest rewards"""
         quest = self.current_quest
 
-        # XP reward
-        xp = getattr(quest, "xp_reward", None)
-        if not xp:
-            xp = getattr(quest, "experience", 0)
-        self.xp_reward_label.setText(f"{xp} XP" if xp else "0 XP")
+        # Try to get Lua quest data first
+        quest_id = getattr(quest, "quest_id", None)
+        lua_data = None
+        if quest_id and self.data_model.has_lua_data():
+            lua_data = self.data_model.get_lua_quest_data(quest_id)
 
-        # Money rewards
-        gold = getattr(quest, "gold_reward", 0)
-        silver = getattr(quest, "silver_reward", 0)
-        copper = getattr(quest, "copper_reward", 0)
-        self.money_reward_label.setText(
-            f"{gold} Gold, {silver} Silver, {copper} Copper"
-        )
+        # XP reward - check Lua first
+        if lua_data and lua_data.rewards and lua_data.rewards.xp > 0:
+            self.xp_reward_label.setText(f"{lua_data.rewards.xp} XP [from Lua]")
+        else:
+            # Fall back to CFF data
+            xp = getattr(quest, "xp_reward", None)
+            if not xp:
+                xp = getattr(quest, "experience", 0)
+            self.xp_reward_label.setText(f"{xp} XP" if xp else "0 XP")
 
-        # Item rewards
-        self.item_rewards_list.clear()
-        item_rewards = getattr(quest, "item_rewards", None)
-        if item_rewards:
-            if isinstance(item_rewards, list):
-                for item in item_rewards:
-                    self.item_rewards_list.addItem(f"Item ID: {item}")
+        # Money rewards - check Lua first
+        if lua_data and lua_data.rewards:
+            gold = lua_data.rewards.gold
+            silver = lua_data.rewards.silver
+            copper = lua_data.rewards.copper
+            if gold > 0 or silver > 0 or copper > 0:
+                self.money_reward_label.setText(
+                    f"{gold} Gold, {silver} Silver, {copper} Copper [from Lua]"
+                )
             else:
-                self.item_rewards_list.addItem(str(item_rewards))
+                # Fall back to CFF
+                gold = getattr(quest, "gold_reward", 0)
+                silver = getattr(quest, "silver_reward", 0)
+                copper = getattr(quest, "copper_reward", 0)
+                self.money_reward_label.setText(
+                    f"{gold} Gold, {silver} Silver, {copper} Copper"
+                )
+        else:
+            gold = getattr(quest, "gold_reward", 0)
+            silver = getattr(quest, "silver_reward", 0)
+            copper = getattr(quest, "copper_reward", 0)
+            self.money_reward_label.setText(
+                f"{gold} Gold, {silver} Silver, {copper} Copper"
+            )
+
+        # Item rewards - check Lua first
+        self.item_rewards_list.clear()
+        if lua_data and lua_data.rewards and lua_data.rewards.items:
+            for item_id in lua_data.rewards.items:
+                self.item_rewards_list.addItem(f"[Lua] Item ID: {item_id}")
+        else:
+            # Fall back to CFF data
+            item_rewards = getattr(quest, "item_rewards", None)
+            if item_rewards:
+                if isinstance(item_rewards, list):
+                    for item in item_rewards:
+                        self.item_rewards_list.addItem(f"Item ID: {item}")
+                else:
+                    self.item_rewards_list.addItem(str(item_rewards))
 
         if self.item_rewards_list.count() == 0:
-            self.item_rewards_list.addItem("No item rewards")
+            self.item_rewards_list.addItem("No item rewards (check Lua scripts)")
 
     def update_dialogues(self):
         """Update quest dialogues"""

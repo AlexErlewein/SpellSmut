@@ -90,6 +90,16 @@ class QuestEditorWidget(QWidget):
         elif index == 1 and self.data_model.game_data:  # Tab 1 is Quest Details
             self.quest_details_viewer.refresh()
 
+    def showEvent(self, event):
+        """Handle widget shown event - auto-load tree view if data is available"""
+        super().showEvent(event)
+        # If data is already loaded and tree is empty, load it
+        if (
+            self.data_model.game_data
+            and self.quest_hierarchy_view.tree.topLevelItemCount() == 0
+        ):
+            self.quest_hierarchy_view.load_quests()
+
     def on_data_loaded(self):
         """Handle when data is loaded"""
         # Auto-load quests in the hierarchy view

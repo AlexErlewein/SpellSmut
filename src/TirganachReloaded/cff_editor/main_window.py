@@ -7,6 +7,7 @@ from pathlib import Path
 from PySide6.QtCore import QSize, Qt
 from PySide6.QtGui import QAction, QActionGroup
 from PySide6.QtWidgets import (
+    QApplication,
     QDialog,
     QFileDialog,
     QLabel,
@@ -172,6 +173,14 @@ class MainWindow(QMainWindow):
         quest_editor_action.setStatusTip("Edit quests with the integrated Quest Editor")
         quest_editor_action.triggered.connect(self.show_quest_editor)
         tools_menu.addAction(quest_editor_action)
+
+        load_lua_quests_action = QAction("Load &Lua Quest Scripts...", self)
+        load_lua_quests_action.setShortcut("Ctrl+L, Q")
+        load_lua_quests_action.setStatusTip(
+            "Load quest objectives, requirements, and rewards from Lua scripts"
+        )
+        load_lua_quests_action.triggered.connect(self.load_lua_quest_directory)
+        tools_menu.addAction(load_lua_quests_action)
 
         tools_menu.addSeparator()
 
@@ -805,6 +814,82 @@ class MainWindow(QMainWindow):
             QMessageBox.critical(
                 self, "Quest Editor Error", f"Failed to open Quest Editor:\n{str(e)}"
             )
+
+    def load_lua_quest_directory(self):
+        """Load Lua quest scripts directory for objectives and rewards"""
+        from pathlib import Path
+
+        from PySide6.QtWidgets import QFileDialog, QMessageBox
+
+        # Suggest the default Original Scripts path if it exists
+        default_path = (
+            Path(__file__).parent.parent.parent.parent
+            / "OriginalGameFiles"
+            / "modding"
+            / "Original Scripts"
+            / "script"
+        )
+
+        if not default_path.exists():
+            default_path = str(Path.home())
+        else:
+            default_path = str(default_path)
+
+        # Open directory selection dialog
+        lua_dir = QFileDialog.getExistingDirectory(
+            self,
+            "Select Lua Quest Scripts Directory",
+            default_path,
+            QFileDialog.Option.ShowDirsOnly,
+        )
+
+        if not lua_dir:
+            return  # User cancelled
+
+        # Set the directory in data model
+        if not self.data_model.set_lua_quest_directory(lua_dir):
+            QMessageBox.warning(
+                self,
+                "Invalid Directory",
+                f"The selected directory could not be accessed:\n{lua_dir}",
+            )
+            return
+
+        # Load quest data with progress feedback
+        try:
+            self.statusBar().showMessage("Parsing Lua quest scripts...")
+            QApplication.processEvents()  # Update UI
+
+            quest_count = self.data_model.load_lua_quest_data(force_refresh=False)
+
+            if quest_count > 0:
+                QMessageBox.information(
+                    self,
+                    "Lua Quest Data Loaded",
+                    f"Successfully loaded quest data from {quest_count} quest(s).\n\n"
+                    f"Quest objectives, requirements, and rewards from Lua scripts\n"
+                    f"are now available in the Quest Editor.",
+                )
+                self.statusBar().showMessage(
+                    f"Loaded Lua data for {quest_count} quests", 5000
+                )
+            else:
+                QMessageBox.information(
+                    self,
+                    "No Quest Data Found",
+                    "No quest data was found in the selected directory.\n\n"
+                    "Make sure you selected the correct 'script' directory containing\n"
+                    "Lua quest files (e.g., P1, P2, P3... subdirectories).",
+                )
+                self.statusBar().showMessage("No Lua quest data found", 5000)
+
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Error Loading Lua Scripts",
+                f"Failed to load Lua quest scripts:\n{str(e)}",
+            )
+            self.statusBar().showMessage("Error loading Lua quest data", 5000)
 
     def show_spell_wizard(self):
         """Show the Spell Creation Wizard"""
