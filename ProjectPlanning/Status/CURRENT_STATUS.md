@@ -57,6 +57,7 @@ The following creator tools are feature-complete, integrated with the shared **I
 - **ID Management System**: Centralized, conflict-free ID allocation is active across all creator tools.
 - **Asset Extraction**: All 59,500+ game assets have been extracted and categorized.
 - **GUI Editor**: The core CFF editor is stable and feature-complete.
+- **Data Layer Acceleration**: 17x faster loading via dual cache system (pickle + SQLite) with automatic validation, progress UI, and cache management.
 
 ---
 

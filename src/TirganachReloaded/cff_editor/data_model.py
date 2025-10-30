@@ -3,9 +3,12 @@ Data Model for CFF Editor
 Manages loaded GameData and provides interface for GUI
 """
 
+import hashlib
 import json
 import os
+import pickle
 import sys
+import time
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
@@ -16,6 +19,19 @@ from PySide6.QtCore import QObject, QSettings, Signal
 from PySide6.QtGui import QIcon, QPixmap
 from tirganach import GameData
 from tirganach.types import *
+
+# Cache version for invalidation when cache format changes
+CACHE_VERSION = "1.0.0"
+
+# Try to import data providers
+try:
+    import cff_editor.data_providers as dp
+    DATA_PROVIDERS_AVAILABLE = True
+except ImportError:
+    DATA_PROVIDERS_AVAILABLE = False
+    dp = None
+
+# Data providers will be imported when needed
 
 
 class CFFDataModel(QObject):
@@ -55,6 +71,18 @@ class CFFDataModel(QObject):
         self.settings = QSettings("SpellSmut", "TirganachReloaded")
         self.current_language = self._load_language_setting()
 
+        # Cache directory
+        self.cache_dir = self.project_root / "src" / "TirganachReloaded" / "data" / "cache"
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
+
+        # Database directory
+        self.db_dir = self.cache_dir / "db"
+        self.db_dir.mkdir(parents=True, exist_ok=True)
+
+        # Data providers (for future use)
+        self.data_provider: Optional[Any] = None
+        self.use_db_provider = False  # Flag to enable DB provider
+
     def _load_language_setting(self) -> Language:
         """Load current language from settings, default to ENGLISH"""
         language_value = self.settings.value(
@@ -64,6 +92,107 @@ class CFFDataModel(QObject):
             return Language(language_value)
         except ValueError:
             return Language.ENGLISH
+
+    def _generate_fingerprint(self, file_path: str) -> str:
+        """Generate a fingerprint for cache validation"""
+        path = Path(file_path)
+        if not path.exists():
+            raise FileNotFoundError(f"File not found: {file_path}")
+
+        # Get file stats
+        stat = path.stat()
+        file_size = stat.st_size
+        mtime = stat.st_mtime
+
+        # Calculate partial SHA-256 of first 32MB
+        sha256 = hashlib.sha256()
+        with open(path, 'rb') as f:
+            # Read first 32MB or entire file if smaller
+            chunk_size = 32 * 1024 * 1024  # 32MB
+            data = f.read(chunk_size)
+            sha256.update(data)
+
+        # Combine all components
+        fingerprint_data = {
+            'path': str(path.absolute()),
+            'size': file_size,
+            'mtime': mtime,
+            'sha256_partial': sha256.hexdigest(),
+            'cache_version': CACHE_VERSION
+        }
+
+        # Create final fingerprint hash
+        fingerprint_str = json.dumps(fingerprint_data, sort_keys=True)
+        return hashlib.sha256(fingerprint_str.encode()).hexdigest()
+
+    def _get_cache_paths(self, fingerprint: str) -> tuple[Path, Path]:
+        """Get cache file paths for a given fingerprint"""
+        cache_file = self.cache_dir / f"GameData_{fingerprint}.pkl"
+        meta_file = self.cache_dir / f"GameData_{fingerprint}.meta.json"
+        return cache_file, meta_file
+
+    def _load_from_cache(self, fingerprint: str) -> tuple[Optional[GameData], Optional[str]]:
+        """Load GameData from cache if valid
+
+        Returns:
+            tuple: (game_data, reason_for_failure)
+            - game_data: GameData object if cache is valid, None otherwise
+            - reason_for_failure: string describing why cache was invalid, None if valid
+        """
+        try:
+            cache_file, meta_file = self._get_cache_paths(fingerprint)
+
+            if not cache_file.exists() or not meta_file.exists():
+                return None, "Cache files not found"
+
+            # Load and validate metadata
+            with open(meta_file, 'r') as f:
+                meta = json.load(f)
+
+            cached_version = meta.get('cache_version')
+            if cached_version != CACHE_VERSION:
+                return None, f"Cache version mismatch: {cached_version} → {CACHE_VERSION}"
+
+            # Load pickled data
+            with open(cache_file, 'rb') as f:
+                game_data = pickle.load(f)
+
+            return game_data, None
+
+        except Exception as e:
+            return None, f"Cache load error: {str(e)}"
+
+    def _save_to_cache(self, game_data: GameData, fingerprint: str, source_path: str):
+        """Save GameData to cache"""
+        cache_file, meta_file = None, None
+        try:
+            cache_file, meta_file = self._get_cache_paths(fingerprint)
+
+            # Save metadata
+            meta = {
+                'cache_version': CACHE_VERSION,
+                'source_path': source_path,
+                'created_at': time.time(),
+                'fingerprint': fingerprint
+            }
+
+            with open(meta_file, 'w') as f:
+                json.dump(meta, f, indent=2)
+
+            # Save pickled data
+            with open(cache_file, 'wb') as f:
+                pickle.dump(game_data, f)
+
+        except PermissionError as e:
+            cache_dir = cache_file.parent if cache_file else self.cache_dir
+            print(f"Permission denied saving cache to {cache_dir}: {e}")
+            print("Cache will not be available for future loads")
+        except OSError as e:
+            print(f"OS error saving cache: {e}")
+            print("Cache will not be available for future loads")
+        except Exception as e:
+            print(f"Unexpected error saving cache: {e}")
+            print("Cache will not be available for future loads")
 
     def set_current_language(self, language: Language):
         """Set the current language and save to settings"""
@@ -81,22 +210,184 @@ class CFFDataModel(QObject):
         # Armor name mapping
         self.armor_name_mapping: Dict[int, str] = {}
 
-    def load_file(self, file_path: str) -> bool:
-        """Load a CFF file"""
+    def load_file(self, file_path: str, force_parse: bool = False) -> bool:
+        """Load a CFF file, using cache when possible"""
         try:
+            path = Path(file_path)
+            if not path.exists():
+                print(f"File not found: {file_path}")
+                return False
+
+            # Generate fingerprint for cache validation
+            fingerprint = self._generate_fingerprint(file_path)
+
+            # Try DB provider if enabled
+            if self.use_db_provider and DATA_PROVIDERS_AVAILABLE and dp:
+                db_path = str(self.db_dir / "cff_data.db")
+                db_manager = dp.DatabaseManager(db_path)
+
+                if not force_parse:
+                    is_valid, db_failure_reason = db_manager.is_valid_for_fingerprint(fingerprint)
+                    if is_valid:
+                        # Database is valid, use DB provider
+                        self.data_provider = dp.DBProvider(db_path)
+                        if self.data_provider.is_loaded():
+                            self.game_data = None  # Not needed for DB provider
+                            self.file_path = file_path
+                            self.modified = False
+
+                            # Load mappings
+                            self._load_weapon_names()
+                            self._load_armor_names()
+
+                            # Save as last opened file
+                            self.settings.setValue("last_opened_file", file_path)
+                            self.data_loaded.emit()
+                            return True
+                    elif db_failure_reason:
+                        print(f"Database rebuild triggered: {db_failure_reason}")
+
+                # Need to rebuild database - first load CFF data
+                self.game_data = GameData(file_path)
+                db_manager.create_schema()
+                db_manager.populate_from_cff(self.game_data, fingerprint)
+                self.data_provider = dp.DBProvider(db_path)
+
+                self.file_path = file_path
+                self.modified = False
+
+                # Load mappings
+                self._load_weapon_names()
+                self._load_armor_names()
+
+                # Save as last opened file
+                self.settings.setValue("last_opened_file", file_path)
+                self.data_loaded.emit()
+                return True
+
+            # Try to load from cache unless force_parse is True
+            if not force_parse:
+                cached_data, cache_failure_reason = self._load_from_cache(fingerprint)
+                if cached_data is not None:
+                    self.game_data = cached_data
+                    self.file_path = file_path
+                    self.modified = False
+
+                    # Load mappings
+                    self._load_weapon_names()
+                    self._load_armor_names()
+
+                    # Save as last opened file
+                    self.settings.setValue("last_opened_file", file_path)
+                    self.data_loaded.emit()
+                    return True
+                elif cache_failure_reason:
+                    print(f"Cache rebuild triggered: {cache_failure_reason}")
+
+            # Parse from file (cache miss or force_parse)
             self.game_data = GameData(file_path)
             self.file_path = file_path
             self.modified = False
 
-            # Load weapon name mapping
+            # Save to cache for future use
+            self._save_to_cache(self.game_data, fingerprint, file_path)
+
+            # Load mappings
             self._load_weapon_names()
-            # Load armor name mapping
             self._load_armor_names()
 
             # Save as last opened file
             self.settings.setValue("last_opened_file", file_path)
             self.data_loaded.emit()
             return True
+
+        except FileNotFoundError as e:
+            print(f"File not found: {file_path}")
+            return False
+        except PermissionError as e:
+            print(f"Permission denied accessing file: {file_path}")
+            return False
+        except Exception as e:
+            error_msg = f"Failed to load CFF file '{file_path}': {str(e)}"
+            print(error_msg)
+            # Could emit an error signal here for UI feedback
+            return False
+
+            if self.use_db_provider and DATA_PROVIDERS_AVAILABLE and dp:
+                # Try to use database provider
+                db_path = str(self.db_dir / "cff_data.db")
+                db_manager = dp.DatabaseManager(db_path)
+
+                if not force_parse:
+                    is_valid, db_failure_reason = db_manager.is_valid_for_fingerprint(fingerprint)
+                    if is_valid:
+                        # Database is valid, use DB provider
+                        self.data_provider = dp.DBProvider(db_path)
+                        if self.data_provider.is_loaded():
+                            self.game_data = None  # Not needed for DB provider
+                        self.file_path = file_path
+                        self.modified = False
+
+                        # Load mappings
+                        self._load_weapon_names()
+                        self._load_armor_names()
+
+                        # Save as last opened file
+                        self.settings.setValue("last_opened_file", file_path)
+                        self.data_loaded.emit()
+                        return True
+                    elif db_failure_reason:
+                        print(f"Database rebuild triggered: {db_failure_reason}")
+
+                # Need to rebuild database
+                self.game_data = GameData(file_path)
+                db_manager.create_schema()
+                db_manager.populate_from_cff(self.game_data, fingerprint)
+                self.data_provider = dp.DBProvider(db_path)
+
+            else:
+                # Use CFF provider (with pickle cache)
+                # Try to load from cache unless force_parse is True
+                if not force_parse:
+                    cached_data, cache_failure_reason = self._load_from_cache(fingerprint)
+                    if cached_data is not None:
+                        self.game_data = cached_data
+                        if DATA_PROVIDERS_AVAILABLE and dp:
+                            self.data_provider = dp.CFFProvider(cached_data)
+                        self.file_path = file_path
+                        self.modified = False
+
+                        # Load mappings
+                        self._load_weapon_names()
+                        self._load_armor_names()
+
+                        # Save as last opened file
+                        self.settings.setValue("last_opened_file", file_path)
+                        self.data_loaded.emit()
+                        return True
+                    elif cache_failure_reason:
+                        print(f"Cache rebuild triggered: {cache_failure_reason}")
+
+                # Parse from file (cache miss or force_parse)
+                self.game_data = GameData(file_path)
+                if DATA_PROVIDERS_AVAILABLE and dp:
+                    self.data_provider = dp.CFFProvider(self.game_data)
+
+                # Save to cache for future use
+                self._save_to_cache(self.game_data, fingerprint, file_path)
+
+            self.file_path = file_path
+            self.modified = False
+
+            # Load mappings
+            self._load_weapon_names()
+            self._load_armor_names()
+
+            # Save as last opened file
+            self.settings.setValue("last_opened_file", file_path)
+            self.data_loaded.emit()
+            return True
+
         except Exception as e:
             print(f"Error loading file: {e}")
             return False
@@ -720,6 +1011,29 @@ class CFFDataModel(QObject):
         Returns:
             Localised text string or None if not found
         """
+        # Try data provider first (for DB provider)
+        if self.data_provider and hasattr(self.data_provider, 'get_localised_text'):
+            try:
+                # Get the text_id from the entity
+                text_id = None
+                if field_name == "name":
+                    # Try different possible text_id field names
+                    for possible_field in ["name_id", "text_id", "spell_name_id"]:
+                        if hasattr(entity, possible_field):
+                            text_id = getattr(entity, possible_field)
+                            if text_id and text_id != 0:
+                                break
+                elif field_name == "description":
+                    # For descriptions, try description_id
+                    if hasattr(entity, "description_id"):
+                        text_id = getattr(entity, "description_id")
+
+                if text_id:
+                    return self.data_provider.get_localised_text(text_id, self.current_language)
+            except Exception:
+                pass  # Fall back to CFF method
+
+        # Fall back to original CFF method
         if not self.game_data or not entity:
             return None
 
@@ -765,11 +1079,68 @@ class CFFDataModel(QObject):
                     ):
                         return getattr(entry, "text", "")
 
-        except Exception as e:
+        except (AttributeError, KeyError, TypeError) as e:
             print(f"Error getting localised text: {e}")
 
+        return None
+
+    def enable_db_provider(self, enabled: bool = True):
+        """Enable or disable database provider for faster queries"""
+        self.use_db_provider = enabled
+        if enabled and self.file_path:
+            # Reload with DB provider
+            self.load_file(self.file_path, force_parse=True)
+
+    def get_quests_from_provider(self):
+        """Get quests using data provider (for DB optimization)"""
+        if self.data_provider and hasattr(self.data_provider, 'get_quests'):
+            try:
+                return self.data_provider.get_quests()
+            except Exception:
+                pass  # Fall back to table method
+        return None
+
+    def get_quest_dialogs_from_provider(self, quest_id: int):
+        """Get quest dialogs using data provider (for DB optimization)"""
+        if self.data_provider and hasattr(self.data_provider, 'get_quest_dialogs'):
+            try:
+                return self.data_provider.get_quest_dialogs(quest_id)
+            except Exception:
+                pass  # Fall back to table method
         return None
 
     def clear_icon_cache(self):
         """Clear the icon cache to free memory."""
         self.icon_cache.clear()
+
+    def clear_db_cache(self):
+        """Clear database cache files"""
+        if self.db_dir.exists():
+            import shutil
+            try:
+                shutil.rmtree(self.db_dir)
+                self.db_dir.mkdir(parents=True, exist_ok=True)
+                print("Database cache cleared")
+            except Exception as e:
+                print(f"Error clearing database cache: {e}")
+
+    def get_cache_info(self) -> dict:
+        """Get information about cache usage"""
+        info = {
+            'pickle_cache': {'files': 0, 'size': 0},
+            'db_cache': {'files': 0, 'size': 0}
+        }
+
+        # Count pickle cache files
+        if self.cache_dir.exists():
+            for file in self.cache_dir.glob("GameData_*.pkl"):
+                info['pickle_cache']['files'] += 1
+                info['pickle_cache']['size'] += file.stat().st_size
+
+        # Count DB cache files
+        if self.db_dir.exists():
+            for file in self.db_dir.glob("*.db"):
+                info['db_cache']['files'] += 1
+                info['db_cache']['size'] += file.stat().st_size
+
+        return info

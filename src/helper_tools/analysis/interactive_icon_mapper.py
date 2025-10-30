@@ -35,6 +35,7 @@ try:
         QMainWindow,
         QMessageBox,
         QPushButton,
+        QScrollArea,
         QSpinBox,
         QSplitter,
         QTextEdit,
@@ -52,14 +53,24 @@ class IconMapperWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.project_root = Path(__file__).parent.parent.parent
+        self.project_root = Path(__file__).parent.parent.parent.parent
         self.icons_root = (
             self.project_root / "ExtractedAssets" / "UI" / "icons_extracted"
         )
         self.mapping_path = (
-            self.project_root / "TirganachReloaded" / "data" / "ui_icon_mapping.json"
+            self.project_root
+            / "src"
+            / "TirganachReloaded"
+            / "data"
+            / "ui_icon_mapping.json"
         )
-        self.gamedata_path = self.project_root / "TirganachReloaded" / "GameData.json"
+        self.gamedata_path = (
+            self.project_root
+            / "src"
+            / "TirganachReloaded"
+            / "exports"
+            / "GameData.json"
+        )
 
         # Load data
         self.load_data()
@@ -101,6 +112,7 @@ class IconMapperWindow(QMainWindow):
                 with open(analysis_path, "r") as f:
                     self.icon_analysis = json.load(f)
             else:
+                # No analysis file found, create empty structure
                 self.icon_analysis = {"analyses": []}
 
         # Load mapping
@@ -111,13 +123,25 @@ class IconMapperWindow(QMainWindow):
         with open(self.gamedata_path, "r") as f:
             gamedata = json.load(f)
 
+            # Build localization lookup (English names)
+            self.localization = {}
+            for entry in gamedata.get("localisation", []):
+                # Only use English entries (language value 1)
+                if entry.get("language", {}).get("value") == [1]:
+                    text_id = entry.get("text_id")
+                    text = entry.get("text")
+                    if text_id is not None and text:
+                        self.localization[str(text_id)] = text
+
             # Build item name lookup
             self.item_names = {}
-            for item in gamedata.get("item_base", []):
+            for item in gamedata.get("items", []):
                 item_id = item.get("item_id")
-                name_id = item.get("item_name_id")
+                name_id = item.get("name_id")
                 if item_id and name_id:
-                    self.item_names[item_id] = name_id
+                    # Look up the actual name from localization
+                    name = self.localization.get(str(name_id), f"Item {item_id}")
+                    self.item_names[item_id] = name
 
         # Build item list
         self.item_list = []
@@ -178,6 +202,7 @@ class IconMapperWindow(QMainWindow):
         """Load previously verified mappings."""
         verified_path = (
             self.project_root
+            / "src"
             / "TirganachReloaded"
             / "data"
             / "verified_icon_mappings.json"
@@ -191,6 +216,7 @@ class IconMapperWindow(QMainWindow):
         """Save verified mappings."""
         verified_path = (
             self.project_root
+            / "src"
             / "TirganachReloaded"
             / "data"
             / "verified_icon_mappings.json"
@@ -341,38 +367,38 @@ class IconMapperWindow(QMainWindow):
         """Create icon selector for a specific index."""
 
         group = QGroupBox(f"Icon Index {index}")
-        layout = QGridLayout(group)
+        layout = QVBoxLayout(group)
 
         # Handle label
         handle_label = QLabel("Handle:")
-        layout.addWidget(handle_label, 0, 0)
+        layout.addWidget(handle_label)
 
         handle_value = QLabel("")
         handle_value.setWordWrap(True)
-        layout.addWidget(handle_value, 0, 1, 1, 3)
+        layout.addWidget(handle_value)
 
-        # Current icon preview
-        current_label = QLabel("Current:")
-        layout.addWidget(current_label, 1, 0)
+        # Possible icons area
+        icons_label = QLabel("Possible Icons:")
+        layout.addWidget(icons_label)
 
-        current_icon = QLabel()
-        current_icon.setFixedSize(64, 64)
-        current_icon.setStyleSheet("border: 1px solid #ccc; background: white;")
-        current_icon.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        layout.addWidget(current_icon, 1, 1)
+        # Scroll area for icons
+        icons_scroll = QScrollArea()
+        icons_scroll.setWidgetResizable(True)
+        icons_scroll.setMinimumHeight(100)
+        icons_scroll.setMaximumHeight(200)
 
-        # Atlas selector
-        atlas_label = QLabel("Atlas:")
-        layout.addWidget(atlas_label, 1, 2)
-
-        atlas_combo = QComboBox()
-        atlas_combo.currentIndexChanged.connect(lambda: self.update_icon_preview(index))
-        layout.addWidget(atlas_combo, 1, 3)
+        icons_widget = QWidget()
+        self.icons_layout = QGridLayout(icons_widget)
+        icons_scroll.setWidget(icons_widget)
+        layout.addWidget(icons_scroll)
 
         # Store widgets for later access
         group.handle_label = handle_value
-        group.icon_preview = current_icon
-        group.atlas_combo = atlas_combo
+        group.icons_layout = self.icons_layout
+        group.icons_widget = icons_widget
+        group.icons_scroll = icons_scroll
+        group.possible_icons = []  # Store possible icon data
+        group.selected_icon = None  # Store selected icon path
         group.setVisible(False)
 
         return group
@@ -434,42 +460,71 @@ class IconMapperWindow(QMainWindow):
                 # Update handle
                 selector.handle_label.setText(icon_data["handle"])
 
-                # Populate atlas combo
-                selector.atlas_combo.clear()
+                # Clear previous icons
+                for j in reversed(range(selector.icons_layout.count())):
+                    widget = selector.icons_layout.itemAt(j).widget()
+                    if widget:
+                        widget.setParent(None)
 
-                category = (
-                    "item"
-                    if icon_data["handle"].startswith("ui_item_")
-                    else "spell"
-                    if icon_data["handle"].startswith("ui_spell_")
-                    else "other"
-                )
+                # Get possible icons from detailed mapping
+                detailed_key = f"{item['id']}_{i}"
+                possible_icons = []
 
-                # Add all atlases for this category
-                atlas_count = (
-                    98 if category == "item" else 18 if category == "spell" else 0
-                )
+                if detailed_key in self.mapping.get("detailed_mapping", {}):
+                    possible_icons = self.mapping["detailed_mapping"][detailed_key].get(
+                        "possible_icons", []
+                    )
 
-                for atlas_num in range(atlas_count):
-                    selector.atlas_combo.addItem(f"Atlas {atlas_num}", atlas_num)
+                # Store possible icons for this selector
+                selector.possible_icons = possible_icons
 
-                # Select verified atlas if exists
+                # Display all possible icons
+                for idx, icon_info in enumerate(possible_icons):
+                    # Create button for each icon
+                    icon_button = QPushButton()
+                    icon_button.setFixedSize(64, 64)
+                    icon_button.setIconSize(QSize(64, 64))
+                    icon_button.setCheckable(True)
+
+                    # Load icon
+                    icon_path = self.icons_root / icon_info["path"]
+                    if icon_path.exists():
+                        pixmap = QPixmap(str(icon_path))
+                        if not pixmap.isNull():
+                            icon_button.setIcon(QIcon(pixmap))
+
+                    # Store icon info with button
+                    icon_button.setProperty("icon_path", icon_info["path"])
+                    icon_button.setProperty("atlas", icon_info["atlas"])
+                    icon_button.clicked.connect(
+                        lambda checked,
+                        btn=icon_button,
+                        sel=selector: self.on_icon_selected(btn, sel)
+                    )
+
+                    # Add to layout (4 icons per row)
+                    row = idx // 4
+                    col = idx % 4
+                    selector.icons_layout.addWidget(icon_button, row, col)
+
+                # Check if this item/icon combination was already verified
                 item_id_str = str(item["id"])
                 if (
                     item_id_str in self.verified_mappings
                     and str(i) in self.verified_mappings[item_id_str]
                 ):
                     verified_path = self.verified_mappings[item_id_str][str(i)]
-                    # Extract atlas number from path
-                    path_obj = Path(verified_path)
-                    if "atlas_" in str(path_obj):
-                        atlas_num = int(path_obj.parent.name.replace("atlas_", ""))
-                        idx = selector.atlas_combo.findData(atlas_num)
-                        if idx >= 0:
-                            selector.atlas_combo.setCurrentIndex(idx)
-
-                # Update preview
-                self.update_icon_preview(i)
+                    # Find and select the verified icon
+                    for j in range(selector.icons_layout.count()):
+                        widget = selector.icons_layout.itemAt(j).widget()
+                        if (
+                            widget
+                            and hasattr(widget, "property")
+                            and widget.property("icon_path") == verified_path
+                        ):
+                            widget.setChecked(True)
+                            selector.selected_icon = verified_path
+                            break
 
         # Hide unused selectors
         for i in range(len(item["icons"]) + 1, 4):
@@ -555,6 +610,20 @@ class IconMapperWindow(QMainWindow):
         else:
             selector.icon_preview.setText("Not found")
 
+    def on_icon_selected(self, button, selector):
+        """Handle icon selection."""
+        # Uncheck all other buttons in this selector
+        for i in range(selector.icons_layout.count()):
+            widget = selector.icons_layout.itemAt(i).widget()
+            if widget and isinstance(widget, QPushButton) and widget != button:
+                widget.setChecked(False)
+
+        # Store selected icon path
+        if button.isChecked():
+            selector.selected_icon = button.property("icon_path")
+        else:
+            selector.selected_icon = None
+
     def save_current_item(self):
         """Save verification for current item."""
 
@@ -575,19 +644,10 @@ class IconMapperWindow(QMainWindow):
         for i, icon_data in enumerate(item["icons"], 1):
             if i in self.icon_selectors and self.icon_selectors[i].isVisible():
                 selector = self.icon_selectors[i]
-                atlas_num = selector.atlas_combo.currentData()
 
-                if atlas_num is not None:
-                    category = (
-                        "item"
-                        if icon_data["handle"].startswith("ui_item_")
-                        else "spell"
-                        if icon_data["handle"].startswith("ui_spell_")
-                        else "other"
-                    )
-
-                    icon_path = f"{category}/atlas_{atlas_num}/icon_{i:03d}.png"
-                    selections[str(i)] = icon_path
+                # Save selected icon if any
+                if selector.selected_icon:
+                    selections[str(i)] = selector.selected_icon
 
         # Save to verified mappings
         self.verified_mappings[item_id_str] = selections
@@ -616,7 +676,13 @@ class IconMapperWindow(QMainWindow):
         filename, _ = QFileDialog.getSaveFileName(
             self,
             "Export Mappings",
-            str(self.project_root / "verified_icon_mappings.json"),
+            str(
+                self.project_root
+                / "src"
+                / "TirganachReloaded"
+                / "data"
+                / "verified_icon_mappings.json"
+            ),
             "JSON Files (*.json)",
         )
 

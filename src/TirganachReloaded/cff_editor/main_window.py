@@ -19,6 +19,8 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
+from .widgets.progress_dialog import ProgressDialog
+
 from ..tirganach.types import Language
 from .data_model import CFFDataModel
 from .widgets.building_wizard import BuildingWizard
@@ -118,6 +120,23 @@ class MainWindow(QMainWindow):
         save_as_action.setShortcut("Ctrl+Shift+S")
         save_as_action.triggered.connect(self.save_file_as)
         file_menu.addAction(save_as_action)
+
+        file_menu.addSeparator()
+
+        reload_cache_action = QAction("&Reload from CFF and Rebuild Cache", self)
+        reload_cache_action.setStatusTip("Force reload from CFF file and rebuild cache")
+        reload_cache_action.triggered.connect(self.reload_and_rebuild_cache)
+        file_menu.addAction(reload_cache_action)
+
+        compare_action = QAction("&Compare with...", self)
+        compare_action.setStatusTip("Compare current CFF with another CFF file")
+        compare_action.triggered.connect(self.compare_with_file)
+        file_menu.addAction(compare_action)
+
+        cache_info_action = QAction("Cache &Info...", self)
+        cache_info_action.setStatusTip("View cache statistics and management controls")
+        cache_info_action.triggered.connect(self.show_cache_info)
+        file_menu.addAction(cache_info_action)
 
         file_menu.addSeparator()
 
@@ -315,6 +334,307 @@ class MainWindow(QMainWindow):
                 self.update_status()
             else:
                 QMessageBox.critical(self, "Error", "Failed to save file")
+
+    def reload_and_rebuild_cache(self):
+        """Force reload from CFF and rebuild cache with progress dialog"""
+        if not self.data_model.file_path:
+            QMessageBox.warning(self, "Warning", "No file currently loaded")
+            return
+
+        def rebuild_operation(progress_callback=None, step_callback=None):
+            """Background operation to rebuild cache"""
+            if step_callback:
+                step_callback("Parsing CFF file")
+            if progress_callback:
+                progress_callback(10, "Parsing CFF file...")
+
+            success = self.data_model.load_file(self.data_model.file_path, force_parse=True)
+
+            if success:
+                if step_callback:
+                    step_callback("Refreshing UI")
+                if progress_callback:
+                    progress_callback(90, "Refreshing UI...")
+
+                # Refresh UI in main thread
+                self.refresh_view()
+
+                if progress_callback:
+                    progress_callback(100, "Cache rebuilt successfully")
+            else:
+                raise Exception("Failed to rebuild cache")
+
+            return success
+
+        # Show progress dialog
+        progress_dialog = ProgressDialog(
+            "Rebuilding Cache",
+            f"Rebuilding cache for {self.data_model.file_path}",
+            self
+        )
+        progress_dialog.start_operation(rebuild_operation)
+
+    def compare_with_file(self):
+        """Compare current CFF with another CFF file"""
+        if not self.data_model.game_data:
+            QMessageBox.warning(self, "Warning", "No file currently loaded")
+            return
+
+        file_path, _ = QFileDialog.getOpenFileName(
+            self,
+            "Select CFF file to compare with",
+            str(Path(self.data_model.file_path).parent) if self.data_model.file_path else "",
+            "CFF Files (*.cff);;All Files (*)",
+        )
+
+        if file_path:
+            self._perform_comparison(file_path)
+
+    def show_cache_info(self):
+        """Show the cache information dialog"""
+        try:
+            from .widgets.cache_info_dialog import CacheInfoDialog
+
+            dialog = CacheInfoDialog(self.data_model, self)
+            dialog.exec()
+
+        except ImportError as e:
+            QMessageBox.warning(
+                self, "Import Error", f"Failed to load cache info dialog: {str(e)}"
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Error", f"An error occurred opening cache info: {str(e)}"
+            )
+
+    def _perform_comparison(self, compare_file_path: str):
+        """Perform the actual comparison between current and selected file"""
+        if not self.data_model.game_data:
+            QMessageBox.warning(self, "Warning", "No current file loaded")
+            return
+
+        try:
+            self.statusBar.showMessage("Loading comparison file...")
+
+            # Check if we can use DB-based comparison
+            if (hasattr(self.data_model, 'data_provider') and
+                self.data_model.data_provider and
+                hasattr(self.data_model.data_provider, 'get_quests')):
+                # Use DB-based comparison
+                comparison_text = self._perform_db_comparison(compare_file_path)
+            else:
+                # Use traditional CFF comparison
+                comparison_text = self._perform_cff_comparison(compare_file_path)
+
+            # Show results in a dialog
+            self._show_comparison_results(comparison_text, compare_file_path)
+
+            self.statusBar.showMessage("Comparison completed", 3000)
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to compare files: {str(e)}")
+            self.statusBar.showMessage("Comparison failed", 3000)
+
+    def _perform_cff_comparison(self, compare_file_path: str) -> str:
+        """Perform traditional CFF file comparison"""
+        from tirganach.compare import compare
+        from tirganach import GameData
+
+        # Load the comparison file
+        compare_data = GameData(compare_file_path)
+
+        # Create a simple text output for the comparison
+        import io
+        import sys
+        from contextlib import redirect_stdout
+
+        # Capture the comparison output
+        output_buffer = io.StringIO()
+        with redirect_stdout(output_buffer):
+            compare(self.data_model.game_data, compare_data)
+
+        return output_buffer.getvalue()
+
+    def _perform_db_comparison(self, compare_file_path: str) -> str:
+        """Perform database-based comparison for faster results"""
+        try:
+            from cff_editor.data_providers import DatabaseManager, DBProvider
+            import tempfile
+            import os
+
+            # Create temporary database for comparison file
+            with tempfile.NamedTemporaryFile(suffix='.db', delete=False) as f:
+                temp_db_path = f.name
+
+            try:
+                # Load comparison file and create its database
+                from tirganach import GameData
+                compare_data = GameData(compare_file_path)
+
+                # Generate fingerprint for comparison file
+                import hashlib
+                from pathlib import Path
+                path = Path(compare_file_path)
+                stat = path.stat()
+                compare_fingerprint = hashlib.sha256(f"{path.absolute()}{stat.st_size}{stat.st_mtime}".encode()).hexdigest()
+
+                # Create and populate comparison database
+                compare_db = DatabaseManager(temp_db_path)
+                compare_db.create_schema()
+                compare_db.populate_from_cff(compare_data, compare_fingerprint)
+                compare_provider = DBProvider(temp_db_path)
+
+                # Perform DB-based comparison
+                return self._compare_databases(self.data_model.data_provider, compare_provider, compare_file_path)
+
+            finally:
+                # Clean up temporary database
+                try:
+                    os.unlink(temp_db_path)
+                except:
+                    pass
+
+        except Exception as e:
+            # Fall back to CFF comparison
+            print(f"DB comparison failed, falling back to CFF: {e}")
+            return self._perform_cff_comparison(compare_file_path)
+
+    def _compare_databases(self, db1_provider, db2_provider, compare_file_path: str) -> str:
+        """Compare two database providers and return formatted diff"""
+        lines = []
+        lines.append("Database-based Comparison Results")
+        lines.append("=" * 50)
+        lines.append(f"File 1: {self.data_model.file_path or 'Current'}")
+        lines.append(f"File 2: {compare_file_path}")
+        lines.append("")
+
+        try:
+            # Compare quests
+            quests1 = db1_provider.get_quests()
+            quests2 = db2_provider.get_quests()
+
+            lines.append("QUESTS COMPARISON")
+            lines.append("-" * 20)
+
+            quests1_dict = {q.quest_id: q for q in quests1}
+            quests2_dict = {q.quest_id: q for q in quests2}
+
+            # Quests in file 1 but not in file 2
+            only_in_1 = set(quests1_dict.keys()) - set(quests2_dict.keys())
+            if only_in_1:
+                lines.append(f"Quests only in file 1 ({len(only_in_1)}):")
+                for qid in sorted(only_in_1):
+                    quest = quests1_dict[qid]
+                    lines.append(f"  - ID {qid}: {quest.name or 'Unnamed'}")
+                lines.append("")
+
+            # Quests in file 2 but not in file 1
+            only_in_2 = set(quests2_dict.keys()) - set(quests1_dict.keys())
+            if only_in_2:
+                lines.append(f"Quests only in file 2 ({len(only_in_2)}):")
+                for qid in sorted(only_in_2):
+                    quest = quests2_dict[qid]
+                    lines.append(f"  - ID {qid}: {quest.name or 'Unnamed'}")
+                lines.append("")
+
+            # Modified quests
+            modified = []
+            for qid in set(quests1_dict.keys()) & set(quests2_dict.keys()):
+                q1 = quests1_dict[qid]
+                q2 = quests2_dict[qid]
+                if (q1.name_id != q2.name_id or
+                    q1.description_id != q2.description_id or
+                    q1.name != q2.name or
+                    q1.description != q2.description):
+                    modified.append((qid, q1, q2))
+
+            if modified:
+                lines.append(f"Modified quests ({len(modified)}):")
+                for qid, q1, q2 in modified[:10]:  # Limit to first 10
+                    lines.append(f"  - ID {qid}:")
+                    if q1.name != q2.name:
+                        lines.append(f"    Name: '{q1.name}' -> '{q2.name}'")
+                    if q1.name_id != q2.name_id:
+                        lines.append(f"    Name ID: {q1.name_id} -> {q2.name_id}")
+                    if q1.description_id != q2.description_id:
+                        lines.append(f"    Description ID: {q1.description_id} -> {q2.description_id}")
+                if len(modified) > 10:
+                    lines.append(f"  ... and {len(modified) - 10} more")
+                lines.append("")
+
+            lines.append(f"Summary: {len(quests1)} quests in file 1, {len(quests2)} quests in file 2")
+
+        except Exception as e:
+            lines.append(f"Error during quest comparison: {e}")
+
+        return "\n".join(lines)
+
+    def _show_comparison_results(self, comparison_text: str, compare_file_path: str):
+        """Show comparison results in a dialog"""
+        from PySide6.QtWidgets import QDialog, QVBoxLayout, QTextEdit, QHBoxLayout, QPushButton
+
+        dialog = QDialog(self)
+        compare_path = Path(compare_file_path)
+        dialog.setWindowTitle(f"Comparison Results - {compare_path.name}")
+        dialog.setMinimumSize(800, 600)
+
+        layout = QVBoxLayout(dialog)
+
+        # Text area for results
+        text_edit = QTextEdit()
+        text_edit.setPlainText(comparison_text)
+        text_edit.setReadOnly(True)
+        layout.addWidget(text_edit)
+
+        # Buttons
+        button_layout = QHBoxLayout()
+
+        copy_button = QPushButton("Copy to Clipboard")
+        copy_button.clicked.connect(lambda: self._copy_to_clipboard(comparison_text))
+        button_layout.addWidget(copy_button)
+
+        save_button = QPushButton("Save As...")
+        save_button.clicked.connect(lambda: self._save_comparison_results(comparison_text, compare_file_path))
+        button_layout.addWidget(save_button)
+
+        close_button = QPushButton("Close")
+        close_button.clicked.connect(dialog.accept)
+        button_layout.addWidget(close_button)
+
+        layout.addLayout(button_layout)
+
+        dialog.exec()
+
+    def _copy_to_clipboard(self, text: str):
+        """Copy text to clipboard"""
+        from PySide6.QtWidgets import QApplication
+        clipboard = QApplication.clipboard()
+        clipboard.setText(text)
+
+    def _save_comparison_results(self, comparison_text: str, compare_file_path: str):
+        """Save comparison results to file"""
+        current_file_stem = Path(self.data_model.file_path).stem if self.data_model.file_path else "current"
+        default_name = f"comparison_{current_file_stem}_vs_{Path(compare_file_path).stem}.txt"
+
+        file_path, _ = QFileDialog.getSaveFileName(
+            self,
+            "Save Comparison Results",
+            default_name,
+            "Text Files (*.txt);;Markdown Files (*.md);;All Files (*)",
+        )
+
+        if file_path:
+            try:
+                with open(file_path, 'w', encoding='utf-8') as f:
+                    f.write(f"# CFF Comparison Results\n\n")
+                    f.write(f"**File 1:** {self.data_model.file_path}\n")
+                    f.write(f"**File 2:** {compare_file_path}\n\n")
+                    f.write("```\n")
+                    f.write(comparison_text)
+                    f.write("```\n")
+                self.statusBar.showMessage("Comparison results saved", 3000)
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Failed to save results: {str(e)}")
 
     def refresh_view(self):
         """Refresh the current view"""

@@ -1,5 +1,9 @@
 # SpellForce - Exclude large binary game files
 *.pak
+
+# cached files
+src/TirganachReloaded/data/cache/*
+
 # Executables and DLLs (game binaries)
 *.exe
 *.dll

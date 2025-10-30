@@ -28,6 +28,7 @@ dependencies = [
     "pillow>=10.0.0",   # For image processing
     "pyyaml>=6.0",      # For configuration files
     "pytest>=7.0.0",
+    "PyQt6>=6.0.0",
 ]
 
 
