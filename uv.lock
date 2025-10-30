@@ -733,7 +733,6 @@ source = { editable = "." }
 dependencies = [
     { name = "pillow", version = "11.3.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "pillow", version = "12.0.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
-    { name = "pyqt6" },
     { name = "pyside6" },
     { name = "pytest" },
     { name = "pyyaml" },
@@ -745,6 +744,8 @@ dev = [
     { name = "isort", version = "6.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "isort", version = "7.0.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
     { name = "mypy" },
+    { name = "pyqt6" },
+    { name = "pyqt6-qt6" },
     { name = "pytest" },
 ]
 
@@ -754,7 +755,8 @@ requires-dist = [
     { name = "isort", marker = "extra == 'dev'", specifier = ">=5.12.0" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.0.0" },
     { name = "pillow", specifier = ">=10.0.0" },
-    { name = "pyqt6", specifier = ">=6.0.0" },
+    { name = "pyqt6", marker = "extra == 'dev'", specifier = ">=6.0.0" },
+    { name = "pyqt6-qt6", marker = "extra == 'dev'", specifier = ">=6.0.0" },
     { name = "pyside6", specifier = ">=6.0.0" },
     { name = "pytest", specifier = ">=7.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0.0" },
