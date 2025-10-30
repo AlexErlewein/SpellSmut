@@ -245,14 +245,15 @@ class QuestHierarchyViewer(QMainWindow):
         # Store quest data in item
         item.setData(0, Qt.ItemDataRole.UserRole, quest_id)
 
-        # Set colors based on type
+        # Set formatting based on type
         if quest_type == "Main Quest":
-            item.setForeground(0, Qt.GlobalColor.darkBlue)
             font = item.font(0)
             font.setBold(True)
             item.setFont(0, font)
         elif quest_type == "Sub-quest (Parent)":
-            item.setForeground(0, Qt.GlobalColor.darkGreen)
+            font = item.font(0)
+            font.setBold(True)
+            item.setFont(0, font)
 
         # Add to tree
         if parent_item:

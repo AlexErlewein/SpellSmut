@@ -19,7 +19,7 @@ A full PySide6 GUI application that displays quests in an interactive tree widge
 
 **Features:**
 - Visual tree view with expandable/collapsible branches
-- Color-coded quest types (Main quests in bold blue, sub-quests in green)
+- Bold formatting for main quests and sub-quests with children
 - Columns: Quest Name, Quest ID, Type, Parent ID, Order Index
 - Double-click any quest to see detailed information
 - Expand/Collapse All buttons

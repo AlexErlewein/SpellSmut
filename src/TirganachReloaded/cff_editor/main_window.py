@@ -27,6 +27,7 @@ from .widgets.element_table import ElementTableWidget
 from .widgets.progress_dialog import ProgressDialog
 from .widgets.property_editor import PropertyEditorWidget
 from .widgets.quest_details import QuestDetailsWidget
+from .widgets.quest_hierarchy_tree import QuestHierarchyTreeWidget
 
 
 class MainWindow(QMainWindow):
@@ -79,9 +80,13 @@ class MainWindow(QMainWindow):
         self.category_tree = CategoryTreeWidget(self.data_model)
         splitter.addWidget(self.category_tree)
 
-        # Center panel - Element table
+        # Center panel - Element table and Quest hierarchy tree (switchable)
         self.element_table = ElementTableWidget(self.data_model)
+        self.quest_hierarchy_tree = QuestHierarchyTreeWidget(self.data_model)
+        self.quest_hierarchy_tree.hide()  # Hidden by default
+
         splitter.addWidget(self.element_table)
+        splitter.addWidget(self.quest_hierarchy_tree)
 
         # Right panel - Property editor
         self.property_editor = PropertyEditorWidget(self.data_model)
@@ -683,6 +688,7 @@ class MainWindow(QMainWindow):
         """Refresh the current view"""
         self.category_tree.refresh()
         self.element_table.refresh()
+        self.quest_hierarchy_tree.refresh()
         self.property_editor.refresh()
         self.quest_details.update_quest_details()  # Refresh quest details if visible
 
@@ -698,12 +704,23 @@ class MainWindow(QMainWindow):
 
     def on_category_changed(self, category):
         """Called when category changes"""
-        # Show/hide quest details panel based on category
+        # Show/hide quest details panel and quest hierarchy tree based on category
         if category == "quests":
+            # Hide element table, show quest hierarchy tree
+            self.element_table.hide()
+            self.quest_hierarchy_tree.show()
+            self.quest_hierarchy_tree.load_quests()
+
+            # Show quest details panel
             self.quest_details.show()
             # Adjust splitter sizes to accommodate 4th panel
             self.adjust_splitter_for_quests()
         else:
+            # Show element table, hide quest hierarchy tree
+            self.element_table.show()
+            self.quest_hierarchy_tree.hide()
+
+            # Hide quest details panel
             self.quest_details.hide()
             # Reset to 3-panel layout
             self.adjust_splitter_for_normal()

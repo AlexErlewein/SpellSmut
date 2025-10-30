@@ -3,67 +3,86 @@ Dialog Branching Editor Widget
 Interactive editor for quest dialog trees with branching conversations
 """
 
-from PySide6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QLabel,
-                               QTreeWidget, QTreeWidgetItem, QPushButton,
-                               QMenu, QMessageBox, QInputDialog, QSplitter,
-                               QGroupBox, QTextEdit, QComboBox, QListWidget,
-                               QListWidgetItem, QScrollArea, QFrame, QLineEdit)
-from PySide6.QtCore import Qt, Signal, QPoint
-from PySide6.QtGui import QAction, QIcon, QFont
-from typing import Optional, List, Dict, Any, Tuple
 import re
+from typing import Any, Dict, List, Optional
+
+from PySide6.QtCore import QPoint, Qt, Signal
+from PySide6.QtGui import QAction
+from PySide6.QtWidgets import (
+    QComboBox,
+    QGroupBox,
+    QHBoxLayout,
+    QInputDialog,
+    QLabel,
+    QLineEdit,
+    QMenu,
+    QMessageBox,
+    QPushButton,
+    QSplitter,
+    QTextEdit,
+    QTreeWidget,
+    QTreeWidgetItem,
+    QVBoxLayout,
+    QWidget,
+)
 
 
 class DialogNode:
     """Data model for dialog nodes in the conversation tree"""
 
-    def __init__(self, dialogue_name: str = "", text: str = "", speaker: str = "NPC",
-                 is_player_choice: bool = False, parent_choice: Optional[str] = None):
+    def __init__(
+        self,
+        dialogue_name: str = "",
+        text: str = "",
+        speaker: str = "NPC",
+        is_player_choice: bool = False,
+        parent_choice: Optional[str] = None,
+    ):
         self.dialogue_name = dialogue_name  # e.g., "ashawe001"
         self.text = text
         self.speaker = speaker  # "NPC" or "Player"
         self.is_player_choice = is_player_choice
         self.parent_choice = parent_choice  # Which player choice leads to this
-        self.children: List['DialogNode'] = []  # NPC responses or player choices
+        self.children: List["DialogNode"] = []  # NPC responses or player choices
         self.order_index = 0
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for serialization"""
         return {
-            'dialogue_name': self.dialogue_name,
-            'text': self.text,
-            'speaker': self.speaker,
-            'is_player_choice': self.is_player_choice,
-            'parent_choice': self.parent_choice,
-            'order_index': self.order_index,
-            'children': [child.to_dict() for child in self.children]
+            "dialogue_name": self.dialogue_name,
+            "text": self.text,
+            "speaker": self.speaker,
+            "is_player_choice": self.is_player_choice,
+            "parent_choice": self.parent_choice,
+            "order_index": self.order_index,
+            "children": [child.to_dict() for child in self.children],
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'DialogNode':
+    def from_dict(cls, data: Dict[str, Any]) -> "DialogNode":
         """Create from dictionary"""
         node = cls(
-            dialogue_name=data.get('dialogue_name', ''),
-            text=data.get('text', ''),
-            speaker=data.get('speaker', 'NPC'),
-            is_player_choice=data.get('is_player_choice', False),
-            parent_choice=data.get('parent_choice')
+            dialogue_name=data.get("dialogue_name", ""),
+            text=data.get("text", ""),
+            speaker=data.get("speaker", "NPC"),
+            is_player_choice=data.get("is_player_choice", False),
+            parent_choice=data.get("parent_choice"),
         )
-        node.order_index = data.get('order_index', 0)
-        node.children = [cls.from_dict(child) for child in data.get('children', [])]
+        node.order_index = data.get("order_index", 0)
+        node.children = [cls.from_dict(child) for child in data.get("children", [])]
         return node
 
-    def add_child(self, child: 'DialogNode'):
+    def add_child(self, child: "DialogNode"):
         """Add a child node"""
         self.children.append(child)
         self.children.sort(key=lambda x: x.order_index)
 
-    def remove_child(self, child: 'DialogNode'):
+    def remove_child(self, child: "DialogNode"):
         """Remove a child node"""
         if child in self.children:
             self.children.remove(child)
 
-    def get_all_nodes(self) -> List['DialogNode']:
+    def get_all_nodes(self) -> List["DialogNode"]:
         """Get all nodes in the tree recursively"""
         nodes = [self]
         for child in self.children:
@@ -73,7 +92,7 @@ class DialogNode:
     def get_next_dialogue_name(self, base_name: str) -> str:
         """Get next available dialogue name in sequence"""
         # Extract base and number from current name
-        match = re.match(r'(.+?)(\d+)$', self.dialogue_name)
+        match = re.match(r"(.+?)(\d+)$", self.dialogue_name)
         if match:
             base, num = match.groups()
             next_num = int(num) + 1
@@ -105,7 +124,7 @@ class DialogTreeWidget(QTreeWidget):
         self.setContextMenuPolicy(Qt.CustomContextMenu)
 
         # Set column widths
-        self.setColumnWidth(0, 80)   # Speaker
+        self.setColumnWidth(0, 80)  # Speaker
         self.setColumnWidth(1, 120)  # Dialog Name
         self.setColumnWidth(2, 300)  # Text Preview
 
@@ -138,19 +157,19 @@ class DialogTreeWidget(QTreeWidget):
         item.setText(1, dialog_node.dialogue_name or "New Dialog")
 
         # Text preview (truncated)
-        preview = dialog_node.text[:50] + "..." if dialog_node.text and len(dialog_node.text) > 50 else dialog_node.text or "No text"
+        preview = (
+            dialog_node.text[:50] + "..."
+            if dialog_node.text and len(dialog_node.text) > 50
+            else dialog_node.text or "No text"
+        )
         item.setText(2, preview)
 
-        # Set font and color based on type
+        # Set font formatting based on type (no colors)
         font = item.font(0)
         if dialog_node.is_player_choice:
             font.setItalic(True)
-            item.setForeground(0, Qt.blue)
-            item.setForeground(1, Qt.blue)
-            item.setForeground(2, Qt.blue)
         else:
             font.setBold(True)
-            item.setForeground(0, Qt.darkGreen)
 
         for col in range(3):
             item.setFont(col, font)
@@ -181,11 +200,15 @@ class DialogTreeWidget(QTreeWidget):
 
         # Add dialog actions
         add_npc_response_action = QAction("Add NPC Response", self)
-        add_npc_response_action.triggered.connect(lambda: self.add_dialog_response(item, "NPC"))
+        add_npc_response_action.triggered.connect(
+            lambda: self.add_dialog_response(item, "NPC")
+        )
         menu.addAction(add_npc_response_action)
 
         add_player_choice_action = QAction("Add Player Choice", self)
-        add_player_choice_action.triggered.connect(lambda: self.add_dialog_response(item, "Player"))
+        add_player_choice_action.triggered.connect(
+            lambda: self.add_dialog_response(item, "Player")
+        )
         menu.addAction(add_player_choice_action)
 
         menu.addSeparator()
@@ -211,7 +234,7 @@ class DialogTreeWidget(QTreeWidget):
             return
 
         # Determine if this is a player choice or NPC response
-        is_player_choice = (speaker_type == "Player")
+        is_player_choice = speaker_type == "Player"
 
         # Generate dialogue name
         base_name = self.extract_base_name(parent_node.dialogue_name)
@@ -222,7 +245,7 @@ class DialogTreeWidget(QTreeWidget):
             dialogue_name=next_name,
             text=f"New {speaker_type.lower()} dialog text...",
             speaker=speaker_type,
-            is_player_choice=is_player_choice
+            is_player_choice=is_player_choice,
         )
 
         # Add as child
@@ -237,7 +260,7 @@ class DialogTreeWidget(QTreeWidget):
 
     def extract_base_name(self, dialogue_name: str) -> str:
         """Extract base name from dialogue name (remove numbers)"""
-        match = re.match(r'(.+?)\d*$', dialogue_name)
+        match = re.match(r"(.+?)\d*$", dialogue_name)
         return match.group(1) if match else dialogue_name
 
     def edit_dialog_text(self, item: QTreeWidgetItem):
@@ -248,9 +271,7 @@ class DialogTreeWidget(QTreeWidget):
 
         # Open text edit dialog
         text, ok = QInputDialog.getMultiLineText(
-            self, "Edit Dialog Text",
-            "Dialog text:",
-            dialog_node.text
+            self, "Edit Dialog Text", "Dialog text:", dialog_node.text
         )
 
         if ok and text != dialog_node.text:
@@ -268,9 +289,11 @@ class DialogTreeWidget(QTreeWidget):
 
         # Confirm deletion
         reply = QMessageBox.question(
-            self, "Delete Dialog",
+            self,
+            "Delete Dialog",
             f"Are you sure you want to delete dialog '{dialog_node.dialogue_name}' and all its branches?",
-            QMessageBox.Yes, QMessageBox.No
+            QMessageBox.Yes,
+            QMessageBox.No,
         )
 
         if reply == QMessageBox.Yes:
@@ -450,7 +473,7 @@ class DialogBranchingEditorWidget(QWidget):
 
         self.speaker_combo.currentTextChanged.connect(self.on_speaker_changed)
         self.dialog_text_edit.textChanged.connect(self.update_preview)
-        
+
         # Connect to language changes
         self.data_model.language_changed.connect(self.on_language_changed)
 
@@ -458,8 +481,9 @@ class DialogBranchingEditorWidget(QWidget):
         """Add a new root-level dialog"""
         # Get base name from user
         base_name, ok = QInputDialog.getText(
-            self, "New Root Dialog",
-            "Enter base name for the dialog sequence (e.g., 'myquest'):"
+            self,
+            "New Root Dialog",
+            "Enter base name for the dialog sequence (e.g., 'myquest'):",
         )
 
         if ok and base_name:
@@ -468,7 +492,7 @@ class DialogBranchingEditorWidget(QWidget):
                 dialogue_name=f"{base_name}001",
                 text="Hello, adventurer! How can I help you?",
                 speaker="NPC",
-                is_player_choice=False
+                is_player_choice=False,
             )
 
             # Add to tree
@@ -482,28 +506,31 @@ class DialogBranchingEditorWidget(QWidget):
         try:
             # Get the currently selected language
             current_language = self.data_model.get_current_language()
-            
+
             # Get localisation table to find quest-related dialogs
-            localisation_table = self.data_model.get_elements('localisation')
+            localisation_table = self.data_model.get_elements("localisation")
             if not localisation_table:
-                QMessageBox.information(self, "Load from Quest", "No localisation data available.")
+                QMessageBox.information(
+                    self, "Load from Quest", "No localisation data available."
+                )
                 return
 
             # Look for dialogs that are in the current language
             current_dialogs = []
             for entry in localisation_table:
-                if (getattr(entry, 'is_dialogue', False) and 
-                    getattr(entry, 'language', None) == current_language):
-                    
-                    dialogue_name = getattr(entry, 'dialogue_name', '')
-                    text_content = getattr(entry, 'text', '')
-                    
+                if (
+                    getattr(entry, "is_dialogue", False)
+                    and getattr(entry, "language", None) == current_language
+                ):
+                    dialogue_name = getattr(entry, "dialogue_name", "")
+                    text_content = getattr(entry, "text", "")
+
                     if dialogue_name and text_content:
                         # Create a base dialog node for each dialogue entry
                         dialog_node = DialogNode(
                             dialogue_name=dialogue_name,
                             text=text_content,
-                            speaker="NPC"  # Default to NPC
+                            speaker="NPC",  # Default to NPC
                         )
                         current_dialogs.append(dialog_node)
 
@@ -512,20 +539,19 @@ class DialogBranchingEditorWidget(QWidget):
                 self.current_dialog_nodes = current_dialogs
                 self.dialog_tree.load_dialog_tree(current_dialogs)
                 QMessageBox.information(
-                    self, "Load from Quest", 
-                    f"Loaded {len(current_dialogs)} dialogs in {current_language.name} language."
+                    self,
+                    "Load from Quest",
+                    f"Loaded {len(current_dialogs)} dialogs in {current_language.name} language.",
                 )
             else:
                 QMessageBox.information(
-                    self, "Load from Quest", 
-                    f"No dialogs found in {current_language.name} language."
+                    self,
+                    "Load from Quest",
+                    f"No dialogs found in {current_language.name} language.",
                 )
 
         except Exception as e:
-            QMessageBox.critical(
-                self, "Error", 
-                f"Failed to load dialogs: {str(e)}"
-            )
+            QMessageBox.critical(self, "Error", f"Failed to load dialogs: {str(e)}")
 
     def save_dialogs(self):
         """Save dialog tree changes"""
@@ -550,7 +576,9 @@ class DialogBranchingEditorWidget(QWidget):
             self.data_model.modified = True
             self.data_model.data_modified.emit()
 
-            QMessageBox.information(self, "Success", f"Saved {len(all_nodes)} dialog entries.")
+            QMessageBox.information(
+                self, "Success", f"Saved {len(all_nodes)} dialog entries."
+            )
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to save dialogs: {str(e)}")
@@ -573,12 +601,16 @@ class DialogBranchingEditorWidget(QWidget):
 
         # Check for invalid dialogue names
         for node in dialog_nodes:
-            if not re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*\d*$', node.dialogue_name):
+            if not re.match(r"^[a-zA-Z_][a-zA-Z0-9_]*\d*$", node.dialogue_name):
                 errors.append(f"Invalid dialogue name: {node.dialogue_name}")
 
         if errors:
             error_text = "\n".join(errors)
-            QMessageBox.warning(self, "Validation Errors", f"Please fix the following errors:\n\n{error_text}")
+            QMessageBox.warning(
+                self,
+                "Validation Errors",
+                f"Please fix the following errors:\n\n{error_text}",
+            )
             return False
 
         return True
@@ -651,7 +683,7 @@ class DialogBranchingEditorWidget(QWidget):
             dialog_node = current_item.data(0, Qt.UserRole)
             if dialog_node:
                 dialog_node.speaker = speaker
-                dialog_node.is_player_choice = (speaker == "Player")
+                dialog_node.is_player_choice = speaker == "Player"
                 # Update tree display
                 current_item.setText(0, speaker)
                 self.on_dialogs_modified()
@@ -660,7 +692,9 @@ class DialogBranchingEditorWidget(QWidget):
         """Update dialog properties from UI"""
         current_item = self.dialog_tree.currentItem()
         if not current_item:
-            QMessageBox.warning(self, "No Selection", "Please select a dialog to update.")
+            QMessageBox.warning(
+                self, "No Selection", "Please select a dialog to update."
+            )
             return
 
         dialog_node = current_item.data(0, Qt.UserRole)
@@ -669,12 +703,16 @@ class DialogBranchingEditorWidget(QWidget):
 
         # Update properties
         dialog_node.speaker = self.speaker_combo.currentText()
-        dialog_node.is_player_choice = (dialog_node.speaker == "Player")
+        dialog_node.is_player_choice = dialog_node.speaker == "Player"
         dialog_node.text = self.dialog_text_edit.toPlainText()
 
         # Update tree display
         current_item.setText(0, dialog_node.speaker)
-        preview = dialog_node.text[:50] + "..." if len(dialog_node.text) > 50 else dialog_node.text
+        preview = (
+            dialog_node.text[:50] + "..."
+            if len(dialog_node.text) > 50
+            else dialog_node.text
+        )
         current_item.setText(2, preview)
 
         self.on_dialogs_modified()
@@ -689,7 +727,7 @@ class DialogBranchingEditorWidget(QWidget):
         """Handle language change"""
         # Update the view to show dialogs in the new language
         # This could reload the dialogs for the selected quest
-        if hasattr(self, 'current_quest_node'):
+        if hasattr(self, "current_quest_node"):
             self.load_from_selected_quest()
 
     def on_dialogs_modified(self):
