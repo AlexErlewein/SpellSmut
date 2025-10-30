@@ -9,6 +9,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QComboBox,
     QFormLayout,
+    QGroupBox,
     QHBoxLayout,
     QLabel,
     QLineEdit,
@@ -16,6 +17,7 @@ from PySide6.QtWidgets import (
     QPushButton,
     QScrollArea,
     QSpinBox,
+    QTextEdit,
     QVBoxLayout,
     QWidget,
 )
@@ -48,12 +50,58 @@ class PropertyEditorWidget(QWidget):
         scroll.setWidgetResizable(True)
         scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
-        # Icon display
+        # Icon display (will be hidden for categories without icons like quests)
         self.icon_label = QLabel()
         self.icon_label.setFixedSize(128, 128)
         self.icon_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.icon_label.setStyleSheet("border: 2px solid #555; background: #222;")
         layout.addWidget(self.icon_label)
+
+        # Quest information section (only shown for quests)
+        self.quest_info_group = QGroupBox("Quest Information")
+        quest_info_layout = QVBoxLayout(self.quest_info_group)
+
+        # Quest ID
+        quest_id_layout = QHBoxLayout()
+        quest_id_layout.addWidget(QLabel("Quest ID:"))
+        self.quest_id_label = QLabel("-")
+        self.quest_id_label.setStyleSheet("font-weight: bold;")
+        quest_id_layout.addWidget(self.quest_id_label)
+        quest_id_layout.addStretch()
+        quest_info_layout.addLayout(quest_id_layout)
+
+        # Name ID
+        name_id_layout = QHBoxLayout()
+        name_id_layout.addWidget(QLabel("Name ID:"))
+        self.name_id_label = QLabel("-")
+        name_id_layout.addWidget(self.name_id_label)
+        name_id_layout.addStretch()
+        quest_info_layout.addLayout(name_id_layout)
+
+        # Description ID
+        desc_id_layout = QHBoxLayout()
+        desc_id_layout.addWidget(QLabel("Description ID:"))
+        self.desc_id_label = QLabel("-")
+        desc_id_layout.addWidget(self.desc_id_label)
+        desc_id_layout.addStretch()
+        quest_info_layout.addLayout(desc_id_layout)
+
+        # Quest Name (localized)
+        quest_info_layout.addWidget(QLabel("Quest Name:"))
+        self.quest_name_display = QTextEdit()
+        self.quest_name_display.setMaximumHeight(50)
+        self.quest_name_display.setReadOnly(True)
+        quest_info_layout.addWidget(self.quest_name_display)
+
+        # Quest Description (localized)
+        quest_info_layout.addWidget(QLabel("Quest Description:"))
+        self.quest_desc_display = QTextEdit()
+        self.quest_desc_display.setMaximumHeight(100)
+        self.quest_desc_display.setReadOnly(True)
+        quest_info_layout.addWidget(self.quest_desc_display)
+
+        self.quest_info_group.hide()  # Hidden by default
+        layout.addWidget(self.quest_info_group)
 
         # Properties container
         self.props_widget = QWidget()
@@ -103,16 +151,53 @@ class PropertyEditorWidget(QWidget):
             self.header_label.setText("Select an element to edit")
             self.save_button.setEnabled(False)
             self.cancel_button.setEnabled(False)
+            self.icon_label.hide()
+            self.quest_info_group.hide()
             return
 
-        # Load and display icon
-        icon_pixmap = self.data_model.get_icon_pixmap(
-            self.current_category, self.current_element, size=(128, 128)
-        )
-        if icon_pixmap:
-            self.icon_label.setPixmap(icon_pixmap)
+        # Hide icon for quest category (quests don't have icons)
+        is_quest = self.current_category and "quest" in self.current_category.lower()
+
+        if is_quest:
+            self.icon_label.hide()
+            self.quest_info_group.show()
+
+            # Populate quest information
+            quest_id = getattr(self.current_element, "quest_id", "Unknown")
+            name_id = getattr(self.current_element, "name_id", "None")
+            description_id = getattr(self.current_element, "description_id", "None")
+
+            self.quest_id_label.setText(str(quest_id))
+            self.name_id_label.setText(str(name_id) if name_id else "None")
+            self.desc_id_label.setText(
+                str(description_id) if description_id else "None"
+            )
+
+            # Get localized name and description
+            quest_name = self.data_model.get_localised_text(
+                self.current_element, "name"
+            )
+            if not quest_name:
+                quest_name = getattr(self.current_element, "name", "No name available")
+
+            quest_desc = self.data_model.get_advanced_description(self.current_element)
+            if not quest_desc:
+                quest_desc = "No description available"
+
+            self.quest_name_display.setPlainText(str(quest_name))
+            self.quest_desc_display.setPlainText(str(quest_desc))
         else:
-            self.icon_label.setText("No Icon")
+            self.icon_label.show()
+            self.quest_info_group.hide()
+
+            # Load and display icon
+            icon_pixmap = self.data_model.get_icon_pixmap(
+                self.current_category, self.current_element, size=(128, 128)
+            )
+            if icon_pixmap:
+                self.icon_label.setPixmap(icon_pixmap)
+            else:
+                self.icon_label.setText("No Icon")
 
         # Update header
         element_name = "Unknown"

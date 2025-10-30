@@ -44,18 +44,14 @@ class QuestDetailsWidget(QWidget):
         layout.setContentsMargins(5, 5, 5, 5)
 
         # Title
-        self.title_label = QLabel("Quest Details")
+        self.title_label = QLabel("Quest Dialogs & Hierarchy")
         self.title_label.setStyleSheet("font-weight: bold; font-size: 14px;")
         layout.addWidget(self.title_label)
 
         # Create splitter for main content
         splitter = QSplitter(Qt.Orientation.Vertical)
 
-        # Top section - Basic quest info
-        self.setup_basic_info_section()
-        splitter.addWidget(self.basic_info_group)
-
-        # Middle section - Quest dialogs
+        # Top section - Quest dialogs
         self.setup_dialogs_section()
         splitter.addWidget(self.dialogs_group)
 
@@ -63,41 +59,10 @@ class QuestDetailsWidget(QWidget):
         self.setup_hierarchy_section()
         splitter.addWidget(self.hierarchy_group)
 
-        # Set splitter proportions
-        splitter.setSizes([150, 350, 200])
+        # Set splitter proportions (dialogs get more space)
+        splitter.setSizes([400, 200])
 
         layout.addWidget(splitter)
-
-    def setup_basic_info_section(self):
-        """Setup basic quest information section"""
-        self.basic_info_group = QGroupBox("Quest Information")
-        layout = QVBoxLayout(self.basic_info_group)
-
-        # Quest ID and name
-        id_layout = QHBoxLayout()
-        id_layout.addWidget(QLabel("Quest ID:"))
-        self.quest_id_label = QLabel("None")
-        id_layout.addWidget(self.quest_id_label)
-        id_layout.addStretch()
-        layout.addLayout(id_layout)
-
-        # Quest name
-        name_layout = QHBoxLayout()
-        name_layout.addWidget(QLabel("Name:"))
-        self.quest_name_label = QLabel("None")
-        self.quest_name_label.setWordWrap(True)
-        name_layout.addWidget(self.quest_name_label)
-        name_layout.addStretch()
-        layout.addLayout(name_layout)
-
-        # Description
-        desc_layout = QVBoxLayout()
-        desc_layout.addWidget(QLabel("Description:"))
-        self.description_text = QTextEdit()
-        self.description_text.setMaximumHeight(80)
-        self.description_text.setReadOnly(True)
-        desc_layout.addWidget(self.description_text)
-        layout.addLayout(desc_layout)
 
     def setup_dialogs_section(self):
         """Setup quest dialogs section"""
@@ -175,42 +140,11 @@ class QuestDetailsWidget(QWidget):
             self.clear_details()
             return
 
-        # Update basic info
-        self.update_basic_info()
-
         # Auto-load dialogs (now optimized with caching)
         self.load_dialogs_on_demand()
 
         # Update hierarchy
         self.update_hierarchy()
-
-    def update_basic_info(self):
-        """Update basic quest information"""
-        quest = self.current_quest
-
-        # Quest ID
-        quest_id = getattr(quest, "quest_id", "Unknown")
-        self.quest_id_label.setText(str(quest_id))
-
-        # Quest name - use localised text lookup (fast with index)
-        quest_name = self.data_model.get_localised_text(quest, "name")
-        if quest_name:
-            self.quest_name_label.setText(str(quest_name))
-        else:
-            # Fallback to name field if localisation fails
-            quest_name = getattr(quest, "name", "Unknown")
-            if quest_name and quest_name != "Unknown":
-                self.quest_name_label.setText(str(quest_name))
-            else:
-                self.quest_name_label.setText(f"Quest {quest_id}")
-
-        # Description - use advanced description lookup (fast with index)
-        # IMPORTANT: Do NOT use getattr(quest, "description") - it's a Relation that does expensive lookups!
-        description = self.data_model.get_advanced_description(quest)
-        if description:
-            self.description_text.setPlainText(str(description))
-        else:
-            self.description_text.setPlainText("No description available")
 
     def load_dialogs_on_demand(self):
         """Load dialogs when user clicks the button"""
@@ -293,7 +227,7 @@ class QuestDetailsWidget(QWidget):
 
     def show_dialog_window(self, title, text):
         """Show dialog text in a separate window"""
-        from PySide6.QtWidgets import QDialog, QPushButton, QTextEdit, QVBoxLayout
+        from PySide6.QtWidgets import QDialog, QPushButton, QVBoxLayout
 
         dialog = QDialog(self)
         dialog.setWindowTitle(title)
@@ -515,9 +449,6 @@ class QuestDetailsWidget(QWidget):
 
     def clear_details(self):
         """Clear all quest details"""
-        self.quest_id_label.setText("None")
-        self.quest_name_label.setText("None")
-        self.description_text.clear()
         self.dialogs_tree.clear()
         self.dialogs_status.setText("Select a quest to view dialogs")
         self.load_dialogs_button.setEnabled(False)
