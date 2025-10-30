@@ -49,6 +49,10 @@ class QuestDetailsViewer(QWidget):
         content_layout = QVBoxLayout(content)
         content_layout.setContentsMargins(5, 5, 5, 5)
 
+        # Information Notice Section
+        self.info_notice_group = self.create_info_notice_section()
+        content_layout.addWidget(self.info_notice_group)
+
         # Basic Info Section
         self.basic_info_group = self.create_basic_info_section()
         content_layout.addWidget(self.basic_info_group)
@@ -81,6 +85,57 @@ class QuestDetailsViewer(QWidget):
 
         scroll.setWidget(content)
         layout.addWidget(scroll)
+
+    def create_info_notice_section(self):
+        """Create informational notice section explaining CFF vs Lua"""
+        group = QGroupBox("📋 Important Information")
+        group.setStyleSheet(
+            "QGroupBox { font-weight: bold; color: #2196F3; border: 2px solid #2196F3; }"
+        )
+        layout = QVBoxLayout(group)
+
+        # Main notice
+        notice_label = QLabel("<b>What's in the CFF File vs Lua Scripts:</b>")
+        notice_label.setStyleSheet("color: #2196F3; font-size: 12px;")
+        layout.addWidget(notice_label)
+
+        # CFF data
+        cff_data = QLabel(
+            "<b style='color: green;'>✓ Available in CFF:</b><br>"
+            "• Quest hierarchy (parent-child relationships)<br>"
+            "• Quest names and descriptions (localized text)<br>"
+            "• Quest IDs and text references<br>"
+            "• Basic quest structure<br>"
+            "• Dialogue text strings (not branching logic)"
+        )
+        cff_data.setWordWrap(True)
+        cff_data.setStyleSheet("padding: 5px;")
+        layout.addWidget(cff_data)
+
+        # Lua data
+        lua_data = QLabel(
+            "<b style='color: orange;'>⚠ Defined in Lua Scripts (not in CFF):</b><br>"
+            "• Quest objectives (Kill X enemies, Collect Y items)<br>"
+            "• Quest requirements (Level, previous quests)<br>"
+            "• Quest rewards (XP, Gold, Items)<br>"
+            "• Quest giver NPC assignments<br>"
+            "• Dialogue branching logic and player choices<br>"
+            "• Quest state management and triggers"
+        )
+        lua_data.setWordWrap(True)
+        lua_data.setStyleSheet("padding: 5px;")
+        layout.addWidget(lua_data)
+
+        # Summary
+        summary = QLabel(
+            "<i>💡 The sections below show CFF data. For complete quest information "
+            "including objectives and rewards, you'll need to examine the Lua quest scripts.</i>"
+        )
+        summary.setWordWrap(True)
+        summary.setStyleSheet("color: #666; font-size: 11px; padding: 5px;")
+        layout.addWidget(summary)
+
+        return group
 
     def create_basic_info_section(self):
         """Create basic quest information section"""
@@ -130,8 +185,16 @@ class QuestDetailsViewer(QWidget):
 
     def create_quest_giver_section(self):
         """Create quest giver information section"""
-        group = QGroupBox("Quest Giver")
+        group = QGroupBox("Quest Giver (⚠ Usually in Lua)")
         layout = QVBoxLayout(group)
+
+        # Add note
+        note = QLabel(
+            "<i>Note: Quest giver data is typically defined in Lua scripts, not in the CFF.</i>"
+        )
+        note.setWordWrap(True)
+        note.setStyleSheet("color: #666; font-size: 10px;")
+        layout.addWidget(note)
 
         # NPC Name
         npc_layout = QHBoxLayout()
@@ -162,8 +225,16 @@ class QuestDetailsViewer(QWidget):
 
     def create_accept_requirements_section(self):
         """Create requirements to accept quest section"""
-        group = QGroupBox("Requirements to Accept Quest")
+        group = QGroupBox("Requirements to Accept Quest (⚠ Usually in Lua)")
         layout = QVBoxLayout(group)
+
+        # Add note
+        note = QLabel(
+            "<i>Note: Accept requirements are typically defined in Lua scripts.</i>"
+        )
+        note.setWordWrap(True)
+        note.setStyleSheet("color: #666; font-size: 10px;")
+        layout.addWidget(note)
 
         # Level requirement
         level_layout = QHBoxLayout()
@@ -191,8 +262,16 @@ class QuestDetailsViewer(QWidget):
 
     def create_objectives_section(self):
         """Create quest objectives/completion requirements section"""
-        group = QGroupBox("Quest Objectives (Requirements to Complete)")
+        group = QGroupBox("Quest Objectives (⚠ Defined in Lua Scripts)")
         layout = QVBoxLayout(group)
+
+        # Add note
+        note = QLabel(
+            "<i>Note: Quest objectives are defined in Lua scripts, not in the CFF file.</i>"
+        )
+        note.setWordWrap(True)
+        note.setStyleSheet("color: #666; font-size: 10px;")
+        layout.addWidget(note)
 
         # Objectives tree
         self.objectives_tree = QTreeWidget()
@@ -205,8 +284,16 @@ class QuestDetailsViewer(QWidget):
 
     def create_rewards_section(self):
         """Create quest rewards section"""
-        group = QGroupBox("Quest Rewards")
+        group = QGroupBox("Quest Rewards (⚠ Usually in Lua)")
         layout = QVBoxLayout(group)
+
+        # Add note
+        note = QLabel(
+            "<i>Note: Quest rewards are typically defined in Lua scripts.</i>"
+        )
+        note.setWordWrap(True)
+        note.setStyleSheet("color: #666; font-size: 10px;")
+        layout.addWidget(note)
 
         # XP reward
         xp_layout = QHBoxLayout()
@@ -250,8 +337,14 @@ class QuestDetailsViewer(QWidget):
 
     def create_relationships_section(self):
         """Create quest relationships section"""
-        group = QGroupBox("Quest Relationships")
+        group = QGroupBox("Quest Relationships (✓ In CFF)")
         layout = QVBoxLayout(group)
+
+        # Add note
+        note = QLabel("<i>Note: Quest hierarchy is stored in the CFF file.</i>")
+        note.setWordWrap(True)
+        note.setStyleSheet("color: green; font-size: 10px;")
+        layout.addWidget(note)
 
         # Parent quest
         parent_layout = QHBoxLayout()
