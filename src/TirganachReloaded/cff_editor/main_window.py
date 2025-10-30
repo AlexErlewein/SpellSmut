@@ -19,13 +19,12 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from .widgets.progress_dialog import ProgressDialog
-
 from ..tirganach.types import Language
 from .data_model import CFFDataModel
 from .widgets.building_wizard import BuildingWizard
 from .widgets.category_tree import CategoryTreeWidget
 from .widgets.element_table import ElementTableWidget
+from .widgets.progress_dialog import ProgressDialog
 from .widgets.property_editor import PropertyEditorWidget
 from .widgets.quest_details import QuestDetailsWidget
 
@@ -348,17 +347,11 @@ class MainWindow(QMainWindow):
             if progress_callback:
                 progress_callback(10, "Parsing CFF file...")
 
-            success = self.data_model.load_file(self.data_model.file_path, force_parse=True)
+            success = self.data_model.load_file(
+                self.data_model.file_path, force_parse=True
+            )
 
             if success:
-                if step_callback:
-                    step_callback("Refreshing UI")
-                if progress_callback:
-                    progress_callback(90, "Refreshing UI...")
-
-                # Refresh UI in main thread
-                self.refresh_view()
-
                 if progress_callback:
                     progress_callback(100, "Cache rebuilt successfully")
             else:
@@ -370,9 +363,26 @@ class MainWindow(QMainWindow):
         progress_dialog = ProgressDialog(
             "Rebuilding Cache",
             f"Rebuilding cache for {self.data_model.file_path}",
-            self
+            self,
         )
-        progress_dialog.start_operation(rebuild_operation)
+
+        # Create worker thread first
+        progress_dialog.worker_thread = progress_dialog._create_worker(
+            rebuild_operation
+        )
+
+        # Connect completion handler to refresh UI in main thread
+        def on_rebuild_complete(result):
+            """Called in main thread when rebuild completes"""
+            if result:
+                # Now safely refresh UI in main thread
+                self.refresh_view()
+                self.on_data_loaded()
+
+        progress_dialog.worker_thread.operation_completed.connect(on_rebuild_complete)
+
+        # Now start the operation
+        progress_dialog._start_worker()
 
     def compare_with_file(self):
         """Compare current CFF with another CFF file"""
@@ -383,7 +393,9 @@ class MainWindow(QMainWindow):
         file_path, _ = QFileDialog.getOpenFileName(
             self,
             "Select CFF file to compare with",
-            str(Path(self.data_model.file_path).parent) if self.data_model.file_path else "",
+            str(Path(self.data_model.file_path).parent)
+            if self.data_model.file_path
+            else "",
             "CFF Files (*.cff);;All Files (*)",
         )
 
@@ -417,9 +429,11 @@ class MainWindow(QMainWindow):
             self.statusBar.showMessage("Loading comparison file...")
 
             # Check if we can use DB-based comparison
-            if (hasattr(self.data_model, 'data_provider') and
-                self.data_model.data_provider and
-                hasattr(self.data_model.data_provider, 'get_quests')):
+            if (
+                hasattr(self.data_model, "data_provider")
+                and self.data_model.data_provider
+                and hasattr(self.data_model.data_provider, "get_quests")
+            ):
                 # Use DB-based comparison
                 comparison_text = self._perform_db_comparison(compare_file_path)
             else:
@@ -437,15 +451,14 @@ class MainWindow(QMainWindow):
 
     def _perform_cff_comparison(self, compare_file_path: str) -> str:
         """Perform traditional CFF file comparison"""
-        from tirganach.compare import compare
         from tirganach import GameData
+        from tirganach.compare import compare
 
         # Load the comparison file
         compare_data = GameData(compare_file_path)
 
         # Create a simple text output for the comparison
         import io
-        import sys
         from contextlib import redirect_stdout
 
         # Capture the comparison output
@@ -458,25 +471,30 @@ class MainWindow(QMainWindow):
     def _perform_db_comparison(self, compare_file_path: str) -> str:
         """Perform database-based comparison for faster results"""
         try:
-            from cff_editor.data_providers import DatabaseManager, DBProvider
-            import tempfile
             import os
+            import tempfile
+
+            from cff_editor.data_providers import DatabaseManager, DBProvider
 
             # Create temporary database for comparison file
-            with tempfile.NamedTemporaryFile(suffix='.db', delete=False) as f:
+            with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as f:
                 temp_db_path = f.name
 
             try:
                 # Load comparison file and create its database
                 from tirganach import GameData
+
                 compare_data = GameData(compare_file_path)
 
                 # Generate fingerprint for comparison file
                 import hashlib
                 from pathlib import Path
+
                 path = Path(compare_file_path)
                 stat = path.stat()
-                compare_fingerprint = hashlib.sha256(f"{path.absolute()}{stat.st_size}{stat.st_mtime}".encode()).hexdigest()
+                compare_fingerprint = hashlib.sha256(
+                    f"{path.absolute()}{stat.st_size}{stat.st_mtime}".encode()
+                ).hexdigest()
 
                 # Create and populate comparison database
                 compare_db = DatabaseManager(temp_db_path)
@@ -485,7 +503,9 @@ class MainWindow(QMainWindow):
                 compare_provider = DBProvider(temp_db_path)
 
                 # Perform DB-based comparison
-                return self._compare_databases(self.data_model.data_provider, compare_provider, compare_file_path)
+                return self._compare_databases(
+                    self.data_model.data_provider, compare_provider, compare_file_path
+                )
 
             finally:
                 # Clean up temporary database
@@ -499,7 +519,9 @@ class MainWindow(QMainWindow):
             print(f"DB comparison failed, falling back to CFF: {e}")
             return self._perform_cff_comparison(compare_file_path)
 
-    def _compare_databases(self, db1_provider, db2_provider, compare_file_path: str) -> str:
+    def _compare_databases(
+        self, db1_provider, db2_provider, compare_file_path: str
+    ) -> str:
         """Compare two database providers and return formatted diff"""
         lines = []
         lines.append("Database-based Comparison Results")
@@ -542,10 +564,12 @@ class MainWindow(QMainWindow):
             for qid in set(quests1_dict.keys()) & set(quests2_dict.keys()):
                 q1 = quests1_dict[qid]
                 q2 = quests2_dict[qid]
-                if (q1.name_id != q2.name_id or
-                    q1.description_id != q2.description_id or
-                    q1.name != q2.name or
-                    q1.description != q2.description):
+                if (
+                    q1.name_id != q2.name_id
+                    or q1.description_id != q2.description_id
+                    or q1.name != q2.name
+                    or q1.description != q2.description
+                ):
                     modified.append((qid, q1, q2))
 
             if modified:
@@ -557,12 +581,16 @@ class MainWindow(QMainWindow):
                     if q1.name_id != q2.name_id:
                         lines.append(f"    Name ID: {q1.name_id} -> {q2.name_id}")
                     if q1.description_id != q2.description_id:
-                        lines.append(f"    Description ID: {q1.description_id} -> {q2.description_id}")
+                        lines.append(
+                            f"    Description ID: {q1.description_id} -> {q2.description_id}"
+                        )
                 if len(modified) > 10:
                     lines.append(f"  ... and {len(modified) - 10} more")
                 lines.append("")
 
-            lines.append(f"Summary: {len(quests1)} quests in file 1, {len(quests2)} quests in file 2")
+            lines.append(
+                f"Summary: {len(quests1)} quests in file 1, {len(quests2)} quests in file 2"
+            )
 
         except Exception as e:
             lines.append(f"Error during quest comparison: {e}")
@@ -571,7 +599,13 @@ class MainWindow(QMainWindow):
 
     def _show_comparison_results(self, comparison_text: str, compare_file_path: str):
         """Show comparison results in a dialog"""
-        from PySide6.QtWidgets import QDialog, QVBoxLayout, QTextEdit, QHBoxLayout, QPushButton
+        from PySide6.QtWidgets import (
+            QDialog,
+            QHBoxLayout,
+            QPushButton,
+            QTextEdit,
+            QVBoxLayout,
+        )
 
         dialog = QDialog(self)
         compare_path = Path(compare_file_path)
@@ -594,7 +628,9 @@ class MainWindow(QMainWindow):
         button_layout.addWidget(copy_button)
 
         save_button = QPushButton("Save As...")
-        save_button.clicked.connect(lambda: self._save_comparison_results(comparison_text, compare_file_path))
+        save_button.clicked.connect(
+            lambda: self._save_comparison_results(comparison_text, compare_file_path)
+        )
         button_layout.addWidget(save_button)
 
         close_button = QPushButton("Close")
@@ -608,13 +644,20 @@ class MainWindow(QMainWindow):
     def _copy_to_clipboard(self, text: str):
         """Copy text to clipboard"""
         from PySide6.QtWidgets import QApplication
+
         clipboard = QApplication.clipboard()
         clipboard.setText(text)
 
     def _save_comparison_results(self, comparison_text: str, compare_file_path: str):
         """Save comparison results to file"""
-        current_file_stem = Path(self.data_model.file_path).stem if self.data_model.file_path else "current"
-        default_name = f"comparison_{current_file_stem}_vs_{Path(compare_file_path).stem}.txt"
+        current_file_stem = (
+            Path(self.data_model.file_path).stem
+            if self.data_model.file_path
+            else "current"
+        )
+        default_name = (
+            f"comparison_{current_file_stem}_vs_{Path(compare_file_path).stem}.txt"
+        )
 
         file_path, _ = QFileDialog.getSaveFileName(
             self,
@@ -625,8 +668,8 @@ class MainWindow(QMainWindow):
 
         if file_path:
             try:
-                with open(file_path, 'w', encoding='utf-8') as f:
-                    f.write(f"# CFF Comparison Results\n\n")
+                with open(file_path, "w", encoding="utf-8") as f:
+                    f.write("# CFF Comparison Results\n\n")
                     f.write(f"**File 1:** {self.data_model.file_path}\n")
                     f.write(f"**File 2:** {compare_file_path}\n\n")
                     f.write("```\n")

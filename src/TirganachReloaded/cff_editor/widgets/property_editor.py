@@ -3,12 +3,22 @@ Property Editor Widget
 Displays and allows editing of element properties
 """
 
-from PySide6.QtWidgets import (QWidget, QVBoxLayout, QFormLayout, QLineEdit,
-                               QSpinBox, QComboBox, QPushButton, QScrollArea,
-                               QLabel, QHBoxLayout, QMessageBox)
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QPixmap
 import enum
+
+from PySide6.QtCore import Qt
+from PySide6.QtWidgets import (
+    QComboBox,
+    QFormLayout,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QMessageBox,
+    QPushButton,
+    QScrollArea,
+    QSpinBox,
+    QVBoxLayout,
+    QWidget,
+)
 
 
 class PropertyEditorWidget(QWidget):
@@ -28,7 +38,9 @@ class PropertyEditorWidget(QWidget):
 
         # Header
         self.header_label = QLabel("Select an element to edit")
-        self.header_label.setStyleSheet("font-weight: bold; font-size: 14px; padding: 10px;")
+        self.header_label.setStyleSheet(
+            "font-weight: bold; font-size: 14px; padding: 10px;"
+        )
         layout.addWidget(self.header_label)
 
         # Scroll area for properties
@@ -74,7 +86,6 @@ class PropertyEditorWidget(QWidget):
         self.current_category = category
         self.current_index = index
         self.current_element = self.data_model.get_element_by_index(category, index)
-
         self.display_element()
 
     def display_element(self):
@@ -95,7 +106,9 @@ class PropertyEditorWidget(QWidget):
             return
 
         # Load and display icon
-        icon_pixmap = self.data_model.get_icon_pixmap(self.current_category, self.current_element, size=(128, 128))
+        icon_pixmap = self.data_model.get_icon_pixmap(
+            self.current_category, self.current_element, size=(128, 128)
+        )
         if icon_pixmap:
             self.icon_label.setPixmap(icon_pixmap)
         else:
@@ -104,14 +117,16 @@ class PropertyEditorWidget(QWidget):
         # Update header
         element_name = "Unknown"
         # Try localised name first
-        localised_name = self.data_model.get_localised_text(self.current_element, 'name')
+        localised_name = self.data_model.get_localised_text(
+            self.current_element, "name"
+        )
         if localised_name:
             element_name = localised_name
-        elif hasattr(self.current_element, 'name'):
+        elif hasattr(self.current_element, "name"):
             element_name = str(self.current_element.name)
-        elif hasattr(self.current_element, 'spell_id'):
+        elif hasattr(self.current_element, "spell_id"):
             element_name = f"Spell ID: {self.current_element.spell_id}"
-        elif hasattr(self.current_element, 'item_id'):
+        elif hasattr(self.current_element, "item_id"):
             element_name = f"Item ID: {self.current_element.item_id}"
 
         self.header_label.setText(f"Editing: {element_name}")
@@ -141,7 +156,7 @@ class PropertyEditorWidget(QWidget):
     def create_field_widget(self, value, field_info):
         """Create appropriate widget for field type"""
         # Check if it's an enum
-        if hasattr(value, '__class__') and isinstance(value.__class__, type(enum.Enum)):
+        if hasattr(value, "__class__") and isinstance(value.__class__, type(enum.Enum)):
             widget = QComboBox()
             # Add enum values
             for member in value.__class__:
@@ -199,18 +214,13 @@ class PropertyEditorWidget(QWidget):
             if str(new_value) != str(original_value):
                 # Update the field
                 if self.data_model.update_element_field(
-                    self.current_category,
-                    self.current_index,
-                    field_name,
-                    new_value
+                    self.current_category, self.current_index, field_name, new_value
                 ):
                     changes_made = True
                     widget.setProperty("original_value", new_value)
                 else:
                     QMessageBox.warning(
-                        self,
-                        "Error",
-                        f"Failed to update field: {field_name}"
+                        self, "Error", f"Failed to update field: {field_name}"
                     )
 
         if changes_made:

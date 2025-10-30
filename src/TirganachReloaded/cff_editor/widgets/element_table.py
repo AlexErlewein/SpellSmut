@@ -3,10 +3,17 @@ Element Table Widget
 Displays all elements in the selected category
 """
 
-from PySide6.QtWidgets import (QWidget, QVBoxLayout, QTableWidget, QTableWidgetItem,
-                               QLineEdit, QHBoxLayout, QLabel, QPushButton)
 from PySide6.QtCore import Qt
-from PySide6.QtGui import QPixmap, QIcon
+from PySide6.QtWidgets import (
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QPushButton,
+    QTableWidget,
+    QTableWidgetItem,
+    QVBoxLayout,
+    QWidget,
+)
 
 
 class ElementTableWidget(QWidget):
@@ -79,7 +86,7 @@ class ElementTableWidget(QWidget):
 
         # Get sample element to determine columns
         sample = self.filtered_elements[0]
-        if not hasattr(sample, '_fields'):
+        if not hasattr(sample, "_fields"):
             self.table.setRowCount(0)
             self.table.setColumnCount(0)
             return
@@ -88,7 +95,9 @@ class ElementTableWidget(QWidget):
         display_fields = self.get_display_fields(sample)
 
         # Setup table with icon and name columns
-        self.table.setColumnCount(len(display_fields) + 2)  # +2 for icon and name columns
+        self.table.setColumnCount(
+            len(display_fields) + 2
+        )  # +2 for icon and name columns
         self.table.setHorizontalHeaderLabels(["Icon", "Name"] + display_fields)
 
         # Calculate page range
@@ -102,7 +111,9 @@ class ElementTableWidget(QWidget):
             element = self.filtered_elements[element_idx]
 
             # Icon cell (column 0)
-            icon_pixmap = self.data_model.get_icon_pixmap(self.data_model.current_category, element, size=(32, 32))
+            icon_pixmap = self.data_model.get_icon_pixmap(
+                self.data_model.current_category, element, size=(32, 32)
+            )
             if icon_pixmap:
                 # Use QTableWidgetItem with decoration role
                 icon_item = QTableWidgetItem()
@@ -116,8 +127,12 @@ class ElementTableWidget(QWidget):
             # Name cell (column 1)
             name_text = self._get_element_name(element)
             name_item = QTableWidgetItem(name_text)
-            name_item.setFlags(name_item.flags() & ~Qt.ItemFlag.ItemIsEditable)  # Read-only
-            name_item.setData(Qt.ItemDataRole.UserRole, element_idx)  # Store actual index
+            name_item.setFlags(
+                name_item.flags() & ~Qt.ItemFlag.ItemIsEditable
+            )  # Read-only
+            name_item.setData(
+                Qt.ItemDataRole.UserRole, element_idx
+            )  # Store actual index
             self.table.setItem(row_idx, 1, name_item)
 
             # Data cells (starting from column 2)
@@ -125,9 +140,15 @@ class ElementTableWidget(QWidget):
                 try:
                     value = getattr(element, field_name)
                     item = QTableWidgetItem(str(value))
-                    item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)  # Read-only
-                    item.setData(Qt.ItemDataRole.UserRole, element_idx)  # Store actual index
-                    self.table.setItem(row_idx, col_idx + 2, item)  # +2 because icon and name are columns 0-1
+                    item.setFlags(
+                        item.flags() & ~Qt.ItemFlag.ItemIsEditable
+                    )  # Read-only
+                    item.setData(
+                        Qt.ItemDataRole.UserRole, element_idx
+                    )  # Store actual index
+                    self.table.setItem(
+                        row_idx, col_idx + 2, item
+                    )  # +2 because icon and name are columns 0-1
                 except:
                     item = QTableWidgetItem("")
                     self.table.setItem(row_idx, col_idx + 2, item)
@@ -137,23 +158,27 @@ class ElementTableWidget(QWidget):
 
         # Ensure icon column is wide enough for 32x32 icons
         if self.table.columnCount() > 0:
-            self.table.setColumnWidth(0, max(self.table.columnWidth(0), 40))  # Minimum 40px for icon column
+            self.table.setColumnWidth(
+                0, max(self.table.columnWidth(0), 40)
+            )  # Minimum 40px for icon column
 
         # Set row height to accommodate icons
         for row in range(self.table.rowCount()):
-            self.table.setRowHeight(row, max(self.table.rowHeight(row), 36))  # Minimum 36px for icon rows
+            self.table.setRowHeight(
+                row, max(self.table.rowHeight(row), 36)
+            )  # Minimum 36px for icon rows
 
         self.update_pagination()
 
     def _get_element_name(self, element) -> str:
         """Extract name from element, trying localised text first, then common name fields"""
-        # Try to get localised name using the data model's localisation method
-        localised_name = self.data_model.get_localised_text(element, 'name')
-        if localised_name:
-            return localised_name
+        # Use the safe method that avoids triggering Relations
+        name = self.data_model.get_element_name_safe(element)
+        if name and name != "Unknown":
+            return name
 
         # Special handling for weapons and armor using enhanced JSON data
-        if hasattr(element, 'item_id'):
+        if hasattr(element, "item_id"):
             weapon_name = self.data_model.get_weapon_name(element.item_id)
             if weapon_name:
                 return weapon_name
@@ -162,32 +187,22 @@ class ElementTableWidget(QWidget):
             if armor_name:
                 return armor_name
 
-        # Try common name fields in order of preference (fallback for non-localised entities)
-        name_fields = ['name', 'item_name', 'spell_name', 'creature_name', 'building_name']
-
-        for field_name in name_fields:
-            if hasattr(element, field_name):
-                name_value = getattr(element, field_name)
-                if name_value:
-                    return str(name_value)
-
-        # Fallback: try to construct a name from ID fields
-        id_fields = ['id', 'item_id', 'spell_id', 'creature_id', 'building_id', 'quest_id', 'npc_id']
-        for field_name in id_fields:
-            if hasattr(element, field_name):
-                id_value = getattr(element, field_name)
-                if id_value is not None and id_value != 0:
-                    return f"{field_name.replace('_id', '').title()} {id_value}"
-
-        return "Unknown"
+        return name if name else "Unknown"
 
     def get_display_fields(self, element) -> list:
         """Get list of fields to display (first 6 important ones)"""
         fields = list(element._fields.keys())
 
         # Prioritize certain fields (excluding 'name' since it's shown in dedicated column)
-        priority_fields = ['item_id', 'spell_id', 'creature_id', 'building_id',
-                          'level', 'item_type', 'item_subtype']
+        priority_fields = [
+            "item_id",
+            "spell_id",
+            "creature_id",
+            "building_id",
+            "level",
+            "item_type",
+            "item_subtype",
+        ]
 
         # Get priority fields that exist
         display = []
@@ -216,7 +231,7 @@ class ElementTableWidget(QWidget):
 
             for elem in self.current_elements:
                 # Search in name field if it exists
-                if hasattr(elem, 'name'):
+                if hasattr(elem, "name"):
                     if text_lower in str(elem.name).lower():
                         self.filtered_elements.append(elem)
                         continue
@@ -249,7 +264,9 @@ class ElementTableWidget(QWidget):
 
     def update_pagination(self):
         """Update pagination controls"""
-        total_pages = max(1, (len(self.filtered_elements) + self.page_size - 1) // self.page_size)
+        total_pages = max(
+            1, (len(self.filtered_elements) + self.page_size - 1) // self.page_size
+        )
         start_idx = self.current_page * self.page_size + 1
         end_idx = min(start_idx + self.page_size - 1, len(self.filtered_elements))
 
@@ -277,8 +294,7 @@ class ElementTableWidget(QWidget):
                 if element_idx is not None:
                     self.data_model.current_element_index = element_idx
                     self.data_model.element_selected.emit(
-                        self.data_model.current_category,
-                        element_idx
+                        self.data_model.current_category, element_idx
                     )
 
     def refresh(self):

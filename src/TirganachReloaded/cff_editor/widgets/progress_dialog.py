@@ -4,19 +4,18 @@ Provides non-blocking progress UI for cache/DB operations
 """
 
 import time
-from typing import Callable, Any, Optional
+from typing import Callable, Optional
 
-from PySide6.QtCore import QThread, Signal, QTimer
+from PySide6.QtCore import QThread, QTimer, Signal
 from PySide6.QtWidgets import (
     QDialog,
-    QVBoxLayout,
+    QFrame,
     QHBoxLayout,
     QLabel,
     QProgressBar,
     QPushButton,
     QTextEdit,
-    QFrame,
-    QSizePolicy,
+    QVBoxLayout,
 )
 
 
@@ -46,8 +45,8 @@ class WorkerThread(QThread):
                 self.step_started.emit(step_description)
 
             # Add callbacks to kwargs if not already present
-            self.kwargs.setdefault('progress_callback', progress_callback)
-            self.kwargs.setdefault('step_callback', step_callback)
+            self.kwargs.setdefault("progress_callback", progress_callback)
+            self.kwargs.setdefault("step_callback", step_callback)
 
             # Execute the operation
             result = self.operation_func(*self.args, **self.kwargs)
@@ -152,21 +151,28 @@ class ProgressDialog(QDialog):
         """Setup signal connections"""
         pass  # Will be connected when operation starts
 
+    def _create_worker(self, operation_func: Callable, *args, **kwargs):
+        """Create worker thread without starting it (for custom signal connections)"""
+        worker = WorkerThread(operation_func, *args, **kwargs)
+
+        # Connect default signals
+        worker.progress_updated.connect(self.on_progress_updated)
+        worker.step_started.connect(self.on_step_started)
+        worker.operation_completed.connect(self.on_operation_completed)
+        worker.operation_failed.connect(self.on_operation_failed)
+
+        return worker
+
+    def _start_worker(self):
+        """Start the worker thread and show dialog"""
+        if self.worker_thread:
+            self.worker_thread.start()
+            self.exec()
+
     def start_operation(self, operation_func: Callable, *args, **kwargs):
         """Start the background operation"""
-        self.worker_thread = WorkerThread(operation_func, *args, **kwargs)
-
-        # Connect signals
-        self.worker_thread.progress_updated.connect(self.on_progress_updated)
-        self.worker_thread.step_started.connect(self.on_step_started)
-        self.worker_thread.operation_completed.connect(self.on_operation_completed)
-        self.worker_thread.operation_failed.connect(self.on_operation_failed)
-
-        # Start the operation
-        self.worker_thread.start()
-
-        # Show the dialog
-        self.exec()
+        self.worker_thread = self._create_worker(operation_func, *args, **kwargs)
+        self._start_worker()
 
     def cancel_operation(self):
         """Cancel the current operation"""
@@ -226,7 +232,7 @@ class ProgressDialog(QDialog):
 
     def update_elapsed_time(self):
         """Update the elapsed time display"""
-        if hasattr(self, 'start_time'):
+        if hasattr(self, "start_time"):
             elapsed = time.time() - self.start_time
             minutes, seconds = divmod(int(elapsed), 60)
             self.elapsed_label.setText(f"Elapsed: {minutes}:{seconds:02d}")

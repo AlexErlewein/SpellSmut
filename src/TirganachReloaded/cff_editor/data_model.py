@@ -26,6 +26,7 @@ CACHE_VERSION = "1.0.0"
 # Try to import data providers
 try:
     import cff_editor.data_providers as dp
+
     DATA_PROVIDERS_AVAILABLE = True
 except ImportError:
     DATA_PROVIDERS_AVAILABLE = False
@@ -72,7 +73,9 @@ class CFFDataModel(QObject):
         self.current_language = self._load_language_setting()
 
         # Cache directory
-        self.cache_dir = self.project_root / "src" / "TirganachReloaded" / "data" / "cache"
+        self.cache_dir = (
+            self.project_root / "src" / "TirganachReloaded" / "data" / "cache"
+        )
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
         # Database directory
@@ -82,6 +85,13 @@ class CFFDataModel(QObject):
         # Data providers (for future use)
         self.data_provider: Optional[Any] = None
         self.use_db_provider = False  # Flag to enable DB provider
+
+        # Localisation index for fast lookups
+        self.localisation_index = None
+        self.localisation_index_language = None
+
+        # Advanced descriptions index for fast lookups
+        self.advanced_descriptions_index = None
 
     def _load_language_setting(self) -> Language:
         """Load current language from settings, default to ENGLISH"""
@@ -106,7 +116,7 @@ class CFFDataModel(QObject):
 
         # Calculate partial SHA-256 of first 32MB
         sha256 = hashlib.sha256()
-        with open(path, 'rb') as f:
+        with open(path, "rb") as f:
             # Read first 32MB or entire file if smaller
             chunk_size = 32 * 1024 * 1024  # 32MB
             data = f.read(chunk_size)
@@ -114,11 +124,11 @@ class CFFDataModel(QObject):
 
         # Combine all components
         fingerprint_data = {
-            'path': str(path.absolute()),
-            'size': file_size,
-            'mtime': mtime,
-            'sha256_partial': sha256.hexdigest(),
-            'cache_version': CACHE_VERSION
+            "path": str(path.absolute()),
+            "size": file_size,
+            "mtime": mtime,
+            "sha256_partial": sha256.hexdigest(),
+            "cache_version": CACHE_VERSION,
         }
 
         # Create final fingerprint hash
@@ -131,7 +141,9 @@ class CFFDataModel(QObject):
         meta_file = self.cache_dir / f"GameData_{fingerprint}.meta.json"
         return cache_file, meta_file
 
-    def _load_from_cache(self, fingerprint: str) -> tuple[Optional[GameData], Optional[str]]:
+    def _load_from_cache(
+        self, fingerprint: str
+    ) -> tuple[Optional[GameData], Optional[str]]:
         """Load GameData from cache if valid
 
         Returns:
@@ -146,15 +158,18 @@ class CFFDataModel(QObject):
                 return None, "Cache files not found"
 
             # Load and validate metadata
-            with open(meta_file, 'r') as f:
+            with open(meta_file, "r") as f:
                 meta = json.load(f)
 
-            cached_version = meta.get('cache_version')
+            cached_version = meta.get("cache_version")
             if cached_version != CACHE_VERSION:
-                return None, f"Cache version mismatch: {cached_version} → {CACHE_VERSION}"
+                return (
+                    None,
+                    f"Cache version mismatch: {cached_version} → {CACHE_VERSION}",
+                )
 
             # Load pickled data
-            with open(cache_file, 'rb') as f:
+            with open(cache_file, "rb") as f:
                 game_data = pickle.load(f)
 
             return game_data, None
@@ -170,17 +185,17 @@ class CFFDataModel(QObject):
 
             # Save metadata
             meta = {
-                'cache_version': CACHE_VERSION,
-                'source_path': source_path,
-                'created_at': time.time(),
-                'fingerprint': fingerprint
+                "cache_version": CACHE_VERSION,
+                "source_path": source_path,
+                "created_at": time.time(),
+                "fingerprint": fingerprint,
             }
 
-            with open(meta_file, 'w') as f:
+            with open(meta_file, "w") as f:
                 json.dump(meta, f, indent=2)
 
             # Save pickled data
-            with open(cache_file, 'wb') as f:
+            with open(cache_file, "wb") as f:
                 pickle.dump(game_data, f)
 
         except PermissionError as e:
@@ -227,7 +242,9 @@ class CFFDataModel(QObject):
                 db_manager = dp.DatabaseManager(db_path)
 
                 if not force_parse:
-                    is_valid, db_failure_reason = db_manager.is_valid_for_fingerprint(fingerprint)
+                    is_valid, db_failure_reason = db_manager.is_valid_for_fingerprint(
+                        fingerprint
+                    )
                     if is_valid:
                         # Database is valid, use DB provider
                         self.data_provider = dp.DBProvider(db_path)
@@ -242,6 +259,11 @@ class CFFDataModel(QObject):
 
                             # Save as last opened file
                             self.settings.setValue("last_opened_file", file_path)
+
+                            # Build indices for faster lookups
+                            self._build_localisation_index()
+                            self._build_advanced_descriptions_index()
+
                             self.data_loaded.emit()
                             return True
                     elif db_failure_reason:
@@ -262,6 +284,11 @@ class CFFDataModel(QObject):
 
                 # Save as last opened file
                 self.settings.setValue("last_opened_file", file_path)
+
+                # Build indices for faster lookups
+                self._build_localisation_index()
+                self._build_advanced_descriptions_index()
+
                 self.data_loaded.emit()
                 return True
 
@@ -279,6 +306,11 @@ class CFFDataModel(QObject):
 
                     # Save as last opened file
                     self.settings.setValue("last_opened_file", file_path)
+
+                    # Build indices for faster lookups
+                    self._build_localisation_index()
+                    self._build_advanced_descriptions_index()
+
                     self.data_loaded.emit()
                     return True
                 elif cache_failure_reason:
@@ -296,15 +328,19 @@ class CFFDataModel(QObject):
             self._load_weapon_names()
             self._load_armor_names()
 
+            # Build indices for faster lookups
+            self._build_localisation_index()
+            self._build_advanced_descriptions_index()
+
             # Save as last opened file
             self.settings.setValue("last_opened_file", file_path)
             self.data_loaded.emit()
             return True
 
-        except FileNotFoundError as e:
+        except FileNotFoundError:
             print(f"File not found: {file_path}")
             return False
-        except PermissionError as e:
+        except PermissionError:
             print(f"Permission denied accessing file: {file_path}")
             return False
         except Exception as e:
@@ -319,7 +355,9 @@ class CFFDataModel(QObject):
                 db_manager = dp.DatabaseManager(db_path)
 
                 if not force_parse:
-                    is_valid, db_failure_reason = db_manager.is_valid_for_fingerprint(fingerprint)
+                    is_valid, db_failure_reason = db_manager.is_valid_for_fingerprint(
+                        fingerprint
+                    )
                     if is_valid:
                         # Database is valid, use DB provider
                         self.data_provider = dp.DBProvider(db_path)
@@ -349,7 +387,9 @@ class CFFDataModel(QObject):
                 # Use CFF provider (with pickle cache)
                 # Try to load from cache unless force_parse is True
                 if not force_parse:
-                    cached_data, cache_failure_reason = self._load_from_cache(fingerprint)
+                    cached_data, cache_failure_reason = self._load_from_cache(
+                        fingerprint
+                    )
                     if cached_data is not None:
                         self.game_data = cached_data
                         if DATA_PROVIDERS_AVAILABLE and dp:
@@ -589,15 +629,29 @@ class CFFDataModel(QObject):
         fields = []
         for field_name in sorted(element._fields.keys()):
             try:
-                # Special handling for localised fields
-                if field_name in ["name", "description"]:
-                    localised_value = self.get_localised_text(element, field_name)
-                    if localised_value is not None:
-                        value = localised_value
+                # Special handling for text fields that might be Relations
+                if field_name == "name":
+                    value = self.safe_get_text_field(element, "name")
+                    if value is None:
+                        value = "[No name]"
+                elif field_name == "description":
+                    value = self.safe_get_text_field(element, "description")
+                    if value is None:
+                        value = "[No description]"
+                else:
+                    # For other fields, get the value normally
+                    # Skip if it's a known Relation field that would be slow
+                    field_info = element._fields[field_name]
+                    field_type_str = str(field_info) if field_info else ""
+
+                    # Skip complex Relation fields (lists, nested objects)
+                    if "Relation" in field_type_str and (
+                        "list" in field_type_str.lower()
+                        or "multiple" in field_type_str.lower()
+                    ):
+                        value = "[Complex Relation - not displayed]"
                     else:
                         value = getattr(element, field_name)
-                else:
-                    value = getattr(element, field_name)
 
                 field_info = element._fields[field_name]
                 fields.append((field_name, value, field_info))
@@ -1000,6 +1054,59 @@ class CFFDataModel(QObject):
 
         return None
 
+    def _build_localisation_index(self):
+        """Build an index of localisation entries by text_id for fast O(1) lookups"""
+        if not self.game_data:
+            return
+
+        try:
+            localisation_table = self.get_table("localisation")
+            if not localisation_table:
+                return
+
+            # Build index: {language: {text_id: text}}
+            self.localisation_index = {}
+
+            for entry in localisation_table:
+                language = getattr(entry, "language", None)
+                text_id = getattr(entry, "text_id", None)
+                text = getattr(entry, "text", "")
+
+                if language is not None and text_id is not None:
+                    if language not in self.localisation_index:
+                        self.localisation_index[language] = {}
+                    self.localisation_index[language][text_id] = text
+
+            self.localisation_index_language = self.current_language
+
+        except Exception as e:
+            print(f"Error building localisation index: {e}")
+            self.localisation_index = None
+
+    def _build_advanced_descriptions_index(self):
+        """Build an index of advanced descriptions by description_id for fast O(1) lookups"""
+        if not self.game_data:
+            return
+
+        try:
+            descriptions_table = self.get_table("advanced_descriptions")
+            if not descriptions_table:
+                return
+
+            # Build index: {description_id: text}
+            self.advanced_descriptions_index = {}
+
+            for entry in descriptions_table:
+                description_id = getattr(entry, "description_id", None)
+                text = getattr(entry, "text", "")
+
+                if description_id is not None:
+                    self.advanced_descriptions_index[description_id] = text
+
+        except Exception as e:
+            print(f"Error building advanced descriptions index: {e}")
+            self.advanced_descriptions_index = None
+
     def get_localised_text(self, entity: Any, field_name: str) -> Optional[str]:
         """
         Get localised text for an entity field based on current language setting.
@@ -1012,7 +1119,7 @@ class CFFDataModel(QObject):
             Localised text string or None if not found
         """
         # Try data provider first (for DB provider)
-        if self.data_provider and hasattr(self.data_provider, 'get_localised_text'):
+        if self.data_provider and hasattr(self.data_provider, "get_localised_text"):
             try:
                 # Get the text_id from the entity
                 text_id = None
@@ -1029,58 +1136,131 @@ class CFFDataModel(QObject):
                         text_id = getattr(entity, "description_id")
 
                 if text_id:
-                    return self.data_provider.get_localised_text(text_id, self.current_language)
+                    return self.data_provider.get_localised_text(
+                        text_id, self.current_language
+                    )
             except Exception:
                 pass  # Fall back to CFF method
 
-        # Fall back to original CFF method
+        # Fall back to original CFF method with indexed lookups
         if not self.game_data or not entity:
             return None
 
         try:
+            # Build index if not already built or language changed
+            if (
+                self.localisation_index is None
+                or self.localisation_index_language != self.current_language
+            ):
+                self._build_localisation_index()
+
             # Get the text_id from the entity
-            text_id_field = None
+            text_id = None
             if field_name == "name":
                 # Try different possible text_id field names
                 for possible_field in ["name_id", "text_id", "spell_name_id"]:
                     if hasattr(entity, possible_field):
                         text_id = getattr(entity, possible_field)
                         if text_id and text_id != 0:
-                            text_id_field = possible_field
                             break
             elif field_name == "description":
                 # For descriptions, try description_id
                 if hasattr(entity, "description_id"):
                     text_id = getattr(entity, "description_id")
-                    if text_id and text_id != 0:
-                        text_id_field = "description_id"
 
-            if text_id_field is None:
+            if text_id is None or text_id == 0:
                 return None
 
-            text_id = getattr(entity, text_id_field)
-
-            # Query localisation table for current language
-            localisation_table = self.get_table("localisation")
-            if localisation_table:
-                for entry in localisation_table:
-                    if (
-                        getattr(entry, "text_id", None) == text_id
-                        and getattr(entry, "language", None) == self.current_language
-                    ):
-                        return getattr(entry, "text", "")
+            # Fast O(1) lookup using index
+            if (
+                self.localisation_index
+                and self.current_language in self.localisation_index
+            ):
+                if text_id in self.localisation_index[self.current_language]:
+                    return self.localisation_index[self.current_language][text_id]
 
             # Fallback to English if current language not found
-            if self.current_language != Language.ENGLISH and localisation_table:
-                for entry in localisation_table:
-                    if (
-                        getattr(entry, "text_id", None) == text_id
-                        and getattr(entry, "language", None) == Language.ENGLISH
-                    ):
-                        return getattr(entry, "text", "")
+            if (
+                self.current_language != Language.ENGLISH
+                and self.localisation_index
+                and Language.ENGLISH in self.localisation_index
+            ):
+                if text_id in self.localisation_index[Language.ENGLISH]:
+                    return self.localisation_index[Language.ENGLISH][text_id]
 
         except (AttributeError, KeyError, TypeError) as e:
             print(f"Error getting localised text: {e}")
+
+        return None
+
+    def safe_get_text_field(self, entity: Any, field_name: str) -> Optional[str]:
+        """
+        Safely get a text field without triggering expensive Relation lookups.
+
+        This method checks if the field is a known Relation field and uses indexed
+        lookups instead of direct field access.
+
+        Args:
+            entity: The entity object
+            field_name: The field name (e.g., 'name', 'description')
+
+        Returns:
+            Text string or None if not found
+        """
+        if not entity:
+            return None
+
+        # Handle known Relation fields with indexed lookups
+        if field_name == "name":
+            return self.get_localised_text(entity, "name")
+        elif field_name == "description":
+            # Check if it's an advanced description (quests use this)
+            if hasattr(entity, "description_id"):
+                return self.get_advanced_description(entity)
+            # Otherwise try regular description
+            return self.get_localised_text(entity, "description")
+
+        # For other fields, check if they exist and are not Relations
+        if hasattr(entity, field_name):
+            value = getattr(entity, field_name, None)
+            # Check if it's already a simple type (not a Relation object)
+            if value is not None and isinstance(value, (str, int, float, bool)):
+                return str(value)
+
+        return None
+
+    def get_advanced_description(self, entity: Any) -> Optional[str]:
+        """
+        Get advanced description text for an entity.
+
+        Args:
+            entity: The entity object with description_id field
+
+        Returns:
+            Description text string or None if not found
+        """
+        if not self.game_data or not entity:
+            return None
+
+        try:
+            # Build index if not already built
+            if self.advanced_descriptions_index is None:
+                self._build_advanced_descriptions_index()
+
+            # Get description_id from entity
+            description_id = getattr(entity, "description_id", None)
+            if description_id is None or description_id == 0:
+                return None
+
+            # Fast O(1) lookup using index
+            if (
+                self.advanced_descriptions_index
+                and description_id in self.advanced_descriptions_index
+            ):
+                return self.advanced_descriptions_index[description_id]
+
+        except (AttributeError, KeyError, TypeError) as e:
+            print(f"Error getting advanced description: {e}")
 
         return None
 
@@ -1093,7 +1273,7 @@ class CFFDataModel(QObject):
 
     def get_quests_from_provider(self):
         """Get quests using data provider (for DB optimization)"""
-        if self.data_provider and hasattr(self.data_provider, 'get_quests'):
+        if self.data_provider and hasattr(self.data_provider, "get_quests"):
             try:
                 return self.data_provider.get_quests()
             except Exception:
@@ -1102,7 +1282,7 @@ class CFFDataModel(QObject):
 
     def get_quest_dialogs_from_provider(self, quest_id: int):
         """Get quest dialogs using data provider (for DB optimization)"""
-        if self.data_provider and hasattr(self.data_provider, 'get_quest_dialogs'):
+        if self.data_provider and hasattr(self.data_provider, "get_quest_dialogs"):
             try:
                 return self.data_provider.get_quest_dialogs(quest_id)
             except Exception:
@@ -1113,10 +1293,71 @@ class CFFDataModel(QObject):
         """Clear the icon cache to free memory."""
         self.icon_cache.clear()
 
+    def invalidate_localisation_index(self):
+        """Invalidate the localisation index (call when language changes or data reloads)"""
+        self.localisation_index = None
+        self.localisation_index_language = None
+        self.advanced_descriptions_index = None
+
+    def get_element_name_safe(self, element: Any) -> str:
+        """
+        Safely get an element's name without triggering Relations.
+        This is a convenience wrapper around safe_get_text_field with fallbacks.
+
+        Args:
+            element: The element object
+
+        Returns:
+            Element name as string, with intelligent fallbacks
+        """
+        if not element:
+            return "Unknown"
+
+        # Try localised name first (fast indexed lookup)
+        name = self.safe_get_text_field(element, "name")
+        if name:
+            return name
+
+        # Try common simple name fields (not Relations)
+        simple_name_fields = [
+            "item_name",
+            "spell_name",
+            "creature_name",
+            "building_name",
+            "map_handle",
+            "npc_name",
+        ]
+        for field in simple_name_fields:
+            if hasattr(element, field):
+                value = getattr(element, field, None)
+                if value and isinstance(value, str) and value != "":
+                    return value
+
+        # Fallback: construct name from ID fields
+        id_fields = [
+            "quest_id",
+            "item_id",
+            "spell_id",
+            "creature_id",
+            "building_id",
+            "npc_id",
+            "object_id",
+            "id",
+        ]
+        for field in id_fields:
+            if hasattr(element, field):
+                value = getattr(element, field, None)
+                if value is not None and value != 0:
+                    entity_type = field.replace("_id", "").replace("_", " ").title()
+                    return f"{entity_type} {value}"
+
+        return "Unknown"
+
     def clear_db_cache(self):
         """Clear database cache files"""
         if self.db_dir.exists():
             import shutil
+
             try:
                 shutil.rmtree(self.db_dir)
                 self.db_dir.mkdir(parents=True, exist_ok=True)
@@ -1127,20 +1368,20 @@ class CFFDataModel(QObject):
     def get_cache_info(self) -> dict:
         """Get information about cache usage"""
         info = {
-            'pickle_cache': {'files': 0, 'size': 0},
-            'db_cache': {'files': 0, 'size': 0}
+            "pickle_cache": {"files": 0, "size": 0},
+            "db_cache": {"files": 0, "size": 0},
         }
 
         # Count pickle cache files
         if self.cache_dir.exists():
             for file in self.cache_dir.glob("GameData_*.pkl"):
-                info['pickle_cache']['files'] += 1
-                info['pickle_cache']['size'] += file.stat().st_size
+                info["pickle_cache"]["files"] += 1
+                info["pickle_cache"]["size"] += file.stat().st_size
 
         # Count DB cache files
         if self.db_dir.exists():
             for file in self.db_dir.glob("*.db"):
-                info['db_cache']['files'] += 1
-                info['db_cache']['size'] += file.stat().st_size
+                info["db_cache"]["files"] += 1
+                info["db_cache"]["size"] += file.stat().st_size
 
         return info
