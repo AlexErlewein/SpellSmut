@@ -74,6 +74,65 @@ QUEST HIERARCHY TREE
     └── [SUB] Explore the Cave (ID: 2002, Order: 0)
 ```
 
+### 3. `find_quests_with_player_choices.py` - Quest Scanner
+
+A tool to scan your CFF file and identify which quests have player dialogue choices.
+
+**Features:**
+- Scans all quests for player dialogue options
+- Lists quests with branching conversations
+- Shows dialogue names and speakers
+- Analyzes dialogue-quest relationships
+- Provides statistical breakdown
+
+**How to Run:**
+```bash
+# With default CFF path
+python find_quests_with_player_choices.py
+
+# With custom CFF file
+python find_quests_with_player_choices.py /path/to/your/spellforce.cff
+```
+
+**Output:**
+- Lists all quests that have player dialogue choices
+- Shows quest ID, name, and dialogue count
+- Displays player dialogue names
+- Provides sample of all dialogues
+- Analyzes dialogue field structure
+
+**Use Case:** Find example quests with branching dialogues to understand how they work.
+
+### 4. `inspect_quest_structure.py` - Data Inspector
+
+A comprehensive tool to examine the actual structure of quest data in your CFF file.
+
+**Features:**
+- Detailed analysis of quest data fields
+- Shows all available attributes on quest objects
+- Field usage statistics across all quests
+- Identifies related tables (objectives, requirements, rewards)
+- Analyzes dialogue-quest relationships
+- Lists all CFF tables
+
+**How to Run:**
+```bash
+# With default CFF path
+python inspect_quest_structure.py
+
+# With custom CFF file
+python inspect_quest_structure.py /path/to/your/spellforce.cff
+```
+
+**Output:**
+- Complete attribute list for sample quest
+- Field usage percentages (which fields have data)
+- Available related tables
+- Dialogue structure analysis
+- What data is actually in the CFF
+
+**Use Case:** Understand what quest data is available in your specific CFF file.
+
 ## Quest Data Structure
 
 The hierarchy is built using the following quest fields:
@@ -90,6 +149,15 @@ The hierarchy is built using the following quest fields:
 2. **Sub-quest**: Quest that has a parent
 3. **Sub-quest (Parent)**: Sub-quest that also has its own sub-quests
 
+## Tools Summary
+
+| Tool | Type | Purpose |
+|------|------|---------|
+| `test_quest_tree_view.py` | GUI | Visual quest hierarchy browser |
+| `test_quest_hierarchy_cli.py` | CLI | Text-based quest tree viewer |
+| `find_quests_with_player_choices.py` | Scanner | Find quests with player dialogues |
+| `inspect_quest_structure.py` | Inspector | Examine quest data structure |
+
 ## Use Cases
 
 These test implementations are useful for:
@@ -97,6 +165,8 @@ These test implementations are useful for:
 - **Understanding quest structure**: See how quests are organized in the game
 - **Planning quest editor UI**: Prototype different ways to display quest hierarchies
 - **Debugging quest relationships**: Identify parent-child connection issues
+- **Finding player dialogues**: Identify which quests have branching conversations
+- **Understanding data structure**: See what fields are actually available in your CFF
 
 ## Integration with Main Application
 
@@ -118,9 +188,39 @@ If no path is provided, both tools look for:
 ~/Desktop/code/Others/SpellSmut/data/spellforce.cff
 ```
 
+## Troubleshooting
+
+### "I don't see player choices in Quest Details"
+
+Run the scanner to check if your quests actually have player dialogues:
+```bash
+python find_quests_with_player_choices.py
+```
+
+This will show you which quests (if any) have player dialogue options.
+
+### "Quest information fields are empty"
+
+Run the inspector to see what data is available:
+```bash
+python inspect_quest_structure.py
+```
+
+This shows which fields exist in your CFF and which have values. Some fields may not be present in all game versions.
+
+### "I want to know what data is actually in my CFF"
+
+Use `inspect_quest_structure.py` - it will show you:
+- All quest attributes
+- Field usage statistics
+- Available related tables
+- What's actually populated
+
 ## Notes
 
 - Quests are sorted by `order_index` within each level
 - The GUI version displays localized quest names when available
 - Orphaned quests (with non-existent parent IDs) are detected and marked
 - The tree view supports unlimited nesting depth
+- Not all quest data fields may be present in all CFF versions
+- Dialogue-quest relationships are detected by naming patterns

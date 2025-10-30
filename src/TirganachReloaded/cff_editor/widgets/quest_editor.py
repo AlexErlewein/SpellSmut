@@ -12,6 +12,7 @@ from PySide6.QtWidgets import (
 
 from .dialog_branching_editor import DialogBranchingEditorWidget
 from .quest_creator import QuestCreatorWidget
+from .quest_details_viewer import QuestDetailsViewer
 from .quest_hierarchy_tree import QuestHierarchyTreeWidget
 
 
@@ -43,11 +44,15 @@ class QuestEditorWidget(QWidget):
         self.quest_hierarchy_view = QuestHierarchyTreeWidget(self.data_model)
         self.tab_widget.addTab(self.quest_hierarchy_view, "Quest Hierarchy")
 
-        # Tab 2: Standalone Dialog Editor
+        # Tab 2: Quest Details Viewer (comprehensive quest information)
+        self.quest_details_viewer = QuestDetailsViewer(self.data_model)
+        self.tab_widget.addTab(self.quest_details_viewer, "Quest Details")
+
+        # Tab 3: Standalone Dialog Editor
         self.dialog_editor = DialogBranchingEditorWidget(self.data_model)
         self.tab_widget.addTab(self.dialog_editor, "Dialog Editor")
 
-        # Tab 3: Quest Creator
+        # Tab 4: Quest Creator
         self.quest_creator = QuestCreatorWidget(self.data_model)
         quest_creator_tab = self.tab_widget.addTab(self.quest_creator, "Quest Creator")
 
@@ -72,6 +77,18 @@ class QuestEditorWidget(QWidget):
 
         # Connect to data loaded signal to auto-load quests
         self.data_model.data_loaded.connect(self.on_data_loaded)
+
+        # Connect to tab changes to load quests when hierarchy tab is shown
+        self.tab_widget.currentChanged.connect(self.on_tab_changed)
+
+    def on_tab_changed(self, index):
+        """Handle tab change"""
+        # If switching to Quest Hierarchy tab and data is loaded, load quests
+        if index == 0 and self.data_model.game_data:  # Tab 0 is Quest Hierarchy
+            self.quest_hierarchy_view.load_quests()
+        # If switching to Quest Details tab and a quest is selected, refresh details
+        elif index == 1 and self.data_model.game_data:  # Tab 1 is Quest Details
+            self.quest_details_viewer.refresh()
 
     def on_data_loaded(self):
         """Handle when data is loaded"""
