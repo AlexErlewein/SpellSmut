@@ -21,6 +21,7 @@ from PySide6.QtWidgets import (
 
 from ..tirganach.types import Language
 from .data_model import CFFDataModel
+from .theme_manager import ThemeManager, ThemeType
 from .widgets.building_wizard import BuildingWizard
 from .widgets.category_tree import CategoryTreeWidget
 from .widgets.element_table import ElementTableWidget
@@ -41,14 +42,18 @@ class MainWindow(QMainWindow):
         # Data model
         self.data_model = CFFDataModel()
 
+        # Theme manager
+        self.theme_manager = ThemeManager()
+        self.theme_manager.theme_changed.connect(self.on_theme_changed)
+
         # Setup UI
         self.setup_ui()
         self.setup_menu()
         self.setup_statusbar()
         self.setup_connections()
 
-        # Apply dark theme
-        self.apply_dark_theme()
+        # Apply initial theme
+        self.apply_theme(self.theme_manager.get_current_theme())
 
         # Auto-load default file
         self.auto_load_default_file()
@@ -161,6 +166,10 @@ class MainWindow(QMainWindow):
         language_menu = menubar.addMenu("&Language")
         self._setup_language_menu(language_menu)
 
+        # Theme menu
+        theme_menu = menubar.addMenu("&Theme")
+        self._setup_theme_menu(theme_menu)
+
         # View menu
         view_menu = menubar.addMenu("&View")
 
@@ -260,6 +269,36 @@ class MainWindow(QMainWindow):
         self.data_model.set_current_language(language)
         self.statusBar.showMessage(f"Language changed to {language.name}", 2000)
         self.refresh_view()
+
+    def _setup_theme_menu(self, theme_menu):
+        """Setup theme selection menu"""
+        # Create action group for radio button behavior
+        theme_group = QActionGroup(self)
+        theme_group.setExclusive(True)
+
+        for theme_type in ThemeType:
+            action = QAction(theme_type.value, self)
+            action.setCheckable(True)
+            action.setChecked(self.theme_manager.get_current_theme() == theme_type)
+            action.triggered.connect(
+                lambda checked, theme=theme_type: self._on_theme_selected(theme)
+            )
+            theme_menu.addAction(action)
+            theme_group.addAction(action)
+
+    def _on_theme_selected(self, theme_type: ThemeType):
+        """Handle theme selection"""
+        self.theme_manager.set_theme(theme_type)
+        self.statusBar.showMessage(f"Theme changed to {theme_type.value}", 2000)
+
+    def on_theme_changed(self, theme_name: str):
+        """Handle theme change signal"""
+        self.apply_theme(self.theme_manager.get_current_theme())
+
+    def apply_theme(self, theme_type: ThemeType):
+        """Apply specified theme to the application"""
+        stylesheet = self.theme_manager.get_theme(theme_type)
+        self.setStyleSheet(stylesheet)
 
     def setup_statusbar(self):
         """Setup status bar"""
@@ -1053,83 +1092,4 @@ class MainWindow(QMainWindow):
         else:
             event.accept()
 
-    def apply_dark_theme(self):
-        """Apply dark theme to the application"""
-        dark_stylesheet = """
-        QMainWindow {
-            background-color: #2b2b2b;
-            color: #ffffff;
-        }
-        QWidget {
-            background-color: #2b2b2b;
-            color: #ffffff;
-        }
-        QTreeWidget {
-            background-color: #353535;
-            border: 1px solid #555555;
-            alternate-background-color: #3a3a3a;
-        }
-        QTreeWidget::item:selected {
-            background-color: #0d47a1;
-        }
-        QTreeWidget::item:hover {
-            background-color: #404040;
-        }
-        QTableWidget {
-            background-color: #353535;
-            border: 1px solid #555555;
-            gridline-color: #555555;
-            alternate-background-color: #3a3a3a;
-        }
-        QTableWidget::item:selected {
-            background-color: #0d47a1;
-        }
-        QHeaderView::section {
-            background-color: #404040;
-            color: #ffffff;
-            border: 1px solid #555555;
-            padding: 4px;
-        }
-        QLineEdit, QSpinBox, QComboBox {
-            background-color: #353535;
-            border: 1px solid #555555;
-            padding: 4px;
-            color: #ffffff;
-        }
-        QPushButton {
-            background-color: #0d47a1;
-            border: none;
-            padding: 6px 12px;
-            color: #ffffff;
-        }
-        QPushButton:hover {
-            background-color: #1565c0;
-        }
-        QPushButton:disabled {
-            background-color: #555555;
-            color: #888888;
-        }
-        QMenuBar {
-            background-color: #353535;
-            color: #ffffff;
-        }
-        QMenuBar::item:selected {
-            background-color: #0d47a1;
-        }
-        QMenu {
-            background-color: #353535;
-            color: #ffffff;
-            border: 1px solid #555555;
-        }
-        QMenu::item:selected {
-            background-color: #0d47a1;
-        }
-        QStatusBar {
-            background-color: #353535;
-            color: #ffffff;
-        }
-        QLabel {
-            color: #ffffff;
-        }
-        """
-        self.setStyleSheet(dark_stylesheet)
+
