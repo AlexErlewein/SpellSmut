@@ -13,6 +13,7 @@ SpellForce Modding Project
 ├── 📁 GUI Editor (PySide6-based CFF Editor)
 ├── 📁 Asset Extraction System
 ├── 📁 Icon System
+├── 📁 Content Creators (Weapon/Armor/Spell/Quest/NPC)
 ├── 📁 Quest Editor Enhancement
 ├── 📁 Documentation & Guides
 └── 📁 Development Tools
@@ -79,7 +80,37 @@ SpellForce Modding Project
 
 ---
 
-## 4. Quest Editor Enhancement
+## 4. Content Creators
+
+**Status**: ✅ **WEAPON CREATOR COMPLETE**, 🔄 **OTHERS IN PROGRESS**
+
+### Weapon Forge (Weapon Creator)
+**Status**: ✅ **COMPLETE** - Ready for in-game testing
+
+#### Achievements
+- ✅ **Full 6-Step Wizard**: Mode selection, basic properties, combat stats, requirements, visual/audio, review
+- ✅ **ID Management System**: Shared across all creators, prevents conflicts
+- ✅ **Edit Existing Weapons**: Browse, load, and modify 719 existing weapons
+- ✅ **New Weapon Types**: Create custom weapon categories beyond 20 base types
+- ✅ **Material System**: Define and use custom weapon materials
+- ✅ **CFF Export**: Export to GameData.cff format
+- ✅ **Validation & Balance**: DPS calculator, balance rating, overpowered warnings
+- ✅ **All Tests Passing**: 4/4 weapon tests passing
+
+#### Pending
+- 🔄 **In-Game Testing**: Verify exported weapons work in SpellForce
+- 📋 **Effects Widget**: UI for selecting weapon effects (minor enhancement)
+
+### Other Creators
+- 🔄 **Armor Creator**: Implementation in progress
+- 🔄 **Spell Creator**: Implementation in progress
+- 🔄 **NPC Creator**: Implementation in progress
+- 📋 **Building Creator**: Planned
+- 📋 **Race Creator**: Planned
+
+---
+
+## 5. Quest Editor Enhancement
 
 **Status**: 🔄 **IN PROGRESS** (Phase 2/4)
 
@@ -99,7 +130,7 @@ SpellForce Modding Project
 
 ---
 
-## 5. Documentation & Guides
+## 6. Documentation & Guides
 
 **Status**: ✅ **COMPLETE**
 
@@ -109,7 +140,7 @@ SpellForce Modding Project
 
 ---
 
-## 6. Development Tools
+## 7. Development Tools
 
 **Status**: 🔄 **ONGOING**
 
@@ -123,15 +154,19 @@ SpellForce Modding Project
 ## Project Timeline & Milestones
 
 ### Current Phase (Q4 2025)
-- 🔄 **Quest Editor**: Complete Phase 1 (data models and widgets).
-- ⚠️ **Icon Mapping**: Resolve the handle-to-atlas mapping challenge.
-- ✅ **GUI Polish**: Finalize Phase 4 (error handling, recent files).
+- ✅ **Weapon Creator**: COMPLETE - Ready for in-game testing
+- 🔄 **Quest Editor**: Complete Phase 1 (data models and widgets)
+- 🔄 **Armor/Spell/NPC Creators**: Implementation in progress
+- ⚠️ **Icon Mapping**: Resolve the handle-to-atlas mapping challenge
+- ✅ **GUI Polish**: Finalize Phase 4 (error handling, recent files)
 
 ### Upcoming Milestones
 - **Q1 2026**:
-  - Complete Quest Editor Phase 2.
-  - Resolve Icon Mapping and complete GUI integration.
-  - Release a visual asset browser.
+  - Test Weapon Creator in-game and refine based on feedback
+  - Complete Armor/Spell/NPC Creators
+  - Complete Quest Editor Phase 2
+  - Resolve Icon Mapping and complete GUI integration
+  - Release a visual asset browser
 - **Q2 2026**:
   - Begin GUI Editor Phase 5 (advanced features).
   - Develop standalone modding tools.
@@ -146,5 +181,6 @@ SpellForce Modding Project
 
 - **Icon Mapping Gap**: The missing handle-to-atlas mapping is the most critical blocker, preventing the full integration of the icon system.
 - **Quest Editor Complexity**: The Quest Editor is a large and complex feature that requires significant development effort.
+- **In-Game Testing**: Weapon Creator needs in-game validation to ensure exported weapons work correctly in SpellForce.
 
 ---
