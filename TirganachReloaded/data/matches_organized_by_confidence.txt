@@ -1,0 +1,2457 @@
+================================================================================
+QUEST REWARD MATCHES - ORGANIZED BY CONFIDENCE
+================================================================================
+
+
+================================================================================
+HIGH CONFIDENCE (≥0.70) - Auto-apply these - 100 matches
+================================================================================
+
+1. MasterGameWon (P208)
+   XP: 30,000, Confidence: 80% (0.800)
+   Language: English, Matched: Game, Won
+   Quest Text:
+   Environment mapping controls the mirroring and reflections in the game environment. This has an effect, particularly on how water is displayed. Withou...
+
+2. BlutigenDariusBefreit (P213)
+   XP: 30,000, Confidence: 80% (0.800)
+   Language: German, Matched: Darius, Befreit
+   Quest Text:
+   Sucht und befreit Darius
+
+3. ZerstoerungDesLagers (P203)
+   XP: 24,000, Confidence: 80% (0.800)
+   Language: German, Matched: Des, Lagers
+   Quest Text:
+   ler Isturs ist von einem Traumdieb besessen und wahnsinnig. Nur der Tod kann ihn von dem Wesen befreien. Er befindet sich in den Bergen westlich des T...
+
+4. SQCraigIstBotschafter (P204)
+   XP: 20,000, Confidence: 72% (0.720)
+   Language: German, Matched: Craig, Ist, Botschafter
+   Quest Text:
+   Der Botschafter ist im Tempelbezirk von Empyria. Sprecht mit ihm und gebt ihm Craigs Nachricht, aber nicht das Siegel.
+
+5. AlleStelenOff (P212)
+   XP: 20,000, Confidence: 80% (0.800)
+   Language: English, Matched: Alle, Off
+   Quest Text:
+   Shan Muir does not want to give the Zirfar potion to you, he says that it may harm the sick hermit. Decide if you still want to look for it or would r...
+
+6. WegZumTorFreigeraeumt (P213)
+   XP: 17,500, Confidence: 90% (0.900)
+   Language: German, Matched: Weg, Zum, Tor
+   Quest Text:
+   Rohen ist auf dem Weg zum Wildland-Pass. Sprecht mit Celen Fell, Kommandantin der Wachen. Ihr werdet ihre Erlaubnis brauchen, wenn ihr die Torfeste na...
+
+7. ArenaKampf42 (P204)
+   XP: 15,000, Confidence: 80% (0.800)
+   Language: German, Matched: Arena, Kampf
+   Quest Text:
+   Na habt Ihr Euch entschieden? Wagt Ihr einen Kampf in der Arena? Oder schleicht Ihr Euch feige von dannen?
+
+8. LargeIrfitReward (P205)
+   XP: 13,000, Confidence: 80% (0.800)
+   Language: English, Matched: Large, Reward
+   Quest Text:
+   He knows the largest deposits of dreamdust in Empyria! If I could only get him alive, I would pay an adequate reward!
+
+9. ArenaKampf40 (P204)
+   XP: 12,500, Confidence: 80% (0.800)
+   Language: German, Matched: Arena, Kampf
+   Quest Text:
+   Na habt Ihr Euch entschieden? Wagt Ihr einen Kampf in der Arena? Oder schleicht Ihr Euch feige von dannen?
+
+10. UndeadRohenGetoetet (P207)
+   XP: 12,000, Confidence: 80% (0.800)
+   Language: English, Matched: Undead, Rohen
+   Quest Text:
+   The Circlemage Rohen has arrived with his Undead Guard. It seems he is not yet in possession of his full powers, or he is sparing you for some reason....
+
+11. Tor1DurchTrickGeoeffnet (P204)
+   XP: 11,000, Confidence: 72% (0.720)
+   Language: German, Matched: Tor, Durch, Trick
+   Quest Text:
+   chter werden Euch nicht durchlassen. Lenkt sie entweder mit Tricks ab oder provoziert sie zum Kampf, indem Ihr vor ihren Augen das Tor aufbrecht.
+
+12. ArenaKampf38 (P204)
+   XP: 10,000, Confidence: 80% (0.800)
+   Language: German, Matched: Arena, Kampf
+   Quest Text:
+   Na habt Ihr Euch entschieden? Wagt Ihr einen Kampf in der Arena? Oder schleicht Ihr Euch feige von dannen?
+
+13. MitDryadeGesprochen (P205)
+   XP: 10,000, Confidence: 80% (0.800)
+   Language: English, Matched: Mit, Dryade
+   Quest Text:
+   The malicious Dryade once drove the hermit into madness. He met her in Eloni and fell under her spell. As long as she owns a lock of his hair, he rema...
+
+14. KopfloserTodVernichtet (P208)
+   XP: 10,000, Confidence: 80% (0.800)
+   Language: German, Matched: Tod, Vernichtet
+   Quest Text:
+   Der Tod Shaknars hat den Traumdieb freigesetzt. Er muss vernichtet werden, um den Obsidian zu erlangen.
+
+15. ArgamunVerwandeltSich (P208)
+   XP: 10,000, Confidence: 80% (0.800)
+   Language: German, Matched: Verwandelt, Sich
+   Quest Text:
+   Sucht die verwandelte Prinzessin, die sich im S
+
+16. KathaiStadtBefreit (P209)
+   XP: 10,000, Confidence: 80% (0.800)
+   Language: German, Matched: Kathai, Stadt
+   Quest Text:
+   mpft alleine gegen die Untoten in der Stadt. Helft ihm und befragt ihn dann zur Lage in Kathai.
+
+17. NahrungFuerAffenjunge (P213)
+   XP: 10,000, Confidence: 80% (0.800)
+   Language: German, Matched: Nahrung, Affenjunge
+   Quest Text:
+   Bringt dem Affenjungen 500 Nahrung f
+
+18. ErsteFestungBesiegt (P207)
+   XP: 9,500, Confidence: 80% (0.800)
+   Language: German, Matched: Erste, Besiegt
+   Quest Text:
+   nderer ihr Versteck. Dorthin haben sie den Besitz von Illirias verschleppt. Findet und besiegt sie.
+
+19. ZweiteFestungBesiegt (P207)
+   XP: 9,500, Confidence: 80% (0.800)
+   Language: German, Matched: Zweite, Besiegt
+   Quest Text:
+   hrt die Kampfaxt wie kein Zweiter. Besiegt ihn und schlagt ihm den Kopf ab.
+
+20. Tor3DurchTrickGeoeffnet (P204)
+   XP: 9,000, Confidence: 72% (0.720)
+   Language: German, Matched: Tor, Durch, Trick
+   Quest Text:
+   chter werden Euch nicht durchlassen. Lenkt sie entweder mit Tricks ab oder provoziert sie zum Kampf, indem Ihr vor ihren Augen das Tor aufbrecht.
+
+21. TruppenZumPortalGesandt (P204)
+   XP: 9,000, Confidence: 90% (0.900)
+   Language: German, Matched: Truppen, Zum, Portal
+   Quest Text:
+   Die Angriffe sind abgewehrt. Nun gilt es, die restlichen Truppen der Feinde aufzureiben und bis zum Portal ins Grauschattental durchzubrechen. Das Por...
+
+22. LeaderNordarmeeKilled (P209)
+   XP: 8,000, Confidence: 80% (0.800)
+   Language: English, Matched: Leader, Killed
+   Quest Text:
+   The imperial troops are disciplined, but they're weak without their leaders. Defeat their leaders and destroy the Emperor's Bronze Giant who killed Ur...
+
+23. LeaderSuedarmeeKilled (P209)
+   XP: 8,000, Confidence: 80% (0.800)
+   Language: English, Matched: Leader, Killed
+   Quest Text:
+   The imperial troops are disciplined, but they're weak without their leaders. Defeat their leaders and destroy the Emperor's Bronze Giant who killed Ur...
+
+24. LeaderHauptarmeeKilled (P209)
+   XP: 8,000, Confidence: 80% (0.800)
+   Language: English, Matched: Leader, Killed
+   Quest Text:
+   The imperial troops are disciplined, but they're weak without their leaders. Defeat their leaders and destroy the Emperor's Bronze Giant who killed Ur...
+
+25. Tor2DurchTrickGeoeffnet (P204)
+   XP: 7,000, Confidence: 72% (0.720)
+   Language: German, Matched: Tor, Durch, Trick
+   Quest Text:
+   chter werden Euch nicht durchlassen. Lenkt sie entweder mit Tricks ab oder provoziert sie zum Kampf, indem Ihr vor ihren Augen das Tor aufbrecht.
+
+26. ArenaKampf36 (P204)
+   XP: 7,000, Confidence: 80% (0.800)
+   Language: German, Matched: Arena, Kampf
+   Quest Text:
+   Na habt Ihr Euch entschieden? Wagt Ihr einen Kampf in der Arena? Oder schleicht Ihr Euch feige von dannen?
+
+27. AlleinEinenWegGefunden (P206)
+   XP: 6,500, Confidence: 90% (0.900)
+   Language: German, Matched: Einen, Weg, Gefunden
+   Quest Text:
+   rper viele Klafter tief in die Erde...damit ich im Verborgenen ruhen kann...bis er einen Weg gefunden hat...Doch nun ist alles vorbei!
+
+28. OpferTot (P202)
+   XP: 6,000, Confidence: 100% (1.000)
+   Language: German, Matched: Opfer, Tot
+   Quest Text:
+   Aber er hat unser Land wohl nie erreicht. Vielleicht ist auch unser Bote den Untoten zum Opfer gefallen, wer weiss.
+
+29. StadtKathaiErreicht (P209)
+   XP: 6,000, Confidence: 80% (0.800)
+   Language: German, Matched: Stadt, Erreicht
+   Quest Text:
+   Ihr habt Shal'Dun, die Hauptstadt des roten Imperiums, erreicht. Der Zugang zum Inneren der Stadt ist allerdings versperrt und die Imperialen werden E...
+
+30. RingGefunden (P201)
+   XP: 5,000, Confidence: 100% (1.000)
+   Language: English, Matched: Ring, Gefunden
+   Quest Text:
+   hrer der Orks erbeuten! Bring sie zu mir, sobald du sie gefunden hast!
+
+31. ArenaKampf32 (P204)
+   XP: 5,000, Confidence: 80% (0.800)
+   Language: German, Matched: Arena, Kampf
+   Quest Text:
+   Na habt Ihr Euch entschieden? Wagt Ihr einen Kampf in der Arena? Oder schleicht Ihr Euch feige von dannen?
+
+32. BlutAdhiraTrank (P63)
+   XP: 4,000, Confidence: 80% (0.800)
+   Language: German, Matched: Blut, Adhira
+   Quest Text:
+   Bringt Adhira das Blut m
+
+33. MonumenteElfClaimed (P211)
+   XP: 4,000, Confidence: 80% (0.800)
+   Language: German, Matched: Monumente, Elf
+   Quest Text:
+   Ich diene der Rune! Ich kann Euch helfen! Gibt es in dieser Gegend noch einige der alten Monumente?
+
+34. BlutTombardTot (P63)
+   XP: 2,000, Confidence: 80% (0.800)
+   Language: German, Matched: Blut, Tot
+   Quest Text:
+   nner sind tapfer, aber es sind zu viele der wandlenden Toten dort draussen. Unser Blut wird bald im Sand verrinnen, wenn nicht ein Wunder geschieht.
+
+35. FialDargTotCenwenFrei (P113)
+   XP: 2,000, Confidence: 96% (0.960)
+   Language: German, Matched: Fial, Darg, Cenwen, Frei
+   Quest Text:
+   nigin Cenwen aus den Klauen des Fial Darg zu befreien, ist ein Vormarsch in die Lande des roten Imperiums. Die Armee von Tirganach ist nicht stark gen...
+
+36. GoblinRennen (P200)
+   XP: 2,000, Confidence: 100% (1.000)
+   Language: German, Matched: Goblin, Rennen
+   Quest Text:
+   Hier erlebt Ihr etwas, dass habt Ihr noch nicht gesehen! Das Rennen der schnellsten Goblins der Welt!
+
+37. InsCampGekommen (P201)
+   XP: 2,000, Confidence: 80% (0.800)
+   Language: English, Matched: Ins, Camp
+   Quest Text:
+   The necromancer and former student Istur's has been possessed by a dream-snatcher and he has gone insane. Only death can liberate him from the creatur...
+
+38. GespraechMitKhal (P209)
+   XP: 2,000, Confidence: 80% (0.800)
+   Language: German, Matched: Mit, Khal
+   Quest Text:
+   ckhalten, aber nun scheinen sie jemanden zu haben, der ihnen hilft. Jemand mit Macht und Mitteln.
+
+39. ZwergenMonumentClaimed (P209)
+   XP: 2,000, Confidence: 80% (0.800)
+   Language: English, Matched: Monument, Claimed
+   Quest Text:
+   Use this button to select the next, activated monument. Cycle through all claimed Monuments. The game view will center on each Monument.
+
+40. EndeDesOrdens1Erreichen (P7)
+   XP: 1,500, Confidence: 72% (0.720)
+   Language: German, Matched: Ende, Des, Erreichen
+   Quest Text:
+   rte, dass ein Ende nahte und in jenem letzen Moment an der Schwelle des Todes, erlangte er die Vollendung, die kein Sterblicher bis dahin erreichen ko...
+
+41. RueckkehrMitWindjalf (P108)
+   XP: 1,250, Confidence: 80% (0.800)
+   Language: English, Matched: Mit, Windjalf
+   Quest Text:
+   Where will I find Windjalf, the smith?
+
+42. AmraUndLea5 (P15)
+   XP: 1,200, Confidence: 90% (0.900)
+   Language: German, Matched: Amra, Und, Lea
+   Quest Text:
+   bsches Paar abgegeben, aber dann ging Lea fort, mit so einem vermummten Kerl. Und Amra war nicht mehr derselbe, tobte und schrie den ganzen Tag.
+
+43. AmraUndLea4 (P7)
+   XP: 1,200, Confidence: 90% (0.900)
+   Language: German, Matched: Amra, Und, Lea
+   Quest Text:
+   bsches Paar abgegeben, aber dann ging Lea fort, mit so einem vermummten Kerl. Und Amra war nicht mehr derselbe, tobte und schrie den ganzen Tag.
+
+44. EchosShinTarGuar (P63)
+   XP: 1,000, Confidence: 90% (0.900)
+   Language: English, Matched: Shin, Tar, Guar
+   Quest Text:
+   I could actually make out words. Tar, Shin and Guar!
+
+45. SkeletonCampDestroyed (P105)
+   XP: 850, Confidence: 80% (0.800)
+   Language: English, Matched: Camp, Destroyed
+   Quest Text:
+   Snarf's camp in the West must be destroyed. Celen wants his Dagger as proof of his defeat.
+
+46. AmraUndLea2Sentos (P6)
+   XP: 800, Confidence: 72% (0.720)
+   Language: German, Matched: Amra, Und, Lea
+   Quest Text:
+   bsches Paar abgegeben, aber dann ging Lea fort, mit so einem vermummten Kerl. Und Amra war nicht mehr derselbe, tobte und schrie den ganzen Tag.
+
+47. AmraLeaGrab (P16)
+   XP: 800, Confidence: 80% (0.800)
+   Language: English, Matched: Amra, Lea
+   Quest Text:
+   Shan is Lea's sister, Amra's chosen one. She probably knows another part of the story.
+
+48. MosaikDesTodes (P16)
+   XP: 800, Confidence: 100% (1.000)
+   Language: German, Matched: Mosaik, Des, Todes
+   Quest Text:
+   en Steinbild - dem Mosaik des Todes!
+
+49. Ulather (P23)
+   XP: 800, Confidence: 100% (1.000)
+   Language: English, Matched: Ulather
+   Quest Text:
+   This fragment belongs to Talia, a mage who has set off to defeat the demon Ulather.
+
+50. Steinbrecher (P21)
+   XP: 800, Confidence: 100% (1.000)
+   Language: German, Matched: Steinbrecher
+   Quest Text:
+   Holt Uram, den Steinbrecher, von seinem Haus und sprengt mit ihm den
+
+51. SickHermit1Zirfar (P63)
+   XP: 600, Confidence: 90% (0.900)
+   Language: English, Matched: Sick, Hermit, Zirfar
+   Quest Text:
+   Shan Muir does not want to give the Zirfar potion to you, he says that it may harm the sick hermit. Decide if you still want to look for it or would r...
+
+52. Thar (P21)
+   XP: 600, Confidence: 100% (1.000)
+   Language: English, Matched: Thar
+   Quest Text:
+   The key point is the entrance to the mountain pass. It is advisable to await the Undead together with the troops of Gunthar. They will probably send t...
+
+53. DerKatarakt (P21)
+   XP: 600, Confidence: 100% (1.000)
+   Language: German, Matched: Der, Katarakt
+   Quest Text:
+   Findet jemanden, der General Torns Katarakt behandeln kann
+
+54. AmraUndLea3Sentos (P63)
+   XP: 500, Confidence: 72% (0.720)
+   Language: German, Matched: Amra, Und, Lea
+   Quest Text:
+   bsches Paar abgegeben, aber dann ging Lea fort, mit so einem vermummten Kerl. Und Amra war nicht mehr derselbe, tobte und schrie den ganzen Tag.
+
+55. TricksterFindFlink (P63)
+   XP: 500, Confidence: 80% (0.800)
+   Language: English, Matched: Find, Flink
+   Quest Text:
+   Find Flink McWinter and give him the golden fragment
+
+56. KlagendeSteine2Korshar (P15)
+   XP: 500, Confidence: 90% (0.900)
+   Language: German, Matched: Klagende, Steine, Korshar
+   Quest Text:
+   Korshar befehligt seine Heere von der alten Festung in den Klagenden Steinen aus. Dort bewacht er auch den einzigen Zugang nach Wisper, wo Hokans Grab...
+
+57. AufDemWall5Endkampf (P17)
+   XP: 500, Confidence: 72% (0.720)
+   Language: German, Matched: Auf, Dem, Wall
+   Quest Text:
+   ten Hof hier auf dem Wall. Wenn ihr weiter nach Norden zieht, dann beendet vorher, was ihr begonnen habt. Vertreibt die restlichen S
+
+58. RuneReowysGenommen (P103)
+   XP: 500, Confidence: 80% (0.800)
+   Language: English, Matched: Rune, Reowys
+   Quest Text:
+   Use the rune monument to summon Dunhan and Reowys. Then the resistance will join you in the battle for the city.
+
+59. KlagendeSteine1BisTor (P15)
+   XP: 400, Confidence: 72% (0.720)
+   Language: German, Matched: Klagende, Steine, Tor
+   Quest Text:
+   hlen! Die Untoten bewachen das Tor zu den klagenden Steinen scharf!
+
+60. ShardAutumn (P21)
+   XP: 400, Confidence: 100% (1.000)
+   Language: English, Matched: Shard, Autumn
+   Quest Text:
+   Elwen, who was to carry the Shard of Autumn Twilight to safety, has been attacked by the Briarwolves. He is being held prisoner in the mercenaries' ca...
+
+61. AusDerTiefe2Spaeher (P1)
+   XP: 350, Confidence: 72% (0.720)
+   Language: German, Matched: Aus, Der, Tiefe
+   Quest Text:
+   chlich aus der Tiefe gestiegen. Er scheint verwirrt. Vielleicht wei
+
+62. InsGrauschattental4 (P10)
+   XP: 350, Confidence: 80% (0.800)
+   Language: German, Matched: Ins, Grauschattental
+   Quest Text:
+   Die Angriffe sind abgewehrt. Nun gilt es, die restlichen Truppen der Feinde aufzureiben und bis zum Portal ins Grauschattental durchzubrechen. Das Por...
+
+63. MaskeDesBelial1 (P12)
+   XP: 300, Confidence: 90% (0.900)
+   Language: German, Matched: Maske, Des, Belial
+   Quest Text:
+   ck und zeigt Darius die Maske des Belial.
+
+64. MaskeDesBelial2 (P12)
+   XP: 300, Confidence: 90% (0.900)
+   Language: German, Matched: Maske, Des, Belial
+   Quest Text:
+   ck und zeigt Darius die Maske des Belial.
+
+65. Homunculus (P15)
+   XP: 300, Confidence: 100% (1.000)
+   Language: German, Matched: Homunculus
+   Quest Text:
+   Homunculus...ein Abbild. Geschaffen, nicht geboren. Mein Leben entstand durch...die K
+
+66. ThurgonBrief (P63)
+   XP: 250, Confidence: 100% (1.000)
+   Language: German, Matched: Thurgon, Brief
+   Quest Text:
+   Ich erkenne sie. Thurgon gab mir diesen Brief. Seht ihr die Anschrift?
+
+67. AusDerTiefe1Schreiber (P1)
+   XP: 250, Confidence: 72% (0.720)
+   Language: German, Matched: Aus, Der, Tiefe
+   Quest Text:
+   chlich aus der Tiefe gestiegen. Er scheint verwirrt. Vielleicht wei
+
+68. KitharLagerZerstoert (P102)
+   XP: 175, Confidence: 80% (0.800)
+   Language: German, Matched: Kithar, Lager
+   Quest Text:
+   Wo befindet sich das Lager der Kithar?
+
+69. RuneDunhanGenommen (P102)
+   XP: 175, Confidence: 80% (0.800)
+   Language: English, Matched: Rune, Dunhan
+   Quest Text:
+   Use the rune monument to summon Dunhan and Reowys. Then the resistance will join you in the battle for the city.
+
+70. AusDerTiefe1Buch (P1)
+   XP: 150, Confidence: 72% (0.720)
+   Language: German, Matched: Aus, Der, Tiefe
+   Quest Text:
+   chlich aus der Tiefe gestiegen. Er scheint verwirrt. Vielleicht wei
+
+71. InsGrauschattental2 (P10)
+   XP: 150, Confidence: 80% (0.800)
+   Language: German, Matched: Ins, Grauschattental
+   Quest Text:
+   Die Angriffe sind abgewehrt. Nun gilt es, die restlichen Truppen der Feinde aufzureiben und bis zum Portal ins Grauschattental durchzubrechen. Das Por...
+
+72. FluechtlingeNachNorden (P101)
+   XP: 150, Confidence: 80% (0.800)
+   Language: German, Matched: Nach, Norden
+   Quest Text:
+   Der Wall ist durch Verwitterung und Menschenhand begehbar geworden. Er ist der einzige Weg nach Norden und damit nach Mulandir.
+
+73. DurchDenSchattenhain (P4)
+   XP: 130, Confidence: 80% (0.800)
+   Language: German, Matched: Durch, Den
+   Quest Text:
+   r Sie selbst (Ihren Avatar). Durch einen Linksklick werden Sie selektiert, durch einen Rechtsklick wird der Bildschirmausschnitt auf Sie zentriert.
+
+74. Einsiedler1Shan (P1)
+   XP: 100, Confidence: 80% (0.800)
+   Language: German, Matched: Einsiedler, Shan
+   Quest Text:
+   Nun kann der Einsiedler in Graufurt endlich den Zirfartrank erhalten. Aber vielleicht hat Shan doch recht mit dem Wahnsinn, der noch in ihm schlummern...
+
+75. WundtinkturSwerdis (P2)
+   XP: 80, Confidence: 100% (1.000)
+   Language: German, Matched: Wundtinktur, Swerdis
+   Quest Text:
+   Die Kinder der Elfen auf Eloni siechen dahin. Swerdis braucht eine Wundtinktur, um sie zu retten.
+
+76. QuelleVergiftet (P102)
+   XP: 65, Confidence: 100% (1.000)
+   Language: German, Matched: Quelle, Vergiftet
+   Quest Text:
+   Etwas ist in der Quelle verkeilt, was ihr Wasser vergiftet. Benutzt Tantaros Nagelstock, um es herauszuholen. Aber seid vorsichtig, das giftige Wasser...
+
+77. InsGrauschattental1 (P10)
+   XP: 50, Confidence: 80% (0.800)
+   Language: German, Matched: Ins, Grauschattental
+   Quest Text:
+   Die Angriffe sind abgewehrt. Nun gilt es, die restlichen Truppen der Feinde aufzureiben und bis zum Portal ins Grauschattental durchzubrechen. Das Por...
+
+78. InsGrauschattental3 (P10)
+   XP: 50, Confidence: 80% (0.800)
+   Language: German, Matched: Ins, Grauschattental
+   Quest Text:
+   Die Angriffe sind abgewehrt. Nun gilt es, die restlichen Truppen der Feinde aufzureiben und bis zum Portal ins Grauschattental durchzubrechen. Das Por...
+
+79. KoenigDerSpinnen (P6)
+   XP: 45, Confidence: 80% (0.800)
+   Language: German, Matched: Der, Spinnen
+   Quest Text:
+   hrt. Markwart will Rache, aber keiner will dem sagenumwobenen Meister der Spinnen zu nahe kommen.
+
+80. AlterMannUndMusik (P6)
+   XP: 45, Confidence: 90% (0.900)
+   Language: German, Matched: Alter, Mann, Und
+   Quest Text:
+   Bleibt Ihr nur bei Eurem Lagerfeuer und Euren Geschichten, alter Mann!
+
+81. FeineStoffe1 (P6)
+   XP: 45, Confidence: 80% (0.800)
+   Language: English, Matched: Feine, Stoffe
+   Quest Text:
+   r die Feine-Stoffe-Quest eingef
+
+82. DieGeiseln (P4)
+   XP: 40, Confidence: 100% (1.000)
+   Language: German, Matched: Die, Geiseln
+   Quest Text:
+   einige von uns gefangensetzen. Als Geiseln, sollten die Schwestern aus Eloni Rache suchen!
+
+83. Schwarzeibe (P63)
+   XP: 35, Confidence: 100% (1.000)
+   Language: English, Matched: Schwarzeibe
+   Quest Text:
+   nnt Ihr irgendwo einen alten Bogen aus Schwarzeibe finden.
+
+84. GeistInDerMine (P1)
+   XP: 35, Confidence: 90% (0.900)
+   Language: German, Matched: Geist, Der, Mine
+   Quest Text:
+   Bei der alten Mine ging eine Erscheinung um. Es schien der Geist eines Menschen zu sein, zornig und verwirrt. Er hatte eben jenen Ring bei sich.
+
+85. KlingzogsBeinlinge (P63)
+   XP: 35, Confidence: 100% (1.000)
+   Language: German, Matched: Klingzogs, Beinlinge
+   Quest Text:
+   Bringt Klingzogs Beinlinge nach Graufurt
+
+86. WundtinkturValdis (P63)
+   XP: 30, Confidence: 100% (1.000)
+   Language: German, Matched: Wundtinktur, Valdis
+   Quest Text:
+   Besorgt die Wundtinktur von Valdis und bringt sie zu Swerdis in Eloni
+
+87. WegNachEloni2Portal (P1)
+   XP: 30, Confidence: 72% (0.720)
+   Language: Italian, Matched: Nach, Eloni, Portal
+   Quest Text:
+   e zum Portal nach Eloni. Ihr Versteck ist ein Lager im Westen.
+
+88. DariusDerKarthograph (P1)
+   XP: 25, Confidence: 80% (0.800)
+   Language: English, Matched: Darius, Der
+   Quest Text:
+   The Order of Dawn sent me. Are you the one they call Darius?
+
+89. WegNachEloni1Snarf (P1)
+   XP: 25, Confidence: 72% (0.720)
+   Language: German, Matched: Weg, Nach, Eloni
+   Quest Text:
+   Rohen ist auf dem Weg zum Wildland-Pass. Sprecht mit Celen Fell, Kommandantin der Wachen. Ihr werdet ihre Erlaubnis brauchen, wenn ihr die Torfeste na...
+
+90. AngriffDerHoehlenorks (P63)
+   XP: 20, Confidence: 80% (0.800)
+   Language: German, Matched: Angriff, Der
+   Quest Text:
+   Die Angriffe sind abgewehrt. Nun gilt es, die restlichen Truppen der Feinde aufzureiben und bis zum Portal ins Grauschattental durchzubrechen. Das Por...
+
+91. EinSeltsamerRing (P1)
+   XP: 20, Confidence: 80% (0.800)
+   Language: English, Matched: Ein, Ring
+   Quest Text:
+   Bring the news to Einar
+
+92. StaubDerSterne1 (P2)
+   XP: 20, Confidence: 90% (0.900)
+   Language: German, Matched: Staub, Der, Sterne
+   Quest Text:
+   endes Sternenlicht, das magische Wasser unserer Welt, erstarrt zu vollendeten Kristallen....nennt man Ariafrost oder Ariastaub.
+
+93. Steckbrief (P1)
+   XP: 20, Confidence: 100% (1.000)
+   Language: German, Matched: Steckbrief
+   Quest Text:
+   Ist dieser Steckbrief von Euch?
+
+94. Traumdieb (P2)
+   XP: 20, Confidence: 100% (1.000)
+   Language: German, Matched: Traumdieb
+   Quest Text:
+   Istur Ash, ein Gefangerer in Eloni, berichtet von Traumdieben ... Kreaturen, die von den Tr
+
+95. NachGraufurtPartEnde (P63)
+   XP: 10, Confidence: 90% (0.900)
+   Language: German, Matched: Nach, Graufurt, Ende
+   Quest Text:
+   ckerobert werden kann. Die Wache am Portal kann die Nachricht nach Graufurt senden.
+
+96. StaubDerSterne2 (P2)
+   XP: 10, Confidence: 90% (0.900)
+   Language: German, Matched: Staub, Der, Sterne
+   Quest Text:
+   endes Sternenlicht, das magische Wasser unserer Welt, erstarrt zu vollendeten Kristallen....nennt man Ariafrost oder Ariastaub.
+
+97. StaubDerSterne3 (P2)
+   XP: 5, Confidence: 90% (0.900)
+   Language: German, Matched: Staub, Der, Sterne
+   Quest Text:
+   endes Sternenlicht, das magische Wasser unserer Welt, erstarrt zu vollendeten Kristallen....nennt man Ariafrost oder Ariastaub.
+
+98. Items (P63)
+   XP: 0, Confidence: 100% (1.000)
+   Language: English, Matched: Items
+   Quest Text:
+   Sinwen Whiteleaf is looking for components of a large spellwork in the leafshade. She needs a few items for that.
+
+99. Money (P63)
+   XP: 0, Confidence: 100% (1.000)
+   Language: English, Matched: Money
+   Quest Text:
+   Listen...since the Black Fist attacked us, looters have been prowling around here! They've robbed me of my money. With bare swords, please note!
+
+100. Conditions (P213)
+   XP: 0, Confidence: 100% (1.000)
+   Language: English, Matched: Conditions
+   Quest Text:
+   Under those conditions, I would allow the eastern gate to be opened for you. The Lordling has crept away to hide somewhere south of the city. Find him...
+
+
+================================================================================
+HIGH-MEDIUM (0.65-0.69) - Very likely correct - 0 matches
+================================================================================
+
+
+================================================================================
+MID-MEDIUM (0.55-0.64) - Review recommended - 59 matches
+================================================================================
+
+1. ColosseumRunde10Sieg (P200)
+   XP: 30,000, Confidence: 60% (0.600)
+   Language: German, Matched: Colosseum, Runde
+   Quest Text:
+   ne des Colosseums um Eure Belohnung zu erhalten. Falls Ihr eine weitere Runde wagen wollt, fordert dann einen enuen Kampf von ihm.
+
+2. ColosseumRunde09Sieg (P200)
+   XP: 25,000, Confidence: 60% (0.600)
+   Language: German, Matched: Colosseum, Runde
+   Quest Text:
+   ne des Colosseums um Eure Belohnung zu erhalten. Falls Ihr eine weitere Runde wagen wollt, fordert dann einen enuen Kampf von ihm.
+
+3. ColosseumRunde08Sieg (P200)
+   XP: 20,500, Confidence: 60% (0.600)
+   Language: German, Matched: Colosseum, Runde
+   Quest Text:
+   ne des Colosseums um Eure Belohnung zu erhalten. Falls Ihr eine weitere Runde wagen wollt, fordert dann einen enuen Kampf von ihm.
+
+4. LastChestInRoom5Opened (P210)
+   XP: 20,000, Confidence: 60% (0.600)
+   Language: English, Matched: Last, Chest, Opened
+   Quest Text:
+   (The coin drops into the slot. The last latch pushes aside. The chest can now be opened.)
+
+5. SceptreOfWindsFound (P210)
+   XP: 20,000, Confidence: 60% (0.600)
+   Language: English, Matched: Sceptre, Winds
+   Quest Text:
+   And we must find the Sceptre of the Winds! Without it we cannot return to our people!
+
+6. ColosseumRunde07Sieg (P200)
+   XP: 17,500, Confidence: 60% (0.600)
+   Language: German, Matched: Colosseum, Runde
+   Quest Text:
+   ne des Colosseums um Eure Belohnung zu erhalten. Falls Ihr eine weitere Runde wagen wollt, fordert dann einen enuen Kampf von ihm.
+
+7. ColosseumRunde06Sieg (P200)
+   XP: 15,000, Confidence: 60% (0.600)
+   Language: German, Matched: Colosseum, Runde
+   Quest Text:
+   ne des Colosseums um Eure Belohnung zu erhalten. Falls Ihr eine weitere Runde wagen wollt, fordert dann einen enuen Kampf von ihm.
+
+8. AirCoinPassageOpened (P210)
+   XP: 15,000, Confidence: 60% (0.600)
+   Language: English, Matched: Air, Coin
+   Quest Text:
+   ui_item_quest_coin_air
+
+9. ColosseumRunde05Sieg (P200)
+   XP: 12,500, Confidence: 60% (0.600)
+   Language: German, Matched: Colosseum, Runde
+   Quest Text:
+   ne des Colosseums um Eure Belohnung zu erhalten. Falls Ihr eine weitere Runde wagen wollt, fordert dann einen enuen Kampf von ihm.
+
+10. AlleTrolleKommenAn (P206)
+   XP: 12,000, Confidence: 60% (0.600)
+   Language: English, Matched: Alle, Trolle
+   Quest Text:
+   Der Zauberer kann ein untotes Wesen unter seine Kontrolle bringen. Verbraucht alle {[0]:3,1} Sekunden {[1]} Mana.
+
+11. ColosseumRunde04Sieg (P200)
+   XP: 10,000, Confidence: 60% (0.600)
+   Language: German, Matched: Colosseum, Runde
+   Quest Text:
+   ne des Colosseums um Eure Belohnung zu erhalten. Falls Ihr eine weitere Runde wagen wollt, fordert dann einen enuen Kampf von ihm.
+
+12. TorZurStaetteOffen (P202)
+   XP: 10,000, Confidence: 60% (0.600)
+   Language: German, Matched: Tor, Zur
+   Quest Text:
+   Aber so schnell gibt sich Leonidar nicht geschlagen! Ich gebe euch noch einmal Leute mit, seht zu, dass ihr diesmal bis zur Torfeste druchkommt!
+
+13. XalabarInArenaBesiegt (P209)
+   XP: 10,000, Confidence: 60% (0.600)
+   Language: English, Matched: Xalabar, Arena
+   Quest Text:
+   Enter the arena and defeat Xalabar
+
+14. DschungelCamp4Killed (P211)
+   XP: 10,000, Confidence: 60% (0.600)
+   Language: English, Matched: Camp, Killed
+   Quest Text:
+   As soon as Seth has killed Briar, advance to the base camp.
+
+15. ColosseumRunde03Sieg (P200)
+   XP: 9,000, Confidence: 60% (0.600)
+   Language: German, Matched: Colosseum, Runde
+   Quest Text:
+   ne des Colosseums um Eure Belohnung zu erhalten. Falls Ihr eine weitere Runde wagen wollt, fordert dann einen enuen Kampf von ihm.
+
+16. ColosseumRunde02Sieg (P200)
+   XP: 8,000, Confidence: 60% (0.600)
+   Language: German, Matched: Colosseum, Runde
+   Quest Text:
+   ne des Colosseums um Eure Belohnung zu erhalten. Falls Ihr eine weitere Runde wagen wollt, fordert dann einen enuen Kampf von ihm.
+
+17. KathaiStadtTorOffen (P209)
+   XP: 8,000, Confidence: 60% (0.600)
+   Language: English, Matched: Kathai, Tor
+   Quest Text:
+   I am Khal, commander of the children of the forest, which you also call Kathai. This is my village and I will bring them back here! My ancestors and t...
+
+18. ColosseumRunde01Sieg (P200)
+   XP: 7,000, Confidence: 60% (0.600)
+   Language: German, Matched: Colosseum, Runde
+   Quest Text:
+   ne des Colosseums um Eure Belohnung zu erhalten. Falls Ihr eine weitere Runde wagen wollt, fordert dann einen enuen Kampf von ihm.
+
+19. DschungelCamp1Killed (P211)
+   XP: 7,000, Confidence: 60% (0.600)
+   Language: English, Matched: Camp, Killed
+   Quest Text:
+   As soon as Seth has killed Briar, advance to the base camp.
+
+20. DschungelCamp2Killed (P211)
+   XP: 7,000, Confidence: 60% (0.600)
+   Language: English, Matched: Camp, Killed
+   Quest Text:
+   As soon as Seth has killed Briar, advance to the base camp.
+
+21. DschungelCamp3Killed (P211)
+   XP: 7,000, Confidence: 60% (0.600)
+   Language: English, Matched: Camp, Killed
+   Quest Text:
+   As soon as Seth has killed Briar, advance to the base camp.
+
+22. EntryMenhirComboCorrect (P210)
+   XP: 3,500, Confidence: 60% (0.600)
+   Language: English, Matched: Entry, Correct
+   Quest Text:
+   Correct! And you could attack them from behind with your army! There is an unguarded entry to their storehouse, far off in the East.
+
+23. NachUrgath3Archon (P27)
+   XP: 2,000, Confidence: 60% (0.600)
+   Language: Italian, Matched: Nach, Urgath
+   Quest Text:
+   e Portal...nach Urgath!
+
+24. NachUrgath2Monument (P27)
+   XP: 1,400, Confidence: 60% (0.600)
+   Language: Italian, Matched: Nach, Urgath
+   Quest Text:
+   e Portal...nach Urgath!
+
+25. FeineStoffe4Robe (P63)
+   XP: 1,100, Confidence: 60% (0.600)
+   Language: English, Matched: Feine, Stoffe
+   Quest Text:
+   r die Feine-Stoffe-Quest eingef
+
+26. DerPhoenix1Waechter (P19)
+   XP: 1,000, Confidence: 60% (0.600)
+   Language: English, Matched: Der, Phoenix
+   Quest Text:
+   The Guardian has the phoenix. Before he surrenders it, he will want proof of the serious nature of your mission.
+
+27. NachUrgath1Elfensiedlung (P27)
+   XP: 1,000, Confidence: 60% (0.600)
+   Language: Italian, Matched: Nach, Urgath
+   Quest Text:
+   e Portal...nach Urgath!
+
+28. AlleVierFackelnAn (P111)
+   XP: 1,000, Confidence: 60% (0.600)
+   Language: German, Matched: Alle, Vier
+   Quest Text:
+   Diese Arbeiter-Rune ist aktiviert. Wird sie entfernt, so verlieren Sie alle mit ihr herbeigerufenen Einheiten, und alle Monumente dieser Rasse werden ...
+
+29. DerPhoenix6Ablieferung (P19)
+   XP: 800, Confidence: 60% (0.600)
+   Language: English, Matched: Der, Phoenix
+   Quest Text:
+   The Guardian has the phoenix. Before he surrenders it, he will want proof of the serious nature of your mission.
+
+30. SickHermit2Locke (P63)
+   XP: 600, Confidence: 60% (0.600)
+   Language: English, Matched: Sick, Hermit
+   Quest Text:
+   Shan Muir does not want to give the Zirfar potion to you, he says that it may harm the sick hermit. Decide if you still want to look for it or would r...
+
+31. AmraUndLea2Liannon1 (P1)
+   XP: 500, Confidence: 60% (0.600)
+   Language: English, Matched: Amra, Und, Liannon
+   Quest Text:
+   Talk to Sunder in Liannon about Amra's armor
+
+32. FugisBroughtToTirganach (P105)
+   XP: 450, Confidence: 60% (0.600)
+   Language: English, Matched: Brought, Tirganach
+   Quest Text:
+   The treasure has been found. Obviously Flink's story about the 15 guards wasn't quite true. Maybe you don't want to return the treasure to him after a...
+
+33. FeineStoffe3Seide (P63)
+   XP: 400, Confidence: 60% (0.600)
+   Language: English, Matched: Feine, Stoffe
+   Quest Text:
+   r die Feine-Stoffe-Quest eingef
+
+34. AmraUndLea1Liannon2 (P1)
+   XP: 400, Confidence: 60% (0.600)
+   Language: English, Matched: Amra, Und, Liannon
+   Quest Text:
+   Talk to Sunder in Liannon about Amra's armor
+
+35. WolfUndDrache2 (P21)
+   XP: 400, Confidence: 60% (0.600)
+   Language: English, Matched: Wolf, Und
+   Quest Text:
+   I found a wolf cub about to starve to death. Too weak to move, even.
+
+36. SQTiondriaBuchDariusZurueck (P105)
+   XP: 400, Confidence: 60% (0.600)
+   Language: German, Matched: Tiondria, Buch, Darius
+   Quest Text:
+   nge! Ich bin Tiondria dicht auf der Spur! Das Buch von Darius gab mir endlich den richtigen Hinweis!
+
+37. P109PortalErreicht (P109)
+   XP: 350, Confidence: 60% (0.600)
+   Language: Italian, Matched: Portal, Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+38. AmraUndLea2Liannon2 (P1)
+   XP: 300, Confidence: 60% (0.600)
+   Language: English, Matched: Amra, Und, Liannon
+   Quest Text:
+   Talk to Sunder in Liannon about Amra's armor
+
+39. AufDemWall2Village2 (P17)
+   XP: 300, Confidence: 60% (0.600)
+   Language: German, Matched: Auf, Dem, Wall
+   Quest Text:
+   ten Hof hier auf dem Wall. Wenn ihr weiter nach Norden zieht, dann beendet vorher, was ihr begonnen habt. Vertreibt die restlichen S
+
+40. AufDemWall3Village3 (P17)
+   XP: 300, Confidence: 60% (0.600)
+   Language: German, Matched: Auf, Dem, Wall
+   Quest Text:
+   ten Hof hier auf dem Wall. Wenn ihr weiter nach Norden zieht, dann beendet vorher, was ihr begonnen habt. Vertreibt die restlichen S
+
+41. AufDemWall4Village4 (P17)
+   XP: 300, Confidence: 60% (0.600)
+   Language: German, Matched: Auf, Dem, Wall
+   Quest Text:
+   ten Hof hier auf dem Wall. Wenn ihr weiter nach Norden zieht, dann beendet vorher, was ihr begonnen habt. Vertreibt die restlichen S
+
+42. SQTiondriaBuchDariusGefunden (P105)
+   XP: 300, Confidence: 60% (0.600)
+   Language: German, Matched: Tiondria, Buch, Darius
+   Quest Text:
+   nge! Ich bin Tiondria dicht auf der Spur! Das Buch von Darius gab mir endlich den richtigen Hinweis!
+
+43. DreiMagierZolowinSave (P102)
+   XP: 250, Confidence: 60% (0.600)
+   Language: German, Matched: Drei, Magier
+   Quest Text:
+   Drei seltsame Magier werden in den Sturmfelsen von den Kithar gefangen gehalten. Die drei scheinen einiges gemeinsam zu haben. Vor allem wohl ihre geg...
+
+44. DreiMagierGruolunSave (P102)
+   XP: 250, Confidence: 60% (0.600)
+   Language: German, Matched: Drei, Magier
+   Quest Text:
+   Drei seltsame Magier werden in den Sturmfelsen von den Kithar gefangen gehalten. Die drei scheinen einiges gemeinsam zu haben. Vor allem wohl ihre geg...
+
+45. DreiMagierRenyaSave (P102)
+   XP: 250, Confidence: 60% (0.600)
+   Language: German, Matched: Drei, Magier
+   Quest Text:
+   Drei seltsame Magier werden in den Sturmfelsen von den Kithar gefangen gehalten. Die drei scheinen einiges gemeinsam zu haben. Vor allem wohl ihre geg...
+
+46. AmraUndLea1Liannon1 (P1)
+   XP: 200, Confidence: 60% (0.600)
+   Language: English, Matched: Amra, Und, Liannon
+   Quest Text:
+   Talk to Sunder in Liannon about Amra's armor
+
+47. AufDemWall1Village1 (P17)
+   XP: 200, Confidence: 60% (0.600)
+   Language: German, Matched: Auf, Dem, Wall
+   Quest Text:
+   ten Hof hier auf dem Wall. Wenn ihr weiter nach Norden zieht, dann beendet vorher, was ihr begonnen habt. Vertreibt die restlichen S
+
+48. WolfUndDrache1 (P21)
+   XP: 200, Confidence: 60% (0.600)
+   Language: English, Matched: Wolf, Und
+   Quest Text:
+   I found a wolf cub about to starve to death. Too weak to move, even.
+
+49. AmWildlandPass2 (P6)
+   XP: 160, Confidence: 60% (0.600)
+   Language: English, Matched: Wildland, Pass
+   Quest Text:
+   One of Branningan's great armies is located in The Shiel and blocking the way to Wildland Pass. The army will attack Liannon in the next few days. A t...
+
+50. AmWildlandPass1 (P6)
+   XP: 120, Confidence: 60% (0.600)
+   Language: English, Matched: Wildland, Pass
+   Quest Text:
+   One of Branningan's great armies is located in The Shiel and blocking the way to Wildland Pass. The army will attack Liannon in the next few days. A t...
+
+51. FeineStoffe2Miria (P10)
+   XP: 100, Confidence: 60% (0.600)
+   Language: English, Matched: Feine, Stoffe
+   Quest Text:
+   r die Feine-Stoffe-Quest eingef
+
+52. DreiMagierZolowinGive (P102)
+   XP: 55, Confidence: 60% (0.600)
+   Language: English, Matched: Zolowin, Give
+   Quest Text:
+   Take the stones away from Renya and Zolowin, and bring me the Crawler fetish! Then I will give you a rich reward.
+
+53. DreiMagierGruolunGive (P102)
+   XP: 55, Confidence: 60% (0.600)
+   Language: German, Matched: Drei, Magier
+   Quest Text:
+   Drei seltsame Magier werden in den Sturmfelsen von den Kithar gefangen gehalten. Die drei scheinen einiges gemeinsam zu haben. Vor allem wohl ihre geg...
+
+54. DreiMagierRenyaGive (P102)
+   XP: 35, Confidence: 60% (0.600)
+   Language: English, Matched: Renya, Give
+   Quest Text:
+   Take the stones away from Renya and Zolowin, and bring me the Crawler fetish! Then I will give you a rich reward.
+
+55. DieLetztenSchuetzen1 (P2)
+   XP: 15, Confidence: 60% (0.600)
+   Language: German, Matched: Die, Letzten
+   Quest Text:
+   Seno, dem Zahnbrecher von Graufurt, wurden auf seiner letzten Reise nach Liannon seine Zangen und Pinzetten von einem Goblin geraubt. Findet den Gobli...
+
+56. DieLetztenSchuetzen2 (P2)
+   XP: 15, Confidence: 60% (0.600)
+   Language: German, Matched: Die, Letzten
+   Quest Text:
+   Seno, dem Zahnbrecher von Graufurt, wurden auf seiner letzten Reise nach Liannon seine Zangen und Pinzetten von einem Goblin geraubt. Findet den Gobli...
+
+57. DieLetztenSchuetzen3 (P2)
+   XP: 15, Confidence: 60% (0.600)
+   Language: German, Matched: Die, Letzten
+   Quest Text:
+   Seno, dem Zahnbrecher von Graufurt, wurden auf seiner letzten Reise nach Liannon seine Zangen und Pinzetten von einem Goblin geraubt. Findet den Gobli...
+
+58. NachGraufurtPartVillage (P63)
+   XP: 0, Confidence: 60% (0.600)
+   Language: English, Matched: Part, Village
+   Quest Text:
+   The village Bergin is situated to the North. In the Western part, there are some knights of the order. Master Swansong is their leader.
+
+59. DreiMagierZolowinFree (P102)
+   XP: 0, Confidence: 60% (0.600)
+   Language: German, Matched: Drei, Magier
+   Quest Text:
+   Drei seltsame Magier werden in den Sturmfelsen von den Kithar gefangen gehalten. Die drei scheinen einiges gemeinsam zu haben. Vor allem wohl ihre geg...
+
+
+================================================================================
+LOW-MEDIUM (0.50-0.54) - Manual review needed - 71 matches
+================================================================================
+
+1. MiniforgersKilled (P212)
+   XP: 30,000, Confidence: 50% (0.500)
+   Language: English, Matched: Killed
+   Quest Text:
+   This ability permits the use of small bladed weapons that give fighters or those skilled in magic solid melee fighting skills. One-handed swords, shor...
+
+2. CampsZerstoert (P201)
+   XP: 15,000, Confidence: 50% (0.500)
+   Language: English, Matched: Camps
+   Quest Text:
+   The way to the east is being guarded by Brannigan's armies. In the North and the South, there are large camps, from where the troops control the land....
+
+3. WerwolfAbgelenkt (P211)
+   XP: 15,000, Confidence: 50% (0.500)
+   Language: German, Matched: Abgelenkt
+   Quest Text:
+   Euch wird schon was einfallen! Schaut Euch in der Umgebung der Tore um, fragt ein paar Leute ... die Wachen sind gelangweilt, mit ein paar Tricks habt...
+
+4. AschetaenzerTot (P202)
+   XP: 12,000, Confidence: 50% (0.500)
+   Language: English, Matched: Tot
+   Quest Text:
+   This is where you can learn new abilities. In total, you can learn up to 10 new abilities.
+
+5. GrabmalGeoeffnet (P202)
+   XP: 12,000, Confidence: 50% (0.500)
+   Language: German, Matched: Grabmal
+   Quest Text:
+   Das Grabmal befindet sich in der Mitte eines Pentagramms und wird von einem Fial Darg bewacht, der von Kreaturen herbeigerufen wird. Die Kreaturen ent...
+
+6. KarawaneLosgelaufen (P206)
+   XP: 10,300, Confidence: 50% (0.500)
+   Language: German, Matched: Karawane
+   Quest Text:
+   Sprecht mit Bario, dem Karawanenf
+
+7. BlockadeDurchbrochen (P203)
+   XP: 10,000, Confidence: 50% (0.500)
+   Language: English, Matched: Blockade
+   Quest Text:
+   All of them! The whole army! Every knight, every esquire! They will break through the blockade in the Frost Marshes.
+
+8. PalastgartenErreicht (P204)
+   XP: 10,000, Confidence: 50% (0.500)
+   Language: English, Matched: Palastgarten
+   Quest Text:
+   nnt mich in den Palastgarten bringen?
+
+9. GartenEntgiftet (P205)
+   XP: 10,000, Confidence: 50% (0.500)
+   Language: English, Matched: Garten
+   Quest Text:
+   nnt mich in den Palastgarten bringen?
+
+10. CraigBefreit (P211)
+   XP: 10,000, Confidence: 50% (0.500)
+   Language: English, Matched: Craig
+   Quest Text:
+   Trygar claims, only Craig could know something about Amra's places of residence. If he doesn't know anything, all efforts were in vain. In order to me...
+
+11. WasserEntgiften (P203)
+   XP: 10,000, Confidence: 50% (0.500)
+   Language: German, Matched: Wasser
+   Quest Text:
+   Farlorn hat seine Glaswaren alle zum Wassertransport herausgegeben. Im Norden von Farlorns Heim soll ein Alchimist gelebt haben, bevor dort der Drache...
+
+12. SchattenklingeBefreit (P211)
+   XP: 10,000, Confidence: 50% (0.500)
+   Language: German, Matched: Befreit
+   Quest Text:
+   stung und befreit den Greif! Er wird seinen Weg alleine zu mir finden, wenn ihr ihn erst aus den Klauen der Untoten befreit habt..
+
+13. UntotenlagerNord (P209)
+   XP: 9,000, Confidence: 50% (0.500)
+   Language: English, Matched: Nord
+   Quest Text:
+   Da qualche parte a nordovest troverai uno dei tre accampamenti nemici. Questo sembra l'ultimo accampamento coinvolto negli attacchi alla fortezza. Le ...
+
+14. UntotenlagerWest (P209)
+   XP: 9,000, Confidence: 50% (0.500)
+   Language: English, Matched: West
+   Quest Text:
+   Brannigan's old headquarters reign over the Northwest of the Forest of Shadows. It's the first hindrance on the way to The Shiel. Einar warns you of t...
+
+15. UntotenlagerSued (P209)
+   XP: 9,000, Confidence: 50% (0.500)
+   Language: English, Matched: Sued
+   Quest Text:
+   I could see them as long as I had my ring! But they pursued me! Wherever I went! I was never safe!
+
+16. SprengzwergBefreit (P207)
+   XP: 8,500, Confidence: 50% (0.500)
+   Language: German, Matched: Befreit
+   Quest Text:
+   stung und befreit den Greif! Er wird seinen Weg alleine zu mir finden, wenn ihr ihn erst aus den Klauen der Untoten befreit habt..
+
+17. UriasBefreit (P201)
+   XP: 8,000, Confidence: 50% (0.500)
+   Language: English, Matched: Urias
+   Quest Text:
+   The order warrior Urias knows more about Hokan and his myrmidons. He commands the outposts of the order in the Greydusk Vale, which got overrun by the...
+
+18. FalleAusgeloest (P206)
+   XP: 7,000, Confidence: 50% (0.500)
+   Language: English, Matched: Falle
+   Quest Text:
+   A restless shadow stalked the land near the old mine in the East of Liannon. It seems to be a warrior, who has fallen many years ago.
+
+19. BergrieseGeholfen (P207)
+   XP: 6,500, Confidence: 50% (0.500)
+   Language: German, Matched: Geholfen
+   Quest Text:
+   llung Eurer Mission geholfen haben! Euer Auftrag hier ist beendet, Ihr k
+
+20. OpferFreigelassen (P202)
+   XP: 6,000, Confidence: 50% (0.500)
+   Language: English, Matched: Opfer
+   Quest Text:
+   ume seiner Opfer. Bringt es  zu mir, wenn ihr erfolgreich wart. Wenn iche s studiere, finde ich vielleicht mehr
+
+21. FlinkAbgeliefert (P204)
+   XP: 5,500, Confidence: 50% (0.500)
+   Language: English, Matched: Flink
+   Quest Text:
+   Flink McWinter describes himself as a nomad, but also seems to be involved in some shady dealings. He will put Greydusk Vale behind him as quickly as ...
+
+22. DracheGetoetet (P115)
+   XP: 5,000, Confidence: 50% (0.500)
+   Language: English, Matched: Drache
+   Quest Text:
+   QuestItem Drachenblut
+
+23. GurimLebt (P201)
+   XP: 5,000, Confidence: 50% (0.500)
+   Language: English, Matched: Gurim
+   Quest Text:
+   Talk to Gurim in the Western part of the Blackwater Coast once again
+
+24. TantaroGefunden (P203)
+   XP: 5,000, Confidence: 50% (0.500)
+   Language: English, Matched: Gefunden
+   Quest Text:
+   hrer der Orks erbeuten! Bring sie zu mir, sobald du sie gefunden hast!
+
+25. RastplatzGefunden (P206)
+   XP: 4,500, Confidence: 50% (0.500)
+   Language: English, Matched: Gefunden
+   Quest Text:
+   hrer der Orks erbeuten! Bring sie zu mir, sobald du sie gefunden hast!
+
+26. WachgeistTot (P202)
+   XP: 4,000, Confidence: 50% (0.500)
+   Language: English, Matched: Tot
+   Quest Text:
+   This is where you can learn new abilities. In total, you can learn up to 10 new abilities.
+
+27. LichkoenigTot (P203)
+   XP: 4,000, Confidence: 50% (0.500)
+   Language: English, Matched: Tot
+   Quest Text:
+   This is where you can learn new abilities. In total, you can learn up to 10 new abilities.
+
+28. LeutnantGesprochen (P201)
+   XP: 3,500, Confidence: 50% (0.500)
+   Language: German, Matched: Gesprochen
+   Quest Text:
+   Weise gesprochen! Der Zirkel wurde alsbald zu einem Zentrum der Macht! Eine Gefahr, die keines der V
+
+29. HeldenBeschworen (P202)
+   XP: 2,000, Confidence: 50% (0.500)
+   Language: German, Matched: Helden
+   Quest Text:
+   Diese Helden-Rune ist aktiviert. Wird sie entfernt, so verlieren Sie auch den entsprechenden Helden, falls Sie ihn schon herbeigerufen haben.
+
+30. GeistercampBesiegt (P107)
+   XP: 1,150, Confidence: 50% (0.500)
+   Language: English, Matched: Besiegt
+   Quest Text:
+   Wenn Du sie besiegt hast, dann bring die Rune zu mir! Ich werde sie Meister Rohen
+
+31. AnfuehrerBesiegt (P107)
+   XP: 1,150, Confidence: 50% (0.500)
+   Language: English, Matched: Besiegt
+   Quest Text:
+   Wenn Du sie besiegt hast, dann bring die Rune zu mir! Ich werde sie Meister Rohen
+
+32. WindjalfBefreit (P108)
+   XP: 1,150, Confidence: 50% (0.500)
+   Language: English, Matched: Windjalf
+   Quest Text:
+   Defeat Gorg and set Windjalf free from the cave.
+
+33. TricksterReturn (P63)
+   XP: 1,000, Confidence: 50% (0.500)
+   Language: English, Matched: Trickster
+   Quest Text:
+   ui_item_quest_hadekodoll_trickster
+
+34. Drachenstein7 (P115)
+   XP: 1,000, Confidence: 50% (0.500)
+   Language: German, Matched: Drachenstein
+   Quest Text:
+   Denn Euer erstes Ziel sind die Drachensteine! Sie sind die Manifestationen von  Aryns erwachender Macht und sie ziehen Drachenbrut an, wie Motten das ...
+
+35. Drachenstein8 (P115)
+   XP: 1,000, Confidence: 50% (0.500)
+   Language: German, Matched: Drachenstein
+   Quest Text:
+   Denn Euer erstes Ziel sind die Drachensteine! Sie sind die Manifestationen von  Aryns erwachender Macht und sie ziehen Drachenbrut an, wie Motten das ...
+
+36. Drachenstein9 (P115)
+   XP: 1,000, Confidence: 50% (0.500)
+   Language: German, Matched: Drachenstein
+   Quest Text:
+   Denn Euer erstes Ziel sind die Drachensteine! Sie sind die Manifestationen von  Aryns erwachender Macht und sie ziehen Drachenbrut an, wie Motten das ...
+
+37. Drachenpanzer2 (P63)
+   XP: 800, Confidence: 50% (0.500)
+   Language: German, Matched: Drachenpanzer
+   Quest Text:
+   berleben - dann kommt wieder zu mir! Ich werde Euch einen Drachenpanzer formen!
+
+38. TorZerstoert (P109)
+   XP: 750, Confidence: 50% (0.500)
+   Language: English, Matched: Tor
+   Quest Text:
+   ui_btn_build_troll_corpsecollector
+
+39. GrimBesiegt (P110)
+   XP: 750, Confidence: 50% (0.500)
+   Language: English, Matched: Besiegt
+   Quest Text:
+   Wenn Du sie besiegt hast, dann bring die Rune zu mir! Ich werde sie Meister Rohen
+
+40. EchosGoran (P63)
+   XP: 700, Confidence: 50% (0.500)
+   Language: English, Matched: Goran
+   Quest Text:
+   Talk to Goran about the strange words.
+
+41. GwensMedizin (P17)
+   XP: 600, Confidence: 50% (0.500)
+   Language: English, Matched: Gwens
+   Quest Text:
+   Sunder Dundrew, Gwens Father, is waiting wistfully for the medicine. It should be brought to him as soon as possible.
+
+42. ElementBeschworen (P111)
+   XP: 600, Confidence: 50% (0.500)
+   Language: English, Matched: Element
+   Quest Text:
+   Elemental Magic is dedicated to controlling the elements fire, ice and earth. High intelligence and wisdom are required to reach higher levels.
+
+43. MondstadtZerstoert (P110)
+   XP: 600, Confidence: 50% (0.500)
+   Language: German, Matched: Mondstadt
+   Quest Text:
+   Ich kenne Euer Bestreben, die Mondstadt zu vernichtetn... Ihr habt eine Macht erforscht, die der schwarzen magie widersteht?
+
+44. SonnenstadtZerstoert (P110)
+   XP: 600, Confidence: 50% (0.500)
+   Language: German, Matched: Sonnenstadt
+   Quest Text:
+   ssel der Sonnenstadt. Ihr findet ihn im S
+
+45. WumpusKilled (P101)
+   XP: 550, Confidence: 50% (0.500)
+   Language: English, Matched: Killed
+   Quest Text:
+   This ability permits the use of small bladed weapons that give fighters or those skilled in magic solid melee fighting skills. One-handed swords, shor...
+
+46. ZwergeBefreit (P109)
+   XP: 550, Confidence: 50% (0.500)
+   Language: English, Matched: Zwerge
+   Quest Text:
+   Ich bringe Kunde vom Hetman der Zwerge.
+
+47. WerwolfGesamt (P109)
+   XP: 550, Confidence: 50% (0.500)
+   Language: German, Matched: Gesamt
+   Quest Text:
+   Nun halten sie den gesamten Osten sowie das Dorf Gannan! Sie haben alles besetzt - selbst Eure Runenmonumente!
+
+48. SchattenringBekommen (P111)
+   XP: 500, Confidence: 50% (0.500)
+   Language: Italian, Matched: Bekommen
+   Quest Text:
+   Warum habt ihr nichts unternommen um das Portal wieder frei zu bekommen?
+
+49. SchattenweltShadowpulse (P63)
+   XP: 500, Confidence: 50% (0.500)
+   Language: German, Matched: Schattenwelt
+   Quest Text:
+   ber die Schattenwelt. Erstaunlich!
+
+50. Drachenstein1 (P115)
+   XP: 450, Confidence: 50% (0.500)
+   Language: German, Matched: Drachenstein
+   Quest Text:
+   Denn Euer erstes Ziel sind die Drachensteine! Sie sind die Manifestationen von  Aryns erwachender Macht und sie ziehen Drachenbrut an, wie Motten das ...
+
+51. Drachenstein2 (P115)
+   XP: 450, Confidence: 50% (0.500)
+   Language: German, Matched: Drachenstein
+   Quest Text:
+   Denn Euer erstes Ziel sind die Drachensteine! Sie sind die Manifestationen von  Aryns erwachender Macht und sie ziehen Drachenbrut an, wie Motten das ...
+
+52. Drachenstein3 (P115)
+   XP: 450, Confidence: 50% (0.500)
+   Language: German, Matched: Drachenstein
+   Quest Text:
+   Denn Euer erstes Ziel sind die Drachensteine! Sie sind die Manifestationen von  Aryns erwachender Macht und sie ziehen Drachenbrut an, wie Motten das ...
+
+53. Drachenstein4 (P115)
+   XP: 450, Confidence: 50% (0.500)
+   Language: German, Matched: Drachenstein
+   Quest Text:
+   Denn Euer erstes Ziel sind die Drachensteine! Sie sind die Manifestationen von  Aryns erwachender Macht und sie ziehen Drachenbrut an, wie Motten das ...
+
+54. Drachenstein5 (P115)
+   XP: 450, Confidence: 50% (0.500)
+   Language: German, Matched: Drachenstein
+   Quest Text:
+   Denn Euer erstes Ziel sind die Drachensteine! Sie sind die Manifestationen von  Aryns erwachender Macht und sie ziehen Drachenbrut an, wie Motten das ...
+
+55. Drachenstein6 (P115)
+   XP: 450, Confidence: 50% (0.500)
+   Language: German, Matched: Drachenstein
+   Quest Text:
+   Denn Euer erstes Ziel sind die Drachensteine! Sie sind die Manifestationen von  Aryns erwachender Macht und sie ziehen Drachenbrut an, wie Motten das ...
+
+56. Erdenklinge3 (P10)
+   XP: 400, Confidence: 50% (0.500)
+   Language: German, Matched: Erdenklinge
+   Quest Text:
+   Bjarnes Bart, eine Erdenklinge!
+
+57. Erdenklinge4 (P10)
+   XP: 400, Confidence: 50% (0.500)
+   Language: German, Matched: Erdenklinge
+   Quest Text:
+   Bjarnes Bart, eine Erdenklinge!
+
+58. WaldschrateKilled (P103)
+   XP: 250, Confidence: 50% (0.500)
+   Language: English, Matched: Killed
+   Quest Text:
+   This ability permits the use of small bladed weapons that give fighters or those skilled in magic solid melee fighting skills. One-handed swords, shor...
+
+59. EchosBuch (P1)
+   XP: 200, Confidence: 50% (0.500)
+   Language: English, Matched: Buch
+   Quest Text:
+   QuestItem Buch des Shan Tar Guar
+
+60. Erdenklinge2 (P10)
+   XP: 200, Confidence: 50% (0.500)
+   Language: German, Matched: Erdenklinge
+   Quest Text:
+   Bjarnes Bart, eine Erdenklinge!
+
+61. OrklagerEinnehmen (P104)
+   XP: 175, Confidence: 50% (0.500)
+   Language: German, Matched: Einnehmen
+   Quest Text:
+   lpeln entringen. Nun wird er wieder seinen rechten Platz einnehmen.
+
+62. Marcia1 (P9)
+   XP: 150, Confidence: 50% (0.500)
+   Language: English, Matched: Marcia
+   Quest Text:
+   Marcia, the messenger of the order, is in Stonewell preparing the city for another attack from the Undead. She can be found close to Lord Jonir. Time ...
+
+63. Drachenpanzer1 (P63)
+   XP: 100, Confidence: 50% (0.500)
+   Language: German, Matched: Drachenpanzer
+   Quest Text:
+   berleben - dann kommt wieder zu mir! Ich werde Euch einen Drachenpanzer formen!
+
+64. JaninaBefreit (P102)
+   XP: 65, Confidence: 50% (0.500)
+   Language: English, Matched: Janina
+   Quest Text:
+   Bring Janina to Hulu in the camp of the Skerg in the East
+
+65. HuluErreicht (P102)
+   XP: 65, Confidence: 50% (0.500)
+   Language: English, Matched: Hulu
+   Quest Text:
+   Bring Janina to Hulu in the camp of the Skerg in the East
+
+66. SetriusErreicht (P102)
+   XP: 65, Confidence: 50% (0.500)
+   Language: English, Matched: Setrius
+   Quest Text:
+   Bring Janina to Setrius in the Northeast
+
+67. Bannwerk1 (P4)
+   XP: 60, Confidence: 50% (0.500)
+   Language: German, Matched: Bannwerk
+   Quest Text:
+   r ein Bannwerk, von dem Ihr spracht?
+
+68. Bannwerk2 (P4)
+   XP: 60, Confidence: 50% (0.500)
+   Language: German, Matched: Bannwerk
+   Quest Text:
+   r ein Bannwerk, von dem Ihr spracht?
+
+69. HeldenErschaffen (P101)
+   XP: 45, Confidence: 50% (0.500)
+   Language: Italian, Matched: Erschaffen
+   Quest Text:
+   ne ... Ein Portal will er erschaffen?
+
+70. ZahnbrechersZangen (P63)
+   XP: 35, Confidence: 50% (0.500)
+   Language: German, Matched: Zangen
+   Quest Text:
+   Seno, dem Zahnbrecher von Graufurt, wurden auf seiner letzten Reise nach Liannon seine Zangen und Pinzetten von einem Goblin geraubt. Findet den Gobli...
+
+71. DieFreihaendler (P2)
+   XP: 20, Confidence: 50% (0.500)
+   Language: English, Matched: Die
+   Quest Text:
+   Talk to one of the soldiers in order to open the gate to Eloni.
+
+
+================================================================================
+LOW CONFIDENCE (<0.50) - Skip for now - 172 matches
+================================================================================
+
+1. Room3HeadDoorOpened (P210)
+   XP: 45,000, Confidence: 48% (0.480)
+   Language: English, Matched: Room, Door
+   Quest Text:
+   Brigor's fellows escaped with the sigils from Empyria to the South. Look for the sigils there, as soon as you've got them, put them into the bed stone...
+
+2. ExitDoorToP211Opened (P210)
+   XP: 25,000, Confidence: 17% (0.167)
+   Language: English, Matched: Door
+   Quest Text:
+   ui_item_quest_hadekodoll_doorkeeper
+
+3. SQSchutzgeldLarge (P204)
+   XP: 18,000, Confidence: 25% (0.250)
+   Language: English, Matched: Large
+   Quest Text:
+   Sinwen Whiteleaf is looking for components of a large spellwork in the leafshade. She needs a few items for that.
+
+4. UrneZuHokan (P202)
+   XP: 16,000, Confidence: 33% (0.333)
+   Language: English, Matched: Hokan
+   Quest Text:
+   The Mask of Belial has to be taken from the Destroyer. Only the Mask will help Hokan in his misery.
+
+5. Room6SpiderGateOpened (P210)
+   XP: 15,000, Confidence: 48% (0.480)
+   Language: English, Matched: Gate, Opened
+   Quest Text:
+   The gate to the fortress is locked and cannot be opened from outside. You must provoke the undead to an excursion, then they will open the gate themse...
+
+6. Room4SkeletonDoorOpened (P210)
+   XP: 15,000, Confidence: 48% (0.480)
+   Language: English, Matched: Room, Door
+   Quest Text:
+   Brigor's fellows escaped with the sigils from Empyria to the South. Look for the sigils there, as soon as you've got them, put them into the bed stone...
+
+7. Room7ChessboardCrossed (P210)
+   XP: 15,000, Confidence: 25% (0.250)
+   Language: English, Matched: Room
+   Quest Text:
+   Here, somewhere in the ruinous rests of the once mightiful halls, Korshar the bonecrusher is waiting for his destiny. His throne room will be well-gua...
+
+8. EndgegnerSoulforgerKilled (P211)
+   XP: 15,000, Confidence: 33% (0.333)
+   Language: English, Matched: Killed
+   Quest Text:
+   This ability permits the use of small bladed weapons that give fighters or those skilled in magic solid melee fighting skills. One-handed swords, shor...
+
+9. BeideMumienCampsPlatt (P213)
+   XP: 15,000, Confidence: 25% (0.250)
+   Language: English, Matched: Camps
+   Quest Text:
+   The way to the east is being guarded by Brannigan's armies. In the North and the South, there are large camps, from where the troops control the land....
+
+10. Room2SensoSolved (P210)
+   XP: 14,000, Confidence: 25% (0.250)
+   Language: English, Matched: Solved
+   Quest Text:
+   Quest Menu - View quest related items, as well as a list of completed and unsolved quests.
+
+11. SQSchutzgeldMedium (P204)
+   XP: 12,000, Confidence: 25% (0.250)
+   Language: English, Matched: Medium
+   Quest Text:
+   With the small headquarters, you can support a maximum of thirty combat units. Medium-sized or large headquarters which will become available later af...
+
+12. KreisSchluss4Soulforger (P32)
+   XP: 10,000, Confidence: 25% (0.250)
+   Language: English, Matched: Soulforger
+   Quest Text:
+   By killing the soulforger! He his the most powerful being I ever created. He forged the iron men from the souls of tortured individuals at a dark forg...
+
+13. ExtinctTuermeWeg (P202)
+   XP: 10,000, Confidence: 33% (0.333)
+   Language: English, Matched: Weg
+   Quest Text:
+   swego krasnoludzkiego towarzysza.
+
+14. ResistenteGargoyle1Tot (P202)
+   XP: 10,000, Confidence: 25% (0.250)
+   Language: English, Matched: Tot
+   Quest Text:
+   This is where you can learn new abilities. In total, you can learn up to 10 new abilities.
+
+15. SQBotschafterTot (P204)
+   XP: 10,000, Confidence: 25% (0.250)
+   Language: English, Matched: Tot
+   Quest Text:
+   This is where you can learn new abilities. In total, you can learn up to 10 new abilities.
+
+16. TurningHeadsCrossed (P210)
+   XP: 10,000, Confidence: 33% (0.333)
+   Language: English, Matched: Turning
+   Quest Text:
+   The spirits of Udwins men are returning to the face of the land near an old mine in Liannon. With them, comes cold danger.
+
+17. HlStaetteBaumGepflanzt (P202)
+   XP: 10,000, Confidence: 25% (0.250)
+   Language: German, Matched: Baum
+   Quest Text:
+   chter wird ihn also verteidigen. Der Splitter ist unterhalb eines Steines in der Mitte des Baumrunds.
+
+18. SQHaendlerFriedlich (P204)
+   XP: 10,000, Confidence: 25% (0.250)
+   Language: German, Matched: Friedlich
+   Quest Text:
+   re scheinen die friedlichere der beiden Parteien zu sein. Von ihnen ist eher Hilfe zu erwarten.
+
+19. DritteFestungBesiegt (P207)
+   XP: 9,500, Confidence: 33% (0.333)
+   Language: English, Matched: Besiegt
+   Quest Text:
+   Wenn Du sie besiegt hast, dann bring die Rune zu mir! Ich werde sie Meister Rohen
+
+20. VierteFestungBesiegt (P207)
+   XP: 9,500, Confidence: 33% (0.333)
+   Language: English, Matched: Besiegt
+   Quest Text:
+   Wenn Du sie besiegt hast, dann bring die Rune zu mir! Ich werde sie Meister Rohen
+
+21. GnomlingBossTot (P202)
+   XP: 8,000, Confidence: 33% (0.333)
+   Language: English, Matched: Tot
+   Quest Text:
+   This is where you can learn new abilities. In total, you can learn up to 10 new abilities.
+
+22. DschungelWeisenDialog (P213)
+   XP: 8,000, Confidence: 33% (0.333)
+   Language: English, Matched: Dialog
+   Quest Text:
+   Many characters have dialogues and orders that concern the main quest, other characters are only important for so-called
+
+23. ZuTarioGegangen (P203)
+   XP: 7,000, Confidence: 33% (0.333)
+   Language: English, Matched: Tario
+   Quest Text:
+   Usa questo pulsante per aprire l'inventario del tuo Avatar.
+
+24. DialogMitUnterhaendler (P206)
+   XP: 7,000, Confidence: 33% (0.333)
+   Language: English, Matched: Mit
+   Quest Text:
+   This ability permits the use of blunt weapons with the highest possible destructive power. The weapons include one- and two-handed hammers, clubs or s...
+
+25. Lager1Kaputtgemacht (P206)
+   XP: 7,000, Confidence: 33% (0.333)
+   Language: English, Matched: Lager
+   Quest Text:
+   Gesagt, getan. Ich lasse ein paar Sachen in euer Lager bringen.
+
+26. Lager2Kaputtgemacht (P206)
+   XP: 7,000, Confidence: 33% (0.333)
+   Language: English, Matched: Lager
+   Quest Text:
+   Gesagt, getan. Ich lasse ein paar Sachen in euer Lager bringen.
+
+27. VieleTrolleKommenAn (P206)
+   XP: 7,000, Confidence: 25% (0.250)
+   Language: English, Matched: Trolle
+   Quest Text:
+   I wouldn't stop you, but the trail there is controlled by the Goblin hordes. We had to give up the Portal Keep to Eloni, and so we locked it.
+
+28. Stele1Off (P212)
+   XP: 7,000, Confidence: 33% (0.333)
+   Language: English, Matched: Off
+   Quest Text:
+   The Nightglow is a special ring that offers good portection against magic. It is particularly useful to magicians. Sinwen had already collected the pa...
+
+29. Stele2Off (P212)
+   XP: 7,000, Confidence: 33% (0.333)
+   Language: English, Matched: Off
+   Quest Text:
+   The Nightglow is a special ring that offers good portection against magic. It is particularly useful to magicians. Sinwen had already collected the pa...
+
+30. Stele3Off (P212)
+   XP: 7,000, Confidence: 33% (0.333)
+   Language: English, Matched: Off
+   Quest Text:
+   The Nightglow is a special ring that offers good portection against magic. It is particularly useful to magicians. Sinwen had already collected the pa...
+
+31. Stele4Off (P212)
+   XP: 7,000, Confidence: 33% (0.333)
+   Language: English, Matched: Off
+   Quest Text:
+   The Nightglow is a special ring that offers good portection against magic. It is particularly useful to magicians. Sinwen had already collected the pa...
+
+32. Stele5Off (P212)
+   XP: 7,000, Confidence: 33% (0.333)
+   Language: English, Matched: Off
+   Quest Text:
+   The Nightglow is a special ring that offers good portection against magic. It is particularly useful to magicians. Sinwen had already collected the pa...
+
+33. Stele6Off (P212)
+   XP: 7,000, Confidence: 33% (0.333)
+   Language: English, Matched: Off
+   Quest Text:
+   The Nightglow is a special ring that offers good portection against magic. It is particularly useful to magicians. Sinwen had already collected the pa...
+
+34. OberstadtRechtsErreicht (P204)
+   XP: 6,500, Confidence: 33% (0.333)
+   Language: English, Matched: Rechts
+   Quest Text:
+   Sie haben die Queste 'Die verschollene Rune' erhalten. Wenn Sie die Queste anklicken, erscheinen rechts die einzelnen Schritte dieser Queste. Bereits ...
+
+35. OberstadtLinksErreicht (P204)
+   XP: 6,500, Confidence: 33% (0.333)
+   Language: English, Matched: Links
+   Quest Text:
+   Darius is now willing to release Flink. Open Flinks cell with the key Darius gave you.
+
+36. TorJenquaiGeoeffnet (P211)
+   XP: 6,500, Confidence: 33% (0.333)
+   Language: English, Matched: Tor
+   Quest Text:
+   ui_btn_build_troll_corpsecollector
+
+37. DialogMitAeltestem (P203)
+   XP: 6,000, Confidence: 33% (0.333)
+   Language: English, Matched: Mit
+   Quest Text:
+   This ability permits the use of blunt weapons with the highest possible destructive power. The weapons include one- and two-handed hammers, clubs or s...
+
+38. LyrioQuestGeloest (P204)
+   XP: 6,000, Confidence: 33% (0.333)
+   Language: English, Matched: Quest
+   Quest Text:
+   ui_item_quest_ring_iron
+
+39. SQSchutzgeldSmall (P204)
+   XP: 6,000, Confidence: 25% (0.250)
+   Language: English, Matched: Small
+   Quest Text:
+   This ability permits the use of small bladed weapons that give fighters or those skilled in magic solid melee fighting skills. One-handed swords, shor...
+
+40. Nymphe1Befreit (P205)
+   XP: 6,000, Confidence: 33% (0.333)
+   Language: English, Matched: Nymphe
+   Quest Text:
+   The nymphets that the Dryads sent out were attacked and scattered around by spider creatures. Look for them, they'll support you to rescue the grove.
+
+41. Nymphe2Befreit (P205)
+   XP: 6,000, Confidence: 33% (0.333)
+   Language: English, Matched: Nymphe
+   Quest Text:
+   The nymphets that the Dryads sent out were attacked and scattered around by spider creatures. Look for them, they'll support you to rescue the grove.
+
+42. Nymphe3Befreit (P205)
+   XP: 6,000, Confidence: 33% (0.333)
+   Language: English, Matched: Nymphe
+   Quest Text:
+   The nymphets that the Dryads sent out were attacked and scattered around by spider creatures. Look for them, they'll support you to rescue the grove.
+
+43. ErstenDrachenGetoetet (P201)
+   XP: 5,000, Confidence: 33% (0.333)
+   Language: English, Matched: Drachen
+   Quest Text:
+   QuestItem Drachenblut
+
+44. ZweitenDrachenGetoetet (P201)
+   XP: 5,000, Confidence: 33% (0.333)
+   Language: English, Matched: Drachen
+   Quest Text:
+   QuestItem Drachenblut
+
+45. DrittenDrachenGetoetet (P201)
+   XP: 5,000, Confidence: 33% (0.333)
+   Language: English, Matched: Drachen
+   Quest Text:
+   QuestItem Drachenblut
+
+46. ViertenDrachenGetoetet (P201)
+   XP: 5,000, Confidence: 33% (0.333)
+   Language: English, Matched: Drachen
+   Quest Text:
+   QuestItem Drachenblut
+
+47. SQSethHealed (P204)
+   XP: 5,000, Confidence: 25% (0.250)
+   Language: English, Matched: Seth
+   Quest Text:
+   As soon as Seth has killed Briar, advance to the base camp.
+
+48. SQBotschafterGefunden (P204)
+   XP: 5,000, Confidence: 25% (0.250)
+   Language: English, Matched: Gefunden
+   Quest Text:
+   hrer der Orks erbeuten! Bring sie zu mir, sobald du sie gefunden hast!
+
+49. SmallIrfitReward (P205)
+   XP: 5,000, Confidence: 33% (0.333)
+   Language: English, Matched: Small
+   Quest Text:
+   This ability permits the use of small bladed weapons that give fighters or those skilled in magic solid melee fighting skills. One-handed swords, shor...
+
+50. P210KarteErreicht (P210)
+   XP: 5,000, Confidence: 25% (0.250)
+   Language: English, Matched: 210
+   Quest Text:
+   SchatzkisteP210_SidequestKey_AO2
+
+51. P205KarteErreicht (P205)
+   XP: 5,000, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+52. P206KarteErreicht (P206)
+   XP: 5,000, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+53. P208KarteErreicht (P208)
+   XP: 5,000, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+54. P209KarteErreicht (P209)
+   XP: 5,000, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+55. P211KarteErreicht (P211)
+   XP: 5,000, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+56. P212KarteErreicht (P212)
+   XP: 5,000, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+57. P213KarteErreicht (P213)
+   XP: 5,000, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+58. P207KarteErreicht (P207)
+   XP: 4,500, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+59. IshtarTraumstabGebracht (P204)
+   XP: 4,000, Confidence: 33% (0.333)
+   Language: English, Matched: Ishtar
+   Quest Text:
+   Ishtar is worried because of the people who illegally deal with Dreamdust. You have his permission to eliminate these people. If you happen to come al...
+
+60. HolyArtefact1Gefunden (P209)
+   XP: 4,000, Confidence: 25% (0.250)
+   Language: English, Matched: Artefact
+   Quest Text:
+   The guardian in Mulandir is demanding the four fragments of a magical glass artefact before he will give up the phoenix. These shards have brought the...
+
+61. HolyArtefact2Gefunden (P209)
+   XP: 4,000, Confidence: 25% (0.250)
+   Language: English, Matched: Artefact
+   Quest Text:
+   The guardian in Mulandir is demanding the four fragments of a magical glass artefact before he will give up the phoenix. These shards have brought the...
+
+62. MonumenteZwerg1Claimed (P211)
+   XP: 4,000, Confidence: 25% (0.250)
+   Language: English, Matched: Zwerg
+   Quest Text:
+   Ich bringe Kunde vom Hetman der Zwerge.
+
+63. MonumenteZwerg2Claimed (P211)
+   XP: 4,000, Confidence: 25% (0.250)
+   Language: English, Matched: Zwerg
+   Quest Text:
+   Ich bringe Kunde vom Hetman der Zwerge.
+
+64. Ordensritter1Befreit (P201)
+   XP: 4,000, Confidence: 33% (0.333)
+   Language: German, Matched: Ordensritter
+   Quest Text:
+   t, Ordensritter. Was tragt Ihr da in der Hand?
+
+65. Ordensritter2Befreit (P201)
+   XP: 4,000, Confidence: 33% (0.333)
+   Language: German, Matched: Ordensritter
+   Quest Text:
+   t, Ordensritter. Was tragt Ihr da in der Hand?
+
+66. Ordensritter3Befreit (P201)
+   XP: 4,000, Confidence: 33% (0.333)
+   Language: German, Matched: Ordensritter
+   Quest Text:
+   t, Ordensritter. Was tragt Ihr da in der Hand?
+
+67. AugenSet1Solved (P210)
+   XP: 3,500, Confidence: 25% (0.250)
+   Language: English, Matched: Set
+   Quest Text:
+   Give word to Lian, as soon as the way to the settlement is safe for them. She will then lead her group home.
+
+68. AugenSet2Solved (P210)
+   XP: 3,500, Confidence: 25% (0.250)
+   Language: English, Matched: Set
+   Quest Text:
+   Give word to Lian, as soon as the way to the settlement is safe for them. She will then lead her group home.
+
+69. AugenSet3Solved (P210)
+   XP: 3,500, Confidence: 25% (0.250)
+   Language: English, Matched: Set
+   Quest Text:
+   Give word to Lian, as soon as the way to the settlement is safe for them. She will then lead her group home.
+
+70. AugenSet4Solved (P210)
+   XP: 3,500, Confidence: 25% (0.250)
+   Language: English, Matched: Set
+   Quest Text:
+   Give word to Lian, as soon as the way to the settlement is safe for them. She will then lead her group home.
+
+71. AtmenderWald2Portal (P30)
+   XP: 3,000, Confidence: 25% (0.250)
+   Language: English, Matched: Portal
+   Quest Text:
+   Are you sure that you want to enter this portal?
+
+72. WenigeTrolleKommenAn (P206)
+   XP: 3,000, Confidence: 25% (0.250)
+   Language: English, Matched: Trolle
+   Quest Text:
+   I wouldn't stop you, but the trail there is controlled by the Goblin hordes. We had to give up the Portal Keep to Eloni, and so we locked it.
+
+73. Prinzessin1Befreit (P208)
+   XP: 3,000, Confidence: 33% (0.333)
+   Language: English, Matched: Prinzessin
+   Quest Text:
+   e bringen, Prinzessin. Sollte es mein Volk noch geben, wenn ich dort ankomme ...
+
+74. Prinzessin2Befreit (P208)
+   XP: 3,000, Confidence: 33% (0.333)
+   Language: English, Matched: Prinzessin
+   Quest Text:
+   e bringen, Prinzessin. Sollte es mein Volk noch geben, wenn ich dort ankomme ...
+
+75. Prinzessin3Befreit (P208)
+   XP: 3,000, Confidence: 33% (0.333)
+   Language: English, Matched: Prinzessin
+   Quest Text:
+   e bringen, Prinzessin. Sollte es mein Volk noch geben, wenn ich dort ankomme ...
+
+76. Prinzessin4Befreit (P208)
+   XP: 3,000, Confidence: 33% (0.333)
+   Language: English, Matched: Prinzessin
+   Quest Text:
+   e bringen, Prinzessin. Sollte es mein Volk noch geben, wenn ich dort ankomme ...
+
+77. Prinzessin5Befreit (P208)
+   XP: 3,000, Confidence: 33% (0.333)
+   Language: English, Matched: Prinzessin
+   Quest Text:
+   e bringen, Prinzessin. Sollte es mein Volk noch geben, wenn ich dort ankomme ...
+
+78. P204KarteErreicht (P204)
+   XP: 3,000, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+79. SQAuftragGescheitert (P204)
+   XP: 3,000, Confidence: 25% (0.250)
+   Language: German, Matched: Auftrag
+   Quest Text:
+   Durch das Westtor. Im Auftrag des Ordens von Greyfell.
+
+80. Klingensturm2Sartarius (P25)
+   XP: 2,600, Confidence: 33% (0.333)
+   Language: English, Matched: Sartarius
+   Quest Text:
+   Go back to Greyfell and speak to Sartarius.
+
+81. SQTiondriaSchatzGeteilt (P105)
+   XP: 2,500, Confidence: 48% (0.480)
+   Language: German, Matched: Tiondria, Schatz
+   Quest Text:
+   Da ist der Offenbarungsort von Farnhardts Schatz aus Tiondria! All das Gold, das er aus Tiondria mitgebracht hat!
+
+82. KreisSchluss1Tor1 (P32)
+   XP: 2,000, Confidence: 20% (0.200)
+   Language: English, Matched: Tor
+   Quest Text:
+   ui_btn_build_troll_corpsecollector
+
+83. KreisSchluss2Tor2 (P32)
+   XP: 2,000, Confidence: 20% (0.200)
+   Language: English, Matched: Tor
+   Quest Text:
+   ui_btn_build_troll_corpsecollector
+
+84. KreisSchluss3Tor3 (P32)
+   XP: 2,000, Confidence: 20% (0.200)
+   Language: English, Matched: Tor
+   Quest Text:
+   ui_btn_build_troll_corpsecollector
+
+85. MasterOfMosaic (P108)
+   XP: 2,000, Confidence: 33% (0.333)
+   Language: English, Matched: Master
+   Quest Text:
+   Heavy Combat Art is the ability to master large and powerful weapons and wear heavy armor and shields. To attain higher levels, very high levels of st...
+
+86. UruSpricht1 (P209)
+   XP: 2,000, Confidence: 33% (0.333)
+   Language: English, Matched: Uru
+   Quest Text:
+   (The dead minotaurus has his eyes rolled back into his head and dry foam around his mouth. It seems something didn't do him very well.)
+
+87. UruSpricht2 (P209)
+   XP: 2,000, Confidence: 33% (0.333)
+   Language: English, Matched: Uru
+   Quest Text:
+   (The dead minotaurus has his eyes rolled back into his head and dry foam around his mouth. It seems something didn't do him very well.)
+
+88. UruSpricht3 (P209)
+   XP: 2,000, Confidence: 33% (0.333)
+   Language: English, Matched: Uru
+   Quest Text:
+   (The dead minotaurus has his eyes rolled back into his head and dry foam around his mouth. It seems something didn't do him very well.)
+
+89. UruSpricht4 (P209)
+   XP: 2,000, Confidence: 33% (0.333)
+   Language: English, Matched: Uru
+   Quest Text:
+   (The dead minotaurus has his eyes rolled back into his head and dry foam around his mouth. It seems something didn't do him very well.)
+
+90. UruSpricht5 (P209)
+   XP: 2,000, Confidence: 33% (0.333)
+   Language: English, Matched: Uru
+   Quest Text:
+   (The dead minotaurus has his eyes rolled back into his head and dry foam around his mouth. It seems something didn't do him very well.)
+
+91. AtmenderWald1Waldherz (P30)
+   XP: 2,000, Confidence: 25% (0.250)
+   Language: German, Matched: Wald
+   Quest Text:
+   Das alte Hauptquartier Brannigans beherrscht den Nordwesten des Schattenwaldes. Es ist das erste Hindernis auf dem Weg nach Shiel. Einar warnt vor den...
+
+92. EndeDesOrdens2DreiItems (P7)
+   XP: 1,500, Confidence: 40% (0.400)
+   Language: English, Matched: Ende, Des
+   Quest Text:
+   rgr, a giant has descended from the rocks of the Southern Windwalls and is threatening the vale. He kills the inhabitants and steals the cattle from t...
+
+93. SQScaramangirKilled (P105)
+   XP: 1,500, Confidence: 25% (0.250)
+   Language: English, Matched: Killed
+   Quest Text:
+   This ability permits the use of small bladed weapons that give fighters or those skilled in magic solid melee fighting skills. One-handed swords, shor...
+
+94. P203KarteErreicht (P203)
+   XP: 1,500, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+95. Schattenwelt4Kristall (P15)
+   XP: 1,400, Confidence: 33% (0.333)
+   Language: English, Matched: Kristall
+   Quest Text:
+   Wo finde ich Feuerkristalle?
+
+96. DurchdenSpalt1Hin (P23)
+   XP: 1,300, Confidence: 25% (0.250)
+   Language: English, Matched: Hin
+   Quest Text:
+   Brannigan's old headquarters reign over the Northwest of the Forest of Shadows. It's the first hindrance on the way to The Shiel. Einar warns you of t...
+
+97. DurchdenSpalt2Her (P23)
+   XP: 1,300, Confidence: 25% (0.250)
+   Language: English, Matched: Her
+   Quest Text:
+   ui_item_quest_feather_01
+
+98. SQTiondriaMordfallSolved (P105)
+   XP: 1,300, Confidence: 20% (0.200)
+   Language: English, Matched: Solved
+   Quest Text:
+   Quest Menu - View quest related items, as well as a list of completed and unsolved quests.
+
+99. Schattenwelt3Manifest (P63)
+   XP: 1,000, Confidence: 33% (0.333)
+   Language: English, Matched: Manifest
+   Quest Text:
+   Bring the shadow manifest to Rigour
+
+100. Klingensturm1Monument (P25)
+   XP: 1,000, Confidence: 33% (0.333)
+   Language: English, Matched: Monument
+   Quest Text:
+   This Hero Rune can be used on a Hero Monument to summon a hero. To remove it from the Runeboard, the hero cannot be carrying any equipment.
+
+101. DerPhoenix2Splitter1 (P19)
+   XP: 800, Confidence: 48% (0.480)
+   Language: English, Matched: Der, Phoenix
+   Quest Text:
+   The Guardian has the phoenix. Before he surrenders it, he will want proof of the serious nature of your mission.
+
+102. DerPhoenix3Splitter2 (P19)
+   XP: 800, Confidence: 48% (0.480)
+   Language: English, Matched: Der, Phoenix
+   Quest Text:
+   The Guardian has the phoenix. Before he surrenders it, he will want proof of the serious nature of your mission.
+
+103. DerPhoenix4Splitter3 (P19)
+   XP: 800, Confidence: 48% (0.480)
+   Language: English, Matched: Der, Phoenix
+   Quest Text:
+   The Guardian has the phoenix. Before he surrenders it, he will want proof of the serious nature of your mission.
+
+104. DerPhoenix5Splitter4 (P19)
+   XP: 800, Confidence: 48% (0.480)
+   Language: English, Matched: Der, Phoenix
+   Quest Text:
+   The Guardian has the phoenix. Before he surrenders it, he will want proof of the serious nature of your mission.
+
+105. SQTiondriaMordfallHalfSolved (P105)
+   XP: 750, Confidence: 17% (0.167)
+   Language: English, Matched: Half
+   Quest Text:
+   ui_item_quest_ring_shadow_half_01
+
+106. InInnenstadtGekommen (P110)
+   XP: 700, Confidence: 33% (0.333)
+   Language: German, Matched: Gekommen
+   Quest Text:
+   ft, ist der Moment gekommen, ihm das vergiftete Fleisch unterzuschieben. Es muss nur schnell geschehen, bevor er vielleicht aufwacht. Er tr
+
+107. Schattenwelt2bRigour (P21)
+   XP: 600, Confidence: 33% (0.333)
+   Language: English, Matched: Rigour
+   Quest Text:
+   Bring the shadow ring to Rigour in Farlorn's Hope
+
+108. GuramMachtSprengung (P108)
+   XP: 550, Confidence: 33% (0.333)
+   Language: English, Matched: Macht
+   Quest Text:
+   Ich habe seinen Schlafplatz ausfindig gemacht.
+
+109. SQTiondriaSchatzGefunden (P108)
+   XP: 550, Confidence: 48% (0.480)
+   Language: German, Matched: Tiondria, Schatz
+   Quest Text:
+   Da ist der Offenbarungsort von Farnhardts Schatz aus Tiondria! All das Gold, das er aus Tiondria mitgebracht hat!
+
+110. SQTiondriaSeite1Gefunden (P104)
+   XP: 500, Confidence: 40% (0.400)
+   Language: German, Matched: Seite, Gefunden
+   Quest Text:
+   ... ist nicht Darius, richtig! Die Kreatur muss das Buch irgendwo gefunden haben ... die Seiten sind voller Blut, man kann kaum noch etwas lesen ...
+
+111. SQTiondriaSeite2Gefunden (P104)
+   XP: 500, Confidence: 40% (0.400)
+   Language: German, Matched: Seite, Gefunden
+   Quest Text:
+   ... ist nicht Darius, richtig! Die Kreatur muss das Buch irgendwo gefunden haben ... die Seiten sind voller Blut, man kann kaum noch etwas lesen ...
+
+112. SQTiondriaSeite3Gefunden (P104)
+   XP: 500, Confidence: 40% (0.400)
+   Language: German, Matched: Seite, Gefunden
+   Quest Text:
+   ... ist nicht Darius, richtig! Die Kreatur muss das Buch irgendwo gefunden haben ... die Seiten sind voller Blut, man kann kaum noch etwas lesen ...
+
+113. EchosBuchstabe1 (P63)
+   XP: 500, Confidence: 33% (0.333)
+   Language: Spanish, Matched: Echos
+   Quest Text:
+   Las sospechosas son Lithere y Baetha. Ambas pertenecen a la Orden de Aryn.
+
+114. EchosBuchstabe2 (P63)
+   XP: 500, Confidence: 33% (0.333)
+   Language: Spanish, Matched: Echos
+   Quest Text:
+   Las sospechosas son Lithere y Baetha. Ambas pertenecen a la Orden de Aryn.
+
+115. EchosBuchstabe3 (P63)
+   XP: 500, Confidence: 33% (0.333)
+   Language: Spanish, Matched: Echos
+   Quest Text:
+   Las sospechosas son Lithere y Baetha. Ambas pertenecen a la Orden de Aryn.
+
+116. FluesterndeStadt4Endkampf (P16)
+   XP: 450, Confidence: 25% (0.250)
+   Language: English, Matched: Stadt
+   Quest Text:
+   sste dieser ehemalige Stadtkern im Norden der Insel zu finden sein!
+
+117. Schattenwelt2aRigour (P21)
+   XP: 400, Confidence: 33% (0.333)
+   Language: English, Matched: Rigour
+   Quest Text:
+   Bring the shadow ring to Rigour in Farlorn's Hope
+
+118. P115KarteErreicht (P115)
+   XP: 400, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+119. FluesterndeStadt5Maske (P16)
+   XP: 350, Confidence: 25% (0.250)
+   Language: English, Matched: Maske
+   Quest Text:
+   Bring mir die Maske! Du hast meine Pl
+
+120. WerwolfTempel1 (P109)
+   XP: 350, Confidence: 33% (0.333)
+   Language: English, Matched: Tempel
+   Quest Text:
+   Wo finde ich die Tempelanlagen?
+
+121. WerwolfTempel2 (P109)
+   XP: 350, Confidence: 33% (0.333)
+   Language: English, Matched: Tempel
+   Quest Text:
+   Wo finde ich die Tempelanlagen?
+
+122. WerwolfTempel3 (P109)
+   XP: 350, Confidence: 33% (0.333)
+   Language: English, Matched: Tempel
+   Quest Text:
+   Wo finde ich die Tempelanlagen?
+
+123. SQTiondriaObjekteEingesetzt (P111)
+   XP: 350, Confidence: 20% (0.200)
+   Language: English, Matched: Tiondria
+   Quest Text:
+   To the Firefangs! I'm hot on the trail of Tiondria! Darius's book finally gave me the right clue!
+
+124. P108KarteErreicht (P108)
+   XP: 350, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+125. P109KarteErreicht (P109)
+   XP: 350, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+126. P110KarteErreicht (P110)
+   XP: 350, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+127. P111KarteErreicht (P111)
+   XP: 350, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+128. P113KarteErreicht (P113)
+   XP: 350, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+129. Grenzkrieg1Festung (P12)
+   XP: 300, Confidence: 33% (0.333)
+   Language: English, Matched: Festung
+   Quest Text:
+   Neu formieren! Ich will diese Festung fallen sehen! Sturm!
+
+130. Trickster1Cassius (P15)
+   XP: 300, Confidence: 33% (0.333)
+   Language: English, Matched: Trickster
+   Quest Text:
+   ui_item_quest_hadekodoll_trickster
+
+131. Schattenwelt2Rigour (P21)
+   XP: 300, Confidence: 33% (0.333)
+   Language: English, Matched: Rigour
+   Quest Text:
+   Bring the shadow ring to Rigour in Farlorn's Hope
+
+132. P107KarteErreicht (P107)
+   XP: 275, Confidence: 25% (0.250)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+133. Zwergendienste2Cronvig (P10)
+   XP: 250, Confidence: 33% (0.333)
+   Language: English, Matched: Cronvig
+   Quest Text:
+   Find Cronvig's eyeglasses and bring them to him.
+
+134. FluesterndeStadt1Item1 (P16)
+   XP: 250, Confidence: 20% (0.200)
+   Language: English, Matched: Item
+   Quest Text:
+   ui_item_quest_ring_iron
+
+135. FluesterndeStadt2Item2 (P16)
+   XP: 250, Confidence: 20% (0.200)
+   Language: English, Matched: Item
+   Quest Text:
+   ui_item_quest_ring_iron
+
+136. FluesterndeStadt3Item3 (P16)
+   XP: 250, Confidence: 20% (0.200)
+   Language: English, Matched: Item
+   Quest Text:
+   ui_item_quest_ring_iron
+
+137. SQTiondriaFlinkBefreit (P105)
+   XP: 250, Confidence: 48% (0.480)
+   Language: English, Matched: Tiondria, Flink
+   Quest Text:
+   Flink McWinter is looking for a legendary land that is supposedly called Tiondria. Actually, to be more specific, he is looking for treasures once lef...
+
+138. SQTiondriaSchatzBehalten (P105)
+   XP: 250, Confidence: 48% (0.480)
+   Language: German, Matched: Tiondria, Schatz
+   Quest Text:
+   Da ist der Offenbarungsort von Farnhardts Schatz aus Tiondria! All das Gold, das er aus Tiondria mitgebracht hat!
+
+139. Camp1Befreit (P104)
+   XP: 200, Confidence: 33% (0.333)
+   Language: English, Matched: Camp
+   Quest Text:
+   The camp that is close to the lake could be defended even better. It won't be an easy battle, but perhaps there is a possibility to avoid the defences...
+
+140. Camp2Befreit (P104)
+   XP: 200, Confidence: 33% (0.333)
+   Language: English, Matched: Camp
+   Quest Text:
+   The camp that is close to the lake could be defended even better. It won't be an easy battle, but perhaps there is a possibility to avoid the defences...
+
+141. Camp3Befreit (P104)
+   XP: 200, Confidence: 33% (0.333)
+   Language: English, Matched: Camp
+   Quest Text:
+   The camp that is close to the lake could be defended even better. It won't be an easy battle, but perhaps there is a possibility to avoid the defences...
+
+142. FugisBroughtToMap (P105)
+   XP: 175, Confidence: 25% (0.250)
+   Language: English, Matched: Map
+   Quest Text:
+   ui_item_quest_map_01
+
+143. HQBefreien (P101)
+   XP: 150, Confidence: 33% (0.333)
+   Language: English, Matched: Befreien
+   Quest Text:
+   sst ihn finden und befreien.
+
+144. SchlachtUmBrunnenfels2 (P9)
+   XP: 150, Confidence: 25% (0.250)
+   Language: German, Matched: Brunnenfels
+   Quest Text:
+   Sucht Marcia in Brunnenfels auf
+
+145. SchlachtUmBrunnenfels2a (P9)
+   XP: 150, Confidence: 25% (0.250)
+   Language: German, Matched: Brunnenfels
+   Quest Text:
+   Sucht Marcia in Brunnenfels auf
+
+146. BefreiungShiel2Dryaden (P5)
+   XP: 140, Confidence: 25% (0.250)
+   Language: English, Matched: Shiel
+   Quest Text:
+   ui_item_quest_dwarfshield_burst
+
+147. P104Erreicht (P104)
+   XP: 125, Confidence: 33% (0.333)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+148. Zauberwerk4Robe (P63)
+   XP: 120, Confidence: 33% (0.333)
+   Language: English, Matched: Robe
+   Quest Text:
+   ui_item_quest_robe_03
+
+149. Schattenwelt1Castagir (P63)
+   XP: 120, Confidence: 33% (0.333)
+   Language: English, Matched: Castagir
+   Quest Text:
+   Castagir believes that Rigour, another necromancer, knows how its power can be returned to the shadow ring. He can be found in Farlorn's Hope, in the ...
+
+150. Zwergendienste1Hinrik (P63)
+   XP: 120, Confidence: 33% (0.333)
+   Language: English, Matched: Hinrik
+   Quest Text:
+   Hinrik in Greyfell wants some brandy from his homeland. Find a suitable bottle and take it to him.
+
+151. SQTiondriaMordfallNotSolved (P105)
+   XP: 100, Confidence: 17% (0.167)
+   Language: English, Matched: Not
+   Quest Text:
+   Another ring for Ortah's collection
+
+152. SchlachtUmBrunnenfels1 (P9)
+   XP: 100, Confidence: 25% (0.250)
+   Language: German, Matched: Brunnenfels
+   Quest Text:
+   Sucht Marcia in Brunnenfels auf
+
+153. WeisseSchatten1 (P10)
+   XP: 80, Confidence: 33% (0.333)
+   Language: English, Matched: Schatten
+   Quest Text:
+   Rigour, ich bringe Euch den Schattenkristall!
+
+154. P103Erreicht (P103)
+   XP: 75, Confidence: 33% (0.333)
+   Language: English, Matched: 103
+   Quest Text:
+   QuestItem Zweite Rune (P103)
+
+155. BefreiungShiel1Alfalas (P1)
+   XP: 60, Confidence: 25% (0.250)
+   Language: English, Matched: Shiel
+   Quest Text:
+   ui_item_quest_dwarfshield_burst
+
+156. Kopfjagd6Complete (P4)
+   XP: 60, Confidence: 33% (0.333)
+   Language: English, Matched: Complete
+   Quest Text:
+   Quest Menu - View quest related items, as well as a list of completed and unsolved quests.
+
+157. PurpurnesBanner2 (P5)
+   XP: 45, Confidence: 33% (0.333)
+   Language: English, Matched: Banner
+   Quest Text:
+   The House of Utran in the Shiel fell through the hands of a traitor. He has kidnapped Lord Tynar's wife this night an stolen the family banner. Maybe ...
+
+158. BefreiungShiel1Kommandant (P5)
+   XP: 40, Confidence: 25% (0.250)
+   Language: English, Matched: Shiel
+   Quest Text:
+   ui_item_quest_dwarfshield_burst
+
+159. WeisseSchatten2 (P10)
+   XP: 40, Confidence: 33% (0.333)
+   Language: English, Matched: Schatten
+   Quest Text:
+   Rigour, ich bringe Euch den Schattenkristall!
+
+160. PurpurnesBanner1Kettchen (P5)
+   XP: 35, Confidence: 25% (0.250)
+   Language: English, Matched: Banner
+   Quest Text:
+   The House of Utran in the Shiel fell through the hands of a traitor. He has kidnapped Lord Tynar's wife this night an stolen the family banner. Maybe ...
+
+161. Zauberwerk3Kreide (P63)
+   XP: 35, Confidence: 33% (0.333)
+   Language: German, Matched: Kreide
+   Quest Text:
+   rerkreide zu besorgen. Diese spezielle Kreide wird nur von Orkschamanen hergestellt. Gabar ist hilflos.
+
+162. P102Erreicht (P102)
+   XP: 30, Confidence: 33% (0.333)
+   Language: Italian, Matched: Erreicht
+   Quest Text:
+   Aber bis Ihr das Portal dorthin erreicht, erwartet Euch noch ein harter Kampf!
+
+163. Zauberwerk2Feder (P63)
+   XP: 25, Confidence: 33% (0.333)
+   Language: English, Matched: Feder
+   Quest Text:
+   Today, Nortander is more like a kind of loose confederation of the four surviving ruling houses. The realm of the High Mark, which lies to the south o...
+
+164. Kopfjagd1Head1 (P4)
+   XP: 15, Confidence: 25% (0.250)
+   Language: English, Matched: Head
+   Quest Text:
+   ui_item_quest_head_02
+
+165. Kopfjagd2Head2 (P4)
+   XP: 15, Confidence: 25% (0.250)
+   Language: English, Matched: Head
+   Quest Text:
+   ui_item_quest_head_02
+
+166. Kopfjagd3Head3 (P4)
+   XP: 15, Confidence: 25% (0.250)
+   Language: English, Matched: Head
+   Quest Text:
+   ui_item_quest_head_02
+
+167. Kopfjagd4Head4 (P4)
+   XP: 15, Confidence: 25% (0.250)
+   Language: English, Matched: Head
+   Quest Text:
+   ui_item_quest_head_02
+
+168. Kopfjagd5Head5 (P4)
+   XP: 15, Confidence: 25% (0.250)
+   Language: English, Matched: Head
+   Quest Text:
+   ui_item_quest_head_02
+
+169. ImCampMitAllenGeredet (P101)
+   XP: 15, Confidence: 48% (0.480)
+   Language: English, Matched: Mit, Allen
+   Quest Text:
+   This sword must have wrought many calamities! How many hosts have fallen victim to this blade?
+
+170. KleineFische1 (P1)
+   XP: 10, Confidence: 33% (0.333)
+   Language: English, Matched: Kleine
+   Quest Text:
+   Kleiner Schmerzbringer
+
+171. KleineFische2 (P1)
+   XP: 10, Confidence: 33% (0.333)
+   Language: English, Matched: Kleine
+   Quest Text:
+   Kleiner Schmerzbringer
+
+172. Zauberwerk1Augenglas (P63)
+   XP: 10, Confidence: 33% (0.333)
+   Language: German, Matched: Zauberwerk
+   Quest Text:
+   tigt ihr die Kristalle? Wollt ihr Zauberwerk damit wirken?
+
+
+================================================================================
+SUMMARY
+================================================================================
+High confidence (≥0.70):      100 matches
+High-medium (0.65-0.69):        0 matches
+Mid-medium (0.55-0.64):        59 matches
+Low-medium (0.50-0.54):        71 matches
+Low confidence (<0.50):       172 matches
+========================================
+TOTAL:                        402 matches
+
+Recommendation:
+  • Auto-apply: 100 high-confidence matches
+  • Review carefully: 59 medium matches
+  • Manual mapping: 243 lower matches + 120 unmatched = ~250 total
