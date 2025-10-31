@@ -309,7 +309,7 @@ def create_standard_icon_mapping(itm_output_dir: Path, standard_output_dir: Path
 def main():
     """Main extraction process for ITM icons."""
 
-    project_root = Path(__file__).parent.parent.parent
+    project_root = Path(__file__).parent.parent.parent.parent
     extracted_ui = project_root / "ExtractedAssets" / "UI" / "extracted"
     output_root = project_root / "ExtractedAssets" / "UI" / "itm_icons_extracted"
 
@@ -331,8 +331,8 @@ def main():
         "patterns_detected": {},
     }
 
-    # Find all ITM DDS files
-    dds_files = list(extracted_ui.rglob("ui_itm*.dds"))
+    # Find all ITM DDS files (they're named ui_item*.dds)
+    dds_files = list(extracted_ui.rglob("ui_item*.dds"))
     print(f"Found {len(dds_files)} ITM texture files")
     print()
 
