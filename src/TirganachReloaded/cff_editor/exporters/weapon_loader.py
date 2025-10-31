@@ -1,9 +1,13 @@
 import json
+from pathlib import Path
 
 from ..models.weapon_creation_data import (
+    DamageCategory,
+    DamageType,
     Rarity,
     WeaponCreationData,
     WeaponEffect,
+    WeaponHands,
     WeaponRequirements,
 )
 
@@ -14,8 +18,14 @@ class WeaponLoader:
     @staticmethod
     def load_weapon(weapon_id: int) -> WeaponCreationData:
         """Load existing weapon by ID"""
-        # Load from enhanced_weapons.json
-        with open("src/TirganachReloaded/enhanced_weapons.json", "r") as f:
+        # Load from enhanced_weapons.json using absolute path
+        current_file = Path(__file__)
+        weapons_file = current_file.parent.parent.parent / "enhanced_weapons.json"
+        
+        if not weapons_file.exists():
+            raise FileNotFoundError(f"Weapons file not found at: {weapons_file}")
+        
+        with open(weapons_file, "r") as f:
             weapons = json.load(f)
 
         weapon_data = next((w for w in weapons if w["item_id"] == weapon_id), None)
@@ -32,14 +42,32 @@ class WeaponLoader:
             weapon_type_name=weapon_data.get("weapon_type_name", ""),
             weapon_material_id=weapon_data.get("weapon_material_id", 5),
             weapon_material_name=weapon_data.get("weapon_material_name", ""),
+            hands=WeaponHands.ONE_HANDED,  # Default, can be updated based on weapon type
+            damage_category=DamageCategory.MELEE,  # Default, can be updated based on weapon type
+            description=weapon_data.get("description", ""),
             min_damage=weapon_data.get("min_damage", 10),
             max_damage=weapon_data.get("max_damage", 15),
+            damage_type=DamageType.SLASH,  # Default, can be updated based on weapon type
             attack_speed=weapon_data.get("weapon_speed", 100),
             min_range=weapon_data.get("min_range", 0),
             max_range=weapon_data.get("max_range", 2),
+            attack_arc=90,  # Default melee arc
+            critical_chance=5.0,  # Default crit chance
+            armor_penetration=0.0,
+            knockback_chance=0.0,
+            requirements=WeaponRequirements(),  # Use defaults
             sell_value=weapon_data.get("sell_value", 50),
             buy_value=weapon_data.get("buy_value", 100),
-            # ... map other fields
+            rarity=Rarity.COMMON,  # Default rarity
+            effects=[],  # No effects by default
+            item_set_id=weapon_data.get("item_set_id", 0),
+            icon_handle="",  # Would need to be populated from icon mapping
+            hit_sound="battle_hit_1hsword",
+            miss_sound="battle_miss_sword",
+            equip_sound="",
+            model_file="",  # Would need to be populated from model mapping
+            trail_effect="",
+            impact_effect=""
         )
 
     @staticmethod

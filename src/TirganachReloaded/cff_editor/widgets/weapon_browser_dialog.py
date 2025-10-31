@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 from typing import List, Dict, Optional
 from PySide6.QtWidgets import (
     QDialog,
@@ -22,9 +23,27 @@ class WeaponBrowserDialog(QDialog):
         self.resize(800, 600)
         
         self.selected_weapon = None
-        self.weapons = self.load_weapons()
+        
+        # Load weapons with error handling
+        try:
+            self.weapons = self.load_weapons()
+            if not self.weapons:
+                raise ValueError("No weapons loaded - weapons file may be empty or corrupted")
+        except Exception as e:
+            # Show error and create empty dialog
+            from PySide6.QtWidgets import QMessageBox
+            QMessageBox.critical(
+                self,
+                "Loading Error",
+                f"Failed to load weapons:\n{str(e)}\n\nPlease check the weapons file."
+            )
+            self.weapons = []
         
         layout = QVBoxLayout()
+        
+        # Add status label
+        self.status_label = QLabel(f"Loaded {len(self.weapons)} weapons")
+        layout.addWidget(self.status_label)
         
         # Search/Filter
         search_layout = QHBoxLayout()
@@ -52,13 +71,21 @@ class WeaponBrowserDialog(QDialog):
         self.weapon_table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
         self.weapon_table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
         self.weapon_table.doubleClicked.connect(self.accept)
-        self.populate_table()
+        
+        if self.weapons:
+            self.populate_table()
+        else:
+            self.weapon_table.setRowCount(1)
+            self.weapon_table.setItem(0, 0, QTableWidgetItem("No weapons available"))
+            self.weapon_table.setSpan(0, 0, 1, 7)
+        
         layout.addWidget(self.weapon_table)
         
         # Buttons
         btn_layout = QHBoxLayout()
         ok_btn = QPushButton("Load Weapon")
         ok_btn.clicked.connect(self.accept)
+        ok_btn.setEnabled(bool(self.weapons))  # Disable if no weapons
         cancel_btn = QPushButton("Cancel")
         cancel_btn.clicked.connect(self.reject)
         btn_layout.addWidget(ok_btn)
@@ -69,7 +96,14 @@ class WeaponBrowserDialog(QDialog):
     
     def load_weapons(self) -> List[Dict]:
         """Load weapons from enhanced_weapons.json"""
-        with open("src/TirganachReloaded/enhanced_weapons.json", 'r') as f:
+        # Get the absolute path to the weapons file
+        current_file = Path(__file__)
+        weapons_file = current_file.parent.parent.parent / "enhanced_weapons.json"
+        
+        if not weapons_file.exists():
+            raise FileNotFoundError(f"Weapons file not found at: {weapons_file}")
+        
+        with open(weapons_file, 'r') as f:
             return json.load(f)
     
     def populate_table(self, weapons=None):
@@ -112,6 +146,15 @@ class WeaponBrowserDialog(QDialog):
             filtered.append(weapon)
         
         self.populate_table(filtered)
+        
+        # Update status label
+        if hasattr(self, 'status_label'):
+            total = len(self.weapons)
+            showing = len(filtered)
+            if showing == total:
+                self.status_label.setText(f"Loaded {total} weapons")
+            else:
+                self.status_label.setText(f"Showing {showing} of {total} weapons")
     
     def get_selected_weapon(self) -> Optional[Dict]:
         """Get selected weapon data"""

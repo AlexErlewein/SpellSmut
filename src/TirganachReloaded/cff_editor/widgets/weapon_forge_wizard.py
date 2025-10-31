@@ -560,9 +560,9 @@ class RequirementsValuePage(QWizardPage):
             weapon = wizard.source_weapon
 
             # Populate requirements
-            self.str_spin.setValue(weapon.requirements.strength)
-            self.dex_spin.setValue(weapon.requirements.dexterity)
-            self.int_spin.setValue(weapon.requirements.intelligence)
+            self.strength_spin.setValue(weapon.requirements.strength)
+            self.dexterity_spin.setValue(weapon.requirements.dexterity)
+            self.intelligence_spin.setValue(weapon.requirements.intelligence)
             self.level_spin.setValue(weapon.requirements.level)
 
             # Populate values
@@ -684,9 +684,9 @@ class ReviewExportPage(QWizardPage):
 
         # Build requirements
         requirements = WeaponRequirements(
-            strength=req_page.str_spin.value(),
-            dexterity=req_page.dex_spin.value(),
-            intelligence=req_page.int_spin.value(),
+            strength=req_page.strength_spin.value(),
+            dexterity=req_page.dexterity_spin.value(),
+            intelligence=req_page.intelligence_spin.value(),
             level=req_page.level_spin.value()
         )
 
@@ -698,24 +698,24 @@ class ReviewExportPage(QWizardPage):
             source_weapon_id=source_weapon_id,
 
             # Step 2: Basic Properties
-            weapon_name=basic_page.name_edit.text(),
-            weapon_type_id=basic_page.type_combo.currentIndex() + 1,  # Adjust for 0-based index
-            weapon_type_name=basic_page.type_combo.currentText(),
-            weapon_material_id=basic_page.material_combo.currentIndex() + 1,
-            weapon_material_name=basic_page.material_combo.currentText(),
+            weapon_name=basic_page.weapon_name_edit.text(),
+            weapon_type_id=basic_page.weapon_type_combo.currentIndex() + 1,  # Adjust for 0-based index
+            weapon_type_name=basic_page.weapon_type_combo.currentText(),
+            weapon_material_id=basic_page.weapon_material_combo.currentIndex() + 1,
+            weapon_material_name=basic_page.weapon_material_combo.currentText(),
             hands=WeaponHands(basic_page.hands_combo.currentText()),
-            damage_category=DamageCategory(basic_page.category_combo.currentText()),
+            damage_category=DamageCategory(basic_page.damage_category_combo.currentText()),
             description=basic_page.description_edit.toPlainText(),
 
             # Step 3: Combat Stats
             min_damage=combat_page.min_damage_spin.value(),
             max_damage=combat_page.max_damage_spin.value(),
             damage_type=DamageType(combat_page.damage_type_combo.currentText()),
-            attack_speed=combat_page.speed_spin.value(),
+            attack_speed=combat_page.attack_speed_spin.value(),
             min_range=combat_page.min_range_spin.value(),
             max_range=combat_page.max_range_spin.value(),
-            attack_arc=combat_page.arc_spin.value(),
-            critical_chance=combat_page.crit_spin.value(),
+            attack_arc=combat_page.attack_arc_spin.value(),
+            critical_chance=combat_page.crit_chance_spin.value(),
             armor_penetration=combat_page.armor_pen_spin.value(),
             knockback_chance=combat_page.knockback_spin.value(),
 
