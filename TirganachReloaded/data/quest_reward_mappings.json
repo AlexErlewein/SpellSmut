@@ -1,0 +1,100 @@
+{
+  "_readme": {
+    "description": "Manual mapping file for quest rewards that cannot be automatically matched",
+    "format": "Map reward script names from GdsQuestRewards.lua to quest IDs",
+    "usage": "Add entries in the format: 'RewardScriptName': quest_id",
+    "example": "'NachGraufurtPartVillage': 12",
+    "platforms": "Organize by platform (P63, P7, P1, etc.) to match game structure",
+    "how_to_find_quest_ids": "Check the database or CFF editor to find quest IDs for each platform"
+  },
+  "P63": {
+    "_platform_name": "Greyfell",
+    "_comment": "Quest rewards for Greyfell (Platform 63)",
+    "NachGraufurtPartVillage": null,
+    "NachGraufurtPartEnde": null,
+    "AngriffDerHoehlenorks": null,
+    "Zauberwerk1Augenglas": null,
+    "Zauberwerk2Feder": null,
+    "Zauberwerk3Kreide": null,
+    "Zauberwerk4Robe": null,
+    "ZahnbrechersZangen": null,
+    "WundtinkturValdis": null,
+    "BlutAdhiraTrank": null,
+    "BlutTombardTot": null,
+    "SickHermit1Zirfar": null,
+    "SickHermit2Locke": null,
+    "Schattenwelt1Castagir": null,
+    "Schattenwelt3Manifest": null,
+    "SchattenweltShadowpulse": null,
+    "EchosBuchstabe1": null,
+    "EchosBuchstabe2": null,
+    "EchosBuchstabe3": null,
+    "EchosGoran": null,
+    "EchosShinTarGuar": null,
+    "AmraUndLea3Sentos": null,
+    "Zwergendienste1Hinrik": null,
+    "Schwarzeibe": null,
+    "Seelenschwerter": null,
+    "KlingzogsBeinlinge": null,
+    "ThurgonBrief": null,
+    "FeineStoffe3Seide": null,
+    "FeineStoffe4Robe": null,
+    "Drachenpanzer1": null
+  },
+  "P1": {
+    "_platform_name": "Platform 1",
+    "_comment": "Quest rewards for Platform 1"
+  },
+  "P2": {
+    "_platform_name": "Platform 2",
+    "_comment": "Quest rewards for Platform 2"
+  },
+  "P4": {
+    "_platform_name": "Platform 4",
+    "_comment": "Quest rewards for Platform 4"
+  },
+  "P7": {
+    "_platform_name": "Platform 7",
+    "_comment": "Quest rewards for Platform 7"
+  },
+  "P9": {
+    "_platform_name": "Platform 9",
+    "_comment": "Quest rewards for Platform 9"
+  },
+  "P10": {
+    "_platform_name": "Platform 10",
+    "_comment": "Quest rewards for Platform 10"
+  },
+  "P102": {
+    "_platform_name": "Platform 102",
+    "_comment": "Quest rewards for Platform 102"
+  },
+  "P103": {
+    "_platform_name": "Platform 103",
+    "_comment": "Quest rewards for Platform 103"
+  },
+  "P107": {
+    "_platform_name": "Platform 107",
+    "_comment": "Quest rewards for Platform 107"
+  },
+  "P108": {
+    "_platform_name": "Platform 108",
+    "_comment": "Quest rewards for Platform 108"
+  },
+  "P201": {
+    "_platform_name": "Platform 201",
+    "_comment": "Quest rewards for Platform 201"
+  },
+  "_notes": {
+    "matching_strategy": "When this file contains a mapping, it takes precedence over automatic matching",
+    "null_values": "null values mean 'not yet mapped' - fill in quest IDs as you identify them",
+    "workflow": [
+      "1. Extract all reward names from GdsQuestRewards.lua",
+      "2. Match quest IDs by playing the game or examining quest descriptions",
+      "3. Fill in the quest_id for each reward name",
+      "4. The parser will use these manual mappings when loading quest data"
+    ],
+    "benefits": "Manual mapping ensures 100% accurate reward data for all quests",
+    "multi_language": "Consider adding English/German quest name hints to make mapping easier"
+  }
+}

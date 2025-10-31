@@ -1,0 +1,1006 @@
+================================================================================
+QUEST STRINGS EXTRACTED FROM GERMAN CFF
+================================================================================
+
+Total quest-related strings: 32576
+
+
+--------------------------------------------------------------------------------
+String #1 (Length: 310, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+When you select a finished building, then you can see how many craftsmen are already assigned to this building in the selection window. When you click an empty symbol, and there is another free worker available, he will be assigned to the building. When you click an occupied symbol, a worker will be released.
+
+--------------------------------------------------------------------------------
+String #2 (Length: 304, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Battle units are also summoned to human monuments. If you would like to establish a rally point for new units, select the human monument and click with the right mouse button on the desired destination. The appearance of a little flag indicates that the summoned combat units will assemble at this point.
+
+--------------------------------------------------------------------------------
+String #3 (Length: 300, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Produce at least three clerics. Should you be unable to produce the unit, the button will be darkened. In this case move the mouse over the button and follow the instructions in the help window. In case you already have the maximum number of units, you can select units and destroy them using the key
+
+--------------------------------------------------------------------------------
+String #4 (Length: 299, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Settings for the shadow types for objects and characters in the game. Turn shadows of completely (fastest speed), set to point-shadows (simple, round shadows) or activate the real shadows (highest load on system). Shadow types 'high' and 'very high' are only available with Effectlightmap set to on.
+
+--------------------------------------------------------------------------------
+String #5 (Length: 286, Keywords: find)
+--------------------------------------------------------------------------------
+Select the human monument and summon at least three recruits and three scouts. If you are unable to produce units, you will find text marked in red in the help window. This specifies the reason why, for example, there might be a missing or unoccupied building or insufficient resources.
+
+--------------------------------------------------------------------------------
+String #6 (Length: 284, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+There is still enough medicine in the bottle to heal one of the insured. Devus is at a loss, faced with making a decision between who he should save and who he should abandon to die. Help the tormented healer in his decision,  but be aware that this is a decision over life and death.
+
+--------------------------------------------------------------------------------
+String #7 (Length: 281, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Vsync makes sure that the frame rate corresponds to the frame rate of your viewing devices. When you turn off Vsync, it is possible that you will experience a high amount of frame repetitions in the game, when you scroll or rotate the camera, however, image disturbances may occur.
+
+--------------------------------------------------------------------------------
+String #8 (Length: 279, Keywords: bring)
+--------------------------------------------------------------------------------
+Environment mapping controls the mirroring and reflections in the game environment. This has an effect, particularly on how water is displayed. Without Environment Mapping, the water won't reflect the surroundings, although, at the same time, it does bring an advantage in speed.
+
+--------------------------------------------------------------------------------
+String #9 (Length: 277, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Take up a position close to the dead goblin and click on the corpse with the right mouse button. You can then see what object the goblin had with him on the left hand edge of the screen. Click on the shield to take it with you, it will be automatically added to your inventory.
+
+--------------------------------------------------------------------------------
+String #10 (Length: 276, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+With that you have access to the advanced features of 'The Shadow of the Phoenix'. You may import Avatars from the Coop Mode and the ready-made Avatars have building destructors and swarm units. However, only players with 'Shadow of the Phoenix' installed can enter this game.
+
+--------------------------------------------------------------------------------
+String #11 (Length: 271, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+In the course of time, however, the Mages had a falling out. They thought only a single individual could acquire the power over the primeval elements. That's what brought about the War of the Convocation! Many generations worked on them, but the old texts were imprecise.
+
+--------------------------------------------------------------------------------
+String #12 (Length: 268, Keywords: quest)
+--------------------------------------------------------------------------------
+Quando mandi un lavoratore ad un edificio con il tasto destro del mouse, puoi riempire i lavori liberi. In questo modo i lavoratori che, per esempio, abbattono gli alberi, cercano automaticamente i lavori nelle case dei taglialegna e cominciano a farli in breve tempo.
+
+--------------------------------------------------------------------------------
+String #13 (Length: 267, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The bindstone offers the avatar an opportunity to connect his rune with this place. Should he perish, he will appear at the last bindstone used. Enemies are able to sever the connection to a bindstone if they attack it, thus causing you to loose one active bindstone.
+
+--------------------------------------------------------------------------------
+String #14 (Length: 266, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+(One is the heart of mountain crystal and the other a heart of onyx. Next to the hearts you see written characters. The writing says that the Golem will receive power of earth magic through the mountain crystal and protection against black magic through the onyx...)
+
+--------------------------------------------------------------------------------
+String #15 (Length: 264, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+To do this, open your inventory and, for instance, first click on one magic spell and then the second one. As the buildings and magic spells in the action bar are shown in the same order as they are sorted in the buildings menu or magic memory, this can be useful.
+
+--------------------------------------------------------------------------------
+String #16 (Length: 263, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Gli elementi si risvegliarono dal sonno, e la loro rabbia fece tremare la terra. Solo nei posti in cui si trovavano le pietre divine di Aonir - gli obelischi blu - qualcosa venne preservato dalla potenza del dio stellare, che ci protesse dalla distruzione totale.
+
+--------------------------------------------------------------------------------
+String #17 (Length: 259, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+It is his goal to open a portal back into the valley. He believes, this way he can change the course of history and acquire the power of the Convocation. But he is mistaken! He cannot control that power. Nobody can! It was a deception, a ploy of the evilgods.
+
+--------------------------------------------------------------------------------
+String #18 (Length: 255, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Hokan, one of the mighty Circle Mages, lays in his grave in the city of the undead, Whisper. His spirit, however, wanders restlessly around the ruins, saved by the power of necromancy. He is creator of the blades and the onyl one, who can be of any more h
+
+--------------------------------------------------------------------------------
+String #19 (Length: 255, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+La truppe della Legione Rossa hanno scoperto che le difese dei Lupi di Briar sono quasi impossibili da spezzare. Un attacco diretto al loro accampamento principale fallirebbe quasi di certo. Ci deve essere un modo per indebolire le loro difese, comunque..
+
+--------------------------------------------------------------------------------
+String #20 (Length: 255, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Regola la visualizzazione dei danni in battaglia. 'Nessuna' disattiva la visualizzazione, 'Avatar' mostra solamente il danno fatto o causato dall'Avatar. 'Avatar e eroi' aggiunge il danno degli eroi, 'Tutti' mostra i livelli di danno di tutti i personaggi
+
+--------------------------------------------------------------------------------
+String #21 (Length: 255, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Aedale, the High Priestess of the Order of Aryn, is dead. The elves are shocked - it seems it was not one of Aedales foes, but much more, one of her own followers have murdered her. Aileen, now trying to uncover the secret behind her death, might need som
+
+--------------------------------------------------------------------------------
+String #22 (Length: 254, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+This enables quick access to workers of a particular race. The number shows the current amount of available workers. You can select the next available worker by left-clicking your mouse. With additional left-clicks, you can select more available workers.
+
+--------------------------------------------------------------------------------
+String #23 (Length: 254, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Tynar pensa che le guardie sulle colline vicino ai monumenti possano avvertire l'esercito. Il passaggio di informazioni tra le guardie deve essere interrotto. Le guardie devono essere eliminate una per una. Un allarme sarebbe mortale. Torna da Lord Tynar
+
+--------------------------------------------------------------------------------
+String #24 (Length: 254, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The Gerask is a hero of the nations, as he is was also one of them. In many cases, a knight of Order has served many years as a lansquenet before his level is promoted to that of a Knight of Order. Gerask fights for his beliefs, which gives him strength.
+
+--------------------------------------------------------------------------------
+String #25 (Length: 254, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Many years ago, Mirelle committed an offense against the elves, which faded to a legend in the course of time. The elves punished what she had done by letting her soul freeze to ice. Her strong spirit, however, was able to overcome and master that curse.
+
+--------------------------------------------------------------------------------
+String #26 (Length: 254, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The darkwall is blocking the advance. There's no way to overcome it from the West, but there must be a secret portal in the East. Your troops won't be able to follow you, but there will surely be possibilities behind the portal to open the wall for them.
+
+--------------------------------------------------------------------------------
+String #27 (Length: 254, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+But he was wrong! Yes, the women did accept his gems, oh yes, but they condemned the ugly giant! He fell into such a rage that he lifted his foot, and stomped it down onto the ground with a mighty thump, letting the ground break open and the volcano rise
+
+--------------------------------------------------------------------------------
+String #28 (Length: 253, Keywords: quest)
+--------------------------------------------------------------------------------
+Negli Howling Mounds giacciono le rovine di un'antica fortezza, attualmente occupata dall'ultimo grande esercito di Non-Morti. Una vittoria in questa terra metterebbe fine agli attacchi dei Non-Morti ai regni del nord, e aprirebbe la strada per Whisper.
+
+--------------------------------------------------------------------------------
+String #29 (Length: 253, Keywords: talk)
+--------------------------------------------------------------------------------
+By using the mouse wheel, you can switch through all the weapons in your inventory. Or you can open your inventory, by pressing I, where,  you are able to change your weapons or your armour. You cannot, however, open your inventory while we are talking.
+
+--------------------------------------------------------------------------------
+String #30 (Length: 252, Keywords: defeat)
+--------------------------------------------------------------------------------
+But I set off towards the ocean, searching for Laurins antagonists, the seadragon Sheeha and Andar! In a fierce battle I managed to defeat them ... But that was only the beginning... And now I sense everything is starting over from the beginning again!
+
+--------------------------------------------------------------------------------
+String #31 (Length: 251, Keywords: question/exclamation, multi-sentence)
+--------------------------------------------------------------------------------
+No! It was just a simple pewter ring. Sometimes the faith of the people is stronger than any magic. Do you understand? The people simply wanted to believe that Lea was blessed. They themselves created that legend - with their own power of imagination.
+
+--------------------------------------------------------------------------------
+String #32 (Length: 251, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Settings for screen resolution and color depth. Higher screen resolutions and color depths require a higher level of system performance. In an active game, these options are not available, you must be in the start menu to change the screen resolution.
+
+--------------------------------------------------------------------------------
+String #33 (Length: 250, Keywords: quest)
+--------------------------------------------------------------------------------
+Un possente esercito blocca la strada per il Passo di Wildland. Non puoi sperare di sconfiggerlo. Le driadi, potenti spiriti degli alberi di una radura vicina, potrebbero sconfiggere questo esercito per te, ma dovrai sacrificare 1000 piante di Lenya.
+
+--------------------------------------------------------------------------------
+String #34 (Length: 250, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+With the help for the Circle, Hokan, the Masked One, has begun to connect with the demigod Belial. You must prevent this from happening with your own, common weapons. Then release the phoenix as soon as Hokan has been forced back into his human form.
+
+--------------------------------------------------------------------------------
+String #35 (Length: 249, Keywords: sucht, darius)
+--------------------------------------------------------------------------------
+Darius hat herausgefunden, dass jemand die Magier des Zirkels wieder erweckt. Das Grab, das Ihr untersucht habt, war das der Zirkelmagierin Ianna. Darius ist mittlerweile nach Empyria weitergereist, um eine weise Frau zu den Ereignissen zu befragen.
+
+--------------------------------------------------------------------------------
+String #36 (Length: 248, Keywords: bring)
+--------------------------------------------------------------------------------
+One of Branningan's great armies is located in The Shiel and blocking the way to Wildland Pass. The army will attack Liannon in the next few days. A thrust to the East will open the way to Wildland Pass and bring freedom to the people of The Shiel.
+
+--------------------------------------------------------------------------------
+String #37 (Length: 248, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The attacks have been fended off. Now it is essential to annihilate the remaining troops of the enemies and to break through to the portal leading into the Greydusk Vale. Do not cross the portal, many undead myrmidons are waiting on the other side.
+
+--------------------------------------------------------------------------------
+String #38 (Length: 248, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Once the mighty fortress of the brazen falcons stood there. They watched over of the city of the Fial Darg, which sleeps beneath these lands under the spell of the gods. At least they did until the convocation. Who knows, what has become of them...
+
+--------------------------------------------------------------------------------
+String #39 (Length: 248, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Lucius, the masked one's assistant, has been kidnapped by goblins. He is being held captive in the camp up in the mountain. It looks like the masked one doesn't want to come anywhere near the Goblin's godly statue, so it's up to you to free Lucius.
+
+--------------------------------------------------------------------------------
+String #40 (Length: 248, Keywords: mission)
+--------------------------------------------------------------------------------
+However, because they were not from this world, he did not take their souls with him to Mor Duine and he did not grant them admission to the realms of the dead. Therefore, the souls of these barbarous creatures are still erring through these walls.
+
+--------------------------------------------------------------------------------
+String #41 (Length: 248, Keywords: question/exclamation, multi-sentence)
+--------------------------------------------------------------------------------
+I was showing it to my comrades and it suddenly slipped out of my hands! It rolled all the way down the slope, almost into the sea! And before I was able to do anything, one of those crawlers grabbed that shiny thing and fled into his cave with it!
+
+--------------------------------------------------------------------------------
+String #42 (Length: 247, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Die Angriffe sind abgewehrt. Nun gilt es, die restlichen Truppen der Feinde aufzureiben und bis zum Portal ins Grauschattental durchzubrechen. Das Portal sollte jedoch nicht durchquert werden, auf der anderen Seite warten zu viele untote Schergen.
+
+--------------------------------------------------------------------------------
+String #43 (Length: 247, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Just like the bow, the staff is a two-handed weapon. Using the left mouse button, you can cast the spell on the current target, and with the right button, you can use the staff as a melee weapon - it is, however, not as effective as other weapons.
+
+--------------------------------------------------------------------------------
+String #44 (Length: 247, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The leader of the bandits has fought his way upwards, through the dreary alleyways. He has no mercy for the player, and nobody would expect anything different. The most important thing a bandit can have, is respect. And this is gained in a battle.
+
+--------------------------------------------------------------------------------
+String #45 (Length: 247, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Blackblade un asesino sin conciencia que ofrece sus servicios al mejor postor. Sus aciertos y su falsedad son sus armas y su lealtad vale su peso en oro. La moral, la decencia y la clemencia son un escollo en su camino hacia la fortuna y el poder.
+
+--------------------------------------------------------------------------------
+String #46 (Length: 247, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+I took the Phoenix Stone out of the time portal. The Phoenix broke...and I fled. I wandered though distant countries, hoping that nobody would ever again strive after the power of the Phoenix! And I hoped that my days of battle had finally passed.
+
+--------------------------------------------------------------------------------
+String #47 (Length: 246, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Herger's helmet was amongst the loot of the little dragon. Thanen's wish has been fulfilled, his son avenged and now the helmet must be returend to Skeld as a sign. Either the helmet will be handed over to Joshua or handed directly to the Thanen.
+
+--------------------------------------------------------------------------------
+String #48 (Length: 246, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+They arose from their slumbers, and their raging shattered the face of the world. Only in those places where the godstones of Aonir stood - the blue obelisks - was anything preserved from the might of the star god to protect us from annihilation.
+
+--------------------------------------------------------------------------------
+String #49 (Length: 246, Keywords: quest)
+--------------------------------------------------------------------------------
+Quando hai selezionato il monumento, vedrai al di sotto dei numeri che indicano il limite della tua popolazione. Il numero superiore indica quanti lavoratori di questa razza hai attualmente, l'altro il numero massimo di lavoratori che puoi avere.
+
+--------------------------------------------------------------------------------
+String #50 (Length: 246, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Beyond that, Mulandir was the city of the Circle. From there it spun its strings on which the kings of the world danced like marionettes. And in the archives of the city they kept stacks of treasures and magical artifacts from all over the world.
+
+--------------------------------------------------------------------------------
+String #51 (Length: 246, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+A human gifted with the power of magic takes a long time to climb to the level of an arch magician. Many years of studies are necessary to master the arcane arts to the extent Cera does. Arch magicians often provide strong forces with her powers.
+
+--------------------------------------------------------------------------------
+String #52 (Length: 246, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Fastholme is being attacked. King Ragnar has asked you to help defend the city. Call on the workers and use the buildings in Fastholme in the defensive effort. Send in troops as soon as possible to the outpost at the foot of the great stone ramp.
+
+--------------------------------------------------------------------------------
+String #53 (Length: 246, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+(Tenth: The Hazims have attacked. I think they have surrounded the village...assumingly everyone there is dead by now. I will stay here where there is at least a bit of clear water! In any event, the people in the village do not need it anymore!)
+
+--------------------------------------------------------------------------------
+String #54 (Length: 245, Keywords: quest)
+--------------------------------------------------------------------------------
+Ho bisogno comunque di due tipi diversi di questa seta di ragno. Da una parte, della seta scura, del tipo lavorato dai grandi ragni delle rocce nelle montagne. Dall'altra, una seta chiara, come quella lavorata dai ragni fantasma delle Darklands.
+
+--------------------------------------------------------------------------------
+String #55 (Length: 245, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Brigor's fellows escaped with the sigils from Empyria to the South. Look for the sigils there, as soon as you've got them, put them into the bed stone in the bank. You should then open the door to the treasure room without setting off the alarm.
+
+--------------------------------------------------------------------------------
+String #56 (Length: 245, Keywords: collect)
+--------------------------------------------------------------------------------
+Hm, goblins are rare ... but, if you ask me, go and look for them in the western part of the City of Souls! It's very spooky there, but these strangers have collected all sorts of creatures from our world, maybe there's also a cobold among them!
+
+--------------------------------------------------------------------------------
+String #57 (Length: 244, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+One thing is for certain, though: it is these obelisks that fortify our world and have preserved us from the chaos of the elements. Only in those places where the obelisks once stood, has the land been spared from the raging of the Convocation.
+
+--------------------------------------------------------------------------------
+String #58 (Length: 244, Keywords: quest, collect, kill, defeat)
+--------------------------------------------------------------------------------
+Once you have collected a specific number of experience points, your avatar will move up one level, will become stronger and will be able to learn new skills. You receive experience points by defeating opponents and successfully solving quests.
+
+--------------------------------------------------------------------------------
+String #59 (Length: 244, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+By giving the Irfit Aria Crystals, he will receive light powers, if you give him hearts he will receive dark powers. After feeding him three pieces of one kind he will change into the respective form. Use mortars from Empyria to grind the food.
+
+--------------------------------------------------------------------------------
+String #60 (Length: 244, Keywords: question/exclamation, multi-sentence)
+--------------------------------------------------------------------------------
+I presume you will have to compensate the evil forces of the pentacle with your own life energy or the life energy of your people. Keep an eye on the pentacle and the direction from which the creatures are coming! That is the key to the riddle!
+
+--------------------------------------------------------------------------------
+String #61 (Length: 243, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+My dear sister, I am writing to you now that I have reached the end of my path. My husband desires neither me nor the wealth of our house. The pledge of the gods was the only thing that he lusted after so he could use it for his magical works.
+
+--------------------------------------------------------------------------------
+String #62 (Length: 243, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+You can combine combat units to form groups. To do this, select the units and click on one of the small buttons at the top of the screen in the middle, or hold down the CTRL key and select a number key from one to six for the respective group.
+
+--------------------------------------------------------------------------------
+String #63 (Length: 243, Keywords: return, defeat)
+--------------------------------------------------------------------------------
+You have started a new fight round; your opponents are awaitng you in the Colosseum Arena. Defeat them and then return to Zerbo to receive your reward. Do not leave the arena before you have defeated all opponents, or you will lose the battle.
+
+--------------------------------------------------------------------------------
+String #64 (Length: 242, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Per tagliare pietre seleziona alcuni lavoratori e clicca col pulsante destro su una risorsa per le pietre. Le risorse per le pietre sono blocchi di pietra di colore chiaro, poste verticalmente, da sole. Ne troverai alcune vicino al monumento.
+
+--------------------------------------------------------------------------------
+String #65 (Length: 242, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The Coldmark is an accursed land! Many years ago Skeld had a dispute with his brother Argard. The two brothers divided the land with one another. Argard, however, made a pact with an ancient evil one for the purpose of destroying his brother.
+
+--------------------------------------------------------------------------------
+String #66 (Length: 242, Keywords: quest)
+--------------------------------------------------------------------------------
+L'Ordine, hm? Era ora che la tua gente si facesse vedere da queste parti. Questi maledetti mercenari mi hanno rubato l'equipaggiamento. Per le gole ululanti di Bara Gor! Quella banda di felloni! Aspetta che riesca a mettergli le mani addosso!
+
+--------------------------------------------------------------------------------
+String #67 (Length: 242, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+I do, however, need two different kinds of this spider silk. On the one hand, some dark silk, the kind woven by large rock spiders in the mountains. On the other hand, a light silk, like the kind woven by the phantom spiders in the Darklands.
+
+--------------------------------------------------------------------------------
+String #68 (Length: 242, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+This is your rune-power. With every worker or hero you produce, you lose rune power. The less rune power you have, the slower the production progress of additional  workers and heroes. Your rune-power regenerates itself in the course of time.
+
+--------------------------------------------------------------------------------
+String #69 (Length: 242, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The phoenix stone is the legendary artifact that equals the power of a circle mage. It's power will be necessary to hold up the Dark One. Before the war, the phoenix was kept in the archives of Mulandir. That is where the search should begin.
+
+--------------------------------------------------------------------------------
+String #70 (Length: 242, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+bergabe des Kriecherfetischs an einen der drei Magier hat die anderen beiden in Zorn und Rage versetzt. Verteidigt den Magier, dem Ihr den Fetisch gabt. Sicherlich wird er sich erkenntlich zeigen, wenn Ihr ihm helft, seine Feinde zu besiegen.
+
+--------------------------------------------------------------------------------
+String #71 (Length: 241, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The border gates around the city have been closed, your armies have no chance of getting in. The gates can only be opened from the inside, from the city side. You must enter the city with the hidden portal and open the gates from the inside.
+
+--------------------------------------------------------------------------------
+String #72 (Length: 240, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Los ataques han sido rechazados. Ahora es esencial aniquilar las tropas restantes de los enemigos y abrir el camino hacia el portal que lleva al Valle de la Penumbra. No cruces el portal: al otro lado hay muchos muertos vivientes esperando.
+
+--------------------------------------------------------------------------------
+String #73 (Length: 240, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Miria ha bisogno di tre criniere di Uomini Bestia per confezionare una bella tunica con la pelle dello Squartatore. Puoi trovare gli Uomini Bestia in molti posti, specialmente nelle Montagne Windwall meridionali e sulla Montagna Stoneblade.
+
+--------------------------------------------------------------------------------
+String #74 (Length: 240, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+While he was making them, he didn't distinguish between the nations of the light and the darkness, and just as little between nations and creatures. It was his wish for the world to become one again. This is why we need the gate fortresses.
+
+--------------------------------------------------------------------------------
+String #75 (Length: 240, Keywords: bringt, bring)
+--------------------------------------------------------------------------------
+Environment Mapping steuert die Spiegelung der Umgebung. Dies hat vor allem auf die Darstellung des Wassers Auswirkungen. Ohne Envrionment Mapping spiegelt das Wasser keine Umgebung, was allerdings auch einen Geschwindigkeitsvorteil bringt.
+
+--------------------------------------------------------------------------------
+String #76 (Length: 240, Keywords: question/exclamation, multi-sentence)
+--------------------------------------------------------------------------------
+Yes, we were attacked! But now things have calmed down, except for something out there that keeps howling and crying, as if there were no tomorrow! In the meanwhile I almost wish we were attacked, only to not have to listen to that moaning!
+
+--------------------------------------------------------------------------------
+String #77 (Length: 239, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The moment you occupy a worker monument, things get serious. Normally, when enemies discover your newly established settlements, they will do all they can to destroy you as quickly as possible. On this map, however, you can take your time.
+
+--------------------------------------------------------------------------------
+String #78 (Length: 239, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+When you send a worker to a building with the right mouse button, you can fill free jobs. This way, workers who, for example, chop down trees, will automatically look for free jobs in woodcutter houses and start doing them in a short time.
+
+--------------------------------------------------------------------------------
+String #79 (Length: 238, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Borosh is a fighter from the cold nations of the west. He is used to the cold winter days back in his homestead and he faces every enemy with firmness and courage to fight. Men from the west go out into the world to attain fame and honor.
+
+--------------------------------------------------------------------------------
+String #80 (Length: 238, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Keshars family is eminently respectable. Long before he was born, it was clear that he would once lead an army in battle. Thus, they have been preparing him for this battle since the days of his short childhood - they  expect much of him.
+
+--------------------------------------------------------------------------------
+String #81 (Length: 238, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+He's looking for something! Something that was stolen from his palace and which is of incalculable value for him. The mask of Belial. It is the key to his power and his protection against the vengeance of the souls he has been afflicting.
+
+--------------------------------------------------------------------------------
+String #82 (Length: 238, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+In order to reign over the undead you must sell your soul to Nor. The Forgotten One enjoys lending the power of death to a willing mortal who is craving for power, more than anything. This is how Ktena became a feared warrior and captain.
+
+--------------------------------------------------------------------------------
+String #83 (Length: 237, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The way to the east is being guarded by Brannigan's armies. In the North and the South, there are large camps, from where the troops control the land. It would be better to destroy these camps, before daring any breakthrough to the East.
+
+--------------------------------------------------------------------------------
+String #84 (Length: 237, Keywords: question/exclamation, multi-sentence)
+--------------------------------------------------------------------------------
+To become an acolythe, a human must literally walk through an inferno. Only he, who masters the flames, can serve the Firegod. And it is not uncommon that the ones who have suffered such agony and are chosen by Zarach, loses their minds!
+
+--------------------------------------------------------------------------------
+String #85 (Length: 237, Keywords: quest)
+--------------------------------------------------------------------------------
+If someone offers you a dialogue, a symbol will float above the character. If this person is relevant to the main quest, it will be an exclamation mark. If the person is only relevant for optional side quests, it will be a question mark.
+
+--------------------------------------------------------------------------------
+String #86 (Length: 236, Keywords: talk)
+--------------------------------------------------------------------------------
+By using the mouse wheel, you can switch through all the weapons in your inventory. Or you can open your inventory, by pressing I, where you are able to change your weapons or armour. You cannot open your inventory while we are talking.
+
+--------------------------------------------------------------------------------
+String #87 (Length: 236, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Dunham is protected by the Kithar elite.The rangers only have one chance against them, when the Kithars are weakened. You must poison the Kithars' water source in order to weaken them. Take the mountain path in order make it to the West
+
+--------------------------------------------------------------------------------
+String #88 (Length: 236, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Shadowy beings are surging from the sword and the guard of the blade needs your help to repel these beings. The shadows are invisible - look for something or someone who can help to make them visible, so that you can fight against them.
+
+--------------------------------------------------------------------------------
+String #89 (Length: 236, Keywords: return)
+--------------------------------------------------------------------------------
+The treasure has been found. Obviously Flink's story about the 15 guards wasn't quite true. Maybe you don't want to return the treasure to him after all. He's brought you into more than one dangerous situation. Go visit him in Tirganach
+
+--------------------------------------------------------------------------------
+String #90 (Length: 235, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Kraga, il gigante delle Montagne di Stoneblade, ha litigato con suo fratello Braga che ha rubato la sua gemma. Kraga ha giurato di proteggere la caverna del tesoro e di non lasciare la sua posizione per andare in cerca di suo fratello.
+
+--------------------------------------------------------------------------------
+String #91 (Length: 234, Keywords: kill)
+--------------------------------------------------------------------------------
+And when the hour of the Convocation came, they invoked the primeval powers with all their magical skills - competing for the prize of great power. But nobody could muster enough strength, and the primeval elements got out of control.
+
+--------------------------------------------------------------------------------
+String #92 (Length: 234, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+E quando venne l'ora della Convocazione, invocarono i poteri primordiali con tutti i loro poteri magici - competendo per il premio dell'immenso potere. Ma nessuno fu abbastanza forte, e persero il controllo sugli elementi primordiali.
+
+--------------------------------------------------------------------------------
+String #93 (Length: 234, Keywords: find)
+--------------------------------------------------------------------------------
+The darkelves were once the Lords of Tirganach. They constructed the gates that now seperate Tirganach from the firelands. Perhaps you can find a way to open these gates in one of their old graves. Start your search north of the town.
+
+--------------------------------------------------------------------------------
+String #94 (Length: 234, Keywords: retrieve)
+--------------------------------------------------------------------------------
+According to the traditions of the bone forgers, the apprentice must form his masterpiece out of the bones of his master. Now it's up to you to follow Ashgork and retrieve his bones, otherwise you will never become a true bone forger.
+
+--------------------------------------------------------------------------------
+String #95 (Length: 233, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+I mercenari, i Lupi di Briar, hanno derubato gli abitanti del Godwall. Cercano un artefatto dei tempi del Cerchio, e sono al servizio di un illusionista di nome Mechlan. Mentre svolgono il loro compito derubano i villaggi e la gente.
+
+--------------------------------------------------------------------------------
+String #96 (Length: 233, Keywords: question/exclamation, multi-sentence)
+--------------------------------------------------------------------------------
+No! It was just a simple pewter ring. Sometimes people's faith is stronger than any magic. Do you understand? The people simply wanted to believe that Lea was blessed. They themselves created that legend - with their own imagination.
+
+--------------------------------------------------------------------------------
+String #97 (Length: 233, Keywords: question/exclamation)
+--------------------------------------------------------------------------------
+His brothers put down the wolflings, but more and more kept pouring out of the caves, and the headless giant kept right on following the dwarf. Then Windjalf took his hammer and slammed it full strength against the walls of the cave!
+
+--------------------------------------------------------------------------------
+String #98 (Length: 233, Keywords: question/exclamation, multi-sentence)
+--------------------------------------------------------------------------------
+I would have freed him! I would have sneaked up on his tormentor like a nightmare, oh yes; nobody dares to hold my brother captive! However, Ereon has been outcast, and the rules forbid me to intervene! The rules! These damned rules!
+
+--------------------------------------------------------------------------------
+String #99 (Length: 233, Keywords: question/exclamation, multi-sentence)
+--------------------------------------------------------------------------------
+You have made a wise choice, friend! The deceiver is dead ... However, the gate to the world of the Shadows has been opened! They will soon be here! And one of the guards will betray the others! The prophecy has already been written!
+
+--------------------------------------------------------------------------------
+String #100 (Length: 233, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+So, the gods called the five most beautiful princesses of the young folks, so Utrur could chose one of them. And Utrur believed that if he gave the women enough jewels and gold from the depths of the earth, he could win their hearts.
+
+--------------------------------------------------------------------------------
+String #101 (Length: 232, Keywords: talk)
+--------------------------------------------------------------------------------
+The dwarves are enranged and refuse to give any kind of help. Skarvig Ironbeard is one of the more sensible dwarves and maybe it will be possible to talk to him. He is living in the dwarf city of Windholme in the Southern Windwalls.
+
+--------------------------------------------------------------------------------
+String #102 (Length: 232, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Ihr Avatar kann sich mit diesem Seelenfels verbinden und ihn so zu seinem Auferstehungspunkt machen. Stirbt der Avatar, dann wird er an diesem Seelenfels neu erscheinen. Ihr Avatar kann auch zwischen aktivierten Seelenfelsen reisen.
+
+--------------------------------------------------------------------------------
+String #103 (Length: 232, Keywords: question/exclamation, multi-sentence)
+--------------------------------------------------------------------------------
+I can't begin to describe them... But one night she stole a lock of my hair. Since then we have been bound together in a pact. Her hate burns in my breast! Men are rivals, women challenge her beauty...they must all die, all of them!
+
+--------------------------------------------------------------------------------
+String #104 (Length: 232, Keywords: darius)
+--------------------------------------------------------------------------------
+Darius found out that someone has awakened the Circle mages. The grave that you've examined was the grave of Ianna, a Circle Mage. In the meantime, Darius has continued his journey to Empyria to ask a wise woman about the incidents.
+
+--------------------------------------------------------------------------------
+String #105 (Length: 232, Keywords: question/exclamation, multi-sentence)
+--------------------------------------------------------------------------------
+I don't know, that is what is driving me so crazy! But my Sahra rarely ever look me in the eyes anymore...and in the evenings she always retreats to her room to sew. Sometimes I hear her laughing, as if she were joking with someone!
+
+--------------------------------------------------------------------------------
+String #106 (Length: 232, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Aonir spoke: Ulm, you shall be the keeper of diversity and change. Because nothing shall last forever and change will determine the countenance of this world. Your power may give colors to the flowers and diversity to the creatures.
+
+--------------------------------------------------------------------------------
+String #107 (Length: 231, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+La commerciante libera Shadira Sundancer sta cercando la polvere di cristallo che chiama Ariafrost nelle Montagne Stormcleaver. Pare che sia di grandissimo valore e che si possa trovare da qualche parte nelle Montagne Stormcleaver.
+
+--------------------------------------------------------------------------------
+String #108 (Length: 231, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Das Sternenblut des Gottes fiel auf Eo herab und bildete jene kristallenen Obelisken. Damit wurde unsere Welt zu einem Teil von Aonir und seiner Macht. Andere wiederum sagen, das jemand sie gebaut ahben muss, vielleicht die Former.
+
+--------------------------------------------------------------------------------
+String #109 (Length: 231, Keywords: quest)
+--------------------------------------------------------------------------------
+Le orde goblin di Brannigan, quella masnada miserabile! Questa una volta era una zona tranquilla - da qui per tutta la strada fino al passo di Wildland! Ma adesso sembra che ci sia di nuovo la guerra! Di sicuro fa male agli affari.
+
+--------------------------------------------------------------------------------
+String #110 (Length: 231, Keywords: kill)
+--------------------------------------------------------------------------------
+Uthar Greifenstahl has come to kill Ismail, Hokan's invincible apprentice. Uthar is the only person who can kill Ismail, but he was outwitted on his way here, and his weapon, armor and his faithful griffin have been taken from him.
+
+--------------------------------------------------------------------------------
+String #111 (Length: 231, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Generally, it is more comfortable to used convenient function for standard formations. As soon as you have formed a formation, three additional symbols appear for the standard formations: circular, semi-circular and rank formation.
+
+--------------------------------------------------------------------------------
+String #112 (Length: 231, Keywords: find)
+--------------------------------------------------------------------------------
+Attack the city of Mirraw Thur together with the resistance and the rune warriors. The maine enclave of ice elves is in the north of the city - you should be able to find the key to the prison and the commanders of the elves there.
+
+--------------------------------------------------------------------------------
+String #113 (Length: 231, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Gorg came up with a trick and invited the dwarves to a celebration of the solstice in his cave in the eternal ice. While the dwarves were celebrating and getting drunk, suddenly Gorg's loyal wolflings jumped up and pounced on them.
+
+--------------------------------------------------------------------------------
+String #114 (Length: 231, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Unlike you had first expected, your enemies in Mirraw Thur are not the Orcs, but instead the ice elves from Tirganach. Their units are partolling the East side of the island. Avoid them and advance to the portal in the echo swamps.
+
+--------------------------------------------------------------------------------
+String #115 (Length: 231, Keywords: darius)
+--------------------------------------------------------------------------------
+I know you are seeking peace. But Darius would never have called us if it were not important! Come with me, my knights have set up camp in an abandoned village. We are in safety there. The village lies to the south, down that path!
+
+--------------------------------------------------------------------------------
+String #116 (Length: 231, Keywords: findet, find)
+--------------------------------------------------------------------------------
+(Eines ist ein Herz aus Bergkristall, das andere ist ein Herz aus Onyx. Daneben findet Ihr Schriftzeichen. Sie besagen, dass der Golem durch den Bergkristall die Kraft der Erdmagie und durch den Onyx Schutz gegen schwarze Magie erh
+
+--------------------------------------------------------------------------------
+String #117 (Length: 231, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+(Dritter Sudani: Irgendetwas steckt in der Quelle fest, aber ich komme nicht heran! Ich glaube, dass dieser Gegenstand das Gift ins Wasser streut. Ich werde mir einen Nagelstock bauen, vielleicht bekomme ich das Ding damit heraus.)
+
+--------------------------------------------------------------------------------
+String #118 (Length: 231, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Ich habe sie meinen Kameraden gezeigt und da ist sie mir entglitten! Sie rollte hier den Abhang hinunter zum See! Noch bevor ich etwas machen konnte, hatte sich einer der Kriecher das Glitzerding geschnappt und ist damit in seine H
+
+--------------------------------------------------------------------------------
+String #119 (Length: 230, Keywords: go to)
+--------------------------------------------------------------------------------
+In Greydusk Vale, on the border with the Darklands, stands the Fortress of the Order. There dwells the Knight Urias, whose knowledge of Hokan may be pivotal.It is time to go to the stronghold and break the siege that encircles it.
+
+--------------------------------------------------------------------------------
+String #120 (Length: 230, Keywords: question/exclamation)
+--------------------------------------------------------------------------------
+The second curse was intended for Utrurs' younger brother, Surt, who had joined forces with the Ice Giant Gorg, in order to overturn Utrur as the Colosseum guard and get their hands on the lava ruby, Utrurs most precious treasure!
+
+--------------------------------------------------------------------------------
+String #121 (Length: 229, Keywords: find)
+--------------------------------------------------------------------------------
+In the lower left, you will find the overview map. Black areas have not yet been explored and are automatically uncovered when you approach them with units. Your avatar has a greater view radius, so he will uncover a larger area.
+
+--------------------------------------------------------------------------------
+String #122 (Length: 229, Keywords: bring)
+--------------------------------------------------------------------------------
+And don't try to destroy their camp. That would be senseless. The magic of these old ruins is so strong that it keeps bringing forth new undead. Only when their commander Zihar has been put out of the way will the terror be over.
+
+--------------------------------------------------------------------------------
+String #123 (Length: 229, Keywords: bring, go to)
+--------------------------------------------------------------------------------
+Jarod has high debts from betting that he owes his brother Bostos. Go to Bostos and tell him you're ready to fight for Jarod and become the champion. After you've won, get the voucher from Bostos and bring it to Jarod at the gate
+
+--------------------------------------------------------------------------------
+String #124 (Length: 229, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+(Third Sudani: something is stuck inside the well, but I cannot reach it! I think this object is pouring the poison into the water. I am going to build myself a nail-stick, perhaps I can get that thing out of the well with that.)
+
+--------------------------------------------------------------------------------
+String #125 (Length: 229, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+(Zehnter: Die Hazim haben angegriffen, ich glaube, sie haben das Dorf umzingelt ... wahrscheinlich sind dort alle tot. Ich bleibe hier, wo es wenigstens noch etwas reines Wasser gibt! Die im Dorf brauchen es sowieso nicht mehr!.)
+
+--------------------------------------------------------------------------------
+String #126 (Length: 228, Keywords: return)
+--------------------------------------------------------------------------------
+Tynar reckons that the guards on the hills near the monuments will inform the main army. The chain of guards must be cut off. The guards must be eliminated individually. An alarm would be deadly. Return to Lord Tynar afterwards.
+
+--------------------------------------------------------------------------------
+String #127 (Length: 228, Keywords: kill)
+--------------------------------------------------------------------------------
+Here you can select a predefined character for playing. These characters have been set up with stats and skills to be optimized for a certain style of play. They can be advanced on that scheme automatically through later levels.
+
+--------------------------------------------------------------------------------
+String #128 (Length: 228, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Rigour has enchanted your ring and now it offers a view into the world of the shadows. From now on, the shadows will be visible. A good place to start the search would be the Windwalls, the place where you met the first of them.
+
+--------------------------------------------------------------------------------
+String #129 (Length: 228, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Credo che quattro nostri gruppi si siano messi in salvo nella foresta. Non so dove gli altri siano, ma prego per le loro vite. Molte di noi erano troppo esauste per continuare a combattere, ma le Eloni non sono ancora sconfitte.
+
+--------------------------------------------------------------------------------
+String #130 (Length: 228, Keywords: find)
+--------------------------------------------------------------------------------
+And should you ever receive this letter, then warn Amra! Send a message to Tyrgar - old comrades in arms can always find one another. After all, who knows when my husband will track him down. May he have a better fate than mine.
+
+--------------------------------------------------------------------------------
+String #131 (Length: 228, Keywords: question/exclamation, multi-sentence)
+--------------------------------------------------------------------------------
+Skarvig says that the Earthblade, which formed the basis for the Swords of Power, was created by beings on Stoneblade Mountain. He says that these beings are known as Earth Elementals. Could it be that there are still some left?
+
+--------------------------------------------------------------------------------
+String #132 (Length: 228, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+When you have selected the monument, you will see numbers indicating your population limitations below. The upper number indicates how many workers of this race you currently have, and the maximum number you are allowed to have.
+
+--------------------------------------------------------------------------------
+String #133 (Length: 228, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+When you reach 'berserk', your avatar causes an enormous damage to the enemy for a short period of time. This can be very helpful in an emergency situation, although you cannot apply this attack again, until after a few minutes.
+
+--------------------------------------------------------------------------------
+String #134 (Length: 228, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+As far as I know, he is looking for a piece of glass artwork made by the formers, a piece that was once stored in the archives of the Circle. It is a likeness of such perfection that everyone who gazes upon it drowns in rapture.
+
+--------------------------------------------------------------------------------
+String #135 (Length: 227, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+La Magia della Mente aggressiva danneggia l'intelletto e lo spirito di un nemico. Comprende incantesimi che ipnotizzano i nemici, che li confondono in modo che non riconoscano gli amici dai nemici, o che causano danni da shock.
+
+--------------------------------------------------------------------------------
+String #136 (Length: 227, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The areana is liberated. Now the attack against the stronghold of the undead and their highest commander Korshar may follow. He is waiting for his death at the Howling Mounds. The safest portal to that location is in the Arena.
+
+--------------------------------------------------------------------------------
+String #137 (Length: 227, Keywords: sprecht, rohen)
+--------------------------------------------------------------------------------
+Rohen ist auf dem Weg zum Wildland-Pass. Sprecht mit Celen Fell, Kommandantin der Wachen. Ihr werdet ihre Erlaubnis brauchen, wenn ihr die Torfeste nach Eloni durchqueren wollt. Dies ist momentan der einzige Weg, der zum Pass f
+
+--------------------------------------------------------------------------------
+String #138 (Length: 227, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Blackblade is the murderer without a conscience, who offers his services to the highest-bidder. Aptness and deceitfulness are his weapons, gold his virtue. Morals, decency or even mercy are only in his way to fortune and power.
+
+--------------------------------------------------------------------------------
+String #139 (Length: 227, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Today, Nortander is more like a kind of loose confederation of the four surviving ruling houses. The realm of the High Mark, which lies to the south of the Darklands, has closed its borders. We don't know what's going on there.
+
+--------------------------------------------------------------------------------
+String #140 (Length: 227, Keywords: talk)
+--------------------------------------------------------------------------------
+You'll need dark elven plans and runes in order to gain a foothold in the Godmark,. Craig believes that these can be found in the ice region. You should talk to him again later to ensure that you have found everything you need.
+
+--------------------------------------------------------------------------------
+String #141 (Length: 227, Keywords: rohen)
+--------------------------------------------------------------------------------
+The Circlemage Rohen has arrived with his Undead Guard. It seems he is not yet in possession of his full powers, or he is sparing you for some reason. In any event, it seems he is not going to use his Eternal Flame against you.
+
+--------------------------------------------------------------------------------
+String #142 (Length: 227, Keywords: defeat)
+--------------------------------------------------------------------------------
+Laurin has shown up. Gurim has set off to meet him. Defeat Laurin before he can defeat Gurim a second time. As soon as you notice that he wants to multiply himself, quickly touch him with one of his dragon stones to prevent it.
+
+--------------------------------------------------------------------------------
+String #143 (Length: 227, Keywords: question/exclamation)
+--------------------------------------------------------------------------------
+This promise protected our kingdom for many generations. And even when turmoil and war raged, the horns of the Guards called us together - Hazim, Kathai and the Emperor - and we stood together against the terrors of the Jungle!
+
+--------------------------------------------------------------------------------
+String #144 (Length: 227, Keywords: rohen)
+--------------------------------------------------------------------------------
+The members of Order of Dawn are the only ones who know the portal spell; they have learned it from Rohen. However, neither torture nor magic will lure the spell from the mouth of a Knight of Order. Rohen has made sure of that!
+
+--------------------------------------------------------------------------------
+String #145 (Length: 226, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Shan Muir does not want to give the Zirfar potion to you, he says that it may harm the sick hermit. Decide if you still want to look for it or would rather accept the pain alleviating drink which thry have offered you instead.
+
+--------------------------------------------------------------------------------
+String #146 (Length: 226, Keywords: question/exclamation, multi-sentence)
+--------------------------------------------------------------------------------
+Das Sternenblut des Gottes fiel auf Eo herab und bildete die kristallenen Obelisken! Damit wurde unsere Welt eins mit Aonir und seiner Macht! Andere wiederum behaupten, dass jemand sie gebaut haben muss, vielleicht die Former!
+
+--------------------------------------------------------------------------------
+String #147 (Length: 226, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The fortress was destroyed in the convocation war and is now an eerie place. It was from here that the hordes of the undead came pouring into the country. For the only portal to Whisper, the city of the dead, is located there.
+
+--------------------------------------------------------------------------------
+String #148 (Length: 226, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The undead have been besieging us for a long time. As long as they remain outside the walls, we can hold out. But a few days ago they managed to get into the fortress through one of the secret passageways. It was horrifying...
+
+--------------------------------------------------------------------------------
+String #149 (Length: 226, Keywords: quest, mission)
+--------------------------------------------------------------------------------
+Puoi riconoscere i personaggi importanti per la missione principale dal grande punto esclamativo che hanno sulla testa. Dovrai parlare con questi personaggi per riuscire a portare a termine la missione principale con successo.
+
+--------------------------------------------------------------------------------
+String #150 (Length: 226, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+If you want to select several units simultaneously, you can hold down the left mouse button in the game world and drag a frame around both characters. As soon as you release the left mouse button, the selection is established.
+
+--------------------------------------------------------------------------------
+String #151 (Length: 226, Keywords: quest)
+--------------------------------------------------------------------------------
+Ora puoi lasciare questa mappa attraverso il portale magico, o seguire il sentiero verso sud, dove altri avversari stanno aspettando con alcuni suggerimenti utili che comunque non ti servono necessariamente per le prime mappe.
+
+--------------------------------------------------------------------------------
+String #152 (Length: 226, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+To open your inventory, click on the backpack symbol in the action bar, which can be found on the bottom of the screen. A window will open and on the left you can select the different categories of your inventory. Click on the
+
+--------------------------------------------------------------------------------
+String #153 (Length: 226, Keywords: quest)
+--------------------------------------------------------------------------------
+Una configurazione non corretta o un driver sbagliato per le periferiche di controllo possono causare ritardi nel gioco. Puoi evitarlo attivando Evita ritardi input. Attivando questa funzione possono verificarsi rallentamenti.
+
+--------------------------------------------------------------------------------
+String #154 (Length: 226, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+This precipitated an uncertain peace. To mediate the power struggles, the Dracon at the time came up with the cunning idea of the three keys. This way the  lords of the three cities could only enter the interior city together.
+
+--------------------------------------------------------------------------------
+String #155 (Length: 226, Keywords: find)
+--------------------------------------------------------------------------------
+The Darkwind Mountains can only be crossed through the darkwind keep. But the Undead have locked up the entrance. the Uru sent you through the Clockwork Crypts because there, you'll find a secret entrance to the darkwind keep.
+
+--------------------------------------------------------------------------------
+String #156 (Length: 225, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The mercenaries of the briar wolves have robbed the settlers on the Godwall. They are searching for an artifact from the days of the Circle, serving a illusionist named Mechlan. In doing so, the rob the villages and the folk.
+
+--------------------------------------------------------------------------------
+String #157 (Length: 225, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+You can select your avatar at any time by clicking on the portrait button in the upper left corner of the screen. By clicking on the portrait button with the right mouse button, the view will be moved to the appropriate unit.
+
+--------------------------------------------------------------------------------
+String #158 (Length: 225, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+nigin Cenwen aus den Klauen des Fial Darg zu befreien, ist ein Vormarsch in die Lande des roten Imperiums. Die Armee von Tirganach ist nicht stark genug, die Horden des Feuers zu schlagen, aber vielleicht gibt es andere Wege.
+
+--------------------------------------------------------------------------------
+String #159 (Length: 225, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Las sombras se manifiestan en cristales oscuros extendidos por la tierra. Extingue el fuego de hechizo de la guardia. Consigue una llama de Zarach en el antiguo templo y vuelve a encender el fuego de hechizo en los cristales.
+
+--------------------------------------------------------------------------------
+String #160 (Length: 225, Keywords: find, bring)
+--------------------------------------------------------------------------------
+I must find my father; I must bring him the Sigil of Norcaine! Perhaps he can open the eyes of our folk on time! Farewell, messenger, take this ring, it shall protect you during the times that are bound to come. Wish us luck!
+
+--------------------------------------------------------------------------------
+String #161 (Length: 224, Keywords: find)
+--------------------------------------------------------------------------------
+The House of Utran in the Shiel fell through the hands of a traitor. He has kidnapped Lord Tynar's wife this night an stolen the family banner. Maybe one can find a clue among Brannigan's troops as to where he has taken her.
+
+--------------------------------------------------------------------------------
+String #162 (Length: 224, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Cassius Demer, one of Flink's 'business aquaintances', is missing. Flink suspects he may be in the Darklands, but doesn't want to go looking for him in the current circumstances. He is, however, grateful for news of Cassius.
+
+--------------------------------------------------------------------------------
+String #163 (Length: 224, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Ero di passaggio solo per raccogliere le ultime cose che mi servivano per il mio incantesimo quando le orde dell'est sono calate su di noi come un'onda di marea. Hanno bruciato la cittadella e ucciso molte delle mie sorelle.
+
+--------------------------------------------------------------------------------
+String #164 (Length: 224, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+una terra maledetta! Molti anni fa, Skeld ebbe una discussione con suo fratello Argard. I due fratelli si divisero la terra. Argard, comunque, strinse un patto con un antico demone, prefiggendosi di distruggere suo fratello.
+
+--------------------------------------------------------------------------------
+String #165 (Length: 224, Keywords: deliver)
+--------------------------------------------------------------------------------
+Is assigned with 1 worker. Receives deliveries from nearby hunters, fishers and breeders and doubles the yield of food production. Gives units the possibility to regenerate their Mana-reserves and their health automatically.
+
+--------------------------------------------------------------------------------
+String #166 (Length: 224, Keywords: collect, deliver)
+--------------------------------------------------------------------------------
+Is assigned with 1 worker. Receives deliveries from nearby corpse collectors and hunters and doubles the yield of food production. Gives units the possibility to regenerate their Mana-reserves and their health automatically.
+
+--------------------------------------------------------------------------------
+String #167 (Length: 224, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+However, these servants cost the mage a certain amount of Mana as time passes, which leads to a slower regeneration of Mana, or even a constant loss of Mana. When the mage has lost all of his Mana reserves, his servant dies.
+
+--------------------------------------------------------------------------------
+String #168 (Length: 224, Keywords: find)
+--------------------------------------------------------------------------------
+This runestone has bound to the essence of an orc shaman. However, the masked one must awaken it before the orc can be called. If you cannot find the masked one in the echo swamps, then he probably travelled on to Tirganach.
+
+--------------------------------------------------------------------------------
+String #169 (Length: 224, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+This character is well versed in all forms of Mindmagic. He can burn the spirit of his enemies, force his will onto them or rob them of their magical powers. He also possesses healing powers, though they are not very strong.
+
+--------------------------------------------------------------------------------
+String #170 (Length: 223, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+controllata dagli eserciti di Brannigan. Nel nord e nel sud ci sono grandi accampamenti da cui le truppe controllano i territori. Sarebbe meglio distruggere quei campi, prima di qualunque tentativo di sfondamento verso est.
+
+--------------------------------------------------------------------------------
+String #171 (Length: 223, Keywords: sammelt)
+--------------------------------------------------------------------------------
+Also schuf der Zirkel Euch! Er schmiedete Eure Seelen, Eure Lebenskraft an die Runen und sicherte sich somit Eure Treue. Und jede Erfahrung, die Ihr in endlosen Kriegen sammelt, bleibt in Euch erhalten! Eine perfekte Waffe!
+
+--------------------------------------------------------------------------------
+String #172 (Length: 223, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Mientras los estaba creando no hizo diferencias entre las naciones de la luz y de la oscuridad, ni entre naciones y criaturas. Su gran deseo era que el mundo volviera a ser uno. Por eso necesitamos las puertas fortificadas.
+
+--------------------------------------------------------------------------------
+String #173 (Length: 223, Keywords: bring, return)
+--------------------------------------------------------------------------------
+Then you're even more foolish than you look. Beat the undead in one battle, and they just return a hundredfold stronger! They bring death, and death nourishes them. The day will come when they will have eliminated all life.
+
+--------------------------------------------------------------------------------
+String #174 (Length: 223, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Molto bene. Puoi muovere la visuale sia con le frecce direzionali sia con il mouse, tenendo premuto il tasto destro. Puoi anche spostare la visuale portando il puntatore del mouse verso il lato corrispondente dello schermo.
+
+--------------------------------------------------------------------------------
+String #175 (Length: 223, Keywords: question/exclamation, multi-sentence)
+--------------------------------------------------------------------------------
+Then I heard a voice: whoever breaks the seals of the beast will be inflicted with its curse. Restless and bloodthirsty he will then wander about. Cursed by the darkness, he will no nothing more apart from the eternal hunt!
+
+--------------------------------------------------------------------------------
+String #176 (Length: 223, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The only way to free Queen Cenwen from the claws of the Fial Darg is to advance into the land of the Crimson Empire. The army of Tirganach is not strong enough to tackle the hordes of fire, but perhaps there is another way.
+
+--------------------------------------------------------------------------------
+String #177 (Length: 223, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Flink McWinter is looking for a legendary land that is supposedly called Tiondria. Actually, to be more specific, he is looking for treasures once left in Tiondria, especially the legendary treasure of the dwarf, Farnhardt.
+
+--------------------------------------------------------------------------------
+String #178 (Length: 223, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+They were a magical order, one of the largest in the empire. While the Emperor's troops kept watch along the Darkwind Mountains, the Zerbites searched their own fortresses for ways to ward off the dark forces of the Jungle.
+
+--------------------------------------------------------------------------------
+String #179 (Length: 222, Keywords: find)
+--------------------------------------------------------------------------------
+The order warrior Urias knows more about Hokan and his myrmidons. He commands the outposts of the order in the Greydusk Vale, which got overrun by the Undead. There must be a way to it, to find out if Urias is still alive.
+
+--------------------------------------------------------------------------------
+String #180 (Length: 222, Keywords: quest)
+--------------------------------------------------------------------------------
+l'altro, guerriero runico dalla testa calda! Sono il custode di queste magnifiche creature. La guerra mi ha costretto ad andarmene dal mio nascondiglio nelle montagne, ma quando le tempeste della guerra saranno passate sar
+
+--------------------------------------------------------------------------------
+String #181 (Length: 222, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+They say I'm a murderer. Perhaps I am, but I didn't do it voluntarily. Once, I fell under the spell of a dryad, a horrible enchantment...magnificently beautiful...and yet cold and consuming like frost. She gave me hours...
+
+--------------------------------------------------------------------------------
+String #182 (Length: 222, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Gli Elfi oscuri, un tempo signori di Tirganach, costruirono le porte che separano Tirganach dalle terre infuocate. Forse in una delle loro vecchie tombe troverai il modo per aprirle. Inizia la tua ricerca a nord della citt
+
+--------------------------------------------------------------------------------
+String #183 (Length: 222, Keywords: find, return)
+--------------------------------------------------------------------------------
+The sword is in your hands, you're now ready to face the Fial Darg - even if you're not quite sure how high the price you're paying is going to be. Return to the burning city, where you will find the portal into the abyss.
+
+--------------------------------------------------------------------------------
+String #184 (Length: 222, Keywords: question/exclamation)
+--------------------------------------------------------------------------------
+For quite a while I fled from their enragement, wandering throughout the world. Until I started to feel the Circle awakening and I decided to act once again, where my brothers and sisters would only stand around and watch!
+
+--------------------------------------------------------------------------------
+String #185 (Length: 221, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Out of sheer cowardliness Joshua, son of Jonir,  has left his blood brother Herger dying in the Coldmark. The dwarves are enraged. Joshua shall make the journey for a second time and avenge the death of his dwarf-brother.
+
+--------------------------------------------------------------------------------
+String #186 (Length: 221, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Korshar comanda gli eserciti dall'antica fortezza nelle Howling Mounds. Da qui, controlla anche l'unica strada per Whisper, dove si trova il sepolcro di Hokan. La sconfitta di Korshar significherebbe la fine della guerra.
+
+--------------------------------------------------------------------------------
+String #187 (Length: 221, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+With the help of the abiders he has called upon, the commander is unconquerable. He seems to be calling them from other locations on the island when he is attacked. The abiders must be eliminated befor a battle can begin.
+
+--------------------------------------------------------------------------------
+String #188 (Length: 221, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+The Phoenix Stone from the guard was one of Mechlan's illusions, just like the guard himself. Mechlan has fled to the Northeast of Mulandir, with the real phoenix in his possession. It can only be taken from him by force.
+
+--------------------------------------------------------------------------------
+String #189 (Length: 221, Keywords: uram)
+--------------------------------------------------------------------------------
+Im Konvokationskrieg war dies die Grenze zwischen den Landen Hokans und Urams, die in erbitterter Feindschaft lagen. Nun ist es eine der wenigen Stellen, an denen aus dem Fels noch Wasser austritt und ein wenig Ackerbau m
+
+--------------------------------------------------------------------------------
+String #190 (Length: 221, Keywords: uram)
+--------------------------------------------------------------------------------
+Im Konvokationskrieg war dies die Grenze zwischen den Landen Hokans und Urams, die in erbitterter Feindschaft lagen. Nun ist es eine der wenigen Stellen, an denen aus dem Fels noch Wasser austritt udn ein wenig Ackerbau m
+
+--------------------------------------------------------------------------------
+String #191 (Length: 221, Keywords: defeat)
+--------------------------------------------------------------------------------
+A mighty army blocks the way to Widland Pass. You have no hope of overpowering them. The dryads, powerful tree spirits from a nearby grove, could defeat this army for you, but you will need to sacrifice 1000 Lenya plants.
+
+--------------------------------------------------------------------------------
+String #192 (Length: 221, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Neither nor, hot-blooded rune warrior! I am the keeper of these magnificent creatures. The war drove me out of my hiding place in the mountains! But when the storms of war have subsided, I will disappear back there again.
+
+--------------------------------------------------------------------------------
+String #193 (Length: 221, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+His name was Shin Tar Guar, the last sorcerer of Greyfell. In his greed for power, he slew his three sons and offered their blood as a sacrifice to the Red Horde. But the horde betrayed him - as they did so many others...
+
+--------------------------------------------------------------------------------
+String #194 (Length: 221, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+Dalla spada emergono creature d'ombra e il guardiano della spada ha bisogno del tuoi aiuto per scacciarle. Le ombre sono invisibili; cerca qualcosa o qualcuno che possa renderle visibili in modo da riuscire a combatterle.
+
+--------------------------------------------------------------------------------
+String #195 (Length: 221, Keywords: return, uram)
+--------------------------------------------------------------------------------
+Uram the dwarf, the one you've rescued, said that the villagers are always keeping back raw materials that they call imperial supply. Return to Tario in the village and ask him to give you the supply whenever you need it.
+
+--------------------------------------------------------------------------------
+String #196 (Length: 221, Keywords: sucht, lya)
+--------------------------------------------------------------------------------
+Flink McWinter treibt sich laut Alyah in der Unterstadt herum. Sagt dem Wachposten am Tor zur Unterstadt, dass Ihr eine Lieferung von Alyah habt, er wird Euch in die Unterstadt lassen. Sucht dann dort nach Flink McWinter.
+
+--------------------------------------------------------------------------------
+String #197 (Length: 221, Keywords: sucht)
+--------------------------------------------------------------------------------
+Ich werde dieses Buch einem braven Fischer geben, er soll meinen Freunden berichten, was sich zugetragen hat. Freunde, ich hoffe, euch erreicht diese Schrift ... Folgt mir nach Empyria! Sucht nach der Frau unter dem Baum!
+
+--------------------------------------------------------------------------------
+String #198 (Length: 221, Keywords: multi-sentence)
+--------------------------------------------------------------------------------
+(Seventh Sudani: I cannot get to the source of the poison! The poisonous water has completely burned my hands, I can hardly feel them anymore. I think I have a fever...it is so terribly painful...if I only had my gloves!)
+
+--------------------------------------------------------------------------------
+String #199 (Length: 220, Keywords: find)
+--------------------------------------------------------------------------------
+Beings without souls are normally neither happy nor sad. If such a being should ever cry, its tears will possess an uncommon power. A soulless being can be either a summoned or spawned being, but it will be hard to find.
+
+--------------------------------------------------------------------------------
+String #200 (Length: 220, Keywords: find)
+--------------------------------------------------------------------------------
+Korshar befehligt seine Heere von der alten Festung in den Klagenden Steinen aus. Dort bewacht er auch den einzigen Zugang nach Wisper, wo Hokans Grab zu finden ist. Korshars Ende wird auch das Ende des Krieges bedeuten.

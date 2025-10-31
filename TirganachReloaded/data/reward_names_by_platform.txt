@@ -1,0 +1,1658 @@
+================================================================================
+QUEST REWARD NAMES BY PLATFORM
+Extracted from GdsQuestRewards.lua
+================================================================================
+
+
+================================================================================
+PLATFORM P1 - 21 rewards
+================================================================================
+
+  AmraUndLea1Liannon1
+    → XP: 200
+
+  AmraUndLea1Liannon2
+    → XP: 400
+
+  AmraUndLea2Liannon1
+    → XP: 500
+
+  AmraUndLea2Liannon2
+    → XP: 300
+
+  AusDerTiefe1Buch
+    → XP: 150
+
+  AusDerTiefe1Schreiber
+    → XP: 250
+
+  AusDerTiefe2Spaeher
+    → XP: 350
+
+  BefreiungShiel1Alfalas
+    → XP: 60
+
+  DariusDerKarthograph
+    → XP: 25
+
+  EchosBuch
+    → XP: 200
+
+  EinSeltsamerRing
+    → XP: 20
+
+  Einsiedler1Shan
+    → XP: 100
+
+  GeistInDerMine
+    → XP: 35
+
+  Items
+
+  KleineFische1
+    → XP: 10
+
+  KleineFische2
+    → XP: 10
+
+  Money
+    → Silver: 2, Copper: 50
+
+  Steckbrief
+    → XP: 20
+
+  WegNachEloni1Snarf
+    → XP: 25
+
+  WegNachEloni2Portal
+    → XP: 30
+
+  Zwergenaxt
+    → XP: 20
+
+
+================================================================================
+PLATFORM P2 - 12 rewards
+================================================================================
+
+  DieFreihaendler
+    → XP: 20
+
+  DieLetztenSchuetzen1
+    → XP: 15
+
+  DieLetztenSchuetzen2
+    → XP: 15
+
+  DieLetztenSchuetzen3
+    → XP: 15
+
+  Items
+
+  Money
+    → Silver: 6
+
+  StaubDerSterne1
+    → XP: 20
+
+  StaubDerSterne2
+    → XP: 10
+
+  StaubDerSterne3
+    → XP: 5
+
+  Traumdieb
+    → XP: 20
+
+  TrommelnInWaeldern
+    → XP: 90
+
+  WundtinkturSwerdis
+    → XP: 80
+
+
+================================================================================
+PLATFORM P4 - 10 rewards
+================================================================================
+
+  Bannwerk1
+    → XP: 60
+
+  Bannwerk2
+    → XP: 60
+
+  DieGeiseln
+    → XP: 40
+
+  DurchDenSchattenhain
+    → XP: 130
+
+  Kopfjagd1Head1
+    → XP: 15
+
+  Kopfjagd2Head2
+    → XP: 15
+
+  Kopfjagd3Head3
+    → XP: 15
+
+  Kopfjagd4Head4
+    → XP: 15
+
+  Kopfjagd5Head5
+    → XP: 15
+
+  Kopfjagd6Complete
+    → XP: 60
+
+
+================================================================================
+PLATFORM P5 - 5 rewards
+================================================================================
+
+  BefreiungShiel1Kommandant
+    → XP: 40
+
+  BefreiungShiel2Dryaden
+    → XP: 140
+
+  Items
+
+  PurpurnesBanner1Kettchen
+    → XP: 35
+
+  PurpurnesBanner2
+    → XP: 45
+
+
+================================================================================
+PLATFORM P6 - 8 rewards
+================================================================================
+
+  AlterMannUndMusik
+    → XP: 45
+
+  AmWildlandPass1
+    → XP: 120
+
+  AmWildlandPass2
+    → XP: 160
+
+  AmraUndLea2Sentos
+    → XP: 800
+
+  FeineStoffe1
+    → XP: 45
+
+  Items
+
+  KoenigDerSpinnen
+    → XP: 45
+
+  Money
+    → Silver: 10
+
+
+================================================================================
+PLATFORM P7 - 3 rewards
+================================================================================
+
+  AmraUndLea4
+    → XP: 1200
+
+  EndeDesOrdens1Erreichen
+    → XP: 1500
+
+  EndeDesOrdens2DreiItems
+    → XP: 1500
+
+
+================================================================================
+PLATFORM P9 - 12 rewards
+================================================================================
+
+  Eisenkarren1
+    → XP: 20
+
+  Eisenkarren2
+    → XP: 20
+
+  Eisenkarren3
+    → XP: 20
+
+  Eisenkarren4
+    → XP: 20
+
+  Eisenkarren5
+    → XP: 20
+
+  Eisenkarren6
+    → XP: 20
+
+  Eisenkarren7
+    → XP: 20
+
+  Items
+
+  Marcia1
+    → XP: 150
+
+  SchlachtUmBrunnenfels1
+    → XP: 100
+
+  SchlachtUmBrunnenfels2
+    → XP: 150
+
+  SchlachtUmBrunnenfels2a
+    → XP: 150
+
+
+================================================================================
+PLATFORM P10 - 16 rewards
+================================================================================
+
+  Erdenklinge2
+    → XP: 200
+
+  Erdenklinge3
+    → XP: 400
+
+  Erdenklinge4
+    → XP: 400
+
+  FeineStoffe2Miria
+    → XP: 100
+
+  InsGrauschattental1
+    → XP: 50
+
+  InsGrauschattental2
+    → XP: 150
+
+  InsGrauschattental3
+    → XP: 50
+
+  InsGrauschattental4
+    → XP: 350
+
+  Items
+
+  JeGroesser1
+    → XP: 90
+
+  JeGroesser2
+    → XP: 110
+
+  Money
+    → Gold: 5
+
+  Reisserfell
+    → XP: 60
+
+  WeisseSchatten1
+    → XP: 80
+
+  WeisseSchatten2
+    → XP: 40
+
+  Zwergendienste2Cronvig
+    → XP: 250
+
+
+================================================================================
+PLATFORM P11 - 6 rewards
+================================================================================
+
+  Erdklinge11
+    → XP: 100
+
+  Erdklinge12
+    → XP: 250
+
+  Giftzwerg
+    → XP: 150
+
+  Items
+
+  Riesenaerger1
+    → XP: 100
+
+  Riesenaerger2
+    → XP: 150
+
+
+================================================================================
+PLATFORM P12 - 6 rewards
+================================================================================
+
+  Grenzkrieg1Festung
+    → XP: 300
+
+  Grenzkrieg2Canyon
+    → XP: 500
+
+  Items
+
+  MaskeDesBelial1
+    → XP: 300
+
+  MaskeDesBelial2
+    → XP: 300
+
+  Verraeter
+    → XP: 400
+
+
+================================================================================
+PLATFORM P15 - 8 rewards
+================================================================================
+
+  AmraUndLea5
+    → XP: 1200
+
+  Homunculus
+    → XP: 300
+
+  Items
+
+  KlagendeSteine1BisTor
+    → XP: 400
+
+  KlagendeSteine2Korshar
+    → XP: 500
+
+  MaskeDesBelial2
+    → XP: 300
+
+  Schattenwelt4Kristall
+    → XP: 1400
+
+  Trickster1Cassius
+    → XP: 300
+
+
+================================================================================
+PLATFORM P16 - 7 rewards
+================================================================================
+
+  AmraLeaGrab
+    → XP: 800
+
+  FluesterndeStadt1Item1
+    → XP: 250
+
+  FluesterndeStadt2Item2
+    → XP: 250
+
+  FluesterndeStadt3Item3
+    → XP: 250
+
+  FluesterndeStadt4Endkampf
+    → XP: 450
+
+  FluesterndeStadt5Maske
+    → XP: 350
+
+  MosaikDesTodes
+    → XP: 800
+
+
+================================================================================
+PLATFORM P17 - 6 rewards
+================================================================================
+
+  AufDemWall1Village1
+    → XP: 200
+
+  AufDemWall2Village2
+    → XP: 300
+
+  AufDemWall3Village3
+    → XP: 300
+
+  AufDemWall4Village4
+    → XP: 300
+
+  AufDemWall5Endkampf
+    → XP: 500
+
+  GwensMedizin
+    → XP: 600
+
+
+================================================================================
+PLATFORM P19 - 6 rewards
+================================================================================
+
+  DerPhoenix1Waechter
+    → XP: 1000
+
+  DerPhoenix2Splitter1
+    → XP: 800
+
+  DerPhoenix3Splitter2
+    → XP: 800
+
+  DerPhoenix4Splitter3
+    → XP: 800
+
+  DerPhoenix5Splitter4
+    → XP: 800
+
+  DerPhoenix6Ablieferung
+    → XP: 800
+
+
+================================================================================
+PLATFORM P21 - 10 rewards
+================================================================================
+
+  DerKatarakt
+    → XP: 600
+
+  Money
+    → Gold: 50
+
+  Schattenwelt2Rigour
+    → XP: 300
+
+  Schattenwelt2aRigour
+    → XP: 400
+
+  Schattenwelt2bRigour
+    → XP: 600
+
+  ShardAutumn
+    → XP: 400
+
+  Steinbrecher
+    → XP: 800
+
+  Thar
+    → XP: 600
+
+  WolfUndDrache1
+    → XP: 200
+
+  WolfUndDrache2
+    → XP: 400
+
+
+================================================================================
+PLATFORM P23 - 4 rewards
+================================================================================
+
+  DurchdenSpalt1Hin
+    → XP: 1300
+
+  DurchdenSpalt2Her
+    → XP: 1300
+
+  Items
+
+  Ulather
+    → XP: 800
+
+
+================================================================================
+PLATFORM P25 - 4 rewards
+================================================================================
+
+  AmraUndLea4
+    → XP: 1200
+
+  Items
+
+  Klingensturm1Monument
+    → XP: 1000
+
+  Klingensturm2Sartarius
+    → XP: 2600
+
+
+================================================================================
+PLATFORM P27 - 4 rewards
+================================================================================
+
+  Items
+
+  NachUrgath1Elfensiedlung
+    → XP: 1000
+
+  NachUrgath2Monument
+    → XP: 1400
+
+  NachUrgath3Archon
+    → XP: 2000
+
+
+================================================================================
+PLATFORM P30 - 2 rewards
+================================================================================
+
+  AtmenderWald1Waldherz
+    → XP: 2000
+
+  AtmenderWald2Portal
+    → XP: 3000
+
+
+================================================================================
+PLATFORM P32 - 4 rewards
+================================================================================
+
+  KreisSchluss1Tor1
+    → XP: 2000
+
+  KreisSchluss2Tor2
+    → XP: 2000
+
+  KreisSchluss3Tor3
+    → XP: 2000
+
+  KreisSchluss4Soulforger
+    → XP: 10000
+
+
+================================================================================
+PLATFORM P63 - 36 rewards
+================================================================================
+
+  AmraUndLea3Sentos
+    → XP: 500
+
+  AngriffDerHoehlenorks
+    → XP: 20
+
+  BlutAdhiraTrank
+    → XP: 4000
+
+  BlutTombardTot
+    → XP: 2000
+
+  Drachenpanzer1
+    → XP: 100
+
+  Drachenpanzer2
+    → XP: 800
+
+  EchosBuchstabe1
+    → XP: 500
+
+  EchosBuchstabe2
+    → XP: 500
+
+  EchosBuchstabe3
+    → XP: 500
+
+  EchosGoran
+    → XP: 700
+
+  EchosShinTarGuar
+    → XP: 1000
+
+  FeineStoffe3Seide
+    → XP: 400
+
+  FeineStoffe4Robe
+    → XP: 1100
+
+  Items
+
+  KlingzogsBeinlinge
+    → XP: 35
+
+  Money
+    → Gold: 2
+
+  NachGraufurtPartEnde
+    → XP: 10
+
+  NachGraufurtPartVillage
+
+  Schattenwelt1Castagir
+    → XP: 120
+
+  Schattenwelt3Manifest
+    → XP: 1000
+
+  SchattenweltShadowpulse
+    → XP: 500
+
+  Schwarzeibe
+    → XP: 35
+
+  Seelenschwerter
+    → XP: 600
+
+  SickHermit1Zirfar
+    → XP: 600
+
+  SickHermit2Locke
+    → XP: 600
+
+  ThurgonBrief
+    → XP: 250
+
+  TricksterFindFlink
+    → XP: 500
+
+  TricksterReturn
+    → XP: 1000
+
+  WundtinkturValdis
+    → XP: 30
+
+  XP
+
+  ZahnbrechersZangen
+    → XP: 35
+
+  Zauberwerk1Augenglas
+    → XP: 10
+
+  Zauberwerk2Feder
+    → XP: 25
+
+  Zauberwerk3Kreide
+    → XP: 35
+
+  Zauberwerk4Robe
+    → XP: 120
+
+  Zwergendienste1Hinrik
+    → XP: 120
+
+
+================================================================================
+PLATFORM P101 - 6 rewards
+================================================================================
+
+  FluechtlingeNachNorden
+    → XP: 150
+
+  HQBefreien
+    → XP: 150
+
+  HeldenErschaffen
+    → XP: 45
+
+  ImCampMitAllenGeredet
+    → XP: 15
+
+  Items
+
+  WumpusKilled
+    → XP: 550
+
+
+================================================================================
+PLATFORM P102 - 15 rewards
+================================================================================
+
+  DreiMagierGruolunGive
+    → XP: 55
+
+  DreiMagierGruolunSave
+    → XP: 250
+
+  DreiMagierRenyaGive
+    → XP: 35
+
+  DreiMagierRenyaSave
+    → XP: 250
+
+  DreiMagierZolowinFree
+
+  DreiMagierZolowinGive
+    → XP: 55
+
+  DreiMagierZolowinSave
+    → XP: 250
+
+  HuluErreicht
+    → XP: 65
+
+  Items
+
+  JaninaBefreit
+    → XP: 65
+
+  KitharLagerZerstoert
+    → XP: 175
+
+  P102Erreicht
+    → XP: 30
+
+  QuelleVergiftet
+    → XP: 65
+
+  RuneDunhanGenommen
+    → XP: 175
+
+  SetriusErreicht
+    → XP: 65
+
+
+================================================================================
+PLATFORM P103 - 3 rewards
+================================================================================
+
+  P103Erreicht
+    → XP: 75
+
+  RuneReowysGenommen
+    → XP: 500
+
+  WaldschrateKilled
+    → XP: 250
+
+
+================================================================================
+PLATFORM P104 - 9 rewards
+================================================================================
+
+  Camp1Befreit
+    → XP: 200
+
+  Camp2Befreit
+    → XP: 200
+
+  Camp3Befreit
+    → XP: 200
+
+  OrklagerEinnehmen
+    → XP: 175
+
+  P104Erreicht
+    → XP: 125
+
+  SQTiondriaSeite1Gefunden
+    → XP: 500
+
+  SQTiondriaSeite2Gefunden
+    → XP: 500
+
+  SQTiondriaSeite3Gefunden
+    → XP: 500
+
+  Schluesselmeisterin
+    → XP: 350
+
+
+================================================================================
+PLATFORM P105 - 14 rewards
+================================================================================
+
+  FugisBroughtToMap
+    → XP: 175
+
+  FugisBroughtToTirganach
+    → XP: 450
+
+  Items
+
+  Money
+    → Gold: 30
+
+  SQScaramangirKilled
+    → XP: 1500
+
+  SQTiondriaBuchDariusGefunden
+    → XP: 300
+
+  SQTiondriaBuchDariusZurueck
+    → XP: 400
+
+  SQTiondriaFlinkBefreit
+    → XP: 250
+
+  SQTiondriaMordfallHalfSolved
+    → XP: 750
+
+  SQTiondriaMordfallNotSolved
+    → XP: 100
+
+  SQTiondriaMordfallSolved
+    → XP: 1300
+
+  SQTiondriaSchatzBehalten
+    → XP: 250
+
+  SQTiondriaSchatzGeteilt
+    → XP: 2500
+
+  SkeletonCampDestroyed
+    → XP: 850
+
+
+================================================================================
+PLATFORM P107 - 3 rewards
+================================================================================
+
+  AnfuehrerBesiegt
+    → XP: 1150
+
+  GeistercampBesiegt
+    → XP: 1150
+
+  P107KarteErreicht
+    → XP: 275
+
+
+================================================================================
+PLATFORM P108 - 6 rewards
+================================================================================
+
+  GuramMachtSprengung
+    → XP: 550
+
+  MasterOfMosaic
+    → XP: 2000
+
+  P108KarteErreicht
+    → XP: 350
+
+  RueckkehrMitWindjalf
+    → XP: 1250
+
+  SQTiondriaSchatzGefunden
+    → XP: 550
+
+  WindjalfBefreit
+    → XP: 1150
+
+
+================================================================================
+PLATFORM P109 - 10 rewards
+================================================================================
+
+  Items
+
+  P109KarteErreicht
+    → XP: 350
+
+  P109PortalErreicht
+    → XP: 350
+
+  TorZerstoert
+    → XP: 750
+
+  TrollcampZerstoert
+    → XP: 900
+
+  WerwolfGesamt
+    → XP: 550
+
+  WerwolfTempel1
+    → XP: 350
+
+  WerwolfTempel2
+    → XP: 350
+
+  WerwolfTempel3
+    → XP: 350
+
+  ZwergeBefreit
+    → XP: 550
+
+
+================================================================================
+PLATFORM P110 - 6 rewards
+================================================================================
+
+  GrimBesiegt
+    → XP: 750
+
+  InInnenstadtGekommen
+    → XP: 700
+
+  MondstadtZerstoert
+    → XP: 600
+
+  P110KarteErreicht
+    → XP: 350
+
+  SonnenstadtZerstoert
+    → XP: 600
+
+  SternstadtZerstoert
+    → XP: 600
+
+
+================================================================================
+PLATFORM P111 - 6 rewards
+================================================================================
+
+  AlleVierFackelnAn
+    → XP: 1000
+
+  ElementBeschworen
+    → XP: 600
+
+  P111KarteErreicht
+    → XP: 350
+
+  SQTiondriaObjekteEingesetzt
+    → XP: 350
+
+  SchattenringBekommen
+    → XP: 500
+
+  WaechterGetoetet
+    → XP: 1000
+
+
+================================================================================
+PLATFORM P113 - 6 rewards
+================================================================================
+
+  Boss1Getoetet
+    → XP: 700
+
+  Boss2Getoetet
+    → XP: 700
+
+  Boss3Getoetet
+    → XP: 700
+
+  Boss4Getoetet
+    → XP: 700
+
+  FialDargTotCenwenFrei
+    → XP: 2000
+
+  P113KarteErreicht
+    → XP: 350
+
+
+================================================================================
+PLATFORM P115 - 11 rewards
+================================================================================
+
+  DracheGetoetet
+    → XP: 5000
+
+  Drachenstein1
+    → XP: 450
+
+  Drachenstein2
+    → XP: 450
+
+  Drachenstein3
+    → XP: 450
+
+  Drachenstein4
+    → XP: 450
+
+  Drachenstein5
+    → XP: 450
+
+  Drachenstein6
+    → XP: 450
+
+  Drachenstein7
+    → XP: 1000
+
+  Drachenstein8
+    → XP: 1000
+
+  Drachenstein9
+    → XP: 1000
+
+  P115KarteErreicht
+    → XP: 400
+
+
+================================================================================
+PLATFORM P200 - 13 rewards
+================================================================================
+
+  ColosseumRunde01Sieg
+    → XP: 7000
+
+  ColosseumRunde02Sieg
+    → XP: 8000
+
+  ColosseumRunde03Sieg
+    → XP: 9000
+
+  ColosseumRunde04Sieg
+    → XP: 10000
+
+  ColosseumRunde05Sieg
+    → XP: 12500
+
+  ColosseumRunde06Sieg
+    → XP: 15000
+
+  ColosseumRunde07Sieg
+    → XP: 17500
+
+  ColosseumRunde08Sieg
+    → XP: 20500
+
+  ColosseumRunde09Sieg
+    → XP: 25000
+
+  ColosseumRunde10Sieg
+    → XP: 30000
+
+  GoblinRennen
+    → XP: 2000
+
+  Items
+
+  Money
+    → Gold: 5000
+
+
+================================================================================
+PLATFORM P201 - 13 rewards
+================================================================================
+
+  CampsZerstoert
+    → XP: 15000
+
+  DrittenDrachenGetoetet
+    → XP: 5000
+
+  ErstenDrachenGetoetet
+    → XP: 5000
+
+  GurimLebt
+    → XP: 5000
+
+  InsCampGekommen
+    → XP: 2000
+
+  LeutnantGesprochen
+    → XP: 3500
+
+  Ordensritter1Befreit
+    → XP: 4000
+
+  Ordensritter2Befreit
+    → XP: 4000
+
+  Ordensritter3Befreit
+    → XP: 4000
+
+  RingGefunden
+    → XP: 5000
+
+  UriasBefreit
+    → XP: 8000
+
+  ViertenDrachenGetoetet
+    → XP: 5000
+
+  ZweitenDrachenGetoetet
+    → XP: 5000
+
+
+================================================================================
+PLATFORM P202 - 17 rewards
+================================================================================
+
+  AschetaenzerTot
+    → XP: 12000
+
+  ExtinctTuermeWeg
+    → XP: 10000
+
+  GnomlingBossTot
+    → XP: 8000
+
+  GrabmalGeoeffnet
+    → XP: 12000
+
+  HeldenBeschworen
+    → XP: 2000
+
+  HlStaetteBaumGepflanzt
+    → XP: 10000
+
+  OpferFreigelassen
+    → XP: 6000
+
+  OpferTot
+    → XP: 6000
+
+  ResistenteGargoyle1Tot
+    → XP: 10000
+
+  Seelenwesen1
+    → XP: 2400
+
+  Seelenwesen2
+    → XP: 2400
+
+  Seelenwesen3
+    → XP: 2400
+
+  Seelenwesen4
+    → XP: 2400
+
+  Seelenwesen5
+    → XP: 2400
+
+  TorZurStaetteOffen
+    → XP: 10000
+
+  UrneZuHokan
+    → XP: 16000
+
+  WachgeistTot
+    → XP: 4000
+
+
+================================================================================
+PLATFORM P203 - 9 rewards
+================================================================================
+
+  BlockadeDurchbrochen
+    → XP: 10000
+
+  DialogMitAeltestem
+    → XP: 6000
+
+  Geheimweg
+    → XP: 9000
+
+  LichkoenigTot
+    → XP: 4000
+
+  P203KarteErreicht
+    → XP: 1500
+
+  TantaroGefunden
+    → XP: 5000
+
+  WasserEntgiften
+    → XP: 10000
+
+  ZerstoerungDesLagers
+    → XP: 24000
+
+  ZuTarioGegangen
+    → XP: 7000
+
+
+================================================================================
+PLATFORM P204 - 25 rewards
+================================================================================
+
+  ArenaKampf32
+    → XP: 5000
+
+  ArenaKampf36
+    → XP: 7000
+
+  ArenaKampf38
+    → XP: 10000
+
+  ArenaKampf40
+    → XP: 12500
+
+  ArenaKampf42
+    → XP: 15000
+
+  FlinkAbgeliefert
+    → XP: 5500
+
+  IshtarTraumstabGebracht
+    → XP: 4000
+
+  LyrioQuestGeloest
+    → XP: 6000
+
+  OberstadtLinksErreicht
+    → XP: 6500
+
+  OberstadtRechtsErreicht
+    → XP: 6500
+
+  P204KarteErreicht
+    → XP: 3000
+
+  PalastgartenErreicht
+    → XP: 10000
+
+  SQAuftragGescheitert
+    → XP: 3000
+
+  SQBotschafterGefunden
+    → XP: 5000
+
+  SQBotschafterTot
+    → XP: 10000
+
+  SQCraigIstBotschafter
+    → XP: 20000
+
+  SQHaendlerFriedlich
+    → XP: 10000
+
+  SQSchutzgeldLarge
+    → XP: 18000
+
+  SQSchutzgeldMedium
+    → XP: 12000
+
+  SQSchutzgeldSmall
+    → XP: 6000
+
+  SQSethHealed
+    → XP: 5000
+
+  Tor1DurchTrickGeoeffnet
+    → XP: 11000
+
+  Tor2DurchTrickGeoeffnet
+    → XP: 7000
+
+  Tor3DurchTrickGeoeffnet
+    → XP: 9000
+
+  TruppenZumPortalGesandt
+    → XP: 9000
+
+
+================================================================================
+PLATFORM P205 - 9 rewards
+================================================================================
+
+  GartenEntgiftet
+    → XP: 10000
+
+  LargeIrfitReward
+    → XP: 13000
+
+  MitDryadeGesprochen
+    → XP: 10000
+
+  Nymphe1Befreit
+    → XP: 6000
+
+  Nymphe2Befreit
+    → XP: 6000
+
+  Nymphe3Befreit
+    → XP: 6000
+
+  P205KarteErreicht
+    → XP: 5000
+
+  SmallIrfitReward
+    → XP: 5000
+
+  SpinnencampZerstoert
+    → XP: 8000
+
+
+================================================================================
+PLATFORM P206 - 11 rewards
+================================================================================
+
+  AlleTrolleKommenAn
+    → XP: 12000
+
+  AlleinEinenWegGefunden
+    → XP: 6500
+
+  DialogMitUnterhaendler
+    → XP: 7000
+
+  FalleAusgeloest
+    → XP: 7000
+
+  KarawaneLosgelaufen
+    → XP: 10300
+
+  Lager1Kaputtgemacht
+    → XP: 7000
+
+  Lager2Kaputtgemacht
+    → XP: 7000
+
+  P206KarteErreicht
+    → XP: 5000
+
+  RastplatzGefunden
+    → XP: 4500
+
+  VieleTrolleKommenAn
+    → XP: 7000
+
+  WenigeTrolleKommenAn
+    → XP: 3000
+
+
+================================================================================
+PLATFORM P207 - 9 rewards
+================================================================================
+
+  BergrieseGeholfen
+    → XP: 6500
+
+  DritteFestungBesiegt
+    → XP: 9500
+
+  ErsteFestungBesiegt
+    → XP: 9500
+
+  P207KarteErreicht
+    → XP: 4500
+
+  SchalterraetselGeloest
+    → XP: 7500
+
+  SprengzwergBefreit
+    → XP: 8500
+
+  UndeadRohenGetoetet
+    → XP: 12000
+
+  VierteFestungBesiegt
+    → XP: 9500
+
+  ZweiteFestungBesiegt
+    → XP: 9500
+
+
+================================================================================
+PLATFORM P208 - 22 rewards
+================================================================================
+
+  ArgamunVerwandeltSich
+    → XP: 10000
+
+  Gremlinlager1Zerstoert
+    → XP: 3000
+
+  Gremlinlager2Zerstoert
+    → XP: 3000
+
+  Gremlinlager3Zerstoert
+    → XP: 3000
+
+  Gremlinlager4Zerstoert
+    → XP: 3000
+
+  Gremlinlager5Zerstoert
+    → XP: 3000
+
+  Items
+
+  KopfloserTodVernichtet
+    → XP: 10000
+
+  MasterGameWon
+    → XP: 30000
+
+  P208KarteErreicht
+    → XP: 5000
+
+  Prinzessin1Befreit
+    → XP: 3000
+
+  Prinzessin2Befreit
+    → XP: 3000
+
+  Prinzessin3Befreit
+    → XP: 3000
+
+  Prinzessin4Befreit
+    → XP: 3000
+
+  Prinzessin5Befreit
+    → XP: 3000
+
+  Wolfcamp1Zerstoert
+    → XP: 2500
+
+  Wolfcamp2Zerstoert
+    → XP: 2500
+
+  Wolfcamp3Zerstoert
+    → XP: 2500
+
+  Wolfcamp4Zerstoert
+    → XP: 2500
+
+  Wolfcamp5Zerstoert
+    → XP: 2500
+
+  Wolfcamp6Zerstoert
+    → XP: 2500
+
+  Wolfcamp7Zerstoert
+    → XP: 2500
+
+
+================================================================================
+PLATFORM P209 - 21 rewards
+================================================================================
+
+  BronzerieseGetoetet
+    → XP: 12000
+
+  GespraechMitKhal
+    → XP: 2000
+
+  HolyArtefact1Gefunden
+    → XP: 4000
+
+  HolyArtefact2Gefunden
+    → XP: 4000
+
+  KathaiStadtBefreit
+    → XP: 10000
+
+  KathaiStadtTorOffen
+    → XP: 8000
+
+  LeaderHauptarmeeKilled
+    → XP: 8000
+
+  LeaderNordarmeeKilled
+    → XP: 8000
+
+  LeaderSuedarmeeKilled
+    → XP: 8000
+
+  P209KarteErreicht
+    → XP: 5000
+
+  StadtKathaiErreicht
+    → XP: 6000
+
+  UntotenlagerNord
+    → XP: 9000
+
+  UntotenlagerSued
+    → XP: 9000
+
+  UntotenlagerWest
+    → XP: 9000
+
+  UruSpricht1
+    → XP: 2000
+
+  UruSpricht2
+    → XP: 2000
+
+  UruSpricht3
+    → XP: 2000
+
+  UruSpricht4
+    → XP: 2000
+
+  UruSpricht5
+    → XP: 2000
+
+  XalabarInArenaBesiegt
+    → XP: 10000
+
+  ZwergenMonumentClaimed
+    → XP: 2000
+
+
+================================================================================
+PLATFORM P210 - 16 rewards
+================================================================================
+
+  AirCoinPassageOpened
+    → XP: 15000
+
+  AugenSet1Solved
+    → XP: 3500
+
+  AugenSet2Solved
+    → XP: 3500
+
+  AugenSet3Solved
+    → XP: 3500
+
+  AugenSet4Solved
+    → XP: 3500
+
+  EntryMenhirComboCorrect
+    → XP: 3500
+
+  ExitDoorToP211Opened
+    → XP: 25000
+
+  LastChestInRoom5Opened
+    → XP: 20000
+
+  P210KarteErreicht
+    → XP: 5000
+
+  Room2SensoSolved
+    → XP: 14000
+
+  Room3HeadDoorOpened
+    → XP: 45000
+
+  Room4SkeletonDoorOpened
+    → XP: 15000
+
+  Room6SpiderGateOpened
+    → XP: 15000
+
+  Room7ChessboardCrossed
+    → XP: 15000
+
+  SceptreOfWindsFound
+    → XP: 20000
+
+  TurningHeadsCrossed
+    → XP: 10000
+
+
+================================================================================
+PLATFORM P211 - 13 rewards
+================================================================================
+
+  CraigBefreit
+    → XP: 10000
+
+  DschungelCamp1Killed
+    → XP: 7000
+
+  DschungelCamp2Killed
+    → XP: 7000
+
+  DschungelCamp3Killed
+    → XP: 7000
+
+  DschungelCamp4Killed
+    → XP: 10000
+
+  EndgegnerSoulforgerKilled
+    → XP: 15000
+
+  MonumenteElfClaimed
+    → XP: 4000
+
+  MonumenteZwerg1Claimed
+    → XP: 4000
+
+  MonumenteZwerg2Claimed
+    → XP: 4000
+
+  P211KarteErreicht
+    → XP: 5000
+
+  SchattenklingeBefreit
+    → XP: 10000
+
+  TorJenquaiGeoeffnet
+    → XP: 6500
+
+  WerwolfAbgelenkt
+    → XP: 15000
+
+
+================================================================================
+PLATFORM P212 - 9 rewards
+================================================================================
+
+  AlleStelenOff
+    → XP: 20000
+
+  MiniforgersKilled
+    → XP: 30000
+
+  P212KarteErreicht
+    → XP: 5000
+
+  Stele1Off
+    → XP: 7000
+
+  Stele2Off
+    → XP: 7000
+
+  Stele3Off
+    → XP: 7000
+
+  Stele4Off
+    → XP: 7000
+
+  Stele5Off
+    → XP: 7000
+
+  Stele6Off
+    → XP: 7000
+
+
+================================================================================
+PLATFORM P213 - 7 rewards
+================================================================================
+
+  BeideMumienCampsPlatt
+    → XP: 15000
+
+  BlutigenDariusBefreit
+    → XP: 30000
+
+  Conditions
+
+  DschungelWeisenDialog
+    → XP: 8000
+
+  NahrungFuerAffenjunge
+    → XP: 10000
+
+  P213KarteErreicht
+    → XP: 5000
+
+  WegZumTorFreigeraeumt
+    → XP: 17500
+
+
+================================================================================
+SUMMARY: 479 total reward entries across 47 platforms
+================================================================================

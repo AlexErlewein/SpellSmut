@@ -1,0 +1,4607 @@
+{
+  "_readme": {
+    "description": "Manual mapping file for quest rewards",
+    "format": "Map reward script names from GdsQuestRewards.lua to quest IDs",
+    "usage": "Fill in the 'quest_id' field for each reward entry",
+    "workflow": [
+      "1. Look at the reward name and associated data (XP, items, comment)",
+      "2. Search for matching quest in the CFF editor or database",
+      "3. Fill in the quest_id field",
+      "4. The parser will use these manual mappings when loading data"
+    ],
+    "note": "Comments from the original file are included to help with identification"
+  },
+  "P1": {
+    "_platform_name": "Greydusk Vale",
+    "_count": 21,
+    "rewards": {
+      "DariusDerKarthograph": {
+        "quest_id": null,
+        "xp": 25,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WegNachEloni1Snarf": {
+        "quest_id": null,
+        "xp": 25,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WegNachEloni2Portal": {
+        "quest_id": null,
+        "xp": 30,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "KleineFische1": {
+        "quest_id": null,
+        "xp": 10,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "KleineFische2": {
+        "quest_id": null,
+        "xp": 10,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Steckbrief": {
+        "quest_id": null,
+        "xp": 20,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Money": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 2,
+        "copper": 50,
+        "items": [],
+        "comment": ""
+      },
+      "Zwergenaxt": {
+        "quest_id": null,
+        "xp": 20,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "GeistInDerMine": {
+        "quest_id": null,
+        "xp": 35,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "EinSeltsamerRing": {
+        "quest_id": null,
+        "xp": 20,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AusDerTiefe1Schreiber": {
+        "quest_id": null,
+        "xp": 250,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AusDerTiefe1Buch": {
+        "quest_id": null,
+        "xp": 150,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AusDerTiefe2Spaeher": {
+        "quest_id": null,
+        "xp": 350,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AmraUndLea1Liannon1": {
+        "quest_id": null,
+        "xp": 200,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AmraUndLea1Liannon2": {
+        "quest_id": null,
+        "xp": 400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AmraUndLea2Liannon1": {
+        "quest_id": null,
+        "xp": 500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AmraUndLea2Liannon2": {
+        "quest_id": null,
+        "xp": 300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "EchosBuch": {
+        "quest_id": null,
+        "xp": 200,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "BefreiungShiel1Alfalas": {
+        "quest_id": null,
+        "xp": 60,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Einsiedler1Shan": {
+        "quest_id": null,
+        "xp": 100,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P2": {
+    "_platform_name": "Greydusk Vale (continued)",
+    "_count": 12,
+    "rewards": {
+      "TrommelnInWaeldern": {
+        "quest_id": null,
+        "xp": 90,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WundtinkturSwerdis": {
+        "quest_id": null,
+        "xp": 80,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DieLetztenSchuetzen1": {
+        "quest_id": null,
+        "xp": 15,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DieLetztenSchuetzen2": {
+        "quest_id": null,
+        "xp": 15,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DieLetztenSchuetzen3": {
+        "quest_id": null,
+        "xp": 15,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DieFreihaendler": {
+        "quest_id": null,
+        "xp": 20,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Traumdieb": {
+        "quest_id": null,
+        "xp": 20,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "StaubDerSterne1": {
+        "quest_id": null,
+        "xp": 20,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Money": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 6,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "StaubDerSterne2": {
+        "quest_id": null,
+        "xp": 10,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "StaubDerSterne3": {
+        "quest_id": null,
+        "xp": 5,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P4": {
+    "_platform_name": "The Whisper",
+    "_count": 10,
+    "rewards": {
+      "DurchDenSchattenhain": {
+        "quest_id": null,
+        "xp": 130,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Bannwerk1": {
+        "quest_id": null,
+        "xp": 60,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Bannwerk2": {
+        "quest_id": null,
+        "xp": 60,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Kopfjagd1Head1": {
+        "quest_id": null,
+        "xp": 15,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Kopfjagd2Head2": {
+        "quest_id": null,
+        "xp": 15,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Kopfjagd3Head3": {
+        "quest_id": null,
+        "xp": 15,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Kopfjagd4Head4": {
+        "quest_id": null,
+        "xp": 15,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Kopfjagd5Head5": {
+        "quest_id": null,
+        "xp": 15,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Kopfjagd6Complete": {
+        "quest_id": null,
+        "xp": 60,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DieGeiseln": {
+        "quest_id": null,
+        "xp": 40,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P5": {
+    "_platform_name": "The Whisper (continued)",
+    "_count": 5,
+    "rewards": {
+      "BefreiungShiel1Kommandant": {
+        "quest_id": null,
+        "xp": 40,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "BefreiungShiel2Dryaden": {
+        "quest_id": null,
+        "xp": 140,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "PurpurnesBanner1Kettchen": {
+        "quest_id": null,
+        "xp": 35,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "PurpurnesBanner2": {
+        "quest_id": null,
+        "xp": 45,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P6": {
+    "_platform_name": "The Shiel",
+    "_count": 8,
+    "rewards": {
+      "AmWildlandPass1": {
+        "quest_id": null,
+        "xp": 120,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AmWildlandPass2": {
+        "quest_id": null,
+        "xp": 160,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "KoenigDerSpinnen": {
+        "quest_id": null,
+        "xp": 45,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Money": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 10,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AlterMannUndMusik": {
+        "quest_id": null,
+        "xp": 45,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "FeineStoffe1": {
+        "quest_id": null,
+        "xp": 45,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AmraUndLea2Sentos": {
+        "quest_id": null,
+        "xp": 800,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P7": {
+    "_platform_name": "Mulandir",
+    "_count": 3,
+    "rewards": {
+      "EndeDesOrdens1Erreichen": {
+        "quest_id": null,
+        "xp": 1500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "EndeDesOrdens2DreiItems": {
+        "quest_id": null,
+        "xp": 1500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AmraUndLea4": {
+        "quest_id": null,
+        "xp": 1200,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P9": {
+    "_platform_name": "Sevenkeeps",
+    "_count": 12,
+    "rewards": {
+      "Marcia1": {
+        "quest_id": null,
+        "xp": 150,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SchlachtUmBrunnenfels1": {
+        "quest_id": null,
+        "xp": 100,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SchlachtUmBrunnenfels2": {
+        "quest_id": null,
+        "xp": 150,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SchlachtUmBrunnenfels2a": {
+        "quest_id": null,
+        "xp": 150,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Eisenkarren1": {
+        "quest_id": null,
+        "xp": 20,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Eisenkarren2": {
+        "quest_id": null,
+        "xp": 20,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Eisenkarren3": {
+        "quest_id": null,
+        "xp": 20,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Eisenkarren4": {
+        "quest_id": null,
+        "xp": 20,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Eisenkarren5": {
+        "quest_id": null,
+        "xp": 20,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Eisenkarren6": {
+        "quest_id": null,
+        "xp": 20,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Eisenkarren7": {
+        "quest_id": null,
+        "xp": 20,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P10": {
+    "_platform_name": "The Gorge",
+    "_count": 16,
+    "rewards": {
+      "InsGrauschattental1": {
+        "quest_id": null,
+        "xp": 50,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "InsGrauschattental2": {
+        "quest_id": null,
+        "xp": 150,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "InsGrauschattental3": {
+        "quest_id": null,
+        "xp": 50,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "InsGrauschattental4": {
+        "quest_id": null,
+        "xp": 350,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WeisseSchatten1": {
+        "quest_id": null,
+        "xp": 80,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WeisseSchatten2": {
+        "quest_id": null,
+        "xp": 40,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Zwergendienste2Cronvig": {
+        "quest_id": null,
+        "xp": 250,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Money": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 5,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "JeGroesser1": {
+        "quest_id": null,
+        "xp": 90,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "JeGroesser2": {
+        "quest_id": null,
+        "xp": 110,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Reisserfell": {
+        "quest_id": null,
+        "xp": 60,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "FeineStoffe2Miria": {
+        "quest_id": null,
+        "xp": 100,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Erdenklinge2": {
+        "quest_id": null,
+        "xp": 200,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Erdenklinge3": {
+        "quest_id": null,
+        "xp": 400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Erdenklinge4": {
+        "quest_id": null,
+        "xp": 400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P11": {
+    "_platform_name": "Dun Mora",
+    "_count": 6,
+    "rewards": {
+      "Erdklinge11": {
+        "quest_id": null,
+        "xp": 100,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Erdklinge12": {
+        "quest_id": null,
+        "xp": 250,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Giftzwerg": {
+        "quest_id": null,
+        "xp": 150,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Riesenaerger1": {
+        "quest_id": null,
+        "xp": 100,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Riesenaerger2": {
+        "quest_id": null,
+        "xp": 150,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P12": {
+    "_platform_name": "Dun Mora (continued)",
+    "_count": 6,
+    "rewards": {
+      "Grenzkrieg1Festung": {
+        "quest_id": null,
+        "xp": 300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Grenzkrieg2Canyon": {
+        "quest_id": null,
+        "xp": 500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Verraeter": {
+        "quest_id": null,
+        "xp": 400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "MaskeDesBelial1": {
+        "quest_id": null,
+        "xp": 300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "MaskeDesBelial2": {
+        "quest_id": null,
+        "xp": 300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P15": {
+    "_platform_name": "Shal",
+    "_count": 8,
+    "rewards": {
+      "KlagendeSteine1BisTor": {
+        "quest_id": null,
+        "xp": 400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "KlagendeSteine2Korshar": {
+        "quest_id": null,
+        "xp": 500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Homunculus": {
+        "quest_id": null,
+        "xp": 300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Trickster1Cassius": {
+        "quest_id": null,
+        "xp": 300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "MaskeDesBelial2": {
+        "quest_id": null,
+        "xp": 300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Schattenwelt4Kristall": {
+        "quest_id": null,
+        "xp": 1400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AmraUndLea5": {
+        "quest_id": null,
+        "xp": 1200,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P16": {
+    "_platform_name": "Shal (continued)",
+    "_count": 7,
+    "rewards": {
+      "FluesterndeStadt1Item1": {
+        "quest_id": null,
+        "xp": 250,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "FluesterndeStadt2Item2": {
+        "quest_id": null,
+        "xp": 250,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "FluesterndeStadt3Item3": {
+        "quest_id": null,
+        "xp": 250,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "FluesterndeStadt4Endkampf": {
+        "quest_id": null,
+        "xp": 450,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "FluesterndeStadt5Maske": {
+        "quest_id": null,
+        "xp": 350,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AmraLeaGrab": {
+        "quest_id": null,
+        "xp": 800,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "MosaikDesTodes": {
+        "quest_id": null,
+        "xp": 800,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P17": {
+    "_platform_name": "The Shattered Wastes",
+    "_count": 6,
+    "rewards": {
+      "AufDemWall1Village1": {
+        "quest_id": null,
+        "xp": 200,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AufDemWall2Village2": {
+        "quest_id": null,
+        "xp": 300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AufDemWall3Village3": {
+        "quest_id": null,
+        "xp": 300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AufDemWall4Village4": {
+        "quest_id": null,
+        "xp": 300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AufDemWall5Endkampf": {
+        "quest_id": null,
+        "xp": 500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "GwensMedizin": {
+        "quest_id": null,
+        "xp": 600,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P19": {
+    "_platform_name": "The Magnet Stones",
+    "_count": 6,
+    "rewards": {
+      "DerPhoenix1Waechter": {
+        "quest_id": null,
+        "xp": 1000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DerPhoenix2Splitter1": {
+        "quest_id": null,
+        "xp": 800,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DerPhoenix3Splitter2": {
+        "quest_id": null,
+        "xp": 800,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DerPhoenix4Splitter3": {
+        "quest_id": null,
+        "xp": 800,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DerPhoenix5Splitter4": {
+        "quest_id": null,
+        "xp": 800,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DerPhoenix6Ablieferung": {
+        "quest_id": null,
+        "xp": 800,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P21": {
+    "_platform_name": "Tirganach",
+    "_count": 10,
+    "rewards": {
+      "WolfUndDrache1": {
+        "quest_id": null,
+        "xp": 200,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WolfUndDrache2": {
+        "quest_id": null,
+        "xp": 400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Steinbrecher": {
+        "quest_id": null,
+        "xp": 800,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Thar": {
+        "quest_id": null,
+        "xp": 600,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Money": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 50,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Schattenwelt2Rigour": {
+        "quest_id": null,
+        "xp": 300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Schattenwelt2aRigour": {
+        "quest_id": null,
+        "xp": 400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Schattenwelt2bRigour": {
+        "quest_id": null,
+        "xp": 600,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DerKatarakt": {
+        "quest_id": null,
+        "xp": 600,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ShardAutumn": {
+        "quest_id": null,
+        "xp": 400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P23": {
+    "_platform_name": "Siege of Mulandir",
+    "_count": 4,
+    "rewards": {
+      "DurchdenSpalt1Hin": {
+        "quest_id": null,
+        "xp": 1300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DurchdenSpalt2Her": {
+        "quest_id": null,
+        "xp": 1300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Ulather": {
+        "quest_id": null,
+        "xp": 800,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P25": {
+    "_platform_name": "Shadow Pass",
+    "_count": 4,
+    "rewards": {
+      "Klingensturm1Monument": {
+        "quest_id": null,
+        "xp": 1000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Klingensturm2Sartarius": {
+        "quest_id": null,
+        "xp": 2600,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AmraUndLea4": {
+        "quest_id": null,
+        "xp": 1200,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P27": {
+    "_platform_name": "The Undergound",
+    "_count": 4,
+    "rewards": {
+      "NachUrgath1Elfensiedlung": {
+        "quest_id": null,
+        "xp": 1000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "NachUrgath2Monument": {
+        "quest_id": null,
+        "xp": 1400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "NachUrgath3Archon": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P30": {
+    "_platform_name": "Crystal Wastes",
+    "_count": 2,
+    "rewards": {
+      "AtmenderWald1Waldherz": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AtmenderWald2Portal": {
+        "quest_id": null,
+        "xp": 3000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P32": {
+    "_platform_name": "Platform 32",
+    "_count": 4,
+    "rewards": {
+      "KreisSchluss1Tor1": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "KreisSchluss2Tor2": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "KreisSchluss3Tor3": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "KreisSchluss4Soulforger": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P63": {
+    "_platform_name": "Greyfell",
+    "_count": 36,
+    "rewards": {
+      "NachGraufurtPartVillage": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "XP": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "NachGraufurtPartEnde": {
+        "quest_id": null,
+        "xp": 10,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AngriffDerHoehlenorks": {
+        "quest_id": null,
+        "xp": 20,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Zauberwerk1Augenglas": {
+        "quest_id": null,
+        "xp": 10,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Zauberwerk2Feder": {
+        "quest_id": null,
+        "xp": 25,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Zauberwerk3Kreide": {
+        "quest_id": null,
+        "xp": 35,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Zauberwerk4Robe": {
+        "quest_id": null,
+        "xp": 120,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ZahnbrechersZangen": {
+        "quest_id": null,
+        "xp": 35,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WundtinkturValdis": {
+        "quest_id": null,
+        "xp": 30,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "BlutAdhiraTrank": {
+        "quest_id": null,
+        "xp": 4000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "BlutTombardTot": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SickHermit1Zirfar": {
+        "quest_id": null,
+        "xp": 600,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SickHermit2Locke": {
+        "quest_id": null,
+        "xp": 600,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Schattenwelt1Castagir": {
+        "quest_id": null,
+        "xp": 120,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Schattenwelt3Manifest": {
+        "quest_id": null,
+        "xp": 1000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SchattenweltShadowpulse": {
+        "quest_id": null,
+        "xp": 500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "EchosBuchstabe1": {
+        "quest_id": null,
+        "xp": 500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "EchosBuchstabe2": {
+        "quest_id": null,
+        "xp": 500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "EchosBuchstabe3": {
+        "quest_id": null,
+        "xp": 500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "EchosGoran": {
+        "quest_id": null,
+        "xp": 700,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "EchosShinTarGuar": {
+        "quest_id": null,
+        "xp": 1000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AmraUndLea3Sentos": {
+        "quest_id": null,
+        "xp": 500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Zwergendienste1Hinrik": {
+        "quest_id": null,
+        "xp": 120,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Schwarzeibe": {
+        "quest_id": null,
+        "xp": 35,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Seelenschwerter": {
+        "quest_id": null,
+        "xp": 600,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "KlingzogsBeinlinge": {
+        "quest_id": null,
+        "xp": 35,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ThurgonBrief": {
+        "quest_id": null,
+        "xp": 250,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Money": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 2,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "FeineStoffe3Seide": {
+        "quest_id": null,
+        "xp": 400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "FeineStoffe4Robe": {
+        "quest_id": null,
+        "xp": 1100,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Drachenpanzer1": {
+        "quest_id": null,
+        "xp": 100,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Drachenpanzer2": {
+        "quest_id": null,
+        "xp": 800,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "TricksterFindFlink": {
+        "quest_id": null,
+        "xp": 500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "TricksterReturn": {
+        "quest_id": null,
+        "xp": 1000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P101": {
+    "_platform_name": "Platform 101",
+    "_count": 6,
+    "rewards": {
+      "ImCampMitAllenGeredet": {
+        "quest_id": null,
+        "xp": 15,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "HeldenErschaffen": {
+        "quest_id": null,
+        "xp": 45,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "HQBefreien": {
+        "quest_id": null,
+        "xp": 150,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "FluechtlingeNachNorden": {
+        "quest_id": null,
+        "xp": 150,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WumpusKilled": {
+        "quest_id": null,
+        "xp": 550,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P102": {
+    "_platform_name": "Platform 102",
+    "_count": 15,
+    "rewards": {
+      "P102Erreicht": {
+        "quest_id": null,
+        "xp": 30,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "JaninaBefreit": {
+        "quest_id": null,
+        "xp": 65,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "HuluErreicht": {
+        "quest_id": null,
+        "xp": 65,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SetriusErreicht": {
+        "quest_id": null,
+        "xp": 65,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "QuelleVergiftet": {
+        "quest_id": null,
+        "xp": 65,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "KitharLagerZerstoert": {
+        "quest_id": null,
+        "xp": 175,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "RuneDunhanGenommen": {
+        "quest_id": null,
+        "xp": 175,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DreiMagierZolowinFree": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DreiMagierZolowinGive": {
+        "quest_id": null,
+        "xp": 55,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DreiMagierGruolunGive": {
+        "quest_id": null,
+        "xp": 55,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DreiMagierRenyaGive": {
+        "quest_id": null,
+        "xp": 35,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DreiMagierZolowinSave": {
+        "quest_id": null,
+        "xp": 250,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DreiMagierGruolunSave": {
+        "quest_id": null,
+        "xp": 250,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DreiMagierRenyaSave": {
+        "quest_id": null,
+        "xp": 250,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P103": {
+    "_platform_name": "Platform 103",
+    "_count": 3,
+    "rewards": {
+      "P103Erreicht": {
+        "quest_id": null,
+        "xp": 75,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WaldschrateKilled": {
+        "quest_id": null,
+        "xp": 250,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "RuneReowysGenommen": {
+        "quest_id": null,
+        "xp": 500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P104": {
+    "_platform_name": "Platform 104",
+    "_count": 9,
+    "rewards": {
+      "P104Erreicht": {
+        "quest_id": null,
+        "xp": 125,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Camp1Befreit": {
+        "quest_id": null,
+        "xp": 200,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Camp2Befreit": {
+        "quest_id": null,
+        "xp": 200,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Camp3Befreit": {
+        "quest_id": null,
+        "xp": 200,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "OrklagerEinnehmen": {
+        "quest_id": null,
+        "xp": 175,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Schluesselmeisterin": {
+        "quest_id": null,
+        "xp": 350,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQTiondriaSeite1Gefunden": {
+        "quest_id": null,
+        "xp": 500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQTiondriaSeite2Gefunden": {
+        "quest_id": null,
+        "xp": 500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQTiondriaSeite3Gefunden": {
+        "quest_id": null,
+        "xp": 500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P105": {
+    "_platform_name": "Platform 105",
+    "_count": 14,
+    "rewards": {
+      "FugisBroughtToMap": {
+        "quest_id": null,
+        "xp": 175,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "FugisBroughtToTirganach": {
+        "quest_id": null,
+        "xp": 450,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQTiondriaBuchDariusGefunden": {
+        "quest_id": null,
+        "xp": 300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQTiondriaBuchDariusZurueck": {
+        "quest_id": null,
+        "xp": 400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQTiondriaFlinkBefreit": {
+        "quest_id": null,
+        "xp": 250,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQTiondriaSchatzGeteilt": {
+        "quest_id": null,
+        "xp": 2500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Money": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 30,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQTiondriaSchatzBehalten": {
+        "quest_id": null,
+        "xp": 250,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQTiondriaMordfallSolved": {
+        "quest_id": null,
+        "xp": 1300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQTiondriaMordfallHalfSolved": {
+        "quest_id": null,
+        "xp": 750,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQTiondriaMordfallNotSolved": {
+        "quest_id": null,
+        "xp": 100,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQScaramangirKilled": {
+        "quest_id": null,
+        "xp": 1500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SkeletonCampDestroyed": {
+        "quest_id": null,
+        "xp": 850,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P107": {
+    "_platform_name": "Platform 107",
+    "_count": 3,
+    "rewards": {
+      "P107KarteErreicht": {
+        "quest_id": null,
+        "xp": 275,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "GeistercampBesiegt": {
+        "quest_id": null,
+        "xp": 1150,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AnfuehrerBesiegt": {
+        "quest_id": null,
+        "xp": 1150,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P108": {
+    "_platform_name": "Platform 108",
+    "_count": 6,
+    "rewards": {
+      "P108KarteErreicht": {
+        "quest_id": null,
+        "xp": 350,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "GuramMachtSprengung": {
+        "quest_id": null,
+        "xp": 550,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WindjalfBefreit": {
+        "quest_id": null,
+        "xp": 1150,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "RueckkehrMitWindjalf": {
+        "quest_id": null,
+        "xp": 1250,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQTiondriaSchatzGefunden": {
+        "quest_id": null,
+        "xp": 550,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "MasterOfMosaic": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P109": {
+    "_platform_name": "Platform 109",
+    "_count": 10,
+    "rewards": {
+      "P109KarteErreicht": {
+        "quest_id": null,
+        "xp": 350,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "P109PortalErreicht": {
+        "quest_id": null,
+        "xp": 350,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ZwergeBefreit": {
+        "quest_id": null,
+        "xp": 550,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "TorZerstoert": {
+        "quest_id": null,
+        "xp": 750,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "TrollcampZerstoert": {
+        "quest_id": null,
+        "xp": 900,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WerwolfTempel1": {
+        "quest_id": null,
+        "xp": 350,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WerwolfTempel2": {
+        "quest_id": null,
+        "xp": 350,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WerwolfTempel3": {
+        "quest_id": null,
+        "xp": 350,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WerwolfGesamt": {
+        "quest_id": null,
+        "xp": 550,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P110": {
+    "_platform_name": "Platform 110",
+    "_count": 6,
+    "rewards": {
+      "P110KarteErreicht": {
+        "quest_id": null,
+        "xp": 350,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SternstadtZerstoert": {
+        "quest_id": null,
+        "xp": 600,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "MondstadtZerstoert": {
+        "quest_id": null,
+        "xp": 600,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SonnenstadtZerstoert": {
+        "quest_id": null,
+        "xp": 600,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "InInnenstadtGekommen": {
+        "quest_id": null,
+        "xp": 700,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "GrimBesiegt": {
+        "quest_id": null,
+        "xp": 750,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P111": {
+    "_platform_name": "Platform 111",
+    "_count": 6,
+    "rewards": {
+      "P111KarteErreicht": {
+        "quest_id": null,
+        "xp": 350,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SchattenringBekommen": {
+        "quest_id": null,
+        "xp": 500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ElementBeschworen": {
+        "quest_id": null,
+        "xp": 600,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AlleVierFackelnAn": {
+        "quest_id": null,
+        "xp": 1000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WaechterGetoetet": {
+        "quest_id": null,
+        "xp": 1000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQTiondriaObjekteEingesetzt": {
+        "quest_id": null,
+        "xp": 350,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P113": {
+    "_platform_name": "Platform 113",
+    "_count": 6,
+    "rewards": {
+      "P113KarteErreicht": {
+        "quest_id": null,
+        "xp": 350,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Boss1Getoetet": {
+        "quest_id": null,
+        "xp": 700,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Boss2Getoetet": {
+        "quest_id": null,
+        "xp": 700,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Boss3Getoetet": {
+        "quest_id": null,
+        "xp": 700,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Boss4Getoetet": {
+        "quest_id": null,
+        "xp": 700,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "FialDargTotCenwenFrei": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P115": {
+    "_platform_name": "Platform 115",
+    "_count": 11,
+    "rewards": {
+      "P115KarteErreicht": {
+        "quest_id": null,
+        "xp": 400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Drachenstein1": {
+        "quest_id": null,
+        "xp": 450,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Drachenstein2": {
+        "quest_id": null,
+        "xp": 450,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Drachenstein3": {
+        "quest_id": null,
+        "xp": 450,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Drachenstein4": {
+        "quest_id": null,
+        "xp": 450,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Drachenstein5": {
+        "quest_id": null,
+        "xp": 450,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Drachenstein6": {
+        "quest_id": null,
+        "xp": 450,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Drachenstein7": {
+        "quest_id": null,
+        "xp": 1000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Drachenstein8": {
+        "quest_id": null,
+        "xp": 1000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Drachenstein9": {
+        "quest_id": null,
+        "xp": 1000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DracheGetoetet": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P200": {
+    "_platform_name": "Platform 200",
+    "_count": 13,
+    "rewards": {
+      "ColosseumRunde01Sieg": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Money": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 5000,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ColosseumRunde02Sieg": {
+        "quest_id": null,
+        "xp": 8000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ColosseumRunde03Sieg": {
+        "quest_id": null,
+        "xp": 9000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ColosseumRunde04Sieg": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ColosseumRunde05Sieg": {
+        "quest_id": null,
+        "xp": 12500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ColosseumRunde06Sieg": {
+        "quest_id": null,
+        "xp": 15000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ColosseumRunde07Sieg": {
+        "quest_id": null,
+        "xp": 17500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ColosseumRunde08Sieg": {
+        "quest_id": null,
+        "xp": 20500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ColosseumRunde09Sieg": {
+        "quest_id": null,
+        "xp": 25000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ColosseumRunde10Sieg": {
+        "quest_id": null,
+        "xp": 30000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "GoblinRennen": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P201": {
+    "_platform_name": "Platform 201",
+    "_count": 13,
+    "rewards": {
+      "InsCampGekommen": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "RingGefunden": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "UriasBefreit": {
+        "quest_id": null,
+        "xp": 8000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "CampsZerstoert": {
+        "quest_id": null,
+        "xp": 15000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Ordensritter1Befreit": {
+        "quest_id": null,
+        "xp": 4000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Ordensritter2Befreit": {
+        "quest_id": null,
+        "xp": 4000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Ordensritter3Befreit": {
+        "quest_id": null,
+        "xp": 4000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "LeutnantGesprochen": {
+        "quest_id": null,
+        "xp": 3500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ErstenDrachenGetoetet": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ZweitenDrachenGetoetet": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DrittenDrachenGetoetet": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ViertenDrachenGetoetet": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "GurimLebt": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P202": {
+    "_platform_name": "Platform 202",
+    "_count": 17,
+    "rewards": {
+      "HeldenBeschworen": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "GrabmalGeoeffnet": {
+        "quest_id": null,
+        "xp": 12000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "UrneZuHokan": {
+        "quest_id": null,
+        "xp": 16000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Seelenwesen1": {
+        "quest_id": null,
+        "xp": 2400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Seelenwesen2": {
+        "quest_id": null,
+        "xp": 2400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Seelenwesen3": {
+        "quest_id": null,
+        "xp": 2400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Seelenwesen4": {
+        "quest_id": null,
+        "xp": 2400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Seelenwesen5": {
+        "quest_id": null,
+        "xp": 2400,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WachgeistTot": {
+        "quest_id": null,
+        "xp": 4000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "OpferFreigelassen": {
+        "quest_id": null,
+        "xp": 6000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "OpferTot": {
+        "quest_id": null,
+        "xp": 6000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "TorZurStaetteOffen": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "HlStaetteBaumGepflanzt": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AschetaenzerTot": {
+        "quest_id": null,
+        "xp": 12000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "GnomlingBossTot": {
+        "quest_id": null,
+        "xp": 8000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ExtinctTuermeWeg": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ResistenteGargoyle1Tot": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P203": {
+    "_platform_name": "Platform 203",
+    "_count": 9,
+    "rewards": {
+      "P203KarteErreicht": {
+        "quest_id": null,
+        "xp": 1500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "BlockadeDurchbrochen": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DialogMitAeltestem": {
+        "quest_id": null,
+        "xp": 6000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Geheimweg": {
+        "quest_id": null,
+        "xp": 9000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ZerstoerungDesLagers": {
+        "quest_id": null,
+        "xp": 24000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "LichkoenigTot": {
+        "quest_id": null,
+        "xp": 4000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "TantaroGefunden": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WasserEntgiften": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ZuTarioGegangen": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P204": {
+    "_platform_name": "Platform 204",
+    "_count": 25,
+    "rewards": {
+      "P204KarteErreicht": {
+        "quest_id": null,
+        "xp": 3000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "FlinkAbgeliefert": {
+        "quest_id": null,
+        "xp": 5500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Tor1DurchTrickGeoeffnet": {
+        "quest_id": null,
+        "xp": 11000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Tor2DurchTrickGeoeffnet": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Tor3DurchTrickGeoeffnet": {
+        "quest_id": null,
+        "xp": 9000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "OberstadtRechtsErreicht": {
+        "quest_id": null,
+        "xp": 6500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "OberstadtLinksErreicht": {
+        "quest_id": null,
+        "xp": 6500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "PalastgartenErreicht": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "LyrioQuestGeloest": {
+        "quest_id": null,
+        "xp": 6000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "IshtarTraumstabGebracht": {
+        "quest_id": null,
+        "xp": 4000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "TruppenZumPortalGesandt": {
+        "quest_id": null,
+        "xp": 9000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ArenaKampf32": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ArenaKampf36": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ArenaKampf38": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ArenaKampf40": {
+        "quest_id": null,
+        "xp": 12500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ArenaKampf42": {
+        "quest_id": null,
+        "xp": 15000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQSethHealed": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQBotschafterGefunden": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQBotschafterTot": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQCraigIstBotschafter": {
+        "quest_id": null,
+        "xp": 20000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQSchutzgeldSmall": {
+        "quest_id": null,
+        "xp": 6000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQSchutzgeldMedium": {
+        "quest_id": null,
+        "xp": 12000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQSchutzgeldLarge": {
+        "quest_id": null,
+        "xp": 18000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQHaendlerFriedlich": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SQAuftragGescheitert": {
+        "quest_id": null,
+        "xp": 3000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P205": {
+    "_platform_name": "Platform 205",
+    "_count": 9,
+    "rewards": {
+      "P205KarteErreicht": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Nymphe1Befreit": {
+        "quest_id": null,
+        "xp": 6000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Nymphe2Befreit": {
+        "quest_id": null,
+        "xp": 6000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Nymphe3Befreit": {
+        "quest_id": null,
+        "xp": 6000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SpinnencampZerstoert": {
+        "quest_id": null,
+        "xp": 8000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "GartenEntgiftet": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "MitDryadeGesprochen": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SmallIrfitReward": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "LargeIrfitReward": {
+        "quest_id": null,
+        "xp": 13000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P206": {
+    "_platform_name": "Platform 206",
+    "_count": 11,
+    "rewards": {
+      "P206KarteErreicht": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "RastplatzGefunden": {
+        "quest_id": null,
+        "xp": 4500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DialogMitUnterhaendler": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "FalleAusgeloest": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Lager1Kaputtgemacht": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Lager2Kaputtgemacht": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AlleinEinenWegGefunden": {
+        "quest_id": null,
+        "xp": 6500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "KarawaneLosgelaufen": {
+        "quest_id": null,
+        "xp": 10300,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AlleTrolleKommenAn": {
+        "quest_id": null,
+        "xp": 12000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "VieleTrolleKommenAn": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WenigeTrolleKommenAn": {
+        "quest_id": null,
+        "xp": 3000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P207": {
+    "_platform_name": "Platform 207",
+    "_count": 9,
+    "rewards": {
+      "P207KarteErreicht": {
+        "quest_id": null,
+        "xp": 4500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "BergrieseGeholfen": {
+        "quest_id": null,
+        "xp": 6500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SprengzwergBefreit": {
+        "quest_id": null,
+        "xp": 8500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ErsteFestungBesiegt": {
+        "quest_id": null,
+        "xp": 9500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SchalterraetselGeloest": {
+        "quest_id": null,
+        "xp": 7500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ZweiteFestungBesiegt": {
+        "quest_id": null,
+        "xp": 9500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DritteFestungBesiegt": {
+        "quest_id": null,
+        "xp": 9500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "VierteFestungBesiegt": {
+        "quest_id": null,
+        "xp": 9500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "UndeadRohenGetoetet": {
+        "quest_id": null,
+        "xp": 12000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P208": {
+    "_platform_name": "Platform 208",
+    "_count": 22,
+    "rewards": {
+      "P208KarteErreicht": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Prinzessin1Befreit": {
+        "quest_id": null,
+        "xp": 3000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Prinzessin2Befreit": {
+        "quest_id": null,
+        "xp": 3000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Prinzessin3Befreit": {
+        "quest_id": null,
+        "xp": 3000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Prinzessin4Befreit": {
+        "quest_id": null,
+        "xp": 3000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Prinzessin5Befreit": {
+        "quest_id": null,
+        "xp": 3000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Wolfcamp1Zerstoert": {
+        "quest_id": null,
+        "xp": 2500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Wolfcamp2Zerstoert": {
+        "quest_id": null,
+        "xp": 2500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Wolfcamp3Zerstoert": {
+        "quest_id": null,
+        "xp": 2500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Wolfcamp4Zerstoert": {
+        "quest_id": null,
+        "xp": 2500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Wolfcamp5Zerstoert": {
+        "quest_id": null,
+        "xp": 2500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Wolfcamp6Zerstoert": {
+        "quest_id": null,
+        "xp": 2500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Wolfcamp7Zerstoert": {
+        "quest_id": null,
+        "xp": 2500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "KopfloserTodVernichtet": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Gremlinlager1Zerstoert": {
+        "quest_id": null,
+        "xp": 3000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Gremlinlager2Zerstoert": {
+        "quest_id": null,
+        "xp": 3000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Gremlinlager3Zerstoert": {
+        "quest_id": null,
+        "xp": 3000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Gremlinlager4Zerstoert": {
+        "quest_id": null,
+        "xp": 3000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Gremlinlager5Zerstoert": {
+        "quest_id": null,
+        "xp": 3000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ArgamunVerwandeltSich": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "MasterGameWon": {
+        "quest_id": null,
+        "xp": 30000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Items": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P209": {
+    "_platform_name": "Platform 209",
+    "_count": 21,
+    "rewards": {
+      "P209KarteErreicht": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "UntotenlagerNord": {
+        "quest_id": null,
+        "xp": 9000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "UntotenlagerWest": {
+        "quest_id": null,
+        "xp": 9000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "UntotenlagerSued": {
+        "quest_id": null,
+        "xp": 9000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "StadtKathaiErreicht": {
+        "quest_id": null,
+        "xp": 6000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "GespraechMitKhal": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "UruSpricht1": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "KathaiStadtTorOffen": {
+        "quest_id": null,
+        "xp": 8000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "KathaiStadtBefreit": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "UruSpricht2": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "HolyArtefact1Gefunden": {
+        "quest_id": null,
+        "xp": 4000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "HolyArtefact2Gefunden": {
+        "quest_id": null,
+        "xp": 4000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "XalabarInArenaBesiegt": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "UruSpricht3": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "UruSpricht4": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ZwergenMonumentClaimed": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "LeaderNordarmeeKilled": {
+        "quest_id": null,
+        "xp": 8000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "LeaderSuedarmeeKilled": {
+        "quest_id": null,
+        "xp": 8000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "LeaderHauptarmeeKilled": {
+        "quest_id": null,
+        "xp": 8000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "BronzerieseGetoetet": {
+        "quest_id": null,
+        "xp": 12000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "UruSpricht5": {
+        "quest_id": null,
+        "xp": 2000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P210": {
+    "_platform_name": "Platform 210",
+    "_count": 16,
+    "rewards": {
+      "P210KarteErreicht": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "EntryMenhirComboCorrect": {
+        "quest_id": null,
+        "xp": 3500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AugenSet1Solved": {
+        "quest_id": null,
+        "xp": 3500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AugenSet2Solved": {
+        "quest_id": null,
+        "xp": 3500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AugenSet3Solved": {
+        "quest_id": null,
+        "xp": 3500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AugenSet4Solved": {
+        "quest_id": null,
+        "xp": 3500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Room2SensoSolved": {
+        "quest_id": null,
+        "xp": 14000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "LastChestInRoom5Opened": {
+        "quest_id": null,
+        "xp": 20000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Room6SpiderGateOpened": {
+        "quest_id": null,
+        "xp": 15000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "TurningHeadsCrossed": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AirCoinPassageOpened": {
+        "quest_id": null,
+        "xp": 15000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Room4SkeletonDoorOpened": {
+        "quest_id": null,
+        "xp": 15000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Room7ChessboardCrossed": {
+        "quest_id": null,
+        "xp": 15000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Room3HeadDoorOpened": {
+        "quest_id": null,
+        "xp": 45000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SceptreOfWindsFound": {
+        "quest_id": null,
+        "xp": 20000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "ExitDoorToP211Opened": {
+        "quest_id": null,
+        "xp": 25000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P211": {
+    "_platform_name": "Platform 211",
+    "_count": 13,
+    "rewards": {
+      "P211KarteErreicht": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "TorJenquaiGeoeffnet": {
+        "quest_id": null,
+        "xp": 6500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "MonumenteElfClaimed": {
+        "quest_id": null,
+        "xp": 4000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "MonumenteZwerg1Claimed": {
+        "quest_id": null,
+        "xp": 4000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "MonumenteZwerg2Claimed": {
+        "quest_id": null,
+        "xp": 4000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DschungelCamp1Killed": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DschungelCamp2Killed": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DschungelCamp3Killed": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DschungelCamp4Killed": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "CraigBefreit": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "SchattenklingeBefreit": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WerwolfAbgelenkt": {
+        "quest_id": null,
+        "xp": 15000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "EndgegnerSoulforgerKilled": {
+        "quest_id": null,
+        "xp": 15000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P212": {
+    "_platform_name": "Platform 212",
+    "_count": 9,
+    "rewards": {
+      "P212KarteErreicht": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "MiniforgersKilled": {
+        "quest_id": null,
+        "xp": 30000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Stele1Off": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Stele2Off": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Stele3Off": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Stele4Off": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Stele5Off": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Stele6Off": {
+        "quest_id": null,
+        "xp": 7000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "AlleStelenOff": {
+        "quest_id": null,
+        "xp": 20000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  },
+  "P213": {
+    "_platform_name": "Platform 213",
+    "_count": 7,
+    "rewards": {
+      "P213KarteErreicht": {
+        "quest_id": null,
+        "xp": 5000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "DschungelWeisenDialog": {
+        "quest_id": null,
+        "xp": 8000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "BeideMumienCampsPlatt": {
+        "quest_id": null,
+        "xp": 15000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "NahrungFuerAffenjunge": {
+        "quest_id": null,
+        "xp": 10000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "WegZumTorFreigeraeumt": {
+        "quest_id": null,
+        "xp": 17500,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "BlutigenDariusBefreit": {
+        "quest_id": null,
+        "xp": 30000,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      },
+      "Conditions": {
+        "quest_id": null,
+        "xp": 0,
+        "gold": 0,
+        "silver": 0,
+        "copper": 0,
+        "items": [],
+        "comment": ""
+      }
+    }
+  }
+}
