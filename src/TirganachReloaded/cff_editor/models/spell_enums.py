@@ -13,6 +13,7 @@ class MagicSchool(Enum):
     BLACK = 3    # Necromancy/Dark magic
     MENTAL = 4   # Mind/Illusion magic
     EARTH = 5    # Earth elemental
+    CUSTOM = 99   # Custom user-defined school
 
 
 class SpellType(Enum):

@@ -1,0 +1,703 @@
+{
+  "extraction_stats": {
+    "atlases_found": 432,
+    "atlases_converted": 432,
+    "icons_extracted": 110592,
+    "patterns_detected": {
+      "atlas_0": {
+        "single_icons": 53,
+        "horizontal_pairs": 35,
+        "horizontal_quads": 14,
+        "empty_slots": 105,
+        "weapons_created": 49
+      },
+      "atlas_1": {
+        "single_icons": 58,
+        "horizontal_pairs": 29,
+        "horizontal_quads": 0,
+        "empty_slots": 140,
+        "weapons_created": 29
+      },
+      "atlas_2": {
+        "single_icons": 53,
+        "horizontal_pairs": 37,
+        "horizontal_quads": 19,
+        "empty_slots": 91,
+        "weapons_created": 56
+      },
+      "atlas_3": {
+        "single_icons": 52,
+        "horizontal_pairs": 44,
+        "horizontal_quads": 34,
+        "empty_slots": 48,
+        "weapons_created": 78
+      },
+      "atlas_4": {
+        "single_icons": 47,
+        "horizontal_pairs": 39,
+        "horizontal_quads": 8,
+        "empty_slots": 115,
+        "weapons_created": 47
+      },
+      "atlas_5": {
+        "single_icons": 49,
+        "horizontal_pairs": 38,
+        "horizontal_quads": 16,
+        "empty_slots": 99,
+        "weapons_created": 54
+      },
+      "atlas_6": {
+        "single_icons": 56,
+        "horizontal_pairs": 41,
+        "horizontal_quads": 8,
+        "empty_slots": 102,
+        "weapons_created": 49
+      },
+      "atlas_7": {
+        "single_icons": 47,
+        "horizontal_pairs": 41,
+        "horizontal_quads": 5,
+        "empty_slots": 117,
+        "weapons_created": 46
+      },
+      "atlas_8": {
+        "single_icons": 49,
+        "horizontal_pairs": 34,
+        "horizontal_quads": 12,
+        "empty_slots": 115,
+        "weapons_created": 46
+      },
+      "atlas_9": {
+        "single_icons": 47,
+        "horizontal_pairs": 36,
+        "horizontal_quads": 16,
+        "empty_slots": 105,
+        "weapons_created": 52
+      },
+      "atlas_10": {
+        "single_icons": 46,
+        "horizontal_pairs": 34,
+        "horizontal_quads": 20,
+        "empty_slots": 102,
+        "weapons_created": 54
+      },
+      "atlas_11": {
+        "single_icons": 57,
+        "horizontal_pairs": 35,
+        "horizontal_quads": 9,
+        "empty_slots": 111,
+        "weapons_created": 44
+      },
+      "atlas_12": {
+        "single_icons": 56,
+        "horizontal_pairs": 45,
+        "horizontal_quads": 25,
+        "empty_slots": 60,
+        "weapons_created": 70
+      },
+      "atlas_13": {
+        "single_icons": 54,
+        "horizontal_pairs": 41,
+        "horizontal_quads": 13,
+        "empty_slots": 94,
+        "weapons_created": 54
+      },
+      "atlas_14": {
+        "single_icons": 45,
+        "horizontal_pairs": 37,
+        "horizontal_quads": 13,
+        "empty_slots": 111,
+        "weapons_created": 50
+      },
+      "atlas_15": {
+        "single_icons": 65,
+        "horizontal_pairs": 43,
+        "horizontal_quads": 12,
+        "empty_slots": 81,
+        "weapons_created": 55
+      },
+      "atlas_16": {
+        "single_icons": 61,
+        "horizontal_pairs": 46,
+        "horizontal_quads": 12,
+        "empty_slots": 79,
+        "weapons_created": 58
+      },
+      "atlas_17": {
+        "single_icons": 61,
+        "horizontal_pairs": 40,
+        "horizontal_quads": 9,
+        "empty_slots": 97,
+        "weapons_created": 49
+      },
+      "atlas_18": {
+        "single_icons": 49,
+        "horizontal_pairs": 26,
+        "horizontal_quads": 1,
+        "empty_slots": 153,
+        "weapons_created": 27
+      },
+      "atlas_19": {
+        "single_icons": 49,
+        "horizontal_pairs": 22,
+        "horizontal_quads": 0,
+        "empty_slots": 163,
+        "weapons_created": 22
+      },
+      "atlas_20": {
+        "single_icons": 55,
+        "horizontal_pairs": 38,
+        "horizontal_quads": 11,
+        "empty_slots": 103,
+        "weapons_created": 49
+      },
+      "atlas_21": {
+        "single_icons": 57,
+        "horizontal_pairs": 44,
+        "horizontal_quads": 21,
+        "empty_slots": 69,
+        "weapons_created": 65
+      },
+      "atlas_22": {
+        "single_icons": 54,
+        "horizontal_pairs": 42,
+        "horizontal_quads": 18,
+        "empty_slots": 82,
+        "weapons_created": 60
+      },
+      "atlas_23": {
+        "single_icons": 51,
+        "horizontal_pairs": 44,
+        "horizontal_quads": 23,
+        "empty_slots": 71,
+        "weapons_created": 67
+      },
+      "atlas_24": {
+        "single_icons": 47,
+        "horizontal_pairs": 36,
+        "horizontal_quads": 16,
+        "empty_slots": 105,
+        "weapons_created": 52
+      },
+      "atlas_25": {
+        "single_icons": 41,
+        "horizontal_pairs": 30,
+        "horizontal_quads": 11,
+        "empty_slots": 133,
+        "weapons_created": 41
+      },
+      "atlas_26": {
+        "single_icons": 48,
+        "horizontal_pairs": 38,
+        "horizontal_quads": 20,
+        "empty_slots": 92,
+        "weapons_created": 58
+      },
+      "atlas_27": {
+        "single_icons": 45,
+        "horizontal_pairs": 37,
+        "horizontal_quads": 15,
+        "empty_slots": 107,
+        "weapons_created": 52
+      },
+      "atlas_28": {
+        "single_icons": 51,
+        "horizontal_pairs": 38,
+        "horizontal_quads": 16,
+        "empty_slots": 97,
+        "weapons_created": 54
+      },
+      "atlas_29": {
+        "single_icons": 49,
+        "horizontal_pairs": 44,
+        "horizontal_quads": 23,
+        "empty_slots": 73,
+        "weapons_created": 67
+      },
+      "atlas_30": {
+        "single_icons": 59,
+        "horizontal_pairs": 38,
+        "horizontal_quads": 14,
+        "empty_slots": 93,
+        "weapons_created": 52
+      },
+      "atlas_31": {
+        "single_icons": 57,
+        "horizontal_pairs": 42,
+        "horizontal_quads": 19,
+        "empty_slots": 77,
+        "weapons_created": 61
+      },
+      "atlas_32": {
+        "single_icons": 40,
+        "horizontal_pairs": 32,
+        "horizontal_quads": 13,
+        "empty_slots": 126,
+        "weapons_created": 45
+      },
+      "atlas_33": {
+        "single_icons": 58,
+        "horizontal_pairs": 42,
+        "horizontal_quads": 30,
+        "empty_slots": 54,
+        "weapons_created": 72
+      },
+      "atlas_34": {
+        "single_icons": 54,
+        "horizontal_pairs": 48,
+        "horizontal_quads": 37,
+        "empty_slots": 32,
+        "weapons_created": 85
+      },
+      "atlas_35": {
+        "single_icons": 47,
+        "horizontal_pairs": 43,
+        "horizontal_quads": 26,
+        "empty_slots": 71,
+        "weapons_created": 69
+      },
+      "atlas_36": {
+        "single_icons": 55,
+        "horizontal_pairs": 45,
+        "horizontal_quads": 23,
+        "empty_slots": 65,
+        "weapons_created": 68
+      },
+      "atlas_37": {
+        "single_icons": 57,
+        "horizontal_pairs": 45,
+        "horizontal_quads": 15,
+        "empty_slots": 79,
+        "weapons_created": 60
+      },
+      "atlas_38": {
+        "single_icons": 42,
+        "horizontal_pairs": 36,
+        "horizontal_quads": 16,
+        "empty_slots": 110,
+        "weapons_created": 52
+      },
+      "atlas_39": {
+        "single_icons": 56,
+        "horizontal_pairs": 46,
+        "horizontal_quads": 30,
+        "empty_slots": 48,
+        "weapons_created": 76
+      },
+      "atlas_40": {
+        "single_icons": 45,
+        "horizontal_pairs": 41,
+        "horizontal_quads": 31,
+        "empty_slots": 67,
+        "weapons_created": 72
+      },
+      "atlas_41": {
+        "single_icons": 49,
+        "horizontal_pairs": 40,
+        "horizontal_quads": 19,
+        "empty_slots": 89,
+        "weapons_created": 59
+      },
+      "atlas_42": {
+        "single_icons": 47,
+        "horizontal_pairs": 35,
+        "horizontal_quads": 16,
+        "empty_slots": 107,
+        "weapons_created": 51
+      },
+      "atlas_43": {
+        "single_icons": 45,
+        "horizontal_pairs": 35,
+        "horizontal_quads": 9,
+        "empty_slots": 123,
+        "weapons_created": 44
+      },
+      "atlas_44": {
+        "single_icons": 42,
+        "horizontal_pairs": 29,
+        "horizontal_quads": 4,
+        "empty_slots": 148,
+        "weapons_created": 33
+      },
+      "atlas_45": {
+        "single_icons": 41,
+        "horizontal_pairs": 32,
+        "horizontal_quads": 18,
+        "empty_slots": 115,
+        "weapons_created": 50
+      },
+      "atlas_46": {
+        "single_icons": 39,
+        "horizontal_pairs": 35,
+        "horizontal_quads": 25,
+        "empty_slots": 97,
+        "weapons_created": 60
+      },
+      "atlas_47": {
+        "single_icons": 42,
+        "horizontal_pairs": 38,
+        "horizontal_quads": 26,
+        "empty_slots": 86,
+        "weapons_created": 64
+      },
+      "atlas_48": {
+        "single_icons": 40,
+        "horizontal_pairs": 33,
+        "horizontal_quads": 22,
+        "empty_slots": 106,
+        "weapons_created": 55
+      },
+      "atlas_49": {
+        "single_icons": 41,
+        "horizontal_pairs": 36,
+        "horizontal_quads": 20,
+        "empty_slots": 103,
+        "weapons_created": 56
+      },
+      "atlas_50": {
+        "single_icons": 33,
+        "horizontal_pairs": 32,
+        "horizontal_quads": 25,
+        "empty_slots": 109,
+        "weapons_created": 57
+      },
+      "atlas_51": {
+        "single_icons": 48,
+        "horizontal_pairs": 46,
+        "horizontal_quads": 32,
+        "empty_slots": 52,
+        "weapons_created": 78
+      },
+      "atlas_52": {
+        "single_icons": 47,
+        "horizontal_pairs": 46,
+        "horizontal_quads": 35,
+        "empty_slots": 47,
+        "weapons_created": 81
+      },
+      "atlas_53": {
+        "single_icons": 48,
+        "horizontal_pairs": 46,
+        "horizontal_quads": 36,
+        "empty_slots": 44,
+        "weapons_created": 82
+      },
+      "atlas_54": {
+        "single_icons": 48,
+        "horizontal_pairs": 46,
+        "horizontal_quads": 36,
+        "empty_slots": 44,
+        "weapons_created": 82
+      },
+      "atlas_55": {
+        "single_icons": 48,
+        "horizontal_pairs": 45,
+        "horizontal_quads": 31,
+        "empty_slots": 56,
+        "weapons_created": 76
+      },
+      "atlas_56": {
+        "single_icons": 43,
+        "horizontal_pairs": 32,
+        "horizontal_quads": 19,
+        "empty_slots": 111,
+        "weapons_created": 51
+      },
+      "atlas_57": {
+        "single_icons": 46,
+        "horizontal_pairs": 45,
+        "horizontal_quads": 25,
+        "empty_slots": 70,
+        "weapons_created": 70
+      },
+      "atlas_58": {
+        "single_icons": 43,
+        "horizontal_pairs": 39,
+        "horizontal_quads": 25,
+        "empty_slots": 85,
+        "weapons_created": 64
+      },
+      "atlas_59": {
+        "single_icons": 38,
+        "horizontal_pairs": 34,
+        "horizontal_quads": 19,
+        "empty_slots": 112,
+        "weapons_created": 53
+      },
+      "atlas_60": {
+        "single_icons": 37,
+        "horizontal_pairs": 36,
+        "horizontal_quads": 21,
+        "empty_slots": 105,
+        "weapons_created": 57
+      },
+      "atlas_61": {
+        "single_icons": 38,
+        "horizontal_pairs": 33,
+        "horizontal_quads": 21,
+        "empty_slots": 110,
+        "weapons_created": 54
+      },
+      "atlas_62": {
+        "single_icons": 36,
+        "horizontal_pairs": 34,
+        "horizontal_quads": 19,
+        "empty_slots": 114,
+        "weapons_created": 53
+      },
+      "atlas_63": {
+        "single_icons": 39,
+        "horizontal_pairs": 36,
+        "horizontal_quads": 22,
+        "empty_slots": 101,
+        "weapons_created": 58
+      },
+      "atlas_64": {
+        "single_icons": 36,
+        "horizontal_pairs": 31,
+        "horizontal_quads": 17,
+        "empty_slots": 124,
+        "weapons_created": 48
+      },
+      "atlas_65": {
+        "single_icons": 37,
+        "horizontal_pairs": 32,
+        "horizontal_quads": 15,
+        "empty_slots": 125,
+        "weapons_created": 47
+      },
+      "atlas_66": {
+        "single_icons": 38,
+        "horizontal_pairs": 33,
+        "horizontal_quads": 16,
+        "empty_slots": 120,
+        "weapons_created": 49
+      },
+      "atlas_67": {
+        "single_icons": 39,
+        "horizontal_pairs": 36,
+        "horizontal_quads": 21,
+        "empty_slots": 103,
+        "weapons_created": 57
+      },
+      "atlas_68": {
+        "single_icons": 37,
+        "horizontal_pairs": 35,
+        "horizontal_quads": 20,
+        "empty_slots": 109,
+        "weapons_created": 55
+      },
+      "atlas_69": {
+        "single_icons": 39,
+        "horizontal_pairs": 36,
+        "horizontal_quads": 23,
+        "empty_slots": 99,
+        "weapons_created": 59
+      },
+      "atlas_70": {
+        "single_icons": 38,
+        "horizontal_pairs": 35,
+        "horizontal_quads": 20,
+        "empty_slots": 108,
+        "weapons_created": 55
+      },
+      "atlas_71": {
+        "single_icons": 34,
+        "horizontal_pairs": 30,
+        "horizontal_quads": 20,
+        "empty_slots": 122,
+        "weapons_created": 50
+      },
+      "atlas_72": {
+        "single_icons": 37,
+        "horizontal_pairs": 32,
+        "horizontal_quads": 15,
+        "empty_slots": 125,
+        "weapons_created": 47
+      },
+      "atlas_73": {
+        "single_icons": 39,
+        "horizontal_pairs": 32,
+        "horizontal_quads": 8,
+        "empty_slots": 137,
+        "weapons_created": 40
+      },
+      "atlas_74": {
+        "single_icons": 38,
+        "horizontal_pairs": 32,
+        "horizontal_quads": 18,
+        "empty_slots": 118,
+        "weapons_created": 50
+      },
+      "atlas_75": {
+        "single_icons": 34,
+        "horizontal_pairs": 33,
+        "horizontal_quads": 16,
+        "empty_slots": 124,
+        "weapons_created": 49
+      },
+      "atlas_76": {
+        "single_icons": 38,
+        "horizontal_pairs": 33,
+        "horizontal_quads": 17,
+        "empty_slots": 118,
+        "weapons_created": 50
+      },
+      "atlas_77": {
+        "single_icons": 38,
+        "horizontal_pairs": 28,
+        "horizontal_quads": 12,
+        "empty_slots": 138,
+        "weapons_created": 40
+      },
+      "atlas_78": {
+        "single_icons": 38,
+        "horizontal_pairs": 36,
+        "horizontal_quads": 19,
+        "empty_slots": 108,
+        "weapons_created": 55
+      },
+      "atlas_79": {
+        "single_icons": 37,
+        "horizontal_pairs": 36,
+        "horizontal_quads": 20,
+        "empty_slots": 107,
+        "weapons_created": 56
+      },
+      "atlas_80": {
+        "single_icons": 36,
+        "horizontal_pairs": 34,
+        "horizontal_quads": 19,
+        "empty_slots": 114,
+        "weapons_created": 53
+      },
+      "atlas_81": {
+        "single_icons": 38,
+        "horizontal_pairs": 35,
+        "horizontal_quads": 22,
+        "empty_slots": 104,
+        "weapons_created": 57
+      },
+      "atlas_82": {
+        "single_icons": 39,
+        "horizontal_pairs": 35,
+        "horizontal_quads": 21,
+        "empty_slots": 105,
+        "weapons_created": 56
+      },
+      "atlas_83": {
+        "single_icons": 39,
+        "horizontal_pairs": 35,
+        "horizontal_quads": 22,
+        "empty_slots": 103,
+        "weapons_created": 57
+      },
+      "atlas_84": {
+        "single_icons": 38,
+        "horizontal_pairs": 32,
+        "horizontal_quads": 16,
+        "empty_slots": 122,
+        "weapons_created": 48
+      },
+      "atlas_85": {
+        "single_icons": 19,
+        "horizontal_pairs": 17,
+        "horizontal_quads": 5,
+        "empty_slots": 193,
+        "weapons_created": 22
+      },
+      "atlas_86": {
+        "single_icons": 38,
+        "horizontal_pairs": 33,
+        "horizontal_quads": 13,
+        "empty_slots": 126,
+        "weapons_created": 46
+      },
+      "atlas_87": {
+        "single_icons": 37,
+        "horizontal_pairs": 33,
+        "horizontal_quads": 16,
+        "empty_slots": 121,
+        "weapons_created": 49
+      },
+      "atlas_88": {
+        "single_icons": 38,
+        "horizontal_pairs": 36,
+        "horizontal_quads": 20,
+        "empty_slots": 106,
+        "weapons_created": 56
+      },
+      "atlas_89": {
+        "single_icons": 38,
+        "horizontal_pairs": 35,
+        "horizontal_quads": 20,
+        "empty_slots": 108,
+        "weapons_created": 55
+      },
+      "atlas_90": {
+        "single_icons": 35,
+        "horizontal_pairs": 35,
+        "horizontal_quads": 19,
+        "empty_slots": 113,
+        "weapons_created": 54
+      },
+      "atlas_91": {
+        "single_icons": 39,
+        "horizontal_pairs": 34,
+        "horizontal_quads": 16,
+        "empty_slots": 117,
+        "weapons_created": 50
+      },
+      "atlas_92": {
+        "single_icons": 39,
+        "horizontal_pairs": 35,
+        "horizontal_quads": 18,
+        "empty_slots": 111,
+        "weapons_created": 53
+      },
+      "atlas_93": {
+        "single_icons": 37,
+        "horizontal_pairs": 36,
+        "horizontal_quads": 21,
+        "empty_slots": 105,
+        "weapons_created": 57
+      },
+      "atlas_94": {
+        "single_icons": 35,
+        "horizontal_pairs": 33,
+        "horizontal_quads": 19,
+        "empty_slots": 117,
+        "weapons_created": 52
+      },
+      "atlas_95": {
+        "single_icons": 39,
+        "horizontal_pairs": 37,
+        "horizontal_quads": 20,
+        "empty_slots": 103,
+        "weapons_created": 57
+      },
+      "atlas_96": {
+        "single_icons": 34,
+        "horizontal_pairs": 27,
+        "horizontal_quads": 14,
+        "empty_slots": 140,
+        "weapons_created": 41
+      },
+      "atlas_97": {
+        "single_icons": 39,
+        "horizontal_pairs": 29,
+        "horizontal_quads": 10,
+        "empty_slots": 139,
+        "weapons_created": 39
+      }
+    }
+  },
+  "extraction_method": {
+    "grid_size": 16,
+    "icon_size": 16,
+    "offset_x": 0,
+    "offset_y": 0,
+    "total_icons_per_atlas": 256
+  },
+  "timestamp": "1761904891.9813569"
+}
