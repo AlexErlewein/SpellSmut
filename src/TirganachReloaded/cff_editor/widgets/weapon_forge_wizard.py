@@ -283,9 +283,12 @@ class ModeSelectionPage(QWizardPage):
             weapon_dict = dialog.get_selected_weapon()
             if weapon_dict:
                 try:
-                    # Load the weapon using WeaponLoader
+                    # Load the weapon using WeaponLoader with GameData path
+                    gamedata_path = Path(__file__).parent.parent.parent.parent.parent / "OriginalGameFiles" / "data" / "GameData.cff"
+                    gamedata_path_str = str(gamedata_path) if gamedata_path.exists() else None
                     self.selected_weapon_data = self.weapon_loader.load_weapon(
-                        weapon_dict["item_id"]
+                        weapon_dict["item_id"],
+                        gamedata_path=gamedata_path_str
                     )
 
                     # Update the display label
