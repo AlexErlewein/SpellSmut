@@ -31,7 +31,9 @@ class IconBrowserDialog(QDialog):
         self.resize(1000, 700)
         
         self.init_ui()
-        self.populate_icons()
+        # Delay population to ensure Qt app is fully initialized
+        from PySide6.QtCore import QTimer
+        QTimer.singleShot(100, self.populate_icons)
 
     def init_ui(self):
         """Initialize the UI"""
@@ -48,14 +50,33 @@ class IconBrowserDialog(QDialog):
         
         search_layout.addWidget(QLabel("Category:"))
         self.category_combo = QComboBox()
-        self.category_combo.addItems([
-            "All Categories",
-            "Item Icons",
-            "Spell Icons",
-            "UI Icons",
-            "Character Icons",
-            "Building Icons"
-        ])
+        # Get actual categories from data
+        actual_categories = set()
+        if hasattr(self.data_model, 'icon_index') and self.data_model.icon_index:
+            icons = self.data_model.icon_index.get('icons', {})
+            for icon_info in icons.values():
+                actual_categories.add(icon_info.get('category', 'unknown'))
+        
+        # Build category list with actual data
+        category_items = ["All Categories"]
+        category_map = {
+            "itm": "Item Icons (itm)",
+            "spell": "Spell Icons (spell)",
+            "ui": "UI Icons (ui)",
+            "character": "Character Icons (character)",
+            "building": "Building Icons (building)",
+            "bgr": "Background Icons (bgr)",
+            "btn": "Button Icons (btn)",
+            "cnt": "Content Icons (cnt)",
+            "logo": "Logo Icons (logo)",
+            "oth": "Other Icons (oth)"
+        }
+        
+        for category in sorted(actual_categories):
+            display_name = category_map.get(category, f"{category.title()} Icons")
+            category_items.append(display_name)
+        
+        self.category_combo.addItems(category_items)
         self.category_combo.currentTextChanged.connect(self.filter_icons)
         search_layout.addWidget(self.category_combo)
         
@@ -157,7 +178,9 @@ class IconBrowserDialog(QDialog):
         # Statistics
         stats_layout = QHBoxLayout()
         self.stats_label = QLabel("Total icons: 0")
+        self.filter_label = QLabel("Showing: 0 / 0")
         stats_layout.addWidget(self.stats_label)
+        stats_layout.addWidget(self.filter_label)
         stats_layout.addStretch()
         layout.addLayout(stats_layout)
         
@@ -290,20 +313,31 @@ class IconBrowserDialog(QDialog):
             
             # Category filter
             if category_filter != "All Categories":
-                category_map = {
-                    "Item Icons": "item",
-                    "Spell Icons": "spell",
-                    "UI Icons": "ui",
-                    "Character Icons": "character",
-                    "Building Icons": "building"
+                # Reverse mapping from display name to actual category
+                reverse_category_map = {
+                    "Item Icons (itm)": "itm",
+                    "Spell Icons (spell)": "spell",
+                    "UI Icons (ui)": "ui",
+                    "Character Icons (character)": "character",
+                    "Building Icons (building)": "building",
+                    "Background Icons (bgr)": "bgr",
+                    "Button Icons (btn)": "btn",
+                    "Content Icons (cnt)": "cnt",
+                    "Logo Icons (logo)": "logo",
+                    "Other Icons (oth)": "oth"
                 }
-                expected_category = category_map.get(category_filter, "")
+                expected_category = reverse_category_map.get(category_filter, "")
                 if icon_data.get('category', '') != expected_category:
                     continue
             
             filtered.append(icon_data)
         
         self.populate_icons(filtered)
+        
+        # Update filter statistics
+        total_icons = len(all_icons)
+        filtered_count = len(filtered)
+        self.filter_label.setText(f"Showing: {filtered_count} / {total_icons}")
 
     def refresh_icons(self):
         """Refresh the icon list"""
@@ -344,7 +378,8 @@ class IconBrowserDialog(QDialog):
 
     def update_stats(self, count: int):
         """Update statistics display"""
-        self.stats_label.setText(f"Showing {count} icons")
+        self.stats_label.setText(f"Total icons: {count}")
+        self.filter_label.setText(f"Showing: {count} / {count}")
 
     def get_selected_icon(self) -> Optional[str]:
         """Get the selected icon handle"""

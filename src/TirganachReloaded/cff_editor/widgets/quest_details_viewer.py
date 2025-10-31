@@ -21,6 +21,40 @@ from PySide6.QtWidgets import (
 class QuestDetailsViewer(QWidget):
     """Comprehensive quest details viewer"""
 
+    # Platform ID to map name mapping
+    PLATFORM_NAMES = {
+        "P1": "Liannon",
+        "P2": "Eloni",
+        "P3": "Leafshade",
+        "P4": "Wildland Pass",
+        "P5": "Shiel",
+        "P6": "Wildland Pass",
+        "P7": "Greyfell",
+        "P8": "Underhall",
+        "P10": "Iron Fields",
+        "P11": "The Shiel",
+        "P12": "峡谷",
+        "P15": "Shal",
+        "P16": "Whisper",
+        "P17": "Tirganach",
+        "P19": "Dun Mora",
+        "P23": "The Gorge",
+        "P25": "Sword Storm",
+        "P27": "Urgath",
+        "P30": "Breathing Forest",
+        "P32": "Soul Forge",
+        "P63": "Greyfell",
+        "P101": "Tutorial",
+        "P105": "Tirganach",
+        "P107": "Encounter Map",
+        "P108": "Encounter Map",
+        "P109": "Warzone",
+        "P110": "Ghost Watch",
+        "P111": "Shadow Realm",
+        "P113": "Undergound",
+        "P115": "Dragon Storm",
+    }
+
     def __init__(self, data_model):
         super().__init__()
         self.data_model = data_model
@@ -28,6 +62,13 @@ class QuestDetailsViewer(QWidget):
 
         self.setup_ui()
         self.connect_signals()
+
+    @staticmethod
+    def get_platform_name(platform_id: str) -> str:
+        """Convert platform ID to human-readable map name"""
+        if not platform_id:
+            return "Unknown"
+        return QuestDetailsViewer.PLATFORM_NAMES.get(platform_id, platform_id)
 
     def setup_ui(self):
         """Setup the UI"""
@@ -390,6 +431,11 @@ class QuestDetailsViewer(QWidget):
             self.clear_details()
             return
 
+        # Debug: Show which quest we're updating
+        quest_id = getattr(self.current_quest, "quest_id", None)
+        print(f"[DEBUG] Updating quest details for quest ID: {quest_id}")
+        print(f"[DEBUG] Has Lua data available: {self.data_model.has_lua_data()}")
+
         self.update_basic_info()
         self.update_quest_giver()
         self.update_accept_requirements()
@@ -435,6 +481,13 @@ class QuestDetailsViewer(QWidget):
         lua_data = None
         if quest_id and self.data_model.has_lua_data():
             lua_data = self.data_model.get_lua_quest_data(quest_id)
+            print(
+                f"[DEBUG] Quest Giver - Lua data for quest {quest_id}: {lua_data is not None}"
+            )
+            if lua_data:
+                print(
+                    f"[DEBUG]   NPC ID: {lua_data.npc_id}, Platform: {lua_data.platform}"
+                )
 
         # Try to get quest giver NPC ID
         giver_id = None
@@ -463,7 +516,8 @@ class QuestDetailsViewer(QWidget):
             if not location:
                 location = getattr(quest, "platform", None)
         if location:
-            self.quest_location_label.setText(str(location))
+            map_name = self.get_platform_name(str(location))
+            self.quest_location_label.setText(f"{map_name} ({location})")
         else:
             self.quest_location_label.setText("Unknown")
 
@@ -477,6 +531,11 @@ class QuestDetailsViewer(QWidget):
         lua_data = None
         if quest_id and self.data_model.has_lua_data():
             lua_data = self.data_model.get_lua_quest_data(quest_id)
+            print(
+                f"[DEBUG] Requirements - Lua data for quest {quest_id}: {lua_data is not None}"
+            )
+            if lua_data:
+                print(f"[DEBUG]   Requirements count: {len(lua_data.requirements)}")
 
         # Minimum level
         min_level = getattr(quest, "min_level", None)
@@ -530,6 +589,11 @@ class QuestDetailsViewer(QWidget):
         lua_data = None
         if quest_id and self.data_model.has_lua_data():
             lua_data = self.data_model.get_lua_quest_data(quest_id)
+            print(
+                f"[DEBUG] Objectives - Lua data for quest {quest_id}: {lua_data is not None}"
+            )
+            if lua_data:
+                print(f"[DEBUG]   Objectives count: {len(lua_data.objectives)}")
 
         # Check Lua data for objectives
         if lua_data and lua_data.objectives:
@@ -577,6 +641,13 @@ class QuestDetailsViewer(QWidget):
         lua_data = None
         if quest_id and self.data_model.has_lua_data():
             lua_data = self.data_model.get_lua_quest_data(quest_id)
+            print(
+                f"[DEBUG] Rewards - Lua data for quest {quest_id}: {lua_data is not None}"
+            )
+            if lua_data and lua_data.rewards:
+                print(
+                    f"[DEBUG]   XP: {lua_data.rewards.xp}, Gold: {lua_data.rewards.gold}, Items: {len(lua_data.rewards.items)}"
+                )
 
         # XP reward - check Lua first
         if lua_data and lua_data.rewards and lua_data.rewards.xp > 0:

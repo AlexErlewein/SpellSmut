@@ -5,11 +5,13 @@ Provides multiple dark theme options with different accent colors
 
 from enum import Enum
 from typing import Dict
+
 from PySide6.QtCore import QObject, Signal
 
 
 class ThemeType(Enum):
     """Available theme types"""
+
     DEFAULT = "Default Dark"
     DARCULA = "Darcula"
     JETBRAINS = "JetBrains"

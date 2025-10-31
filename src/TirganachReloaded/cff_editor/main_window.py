@@ -896,7 +896,7 @@ class MainWindow(QMainWindow):
 
         # Load quest data with progress feedback
         try:
-            self.statusBar().showMessage("Parsing Lua quest scripts...")
+            self.statusBar.showMessage("Parsing Lua quest scripts...")
             QApplication.processEvents()  # Update UI
 
             quest_count = self.data_model.load_lua_quest_data(force_refresh=False)
@@ -909,7 +909,7 @@ class MainWindow(QMainWindow):
                     f"Quest objectives, requirements, and rewards from Lua scripts\n"
                     f"are now available in the Quest Editor.",
                 )
-                self.statusBar().showMessage(
+                self.statusBar.showMessage(
                     f"Loaded Lua data for {quest_count} quests", 5000
                 )
             else:
@@ -920,7 +920,7 @@ class MainWindow(QMainWindow):
                     "Make sure you selected the correct 'script' directory containing\n"
                     "Lua quest files (e.g., P1, P2, P3... subdirectories).",
                 )
-                self.statusBar().showMessage("No Lua quest data found", 5000)
+                self.statusBar.showMessage("No Lua quest data found", 5000)
 
         except Exception as e:
             QMessageBox.critical(
@@ -928,7 +928,7 @@ class MainWindow(QMainWindow):
                 "Error Loading Lua Scripts",
                 f"Failed to load Lua quest scripts:\n{str(e)}",
             )
-            self.statusBar().showMessage("Error loading Lua quest data", 5000)
+            self.statusBar.showMessage("Error loading Lua quest data", 5000)
 
     def show_spell_wizard(self):
         """Show the Spell Creation Wizard"""
@@ -1176,5 +1176,3 @@ class MainWindow(QMainWindow):
                 event.ignore()
         else:
             event.accept()
-
-
