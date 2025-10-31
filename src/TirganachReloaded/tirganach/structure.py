@@ -167,7 +167,7 @@ class GameData:
 	item_sets: Table[ItemSet]
 
 	def table_info(self):
-		return {name: annot for name, annot in self.__annotations__.items() if get_origin(annot) is Table}
+		return {name: annot for name, annot in self.__class__.__annotations__.items() if get_origin(annot) is Table}
 
 	def tables(self):
 		return {name: getattr(self, name) for name in self.table_info()}
