@@ -31,7 +31,7 @@ from ..models.weapon_creation_data import (
     WeaponRequirements,
 )
 from ..shared.id_manager import ContentType, IDManager
-from .weapon_browser_dialog import WeaponBrowserDialog
+from .weapon_sound_manager import create_sound_selector_widget, auto_assign_weapon_sounds
 from .weapon_validation import WeaponValidator
 
 
@@ -283,9 +283,12 @@ class ModeSelectionPage(QWizardPage):
             weapon_dict = dialog.get_selected_weapon()
             if weapon_dict:
                 try:
-                    # Load the weapon using WeaponLoader
+                    # Load the weapon using WeaponLoader with GameData path
+                    gamedata_path = Path(__file__).parent.parent.parent.parent.parent / "OriginalGameFiles" / "data" / "GameData.cff"
+                    gamedata_path_str = str(gamedata_path) if gamedata_path.exists() else None
                     self.selected_weapon_data = self.weapon_loader.load_weapon(
-                        weapon_dict["item_id"]
+                        weapon_dict["item_id"],
+                        gamedata_path=gamedata_path_str
                     )
 
                     # Update the display label
@@ -586,9 +589,49 @@ class VisualAudioPage(QWizardPage):
 
         layout = QFormLayout()
         layout.addRow("Icon:", QLabel("Icon browser placeholder"))
-        layout.addRow("Hit Sound:", QComboBox())
-        layout.addRow("Miss Sound:", QComboBox())
-        layout.addRow("Equip Sound:", QComboBox())
+        
+        # Sound selection widgets (will be populated in initializePage)
+        self.sound_selector_widget = None
+        layout.addRow(self.sound_selector_widget)
+        
+    def _setup_sound_selection(self):
+        """Setup sound selection based on current weapon data"""
+        wizard = self.wizard()
+        
+        # Get weapon data from previous pages
+        mode_page = wizard.page(0)  # ModeSelectionPage
+        basic_page = wizard.page(1)  # BasicPropertiesPage
+        
+        if hasattr(mode_page, 'selected_weapon_data') and mode_page.selected_weapon_data:
+            source_weapon = mode_page.selected_weapon_data
+            weapon_type = basic_page.weapon_type_combo.currentText().lower()
+            hands = basic_page.hands_combo.currentText()
+            
+            # Auto-assign sounds based on weapon type
+            auto_sounds = auto_assign_weapon_sounds(weapon_type, source_weapon.weapon_type_name if hasattr(source_weapon, 'weapon_type_name') else weapon_type, hands)
+            
+            # Create sound selector widget
+            self.sound_selector_widget = create_sound_selector_widget(
+                weapon_type,
+                hands,
+                auto_sounds.get('hit', ''),
+                auto_sounds.get('miss', '')
+            )
+            
+            # Replace placeholder with our widget
+            # Note: This is a simple replacement - for a real implementation,
+            # we'd need to restructure the layout more carefully
+            if self.sound_selector_widget:
+                self.current_hit_sound = self.sound_selector_widget.hit_sound
+                self.current_miss_sound = self.sound_selector_widget.miss_sound
+        
+        # Call the parent initialization
+        if hasattr(super(), 'initializePage'):
+            super().initializePage()
+        
+    def initializePage(self):
+        """Initialize visual and audio page with data from previous wizard pages"""
+        self._setup_sound_selection()
         layout.addRow("3D Model:", QLabel("Model browser placeholder"))
         layout.addRow("Trail Effect:", QLineEdit())
         layout.addRow("Impact Effect:", QLineEdit())
@@ -726,11 +769,11 @@ class ReviewExportPage(QWizardPage):
             rarity=Rarity(req_page.rarity_combo.currentText()),
             effects=[],  # TODO: Populate from effects widget when implemented
 
-            # Step 5: Visual & Audio (placeholders for now)
+            # Step 5: Visual & Audio (enhanced with sound selection)
             icon_handle="",
-            hit_sound="battle_hit_1hsword",
-            miss_sound="battle_miss_sword",
-            equip_sound="",
+            hit_sound=visual_page.current_hit_sound if hasattr(visual_page, 'current_hit_sound') else 'battle_hit_1hsword',
+            miss_sound=visual_page.current_miss_sound if hasattr(visual_page, 'current_miss_sound') else 'battle_miss_sword',
+            equip_sound=visual_page.current_equip_sound if hasattr(visual_page, 'current_equip_sound') else '',
             model_file="",
             trail_effect="",
             impact_effect=""

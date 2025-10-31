@@ -225,6 +225,7 @@ class GameData:
 				'upgrades': Table[Upgrade],
 				'item_sets': Table[ItemSet],
 			}
+		return {name: annot for name, annot in self.__class__.__annotations__.items() if get_origin(annot) is Table}
 
 	def tables(self):
 		return {name: getattr(self, name) for name in self.table_info()}

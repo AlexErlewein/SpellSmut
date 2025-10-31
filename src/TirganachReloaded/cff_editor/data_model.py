@@ -1464,7 +1464,7 @@ class CFFDataModel(QObject):
             return None
 
         try:
-            return self.lua_data_manager.get_quest(quest_id)
+            return self.lua_data_manager.get_quest_data(quest_id)
         except Exception as e:
             print(f"Error getting Lua quest data for quest {quest_id}: {e}")
             return None
@@ -1472,12 +1472,18 @@ class CFFDataModel(QObject):
     def has_lua_data(self) -> bool:
         """Check if Lua data is available and loaded"""
         if not LUA_MANAGER_AVAILABLE or not self.lua_data_manager:
+            print("[DEBUG] Lua manager not available")
             return False
 
-        return (
-            self.lua_data_manager.cache_loaded
-            and len(self.lua_data_manager.quest_cache) > 0
+        cache_loaded = self.lua_data_manager.cache_loaded
+        cache_size = len(self.lua_data_manager.quest_cache)
+        has_data = cache_loaded and cache_size > 0
+
+        print(
+            f"[DEBUG] has_lua_data check: cache_loaded={cache_loaded}, cache_size={cache_size}, has_data={has_data}"
         )
+
+        return has_data
 
     def get_all_lua_quest_ids(self) -> List[int]:
         """Get all quest IDs that have Lua data"""

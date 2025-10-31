@@ -1,6 +1,11 @@
 import json
 from pathlib import Path
 from typing import List, Dict, Optional
+import sys
+
+# Add parent directories to path to import tirganach
+sys.path.append(str(Path(__file__).parent.parent.parent))
+
 from PySide6.QtWidgets import (
     QDialog,
     QVBoxLayout,
@@ -12,6 +17,13 @@ from PySide6.QtWidgets import (
     QTableWidgetItem,
     QPushButton,
 )
+
+try:
+    from tirganach import GameData
+    GAMEDATA_AVAILABLE = True
+except ImportError:
+    GAMEDATA_AVAILABLE = False
+
 
 class WeaponBrowserDialog(QDialog):
     """Browse and select existing weapons"""
@@ -35,7 +47,7 @@ class WeaponBrowserDialog(QDialog):
             QMessageBox.critical(
                 self,
                 "Loading Error",
-                f"Failed to load weapons:\n{str(e)}\n\nPlease check the weapons file."
+                f"Failed to load weapons:\n{str(e)}\n\nPlease check weapons file."
             )
             self.weapons = []
         
@@ -95,8 +107,64 @@ class WeaponBrowserDialog(QDialog):
         self.setLayout(layout)
     
     def load_weapons(self) -> List[Dict]:
-        """Load weapons from enhanced_weapons.json"""
-        # Get the absolute path to the weapons file
+        """Load weapons from GameData.cff first, fallback to enhanced_weapons.json"""
+        
+        # Try to load from GameData.cff for full stats
+        if GAMEDATA_AVAILABLE:
+            gamedata_path = Path(__file__).parent.parent.parent.parent.parent / "OriginalGameFiles" / "data" / "GameData.cff"
+            if gamedata_path.exists():
+                try:
+                    gd = GameData(str(gamedata_path))
+                    weapons = gd.weapons
+                    item_ui = gd.item_ui
+                    
+                    weapon_list = []
+                    for weapon in weapons:
+                        # Get basic weapon info
+                        weapon_dict = {
+                            'item_id': weapon.item_id,
+                            'name': weapon.item.name if weapon.item else f"Weapon {weapon.item_id}",
+                            'weapon_type_id': weapon.weapon_type,
+                            'weapon_material_id': weapon.material,
+                            'min_damage': weapon.min_damage,
+                            'max_damage': weapon.max_damage,
+                            'weapon_speed': weapon.speed,
+                            'min_range': weapon.min_range,
+                            'max_range': weapon.max_range,
+                            'selling_price': weapon.item.selling_price if weapon.item else 0,
+                            'buying_price': weapon.item.buying_price if weapon.item else 0,
+                            'item_set_id': weapon.item.item_set_id if weapon.item else 0,
+                        }
+                        
+                        # Try to get type and material names
+                        try:
+                            type_names = gd.weapon_type_names.where(weapon_type_id=weapon.weapon_type)
+                            if type_names:
+                                weapon_dict['weapon_type_name'] = type_names[0].name
+                        except:
+                            pass
+                            
+                        try:
+                            material_names = gd.weapon_material_names.where(weapon_material_id=weapon.material)
+                            if material_names:
+                                weapon_dict['weapon_material_name'] = material_names[0].name
+                        except:
+                            pass
+                        
+                        # Try to get UI handle
+                        ui_matches = [ui for ui in item_ui if ui.item_id == weapon.item_id]
+                        if ui_matches and ui_matches[0].item_ui_handle:
+                            weapon_dict['ui_handle'] = ui_matches[0].item_ui_handle.strip()
+                            
+                        weapon_list.append(weapon_dict)
+                    
+                    return weapon_list
+                    
+                except Exception as e:
+                    print(f"Warning: Could not load from GameData: {e}")
+                    # Fall back to JSON
+        
+        # Fallback to enhanced_weapons.json
         current_file = Path(__file__)
         weapons_file = current_file.parent.parent.parent / "enhanced_weapons.json"
         

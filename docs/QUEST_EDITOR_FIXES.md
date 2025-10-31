@@ -49,6 +49,84 @@
 
 ---
 
+### Issue 3: Import Error in Theme Manager ✅ FIXED
+
+**Problem**: Application crashed on startup with `ImportError: cannot import name 'pyqtSignal' from 'PySide6.QtCore'`
+
+**Root Cause**: The `theme_manager.py` file was using PyQt naming conventions (`pyqtSignal`, `pyqtSlot`) instead of PySide6 naming conventions (`Signal`, `Slot`).
+
+**Solution**: Changed `pyqtSignal` to `Signal` in the import statement and class definition.
+
+**File Modified**: `src/TirganachReloaded/cff_editor/theme_manager.py`
+
+**Note**: This was a critical bug that prevented the application from starting. PyQt and PySide6 have similar APIs but different naming conventions for signals and slots.
+
+---
+
+### Issue 4: StatusBar Method Call Error ✅ FIXED
+
+**Problem**: Application crashed when attempting to load Lua quest scripts with `TypeError: 'PySide6.QtWidgets.QStatusBar' object is not callable`
+
+**Root Cause**: The new `load_lua_quest_directory()` function was calling `self.statusBar()` as a method, but in this codebase the status bar is accessed as a property `self.statusBar` (without parentheses).
+
+**Solution**: Changed all instances of `self.statusBar().showMessage(...)` to `self.statusBar.showMessage(...)` in the new function to match the existing codebase pattern.
+
+**File Modified**: `src/TirganachReloaded/cff_editor/main_window.py`
+
+**Lines Fixed**: 
+- Line 899: Status message during Lua parsing
+- Line 913: Success message after loading
+- Line 923: Message when no data found
+- Line 932: Error message on exception
+
+**Note**: This is a common inconsistency when adding new code to an existing codebase. Always check how existing code accesses framework objects before copying patterns from other projects.
+
+---
+
+### Issue 5: Lua File Encoding Errors ✅ FIXED
+
+**Problem**: Many Lua files failed to parse with encoding errors like `'utf-8' codec can't decode byte 0xfc in position 678: invalid start byte`
+
+**Root Cause**: SpellForce Lua files contain German characters (ü, ö, ä, ß) encoded in Windows-1252/Latin-1, not UTF-8. The parser was only trying UTF-8 encoding.
+
+**Solution**: Added fallback encoding support to try multiple encodings in order:
+1. UTF-8 (standard)
+2. Windows-1252 (German Windows encoding)
+3. Latin-1 / ISO-8859-1 (fallback)
+4. UTF-8 with errors ignored (last resort)
+
+**File Modified**: `src/TirganachReloaded/cff_editor/lua_parser/quest_lua_parser.py`
+
+**Impact**: Files like `n6690.lua`, `n6684.lua`, `n5777.lua` etc. that were failing can now be parsed successfully.
+
+---
+
+### Issue 6: Method Name Bug and Cache Not Loading ✅ FIXED
+
+**Problem**: After loading Lua scripts, quest details viewer showed no Lua data even though 335 quests were parsed.
+
+**Root Causes**:
+1. Data model was calling `get_quest()` but the actual method name is `get_quest_data()`
+2. The `cache_loaded` flag was never set to `True` after parsing
+3. Cache wasn't being preloaded into memory
+
+**Solutions**:
+1. Fixed method call: `self.lua_data_manager.get_quest(quest_id)` → `self.lua_data_manager.get_quest_data(quest_id)`
+2. Added call to `preload_cache()` at end of `parse_lua_directory()`
+3. Added debug logging to trace data flow
+
+**Files Modified**: 
+- `src/TirganachReloaded/cff_editor/data_model.py` (method name fix)
+- `src/TirganachReloaded/cff_editor/lua_parser/lua_data_manager.py` (cache preloading)
+- `src/TirganachReloaded/cff_editor/widgets/quest_details_viewer.py` (debug output)
+
+**Verification**: Debug output now shows:
+- `[DEBUG] has_lua_data check: cache_loaded=True, cache_size=335`
+- `[DEBUG] Lua data for quest X: True/False`
+- Quest details display `[Lua]` prefixed data
+
+---
+
 ## Research Findings: SpellForce Quest System Architecture
 
 ### Data Storage Split
@@ -223,6 +301,16 @@ Displays merged CFF + Lua information
   - Added menu action for loading Lua scripts
   - Added handler function with UI feedback
 
+- `src/TirganachReloaded/cff_editor/theme_manager.py`
+  - Fixed pyqtSignal → Signal for PySide6 compatibility
+
+- `src/TirganachReloaded/cff_editor/lua_parser/quest_lua_parser.py`
+  - Added multi-encoding support for German characters
+  
+- `src/TirganachReloaded/cff_editor/lua_parser/lua_data_manager.py`
+  - Added cache preloading after parsing
+  - Fixed cache_loaded flag setting
+
 ### Existing Files (Already Present)
 - `src/TirganachReloaded/cff_editor/lua_parser/quest_lua_parser.py`
 - `src/TirganachReloaded/cff_editor/lua_parser/lua_data_manager.py`
@@ -274,10 +362,14 @@ Displays merged CFF + Lua information
 
 ## Conclusion
 
-Both issues have been successfully resolved:
+All issues have been successfully resolved:
 
 ✅ **Tree View Auto-Loading**: Now loads immediately when Quest Editor opens  
-✅ **Lua Quest Data**: Fully integrated with parsing, caching, and display
+✅ **Lua Quest Data**: Fully integrated with parsing, caching, and display  
+✅ **Import Error (pyqtSignal)**: Fixed PySide6 compatibility issue preventing app startup  
+✅ **StatusBar Error**: Fixed method call vs property access inconsistency  
+✅ **Encoding Errors**: Added multi-encoding support for German characters in Lua files  
+✅ **Data Not Showing**: Fixed method name bug and cache loading issues
 
 The Quest Editor now provides complete quest information by combining data from both CFF files and Lua scripts, giving modders a comprehensive view of quest mechanics, requirements, and rewards.
 

@@ -91,8 +91,23 @@ class LuaQuestParser:
 
     def parse_file(self, lua_file_path: str) -> List[QuestData]:
         """Parse a Lua quest file and extract all quests"""
-        with open(lua_file_path, "r", encoding="utf-8") as f:
-            lua_content = f.read()
+        # Try multiple encodings (German characters in SpellForce files)
+        encodings = ["utf-8", "windows-1252", "latin-1", "iso-8859-1"]
+        lua_content = None
+
+        for encoding in encodings:
+            try:
+                with open(lua_file_path, "r", encoding=encoding) as f:
+                    lua_content = f.read()
+                break
+            except (UnicodeDecodeError, LookupError):
+                continue
+
+        if lua_content is None:
+            # Last resort: read as binary and ignore errors
+            with open(lua_file_path, "r", encoding="utf-8", errors="ignore") as f:
+                lua_content = f.read()
+
         return self.parse_string(lua_content)
 
     def parse_string(self, lua_content: str) -> List[QuestData]:
@@ -171,17 +186,63 @@ class LuaQuestParser:
         """Extract quest objectives from completion conditions"""
         objectives = []
 
-        # Find completion event
-        complete_pattern = rf"Complete.*?QuestId\s*=\s*{quest_id}.*?Conditions\s*=\s*{{(.*?)}}.*?Actions"
-        match = re.search(complete_pattern, lua_content, re.DOTALL | re.IGNORECASE)
+        # Limit search to reasonable chunk size to prevent hanging
+        if len(lua_content) > 500000:  # 500KB
+            # Only search in relevant sections
+            quest_pattern = rf"QuestId\s*=\s*{quest_id}"
+            matches = list(re.finditer(quest_pattern, lua_content))
+            if matches:
+                # Search in 10KB around each match
+                for match in matches[:5]:  # Limit to first 5 occurrences
+                    start = max(0, match.start() - 5000)
+                    end = min(len(lua_content), match.end() + 5000)
+                    chunk = lua_content[start:end]
+                    objectives.extend(self._extract_objectives_from_chunk(chunk, quest_id))
+                return objectives
+            else:
+                return []
 
-        if match:
-            conditions = match.group(1)
+        # Find all OnOneTimeEvent blocks related to this quest
+        # Simplified pattern to avoid catastrophic backtracking
+        objectives.extend(self._extract_objectives_from_chunk(lua_content, quest_id))
+        return objectives
 
-            # Parse different condition types
-            # FigureIsDead - Kill objectives
-            kill_pattern = r'FigureIsDead\s*{{\s*Tag\s*=\s*["\']([^"\']+)["\']'
+    def _extract_objectives_from_chunk(
+        self, lua_content: str, quest_id: int
+    ) -> List[QuestObjective]:
+        """Extract objectives from a chunk of Lua content"""
+        objectives = []
+
+        # Simple pattern - just look for conditions near QuestSolve
+        solve_pattern = rf"QuestSolve\s*{{\s*QuestId\s*=\s*{quest_id}"
+
+        for match in re.finditer(solve_pattern, lua_content):
+            # Look backwards for Conditions block (up to 2000 chars)
+            start_pos = max(0, match.start() - 2000)
+            preceding_text = lua_content[start_pos:match.start()]
+
+            # Find the last Conditions block before this QuestSolve
+            conditions_match = re.search(r"Conditions\s*=\s*\{([^}]{0,1000})\}", preceding_text)
+            if not conditions_match:
+                continue
+
+            conditions = conditions_match.group(1)
+
+            # FigureIsDead - Kill objectives (with NpcId)
+            kill_pattern = r"FigureIsDead\s*{{\s*NpcId\s*=\s*(\d+)"
             for kill_match in re.finditer(kill_pattern, conditions):
+                npc_id = kill_match.group(1)
+                objectives.append(
+                    QuestObjective(
+                        description=f"Defeat NPC {npc_id}",
+                        objective_type="Kill",
+                        target=f"NPC {npc_id}",
+                    )
+                )
+
+            # FigureIsDead with Tag
+            kill_tag_pattern = r'FigureIsDead\s*{{\s*Tag\s*=\s*["\']([^"\']+)["\']'
+            for kill_match in re.finditer(kill_tag_pattern, conditions):
                 objectives.append(
                     QuestObjective(
                         description=f"Defeat {kill_match.group(1)}",
@@ -191,16 +252,25 @@ class LuaQuestParser:
                 )
 
             # PlayerHasItem - Collection objectives
-            item_pattern = (
-                r"PlayerHasItem\s*{{\s*ItemId\s*=\s*(\d+).*?Amount\s*=\s*(\d+)"
-            )
+            item_pattern = r"PlayerHasItem\s*{{\s*ItemId\s*=\s*(\d+)"
             for item_match in re.finditer(item_pattern, conditions):
+                item_id = item_match.group(1)
+                # Try to extract amount
+                amount = 1
+                amount_match = re.search(
+                    rf"ItemId\s*=\s*{item_id}.*?Amount\s*=\s*(\d+)",
+                    conditions,
+                    re.DOTALL,
+                )
+                if amount_match:
+                    amount = int(amount_match.group(1))
+
                 objectives.append(
                     QuestObjective(
-                        description=f"Collect item {item_match.group(1)}",
+                        description=f"Collect item {item_id}",
                         objective_type="Collect",
-                        target=item_match.group(1),
-                        count=int(item_match.group(2)),
+                        target=item_id,
+                        count=amount,
                     )
                 )
 
@@ -223,14 +293,19 @@ class LuaQuestParser:
         """Extract quest requirements from init conditions"""
         requirements = []
 
-        # Find init event
-        init_pattern = (
-            rf"Init.*?QuestId\s*=\s*{quest_id}.*?Conditions\s*=\s*{{(.*?)}}.*?Actions"
-        )
-        match = re.search(init_pattern, lua_content, re.DOTALL | re.IGNORECASE)
+        # Limit search scope to prevent hanging
+        quest_begin_pattern = rf"QuestBegin\s*{{\s*QuestId\s*=\s*{quest_id}"
 
-        if match:
-            conditions = match.group(1)
+        for match in re.finditer(quest_begin_pattern, lua_content):
+            # Look backwards for Conditions (up to 1000 chars)
+            start_pos = max(0, match.start() - 1000)
+            preceding_text = lua_content[start_pos:match.start()]
+
+            conditions_match = re.search(r"Conditions\s*=\s*\{([^}]{0,500})\}", preceding_text)
+            if not conditions_match:
+                continue
+
+            conditions = conditions_match.group(1)
 
             # QuestState - Prerequisite quest
             quest_pattern = r"QuestState\s*{{\s*QuestId\s*=\s*(\d+).*?State\s*=\s*(\w+)"
@@ -261,9 +336,9 @@ class LuaQuestParser:
         """Extract quest rewards"""
         reward = QuestReward()
 
-        # Look for reward definition
-        reward_pattern = rf"Quest{quest_id}Reward\s*=\s*{{(.*?)}}"
-        match = re.search(reward_pattern, lua_content, re.DOTALL)
+        # Look for reward definition (simplified pattern)
+        reward_pattern = rf"Quest{quest_id}Reward\s*=\s*\{{([^}}]{{0,500}})\}}"
+        match = re.search(reward_pattern, lua_content)
 
         if match:
             reward_def = match.group(1)
