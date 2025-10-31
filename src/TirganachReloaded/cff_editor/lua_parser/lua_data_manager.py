@@ -152,18 +152,37 @@ class LuaDataManager:
                 if not force_refresh and self._is_file_cached(lua_file):
                     continue
 
-                # Parse the file
+                # Skip very large files (likely not quest files)
+                file_size = lua_file.stat().st_size
+                if file_size > 1 * 1024 * 1024:  # 1MB
+                    print(
+                        f"Skipping large file: {lua_file.name} ({file_size / 1024:.0f}KB)"
+                    )
+                    continue
+
+                # Parse the file with timeout protection
                 print(f"Parsing: {lua_file.name}")
-                quests = self.parser.parse_file(str(lua_file))
+
+                try:
+                    quests = self.parser.parse_file(str(lua_file))
+                except Exception as parse_error:
+                    print(f"  Parse error in {lua_file.name}: {parse_error}")
+                    continue
+
+                # Detect platform from file path (e.g., P1, P2, P3)
+                platform = self._detect_platform_from_path(lua_file)
 
                 if quests:
                     for quest in quests:
+                        # Set platform if detected and not already set
+                        if platform and (not quest.platform or quest.platform == "P7"):
+                            quest.platform = platform
                         self._store_quest(quest, lua_file)
                         quests_parsed += 1
                         print(f"  - Found quest {quest.quest_id}: {quest.quest_name}")
 
             except Exception as e:
-                print(f"Error parsing {lua_file.name}: {e}")
+                print(f"Error processing {lua_file.name}: {e}")
                 continue
 
         # Update metadata
@@ -173,10 +192,25 @@ class LuaDataManager:
         print(f"Parsed {quests_parsed} quests from Lua files")
 
         # Parse GdsQuestRewards.lua if it exists
-        rewards_file = lua_dir / "GdsQuestRewards.lua"
-        if rewards_file.exists():
+        # Try multiple locations
+        rewards_file = None
+
+        # Location 1: In the selected directory
+        if (lua_dir / "GdsQuestRewards.lua").exists():
+            rewards_file = lua_dir / "GdsQuestRewards.lua"
+        # Location 2: Search in subdirectories
+        elif list(lua_dir.glob("**/GdsQuestRewards.lua")):
+            rewards_file = list(lua_dir.glob("**/GdsQuestRewards.lua"))[0]
+
+        if rewards_file:
+            print(f"Found GdsQuestRewards.lua at: {rewards_file}")
             print("Parsing GdsQuestRewards.lua for reward data...")
             self._parse_rewards_file(rewards_file)
+        else:
+            print(
+                "Warning: GdsQuestRewards.lua not found - rewards will not be available"
+            )
+            print(f"  Searched in: {lua_dir}")
 
         # Preload cache into memory for fast access
         self.preload_cache()
@@ -186,6 +220,7 @@ class LuaDataManager:
     def _parse_rewards_file(self, rewards_file: Path):
         """Parse GdsQuestRewards.lua file to extract reward data"""
         try:
+            print(f"[DEBUG] Reading rewards file: {rewards_file}")
             # Try multiple encodings
             encodings = ["utf-8", "windows-1252", "latin-1"]
             content = None
@@ -194,6 +229,7 @@ class LuaDataManager:
                 try:
                     with open(rewards_file, "r", encoding=encoding) as f:
                         content = f.read()
+                    print(f"[DEBUG] Successfully read file with encoding: {encoding}")
                     break
                 except (UnicodeDecodeError, LookupError):
                     continue
@@ -201,21 +237,40 @@ class LuaDataManager:
             if not content:
                 with open(rewards_file, "r", encoding="utf-8", errors="ignore") as f:
                     content = f.read()
+                print("[DEBUG] Used UTF-8 with errors ignored")
+
+            print(f"[DEBUG] File content length: {len(content)} characters")
 
             # Parse each platform's rewards (P1, P2, P63, etc.)
-            platform_pattern = r"QuestRewardsP(\d+)\s*=\s*{(.*?)(?=QuestRewardsP|\Z)}"
+            platform_pattern = r"QuestRewardsP(\d+)\s*=\s*\{(.*?)(?=\nQuestRewardsP|\Z)"
 
+            print("[DEBUG] Searching for platform patterns...")
+            platforms_found = 0
             for platform_match in re.finditer(platform_pattern, content, re.DOTALL):
+                platforms_found += 1
                 platform = f"P{platform_match.group(1)}"
                 rewards_section = platform_match.group(2)
+                print(
+                    f"  Parsing rewards for platform {platform}... (section length: {len(rewards_section)})"
+                )
 
                 # Parse individual quest rewards
                 # Format: QuestName = { XP = {25}, Items = {626}, Money = {Gold = 1} }
                 quest_pattern = r"(\w+)\s*=\s*{([^}]+(?:{[^}]*}[^}]*)*?)}"
 
-                for quest_match in re.finditer(quest_pattern, rewards_section):
+                quest_count = 0
+                matches_list = list(re.finditer(quest_pattern, rewards_section))
+                print(f"[DEBUG] Found {len(matches_list)} quest patterns in {platform}")
+
+                for quest_match in matches_list:
+                    quest_count += 1
                     quest_name = quest_match.group(1)
                     reward_data = quest_match.group(2)
+
+                    if quest_count <= 3:  # Show first 3 for debugging
+                        print(
+                            f"[DEBUG]   Quest name: '{quest_name}', reward data: '{reward_data[:50]}...'"
+                        )
 
                     # Extract reward values
                     xp = 0
@@ -253,11 +308,20 @@ class LuaDataManager:
                         ]
 
                     # Store in a mapping (we'll match to quest IDs later)
+                    if quest_count <= 3:  # Show first 3 for debugging
+                        print(
+                            f"[DEBUG]   Storing: {quest_name} - XP:{xp}, Gold:{gold}, Items:{items}"
+                        )
+
                     self._store_reward_by_name(
                         quest_name, platform, xp, gold, silver, copper, items
                     )
 
-            print("  Parsed rewards from GdsQuestRewards.lua")
+                print(f"    Found {quest_count} quest rewards for {platform}")
+
+            print(
+                f"  Parsed rewards from GdsQuestRewards.lua - {platforms_found} platforms found"
+            )
 
         except Exception as e:
             print(f"Error parsing GdsQuestRewards.lua: {e}")
@@ -276,18 +340,86 @@ class LuaDataManager:
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
 
-        # For now, try to find quest by name pattern in the database
-        # This is approximate - some quests may not match
+        # Check if there are any quests for this platform first
+        cursor.execute(
+            "SELECT COUNT(*) FROM lua_quests WHERE platform = ?", (platform,)
+        )
+        quest_count = cursor.fetchone()[0]
+        if quest_count == 0:
+            print(
+                f"[DEBUG] WARNING: No quests found in database for platform {platform}"
+            )
+            conn.close()
+            return
+
+        # German quest names are compound words - break them up for better matching
+        # e.g., "DariusDerKarthograph" → ["Darius", "Der", "Karthograph"]
+        # Split on capital letters and numbers
+        name_parts = re.findall(r"[A-Z][a-z]*|[0-9]+", quest_name)
+
+        # Try multiple matching strategies
+        quest_id = None
+
+        # Strategy 1: Exact match on full name
         cursor.execute(
             "SELECT quest_id FROM lua_quests WHERE platform = ? AND (quest_name LIKE ? OR description LIKE ?)",
             (platform, f"%{quest_name}%", f"%{quest_name}%"),
         )
         result = cursor.fetchone()
-
         if result:
             quest_id = result[0]
 
-            # Update the reward for this quest
+        # Strategy 2: Match on name parts (German compound words)
+        if not quest_id and len(name_parts) >= 2:
+            # Build a query that checks if ALL parts appear in the description
+            # This handles German compound words well
+            conditions = " AND ".join(["description LIKE ?" for _ in name_parts])
+            query = (
+                f"SELECT quest_id FROM lua_quests WHERE platform = ? AND ({conditions})"
+            )
+            params = [platform] + [f"%{part}%" for part in name_parts]
+
+            cursor.execute(query, params)
+            result = cursor.fetchone()
+            if result:
+                quest_id = result[0]
+                print(
+                    f"  Matched '{quest_name}' using parts: {name_parts} → Quest {quest_id}"
+                )
+
+        # Strategy 3: Try first significant word (often the main keyword)
+        if not quest_id and len(name_parts) > 0:
+            # Skip common German words
+            skip_words = [
+                "Der",
+                "Die",
+                "Das",
+                "Ein",
+                "Eine",
+                "Und",
+                "Nach",
+                "Vor",
+                "Part",
+            ]
+            significant_parts = [
+                p for p in name_parts if p not in skip_words and len(p) > 2
+            ]
+
+            if significant_parts:
+                first_word = significant_parts[0]
+                cursor.execute(
+                    "SELECT quest_id FROM lua_quests WHERE platform = ? AND description LIKE ?",
+                    (platform, f"%{first_word}%"),
+                )
+                result = cursor.fetchone()
+                if result:
+                    quest_id = result[0]
+                    print(
+                        f"  Matched '{quest_name}' using keyword '{first_word}' → Quest {quest_id}"
+                    )
+
+        # Store the reward if we found a match
+        if quest_id:
             cursor.execute(
                 """
                 INSERT OR REPLACE INTO quest_rewards
@@ -297,8 +429,31 @@ class LuaDataManager:
                 (quest_id, xp, gold, silver, copper, json.dumps(items), json.dumps([])),
             )
             conn.commit()
+        else:
+            # Debug: show what quests ARE available on this platform
+            cursor.execute(
+                "SELECT quest_id, description FROM lua_quests WHERE platform = ? LIMIT 3",
+                (platform,),
+            )
+            sample_quests = cursor.fetchall()
+            print(f"  Could not match reward '{quest_name}' on platform {platform}")
+            print(f"    Name parts: {name_parts}")
+            if sample_quests:
+                print(f"    Sample quests on {platform}:")
+                for qid, desc in sample_quests:
+                    print(
+                        f"      Quest {qid}: {desc[:60] if desc else 'No description'}..."
+                    )
 
         conn.close()
+
+    def _detect_platform_from_path(self, lua_file: Path) -> Optional[str]:
+        """Detect platform ID from file path (e.g., /script/P1/n0.lua → P1)"""
+        # Check parent directories for pattern like P1, P2, P3, etc.
+        for part in lua_file.parts:
+            if re.match(r"^P\d+$", part):
+                return part
+        return None
 
     def _is_file_cached(self, lua_file: Path) -> bool:
         """Check if file is already cached and up-to-date"""

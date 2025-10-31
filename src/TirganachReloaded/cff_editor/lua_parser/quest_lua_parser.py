@@ -186,12 +186,47 @@ class LuaQuestParser:
         """Extract quest objectives from completion conditions"""
         objectives = []
 
-        # Find all OnOneTimeEvent blocks related to this quest
-        # Look for QuestSolve or QuestBegin actions with this quest ID
-        solve_pattern = rf"OnOneTimeEvent\s*{{\s*Conditions\s*=\s*{{(.*?)}}\s*,\s*Actions\s*=\s*{{(.*?QuestSolve\s*{{\s*QuestId\s*=\s*{quest_id}.*?)}}"
+        # Limit search to reasonable chunk size to prevent hanging
+        if len(lua_content) > 500000:  # 500KB
+            # Only search in relevant sections
+            quest_pattern = rf"QuestId\s*=\s*{quest_id}"
+            matches = list(re.finditer(quest_pattern, lua_content))
+            if matches:
+                # Search in 10KB around each match
+                for match in matches[:5]:  # Limit to first 5 occurrences
+                    start = max(0, match.start() - 5000)
+                    end = min(len(lua_content), match.end() + 5000)
+                    chunk = lua_content[start:end]
+                    objectives.extend(self._extract_objectives_from_chunk(chunk, quest_id))
+                return objectives
+            else:
+                return []
 
-        for match in re.finditer(solve_pattern, lua_content, re.DOTALL | re.IGNORECASE):
-            conditions = match.group(1)
+        # Find all OnOneTimeEvent blocks related to this quest
+        # Simplified pattern to avoid catastrophic backtracking
+        objectives.extend(self._extract_objectives_from_chunk(lua_content, quest_id))
+        return objectives
+
+    def _extract_objectives_from_chunk(
+        self, lua_content: str, quest_id: int
+    ) -> List[QuestObjective]:
+        """Extract objectives from a chunk of Lua content"""
+        objectives = []
+
+        # Simple pattern - just look for conditions near QuestSolve
+        solve_pattern = rf"QuestSolve\s*{{\s*QuestId\s*=\s*{quest_id}"
+
+        for match in re.finditer(solve_pattern, lua_content):
+            # Look backwards for Conditions block (up to 2000 chars)
+            start_pos = max(0, match.start() - 2000)
+            preceding_text = lua_content[start_pos:match.start()]
+
+            # Find the last Conditions block before this QuestSolve
+            conditions_match = re.search(r"Conditions\s*=\s*\{([^}]{0,1000})\}", preceding_text)
+            if not conditions_match:
+                continue
+
+            conditions = conditions_match.group(1)
 
             # FigureIsDead - Kill objectives (with NpcId)
             kill_pattern = r"FigureIsDead\s*{{\s*NpcId\s*=\s*(\d+)"
@@ -258,14 +293,19 @@ class LuaQuestParser:
         """Extract quest requirements from init conditions"""
         requirements = []
 
-        # Find init event
-        init_pattern = (
-            rf"Init.*?QuestId\s*=\s*{quest_id}.*?Conditions\s*=\s*{{(.*?)}}.*?Actions"
-        )
-        match = re.search(init_pattern, lua_content, re.DOTALL | re.IGNORECASE)
+        # Limit search scope to prevent hanging
+        quest_begin_pattern = rf"QuestBegin\s*{{\s*QuestId\s*=\s*{quest_id}"
 
-        if match:
-            conditions = match.group(1)
+        for match in re.finditer(quest_begin_pattern, lua_content):
+            # Look backwards for Conditions (up to 1000 chars)
+            start_pos = max(0, match.start() - 1000)
+            preceding_text = lua_content[start_pos:match.start()]
+
+            conditions_match = re.search(r"Conditions\s*=\s*\{([^}]{0,500})\}", preceding_text)
+            if not conditions_match:
+                continue
+
+            conditions = conditions_match.group(1)
 
             # QuestState - Prerequisite quest
             quest_pattern = r"QuestState\s*{{\s*QuestId\s*=\s*(\d+).*?State\s*=\s*(\w+)"
@@ -296,9 +336,9 @@ class LuaQuestParser:
         """Extract quest rewards"""
         reward = QuestReward()
 
-        # Look for reward definition
-        reward_pattern = rf"Quest{quest_id}Reward\s*=\s*{{(.*?)}}"
-        match = re.search(reward_pattern, lua_content, re.DOTALL)
+        # Look for reward definition (simplified pattern)
+        reward_pattern = rf"Quest{quest_id}Reward\s*=\s*\{{([^}}]{{0,500}})\}}"
+        match = re.search(reward_pattern, lua_content)
 
         if match:
             reward_def = match.group(1)
