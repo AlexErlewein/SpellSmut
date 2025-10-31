@@ -1,0 +1,6377 @@
+{
+  "_metadata": {
+    "description": "CFF strings separated by detected language",
+    "total_languages": 7,
+    "total_quest_strings": 32576
+  },
+  "languages": {
+    "Unknown": {
+      "count": 8715,
+      "quest_strings": [
+        {
+          "text": "ui_spell_MM_Defensive_AuraManatap",
+          "length": 33,
+          "keywords": [
+            "uram"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "=\t@\t>\tA\t?\tB\tX\tW\tY\tZ\t[\t\\\t]\t^\t_\t`\ta\tb\tc\td\te\tf\tg\th\ti\tj\tk\tl\tm\tn\to\tp\tq\tr\ts\tt\tu\tv\tw\tx\ty\tz\t{\t|\t}\t~",
+          "length": 91,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "ui_btn_build_elf_gathererhut",
+          "length": 28,
+          "keywords": [
+            "gather"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. Aura de inflexibilidad niv. 4",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. aura di rigenerazione liv. 5",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. resistenza al freddo liv. 12",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. aura combattimento lento liv. 2",
+          "length": 37,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Sinwen Silberblatt sucht im Schattenhain nach Bestandteilen eines gro",
+          "length": 69,
+          "keywords": [
+            "sucht"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Sinwen Whiteleaf sta cercando i componenti di un grande oggetto magico nel Leafshade. Le servono alcuni elementi.",
+          "length": 113,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Armes Tranch. Lourd.",
+          "length": 20,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Armes Contond. Lourd.",
+          "length": 21,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. resist. allo scioglimento liv. 12",
+          "length": 39,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Invocation de squelette niv. 1",
+          "length": 37,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Aura vampirisation vie niv. 8",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. aura combattimento veloce liv. 3",
+          "length": 38,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. aura combattimento lento liv. 4",
+          "length": 37,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. Aura de inflexibilidad niv. 8",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. guarisci sentinella liv. 10",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Dispersion d'aura blanche niv. 5",
+          "length": 39,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. disperdi aura bianca liv. 12",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. aura combattimento veloce liv. 1",
+          "length": 38,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. aura combattimento veloce liv. 2",
+          "length": 38,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. Aura de inflexibilidad niv. 3",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. resist. allo scioglimento liv. 11",
+          "length": 39,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Vampirisation de mana niv. 9",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. pallottola di pietra liv. 4",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. resistenza al freddo liv. 10",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. resistenza al freddo liv. 11",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. aura di soffocamento liv. 10",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. aura di soffocamento liv. 11",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. aura di soffocamento liv. 12",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Aura vampirisation de vie niv. 9",
+          "length": 39,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. aura dell'ipnotismo liv. 10",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Aura vampirisation mana niv. 10",
+          "length": 38,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Vampirisation de mana niv. 4",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Vampirisation de mana niv. 5",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Vampirisation de mana niv. 6",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Vampirisation de mana niv. 7",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Dispersion d'aura noire niv. 4",
+          "length": 37,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Dispersion d'aura noire niv. 8",
+          "length": 37,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. guarisci sentinella liv. 11",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. guarisci sentinella liv. 12",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. aura combattimento lento liv. 9",
+          "length": 37,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Vampirisation de mana niv. 8",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Vampirisation de mana niv. 10",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Vampirisation de mana niv. 11",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Vampirisation de mana niv. 12",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Vampirisation de vie niv. 10",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Vampirisation de vie niv. 11",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Vampirisation de vie niv. 12",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. aura combattimento lento liv. 1",
+          "length": 37,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. pallottola di pietra liv. 1",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Invocation squelette niv. 5",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Invocation squelette niv. 10",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Invocation squelette niv. 2",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Invocation squelette niv. 3",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Invocation squelette niv. 4",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Invocation squelette niv. 6",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Invocation squelette niv. 7",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Invocation squelette niv. 8",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Invocation squelette niv. 9",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Invocation squelette niv. 11",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Invocation squelette niv. 12",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. guarigione maggiore liv. 10",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. guarigione maggiore liv. 11",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. guarigione maggiore liv. 12",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. resist. allo scioglimento liv. 10",
+          "length": 39,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Serviteur mort-vivant niv. 4",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. Goblin muerto viviente niv. 4",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Serviteur mort-vivant niv. 5",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. Goblin muerto viviente niv. 5",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Serviteur mort-vivant niv. 6",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. Goblin muerto viviente niv. 6",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Serviteur mort-vivant niv. 8",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. Goblin muerto viviente niv. 8",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Serviteur mort-vivant niv. 9",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. Goblin muerto viviente niv. 9",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Serviteur mort-vivant niv. 10",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. Goblin muerto viviente niv. 10",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Serviteur mort-vivant niv. 11",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. Goblin muerto viviente niv. 11",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Serviteur mort-vivant niv. 12",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. Goblin muerto viviente niv. 12",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Dispersion aura blanche niv. 10",
+          "length": 38,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. disperdi aura bianca liv. 4",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Dispersion aura blanche niv. 6",
+          "length": 37,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. disperdi aura bianca liv. 5",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Invocation de spectre niv. 12",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Invocation de spectre niv. 11",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Invocation de spectre niv. 10",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Parch. Aura de marche rapide niv. 6",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. pallottola di pietra liv. 3",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. pallottola di pietra liv. 9",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. guarigione impossibile liv. 12",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. pallottola di pietra liv. 2",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. aura di rigenerazione liv. 4",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Perg. aura combattimento veloce liv. 4",
+          "length": 38,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Darius le Cartographe",
+          "length": 21,
+          "keywords": [
+            "darius"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Darius il cartografo",
+          "length": 20,
+          "keywords": [
+            "darius"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        },
+        {
+          "text": "Begebt Euch zu Darius Servil in Liannon.",
+          "length": 40,
+          "keywords": [
+            "darius"
+          ],
+          "language": "Unknown",
+          "language_confidence": 0.0
+        }
+      ]
+    },
+    "English": {
+      "count": 9438,
+      "quest_strings": [
+        {
+          "text": "ui_item_quest_ring_iron",
+          "length": 23,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_ring_gold_01",
+          "length": 26,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_ring_red_01",
+          "length": 25,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_ring_gold_02",
+          "length": 26,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_ring_dark_01",
+          "length": 26,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_ring_green",
+          "length": 24,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_ring_bronze_01",
+          "length": 28,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_ring_silver_05",
+          "length": 28,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_ring_silver_03",
+          "length": 28,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_ring_dark_02",
+          "length": 26,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_ring_wood_01",
+          "length": 26,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_btn_build_troll_corpsecollector",
+          "length": 34,
+          "keywords": [
+            "collect"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_equip_trousers_01",
+          "length": 31,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_ring_silver_04",
+          "length": 28,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_inkwell",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_feather_01",
+          "length": 24,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_arrow_broken",
+          "length": 26,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_book_01",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_parchment_01",
+          "length": 26,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_ring_silver_06",
+          "length": 28,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_gem_blue_01",
+          "length": 25,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_mask_01",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_key_dark",
+          "length": 22,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_coin_01",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_potion_02",
+          "length": 23,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_gem_white_01",
+          "length": 26,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_potion_04",
+          "length": 23,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_iridanerz",
+          "length": 23,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_gem_red_01",
+          "length": 24,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_gem_obsidian_02",
+          "length": 29,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_rauchquarz",
+          "length": 24,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_amulet_02",
+          "length": 23,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_potion_03",
+          "length": 23,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_skull_01",
+          "length": 22,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_fur_01",
+          "length": 20,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_ring_silver_02",
+          "length": 28,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_mask_04",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_bracelet_01",
+          "length": 25,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_gem_amethyst",
+          "length": 26,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_potion_01",
+          "length": 23,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_plant_04",
+          "length": 22,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_amulet_01",
+          "length": 23,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_fur_03",
+          "length": 20,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_rune_04",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_rune_01",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_rune_03",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_rune_02",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_robe_03",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_fabric_grey",
+          "length": 25,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_stone_round_03",
+          "length": 28,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_map_01",
+          "length": 20,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_stone_round_04",
+          "length": 28,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_gem_nebulaquartz",
+          "length": 30,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_gem_opal",
+          "length": 22,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_gem_lapislazuli",
+          "length": 29,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_gem_green_01",
+          "length": 26,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_gem_red_02",
+          "length": 24,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_gem_malachit",
+          "length": 26,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_plant_06",
+          "length": 22,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_plant_05",
+          "length": 22,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_plant_03",
+          "length": 22,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_plant_01",
+          "length": 22,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_dwarfhelmet_burst",
+          "length": 31,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_dwarfplate_burst",
+          "length": 30,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_dwarfshield_burst",
+          "length": 31,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_dwarfaxe_burst",
+          "length": 28,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_food_01",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_pincers",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_fabric_purple",
+          "length": 27,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_chitin",
+          "length": 20,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_fabric_black",
+          "length": 26,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_food_02",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_skin_dragon",
+          "length": 25,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_metalbar_01",
+          "length": 25,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_metalbar_03",
+          "length": 25,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_metalbar_02",
+          "length": 25,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_mask_03",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_key_grey",
+          "length": 22,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_stone_round_02",
+          "length": 28,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_gem_achat",
+          "length": 23,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_gem_bloodred",
+          "length": 26,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_octagon",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_stone_round_01",
+          "length": 28,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_paperscroll_01",
+          "length": 28,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_fur_02",
+          "length": 20,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_letter",
+          "length": 20,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_coin_02",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_plant_02",
+          "length": 22,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_glasspiece_02",
+          "length": 27,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_feather_02",
+          "length": 24,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_mummy_hand",
+          "length": 24,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_skin_basilisk",
+          "length": 27,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_gem_obsidian",
+          "length": 26,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_gem_topas",
+          "length": 23,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_amulet_04",
+          "length": 23,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_monokel",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_bottle_01",
+          "length": 23,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_skin_leather",
+          "length": 26,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_glasspiece_04",
+          "length": 27,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ui_item_quest_tube_02",
+          "length": 21,
+          "keywords": [
+            "quest"
+          ],
+          "language": "English",
+          "language_confidence": 1.0
+        }
+      ]
+    },
+    "Italian": {
+      "count": 1856,
+      "quest_strings": [
+        {
+          "text": "Perg. aura della debolezza liv. 2",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura della debolezza liv. 7",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. stretta della morte liv. 10",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura della debolezza liv. 12",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura della sopportazione liv. 8",
+          "length": 37,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura della debolezza liv. 6",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura della debolezza liv. 5",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura della guarigione liv. 6",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura della destrezza liv. 10",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura della debolezza liv. 8",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura della debolezza liv. 9",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura della debolezza liv. 10",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura della debolezza liv. 11",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura della debolezza liv. 3",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura della debolezza liv. 4",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura della guarigione liv. 7",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. elementale della terra liv. 6",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. stretta della morte liv. 11",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. stretta della morte liv. 12",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. elementale della terra liv. 9",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Riferisci a Einar del tuo successo. Ha parlato di un regalo che potrebbe esserti utile nello Shiel.",
+          "length": 99,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.6
+        },
+        {
+          "text": "Vai a trovare Darius Servil a Liannon.",
+          "length": 38,
+          "keywords": [
+            "darius"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Ortah Gelfbeard potrebbe sapere qualcosa riguardo all'anello del fantasma. La sua casa si trova a est di Liannon.",
+          "length": 113,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.42857142857142855
+        },
+        {
+          "text": "Scorta Silwen e il suo gruppo verso casa. Parla ancora con Silwen quando sarete arrivati all'insediamento.",
+          "length": 106,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.6
+        },
+        {
+          "text": "Gli spiriti degli uomini di Udwin tornano sulla terra. Con essi torna un gelido pericolo.",
+          "length": 89,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.7777777777777778
+        },
+        {
+          "text": "Un'ombra senza riposo percorre le terre vicine alla vecchia miniera ad est di Liannon. Sembra sia il fantasma di un guerriero caduto molti anni fa.",
+          "length": 147,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "Anche questa apparizione portava un anello. Ortah probabilmente lo scambier",
+          "length": 75,
+          "keywords": [
+            "quest"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.625
+        },
+        {
+          "text": "I ricordi degli orrori che ha incontrato hanno fatto impazzire Udwin una seconda volta. Il fantasma deve essere sconfitto prima che faccia del male a qualcuno.",
+          "length": 159,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.6
+        },
+        {
+          "text": "Torna a Liannon e mostra a Darius la Maschera di Belial.",
+          "length": 56,
+          "keywords": [
+            "darius"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Gli orchi di Torgruk sono in guerra contro gli uomini bestia. La liberazione di Sharak potrebbe portarti nuovi alleati.",
+          "length": 119,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Visualizza gli oggetti legati alle missioni ed un elenco di missioni complete e non risolte.",
+          "length": 92,
+          "keywords": [
+            "mission"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "del tuo Avatar e degli eroi. Ti permette inoltre di distribuire i punti ottenuti quando avanzi di un livello.",
+          "length": 109,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "essere memorizzato e posizionato nella Memoria Incantesimi. Seleziona l'incantesimo e mettilo in uno degli spazi vuoti qui sopra.",
+          "length": 129,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "una pergamena magica. Per inserire l'incantesimo nel Libro, porta la pergamena in uno spazio vuoto. Il contenuto della pergamena verr",
+          "length": 133,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.7777777777777778
+        },
+        {
+          "text": "essere posizionato in uno spazio vuoto della Tavola degli Edifici della razza corrispondente. I piani verranno conservati nella tavola permanentemente.",
+          "length": 151,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Questo spazio nella Tavola degli Edifici",
+          "length": 40,
+          "keywords": [
+            "quest"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.5714285714285714
+        },
+        {
+          "text": "vuoto. Clicca lo spazio libero nella Tavola per inserire qui il piano.",
+          "length": 70,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "essere utile per una missione o pu",
+          "length": 34,
+          "keywords": [
+            "mission"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "di combattimento corpo-a-corpo ai guerrieri o a coloro che sono abili nella magia. Spade a una mano, spade corte e asce sono alcune delle armi disponibili.",
+          "length": 155,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.75
+        },
+        {
+          "text": "veloce per il combattimento ravvicinato, oltre ad altre armi da lancio. Queste armi sono particolarmente indicate per i combattenti che hanno molta destrezza o per coloro che sono abili nella magia.",
+          "length": 198,
+          "keywords": [
+            "quest"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "alleate, fornendo un grande vantaggio in battaglia. Possono essere usate anche contro i Non-morti.",
+          "length": 98,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "La Magia della Mente aggressiva danneggia l'intelletto e lo spirito di un nemico. Comprende incantesimi che ipnotizzano i nemici, che li confondono in modo che non riconoscano gli amici dai nemici, o che causano danni da shock.",
+          "length": 227,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "risucchiare il Mana di un nemico trasferendolo a chi lancia l'incantesimo o passandolo ai suoi alleati. Permette anche un rifornimento rapido delle riserve di Mana.",
+          "length": 164,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "sono in coda e devono essere evocate. Clicca col tasto sinistro su un simbolo per rimuoverlo dalla coda.",
+          "length": 104,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "chten Sie dieses Portal betreten?",
+          "length": 33,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Seguro que quieres entrar en este portal?",
+          "length": 41,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.6
+        },
+        {
+          "text": "L'accampamento di Snarf a ovest deve essere distrutto. Celen vuole il suo pugnale come prova della sua sconfitta.",
+          "length": 113,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "e zum Portal nach Eloni. Ihr Versteck ist ein Lager im Westen.",
+          "length": 62,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.6
+        },
+        {
+          "text": "Snarf y su banda de goblins asedian la carretera que lleva al portal de Eloni. Su guarida es un campamento en el oeste.",
+          "length": 119,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.6
+        },
+        {
+          "text": "Gli Uomini Bestia occupano la parte centrale del Vale. Devono essere spazzati via o metteranno in pericolo l'attacco alle forze del Distruttore.",
+          "length": 144,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "aiuto a Torgruk. Deve tornare all'insediamento degli orchi. Fa' attenzione alle guardie.",
+          "length": 88,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "stata attaccata e rapita nella foresta di Eloni. Sono tenuti prigionieri in una vecchia cava a sud di Eloni.",
+          "length": 108,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.75
+        },
+        {
+          "text": "Un cancello di pietra bianca blocca la strada verso sud. Gli elfi dell'insediamento sanno come aprirlo.",
+          "length": 103,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "I prigionieri sono in una vecchia cava a sud. Per raggiungerla devi attraversare le terre degli Uomini Bestia. Fai attenzione!",
+          "length": 126,
+          "keywords": [
+            "question/exclamation",
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.75
+        },
+        {
+          "text": "Gli Orchi controllano la vecchia cava. Devi sconfiggerli per liberare i prigionieri.",
+          "length": 84,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "La commerciante libera Shadira Sundancer sta cercando la polvere di cristallo che chiama Ariafrost nelle Montagne Stormcleaver. Pare che sia di grandissimo valore e che si possa trovare da qualche parte nelle Montagne Stormcleaver.",
+          "length": 231,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Shadira sta cercando l'Ariafrost, cristalli di Aria puri, che possono essere trovati nelle Rocce di Stormcleaver. Si dice che si trovino in posti dove possono arrivare solo gli uccelli.",
+          "length": 185,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "creature che vivono dei sogni degli esseri umani. Suo fratello Sharknar stato posseduto da una di queste creature ed",
+          "length": 116,
+          "keywords": [
+            "quest"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.4444444444444444
+        },
+        {
+          "text": "liberarlo da quella creatura. Potrai trovarlo nelle montagne, a ovest dell'accampamento degli Uomini Bestia.",
+          "length": 108,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "un gioiello di piccole dimensioni. Devi portarlo a Sinwen.",
+          "length": 58,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "scara de conjuros es una calavera de troll. Normalmente, en Hoja de sombra no hay trolls. Normalmente.",
+          "length": 102,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "un teschio di troll. Di solito non ci sono troll nel Leafshade. Di solito.",
+          "length": 74,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Pare mettersi male per la Casa di Utran, da quando hanno perso il comando di quasi tutta la vallata. Potrebbero avere suggerimenti importanti sulla strategia nemica. Il loro accampamento",
+          "length": 186,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "tu possa sconfiggerli. Hai bisogno del sostegno degli Utran per cacciare le guardie.",
+          "length": 84,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "L'erba Alfalas cresce a nord di Liannon. Le guardie del Northbridge hanno la chiave per il cancello di roccia, che blocca la strada per il nord.",
+          "length": 144,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "Shan pensa che l'accampamento dei goblin di Burgle sia proprio dove cresce l'erba Alfalas. Forse i goblin ne hanno raccolta per uso personale.",
+          "length": 142,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Tynar pensa che le guardie sulle colline vicino ai monumenti possano avvertire l'esercito. Il passaggio di informazioni tra le guardie deve essere interrotto. Le guardie devono essere eliminate una per una. Un allarme sarebbe mortale. Torna da Lord Tynar",
+          "length": 254,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.7142857142857143
+        },
+        {
+          "text": "controllata dagli eserciti di Brannigan. Nel nord e nel sud ci sono grandi accampamenti da cui le truppe controllano i territori. Sarebbe meglio distruggere quei campi, prima di qualunque tentativo di sfondamento verso est.",
+          "length": 223,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "Sei riuscito ad oltrepassare il cordone delle truppe di Brannigan. Adesso continua verso est, attraversa il portale e passa nelle Wildland.",
+          "length": 139,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.6
+        },
+        {
+          "text": "situato a nord. Nella parte ovest ci sono alcuni Cavalieri dell'Ordine. Il loro comandante",
+          "length": 90,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Follow Rohen through the portal into the Frostmarshes.",
+          "length": 54,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.6
+        },
+        {
+          "text": "Segui Rohen attraverso il portale nelle Paludi del Ghiaccio.",
+          "length": 60,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.6
+        },
+        {
+          "text": "aj za Rohenem przez portal na Lodowe Bagna.",
+          "length": 43,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "morto. La trappola era il messaggio che era stato preparato per lui. Devi portare la terribile notizia a Greyfell.",
+          "length": 114,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Devi portare a Sartarius le notizie sulla morte di Rohen al pi",
+          "length": 62,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "presto possibile. Adesso l'Ordine deve trovare un modo di affrontare la minaccia senza l'aiuto di Rohen.",
+          "length": 104,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Il castello di Stonewall, dimora della Casa di Hallit, sta per essere attaccato. Gli assalitori si avvicinano da sud, direttamente dalle Darklands.",
+          "length": 147,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Alla Casa di Hallit restano pochi guerrieri per il combattimento a distanza. Hanno bisogno di aiuto prima possibile.",
+          "length": 116,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "un buon posto per posizionare gli arcieri. Da queste colline possono dare copertura alle armate degli Hallit.",
+          "length": 109,
+          "keywords": [
+            "quest"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.5714285714285714
+        },
+        {
+          "text": ". L'ordine deve mandare rinforzi per riuscire a riprendere il controllo del territorio. La guarda al portale pu",
+          "length": 111,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.6
+        },
+        {
+          "text": "necessario annientare le truppe rimanenti del nemico e farle passare attraverso il portale per Greydusk Vale. Non attraversare il portale, molti mirmidoni Non-Morti aspettano sull'altro lato.",
+          "length": 191,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.6
+        },
+        {
+          "text": "Gli indizi su Hokan puntano alle Darklands. La strada per le Darklands porta verso sud. Marcia, un messaggero dell'ordine, potr",
+          "length": 127,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "I Windwall cominciano a sud di Greyfell. Dicono che Marcia si trovi nelle terre della Casa di Hallit.",
+          "length": 101,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "The direct way into the Greydusk Vale is blocked. A less dangerous way is through the land of the dwarves at the Southern Windwalls. The portal to it is located in the Southwest of Stonewell. .",
+          "length": 193,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.6
+        },
+        {
+          "text": "bloccata. Una strada meno pericolosa passa attraverso i territori dei nani nei Windwall meridionali. Il portale si trova a sudovest di Stonewell.",
+          "length": 145,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.8
+        },
+        {
+          "text": "Il generale Gunthar ha marciato con l'esercito degli Hallit verso il passo in direzione sud. Conosce la situazione. Appena i tiratori sono pronti, devi discutere il piano con lui.",
+          "length": 179,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "Tyrgar deve un carico di pesce a Sunder. Per sua disgrazia i goblin hanno catturato tutti i pesci del lago. I goblin devono essere sconfitti e il pesce rubato portato a Tyrgar.",
+          "length": 176,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.7142857142857143
+        },
+        {
+          "text": "Ora puoi portare il pesce a Sunder. Lo troverai a Liannon.",
+          "length": 58,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "la comandante degli elfi di Eloni. Qualunque azione deve essere discussa con lei.",
+          "length": 81,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "I seguaci di Brannigan hanno costruito l'accampamento da cui conducono i loro attacchi appena fuori dall'insediamento elfico. Deve essere distrutto, le difese degli elfi stanno per crollare.",
+          "length": 190,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "caduta nelle mani di un traditore che ha rapito la moglie di Lord Tynar stanotte e ha rubato la bandiera di famiglia. Forse puoi trovare degli indizi tra i soldati di Brannigan su dove sia stata portata.",
+          "length": 203,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ancora traccia della moglie di Lord Tynar. Devi riportare la bandiera alla Casa di Utran.",
+          "length": 89,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Per pura codardia Joshua, figlio di Jonir, ha abbandonato il proprio fratello di sangue, Herger, a morire nel Coldmark. I nani sono inferociti. Joshua dovr",
+          "length": 155,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "stato soddisfatto, suo figlio vendicato e adesso devi riportargli l'elmo come prova. Puoi dare l'elmo a Joshua o in alternativa portarlo di persona al Thane.",
+          "length": 157,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "rgr, un gigante sceso dalle cime dei Windwall meridionali, sta minacciando la vallata. Uccide gli abitanti e ruba il bestiame dai campi. I nani non riescono a liberarsene.",
+          "length": 171,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "rgr dorme sempre in un posto preciso. Una volta trovato il posto i nani proveranno a coglierlo di sorpresa.",
+          "length": 107,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.7142857142857143
+        },
+        {
+          "text": "rgr con la forza delle armi, e non sono preparati per provare in altri modi. Ragnar pensa che Lorderic, l'alchimista, possa conoscere una soluzione.",
+          "length": 148,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "rgr. Gli servono alcune erbe.",
+          "length": 29,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Lo stelonero si trova vicino a posti oscuri e tombe. Forse nel Frostmark ci sono posti in cui cresce quest'erba.",
+          "length": 112,
+          "keywords": [
+            "quest"
+          ],
+          "language": "Italian",
+          "language_confidence": 0.625
+        },
+        {
+          "text": "Gli hai dato la carne. Ora devi solo aspettare che arrivi il mattino e che lui la mangi.",
+          "length": 88,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Italian",
+          "language_confidence": 1.0
+        }
+      ]
+    },
+    "Spanish": {
+      "count": 2446,
+      "quest_strings": [
+        {
+          "text": "Perg. aura del passo lento liv. 6",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "en Hoja de sombra buscando componentes para un gran hechizo. Necesita algunos objetos.",
+          "length": 86,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura del combattimento lento liv. 3",
+          "length": 41,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. elementale del ghiaccio liv. 6",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. elementale del fuoco liv. 9",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. elementale del fuoco liv. 6",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. aura del passo veloce liv. 6",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. elementale del fuoco liv. 11",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "a saber algo sobre el anillo del fantasma. Su casa se encuentra al este de Liannon.",
+          "length": 83,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Escolta a Silven y su grupo de regreso a casa. Habla de nuevo con Silven cuando haya llegado al asentamiento.",
+          "length": 109,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "s sepa algo sobre el antiguo anillo. Su casa se encuentra en el extremo oeste de la aldea.",
+          "length": 90,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "El fantasma de Udwin ha emergido de las profundidades, ciertamente. Parece confudido. Quiz",
+          "length": 90,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Regresa a Liannon y muestra a Darius la m",
+          "length": 41,
+          "keywords": [
+            "darius"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Memoria de hechizos - El personaje seleccionado ha memorizado este hechizo. Se puede usar en la partida inmediatamente. Haz clic en el hechizo para borrarlo y hacer sitio para otro.",
+          "length": 181,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "o. Para introducir un hechizo, haz clic en el espacio con un pergamino.",
+          "length": 71,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "vuoto. Per inserire un incantesimo clicca lo spazio con una pergamena.",
+          "length": 70,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "a. Haz clic en la ranura con un Plano de unidad para introducirlo.",
+          "length": 66,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "pidas que te dan libertad de movimiento. Para llegar a niveles superiores es  necesario contar con buena destreza y fuerza.",
+          "length": 123,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "El Combate pesado es la habilidad de controlar armas grandes y potentes y llevar armaduras y escudos pesados. Para llegar a niveles superiores es necesario contar con un gran nivel de fuerza y resistencia.",
+          "length": 205,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "El Combate a distancia se basa en el dominio de arcos y ballestas. Para llegar a niveles superiores, es necesario contar con un gran nivel de destreza y una fuerza considerable.",
+          "length": 177,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 0.75
+        },
+        {
+          "text": ". Las espadas de una mano, las espadas cortas y las hachas son algunas de las armas disponibles.",
+          "length": 96,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 0.75
+        },
+        {
+          "text": "La Magia dell'Incantamento viene usata per confondere e ingannare i nemici usando illusioni e manipolazione. Con il suo aiuto si possono controllare i nemici ed usarli per i propri scopi.",
+          "length": 187,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ritu del enemigo. Incluye hechizos que hipnotizan a los enemigos, o los confunden para no que distingan a los aliados de los enemigos y para provocarles shocks.",
+          "length": 160,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Los puntos de salud pueden perderse en combate o a causa de hechizos enemigos y se regeneran con un poco de descanso. Cuando los puntos de salud se agotan, las criaturas vivas mueren.",
+          "length": 183,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "il simbolo del tuo Avatar. Con il tasto sinistro del mouse puoi selezionarlo, con il tasto destro centri la visuale sul tuo personaggio.",
+          "length": 136,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "il simbolo di uno dei tuoi eroi. Con il tasto sinistro del mouse puoi selezionarlo, con il tasto destro centri la visuale su di lui.",
+          "length": 132,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "rappresentata nel gruppo. Il numero mostra il numero dei membri. Cliccando con il tasto sinistro del mouse selezionerai il gruppo, con il tasto destro centrerai la visuale su di e",
+          "length": 179,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "mero de la parte inferior izqda. indica la cantidad de trabajadores disponibles. Para elegir al siguiente trabajador haz clic con el bot",
+          "length": 136,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "attuale di lavoratori disponibili. Puoi selezionare il successivo cliccando col tasto sinistro. Con ogni clic successivo selezionerai altri lavoratori.",
+          "length": 151,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Muestra la unidad invocada actualmente. La barra verde muestra el progreso. Haz clic para detener el proceso.",
+          "length": 109,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "activo actualmente en ti mismo. Haz clic para detener el hechizo.",
+          "length": 65,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "roe. Haz clic para detener el hechizo.",
+          "length": 38,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Seguro que quieres destruir este objeto? No podr",
+          "length": 48,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Seguro que quieres matar a la(s) unidad(es) seleccionada(s)?",
+          "length": 60,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Hay que destruir el campamento de Snarf en el oeste. Celen quiere su daga como prueba de su derrota.",
+          "length": 100,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "recuperar fuerzas en el refugio del Valle de la Penumbra. Es el momento de atacar.",
+          "length": 82,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ayuda a Torgruk. Necesita volver al asentamiento de los orcos. Cuidado con los guardias.",
+          "length": 88,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "stata rimossa. Ora prosegui verso nord per spazzar via i ranghi dei seguaci del Distruttore.",
+          "length": 92,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "s que cruzar la tierra de los hombres-bestia. Ten cuidado.",
+          "length": 58,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "custodiada por ogros. Hay que derrotarlos para poder liberar a los prisioneros.",
+          "length": 79,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "bloqueado. Destruye el edificio para liberar a los comerciantes prisioneros.",
+          "length": 76,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "os... criaturas que viven de los sue",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "os. Es necesario aniquilarlo para hacerse con la obsidiana.",
+          "length": 59,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Otra parte del anillo que le fue robada a Sinwen. La necesita.",
+          "length": 62,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "del. Normalerweise gibt es im Schattenhain keine Trolle.  Normalerweise.",
+          "length": 72,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Los seguidores de Branningan guardan los monumentos de la runa de Miter. Son demasiados para que puedas vencerles. Necesitar",
+          "length": 124,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "n consejo que darte. Vive en Liannon.",
+          "length": 37,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "La hierba alfalas crece en el norte de Liannon. Los guardias del Puente Norte tienen la llave de la puerta de piedra que bloquea el camino hacia el norte.",
+          "length": 154,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "rcito principal. Hay que cortar la cadena de guardias. Los guardias han de ser eliminados uno por uno. Si dieran la alarma ser",
+          "length": 126,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "rcitos de Brannigan. En el norte y en el sur hay grandes campamentos desde los que las tropas controlan el territorio. Ser",
+          "length": 122,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. elementale del ghiaccio liv. 7",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. elementale del ghiaccio liv. 8",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. elementale del ghiaccio liv. 9",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "I saccheggiatori del Pugno Nero hanno assediato la parte est del villaggio e minacciano il monumento. Con l'aiuto dei cavalieri, potresti impegnarli per abbastanza tempo da poter prendere possesso del monumento.",
+          "length": 211,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "n este para llegar hasta Rohen.",
+          "length": 31,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Las noticias sobre la muerte de Rohen han de llegar a Sartarius cuanto antes. Ahora la Orden tiene que encontrar la manera de afrontar la amenaza sin la ayuda de Rohen.",
+          "length": 168,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. elementale del fuoco liv. 7",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. elementale del ghiaccio liv. 11",
+          "length": 37,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Un ataque contra el castillo de Muro de piedra de la Casa de Hallit es inminente. Los atacantes se acercan desde el sur, directamente desde las Tierras Negras.",
+          "length": 159,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "en Muro de piedra preparando la ciudad para otro ataque de los muertos vivientes. Puedes encontrarla cerca de Lord Jonir.",
+          "length": 121,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "a. Es aconsejable esperar a los muertos vivientes junto con las tropas de Gunthar. Probablemente enviar",
+          "length": 103,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "n tres oleadas de atacantes. Hay que darse prisa.",
+          "length": 49,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Los muertos vivientes han logrado atravesar el paso y han invadido la ciudad. La Orden ha de enviar refuerzos para recuperar la tierra. El guardia del portal puede enviar el mensaje a P",
+          "length": 185,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "Los muertos vivientes han conquistado la ciudad de los hallits. Es esencial recuperarla tan pronto como sea posible.",
+          "length": 116,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. elementale del ghiaccio liv. 10",
+          "length": 37,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. elementale del ghiaccio liv. 12",
+          "length": 37,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Los ataques han sido rechazados. Ahora es esencial aniquilar las tropas restantes de los enemigos y abrir el camino hacia el portal que lleva al Valle de la Penumbra. No cruces el portal: al otro lado hay muchos muertos vivientes esperando.",
+          "length": 240,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "a salvo, los muertos vivientes han sido derrotados. Por fin ha llegado el momento de hablar de Hokan.",
+          "length": 101,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "nicas pistas sobre Hokan apuntan hacia las Tierras Negras. El camino hacia las Tierras Negras conduce hacia el sur. Marcia, que es mensajera de la Orden, puede saber m",
+          "length": 167,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "s sobre Hokan y sus mirmidones. Comanda los puestos de avanzada de la Orden en el Valle de la Penumbra, que fue invadido por los muertos vivientes. Debe de haber un camino para llegar all",
+          "length": 187,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "furioso porque los goblins han pescado todos los peces del lago. Hay que ocuparse de los goblins y devolver el pescado robado a Tyrgar.",
+          "length": 135,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Seguro que quieres sobrescribir esta partida guardada?",
+          "length": 54,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "La cadena de oro tiene las armas de Utran. Es igual a la que lleva el propio Lord Tynar. Quiz",
+          "length": 93,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "al alguna de la esposa de Lord Tynar. Hay que devolver el estandarte a la Casa de Utran.",
+          "length": 88,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "l'unico modo per riabilitare l'onore dei nani e il legame di alleanza tra nani e umani. Joshua si nasconde da qualche parte a sud del villaggio dei nani.",
+          "length": 153,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "amenazando el valle. Mata a sus habitantes y roba el ganado de las praderas. Los enanos no han logrado expulsarlo.",
+          "length": 114,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "rgr con algo de carne como cebo. Para prepararlo necesita algunas hierbas.",
+          "length": 74,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "o puede encontrarse cerca de lugares oscuros y tumbas. En las Marcas Heladas puede haber lugares en los que crezca esta hierba.",
+          "length": 127,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "durmiendo, es el momento de colarle la carne envenenada. Hazlo deprisa, antes de que se despierte. Lleva sus raciones en una bolsa del cintur",
+          "length": 141,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 0.75
+        },
+        {
+          "text": "Perg. elementale del fuoco liv. 8",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. elementale del fuoco liv. 10",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Perg. elementale del fuoco liv. 12",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Cinco guardias con forma de golems de roca han empezado a invocar la Ira de la piedra. No queda mucho tiempo para encontrarlos y destruirlos, antes de que hayan acabado de invocar este terrible poder.",
+          "length": 200,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "La sangre de demonio tiene propiedades muy potentes. Su poder confiere su dureza al adamantio. Los demonios pueden encontrarse provocando el caos en las Tierras Negras, cerca de Mulandir.",
+          "length": 187,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Seguro que quieres destruir este edificio?",
+          "length": 42,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Kraga, el gigante de Pico Afilado se ha peleado con su hermano Draga, que le ha robado su gema. Kraga ha jurado proteger el tesoro de una cueva y no puede dejar su puesto para ir en busca de su hermano.",
+          "length": 202,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 0.8
+        },
+        {
+          "text": "Kraga, il gigante delle Montagne di Stoneblade, ha litigato con suo fratello Braga che ha rubato la sua gemma. Kraga ha giurato di proteggere la caverna del tesoro e di non lasciare la sua posizione per andare in cerca di suo fratello.",
+          "length": 235,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Kraga se siente obligado por su juramento y quiere que alguien le releve para poder abandonar la cueva. Como no es el gigante m",
+          "length": 127,
+          "keywords": [
+            "uram"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "da ottimizzare con il proprio stile di gioco. Possono essere fatti avanzare automaticamente nei livelli successivi.",
+          "length": 115,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Seguro que quieres borrar esta partida guardada?",
+          "length": 48,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "n para romper el asedio de la fortaleza. Tienes que asegurarte de que tienes suficientes guerreros competentes, porque la batalla seguramente ser",
+          "length": 145,
+          "keywords": [
+            "uram"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "s el primero de tres campamentos enemigos. Este, hasta ahora, parece ser el menos implicado en los ataques a la fortaleza. Las criaturas que hay en",
+          "length": 147,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "a ser una pista de la identidad del traidor. Hay que avisar a Morton Tharne de ello.",
+          "length": 84,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 0.75
+        },
+        {
+          "text": "del traditore. Morton Tharne deve esserne informato.",
+          "length": 52,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "a de Thurgon en la carta dirigida a Tanara se parece mucho a la que figura en el mapa. Morton tiene que saberlo.",
+          "length": 112,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Thurgon admite su culpa pero no se arrepiente de sus acciones. Tiene consigo una gema de incalculable valor, que es sin duda el pago por sus acciones. Morton quiz",
+          "length": 162,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "hacia el este, es el Paso de la Serpiente, una garganta estrecha con muchas entradas de cuevas. Los muertos vivientes marchan por esas cuevas hacia el Paso y eso hace que sea casi imposible de cruzar.",
+          "length": 200,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 0.8
+        },
+        {
+          "text": "attraverso il Passo del Serpente, una stretta gola con molte aperture di caverne in essa. I Non-Morti marciano attraverso queste caverne nel passo, rendendo praticamente impossibile il passaggio.",
+          "length": 195,
+          "keywords": [
+            "quest"
+          ],
+          "language": "Spanish",
+          "language_confidence": 0.5454545454545454
+        },
+        {
+          "text": "intentando abrirse paso hacia la libertad. No hay otra alternativa: hay que detenerle.",
+          "length": 86,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "en una urna cerrada que se encuentra en la fortaleza fronteriza. Malicor ha confiado la llave a Tana Songblade.",
+          "length": 111,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Spanish",
+          "language_confidence": 0.7777777777777778
+        }
+      ]
+    },
+    "German": {
+      "count": 7762,
+      "quest_strings": [
+        {
+          "text": "Sprecht mit Celen Fell",
+          "length": 22,
+          "keywords": [
+            "sprecht"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Berichtet Einar von dem Erfolg. Er sprach von einer Gabe, die in Shiel von Nutzen sein kann.",
+          "length": 92,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Das alte Hauptquartier Brannigans beherrscht den Nordwesten des Schattenwaldes. Es ist das erste Hindernis auf dem Weg nach Shiel. Einar warnt vor den Sp",
+          "length": 153,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 0.8571428571428571
+        },
+        {
+          "text": "Darius der Kartograph",
+          "length": 21,
+          "keywords": [
+            "darius"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Findet die drei versprengten Sch",
+          "length": 32,
+          "keywords": [
+            "findet",
+            "find"
+          ],
+          "language": "German",
+          "language_confidence": 0.625
+        },
+        {
+          "text": "Sprecht einen Soldaten an, um das Tor nach Eloni zu",
+          "length": 51,
+          "keywords": [
+            "sprecht"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Bringt das Schwert des Geistes zu Brok",
+          "length": 38,
+          "keywords": [
+            "bringt",
+            "bring"
+          ],
+          "language": "German",
+          "language_confidence": 0.5833333333333334
+        },
+        {
+          "text": "Bringt das alte Schwert, welches der Geist bei sich hatte, zu Brok.",
+          "length": 67,
+          "keywords": [
+            "bringt",
+            "bring"
+          ],
+          "language": "German",
+          "language_confidence": 0.75
+        },
+        {
+          "text": "hren, wenn der Weg sicher ist. Gebt ihr Nachricht, sobald es soweit ist.",
+          "length": 72,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ngt.  Vernichtet die Belagerer an der Landenge vor der Siedlung.",
+          "length": 64,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ck. Sprecht dann mit Silven in der Siedlung.",
+          "length": 44,
+          "keywords": [
+            "sprecht"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ck. Gefahr ist im Verzug.",
+          "length": 25,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Ein ruheloser Schatten ging bei der Mine im Osten um. Es schien ein vor langer Zeit gefallener Krieger zu sein.",
+          "length": 111,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Bringt den Ring des Geistes zu Ortah",
+          "length": 36,
+          "keywords": [
+            "bringt",
+            "bring"
+          ],
+          "language": "German",
+          "language_confidence": 0.5833333333333334
+        },
+        {
+          "text": "ber diesen alten Ring wissen. Er hat sein Haus am westlichen Ende des Dorfes.",
+          "length": 77,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "Zeigt Darius das Runenbuch",
+          "length": 26,
+          "keywords": [
+            "darius"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ck, als der Geist verging. Darius k",
+          "length": 35,
+          "keywords": [
+            "darius"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Bringt das Runenbuch zu Udwin",
+          "length": 29,
+          "keywords": [
+            "bringt",
+            "bring"
+          ],
+          "language": "German",
+          "language_confidence": 0.625
+        },
+        {
+          "text": "Ortah glaubt, dass Udwin nach Erinnerungen sucht. Das Runenbuch kann mit seinen Aufzeichnungen vielleicht helfen.",
+          "length": 113,
+          "keywords": [
+            "sucht"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "chlich aus der Tiefe gestiegen. Er scheint verwirrt. Vielleicht wei",
+          "length": 67,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Die Erinnerung hat Udwin erneut in den Wahnsinn getrieben. Der Geist muss bezwungen werden, bevor er jemandem schadet.",
+          "length": 118,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ck und zeigt Darius die Maske des Belial.",
+          "length": 41,
+          "keywords": [
+            "darius"
+          ],
+          "language": "German",
+          "language_confidence": 0.75
+        },
+        {
+          "text": "Die Orks des Torgruk liegen im Streit mit den Tiermenschen. Die Befreiung Sharaks bringt vielleicht Verb",
+          "length": 104,
+          "keywords": [
+            "bringt",
+            "bring"
+          ],
+          "language": "German",
+          "language_confidence": 0.6875
+        },
+        {
+          "text": "gung. Mit ihrer Hilfe werden die Tiermenschen schnell fallen.",
+          "length": 61,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Zum Zauberbuch - Hier befindet sich Ihr Zauberbuch, sowie alle Zauberspruchrollen, die Sie besitzen.",
+          "length": 100,
+          "keywords": [
+            "findet",
+            "find"
+          ],
+          "language": "German",
+          "language_confidence": 0.7
+        },
+        {
+          "text": "r die linke Hand - Befindet sich in der rechten Hand bereits ein zweih",
+          "length": 70,
+          "keywords": [
+            "findet",
+            "find"
+          ],
+          "language": "German",
+          "language_confidence": 0.75
+        },
+        {
+          "text": "r Beinbekleidung - Befindet sich im Oberk",
+          "length": 41,
+          "keywords": [
+            "findet",
+            "find"
+          ],
+          "language": "German",
+          "language_confidence": 0.625
+        },
+        {
+          "text": "ssen Sie den Zauberspruch nur anklicken und in eines der oben befindlichen F",
+          "length": 76,
+          "keywords": [
+            "find"
+          ],
+          "language": "German",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "Diese Arbeiter-Rune ist aktiviert. Wird sie entfernt, so verlieren Sie alle mit ihr herbeigerufenen Einheiten, und alle Monumente dieser Rasse werden freigegeben.",
+          "length": 162,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Diese Helden-Rune ist aktiviert. Wird sie entfernt, so verlieren Sie auch den entsprechenden Helden, falls Sie ihn schon herbeigerufen haben.",
+          "length": 141,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Hier befinden sich die Pl",
+          "length": 25,
+          "keywords": [
+            "find"
+          ],
+          "language": "German",
+          "language_confidence": 0.5714285714285714
+        },
+        {
+          "text": "schen. Sie wird dann aus dem Questenbuch dauerhaft entfernt, Sie k",
+          "length": 66,
+          "keywords": [
+            "quest"
+          ],
+          "language": "German",
+          "language_confidence": 0.5714285714285714
+        },
+        {
+          "text": "nnen durch Kampf und feindliche Magie verloren gehen und regenerieren in Ruhezeiten wieder. Ein Lebewesen stirbt, wenn es keine Lebenspunkte mehr hat.",
+          "length": 150,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "nnen. Immer wenn Sie eine Stufe aufsteigen, erhalten Sie neue Attribut-Punkte.",
+          "length": 78,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Tageszeit - Wenn die Sonne in der Mitte steht, ist es Mittagszeit. Wenn der Mond in der Mitte steht, ist es Mitternacht.",
+          "length": 120,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "r Sie selbst (Ihren Avatar). Durch einen Linksklick werden Sie selektiert, durch einen Rechtsklick wird der Bildschirmausschnitt auf Sie zentriert.",
+          "length": 147,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "r einen Ihrer Helden. Durch einen Linksklick wird er selektiert, durch einen Rechtsklick wird der Bildschirmausschnitt auf ihn zentriert.",
+          "length": 137,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "nnen Sie eine Gruppe formen. Die aktuell selektierten Einheiten werden dann als Gruppe festgelegt und erhalten ein Symbol.",
+          "length": 122,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 0.7272727272727273
+        },
+        {
+          "text": "nnen Sie eine Gruppe formen. Die aktuell selektierten Einheiten werden dann als Gruppe festgelegt und erhalten ein Symbol. Die an dieser Stelle bereits definierte Gruppe wird automatisch aufgel",
+          "length": 193,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 0.7692307692307693
+        },
+        {
+          "text": "nnen Sie eine Gruppe definieren. Dazu muss wenigstens eine eigene Einheit selektiert sein.",
+          "length": 90,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ufigste Einheit der Gruppe. Die Zahl entspricht der Anzahl der Gruppenmitglieder. Durch einen Linksklick wird die Gruppe selektiert.",
+          "length": 132,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "glicht einen schnellen Zugriff auf Arbeiter einer Rasse. Die Zahl zeigt die momentan freien Arbeiter an. Ein Linksklick selektiert den n",
+          "length": 136,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "nen Balken angezeigt. Ein Klick auf die angezeigte Einheit bricht den Vorgang ab.",
+          "length": 81,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Diese Einheiten befinden sich in der Warteschlange und werden als n",
+          "length": 67,
+          "keywords": [
+            "find"
+          ],
+          "language": "German",
+          "language_confidence": 0.7272727272727273
+        },
+        {
+          "text": "chstes herbeigerufen. Ein Klick auf eine Einheit in der Warteschlange entfernt sie aus der Warteschlange.",
+          "length": 105,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "nnen separat gesteuert werden. Die Zahl gibt die Anzahl der Einheiten an.",
+          "length": 73,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "nnen Sie Ihren Helden den abgebildeten Zauberspruch auf das aktuell selektierte Ziel zaubern lassen. Je kleiner das Symbol ist, desto weiter muss Ihr Held laufen, um in Reichweite zu kommen.",
+          "length": 190,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 0.7272727272727273
+        },
+        {
+          "text": "nnen Sie Ihren Helden direkt das aktuell selektierte Ziel angreifen lassen. Je kleiner das Symbol ist, desto weiter muss Ihr Held laufen, um in Reichweite zu kommen.",
+          "length": 165,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 0.5714285714285714
+        },
+        {
+          "text": "Formation Doppelreihe. Hier nehmen alle Mitglieder der Selektion Aufstellung in einer Doppelreihe.",
+          "length": 98,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Sie verlieren alle Einheiten dieser Rasse, wenn sie das letzte Monument freigeben. Fortfahren?",
+          "length": 94,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Wenn Sie die diese Rune aus Ihrer Runentafel entfernen, verlieren Sie alle auf dieser Insel bereits herbeigerufenen Einheiten dieser Rasse. Wollen Sie fortfahren?",
+          "length": 162,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Wenn Sie diese Rune aus Ihrer Runnentafel entfernen, verlieren Sie den entsprechenden Helden falls Sie ihn schon herbeigerufen haben. Wollen Sie fortfahren?",
+          "length": 156,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ren wollen? Er ist dann verloren.",
+          "length": 33,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Snarfs Lager im Westen muss vernichtet werden. Celen fordert seinen Dolch als Beweis.",
+          "length": 85,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Bringt Snarfs Dolch zu Celen Fell",
+          "length": 33,
+          "keywords": [
+            "bringt",
+            "bring"
+          ],
+          "language": "German",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "pfen. Nun ist der Moment, um ihn niederzuwerfen.",
+          "length": 48,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ckgewonnen werden. Nur die Maske kann Hokan helfen.",
+          "length": 51,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ckkehren. Vorsicht vor den Wachen ist geboten.",
+          "length": 46,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "rer ist nahe. Jetzt gilt es, ihn zu zerschmettern und die Maske zu erlangen.",
+          "length": 76,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Die Gefangenen befinden sich in einem alten Steinbruch im S",
+          "length": 59,
+          "keywords": [
+            "find"
+          ],
+          "language": "German",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "In Eloni sucht die Freih",
+          "length": 24,
+          "keywords": [
+            "sucht"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Findet den Ariafrost",
+          "length": 20,
+          "keywords": [
+            "findet",
+            "find"
+          ],
+          "language": "German",
+          "language_confidence": 0.625
+        },
+        {
+          "text": "Shadira sucht nach dem Ariafrost, reine Ariakristalle, die hier in den Sturmfelsen vorkommen sollen. Man sagt, es g",
+          "length": 115,
+          "keywords": [
+            "sucht"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Bringt den Ariafrost zu Shadira",
+          "length": 31,
+          "keywords": [
+            "bringt",
+            "bring"
+          ],
+          "language": "German",
+          "language_confidence": 0.625
+        },
+        {
+          "text": "Istur Ash, ein Gefangerer in Eloni, berichtet von Traumdieben ... Kreaturen, die von den Tr",
+          "length": 91,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "umen der Menschen leben. Sein Bruder Sharknar ist von einem solchen Wesen besessen und wahnsinnig.",
+          "length": 98,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ler Isturs ist von einem Traumdieb besessen und wahnsinnig. Nur der Tod kann ihn von dem Wesen befreien. Er befindet sich in den Bergen westlich des Tiermenschenlagers.",
+          "length": 168,
+          "keywords": [
+            "findet",
+            "find"
+          ],
+          "language": "German",
+          "language_confidence": 0.8076923076923077
+        },
+        {
+          "text": "Der Tod Shaknars hat den Traumdieb freigesetzt. Er muss vernichtet werden, um den Obsidian zu erlangen.",
+          "length": 103,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Bringt den Obsidian zu Istur",
+          "length": 28,
+          "keywords": [
+            "bringt",
+            "bring"
+          ],
+          "language": "German",
+          "language_confidence": 0.625
+        },
+        {
+          "text": "Erbeutet den summenden Obsidian von dem Traumdieb und bringt ihn Istur.",
+          "length": 71,
+          "keywords": [
+            "bringt",
+            "bring"
+          ],
+          "language": "German",
+          "language_confidence": 0.7857142857142857
+        },
+        {
+          "text": "r Zauberer geeignet. Sinwen hatte die Bestandteile des Ringes bereits gesammelt, aber sie wurden ihr von Brannigans Leuten abgenommen.",
+          "length": 134,
+          "keywords": [
+            "sammelt"
+          ],
+          "language": "German",
+          "language_confidence": 0.8181818181818182
+        },
+        {
+          "text": "Findet den Rauchquarz und bringt ihn Sinwen.",
+          "length": 44,
+          "keywords": [
+            "findet",
+            "bringt",
+            "find",
+            "bring"
+          ],
+          "language": "German",
+          "language_confidence": 0.625
+        },
+        {
+          "text": "ck. Er muss zu Sinwen gebracht werden.",
+          "length": 38,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "t des ombres. Normalement.",
+          "length": 26,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "Rohen befindet sich hier, aber Brannigans Truppen haben ihn von seiner Leibwache getrennt und eingekesselt.",
+          "length": 107,
+          "keywords": [
+            "findet",
+            "find",
+            "rohen"
+          ],
+          "language": "German",
+          "language_confidence": 0.75
+        },
+        {
+          "text": "nach Osten wird den Weg zum Pass frei machen und den Menschen in Shiel wieder Freiheit bringen.",
+          "length": 95,
+          "keywords": [
+            "bring"
+          ],
+          "language": "German",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "Es steht schlimm um das Haus Utran. Sie haben fast all ihr Land verloren. Vielleicht haben sie wertvolle Hinweise zur Strategie der Feinde. Ihr Lager ist im Westen.",
+          "length": 164,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Die Monumente der Rune in Shiel werden von Brannigans Leuten bewacht. Es sind zu viele, um sie alleine zu schlagen. Die Hilfe der Utraner wird n",
+          "length": 144,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Tynar, der Lord Kommandant der Utraner, ist vergiftet worden. Der Feldscher der Utraner ist machtlos, es muss ein Mittel gegen das Gift gefunden werden.",
+          "length": 152,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Sucht Shan Muir in Liannon auf",
+          "length": 30,
+          "keywords": [
+            "sucht"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Sucht das Alfalaskraut im Norden",
+          "length": 32,
+          "keywords": [
+            "sucht"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "r den eigenen Bedarf gesammelt.",
+          "length": 31,
+          "keywords": [
+            "sammelt"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Bringt das Alfalaskraut zu Shan Muir",
+          "length": 36,
+          "keywords": [
+            "bringt",
+            "bring"
+          ],
+          "language": "German",
+          "language_confidence": 0.625
+        },
+        {
+          "text": "Shan wartet in der Stadt auf das Kraut. Sie sollte es schnellstens erhalten, damit der Trank gebraut werden kann.",
+          "length": 113,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "gelkamm nahe den Monumenten die Hauptarmee benachrichtigen werden. Die Postenkette muss unterbrochen werden. Die Posten m",
+          "length": 121,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "gung. Die Gegner bei den Monumenten sollten nun keine Schwierigkeit mehr darstellen, solange das gegnerische Hauptlager nicht benachrichtigt wird.",
+          "length": 146,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "rtel von Brannigans Truppen ist durchbrochen. Nun geht es weiter nach Osten, durch das Portal ins Wildland.",
+          "length": 107,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "Sprecht mit Lord Tynar",
+          "length": 22,
+          "keywords": [
+            "sprecht"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Lord Tynar ist wieder genesen. Er wird hoffentlich hilfreicher sein als Hauptmann Bahir.",
+          "length": 88,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "rdlich liegt das Dorf Bergin. Im westlichen Teil befinden sich einige Ritter des Ordens. Meister Swanson ist ihr Anf",
+          "length": 116,
+          "keywords": [
+            "find"
+          ],
+          "language": "German",
+          "language_confidence": 0.6153846153846154
+        },
+        {
+          "text": "Brannigans Truppen blockieren den Eingang zum Pass. Es wird nicht leicht werden, ihre Reihen zu durchbrechen.",
+          "length": 109,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "rde ist genommen, nun muss der Rest des Passes in Richtung Osten durchquert werden, um Rohen zu erreichen.",
+          "length": 106,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "German",
+          "language_confidence": 0.8
+        },
+        {
+          "text": "Folgt Rohen durch das Portal in die Frostmarschen",
+          "length": 49,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "German",
+          "language_confidence": 0.5714285714285714
+        },
+        {
+          "text": "Rohen hat seine Gegner hier ignoriert und ist weiter in die Frostmarschen vorgedrungen.",
+          "length": 87,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "hrt. Aber vielleicht gibt er sie wieder frei, nun wo er sich nicht mehr verstecken kann.",
+          "length": 88,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "hrt. Markwart will Rache, aber keiner will dem sagenumwobenen Meister der Spinnen zu nahe kommen.",
+          "length": 97,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "German",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "Bringt das Kleid zur",
+          "length": 20,
+          "keywords": [
+            "bringt",
+            "bring"
+          ],
+          "language": "German",
+          "language_confidence": 0.625
+        },
+        {
+          "text": "Rohen ist tot. Die Nachricht selbst war die Falle, die f",
+          "length": 56,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ck und sprecht mit Sartarius",
+          "length": 28,
+          "keywords": [
+            "sprecht"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Die Nachricht von Rohens Tod sollte so schnell wie m",
+          "length": 52,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "German",
+          "language_confidence": 1.0
+        }
+      ]
+    },
+    "French": {
+      "count": 1808,
+      "quest_strings": [
+        {
+          "text": "t des Ombres. C'est le premier obstacle sur la route du Shiel. Einar vous met en garde contre les",
+          "length": 97,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.8
+        },
+        {
+          "text": "mes des hommes d'Udwin remontent des profondeurs. Une froide menace les accompagne.",
+          "length": 83,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.75
+        },
+        {
+          "text": "l'est de Liannon. Il semble qu'elle soit celle d'un guerrier, mort depuis bien longtemps.",
+          "length": 89,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "diatement dans le jeu. Cliquez sur le sort pour l'oublier et faire de la place pour un nouveau sort.",
+          "length": 100,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Clicca qui per visualizzare le missioni non completate.",
+          "length": 55,
+          "keywords": [
+            "mission"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Clicca qui per visualizzare le missioni completate.",
+          "length": 51,
+          "keywords": [
+            "mission"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "s amies, ce qui donne un grand avantage sur le champ de bataille. Elles sont aussi efficaces contre les morts-vivants.",
+          "length": 118,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "coulement du temps - quand le soleil est au centre, il est midi. Quand c'est la lune, il est minuit.",
+          "length": 100,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "e est soit le plus puissante soit la plus nombreuse. Le chiffre indique le nombre de membres. Un clic gauche s",
+          "length": 110,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Ce sort est actif sur vous. Cliquez pour l'interrompre.",
+          "length": 55,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ros. Cliquez pour l'interrompre.",
+          "length": 32,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "? Vous avez toujours %u autre(s) monument(s) de cette race.",
+          "length": 59,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "? Vous ne pourrez pas annuler cette op",
+          "length": 38,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "refaire ses forces. C'est le moment d'attaquer.",
+          "length": 47,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Sharak va demander l'aide de Torgruk. Pour cela, il doit retourner au village des orques. Faites attention aux gardes.",
+          "length": 118,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.7777777777777778
+        },
+        {
+          "text": "e par une porte de pierre blanche. Les elfes du village connaissent le moyen de l'ouvrir.",
+          "length": 89,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "lent les monuments de la Rune dans tout le Shiel. Elles sont trop nombreuses pour que vous puissiez les vaincre. Vous aurez besoin des Utrans pour vous en d",
+          "length": 156,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.7777777777777778
+        },
+        {
+          "text": "L'herbe d'Alfalas pousse au nord de Liannon. Les gardes du pont nord ont la clef de la porte de pierre qui ferme la route vers le nord.",
+          "length": 135,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Shan attend en ville que vous lui rapportiez l'herbe. Il faut lui remettre aussi vite que possible afin qu'elle concocte la potion.",
+          "length": 131,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "au plus vite dans le Shiel. Le capitaine Bahir pourra l'administrer au Seigneur Commandeur.",
+          "length": 91,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "les lignes de Brannigan. Celui-ci poursuit maintenant sa route vers l'est, vers le portail menant aux Terres sauvages.",
+          "length": 118,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.5714285714285714
+        },
+        {
+          "text": ". Pour atteindre Rohen, vous devez franchir le col en direction de l'est.",
+          "length": 73,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "passata, ora devi attraversare il resto del passo in direzione est per raggiungere Rohen.",
+          "length": 89,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "French",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "la fille de Markwart. Elle lui prouvera que l'assassin de sa fille est mort.",
+          "length": 76,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "Rohen est mort. Le message qui lui",
+          "length": 34,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "pare. Les assaillants approchent par le sud depuis les Terres Sombres.",
+          "length": 70,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Il ne reste pratiquement plus de tireurs parmi les troupes de Hallit. Ils ont un urgent besoin de soutien.",
+          "length": 106,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "gique. Il serait sage d'y attendre les morts-vivants de pied ferme en compagnie des troupes de Gunthar. Les morts-vivants vont s",
+          "length": 128,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "vaincus. Il est temps maintenant de parler de Hokan.",
+          "length": 52,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Les seuls indices concernant Hokan indiquent les Terres sombres. La route des Terre sombres va au sud. Marcia, la messag",
+          "length": 120,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "La Muraille Venteuse commence au sud de Greyfell. On dit que Marcia se trouve sur les terres de la Maison Hallit.",
+          "length": 113,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.7142857142857143
+        },
+        {
+          "text": ". Un chemin moins dangereux traverse les territoires nains du sud de la Muraille Venteuse. Le portail permettant de s'y rendre se trouve au sud-ouest de Stonewell.",
+          "length": 163,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.625
+        },
+        {
+          "text": "fendre leur ville. Le seigneur Jonir commande les troupes, c'est lui qui leur donnera les ordres.",
+          "length": 97,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Liannon. Aller plus au nord est dangereux, alors soyez prudent.",
+          "length": 63,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "e des armes d'Utran. Le seigneur Tynar en porte une semblable. Celle-ci appartient sans doute",
+          "length": 93,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "es. Les nains sont furieux. Joshua accomplira une deuxi",
+          "length": 55,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Les nains sont furieux et refusent d'apporter leur aide. Skarvig Barbedefer est un des nains les plus raisonnables, il est sans doute possible de lui parler. Il habite dans la cit",
+          "length": 179,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.8888888888888888
+        },
+        {
+          "text": "l'honneur des nains  et de restaurer le lien qui les unis aux humains. Joshua se cache quelque part au sud du village nain.",
+          "length": 123,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.75
+        },
+        {
+          "text": "nel Coldmark dirigendosi ad Est. Skeld ha mandato un messaggio alle guardie per far loro aprire il cancello.",
+          "length": 108,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Un draghetto ha ucciso il figlio del Thane. Apparentemente vive nel lontano est del Coldmark.",
+          "length": 93,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "t. Pour cela, il lui faut certaines herbes.",
+          "length": 43,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "sente plus de menace. Les colons nains vont enfin pouvoir dormir en paix.",
+          "length": 73,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "par sa promesse. Aussi quelqu'un devra-t-il le remplacer pour qu'il puisse quitter son poste. Comme",
+          "length": 99,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "t les Terres sombres mieux que quiconque. Il sait tout sur Hokan et les attaques de morts-vivants.",
+          "length": 98,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "es de grottes. Les morts-vivants utilisent ces grottes pour occuper le col, rendant tout passage impossible.",
+          "length": 108,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "faire. Tout cela va prendre du temps.",
+          "length": 37,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "e. Sa mort l'attend dans les Tertres Hurlants. Le portail le plus s",
+          "length": 67,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.5714285714285714
+        },
+        {
+          "text": "e des morts-vivants. Quand il tombera, la Horde grise cessera ses attaques. Pour que les Terres du nord soient",
+          "length": 110,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.6
+        },
+        {
+          "text": "Le portail au sommet de la forteresse conduit aux ruines des grandes salles au dessus d'une mer de lave. Korshar commande ses troupes depuis cet endroit.",
+          "length": 153,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.4444444444444444
+        },
+        {
+          "text": "Annulla la scheda del personaggio. Le tue scelte andranno perdute.",
+          "length": 66,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.6
+        },
+        {
+          "text": "de avec impatience. Il faut lui rapporter le plus vite possible.",
+          "length": 64,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "dition punitive. C'est le moment de frapper.",
+          "length": 44,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "vous le vendre contre une somme modique. Cela peut valoir la peine.",
+          "length": 67,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "s pour transporter l'eau. Les gens parlent d'un alchimiste qui vivait au nord du Pays de Farlorn avant que le dragon n'arrive. Il y a peut-",
+          "length": 139,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.8181818181818182
+        },
+        {
+          "text": ". Brok n'attend plus qu'un signal pour commencer.",
+          "length": 49,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "tient ce fragment. Il veut l'utiliser pour charmer le dragon Fyrmir et lui voler son or.",
+          "length": 88,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "scappato a Farlorn's Hope. Qui si perdono le sue tracce.",
+          "length": 56,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "risse ou le fragment sera perdu. Pour l'instant, elle a besoin d'aide. Il sera temps de parler du fragment plus tard.",
+          "length": 117,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "mons. Talia, inconsciente du danger,  veut affronter Ulather seule. Si elle meurt, le fragment est perdu !",
+          "length": 106,
+          "keywords": [
+            "question/exclamation",
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ge du Cercle et un centre de magie important. Dans ses archives se trouvent des objets magiques d'une valeur inestimable. C'est l",
+          "length": 129,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.6875
+        },
+        {
+          "text": "nix. Avant de vous le remettre, il veut une preuve indiscutable de la valeur de votre mission.",
+          "length": 94,
+          "keywords": [
+            "mission"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "clats d'un artefact magique comme preuve. Ils se trouvent dans les Terres sombres.",
+          "length": 82,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "nix vers le nord-est de Mulandir. Lui reprendre de force est le seul moyen.",
+          "length": 75,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "tranges. Il semblerait que Sandor ne vous ait pas dit tout ce qu'il savait.",
+          "length": 75,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "e dans les montagne. Il souhaite s'y rendre avec vous pour l'ouvrir.",
+          "length": 68,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "s de Greyfell avec le lorgnon. Il faut le retrouver et le vaincre.",
+          "length": 66,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "e que par les chamans orques. Gabar ne sait que faire.",
+          "length": 54,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "rir un pays. Il faut en construire une aussi vite que possible.",
+          "length": 63,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "s en retard. Normalement, il suit la route qui traverse le Shiel et les Terres sauvages. Trouvez-le et demandez-lui ce qu'il en est des marchandises.",
+          "length": 149,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.8461538461538461
+        },
+        {
+          "text": "L'ermite de Greyfell se plaint de ses douleurs. Il a besoin d'une potion de soin, la potion de Zirfar.",
+          "length": 102,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "L'ermite de Greyfell se plaint de ses douleurs. Il a besoin d'une potion de soin, la potion de Zirfar. Shan Muir est la gu",
+          "length": 122,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "tat de folie. La prudence est de mise.",
+          "length": 38,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Affiche la vitesse de connexion du serveur. Plus la valeur est faible, plus le serveur est rapide. La liste peut",
+          "length": 112,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Qui puoi creare la tua partita. Puoi quindi selezionare la mappa da giocare e altre impostazioni.",
+          "length": 97,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "marrez la partie ici. Les autres joueurs pourront alors vous rejoindre.",
+          "length": 71,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "atures. La maison se trouve au nord-est de Liannon.",
+          "length": 51,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "des morts-vivants se trouve une tombe dans laquelle Lea reposerait. Un examen de la tombe pourrait permettre d'expliquer quel fut son destin.",
+          "length": 141,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.6923076923076923
+        },
+        {
+          "text": "sidence d'Amra. S'il ne sait rien, tout espoir est perdu. Pour le rencontrer, il faut se rendre dans le sud des Marches Divines.",
+          "length": 128,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.8333333333333334
+        },
+        {
+          "text": "Adhira a aussi besoin du sang d'un dragon. Trouvez-en.",
+          "length": 54,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "l'anneau des ombres. On peut le trouver au Pays de Farlorn, dans les Terres sombres.",
+          "length": 84,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.8181818181818182
+        },
+        {
+          "text": "tre ! Une conspiration met la vie de Rohen en grave danger ! Le tra",
+          "length": 67,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "tre est mort ! Le coffret du mage noir renferme des plans d'invasion ! Il faut le faire parvenir",
+          "length": 96,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.6666666666666666
+        },
+        {
+          "text": "s loin. Le chemin quitte la montagne et poursuit vers l'est.",
+          "length": 60,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "lontana. Il sentiero lascia le montagne ad est.",
+          "length": 47,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Sartarius de l'Ordre de l'Aube est un ami de Rohen. Il doit",
+          "length": 59,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Les orques des cavernes, ivres de vengeance, vous ont suivi. Ils attaquent la ville !",
+          "length": 85,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "French",
+          "language_confidence": 0.75
+        },
+        {
+          "text": "e. Il est temps d'aborder d'autres sujets avec Sartarius.",
+          "length": 57,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Le portail vers Liannon se trouve au nord-est de la ville. Les gardes ouvriront la porte si vous avez un laissez-passer.",
+          "length": 120,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.75
+        },
+        {
+          "text": "te de pont ici. Les elfes pourront vous en dire plus sur la situation.",
+          "length": 70,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "s du portail. On dirait des Utran. Ils doivent savoir quelque chose de la situation dans la for",
+          "length": 95,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.4444444444444444
+        },
+        {
+          "text": "La route du Shiel est libre et Einar a accompli sa mission. Il est temps de se rendre au Shiel.",
+          "length": 95,
+          "keywords": [
+            "mission"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Que les corten la cabeza!",
+          "length": 25,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "French",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "fiez-vous de sa dague !",
+          "length": 23,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "pour ses adversaires et n'en attend aucune de leur part. La chose la plus importante pour un bandit est le respect. Et le respect se gagne au cu champ de bataille.",
+          "length": 163,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.5714285714285714
+        },
+        {
+          "text": "s avoir subi une telle agoagonie!",
+          "length": 33,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "? Je ne vous demanderai pas",
+          "length": 27,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "quelles fins vous en avez besoin... mais je vous avertis, cela ne sera pas bon march",
+          "length": 84,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Ramenez-moi ma bourse, et assurez-vous de passer ces personnages au fil de votre lame, vous savez ce que je veux dire... Personne ne menace impun",
+          "length": 145,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 0.5
+        },
+        {
+          "text": "me... se trouve devant vous.",
+          "length": 28,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "! Seul, vous ne pourrez jamais...",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "French",
+          "language_confidence": 1.0
+        }
+      ]
+    },
+    "Polish": {
+      "count": 551,
+      "quest_strings": [
+        {
+          "text": "e w Cieniu Drzew zwykle nie ma trolli. Sytuacja jest jednak daleka od normalnej...",
+          "length": 82,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Rohen tu jest, jednak wojska Brannigana oddzieli",
+          "length": 48,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ugach. Urias przewodzi posterunkowi zakonnemu w Dolinie Szarego Zmierzchu. Jego plac",
+          "length": 84,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "nie informacji szuka Sandor...",
+          "length": 30,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "chorego. Jest on teraz bardzo silny i agresywny. Trzeba go powstrzyma",
+          "length": 69,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "w ten... a nie inny spos",
+          "length": 24,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "dej bitwie. Jednym z nich jest chyba rybak Tyrgar.",
+          "length": 50,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "zdrajca. Lordowi Tynarowi potrzebny jest ukradziony przez niego sztandar.",
+          "length": 73,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Warum habt ihr sie nie vertrieben?",
+          "length": 34,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Dich hab ich hier aber noch nie gesehen, was willst du?",
+          "length": 55,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "To czemu mu go po prostu nie odbierzesz?",
+          "length": 40,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "! Gdzie? Gdzie jest Braga?",
+          "length": 26,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "nie... Gdy tylko przyst",
+          "length": 23,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "w w innych miejscach? Nie wracaj bez wi",
+          "length": 39,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "tu spisek, a Rohen jest w powa",
+          "length": 30,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "jednak jego sztyletu!",
+          "length": 21,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Oh, Lea! Ich habe nie damit gerechnet dieses Kleinod wieder zu sehen. Ich hatte es Lea zu ihrer Hochzeit geschenkt. Aber alsst uns sehen, was in diesem Brief steht!",
+          "length": 164,
+          "keywords": [
+            "question/exclamation",
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "po co... Powiem ci tylko jedno - tanio go nie dostaniesz.",
+          "length": 57,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "acili za swe czyny. Nikomu, kto grozi Illiriasowi, nie uchodzi to na sucho!",
+          "length": 75,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ge Euch nie wiederfahren, was ich ertragen musste...nun gibt es nur eines, was meine Pein noch lindert...wenn ich ihn nur bekommen k",
+          "length": 132,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ota jest nienasycona!",
+          "length": 21,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "w idzie w setki! Samotnie niczego nie dokonasz...",
+          "length": 49,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "e jest jeszcze nadzieja...",
+          "length": 26,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Warum habt Ihr sie nie vertrieben?",
+          "length": 34,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ry nie jest waszym wrogiem!",
+          "length": 27,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "e do tego nie dojdzie. Powodzenia.",
+          "length": 34,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Na pewno nie. Nikt by... a, o to ci chodzi? Chcesz ode mnie co",
+          "length": 62,
+          "keywords": [
+            "question/exclamation",
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Mego brata... Sharknara.... on... on... on ich wszystkich zabije... tak, zabije wszystkich...!",
+          "length": 94,
+          "keywords": [
+            "question/exclamation",
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "era jego sny... jego umys",
+          "length": 25,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "tany przez tego stwora...! Tylko",
+          "length": 32,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Nie... nie ma czasu! Musisz... musisz odnale",
+          "length": 44,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "dku! To nie jest jeden z nich!",
+          "length": 30,
+          "keywords": [
+            "question/exclamation",
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "stwo... Ale jest w tobie co",
+          "length": 27,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ugo Run. Ale to jeszcze nie koniec.",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": ". Jeszcze nie czas na odpoczynek.",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Czy to nie jest czarna magia? Troch",
+          "length": 35,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ugo Run? Drugi mag? W takim razie nie wolno ci traci",
+          "length": 52,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": ". Ta wiedza... nie jest przeznaczona dla ciebie.",
+          "length": 48,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": ", gdyby Rohen Tahir nie stworzy",
+          "length": 31,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "to nie jest... niech mnie... sygnet Udwina! Na Gardian",
+          "length": 54,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": ". To nie jest dobry znak.",
+          "length": 25,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "A niech mnie... jeszcze jeden?! Nie",
+          "length": 35,
+          "keywords": [
+            "question/exclamation",
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Udwin jest niebezpieczny?",
+          "length": 25,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "... ale teraz jest mocno podniszczony. Dam ci w zamian co",
+          "length": 57,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "otra. Snarf to wielki, szpetny goblin. Jego ob",
+          "length": 46,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Jakiej kopalni? A co tam jest?",
+          "length": 30,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "li ich nie uleczy. Lecz eliksiru zirfar nie dostaniesz!",
+          "length": 55,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "nie od tego, gdzie przebywa... i jej ukochanego r",
+          "length": 49,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "a tylko ruina. Nic tam nie ma.",
+          "length": 30,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "jego gniew jest przeogromny!",
+          "length": 28,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "naczelnikiem tego miasta?",
+          "length": 25,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Kto, ja? O nie, niech bogowie broni",
+          "length": 35,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Ortah Gelfbeard? Oczywista. Jest starym weteranem Wojny Przywo",
+          "length": 62,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Uzdrowiciela? Tak, Shan Muir jest uzdrowicielk",
+          "length": 46,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "c? Zabij te zielonosk",
+          "length": 21,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "mu moje pozdrowienia? Niestety, nie mog",
+          "length": 39,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "osy... Nic... nie pami",
+          "length": 22,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "l nie do zniesienia!",
+          "length": 20,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Burgle ze swymi goblinami. Jest jednym z podkomendnych Brannigana.",
+          "length": 66,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Za miastem jest pewien kupiec... Ortah?",
+          "length": 39,
+          "keywords": [
+            "question/exclamation",
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "(Klucz pasuje. Brama jest otwarta.)",
+          "length": 35,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Nie wybrano jeszcze awatara!",
+          "length": 28,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "yn jest zbyt wielu graczy!",
+          "length": 26,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Nie tracili czasu. Co za fortyfikacja!",
+          "length": 38,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "jest nadzieja... Gdziekolwiek jednak przebywa teraz moja ukochana, ten zdrajca nie mo",
+          "length": 85,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Nie rozumiesz... Nie tylko porwa",
+          "length": 32,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "jego zatrutego sztyletu. Brandel z kolei zawsze korzysta ze swej kuszy.",
+          "length": 71,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": ", gdzie jest ta runa?",
+          "length": 21,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Pokonaj Kowala Dusz, a pokonasz jego hufce!",
+          "length": 43,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ode mnie nie dowiesz!",
+          "length": 21,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "dzie bogom... Zatem... jest jeszcze nadzieja!",
+          "length": 45,
+          "keywords": [
+            "question/exclamation",
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "nie martw... Musisz... rusza",
+          "length": 28,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Nie... Nie dotykaj kajdan. S",
+          "length": 28,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ego artefaktu? Jego moc wystarczy, by otworzy",
+          "length": 45,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ania? Czy to aby nie za trudna lektura dla kogo",
+          "length": 47,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "... I tak nigdy jej nie przeczytasz.",
+          "length": 36,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "do Dariusa! Ty natomiast poszukaj najpierw broni i zbierz swoje si",
+          "length": 66,
+          "keywords": [
+            "darius"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Ja... nawet nie pami",
+          "length": 20,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Gdzie jest Sartarius?",
+          "length": 21,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "cem... nie wojownikiem.",
+          "length": 23,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "... hmm... jest magicznie zapiecz",
+          "length": 33,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "stalowych. I poszukaj tego przedmiotu. Mo",
+          "length": 41,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "go sam Rohen, aby nie",
+          "length": 21,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "adzy. Lecz Rohen nie ods",
+          "length": 24,
+          "keywords": [
+            "rohen"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "nie ja... A ty musisz by",
+          "length": 24,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": ". Na pewno go nie przeoczysz.",
+          "length": 29,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Nie rozumiem... Co si",
+          "length": 21,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Jest pusta... Ale...",
+          "length": 20,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ca... Nie ma dla ciebie przysz",
+          "length": 30,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ugo Run? Nawet nie wiesz, jak wiele ci zawdzi",
+          "length": 45,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "tam. Nie... nie doceniali",
+          "length": 25,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "my zaatakowani. Lev jest ranny i potrzebuje twojej pomocy. Wszyscy jej potrzebujemy!",
+          "length": 84,
+          "keywords": [
+            "question/exclamation",
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "c chyba nie mam wyboru... Dobrze, pomog",
+          "length": 39,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "wam. Gdzie jest Lev?",
+          "length": 20,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "owiek? Moi bracia nie przepadaj",
+          "length": 31,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "Skarvig. Jestem jednym z tutejszych kowali. W sumie to nigdy nie mia",
+          "length": 68,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "precz. Nie chcemy tu ludzi.",
+          "length": 27,
+          "keywords": [
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "d? Tam znajdziesz tylko grobowiec... Grobowiec mojego syna. Ta droga jest dla ciebie zamkni",
+          "length": 91,
+          "keywords": [
+            "question/exclamation",
+            "multi-sentence"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "mu jego winy. Jasne?",
+          "length": 20,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        },
+        {
+          "text": "ludziom, bo krasnoludom na pewno nie!",
+          "length": 37,
+          "keywords": [
+            "question/exclamation"
+          ],
+          "language": "Polish",
+          "language_confidence": 1.0
+        }
+      ]
+    }
+  }
+}

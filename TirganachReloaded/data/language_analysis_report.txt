@@ -1,0 +1,176 @@
+================================================================================
+MULTI-LANGUAGE CFF ANALYSIS REPORT
+================================================================================
+
+LANGUAGE DISTRIBUTION:
+--------------------------------------------------------------------------------
+  English      9,438 quest strings ( 29.0%)
+  Unknown      8,715 quest strings ( 26.8%)
+  German       7,762 quest strings ( 23.8%)
+  Spanish      2,446 quest strings (  7.5%)
+  Italian      1,856 quest strings (  5.7%)
+  French       1,808 quest strings (  5.6%)
+  Polish         551 quest strings (  1.7%)
+
+================================================================================
+MATCHING STATISTICS BY LANGUAGE:
+--------------------------------------------------------------------------------
+
+English:
+  Total matches:        68,658
+  High-confidence (≥0.7): 1,986 (2.9%)
+
+Italian:
+  Total matches:        9,723
+  High-confidence (≥0.7): 23 (0.2%)
+
+Spanish:
+  Total matches:        10,401
+  High-confidence (≥0.7): 17 (0.2%)
+
+German:
+  Total matches:        147,574
+  High-confidence (≥0.7): 843 (0.6%)
+
+French:
+  Total matches:        6,109
+  High-confidence (≥0.7): 15 (0.2%)
+
+Polish:
+  Total matches:        398
+  High-confidence (≥0.7): 2 (0.5%)
+
+================================================================================
+TOP 20 HIGH-CONFIDENCE MATCHES:
+--------------------------------------------------------------------------------
+
+1. OpferTot (P202)
+   Language: German
+   XP: 6000, Confidence: 100%
+   Matched: Opfer, Tot
+   Text: Aber er hat unser Land wohl nie erreicht. Vielleicht ist auch unser Bote den Untoten zum Opfer gefallen, wer weiss.
+
+2. RingGefunden (P201)
+   Language: English
+   XP: 5000, Confidence: 100%
+   Matched: Ring, Gefunden
+   Text: hrer der Orks erbeuten! Bring sie zu mir, sobald du sie gefunden hast!
+
+3. GoblinRennen (P200)
+   Language: German
+   XP: 2000, Confidence: 100%
+   Matched: Goblin, Rennen
+   Text: Hier erlebt Ihr etwas, dass habt Ihr noch nicht gesehen! Das Rennen der schnellsten Goblins der Welt!
+
+4. MosaikDesTodes (P16)
+   Language: German
+   XP: 800, Confidence: 100%
+   Matched: Mosaik, Des, Todes
+   Text: en Steinbild - dem Mosaik des Todes!
+
+5. Ulather (P23)
+   Language: English
+   XP: 800, Confidence: 100%
+   Matched: Ulather
+   Text: This fragment belongs to Talia, a mage who has set off to defeat the demon Ulather.
+
+6. Steinbrecher (P21)
+   Language: German
+   XP: 800, Confidence: 100%
+   Matched: Steinbrecher
+   Text: Holt Uram, den Steinbrecher, von seinem Haus und sprengt mit ihm den
+
+7. Thar (P21)
+   Language: English
+   XP: 600, Confidence: 100%
+   Matched: Thar
+   Text: The key point is the entrance to the mountain pass. It is advisable to await the Undead together with the troops of Gunthar. They will probably send t...
+
+8. DerKatarakt (P21)
+   Language: German
+   XP: 600, Confidence: 100%
+   Matched: Der, Katarakt
+   Text: Findet jemanden, der General Torns Katarakt behandeln kann
+
+9. ShardAutumn (P21)
+   Language: English
+   XP: 400, Confidence: 100%
+   Matched: Shard, Autumn
+   Text: Elwen, who was to carry the Shard of Autumn Twilight to safety, has been attacked by the Briarwolves. He is being held prisoner in the mercenaries' ca...
+
+10. Homunculus (P15)
+   Language: German
+   XP: 300, Confidence: 100%
+   Matched: Homunculus
+   Text: Homunculus...ein Abbild. Geschaffen, nicht geboren. Mein Leben entstand durch...die K
+
+11. ThurgonBrief (P63)
+   Language: German
+   XP: 250, Confidence: 100%
+   Matched: Thurgon, Brief
+   Text: Ich erkenne sie. Thurgon gab mir diesen Brief. Seht ihr die Anschrift?
+
+12. WundtinkturSwerdis (P2)
+   Language: German
+   XP: 80, Confidence: 100%
+   Matched: Wundtinktur, Swerdis
+   Text: Die Kinder der Elfen auf Eloni siechen dahin. Swerdis braucht eine Wundtinktur, um sie zu retten.
+
+13. QuelleVergiftet (P102)
+   Language: German
+   XP: 65, Confidence: 100%
+   Matched: Quelle, Vergiftet
+   Text: Etwas ist in der Quelle verkeilt, was ihr Wasser vergiftet. Benutzt Tantaros Nagelstock, um es herauszuholen. Aber seid vorsichtig, das giftige Wasser...
+
+14. DieGeiseln (P4)
+   Language: German
+   XP: 40, Confidence: 100%
+   Matched: Die, Geiseln
+   Text: einige von uns gefangensetzen. Als Geiseln, sollten die Schwestern aus Eloni Rache suchen!
+
+15. Schwarzeibe (P63)
+   Language: English
+   XP: 35, Confidence: 100%
+   Matched: Schwarzeibe
+   Text: nnt Ihr irgendwo einen alten Bogen aus Schwarzeibe finden.
+
+16. KlingzogsBeinlinge (P63)
+   Language: German
+   XP: 35, Confidence: 100%
+   Matched: Klingzogs, Beinlinge
+   Text: Bringt Klingzogs Beinlinge nach Graufurt
+
+17. WundtinkturValdis (P63)
+   Language: German
+   XP: 30, Confidence: 100%
+   Matched: Wundtinktur, Valdis
+   Text: Besorgt die Wundtinktur von Valdis und bringt sie zu Swerdis in Eloni
+
+18. Steckbrief (P1)
+   Language: German
+   XP: 20, Confidence: 100%
+   Matched: Steckbrief
+   Text: Ist dieser Steckbrief von Euch?
+
+19. Traumdieb (P2)
+   Language: German
+   XP: 20, Confidence: 100%
+   Matched: Traumdieb
+   Text: Istur Ash, ein Gefangerer in Eloni, berichtet von Traumdieben ... Kreaturen, die von den Tr
+
+20. Items (P63)
+   Language: English
+   XP: 0, Confidence: 100%
+   Matched: Items
+   Text: Sinwen Whiteleaf is looking for components of a large spellwork in the leafshade. She needs a few items for that.
+
+================================================================================
+SUMMARY:
+--------------------------------------------------------------------------------
+Total rewards in GdsQuestRewards.lua: 522
+Unique matches found: 402
+High-confidence matches (≥0.7): 100
+Match rate: 77.0% (19.2% high-confidence)
+Remaining unmatched: 120
+
+================================================================================
