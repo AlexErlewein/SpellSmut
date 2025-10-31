@@ -78,9 +78,15 @@ class AssetExtractor:
         pak_dir = self.original_files_dir / "pak"
         if not pak_dir.exists():
             print(f"[ERROR] PAK directory not found: {pak_dir}")
+            print("[HELP] Make sure you have copied the PAK files from your SpellForce installation to the OriginalGameFiles/pak/ directory")
             return []
 
         pak_files = sorted(pak_dir.glob("*.pak"))
+        if not pak_files:
+            print(f"[WARNING] No PAK files found in {pak_dir}")
+            print("[HELP] Make sure you have copied the PAK files from your SpellForce installation to the OriginalGameFiles/pak/ directory")
+            return []
+            
         return pak_files
 
     def extract_assets(self, output_dir: Path = None, force: bool = False) -> bool:
@@ -95,6 +101,13 @@ class AssetExtractor:
             True if successful, False otherwise
         """
         print("Starting asset extraction...")
+        
+        # Check if PAK files exist
+        pak_files = self.get_pak_files()
+        if not pak_files:
+            print("[ERROR] No PAK files found. Cannot proceed with extraction.")
+            print("[HELP] Please copy the PAK files from your SpellForce installation to the OriginalGameFiles/pak/ directory")
+            return False
         
         # Use the existing bulk extraction script
         bulk_extract_script = self.extraction_scripts_dir / "bulk_extract_paks.py"
@@ -111,17 +124,22 @@ class AssetExtractor:
             
             if result.returncode == 0:
                 print("[OK] Asset extraction completed successfully")
-                print(result.stdout)
+                if result.stdout:
+                    print(result.stdout)
                 return True
             else:
                 print("[ERROR] Asset extraction failed")
                 print(f"Return code: {result.returncode}")
-                print(f"Stdout: {result.stdout}")
-                print(f"Stderr: {result.stderr}")
+                if result.stdout:
+                    print(f"Stdout: {result.stdout}")
+                if result.stderr:
+                    print(f"Stderr: {result.stderr}")
                 return False
                 
         except Exception as e:
             print(f"[ERROR] Failed to run bulk extraction: {e}")
+            import traceback
+            traceback.print_exc()
             return False
 
     def calculate_file_checksum(self, file_path: Path) -> str:

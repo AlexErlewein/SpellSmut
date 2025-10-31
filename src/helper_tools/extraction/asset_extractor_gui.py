@@ -71,7 +71,9 @@ class ExtractionWorker(QObject):
             self.finished.emit(success, message)
             
         except Exception as e:
-            self.finished.emit(False, f"Error during {self.operation}: {str(e)}")
+            import traceback
+            error_details = f"Error during {self.operation}: {str(e)}\n\nTraceback:\n{traceback.format_exc()}"
+            self.finished.emit(False, error_details)
 
 
 class AssetExtractorGUI(QMainWindow):
@@ -92,6 +94,18 @@ class AssetExtractorGUI(QMainWindow):
                 "QuickBMS Not Found", 
                 "QuickBMS executable not found. Please run bulk_extract_paks.py first to install it."
             )
+            
+        # Check if PAK files directory exists
+        if self.extractor:
+            pak_dir = self.extractor.original_files_dir / "pak"
+            if not pak_dir.exists():
+                QMessageBox.warning(
+                    self,
+                    "PAK Directory Not Found",
+                    f"PAK directory not found: {pak_dir}\n\n"
+                    "Please create this directory and copy the PAK files from your SpellForce installation.\n"
+                    "The PAK files are typically located in the 'pak' subdirectory of your SpellForce installation."
+                )
     
     def init_ui(self):
         """Initialize the user interface"""
@@ -368,7 +382,17 @@ class AssetExtractorGUI(QMainWindow):
         if success:
             QMessageBox.information(self, "Success", message)
         else:
-            QMessageBox.critical(self, "Error", message)
+            # For detailed error messages, show in a scrollable text dialog
+            if "\n" in message or len(message) > 200:
+                error_dialog = QMessageBox(self)
+                error_dialog.setIcon(QMessageBox.Critical)
+                error_dialog.setWindowTitle("Error Details")
+                error_dialog.setText("Asset extraction failed. See details below:")
+                error_dialog.setDetailedText(message)
+                error_dialog.setStandardButtons(QMessageBox.Ok)
+                error_dialog.exec()
+            else:
+                QMessageBox.critical(self, "Error", message)
             
     def reference_finished(self, success: bool, message: str):
         """Handle completion of reference creation"""
@@ -385,7 +409,17 @@ class AssetExtractorGUI(QMainWindow):
         if success:
             QMessageBox.information(self, "Success", message)
         else:
-            QMessageBox.critical(self, "Error", message)
+            # For detailed error messages, show in a scrollable text dialog
+            if "\n" in message or len(message) > 200:
+                error_dialog = QMessageBox(self)
+                error_dialog.setIcon(QMessageBox.Critical)
+                error_dialog.setWindowTitle("Error Details")
+                error_dialog.setText("Reference creation failed. See details below:")
+                error_dialog.setDetailedText(message)
+                error_dialog.setStandardButtons(QMessageBox.Ok)
+                error_dialog.exec_()
+            else:
+                QMessageBox.critical(self, "Error", message)
             
     def comparison_finished(self, success: bool, message: str):
         """Handle completion of comparison"""
@@ -403,7 +437,17 @@ class AssetExtractorGUI(QMainWindow):
             self.load_diff_report()
             QMessageBox.information(self, "Success", message)
         else:
-            QMessageBox.critical(self, "Error", message)
+            # For detailed error messages, show in a scrollable text dialog
+            if "\n" in message or len(message) > 200:
+                error_dialog = QMessageBox(self)
+                error_dialog.setIcon(QMessageBox.Critical)
+                error_dialog.setWindowTitle("Error Details")
+                error_dialog.setText("Comparison failed. See details below:")
+                error_dialog.setDetailedText(message)
+                error_dialog.setStandardButtons(QMessageBox.Ok)
+                error_dialog.exec()
+            else:
+                QMessageBox.critical(self, "Error", message)
             
     def update_reference_info(self):
         """Update the reference information display"""
