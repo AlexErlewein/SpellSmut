@@ -5,6 +5,7 @@ Similar to CFF caching but for Lua script files
 """
 
 import json
+import re
 import sqlite3
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -170,7 +171,134 @@ class LuaDataManager:
         self._update_metadata("lua_directory", str(lua_dir))
 
         print(f"Parsed {quests_parsed} quests from Lua files")
+
+        # Parse GdsQuestRewards.lua if it exists
+        rewards_file = lua_dir / "GdsQuestRewards.lua"
+        if rewards_file.exists():
+            print("Parsing GdsQuestRewards.lua for reward data...")
+            self._parse_rewards_file(rewards_file)
+
+        # Preload cache into memory for fast access
+        self.preload_cache()
+
         return quests_parsed
+
+    def _parse_rewards_file(self, rewards_file: Path):
+        """Parse GdsQuestRewards.lua file to extract reward data"""
+        try:
+            # Try multiple encodings
+            encodings = ["utf-8", "windows-1252", "latin-1"]
+            content = None
+
+            for encoding in encodings:
+                try:
+                    with open(rewards_file, "r", encoding=encoding) as f:
+                        content = f.read()
+                    break
+                except (UnicodeDecodeError, LookupError):
+                    continue
+
+            if not content:
+                with open(rewards_file, "r", encoding="utf-8", errors="ignore") as f:
+                    content = f.read()
+
+            # Parse each platform's rewards (P1, P2, P63, etc.)
+            platform_pattern = r"QuestRewardsP(\d+)\s*=\s*{(.*?)(?=QuestRewardsP|\Z)}"
+
+            for platform_match in re.finditer(platform_pattern, content, re.DOTALL):
+                platform = f"P{platform_match.group(1)}"
+                rewards_section = platform_match.group(2)
+
+                # Parse individual quest rewards
+                # Format: QuestName = { XP = {25}, Items = {626}, Money = {Gold = 1} }
+                quest_pattern = r"(\w+)\s*=\s*{([^}]+(?:{[^}]*}[^}]*)*?)}"
+
+                for quest_match in re.finditer(quest_pattern, rewards_section):
+                    quest_name = quest_match.group(1)
+                    reward_data = quest_match.group(2)
+
+                    # Extract reward values
+                    xp = 0
+                    gold = 0
+                    silver = 0
+                    copper = 0
+                    items = []
+
+                    # XP: can be {25} or just 25
+                    xp_match = re.search(r"XP\s*=\s*{?\s*(\d+)\s*}?", reward_data)
+                    if xp_match:
+                        xp = int(xp_match.group(1))
+
+                    # Money: {Gold = 1, Silver = 2, Copper = 3}
+                    gold_match = re.search(r"Gold\s*=\s*(\d+)", reward_data)
+                    if gold_match:
+                        gold = int(gold_match.group(1))
+
+                    silver_match = re.search(r"Silver\s*=\s*(\d+)", reward_data)
+                    if silver_match:
+                        silver = int(silver_match.group(1))
+
+                    copper_match = re.search(r"Copper\s*=\s*(\d+)", reward_data)
+                    if copper_match:
+                        copper = int(copper_match.group(1))
+
+                    # Items: {626, 707} or {626}
+                    items_match = re.search(r"Items\s*=\s*{([^}]+)}", reward_data)
+                    if items_match:
+                        items_str = items_match.group(1)
+                        items = [
+                            int(x.strip())
+                            for x in items_str.split(",")
+                            if x.strip().isdigit()
+                        ]
+
+                    # Store in a mapping (we'll match to quest IDs later)
+                    self._store_reward_by_name(
+                        quest_name, platform, xp, gold, silver, copper, items
+                    )
+
+            print("  Parsed rewards from GdsQuestRewards.lua")
+
+        except Exception as e:
+            print(f"Error parsing GdsQuestRewards.lua: {e}")
+
+    def _store_reward_by_name(
+        self,
+        quest_name: str,
+        platform: str,
+        xp: int,
+        gold: int,
+        silver: int,
+        copper: int,
+        items: list,
+    ):
+        """Store reward data by quest name (will need to match to quest ID later)"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+
+        # For now, try to find quest by name pattern in the database
+        # This is approximate - some quests may not match
+        cursor.execute(
+            "SELECT quest_id FROM lua_quests WHERE platform = ? AND (quest_name LIKE ? OR description LIKE ?)",
+            (platform, f"%{quest_name}%", f"%{quest_name}%"),
+        )
+        result = cursor.fetchone()
+
+        if result:
+            quest_id = result[0]
+
+            # Update the reward for this quest
+            cursor.execute(
+                """
+                INSERT OR REPLACE INTO quest_rewards
+                (quest_id, xp, gold, silver, copper, items, flags)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (quest_id, xp, gold, silver, copper, json.dumps(items), json.dumps([])),
+            )
+            conn.commit()
+
+        conn.close()
 
     def _is_file_cached(self, lua_file: Path) -> bool:
         """Check if file is already cached and up-to-date"""
