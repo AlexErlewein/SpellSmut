@@ -20,6 +20,8 @@ from ..models import (
 )
 from .spell_mode_selection_page import SpellModeSelectionPage
 from .spell_loader import SpellLoader
+from .custom_school_page import CustomSchoolPage
+from .triggered_effects_page import TriggeredEffectsPage
 
 
 class SpellBasicsPage(QWizardPage):
@@ -1229,16 +1231,20 @@ class SpellCreatorWizard(QWizard):
         # Set up pages
         self.mode_page = SpellModeSelectionPage()
         self.basics_page = SpellBasicsPage()
+        self.school_page = CustomSchoolPage()
         self.target_page = TargetMechanicsPage()
         self.level_page = LevelProgressionPage()
+        self.effects_page = TriggeredEffectsPage()
         self.visual_page = VisualEffectsPage()
         self.sound_page = SoundEffectsPage()
         self.review_page = ReviewExportPage()
 
         self.addPage(self.mode_page)
         self.addPage(self.basics_page)
+        self.addPage(self.school_page)
         self.addPage(self.target_page)
         self.addPage(self.level_page)
+        self.addPage(self.effects_page)
         self.addPage(self.visual_page)
         self.addPage(self.sound_page)
         self.addPage(self.review_page)
@@ -1250,7 +1256,7 @@ class SpellCreatorWizard(QWizard):
         """Handle page changes"""
         if page_id == 1:  # Basics page - load copied spell data
             self.load_copied_spell_data()
-        elif page_id == 6:  # Review page
+        elif page_id == 8:  # Review page
             self.update_review_page()
 
     def load_copied_spell_data(self):
@@ -1474,6 +1480,30 @@ class SpellCreatorWizard(QWizard):
 
         spell_data.sfx_resolve = self.sound_page.resolve_sound_combo.currentText()
         spell_data.sfx_hit = self.sound_page.hit_sound_combo.currentText()
+        
+        # Custom magic school data
+        if hasattr(self, 'school_page'):
+            custom_school_data = self.school_page.get_custom_school_data()
+            if custom_school_data:
+                spell_data.custom_school_name = custom_school_data['name']
+                spell_data.custom_school_color = custom_school_data['color']
+                spell_data.custom_school_description = custom_school_data['description']
+        
+        # Triggered effects data
+        if hasattr(self, 'effects_page'):
+            effects_data = self.effects_page.get_triggered_effects_data()
+            spell_data.has_aura = effects_data.get('has_aura', False)
+            spell_data.aura_radius = effects_data.get('aura_radius', 0.0)
+            spell_data.aura_duration = effects_data.get('aura_duration', 0.0)
+            spell_data.aura_vfx = effects_data.get('aura_vfx', '')
+            spell_data.aura_sfx = effects_data.get('sound_aura_loop', '')
+            spell_data.projectile_count = effects_data.get('projectile_count', 1)
+            spell_data.projectile_spread = effects_data.get('projectile_spread', 0.0)
+            spell_data.projectile_speed = effects_data.get('projectile_speed', 1.0)
+            spell_data.projectile_gravity = effects_data.get('projectile_gravity', 1.0)
+            spell_data.projectile_bounce = effects_data.get('projectile_bounce', False)
+            spell_data.projectile_pierce = effects_data.get('projectile_pierce', False)
+            spell_data.triggered_effects = effects_data.get('triggered_effects', [])
 
         return spell_data
 
