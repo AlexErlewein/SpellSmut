@@ -7,6 +7,16 @@ Before testing, ensure you have:
 1. **Python environment set up** with PySide6 installed
 2. **SpellForce Platinum Edition PAK files** copied to `OriginalGameFiles/pak/`
 3. **QuickBMS installed** (will be installed automatically by `bulk_extract_paks.py`)
+4. **Platform-specific requirements**:
+   - **macOS**: Native QuickBMS executable is available
+   - **Windows**: Windows QuickBMS executable will be installed
+
+## Platform Compatibility
+
+The tool works on multiple platforms:
+- **macOS**: Native QuickBMS executable is available and working (verified)
+- **Windows**: Windows QuickBMS executable
+- **Linux**: May work with Wine or a Linux version of QuickBMS
 
 ## Testing the Command-Line Version
 
@@ -100,6 +110,11 @@ python3 src/helper_tools/extraction/asset_extractor_gui.py
    - Warning dialog about missing QuickBMS
    - Guidance on how to install it
 
+### 3. Cross-Platform Specific Tests
+1. **File permissions**: When copying PAK files from Windows to macOS, verify they have correct permissions
+2. **Path compatibility**: Ensure paths work correctly on your platform
+3. **QuickBMS execution**: Verify QuickBMS runs properly on your system
+
 ## Verification Steps
 
 ### 1. Check Output Files
@@ -129,18 +144,35 @@ After successful extraction, verify these files exist:
 4. **Permission errors**
    - Solution: Ensure read permissions on PAK files
 
+5. **Platform-specific issues**
+   - On macOS: Check that the QuickBMS executable has execute permissions
+   - On Windows: Ensure no antivirus is blocking QuickBMS
+   - On Linux: May require Wine or native QuickBMS
+
 ### Debugging Tips
 
-1. **Enable detailed logging**:
+1. **Platform-specific verification**:
+   ```bash
+   # Check QuickBMS executable
+   /Users/alex/Desktop/code/Others/SpellSmut-asset-extraction-check/ModdingTools/quickbms/quickbms -h
+   ```
+
+2. **Check file permissions**:
+   ```bash
+   # Ensure PAK files have read permissions
+   ls -la OriginalGameFiles/pak/
+   ```
+
+3. **Enable detailed logging**:
    ```bash
    # Add verbose output to see more details
    python3 src/helper_tools/extraction/asset_extractor.py --extract --verbose
    ```
 
-2. **Check intermediate files**:
+4. **Check intermediate files**:
    - Look in `ExtractedAssets/_raw_extraction/` for raw extraction output
    - Check `ReferenceAssets/reference_snapshot.json` for reference data
 
-3. **Test individual components**:
+5. **Test individual components**:
    - Run `bulk_extract_paks.py` directly to test QuickBMS functionality
    - Test asset extractor module independently
