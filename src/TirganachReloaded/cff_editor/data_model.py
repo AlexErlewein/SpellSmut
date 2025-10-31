@@ -9,6 +9,7 @@ import os
 import pickle
 import sys
 import time
+import logging
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
@@ -70,6 +71,9 @@ class CFFDataModel(QObject):
             self.project_root / "ExtractedAssets" / "UI" / "icons_extracted"
         )
         self.data_dir = self.project_root / "src" / "TirganachReloaded" / "data"
+
+        # Initialize logger for icon loading process (must be before _load_icon_data)
+        self.logger = self._setup_logger()
 
         # Load icon mappings and analysis data
         self.icon_mapping = {}
@@ -525,55 +529,194 @@ class CFFDataModel(QObject):
         """Load icon mapping and analysis data."""
         try:
             # Load icon mapping
+            import time
+            start_time = time.time()
+            
             mapping_path = self.data_dir / "ui_icon_mapping.json"
-            if mapping_path.exists():
-                with open(mapping_path, "r") as f:
-                    self.icon_mapping = json.load(f)
-                print(
-                    f"Loaded icon mapping: {len(self.icon_mapping.get('item_to_icons', {}))} items"
-                )
+            self.logger.info(f"Loading icon mapping from: {mapping_path}")
+            
+            # Check if we have chunked icon mapping files
+            manifest_path = self.data_dir / "ui_icon_mapping_manifest.json"
+            if manifest_path.exists():
+                # Load from chunked files
+                self.logger.info("Loading chunked icon mapping from manifest")
+                print("Loading chunked icon mapping from manifest...")
+                
+                with open(manifest_path, "r") as f:
+                    manifest = json.load(f)
+                
+                # Combine chunked data
+                combined_data = {"item_to_icons": {}, "detailed_mapping": {}}
+                
+                for file_info in manifest["files"]:
+                    chunk_path = self.data_dir / file_info["filename"]
+                    if chunk_path.exists():
+                        with open(chunk_path, "r") as f:
+                            chunk_data = json.load(f)
+                        combined_data["item_to_icons"].update(chunk_data.get("item_to_icons", {}))
+                        
+                        # If there are detailed mappings in the chunks, combine them too
+                        if "detailed_mapping" in chunk_data:
+                            combined_data["detailed_mapping"].update(chunk_data["detailed_mapping"])
+                
+                self.icon_mapping = combined_data
+                load_time = time.time() - start_time
+                item_count = len(self.icon_mapping.get('item_to_icons', {}))
+                self.logger.info(f"Loaded chunked icon mapping: {item_count} items in {load_time:.2f}s")
+                print(f"Loaded chunked icon mapping: {item_count} items in {load_time:.2f}s")
+                
+            elif mapping_path.exists():
+                # Load from single file as before
+                try:
+                    with open(mapping_path, "r") as f:
+                        self.icon_mapping = json.load(f)
+                    load_time = time.time() - start_time
+                    item_count = len(self.icon_mapping.get('item_to_icons', {}))
+                    self.logger.info(f"Loaded icon mapping: {item_count} items in {load_time:.2f}s")
+                    print(f"Loaded icon mapping: {item_count} items in {load_time:.2f}s")
+                except MemoryError:
+                    self.logger.error("Icon mapping file too large to load into memory")
+                    print("Icon mapping file too large to load into memory")
+                    self.icon_mapping = {"item_to_icons": {}}
             else:
+                self.logger.warning(f"Icon mapping not found: {mapping_path}")
                 print(f"Icon mapping not found: {mapping_path}")
                 self.icon_mapping = {}
+            
+            # Build a reverse mapping from handles to potential file paths
+            start_time = time.time()
+            self.handle_to_path_mapping = self._build_handle_to_path_mapping()
+            build_time = time.time() - start_time
+            self.logger.info(f"Built handle-to-path mapping in {build_time:.2f}s")
+            print(f"Built handle-to-path mapping in {build_time:.2f}s")
+            
+            # Add a cache for frequently accessed handle mappings
+            self.handle_cache = {}
+            self.logger.info("Initialized handle cache")
 
             # Load icon index (check for split files first)
             manifest_path = self.icons_root / "icon_index_manifest.json"
+            self.logger.info(f"Loading icon index from: {manifest_path}")
+            
             if manifest_path.exists():
                 # Load from split files
                 self.icon_index = self._load_split_icon_index()
-                print(
-                    f"Loaded split icon index: {len(self.icon_index.get('icons', {}))} icons"
-                )
+                icon_count = len(self.icon_index.get('icons', {}))
+                self.logger.info(f"Loaded split icon index: {icon_count} icons")
+                print(f"Loaded split icon index: {icon_count} icons")
             else:
                 # Load single file
                 index_path = self.icons_root / "icon_index.json"
+                self.logger.info(f"Loading single icon index from: {index_path}")
+                
                 if index_path.exists():
                     with open(index_path, "r") as f:
                         self.icon_index = json.load(f)
-                    print(
-                        f"Loaded icon index: {len(self.icon_index.get('icons', {}))} icons"
-                    )
+                    icon_count = len(self.icon_index.get('icons', {}))
+                    self.logger.info(f"Loaded icon index: {icon_count} icons")
+                    print(f"Loaded icon index: {icon_count} icons")
                 else:
+                    self.logger.warning(f"Icon index not found: {index_path}")
                     print(f"Icon index not found: {index_path}")
                     self.icon_index = {}
 
             # Load verified mappings
             verified_path = self.data_dir / "verified_icon_mappings.json"
+            self.logger.info(f"Loading verified mappings from: {verified_path}")
+            
             if verified_path.exists():
                 with open(verified_path, "r") as f:
                     self.verified_mappings = json.load(f)
-                print(f"Loaded verified mappings: {len(self.verified_mappings)} items")
+                verified_count = len(self.verified_mappings)
+                self.logger.info(f"Loaded verified mappings: {verified_count} items")
+                print(f"Loaded verified mappings: {verified_count} items")
             else:
-                print(
-                    "No verified mappings found (run interactive_icon_mapper.py to create)"
-                )
+                self.logger.info("No verified mappings found (run interactive_icon_mapper.py to create)")
+                print("No verified mappings found (run interactive_icon_mapper.py to create)")
                 self.verified_mappings = {}
 
         except Exception as e:
+            self.logger.error(f"Error loading icon data: {e}")
             print(f"Error loading icon data: {e}")
             self.icon_mapping = {}
             self.icon_index = {}
             self.verified_mappings = {}
+            self.handle_to_path_mapping = {}
+            self.handle_cache = {}
+
+    def _build_handle_to_path_mapping(self):
+        """
+        Build a reverse mapping from UI handles to potential file paths.
+        This helps with the _resolve_icon_path function to find the right icon.
+        """
+        import time
+        start_time = time.time()
+        
+        mapping = {}
+        
+        if not self.icon_mapping or "item_to_icons" not in self.icon_mapping:
+            print("No item_to_icons in icon mapping, skipping handle-to-path mapping")
+            return mapping
+        
+        item_to_icons = self.icon_mapping["item_to_icons"]
+        total_mappings = len(item_to_icons)
+        print(f"Building handle-to-path mapping for {total_mappings} items...")
+        
+        # For performance, we'll pre-check what atlases actually exist on the filesystem
+        # Check which spell atlases exist
+        spell_atlas_exists = []
+        for atlas_num in range(18):
+            atlas_dir = self.icons_root / "spell" / f"atlas_{atlas_num}"
+            if atlas_dir.exists():
+                spell_atlas_exists.append(atlas_num)
+        
+        # Check which item atlases exist (limit to reasonable range)
+        item_atlas_exists = []
+        for atlas_num in range(20):  # reasonable range
+            atlas_dir = self.icons_root / "itm" / f"atlas_{atlas_num}"
+            if atlas_dir.exists():
+                item_atlas_exists.append(atlas_num)
+        
+        # Create optimized mapping that only includes existing paths
+        for item_id, icon_list in item_to_icons.items():
+            for icon_data in icon_list:
+                handle = icon_data.get("handle", "")
+                if handle:
+                    if handle not in mapping:
+                        mapping[handle] = []
+                    
+                    # Get the icon index
+                    index = icon_data.get("index", 1)
+                    
+                    # Determine the appropriate subdirectory based on handle type
+                    if handle.startswith("ui_spell_"):
+                        icon_subdir = "spell"
+                        # Only add paths for atlases that actually exist
+                        for atlas_num in spell_atlas_exists:
+                            path = f"{icon_subdir}/atlas_{atlas_num}/icon_{index:03d}.png"
+                            # Check if the file exists before adding to mapping
+                            if (self.icons_root / path).exists():
+                                mapping[handle].append(path)
+                    elif handle.startswith("ui_item_"):
+                        icon_subdir = "itm"  # or "item" depending on your extraction
+                        # Only add paths for item atlases that actually exist
+                        for atlas_num in item_atlas_exists:
+                            path = f"{icon_subdir}/atlas_{atlas_num}/icon_{index:03d}.png"
+                            # Check if the file exists before adding to mapping
+                            if (self.icons_root / path).exists():
+                                mapping[handle].append(path)
+                    else:
+                        # Default to item category
+                        icon_subdir = "itm"
+                        # Only add paths for item atlases that actually exist
+                        for atlas_num in item_atlas_exists:
+                            path = f"{icon_subdir}/atlas_{atlas_num}/icon_{index:03d}.png"
+                            # Check if the file exists before adding to mapping
+                            if (self.icons_root / path).exists():
+                                mapping[handle].append(path)
+        
+        print(f"Built handle-to-path mapping with {len(mapping)} handles in {time.time() - start_time:.2f}s")
+        return mapping
 
     def _load_split_icon_index(self) -> dict:
         """
@@ -597,6 +740,93 @@ class CFFDataModel(QObject):
                 all_icons.update(part_data["icons"])
 
         return {"stats": manifest["stats"], "icons": all_icons}
+
+    def write_chunked_icon_index(self, index_data: dict, output_path: Path, chunk_size_mb: float = 100.0):
+        """
+        Write a large icon index to multiple chunked files to avoid exceeding size limits.
+
+        Args:
+            index_data: The icon index data to chunk and write
+            output_path: Path to the main index file (directory for chunks)
+            chunk_size_mb: Maximum size of each chunk in MB (default 100MB)
+        """
+        import math
+        import os
+        
+        # Calculate chunk size based on target MB size
+        target_size_bytes = int(chunk_size_mb * 1024 * 1024)  # Convert MB to bytes
+        
+        # Get the icons dict to chunk
+        icons = index_data.get("icons", {})
+        stats = index_data.get("stats", {})
+        
+        if not icons:
+            # If no icons to chunk, write as a single file
+            with open(output_path, "w") as f:
+                json.dump(index_data, f, indent=2)
+            return
+
+        icon_items = list(icons.items())
+        total_icons = len(icon_items)
+        
+        # Estimate size per icon by sampling a subset
+        sample_size = min(100, len(icon_items))
+        sample_data = {"icons": dict(icon_items[:sample_size]), "stats": stats}
+        sample_json = json.dumps(sample_data)
+        estimated_size_per_icon = len(sample_json.encode('utf-8')) / sample_size if sample_size > 0 else 100
+        
+        # Calculate how many icons per chunk to stay under target size
+        # Account for stats and JSON overhead by being conservative
+        icons_per_chunk = max(1, int(target_size_bytes / estimated_size_per_icon * 0.8))  # 80% to be safe
+        total_chunks = math.ceil(total_icons / icons_per_chunk)
+        
+        self.logger.info(
+            f"Splitting {total_icons} icons into {total_chunks} chunks "
+            f"(~{icons_per_chunk} icons per chunk, target ~{chunk_size_mb}MB each)"
+        )
+        
+        manifest = {
+            "description": "Chunked icon index manifest",
+            "total_icons": total_icons,
+            "total_chunks": total_chunks,
+            "chunk_size_mb": chunk_size_mb,
+            "stats": stats,
+            "files": []
+        }
+        
+        # Write chunks
+        for chunk_idx in range(total_chunks):
+            start_idx = chunk_idx * icons_per_chunk
+            end_idx = min(start_idx + icons_per_chunk, total_icons)
+            chunk_icons = dict(icon_items[start_idx:end_idx])
+            
+            chunk_filename = f"icon_index_chunk_{chunk_idx:03d}.json"
+            chunk_path = output_path.parent / chunk_filename
+            
+            chunk_data = {
+                "chunk_index": chunk_idx,
+                "total_chunks": total_chunks,
+                "icons": chunk_icons
+            }
+            
+            with open(chunk_path, "w", encoding="utf-8") as f:
+                json.dump(chunk_data, f, indent=2)
+            
+            manifest["files"].append({
+                "file": chunk_filename,
+                "start_idx": start_idx,
+                "end_idx": end_idx,
+                "icon_count": len(chunk_icons)
+            })
+            
+            self.logger.debug(f"Chunk {chunk_idx}: {len(chunk_icons)} icons written to {chunk_filename}")
+        
+        # Write manifest file
+        manifest_path = output_path.parent / "icon_index_manifest.json"
+        with open(manifest_path, "w", encoding="utf-8") as f:
+            json.dump(manifest, f, indent=2)
+        
+        self.logger.info(f"Chunked icon index written with {total_chunks} chunks and manifest")
 
     def get_categories(self) -> List[tuple]:
         """Returns list of (category_name, count) tuples"""
@@ -752,6 +982,7 @@ class CFFDataModel(QObject):
             Path to PNG file or None
         """
         if not self.game_data:
+            self.logger.warning("No game data available, returning None for icon path")
             return None
 
         # Map table names to icon category names
@@ -765,16 +996,21 @@ class CFFDataModel(QObject):
         # Get element ID based on category
         element_id = self._get_element_id(category, element)
         if element_id is None:
+            self.logger.warning(f"Could not get element ID for category {category}")
             return None
+
+        self.logger.debug(f"Looking for icon for {category} element with ID {element_id} (category: {icon_category})")
 
         # PRIORITY 1: Check verified mappings first
         item_id_str = str(element_id)
         if item_id_str in self.verified_mappings:
+            self.logger.debug(f"Found verified mapping for item ID {item_id_str}")
             # Get primary icon (index 1)
             if "1" in self.verified_mappings[item_id_str]:
                 icon_rel_path = self.verified_mappings[item_id_str]["1"]
                 icon_path = self.icons_root / icon_rel_path
                 if icon_path.exists():
+                    self.logger.debug(f"Returning verified icon path: {icon_path}")
                     return str(icon_path)
 
         # PRIORITY 1.5: Try ITM integration for items/weapons/armor
@@ -791,25 +1027,33 @@ class CFFDataModel(QObject):
             ui_entry = self._find_item_ui_entry(element_id)
             if ui_entry:
                 handle = ui_entry.get("item_ui_handle")
+                self.logger.debug(f"Found UI handle for {category} item {element_id}: {handle}")
 
         # Look up in spell_names table for spells
         elif category == "spells":
             spell = self._find_spell_entry(element_id)
             if spell:
                 handle = spell.get("spell_ui_handle")
+                self.logger.debug(f"Found spell handle for spell {element_id}: {handle}")
 
         if handle:
+            self.logger.debug(f"Resolving icon path for handle: {handle}")
             resolved_path = self._resolve_icon_path(handle, icon_category)
             if resolved_path:
+                self.logger.debug(f"Successfully resolved icon path: {resolved_path}")
                 return resolved_path
+            else:
+                self.logger.debug(f"Could not resolve icon path for handle: {handle}")
 
         # PRIORITY 3: Try finding first non-empty icon from icon_mapping
         if item_id_str in self.icon_mapping.get("item_to_icons", {}):
+            self.logger.debug(f"Checking icon mapping for ID {item_id_str}")
             icons = self.icon_mapping["item_to_icons"][item_id_str]
             for icon_data in icons:
                 if icon_data.get("index") == 1:  # Primary icon
                     # Try different atlases until we find a non-empty one
                     handle = icon_data.get("handle", "")
+                    self.logger.debug(f"Checking mapped icon with handle: {handle}")
                     # Use the already mapped icon_category, but determine the subdirectory
                     icon_subdir = (
                         "itm"
@@ -835,8 +1079,12 @@ class CFFDataModel(QObject):
                             if icon_key in self.icon_index.get("icons", {}):
                                 icon_info = self.icon_index["icons"][icon_key]
                                 if not icon_info.get("is_empty", False):
+                                    self.logger.debug(f"Found non-empty icon at path: {icon_path}")
                                     return str(icon_path)
+                        else:
+                            self.logger.debug(f"Icon path does not exist: {icon_path}")
 
+        self.logger.debug(f"No icon found for {category} element with ID {element_id}")
         return None
 
     def get_icon_pixmap(
@@ -964,21 +1212,50 @@ class CFFDataModel(QObject):
     def _resolve_icon_path(self, handle: str, category: str) -> Optional[str]:
         """
         Convert UI handle to file path.
-        Since we have numbered PNG files instead of named ones,
-        create a mapping based on handle hash.
+        Uses the mapping from ui_icon_mapping.json to find the correct icon file.
         """
         if not handle:
+            self.logger.debug("Empty handle provided to _resolve_icon_path, returning None")
             return None
+
+        self.logger.debug(f"Resolving icon path for handle '{handle}' in category '{category}'")
+
+        # Check cache first for frequently accessed handles
+        cache_key = f"{handle}_{category}"
+        if cache_key in self.handle_cache:
+            result = self.handle_cache[cache_key]
+            self.logger.debug(f"Found cached result for {cache_key}: {result}")
+            return result
 
         # First try direct lookup (in case we have properly named files)
         icon_path = self.ui_assets_dir / category / f"{handle}.png"
         if icon_path.exists():
-            return str(icon_path)
+            result = str(icon_path)
+            self.handle_cache[cache_key] = result
+            self.logger.debug(f"Found direct lookup path: {result}")
+            return result
+        else:
+            self.logger.debug(f"Direct lookup failed for {icon_path}")
+
+        # Use the pre-built handle-to-path mapping
+        if handle in self.handle_to_path_mapping:
+            self.logger.debug(f"Handle '{handle}' found in handle-to-path mapping with {len(self.handle_to_path_mapping[handle])} potential paths")
+            # Go through the possible paths for this handle
+            for relative_path in self.handle_to_path_mapping[handle]:
+                full_path = self.icons_root / relative_path
+                if full_path.exists():
+                    result = str(full_path)
+                    self.handle_cache[cache_key] = result
+                    self.logger.debug(f"Found path from handle-to-path mapping: {result}")
+                    return result
+                else:
+                    self.logger.debug(f"Path from handle-to-path mapping does not exist: {full_path}")
 
         # For spell category, handle different types of handles
         if category == "spell":
             # If it's a spell handle, look in spell directories
             if handle.startswith("ui_spell_"):
+                self.logger.debug(f"Processing spell handle: {handle}")
                 # Look up in our verified icon mapping
                 # The mapping provides detailed paths for spell handles
                 if self.icon_mapping and "detailed_mapping" in self.icon_mapping:
@@ -989,40 +1266,44 @@ class CFFDataModel(QObject):
                             # Found exact match, try the mapped path
                             icon_path = self.icons_root / mapping_data["path"]
                             if icon_path.exists():
-                                return str(icon_path)
+                                result = str(icon_path)
+                                self.handle_cache[cache_key] = result
+                                self.logger.debug(f"Found detailed mapping result: {result}")
+                                return result
 
                             # Try alternative paths if primary doesn't exist
                             if "alternatives" in mapping_data:
                                 for alt_path in mapping_data["alternatives"]:
                                     alt_icon_path = self.icons_root / alt_path
                                     if alt_icon_path.exists():
-                                        return str(alt_icon_path)
+                                        result = str(alt_icon_path)
+                                        self.handle_cache[cache_key] = result
+                                        self.logger.debug(f"Found detailed mapping alternative: {result}")
+                                        return result
 
-                # Fallback: Use handle-based selection from available spell icons
+                # As another fallback, look for this spell handle in spell directories
                 spell_icons_root = self.icons_root / "spell"
                 if spell_icons_root.exists():
-                    # Get all available spell icon files
-                    all_spell_icons = []
-                    for atlas_num in range(18):
+                    # Try to find the icon in spell atlases
+                    for atlas_num in range(18):  # Spell icons are in 18 atlases
                         atlas_dir = spell_icons_root / f"atlas_{atlas_num}"
                         if atlas_dir.exists():
-                            for icon_idx in range(1, 17):
-                                icon_file = atlas_dir / f"icon_{icon_idx:03d}.png"
+                            # Try to find any icon in this atlas that might match
+                            for idx in range(1, 17):  # Icons in atlas range from 1 to 16
+                                icon_file = atlas_dir / f"icon_{idx:03d}.png"
                                 if icon_file.exists():
-                                    all_spell_icons.append(icon_file)
-
-                    if all_spell_icons:
-                        # Use hash of handle to deterministically select an icon
-                        import hashlib
-
-                        hash_obj = hashlib.md5(handle.encode("utf-8"))
-                        hash_int = int(hash_obj.hexdigest(), 16)
-                        selected_index = hash_int % len(all_spell_icons)
-                        return str(all_spell_icons[selected_index])
+                                    # If we have a specific mapping to use this handle, try this file
+                                    result = str(icon_file)
+                                    self.handle_cache[cache_key] = result
+                                    self.logger.debug(f"Found fallback spell icon: {result}")
+                                    return result
 
             # If it's an item handle (like ui_item_spellscroll), resolve as item icon
             elif handle.startswith("ui_item_"):
-                return self._resolve_icon_path(handle, "item")
+                self.logger.debug(f"Resolving item handle as 'item' category: {handle}")
+                result = self._resolve_icon_path(handle, "item")
+                self.handle_cache[cache_key] = result
+                return result
 
         # For other categories, use the mapping approach
         # Fall back to mapping numbered files
@@ -1040,10 +1321,14 @@ class CFFDataModel(QObject):
                 # Map hash to available files
                 file_index = hash_int % len(png_files)
                 mapped_file = png_files[file_index]
-                return str(mapped_file)
+                result = str(mapped_file)
+                self.handle_cache[cache_key] = result
+                self.logger.debug(f"Using hash-based fallback: {result}")
+                return result
 
-        return None
-
+        # Cache the fact that this handle wasn't found
+        self.handle_cache[cache_key] = None
+        self.logger.debug(f"No path found for handle '{handle}' in category '{category}'")
         return None
 
     def _get_fallback_icon(self, category: str, size) -> Optional[QPixmap]:
@@ -1495,76 +1780,35 @@ class CFFDataModel(QObject):
         except Exception:
             return []
 
-    # ITM Icon Integration Methods
-
-    def _init_itm_integration(self):
-        """Initialize ITM icon integration if available."""
-        try:
-            # Import the ITM integration module
-            import sys
-            project_root = Path(__file__).parent.parent.parent.parent
-            integration_path = project_root / "cff_editor_itm_integration.py"
-            
-            if integration_path.exists():
-                sys.path.insert(0, str(project_root))
-                from cff_editor_itm_integration import CFFEditorITMIntegration
-                
-                # Initialize with default GameData paths
-                original_path = self.project_root / "OriginalGameFiles" / "data" / "GameData.cff"
-                modded_path = self.project_root / "ModdedGameFiles" / "GameData_MyCustomMod_20251019_100557.cff"
-                
-                if original_path.exists():
-                    self.itm_integration = CFFEditorITMIntegration(
-                        str(original_path), 
-                        str(modded_path) if modded_path.exists() else None
-                    )
-                    print("ITM icon integration initialized successfully")
-                else:
-                    print("Original GameData.cff not found, ITM integration disabled")
-            else:
-                print("ITM integration module not found")
-        except Exception as e:
-            print(f"Failed to initialize ITM integration: {e}")
-            self.itm_integration = None
-
-    def get_itm_icon_path(self, item_id: int) -> Optional[str]:
-        """
-        Get ITM icon path for an item using the ITM integration.
+    def _setup_logger(self):
+        """Setup logger for icon loading process"""
+        logger = logging.getLogger("IconLoader")
+        logger.setLevel(logging.DEBUG)
         
-        Args:
-            item_id: The item ID to get icon for
-            
-        Returns:
-            Path to ITM icon PNG file or None
-        """
-        if not self.itm_integration:
-            return None
-            
-        try:
-            mapping = self.itm_integration.original_mapper.get_itm_mapping(item_id)
-            if mapping and mapping.atlas_file:
-                return self.itm_integration.get_icon_path(mapping)
-        except Exception as e:
-            print(f"Error getting ITM icon for item {item_id}: {e}")
-            
-        return None
-
-    def get_itm_icon_pixmap(self, item_id: int, size=(64, 64)) -> Optional[QPixmap]:
-        """
-        Get ITM icon QPixmap for an item.
+        # Create logs directory if it doesn't exist
+        logs_dir = self.project_root / "logs"
+        logs_dir.mkdir(parents=True, exist_ok=True)
         
-        Args:
-            item_id: The item ID to get icon for
-            size: Desired size as (width, height) tuple
-            
-        Returns:
-            QPixmap object or None
-        """
-        icon_path = self.get_itm_icon_path(item_id)
-        if icon_path and Path(icon_path).exists():
-            pixmap = QPixmap(icon_path)
-            if not pixmap.isNull():
-                pixmap = pixmap.scaled(size[0], size[1])
-                return pixmap
-                
-        return None
+        # Create file handler
+        log_file = logs_dir / "icon_loading.log"
+        file_handler = logging.FileHandler(log_file)
+        file_handler.setLevel(logging.DEBUG)
+        
+        # Create console handler
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.INFO)
+        
+        # Create formatter
+        formatter = logging.Formatter(
+            '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        )
+        file_handler.setFormatter(formatter)
+        console_handler.setFormatter(formatter)
+        
+        # Add handlers to logger
+        if not logger.handlers:
+            logger.addHandler(file_handler)
+            logger.addHandler(console_handler)
+        
+        logger.info("Icon loading logger initialized")
+        return logger

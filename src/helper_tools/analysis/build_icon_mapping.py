@@ -240,7 +240,7 @@ def main():
     # Create simple lookup
     simple_lookup = create_simple_lookup(item_ui_data)
     
-    # Save mappings
+    # Prepare output data
     output_data = {
         'description': 'Mapping from item IDs to UI icon data',
         'note': 'Atlas numbers are educated guesses - visual verification recommended',
@@ -248,13 +248,32 @@ def main():
         'detailed_mapping': handle_mapping
     }
     
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_path, 'w') as f:
-        json.dump(output_data, f, indent=2)
-    
     print("=" * 80)
     print("MAPPING COMPLETE")
     print("=" * 80)
+    
+    # Check total size of output data and potentially chunk it
+    estimated_size = len(json.dumps(output_data).encode('utf-8'))
+    estimated_size_mb = estimated_size / (1024 * 1024)
+    
+    print(f"Estimated size: {estimated_size_mb:.2f} MB")
+    
+    if estimated_size_mb > 50:  # If larger than 50MB, chunk it
+        print("Output file is large, using chunking...")
+        
+        # Use the chunking utility we created
+        import sys
+        sys.path.insert(0, str(project_root / "src" / "helper_tools" / "extraction"))
+        from chunk_json_files import chunk_large_json
+        
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        chunk_large_json(output_path, output_path.parent, chunk_size_mb=50.0)
+    else:
+        # Write normally if small enough
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(output_path, 'w') as f:
+            json.dump(output_data, f, indent=2)
+    
     print(f"Output: {output_path}")
     print()
     print(f"Items with icon data: {len(simple_lookup)}")
