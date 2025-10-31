@@ -777,6 +777,12 @@ class CFFDataModel(QObject):
                 if icon_path.exists():
                     return str(icon_path)
 
+        # PRIORITY 1.5: Try ITM integration for items/weapons/armor
+        if category in ["items", "weapons", "armor"] and self.itm_integration:
+            itm_icon_path = self.get_itm_icon_path(element_id)
+            if itm_icon_path and Path(itm_icon_path).exists():
+                return str(itm_icon_path)
+
         # PRIORITY 2: Try automatic mapping based on handle
         handle = None
 
@@ -1482,3 +1488,77 @@ class CFFDataModel(QObject):
             return list(self.lua_data_manager.quest_cache.keys())
         except Exception:
             return []
+
+    # ITM Icon Integration Methods
+
+    def _init_itm_integration(self):
+        """Initialize ITM icon integration if available."""
+        try:
+            # Import the ITM integration module
+            import sys
+            project_root = Path(__file__).parent.parent.parent.parent
+            integration_path = project_root / "cff_editor_itm_integration.py"
+            
+            if integration_path.exists():
+                sys.path.insert(0, str(project_root))
+                from cff_editor_itm_integration import CFFEditorITMIntegration
+                
+                # Initialize with default GameData paths
+                original_path = self.project_root / "OriginalGameFiles" / "data" / "GameData.cff"
+                modded_path = self.project_root / "ModdedGameFiles" / "GameData_MyCustomMod_20251019_100557.cff"
+                
+                if original_path.exists():
+                    self.itm_integration = CFFEditorITMIntegration(
+                        str(original_path), 
+                        str(modded_path) if modded_path.exists() else None
+                    )
+                    print("ITM icon integration initialized successfully")
+                else:
+                    print("Original GameData.cff not found, ITM integration disabled")
+            else:
+                print("ITM integration module not found")
+        except Exception as e:
+            print(f"Failed to initialize ITM integration: {e}")
+            self.itm_integration = None
+
+    def get_itm_icon_path(self, item_id: int) -> Optional[str]:
+        """
+        Get ITM icon path for an item using the ITM integration.
+        
+        Args:
+            item_id: The item ID to get icon for
+            
+        Returns:
+            Path to ITM icon PNG file or None
+        """
+        if not self.itm_integration:
+            return None
+            
+        try:
+            mapping = self.itm_integration.original_mapper.get_itm_mapping(item_id)
+            if mapping and mapping.atlas_file:
+                return self.itm_integration.get_icon_path(mapping)
+        except Exception as e:
+            print(f"Error getting ITM icon for item {item_id}: {e}")
+            
+        return None
+
+    def get_itm_icon_pixmap(self, item_id: int, size=(64, 64)) -> Optional[QPixmap]:
+        """
+        Get ITM icon QPixmap for an item.
+        
+        Args:
+            item_id: The item ID to get icon for
+            size: Desired size as (width, height) tuple
+            
+        Returns:
+            QPixmap object or None
+        """
+        icon_path = self.get_itm_icon_path(item_id)
+        if icon_path and Path(icon_path).exists():
+            pixmap = QPixmap(icon_path)
+            if not pixmap.isNull():
+                pixmap = pixmap.scaled(size[0], size[1])
+                return pixmap
+                
+        return None
