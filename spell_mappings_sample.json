@@ -1,0 +1,16 @@
+{
+  "note": "Sample of spell-related mappings from ui_icon_mapping.json",
+  "total_spell_mappings_found": 1919,
+  "sample_spell_mappings": {
+    "22": [/* mapping data with spell handle */],
+    "42": [/* mapping data with spell handle */],
+    "43": [/* mapping data with spell handle */],
+    "44": [/* mapping data with spell handle */],
+    "45": [/* mapping data with spell handle */],
+    "46": [/* mapping data with spell handle */],
+    "47": [/* mapping data with spell handle */],
+    "48": [/* mapping data with spell handle */],
+    "49": [/* mapping data with spell handle */],
+    "50": [/* mapping data with spell handle */]
+  }
+}

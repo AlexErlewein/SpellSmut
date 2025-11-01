@@ -20,7 +20,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from ..tirganach.types import Language
+from tirganach.types import Language
 from .data_model import CFFDataModel
 from .theme_manager import ThemeManager, ThemeType
 from .widgets.building_wizard import BuildingWizard

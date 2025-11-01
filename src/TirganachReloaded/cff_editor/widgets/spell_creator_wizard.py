@@ -18,6 +18,10 @@ from ..models import (
     SpellCreationData, MagicSchool, SpellType, TargetType, ScalingMode,
     SpellLevel
 )
+from .spell_mode_selection_page import SpellModeSelectionPage
+from .spell_loader import SpellLoader
+from .custom_school_page import CustomSchoolPage
+from .triggered_effects_page import TriggeredEffectsPage
 
 
 class SpellBasicsPage(QWizardPage):
@@ -1221,17 +1225,26 @@ class SpellCreatorWizard(QWizard):
         self.setWizardStyle(QWizard.WizardStyle.ModernStyle)
         self.setMinimumSize(700, 600)
 
+        # Initialize spell loader
+        self.spell_loader = SpellLoader()
+
         # Set up pages
+        self.mode_page = SpellModeSelectionPage()
         self.basics_page = SpellBasicsPage()
+        self.school_page = CustomSchoolPage()
         self.target_page = TargetMechanicsPage()
         self.level_page = LevelProgressionPage()
+        self.effects_page = TriggeredEffectsPage()
         self.visual_page = VisualEffectsPage()
         self.sound_page = SoundEffectsPage()
         self.review_page = ReviewExportPage()
 
+        self.addPage(self.mode_page)
         self.addPage(self.basics_page)
+        self.addPage(self.school_page)
         self.addPage(self.target_page)
         self.addPage(self.level_page)
+        self.addPage(self.effects_page)
         self.addPage(self.visual_page)
         self.addPage(self.sound_page)
         self.addPage(self.review_page)
@@ -1241,11 +1254,103 @@ class SpellCreatorWizard(QWizard):
 
     def on_page_changed(self, page_id):
         """Handle page changes"""
-        if page_id == 5:  # Review page
+        if page_id == 1:  # Basics page - load copied spell data
+            self.load_copied_spell_data()
+        elif page_id == 8:  # Review page
             self.update_review_page()
 
+    def load_copied_spell_data(self):
+        """Load spell data when using copy/edit modes"""
+        creation_mode = self.mode_page.get_creation_mode()
+        
+        if creation_mode in ["edit", "duplicate"]:
+            selected_spell_data = self.mode_page.get_selected_spell_data()
+            if selected_spell_data:
+                # Load the spell data using the spell loader
+                spell_data = self.spell_loader.load_spell_from_data(selected_spell_data)
+                if spell_data:
+                    # Populate all pages with the loaded spell data
+                    self.populate_pages_with_spell_data(spell_data)
+                    
+                    # For duplicate mode, clear the name and ID to force new entry
+                    if creation_mode == "duplicate":
+                        self.basics_page.spell_name_edit.clear()
+                        self.basics_page.internal_name_edit.clear()
+                        # Auto-assign new ID will be handled during export
+    
+    def populate_pages_with_spell_data(self, spell_data: SpellCreationData):
+        """Populate all wizard pages with existing spell data"""
+        # Populate basics page
+        self.basics_page.spell_name_edit.setText(spell_data.spell_name)
+        self.basics_page.internal_name_edit.setText(spell_data.internal_name)
+        self.basics_page.description_edit.setPlainText(spell_data.description)
+        
+        # Set school and type combos
+        school_map = {
+            MagicSchool.WHITE: 0,
+            MagicSchool.FIRE: 1,
+            MagicSchool.ICE: 2,
+            MagicSchool.BLACK: 3,
+            MagicSchool.MENTAL: 4,
+            MagicSchool.EARTH: 5
+        }
+        self.basics_page.school_combo.setCurrentIndex(school_map.get(spell_data.magic_school, 1))
+        
+        type_map = {
+            SpellType.ATTACK: 0,
+            SpellType.HEAL: 1,
+            SpellType.BUFF: 2,
+            SpellType.DEBUFF: 3,
+            SpellType.SUMMON: 4,
+            SpellType.AOE: 5,
+            SpellType.UTILITY: 6
+        }
+        self.basics_page.type_combo.setCurrentIndex(type_map.get(spell_data.spell_type, 0))
+        
+        # Populate target page
+        target_map = {
+            TargetType.SINGLE: 0,
+            TargetType.AOE: 1,
+            TargetType.SELF: 2,
+            TargetType.CONE: 3,
+            TargetType.CHAIN: 4
+        }
+        self.target_page.target_combo.setCurrentIndex(target_map.get(spell_data.target_type, 0))
+        self.target_page.projectile_checkbox.setChecked(spell_data.has_projectile)
+        self.target_page.range_spin.setValue(int(spell_data.base_range))
+        self.target_page.aoe_spin.setValue(int(spell_data.aoe_radius))
+        self.target_page.duration_spin.setValue(int(spell_data.duration))
+        self.target_page.effects_text.setPlainText(", ".join(spell_data.special_effects))
+        
+        # Populate level page
+        self.level_page.level_spinbox.setValue(spell_data.num_levels)
+        
+        scaling_map = {
+            ScalingMode.LINEAR: "linear (same increase per level)",
+            ScalingMode.EXPONENTIAL: "exponential (accelerating growth)",
+            ScalingMode.LOGARITHMIC: "logarithmic (diminishing returns)",
+            ScalingMode.CUSTOM: "custom (edit each level manually)"
+        }
+        scaling_text = scaling_map.get(spell_data.scaling_mode, "linear (same increase per level)")
+        index = self.level_page.scaling_combo.findText(scaling_text, Qt.MatchFlag.MatchFixedString)
+        if index >= 0:
+            self.level_page.scaling_combo.setCurrentIndex(index)
+        
+        # Populate visual page
+        self.visual_page.cast_combo.setCurrentText(spell_data.vfx_cast or "None")
+        self.visual_page.projectile_combo.setCurrentText(spell_data.vfx_projectile or "None")
+        self.visual_page.resolve_combo.setCurrentText(spell_data.vfx_resolve or "None")
+        self.visual_page.target_combo.setCurrentText(spell_data.vfx_target or "None")
+        self.visual_page.overtime_combo.setCurrentText(spell_data.vfx_overtime or "None")
+        
+        # Populate sound page
+        self.sound_page.cast_combo.setCurrentText(spell_data.sfx_cast or "None")
+        self.sound_page.projectile_combo.setCurrentText(spell_data.sfx_projectile or "None")
+        self.sound_page.resolve_combo.setCurrentText(spell_data.sfx_resolve or "None")
+        self.sound_page.hit_combo.setCurrentText(spell_data.sfx_hit or "None")
+
     def update_review_page(self):
-        """Update the review page with current spell data"""
+        """Update review page with current spell data"""
         spell_data = self.collect_spell_data()
         self.review_page.update_summary(spell_data)
 
@@ -1375,12 +1480,53 @@ class SpellCreatorWizard(QWizard):
 
         spell_data.sfx_resolve = self.sound_page.resolve_sound_combo.currentText()
         spell_data.sfx_hit = self.sound_page.hit_sound_combo.currentText()
+        
+        # Custom magic school data
+        if hasattr(self, 'school_page'):
+            custom_school_data = self.school_page.get_custom_school_data()
+            if custom_school_data:
+                spell_data.custom_school_name = custom_school_data['name']
+                spell_data.custom_school_color = custom_school_data['color']
+                spell_data.custom_school_description = custom_school_data['description']
+        
+        # Triggered effects data
+        if hasattr(self, 'effects_page'):
+            effects_data = self.effects_page.get_triggered_effects_data()
+            spell_data.has_aura = effects_data.get('has_aura', False)
+            spell_data.aura_radius = effects_data.get('aura_radius', 0.0)
+            spell_data.aura_duration = effects_data.get('aura_duration', 0.0)
+            spell_data.aura_vfx = effects_data.get('aura_vfx', '')
+            spell_data.aura_sfx = effects_data.get('sound_aura_loop', '')
+            spell_data.projectile_count = effects_data.get('projectile_count', 1)
+            spell_data.projectile_spread = effects_data.get('projectile_spread', 0.0)
+            spell_data.projectile_speed = effects_data.get('projectile_speed', 1.0)
+            spell_data.projectile_gravity = effects_data.get('projectile_gravity', 1.0)
+            spell_data.projectile_bounce = effects_data.get('projectile_bounce', False)
+            spell_data.projectile_pierce = effects_data.get('projectile_pierce', False)
+            spell_data.triggered_effects = effects_data.get('triggered_effects', [])
 
         return spell_data
 
     def accept(self):
         """Wizard completed successfully"""
         spell_data = self.collect_spell_data()
+        
+        # Handle spell ID assignment based on mode selection
+        id_mode = self.mode_page.get_spell_id_mode()
+        if id_mode == "auto":
+            # Auto-assign next available ID (simplified - in real implementation would check existing spells)
+            spell_data.spell_line_id = 300  # Default starting ID for custom spells
+        else:
+            # Use manually assigned ID
+            spell_data.spell_line_id = self.mode_page.get_manual_spell_id()
+        
+        # Set creation metadata
+        creation_mode = self.mode_page.get_creation_mode()
+        if creation_mode == "duplicate":
+            selected_spell = self.mode_page.get_selected_spell_data()
+            if selected_spell:
+                spell_data.description = f"Duplicated from: {selected_spell['name']}\n\n{spell_data.description}"
+        
         self.spellCreated.emit(spell_data)
         super().accept()
 

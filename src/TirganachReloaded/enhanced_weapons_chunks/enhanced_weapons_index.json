@@ -1,0 +1,14 @@
+{
+  "total_items": 719,
+  "num_chunks": 1,
+  "max_items_per_chunk": 105507,
+  "chunks": [
+    {
+      "chunk_index": 0,
+      "filename": "enhanced_weapons_part_00.json",
+      "start_index": 0,
+      "end_index": 719,
+      "item_count": 719
+    }
+  ]
+}

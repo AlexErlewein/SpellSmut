@@ -18,7 +18,7 @@ class Table(list[T], Generic[T]):
 
 	offset: int
 	entity_type: Type[T]
-	entity_index: dict[tuple, T] = None
+	entity_index: dict[tuple, T] | None = None
 	primary_keys: tuple # sorted alphabetically!
 
 	def __init__(self, raw_bytes: bytes | bytearray, entity_type: Type[T], game_data: 'GameData'):
@@ -30,18 +30,18 @@ class Table(list[T], Generic[T]):
 
 		# we read the header here again, just for cleaner structure (rather than passing the info to the init)
 		header = raw_bytes[0:12]
-		self._header = header
+		self._header = bytearray(header)
 		offset += 12
 
 		table_size_bytes = int.from_bytes(header[6: 10], byteorder='little', signed=False)
 		table_row_length = entity_type._length()
 		table_size_rows = int(table_size_bytes / table_row_length)
 		assert table_size_rows == (table_size_bytes / table_row_length)
-		super().__init__([None] * table_size_rows)
+		super().__init__([])  # Will be populated below
 
 		for idx in range(0, table_size_rows):
-			new_instance: entity_type = entity_type(raw_bytes[offset:offset+table_row_length], game_data=self._game_data)
-			self[idx] = new_instance
+			new_instance = entity_type(raw_bytes[offset:offset+table_row_length], game_data=self._game_data)
+			self.append(new_instance)
 			offset += table_row_length
 
 		assert offset == len(raw_bytes)
@@ -77,7 +77,7 @@ class Table(list[T], Generic[T]):
 		if self.primary_keys:
 			if set(kwargs.keys()) == set(self.primary_keys):
 				ordered_pkeyvals = tuple(kwargs[pkey] for pkey in self.primary_keys)
-				result = self.entity_index.get(ordered_pkeyvals)
+				result = self.entity_index.get(ordered_pkeyvals) if self.entity_index else None
 				if result:
 					return [result]
 				else:
@@ -106,15 +106,15 @@ class TableDefinition:
 		self.entity_type = entity_type
 		self.offset = offset
 
-	def create_table(self, rows: int):
-		return Table(entity_type=self.entity_type, offset=self.offset, rows=rows)
+	def create_table(self, raw_bytes: bytes, game_data):
+		return Table(raw_bytes=raw_bytes, entity_type=self.entity_type, game_data=game_data)
 
 
 class GameData:
 	_header: bytearray
 	_offsets: dict = {}
-	_length: int = None
-	_md5: str = None
+	_length: int | None = None
+	_md5: str | None = None
 
 	spells: Table[Spell]
 	spell_names: Table[SpellName]
@@ -167,15 +167,74 @@ class GameData:
 	item_sets: Table[ItemSet]
 
 	def table_info(self):
-		return {name: annot for name, annot in self.__annotations__.items() if get_origin(annot) is Table}
+		# Handle Python 3.14+ where __annotations__ may not be available
+		class_annotations = self.__class__.__annotations__ if hasattr(self.__class__, '__annotations__') else {}
+		if class_annotations:
+			return {name: annot for name, annot in class_annotations.items() if get_origin(annot) is Table}
+		else:
+			# Fallback: define table information based on known GameData structure
+			# This is a hardcoded fallback for Python 3.14+ compatibility
+			return {
+				'spells': Table[Spell],
+				'spell_names': Table[SpellName],
+				'unknown3': Table[Unknown3],
+				'creature_stats': Table[CreatureStats],
+				'creature_skills': Table[CreatureSkill],
+				'hero_spells': Table[HeroSpell],
+				'items': Table[Item],
+				'armor': Table[Armor],
+				'item_installs': Table[ItemInstall],
+				'weapons': Table[Weapon],
+				'item_requirements': Table[ItemRequirement],
+				'item_effects': Table[ItemEffect],
+				'item_ui': Table[ItemUI],
+				'spell_effects': Table[SpellEffect],
+				'localisation': Table[Localisation],
+				'races': Table[RaceDB],
+				'heads': Table[Head],
+				'creatures': Table[Creature],
+				'creature_equipment': Table[CreatureEquipment],
+				'creature_spells': Table[CreatureSpell],
+				'creature_resources': Table[CreatureResourceRequirement],
+				'drops': Table[CreatureDrop],
+				'unit_building_requirements': Table[UnitBuildingRequirement],
+				'buildings': Table[Building],
+				'building_graphics': Table[BuildingGraphics],
+				'building_requirements': Table[BuildingRequirement],
+				'skills': Table[Skill],
+				'skill_requirements': Table[SkillRequirement],
+				'merchant_inventories': Table[MerchantInventory],
+				'merchant_inventory_items': Table[MerchantInventoryItem],
+				'merchant_price_multipliers': Table[MerchantPriceMultiplier],
+				'resource_names': Table[ResourceName],
+				'levels': Table[Level],
+				'objects': Table[Object],
+				'object_graphics': Table[ObjectGraphics],
+				'object_loot': Table[ObjectLoot],
+				'npc_names': Table[NPCName],
+				'maps': Table[Map],
+				'portals': Table[Portal],
+				'unknown40': Table[Unknown40],
+				'descriptions': Table[Description],
+				'advanced_descriptions': Table[AdvancedDescription],
+				'quests': Table[Quest],
+				'weapon_type_names': Table[WeaponTypeName],
+				'weapon_material_names': Table[WeaponMaterialName],
+				'terrain': Table[Terrain],
+				'unknown47': Table[Unknown47],
+				'upgrades': Table[Upgrade],
+				'item_sets': Table[ItemSet],
+			}
+		return {name: annot for name, annot in self.__class__.__annotations__.items() if get_origin(annot) is Table}
 
 	def tables(self):
 		return {name: getattr(self, name) for name in self.table_info()}
 
-	def get_table(self, entity_type: Type[Entity]) -> Table[Entity]:
+	def get_table(self, entity_type: Type[Entity]) -> Table[Entity] | None:
 		for name, annot in self.table_info().items():
 			if get_args(annot)[0] is entity_type:
 				return self.tables()[name]
+		return None
 
 	def __init__(self, from_input: bytes | str | PathLike[bytes]):
 		if isinstance(from_input, PathLike) or isinstance(from_input, str):

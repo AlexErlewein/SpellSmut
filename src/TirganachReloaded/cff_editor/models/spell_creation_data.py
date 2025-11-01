@@ -3,7 +3,7 @@ SpellForce Spell Creation System - Main Spell Data Model
 """
 
 from dataclasses import dataclass, field
-from typing import List, Optional
+from typing import List, Optional, Dict
 from datetime import datetime
 
 from .spell_enums import MagicSchool, SpellType, TargetType, ScalingMode
@@ -46,6 +46,27 @@ class SpellCreationData:
     sfx_projectile: str = ""
     sfx_resolve: str = ""
     sfx_hit: str = ""
+    
+    # Step 6: Triggered Effects
+    triggered_effects: List[Dict] = field(default_factory=list)  # Aura, projectile, ongoing effects
+    has_aura: bool = False
+    aura_radius: float = 0.0
+    aura_duration: float = 0.0
+    aura_vfx: str = ""
+    aura_sfx: str = ""
+    
+    # Projectile System
+    projectile_count: int = 1
+    projectile_spread: float = 0.0  # Degrees of spread
+    projectile_speed: float = 1.0
+    projectile_gravity: float = 1.0
+    projectile_bounce: bool = False
+    projectile_pierce: bool = False
+    
+    # Custom Magic School
+    custom_school_name: str = ""
+    custom_school_color: str = ""  # Hex color code
+    custom_school_description: str = ""
 
     # Metadata
     spell_line_id: int = 300  # Auto-assigned (300+ range for custom spells)
@@ -190,6 +211,21 @@ class SpellCreationData:
             "sfx_projectile": self.sfx_projectile,
             "sfx_resolve": self.sfx_resolve,
             "sfx_hit": self.sfx_hit,
+            "triggered_effects": self.triggered_effects,
+            "has_aura": self.has_aura,
+            "aura_radius": self.aura_radius,
+            "aura_duration": self.aura_duration,
+            "aura_vfx": self.aura_vfx,
+            "aura_sfx": self.aura_sfx,
+            "projectile_count": self.projectile_count,
+            "projectile_spread": self.projectile_spread,
+            "projectile_speed": self.projectile_speed,
+            "projectile_gravity": self.projectile_gravity,
+            "projectile_bounce": self.projectile_bounce,
+            "projectile_pierce": self.projectile_pierce,
+            "custom_school_name": self.custom_school_name,
+            "custom_school_color": self.custom_school_color,
+            "custom_school_description": self.custom_school_description,
             "spell_line_id": self.spell_line_id,
             "created_date": self.created_date,
             "author": self.author,
@@ -232,6 +268,21 @@ class SpellCreationData:
             sfx_projectile=data.get("sfx_projectile", ""),
             sfx_resolve=data.get("sfx_resolve", ""),
             sfx_hit=data.get("sfx_hit", ""),
+            triggered_effects=data.get("triggered_effects", []),
+            has_aura=data.get("has_aura", False),
+            aura_radius=data.get("aura_radius", 0.0),
+            aura_duration=data.get("aura_duration", 0.0),
+            aura_vfx=data.get("aura_vfx", ""),
+            aura_sfx=data.get("aura_sfx", ""),
+            projectile_count=data.get("projectile_count", 1),
+            projectile_spread=data.get("projectile_spread", 0.0),
+            projectile_speed=data.get("projectile_speed", 1.0),
+            projectile_gravity=data.get("projectile_gravity", 1.0),
+            projectile_bounce=data.get("projectile_bounce", False),
+            projectile_pierce=data.get("projectile_pierce", False),
+            custom_school_name=data.get("custom_school_name", ""),
+            custom_school_color=data.get("custom_school_color", ""),
+            custom_school_description=data.get("custom_school_description", ""),
             spell_line_id=data.get("spell_line_id", 300),
             created_date=data.get("created_date", ""),
             author=data.get("author", ""),
