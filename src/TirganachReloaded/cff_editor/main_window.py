@@ -339,6 +339,7 @@ class MainWindow(QMainWindow):
         self.data_model.data_modified.connect(self.on_data_modified)
         self.data_model.category_changed.connect(self.on_category_changed)
         self.data_model.language_changed.connect(self.on_language_changed)
+        self.data_model.element_selected.connect(self.on_element_selected)
 
     def open_file(self):
         """Open CFF file dialog"""
@@ -784,6 +785,13 @@ class MainWindow(QMainWindow):
         """Called when language changes"""
         # Refresh all views to show text in new language
         self.refresh_view()
+
+    def on_element_selected(self, category, element_index):
+        """Called when an element is selected in any view"""
+        if category == "quests":
+            # Update quest details with selected quest
+            self.quest_details.on_element_selected(category, element_index)
+            self.logger.debug(f"Selected quest at index {element_index}")
 
     def adjust_splitter_for_quests(self):
         """Adjust splitter sizes when showing quest details"""
