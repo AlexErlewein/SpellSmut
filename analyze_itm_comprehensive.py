@@ -9,12 +9,12 @@ import os
 import re
 from pathlib import Path
 
-# Add the tirganach library to path
-sys.path.insert(0, str(Path(__file__).parent / "src" / "TirganachReloaded"))
+# Add the src directory to path
+sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 try:
-    from tirganach.structure import GameData
-    from tirganach.entities import Item, ItemUI
+    from TirganachReloaded.tirganach.structure import GameData
+    from TirganachReloaded.tirganach.entities import Item, ItemUI
 except ImportError as e:
     print(f"Error importing tirganach library: {e}")
     sys.exit(1)

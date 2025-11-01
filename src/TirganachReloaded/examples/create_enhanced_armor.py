@@ -5,13 +5,10 @@ Similar to how enhanced_weapons.json was created
 """
 
 import json
-import sys
-import os
-sys.path.insert(0, os.path.dirname(__file__))
-
-from tirganach import GameData
-from tirganach.types import Language
 from pathlib import Path
+
+from TirganachReloaded.tirganach import GameData
+from TirganachReloaded.tirganach.types import Language
 
 def create_enhanced_armor():
     """Create enhanced armor data with proper names"""

@@ -6,8 +6,8 @@ This is a template script for creating your own mods.
 Modify the sections below to create your custom modifications.
 """
 
-from tirganach import GameData
-from tirganach.types import *
+from TirganachReloaded.tirganach import GameData
+from TirganachReloaded.tirganach.types import *
 import os
 from datetime import datetime
 

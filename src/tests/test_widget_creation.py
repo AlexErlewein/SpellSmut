@@ -4,10 +4,9 @@ Test script to check if QuestDetailsWidget can be created without errors
 """
 
 import sys
-sys.path.append('../TirganachReloaded')
 
 from PySide6.QtWidgets import QApplication
-from tirganach import GameData
+from TirganachReloaded.tirganach import GameData
 
 class MockDataModel:
     """Mock data model for testing"""
@@ -22,7 +21,7 @@ class MockDataModel:
 
     def get_current_language(self):
         """Get current language"""
-        from tirganach.types import Language
+        from TirganachReloaded.tirganach.types import Language
         return Language.ENGLISH
 
     def get_elements(self, category):

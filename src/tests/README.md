@@ -139,7 +139,7 @@ Fixtures are defined in `conftest.py` and available to all tests:
 ```python
 def test_with_gamedata(gamedata_path):
     """Test that uses GameData.cff path"""
-    from tirganach import GameData
+    from TirganachReloaded.tirganach import GameData
     gd = GameData(str(gamedata_path))
     assert gd is not None
 ```

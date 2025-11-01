@@ -444,7 +444,7 @@ def main():
         "--output-dir",
         type=Path,
         default=None,
-        help="Output directory for results (default: TirganachReloaded/data)",
+        help="Output directory for results (default: src/TirganachReloaded/data)",
     )
 
     args = parser.parse_args()
@@ -458,7 +458,7 @@ def main():
         return 1
 
     # Set output directory
-    output_dir = args.output_dir or (project_root / "TirganachReloaded" / "data")
+    output_dir = args.output_dir or (project_root / "src" / "TirganachReloaded" / "data")
 
     # Initialize scanner
     scanner = LuaRewardScanner(script_root, verbose=args.verbose)

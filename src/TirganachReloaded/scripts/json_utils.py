@@ -66,9 +66,7 @@ def check_weapon_data_quality():
     gamedata_path = Path(__file__).parent.parent.parent / "OriginalGameFiles" / "data" / "GameData.cff"
     if gamedata_path.exists():
         try:
-            import sys
-            sys.path.append(str(Path(__file__).parent.parent))
-            from tirganach import GameData
+            from TirganachReloaded.tirganach import GameData
             
             gd = GameData(str(gamedata_path))
             weapons = gd.weapons

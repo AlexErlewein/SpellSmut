@@ -54,7 +54,7 @@ def test_ui_handles():
     print("=== UI Handle Test ===\n")
     
     try:
-        from tirganach import GameData
+        from TirganachReloaded.tirganach import GameData
         
         gd = GameData("OriginalGameFiles/data/GameData.cff")
         weapons = gd.weapons

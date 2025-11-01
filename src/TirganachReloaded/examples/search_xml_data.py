@@ -9,8 +9,8 @@ Usage:
 """
 
 import xml.etree.ElementTree as ET
-from tirganach import GameData
-from tirganach.types import *
+from TirganachReloaded.tirganach import GameData
+from TirganachReloaded.tirganach.types import *
 
 # ============================================================================
 # CONFIGURATION

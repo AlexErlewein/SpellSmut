@@ -976,7 +976,7 @@ def main():
     )
     parser.add_argument(
         "--mappings",
-        default="TirganachReloaded/data/id_name_mappings.json",
+        default="src/TirganachReloaded/data/id_name_mappings.json",
         help="Path to JSON mappings file",
     )
     parser.add_argument(

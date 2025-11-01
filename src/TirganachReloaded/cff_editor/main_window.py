@@ -523,8 +523,8 @@ class MainWindow(QMainWindow):
 
     def _perform_cff_comparison(self, compare_file_path: str) -> str:
         """Perform traditional CFF file comparison"""
-        from tirganach import GameData
-        from tirganach.compare import compare
+        from TirganachReloaded.tirganach import GameData
+        from TirganachReloaded.tirganach.compare import compare
 
         # Load the comparison file
         compare_data = GameData(compare_file_path)
@@ -554,7 +554,7 @@ class MainWindow(QMainWindow):
 
             try:
                 # Load comparison file and create its database
-                from tirganach import GameData
+                from TirganachReloaded.tirganach import GameData
 
                 compare_data = GameData(compare_file_path)
 

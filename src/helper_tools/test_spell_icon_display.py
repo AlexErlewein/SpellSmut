@@ -10,14 +10,14 @@ from pathlib import Path
 
 # Add project paths
 project_root = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(project_root / "src" / "TirganachReloaded"))
+sys.path.insert(0, str(project_root / "src"))
 
 from PySide6.QtWidgets import QApplication, QLabel, QVBoxLayout, QWidget
 from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
 
-from cff_editor.data_model import CFFDataModel
-from tirganach import GameData
+from TirganachReloaded.cff_editor.data_model import CFFDataModel
+from TirganachReloaded.tirganach import GameData
 
 
 def test_spell_icon_display():

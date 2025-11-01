@@ -702,7 +702,7 @@ def main():
     )
     parser.add_argument(
         "--output",
-        default="TirganachReloaded/data/id_name_mappings.json",
+        default="src/TirganachReloaded/data/id_name_mappings.json",
         help="Output JSON file path",
     )
 

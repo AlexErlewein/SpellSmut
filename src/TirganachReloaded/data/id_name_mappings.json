@@ -1702,34 +1702,10 @@
     }
   },
   "job_types": {
-    "kGdJobHitTargetRange1": {
-      "name": "Ranged Aim",
-      "constant": "kGdJobHitTargetRange1",
-      "display": "Ranged Aim [?]",
-      "id": null
-    },
-    "kGdJobGroupWalk": {
-      "name": "Walking",
-      "constant": "kGdJobGroupWalk",
-      "display": "Walking [?]",
-      "id": null
-    },
-    "kGdJobFeignDeath": {
-      "name": "Feign Death",
-      "constant": "kGdJobFeignDeath",
-      "display": "Feign Death [?]",
-      "id": null
-    },
-    "kGdJobStab": {
-      "name": "Stabbing Attack",
-      "constant": "kGdJobStab",
-      "display": "Stabbing Attack [?]",
-      "id": null
-    },
-    "kGdJobStoop": {
-      "name": "Pickup/Loot",
-      "constant": "kGdJobStoop",
-      "display": "Pickup/Loot [?]",
+    "kGdJobCastResolve": {
+      "name": "Spell Complete",
+      "constant": "kGdJobCastResolve",
+      "display": "Spell Complete [?]",
       "id": null
     },
     "kGdJobBuilderBuild": {
@@ -1744,46 +1720,16 @@
       "display": "Unarmed Attack [?]",
       "id": null
     },
-    "kGdJobGroupNothing": {
-      "name": "No Action",
-      "constant": "kGdJobGroupNothing",
-      "display": "No Action [?]",
-      "id": null
-    },
-    "kGdJobCastResolve": {
-      "name": "Spell Complete",
-      "constant": "kGdJobCastResolve",
-      "display": "Spell Complete [?]",
-      "id": null
-    },
-    "kGdJobStoneMinerCrushStone": {
-      "name": "Mine Stone",
-      "constant": "kGdJobStoneMinerCrushStone",
-      "display": "Mine Stone [?]",
-      "id": null
-    },
-    "kGdJobHitTargetRange2": {
-      "name": "Ranged Fire",
-      "constant": "kGdJobHitTargetRange2",
-      "display": "Ranged Fire [?]",
-      "id": null
-    },
-    "kGdJobWoodCutterCutTree": {
-      "name": "Chop Trees",
-      "constant": "kGdJobWoodCutterCutTree",
-      "display": "Chop Trees [?]",
-      "id": null
-    },
     "kGdJobMinerWork": {
       "name": "Mine Ore",
       "constant": "kGdJobMinerWork",
       "display": "Mine Ore [?]",
       "id": null
     },
-    "kGdJobFisherWork": {
-      "name": "Fishing",
-      "constant": "kGdJobFisherWork",
-      "display": "Fishing [?]",
+    "kGdJobGroupNothing": {
+      "name": "No Action",
+      "constant": "kGdJobGroupNothing",
+      "display": "No Action [?]",
       "id": null
     },
     "kGdJobCriticalHit": {
@@ -1792,16 +1738,28 @@
       "display": "Hit Reaction [?]",
       "id": null
     },
-    "kGdJobSmithWork": {
-      "name": "Blacksmithing",
-      "constant": "kGdJobSmithWork",
-      "display": "Blacksmithing [?]",
-      "id": null
-    },
     "kGdJobStrike": {
       "name": "Melee Strike",
       "constant": "kGdJobStrike",
       "display": "Melee Strike [?]",
+      "id": null
+    },
+    "kGdJobDie": {
+      "name": "Death",
+      "constant": "kGdJobDie",
+      "display": "Death [?]",
+      "id": null
+    },
+    "kGdJobStab": {
+      "name": "Stabbing Attack",
+      "constant": "kGdJobStab",
+      "display": "Stabbing Attack [?]",
+      "id": null
+    },
+    "kGdJobStoneMinerCrushStone": {
+      "name": "Mine Stone",
+      "constant": "kGdJobStoneMinerCrushStone",
+      "display": "Mine Stone [?]",
       "id": null
     },
     "kGdJobDefault": {
@@ -1816,10 +1774,52 @@
       "display": "Spell Cast [?]",
       "id": null
     },
-    "kGdJobDie": {
-      "name": "Death",
-      "constant": "kGdJobDie",
-      "display": "Death [?]",
+    "kGdJobSmithWork": {
+      "name": "Blacksmithing",
+      "constant": "kGdJobSmithWork",
+      "display": "Blacksmithing [?]",
+      "id": null
+    },
+    "kGdJobHitTargetRange2": {
+      "name": "Ranged Fire",
+      "constant": "kGdJobHitTargetRange2",
+      "display": "Ranged Fire [?]",
+      "id": null
+    },
+    "kGdJobWoodCutterCutTree": {
+      "name": "Chop Trees",
+      "constant": "kGdJobWoodCutterCutTree",
+      "display": "Chop Trees [?]",
+      "id": null
+    },
+    "kGdJobGroupWalk": {
+      "name": "Walking",
+      "constant": "kGdJobGroupWalk",
+      "display": "Walking [?]",
+      "id": null
+    },
+    "kGdJobStoop": {
+      "name": "Pickup/Loot",
+      "constant": "kGdJobStoop",
+      "display": "Pickup/Loot [?]",
+      "id": null
+    },
+    "kGdJobHitTargetRange1": {
+      "name": "Ranged Aim",
+      "constant": "kGdJobHitTargetRange1",
+      "display": "Ranged Aim [?]",
+      "id": null
+    },
+    "kGdJobFeignDeath": {
+      "name": "Feign Death",
+      "constant": "kGdJobFeignDeath",
+      "display": "Feign Death [?]",
+      "id": null
+    },
+    "kGdJobFisherWork": {
+      "name": "Fishing",
+      "constant": "kGdJobFisherWork",
+      "display": "Fishing [?]",
       "id": null
     }
   },

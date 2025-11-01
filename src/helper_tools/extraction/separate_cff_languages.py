@@ -563,7 +563,7 @@ def main():
 
     # Setup paths
     project_root = Path(__file__).parent.parent.parent.parent
-    data_dir = project_root / "TirganachReloaded" / "data"
+    data_dir = project_root / "src" / "TirganachReloaded" / "data"
     input_file = data_dir / "cff_strings_german.json"  # Contains all languages
     rewards_file = (
         project_root

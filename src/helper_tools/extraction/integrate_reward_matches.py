@@ -336,7 +336,7 @@ def main():
     project_root = Path(__file__).parent.parent.parent.parent
     db_path = Path.home() / ".spellforce_editor" / "lua_cache" / "lua_quest_cache.db"
     matches_file = (
-        project_root / "TirganachReloaded" / "data" / "quest_matches_multilang.json"
+        project_root / "src" / "TirganachReloaded" / "data" / "quest_matches_multilang.json"
     )
 
     # Check files exist

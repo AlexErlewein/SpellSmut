@@ -11,8 +11,8 @@ This script demonstrates how to use the tirganach library to:
 NOTE: Always backup your original GameData.cff before making changes!
 """
 
-from tirganach import GameData
-from tirganach.types import *
+from TirganachReloaded.tirganach import GameData
+from TirganachReloaded.tirganach.types import *
 
 # ============================================================================
 # LOADING THE FILE

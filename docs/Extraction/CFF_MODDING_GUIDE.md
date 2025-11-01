@@ -39,8 +39,8 @@ pip install -e .
 ### 1. Load the GameData.cff File
 
 ```python
-from tirganach import GameData
-from tirganach.types import *
+from TirganachReloaded.tirganach import GameData
+from TirganachReloaded.tirganach.types import *
 
 # Load the file
 gd = GameData('H:/SpellSmut/OriginalGameFiles/data/GameData.cff')
@@ -249,8 +249,8 @@ Language.ITALIAN
 ### Example 1: Create an Overpowered Ring
 
 ```python
-from tirganach import GameData
-from tirganach.types import *
+from TirganachReloaded.tirganach import GameData
+from TirganachReloaded.tirganach.types import *
 
 gd = GameData('H:/SpellSmut/OriginalGameFiles/data/GameData.cff')
 

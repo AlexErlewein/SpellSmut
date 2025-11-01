@@ -1,10 +1,6 @@
 import json
 from pathlib import Path
 from typing import List, Dict, Optional
-import sys
-
-# Add parent directories to path to import tirganach
-sys.path.append(str(Path(__file__).parent.parent.parent))
 
 from PySide6.QtWidgets import (
     QDialog,
@@ -19,7 +15,7 @@ from PySide6.QtWidgets import (
 )
 
 try:
-    from tirganach import GameData
+    from TirganachReloaded.tirganach import GameData
     GAMEDATA_AVAILABLE = True
 except ImportError:
     GAMEDATA_AVAILABLE = False

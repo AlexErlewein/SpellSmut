@@ -7,8 +7,8 @@ import sys
 import os
 from pathlib import Path
 
-# Add the tirganach library to the path
-sys.path.insert(0, str(Path(__file__).parent / "src" / "TirganachReloaded"))
+# Add the src directory to the path
+sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 def analyze_gamedata_simple(gamedata, name="GameData"):
     """Simple analysis without relying on annotations."""
@@ -119,7 +119,7 @@ def main():
     
     # Load and analyze original
     try:
-        from tirganach import GameData
+        from TirganachReloaded.tirganach import GameData
         
         print("Loading original GameData...")
         original_gd = GameData(original_path)

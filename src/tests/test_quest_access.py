@@ -4,9 +4,8 @@ Test script to verify quest access and details widget functionality
 """
 
 import sys
-sys.path.append('../TirganachReloaded')
 
-from tirganach import GameData
+from TirganachReloaded.tirganach import GameData
 
 def test_quest_access():
     """Test accessing quest elements"""

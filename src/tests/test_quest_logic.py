@@ -4,9 +4,8 @@ Test script to verify quest details logic without GUI
 """
 
 import sys
-sys.path.append('../TirganachReloaded')
 
-from tirganach import GameData
+from TirganachReloaded.tirganach import GameData
 
 def test_quest_logic():
     """Test quest details logic without GUI"""

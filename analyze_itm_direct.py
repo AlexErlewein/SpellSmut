@@ -8,8 +8,8 @@ import sys
 import os
 from pathlib import Path
 
-# Add tirganach library to path
-sys.path.insert(0, str(Path(__file__).parent / "src" / "TirganachReloaded"))
+# Add src directory to path
+sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 def analyze_gamedata_direct(gamedata, name="GameData"):
     """Direct analysis by accessing table attributes."""
@@ -193,7 +193,7 @@ def main():
     # Load and analyze original
     try:
         # Import GameData directly
-        from tirganach.structure import GameData
+        from TirganachReloaded.tirganach.structure import GameData
         
         print("Loading original GameData...")
         original_gd = GameData(original_path)

@@ -4,9 +4,8 @@ Simple test script to verify quest dialog finding logic without GUI
 """
 
 import sys
-sys.path.append('../TirganachReloaded')
 
-from tirganach import GameData
+from TirganachReloaded.tirganach import GameData
 
 class MockDataModel:
     """Mock data model for testing"""

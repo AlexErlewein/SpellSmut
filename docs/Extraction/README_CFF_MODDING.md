@@ -70,8 +70,8 @@ Quick reference: **[CFF_QUICK_REFERENCE.md](CFF_QUICK_REFERENCE.md)**
 ## 💡 Example: Make Rings Overpowered
 
 ```python
-from tirganach import GameData
-from tirganach.types import *
+from TirganachReloaded.tirganach import GameData
+from TirganachReloaded.tirganach.types import *
 
 # Load
 gd = GameData('H:/SpellSmut/OriginalGameFiles/data/GameData.cff')

@@ -105,7 +105,7 @@ Quick reference for choosing between JSON, XML, and CFF formats.
 
 **Example:**
 ```python
-from tirganach import GameData
+from TirganachReloaded.tirganach import GameData
 
 gd = GameData('GameData.cff')
 spell = gd.spells[0]
@@ -159,7 +159,7 @@ gd.save('GameData_modded.cff')
 ### Development Phase
 4. **Use tirganach** to implement changes
    ```python
-   from tirganach import GameData
+   from TirganachReloaded.tirganach import GameData
    gd = GameData('GameData.cff')
    # Make modifications
    gd.save('GameData_mod.cff')
