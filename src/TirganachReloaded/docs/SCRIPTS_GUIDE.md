@@ -185,8 +185,8 @@ python cff_modding_examples.py
 ### Task: Find all items of a specific type
 
 ```python
-from tirganach import GameData
-from tirganach.types import *
+from TirganachReloaded.tirganach import GameData
+from TirganachReloaded.tirganach.types import *
 
 gd = GameData('H:/SpellSmut/OriginalGameFiles/data/GameData.cff')
 

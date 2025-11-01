@@ -1,12 +1,8 @@
 import json
 from pathlib import Path
-import sys
 from typing import Optional
 
-# Add parent directories to path to import tirganach
-sys.path.append(str(Path(__file__).parent.parent.parent))
-
-from tirganach import GameData
+from TirganachReloaded.tirganach import GameData
 from ..models.weapon_creation_data import (
     DamageCategory,
     DamageType,

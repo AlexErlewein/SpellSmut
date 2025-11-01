@@ -29,6 +29,8 @@ dependencies = [
     "loguru>=0.7.0",
 ]
 
+[project.scripts]
+tirganach = "TirganachReloaded.cff_editor.main:main"
 
 [project.optional-dependencies]
 dev = [
@@ -41,8 +43,10 @@ dev = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["TirganachReloaded"]
-source = "src"
+packages = ["src/TirganachReloaded"]
+
+[tool.hatch.build]
+sources = ["src"]
 
 [tool.hatch.envs.default]
 dependencies = ["PySide6", "pillow", "pyyaml"]

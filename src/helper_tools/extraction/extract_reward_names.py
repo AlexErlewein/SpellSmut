@@ -246,7 +246,7 @@ def main():
     print(f"{'=' * 80}\n")
 
     # Generate output files
-    output_dir = script_dir / "TirganachReloaded" / "data"
+    output_dir = script_dir / "src" / "TirganachReloaded" / "data"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     template_file = output_dir / "quest_reward_mappings_template.json"

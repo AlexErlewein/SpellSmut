@@ -8,13 +8,13 @@ import sys
 import os
 from pathlib import Path
 
-# Add tirganach library to path
-sys.path.insert(0, str(Path(__file__).parent / "src" / "TirganachReloaded"))
+# Add src directory to path
+sys.path.insert(0, str(Path(__file__).parent / "src"))
 
 def load_gamedata_manual(filepath):
     """Manually load GameData by manually processing tables."""
-    from tirganach.structure import GameData
-    from tirganach.entities import Item, ItemUI, Weapon, Armor
+    from TirganachReloaded.tirganach.structure import GameData
+    from TirganachReloaded.tirganach.entities import Item, ItemUI, Weapon, Armor
     
     # Load the raw data
     with open(filepath, 'rb') as f:

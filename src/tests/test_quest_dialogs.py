@@ -4,10 +4,9 @@ Test script to verify quest dialog functionality
 """
 
 import sys
-sys.path.append('../TirganachReloaded')
 
-from tirganach import GameData
-from tirganach.types import Language
+from TirganachReloaded.tirganach import GameData
+from TirganachReloaded.tirganach.types import Language
 
 def test_localisation_loading():
     """Test loading localisation table"""

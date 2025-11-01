@@ -43,8 +43,8 @@ Total Items: 7101
 ## Basic Usage
 
 ```python
-from tirganach import GameData
-from tirganach.types import *
+from TirganachReloaded.tirganach import GameData
+from TirganachReloaded.tirganach.types import *
 
 # Load the CFF file
 gd = GameData('H:/SpellSmut/OriginalGameFiles/data/GameData.cff')

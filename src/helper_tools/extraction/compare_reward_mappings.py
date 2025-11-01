@@ -309,14 +309,14 @@ def main():
         "--output-dir",
         type=Path,
         default=None,
-        help="Output directory for reports (default: TirganachReloaded/data)",
+        help="Output directory for reports (default: src/TirganachReloaded/data)",
     )
 
     args = parser.parse_args()
 
     # Paths
     project_root = Path(__file__).parent.parent.parent.parent
-    data_dir = project_root / "TirganachReloaded" / "data"
+    data_dir = project_root / "src" / "TirganachReloaded" / "data"
 
     old_file = data_dir / "REWARD_TO_QUEST_ID_MASTER_MAP.json"
     new_file = data_dir / "lua_reward_mappings_complete.json"

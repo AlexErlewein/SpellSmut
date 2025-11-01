@@ -341,7 +341,7 @@ def main():
     # Setup paths
     project_root = Path(__file__).parent.parent.parent.parent
     cff_dir = project_root / "OriginalGameFiles" / "data"
-    output_dir = project_root / "TirganachReloaded" / "data"
+    output_dir = project_root / "src" / "TirganachReloaded" / "data"
     rewards_file = (
         project_root
         / "OriginalGameFiles"

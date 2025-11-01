@@ -23,23 +23,31 @@ def main():
     project_root = Path(__file__).parent.parent.parent.parent
     debug_mode = "--debug" in sys.argv
     configure_logging(debug_mode=debug_mode, project_root=project_root)
-    
+
     from .logging_config import get_logger
+
     logger = get_logger("main")
     logger.info("Starting SpellForce CFF Editor")
     logger.debug(f"Debug mode: {debug_mode}")
-    
+
     app = QApplication(sys.argv)
     app.setApplicationName("SpellForce CFF Editor")
     app.setOrganizationName("SpellSmut Modding Tools")
 
     # Create and show main window
     try:
+        logger.info("Creating QApplication instance...")
+        logger.info("About to create MainWindow...")
         window = MainWindow()
+        logger.info("MainWindow created successfully")
+        logger.info("Calling window.show()...")
         window.show()
         logger.info("Main window created and shown")
     except Exception as e:
         logger.exception(f"Failed to create main window: {e}")
+        import traceback
+
+        traceback.print_exc()
         sys.exit(1)
 
     try:

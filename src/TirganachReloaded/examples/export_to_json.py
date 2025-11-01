@@ -17,8 +17,8 @@ import json
 import os
 from datetime import datetime
 
-from tirganach import GameData
-from tirganach.types import *
+from TirganachReloaded.tirganach import GameData
+from TirganachReloaded.tirganach.types import *
 
 
 def value_to_serializable(value):

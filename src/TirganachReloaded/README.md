@@ -95,8 +95,8 @@ See [docs/JSON_EXPORT_GUIDE.md](docs/JSON_EXPORT_GUIDE.md) for detailed JSON usa
 Here's how you use `tirganach`:
 
 ```python
-from tirganach import GameData
-from tirganach.types import *
+from TirganachReloaded.tirganach import GameData
+from TirganachReloaded.tirganach.types import *
 import random
 
 gd = GameData('/games/SpellForce/data/GameData.cff')

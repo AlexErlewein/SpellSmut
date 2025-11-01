@@ -20,9 +20,10 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from tirganach.types import Language
-from .logging_config import get_logger
+from TirganachReloaded.tirganach.types import Language
+
 from .data_model import CFFDataModel
+from .logging_config import get_logger
 from .theme_manager import ThemeManager, ThemeType
 from .widgets.building_wizard import BuildingWizard
 from .widgets.category_tree import CategoryTreeWidget
@@ -38,33 +39,43 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        
+
         # Initialize logger
         self.logger = get_logger("main_window")
-        self.logger.debug("Initializing MainWindow")
-        
+        self.logger.info("Initializing MainWindow")
+
         self.setWindowTitle("TirganachReloaded: SpellForce GameData Editor")
         self.setMinimumSize(QSize(1500, 900))
 
         # Data model
+        self.logger.info("Creating CFFDataModel...")
         self.data_model = CFFDataModel()
-        self.logger.debug("Data model initialized")
+        self.logger.info("Data model initialized")
 
         # Theme manager
+        self.logger.info("Creating ThemeManager...")
         self.theme_manager = ThemeManager()
         self.theme_manager.theme_changed.connect(self.on_theme_changed)
+        self.logger.info("ThemeManager initialized")
 
         # Setup UI
+        self.logger.info("Setting up UI...")
         self.setup_ui()
+        self.logger.info("Setting up menu...")
         self.setup_menu()
+        self.logger.info("Setting up statusbar...")
         self.setup_statusbar()
+        self.logger.info("Setting up connections...")
         self.setup_connections()
 
         # Apply initial theme
+        self.logger.info("Applying theme...")
         self.apply_theme(self.theme_manager.get_current_theme())
 
         # Auto-load default file
+        self.logger.info("Auto-loading default file...")
         self.auto_load_default_file()
+        self.logger.info("MainWindow initialization complete")
 
     def auto_load_default_file(self):
         """Automatically load the default file on startup"""
@@ -339,6 +350,7 @@ class MainWindow(QMainWindow):
         self.data_model.data_modified.connect(self.on_data_modified)
         self.data_model.category_changed.connect(self.on_category_changed)
         self.data_model.language_changed.connect(self.on_language_changed)
+        self.data_model.element_selected.connect(self.on_element_selected)
 
     def open_file(self):
         """Open CFF file dialog"""
@@ -511,8 +523,8 @@ class MainWindow(QMainWindow):
 
     def _perform_cff_comparison(self, compare_file_path: str) -> str:
         """Perform traditional CFF file comparison"""
-        from tirganach import GameData
-        from tirganach.compare import compare
+        from TirganachReloaded.tirganach import GameData
+        from TirganachReloaded.tirganach.compare import compare
 
         # Load the comparison file
         compare_data = GameData(compare_file_path)
@@ -542,7 +554,7 @@ class MainWindow(QMainWindow):
 
             try:
                 # Load comparison file and create its database
-                from tirganach import GameData
+                from TirganachReloaded.tirganach import GameData
 
                 compare_data = GameData(compare_file_path)
 
@@ -784,6 +796,13 @@ class MainWindow(QMainWindow):
         """Called when language changes"""
         # Refresh all views to show text in new language
         self.refresh_view()
+
+    def on_element_selected(self, category, element_index):
+        """Called when an element is selected in any view"""
+        if category == "quests":
+            # Update quest details with selected quest
+            self.quest_details.on_element_selected(category, element_index)
+            self.logger.debug(f"Selected quest at index {element_index}")
 
     def adjust_splitter_for_quests(self):
         """Adjust splitter sizes when showing quest details"""

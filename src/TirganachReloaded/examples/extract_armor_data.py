@@ -5,12 +5,9 @@ Similar to how enhanced_weapons.json was created
 """
 
 import json
-import sys
-import os
-sys.path.insert(0, os.path.dirname(__file__))
-
-from tirganach import GameData
 from pathlib import Path
+
+from TirganachReloaded.tirganach import GameData
 
 def extract_armor_data():
     """Extract armor data from GameData.cff"""

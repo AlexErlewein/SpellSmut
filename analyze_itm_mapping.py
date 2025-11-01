@@ -8,10 +8,10 @@ import sys
 import os
 from pathlib import Path
 
-# Add the tirganach library to the path
-sys.path.insert(0, str(Path(__file__).parent / "src" / "TirganachReloaded"))
+# Add the src directory to the path
+sys.path.insert(0, str(Path(__file__).parent / "src"))
 
-from tirganach import GameData
+from TirganachReloaded.tirganach import GameData
 
 def analyze_item_ui_mapping(gamedata, name="GameData"):
     """Analyze the item_ui table and its relationship to items."""

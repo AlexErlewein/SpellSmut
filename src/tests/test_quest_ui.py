@@ -4,9 +4,8 @@ Test script to verify quest UI functionality
 """
 
 import sys
-sys.path.append('../TirganachReloaded')
 
-from tirganach import GameData
+from TirganachReloaded.tirganach import GameData
 
 def test_quest_ui():
     """Test quest UI functionality"""

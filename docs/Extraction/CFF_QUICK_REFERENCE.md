@@ -3,8 +3,8 @@
 ## Loading & Saving
 
 ```python
-from tirganach import GameData
-from tirganach.types import *
+from TirganachReloaded.tirganach import GameData
+from TirganachReloaded.tirganach.types import *
 
 # Load
 gd = GameData('path/to/GameData.cff')

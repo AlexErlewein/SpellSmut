@@ -130,6 +130,9 @@ class QuestDetailsWidget(QWidget):
         if 0 <= element_index < len(elements):
             self.current_quest = elements[element_index]
             self.update_quest_details()
+            
+            # Also try to load Lua quest data if available
+            self.load_lua_quest_details()
         else:
             self.current_quest = None
             self.clear_details()
@@ -456,3 +459,28 @@ class QuestDetailsWidget(QWidget):
         self.hierarchy_tree.clear()
         if hasattr(self, "current_dialogs"):
             self.current_dialogs = []
+
+    def load_lua_quest_details(self):
+        """Load and display Lua quest data if available"""
+        if not self.current_quest:
+            return
+            
+        quest_id = getattr(self.current_quest, "quest_id", None)
+        if not quest_id:
+            return
+            
+        # Try to get Lua quest data from the data model
+        try:
+            lua_quest_data = self.data_model.get_lua_quest_data(quest_id)
+            if lua_quest_data:
+                # Display Lua quest information in the details
+                self.display_lua_quest_data(lua_quest_data)
+        except Exception as e:
+            # Silently fail if Lua data is not available
+            pass
+            
+    def display_lua_quest_data(self, lua_quest):
+        """Display Lua quest data in the details panel"""
+        # This could be enhanced to show Lua-specific information
+        # For now, we'll just log that Lua data is available
+        print(f"Lua quest data available for quest {lua_quest.quest_id}: {lua_quest.quest_name}")

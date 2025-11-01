@@ -353,7 +353,7 @@ def main():
 
     # Paths
     cff_base_path = project_root / "OriginalGameFiles" / "data"
-    output_dir = project_root / "TirganachReloaded" / "data"
+    output_dir = project_root / "src" / "TirganachReloaded" / "data"
     db_path = Path.home() / ".spellforce_editor" / "lua_cache" / "lua_quest_cache.db"
     rewards_file = (
         project_root

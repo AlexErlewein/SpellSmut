@@ -229,7 +229,7 @@ def main():
     project_root = Path(__file__).parent.parent.parent
     gamedata_path = project_root / "TirganachReloaded" / "GameData.json"
     icon_index_path = project_root / "ExtractedAssets" / "UI" / "icons_extracted" / "icon_index.json"
-    output_path = project_root / "TirganachReloaded" / "data" / "ui_icon_mapping.json"
+    output_path = project_root / "src" / "TirganachReloaded" / "data" / "ui_icon_mapping.json"
     
     # Analyze patterns
     by_item, item_ui_data = analyze_item_ui_patterns(gamedata_path)

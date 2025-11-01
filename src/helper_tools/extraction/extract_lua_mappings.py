@@ -21,7 +21,7 @@ from loguru import logger
 class LuaMappingExtractor:
     """Extract ID mappings from SpellForce Lua source files"""
 
-    def __init__(self, lua_sources_dir: str, debug_mode: bool = False):
+    def __init__(self, lua_sources_dir: str, debug_mode: bool = True):
         self.lua_sources_dir = Path(lua_sources_dir)
         self.debug_mode = debug_mode
         self._setup_logging()
@@ -49,12 +49,22 @@ class LuaMappingExtractor:
 
     def _setup_logging(self):
         """Setup logging configuration"""
-        if self.debug_mode:
-            logger.remove()
-            logger.add(sys.stderr, level="DEBUG")
-        else:
-            logger.remove()
-            logger.add(sys.stderr, level="INFO")
+        # Always use DEBUG level for Lua operations
+        logger.remove()
+        
+        console_format = (
+            "<green>{time:HH:mm:ss}</green> | "
+            "<level>{level: <8}</level> | "
+            "<cyan>LuaTool</cyan> | "
+            "<level>{message}</level>"
+        )
+        
+        logger.add(
+            sys.stderr,
+            format=console_format,
+            level="DEBUG",
+            colorize=True
+        )
 
     def extract_all(self) -> Dict[str, Any]:
         """Extract all mappings from Lua sources"""
@@ -692,7 +702,7 @@ def main():
     )
     parser.add_argument(
         "--output",
-        default="TirganachReloaded/data/id_name_mappings.json",
+        default="src/TirganachReloaded/data/id_name_mappings.json",
         help="Output JSON file path",
     )
 

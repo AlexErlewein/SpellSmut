@@ -390,7 +390,7 @@ def main():
 
     # Paths
     project_root = Path(__file__).parent.parent.parent.parent
-    data_dir = project_root / "TirganachReloaded" / "data"
+    data_dir = project_root / "src" / "TirganachReloaded" / "data"
     matches_file = data_dir / "quest_matches_multilang.json"
 
     if not matches_file.exists():

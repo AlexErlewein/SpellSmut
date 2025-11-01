@@ -12,8 +12,8 @@ Output:
     Creates GameData.xml in the current directory with all game data.
 """
 
-from tirganach import GameData
-from tirganach.types import *
+from TirganachReloaded.tirganach import GameData
+from TirganachReloaded.tirganach.types import *
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 import os
