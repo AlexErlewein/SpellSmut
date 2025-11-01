@@ -3,19 +3,16 @@ Data Providers for CFF Editor
 Provides abstraction layer between GUI and data sources (CFF files, databases)
 """
 
-import sqlite3
-import json
-from abc import ABC, abstractmethod
-from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
-from dataclasses import dataclass
-
-import sys
 import os
+import sqlite3
+import sys
+from abc import ABC, abstractmethod
+from dataclasses import dataclass
+from typing import Any, List, Optional, Tuple
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from tirganach.types import Language
-
+from TirganachReloaded.tirganach.types import Language
 
 # Database schema version
 SCHEMA_VERSION = "1.0.0"
@@ -24,6 +21,7 @@ SCHEMA_VERSION = "1.0.0"
 @dataclass
 class QuestData:
     """Quest data structure"""
+
     quest_id: int
     name_id: Optional[int] = None
     description_id: Optional[int] = None
@@ -34,6 +32,7 @@ class QuestData:
 @dataclass
 class QuestDialogData:
     """Quest dialog data structure"""
+
     dialog_id: int
     quest_id: int
     speaker_id: Optional[int] = None
@@ -142,8 +141,10 @@ class CFFProvider(DataProvider):
             return None
 
         for entry in localisation_table:
-            if (getattr(entry, "text_id", None) == text_id and
-                getattr(entry, "language", None) == language):
+            if (
+                getattr(entry, "text_id", None) == text_id
+                and getattr(entry, "language", None) == language
+            ):
                 return getattr(entry, "text", "")
 
         return None
@@ -197,7 +198,7 @@ class DBProvider(DataProvider):
                 name_id=row[1],
                 description_id=row[2],
                 name=row[3],
-                description=row[4]
+                description=row[4],
             )
             for row in results
         ]
@@ -221,7 +222,7 @@ class DBProvider(DataProvider):
                 name_id=row[1],
                 description_id=row[2],
                 name=row[3],
-                description=row[4]
+                description=row[4],
             )
         return None
 
@@ -245,7 +246,7 @@ class DBProvider(DataProvider):
                 text_id=row[3],
                 next_dialog_id=row[4],
                 conditions=row[5],
-                text=row[6]
+                text=row[6],
             )
             for row in results
         ]
@@ -253,7 +254,7 @@ class DBProvider(DataProvider):
     def get_localised_text(self, text_id: int, language: Language) -> Optional[str]:
         """Get localised text from database"""
         # Handle Language enum properly
-        if hasattr(language, 'value'):
+        if hasattr(language, "value"):
             language_value = language.value
         elif isinstance(language, int):
             language_value = language
@@ -273,7 +274,9 @@ class DBProvider(DataProvider):
     def is_loaded(self) -> bool:
         """Check if database is accessible"""
         try:
-            self._execute_query("SELECT 1 FROM metadata WHERE key = 'schema_version' LIMIT 1")
+            self._execute_query(
+                "SELECT 1 FROM metadata WHERE key = 'schema_version' LIMIT 1"
+            )
             return True
         except:
             return False
@@ -333,12 +336,24 @@ class DatabaseManager:
         """)
 
         # Create indices for performance
-        cursor.execute("CREATE INDEX IF NOT EXISTS idx_quests_name_id ON quests(name_id)")
-        cursor.execute("CREATE INDEX IF NOT EXISTS idx_quests_description_id ON quests(description_id)")
-        cursor.execute("CREATE INDEX IF NOT EXISTS idx_quest_dialogs_quest_id ON quest_dialogs(quest_id)")
-        cursor.execute("CREATE INDEX IF NOT EXISTS idx_quest_dialogs_text_id ON quest_dialogs(text_id)")
-        cursor.execute("CREATE INDEX IF NOT EXISTS idx_localisation_text_id ON localisation(text_id)")
-        cursor.execute("CREATE INDEX IF NOT EXISTS idx_localisation_language ON localisation(language)")
+        cursor.execute(
+            "CREATE INDEX IF NOT EXISTS idx_quests_name_id ON quests(name_id)"
+        )
+        cursor.execute(
+            "CREATE INDEX IF NOT EXISTS idx_quests_description_id ON quests(description_id)"
+        )
+        cursor.execute(
+            "CREATE INDEX IF NOT EXISTS idx_quest_dialogs_quest_id ON quest_dialogs(quest_id)"
+        )
+        cursor.execute(
+            "CREATE INDEX IF NOT EXISTS idx_quest_dialogs_text_id ON quest_dialogs(text_id)"
+        )
+        cursor.execute(
+            "CREATE INDEX IF NOT EXISTS idx_localisation_text_id ON localisation(text_id)"
+        )
+        cursor.execute(
+            "CREATE INDEX IF NOT EXISTS idx_localisation_language ON localisation(language)"
+        )
 
         conn.commit()
         conn.close()
@@ -365,52 +380,61 @@ class DatabaseManager:
                     language_value = int(language_value)
                 except (TypeError, ValueError):
                     language_value = 0
-                localisation_data.append((
-                    getattr(entry, "text_id", 0),
-                    language_value,
-                    getattr(entry, "text", "")
-                ))
+                localisation_data.append(
+                    (
+                        getattr(entry, "text_id", 0),
+                        language_value,
+                        getattr(entry, "text", ""),
+                    )
+                )
 
             if localisation_data:
                 cursor.executemany(
                     "INSERT OR REPLACE INTO localisation (text_id, language, text) VALUES (?, ?, ?)",
-                    localisation_data
+                    localisation_data,
                 )
 
             # Populate quests
             quests_table = getattr(game_data, "quests", [])
             quests_data = []
             for quest in quests_table:
-                quests_data.append((
-                    getattr(quest, "quest_id", 0),
-                    getattr(quest, "name_id", None),
-                    getattr(quest, "description_id", None)
-                ))
+                quests_data.append(
+                    (
+                        getattr(quest, "quest_id", 0),
+                        getattr(quest, "name_id", None),
+                        getattr(quest, "description_id", None),
+                    )
+                )
 
             if quests_data:
                 cursor.executemany(
                     "INSERT OR REPLACE INTO quests (quest_id, name_id, description_id) VALUES (?, ?, ?)",
-                    quests_data
+                    quests_data,
                 )
 
             # Populate quest dialogs
             quest_dialogs_table = getattr(game_data, "quest_dialogs", [])
             dialogs_data = []
             for dialog in quest_dialogs_table:
-                dialogs_data.append((
-                    getattr(dialog, "dialog_id", 0),
-                    getattr(dialog, "quest_id", 0),
-                    getattr(dialog, "speaker_id", None),
-                    getattr(dialog, "text_id", None),
-                    getattr(dialog, "next_dialog_id", None),
-                    getattr(dialog, "conditions", None)
-                ))
+                dialogs_data.append(
+                    (
+                        getattr(dialog, "dialog_id", 0),
+                        getattr(dialog, "quest_id", 0),
+                        getattr(dialog, "speaker_id", None),
+                        getattr(dialog, "text_id", None),
+                        getattr(dialog, "next_dialog_id", None),
+                        getattr(dialog, "conditions", None),
+                    )
+                )
 
             if dialogs_data:
-                cursor.executemany("""
+                cursor.executemany(
+                    """
                     INSERT OR REPLACE INTO quest_dialogs (dialog_id, quest_id, speaker_id, text_id, next_dialog_id, conditions)
                     VALUES (?, ?, ?, ?, ?, ?)
-                """, dialogs_data)
+                """,
+                    dialogs_data,
+                )
 
             # Insert metadata
             metadata = [
@@ -418,7 +442,9 @@ class DatabaseManager:
                 ("fingerprint", fingerprint),
                 ("created_at", str(__import__("time").time())),
             ]
-            cursor.executemany("INSERT INTO metadata (key, value) VALUES (?, ?)", metadata)
+            cursor.executemany(
+                "INSERT INTO metadata (key, value) VALUES (?, ?)", metadata
+            )
 
             conn.commit()
 
@@ -449,7 +475,10 @@ class DatabaseManager:
             db_schema_version = result[0]
             if db_schema_version != SCHEMA_VERSION:
                 conn.close()
-                return False, f"Schema version mismatch: {db_schema_version} → {SCHEMA_VERSION}"
+                return (
+                    False,
+                    f"Schema version mismatch: {db_schema_version} → {SCHEMA_VERSION}",
+                )
 
             # Check fingerprint
             cursor.execute("SELECT value FROM metadata WHERE key = 'fingerprint'")
@@ -460,7 +489,7 @@ class DatabaseManager:
             db_fingerprint = result[0]
             if db_fingerprint != fingerprint:
                 conn.close()
-                return False, f"Fingerprint mismatch: file changed"
+                return False, "Fingerprint mismatch: file changed"
 
             conn.close()
             return True, None

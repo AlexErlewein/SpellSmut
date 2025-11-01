@@ -18,8 +18,9 @@ from typing import Any, Dict, List, Optional
 from loguru import logger
 from PySide6.QtCore import QObject, QSettings, Signal
 from PySide6.QtGui import QIcon, QPixmap
-from tirganach import GameData
-from tirganach.types import *
+
+from TirganachReloaded.tirganach import GameData
+from TirganachReloaded.tirganach.types import *
 
 # Import Loguru logging
 from .logging_config import get_logger, performance_logger
@@ -787,7 +788,6 @@ class CFFDataModel(QObject):
             chunk_size_mb: Maximum size of each chunk in MB (default 100MB)
         """
         import math
-        import os
 
         # Calculate chunk size based on target MB size
         target_size_bytes = int(chunk_size_mb * 1024 * 1024)  # Convert MB to bytes
