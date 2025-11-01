@@ -11,15 +11,20 @@ Usage:
 
 import json
 import re
+import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
+
+from loguru import logger
 
 
 class LuaMappingExtractor:
     """Extract ID mappings from SpellForce Lua source files"""
 
-    def __init__(self, lua_sources_dir: str):
+    def __init__(self, lua_sources_dir: str, debug_mode: bool = False):
         self.lua_sources_dir = Path(lua_sources_dir)
+        self.debug_mode = debug_mode
+        self._setup_logging()
         self.mappings = {
             "weapon_types": {},
             "spell_lines": {},
@@ -42,43 +47,61 @@ class LuaMappingExtractor:
             "animation_subtypes": {},
         }
 
+    def _setup_logging(self):
+        """Setup logging configuration"""
+        if self.debug_mode:
+            logger.remove()
+            logger.add(sys.stderr, level="DEBUG")
+        else:
+            logger.remove()
+            logger.add(sys.stderr, level="INFO")
+
     def extract_all(self) -> Dict[str, Any]:
         """Extract all mappings from Lua sources"""
-        print("🔍 Extracting mappings from Lua sources...")
+        logger.info("Starting Lua mapping extraction...")
+        logger.debug(f"Lua sources directory: {self.lua_sources_dir}")
 
         # Extract weapon types from DrwSound.lua
         self.extract_weapon_types()
+        logger.debug("Weapon types extraction completed")
 
         # Extract constants from GdsDefines.lua
         self.extract_gds_defines()
+        logger.debug("GDS defines extraction completed")
 
         # Extract effect types and spell lines from object_effect_register.lua
         self.extract_effect_mappings()
+        logger.debug("Effect mappings extraction completed")
 
         # Extract monument types from object_effect_register.lua
         self.extract_monument_types()
+        logger.debug("Monument types extraction completed")
 
         # Extract race IDs from effect register (from monument mappings)
         self.extract_race_ids()
+        logger.debug("Race IDs extraction completed")
 
         # Extract job/animation IDs (basic set for now)
         self.extract_job_types()
+        logger.debug("Job types extraction completed")
 
         # Extract figure tasks
         self.extract_figure_tasks()
+        logger.debug("Figure tasks extraction completed")
 
         # Clean up and validate
         self.clean_mappings()
+        logger.info("Lua mapping extraction completed successfully")
 
         return self.mappings
 
     def extract_weapon_types(self):
         """Extract weapon type mappings from DrwSound.lua"""
-        print("  📋 Extracting weapon types...")
+        logger.debug("Extracting weapon types from DrwSound.lua")
 
         drw_sound_path = self.lua_sources_dir / "script" / "DrwSound.lua"
         if not drw_sound_path.exists():
-            print(f"    ⚠️  Warning: {drw_sound_path} not found")
+            logger.warning(f"DrwSound.lua not found at {drw_sound_path}")
             return
 
         with open(drw_sound_path, "r", encoding="utf-8", errors="ignore") as f:
@@ -88,7 +111,7 @@ class LuaMappingExtractor:
         # Use a more robust pattern that handles nested braces
         battle_data_start = content.find("local BattleData = {")
         if battle_data_start == -1:
-            print("    ⚠️  Warning: Could not find BattleData section")
+            logger.warning("Could not find BattleData section in DrwSound.lua")
             return
 
         # Find the matching closing brace (simple brace counting)
@@ -134,6 +157,7 @@ class LuaMappingExtractor:
                         "display": f"{name} [{weapon_id}]",
                         "sound_hit": sound_name,
                     }
+                    logger.debug(f"Added weapon type {name} (ID: {weapon_id})")
 
         # Extract misses mapping - use more flexible pattern
         misses_match = re.search(
@@ -156,8 +180,9 @@ class LuaMappingExtractor:
                     self.mappings["weapon_types"][str(weapon_id)]["sound_miss"] = (
                         sound_name
                     )
+                    logger.debug(f"Added miss sound for weapon type {name} (ID: {weapon_id})")
 
-        print(f"    ✅ Extracted {len(self.mappings['weapon_types'])} weapon types")
+        logger.info(f"Extracted {len(self.mappings['weapon_types'])} weapon types")
 
     def format_weapon_name(self, constant: str) -> str:
         """Convert constant name to readable format
@@ -229,7 +254,7 @@ class LuaMappingExtractor:
 
     def extract_gds_defines(self):
         """Extract constants from GdsDefines.lua"""
-        print("  📋 Extracting GdsDefines constants...")
+        logger.debug("Extracting constants from GdsDefines.lua")
 
         # Try both possible locations
         possible_paths = [
@@ -244,7 +269,7 @@ class LuaMappingExtractor:
                 break
 
         if not gds_path:
-            print("    ⚠️  Warning: GdsDefines.lua not found in any expected location")
+            logger.warning("GdsDefines.lua not found in any expected location")
             return
 
         with open(gds_path, "r", encoding="utf-8", errors="ignore") as f:
@@ -285,7 +310,7 @@ class LuaMappingExtractor:
                 "display": f"{name} [{id_val}]",
             }
 
-        print(f"    ✅ Extracted {len(states)} quest states")
+        logger.debug(f"Extracted {len(states)} quest states")
 
     def extract_equipment_slots(self, content: str):
         """Extract equipment slot constants"""
@@ -313,9 +338,7 @@ class LuaMappingExtractor:
                 "display": f"{name} [{id_val}]",
             }
 
-        print(
-            f"    ✅ Extracted {len(self.mappings['equipment_slots'])} equipment slots"
-        )
+        logger.debug(f"Extracted {len(self.mappings['equipment_slots'])} equipment slots")
 
     def extract_target_types(self, content: str):
         """Extract target type constants"""
@@ -334,7 +357,7 @@ class LuaMappingExtractor:
                 "display": f"{name} [{id_val}]",
             }
 
-        print(f"    ✅ Extracted {len(targets)} target types")
+        logger.debug(f"Extracted {len(targets)} target types")
 
     def extract_variable_operators(self, content: str):
         """Extract variable operator constants"""
@@ -356,9 +379,7 @@ class LuaMappingExtractor:
                 }
                 seen.add(id_val)
 
-        print(
-            f"    ✅ Extracted {len(self.mappings['variable_operators'])} variable operators"
-        )
+        logger.debug(f"Extracted {len(self.mappings['variable_operators'])} variable operators")
 
     def extract_directions(self, content: str):
         """Extract direction constants"""
@@ -381,7 +402,7 @@ class LuaMappingExtractor:
                 "angle": angle,
             }
 
-        print(f"    ✅ Extracted {len(directions)} directions")
+        logger.debug(f"Extracted {len(directions)} directions")
 
     def extract_movement_modes(self, content: str):
         """Extract movement mode constants"""
@@ -397,15 +418,15 @@ class LuaMappingExtractor:
                 "display": f"{name} [{id_val}]",
             }
 
-        print(f"    ✅ Extracted {len(modes)} movement modes")
+        logger.debug(f"Extracted {len(modes)} movement modes")
 
     def extract_effect_mappings(self):
         """Extract effect types and spell line mappings"""
-        print("  📋 Extracting effect types and spell lines...")
+        logger.debug("Extracting effect types and spell lines")
 
         effect_path = self.lua_sources_dir / "object" / "object_effect_register.lua"
         if not effect_path.exists():
-            print(f"    ⚠️  Warning: {effect_path} not found")
+            logger.warning(f"object_effect_register.lua not found at {effect_path}")
             return
 
         with open(effect_path, "r", encoding="utf-8", errors="ignore") as f:
@@ -469,7 +490,7 @@ class LuaMappingExtractor:
                 "display": f"{name} [{id_val}]",
             }
 
-        print(f"    ✅ Extracted {len(effects)} effect types")
+        logger.debug(f"Extracted {len(effects)} effect types")
 
     def extract_spell_lines(self, content: str):
         """Extract spell line mappings from SpellEffect declarations"""
@@ -498,11 +519,11 @@ class LuaMappingExtractor:
                 "id": None,  # To be filled later
             }
 
-        print(f"    ✅ Extracted {len(spell_names)} spell line constants")
+        logger.debug(f"Extracted {len(spell_names)} spell line constants")
 
     def extract_monument_types(self):
         """Extract monument type constants"""
-        print("  📋 Extracting monument types...")
+        logger.debug("Extracting monument types")
 
         monuments = {
             0x303: ("Human Monument", "kGdObjMonumentHuman"),
@@ -522,11 +543,11 @@ class LuaMappingExtractor:
                 "hex_id": f"0x{id_val:03X}",
             }
 
-        print(f"    ✅ Extracted {len(monuments)} monument types")
+        logger.debug(f"Extracted {len(monuments)} monument types")
 
     def extract_race_ids(self):
         """Extract race IDs from monument types and RegisterEffect calls"""
-        print("  📋 Extracting race IDs...")
+        logger.debug("Extracting race IDs")
 
         races = {
             1: ("Human", "kGtRaceHuman"),
@@ -544,11 +565,11 @@ class LuaMappingExtractor:
                 "display": f"{name} [{id_val}]",
             }
 
-        print(f"    ✅ Extracted {len(races)} races")
+        logger.debug(f"Extracted {len(races)} races")
 
     def extract_job_types(self):
         """Extract job/animation type constants"""
-        print("  📋 Extracting job/animation types...")
+        logger.debug("Extracting job/animation types")
 
         # Core job types based on ID_MAPPINGS.md
         jobs = {
@@ -585,11 +606,11 @@ class LuaMappingExtractor:
                 "id": None,
             }
 
-        print(f"    ✅ Extracted {len(jobs)} job type constants")
+        logger.debug(f"Extracted {len(jobs)} job type constants")
 
     def extract_figure_tasks(self):
         """Extract figure task type constants"""
-        print("  📋 Extracting figure task types...")
+        logger.debug("Extracting figure task types")
 
         tasks = {
             2: ("Worker", "TASK_WORKER"),
@@ -612,11 +633,11 @@ class LuaMappingExtractor:
                 "display": f"{name} [{id_val}]",
             }
 
-        print(f"    ✅ Extracted {len(tasks)} figure task types")
+        logger.debug(f"Extracted {len(tasks)} figure task types")
 
     def clean_mappings(self):
         """Clean up and validate extracted mappings"""
-        print("  🧹 Cleaning and validating mappings...")
+        logger.debug("Cleaning and validating mappings")
 
         # Remove empty categories
         self.mappings = {
@@ -644,12 +665,12 @@ class LuaMappingExtractor:
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(self.mappings, f, indent=2, ensure_ascii=False)
 
-        print(f"\n✅ Saved mappings to: {output_path}")
+        logger.info(f"Saved mappings to: {output_path}")
 
         # Print summary
-        print("\n📊 Extraction Summary:")
+        logger.info("Extraction Summary:")
         for category, data in self.mappings.items():
-            print(f"  • {category}: {len(data)} entries")
+            logger.debug(f"  {category}: {len(data)} entries")
 
 
 def main():
@@ -658,6 +679,11 @@ def main():
 
     parser = argparse.ArgumentParser(
         description="Extract ID mappings from SpellForce Lua sources"
+    )
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="Enable debug mode with verbose logging",
     )
     parser.add_argument(
         "--lua-dir",
@@ -676,11 +702,11 @@ def main():
     print("SpellForce Lua Mapping Extractor")
     print("=" * 70)
 
-    extractor = LuaMappingExtractor(args.lua_dir)
+    extractor = LuaMappingExtractor(args.lua_dir, debug_mode=args.debug)
     extractor.extract_all()
     extractor.save_to_json(args.output)
 
-    print("\n✨ Extraction complete!")
+    logger.info("Extraction complete!")
 
 
 if __name__ == "__main__":
