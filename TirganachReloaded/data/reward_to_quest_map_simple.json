@@ -1,0 +1,2237 @@
+{
+  "206KeineKarawaneDurchgebracht": {
+    "platform": "P206",
+    "quest_id": "Q825",
+    "quest_state": null
+  },
+  "AirCoinPassageOpened": {
+    "platform": "P210",
+    "quest_id": "Q9788",
+    "quest_state": null
+  },
+  "AlleStelenOff": {
+    "platform": "P212",
+    "quest_id": "Q956",
+    "quest_state": null
+  },
+  "AlleTrolleKommenAn": {
+    "platform": "P206",
+    "quest_id": "Q825",
+    "quest_state": null
+  },
+  "AlleVierFackelnAn": {
+    "platform": "P111",
+    "quest_id": "Q675",
+    "quest_state": null
+  },
+  "AlleinEinenWegGefunden": {
+    "platform": "P206",
+    "quest_id": "Q822",
+    "quest_state": null
+  },
+  "AlterMannUndMusik": {
+    "platform": "P6",
+    "quest_id": "Q410",
+    "quest_state": null
+  },
+  "AmWildlandPass1": {
+    "platform": "P6",
+    "quest_id": "Q99",
+    "quest_state": null
+  },
+  "AmWildlandPass2": {
+    "platform": "P6",
+    "quest_id": "Q99",
+    "quest_state": null
+  },
+  "AmraLeaGrab": {
+    "platform": "P16",
+    "quest_id": "Q211",
+    "quest_state": null
+  },
+  "AmraUndLea1Liannon1": {
+    "platform": "P1",
+    "quest_id": "Q131",
+    "quest_state": null
+  },
+  "AmraUndLea1Liannon2": {
+    "platform": "P1",
+    "quest_id": "Q90",
+    "quest_state": null
+  },
+  "AmraUndLea2Liannon1": {
+    "platform": "P1",
+    "quest_id": "Q381",
+    "quest_state": null
+  },
+  "AmraUndLea2Liannon2": {
+    "platform": "P1",
+    "quest_id": "Q128",
+    "quest_state": null
+  },
+  "AmraUndLea2Sentos": {
+    "platform": "P6",
+    "quest_id": "Q385",
+    "quest_state": null
+  },
+  "AmraUndLea3Sentos": {
+    "platform": "P63",
+    "quest_id": "Q384",
+    "quest_state": null
+  },
+  "AmraUndLea4": {
+    "platform": "P7",
+    "quest_id": "Q521",
+    "quest_state": null
+  },
+  "AnfuehrerBesiegt": {
+    "platform": "P107",
+    "quest_id": "Q684",
+    "quest_state": null
+  },
+  "AngriffDerHoehlenorks": {
+    "platform": "P63",
+    "quest_id": "Q424",
+    "quest_state": null
+  },
+  "ArenaKampf32": {
+    "platform": "P204",
+    "quest_id": "Q1012",
+    "quest_state": null
+  },
+  "ArenaKampf36": {
+    "platform": "P204",
+    "quest_id": "Q1012",
+    "quest_state": null
+  },
+  "ArenaKampf38": {
+    "platform": "P204",
+    "quest_id": "Q1012",
+    "quest_state": null
+  },
+  "ArenaKampf40": {
+    "platform": "P204",
+    "quest_id": "Q1011",
+    "quest_state": null
+  },
+  "ArenaKampf42": {
+    "platform": "P204",
+    "quest_id": "Q10582",
+    "quest_state": null
+  },
+  "ArgamunVerwandeltSich": {
+    "platform": "P208",
+    "quest_id": "Q854",
+    "quest_state": null
+  },
+  "AschetaenzerTot": {
+    "platform": "P202",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "AtmenderWald1Waldherz": {
+    "platform": "P30",
+    "quest_id": "Q539",
+    "quest_state": null
+  },
+  "AtmenderWald2Portal": {
+    "platform": "P30",
+    "quest_id": "Q539",
+    "quest_state": null
+  },
+  "AufDemWall1Village1": {
+    "platform": "P17",
+    "quest_id": "Q2615",
+    "quest_state": null
+  },
+  "AufDemWall2Village2": {
+    "platform": "P17",
+    "quest_id": "Q2614",
+    "quest_state": null
+  },
+  "AufDemWall3Village3": {
+    "platform": "P17",
+    "quest_id": "Q258",
+    "quest_state": null
+  },
+  "AufDemWall4Village4": {
+    "platform": "P17",
+    "quest_id": "Q250",
+    "quest_state": null
+  },
+  "AufDemWall5Endkampf": {
+    "platform": "P17",
+    "quest_id": "Q265",
+    "quest_state": null
+  },
+  "AugenSet1Solved": {
+    "platform": "P210",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "AugenSet2Solved": {
+    "platform": "P210",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "AugenSet3Solved": {
+    "platform": "P210",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "AugenSet4Solved": {
+    "platform": "P210",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "AusDerTiefe1Buch": {
+    "platform": "P1",
+    "quest_id": "Q111",
+    "quest_state": null
+  },
+  "AusDerTiefe1Schreiber": {
+    "platform": "P1",
+    "quest_id": "Q41",
+    "quest_state": null
+  },
+  "AusDerTiefe2Spaeher": {
+    "platform": "P1",
+    "quest_id": "Q557",
+    "quest_state": null
+  },
+  "Bannwerk1": {
+    "platform": "P4",
+    "quest_id": "Q462",
+    "quest_state": null
+  },
+  "Bannwerk2": {
+    "platform": "P4",
+    "quest_id": "Q24",
+    "quest_state": null
+  },
+  "BefreiungShiel1Alfalas": {
+    "platform": "P1",
+    "quest_id": "Q90",
+    "quest_state": null
+  },
+  "BefreiungShiel1Kommandant": {
+    "platform": "P5",
+    "quest_id": "Q100",
+    "quest_state": null
+  },
+  "BefreiungShiel2Dryaden": {
+    "platform": "P5",
+    "quest_id": "Q486",
+    "quest_state": null
+  },
+  "BeideMumienCampsPlatt": {
+    "platform": "P213",
+    "quest_id": "Q956",
+    "quest_state": null
+  },
+  "BergrieseGeholfen": {
+    "platform": "P207",
+    "quest_id": "Q891",
+    "quest_state": null
+  },
+  "BlockadeDurchbrochen": {
+    "platform": "P203",
+    "quest_id": "Q803",
+    "quest_state": null
+  },
+  "BlutAdhiraTrank": {
+    "platform": "P63",
+    "quest_id": "Q407",
+    "quest_state": null
+  },
+  "BlutTombardTot": {
+    "platform": "P63",
+    "quest_id": "Q397",
+    "quest_state": null
+  },
+  "BlutigenDariusBefreit": {
+    "platform": "P213",
+    "quest_id": "Q10986",
+    "quest_state": null
+  },
+  "Boss1Getoetet": {
+    "platform": "P113",
+    "quest_id": "Q746",
+    "quest_state": null
+  },
+  "Boss2Getoetet": {
+    "platform": "P113",
+    "quest_id": "Q746",
+    "quest_state": null
+  },
+  "Boss3Getoetet": {
+    "platform": "P113",
+    "quest_id": "Q746",
+    "quest_state": null
+  },
+  "Boss4Getoetet": {
+    "platform": "P113",
+    "quest_id": "Q746",
+    "quest_state": null
+  },
+  "BronzerieseGetoetet": {
+    "platform": "P209",
+    "quest_id": "Q794",
+    "quest_state": null
+  },
+  "Camp1Befreit": {
+    "platform": "P104",
+    "quest_id": "Q580",
+    "quest_state": null
+  },
+  "Camp2Befreit": {
+    "platform": "P104",
+    "quest_id": "Q581",
+    "quest_state": null
+  },
+  "Camp3Befreit": {
+    "platform": "P104",
+    "quest_id": "Q582",
+    "quest_state": null
+  },
+  "CampsZerstoert": {
+    "platform": "P201",
+    "quest_id": "Q773",
+    "quest_state": null
+  },
+  "ColosseumRunde01Sieg": {
+    "platform": "P200",
+    "quest_id": "Q2",
+    "quest_state": null
+  },
+  "ColosseumRunde02Sieg": {
+    "platform": "P200",
+    "quest_id": "Q3",
+    "quest_state": null
+  },
+  "ColosseumRunde03Sieg": {
+    "platform": "P200",
+    "quest_id": "Q4",
+    "quest_state": null
+  },
+  "ColosseumRunde04Sieg": {
+    "platform": "P200",
+    "quest_id": "Q5",
+    "quest_state": null
+  },
+  "ColosseumRunde05Sieg": {
+    "platform": "P200",
+    "quest_id": "Q6",
+    "quest_state": null
+  },
+  "ColosseumRunde06Sieg": {
+    "platform": "P200",
+    "quest_id": "Q7",
+    "quest_state": null
+  },
+  "ColosseumRunde07Sieg": {
+    "platform": "P200",
+    "quest_id": "Q8",
+    "quest_state": null
+  },
+  "ColosseumRunde08Sieg": {
+    "platform": "P200",
+    "quest_id": "Q9",
+    "quest_state": null
+  },
+  "ColosseumRunde09Sieg": {
+    "platform": "P200",
+    "quest_id": "Q10",
+    "quest_state": null
+  },
+  "ColosseumRunde10Sieg": {
+    "platform": "P200",
+    "quest_id": "Q11",
+    "quest_state": null
+  },
+  "CraigBefreit": {
+    "platform": "P211",
+    "quest_id": "Q1063",
+    "quest_state": null
+  },
+  "DariusDerKarthograph": {
+    "platform": "P1",
+    "quest_id": "Q111",
+    "quest_state": null
+  },
+  "DerKatarakt": {
+    "platform": "P21",
+    "quest_id": "Q376",
+    "quest_state": null
+  },
+  "DerPhoenix1Waechter": {
+    "platform": "P19",
+    "quest_id": "Q308",
+    "quest_state": null
+  },
+  "DerPhoenix2Splitter1": {
+    "platform": "P19",
+    "quest_id": "Q318",
+    "quest_state": null
+  },
+  "DerPhoenix2Splitter2": {
+    "platform": "P19",
+    "quest_id": "Q319",
+    "quest_state": null
+  },
+  "DerPhoenix2Splitter3": {
+    "platform": "P19",
+    "quest_id": "Q2850",
+    "quest_state": null
+  },
+  "DerPhoenix2Splitter4": {
+    "platform": "P19",
+    "quest_id": "Q2850",
+    "quest_state": null
+  },
+  "DerPhoenix6Ablieferung": {
+    "platform": "P19",
+    "quest_id": "Q322",
+    "quest_state": null
+  },
+  "DialogMitAeltestem": {
+    "platform": "P203",
+    "quest_id": "Q8444",
+    "quest_state": null
+  },
+  "DialogMitUnterhaendler": {
+    "platform": "P206",
+    "quest_id": "Q821",
+    "quest_state": null
+  },
+  "DieFreihaendler": {
+    "platform": "P2",
+    "quest_id": "Q66",
+    "quest_state": null
+  },
+  "DieGeiseln": {
+    "platform": "P4",
+    "quest_id": "Q460",
+    "quest_state": null
+  },
+  "DieLetztenSchuetzen1": {
+    "platform": "P2",
+    "quest_id": "Q30",
+    "quest_state": null
+  },
+  "DieLetztenSchuetzen2": {
+    "platform": "P2",
+    "quest_id": "Q32",
+    "quest_state": null
+  },
+  "DieLetztenSchuetzen3": {
+    "platform": "P2",
+    "quest_id": "Q34",
+    "quest_state": null
+  },
+  "DracheGetoetet": {
+    "platform": "P115",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "Drachenpanzer1": {
+    "platform": "P63",
+    "quest_id": "Q110",
+    "quest_state": null
+  },
+  "Drachenpanzer2": {
+    "platform": "P63",
+    "quest_id": "Q516",
+    "quest_state": null
+  },
+  "Drachenstein1": {
+    "platform": "P115",
+    "quest_id": "Q735",
+    "quest_state": null
+  },
+  "Drachenstein2": {
+    "platform": "P115",
+    "quest_id": "Q735",
+    "quest_state": null
+  },
+  "Drachenstein3": {
+    "platform": "P115",
+    "quest_id": "Q735",
+    "quest_state": null
+  },
+  "Drachenstein4": {
+    "platform": "P115",
+    "quest_id": "Q735",
+    "quest_state": null
+  },
+  "Drachenstein5": {
+    "platform": "P115",
+    "quest_id": "Q735",
+    "quest_state": null
+  },
+  "Drachenstein6": {
+    "platform": "P115",
+    "quest_id": "Q733",
+    "quest_state": null
+  },
+  "Drachenstein7": {
+    "platform": "P115",
+    "quest_id": "Q733",
+    "quest_state": null
+  },
+  "Drachenstein8": {
+    "platform": "P115",
+    "quest_id": "Q733",
+    "quest_state": null
+  },
+  "Drachenstein9": {
+    "platform": "P115",
+    "quest_id": "Q733",
+    "quest_state": null
+  },
+  "DreiMagierGruolunGive": {
+    "platform": "P102",
+    "quest_id": "Q637",
+    "quest_state": null
+  },
+  "DreiMagierGruolunSave": {
+    "platform": "P102",
+    "quest_id": "Q643",
+    "quest_state": null
+  },
+  "DreiMagierRenyaGive": {
+    "platform": "P102",
+    "quest_id": "Q637",
+    "quest_state": null
+  },
+  "DreiMagierRenyaSave": {
+    "platform": "P102",
+    "quest_id": "Q643",
+    "quest_state": null
+  },
+  "DreiMagierZolowinFree": {
+    "platform": "P102",
+    "quest_id": "Q634",
+    "quest_state": null
+  },
+  "DreiMagierZolowinGive": {
+    "platform": "P102",
+    "quest_id": "Q637",
+    "quest_state": null
+  },
+  "DreiMagierZolowinSave": {
+    "platform": "P102",
+    "quest_id": "Q643",
+    "quest_state": null
+  },
+  "DritteFestungBesiegt": {
+    "platform": "P207",
+    "quest_id": "Q891",
+    "quest_state": null
+  },
+  "DrittenDrachenGetoetet": {
+    "platform": "P201",
+    "quest_id": "Q895",
+    "quest_state": null
+  },
+  "DschungelCamp1Killed": {
+    "platform": "P211",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "DschungelCamp2Killed": {
+    "platform": "P211",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "DschungelCamp3Killed": {
+    "platform": "P211",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "DschungelCamp4Killed": {
+    "platform": "P211",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "DschungelWeisenDialog": {
+    "platform": "P213",
+    "quest_id": "Q10983",
+    "quest_state": null
+  },
+  "DurchDenSchattenhain": {
+    "platform": "P4",
+    "quest_id": "Q22",
+    "quest_state": null
+  },
+  "DurchdenSpalt1Hin": {
+    "platform": "P23",
+    "quest_id": "Q496",
+    "quest_state": null
+  },
+  "DurchdenSpalt2Her": {
+    "platform": "P23",
+    "quest_id": "Q498",
+    "quest_state": null
+  },
+  "EchosBuch": {
+    "platform": "P1",
+    "quest_id": "Q46",
+    "quest_state": null
+  },
+  "EchosBuchstabe1": {
+    "platform": "P63",
+    "quest_id": "Q325",
+    "quest_state": null
+  },
+  "EchosBuchstabe2": {
+    "platform": "P63",
+    "quest_id": "Q325",
+    "quest_state": null
+  },
+  "EchosBuchstabe3": {
+    "platform": "P63",
+    "quest_id": "Q325",
+    "quest_state": null
+  },
+  "EchosGoran": {
+    "platform": "P63",
+    "quest_id": "Q330",
+    "quest_state": null
+  },
+  "EchosShinTarGuar": {
+    "platform": "P63",
+    "quest_id": "Q110",
+    "quest_state": null
+  },
+  "EinSeltsamerRing": {
+    "platform": "P1",
+    "quest_id": "Q46",
+    "quest_state": null
+  },
+  "Einsiedler1Shan": {
+    "platform": "P1",
+    "quest_id": "Q93",
+    "quest_state": null
+  },
+  "Eisenkarren1": {
+    "platform": "P9",
+    "quest_id": "Q3309",
+    "quest_state": null
+  },
+  "Eisenkarren2": {
+    "platform": "P9",
+    "quest_id": "Q3310",
+    "quest_state": null
+  },
+  "Eisenkarren3": {
+    "platform": "P9",
+    "quest_id": "Q3311",
+    "quest_state": null
+  },
+  "Eisenkarren4": {
+    "platform": "P9",
+    "quest_id": "Q3312",
+    "quest_state": null
+  },
+  "Eisenkarren5": {
+    "platform": "P9",
+    "quest_id": "Q3313",
+    "quest_state": null
+  },
+  "Eisenkarren6": {
+    "platform": "P9",
+    "quest_id": "Q3314",
+    "quest_state": null
+  },
+  "Eisenkarren7": {
+    "platform": "P9",
+    "quest_id": "Q3315",
+    "quest_state": null
+  },
+  "ElementBeschworen": {
+    "platform": "P111",
+    "quest_id": "Q675",
+    "quest_state": null
+  },
+  "EndeDesOrdens1Erreichen": {
+    "platform": "P7",
+    "quest_id": "Q521",
+    "quest_state": null
+  },
+  "EndeDesOrdens2DreiItems": {
+    "platform": "P7",
+    "quest_id": "Q522",
+    "quest_state": null
+  },
+  "EndgegnerSoulforgerKilled": {
+    "platform": "P211",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "EntryMenhirComboCorrect": {
+    "platform": "P210",
+    "quest_id": "Q9120",
+    "quest_state": null
+  },
+  "Erdenklinge2": {
+    "platform": "P10",
+    "quest_id": "Q166",
+    "quest_state": null
+  },
+  "Erdenklinge3": {
+    "platform": "P10",
+    "quest_id": "Q176",
+    "quest_state": null
+  },
+  "Erdenklinge4": {
+    "platform": "P10",
+    "quest_id": "Q170",
+    "quest_state": null
+  },
+  "Erdklinge11": {
+    "platform": "P11",
+    "quest_id": "Q482",
+    "quest_state": null
+  },
+  "Erdklinge12": {
+    "platform": "P11",
+    "quest_id": "Q482",
+    "quest_state": null
+  },
+  "ErsteFestungBesiegt": {
+    "platform": "P207",
+    "quest_id": "Q891",
+    "quest_state": null
+  },
+  "ErstenDrachenGetoetet": {
+    "platform": "P201",
+    "quest_id": "Q895",
+    "quest_state": null
+  },
+  "ExitDoorToP211Opened": {
+    "platform": "P210",
+    "quest_id": "Q9967",
+    "quest_state": null
+  },
+  "ExtinctTuermeWeg": {
+    "platform": "P202",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "FalleAusgeloest": {
+    "platform": "P206",
+    "quest_id": "Q822",
+    "quest_state": null
+  },
+  "FeineStoffe1": {
+    "platform": "P6",
+    "quest_id": "Q413",
+    "quest_state": null
+  },
+  "FeineStoffe2Miria": {
+    "platform": "P10",
+    "quest_id": "Q480",
+    "quest_state": null
+  },
+  "FeineStoffe3Seide": {
+    "platform": "P63",
+    "quest_id": "Q413",
+    "quest_state": null
+  },
+  "FeineStoffe4Robe": {
+    "platform": "P63",
+    "quest_id": "Q344",
+    "quest_state": null
+  },
+  "FialDargTotCenwenFrei": {
+    "platform": "P113",
+    "quest_id": "Q697",
+    "quest_state": null
+  },
+  "FlinkAbgeliefert": {
+    "platform": "P204",
+    "quest_id": "Q811",
+    "quest_state": null
+  },
+  "FluechtlingeNachNorden": {
+    "platform": "P101",
+    "quest_id": "Q644",
+    "quest_state": null
+  },
+  "FluesterndeStadt1Item1": {
+    "platform": "P16",
+    "quest_id": "Q493",
+    "quest_state": null
+  },
+  "FluesterndeStadt1Item2": {
+    "platform": "P16",
+    "quest_id": "Q493",
+    "quest_state": null
+  },
+  "FluesterndeStadt1Item3": {
+    "platform": "P16",
+    "quest_id": "Q217",
+    "quest_state": null
+  },
+  "FluesterndeStadt4Endkampf": {
+    "platform": "P16",
+    "quest_id": "Q212",
+    "quest_state": null
+  },
+  "FluesterndeStadt5Maske": {
+    "platform": "P16",
+    "quest_id": "Q244",
+    "quest_state": null
+  },
+  "FugisBroughtToMap": {
+    "platform": "P105",
+    "quest_id": "Q584",
+    "quest_state": null
+  },
+  "FugisBroughtToTirganach": {
+    "platform": "P105",
+    "quest_id": "Q683",
+    "quest_state": null
+  },
+  "GartenEntgiftet": {
+    "platform": "P205",
+    "quest_id": "Q32354",
+    "quest_state": null
+  },
+  "Geheimweg": {
+    "platform": "P203",
+    "quest_id": "Q8486",
+    "quest_state": null
+  },
+  "GeistInDerMine": {
+    "platform": "P1",
+    "quest_id": "Q39",
+    "quest_state": null
+  },
+  "GeistercampBesiegt": {
+    "platform": "P107",
+    "quest_id": "Q684",
+    "quest_state": null
+  },
+  "GespraechMitKhal": {
+    "platform": "P209",
+    "quest_id": "Q779",
+    "quest_state": null
+  },
+  "Giftzwerg": {
+    "platform": "P11",
+    "quest_id": "Q509",
+    "quest_state": null
+  },
+  "GnomlingBossTot": {
+    "platform": "P202",
+    "quest_id": "Q11268",
+    "quest_state": null
+  },
+  "GoblinRennen": {
+    "platform": "P200",
+    "quest_id": "Q12",
+    "quest_state": null
+  },
+  "GrabmalGeoeffnet": {
+    "platform": "P202",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "Gremlinlager1Zerstoert": {
+    "platform": "P208",
+    "quest_id": "Q860",
+    "quest_state": null
+  },
+  "Gremlinlager2Zerstoert": {
+    "platform": "P208",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "Gremlinlager3Zerstoert": {
+    "platform": "P208",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "Gremlinlager4Zerstoert": {
+    "platform": "P208",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "Gremlinlager5Zerstoert": {
+    "platform": "P208",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "Grenzkrieg1Festung": {
+    "platform": "P12",
+    "quest_id": "Q210",
+    "quest_state": null
+  },
+  "Grenzkrieg2Canyon": {
+    "platform": "P12",
+    "quest_id": "Q190",
+    "quest_state": null
+  },
+  "GrimBesiegt": {
+    "platform": "P110",
+    "quest_id": "Q32018",
+    "quest_state": null
+  },
+  "GuramMachtSprengung": {
+    "platform": "P108",
+    "quest_id": "Q291",
+    "quest_state": null
+  },
+  "GurimLebt": {
+    "platform": "P201",
+    "quest_id": "Q895",
+    "quest_state": null
+  },
+  "GwensMedizin": {
+    "platform": "P17",
+    "quest_id": "Q258",
+    "quest_state": null
+  },
+  "HQBefreien": {
+    "platform": "P101",
+    "quest_id": "Q560",
+    "quest_state": null
+  },
+  "HeldenBeschworen": {
+    "platform": "P202",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "HeldenErschaffen": {
+    "platform": "P101",
+    "quest_id": "Q587",
+    "quest_state": null
+  },
+  "HlStaetteBaumGepflanzt": {
+    "platform": "P202",
+    "quest_id": "Q827",
+    "quest_state": null
+  },
+  "HolyArtefact1Gefunden": {
+    "platform": "P209",
+    "quest_id": "Q934",
+    "quest_state": null
+  },
+  "HolyArtefact2Gefunden": {
+    "platform": "P209",
+    "quest_id": "Q934",
+    "quest_state": null
+  },
+  "Homunculus": {
+    "platform": "P15",
+    "quest_id": "Q2480",
+    "quest_state": null
+  },
+  "HuluErreicht": {
+    "platform": "P102",
+    "quest_id": "Q569",
+    "quest_state": null
+  },
+  "ImCampMitAllenGeredet": {
+    "platform": "P101",
+    "quest_id": "Q571",
+    "quest_state": null
+  },
+  "InInnenstadtGekommen": {
+    "platform": "P110",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "InsCampGekommen": {
+    "platform": "P201",
+    "quest_id": "Q773",
+    "quest_state": null
+  },
+  "InsGrauschattental1": {
+    "platform": "P10",
+    "quest_id": "Q403",
+    "quest_state": null
+  },
+  "InsGrauschattental2": {
+    "platform": "P10",
+    "quest_id": "Q141",
+    "quest_state": null
+  },
+  "InsGrauschattental3": {
+    "platform": "P10",
+    "quest_id": "Q141",
+    "quest_state": null
+  },
+  "InsGrauschattental4": {
+    "platform": "P10",
+    "quest_id": "Q141",
+    "quest_state": null
+  },
+  "JaninaBefreit": {
+    "platform": "P102",
+    "quest_id": "Q572",
+    "quest_state": null
+  },
+  "JeGroesser1": {
+    "platform": "P10",
+    "quest_id": "Q151",
+    "quest_state": null
+  },
+  "JeGroesser2": {
+    "platform": "P10",
+    "quest_id": "Q158",
+    "quest_state": null
+  },
+  "KarawaneLosgelaufen": {
+    "platform": "P206",
+    "quest_id": "Q886",
+    "quest_state": null
+  },
+  "KathaiStadtBefreit": {
+    "platform": "P209",
+    "quest_id": "Q785",
+    "quest_state": null
+  },
+  "KathaiStadtTorOffen": {
+    "platform": "P209",
+    "quest_id": "Q782",
+    "quest_state": null
+  },
+  "KitharLagerZerstoert": {
+    "platform": "P102",
+    "quest_id": "Q564",
+    "quest_state": null
+  },
+  "KlagendeSteine1BisTor": {
+    "platform": "P15",
+    "quest_id": "Q225",
+    "quest_state": null
+  },
+  "KlagendeSteine2Korshar": {
+    "platform": "P15",
+    "quest_id": "Q238",
+    "quest_state": null
+  },
+  "KleineFische1": {
+    "platform": "P1",
+    "quest_id": "Q128",
+    "quest_state": null
+  },
+  "KleineFische2": {
+    "platform": "P1",
+    "quest_id": "Q131",
+    "quest_state": null
+  },
+  "Klingensturm1Monument": {
+    "platform": "P25",
+    "quest_id": "Q531",
+    "quest_state": null
+  },
+  "Klingensturm2Sartarius": {
+    "platform": "P25",
+    "quest_id": "Q532",
+    "quest_state": null
+  },
+  "KlingzogsBeinlinge": {
+    "platform": "P63",
+    "quest_id": "Q413",
+    "quest_state": null
+  },
+  "KoenigDerSpinnen": {
+    "platform": "P6",
+    "quest_id": "Q107",
+    "quest_state": null
+  },
+  "Kopfjagd1Head1": {
+    "platform": "P4",
+    "quest_id": "Q453",
+    "quest_state": null
+  },
+  "Kopfjagd2Head2": {
+    "platform": "P4",
+    "quest_id": "Q453",
+    "quest_state": null
+  },
+  "Kopfjagd3Head3": {
+    "platform": "P4",
+    "quest_id": "Q453",
+    "quest_state": null
+  },
+  "Kopfjagd4Head4": {
+    "platform": "P4",
+    "quest_id": "Q453",
+    "quest_state": null
+  },
+  "Kopfjagd5Head5": {
+    "platform": "P4",
+    "quest_id": "Q453",
+    "quest_state": null
+  },
+  "Kopfjagd6Complete": {
+    "platform": "P4",
+    "quest_id": "Q22",
+    "quest_state": null
+  },
+  "KopfloserTodVernichtet": {
+    "platform": "P208",
+    "quest_id": "Q849",
+    "quest_state": null
+  },
+  "KreisSchluss1Tor1": {
+    "platform": "P32",
+    "quest_id": "Q4181",
+    "quest_state": null
+  },
+  "KreisSchluss2Tor2": {
+    "platform": "P32",
+    "quest_id": "Q4182",
+    "quest_state": null
+  },
+  "KreisSchluss2Tor3": {
+    "platform": "P32",
+    "quest_id": "Q4651",
+    "quest_state": null
+  },
+  "KreisSchluss4Soulforger": {
+    "platform": "P32",
+    "quest_id": "Q542",
+    "quest_state": null
+  },
+  "Lager1Kaputtgemacht": {
+    "platform": "P206",
+    "quest_id": "Q822",
+    "quest_state": null
+  },
+  "Lager2Kaputtgemacht": {
+    "platform": "P206",
+    "quest_id": "Q886",
+    "quest_state": null
+  },
+  "LargeIrfitReward": {
+    "platform": "P205",
+    "quest_id": "Q1045",
+    "quest_state": null
+  },
+  "LastChestInRoom5Opened": {
+    "platform": "P210",
+    "quest_id": "Q8637",
+    "quest_state": null
+  },
+  "LeaderHauptarmeeKilled": {
+    "platform": "P209",
+    "quest_id": "Q794",
+    "quest_state": null
+  },
+  "LeaderNordarmeeKilled": {
+    "platform": "P209",
+    "quest_id": "Q794",
+    "quest_state": null
+  },
+  "LeaderSuedarmeeKilled": {
+    "platform": "P209",
+    "quest_id": "Q794",
+    "quest_state": null
+  },
+  "LeutnantGesprochen": {
+    "platform": "P201",
+    "quest_id": "Q893",
+    "quest_state": null
+  },
+  "LichkoenigTot": {
+    "platform": "P203",
+    "quest_id": "Q778",
+    "quest_state": null
+  },
+  "LyrioQuestGeloest": {
+    "platform": "P204",
+    "quest_id": "Q810",
+    "quest_state": null
+  },
+  "Marcia1": {
+    "platform": "P9",
+    "quest_id": "Q122",
+    "quest_state": null
+  },
+  "MaskeDesBelial1": {
+    "platform": "P12",
+    "quest_id": "Q190",
+    "quest_state": null
+  },
+  "MaskeDesBelial2": {
+    "platform": "P12",
+    "quest_id": "Q190",
+    "quest_state": null
+  },
+  "MasterGameWon": {
+    "platform": "P208",
+    "quest_id": "Q1070",
+    "quest_state": null
+  },
+  "MasterOfMosaic": {
+    "platform": "P107",
+    "quest_id": "Q6862",
+    "quest_state": null
+  },
+  "MiniforgersKilled": {
+    "platform": "P212",
+    "quest_id": "Q956",
+    "quest_state": null
+  },
+  "MitDryadeGesprochen": {
+    "platform": "P205",
+    "quest_id": "Q872",
+    "quest_state": null
+  },
+  "MondstadtZerstoert": {
+    "platform": "P110",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "MonumenteElfClaimed": {
+    "platform": "P211",
+    "quest_id": "Q900",
+    "quest_state": null
+  },
+  "MonumenteZwerg1Claimed": {
+    "platform": "P211",
+    "quest_id": "Q900",
+    "quest_state": null
+  },
+  "MonumenteZwerg2Claimed": {
+    "platform": "P211",
+    "quest_id": "Q900",
+    "quest_state": null
+  },
+  "MosaikDesTodes": {
+    "platform": "P16",
+    "quest_id": "Q3616",
+    "quest_state": null
+  },
+  "NachGraufurtPartEnde": {
+    "platform": "P63",
+    "quest_id": "Q424",
+    "quest_state": null
+  },
+  "NachGraufurtPartVillage": {
+    "platform": "P63",
+    "quest_id": "Q439",
+    "quest_state": null
+  },
+  "NachUrgath1Elfensiedlung": {
+    "platform": "P27",
+    "quest_id": "Q535",
+    "quest_state": null
+  },
+  "NachUrgath2Monument": {
+    "platform": "P27",
+    "quest_id": "Q534",
+    "quest_state": null
+  },
+  "NachUrgath3Archon": {
+    "platform": "P27",
+    "quest_id": "Q538",
+    "quest_state": null
+  },
+  "NahrungFuerAffenjunge": {
+    "platform": "P213",
+    "quest_id": "Q1008",
+    "quest_state": null
+  },
+  "Nymphe1Befreit": {
+    "platform": "P205",
+    "quest_id": "Q9310",
+    "quest_state": null
+  },
+  "Nymphe2Befreit": {
+    "platform": "P205",
+    "quest_id": "Q9307",
+    "quest_state": null
+  },
+  "Nymphe3Befreit": {
+    "platform": "P205",
+    "quest_id": "Q9301",
+    "quest_state": null
+  },
+  "OberstadtLinksErreicht": {
+    "platform": "P204",
+    "quest_id": "Q877",
+    "quest_state": null
+  },
+  "OberstadtRechtsErreicht": {
+    "platform": "P204",
+    "quest_id": "Q940",
+    "quest_state": null
+  },
+  "OpferFreigelassen": {
+    "platform": "P202",
+    "quest_id": "Q996",
+    "quest_state": null
+  },
+  "OpferTot": {
+    "platform": "P202",
+    "quest_id": "Q995",
+    "quest_state": null
+  },
+  "Ordensritter1Befreit": {
+    "platform": "P201",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "Ordensritter2Befreit": {
+    "platform": "P201",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "Ordensritter3Befreit": {
+    "platform": "P201",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "OrklagerEinnehmen": {
+    "platform": "P104",
+    "quest_id": "Q578",
+    "quest_state": null
+  },
+  "P102Erreicht": {
+    "platform": "P102",
+    "quest_id": "Q569",
+    "quest_state": null
+  },
+  "P103Erreicht": {
+    "platform": "P103",
+    "quest_id": "Q590",
+    "quest_state": null
+  },
+  "P104Erreicht": {
+    "platform": "P104",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "P107KarteErreicht": {
+    "platform": "P107",
+    "quest_id": "Q684",
+    "quest_state": null
+  },
+  "P108KarteErreicht": {
+    "platform": "P108",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "P109KarteErreicht": {
+    "platform": "P109",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "P109PortalErreicht": {
+    "platform": "P109",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "P110KarteErreicht": {
+    "platform": "P110",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "P111KarteErreicht": {
+    "platform": "P111",
+    "quest_id": "Q675",
+    "quest_state": null
+  },
+  "P113KarteErreicht": {
+    "platform": "P113",
+    "quest_id": "Q746",
+    "quest_state": null
+  },
+  "P115KarteErreicht": {
+    "platform": "P115",
+    "quest_id": "Q7206",
+    "quest_state": null
+  },
+  "P203KarteErreicht": {
+    "platform": "P203",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "P204KarteErreicht": {
+    "platform": "P204",
+    "quest_id": "Q809",
+    "quest_state": null
+  },
+  "P205KarteErreicht": {
+    "platform": "P205",
+    "quest_id": "Q810",
+    "quest_state": null
+  },
+  "P206KarteErreicht": {
+    "platform": "P206",
+    "quest_id": "Q818",
+    "quest_state": null
+  },
+  "P207KarteErreicht": {
+    "platform": "P207",
+    "quest_id": "Q891",
+    "quest_state": null
+  },
+  "P208MosaikDesTodes": {
+    "platform": "P208",
+    "quest_id": "Q11386",
+    "quest_state": null
+  },
+  "P209KarteErreicht": {
+    "platform": "P209",
+    "quest_id": "Q779",
+    "quest_state": null
+  },
+  "P210KarteErreicht": {
+    "platform": "P210",
+    "quest_id": "Q875",
+    "quest_state": null
+  },
+  "P211KarteErreicht": {
+    "platform": "P211",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "P212KarteErreicht": {
+    "platform": "P212",
+    "quest_id": "Q956",
+    "quest_state": null
+  },
+  "P213KarteErreicht": {
+    "platform": "P213",
+    "quest_id": "Q956",
+    "quest_state": null
+  },
+  "PalastgartenErreicht": {
+    "platform": "P204",
+    "quest_id": "Q809",
+    "quest_state": null
+  },
+  "Prinzessin1Befreit ": {
+    "platform": "P208",
+    "quest_id": "Q848",
+    "quest_state": null
+  },
+  "Prinzessin2Befreit ": {
+    "platform": "P208",
+    "quest_id": "Q848",
+    "quest_state": null
+  },
+  "Prinzessin3Befreit ": {
+    "platform": "P208",
+    "quest_id": "Q848",
+    "quest_state": null
+  },
+  "Prinzessin4Befreit ": {
+    "platform": "P208",
+    "quest_id": "Q848",
+    "quest_state": null
+  },
+  "Prinzessin5Befreit ": {
+    "platform": "P208",
+    "quest_id": "Q848",
+    "quest_state": null
+  },
+  "PurpurnesBanner1Kettchen": {
+    "platform": "P5",
+    "quest_id": "Q100",
+    "quest_state": null
+  },
+  "PurpurnesBanner2": {
+    "platform": "P5",
+    "quest_id": "Q100",
+    "quest_state": null
+  },
+  "QuelleVergiftet": {
+    "platform": "P102",
+    "quest_id": "Q572",
+    "quest_state": null
+  },
+  "RastplatzGefunden": {
+    "platform": "P206",
+    "quest_id": "Q818",
+    "quest_state": null
+  },
+  "Reisserfell": {
+    "platform": "P10",
+    "quest_id": "Q481",
+    "quest_state": null
+  },
+  "ResistenteGargoyle1Tot": {
+    "platform": "P202",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "Riesenaerger1": {
+    "platform": "P11",
+    "quest_id": "Q186",
+    "quest_state": null
+  },
+  "Riesenaerger2": {
+    "platform": "P11",
+    "quest_id": "Q186",
+    "quest_state": null
+  },
+  "RingGefunden": {
+    "platform": "P201",
+    "quest_id": "Q773",
+    "quest_state": null
+  },
+  "Room2SensoSolved": {
+    "platform": "P210",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "Room3HeadDoorOpened": {
+    "platform": "P210",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "Room4SkeletonDoorOpened": {
+    "platform": "P210",
+    "quest_id": "Q9881",
+    "quest_state": null
+  },
+  "Room6SpiderGateOpened": {
+    "platform": "P210",
+    "quest_id": "Q9783",
+    "quest_state": null
+  },
+  "Room7ChessboardCrossed": {
+    "platform": "P210",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "RueckkehrMitWindjalf": {
+    "platform": "P108",
+    "quest_id": "Q612",
+    "quest_state": null
+  },
+  "RuneDunhanGenommen": {
+    "platform": "P102",
+    "quest_id": "Q564",
+    "quest_state": null
+  },
+  "RuneReowysGenommen": {
+    "platform": "P103",
+    "quest_id": "Q593",
+    "quest_state": null
+  },
+  "SQAuftragGescheitert": {
+    "platform": "P204",
+    "quest_id": "Q1064",
+    "quest_state": null
+  },
+  "SQBotschafterGefunden": {
+    "platform": "P204",
+    "quest_id": "Q1038",
+    "quest_state": null
+  },
+  "SQBotschafterTot": {
+    "platform": "P204",
+    "quest_id": "Q1039",
+    "quest_state": null
+  },
+  "SQCraigIstBotschafter": {
+    "platform": "P204",
+    "quest_id": "Q1064",
+    "quest_state": null
+  },
+  "SQHaendlerFriedlich": {
+    "platform": "P204",
+    "quest_id": "Q11198",
+    "quest_state": null
+  },
+  "SQScaramangirKilled": {
+    "platform": "P105",
+    "quest_id": "Q8061",
+    "quest_state": null
+  },
+  "SQSchutzgeldLarge": {
+    "platform": "P204",
+    "quest_id": "Q1071",
+    "quest_state": null
+  },
+  "SQSchutzgeldMedium": {
+    "platform": "P204",
+    "quest_id": "Q1071",
+    "quest_state": null
+  },
+  "SQSchutzgeldSmall": {
+    "platform": "P204",
+    "quest_id": "Q11198",
+    "quest_state": null
+  },
+  "SQSethHealed": {
+    "platform": "P204",
+    "quest_id": "Q1022",
+    "quest_state": null
+  },
+  "SQTiondriaBuchDariusGefunden": {
+    "platform": "P105",
+    "quest_id": "Q608",
+    "quest_state": null
+  },
+  "SQTiondriaBuchDariusZurueck": {
+    "platform": "P105",
+    "quest_id": "Q702",
+    "quest_state": null
+  },
+  "SQTiondriaFlinkBefreit": {
+    "platform": "P105",
+    "quest_id": "Q698",
+    "quest_state": null
+  },
+  "SQTiondriaMordfallHalfSolved": {
+    "platform": "P105",
+    "quest_id": "Q765",
+    "quest_state": null
+  },
+  "SQTiondriaMordfallNotSolved": {
+    "platform": "P105",
+    "quest_id": "Q765",
+    "quest_state": null
+  },
+  "SQTiondriaMordfallSolved": {
+    "platform": "P105",
+    "quest_id": "Q765",
+    "quest_state": null
+  },
+  "SQTiondriaObjekteEingesetzt": {
+    "platform": "P111",
+    "quest_id": "Q709",
+    "quest_state": null
+  },
+  "SQTiondriaSchatzBehalten": {
+    "platform": "P105",
+    "quest_id": "Q714",
+    "quest_state": null
+  },
+  "SQTiondriaSchatzGefunden": {
+    "platform": "P108",
+    "quest_id": "Q772",
+    "quest_state": null
+  },
+  "SQTiondriaSchatzGeteilt": {
+    "platform": "P105",
+    "quest_id": "Q709",
+    "quest_state": null
+  },
+  "SQTiondriaSeite1Gefunden": {
+    "platform": "P104",
+    "quest_id": "Q704",
+    "quest_state": null
+  },
+  "SQTiondriaSeite2Gefunden": {
+    "platform": "P104",
+    "quest_id": "Q704",
+    "quest_state": null
+  },
+  "SQTiondriaSeite3Gefunden": {
+    "platform": "P104",
+    "quest_id": "Q704",
+    "quest_state": null
+  },
+  "SceptreOfWindsFound": {
+    "platform": "P210",
+    "quest_id": "Q9908",
+    "quest_state": null
+  },
+  "SchalterraetselGeloest": {
+    "platform": "P207",
+    "quest_id": "Q891",
+    "quest_state": null
+  },
+  "SchattenklingeBefreit": {
+    "platform": "P211",
+    "quest_id": "Q32533",
+    "quest_state": null
+  },
+  "SchattenringBekommen": {
+    "platform": "P111",
+    "quest_id": "Q675",
+    "quest_state": null
+  },
+  "Schattenwelt1Castagir": {
+    "platform": "P63",
+    "quest_id": "Q417",
+    "quest_state": null
+  },
+  "Schattenwelt2Rigour": {
+    "platform": "P21",
+    "quest_id": "Q512",
+    "quest_state": null
+  },
+  "Schattenwelt2aRigour": {
+    "platform": "P21",
+    "quest_id": "Q512",
+    "quest_state": null
+  },
+  "Schattenwelt2bRigour": {
+    "platform": "P21",
+    "quest_id": "Q514",
+    "quest_state": null
+  },
+  "Schattenwelt3Manifest": {
+    "platform": "P63",
+    "quest_id": "Q423",
+    "quest_state": null
+  },
+  "Schattenwelt4Kristall": {
+    "platform": "P15",
+    "quest_id": "Q421",
+    "quest_state": null
+  },
+  "SchattenweltShadowpulse": {
+    "platform": "P63",
+    "quest_id": "Q530",
+    "quest_state": null
+  },
+  "SchlachtUmBrunnenfels1": {
+    "platform": "P9",
+    "quest_id": "Q122",
+    "quest_state": null
+  },
+  "SchlachtUmBrunnenfels2": {
+    "platform": "P9",
+    "quest_id": "Q117",
+    "quest_state": null
+  },
+  "SchlachtUmBrunnenfels2a": {
+    "platform": "P9",
+    "quest_id": "Q117",
+    "quest_state": null
+  },
+  "Schluesselmeisterin": {
+    "platform": "P104",
+    "quest_id": "Q578",
+    "quest_state": null
+  },
+  "Schwarzeibe": {
+    "platform": "P63",
+    "quest_id": "Q414",
+    "quest_state": null
+  },
+  "Seelenschwerter": {
+    "platform": "P63",
+    "quest_id": "Q110",
+    "quest_state": null
+  },
+  "Seelenwesen1": {
+    "platform": "P202",
+    "quest_id": "Q928",
+    "quest_state": null
+  },
+  "Seelenwesen2": {
+    "platform": "P202",
+    "quest_id": "Q928",
+    "quest_state": null
+  },
+  "Seelenwesen3": {
+    "platform": "P202",
+    "quest_id": "Q928",
+    "quest_state": null
+  },
+  "Seelenwesen4": {
+    "platform": "P202",
+    "quest_id": "Q928",
+    "quest_state": null
+  },
+  "Seelenwesen5": {
+    "platform": "P202",
+    "quest_id": "Q928",
+    "quest_state": null
+  },
+  "SetriusErreicht": {
+    "platform": "P102",
+    "quest_id": "Q32008",
+    "quest_state": null
+  },
+  "ShardAutum": {
+    "platform": "P21",
+    "quest_id": "Q334",
+    "quest_state": null
+  },
+  "SickHermit1Zirfar": {
+    "platform": "P63",
+    "quest_id": "Q358",
+    "quest_state": null
+  },
+  "SickHermit2Locke": {
+    "platform": "P63",
+    "quest_id": "Q360",
+    "quest_state": null
+  },
+  "SkeletonCampDestroyed": {
+    "platform": "P105",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "SmallIrfitReward": {
+    "platform": "P205",
+    "quest_id": "Q1045",
+    "quest_state": null
+  },
+  "SonnenstadtZerstoert": {
+    "platform": "P110",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "SpinnencampZerstoert": {
+    "platform": "P205",
+    "quest_id": "Q810",
+    "quest_state": null
+  },
+  "SprengzwergBefreit": {
+    "platform": "P207",
+    "quest_id": "Q891",
+    "quest_state": null
+  },
+  "StadtKathaiErreicht": {
+    "platform": "P209",
+    "quest_id": "Q779",
+    "quest_state": null
+  },
+  "StaubDerSterne1": {
+    "platform": "P2",
+    "quest_id": "Q71",
+    "quest_state": null
+  },
+  "StaubDerSterne2": {
+    "platform": "P2",
+    "quest_id": "Q71",
+    "quest_state": null
+  },
+  "StaubDerSterne3": {
+    "platform": "P2",
+    "quest_id": "Q71",
+    "quest_state": null
+  },
+  "Steckbrief": {
+    "platform": "P1",
+    "quest_id": "Q64",
+    "quest_state": null
+  },
+  "Steinbrecher": {
+    "platform": "P21",
+    "quest_id": "Q279",
+    "quest_state": null
+  },
+  "Stele1Off": {
+    "platform": "P212",
+    "quest_id": "Q960",
+    "quest_state": null
+  },
+  "Stele2Off": {
+    "platform": "P212",
+    "quest_id": "Q961",
+    "quest_state": null
+  },
+  "Stele3Off": {
+    "platform": "P212",
+    "quest_id": "Q962",
+    "quest_state": null
+  },
+  "Stele4Off": {
+    "platform": "P212",
+    "quest_id": "Q963",
+    "quest_state": null
+  },
+  "Stele5Off": {
+    "platform": "P212",
+    "quest_id": "Q964",
+    "quest_state": null
+  },
+  "Stele6Off": {
+    "platform": "P212",
+    "quest_id": "Q965",
+    "quest_state": null
+  },
+  "SternstadtZerstoert": {
+    "platform": "P110",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "TantaroGefunden": {
+    "platform": "P203",
+    "quest_id": "Q1029",
+    "quest_state": null
+  },
+  "Thar": {
+    "platform": "P21",
+    "quest_id": "Q514",
+    "quest_state": null
+  },
+  "ThurgonBrief": {
+    "platform": "P63",
+    "quest_id": "Q344",
+    "quest_state": null
+  },
+  "Tor1DurchTrickGeoeffnet": {
+    "platform": "P204",
+    "quest_id": "Q8838",
+    "quest_state": null
+  },
+  "Tor2DurchTrickGeoeffnet": {
+    "platform": "P204",
+    "quest_id": "Q947",
+    "quest_state": null
+  },
+  "Tor3DurchTrickGeoeffnet": {
+    "platform": "P204",
+    "quest_id": "Q948",
+    "quest_state": null
+  },
+  "TorJenquaiGeoeffnet": {
+    "platform": "P211",
+    "quest_id": "Q9810",
+    "quest_state": null
+  },
+  "TorZerstoert": {
+    "platform": "P109",
+    "quest_id": "Q693",
+    "quest_state": null
+  },
+  "TorZurStaetteOffen": {
+    "platform": "P202",
+    "quest_id": "Q845",
+    "quest_state": null
+  },
+  "Traumdieb": {
+    "platform": "P2",
+    "quest_id": "Q73",
+    "quest_state": null
+  },
+  "Trickster1Cassius": {
+    "platform": "P15",
+    "quest_id": "Q221",
+    "quest_state": null
+  },
+  "TricksterFindFlink": {
+    "platform": "P63",
+    "quest_id": "Q527",
+    "quest_state": null
+  },
+  "TricksterReturn": {
+    "platform": "P63",
+    "quest_id": "Q528",
+    "quest_state": null
+  },
+  "TrollcampZerstoert": {
+    "platform": "P109",
+    "quest_id": "Q693",
+    "quest_state": null
+  },
+  "TrommelnInWaeldern": {
+    "platform": "P2",
+    "quest_id": "Q132",
+    "quest_state": null
+  },
+  "TruppenZumPortalGesandt": {
+    "platform": "P204",
+    "quest_id": "Q816",
+    "quest_state": null
+  },
+  "TurningHeadsCrossed": {
+    "platform": "P210",
+    "quest_id": "Q0",
+    "quest_state": null
+  },
+  "Ulather": {
+    "platform": "P23",
+    "quest_id": "Q499",
+    "quest_state": null
+  },
+  "UndeadRohenGetoetet": {
+    "platform": "P207",
+    "quest_id": "Q891",
+    "quest_state": null
+  },
+  "UntotenlagerNord": {
+    "platform": "P209",
+    "quest_id": "Q779",
+    "quest_state": null
+  },
+  "UntotenlagerSued": {
+    "platform": "P209",
+    "quest_id": "Q779",
+    "quest_state": null
+  },
+  "UntotenlagerWest": {
+    "platform": "P209",
+    "quest_id": "Q779",
+    "quest_state": null
+  },
+  "UriasBefreit": {
+    "platform": "P201",
+    "quest_id": "Q773",
+    "quest_state": null
+  },
+  "UrneZuHokan": {
+    "platform": "P202",
+    "quest_id": "Q831",
+    "quest_state": null
+  },
+  "UruSpricht1": {
+    "platform": "P209",
+    "quest_id": "Q781",
+    "quest_state": null
+  },
+  "UruSpricht2": {
+    "platform": "P209",
+    "quest_id": "Q934",
+    "quest_state": null
+  },
+  "UruSpricht3": {
+    "platform": "P209",
+    "quest_id": "Q934",
+    "quest_state": null
+  },
+  "UruSpricht4": {
+    "platform": "P209",
+    "quest_id": "Q794",
+    "quest_state": null
+  },
+  "UruSpricht5": {
+    "platform": "P209",
+    "quest_id": "Q794",
+    "quest_state": null
+  },
+  "Verraeter": {
+    "platform": "P12",
+    "quest_id": "Q199",
+    "quest_state": null
+  },
+  "VieleTrolleKommenAn": {
+    "platform": "P206",
+    "quest_id": "Q825",
+    "quest_state": null
+  },
+  "VierteFestungBesiegt": {
+    "platform": "P207",
+    "quest_id": "Q891",
+    "quest_state": null
+  },
+  "ViertenDrachenGetoetet": {
+    "platform": "P201",
+    "quest_id": "Q834",
+    "quest_state": null
+  },
+  "WachgeistTot": {
+    "platform": "P202",
+    "quest_id": "Q995",
+    "quest_state": null
+  },
+  "WaechterGetoetet": {
+    "platform": "P111",
+    "quest_id": "Q675",
+    "quest_state": null
+  },
+  "WaldschrateKilled": {
+    "platform": "P103",
+    "quest_id": "Q590",
+    "quest_state": null
+  },
+  "WasserEntgiften": {
+    "platform": "P203",
+    "quest_id": "Q1029",
+    "quest_state": null
+  },
+  "WegNachEloni1Snarf": {
+    "platform": "P1",
+    "quest_id": "Q14",
+    "quest_state": null
+  },
+  "WegNachEloni2Portal": {
+    "platform": "P1",
+    "quest_id": "Q17",
+    "quest_state": null
+  },
+  "WegZumTorFreigeraeumt": {
+    "platform": "P213",
+    "quest_id": "Q956",
+    "quest_state": null
+  },
+  "WeisseSchatten1": {
+    "platform": "P10",
+    "quest_id": "Q164",
+    "quest_state": null
+  },
+  "WeisseSchatten2": {
+    "platform": "P10",
+    "quest_id": "Q164",
+    "quest_state": null
+  },
+  "WenigeTrolleKommenAn": {
+    "platform": "P206",
+    "quest_id": "Q825",
+    "quest_state": null
+  },
+  "WerwolfAbgelenkt": {
+    "platform": "P211",
+    "quest_id": "Q10583",
+    "quest_state": null
+  },
+  "WerwolfGesamt": {
+    "platform": "P109",
+    "quest_id": "Q652",
+    "quest_state": null
+  },
+  "WerwolfTempel1": {
+    "platform": "P109",
+    "quest_id": "Q653",
+    "quest_state": null
+  },
+  "WerwolfTempel2": {
+    "platform": "P109",
+    "quest_id": "Q654",
+    "quest_state": null
+  },
+  "WerwolfTempel3": {
+    "platform": "P109",
+    "quest_id": "Q655",
+    "quest_state": null
+  },
+  "WindjalfBefreit": {
+    "platform": "P108",
+    "quest_id": "Q772",
+    "quest_state": null
+  },
+  "WolfUndDrache1": {
+    "platform": "P21",
+    "quest_id": "Q276",
+    "quest_state": null
+  },
+  "WolfUndDrache2": {
+    "platform": "P21",
+    "quest_id": "Q277",
+    "quest_state": null
+  },
+  "Wolfcamp1Zerstoert ": {
+    "platform": "P208",
+    "quest_id": "Q849",
+    "quest_state": null
+  },
+  "Wolfcamp2Zerstoert ": {
+    "platform": "P208",
+    "quest_id": "Q849",
+    "quest_state": null
+  },
+  "Wolfcamp3Zerstoert ": {
+    "platform": "P208",
+    "quest_id": "Q849",
+    "quest_state": null
+  },
+  "Wolfcamp4Zerstoert ": {
+    "platform": "P208",
+    "quest_id": "Q849",
+    "quest_state": null
+  },
+  "Wolfcamp5Zerstoert ": {
+    "platform": "P208",
+    "quest_id": "Q849",
+    "quest_state": null
+  },
+  "Wolfcamp6Zerstoert ": {
+    "platform": "P208",
+    "quest_id": "Q849",
+    "quest_state": null
+  },
+  "Wolfcamp7Zerstoert ": {
+    "platform": "P208",
+    "quest_id": "Q849",
+    "quest_state": null
+  },
+  "WumpusKilled": {
+    "platform": "P101",
+    "quest_id": "Q606",
+    "quest_state": null
+  },
+  "WundtinkturSwerdis": {
+    "platform": "P2",
+    "quest_id": "Q357",
+    "quest_state": null
+  },
+  "WundtinkturValdis": {
+    "platform": "P63",
+    "quest_id": "Q357",
+    "quest_state": null
+  },
+  "XalabarInArenaBesiegt": {
+    "platform": "P209",
+    "quest_id": "Q934",
+    "quest_state": null
+  },
+  "ZahnbrechersZangen": {
+    "platform": "P63",
+    "quest_id": "Q371",
+    "quest_state": null
+  },
+  "Zauberwerk1Augenglas": {
+    "platform": "P63",
+    "quest_id": "Q338",
+    "quest_state": null
+  },
+  "Zauberwerk2Feder": {
+    "platform": "P63",
+    "quest_id": "Q338",
+    "quest_state": null
+  },
+  "Zauberwerk3Kreide": {
+    "platform": "P63",
+    "quest_id": "Q340",
+    "quest_state": null
+  },
+  "Zauberwerk4Robe": {
+    "platform": "P63",
+    "quest_id": "Q341",
+    "quest_state": null
+  },
+  "ZerstoerungDesLagers": {
+    "platform": "P203",
+    "quest_id": "Q803",
+    "quest_state": null
+  },
+  "ZuTarioGegangen": {
+    "platform": "P203",
+    "quest_id": "Q1029",
+    "quest_state": null
+  },
+  "ZweiteFestungBesiegt": {
+    "platform": "P207",
+    "quest_id": "Q891",
+    "quest_state": null
+  },
+  "ZweitenDrachenGetoetet": {
+    "platform": "P201",
+    "quest_id": "Q893",
+    "quest_state": null
+  },
+  "ZwergeBefreit": {
+    "platform": "P109",
+    "quest_id": "Q693",
+    "quest_state": null
+  },
+  "ZwergenMonumentClaimed": {
+    "platform": "P209",
+    "quest_id": "Q794",
+    "quest_state": null
+  },
+  "Zwergenaxt": {
+    "platform": "P1",
+    "quest_id": "Q380",
+    "quest_state": null
+  },
+  "Zwergendienste1Hinrik": {
+    "platform": "P63",
+    "quest_id": "Q489",
+    "quest_state": null
+  },
+  "Zwergendienste2Cronvig": {
+    "platform": "P10",
+    "quest_id": "Q488",
+    "quest_state": null
+  }
+}

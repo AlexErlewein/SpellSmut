@@ -1,0 +1,393 @@
+Reward Mapping Comparison Report
+================================================================================
+
+Old mappings: 232
+New mappings: 447
+Improvement:  +215 (+92.7%)
+
+New discoveries: 215
+Confirmed:       73
+Conflicts:       159
+Lost:            0
+
+
+New Discoveries:
+--------------------------------------------------------------------------------
+206KeineKarawaneDurchgebracht                      → Q825
+AirCoinPassageOpened                               → Q9788
+AlleStelenOff                                      → Q956
+AmraUndLea1Liannon1                                → Q131
+AmraUndLea1Liannon2                                → Q90
+AmraUndLea2Liannon1                                → Q381
+AmraUndLea2Liannon2                                → Q128
+AmraUndLea4                                        → Q521
+AnfuehrerBesiegt                                   → Q684
+ArenaKampf32                                       → Q1012
+ArenaKampf36                                       → Q1012
+ArenaKampf38                                       → Q1012
+ArenaKampf40                                       → Q1011
+AschetaenzerTot                                    → Q0
+AtmenderWald1Waldherz                              → Q539
+AufDemWall2Village2                                → Q2614
+AugenSet1Solved                                    → Q0
+AugenSet2Solved                                    → Q0
+AugenSet3Solved                                    → Q0
+AugenSet4Solved                                    → Q0
+AusDerTiefe1Buch                                   → Q111
+AusDerTiefe1Schreiber                              → Q41
+AusDerTiefe2Spaeher                                → Q557
+Bannwerk1                                          → Q462
+BefreiungShiel1Kommandant                          → Q100
+BefreiungShiel2Dryaden                             → Q486
+BeideMumienCampsPlatt                              → Q956
+BlutigenDariusBefreit                              → Q10986
+ColosseumRunde01Sieg                               → Q2
+ColosseumRunde02Sieg                               → Q3
+ColosseumRunde03Sieg                               → Q4
+ColosseumRunde04Sieg                               → Q5
+ColosseumRunde05Sieg                               → Q6
+ColosseumRunde06Sieg                               → Q7
+ColosseumRunde07Sieg                               → Q8
+ColosseumRunde08Sieg                               → Q9
+ColosseumRunde09Sieg                               → Q10
+DerPhoenix2Splitter1                               → Q318
+DerPhoenix2Splitter2                               → Q319
+DerPhoenix2Splitter3                               → Q2850
+DerPhoenix2Splitter4                               → Q2850
+Drachenpanzer1                                     → Q110
+Drachenpanzer2                                     → Q516
+Drachenstein1                                      → Q735
+Drachenstein2                                      → Q735
+Drachenstein3                                      → Q735
+Drachenstein4                                      → Q735
+Drachenstein5                                      → Q735
+Drachenstein6                                      → Q733
+DreiMagierGruolunSave                              → Q643
+DreiMagierRenyaSave                                → Q643
+DreiMagierZolowinGive                              → Q637
+DreiMagierZolowinSave                              → Q643
+DschungelCamp1Killed                               → Q0
+DschungelCamp2Killed                               → Q0
+DschungelCamp3Killed                               → Q0
+DschungelCamp4Killed                               → Q0
+DschungelWeisenDialog                              → Q10983
+DurchDenSchattenhain                               → Q22
+DurchdenSpalt1Hin                                  → Q496
+EchosBuch                                          → Q46
+Einsiedler1Shan                                    → Q93
+Eisenkarren1                                       → Q3309
+Eisenkarren2                                       → Q3310
+Eisenkarren3                                       → Q3311
+Eisenkarren4                                       → Q3312
+Eisenkarren5                                       → Q3313
+Eisenkarren6                                       → Q3314
+Eisenkarren7                                       → Q3315
+ElementBeschworen                                  → Q675
+EntryMenhirComboCorrect                            → Q9120
+Erdenklinge2                                       → Q166
+Erdenklinge4                                       → Q170
+Erdklinge12                                        → Q482
+ExitDoorToP211Opened                               → Q9967
+ExtinctTuermeWeg                                   → Q0
+FeineStoffe4Robe                                   → Q344
+FlinkAbgeliefert                                   → Q811
+FluesterndeStadt5Maske                             → Q244
+GartenEntgiftet                                    → Q32354
+Geheimweg                                          → Q8486
+GeistercampBesiegt                                 → Q684
+GnomlingBossTot                                    → Q11268
+GoblinRennen                                       → Q12
+GrabmalGeoeffnet                                   → Q0
+Gremlinlager1Zerstoert                             → Q860
+Gremlinlager2Zerstoert                             → Q0
+Gremlinlager3Zerstoert                             → Q0
+Gremlinlager4Zerstoert                             → Q0
+Gremlinlager5Zerstoert                             → Q0
+GrimBesiegt                                        → Q32018
+GurimLebt                                          → Q895
+GwensMedizin                                       → Q258
+HolyArtefact2Gefunden                              → Q934
+Homunculus                                         → Q2480
+HuluErreicht                                       → Q569
+InInnenstadtGekommen                               → Q0
+InsGrauschattental3                                → Q141
+JaninaBefreit                                      → Q572
+KarawaneLosgelaufen                                → Q886
+Klingensturm2Sartarius                             → Q532
+KlingzogsBeinlinge                                 → Q413
+KopfloserTodVernichtet                             → Q849
+KreisSchluss1Tor1                                  → Q4181
+KreisSchluss2Tor2                                  → Q4182
+KreisSchluss2Tor3                                  → Q4651
+Lager1Kaputtgemacht                                → Q822
+Lager2Kaputtgemacht                                → Q886
+LargeIrfitReward                                   → Q1045
+LastChestInRoom5Opened                             → Q8637
+MasterOfMosaic                                     → Q6862
+MitDryadeGesprochen                                → Q872
+MondstadtZerstoert                                 → Q0
+MonumenteElfClaimed                                → Q900
+MonumenteZwerg1Claimed                             → Q900
+MonumenteZwerg2Claimed                             → Q900
+MosaikDesTodes                                     → Q3616
+NachGraufurtPartEnde                               → Q424
+NachGraufurtPartVillage                            → Q439
+NachUrgath1Elfensiedlung                           → Q535
+NachUrgath3Archon                                  → Q538
+Nymphe1Befreit                                     → Q9310
+Nymphe2Befreit                                     → Q9307
+Nymphe3Befreit                                     → Q9301
+OberstadtLinksErreicht                             → Q877
+OberstadtRechtsErreicht                            → Q940
+Ordensritter1Befreit                               → Q0
+Ordensritter2Befreit                               → Q0
+Ordensritter3Befreit                               → Q0
+P103Erreicht                                       → Q590
+P104Erreicht                                       → Q0
+P108KarteErreicht                                  → Q0
+P109KarteErreicht                                  → Q0
+P109PortalErreicht                                 → Q0
+P110KarteErreicht                                  → Q0
+P115KarteErreicht                                  → Q7206
+P203KarteErreicht                                  → Q0
+P208MosaikDesTodes                                 → Q11386
+P211KarteErreicht                                  → Q0
+PurpurnesBanner1Kettchen                           → Q100
+PurpurnesBanner2                                   → Q100
+QuelleVergiftet                                    → Q572
+Reisserfell                                        → Q481
+ResistenteGargoyle1Tot                             → Q0
+Riesenaerger2                                      → Q186
+Room2SensoSolved                                   → Q0
+Room3HeadDoorOpened                                → Q0
+Room4SkeletonDoorOpened                            → Q9881
+Room6SpiderGateOpened                              → Q9783
+Room7ChessboardCrossed                             → Q0
+SQScaramangirKilled                                → Q8061
+SQSchutzgeldLarge                                  → Q1071
+SQSchutzgeldMedium                                 → Q1071
+SQSchutzgeldSmall                                  → Q11198
+SQTiondriaBuchDariusZurueck                        → Q702
+SQTiondriaFlinkBefreit                             → Q698
+SQTiondriaMordfallHalfSolved                       → Q765
+SQTiondriaMordfallSolved                           → Q765
+SQTiondriaObjekteEingesetzt                        → Q709
+SQTiondriaSchatzBehalten                           → Q714
+SQTiondriaSchatzGeteilt                            → Q709
+SceptreOfWindsFound                                → Q9908
+SchattenklingeBefreit                              → Q32533
+Schattenwelt2Rigour                                → Q512
+Schattenwelt2aRigour                               → Q512
+Schattenwelt2bRigour                               → Q514
+Schattenwelt3Manifest                              → Q423
+Schattenwelt4Kristall                              → Q421
+SchattenweltShadowpulse                            → Q530
+SchlachtUmBrunnenfels2                             → Q117
+Schluesselmeisterin                                → Q578
+SetriusErreicht                                    → Q32008
+ShardAutum                                         → Q334
+SickHermit2Locke                                   → Q360
+SkeletonCampDestroyed                              → Q0
+SmallIrfitReward                                   → Q1045
+SonnenstadtZerstoert                               → Q0
+StaubDerSterne2                                    → Q71
+StaubDerSterne3                                    → Q71
+Steckbrief                                         → Q64
+Stele1Off                                          → Q960
+Stele2Off                                          → Q961
+Stele3Off                                          → Q962
+Stele4Off                                          → Q963
+Stele5Off                                          → Q964
+Stele6Off                                          → Q965
+SternstadtZerstoert                                → Q0
+ThurgonBrief                                       → Q344
+Tor1DurchTrickGeoeffnet                            → Q8838
+TorJenquaiGeoeffnet                                → Q9810
+Trickster1Cassius                                  → Q221
+TricksterReturn                                    → Q528
+TrollcampZerstoert                                 → Q693
+TruppenZumPortalGesandt                            → Q816
+TurningHeadsCrossed                                → Q0
+Ulather                                            → Q499
+UntotenlagerNord                                   → Q779
+UntotenlagerSued                                   → Q779
+UntotenlagerWest                                   → Q779
+VieleTrolleKommenAn                                → Q825
+WachgeistTot                                       → Q995
+WeisseSchatten2                                    → Q164
+WenigeTrolleKommenAn                               → Q825
+WerwolfAbgelenkt                                   → Q10583
+WerwolfGesamt                                      → Q652
+WindjalfBefreit                                    → Q772
+WolfUndDrache2                                     → Q277
+WumpusKilled                                       → Q606
+Zauberwerk2Feder                                   → Q338
+Zauberwerk3Kreide                                  → Q340
+Zauberwerk4Robe                                    → Q341
+ZweitenDrachenGetoetet                             → Q893
+ZwergeBefreit                                      → Q693
+Zwergenaxt                                         → Q380
+Zwergendienste1Hinrik                              → Q489
+
+
+Conflicts (Old → New):
+--------------------------------------------------------------------------------
+AlleTrolleKommenAn                                 | Q820     → Q825    
+AlleinEinenWegGefunden                             | Q886     → Q822    
+AmWildlandPass1                                    | Q104     → Q99     
+AmWildlandPass2                                    | Q105     → Q99     
+AmraLeaGrab                                        | Q387     → Q211    
+AngriffDerHoehlenorks                              | Q438     → Q424    
+ArenaKampf42                                       | Q1011    → Q10582  
+ArgamunVerwandeltSich                              | Q863     → Q854    
+AtmenderWald2Portal                                | Q541     → Q539    
+AufDemWall1Village1                                | Q249     → Q2615   
+AufDemWall5Endkampf                                | Q264     → Q265    
+Bannwerk2                                          | Q97      → Q24     
+BefreiungShiel1Alfalas                             | Q93      → Q90     
+BergrieseGeholfen                                  | Q989     → Q891    
+BlutAdhiraTrank                                    | Q402     → Q407    
+Boss1Getoetet                                      | Q625     → Q746    
+Boss2Getoetet                                      | Q628     → Q746    
+Boss3Getoetet                                      | Q629     → Q746    
+Boss4Getoetet                                      | Q630     → Q746    
+BronzerieseGetoetet                                | Q817     → Q794    
+CampsZerstoert                                     | Q777     → Q773    
+ColosseumRunde10Sieg                               | Q1103    → Q11     
+CraigBefreit                                       | Q1061    → Q1063   
+DariusDerKarthograph                               | Q46      → Q111    
+DialogMitAeltestem                                 | Q1002    → Q8444   
+DialogMitUnterhaendler                             | Q886     → Q821    
+DieGeiseln                                         | Q462     → Q460    
+DieLetztenSchuetzen1                               | Q31      → Q30     
+DracheGetoetet                                     | Q670     → Q0      
+Drachenstein7                                      | Q667     → Q733    
+Drachenstein8                                      | Q668     → Q733    
+Drachenstein9                                      | Q669     → Q733    
+DreiMagierGruolunGive                              | Q636     → Q637    
+DreiMagierRenyaGive                                | Q635     → Q637    
+DritteFestungBesiegt                               | Q981     → Q891    
+DrittenDrachenGetoetet                             | Q840     → Q895    
+DurchdenSpalt2Her                                  | Q499     → Q498    
+EchosShinTarGuar                                   | Q333     → Q110    
+EinSeltsamerRing                                   | Q41      → Q46     
+EndeDesOrdens2DreiItems                            | Q532     → Q522    
+EndgegnerSoulforgerKilled                          | Q1097    → Q0      
+Erdenklinge3                                       | Q170     → Q176    
+ErsteFestungBesiegt                                | Q973     → Q891    
+ErstenDrachenGetoetet                              | Q836     → Q895    
+FeineStoffe3Seide                                  | Q344     → Q413    
+FluesterndeStadt1Item1                             | Q491     → Q493    
+FluesterndeStadt1Item2                             | Q492     → Q493    
+FluesterndeStadt1Item3                             | Q491     → Q217    
+FluesterndeStadt4Endkampf                          | Q490     → Q212    
+FugisBroughtToMap                                  | Q585     → Q584    
+FugisBroughtToTirganach                            | Q691     → Q683    
+GeistInDerMine                                     | Q36      → Q39     
+GespraechMitKhal                                   | Q1083    → Q779    
+Giftzwerg                                          | Q270     → Q509    
+Grenzkrieg1Festung                                 | Q206     → Q210    
+Grenzkrieg2Canyon                                  | Q198     → Q190    
+HQBefreien                                         | Q586     → Q560    
+HeldenBeschworen                                   | Q827     → Q0      
+HeldenErschaffen                                   | Q588     → Q587    
+HlStaetteBaumGepflanzt                             | Q844     → Q827    
+HolyArtefact1Gefunden                              | Q789     → Q934    
+ImCampMitAllenGeredet                              | Q715     → Q571    
+InsCampGekommen                                    | Q776     → Q773    
+InsGrauschattental1                                | Q472     → Q403    
+InsGrauschattental2                                | Q146     → Q141    
+InsGrauschattental4                                | Q146     → Q141    
+KathaiStadtBefreit                                 | Q781     → Q785    
+KathaiStadtTorOffen                                | Q784     → Q782    
+KlagendeSteine1BisTor                              | Q238     → Q225    
+KlagendeSteine2Korshar                             | Q236     → Q238    
+Klingensturm1Monument                              | Q550     → Q531    
+Kopfjagd1Head1                                     | Q455     → Q453    
+Kopfjagd2Head2                                     | Q458     → Q453    
+Kopfjagd3Head3                                     | Q456     → Q453    
+Kopfjagd4Head4                                     | Q457     → Q453    
+Kopfjagd5Head5                                     | Q454     → Q453    
+Kopfjagd6Complete                                  | Q463     → Q22     
+KreisSchluss4Soulforger                            | Q547     → Q542    
+LeaderHauptarmeeKilled                             | Q799     → Q794    
+LeaderNordarmeeKilled                              | Q797     → Q794    
+LeaderSuedarmeeKilled                              | Q798     → Q794    
+LeutnantGesprochen                                 | Q895     → Q893    
+LichkoenigTot                                      | Q802     → Q778    
+Marcia1                                            | Q121     → Q122    
+MaskeDesBelial1                                    | Q219     → Q190    
+MaskeDesBelial2                                    | Q216     → Q190    
+MiniforgersKilled                                  | Q958     → Q956    
+NachUrgath2Monument                                | Q537     → Q534    
+OpferFreigelassen                                  | Q1049    → Q996    
+OpferTot                                           | Q1048    → Q995    
+OrklagerEinnehmen                                  | Q575     → Q578    
+P102Erreicht                                       | Q572     → Q569    
+P111KarteErreicht                                  | Q744     → Q675    
+P212KarteErreicht                                  | Q971     → Q956    
+PalastgartenErreicht                               | Q816     → Q809    
+Prinzessin1Befreit                                 | Q851     → Q848    
+Prinzessin2Befreit                                 | Q849     → Q848    
+Prinzessin3Befreit                                 | Q853     → Q848    
+Prinzessin4Befreit                                 | Q850     → Q848    
+Prinzessin5Befreit                                 | Q852     → Q848    
+RastplatzGefunden                                  | Q819     → Q818    
+Riesenaerger1                                      | Q188     → Q186    
+RingGefunden                                       | Q893     → Q773    
+RuneDunhanGenommen                                 | Q567     → Q564    
+RuneReowysGenommen                                 | Q594     → Q593    
+SQAuftragGescheitert                               | Q1068    → Q1064   
+SQBotschafterGefunden                              | Q1064    → Q1038   
+SQBotschafterTot                                   | Q1068    → Q1039   
+SQCraigIstBotschafter                              | Q1068    → Q1064   
+SQHaendlerFriedlich                                | Q1075    → Q11198  
+SQSethHealed                                       | Q1020    → Q1022   
+SQTiondriaBuchDariusGefunden                       | Q701     → Q608    
+SQTiondriaSchatzGefunden                           | Q712     → Q772    
+SQTiondriaSeite2Gefunden                           | Q705     → Q704    
+SQTiondriaSeite3Gefunden                           | Q706     → Q704    
+SchalterraetselGeloest                             | Q983     → Q891    
+SchattenringBekommen                               | Q673     → Q675    
+Schattenwelt1Castagir                              | Q111     → Q417    
+SchlachtUmBrunnenfels1                             | Q112     → Q122    
+SchlachtUmBrunnenfels2a                            | Q121     → Q117    
+Seelenwesen1                                       | Q929     → Q928    
+Seelenwesen2                                       | Q930     → Q928    
+Seelenwesen3                                       | Q931     → Q928    
+Seelenwesen4                                       | Q932     → Q928    
+Seelenwesen5                                       | Q933     → Q928    
+SpinnencampZerstoert                               | Q871     → Q810    
+SprengzwergBefreit                                 | Q977     → Q891    
+StadtKathaiErreicht                                | Q782     → Q779    
+Thar                                               | Q512     → Q514    
+Tor2DurchTrickGeoeffnet                            | Q970     → Q947    
+TricksterFindFlink                                 | Q220     → Q527    
+TrommelnInWaeldern                                 | Q28      → Q132    
+UndeadRohenGetoetet                                | Q988     → Q891    
+UriasBefreit                                       | Q775     → Q773    
+UruSpricht1                                        | Q1083    → Q781    
+UruSpricht3                                        | Q792     → Q934    
+UruSpricht5                                        | Q874     → Q794    
+VierteFestungBesiegt                               | Q986     → Q891    
+ViertenDrachenGetoetet                             | Q841     → Q834    
+WaechterGetoetet                                   | Q680     → Q675    
+WaldschrateKilled                                  | Q593     → Q590    
+WasserEntgiften                                    | Q1030    → Q1029   
+WegNachEloni2Portal                                | Q16      → Q17     
+WegZumTorFreigeraeumt                              | Q1006    → Q956    
+WeisseSchatten1                                    | Q163     → Q164    
+WolfUndDrache1                                     | Q274     → Q276    
+Wolfcamp1Zerstoert                                 | Q856     → Q849    
+Wolfcamp2Zerstoert                                 | Q857     → Q849    
+Wolfcamp3Zerstoert                                 | Q858     → Q849    
+Wolfcamp4Zerstoert                                 | Q859     → Q849    
+Wolfcamp5Zerstoert                                 | Q860     → Q849    
+Wolfcamp6Zerstoert                                 | Q861     → Q849    
+Wolfcamp7Zerstoert                                 | Q1077    → Q849    
+XalabarInArenaBesiegt                              | Q791     → Q934    
+Zauberwerk1Augenglas                               | Q335     → Q338    
+ZerstoerungDesLagers                               | Q807     → Q803    
+ZuTarioGegangen                                    | Q1031    → Q1029   
+ZweiteFestungBesiegt                               | Q978     → Q891    
+ZwergenMonumentClaimed                             | Q795     → Q794    

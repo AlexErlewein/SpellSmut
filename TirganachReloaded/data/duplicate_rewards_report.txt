@@ -1,0 +1,280 @@
+Duplicate Reward Mappings Report
+================================================================================
+
+Found 33 rewards mapped in multiple locations
+
+
+AlleTrolleKommenAn:
+  - P206/n9870.lua → Q825 [None]
+  - P206/n8790.lua → Q824 [None]
+
+AmraUndLea4:
+  - P7/n4010.lua → Q521 [None]
+  - P7/n4010.lua → Q521 [None]
+  - P7/n4010.lua → Q521 [None]
+  - P7/n4010.lua → Q521 [None]
+  - P7/n4010.lua → Q521 [None]
+  - P7/n4010.lua → Q390 [None]
+  - P7/n4010.lua → Q521 [None]
+  - P7/n4010.lua → Q521 [None]
+  - P25/n2910.lua → Q533 [None]
+  - P25/n2910.lua → Q533 [None]
+  - P25/n2910.lua → Q533 [None]
+  - P25/n2910.lua → Q533 [None]
+
+AufDemWall3Village3:
+  - P17/n2616.lua → Q258 [None]
+  - P17/n2616.lua → Q258 [None]
+  - P17/n2616.lua → Q258 [None]
+  - P17/n2616.lua → Q258 [None]
+  - P17/n2616.lua → Q258 [None]
+  - P17/n2616.lua → Q258 [None]
+  - P17/n2616.lua → Q258 [None]
+  - P17/n2616.lua → Q258 [None]
+  - P17/n2616.lua → Q258 [None]
+  - P17/n2616.lua → Q258 [None]
+  - P17/n2616.lua → Q258 [None]
+  - P17/n2616.lua → Q258 [None]
+  - P17/n2616.lua → Q258 [None]
+  - P17/n2616.lua → Q258 [None]
+  - P17/n2616.lua → Q260 [None]
+  - P17/n2616.lua → Q258 [None]
+
+AufDemWall4Village4:
+  - P17/n2613.lua → Q250 [None]
+  - P17/n2613.lua → Q250 [None]
+  - P17/n2613.lua → Q250 [None]
+  - P17/n2613.lua → Q250 [None]
+
+Bannwerk2:
+  - P4/n1387.lua → Q24 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q134 [None]
+  - P5/n1956.lua → Q96 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q136 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q134 [None]
+  - P5/n1956.lua → Q136 [None]
+  - P5/n1956.lua → Q136 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q134 [None]
+  - P5/n1956.lua → Q134 [None]
+  - P5/n1956.lua → Q134 [None]
+  - P5/n1956.lua → Q134 [None]
+
+BefreiungShiel1Kommandant:
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q134 [None]
+  - P5/n1956.lua → Q134 [None]
+  - P5/n1956.lua → Q96 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q137 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q136 [None]
+  - P5/n1956.lua → Q137 [None]
+  - P5/n1956.lua → Q137 [None]
+  - P5/n1956.lua → Q100 [None]
+  - P5/n1956.lua → Q134 [None]
+  - P5/n1956.lua → Q134 [None]
+  - P5/n1956.lua → Q134 [None]
+  - P5/n1956.lua → Q134 [None]
+
+CraigBefreit:
+  - P211/n9801.lua → Q1063 [None]
+  - P211/n0.lua → Q1063 [None]
+
+DariusDerKarthograph:
+  - P1/n1240.lua → Q111 [None]
+  - P1/n1240.lua → Q46 [None]
+  - P1/n1240.lua → Q46 [None]
+  - P1/n1240.lua → Q46 [None]
+  - P1/n1240.lua → Q46 [None]
+  - P1/n1240.lua → Q46 [None]
+  - P1/n1240.lua → Q46 [None]
+  - P1/n1240.lua → Q46 [None]
+  - P1/n1240.lua → Q12 [None]
+  - P1/n1240.lua → Q46 [None]
+  - P1/n1240.lua → Q46 [None]
+  - P1/n1240.lua → Q46 [None]
+  - P1/n1240.lua → Q447 [None]
+  - P1/n1240.lua → Q447 [None]
+  - P1/n1240.lua → Q14 [None]
+  - P1/n1240.lua → Q14 [None]
+  - P1/n1240.lua → Q111 [None]
+  - P1/n1240.lua → Q14 [None]
+  - P1/n1240.lua → Q447 [None]
+  - P1/n1240.lua → Q46 [None]
+  - P1/n1240.lua → Q447 [None]
+  - P1/n1240.lua → Q447 [None]
+  - P1/n1240.lua → Q14 [None]
+  - P1/n1240.lua → Q14 [None]
+  - P1/n1240.lua → Q111 [None]
+  - P1/n1240.lua → Q14 [None]
+  - P1/n1240.lua → Q111 [None]
+  - P1/n1240.lua → Q14 [None]
+  - P1/n1240.lua → Q111 [None]
+  - P1/n1240.lua → Q111 [None]
+  - P1/n1240.lua → Q378 [None]
+  - P1/n1240.lua → Q378 [None]
+
+DerPhoenix6Ablieferung:
+  - P19/n2837.lua → Q322 [None]
+  - P19/n2837.lua → Q322 [None]
+
+DieFreihaendler:
+  - P2/n2904.lua → Q66 [None]
+  - P2/n2904.lua → Q66 [None]
+  - P2/n2904.lua → Q66 [None]
+
+Einsiedler1Shan:
+  - P1/n1394.lua → Q93 [None]
+  - P1/n1394.lua → Q90 [None]
+
+Erdklinge12:
+  - P11/n2266.lua → Q482 [None]
+  - P11/n2266.lua → Q269 [None]
+
+FeineStoffe3Seide:
+  - P63/n2861.lua → Q413 [None]
+  - P63/n2861.lua → Q413 [None]
+
+FluesterndeStadt5Maske:
+  - P16/n2576_CutsceneHokanII_mask.lua → Q244 [None]
+  - P16/n2576_CutsceneHokanI_mask.lua → Q244 [None]
+
+Homunculus:
+  - P15/n2480.lua → Q2480 [None]
+  - P15/n2480.lua → Q2480 [None]
+
+InsGrauschattental3:
+  - P10/n2184.lua → Q141 [None]
+  - P10/n2184.lua → Q141 [None]
+  - P10/n2184.lua → Q145 [None]
+  - P10/n2184.lua → Q145 [None]
+  - P10/n2184.lua → Q141 [None]
+  - P10/n2184.lua → Q141 [None]
+  - P10/n2184.lua → Q141 [None]
+  - P10/n2184.lua → Q141 [None]
+  - P10/n2184.lua → Q141 [None]
+  - P10/n2184.lua → Q141 [None]
+  - P10/n2184.lua → Q141 [None]
+  - P10/n2184.lua → Q141 [None]
+  - P10/n2184.lua → Q141 [None]
+  - P10/n2184.lua → Q141 [None]
+  - P10/n2184.lua → Q141 [None]
+  - P10/n2184.lua → Q141 [None]
+
+InsGrauschattental4:
+  - P10/n2184.lua → Q141 [None]
+  - P10/n2178.lua → Q138 [None]
+
+KathaiStadtTorOffen:
+  - P209/n5.lua → Q782 [None]
+  - P209/n5.lua → Q782 [None]
+  - P209/n5.lua → Q782 [None]
+
+Kopfjagd6Complete:
+  - P4/n1362.lua → Q22 [None]
+  - P5/n1957.lua → Q463 [None]
+
+MaskeDesBelial2:
+  - P12/n0.lua → Q190 [None]
+  - P15/n0.lua → Q239 [None]
+  - P16/n0.lua → Q493 [None]
+
+MitDryadeGesprochen:
+  - P205/n9250.lua → Q872 [None]
+  - P205/n9250.lua → Q872 [None]
+
+Riesenaerger2:
+  - P11/n2264.lua → Q186 [None]
+  - P11/n2264.lua → Q189 [None]
+
+Room2SensoSolved:
+  - P210/n0.lua → Q0 [None]
+  - P210/n0.lua → Q0 [None]
+
+SQHaendlerFriedlich:
+  - P204/n11198.lua → Q11198 [None]
+  - P204/n11197.lua → Q1075 [None]
+
+SQSchutzgeldLarge:
+  - P204/n11198.lua → Q1071 [None]
+  - P204/n11197.lua → Q1071 [None]
+
+SQSchutzgeldMedium:
+  - P204/n11198.lua → Q1071 [None]
+  - P204/n11197.lua → Q1071 [None]
+
+SQSchutzgeldSmall:
+  - P204/n11198.lua → Q11198 [None]
+  - P204/n11197.lua → Q11197 [None]
+
+SQTiondriaMordfallNotSolved:
+  - P105/n6591.lua → Q765 [None]
+  - P105/n6591.lua → Q765 [None]
+
+Seelenschwerter:
+  - P63/n2896.lua → Q110 [None]
+  - P63/n2896.lua → Q469 [None]
+  - P63/n2896.lua → Q469 [None]
+
+VieleTrolleKommenAn:
+  - P206/n9870.lua → Q825 [None]
+  - P206/n8790.lua → Q824 [None]
+
+WegNachEloni2Portal:
+  - P1/n1609.lua → Q17 [None]
+  - P1/n1608.lua → Q17 [None]
+  - P1/n1611.lua → Q17 [None]
+  - P1/n1610.lua → Q17 [None]
+  - P1/n1406.lua → Q17 [None]
+
+WenigeTrolleKommenAn:
+  - P206/n9870.lua → Q825 [None]
+  - P206/n8790.lua → Q825 [None]
+
+Zwergenaxt:
+  - P1/n1390.lua → Q380 [None]
+  - P1/n1390.lua → Q380 [None]
+  - P1/n1390.lua → Q380 [None]
+  - P1/n1390.lua → Q380 [None]
+  - P1/n1390.lua → Q131 [None]

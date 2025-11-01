@@ -1,0 +1,943 @@
+{
+  "summary": {
+    "old_count": 232,
+    "new_count": 447,
+    "improvement": 215,
+    "improvement_pct": 92.67241379310344,
+    "new_discoveries": 215,
+    "confirmed": 73,
+    "conflicts": 159,
+    "lost": 0
+  },
+  "new_discoveries": {
+    "ColosseumRunde07Sieg": "Q8",
+    "GrimBesiegt": "Q32018",
+    "AnfuehrerBesiegt": "Q684",
+    "TricksterReturn": "Q528",
+    "AmraUndLea1Liannon2": "Q90",
+    "Eisenkarren7": "Q3315",
+    "FlinkAbgeliefert": "Q811",
+    "AugenSet1Solved": "Q0",
+    "Bannwerk1": "Q462",
+    "Eisenkarren1": "Q3309",
+    "Room3HeadDoorOpened": "Q0",
+    "OberstadtLinksErreicht": "Q877",
+    "ArenaKampf32": "Q1012",
+    "Schattenwelt2bRigour": "Q514",
+    "Einsiedler1Shan": "Q93",
+    "Nymphe2Befreit": "Q9307",
+    "Drachenstein1": "Q735",
+    "SchattenweltShadowpulse": "Q530",
+    "HuluErreicht": "Q569",
+    "Lager1Kaputtgemacht": "Q822",
+    "DreiMagierZolowinGive": "Q637",
+    "GwensMedizin": "Q258",
+    "Zauberwerk3Kreide": "Q340",
+    "DschungelCamp4Killed": "Q0",
+    "P115KarteErreicht": "Q7206",
+    "GurimLebt": "Q895",
+    "EntryMenhirComboCorrect": "Q9120",
+    "LastChestInRoom5Opened": "Q8637",
+    "SmallIrfitReward": "Q1045",
+    "DerPhoenix2Splitter1": "Q318",
+    "KreisSchluss2Tor3": "Q4651",
+    "Geheimweg": "Q8486",
+    "WenigeTrolleKommenAn": "Q825",
+    "Drachenpanzer1": "Q110",
+    "ArenaKampf36": "Q1012",
+    "DreiMagierGruolunSave": "Q643",
+    "InInnenstadtGekommen": "Q0",
+    "ColosseumRunde08Sieg": "Q9",
+    "GartenEntgiftet": "Q32354",
+    "PurpurnesBanner1Kettchen": "Q100",
+    "DschungelCamp2Killed": "Q0",
+    "GoblinRennen": "Q12",
+    "Eisenkarren4": "Q3312",
+    "ElementBeschworen": "Q675",
+    "KopfloserTodVernichtet": "Q849",
+    "AirCoinPassageOpened": "Q9788",
+    "DurchdenSpalt1Hin": "Q496",
+    "AmraUndLea1Liannon1": "Q131",
+    "BeideMumienCampsPlatt": "Q956",
+    "TurningHeadsCrossed": "Q0",
+    "KarawaneLosgelaufen": "Q886",
+    "ArenaKampf38": "Q1012",
+    "Tor1DurchTrickGeoeffnet": "Q8838",
+    "Stele1Off": "Q960",
+    "TruppenZumPortalGesandt": "Q816",
+    "AlleStelenOff": "Q956",
+    "SQSchutzgeldSmall": "Q11198",
+    "BefreiungShiel2Dryaden": "Q486",
+    "DerPhoenix2Splitter3": "Q2850",
+    "Riesenaerger2": "Q186",
+    "Homunculus": "Q2480",
+    "NachGraufurtPartEnde": "Q424",
+    "ArenaKampf40": "Q1011",
+    "Erdenklinge4": "Q170",
+    "VieleTrolleKommenAn": "Q825",
+    "ColosseumRunde04Sieg": "Q5",
+    "KreisSchluss1Tor1": "Q4181",
+    "DerPhoenix2Splitter4": "Q2850",
+    "ColosseumRunde05Sieg": "Q6",
+    "ColosseumRunde09Sieg": "Q10",
+    "Trickster1Cassius": "Q221",
+    "JaninaBefreit": "Q572",
+    "MasterOfMosaic": "Q6862",
+    "SQTiondriaMordfallHalfSolved": "Q765",
+    "ColosseumRunde06Sieg": "Q7",
+    "SchattenklingeBefreit": "Q32533",
+    "MitDryadeGesprochen": "Q872",
+    "AusDerTiefe1Schreiber": "Q41",
+    "SQTiondriaMordfallSolved": "Q765",
+    "P208MosaikDesTodes": "Q11386",
+    "InsGrauschattental3": "Q141",
+    "Stele4Off": "Q963",
+    "Drachenstein5": "Q735",
+    "Drachenstein4": "Q735",
+    "ZwergeBefreit": "Q693",
+    "Schluesselmeisterin": "Q578",
+    "Eisenkarren6": "Q3314",
+    "WachgeistTot": "Q995",
+    "Zwergendienste1Hinrik": "Q489",
+    "DurchDenSchattenhain": "Q22",
+    "Zwergenaxt": "Q380",
+    "SQSchutzgeldLarge": "Q1071",
+    "206KeineKarawaneDurchgebracht": "Q825",
+    "Stele6Off": "Q965",
+    "AschetaenzerTot": "Q0",
+    "Room4SkeletonDoorOpened": "Q9881",
+    "Ulather": "Q499",
+    "Nymphe3Befreit": "Q9301",
+    "Klingensturm2Sartarius": "Q532",
+    "Stele2Off": "Q961",
+    "DerPhoenix2Splitter2": "Q319",
+    "MonumenteElfClaimed": "Q900",
+    "SQTiondriaSchatzBehalten": "Q714",
+    "SQScaramangirKilled": "Q8061",
+    "TrollcampZerstoert": "Q693",
+    "UntotenlagerNord": "Q779",
+    "Schattenwelt3Manifest": "Q423",
+    "Eisenkarren3": "Q3311",
+    "ResistenteGargoyle1Tot": "Q0",
+    "ZweitenDrachenGetoetet": "Q893",
+    "SkeletonCampDestroyed": "Q0",
+    "AusDerTiefe1Buch": "Q111",
+    "WerwolfGesamt": "Q652",
+    "AmraUndLea2Liannon2": "Q128",
+    "Ordensritter2Befreit": "Q0",
+    "StaubDerSterne2": "Q71",
+    "Erdenklinge2": "Q166",
+    "DschungelCamp1Killed": "Q0",
+    "FluesterndeStadt5Maske": "Q244",
+    "SceptreOfWindsFound": "Q9908",
+    "QuelleVergiftet": "Q572",
+    "Drachenstein6": "Q733",
+    "Drachenstein2": "Q735",
+    "NachGraufurtPartVillage": "Q439",
+    "GrabmalGeoeffnet": "Q0",
+    "Reisserfell": "Q481",
+    "AmraUndLea2Liannon1": "Q381",
+    "Zauberwerk4Robe": "Q341",
+    "UntotenlagerWest": "Q779",
+    "ColosseumRunde01Sieg": "Q2",
+    "AugenSet3Solved": "Q0",
+    "Gremlinlager1Zerstoert": "Q860",
+    "SonnenstadtZerstoert": "Q0",
+    "Room6SpiderGateOpened": "Q9783",
+    "Schattenwelt2aRigour": "Q512",
+    "P203KarteErreicht": "Q0",
+    "DreiMagierZolowinSave": "Q643",
+    "P104Erreicht": "Q0",
+    "AtmenderWald1Waldherz": "Q539",
+    "LargeIrfitReward": "Q1045",
+    "NachUrgath1Elfensiedlung": "Q535",
+    "KlingzogsBeinlinge": "Q413",
+    "MonumenteZwerg1Claimed": "Q900",
+    "HolyArtefact2Gefunden": "Q934",
+    "UntotenlagerSued": "Q779",
+    "P109KarteErreicht": "Q0",
+    "AmraUndLea4": "Q521",
+    "WindjalfBefreit": "Q772",
+    "P108KarteErreicht": "Q0",
+    "Stele5Off": "Q964",
+    "ShardAutum": "Q334",
+    "WeisseSchatten2": "Q164",
+    "WolfUndDrache2": "Q277",
+    "Room2SensoSolved": "Q0",
+    "SickHermit2Locke": "Q360",
+    "Drachenpanzer2": "Q516",
+    "BefreiungShiel1Kommandant": "Q100",
+    "FeineStoffe4Robe": "Q344",
+    "ExitDoorToP211Opened": "Q9967",
+    "DschungelWeisenDialog": "Q10983",
+    "AugenSet4Solved": "Q0",
+    "GnomlingBossTot": "Q11268",
+    "Eisenkarren2": "Q3310",
+    "GeistercampBesiegt": "Q684",
+    "Stele3Off": "Q962",
+    "StaubDerSterne3": "Q71",
+    "P109PortalErreicht": "Q0",
+    "Lager2Kaputtgemacht": "Q886",
+    "MonumenteZwerg2Claimed": "Q900",
+    "Room7ChessboardCrossed": "Q0",
+    "SQTiondriaBuchDariusZurueck": "Q702",
+    "AugenSet2Solved": "Q0",
+    "P211KarteErreicht": "Q0",
+    "MondstadtZerstoert": "Q0",
+    "PurpurnesBanner2": "Q100",
+    "WerwolfAbgelenkt": "Q10583",
+    "Steckbrief": "Q64",
+    "Schattenwelt4Kristall": "Q421",
+    "DschungelCamp3Killed": "Q0",
+    "AufDemWall2Village2": "Q2614",
+    "SQTiondriaFlinkBefreit": "Q698",
+    "DreiMagierRenyaSave": "Q643",
+    "ColosseumRunde02Sieg": "Q3",
+    "ExtinctTuermeWeg": "Q0",
+    "Nymphe1Befreit": "Q9310",
+    "Gremlinlager3Zerstoert": "Q0",
+    "Zauberwerk2Feder": "Q338",
+    "NachUrgath3Archon": "Q538",
+    "SQTiondriaSchatzGeteilt": "Q709",
+    "KreisSchluss2Tor2": "Q4182",
+    "SQSchutzgeldMedium": "Q1071",
+    "BlutigenDariusBefreit": "Q10986",
+    "OberstadtRechtsErreicht": "Q940",
+    "SetriusErreicht": "Q32008",
+    "Gremlinlager2Zerstoert": "Q0",
+    "EchosBuch": "Q46",
+    "ThurgonBrief": "Q344",
+    "Gremlinlager5Zerstoert": "Q0",
+    "SchlachtUmBrunnenfels2": "Q117",
+    "Schattenwelt2Rigour": "Q512",
+    "Erdklinge12": "Q482",
+    "Ordensritter3Befreit": "Q0",
+    "MosaikDesTodes": "Q3616",
+    "AusDerTiefe2Spaeher": "Q557",
+    "P103Erreicht": "Q590",
+    "Ordensritter1Befreit": "Q0",
+    "TorJenquaiGeoeffnet": "Q9810",
+    "WumpusKilled": "Q606",
+    "ColosseumRunde03Sieg": "Q4",
+    "Gremlinlager4Zerstoert": "Q0",
+    "SternstadtZerstoert": "Q0",
+    "SQTiondriaObjekteEingesetzt": "Q709",
+    "P110KarteErreicht": "Q0",
+    "Drachenstein3": "Q735",
+    "Eisenkarren5": "Q3313"
+  },
+  "confirmed": {
+    "SQTiondriaSeite1Gefunden": "Q704",
+    "BlockadeDurchbrochen": "Q803",
+    "RueckkehrMitWindjalf": "Q612",
+    "Steinbrecher": "Q279",
+    "FalleAusgeloest": "Q822",
+    "SickHermit1Zirfar": "Q358",
+    "AmraUndLea3Sentos": "Q384",
+    "P210KarteErreicht": "Q875",
+    "KleineFische2": "Q131",
+    "UruSpricht4": "Q794",
+    "WundtinkturSwerdis": "Q357",
+    "AufDemWall4Village4": "Q250",
+    "P204KarteErreicht": "Q809",
+    "DreiMagierZolowinFree": "Q634",
+    "KitharLagerZerstoert": "Q564",
+    "Traumdieb": "Q73",
+    "EndeDesOrdens1Erreichen": "Q521",
+    "DieLetztenSchuetzen2": "Q32",
+    "P209KarteErreicht": "Q779",
+    "EchosBuchstabe1": "Q325",
+    "EchosBuchstabe3": "Q325",
+    "WerwolfTempel3": "Q655",
+    "DerPhoenix6Ablieferung": "Q322",
+    "DieFreihaendler": "Q66",
+    "KleineFische1": "Q128",
+    "JeGroesser2": "Q158",
+    "AlleVierFackelnAn": "Q675",
+    "SQTiondriaMordfallNotSolved": "Q765",
+    "NahrungFuerAffenjunge": "Q1008",
+    "P213KarteErreicht": "Q956",
+    "LyrioQuestGeloest": "Q810",
+    "EchosGoran": "Q330",
+    "FialDargTotCenwenFrei": "Q697",
+    "Camp1Befreit": "Q580",
+    "WegNachEloni1Snarf": "Q14",
+    "Erdklinge11": "Q482",
+    "EchosBuchstabe2": "Q325",
+    "UruSpricht2": "Q934",
+    "DerPhoenix1Waechter": "Q308",
+    "Zwergendienste2Cronvig": "Q488",
+    "TorZurStaetteOffen": "Q845",
+    "BlutTombardTot": "Q397",
+    "Camp2Befreit": "Q581",
+    "FeineStoffe2Miria": "Q480",
+    "GuramMachtSprengung": "Q291",
+    "WerwolfTempel1": "Q653",
+    "WundtinkturValdis": "Q357",
+    "WerwolfTempel2": "Q654",
+    "Camp3Befreit": "Q582",
+    "MasterGameWon": "Q1070",
+    "P206KarteErreicht": "Q818",
+    "P205KarteErreicht": "Q810",
+    "P107KarteErreicht": "Q684",
+    "FeineStoffe1": "Q413",
+    "P207KarteErreicht": "Q891",
+    "P113KarteErreicht": "Q746",
+    "Seelenschwerter": "Q110",
+    "AmraUndLea2Sentos": "Q385",
+    "ZahnbrechersZangen": "Q371",
+    "StaubDerSterne1": "Q71",
+    "KoenigDerSpinnen": "Q107",
+    "Tor3DurchTrickGeoeffnet": "Q948",
+    "Schwarzeibe": "Q414",
+    "AufDemWall3Village3": "Q258",
+    "UrneZuHokan": "Q831",
+    "AlterMannUndMusik": "Q410",
+    "TantaroGefunden": "Q1029",
+    "FluechtlingeNachNorden": "Q644",
+    "Verraeter": "Q199",
+    "DieLetztenSchuetzen3": "Q34",
+    "TorZerstoert": "Q693",
+    "DerKatarakt": "Q376",
+    "JeGroesser1": "Q151"
+  },
+  "conflicts": {
+    "FluesterndeStadt1Item3": [
+      "Q491",
+      "Q217"
+    ],
+    "FugisBroughtToTirganach": [
+      "Q691",
+      "Q683"
+    ],
+    "FluesterndeStadt1Item1": [
+      "Q491",
+      "Q493"
+    ],
+    "ColosseumRunde10Sieg": [
+      "Q1103",
+      "Q11"
+    ],
+    "Wolfcamp3Zerstoert ": [
+      "Q858",
+      "Q849"
+    ],
+    "ErstenDrachenGetoetet": [
+      "Q836",
+      "Q895"
+    ],
+    "Seelenwesen4": [
+      "Q932",
+      "Q928"
+    ],
+    "DialogMitUnterhaendler": [
+      "Q886",
+      "Q821"
+    ],
+    "Kopfjagd6Complete": [
+      "Q463",
+      "Q22"
+    ],
+    "SprengzwergBefreit": [
+      "Q977",
+      "Q891"
+    ],
+    "MaskeDesBelial1": [
+      "Q219",
+      "Q190"
+    ],
+    "Boss3Getoetet": [
+      "Q629",
+      "Q746"
+    ],
+    "ViertenDrachenGetoetet": [
+      "Q841",
+      "Q834"
+    ],
+    "SchattenringBekommen": [
+      "Q673",
+      "Q675"
+    ],
+    "KlagendeSteine1BisTor": [
+      "Q238",
+      "Q225"
+    ],
+    "P102Erreicht": [
+      "Q572",
+      "Q569"
+    ],
+    "KreisSchluss4Soulforger": [
+      "Q547",
+      "Q542"
+    ],
+    "Kopfjagd1Head1": [
+      "Q455",
+      "Q453"
+    ],
+    "LeaderNordarmeeKilled": [
+      "Q797",
+      "Q794"
+    ],
+    "AufDemWall1Village1": [
+      "Q249",
+      "Q2615"
+    ],
+    "RingGefunden": [
+      "Q893",
+      "Q773"
+    ],
+    "SchalterraetselGeloest": [
+      "Q983",
+      "Q891"
+    ],
+    "Wolfcamp5Zerstoert ": [
+      "Q860",
+      "Q849"
+    ],
+    "P212KarteErreicht": [
+      "Q971",
+      "Q956"
+    ],
+    "DieLetztenSchuetzen1": [
+      "Q31",
+      "Q30"
+    ],
+    "Prinzessin1Befreit ": [
+      "Q851",
+      "Q848"
+    ],
+    "Wolfcamp6Zerstoert ": [
+      "Q861",
+      "Q849"
+    ],
+    "OpferTot": [
+      "Q1048",
+      "Q995"
+    ],
+    "Kopfjagd3Head3": [
+      "Q456",
+      "Q453"
+    ],
+    "MiniforgersKilled": [
+      "Q958",
+      "Q956"
+    ],
+    "CraigBefreit": [
+      "Q1061",
+      "Q1063"
+    ],
+    "Marcia1": [
+      "Q121",
+      "Q122"
+    ],
+    "Wolfcamp2Zerstoert ": [
+      "Q857",
+      "Q849"
+    ],
+    "Seelenwesen5": [
+      "Q933",
+      "Q928"
+    ],
+    "Thar": [
+      "Q512",
+      "Q514"
+    ],
+    "Prinzessin5Befreit ": [
+      "Q852",
+      "Q848"
+    ],
+    "EchosShinTarGuar": [
+      "Q333",
+      "Q110"
+    ],
+    "InsGrauschattental4": [
+      "Q146",
+      "Q141"
+    ],
+    "ZweiteFestungBesiegt": [
+      "Q978",
+      "Q891"
+    ],
+    "ImCampMitAllenGeredet": [
+      "Q715",
+      "Q571"
+    ],
+    "WolfUndDrache1": [
+      "Q274",
+      "Q276"
+    ],
+    "Drachenstein8": [
+      "Q668",
+      "Q733"
+    ],
+    "BlutAdhiraTrank": [
+      "Q402",
+      "Q407"
+    ],
+    "AtmenderWald2Portal": [
+      "Q541",
+      "Q539"
+    ],
+    "TrommelnInWaeldern": [
+      "Q28",
+      "Q132"
+    ],
+    "Bannwerk2": [
+      "Q97",
+      "Q24"
+    ],
+    "Seelenwesen3": [
+      "Q931",
+      "Q928"
+    ],
+    "DariusDerKarthograph": [
+      "Q46",
+      "Q111"
+    ],
+    "Kopfjagd5Head5": [
+      "Q454",
+      "Q453"
+    ],
+    "Grenzkrieg1Festung": [
+      "Q206",
+      "Q210"
+    ],
+    "FluesterndeStadt1Item2": [
+      "Q492",
+      "Q493"
+    ],
+    "HolyArtefact1Gefunden": [
+      "Q789",
+      "Q934"
+    ],
+    "Prinzessin2Befreit ": [
+      "Q849",
+      "Q848"
+    ],
+    "RuneDunhanGenommen": [
+      "Q567",
+      "Q564"
+    ],
+    "Seelenwesen2": [
+      "Q930",
+      "Q928"
+    ],
+    "NachUrgath2Monument": [
+      "Q537",
+      "Q534"
+    ],
+    "FugisBroughtToMap": [
+      "Q585",
+      "Q584"
+    ],
+    "DreiMagierRenyaGive": [
+      "Q635",
+      "Q637"
+    ],
+    "FeineStoffe3Seide": [
+      "Q344",
+      "Q413"
+    ],
+    "GespraechMitKhal": [
+      "Q1083",
+      "Q779"
+    ],
+    "Wolfcamp4Zerstoert ": [
+      "Q859",
+      "Q849"
+    ],
+    "SchlachtUmBrunnenfels1": [
+      "Q112",
+      "Q122"
+    ],
+    "SQTiondriaSeite2Gefunden": [
+      "Q705",
+      "Q704"
+    ],
+    "ZuTarioGegangen": [
+      "Q1031",
+      "Q1029"
+    ],
+    "Grenzkrieg2Canyon": [
+      "Q198",
+      "Q190"
+    ],
+    "LeaderHauptarmeeKilled": [
+      "Q799",
+      "Q794"
+    ],
+    "DrittenDrachenGetoetet": [
+      "Q840",
+      "Q895"
+    ],
+    "SpinnencampZerstoert": [
+      "Q871",
+      "Q810"
+    ],
+    "UruSpricht3": [
+      "Q792",
+      "Q934"
+    ],
+    "Zauberwerk1Augenglas": [
+      "Q335",
+      "Q338"
+    ],
+    "EndeDesOrdens2DreiItems": [
+      "Q532",
+      "Q522"
+    ],
+    "WeisseSchatten1": [
+      "Q163",
+      "Q164"
+    ],
+    "WaldschrateKilled": [
+      "Q593",
+      "Q590"
+    ],
+    "Schattenwelt1Castagir": [
+      "Q111",
+      "Q417"
+    ],
+    "DracheGetoetet": [
+      "Q670",
+      "Q0"
+    ],
+    "XalabarInArenaBesiegt": [
+      "Q791",
+      "Q934"
+    ],
+    "InsGrauschattental1": [
+      "Q472",
+      "Q403"
+    ],
+    "SQTiondriaSeite3Gefunden": [
+      "Q706",
+      "Q704"
+    ],
+    "HlStaetteBaumGepflanzt": [
+      "Q844",
+      "Q827"
+    ],
+    "Wolfcamp7Zerstoert ": [
+      "Q1077",
+      "Q849"
+    ],
+    "Giftzwerg": [
+      "Q270",
+      "Q509"
+    ],
+    "Prinzessin3Befreit ": [
+      "Q853",
+      "Q848"
+    ],
+    "Boss2Getoetet": [
+      "Q628",
+      "Q746"
+    ],
+    "SQSethHealed": [
+      "Q1020",
+      "Q1022"
+    ],
+    "SQAuftragGescheitert": [
+      "Q1068",
+      "Q1064"
+    ],
+    "DieGeiseln": [
+      "Q462",
+      "Q460"
+    ],
+    "PalastgartenErreicht": [
+      "Q816",
+      "Q809"
+    ],
+    "GeistInDerMine": [
+      "Q36",
+      "Q39"
+    ],
+    "AngriffDerHoehlenorks": [
+      "Q438",
+      "Q424"
+    ],
+    "BefreiungShiel1Alfalas": [
+      "Q93",
+      "Q90"
+    ],
+    "Klingensturm1Monument": [
+      "Q550",
+      "Q531"
+    ],
+    "ZerstoerungDesLagers": [
+      "Q807",
+      "Q803"
+    ],
+    "EinSeltsamerRing": [
+      "Q41",
+      "Q46"
+    ],
+    "Kopfjagd4Head4": [
+      "Q457",
+      "Q453"
+    ],
+    "SQHaendlerFriedlich": [
+      "Q1075",
+      "Q11198"
+    ],
+    "CampsZerstoert": [
+      "Q777",
+      "Q773"
+    ],
+    "AmWildlandPass1": [
+      "Q104",
+      "Q99"
+    ],
+    "DreiMagierGruolunGive": [
+      "Q636",
+      "Q637"
+    ],
+    "Prinzessin4Befreit ": [
+      "Q850",
+      "Q848"
+    ],
+    "P111KarteErreicht": [
+      "Q744",
+      "Q675"
+    ],
+    "HeldenErschaffen": [
+      "Q588",
+      "Q587"
+    ],
+    "Boss4Getoetet": [
+      "Q630",
+      "Q746"
+    ],
+    "KathaiStadtTorOffen": [
+      "Q784",
+      "Q782"
+    ],
+    "AmraLeaGrab": [
+      "Q387",
+      "Q211"
+    ],
+    "UriasBefreit": [
+      "Q775",
+      "Q773"
+    ],
+    "TricksterFindFlink": [
+      "Q220",
+      "Q527"
+    ],
+    "ZwergenMonumentClaimed": [
+      "Q795",
+      "Q794"
+    ],
+    "DurchdenSpalt2Her": [
+      "Q499",
+      "Q498"
+    ],
+    "WasserEntgiften": [
+      "Q1030",
+      "Q1029"
+    ],
+    "ErsteFestungBesiegt": [
+      "Q973",
+      "Q891"
+    ],
+    "AmWildlandPass2": [
+      "Q105",
+      "Q99"
+    ],
+    "LichkoenigTot": [
+      "Q802",
+      "Q778"
+    ],
+    "UndeadRohenGetoetet": [
+      "Q988",
+      "Q891"
+    ],
+    "AlleinEinenWegGefunden": [
+      "Q886",
+      "Q822"
+    ],
+    "Drachenstein9": [
+      "Q669",
+      "Q733"
+    ],
+    "WegNachEloni2Portal": [
+      "Q16",
+      "Q17"
+    ],
+    "HeldenBeschworen": [
+      "Q827",
+      "Q0"
+    ],
+    "SQTiondriaBuchDariusGefunden": [
+      "Q701",
+      "Q608"
+    ],
+    "ArenaKampf42": [
+      "Q1011",
+      "Q10582"
+    ],
+    "UruSpricht5": [
+      "Q874",
+      "Q794"
+    ],
+    "SQCraigIstBotschafter": [
+      "Q1068",
+      "Q1064"
+    ],
+    "InsGrauschattental2": [
+      "Q146",
+      "Q141"
+    ],
+    "AufDemWall5Endkampf": [
+      "Q264",
+      "Q265"
+    ],
+    "LeaderSuedarmeeKilled": [
+      "Q798",
+      "Q794"
+    ],
+    "SQBotschafterGefunden": [
+      "Q1064",
+      "Q1038"
+    ],
+    "VierteFestungBesiegt": [
+      "Q986",
+      "Q891"
+    ],
+    "OpferFreigelassen": [
+      "Q1049",
+      "Q996"
+    ],
+    "OrklagerEinnehmen": [
+      "Q575",
+      "Q578"
+    ],
+    "AlleTrolleKommenAn": [
+      "Q820",
+      "Q825"
+    ],
+    "WegZumTorFreigeraeumt": [
+      "Q1006",
+      "Q956"
+    ],
+    "Erdenklinge3": [
+      "Q170",
+      "Q176"
+    ],
+    "DialogMitAeltestem": [
+      "Q1002",
+      "Q8444"
+    ],
+    "LeutnantGesprochen": [
+      "Q895",
+      "Q893"
+    ],
+    "BergrieseGeholfen": [
+      "Q989",
+      "Q891"
+    ],
+    "KathaiStadtBefreit": [
+      "Q781",
+      "Q785"
+    ],
+    "Tor2DurchTrickGeoeffnet": [
+      "Q970",
+      "Q947"
+    ],
+    "Seelenwesen1": [
+      "Q929",
+      "Q928"
+    ],
+    "RuneReowysGenommen": [
+      "Q594",
+      "Q593"
+    ],
+    "WaechterGetoetet": [
+      "Q680",
+      "Q675"
+    ],
+    "Boss1Getoetet": [
+      "Q625",
+      "Q746"
+    ],
+    "Wolfcamp1Zerstoert ": [
+      "Q856",
+      "Q849"
+    ],
+    "InsCampGekommen": [
+      "Q776",
+      "Q773"
+    ],
+    "ArgamunVerwandeltSich": [
+      "Q863",
+      "Q854"
+    ],
+    "Riesenaerger1": [
+      "Q188",
+      "Q186"
+    ],
+    "MaskeDesBelial2": [
+      "Q216",
+      "Q190"
+    ],
+    "EndgegnerSoulforgerKilled": [
+      "Q1097",
+      "Q0"
+    ],
+    "KlagendeSteine2Korshar": [
+      "Q236",
+      "Q238"
+    ],
+    "SQBotschafterTot": [
+      "Q1068",
+      "Q1039"
+    ],
+    "SQTiondriaSchatzGefunden": [
+      "Q712",
+      "Q772"
+    ],
+    "BronzerieseGetoetet": [
+      "Q817",
+      "Q794"
+    ],
+    "UruSpricht1": [
+      "Q1083",
+      "Q781"
+    ],
+    "DritteFestungBesiegt": [
+      "Q981",
+      "Q891"
+    ],
+    "SchlachtUmBrunnenfels2a": [
+      "Q121",
+      "Q117"
+    ],
+    "HQBefreien": [
+      "Q586",
+      "Q560"
+    ],
+    "StadtKathaiErreicht": [
+      "Q782",
+      "Q779"
+    ],
+    "FluesterndeStadt4Endkampf": [
+      "Q490",
+      "Q212"
+    ],
+    "RastplatzGefunden": [
+      "Q819",
+      "Q818"
+    ],
+    "Drachenstein7": [
+      "Q667",
+      "Q733"
+    ],
+    "Kopfjagd2Head2": [
+      "Q458",
+      "Q453"
+    ]
+  },
+  "lost": {}
+}

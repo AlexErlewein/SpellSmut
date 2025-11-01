@@ -1,0 +1,5074 @@
+{
+  "summary": {
+    "total_mappings": 623,
+    "unique_rewards": 447,
+    "unique_quests": 283,
+    "platforms_scanned": 76,
+    "files_scanned": 10400,
+    "files_with_rewards": 233
+  },
+  "mappings": [
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q111",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q46",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q46",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q46",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q46",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q46",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q46",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q46",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q12",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q46",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q46",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q46",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q447",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q447",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q14",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q14",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q111",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q14",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q447",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q46",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q447",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q447",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q14",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q14",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q111",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q14",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q111",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q14",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q111",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q111",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q378",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "DariusDerKarthograph",
+      "quest_id": "Q378",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "AusDerTiefe1Buch",
+      "quest_id": "Q111",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "EchosBuch",
+      "quest_id": "Q46",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1240.lua",
+      "file_path": "p1/n1240.lua"
+    },
+    {
+      "reward_name": "WegNachEloni1Snarf",
+      "quest_id": "Q14",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1392.lua",
+      "file_path": "p1/n1392.lua"
+    },
+    {
+      "reward_name": "Steckbrief",
+      "quest_id": "Q64",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1392.lua",
+      "file_path": "p1/n1392.lua"
+    },
+    {
+      "reward_name": "WegNachEloni2Portal",
+      "quest_id": "Q17",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1609.lua",
+      "file_path": "p1/n1609.lua"
+    },
+    {
+      "reward_name": "WegNachEloni2Portal",
+      "quest_id": "Q17",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1608.lua",
+      "file_path": "p1/n1608.lua"
+    },
+    {
+      "reward_name": "GeistInDerMine",
+      "quest_id": "Q39",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1393.lua",
+      "file_path": "p1/n1393.lua"
+    },
+    {
+      "reward_name": "KleineFische2",
+      "quest_id": "Q131",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1390.lua",
+      "file_path": "p1/n1390.lua"
+    },
+    {
+      "reward_name": "Zwergenaxt",
+      "quest_id": "Q380",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1390.lua",
+      "file_path": "p1/n1390.lua"
+    },
+    {
+      "reward_name": "Zwergenaxt",
+      "quest_id": "Q380",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1390.lua",
+      "file_path": "p1/n1390.lua"
+    },
+    {
+      "reward_name": "Zwergenaxt",
+      "quest_id": "Q380",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1390.lua",
+      "file_path": "p1/n1390.lua"
+    },
+    {
+      "reward_name": "Zwergenaxt",
+      "quest_id": "Q380",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1390.lua",
+      "file_path": "p1/n1390.lua"
+    },
+    {
+      "reward_name": "Zwergenaxt",
+      "quest_id": "Q131",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1390.lua",
+      "file_path": "p1/n1390.lua"
+    },
+    {
+      "reward_name": "AmraUndLea1Liannon1",
+      "quest_id": "Q131",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1390.lua",
+      "file_path": "p1/n1390.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Alfalas",
+      "quest_id": "Q90",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1394.lua",
+      "file_path": "p1/n1394.lua"
+    },
+    {
+      "reward_name": "Einsiedler1Shan",
+      "quest_id": "Q93",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1394.lua",
+      "file_path": "p1/n1394.lua"
+    },
+    {
+      "reward_name": "Einsiedler1Shan",
+      "quest_id": "Q90",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1394.lua",
+      "file_path": "p1/n1394.lua"
+    },
+    {
+      "reward_name": "AmraUndLea1Liannon2",
+      "quest_id": "Q90",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1394.lua",
+      "file_path": "p1/n1394.lua"
+    },
+    {
+      "reward_name": "AmraUndLea2Liannon1",
+      "quest_id": "Q381",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1394.lua",
+      "file_path": "p1/n1394.lua"
+    },
+    {
+      "reward_name": "KleineFische1",
+      "quest_id": "Q128",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1396.lua",
+      "file_path": "p1/n1396.lua"
+    },
+    {
+      "reward_name": "AmraUndLea2Liannon2",
+      "quest_id": "Q128",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1396.lua",
+      "file_path": "p1/n1396.lua"
+    },
+    {
+      "reward_name": "EinSeltsamerRing",
+      "quest_id": "Q46",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1388.lua",
+      "file_path": "p1/n1388.lua"
+    },
+    {
+      "reward_name": "AusDerTiefe1Schreiber",
+      "quest_id": "Q41",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1388.lua",
+      "file_path": "p1/n1388.lua"
+    },
+    {
+      "reward_name": "AusDerTiefe2Spaeher",
+      "quest_id": "Q557",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1388.lua",
+      "file_path": "p1/n1388.lua"
+    },
+    {
+      "reward_name": "WegNachEloni2Portal",
+      "quest_id": "Q17",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1611.lua",
+      "file_path": "p1/n1611.lua"
+    },
+    {
+      "reward_name": "WegNachEloni2Portal",
+      "quest_id": "Q17",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1610.lua",
+      "file_path": "p1/n1610.lua"
+    },
+    {
+      "reward_name": "WegNachEloni2Portal",
+      "quest_id": "Q17",
+      "quest_state": null,
+      "platform": "P1",
+      "file": "n1406.lua",
+      "file_path": "p1/n1406.lua"
+    },
+    {
+      "reward_name": "WundtinkturSwerdis",
+      "quest_id": "Q357",
+      "quest_state": null,
+      "platform": "P2",
+      "file": "n2628.lua",
+      "file_path": "p2/n2628.lua"
+    },
+    {
+      "reward_name": "TrommelnInWaeldern",
+      "quest_id": "Q132",
+      "quest_state": null,
+      "platform": "P2",
+      "file": "n1399.lua",
+      "file_path": "p2/n1399.lua"
+    },
+    {
+      "reward_name": "DieFreihaendler",
+      "quest_id": "Q66",
+      "quest_state": null,
+      "platform": "P2",
+      "file": "n2904.lua",
+      "file_path": "p2/n2904.lua"
+    },
+    {
+      "reward_name": "DieFreihaendler",
+      "quest_id": "Q66",
+      "quest_state": null,
+      "platform": "P2",
+      "file": "n2904.lua",
+      "file_path": "p2/n2904.lua"
+    },
+    {
+      "reward_name": "DieFreihaendler",
+      "quest_id": "Q66",
+      "quest_state": null,
+      "platform": "P2",
+      "file": "n2904.lua",
+      "file_path": "p2/n2904.lua"
+    },
+    {
+      "reward_name": "StaubDerSterne1",
+      "quest_id": "Q71",
+      "quest_state": null,
+      "platform": "P2",
+      "file": "n2905.lua",
+      "file_path": "p2/n2905.lua"
+    },
+    {
+      "reward_name": "StaubDerSterne2",
+      "quest_id": "Q71",
+      "quest_state": null,
+      "platform": "P2",
+      "file": "n2905.lua",
+      "file_path": "p2/n2905.lua"
+    },
+    {
+      "reward_name": "StaubDerSterne3",
+      "quest_id": "Q71",
+      "quest_state": null,
+      "platform": "P2",
+      "file": "n2905.lua",
+      "file_path": "p2/n2905.lua"
+    },
+    {
+      "reward_name": "DieLetztenSchuetzen2",
+      "quest_id": "Q32",
+      "quest_state": null,
+      "platform": "P2",
+      "file": "n1411.lua",
+      "file_path": "p2/n1411.lua"
+    },
+    {
+      "reward_name": "Traumdieb",
+      "quest_id": "Q73",
+      "quest_state": null,
+      "platform": "P2",
+      "file": "n2907.lua",
+      "file_path": "p2/n2907.lua"
+    },
+    {
+      "reward_name": "DieLetztenSchuetzen1",
+      "quest_id": "Q30",
+      "quest_state": null,
+      "platform": "P2",
+      "file": "n1500.lua",
+      "file_path": "p2/n1500.lua"
+    },
+    {
+      "reward_name": "DieLetztenSchuetzen3",
+      "quest_id": "Q34",
+      "quest_state": null,
+      "platform": "P2",
+      "file": "n1505.lua",
+      "file_path": "p2/n1505.lua"
+    },
+    {
+      "reward_name": "DieGeiseln",
+      "quest_id": "Q460",
+      "quest_state": null,
+      "platform": "P4",
+      "file": "n1387.lua",
+      "file_path": "p4/n1387.lua"
+    },
+    {
+      "reward_name": "Bannwerk1",
+      "quest_id": "Q462",
+      "quest_state": null,
+      "platform": "P4",
+      "file": "n1387.lua",
+      "file_path": "p4/n1387.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q24",
+      "quest_state": null,
+      "platform": "P4",
+      "file": "n1387.lua",
+      "file_path": "p4/n1387.lua"
+    },
+    {
+      "reward_name": "DurchDenSchattenhain",
+      "quest_id": "Q22",
+      "quest_state": null,
+      "platform": "P4",
+      "file": "n1362.lua",
+      "file_path": "p4/n1362.lua"
+    },
+    {
+      "reward_name": "Kopfjagd6Complete",
+      "quest_id": "Q22",
+      "quest_state": null,
+      "platform": "P4",
+      "file": "n1362.lua",
+      "file_path": "p4/n1362.lua"
+    },
+    {
+      "reward_name": "Kopfjagd1Head1",
+      "quest_id": "Q453",
+      "quest_state": null,
+      "platform": "P4",
+      "file": "n0.lua",
+      "file_path": "p4/n0.lua"
+    },
+    {
+      "reward_name": "Kopfjagd2Head2",
+      "quest_id": "Q453",
+      "quest_state": null,
+      "platform": "P4",
+      "file": "n0.lua",
+      "file_path": "p4/n0.lua"
+    },
+    {
+      "reward_name": "Kopfjagd3Head3",
+      "quest_id": "Q453",
+      "quest_state": null,
+      "platform": "P4",
+      "file": "n0.lua",
+      "file_path": "p4/n0.lua"
+    },
+    {
+      "reward_name": "Kopfjagd4Head4",
+      "quest_id": "Q453",
+      "quest_state": null,
+      "platform": "P4",
+      "file": "n0.lua",
+      "file_path": "p4/n0.lua"
+    },
+    {
+      "reward_name": "Kopfjagd5Head5",
+      "quest_id": "Q453",
+      "quest_state": null,
+      "platform": "P4",
+      "file": "n0.lua",
+      "file_path": "p4/n0.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel2Dryaden",
+      "quest_id": "Q486",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n3394.lua",
+      "file_path": "p5/n3394.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q134",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q134",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q134",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q96",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q96",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q136",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q137",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q134",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q136",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q136",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q137",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q136",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q137",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q134",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q134",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q134",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q134",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q134",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q134",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Bannwerk2",
+      "quest_id": "Q134",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "quest_id": "Q134",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "PurpurnesBanner1Kettchen",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "PurpurnesBanner2",
+      "quest_id": "Q100",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1956.lua",
+      "file_path": "p5/n1956.lua"
+    },
+    {
+      "reward_name": "Kopfjagd6Complete",
+      "quest_id": "Q463",
+      "quest_state": null,
+      "platform": "P5",
+      "file": "n1957.lua",
+      "file_path": "p5/n1957.lua"
+    },
+    {
+      "reward_name": "FeineStoffe1",
+      "quest_id": "Q413",
+      "quest_state": null,
+      "platform": "P6",
+      "file": "n1988.lua",
+      "file_path": "P6/n1988.lua"
+    },
+    {
+      "reward_name": "AlterMannUndMusik",
+      "quest_id": "Q410",
+      "quest_state": null,
+      "platform": "P6",
+      "file": "n1989.lua",
+      "file_path": "P6/n1989.lua"
+    },
+    {
+      "reward_name": "KoenigDerSpinnen",
+      "quest_id": "Q107",
+      "quest_state": null,
+      "platform": "P6",
+      "file": "n1987.lua",
+      "file_path": "P6/n1987.lua"
+    },
+    {
+      "reward_name": "AmraUndLea2Sentos",
+      "quest_id": "Q385",
+      "quest_state": null,
+      "platform": "P6",
+      "file": "n2898.lua",
+      "file_path": "P6/n2898.lua"
+    },
+    {
+      "reward_name": "AmWildlandPass1",
+      "quest_id": "Q99",
+      "quest_state": null,
+      "platform": "P6",
+      "file": "n0.lua",
+      "file_path": "P6/n0.lua"
+    },
+    {
+      "reward_name": "AmWildlandPass2",
+      "quest_id": "Q99",
+      "quest_state": null,
+      "platform": "P6",
+      "file": "n0.lua",
+      "file_path": "P6/n0.lua"
+    },
+    {
+      "reward_name": "EndeDesOrdens2DreiItems",
+      "quest_id": "Q522",
+      "quest_state": null,
+      "platform": "P7",
+      "file": "n4010.lua",
+      "file_path": "P7/n4010.lua"
+    },
+    {
+      "reward_name": "AmraUndLea4",
+      "quest_id": "Q521",
+      "quest_state": null,
+      "platform": "P7",
+      "file": "n4010.lua",
+      "file_path": "P7/n4010.lua"
+    },
+    {
+      "reward_name": "AmraUndLea4",
+      "quest_id": "Q521",
+      "quest_state": null,
+      "platform": "P7",
+      "file": "n4010.lua",
+      "file_path": "P7/n4010.lua"
+    },
+    {
+      "reward_name": "AmraUndLea4",
+      "quest_id": "Q521",
+      "quest_state": null,
+      "platform": "P7",
+      "file": "n4010.lua",
+      "file_path": "P7/n4010.lua"
+    },
+    {
+      "reward_name": "AmraUndLea4",
+      "quest_id": "Q521",
+      "quest_state": null,
+      "platform": "P7",
+      "file": "n4010.lua",
+      "file_path": "P7/n4010.lua"
+    },
+    {
+      "reward_name": "AmraUndLea4",
+      "quest_id": "Q521",
+      "quest_state": null,
+      "platform": "P7",
+      "file": "n4010.lua",
+      "file_path": "P7/n4010.lua"
+    },
+    {
+      "reward_name": "AmraUndLea4",
+      "quest_id": "Q390",
+      "quest_state": null,
+      "platform": "P7",
+      "file": "n4010.lua",
+      "file_path": "P7/n4010.lua"
+    },
+    {
+      "reward_name": "AmraUndLea4",
+      "quest_id": "Q521",
+      "quest_state": null,
+      "platform": "P7",
+      "file": "n4010.lua",
+      "file_path": "P7/n4010.lua"
+    },
+    {
+      "reward_name": "AmraUndLea4",
+      "quest_id": "Q521",
+      "quest_state": null,
+      "platform": "P7",
+      "file": "n4010.lua",
+      "file_path": "P7/n4010.lua"
+    },
+    {
+      "reward_name": "EndeDesOrdens1Erreichen",
+      "quest_id": "Q521",
+      "quest_state": null,
+      "platform": "P7",
+      "file": "n4009.lua",
+      "file_path": "P7/n4009.lua"
+    },
+    {
+      "reward_name": "Marcia1",
+      "quest_id": "Q122",
+      "quest_state": null,
+      "platform": "P9",
+      "file": "n2016.lua",
+      "file_path": "P9/n2016.lua"
+    },
+    {
+      "reward_name": "Eisenkarren1",
+      "quest_id": "Q3309",
+      "quest_state": null,
+      "platform": "P9",
+      "file": "n3309.lua",
+      "file_path": "P9/n3309.lua"
+    },
+    {
+      "reward_name": "SchlachtUmBrunnenfels2a",
+      "quest_id": "Q117",
+      "quest_state": null,
+      "platform": "P9",
+      "file": "n2017.lua",
+      "file_path": "P9/n2017.lua"
+    },
+    {
+      "reward_name": "SchlachtUmBrunnenfels2",
+      "quest_id": "Q117",
+      "quest_state": null,
+      "platform": "P9",
+      "file": "n2017.lua",
+      "file_path": "P9/n2017.lua"
+    },
+    {
+      "reward_name": "Eisenkarren7",
+      "quest_id": "Q3315",
+      "quest_state": null,
+      "platform": "P9",
+      "file": "n3315.lua",
+      "file_path": "P9/n3315.lua"
+    },
+    {
+      "reward_name": "Eisenkarren6",
+      "quest_id": "Q3314",
+      "quest_state": null,
+      "platform": "P9",
+      "file": "n3314.lua",
+      "file_path": "P9/n3314.lua"
+    },
+    {
+      "reward_name": "SchlachtUmBrunnenfels1",
+      "quest_id": "Q122",
+      "quest_state": null,
+      "platform": "P9",
+      "file": "n0.lua",
+      "file_path": "P9/n0.lua"
+    },
+    {
+      "reward_name": "Eisenkarren2",
+      "quest_id": "Q3310",
+      "quest_state": null,
+      "platform": "P9",
+      "file": "n3310.lua",
+      "file_path": "P9/n3310.lua"
+    },
+    {
+      "reward_name": "Eisenkarren3",
+      "quest_id": "Q3311",
+      "quest_state": null,
+      "platform": "P9",
+      "file": "n3311.lua",
+      "file_path": "P9/n3311.lua"
+    },
+    {
+      "reward_name": "Eisenkarren5",
+      "quest_id": "Q3313",
+      "quest_state": null,
+      "platform": "P9",
+      "file": "n3313.lua",
+      "file_path": "P9/n3313.lua"
+    },
+    {
+      "reward_name": "Eisenkarren4",
+      "quest_id": "Q3312",
+      "quest_state": null,
+      "platform": "P9",
+      "file": "n3312.lua",
+      "file_path": "P9/n3312.lua"
+    },
+    {
+      "reward_name": "JeGroesser2",
+      "quest_id": "Q158",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2189.lua",
+      "file_path": "P10/n2189.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental1",
+      "quest_id": "Q403",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2177.lua",
+      "file_path": "P10/n2177.lua"
+    },
+    {
+      "reward_name": "Erdenklinge2",
+      "quest_id": "Q166",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2177.lua",
+      "file_path": "P10/n2177.lua"
+    },
+    {
+      "reward_name": "Zwergendienste2Cronvig",
+      "quest_id": "Q488",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2577.lua",
+      "file_path": "P10/n2577.lua"
+    },
+    {
+      "reward_name": "WeisseSchatten1",
+      "quest_id": "Q164",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2263.lua",
+      "file_path": "P10/n2263.lua"
+    },
+    {
+      "reward_name": "WeisseSchatten2",
+      "quest_id": "Q164",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2262.lua",
+      "file_path": "P10/n2262.lua"
+    },
+    {
+      "reward_name": "FeineStoffe2Miria",
+      "quest_id": "Q480",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2183.lua",
+      "file_path": "P10/n2183.lua"
+    },
+    {
+      "reward_name": "Reisserfell",
+      "quest_id": "Q481",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2183.lua",
+      "file_path": "P10/n2183.lua"
+    },
+    {
+      "reward_name": "JeGroesser1",
+      "quest_id": "Q151",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2182.lua",
+      "file_path": "P10/n2182.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental2",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q145",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q145",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental4",
+      "quest_id": "Q141",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2184.lua",
+      "file_path": "P10/n2184.lua"
+    },
+    {
+      "reward_name": "Erdenklinge3",
+      "quest_id": "Q176",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2179.lua",
+      "file_path": "P10/n2179.lua"
+    },
+    {
+      "reward_name": "Erdenklinge4",
+      "quest_id": "Q170",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2179.lua",
+      "file_path": "P10/n2179.lua"
+    },
+    {
+      "reward_name": "InsGrauschattental4",
+      "quest_id": "Q138",
+      "quest_state": null,
+      "platform": "P10",
+      "file": "n2178.lua",
+      "file_path": "P10/n2178.lua"
+    },
+    {
+      "reward_name": "Erdklinge11",
+      "quest_id": "Q482",
+      "quest_state": null,
+      "platform": "P11",
+      "file": "n2266.lua",
+      "file_path": "P11/n2266.lua"
+    },
+    {
+      "reward_name": "Erdklinge12",
+      "quest_id": "Q482",
+      "quest_state": null,
+      "platform": "P11",
+      "file": "n2266.lua",
+      "file_path": "P11/n2266.lua"
+    },
+    {
+      "reward_name": "Erdklinge12",
+      "quest_id": "Q269",
+      "quest_state": null,
+      "platform": "P11",
+      "file": "n2266.lua",
+      "file_path": "P11/n2266.lua"
+    },
+    {
+      "reward_name": "Riesenaerger1",
+      "quest_id": "Q186",
+      "quest_state": null,
+      "platform": "P11",
+      "file": "n2264.lua",
+      "file_path": "P11/n2264.lua"
+    },
+    {
+      "reward_name": "Riesenaerger2",
+      "quest_id": "Q186",
+      "quest_state": null,
+      "platform": "P11",
+      "file": "n2264.lua",
+      "file_path": "P11/n2264.lua"
+    },
+    {
+      "reward_name": "Riesenaerger2",
+      "quest_id": "Q189",
+      "quest_state": null,
+      "platform": "P11",
+      "file": "n2264.lua",
+      "file_path": "P11/n2264.lua"
+    },
+    {
+      "reward_name": "Giftzwerg",
+      "quest_id": "Q509",
+      "quest_state": null,
+      "platform": "P11",
+      "file": "n2680.lua",
+      "file_path": "P11/n2680.lua"
+    },
+    {
+      "reward_name": "Grenzkrieg1Festung",
+      "quest_id": "Q210",
+      "quest_state": null,
+      "platform": "P12",
+      "file": "n2322.lua",
+      "file_path": "P12/n2322.lua"
+    },
+    {
+      "reward_name": "Verraeter",
+      "quest_id": "Q199",
+      "quest_state": null,
+      "platform": "P12",
+      "file": "n2332.lua",
+      "file_path": "P12/n2332.lua"
+    },
+    {
+      "reward_name": "Grenzkrieg2Canyon",
+      "quest_id": "Q190",
+      "quest_state": null,
+      "platform": "P12",
+      "file": "n0.lua",
+      "file_path": "P12/n0.lua"
+    },
+    {
+      "reward_name": "MaskeDesBelial1",
+      "quest_id": "Q190",
+      "quest_state": null,
+      "platform": "P12",
+      "file": "n0.lua",
+      "file_path": "P12/n0.lua"
+    },
+    {
+      "reward_name": "MaskeDesBelial2",
+      "quest_id": "Q190",
+      "quest_state": null,
+      "platform": "P12",
+      "file": "n0.lua",
+      "file_path": "P12/n0.lua"
+    },
+    {
+      "reward_name": "Schattenwelt4Kristall",
+      "quest_id": "Q421",
+      "quest_state": null,
+      "platform": "P15",
+      "file": "n3256.lua",
+      "file_path": "P15/n3256.lua"
+    },
+    {
+      "reward_name": "Trickster1Cassius",
+      "quest_id": "Q221",
+      "quest_state": null,
+      "platform": "P15",
+      "file": "n4199.lua",
+      "file_path": "P15/n4199.lua"
+    },
+    {
+      "reward_name": "Homunculus",
+      "quest_id": "Q2480",
+      "quest_state": null,
+      "platform": "P15",
+      "file": "n2480.lua",
+      "file_path": "P15/n2480.lua"
+    },
+    {
+      "reward_name": "Homunculus",
+      "quest_id": "Q2480",
+      "quest_state": null,
+      "platform": "P15",
+      "file": "n2480.lua",
+      "file_path": "P15/n2480.lua"
+    },
+    {
+      "reward_name": "KlagendeSteine1BisTor",
+      "quest_id": "Q225",
+      "quest_state": null,
+      "platform": "P15",
+      "file": "n0.lua",
+      "file_path": "P15/n0.lua"
+    },
+    {
+      "reward_name": "KlagendeSteine2Korshar",
+      "quest_id": "Q238",
+      "quest_state": null,
+      "platform": "P15",
+      "file": "n0.lua",
+      "file_path": "P15/n0.lua"
+    },
+    {
+      "reward_name": "MaskeDesBelial2",
+      "quest_id": "Q239",
+      "quest_state": null,
+      "platform": "P15",
+      "file": "n0.lua",
+      "file_path": "P15/n0.lua"
+    },
+    {
+      "reward_name": "FluesterndeStadt5Maske",
+      "quest_id": "Q244",
+      "quest_state": null,
+      "platform": "P16",
+      "file": "n2576_CutsceneHokanII_mask.lua",
+      "file_path": "p16/n2576_CutsceneHokanII_mask.lua"
+    },
+    {
+      "reward_name": "FluesterndeStadt5Maske",
+      "quest_id": "Q244",
+      "quest_state": null,
+      "platform": "P16",
+      "file": "n2576_CutsceneHokanI_mask.lua",
+      "file_path": "p16/n2576_CutsceneHokanI_mask.lua"
+    },
+    {
+      "reward_name": "MosaikDesTodes",
+      "quest_id": "Q3616",
+      "quest_state": null,
+      "platform": "P16",
+      "file": "n3616.lua",
+      "file_path": "p16/n3616.lua"
+    },
+    {
+      "reward_name": "MaskeDesBelial2",
+      "quest_id": "Q493",
+      "quest_state": null,
+      "platform": "P16",
+      "file": "n0.lua",
+      "file_path": "p16/n0.lua"
+    },
+    {
+      "reward_name": "FluesterndeStadt1Item1",
+      "quest_id": "Q493",
+      "quest_state": null,
+      "platform": "P16",
+      "file": "n0.lua",
+      "file_path": "p16/n0.lua"
+    },
+    {
+      "reward_name": "FluesterndeStadt1Item2",
+      "quest_id": "Q493",
+      "quest_state": null,
+      "platform": "P16",
+      "file": "n0.lua",
+      "file_path": "p16/n0.lua"
+    },
+    {
+      "reward_name": "FluesterndeStadt1Item3",
+      "quest_id": "Q217",
+      "quest_state": null,
+      "platform": "P16",
+      "file": "n0.lua",
+      "file_path": "p16/n0.lua"
+    },
+    {
+      "reward_name": "FluesterndeStadt4Endkampf",
+      "quest_id": "Q212",
+      "quest_state": null,
+      "platform": "P16",
+      "file": "n0.lua",
+      "file_path": "p16/n0.lua"
+    },
+    {
+      "reward_name": "AmraLeaGrab",
+      "quest_id": "Q211",
+      "quest_state": null,
+      "platform": "P16",
+      "file": "n0.lua",
+      "file_path": "p16/n0.lua"
+    },
+    {
+      "reward_name": "AufDemWall4Village4",
+      "quest_id": "Q250",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2613.lua",
+      "file_path": "p17/n2613.lua"
+    },
+    {
+      "reward_name": "AufDemWall4Village4",
+      "quest_id": "Q250",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2613.lua",
+      "file_path": "p17/n2613.lua"
+    },
+    {
+      "reward_name": "AufDemWall4Village4",
+      "quest_id": "Q250",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2613.lua",
+      "file_path": "p17/n2613.lua"
+    },
+    {
+      "reward_name": "AufDemWall4Village4",
+      "quest_id": "Q250",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2613.lua",
+      "file_path": "p17/n2613.lua"
+    },
+    {
+      "reward_name": "AufDemWall1Village1",
+      "quest_id": "Q2615",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2615.lua",
+      "file_path": "p17/n2615.lua"
+    },
+    {
+      "reward_name": "AufDemWall2Village2",
+      "quest_id": "Q2614",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2614.lua",
+      "file_path": "p17/n2614.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q260",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall3Village3",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "GwensMedizin",
+      "quest_id": "Q258",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2616.lua",
+      "file_path": "p17/n2616.lua"
+    },
+    {
+      "reward_name": "AufDemWall5Endkampf",
+      "quest_id": "Q265",
+      "quest_state": null,
+      "platform": "P17",
+      "file": "n2619.lua",
+      "file_path": "p17/n2619.lua"
+    },
+    {
+      "reward_name": "DerPhoenix6Ablieferung",
+      "quest_id": "Q322",
+      "quest_state": null,
+      "platform": "P19",
+      "file": "n2837.lua",
+      "file_path": "P19/n2837.lua"
+    },
+    {
+      "reward_name": "DerPhoenix6Ablieferung",
+      "quest_id": "Q322",
+      "quest_state": null,
+      "platform": "P19",
+      "file": "n2837.lua",
+      "file_path": "P19/n2837.lua"
+    },
+    {
+      "reward_name": "DerPhoenix1Waechter",
+      "quest_id": "Q308",
+      "quest_state": null,
+      "platform": "P19",
+      "file": "n2850.lua",
+      "file_path": "P19/n2850.lua"
+    },
+    {
+      "reward_name": "DerPhoenix2Splitter1",
+      "quest_id": "Q318",
+      "quest_state": null,
+      "platform": "P19",
+      "file": "n2850.lua",
+      "file_path": "P19/n2850.lua"
+    },
+    {
+      "reward_name": "DerPhoenix2Splitter2",
+      "quest_id": "Q319",
+      "quest_state": null,
+      "platform": "P19",
+      "file": "n2850.lua",
+      "file_path": "P19/n2850.lua"
+    },
+    {
+      "reward_name": "DerPhoenix2Splitter3",
+      "quest_id": "Q2850",
+      "quest_state": null,
+      "platform": "P19",
+      "file": "n2850.lua",
+      "file_path": "P19/n2850.lua"
+    },
+    {
+      "reward_name": "DerPhoenix2Splitter4",
+      "quest_id": "Q2850",
+      "quest_state": null,
+      "platform": "P19",
+      "file": "n2850.lua",
+      "file_path": "P19/n2850.lua"
+    },
+    {
+      "reward_name": "Steinbrecher",
+      "quest_id": "Q279",
+      "quest_state": null,
+      "platform": "P21",
+      "file": "n2798.lua",
+      "file_path": "p21/n2798.lua"
+    },
+    {
+      "reward_name": "ShardAutum",
+      "quest_id": "Q334",
+      "quest_state": null,
+      "platform": "P21",
+      "file": "n3841.lua",
+      "file_path": "p21/n3841.lua"
+    },
+    {
+      "reward_name": "WolfUndDrache1",
+      "quest_id": "Q276",
+      "quest_state": null,
+      "platform": "P21",
+      "file": "n2800.lua",
+      "file_path": "p21/n2800.lua"
+    },
+    {
+      "reward_name": "WolfUndDrache2",
+      "quest_id": "Q277",
+      "quest_state": null,
+      "platform": "P21",
+      "file": "n2800.lua",
+      "file_path": "p21/n2800.lua"
+    },
+    {
+      "reward_name": "DerKatarakt",
+      "quest_id": "Q376",
+      "quest_state": null,
+      "platform": "P21",
+      "file": "n2976.lua",
+      "file_path": "p21/n2976.lua"
+    },
+    {
+      "reward_name": "Thar",
+      "quest_id": "Q514",
+      "quest_state": null,
+      "platform": "P21",
+      "file": "n2797.lua",
+      "file_path": "p21/n2797.lua"
+    },
+    {
+      "reward_name": "Schattenwelt2Rigour",
+      "quest_id": "Q512",
+      "quest_state": null,
+      "platform": "P21",
+      "file": "n2797.lua",
+      "file_path": "p21/n2797.lua"
+    },
+    {
+      "reward_name": "Schattenwelt2aRigour",
+      "quest_id": "Q512",
+      "quest_state": null,
+      "platform": "P21",
+      "file": "n2797.lua",
+      "file_path": "p21/n2797.lua"
+    },
+    {
+      "reward_name": "Schattenwelt2bRigour",
+      "quest_id": "Q514",
+      "quest_state": null,
+      "platform": "P21",
+      "file": "n2797.lua",
+      "file_path": "p21/n2797.lua"
+    },
+    {
+      "reward_name": "DurchdenSpalt2Her",
+      "quest_id": "Q498",
+      "quest_state": null,
+      "platform": "P23",
+      "file": "n3736.lua",
+      "file_path": "P23/n3736.lua"
+    },
+    {
+      "reward_name": "Ulather",
+      "quest_id": "Q499",
+      "quest_state": null,
+      "platform": "P23",
+      "file": "n3736.lua",
+      "file_path": "P23/n3736.lua"
+    },
+    {
+      "reward_name": "DurchdenSpalt1Hin",
+      "quest_id": "Q496",
+      "quest_state": null,
+      "platform": "P23",
+      "file": "n3736.lua",
+      "file_path": "P23/n3736.lua"
+    },
+    {
+      "reward_name": "Klingensturm2Sartarius",
+      "quest_id": "Q532",
+      "quest_state": null,
+      "platform": "P25",
+      "file": "n3024_CutsceneSartariusDeath.lua",
+      "file_path": "P25/n3024_CutsceneSartariusDeath.lua"
+    },
+    {
+      "reward_name": "AmraUndLea4",
+      "quest_id": "Q533",
+      "quest_state": null,
+      "platform": "P25",
+      "file": "n2910.lua",
+      "file_path": "P25/n2910.lua"
+    },
+    {
+      "reward_name": "AmraUndLea4",
+      "quest_id": "Q533",
+      "quest_state": null,
+      "platform": "P25",
+      "file": "n2910.lua",
+      "file_path": "P25/n2910.lua"
+    },
+    {
+      "reward_name": "AmraUndLea4",
+      "quest_id": "Q533",
+      "quest_state": null,
+      "platform": "P25",
+      "file": "n2910.lua",
+      "file_path": "P25/n2910.lua"
+    },
+    {
+      "reward_name": "AmraUndLea4",
+      "quest_id": "Q533",
+      "quest_state": null,
+      "platform": "P25",
+      "file": "n2910.lua",
+      "file_path": "P25/n2910.lua"
+    },
+    {
+      "reward_name": "Klingensturm1Monument",
+      "quest_id": "Q531",
+      "quest_state": null,
+      "platform": "P25",
+      "file": "n0.lua",
+      "file_path": "P25/n0.lua"
+    },
+    {
+      "reward_name": "NachUrgath3Archon",
+      "quest_id": "Q538",
+      "quest_state": null,
+      "platform": "P27",
+      "file": "n4201.lua",
+      "file_path": "P27/n4201.lua"
+    },
+    {
+      "reward_name": "NachUrgath1Elfensiedlung",
+      "quest_id": "Q535",
+      "quest_state": null,
+      "platform": "P27",
+      "file": "n4200.lua",
+      "file_path": "P27/n4200.lua"
+    },
+    {
+      "reward_name": "NachUrgath2Monument",
+      "quest_id": "Q534",
+      "quest_state": null,
+      "platform": "P27",
+      "file": "n0.lua",
+      "file_path": "P27/n0.lua"
+    },
+    {
+      "reward_name": "AtmenderWald1Waldherz",
+      "quest_id": "Q539",
+      "quest_state": null,
+      "platform": "P30",
+      "file": "n0.lua",
+      "file_path": "P30/n0.lua"
+    },
+    {
+      "reward_name": "AtmenderWald2Portal",
+      "quest_id": "Q539",
+      "quest_state": null,
+      "platform": "P30",
+      "file": "n0.lua",
+      "file_path": "P30/n0.lua"
+    },
+    {
+      "reward_name": "KreisSchluss1Tor1",
+      "quest_id": "Q4181",
+      "quest_state": null,
+      "platform": "P32",
+      "file": "n4181.lua",
+      "file_path": "p32/n4181.lua"
+    },
+    {
+      "reward_name": "KreisSchluss2Tor2",
+      "quest_id": "Q4182",
+      "quest_state": null,
+      "platform": "P32",
+      "file": "n4182.lua",
+      "file_path": "p32/n4182.lua"
+    },
+    {
+      "reward_name": "KreisSchluss2Tor3",
+      "quest_id": "Q4651",
+      "quest_state": null,
+      "platform": "P32",
+      "file": "n4651.lua",
+      "file_path": "p32/n4651.lua"
+    },
+    {
+      "reward_name": "KreisSchluss4Soulforger",
+      "quest_id": "Q542",
+      "quest_state": null,
+      "platform": "P32",
+      "file": "n0.lua",
+      "file_path": "p32/n0.lua"
+    },
+    {
+      "reward_name": "EchosBuchstabe1",
+      "quest_id": "Q325",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n3323.lua",
+      "file_path": "P63/n3323.lua"
+    },
+    {
+      "reward_name": "EchosBuchstabe3",
+      "quest_id": "Q325",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n3322.lua",
+      "file_path": "P63/n3322.lua"
+    },
+    {
+      "reward_name": "WundtinkturValdis",
+      "quest_id": "Q357",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2612.lua",
+      "file_path": "P63/n2612.lua"
+    },
+    {
+      "reward_name": "EchosBuchstabe2",
+      "quest_id": "Q325",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n3324.lua",
+      "file_path": "P63/n3324.lua"
+    },
+    {
+      "reward_name": "Schwarzeibe",
+      "quest_id": "Q414",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n3044.lua",
+      "file_path": "P63/n3044.lua"
+    },
+    {
+      "reward_name": "TricksterFindFlink",
+      "quest_id": "Q527",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n4139.lua",
+      "file_path": "P63/n4139.lua"
+    },
+    {
+      "reward_name": "TricksterReturn",
+      "quest_id": "Q528",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n4139.lua",
+      "file_path": "P63/n4139.lua"
+    },
+    {
+      "reward_name": "BlutTombardTot",
+      "quest_id": "Q397",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2992.lua",
+      "file_path": "P63/n2992.lua"
+    },
+    {
+      "reward_name": "BlutAdhiraTrank",
+      "quest_id": "Q407",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2993.lua",
+      "file_path": "P63/n2993.lua"
+    },
+    {
+      "reward_name": "Schattenwelt1Castagir",
+      "quest_id": "Q417",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n3156.lua",
+      "file_path": "P63/n3156.lua"
+    },
+    {
+      "reward_name": "Schattenwelt3Manifest",
+      "quest_id": "Q423",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n3156.lua",
+      "file_path": "P63/n3156.lua"
+    },
+    {
+      "reward_name": "SchattenweltShadowpulse",
+      "quest_id": "Q530",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n3156.lua",
+      "file_path": "P63/n3156.lua"
+    },
+    {
+      "reward_name": "AmraUndLea3Sentos",
+      "quest_id": "Q384",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2897.lua",
+      "file_path": "P63/n2897.lua"
+    },
+    {
+      "reward_name": "Seelenschwerter",
+      "quest_id": "Q110",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2896.lua",
+      "file_path": "P63/n2896.lua"
+    },
+    {
+      "reward_name": "Seelenschwerter",
+      "quest_id": "Q469",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2896.lua",
+      "file_path": "P63/n2896.lua"
+    },
+    {
+      "reward_name": "Seelenschwerter",
+      "quest_id": "Q469",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2896.lua",
+      "file_path": "P63/n2896.lua"
+    },
+    {
+      "reward_name": "Drachenpanzer1",
+      "quest_id": "Q110",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2896.lua",
+      "file_path": "P63/n2896.lua"
+    },
+    {
+      "reward_name": "Drachenpanzer2",
+      "quest_id": "Q516",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2896.lua",
+      "file_path": "P63/n2896.lua"
+    },
+    {
+      "reward_name": "ZahnbrechersZangen",
+      "quest_id": "Q371",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2863.lua",
+      "file_path": "P63/n2863.lua"
+    },
+    {
+      "reward_name": "FeineStoffe3Seide",
+      "quest_id": "Q413",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2861.lua",
+      "file_path": "P63/n2861.lua"
+    },
+    {
+      "reward_name": "FeineStoffe3Seide",
+      "quest_id": "Q413",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2861.lua",
+      "file_path": "P63/n2861.lua"
+    },
+    {
+      "reward_name": "FeineStoffe4Robe",
+      "quest_id": "Q344",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2861.lua",
+      "file_path": "P63/n2861.lua"
+    },
+    {
+      "reward_name": "ThurgonBrief",
+      "quest_id": "Q344",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2861.lua",
+      "file_path": "P63/n2861.lua"
+    },
+    {
+      "reward_name": "KlingzogsBeinlinge",
+      "quest_id": "Q413",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2861.lua",
+      "file_path": "P63/n2861.lua"
+    },
+    {
+      "reward_name": "Zauberwerk1Augenglas",
+      "quest_id": "Q338",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2860.lua",
+      "file_path": "P63/n2860.lua"
+    },
+    {
+      "reward_name": "Zauberwerk2Feder",
+      "quest_id": "Q338",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2860.lua",
+      "file_path": "P63/n2860.lua"
+    },
+    {
+      "reward_name": "Zauberwerk3Kreide",
+      "quest_id": "Q340",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2860.lua",
+      "file_path": "P63/n2860.lua"
+    },
+    {
+      "reward_name": "Zauberwerk4Robe",
+      "quest_id": "Q341",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2860.lua",
+      "file_path": "P63/n2860.lua"
+    },
+    {
+      "reward_name": "SickHermit1Zirfar",
+      "quest_id": "Q358",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2865.lua",
+      "file_path": "P63/n2865.lua"
+    },
+    {
+      "reward_name": "SickHermit2Locke",
+      "quest_id": "Q360",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2865.lua",
+      "file_path": "P63/n2865.lua"
+    },
+    {
+      "reward_name": "EchosGoran",
+      "quest_id": "Q330",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2872.lua",
+      "file_path": "P63/n2872.lua"
+    },
+    {
+      "reward_name": "Zwergendienste1Hinrik",
+      "quest_id": "Q489",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n2578.lua",
+      "file_path": "P63/n2578.lua"
+    },
+    {
+      "reward_name": "AngriffDerHoehlenorks",
+      "quest_id": "Q424",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n0.lua",
+      "file_path": "P63/n0.lua"
+    },
+    {
+      "reward_name": "EchosShinTarGuar",
+      "quest_id": "Q110",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n0.lua",
+      "file_path": "P63/n0.lua"
+    },
+    {
+      "reward_name": "NachGraufurtPartEnde",
+      "quest_id": "Q424",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n3030_CutsceneSartarius.lua",
+      "file_path": "P63/n3030_CutsceneSartarius.lua"
+    },
+    {
+      "reward_name": "NachGraufurtPartVillage",
+      "quest_id": "Q439",
+      "quest_state": null,
+      "platform": "P63",
+      "file": "n3110.lua",
+      "file_path": "P63/n3110.lua"
+    },
+    {
+      "reward_name": "WumpusKilled",
+      "quest_id": "Q606",
+      "quest_state": null,
+      "platform": "P101",
+      "file": "n6333.lua",
+      "file_path": "p101/n6333.lua"
+    },
+    {
+      "reward_name": "ImCampMitAllenGeredet",
+      "quest_id": "Q571",
+      "quest_state": null,
+      "platform": "P101",
+      "file": "n0.lua",
+      "file_path": "p101/n0.lua"
+    },
+    {
+      "reward_name": "HQBefreien",
+      "quest_id": "Q560",
+      "quest_state": null,
+      "platform": "P101",
+      "file": "n0.lua",
+      "file_path": "p101/n0.lua"
+    },
+    {
+      "reward_name": "FluechtlingeNachNorden",
+      "quest_id": "Q644",
+      "quest_state": null,
+      "platform": "P101",
+      "file": "n0.lua",
+      "file_path": "p101/n0.lua"
+    },
+    {
+      "reward_name": "HeldenErschaffen",
+      "quest_id": "Q587",
+      "quest_state": null,
+      "platform": "P101",
+      "file": "n0_Outcries.lua",
+      "file_path": "p101/n0_Outcries.lua"
+    },
+    {
+      "reward_name": "SetriusErreicht",
+      "quest_id": "Q32008",
+      "quest_state": null,
+      "platform": "P102",
+      "file": "n32008_CutsceneSetrius.lua",
+      "file_path": "P102/n32008_CutsceneSetrius.lua"
+    },
+    {
+      "reward_name": "DreiMagierGruolunGive",
+      "quest_id": "Q637",
+      "quest_state": null,
+      "platform": "P102",
+      "file": "n6969.lua",
+      "file_path": "P102/n6969.lua"
+    },
+    {
+      "reward_name": "DreiMagierGruolunSave",
+      "quest_id": "Q643",
+      "quest_state": null,
+      "platform": "P102",
+      "file": "n6969.lua",
+      "file_path": "P102/n6969.lua"
+    },
+    {
+      "reward_name": "DreiMagierZolowinFree",
+      "quest_id": "Q634",
+      "quest_state": null,
+      "platform": "P102",
+      "file": "n6968.lua",
+      "file_path": "P102/n6968.lua"
+    },
+    {
+      "reward_name": "DreiMagierZolowinGive",
+      "quest_id": "Q637",
+      "quest_state": null,
+      "platform": "P102",
+      "file": "n6968.lua",
+      "file_path": "P102/n6968.lua"
+    },
+    {
+      "reward_name": "DreiMagierZolowinSave",
+      "quest_id": "Q643",
+      "quest_state": null,
+      "platform": "P102",
+      "file": "n6968.lua",
+      "file_path": "P102/n6968.lua"
+    },
+    {
+      "reward_name": "DreiMagierRenyaGive",
+      "quest_id": "Q637",
+      "quest_state": null,
+      "platform": "P102",
+      "file": "n6970.lua",
+      "file_path": "P102/n6970.lua"
+    },
+    {
+      "reward_name": "DreiMagierRenyaSave",
+      "quest_id": "Q643",
+      "quest_state": null,
+      "platform": "P102",
+      "file": "n6970.lua",
+      "file_path": "P102/n6970.lua"
+    },
+    {
+      "reward_name": "P102Erreicht",
+      "quest_id": "Q569",
+      "quest_state": null,
+      "platform": "P102",
+      "file": "n0.lua",
+      "file_path": "P102/n0.lua"
+    },
+    {
+      "reward_name": "HuluErreicht",
+      "quest_id": "Q569",
+      "quest_state": null,
+      "platform": "P102",
+      "file": "n0.lua",
+      "file_path": "P102/n0.lua"
+    },
+    {
+      "reward_name": "JaninaBefreit",
+      "quest_id": "Q572",
+      "quest_state": null,
+      "platform": "P102",
+      "file": "n0.lua",
+      "file_path": "P102/n0.lua"
+    },
+    {
+      "reward_name": "QuelleVergiftet",
+      "quest_id": "Q572",
+      "quest_state": null,
+      "platform": "P102",
+      "file": "n0.lua",
+      "file_path": "P102/n0.lua"
+    },
+    {
+      "reward_name": "KitharLagerZerstoert",
+      "quest_id": "Q564",
+      "quest_state": null,
+      "platform": "P102",
+      "file": "n0.lua",
+      "file_path": "P102/n0.lua"
+    },
+    {
+      "reward_name": "RuneDunhanGenommen",
+      "quest_id": "Q564",
+      "quest_state": null,
+      "platform": "P102",
+      "file": "n0.lua",
+      "file_path": "P102/n0.lua"
+    },
+    {
+      "reward_name": "P103Erreicht",
+      "quest_id": "Q590",
+      "quest_state": null,
+      "platform": "P103",
+      "file": "n0.lua",
+      "file_path": "P103/n0.lua"
+    },
+    {
+      "reward_name": "WaldschrateKilled",
+      "quest_id": "Q590",
+      "quest_state": null,
+      "platform": "P103",
+      "file": "n0.lua",
+      "file_path": "P103/n0.lua"
+    },
+    {
+      "reward_name": "RuneReowysGenommen",
+      "quest_id": "Q593",
+      "quest_state": null,
+      "platform": "P103",
+      "file": "n0.lua",
+      "file_path": "P103/n0.lua"
+    },
+    {
+      "reward_name": "Camp1Befreit",
+      "quest_id": "Q580",
+      "quest_state": null,
+      "platform": "P104",
+      "file": "n5645.lua",
+      "file_path": "P104/n5645.lua"
+    },
+    {
+      "reward_name": "Camp2Befreit",
+      "quest_id": "Q581",
+      "quest_state": null,
+      "platform": "P104",
+      "file": "n5652.lua",
+      "file_path": "P104/n5652.lua"
+    },
+    {
+      "reward_name": "Schluesselmeisterin",
+      "quest_id": "Q578",
+      "quest_state": null,
+      "platform": "P104",
+      "file": "n5643.lua",
+      "file_path": "P104/n5643.lua"
+    },
+    {
+      "reward_name": "Camp3Befreit",
+      "quest_id": "Q582",
+      "quest_state": null,
+      "platform": "P104",
+      "file": "n5659.lua",
+      "file_path": "P104/n5659.lua"
+    },
+    {
+      "reward_name": "P104Erreicht",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P104",
+      "file": "n0.lua",
+      "file_path": "P104/n0.lua"
+    },
+    {
+      "reward_name": "OrklagerEinnehmen",
+      "quest_id": "Q578",
+      "quest_state": null,
+      "platform": "P104",
+      "file": "n0.lua",
+      "file_path": "P104/n0.lua"
+    },
+    {
+      "reward_name": "SQTiondriaSeite1Gefunden",
+      "quest_id": "Q704",
+      "quest_state": null,
+      "platform": "P104",
+      "file": "n0.lua",
+      "file_path": "P104/n0.lua"
+    },
+    {
+      "reward_name": "SQTiondriaSeite2Gefunden",
+      "quest_id": "Q704",
+      "quest_state": null,
+      "platform": "P104",
+      "file": "n0.lua",
+      "file_path": "P104/n0.lua"
+    },
+    {
+      "reward_name": "SQTiondriaSeite3Gefunden",
+      "quest_id": "Q704",
+      "quest_state": null,
+      "platform": "P104",
+      "file": "n0.lua",
+      "file_path": "P104/n0.lua"
+    },
+    {
+      "reward_name": "SQScaramangirKilled",
+      "quest_id": "Q8061",
+      "quest_state": null,
+      "platform": "P105",
+      "file": "n8061.lua",
+      "file_path": "P105/n8061.lua"
+    },
+    {
+      "reward_name": "SQTiondriaFlinkBefreit",
+      "quest_id": "Q698",
+      "quest_state": null,
+      "platform": "P105",
+      "file": "n7287.lua",
+      "file_path": "P105/n7287.lua"
+    },
+    {
+      "reward_name": "SQTiondriaSchatzGeteilt",
+      "quest_id": "Q709",
+      "quest_state": null,
+      "platform": "P105",
+      "file": "n6799.lua",
+      "file_path": "P105/n6799.lua"
+    },
+    {
+      "reward_name": "SQTiondriaSchatzBehalten",
+      "quest_id": "Q714",
+      "quest_state": null,
+      "platform": "P105",
+      "file": "n6799.lua",
+      "file_path": "P105/n6799.lua"
+    },
+    {
+      "reward_name": "FugisBroughtToTirganach",
+      "quest_id": "Q683",
+      "quest_state": null,
+      "platform": "P105",
+      "file": "n7123.lua",
+      "file_path": "P105/n7123.lua"
+    },
+    {
+      "reward_name": "SQTiondriaBuchDariusZurueck",
+      "quest_id": "Q702",
+      "quest_state": null,
+      "platform": "P105",
+      "file": "n6803.lua",
+      "file_path": "P105/n6803.lua"
+    },
+    {
+      "reward_name": "SQTiondriaMordfallNotSolved",
+      "quest_id": "Q765",
+      "quest_state": null,
+      "platform": "P105",
+      "file": "n6591.lua",
+      "file_path": "P105/n6591.lua"
+    },
+    {
+      "reward_name": "SQTiondriaMordfallNotSolved",
+      "quest_id": "Q765",
+      "quest_state": null,
+      "platform": "P105",
+      "file": "n6591.lua",
+      "file_path": "P105/n6591.lua"
+    },
+    {
+      "reward_name": "SQTiondriaMordfallHalfSolved",
+      "quest_id": "Q765",
+      "quest_state": null,
+      "platform": "P105",
+      "file": "n6591.lua",
+      "file_path": "P105/n6591.lua"
+    },
+    {
+      "reward_name": "SQTiondriaMordfallSolved",
+      "quest_id": "Q765",
+      "quest_state": null,
+      "platform": "P105",
+      "file": "n6591.lua",
+      "file_path": "P105/n6591.lua"
+    },
+    {
+      "reward_name": "FugisBroughtToMap",
+      "quest_id": "Q584",
+      "quest_state": null,
+      "platform": "P105",
+      "file": "n0.lua",
+      "file_path": "P105/n0.lua"
+    },
+    {
+      "reward_name": "SkeletonCampDestroyed",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P105",
+      "file": "n0.lua",
+      "file_path": "P105/n0.lua"
+    },
+    {
+      "reward_name": "SQTiondriaBuchDariusGefunden",
+      "quest_id": "Q608",
+      "quest_state": null,
+      "platform": "P105",
+      "file": "n0.lua",
+      "file_path": "P105/n0.lua"
+    },
+    {
+      "reward_name": "P107KarteErreicht",
+      "quest_id": "Q684",
+      "quest_state": null,
+      "platform": "P107",
+      "file": "n0.lua",
+      "file_path": "P107/n0.lua"
+    },
+    {
+      "reward_name": "GeistercampBesiegt",
+      "quest_id": "Q684",
+      "quest_state": null,
+      "platform": "P107",
+      "file": "n0.lua",
+      "file_path": "P107/n0.lua"
+    },
+    {
+      "reward_name": "AnfuehrerBesiegt",
+      "quest_id": "Q684",
+      "quest_state": null,
+      "platform": "P107",
+      "file": "n0.lua",
+      "file_path": "P107/n0.lua"
+    },
+    {
+      "reward_name": "MasterOfMosaic",
+      "quest_id": "Q6862",
+      "quest_state": null,
+      "platform": "P107",
+      "file": "n6862.lua",
+      "file_path": "P107/n6862.lua"
+    },
+    {
+      "reward_name": "RueckkehrMitWindjalf",
+      "quest_id": "Q612",
+      "quest_state": null,
+      "platform": "P108",
+      "file": "n6304.lua",
+      "file_path": "P108/n6304.lua"
+    },
+    {
+      "reward_name": "GuramMachtSprengung",
+      "quest_id": "Q291",
+      "quest_state": null,
+      "platform": "P108",
+      "file": "n6200.lua",
+      "file_path": "P108/n6200.lua"
+    },
+    {
+      "reward_name": "P108KarteErreicht",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P108",
+      "file": "n0.lua",
+      "file_path": "P108/n0.lua"
+    },
+    {
+      "reward_name": "WindjalfBefreit",
+      "quest_id": "Q772",
+      "quest_state": null,
+      "platform": "P108",
+      "file": "n0.lua",
+      "file_path": "P108/n0.lua"
+    },
+    {
+      "reward_name": "SQTiondriaSchatzGefunden",
+      "quest_id": "Q772",
+      "quest_state": null,
+      "platform": "P108",
+      "file": "n0.lua",
+      "file_path": "P108/n0.lua"
+    },
+    {
+      "reward_name": "WerwolfTempel1",
+      "quest_id": "Q653",
+      "quest_state": null,
+      "platform": "P109",
+      "file": "n7236.lua",
+      "file_path": "P109/n7236.lua"
+    },
+    {
+      "reward_name": "WerwolfTempel2",
+      "quest_id": "Q654",
+      "quest_state": null,
+      "platform": "P109",
+      "file": "n7237.lua",
+      "file_path": "P109/n7237.lua"
+    },
+    {
+      "reward_name": "WerwolfGesamt",
+      "quest_id": "Q652",
+      "quest_state": null,
+      "platform": "P109",
+      "file": "n7257.lua",
+      "file_path": "P109/n7257.lua"
+    },
+    {
+      "reward_name": "WerwolfTempel3",
+      "quest_id": "Q655",
+      "quest_state": null,
+      "platform": "P109",
+      "file": "n7238.lua",
+      "file_path": "P109/n7238.lua"
+    },
+    {
+      "reward_name": "P109KarteErreicht",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P109",
+      "file": "n0.lua",
+      "file_path": "P109/n0.lua"
+    },
+    {
+      "reward_name": "P109PortalErreicht",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P109",
+      "file": "n0.lua",
+      "file_path": "P109/n0.lua"
+    },
+    {
+      "reward_name": "TorZerstoert",
+      "quest_id": "Q693",
+      "quest_state": null,
+      "platform": "P109",
+      "file": "n0.lua",
+      "file_path": "P109/n0.lua"
+    },
+    {
+      "reward_name": "ZwergeBefreit",
+      "quest_id": "Q693",
+      "quest_state": null,
+      "platform": "P109",
+      "file": "n0.lua",
+      "file_path": "P109/n0.lua"
+    },
+    {
+      "reward_name": "TrollcampZerstoert",
+      "quest_id": "Q693",
+      "quest_state": null,
+      "platform": "P109",
+      "file": "n0.lua",
+      "file_path": "P109/n0.lua"
+    },
+    {
+      "reward_name": "SternstadtZerstoert",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P110",
+      "file": "n0.lua",
+      "file_path": "P110/n0.lua"
+    },
+    {
+      "reward_name": "MondstadtZerstoert",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P110",
+      "file": "n0.lua",
+      "file_path": "P110/n0.lua"
+    },
+    {
+      "reward_name": "SonnenstadtZerstoert",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P110",
+      "file": "n0.lua",
+      "file_path": "P110/n0.lua"
+    },
+    {
+      "reward_name": "P110KarteErreicht",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P110",
+      "file": "n0.lua",
+      "file_path": "P110/n0.lua"
+    },
+    {
+      "reward_name": "InInnenstadtGekommen",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P110",
+      "file": "n0.lua",
+      "file_path": "P110/n0.lua"
+    },
+    {
+      "reward_name": "GrimBesiegt",
+      "quest_id": "Q32018",
+      "quest_state": null,
+      "platform": "P110",
+      "file": "n32018_CutsceneGrimQuestioning.lua",
+      "file_path": "P110/n32018_CutsceneGrimQuestioning.lua"
+    },
+    {
+      "reward_name": "AlleVierFackelnAn",
+      "quest_id": "Q675",
+      "quest_state": null,
+      "platform": "P111",
+      "file": "n0.lua",
+      "file_path": "P111/n0.lua"
+    },
+    {
+      "reward_name": "P111KarteErreicht",
+      "quest_id": "Q675",
+      "quest_state": null,
+      "platform": "P111",
+      "file": "n0.lua",
+      "file_path": "P111/n0.lua"
+    },
+    {
+      "reward_name": "SchattenringBekommen",
+      "quest_id": "Q675",
+      "quest_state": null,
+      "platform": "P111",
+      "file": "n0.lua",
+      "file_path": "P111/n0.lua"
+    },
+    {
+      "reward_name": "WaechterGetoetet",
+      "quest_id": "Q675",
+      "quest_state": null,
+      "platform": "P111",
+      "file": "n0.lua",
+      "file_path": "P111/n0.lua"
+    },
+    {
+      "reward_name": "ElementBeschworen",
+      "quest_id": "Q675",
+      "quest_state": null,
+      "platform": "P111",
+      "file": "n0.lua",
+      "file_path": "P111/n0.lua"
+    },
+    {
+      "reward_name": "SQTiondriaObjekteEingesetzt",
+      "quest_id": "Q709",
+      "quest_state": null,
+      "platform": "P111",
+      "file": "n7565.lua",
+      "file_path": "P111/n7565.lua"
+    },
+    {
+      "reward_name": "FialDargTotCenwenFrei",
+      "quest_id": "Q697",
+      "quest_state": null,
+      "platform": "P113",
+      "file": "n6673.lua",
+      "file_path": "P113/n6673.lua"
+    },
+    {
+      "reward_name": "P113KarteErreicht",
+      "quest_id": "Q746",
+      "quest_state": null,
+      "platform": "P113",
+      "file": "n0.lua",
+      "file_path": "P113/n0.lua"
+    },
+    {
+      "reward_name": "Boss1Getoetet",
+      "quest_id": "Q746",
+      "quest_state": null,
+      "platform": "P113",
+      "file": "n0.lua",
+      "file_path": "P113/n0.lua"
+    },
+    {
+      "reward_name": "Boss2Getoetet",
+      "quest_id": "Q746",
+      "quest_state": null,
+      "platform": "P113",
+      "file": "n0.lua",
+      "file_path": "P113/n0.lua"
+    },
+    {
+      "reward_name": "Boss3Getoetet",
+      "quest_id": "Q746",
+      "quest_state": null,
+      "platform": "P113",
+      "file": "n0.lua",
+      "file_path": "P113/n0.lua"
+    },
+    {
+      "reward_name": "Boss4Getoetet",
+      "quest_id": "Q746",
+      "quest_state": null,
+      "platform": "P113",
+      "file": "n0.lua",
+      "file_path": "P113/n0.lua"
+    },
+    {
+      "reward_name": "P115KarteErreicht",
+      "quest_id": "Q7206",
+      "quest_state": null,
+      "platform": "P115",
+      "file": "n7206.lua",
+      "file_path": "P115/n7206.lua"
+    },
+    {
+      "reward_name": "Drachenstein1",
+      "quest_id": "Q735",
+      "quest_state": null,
+      "platform": "P115",
+      "file": "n0.lua",
+      "file_path": "P115/n0.lua"
+    },
+    {
+      "reward_name": "Drachenstein2",
+      "quest_id": "Q735",
+      "quest_state": null,
+      "platform": "P115",
+      "file": "n0.lua",
+      "file_path": "P115/n0.lua"
+    },
+    {
+      "reward_name": "Drachenstein3",
+      "quest_id": "Q735",
+      "quest_state": null,
+      "platform": "P115",
+      "file": "n0.lua",
+      "file_path": "P115/n0.lua"
+    },
+    {
+      "reward_name": "Drachenstein4",
+      "quest_id": "Q735",
+      "quest_state": null,
+      "platform": "P115",
+      "file": "n0.lua",
+      "file_path": "P115/n0.lua"
+    },
+    {
+      "reward_name": "Drachenstein5",
+      "quest_id": "Q735",
+      "quest_state": null,
+      "platform": "P115",
+      "file": "n0.lua",
+      "file_path": "P115/n0.lua"
+    },
+    {
+      "reward_name": "Drachenstein6",
+      "quest_id": "Q733",
+      "quest_state": null,
+      "platform": "P115",
+      "file": "n0.lua",
+      "file_path": "P115/n0.lua"
+    },
+    {
+      "reward_name": "Drachenstein7",
+      "quest_id": "Q733",
+      "quest_state": null,
+      "platform": "P115",
+      "file": "n0.lua",
+      "file_path": "P115/n0.lua"
+    },
+    {
+      "reward_name": "Drachenstein8",
+      "quest_id": "Q733",
+      "quest_state": null,
+      "platform": "P115",
+      "file": "n0.lua",
+      "file_path": "P115/n0.lua"
+    },
+    {
+      "reward_name": "Drachenstein9",
+      "quest_id": "Q733",
+      "quest_state": null,
+      "platform": "P115",
+      "file": "n0.lua",
+      "file_path": "P115/n0.lua"
+    },
+    {
+      "reward_name": "DracheGetoetet",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P115",
+      "file": "n0.lua",
+      "file_path": "P115/n0.lua"
+    },
+    {
+      "reward_name": "ColosseumRunde08Sieg",
+      "quest_id": "Q9",
+      "quest_state": null,
+      "platform": "P200",
+      "file": "n9.lua",
+      "file_path": "P200/n9.lua"
+    },
+    {
+      "reward_name": "ColosseumRunde07Sieg",
+      "quest_id": "Q8",
+      "quest_state": null,
+      "platform": "P200",
+      "file": "n8.lua",
+      "file_path": "P200/n8.lua"
+    },
+    {
+      "reward_name": "GoblinRennen",
+      "quest_id": "Q12",
+      "quest_state": null,
+      "platform": "P200",
+      "file": "n12.lua",
+      "file_path": "P200/n12.lua"
+    },
+    {
+      "reward_name": "ColosseumRunde09Sieg",
+      "quest_id": "Q10",
+      "quest_state": null,
+      "platform": "P200",
+      "file": "n10.lua",
+      "file_path": "P200/n10.lua"
+    },
+    {
+      "reward_name": "ColosseumRunde10Sieg",
+      "quest_id": "Q11",
+      "quest_state": null,
+      "platform": "P200",
+      "file": "n11.lua",
+      "file_path": "P200/n11.lua"
+    },
+    {
+      "reward_name": "ColosseumRunde05Sieg",
+      "quest_id": "Q6",
+      "quest_state": null,
+      "platform": "P200",
+      "file": "n6.lua",
+      "file_path": "P200/n6.lua"
+    },
+    {
+      "reward_name": "ColosseumRunde06Sieg",
+      "quest_id": "Q7",
+      "quest_state": null,
+      "platform": "P200",
+      "file": "n7.lua",
+      "file_path": "P200/n7.lua"
+    },
+    {
+      "reward_name": "ColosseumRunde04Sieg",
+      "quest_id": "Q5",
+      "quest_state": null,
+      "platform": "P200",
+      "file": "n5.lua",
+      "file_path": "P200/n5.lua"
+    },
+    {
+      "reward_name": "ColosseumRunde03Sieg",
+      "quest_id": "Q4",
+      "quest_state": null,
+      "platform": "P200",
+      "file": "n4.lua",
+      "file_path": "P200/n4.lua"
+    },
+    {
+      "reward_name": "ColosseumRunde02Sieg",
+      "quest_id": "Q3",
+      "quest_state": null,
+      "platform": "P200",
+      "file": "n3.lua",
+      "file_path": "P200/n3.lua"
+    },
+    {
+      "reward_name": "ColosseumRunde01Sieg",
+      "quest_id": "Q2",
+      "quest_state": null,
+      "platform": "P200",
+      "file": "n2.lua",
+      "file_path": "P200/n2.lua"
+    },
+    {
+      "reward_name": "Ordensritter1Befreit",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P201",
+      "file": "n0.lua",
+      "file_path": "P201/n0.lua"
+    },
+    {
+      "reward_name": "Ordensritter2Befreit",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P201",
+      "file": "n0.lua",
+      "file_path": "P201/n0.lua"
+    },
+    {
+      "reward_name": "Ordensritter3Befreit",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P201",
+      "file": "n0.lua",
+      "file_path": "P201/n0.lua"
+    },
+    {
+      "reward_name": "UriasBefreit",
+      "quest_id": "Q773",
+      "quest_state": null,
+      "platform": "P201",
+      "file": "n0.lua",
+      "file_path": "P201/n0.lua"
+    },
+    {
+      "reward_name": "InsCampGekommen",
+      "quest_id": "Q773",
+      "quest_state": null,
+      "platform": "P201",
+      "file": "n0.lua",
+      "file_path": "P201/n0.lua"
+    },
+    {
+      "reward_name": "CampsZerstoert",
+      "quest_id": "Q773",
+      "quest_state": null,
+      "platform": "P201",
+      "file": "n0.lua",
+      "file_path": "P201/n0.lua"
+    },
+    {
+      "reward_name": "RingGefunden",
+      "quest_id": "Q773",
+      "quest_state": null,
+      "platform": "P201",
+      "file": "n0.lua",
+      "file_path": "P201/n0.lua"
+    },
+    {
+      "reward_name": "LeutnantGesprochen",
+      "quest_id": "Q893",
+      "quest_state": null,
+      "platform": "P201",
+      "file": "n0.lua",
+      "file_path": "P201/n0.lua"
+    },
+    {
+      "reward_name": "ZweitenDrachenGetoetet",
+      "quest_id": "Q893",
+      "quest_state": null,
+      "platform": "P201",
+      "file": "n0.lua",
+      "file_path": "P201/n0.lua"
+    },
+    {
+      "reward_name": "ErstenDrachenGetoetet",
+      "quest_id": "Q895",
+      "quest_state": null,
+      "platform": "P201",
+      "file": "n0.lua",
+      "file_path": "P201/n0.lua"
+    },
+    {
+      "reward_name": "DrittenDrachenGetoetet",
+      "quest_id": "Q895",
+      "quest_state": null,
+      "platform": "P201",
+      "file": "n0.lua",
+      "file_path": "P201/n0.lua"
+    },
+    {
+      "reward_name": "ViertenDrachenGetoetet",
+      "quest_id": "Q834",
+      "quest_state": null,
+      "platform": "P201",
+      "file": "n0.lua",
+      "file_path": "P201/n0.lua"
+    },
+    {
+      "reward_name": "GurimLebt",
+      "quest_id": "Q895",
+      "quest_state": null,
+      "platform": "P201",
+      "file": "n0.lua",
+      "file_path": "P201/n0.lua"
+    },
+    {
+      "reward_name": "Seelenwesen2",
+      "quest_id": "Q928",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n9983.lua",
+      "file_path": "P202/n9983.lua"
+    },
+    {
+      "reward_name": "Seelenwesen1",
+      "quest_id": "Q928",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n9982.lua",
+      "file_path": "P202/n9982.lua"
+    },
+    {
+      "reward_name": "GnomlingBossTot",
+      "quest_id": "Q11268",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n11268.lua",
+      "file_path": "P202/n11268.lua"
+    },
+    {
+      "reward_name": "Seelenwesen4",
+      "quest_id": "Q928",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n9985.lua",
+      "file_path": "P202/n9985.lua"
+    },
+    {
+      "reward_name": "GrabmalGeoeffnet",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n0.lua",
+      "file_path": "P202/n0.lua"
+    },
+    {
+      "reward_name": "HeldenBeschworen",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n0.lua",
+      "file_path": "P202/n0.lua"
+    },
+    {
+      "reward_name": "HlStaetteBaumGepflanzt",
+      "quest_id": "Q827",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n0.lua",
+      "file_path": "P202/n0.lua"
+    },
+    {
+      "reward_name": "TorZurStaetteOffen",
+      "quest_id": "Q845",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n0.lua",
+      "file_path": "P202/n0.lua"
+    },
+    {
+      "reward_name": "WachgeistTot",
+      "quest_id": "Q995",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n0.lua",
+      "file_path": "P202/n0.lua"
+    },
+    {
+      "reward_name": "OpferTot",
+      "quest_id": "Q995",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n0.lua",
+      "file_path": "P202/n0.lua"
+    },
+    {
+      "reward_name": "OpferFreigelassen",
+      "quest_id": "Q996",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n0.lua",
+      "file_path": "P202/n0.lua"
+    },
+    {
+      "reward_name": "AschetaenzerTot",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n0.lua",
+      "file_path": "P202/n0.lua"
+    },
+    {
+      "reward_name": "ExtinctTuermeWeg",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n0.lua",
+      "file_path": "P202/n0.lua"
+    },
+    {
+      "reward_name": "ResistenteGargoyle1Tot",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n0.lua",
+      "file_path": "P202/n0.lua"
+    },
+    {
+      "reward_name": "Seelenwesen3",
+      "quest_id": "Q928",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n9984.lua",
+      "file_path": "P202/n9984.lua"
+    },
+    {
+      "reward_name": "Seelenwesen5",
+      "quest_id": "Q928",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n9986.lua",
+      "file_path": "P202/n9986.lua"
+    },
+    {
+      "reward_name": "UrneZuHokan",
+      "quest_id": "Q831",
+      "quest_state": null,
+      "platform": "P202",
+      "file": "n9010.lua",
+      "file_path": "P202/n9010.lua"
+    },
+    {
+      "reward_name": "TantaroGefunden",
+      "quest_id": "Q1029",
+      "quest_state": null,
+      "platform": "P203",
+      "file": "n0_QuestXP.lua",
+      "file_path": "p203/n0_QuestXP.lua"
+    },
+    {
+      "reward_name": "WasserEntgiften",
+      "quest_id": "Q1029",
+      "quest_state": null,
+      "platform": "P203",
+      "file": "n0_QuestXP.lua",
+      "file_path": "p203/n0_QuestXP.lua"
+    },
+    {
+      "reward_name": "ZuTarioGegangen",
+      "quest_id": "Q1029",
+      "quest_state": null,
+      "platform": "P203",
+      "file": "n0_QuestXP.lua",
+      "file_path": "p203/n0_QuestXP.lua"
+    },
+    {
+      "reward_name": "Geheimweg",
+      "quest_id": "Q8486",
+      "quest_state": null,
+      "platform": "P203",
+      "file": "n8486.lua",
+      "file_path": "p203/n8486.lua"
+    },
+    {
+      "reward_name": "DialogMitAeltestem",
+      "quest_id": "Q8444",
+      "quest_state": null,
+      "platform": "P203",
+      "file": "n8444.lua",
+      "file_path": "p203/n8444.lua"
+    },
+    {
+      "reward_name": "P203KarteErreicht",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P203",
+      "file": "n0.lua",
+      "file_path": "p203/n0.lua"
+    },
+    {
+      "reward_name": "LichkoenigTot",
+      "quest_id": "Q778",
+      "quest_state": null,
+      "platform": "P203",
+      "file": "n0.lua",
+      "file_path": "p203/n0.lua"
+    },
+    {
+      "reward_name": "BlockadeDurchbrochen",
+      "quest_id": "Q803",
+      "quest_state": null,
+      "platform": "P203",
+      "file": "n0.lua",
+      "file_path": "p203/n0.lua"
+    },
+    {
+      "reward_name": "ZerstoerungDesLagers",
+      "quest_id": "Q803",
+      "quest_state": null,
+      "platform": "P203",
+      "file": "n0.lua",
+      "file_path": "p203/n0.lua"
+    },
+    {
+      "reward_name": "OberstadtLinksErreicht",
+      "quest_id": "Q877",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n8842.lua",
+      "file_path": "p204/n8842.lua"
+    },
+    {
+      "reward_name": "OberstadtRechtsErreicht",
+      "quest_id": "Q940",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n8846.lua",
+      "file_path": "p204/n8846.lua"
+    },
+    {
+      "reward_name": "ArenaKampf42",
+      "quest_id": "Q10582",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n10582.lua",
+      "file_path": "p204/n10582.lua"
+    },
+    {
+      "reward_name": "ArenaKampf40",
+      "quest_id": "Q1011",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n10582.lua",
+      "file_path": "p204/n10582.lua"
+    },
+    {
+      "reward_name": "ArenaKampf38",
+      "quest_id": "Q1012",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n10582.lua",
+      "file_path": "p204/n10582.lua"
+    },
+    {
+      "reward_name": "ArenaKampf36",
+      "quest_id": "Q1012",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n10582.lua",
+      "file_path": "p204/n10582.lua"
+    },
+    {
+      "reward_name": "ArenaKampf32",
+      "quest_id": "Q1012",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n10582.lua",
+      "file_path": "p204/n10582.lua"
+    },
+    {
+      "reward_name": "Tor3DurchTrickGeoeffnet",
+      "quest_id": "Q948",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n8837.lua",
+      "file_path": "p204/n8837.lua"
+    },
+    {
+      "reward_name": "SQSethHealed",
+      "quest_id": "Q1022",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n11175.lua",
+      "file_path": "p204/n11175.lua"
+    },
+    {
+      "reward_name": "Tor2DurchTrickGeoeffnet",
+      "quest_id": "Q947",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n8830.lua",
+      "file_path": "p204/n8830.lua"
+    },
+    {
+      "reward_name": "FlinkAbgeliefert",
+      "quest_id": "Q811",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n32322_CutsceneFlinkundAlyah.lua",
+      "file_path": "p204/n32322_CutsceneFlinkundAlyah.lua"
+    },
+    {
+      "reward_name": "SQHaendlerFriedlich",
+      "quest_id": "Q11198",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n11198.lua",
+      "file_path": "p204/n11198.lua"
+    },
+    {
+      "reward_name": "SQSchutzgeldSmall",
+      "quest_id": "Q11198",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n11198.lua",
+      "file_path": "p204/n11198.lua"
+    },
+    {
+      "reward_name": "SQSchutzgeldLarge",
+      "quest_id": "Q1071",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n11198.lua",
+      "file_path": "p204/n11198.lua"
+    },
+    {
+      "reward_name": "SQSchutzgeldMedium",
+      "quest_id": "Q1071",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n11198.lua",
+      "file_path": "p204/n11198.lua"
+    },
+    {
+      "reward_name": "SQHaendlerFriedlich",
+      "quest_id": "Q1075",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n11197.lua",
+      "file_path": "p204/n11197.lua"
+    },
+    {
+      "reward_name": "SQSchutzgeldSmall",
+      "quest_id": "Q11197",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n11197.lua",
+      "file_path": "p204/n11197.lua"
+    },
+    {
+      "reward_name": "SQSchutzgeldLarge",
+      "quest_id": "Q1071",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n11197.lua",
+      "file_path": "p204/n11197.lua"
+    },
+    {
+      "reward_name": "SQSchutzgeldMedium",
+      "quest_id": "Q1071",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n11197.lua",
+      "file_path": "p204/n11197.lua"
+    },
+    {
+      "reward_name": "Tor1DurchTrickGeoeffnet",
+      "quest_id": "Q8838",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n8838.lua",
+      "file_path": "p204/n8838.lua"
+    },
+    {
+      "reward_name": "LyrioQuestGeloest",
+      "quest_id": "Q810",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n8796.lua",
+      "file_path": "p204/n8796.lua"
+    },
+    {
+      "reward_name": "P204KarteErreicht",
+      "quest_id": "Q809",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n0.lua",
+      "file_path": "p204/n0.lua"
+    },
+    {
+      "reward_name": "PalastgartenErreicht",
+      "quest_id": "Q809",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n0.lua",
+      "file_path": "p204/n0.lua"
+    },
+    {
+      "reward_name": "TruppenZumPortalGesandt",
+      "quest_id": "Q816",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n0.lua",
+      "file_path": "p204/n0.lua"
+    },
+    {
+      "reward_name": "SQBotschafterGefunden",
+      "quest_id": "Q1038",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n0.lua",
+      "file_path": "p204/n0.lua"
+    },
+    {
+      "reward_name": "SQBotschafterTot",
+      "quest_id": "Q1039",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n0.lua",
+      "file_path": "p204/n0.lua"
+    },
+    {
+      "reward_name": "SQCraigIstBotschafter",
+      "quest_id": "Q1064",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n0.lua",
+      "file_path": "p204/n0.lua"
+    },
+    {
+      "reward_name": "SQAuftragGescheitert",
+      "quest_id": "Q1064",
+      "quest_state": null,
+      "platform": "P204",
+      "file": "n0.lua",
+      "file_path": "p204/n0.lua"
+    },
+    {
+      "reward_name": "MitDryadeGesprochen",
+      "quest_id": "Q872",
+      "quest_state": null,
+      "platform": "P205",
+      "file": "n9250.lua",
+      "file_path": "P205/n9250.lua"
+    },
+    {
+      "reward_name": "MitDryadeGesprochen",
+      "quest_id": "Q872",
+      "quest_state": null,
+      "platform": "P205",
+      "file": "n9250.lua",
+      "file_path": "P205/n9250.lua"
+    },
+    {
+      "reward_name": "SmallIrfitReward",
+      "quest_id": "Q1045",
+      "quest_state": null,
+      "platform": "P205",
+      "file": "n9250.lua",
+      "file_path": "P205/n9250.lua"
+    },
+    {
+      "reward_name": "LargeIrfitReward",
+      "quest_id": "Q1045",
+      "quest_state": null,
+      "platform": "P205",
+      "file": "n9250.lua",
+      "file_path": "P205/n9250.lua"
+    },
+    {
+      "reward_name": "Nymphe3Befreit",
+      "quest_id": "Q9301",
+      "quest_state": null,
+      "platform": "P205",
+      "file": "n9301.lua",
+      "file_path": "P205/n9301.lua"
+    },
+    {
+      "reward_name": "Nymphe2Befreit",
+      "quest_id": "Q9307",
+      "quest_state": null,
+      "platform": "P205",
+      "file": "n9307.lua",
+      "file_path": "P205/n9307.lua"
+    },
+    {
+      "reward_name": "Nymphe1Befreit",
+      "quest_id": "Q9310",
+      "quest_state": null,
+      "platform": "P205",
+      "file": "n9310.lua",
+      "file_path": "P205/n9310.lua"
+    },
+    {
+      "reward_name": "GartenEntgiftet",
+      "quest_id": "Q32354",
+      "quest_state": null,
+      "platform": "P205",
+      "file": "n32354_CutsceneGartenEntgiftet.lua",
+      "file_path": "P205/n32354_CutsceneGartenEntgiftet.lua"
+    },
+    {
+      "reward_name": "P205KarteErreicht",
+      "quest_id": "Q810",
+      "quest_state": null,
+      "platform": "P205",
+      "file": "n0.lua",
+      "file_path": "P205/n0.lua"
+    },
+    {
+      "reward_name": "SpinnencampZerstoert",
+      "quest_id": "Q810",
+      "quest_state": null,
+      "platform": "P205",
+      "file": "n0.lua",
+      "file_path": "P205/n0.lua"
+    },
+    {
+      "reward_name": "AlleTrolleKommenAn",
+      "quest_id": "Q825",
+      "quest_state": null,
+      "platform": "P206",
+      "file": "n9870.lua",
+      "file_path": "P206/n9870.lua"
+    },
+    {
+      "reward_name": "VieleTrolleKommenAn",
+      "quest_id": "Q825",
+      "quest_state": null,
+      "platform": "P206",
+      "file": "n9870.lua",
+      "file_path": "P206/n9870.lua"
+    },
+    {
+      "reward_name": "WenigeTrolleKommenAn",
+      "quest_id": "Q825",
+      "quest_state": null,
+      "platform": "P206",
+      "file": "n9870.lua",
+      "file_path": "P206/n9870.lua"
+    },
+    {
+      "reward_name": "206KeineKarawaneDurchgebracht",
+      "quest_id": "Q825",
+      "quest_state": null,
+      "platform": "P206",
+      "file": "n9870.lua",
+      "file_path": "P206/n9870.lua"
+    },
+    {
+      "reward_name": "DialogMitUnterhaendler",
+      "quest_id": "Q821",
+      "quest_state": null,
+      "platform": "P206",
+      "file": "n8800.lua",
+      "file_path": "P206/n8800.lua"
+    },
+    {
+      "reward_name": "AlleTrolleKommenAn",
+      "quest_id": "Q824",
+      "quest_state": null,
+      "platform": "P206",
+      "file": "n8790.lua",
+      "file_path": "P206/n8790.lua"
+    },
+    {
+      "reward_name": "VieleTrolleKommenAn",
+      "quest_id": "Q824",
+      "quest_state": null,
+      "platform": "P206",
+      "file": "n8790.lua",
+      "file_path": "P206/n8790.lua"
+    },
+    {
+      "reward_name": "WenigeTrolleKommenAn",
+      "quest_id": "Q825",
+      "quest_state": null,
+      "platform": "P206",
+      "file": "n8790.lua",
+      "file_path": "P206/n8790.lua"
+    },
+    {
+      "reward_name": "P206KarteErreicht",
+      "quest_id": "Q818",
+      "quest_state": null,
+      "platform": "P206",
+      "file": "n0.lua",
+      "file_path": "P206/n0.lua"
+    },
+    {
+      "reward_name": "RastplatzGefunden",
+      "quest_id": "Q818",
+      "quest_state": null,
+      "platform": "P206",
+      "file": "n0.lua",
+      "file_path": "P206/n0.lua"
+    },
+    {
+      "reward_name": "FalleAusgeloest",
+      "quest_id": "Q822",
+      "quest_state": null,
+      "platform": "P206",
+      "file": "n0.lua",
+      "file_path": "P206/n0.lua"
+    },
+    {
+      "reward_name": "AlleinEinenWegGefunden",
+      "quest_id": "Q822",
+      "quest_state": null,
+      "platform": "P206",
+      "file": "n0.lua",
+      "file_path": "P206/n0.lua"
+    },
+    {
+      "reward_name": "Lager1Kaputtgemacht",
+      "quest_id": "Q822",
+      "quest_state": null,
+      "platform": "P206",
+      "file": "n0.lua",
+      "file_path": "P206/n0.lua"
+    },
+    {
+      "reward_name": "Lager2Kaputtgemacht",
+      "quest_id": "Q886",
+      "quest_state": null,
+      "platform": "P206",
+      "file": "n0.lua",
+      "file_path": "P206/n0.lua"
+    },
+    {
+      "reward_name": "KarawaneLosgelaufen",
+      "quest_id": "Q886",
+      "quest_state": null,
+      "platform": "P206",
+      "file": "n0.lua",
+      "file_path": "P206/n0.lua"
+    },
+    {
+      "reward_name": "P207KarteErreicht",
+      "quest_id": "Q891",
+      "quest_state": null,
+      "platform": "P207",
+      "file": "n0_QuestXP.lua",
+      "file_path": "P207/n0_QuestXP.lua"
+    },
+    {
+      "reward_name": "BergrieseGeholfen",
+      "quest_id": "Q891",
+      "quest_state": null,
+      "platform": "P207",
+      "file": "n0_QuestXP.lua",
+      "file_path": "P207/n0_QuestXP.lua"
+    },
+    {
+      "reward_name": "SprengzwergBefreit",
+      "quest_id": "Q891",
+      "quest_state": null,
+      "platform": "P207",
+      "file": "n0_QuestXP.lua",
+      "file_path": "P207/n0_QuestXP.lua"
+    },
+    {
+      "reward_name": "ErsteFestungBesiegt",
+      "quest_id": "Q891",
+      "quest_state": null,
+      "platform": "P207",
+      "file": "n0_QuestXP.lua",
+      "file_path": "P207/n0_QuestXP.lua"
+    },
+    {
+      "reward_name": "SchalterraetselGeloest",
+      "quest_id": "Q891",
+      "quest_state": null,
+      "platform": "P207",
+      "file": "n0_QuestXP.lua",
+      "file_path": "P207/n0_QuestXP.lua"
+    },
+    {
+      "reward_name": "ZweiteFestungBesiegt",
+      "quest_id": "Q891",
+      "quest_state": null,
+      "platform": "P207",
+      "file": "n0_QuestXP.lua",
+      "file_path": "P207/n0_QuestXP.lua"
+    },
+    {
+      "reward_name": "DritteFestungBesiegt",
+      "quest_id": "Q891",
+      "quest_state": null,
+      "platform": "P207",
+      "file": "n0_QuestXP.lua",
+      "file_path": "P207/n0_QuestXP.lua"
+    },
+    {
+      "reward_name": "VierteFestungBesiegt",
+      "quest_id": "Q891",
+      "quest_state": null,
+      "platform": "P207",
+      "file": "n0_QuestXP.lua",
+      "file_path": "P207/n0_QuestXP.lua"
+    },
+    {
+      "reward_name": "UndeadRohenGetoetet",
+      "quest_id": "Q891",
+      "quest_state": null,
+      "platform": "P207",
+      "file": "n0_QuestXP.lua",
+      "file_path": "P207/n0_QuestXP.lua"
+    },
+    {
+      "reward_name": "MasterGameWon",
+      "quest_id": "Q1070",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n11464.lua",
+      "file_path": "P208/n11464.lua"
+    },
+    {
+      "reward_name": "Prinzessin5Befreit ",
+      "quest_id": "Q848",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n9496.lua",
+      "file_path": "P208/n9496.lua"
+    },
+    {
+      "reward_name": "Prinzessin4Befreit ",
+      "quest_id": "Q848",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n9497.lua",
+      "file_path": "P208/n9497.lua"
+    },
+    {
+      "reward_name": "ArgamunVerwandeltSich",
+      "quest_id": "Q854",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n9506.lua",
+      "file_path": "P208/n9506.lua"
+    },
+    {
+      "reward_name": "Prinzessin2Befreit ",
+      "quest_id": "Q848",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n9499.lua",
+      "file_path": "P208/n9499.lua"
+    },
+    {
+      "reward_name": "Prinzessin3Befreit ",
+      "quest_id": "Q848",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n9498.lua",
+      "file_path": "P208/n9498.lua"
+    },
+    {
+      "reward_name": "Prinzessin1Befreit ",
+      "quest_id": "Q848",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n9500.lua",
+      "file_path": "P208/n9500.lua"
+    },
+    {
+      "reward_name": "P208MosaikDesTodes",
+      "quest_id": "Q11386",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n11386.lua",
+      "file_path": "P208/n11386.lua"
+    },
+    {
+      "reward_name": "Wolfcamp1Zerstoert ",
+      "quest_id": "Q849",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n0.lua",
+      "file_path": "P208/n0.lua"
+    },
+    {
+      "reward_name": "Wolfcamp2Zerstoert ",
+      "quest_id": "Q849",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n0.lua",
+      "file_path": "P208/n0.lua"
+    },
+    {
+      "reward_name": "Wolfcamp3Zerstoert ",
+      "quest_id": "Q849",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n0.lua",
+      "file_path": "P208/n0.lua"
+    },
+    {
+      "reward_name": "Wolfcamp4Zerstoert ",
+      "quest_id": "Q849",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n0.lua",
+      "file_path": "P208/n0.lua"
+    },
+    {
+      "reward_name": "Wolfcamp5Zerstoert ",
+      "quest_id": "Q849",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n0.lua",
+      "file_path": "P208/n0.lua"
+    },
+    {
+      "reward_name": "Wolfcamp6Zerstoert ",
+      "quest_id": "Q849",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n0.lua",
+      "file_path": "P208/n0.lua"
+    },
+    {
+      "reward_name": "Wolfcamp7Zerstoert ",
+      "quest_id": "Q849",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n0.lua",
+      "file_path": "P208/n0.lua"
+    },
+    {
+      "reward_name": "KopfloserTodVernichtet",
+      "quest_id": "Q849",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n0.lua",
+      "file_path": "P208/n0.lua"
+    },
+    {
+      "reward_name": "Gremlinlager1Zerstoert",
+      "quest_id": "Q860",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n0.lua",
+      "file_path": "P208/n0.lua"
+    },
+    {
+      "reward_name": "Gremlinlager2Zerstoert",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n0.lua",
+      "file_path": "P208/n0.lua"
+    },
+    {
+      "reward_name": "Gremlinlager3Zerstoert",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n0.lua",
+      "file_path": "P208/n0.lua"
+    },
+    {
+      "reward_name": "Gremlinlager4Zerstoert",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n0.lua",
+      "file_path": "P208/n0.lua"
+    },
+    {
+      "reward_name": "Gremlinlager5Zerstoert",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P208",
+      "file": "n0.lua",
+      "file_path": "P208/n0.lua"
+    },
+    {
+      "reward_name": "UruSpricht2",
+      "quest_id": "Q934",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n6.lua",
+      "file_path": "P209/n6.lua"
+    },
+    {
+      "reward_name": "HolyArtefact1Gefunden",
+      "quest_id": "Q934",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n6.lua",
+      "file_path": "P209/n6.lua"
+    },
+    {
+      "reward_name": "HolyArtefact2Gefunden",
+      "quest_id": "Q934",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n6.lua",
+      "file_path": "P209/n6.lua"
+    },
+    {
+      "reward_name": "XalabarInArenaBesiegt",
+      "quest_id": "Q934",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n6.lua",
+      "file_path": "P209/n6.lua"
+    },
+    {
+      "reward_name": "UruSpricht3",
+      "quest_id": "Q934",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n6.lua",
+      "file_path": "P209/n6.lua"
+    },
+    {
+      "reward_name": "UruSpricht4",
+      "quest_id": "Q794",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n7.lua",
+      "file_path": "P209/n7.lua"
+    },
+    {
+      "reward_name": "ZwergenMonumentClaimed",
+      "quest_id": "Q794",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n7.lua",
+      "file_path": "P209/n7.lua"
+    },
+    {
+      "reward_name": "LeaderNordarmeeKilled",
+      "quest_id": "Q794",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n7.lua",
+      "file_path": "P209/n7.lua"
+    },
+    {
+      "reward_name": "LeaderSuedarmeeKilled",
+      "quest_id": "Q794",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n7.lua",
+      "file_path": "P209/n7.lua"
+    },
+    {
+      "reward_name": "LeaderHauptarmeeKilled",
+      "quest_id": "Q794",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n7.lua",
+      "file_path": "P209/n7.lua"
+    },
+    {
+      "reward_name": "BronzerieseGetoetet",
+      "quest_id": "Q794",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n7.lua",
+      "file_path": "P209/n7.lua"
+    },
+    {
+      "reward_name": "UruSpricht5",
+      "quest_id": "Q794",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n7.lua",
+      "file_path": "P209/n7.lua"
+    },
+    {
+      "reward_name": "P209KarteErreicht",
+      "quest_id": "Q779",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n5.lua",
+      "file_path": "P209/n5.lua"
+    },
+    {
+      "reward_name": "UntotenlagerNord",
+      "quest_id": "Q779",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n5.lua",
+      "file_path": "P209/n5.lua"
+    },
+    {
+      "reward_name": "UntotenlagerSued",
+      "quest_id": "Q779",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n5.lua",
+      "file_path": "P209/n5.lua"
+    },
+    {
+      "reward_name": "UntotenlagerWest",
+      "quest_id": "Q779",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n5.lua",
+      "file_path": "P209/n5.lua"
+    },
+    {
+      "reward_name": "StadtKathaiErreicht",
+      "quest_id": "Q779",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n5.lua",
+      "file_path": "P209/n5.lua"
+    },
+    {
+      "reward_name": "GespraechMitKhal",
+      "quest_id": "Q779",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n5.lua",
+      "file_path": "P209/n5.lua"
+    },
+    {
+      "reward_name": "UruSpricht1",
+      "quest_id": "Q781",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n5.lua",
+      "file_path": "P209/n5.lua"
+    },
+    {
+      "reward_name": "KathaiStadtTorOffen",
+      "quest_id": "Q782",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n5.lua",
+      "file_path": "P209/n5.lua"
+    },
+    {
+      "reward_name": "KathaiStadtTorOffen",
+      "quest_id": "Q782",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n5.lua",
+      "file_path": "P209/n5.lua"
+    },
+    {
+      "reward_name": "KathaiStadtTorOffen",
+      "quest_id": "Q782",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n5.lua",
+      "file_path": "P209/n5.lua"
+    },
+    {
+      "reward_name": "KathaiStadtBefreit",
+      "quest_id": "Q785",
+      "quest_state": null,
+      "platform": "P209",
+      "file": "n5.lua",
+      "file_path": "P209/n5.lua"
+    },
+    {
+      "reward_name": "ExitDoorToP211Opened",
+      "quest_id": "Q9967",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n9967.lua",
+      "file_path": "P210/n9967.lua"
+    },
+    {
+      "reward_name": "Room6SpiderGateOpened",
+      "quest_id": "Q9783",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n9783.lua",
+      "file_path": "P210/n9783.lua"
+    },
+    {
+      "reward_name": "EntryMenhirComboCorrect",
+      "quest_id": "Q9120",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n9120.lua",
+      "file_path": "P210/n9120.lua"
+    },
+    {
+      "reward_name": "Room4SkeletonDoorOpened",
+      "quest_id": "Q9881",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n9881.lua",
+      "file_path": "P210/n9881.lua"
+    },
+    {
+      "reward_name": "SceptreOfWindsFound",
+      "quest_id": "Q9908",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n9908.lua",
+      "file_path": "P210/n9908.lua"
+    },
+    {
+      "reward_name": "LastChestInRoom5Opened",
+      "quest_id": "Q8637",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n8637.lua",
+      "file_path": "P210/n8637.lua"
+    },
+    {
+      "reward_name": "P210KarteErreicht",
+      "quest_id": "Q875",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n0.lua",
+      "file_path": "P210/n0.lua"
+    },
+    {
+      "reward_name": "AugenSet1Solved",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n0.lua",
+      "file_path": "P210/n0.lua"
+    },
+    {
+      "reward_name": "AugenSet2Solved",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n0.lua",
+      "file_path": "P210/n0.lua"
+    },
+    {
+      "reward_name": "AugenSet3Solved",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n0.lua",
+      "file_path": "P210/n0.lua"
+    },
+    {
+      "reward_name": "AugenSet4Solved",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n0.lua",
+      "file_path": "P210/n0.lua"
+    },
+    {
+      "reward_name": "Room2SensoSolved",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n0.lua",
+      "file_path": "P210/n0.lua"
+    },
+    {
+      "reward_name": "Room2SensoSolved",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n0.lua",
+      "file_path": "P210/n0.lua"
+    },
+    {
+      "reward_name": "Room7ChessboardCrossed",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n0.lua",
+      "file_path": "P210/n0.lua"
+    },
+    {
+      "reward_name": "Room3HeadDoorOpened",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n0.lua",
+      "file_path": "P210/n0.lua"
+    },
+    {
+      "reward_name": "TurningHeadsCrossed",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n0.lua",
+      "file_path": "P210/n0.lua"
+    },
+    {
+      "reward_name": "AirCoinPassageOpened",
+      "quest_id": "Q9788",
+      "quest_state": null,
+      "platform": "P210",
+      "file": "n9788.lua",
+      "file_path": "P210/n9788.lua"
+    },
+    {
+      "reward_name": "CraigBefreit",
+      "quest_id": "Q1063",
+      "quest_state": null,
+      "platform": "P211",
+      "file": "n9801.lua",
+      "file_path": "P211/n9801.lua"
+    },
+    {
+      "reward_name": "SchattenklingeBefreit",
+      "quest_id": "Q32533",
+      "quest_state": null,
+      "platform": "P211",
+      "file": "n32533_CutsceneBefreiungSchattenklinge.lua",
+      "file_path": "P211/n32533_CutsceneBefreiungSchattenklinge.lua"
+    },
+    {
+      "reward_name": "TorJenquaiGeoeffnet",
+      "quest_id": "Q9810",
+      "quest_state": null,
+      "platform": "P211",
+      "file": "n9810.lua",
+      "file_path": "P211/n9810.lua"
+    },
+    {
+      "reward_name": "WerwolfAbgelenkt",
+      "quest_id": "Q10583",
+      "quest_state": null,
+      "platform": "P211",
+      "file": "n10583.lua",
+      "file_path": "P211/n10583.lua"
+    },
+    {
+      "reward_name": "P211KarteErreicht",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P211",
+      "file": "n0.lua",
+      "file_path": "P211/n0.lua"
+    },
+    {
+      "reward_name": "MonumenteZwerg1Claimed",
+      "quest_id": "Q900",
+      "quest_state": null,
+      "platform": "P211",
+      "file": "n0.lua",
+      "file_path": "P211/n0.lua"
+    },
+    {
+      "reward_name": "MonumenteElfClaimed",
+      "quest_id": "Q900",
+      "quest_state": null,
+      "platform": "P211",
+      "file": "n0.lua",
+      "file_path": "P211/n0.lua"
+    },
+    {
+      "reward_name": "MonumenteZwerg2Claimed",
+      "quest_id": "Q900",
+      "quest_state": null,
+      "platform": "P211",
+      "file": "n0.lua",
+      "file_path": "P211/n0.lua"
+    },
+    {
+      "reward_name": "DschungelCamp1Killed",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P211",
+      "file": "n0.lua",
+      "file_path": "P211/n0.lua"
+    },
+    {
+      "reward_name": "DschungelCamp2Killed",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P211",
+      "file": "n0.lua",
+      "file_path": "P211/n0.lua"
+    },
+    {
+      "reward_name": "DschungelCamp3Killed",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P211",
+      "file": "n0.lua",
+      "file_path": "P211/n0.lua"
+    },
+    {
+      "reward_name": "DschungelCamp4Killed",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P211",
+      "file": "n0.lua",
+      "file_path": "P211/n0.lua"
+    },
+    {
+      "reward_name": "EndgegnerSoulforgerKilled",
+      "quest_id": "Q0",
+      "quest_state": null,
+      "platform": "P211",
+      "file": "n0.lua",
+      "file_path": "P211/n0.lua"
+    },
+    {
+      "reward_name": "CraigBefreit",
+      "quest_id": "Q1063",
+      "quest_state": null,
+      "platform": "P211",
+      "file": "n0.lua",
+      "file_path": "P211/n0.lua"
+    },
+    {
+      "reward_name": "Stele2Off",
+      "quest_id": "Q961",
+      "quest_state": null,
+      "platform": "P212",
+      "file": "n10585.lua",
+      "file_path": "P212/n10585.lua"
+    },
+    {
+      "reward_name": "Stele3Off",
+      "quest_id": "Q962",
+      "quest_state": null,
+      "platform": "P212",
+      "file": "n10620.lua",
+      "file_path": "P212/n10620.lua"
+    },
+    {
+      "reward_name": "Stele1Off",
+      "quest_id": "Q960",
+      "quest_state": null,
+      "platform": "P212",
+      "file": "n10391.lua",
+      "file_path": "P212/n10391.lua"
+    },
+    {
+      "reward_name": "Stele4Off",
+      "quest_id": "Q963",
+      "quest_state": null,
+      "platform": "P212",
+      "file": "n10653.lua",
+      "file_path": "P212/n10653.lua"
+    },
+    {
+      "reward_name": "Stele5Off",
+      "quest_id": "Q964",
+      "quest_state": null,
+      "platform": "P212",
+      "file": "n10660.lua",
+      "file_path": "P212/n10660.lua"
+    },
+    {
+      "reward_name": "Stele6Off",
+      "quest_id": "Q965",
+      "quest_state": null,
+      "platform": "P212",
+      "file": "n10675.lua",
+      "file_path": "P212/n10675.lua"
+    },
+    {
+      "reward_name": "P212KarteErreicht",
+      "quest_id": "Q956",
+      "quest_state": null,
+      "platform": "P212",
+      "file": "n0.lua",
+      "file_path": "P212/n0.lua"
+    },
+    {
+      "reward_name": "MiniforgersKilled",
+      "quest_id": "Q956",
+      "quest_state": null,
+      "platform": "P212",
+      "file": "n0.lua",
+      "file_path": "P212/n0.lua"
+    },
+    {
+      "reward_name": "AlleStelenOff",
+      "quest_id": "Q956",
+      "quest_state": null,
+      "platform": "P212",
+      "file": "n0.lua",
+      "file_path": "P212/n0.lua"
+    },
+    {
+      "reward_name": "DschungelWeisenDialog",
+      "quest_id": "Q10983",
+      "quest_state": null,
+      "platform": "P213",
+      "file": "n10983.lua",
+      "file_path": "P213/n10983.lua"
+    },
+    {
+      "reward_name": "P213KarteErreicht",
+      "quest_id": "Q956",
+      "quest_state": null,
+      "platform": "P213",
+      "file": "n0.lua",
+      "file_path": "P213/n0.lua"
+    },
+    {
+      "reward_name": "BeideMumienCampsPlatt",
+      "quest_id": "Q956",
+      "quest_state": null,
+      "platform": "P213",
+      "file": "n0.lua",
+      "file_path": "P213/n0.lua"
+    },
+    {
+      "reward_name": "WegZumTorFreigeraeumt",
+      "quest_id": "Q956",
+      "quest_state": null,
+      "platform": "P213",
+      "file": "n0.lua",
+      "file_path": "P213/n0.lua"
+    },
+    {
+      "reward_name": "NahrungFuerAffenjunge",
+      "quest_id": "Q1008",
+      "quest_state": null,
+      "platform": "P213",
+      "file": "n10985.lua",
+      "file_path": "P213/n10985.lua"
+    },
+    {
+      "reward_name": "BlutigenDariusBefreit",
+      "quest_id": "Q10986",
+      "quest_state": null,
+      "platform": "P213",
+      "file": "n10986.lua",
+      "file_path": "P213/n10986.lua"
+    }
+  ],
+  "platforms": [
+    "P0",
+    "P1",
+    "P10",
+    "P101",
+    "P102",
+    "P103",
+    "P104",
+    "P105",
+    "P107",
+    "P108",
+    "P109",
+    "P11",
+    "P110",
+    "P111",
+    "P113",
+    "P115",
+    "P116",
+    "P12",
+    "P15",
+    "P16",
+    "P17",
+    "P19",
+    "P2",
+    "P200",
+    "P201",
+    "P202",
+    "P203",
+    "P204",
+    "P205",
+    "P206",
+    "P207",
+    "P208",
+    "P209",
+    "P21",
+    "P210",
+    "P211",
+    "P212",
+    "P213",
+    "P23",
+    "P25",
+    "P27",
+    "P30",
+    "P300",
+    "P309",
+    "P310",
+    "P32",
+    "P4",
+    "P5",
+    "P502",
+    "P59",
+    "P6",
+    "P62",
+    "P63",
+    "P65",
+    "P66",
+    "P6666",
+    "P67",
+    "P68",
+    "P69",
+    "P7",
+    "P70",
+    "P71",
+    "P72",
+    "P73",
+    "P74",
+    "P75",
+    "P77",
+    "P78",
+    "P79",
+    "P81",
+    "P82",
+    "P84",
+    "P85",
+    "P86",
+    "P88",
+    "P9"
+  ]
+}
