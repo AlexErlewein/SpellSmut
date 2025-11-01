@@ -53,7 +53,7 @@ OnOneTimeEvent
 	
 
 	-- 3 globale flags steuern das an/abschalten eines NPC Dialogs
-	-- die flags lösen die entspr. aktion aus und werden dabei wieder auf false gesetzt
+	-- die flags lï¿½sen die entspr. aktion aus und werden dabei wieder auf false gesetzt
 	-- dies sind die flags, nach dem underscore kommt die NpcId:
 	-- SetGlobalFlagTrue{Name = "PleaseRemoveDialog_1234"},
 	-- SetGlobalFlagTrue{Name = "PleaseEnableMainQuestDialog_5678"},
@@ -64,427 +64,427 @@ OnOneTimeEvent
 	OnBeginDialog{
 		Conditions = {
 			IsNpcFlagFalse{Name = "npc_P210_Known"},
-		},
+		),
 		Actions = {
 			Say{Tag = "zerbiteghostroom2P210_001", String = "Er ist es! Oh, Meister, was ist mit Euch geschehen!"},
 			Answer{Tag = "", String = "", AnswerId = 1},
-		}}
+		)}
 
 	OnBeginDialog{
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "npc_P210_Known"}),
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_036", String = "Ihr kehrt zrück?"},
+			Say{Tag = "zerbiteghostroom2P210_036", String = "Ihr kehrt zrï¿½ck?"},
 			Answer{Tag = "", String = "", AnswerId = 5},
-		}}
+		)}
 
 	OnAnswer{1;
 		Conditions = {
-		},
+		),
 		Actions = {
 			Say{Tag = "zerbiteghostroom2P210_002", String = "Runenkrieger! Ihr tragt die versklavte Seele unseres Bruders Anktahr mit Euch!"},
 			Answer{Tag = "", String = "", AnswerId = 2},
-		}}
+		)}
 
 	OnAnswer{2;
 		Conditions = {
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_003", String = "Seid Ihr gekommen, um uns zu verhöhnen? Wollt Ihr das Werk vollenden, das Hokan einst begonnen hat?"},
+			Say{Tag = "zerbiteghostroom2P210_003", String = "Seid Ihr gekommen, um uns zu verhï¿½hnen? Wollt Ihr das Werk vollenden, das Hokan einst begonnen hat?"},
 			Answer{Tag = "", String = "", AnswerId = 3},
-		}}
+		)}
 
 	OnAnswer{3;
 		Conditions = {
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_004", String = "Wir Geister können Euch keinen Schaden mehr zufügen, aber die Fallen, die wir einst errichtet haben, werden Euer Untergang sein!"},
+			Say{Tag = "zerbiteghostroom2P210_004", String = "Wir Geister kï¿½nnen Euch keinen Schaden mehr zufï¿½gen, aber die Fallen, die wir einst errichtet haben, werden Euer Untergang sein!"},
 			Answer{Tag = "", String = "", AnswerId = 4},
-		}}
+		)}
 
 	OnAnswer{4;
 		Conditions = {
-		},
+		),
 		Actions = {
 			SetNpcFlagTrue{Name = "npc_P210_Known"},
 			Say{Tag = "", String = ""},
 			Answer{Tag = "", String = "", AnswerId = 5},
-		}}
+		)}
 
 	OnAnswer{5;
 		Conditions = {
 			Negated(IsNpcFlagTrue{Name = "npc_P210_RuneChoiceGiven"}),
-			UND9{
+			UND9(
 							IsNpcFlagTrue{Name = "npc_P210_RuneChoiceGiven"},
 							IsGlobalFlagFalse{Name = "g_P210_RuneAnktharReturned"},
-							ODER9{
+							ODER9(
 								PlayerHasItem{ItemId = 4783},
-								IsCreoActive{ CreoId = 2319 },
-								}
-							},
-		},
+								IsCreoActive{ CreoId = 2319 }
+								)
+							),
+		),
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "zerbiteghostroom2P210_005PC", String = "Ich bin nicht gekommen, um Euch zu schaden!", AnswerId = 6},
 			OfferAnswer{Tag = "zerbiteghostroom2P210_007PC", String = "Was hat es mit diesen Hallen auf sich?", AnswerId = 9, Color = ColorDarkOrange},
-			OfferAnswer{Tag = "zerbiteghostroom2P210_014PC", String = "Erzählt mir von Anktahr.", AnswerId = 17, Color = ColorDarkOrange},
-			OfferAnswer{Tag = "zerbiteghostroom2P210_020PC", String = "Erzählt mir von den Fallen.", AnswerId = 24, Color = ColorDarkOrange},
+			OfferAnswer{Tag = "zerbiteghostroom2P210_014PC", String = "Erzï¿½hlt mir von Anktahr.", AnswerId = 17, Color = ColorDarkOrange},
+			OfferAnswer{Tag = "zerbiteghostroom2P210_020PC", String = "Erzï¿½hlt mir von den Fallen.", AnswerId = 24, Color = ColorDarkOrange},
 			OfferAnswer{Tag = "zerbiteghostroom2P210_025PC", String = "Wo ist das Szepter der Winde?", AnswerId = 30},
 			OfferAnswer{Tag = "zerbiteghostroom2P210_029PC", String = "Hier, ich gebe Euch Anktahrs Rune.", AnswerId = 35},
-		}}
+		)}
 
 	OnAnswer{5;
 		Conditions = {
 			Negated(IsNpcFlagTrue{Name = "npc_P210_RuneChoiceGiven"}),
-			Negated(UND9{
+			Negated(UND9(
 							IsNpcFlagTrue{Name = "npc_P210_RuneChoiceGiven"},
 							IsGlobalFlagFalse{Name = "g_P210_RuneAnktharReturned"},
-							ODER9{
+							ODER9(
 								PlayerHasItem{ItemId = 4783},
-								IsCreoActive{ CreoId = 2319 },
-								}
-							}),
-		},
+								IsCreoActive{ CreoId = 2319 }
+								)
+							)),
+		),
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "zerbiteghostroom2P210_005PC", String = "Ich bin nicht gekommen, um Euch zu schaden!", AnswerId = 6},
 			OfferAnswer{Tag = "zerbiteghostroom2P210_007PC", String = "Was hat es mit diesen Hallen auf sich?", AnswerId = 9, Color = ColorDarkOrange},
-			OfferAnswer{Tag = "zerbiteghostroom2P210_014PC", String = "Erzählt mir von Anktahr.", AnswerId = 17, Color = ColorDarkOrange},
-			OfferAnswer{Tag = "zerbiteghostroom2P210_020PC", String = "Erzählt mir von den Fallen.", AnswerId = 24, Color = ColorDarkOrange},
+			OfferAnswer{Tag = "zerbiteghostroom2P210_014PC", String = "Erzï¿½hlt mir von Anktahr.", AnswerId = 17, Color = ColorDarkOrange},
+			OfferAnswer{Tag = "zerbiteghostroom2P210_020PC", String = "Erzï¿½hlt mir von den Fallen.", AnswerId = 24, Color = ColorDarkOrange},
 			OfferAnswer{Tag = "zerbiteghostroom2P210_025PC", String = "Wo ist das Szepter der Winde?", AnswerId = 30},
-		}}
+		)}
 
 	OnAnswer{5;
 		Conditions = {
 			Negated(Negated(IsNpcFlagTrue{Name = "npc_P210_RuneChoiceGiven"})),
-			UND9{
+			UND9(
 							IsNpcFlagTrue{Name = "npc_P210_RuneChoiceGiven"},
 							IsGlobalFlagFalse{Name = "g_P210_RuneAnktharReturned"},
-							ODER9{
+							ODER9(
 								PlayerHasItem{ItemId = 4783},
-								IsCreoActive{ CreoId = 2319 },
-								}
-							},
-		},
+								IsCreoActive{ CreoId = 2319 }
+								)
+							),
+		),
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "zerbiteghostroom2P210_007PC", String = "Was hat es mit diesen Hallen auf sich?", AnswerId = 9, Color = ColorDarkOrange},
-			OfferAnswer{Tag = "zerbiteghostroom2P210_014PC", String = "Erzählt mir von Anktahr.", AnswerId = 17, Color = ColorDarkOrange},
-			OfferAnswer{Tag = "zerbiteghostroom2P210_020PC", String = "Erzählt mir von den Fallen.", AnswerId = 24, Color = ColorDarkOrange},
+			OfferAnswer{Tag = "zerbiteghostroom2P210_014PC", String = "Erzï¿½hlt mir von Anktahr.", AnswerId = 17, Color = ColorDarkOrange},
+			OfferAnswer{Tag = "zerbiteghostroom2P210_020PC", String = "Erzï¿½hlt mir von den Fallen.", AnswerId = 24, Color = ColorDarkOrange},
 			OfferAnswer{Tag = "zerbiteghostroom2P210_025PC", String = "Wo ist das Szepter der Winde?", AnswerId = 30},
 			OfferAnswer{Tag = "zerbiteghostroom2P210_029PC", String = "Hier, ich gebe Euch Anktahrs Rune.", AnswerId = 35},
-		}}
+		)}
 
 	OnAnswer{5;
 		Conditions = {
 			Negated(Negated(IsNpcFlagTrue{Name = "npc_P210_RuneChoiceGiven"})),
-			Negated(UND9{
+			Negated(UND9(
 							IsNpcFlagTrue{Name = "npc_P210_RuneChoiceGiven"},
 							IsGlobalFlagFalse{Name = "g_P210_RuneAnktharReturned"},
-							ODER9{
+							ODER9(
 								PlayerHasItem{ItemId = 4783},
-								IsCreoActive{ CreoId = 2319 },
-								}
-							}),
-		},
+								IsCreoActive{ CreoId = 2319 }
+								)
+							)),
+		),
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "zerbiteghostroom2P210_007PC", String = "Was hat es mit diesen Hallen auf sich?", AnswerId = 9, Color = ColorDarkOrange},
-			OfferAnswer{Tag = "zerbiteghostroom2P210_014PC", String = "Erzählt mir von Anktahr.", AnswerId = 17, Color = ColorDarkOrange},
-			OfferAnswer{Tag = "zerbiteghostroom2P210_020PC", String = "Erzählt mir von den Fallen.", AnswerId = 24, Color = ColorDarkOrange},
+			OfferAnswer{Tag = "zerbiteghostroom2P210_014PC", String = "Erzï¿½hlt mir von Anktahr.", AnswerId = 17, Color = ColorDarkOrange},
+			OfferAnswer{Tag = "zerbiteghostroom2P210_020PC", String = "Erzï¿½hlt mir von den Fallen.", AnswerId = 24, Color = ColorDarkOrange},
 			OfferAnswer{Tag = "zerbiteghostroom2P210_025PC", String = "Wo ist das Szepter der Winde?", AnswerId = 30},
-		}}
+		)}
 
 	OnAnswer{6;
 		Conditions = {
-		},
+		),
 		Actions = {
 			Say{Tag = "zerbiteghostroom2P210_006", String = "Wenn Ihr die Wahrheit sagt, dann gebt uns Anktahrs Rune! Seine Seele soll endlich Ruhe finden!"},
 			Answer{Tag = "", String = "", AnswerId = 7},
-		}}
+		)}
 
 	OnAnswer{7;
 		Conditions = {
-		},
+		),
 		Actions = {
 			SetNpcFlagTrue{Name = "npc_P210_RuneChoiceGiven"},
 			Say{Tag = "", String = ""},
 			Answer{Tag = "", String = "", AnswerId = 5},
-		}}
+		)}
 
 	OnAnswer{9;
 		Conditions = {
-		},
+		),
 		Actions = {
 			Say{Tag = "", String = ""},
 			Answer{Tag = "", String = "", AnswerId = 10},
-		}}
+		)}
 
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsGlobalFlagFalse{Name = "g_P210_RuneAnktharReturned"}),
-		},
+		),
 		Actions = {
 			Say{Tag = "zerbiteghostroom2P210_009", String = "Einst waren sie Hallen des Wissens, Hallen der Rechtschaffenheit und der Vernunft!"},
 			Answer{Tag = "", String = "", AnswerId = 12},
-		}}
+		)}
 
 	OnAnswer{10;
 		Conditions = {
 			IsGlobalFlagFalse{Name = "g_P210_RuneAnktharReturned"},
-		},
+		),
 		Actions = {
 			Say{Tag = "zerbiteghostroom2P210_008", String = "Diese Hallen bedeuten Euren Tod! Ihr werdet sie niemals wieder verlassen!"},
 			Answer{Tag = "", String = "", AnswerId = 5},
-		}}
+		)}
 
 	OnAnswer{12;
 		Conditions = {
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_010", String = "Wir haben einst hier gelebt Runenkrieger! Als Mitglieder des Zerbitenordens erforschten wir die Geheimnisse des schwarzen Dschungels .. und bewahrten das Reich vor seinem Übel."},
+			Say{Tag = "zerbiteghostroom2P210_010", String = "Wir haben einst hier gelebt Runenkrieger! Als Mitglieder des Zerbitenordens erforschten wir die Geheimnisse des schwarzen Dschungels .. und bewahrten das Reich vor seinem ï¿½bel."},
 			Answer{Tag = "", String = "", AnswerId = 13},
-		}}
+		)}
 
 	OnAnswer{13;
 		Conditions = {
-		},
+		),
 		Actions = {
 			Say{Tag = "zerbiteghostroom2P210_011", String = "Aber unser Bruder Hokan hat uns verraten! Er hat dort im Dschungel eine Maske gefunden, die ihm unglaubliche Macht verlieh! Und mit dieser Kraft trachtete er uns zu vernichten!"},
 			Answer{Tag = "", String = "", AnswerId = 14},
-		}}
+		)}
 
 	OnAnswer{14;
 		Conditions = {
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_012", String = "Wir konnten ihm nichts entgegensetzen! Schließlich beschlossen wir, unsere Festungen in tödliche Fallen zu verwandeln, damit Hokan auf seiner Suche nach unserem Wissen sein Ende finden sollte!"},
+			Say{Tag = "zerbiteghostroom2P210_012", String = "Wir konnten ihm nichts entgegensetzen! Schlieï¿½lich beschlossen wir, unsere Festungen in tï¿½dliche Fallen zu verwandeln, damit Hokan auf seiner Suche nach unserem Wissen sein Ende finden sollte!"},
 			Answer{Tag = "", String = "", AnswerId = 15},
-		}}
+		)}
 
 	OnAnswer{15;
 		Conditions = {
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_013", String = "Aber er ahnte die Gefahr! Er griff nicht an, sondern belagerte unsere Festungen und ließ uns verhungern wie Tiere! So sind diese Hallen heute nur noch unser Grab."},
+			Say{Tag = "zerbiteghostroom2P210_013", String = "Aber er ahnte die Gefahr! Er griff nicht an, sondern belagerte unsere Festungen und lieï¿½ uns verhungern wie Tiere! So sind diese Hallen heute nur noch unser Grab."},
 			Answer{Tag = "", String = "", AnswerId = 5},
-		}}
+		)}
 
 	OnAnswer{17;
 		Conditions = {
-		},
+		),
 		Actions = {
 			Say{Tag = "", String = ""},
 			Answer{Tag = "", String = "", AnswerId = 18},
-		}}
+		)}
 
 	OnAnswer{18;
 		Conditions = {
 			IsGlobalFlagFalse{Name = "g_P210_RuneAnktharReturned"},
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_015", String = "Bevor er Hokan in die Hände gefallen ist, hätte er Euch vernichtet! Nun ist er nur noch ein Schatten seiner selbst!"},
+			Say{Tag = "zerbiteghostroom2P210_015", String = "Bevor er Hokan in die Hï¿½nde gefallen ist, hï¿½tte er Euch vernichtet! Nun ist er nur noch ein Schatten seiner selbst!"},
 			Answer{Tag = "", String = "", AnswerId = 5},
-		}}
+		)}
 
 	OnAnswer{18;
 		Conditions = {
 			Negated(IsGlobalFlagFalse{Name = "g_P210_RuneAnktharReturned"}),
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_016", String = "Er war unser Führer, unser Grossmeister! Der Weiseste und Gütigste aus unserer Mitte!"},
+			Say{Tag = "zerbiteghostroom2P210_016", String = "Er war unser Fï¿½hrer, unser Grossmeister! Der Weiseste und Gï¿½tigste aus unserer Mitte!"},
 			Answer{Tag = "", String = "", AnswerId = 20},
-		}}
+		)}
 
 	OnAnswer{20;
 		Conditions = {
-		},
+		),
 		Actions = {
 			Say{Tag = "zerbiteghostroom2P210_017", String = "Man mag es kaum glauben, wenn man den verzerrten Schemen sieht, der er jetzt ist! Aber er war es, der Hokan fortgelockt hat, so dass wir unsere Festen mit Fallen versehen konnten."},
 			Answer{Tag = "", String = "", AnswerId = 21},
-		}}
+		)}
 
 	OnAnswer{21;
 		Conditions = {
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_018", String = "Er opferte sich, damit Hokan nicht unser geheimstes Wissen in die Hände fiel! Zur Strafe hat Hokan seine Seele versklavt und schließlich an die Rune gebunden!"},
+			Say{Tag = "zerbiteghostroom2P210_018", String = "Er opferte sich, damit Hokan nicht unser geheimstes Wissen in die Hï¿½nde fiel! Zur Strafe hat Hokan seine Seele versklavt und schlieï¿½lich an die Rune gebunden!"},
 			Answer{Tag = "", String = "", AnswerId = 22},
-		}}
+		)}
 
 	OnAnswer{22;
 		Conditions = {
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_019", String = "So hat er den einzigen, der ihn jemals überlisten konnte zu seinem willigen Sklaven gemacht! Welch grausamer Spott! Aber jetzt ist er frei!"},
+			Say{Tag = "zerbiteghostroom2P210_019", String = "So hat er den einzigen, der ihn jemals ï¿½berlisten konnte zu seinem willigen Sklaven gemacht! Welch grausamer Spott! Aber jetzt ist er frei!"},
 			Answer{Tag = "", String = "", AnswerId = 5},
-		}}
+		)}
 
 	OnAnswer{24;
 		Conditions = {
-		},
+		),
 		Actions = {
 			Say{Tag = "", String = ""},
 			Answer{Tag = "", String = "", AnswerId = 25},
-		}}
+		)}
 
 	OnAnswer{25;
 		Conditions = {
 			IsGlobalFlagFalse{Name = "g_P210_RuneAnktharReturned"},
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_021", String = "Ihr werdet ihre Wirkung noch früh genug am eigenen Leib erfahren!"},
+			Say{Tag = "zerbiteghostroom2P210_021", String = "Ihr werdet ihre Wirkung noch frï¿½h genug am eigenen Leib erfahren!"},
 			Answer{Tag = "", String = "", AnswerId = 5},
-		}}
+		)}
 
 	OnAnswer{25;
 		Conditions = {
 			Negated(IsGlobalFlagFalse{Name = "g_P210_RuneAnktharReturned"}),
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_022", String = "Sie sind mechanish aber auch magisch! Wir haben sie so gebaut, dass ein geduldiger Mensch, der aus Fehlern lernt, sie überwinden kann."},
+			Say{Tag = "zerbiteghostroom2P210_022", String = "Sie sind mechanish aber auch magisch! Wir haben sie so gebaut, dass ein geduldiger Mensch, der aus Fehlern lernt, sie ï¿½berwinden kann."},
 			Answer{Tag = "", String = "", AnswerId = 27},
-		}}
+		)}
 
 	OnAnswer{27;
 		Conditions = {
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_023", String = "Aber ein Wahnsinniger wie Hokan hätte nur versucht, sich mit Gewalt Zutritt zu verschaffen! Das wäre sein Ende gewesen!"},
+			Say{Tag = "zerbiteghostroom2P210_023", String = "Aber ein Wahnsinniger wie Hokan hï¿½tte nur versucht, sich mit Gewalt Zutritt zu verschaffen! Das wï¿½re sein Ende gewesen!"},
 			Answer{Tag = "", String = "", AnswerId = 28},
-		}}
+		)}
 
 	OnAnswer{28;
 		Conditions = {
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_024", String = "Achtet also auf die Hinweise, die überall zu finden sind, dann werdet Ihr diesen Ort lebend verlassen!"},
+			Say{Tag = "zerbiteghostroom2P210_024", String = "Achtet also auf die Hinweise, die ï¿½berall zu finden sind, dann werdet Ihr diesen Ort lebend verlassen!"},
 			Answer{Tag = "", String = "", AnswerId = 5},
-		}}
+		)}
 
 	OnAnswer{30;
 		Conditions = {
-		},
+		),
 		Actions = {
 			Say{Tag = "", String = ""},
 			Answer{Tag = "", String = "", AnswerId = 31},
-		}}
+		)}
 
 	OnAnswer{31;
 		Conditions = {
 			IsGlobalFlagFalse{Name = "g_P210_RuneAnktharReturned"},
-		},
+		),
 		Actions = {
 			Say{Tag = "zerbiteghostroom2P210_026", String = "Ihr werdet es niemals finden!"},
 			Answer{Tag = "", String = "", AnswerId = 5},
-		}}
+		)}
 
 	OnAnswer{31;
 		Conditions = {
 			Negated(IsGlobalFlagFalse{Name = "g_P210_RuneAnktharReturned"}),
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_027", String = "Das Szepter liegt in der Schatzkammern nordöstlich von hier!"},
+			Say{Tag = "zerbiteghostroom2P210_027", String = "Das Szepter liegt in der Schatzkammern nordï¿½stlich von hier!"},
 			Answer{Tag = "", String = "", AnswerId = 33},
-		}}
+		)}
 
 	OnAnswer{33;
 		Conditions = {
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_028", String = "Merkt Euch das: Um dorthin vorzudringen, müsst ihr die fünf steinernen Köpfe zum Leuchten bringen!"},
+			Say{Tag = "zerbiteghostroom2P210_028", String = "Merkt Euch das: Um dorthin vorzudringen, mï¿½sst ihr die fï¿½nf steinernen Kï¿½pfe zum Leuchten bringen!"},
 			Answer{Tag = "", String = "", AnswerId = 5},
-		}}
+		)}
 
 	OnAnswer{35;
 		Conditions = {
-		},
+		),
 		Actions = {
 			Say{Tag = "", String = ""},
 			Answer{Tag = "", String = "", AnswerId = 36},
-		}}
+		)}
 
 	OnAnswer{36;
 		Conditions = {
 			Negated(Negated(PlayerHasItem{ItemId = 4783})),
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_031", String = "Nehmt diese drei Münzen als Dank! Nun ist Anktahr endlich nach Hause zurückgekehrt. Wir werden seinen gepeinigten Geist heilen."},
+			Say{Tag = "zerbiteghostroom2P210_031", String = "Nehmt diese drei Mï¿½nzen als Dank! Nun ist Anktahr endlich nach Hause zurï¿½ckgekehrt. Wir werden seinen gepeinigten Geist heilen."},
 			Answer{Tag = "", String = "", AnswerId = 38},
-		}}
+		)}
 
 	OnAnswer{36;
 		Conditions = {
 			Negated(PlayerHasItem{ItemId = 4783}),
-		},
+		),
 		Actions = {
 			Say{Tag = "zerbiteghostroom2P210_030", String = "Dann nehmt die Rune aus Eurer Runentafel heraus!"},
 			Answer{Tag = "", String = "", AnswerId = 5},
-		}}
+		)}
 
 	OnAnswer{38;
 		Conditions = {
-		},
+		),
 		Actions = {
 			SetGlobalFlagTrue{Name = "g_P210_RuneAnktharReturned"},
 					TransferItem{TakeItem = 4783 , Flag = Take},
 					TransferItem{GiveItem = 7332 , Flag = Give},
 					TransferItem{GiveItem = 7356 , Flag = Give},
 					TransferItem{GiveItem = 7356 , Flag = Give},
-			Say{Tag = "zerbiteghostroom2P210_032", String = "Ihr habt uns einen großen Dienst erwiesen! Wie können nun wir Euch helfen?"},
+			Say{Tag = "zerbiteghostroom2P210_032", String = "Ihr habt uns einen groï¿½en Dienst erwiesen! Wie kï¿½nnen nun wir Euch helfen?"},
 			Answer{Tag = "", String = "", AnswerId = 39},
-		}}
+		)}
 
 	OnAnswer{39;
 		Conditions = {
 			Negated(QuestState{QuestId = 1035, State = StateActive} ),
-		},
+		),
 		Actions = {
 			Say{Tag = "", String = ""},
 			Answer{Tag = "", String = "", AnswerId = 44},
-		}}
+		)}
 
 	OnAnswer{39;
 		Conditions = {
 			QuestState{QuestId = 1035, State = StateActive} ,
-		},
+		),
 		Actions = {
 			Say{Tag = "", String = ""},
 			Answer{Tag = "zerbiteghostroom2P210_033PC", String = "Ich suche die Artefakte des blutenden Auges.", AnswerId = 40},
-		}}
+		)}
 
 	OnAnswer{40;
 		Conditions = {
-		},
+		),
 		Actions = {
 			Say{Tag = "zerbiteghostroom2P210_034", String = "Auch wenn wir Euch dankbar sind, werden wir dies nicht verraten."},
 			Answer{Tag = "", String = "", AnswerId = 41},
-		}}
+		)}
 
 	OnAnswer{41;
 		Conditions = {
-		},
+		),
 		Actions = {
-			Say{Tag = "zerbiteghostroom2P210_035", String = "Ihr müsst wissen: Demjenigen, der alle Artefakte findet, gewähren wir Zugang zu unserem Vermächtnis."},
+			Say{Tag = "zerbiteghostroom2P210_035", String = "Ihr mï¿½sst wissen: Demjenigen, der alle Artefakte findet, gewï¿½hren wir Zugang zu unserem Vermï¿½chtnis."},
 			Answer{Tag = "", String = "", AnswerId = 42},
-		}}
+		)}
 
 	OnAnswer{42;
 		Conditions = {
-		},
+		),
 		Actions = {
 			Say{Tag = "", String = ""},
 			Answer{Tag = "", String = "", AnswerId = 5},
-		}}
+		)}
 
 	OnAnswer{44;
 		Conditions = {
-		},
+		),
 		Actions = {
 			Say{Tag = "", String = ""},
 			Answer{Tag = "", String = "", AnswerId = 5},
-		}}
+		)}
 
 
 	EndDefinition()

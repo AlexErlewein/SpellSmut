@@ -1037,26 +1037,26 @@ OnOneTimeEvent
 	{
 		ODER9
 		{
-			UND9{
+			UND9(
 				IsGlobalCounter{Name = "g_Mastergame_Plattenzaehler", Value = 1, Operator = IsEqual},
 				IsGlobalCounter{Name = DefColorCounter[StellungOrder[2][1].ColorDef], Value = MyColorCode, Operator = IsEqual}
-				},
-			UND9{
+				),
+			UND9(
 				IsGlobalCounter{Name = "g_Mastergame_Plattenzaehler", Value = 2, Operator = IsEqual},
 				IsGlobalCounter{Name = DefColorCounter[StellungOrder[2][2].ColorDef], Value = MyColorCode, Operator = IsEqual}
-				},
-			UND9{
+				),
+			UND9(
 				IsGlobalCounter{Name = "g_Mastergame_Plattenzaehler", Value = 3, Operator = IsEqual},
 				IsGlobalCounter{Name = DefColorCounter[StellungOrder[2][3].ColorDef], Value = MyColorCode, Operator = IsEqual}
-				},
-			UND9{
+				),
+			UND9(
 				IsGlobalCounter{Name = "g_Mastergame_Plattenzaehler", Value = 4, Operator = IsEqual},
 				IsGlobalCounter{Name = DefColorCounter[StellungOrder[2][4].ColorDef], Value = MyColorCode, Operator = IsEqual}
-				},
-			UND9{
+				),
+			UND9(
 				IsGlobalCounter{Name = "g_Mastergame_Plattenzaehler", Value = 5, Operator = IsEqual},
 				IsGlobalCounter{Name = DefColorCounter[StellungOrder[2][5].ColorDef], Value = MyColorCode, Operator = IsEqual}
-				},
+				),
 		},
 	},
 	Actions =
@@ -1334,26 +1334,26 @@ OnOneTimeEvent
 	{
 		ODER9
 		{
-			UND9{
+			UND9(
 				IsGlobalCounter{Name = "g_Mastergame_Plattenzaehler", Value = 1, Operator = IsEqual},
 				IsGlobalCounter{Name = DefColorCounter[StellungOrder[4][1].ColorDef], Value = MyColorCode, Operator = IsEqual}
-				},
-			UND9{
+				),
+			UND9(
 				IsGlobalCounter{Name = "g_Mastergame_Plattenzaehler", Value = 2, Operator = IsEqual},
 				IsGlobalCounter{Name = DefColorCounter[StellungOrder[4][2].ColorDef], Value = MyColorCode, Operator = IsEqual}
-				},
-			UND9{
+				),
+			UND9(
 				IsGlobalCounter{Name = "g_Mastergame_Plattenzaehler", Value = 3, Operator = IsEqual},
 				IsGlobalCounter{Name = DefColorCounter[StellungOrder[4][3].ColorDef], Value = MyColorCode, Operator = IsEqual}
-				},
-			UND9{
+				),
+			UND9(
 				IsGlobalCounter{Name = "g_Mastergame_Plattenzaehler", Value = 4, Operator = IsEqual},
 				IsGlobalCounter{Name = DefColorCounter[StellungOrder[4][4].ColorDef], Value = MyColorCode, Operator = IsEqual}
-				},
-			UND9{
+				),
+			UND9(
 				IsGlobalCounter{Name = "g_Mastergame_Plattenzaehler", Value = 5, Operator = IsEqual},
 				IsGlobalCounter{Name = DefColorCounter[StellungOrder[4][5].ColorDef], Value = MyColorCode, Operator = IsEqual}
-				},
+				),
 		},
 	},
 	Actions =

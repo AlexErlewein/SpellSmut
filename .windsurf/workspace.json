@@ -1,0 +1,100 @@
+{
+  "spellforce-workspace": {
+    "name": "SpellForce Modding Project",
+    "type": "python",
+    "description": "Comprehensive SpellForce Platinum Edition modding toolkit",
+    "version": "1.0.0",
+    "maintainer": "SpellSmut Development Team"
+  },
+  "python": {
+    "version": "3.11+",
+    "packageManager": "uv",
+    "environment": "uv",
+    "entryPoints": [
+      "src/TirganachReloaded/main.py",
+      "src/helper_tools/"
+    ],
+    "testFramework": "pytest",
+    "testDirectory": "src/tests",
+    "coverageThreshold": 80
+  },
+  "project-structure": {
+    "source": "src/",
+    "tests": "src/tests/",
+    "docs": "docs/",
+    "planning": "ProjectPlanning/",
+    "assets": "ExtractedAssets/",
+    "tools": "ModdingTools/",
+    "ai-configs": ".ai/"
+  },
+  "development-rules": {
+    "useUvForPython": true,
+    "noPipCommands": true,
+    "testsInTestsFolder": true,
+    "docsInDocsFolder": true,
+    "rootConfigOnly": true,
+    "followPep8": true,
+    "typeHintsRequired": true,
+    "comprehensiveTests": true
+  },
+  "current-focus": {
+    "priority": "Icon System Handle-to-Atlas Mapping",
+    "status": "Critical Blocker",
+    "components": [
+      "GUI Editor - Production Ready",
+      "Content Creators - Complete Suite",
+      "Quest Editor - Production Ready", 
+      "Asset Extraction - Complete",
+      "Documentation - Comprehensive"
+    ]
+  },
+  "key-directories": {
+    "main-app": "src/TirganachReloaded/cff_editor/",
+    "creators": "src/TirganachReloaded/creators/",
+    "data-layer": "src/TirganachReloaded/data/",
+    "helper-tools": "src/helper_tools/",
+    "test-suite": "src/tests/",
+    "user-guides": "docs/Guides/",
+    "technical-docs": "docs/Project/",
+    "planning-docs": "ProjectPlanning/",
+    "game-assets": "ExtractedAssets/",
+    "reference-tools": "ModdingTools/",
+    "lua-sources": "ModdingTools/SpellForceLUASources/"
+  },
+  "technologies": {
+    "primary": ["Python", "PySide6", "Qt6"],
+    "data": ["SQLite", "Pickle", "Pandas", "JSON"],
+    "testing": ["Pytest", "Coverage"],
+    "game-formats": ["CFF", "Lua", "PAK", "DDS"],
+    "asset-processing": ["QuickBMS", "Custom Python Scripts"]
+  },
+  "coding-standards": {
+    "style": "PEP 8",
+    "formatting": "Black",
+    "linting": ["Pylint", "Flake8"],
+    "type-checking": "Basic",
+    "docstring-style": "Google Style",
+    "line-length": 88,
+    "import-organization": "isort"
+  },
+  "forbidden-patterns": [
+    "pip install",
+    "python script.py",
+    "test files outside src/tests/",
+    "docs in root directory",
+    "hardcoded absolute paths",
+    "missing error handling",
+    "unvalidated user input"
+  ],
+  "required-patterns": [
+    "uv run script.py",
+    "uv pip install",
+    "tests in src/tests/",
+    "docs in docs/ folder",
+    "relative paths",
+    "comprehensive error handling",
+    "input validation",
+    "type hints for functions",
+    "comprehensive docstrings"
+  ]
+}

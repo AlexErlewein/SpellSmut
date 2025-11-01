@@ -1,0 +1,62 @@
+{
+  "spellforce.rules.project": {
+    "pythonEnvironment": "uv",
+    "testLocation": "src/tests/",
+    "docsLocation": "docs/",
+    "sourceLocation": "src/",
+    "rootConfigOnly": true
+  },
+  "python.defaultInterpreterPath": "uv",
+  "python.terminal.activateEnvironment": true,
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.formatting.provider": "black",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": [
+    "src/tests"
+  ],
+  "python.testing.unittestEnabled": false,
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true,
+    "**/pytest_cache": true,
+    "**/.coverage": true,
+    "**/test_outputs": true,
+    "**/ModdedGameFiles": true,
+    "**/OriginalGameFiles": true,
+    "**/ExtractedAssets": true
+  },
+  "files.watcherExclude": {
+    "**/__pycache__/**": true,
+    "**/test_outputs/**": true,
+    "**/ModdedGameFiles/**": true,
+    "**/OriginalGameFiles/**": true,
+    "**/ExtractedAssets/**": true
+  },
+  "search.exclude": {
+    "**/test_outputs": true,
+    "**/ModdedGameFiles": true,
+    "**/OriginalGameFiles": true,
+    "**/ExtractedAssets": true
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "editor.rulers": [
+    88,
+    120
+  ],
+  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.autoSearchPaths": true,
+  "python.analysis.extraPaths": [
+    "src"
+  ],
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportMissingImports": "information",
+    "reportUndefinedVariable": "error"
+  }
+}

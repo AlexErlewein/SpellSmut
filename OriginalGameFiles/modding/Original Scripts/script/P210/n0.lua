@@ -133,7 +133,7 @@ OnOneTimeEvent
 		{
 		IsGlobalFlagTrue{Name = "g_P210_Room6SpiderGateOpen"},
 		IsGlobalFlagTrue{Name = "g_P210_AirCoinGateOpen"},
-		},
+		),
 	},
 	Actions =
 	{
@@ -450,7 +450,7 @@ OnToggleEvent
 	OnConditions =
 	{
 		Negated(
-		UND9{
+		UND9(
 		IsGlobalFlagFalse{Name = "g_P210Room1aEye01On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1aEye02On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1aEye03On", UpdateInterval = 30},
@@ -460,7 +460,7 @@ OnToggleEvent
 		IsGlobalFlagFalse{Name = "g_P210Room1aEye07On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1aEye08On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1aEye09On", UpdateInterval = 30}
-		}
+		)
 		)
 	},
 	OnActions	=
@@ -512,7 +512,7 @@ OnToggleEvent
 	OnConditions =
 	{
 		Negated(
-		UND9{
+		UND9(
 		IsGlobalFlagFalse{Name = "g_P210Room1bEye01On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1bEye02On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1bEye03On", UpdateInterval = 30},
@@ -522,7 +522,7 @@ OnToggleEvent
 		IsGlobalFlagFalse{Name = "g_P210Room1bEye07On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1bEye08On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1bEye09On", UpdateInterval = 30}
-		}
+		)
 		)
 	},
 	OnActions	=
@@ -576,7 +576,7 @@ OnToggleEvent
 	OnConditions =
 	{
 		Negated(
-		UND9{
+		UND9(
 		IsGlobalFlagFalse{Name = "g_P210Room1cEye01On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1cEye02On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1cEye03On", UpdateInterval = 30},
@@ -586,7 +586,7 @@ OnToggleEvent
 		IsGlobalFlagFalse{Name = "g_P210Room1cEye07On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1cEye08On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1cEye09On", UpdateInterval = 30}
-		}
+		)
 		)
 	},
 	OnActions	=
@@ -639,7 +639,7 @@ OnToggleEvent
 	OnConditions =
 	{
 		Negated(
-		UND9{
+		UND9(
 		IsGlobalFlagFalse{Name = "g_P210Room1dEye01On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1dEye02On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1dEye03On", UpdateInterval = 30},
@@ -649,7 +649,7 @@ OnToggleEvent
 		IsGlobalFlagFalse{Name = "g_P210Room1dEye07On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1dEye08On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room1dEye09On", UpdateInterval = 30}
-		}
+		)
 		)
 	},
 	OnActions	=
@@ -1018,7 +1018,7 @@ OnToggleEvent
 	OnConditions =
 	{
 		Negated(
-		UND9{
+		UND9(
 		IsGlobalFlagFalse{Name = "g_P210Room9zEye01On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room9zEye02On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room9zEye03On", UpdateInterval = 30},
@@ -1028,7 +1028,7 @@ OnToggleEvent
 		IsGlobalFlagFalse{Name = "g_P210Room9zEye07On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room9zEye08On", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "g_P210Room9zEye09On", UpdateInterval = 30}
-		}
+		)
 		)
 	},
 	OnActions	=

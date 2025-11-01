@@ -68,11 +68,11 @@ CreateCutScene
 		IsGlobalFlagTrue {Name = "g_P211_CSIshtargelaufen", UpdateInterval = 30},
 		IsGlobalFlagTrue {Name = "g_P211EbeneErrreicht", UpdateInterval = 30}, --Tor offen
 		
-		ODER9{
+		ODER9(
 			PlayerUnitInRange {X = 235, Y = 153, Range = 5, FigureType = FigureAll, UpdateInterval = 24},
 			PlayerUnitInRange {X = 232, Y = 155, Range = 5, FigureType = FigureAll, UpdateInterval = 22},
-			PlayerUnitInRange {X = 237, Y = 150, Range = 5, FigureType = FigureAll, UpdateInterval = 22},
-			},
+			PlayerUnitInRange {X = 237, Y = 150, Range = 5, FigureType = FigureAll, UpdateInterval = 22}
+			),
 	},
 	BeginActions =
 	{
@@ -105,23 +105,23 @@ CreateCutScene
 		
 		[45] =
 		{
-			LookAtFigure {Target = 10286, NpcId = 0}, --Avatar fährt herum
+			LookAtFigure {Target = 10286, NpcId = 0}, --Avatar fï¿½hrt herum
 		},
 		[50] =
 		{
-			LookAtFigure {Target = 10286, NpcId = 0}, --Avatar fährt herum
+			LookAtFigure {Target = 10286, NpcId = 0}, --Avatar fï¿½hrt herum
 		},
 		[55] =
 		{
-			LookAtFigure {Target = 10286, NpcId = 0}, --Avatar fährt herum
+			LookAtFigure {Target = 10286, NpcId = 0}, --Avatar fï¿½hrt herum
 		},
 		[60] =
 		{
-			LookAtFigure {Target = 10286, NpcId = 0}, --Avatar fährt herum
+			LookAtFigure {Target = 10286, NpcId = 0}, --Avatar fï¿½hrt herum
 		},
 		[65] =
 		{
-			LookAtFigure {Target = 10286, NpcId = 0}, --Avatar fährt herum
+			LookAtFigure {Target = 10286, NpcId = 0}, --Avatar fï¿½hrt herum
 		},
 		[70] =
 		{
@@ -144,7 +144,7 @@ CreateCutScene
 			ExecuteCameraScript{Script = n32532_CameraAuftretenPhoenixVI},	
 			LookAtFigure {Target = 10286, NpcId = 0}, 
 			LookAtFigure {Target = 0, NpcId = 10286}, 
-			CutSceneSay {Tag = "csa242phoenixguard_003", NpcId = 10286, String = "Ein Freund! Jenquai sagte mir, dass ich Euch hier finden werde, Gefährte der Rune."},
+			CutSceneSay {Tag = "csa242phoenixguard_003", NpcId = 10286, String = "Ein Freund! Jenquai sagte mir, dass ich Euch hier finden werde, Gefï¿½hrte der Rune."},
 			
 		},
 		
@@ -154,14 +154,14 @@ CreateCutScene
 			WaitForEndOfSpeech,	 --sollte immer angegeben werden
 			LookAtFigure {Target = 10286, NpcId = 0}, 
 			LookAtFigure {Target = 0, NpcId = 10286}, 
-			CutSceneSay {Tag = "csa242avatar_004", NpcId = 0, String = "Dann seid Ihr der Runenkrieger, der den Phönixstein bewacht? Kommt Ihr endlich, um das aufzuhalten, was Ihr begonnen habt?"},
+			CutSceneSay {Tag = "csa242avatar_004", NpcId = 0, String = "Dann seid Ihr der Runenkrieger, der den Phï¿½nixstein bewacht? Kommt Ihr endlich, um das aufzuhalten, was Ihr begonnen habt?"},
 		},
 		
 		[100] =
 		{
 			--8sek
 			WaitForEndOfSpeech,	 --sollte immer angegeben werden
-			ExecuteCameraScript{Script = n32532_CameraAuftretenPhoenixII},	--Kamera fährt an Phoenixkrieger heran
+			ExecuteCameraScript{Script = n32532_CameraAuftretenPhoenixII},	--Kamera fï¿½hrt an Phoenixkrieger heran
 			LookAtFigure {Target = 10286, NpcId = 0}, 
 			LookAtFigure {Target = 0, NpcId = 10286}, 
 			CutSceneSay {Tag = "csa242phoenixguard_005", NpcId = 10286, String = "Ich habe getan, was ich tun musste! Und ich bin nicht gekommen, um mich von Euch verspotten zu lassen!"},
@@ -169,7 +169,7 @@ CreateCutScene
 		
 		[125] =
 		{
-			Goto {X = 225, Y = 137, NpcId = 10286, Range = 0, WalkMode = Walk, GotoMode = GotoNormal, XRand = 0, YRand = 0}, --Phönix näher an Avatar
+			Goto {X = 225, Y = 137, NpcId = 10286, Range = 0, WalkMode = Walk, GotoMode = GotoNormal, XRand = 0, YRand = 0}, --Phï¿½nix nï¿½her an Avatar
 			LookAtFigure {Target = 10286, NpcId = 0}, 
 			LookAtFigure {Target = 0, NpcId = 10286}, 
 		},
@@ -197,7 +197,7 @@ CreateCutScene
 		
 		[150] =
 		{
-			ExecuteCameraScript{Script = n32532_CameraAuftretenPhoenixIII},	--Kamera noch näher
+			ExecuteCameraScript{Script = n32532_CameraAuftretenPhoenixIII},	--Kamera noch nï¿½her
 			LookAtFigure {Target = 10286, NpcId = 0}, 
 			LookAtFigure {Target = 0, NpcId = 10286}, 
 		},
@@ -224,7 +224,7 @@ CreateCutScene
 			ExecuteCameraScript{Script = n32532_CameraAuftretenPhoenixVII},	
 			LookAtFigure {Target = 10286, NpcId = 0}, 
 			LookAtFigure {Target = 0, NpcId = 10286}, 
-			CutSceneSay {Tag = "csa242phoenixguard_008", NpcId = 10286, String = "Ich will den Zirkel für seine Taten richten! Endgültig!"},
+			CutSceneSay {Tag = "csa242phoenixguard_008", NpcId = 10286, String = "Ich will den Zirkel fï¿½r seine Taten richten! Endgï¿½ltig!"},
 		},
 		
 		
@@ -233,18 +233,18 @@ CreateCutScene
 			--10
 			WaitForEndOfSpeech,	 --sollte immer angegeben werden
 			ExecuteCameraScript{Script = n32532_CameraAuftretenPhoenixIV},	
-			CutSceneSay {Tag = "csa242avatar_009", NpcId = 0, String = "Dann lasst uns gemeinsam die Scharfrichter sein, Wächter des Phönix! Kommt, sie warten bereits auf uns!"},
+			CutSceneSay {Tag = "csa242avatar_009", NpcId = 0, String = "Dann lasst uns gemeinsam die Scharfrichter sein, Wï¿½chter des Phï¿½nix! Kommt, sie warten bereits auf uns!"},
 			LookAtFigure {Target = 10286, NpcId = 0}, 
 			LookAtFigure {Target = 0, NpcId = 10286}, 
 		},
 
 		[320] =
 		{
-			Goto {X = 220, Y = 125, NpcId = 0, Range = 0, WalkMode = Run, GotoMode = GotoNormal, XRand = 0, YRand = 0}, --Avatar ein stück in die Ebene
+			Goto {X = 220, Y = 125, NpcId = 0, Range = 0, WalkMode = Run, GotoMode = GotoNormal, XRand = 0, YRand = 0}, --Avatar ein stï¿½ck in die Ebene
 		},
 		[330] =
 		{
-			Goto {X = 219, Y = 125, NpcId = 10286, Range = 0, WalkMode = Run, GotoMode = GotoNormal, XRand = 0, YRand = 0}, --Avatar ein stück in die Ebene
+			Goto {X = 219, Y = 125, NpcId = 10286, Range = 0, WalkMode = Run, GotoMode = GotoNormal, XRand = 0, YRand = 0}, --Avatar ein stï¿½ck in die Ebene
 		},
 		
 		[370] =

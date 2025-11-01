@@ -11,12 +11,12 @@ OnPortalEvent
 	{
 		ODER9
 		{ 
-			UND9{
+			UND9(
 				IsGlobalFlagTrue { Name = "g_sP201PalisadentorOeffnen"},
 				IsGlobalFlagTrue {Name = "g_nP201_PhoenixSteinSpieler"},
-				},
+				),
 			IsGlobalFlagTrue {Name = "g_nP202_SchattenklingeSpieler"},
-		},
+		),
 	},	
 	CloseConditions = {}, 	-- Standartmaessig zu
 	StayOpen = TRUE,

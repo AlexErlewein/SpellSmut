@@ -20,6 +20,7 @@ These files provide context, rules, and project-specific information to AI assis
 | **Gemini CLI** | `.ai/GEMINI.md` | Instructions for Google's Gemini AI |
 | **Qwen** | `.ai/QWEN.md` | Instructions for Qwen assistant |
 | **Crush** | `.ai/CRUSH.md` | Instructions for Crush assistant |
+| **Windsurf** | `.ai/WINDSURF.md` | Instructions for Windsurf AI assistant |
 
 **All files are in the `.ai/` folder** - NOT in root, NOT in `docs/`!
 
@@ -45,6 +46,15 @@ Instructions for Crush AI assistant.
 **Location:** `.ai/GEMINI.md`  
 Instructions for Google's Gemini AI assistant.
 
+### WINDSURF.md
+**Location:** `.ai/WINDSURF.md`  
+Instructions for Windsurf AI assistant. Contains:
+- Complete project overview and current status
+- Detailed file organization rules
+- Technology stack and development standards
+- Game-specific knowledge and guidelines
+- Current priorities and development workflow
+
 ### QWEN.md
 **Location:** `.ai/QWEN.md`  
 Instructions for Qwen AI assistant.
@@ -69,6 +79,7 @@ ALL AI assistants MUST follow the rules in RULES.md when creating or organizing 
    - Gemini CLI? → Read `.ai/GEMINI.md`
    - Qwen? → Read `.ai/QWEN.md`
    - Crush? → Read `.ai/CRUSH.md`
+   - Windsurf? → Read `.ai/WINDSURF.md`
 
 2. **Read the rules:** Check `.ai/RULES.md` for folder organization
 

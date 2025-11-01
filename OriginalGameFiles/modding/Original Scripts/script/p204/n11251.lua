@@ -150,23 +150,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -191,23 +191,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -231,23 +231,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -271,23 +271,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -310,23 +310,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -350,23 +350,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -389,23 +389,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -428,23 +428,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -466,23 +466,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -506,23 +506,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -545,23 +545,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -584,23 +584,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -622,23 +622,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -661,23 +661,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -699,23 +699,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -737,23 +737,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -774,23 +774,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -814,23 +814,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -853,23 +853,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -892,23 +892,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -930,23 +930,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -969,23 +969,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -1007,23 +1007,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -1045,23 +1045,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -1082,23 +1082,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -1121,23 +1121,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -1159,23 +1159,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -1197,23 +1197,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -1234,23 +1234,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -1272,23 +1272,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -1309,23 +1309,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -1346,23 +1346,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -1382,23 +1382,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -1422,23 +1422,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -1461,23 +1461,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -1500,23 +1500,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -1538,23 +1538,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -1577,23 +1577,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -1615,23 +1615,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -1653,23 +1653,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -1690,23 +1690,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -1729,23 +1729,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -1767,23 +1767,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -1805,23 +1805,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -1842,23 +1842,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -1880,23 +1880,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -1917,23 +1917,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -1954,23 +1954,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -1990,23 +1990,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -2029,23 +2029,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -2067,23 +2067,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -2105,23 +2105,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -2142,23 +2142,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -2180,23 +2180,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -2217,23 +2217,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -2254,23 +2254,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -2290,23 +2290,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -2328,23 +2328,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -2365,23 +2365,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -2402,23 +2402,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -2438,23 +2438,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -2475,23 +2475,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -2511,23 +2511,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -2547,23 +2547,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -2582,23 +2582,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -2622,23 +2622,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -2661,23 +2661,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -2700,23 +2700,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -2738,23 +2738,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -2777,23 +2777,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -2815,23 +2815,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -2853,23 +2853,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -2890,23 +2890,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -2929,23 +2929,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -2967,23 +2967,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -3005,23 +3005,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -3042,23 +3042,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -3080,23 +3080,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -3117,23 +3117,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -3154,23 +3154,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -3190,23 +3190,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -3229,23 +3229,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -3267,23 +3267,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -3305,23 +3305,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -3342,23 +3342,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -3380,23 +3380,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -3417,23 +3417,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -3454,23 +3454,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -3490,23 +3490,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -3528,23 +3528,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -3565,23 +3565,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -3602,23 +3602,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -3638,23 +3638,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -3675,23 +3675,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -3711,23 +3711,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -3747,23 +3747,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ,
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -3782,23 +3782,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -3821,23 +3821,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -3859,23 +3859,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -3897,23 +3897,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -3934,23 +3934,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -3972,23 +3972,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -4009,23 +4009,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -4046,23 +4046,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -4082,23 +4082,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -4120,23 +4120,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -4157,23 +4157,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -4194,23 +4194,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -4230,23 +4230,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -4267,23 +4267,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -4303,23 +4303,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -4339,23 +4339,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					,
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -4374,23 +4374,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -4412,23 +4412,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -4449,23 +4449,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -4486,23 +4486,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -4522,23 +4522,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -4559,23 +4559,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -4595,23 +4595,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -4631,23 +4631,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   },
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -4666,23 +4666,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -4703,23 +4703,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -4739,23 +4739,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -4775,23 +4775,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -4810,23 +4810,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			IsNpcFlagTrue {Name = "known"},
@@ -4846,23 +4846,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			UND9{
+			UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}},
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -4881,23 +4881,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			IsNpcFlagTrue {Name = "known"},
@@ -4916,23 +4916,23 @@ Despawn
 									IsNpcFlagTrue {Name = "known"},
 									PlayerHasItem {ItemId = 7066, Equipment = EquipmentAll },
 									IsNpcFlagFalse{Name ="npc_P204_TearInfoGiven"}
-									}
+									)
 								 ),
 			Negated(UND9
 					{
 					PlayerHasItem {ItemId = 4646, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}
-					}
+					)
 					),
 			Negated(UND9
 				   {
 				   PlayerHasItem {ItemId = 4644, Equipment = EquipmentAll },
 				   IsNpcFlagTrue {Name = "known"}
 				   }),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4645, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
-			Negated(UND9{
+			Negated(UND9(
 					PlayerHasItem {ItemId = 4647, Equipment = EquipmentAll },
 					IsNpcFlagTrue {Name = "known"}}),
 			Negated(IsNpcFlagTrue {Name = "known"}),
@@ -5242,7 +5242,7 @@ Despawn
 							QuestState{QuestId = 1037, State = StateSolved},
 							QuestState{QuestId = 1038, State = StateSolved},
 							QuestState{QuestId = 1039, State = StateSolved}
-						}
+						)
 					,
 		},
 		Actions = {
@@ -5259,7 +5259,7 @@ Despawn
 							QuestState{QuestId = 1037, State = StateSolved},
 							QuestState{QuestId = 1038, State = StateSolved},
 							QuestState{QuestId = 1039, State = StateSolved}
-						}
+						)
 					),
 		},
 		Actions = {

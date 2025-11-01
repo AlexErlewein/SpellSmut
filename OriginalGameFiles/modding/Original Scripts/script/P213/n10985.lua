@@ -152,7 +152,7 @@ Despawn
 	OnAnswer{3;
 		Conditions = {
 			UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} ),
-			UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
+			UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -163,7 +163,7 @@ Despawn
 	OnAnswer{3;
 		Conditions = {
 			UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} ),
-			Negated(UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
+			Negated(UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -173,7 +173,7 @@ Despawn
 	OnAnswer{3;
 		Conditions = {
 			Negated(UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} )),
-			UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
+			UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -183,7 +183,7 @@ Despawn
 	OnAnswer{3;
 		Conditions = {
 			Negated(UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} )),
-			Negated(UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
+			Negated(UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -192,7 +192,7 @@ Despawn
 	OnAnswer{4;
 		Conditions = {
 			UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} ),
-			UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
+			UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -203,7 +203,7 @@ Despawn
 	OnAnswer{4;
 		Conditions = {
 			UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} ),
-			Negated(UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
+			Negated(UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -213,7 +213,7 @@ Despawn
 	OnAnswer{4;
 		Conditions = {
 			Negated(UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} )),
-			UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
+			UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -223,7 +223,7 @@ Despawn
 	OnAnswer{4;
 		Conditions = {
 			Negated(UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} )),
-			Negated(UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
+			Negated(UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -297,7 +297,7 @@ Despawn
 	OnAnswer{12;
 		Conditions = {
 			UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} ),
-			UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
+			UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -308,7 +308,7 @@ Despawn
 	OnAnswer{12;
 		Conditions = {
 			UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} ),
-			Negated(UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
+			Negated(UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -318,7 +318,7 @@ Despawn
 	OnAnswer{12;
 		Conditions = {
 			Negated(UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} )),
-			UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
+			UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -328,7 +328,7 @@ Despawn
 	OnAnswer{12;
 		Conditions = {
 			Negated(UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} )),
-			Negated(UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
+			Negated(UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -363,7 +363,7 @@ Despawn
 	OnAnswer{16;
 		Conditions = {
 			UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} ),
-			UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
+			UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -374,7 +374,7 @@ Despawn
 	OnAnswer{16;
 		Conditions = {
 			UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} ),
-			Negated(UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
+			Negated(UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -384,7 +384,7 @@ Despawn
 	OnAnswer{16;
 		Conditions = {
 			Negated(UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} )),
-			UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
+			UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} ),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -394,7 +394,7 @@ Despawn
 	OnAnswer{16;
 		Conditions = {
 			Negated(UND( IsGlobalFlagFalse {Name = "g_P213_AffenjungeDeal"}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[5]Abgeschaltet"} )),
-			Negated(UND( UND9{IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark})}, IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
+			Negated(UND( UND9(IsGlobalFlagTrue {Name = "g_P213_AffenjungeEssen"}, QuestState {State = StateActive, QuestId = 1008},ODER( PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideLight}, PlayerHasGood {Good = GoodFood, Amount = 500, Side = SideDark}), IsNpcFlagFalse{Name = "ChoiceMitAnswerId[13]Abgeschaltet"} )),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},

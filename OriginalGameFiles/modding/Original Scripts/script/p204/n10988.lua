@@ -869,10 +869,10 @@ Despawn
 
 	OnAnswer{81;
 		Conditions = {
-			Negated(ODER9{
+			Negated(ODER9(
 							IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 0, Operator = IsEqual},
 							IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 1, Operator = IsEqual}
-								}),
+								)),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -881,10 +881,10 @@ Despawn
 
 	OnAnswer{81;
 		Conditions = {
-			ODER9{
+			ODER9(
 							IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 0, Operator = IsEqual},
 							IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 1, Operator = IsEqual}
-								},
+								),
 		},
 		Actions = {
 			Say{Tag = "nandiniP204_026", String = "Ihr werdet den Kauf des Hammers sicherlich nicht bereuen! Damit seht Ihr gleich viel heldenhafter aus!"},
@@ -919,10 +919,10 @@ Despawn
 
 	OnAnswer{84;
 		Conditions = {
-			ODER9{
+			ODER9(
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 2, Operator = IsEqual},
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 3, Operator = IsEqual}
-					},
+					),
 		},
 		Actions = {
 			Say{Tag = "nandiniP204_027", String = "Ich wusste, dass die Kappe genau das Richtige für Euch sein würde!"},
@@ -931,10 +931,10 @@ Despawn
 
 	OnAnswer{84;
 		Conditions = {
-			Negated(ODER9{
+			Negated(ODER9(
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 2, Operator = IsEqual},
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 3, Operator = IsEqual}
-					}),
+					)),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -969,10 +969,10 @@ Despawn
 
 	OnAnswer{87;
 		Conditions = {
-			ODER9{
+			ODER9(
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 4, Operator = IsEqual},
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 5, Operator = IsEqual}
-					},
+					),
 		},
 		Actions = {
 			Say{Tag = "nandiniP204_028", String = "Hier, der Ring ist nun Euer. Habt viel Freude damit!"},
@@ -981,10 +981,10 @@ Despawn
 
 	OnAnswer{87;
 		Conditions = {
-			Negated(ODER9{
+			Negated(ODER9(
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 4, Operator = IsEqual},
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 5, Operator = IsEqual}
-					}),
+					)),
 		},
 		Actions = {
 			Say{Tag = "nandiniP204_029", String = "Nun, dann habt viel Freude an dem schönen Edelstein!"},
@@ -1145,10 +1145,10 @@ Despawn
 
 	OnAnswer{102;
 		Conditions = {
-			ODER9{
+			ODER9(
 							IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 0, Operator = IsEqual},
 							IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 1, Operator = IsEqual}
-								},
+								),
 		},
 		Actions = {
 			Say{Tag = "nandiniP204_032", String = "Seht, hier habe ich eine mächtige Waffe, den Titanenhammer!"},
@@ -1157,10 +1157,10 @@ Despawn
 
 	OnAnswer{102;
 		Conditions = {
-			Negated(ODER9{
+			Negated(ODER9(
 							IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 0, Operator = IsEqual},
 							IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 1, Operator = IsEqual}
-								}),
+								)),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -1193,10 +1193,10 @@ Despawn
 
 	OnAnswer{107;
 		Conditions = {
-			ODER9{
+			ODER9(
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 2, Operator = IsEqual},
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 3, Operator = IsEqual}
-					},
+					),
 		},
 		Actions = {
 			Say{Tag = "nandiniP204_036", String = "Seht her, eine der legendären Kappen der geistigen Unversehrtheit!"},
@@ -1205,10 +1205,10 @@ Despawn
 
 	OnAnswer{107;
 		Conditions = {
-			Negated(ODER9{
+			Negated(ODER9(
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 2, Operator = IsEqual},
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 3, Operator = IsEqual}
-					}),
+					)),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
@@ -1233,10 +1233,10 @@ Despawn
 
 	OnAnswer{111;
 		Conditions = {
-			Negated(ODER9{
+			Negated(ODER9(
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 4, Operator = IsEqual},
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 5, Operator = IsEqual}
-					}),
+					)),
 		},
 		Actions = {
 			Say{Tag = "nandiniP204_042", String = "Seht her, ich biete Euch diese Zerbitenträne!"},
@@ -1245,10 +1245,10 @@ Despawn
 
 	OnAnswer{111;
 		Conditions = {
-			ODER9{
+			ODER9(
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 4, Operator = IsEqual},
 					IsGlobalCounter{Name = "g_P204_NepperAngebot", Value = 5, Operator = IsEqual}
-					},
+					),
 		},
 		Actions = {
 			Say{Tag = "nandiniP204_039", String = "Ich biete Euch den Ring der Narretei! Ein mächtiges, mächtiges Schmuckstück!"},
