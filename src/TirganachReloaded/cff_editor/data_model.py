@@ -9,7 +9,6 @@ import os
 import pickle
 import sys
 import time
-import logging
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
@@ -20,6 +19,9 @@ from PySide6.QtCore import QObject, QSettings, Signal
 from PySide6.QtGui import QIcon, QPixmap
 from tirganach import GameData
 from tirganach.types import *
+
+# Import Loguru logging
+from .logging_config import get_logger, performance_logger
 
 # Import Lua data manager for quest scripts
 try:
@@ -72,8 +74,9 @@ class CFFDataModel(QObject):
         )
         self.data_dir = self.project_root / "src" / "TirganachReloaded" / "data"
 
-        # Initialize logger for icon loading process (must be before _load_icon_data)
-        self.logger = self._setup_logger()
+        # Initialize logger for data model operations
+        self.logger = get_logger("data_model")
+        self.logger.debug("Initializing CFFDataModel")
 
         # Load icon mappings and analysis data
         self.icon_mapping = {}
@@ -527,9 +530,10 @@ class CFFDataModel(QObject):
 
     def _load_icon_data(self):
         """Load icon mapping and analysis data."""
+        perf_logger = performance_logger("icon_data_loading")
+        perf_logger.info("Starting icon data loading")
+        
         try:
-            # Load icon mapping
-            import time
             start_time = time.time()
             
             mapping_path = self.data_dir / "ui_icon_mapping.json"
@@ -637,12 +641,16 @@ class CFFDataModel(QObject):
 
         except Exception as e:
             self.logger.error(f"Error loading icon data: {e}")
+            perf_logger.error(f"Icon data loading failed: {e}")
             print(f"Error loading icon data: {e}")
             self.icon_mapping = {}
             self.icon_index = {}
             self.verified_mappings = {}
             self.handle_to_path_mapping = {}
             self.handle_cache = {}
+        else:
+            total_time = time.time() - start_time
+            perf_logger.info(f"Icon data loading completed in {total_time:.2f}s")
 
     def _build_handle_to_path_mapping(self):
         """
@@ -1780,35 +1788,4 @@ class CFFDataModel(QObject):
         except Exception:
             return []
 
-    def _setup_logger(self):
-        """Setup logger for icon loading process"""
-        logger = logging.getLogger("IconLoader")
-        logger.setLevel(logging.DEBUG)
-        
-        # Create logs directory if it doesn't exist
-        logs_dir = self.project_root / "logs"
-        logs_dir.mkdir(parents=True, exist_ok=True)
-        
-        # Create file handler
-        log_file = logs_dir / "icon_loading.log"
-        file_handler = logging.FileHandler(log_file)
-        file_handler.setLevel(logging.DEBUG)
-        
-        # Create console handler
-        console_handler = logging.StreamHandler()
-        console_handler.setLevel(logging.INFO)
-        
-        # Create formatter
-        formatter = logging.Formatter(
-            '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-        )
-        file_handler.setFormatter(formatter)
-        console_handler.setFormatter(formatter)
-        
-        # Add handlers to logger
-        if not logger.handlers:
-            logger.addHandler(file_handler)
-            logger.addHandler(console_handler)
-        
-        logger.info("Icon loading logger initialized")
-        return logger
+    

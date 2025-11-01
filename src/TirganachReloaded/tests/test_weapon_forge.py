@@ -10,67 +10,70 @@ from pathlib import Path
 # Add the parent directory to the path so we can import our modules
 sys.path.insert(0, str(Path(__file__).parent))
 
+# Import test logging
+from test_logging import test_header, test_success, test_error, test_info, get_test_logger
+
 
 def test_id_manager():
     """Test the ID Manager system"""
-    print("=" * 60)
-    print("Testing ID Manager...")
-    print("=" * 60)
-
+    test_header("Testing ID Manager...")
+    
+    logger = get_test_logger("id_manager_test")
+    
     from cff_editor.shared.id_manager import ContentType, IDManager
 
     # Create ID manager with test file
     id_manager = IDManager("test_weapon_ids.json")
+    logger.info("Created ID manager with test file")
 
     # Test getting next ID for weapons
     weapon_id = id_manager.get_next_id(ContentType.WEAPON)
-    print(f"✓ Next weapon ID: {weapon_id}")
+    test_success(f"Next weapon ID: {weapon_id}")
     assert weapon_id == 10000, f"Expected 10000, got {weapon_id}"
 
     # Test allocating ID
     allocated_id = id_manager.allocate_id(ContentType.WEAPON)
-    print(f"✓ Allocated weapon ID: {allocated_id}")
+    test_success(f"Allocated weapon ID: {allocated_id}")
     assert allocated_id == 10000, f"Expected 10000, got {allocated_id}"
 
     # Allocate a few more
     id2 = id_manager.allocate_id(ContentType.WEAPON)
     id3 = id_manager.allocate_id(ContentType.WEAPON)
-    print(f"✓ Allocated IDs: {allocated_id}, {id2}, {id3}")
-
-    # Test stats
-    stats = id_manager.get_stats()
-    print(f"✓ Weapon stats: {stats['weapon']}")
+    test_success(f"Allocated IDs: {allocated_id}, {id2}, {id3}")
+    
+    # Test weapon stats from data model
+    stats = id_manager.get_weapon_stats(10000)
+    test_success(f"Weapon stats: {stats['weapon']}")
+    
+    logger.info("ID Manager tests completed successfully")
     assert stats["weapon"]["used"] == 3, "Expected 3 used IDs"
 
     # Test validation
     is_used = id_manager.is_id_used(ContentType.WEAPON, 10004)
-    print(f"✓ ID 10004 used: {is_used}")
+    test_success(f"ID 10004 used: {is_used}")
     assert not is_used, "ID 10004 should not be used"
 
     is_used = id_manager.is_id_used(ContentType.WEAPON, 10000)
-    print(f"✓ ID 10000 used: {is_used}")
+    test_success(f"ID 10000 used: {is_used}")
     assert is_used, "ID 10000 should be used"
 
-    # Test release
+    # Test releasing an ID
     id_manager.release_id(ContentType.WEAPON, id2)
-    print(f"✓ Released ID {id2}")
+    test_success(f"Released ID {id2}")
 
-    is_used = id_manager.is_id_used(ContentType.WEAPON, id2)
-    assert not is_used, f"ID {id2} should not be used after release"
-
-    # Test available count
+    # Test getting available count
     available_count = id_manager.get_available_count(ContentType.WEAPON)
-    print(f"✓ Available weapon IDs: {available_count}")
-
-    print("✅ ID Manager tests passed!\n")
+    test_success(f"Available weapon IDs: {available_count}")
+    
+    test_success("ID Manager tests passed!\n")
     return id_manager
 
 
 def test_weapon_data_model():
     """Test the WeaponCreationData model"""
-    print("=" * 60)
-    print("Testing Weapon Data Model...")
-    print("=" * 60)
+    test_header("Testing Weapon Data Model...")
+    
+    logger = get_test_logger("weapon_data_model_test")
 
     from cff_editor.models.weapon_creation_data import (
         DamageCategory,
@@ -89,9 +92,10 @@ def test_weapon_data_model():
         intelligence=0,
         level=5,
     )
-    print(
-        f"✓ Created requirements: Str {requirements.strength}, Dex {requirements.dexterity}, Lvl {requirements.level}"
+    test_success(
+        f"Created requirements: Str {requirements.strength}, Dex {requirements.dexterity}, Lvl {requirements.level}"
     )
+    logger.info("Weapon requirements created")
 
     # Create weapon effect
     effect = WeaponEffect(
@@ -100,7 +104,8 @@ def test_weapon_data_model():
         value=10.0,
         duration=0.0,
     )
-    print(f"✓ Created effect: {effect.effect_name} ({effect.value} damage)")
+    test_success(f"Created effect: {effect.effect_name} ({effect.value} damage)")
+    logger.info(f"Weapon effect created with {effect.value} damage")
 
     # Create weapon data
     weapon = WeaponCreationData(

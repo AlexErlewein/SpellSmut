@@ -7,10 +7,8 @@ name = "TirganachReloaded"
 version = "0.1.0"
 description = "SpellForce CFF Editor and related tools"
 readme = "README.md"
-license = {text = "MIT"}
-authors = [
-    {name = "SpellSmut Team"},
-]
+license = { text = "MIT" }
+authors = [{ name = "SpellSmut Team" }]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -25,11 +23,11 @@ classifiers = [
 requires-python = ">=3.9"
 dependencies = [
     "PySide6>=6.0.0",
-    "pillow>=10.0.0",   # For image processing
-    "pyyaml>=6.0",      # For configuration files
+    "pillow>=10.0.0", # For image processing
+    "pyyaml>=6.0",    # For configuration files
     "pytest>=7.0.0",
+    "loguru>=0.7.0",
 ]
-
 
 
 [project.optional-dependencies]
@@ -47,19 +45,10 @@ packages = ["TirganachReloaded"]
 source = "src"
 
 [tool.hatch.envs.default]
-dependencies = [
-    "PySide6",
-    "pillow",
-    "pyyaml",
-]
+dependencies = ["PySide6", "pillow", "pyyaml"]
 
 [tool.hatch.envs.dev]
-dependencies = [
-    "pytest",
-    "black",
-    "isort",
-    "mypy",
-]
+dependencies = ["pytest", "black", "isort", "mypy"]
 
 [tool.black]
 line-length = 88
@@ -81,11 +70,7 @@ python_files = "test_*.py"
 python_classes = "Test*"
 python_functions = "test_*"
 cache_dir = "src/tests/test_data/.pytest_cache"
-addopts = [
-    "--verbose",
-    "--tb=short",
-    "--basetemp=src/tests/test_data/tmp",
-]
+addopts = ["--verbose", "--tb=short", "--basetemp=src/tests/test_data/tmp"]
 markers = [
     "gui: marks tests that require GUI (deselect with '-m \"not gui\"')",
     "integration: marks tests that require external resources",

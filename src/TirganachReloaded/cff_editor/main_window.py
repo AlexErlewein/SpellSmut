@@ -21,6 +21,7 @@ from PySide6.QtWidgets import (
 )
 
 from tirganach.types import Language
+from .logging_config import get_logger
 from .data_model import CFFDataModel
 from .theme_manager import ThemeManager, ThemeType
 from .widgets.building_wizard import BuildingWizard
@@ -37,11 +38,17 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        
+        # Initialize logger
+        self.logger = get_logger("main_window")
+        self.logger.debug("Initializing MainWindow")
+        
         self.setWindowTitle("TirganachReloaded: SpellForce GameData Editor")
         self.setMinimumSize(QSize(1500, 900))
 
         # Data model
         self.data_model = CFFDataModel()
+        self.logger.debug("Data model initialized")
 
         # Theme manager
         self.theme_manager = ThemeManager()
@@ -569,7 +576,7 @@ class MainWindow(QMainWindow):
 
         except Exception as e:
             # Fall back to CFF comparison
-            print(f"DB comparison failed, falling back to CFF: {e}")
+            self.logger.warning(f"DB comparison failed, falling back to CFF: {e}")
             return self._perform_cff_comparison(compare_file_path)
 
     def _compare_databases(

@@ -19,6 +19,7 @@ def main():
     # Import and run the main function
     from TirganachReloaded.cff_editor.main import main as app_main
 
+    # Pass command line arguments to the main function
     app_main()
 
 
