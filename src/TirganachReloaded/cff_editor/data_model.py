@@ -109,6 +109,24 @@ class CFFDataModel(QObject):
         # Advanced descriptions index for fast lookups
         self.advanced_descriptions_index = None
 
+        # ITM Integration for item icons
+        try:
+            from cff_editor_itm_integration import CFFEditorITMIntegration
+            original_gamedata_path = self.project_root / "OriginalGameFiles" / "data" / "GameData.cff"
+            modded_gamedata_path = self.project_root / "ModdedGameFiles" / "GameData.cff"  # Default path, may not exist
+            if original_gamedata_path.exists():
+                self.itm_integration = CFFEditorITMIntegration(str(original_gamedata_path), str(modded_gamedata_path))
+                print(f"ITM Integration initialized with {len(self.itm_integration.original_mapper.get_all_itm_mappings())} ITM mappings")
+            else:
+                self.itm_integration = None
+                print("ITM Integration: Original GameData.cff not found, skipping initialization")
+        except ImportError:
+            self.itm_integration = None
+            print("ITM Integration: cff_editor_itm_integration module not available")
+        except Exception as e:
+            self.itm_integration = None
+            print(f"ITM Integration: Error initializing - {e}")
+
         # Lua data manager for quest scripts
         self.lua_data_manager = None
         self.lua_quest_directory = None
@@ -996,7 +1014,7 @@ class CFFDataModel(QObject):
         # Map table names to icon category names
         category_mapping = {
             "spells": "spell",  # spells table -> spell icons
-            "items": "item",  # items table -> item icons
+            "items": "item",  # items table -> item icons (fallback)
             # Add more mappings as needed
         }
         icon_category = category_mapping.get(category, category)
@@ -1787,5 +1805,61 @@ class CFFDataModel(QObject):
             return list(self.lua_data_manager.quest_cache.keys())
         except Exception:
             return []
+
+    # ITM Icon Integration Methods
+
+    def get_itm_icon_path(self, item_id: int) -> Optional[str]:
+        """
+        Get the ITM icon path for a specific item ID.
+        
+        Args:
+            item_id: The item ID to look up
+            
+        Returns:
+            Path to the ITM icon file or None if not found
+        """
+        if not self.itm_integration:
+            self.logger.debug("ITM integration not available")
+            return None
+            
+        # Get the ITM mapping for this item
+        mapping = self.itm_integration.original_mapper.get_itm_mapping(item_id)
+        if not mapping:
+            self.logger.debug(f"No ITM mapping found for item ID {item_id}")
+            return None
+        
+        # Get the icon path from the integration system
+        icon_path = self.itm_integration.get_icon_path(mapping)
+        if icon_path and icon_path.exists():
+            self.logger.debug(f"Found ITM icon for item {item_id}: {icon_path}")
+            return str(icon_path)
+        else:
+            self.logger.debug(f"ITM icon path does not exist: {icon_path}")
+            return None
+
+    def get_itm_icon_pixmap(self, item_id: int, size=(64, 64)) -> Optional[QPixmap]:
+        """
+        Get ITM icon as QPixmap for display in GUI.
+        
+        Args:
+            item_id: The item ID to look up
+            size: Desired size as (width, height) tuple
+            
+        Returns:
+            QPixmap object or None
+        """
+        cache_key = f"itm_{item_id}_{size}"
+        if cache_key in self.icon_cache:
+            return self.icon_cache[cache_key]
+
+        icon_path = self.get_itm_icon_path(item_id)
+        if icon_path and Path(icon_path).exists():
+            pixmap = QPixmap(icon_path)
+            if not pixmap.isNull():
+                pixmap = pixmap.scaled(size[0], size[1])
+                self.icon_cache[cache_key] = pixmap
+                return pixmap
+
+        return None
 
     
