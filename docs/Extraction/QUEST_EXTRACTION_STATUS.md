@@ -84,7 +84,7 @@ Check if there are:
    - Gets string translations
    - Outputs JSON
 
-2. **`test_cff_load.py`** - Diagnostic script
+2. **`debug_cff_structure.py`** - Diagnostic script
    - Tests CFF loading
    - Inspects GameData structure
    - Finds quest 379 specifically

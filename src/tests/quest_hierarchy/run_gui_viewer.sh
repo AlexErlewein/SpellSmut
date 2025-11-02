@@ -14,8 +14,8 @@ echo ""
 # Check if a CFF file path was provided as argument
 if [ $# -eq 1 ]; then
     echo "Loading CFF file: $1"
-    python test_quest_tree_view.py "$1"
+    python quest_tree_viewer.py "$1"
 else
     echo "Loading default CFF file..."
-    python test_quest_tree_view.py
+    python quest_tree_viewer.py
 fi

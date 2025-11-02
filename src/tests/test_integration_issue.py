@@ -35,7 +35,15 @@ def test_path_resolution():
             if icons:
                 print(f"Sample icon: {icons[0].name}")
     
-    # Check ITM mapping file
+    # Check ITM mapping file - fix import path
+    integration_path = project_root / "src" / "helper_tools" / "integration"
+    sys.path.insert(0, str(integration_path))
+    
+    # Double-check the path exists
+    if not (integration_path / "cff_editor_itm_integration.py").exists():
+        print(f"❌ ITM integration module not found at: {integration_path}")
+        return False
+    
     from cff_editor_itm_integration import CFFEditorITMIntegration
     
     original_path = project_root / "OriginalGameFiles" / "data" / "GameData.cff"

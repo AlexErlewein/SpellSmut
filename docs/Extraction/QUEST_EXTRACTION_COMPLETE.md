@@ -31,7 +31,7 @@
 2. **`extract_cff_quest_data.py`** - CFF metadata extractor
 3. **`extract_quest_dialogues.py`** - Lua dialogue extractor
 4. **`create_final_documentation.py`** - Documentation generator
-5. **`test_cff_load.py`** - CFF loading test
+5. **`debug_cff_structure.py`** - CFF loading test
 
 ---
 
@@ -180,7 +180,7 @@ SpellSmut/
 ├── extract_cff_quest_data.py                 🔧 CFF extractor
 ├── extract_quest_dialogues.py                🔧 Lua extractor
 ├── create_final_documentation.py             🔧 Doc generator
-└── test_cff_load.py                          🔧 CFF test
+└── debug_cff_structure.py                    🔧 CFF test
 ```
 
 ---
