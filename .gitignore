@@ -4,6 +4,9 @@
 # cached files
 src/TirganachReloaded/data/cache/*
 
+# other extra files we dont need in the repo
+ModdingTools/Inspiration/*
+
 # Executables and DLLs (game binaries)
 *.exe
 *.dll
