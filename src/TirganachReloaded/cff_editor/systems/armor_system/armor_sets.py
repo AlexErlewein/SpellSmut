@@ -14,7 +14,7 @@ try:
     from .armor_model import Armor
 except ImportError:
     # For direct execution
-    from armor_model import Armor
+    from cff_editor.systems.armor_system.armor_model import Armor
 
 
 class ArmorSet:

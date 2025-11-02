@@ -46,6 +46,11 @@ uv run pre-commit run --all-files          # Pre-commit hooks
 uv run pytest src/tests/ --cov=src          # Run tests with coverage
 uv run pytest src/tests/ -m "unit"          # Run unit tests only
 uv run pytest src/tests/ -m "cff"           # Run CFF-specific tests only
+
+# Application launch
+uv run python -m TirganachReloaded.cff_editor.main    # Launch GUI editor
+uv run cff-editor                                     # Launch via script entry
+uv run tirganach                                     # Launch via script entry
 ```
 
 ## Code Style

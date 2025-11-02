@@ -31,6 +31,7 @@ dependencies = [
 
 [project.scripts]
 tirganach = "TirganachReloaded.cff_editor.main:main"
+cff-editor = "TirganachReloaded.cff_editor.main:main"
 
 [project.optional-dependencies]
 dev = [

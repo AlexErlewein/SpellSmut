@@ -12,18 +12,21 @@ from typing import Dict, List, Any, Optional
 
 # Import from existing modules
 try:
-    from . import tirganach
-    from .cff_editor.shared.id_manager import IDManager
-    from .armor_model import Armor
+    from ....tirganach import GameData
+    from ....shared.id_manager import IDManager
+    from .armor_model import Armor, ARMOR_TYPES, MATERIAL_CATEGORIES, QUALITY_TIERS, CLASS_RESTRICTIONS
     from .armor_sets import ArmorSetManager
     from .cff_armor_export import export_armor_to_cff
 except ImportError:
     # For direct execution
-    import tirganach
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
+    from tirganach import GameData
     from cff_editor.shared.id_manager import IDManager
-    from armor_model import Armor
-    from armor_sets import ArmorSetManager
-    from cff_armor_export import export_armor_to_cff
+    from armor_system.armor_model import Armor, ARMOR_TYPES, MATERIAL_CATEGORIES, QUALITY_TIERS, CLASS_RESTRICTIONS
+    from armor_system.armor_sets import ArmorSetManager
+    from armor_system.cff_armor_export import export_armor_to_cff
 
 
 
