@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Simple Standalone Quest Viewer Application
+Simple Standalone Quest Viewer Application - CLEAN VERSION
 ==========================================
 
 A lightweight application for viewing SpellForce quest data.
 Uses cached Lua files and triggers cache creation if needed.
 
 Usage:
-    python simple_quest_viewer.py [--debug] [--rebuild-cache]
+    python simple_quest_viewer_clean.py [--debug] [--rebuild-cache]
 """
 
 import sys
@@ -86,7 +86,7 @@ class SimpleQuestViewer(QMainWindow):
         
         self.quest_tree = QTreeWidget()
         self.quest_tree.setHeaderLabels(["Quest ID", "Name"])
-        self.quest_tree.itemSelectionChanged.connect(self.on_quest_selected)
+        self.quest_tree.itemSelectionChanged.connect(lambda: self.on_quest_selection_changed())
         tree_layout.addWidget(self.quest_tree)
         
         # Tree controls
@@ -136,7 +136,7 @@ class SimpleQuestViewer(QMainWindow):
                 self.logger = get_logger("quest_viewer")
             
             # Initialize Lua data manager
-            cache_dir = Path(__file__).parent.parent.parent / "src" / "TirganachReloaded" / "data" / "cache"
+            cache_dir = Path("src/TirganachReloaded/data/cache")
             self.lua_manager = LuaDataManager(cache_dir=cache_dir)
             
             # Load quest data from various sources
@@ -159,7 +159,7 @@ class SimpleQuestViewer(QMainWindow):
         """Load CFF quest data if available"""
         try:
             # Try to load from the standard location
-            cff_data_path = Path(__file__).parent.parent.parent / "src" / "TirganachReloaded" / "data" / "cff_quest_data.json"
+            cff_data_path = Path("src/TirganachReloaded/data/cff_quest_data.json")
             if cff_data_path.exists():
                 with open(cff_data_path, 'r', encoding='utf-8') as f:
                     cff_data = json.load(f)
@@ -194,23 +194,23 @@ class SimpleQuestViewer(QMainWindow):
                 quest_ids = self.lua_manager.get_all_quest_ids()
                 
                 for quest_id in quest_ids:
-                    quest_data = self.lua_manager.get_quest_data(quest_id)
-                    if quest_data:
+                    quest_data_obj = self.lua_manager.get_quest_data(quest_id)
+                    if quest_data_obj:
                         if quest_id not in self.quest_data:
                             self.quest_data[quest_id] = {}
-                    
-                    self.quest_data[quest_id].update({
-                        'id': quest_id,
-                        'name': quest_data.name or f'Quest {quest_id}',
-                        'description': quest_data.description or '',
-                        'platform': quest_data.platform,
-                        'npc_id': quest_data.npc_id,
-                        'objectives': quest_data.objectives,
-                        'requirements': quest_data.requirements,
-                        'rewards': quest_data.rewards,
-                        'dialogues': quest_data.dialogues
-                    })
-                    
+                        
+                        self.quest_data[quest_id].update({
+                            'id': quest_id,
+                            'name': quest_data_obj.quest_name or f'Quest {quest_id}',
+                            'description': quest_data_obj.description or '',
+                            'platform': quest_data_obj.platform,
+                            'npc_id': quest_data_obj.npc_id,
+                            'objectives': quest_data_obj.objectives,
+                            'requirements': quest_data_obj.requirements,
+                            'rewards': quest_data_obj.rewards,
+                            'dialogues': quest_data_obj.dialogues
+                        })
+                        
         except Exception as e:
             if self.logger:
                 self.logger.warning(f"Failed to load Lua quest data: {e}")
@@ -218,17 +218,15 @@ class SimpleQuestViewer(QMainWindow):
     def populate_quest_tree(self):
         """Populate the quest tree"""
         self.quest_tree.clear()
-        
+
         if not self.quest_data:
             return
         
         # Create quest items
-        quest_items = []
         for quest_id, quest_info in sorted(self.quest_data.items()):
             name = quest_info.get('name', f'Quest {quest_id}')
             item = QTreeWidgetItem(self.quest_tree, [str(quest_id), name])
             item.setData(0, Qt.UserRole, quest_id)
-            quest_items.append(item)
         
         # Create hierarchy (parent-child relationships)
         for quest_id, quest_info in self.quest_data.items():
@@ -253,7 +251,7 @@ class SimpleQuestViewer(QMainWindow):
         
         self.quest_tree.expandAll()
     
-    def on_quest_selected(self):
+    def on_quest_selection_changed(self):
         """Handle quest selection"""
         selected_items = self.quest_tree.selectedItems()
         if not selected_items:
@@ -295,7 +293,7 @@ class SimpleQuestViewer(QMainWindow):
         if objectives:
             details.append("Objectives:")
             for obj in objectives:
-                obj_type = getattr(obj, 'type', 'Unknown')
+                obj_type = getattr(obj, 'objective_type', 'Unknown')
                 obj_text = getattr(obj, 'description', '')
                 details.append(f"  - [{obj_type}] {obj_text}")
             details.append("")
@@ -305,22 +303,21 @@ class SimpleQuestViewer(QMainWindow):
         if requirements:
             details.append("Requirements:")
             for req in requirements:
-                req_type = getattr(req, 'type', 'Unknown')
+                req_type = getattr(req, 'requirement_type', 'Unknown')
                 req_text = getattr(req, 'description', '')
                 details.append(f"  - [{req_type}] {req_text}")
             details.append("")
         
         # Rewards
-        rewards = quest_info.get('rewards', [])
+        rewards = quest_info.get('rewards')
         if rewards:
             details.append("Rewards:")
-            for reward in rewards:
-                reward_type = getattr(reward, 'type', 'Unknown')
-                reward_amount = getattr(reward, 'amount', '')
-                if reward_amount:
-                    details.append(f"  - {reward_type}: {reward_amount}")
-                else:
-                    details.append(f"  - {reward_type}")
+            if hasattr(rewards, 'xp') and rewards.xp > 0:
+                details.append(f"  - XP: {rewards.xp}")
+            if hasattr(rewards, 'gold') and rewards.gold > 0:
+                details.append(f"  - Gold: {rewards.gold}")
+            if hasattr(rewards, 'items') and rewards.items:
+                details.append(f"  - Items: {', '.join(map(str, rewards.items))}")
             details.append("")
         
         # Dialogues
@@ -348,8 +345,8 @@ class SimpleQuestViewer(QMainWindow):
         try:
             # Look for Lua files
             lua_paths = [
-                Path(__file__).parent.parent.parent / "ModdingTools" / "SpellForceLUASources",
-                Path(__file__).parent.parent.parent / "OriginalGameFiles" / "lua",
+                Path("ModdingTools/SpellForceLUASources"),
+                Path("OriginalGameFiles/lua"),
             ]
             
             lua_source_path = None
