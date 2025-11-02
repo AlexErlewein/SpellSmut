@@ -1,1 +1,0 @@
-dofile("script/p206/n9277_ErsteMumienTruppe.lua")

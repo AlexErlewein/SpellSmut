@@ -1,1 +1,0 @@
-dofile("script/p207/n10712_Erste_Festung_Truppe_O_Anfuehrer.lua")

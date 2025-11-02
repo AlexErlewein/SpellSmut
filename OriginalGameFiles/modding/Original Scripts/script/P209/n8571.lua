@@ -1,1 +1,0 @@
-dofile("script/P209/n8566_KathaiKrieger.lua")

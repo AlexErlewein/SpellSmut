@@ -1,1 +1,0 @@
-dofile("script/p108/n6197_AngriffsWelleVier.lua")

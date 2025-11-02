@@ -1,1 +1,0 @@
-dofile("script/p104/n6595_SMWerwölfe.lua")

@@ -1,1 +1,0 @@
-dofile("script/p202/n11503_Daemonenspawn.lua")

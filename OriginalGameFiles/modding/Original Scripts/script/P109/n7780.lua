@@ -1,1 +1,0 @@
-dofile("script/p109/n6418_DunkelElfenTorTruppe.lua")

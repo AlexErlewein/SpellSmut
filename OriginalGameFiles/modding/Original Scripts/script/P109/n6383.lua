@@ -1,1 +1,0 @@
-dofile("script/p108/n6382_TrollJäger.lua")

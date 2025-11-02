@@ -1,1 +1,0 @@
-dofile("script/P209/n10127_Skeletons_North.lua")

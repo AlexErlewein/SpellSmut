@@ -1,1 +1,0 @@
-dofile("script/p207/n11147_Vierte_Festung_Alyhas_Truppe_Ost_Truppe.lua")

@@ -1,1 +1,0 @@
-dofile("script/p207/n10925_Zweite_Festung_Halten_Truppe03_Truppe.lua")

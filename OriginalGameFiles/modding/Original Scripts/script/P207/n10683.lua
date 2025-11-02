@@ -1,1 +1,0 @@
-dofile("script/p207/n10676_Erste_Festung_Tor_Oeffnung_Truppe.lua")

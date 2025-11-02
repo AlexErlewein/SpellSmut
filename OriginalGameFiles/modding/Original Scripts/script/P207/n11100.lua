@@ -1,1 +1,0 @@
-dofile("script/p207/n11087_Vierte_Festung_Rohens_Untote_Truppe.lua")

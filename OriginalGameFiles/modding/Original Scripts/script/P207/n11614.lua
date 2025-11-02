@@ -1,1 +1,0 @@
-dofile("script/p207/n11614_Weg_Zur_Zweiten_Festung_Truppe01_Truppe.lua")

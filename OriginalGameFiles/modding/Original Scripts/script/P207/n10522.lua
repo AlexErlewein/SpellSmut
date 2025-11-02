@@ -1,1 +1,0 @@
-dofile("script/p207/n10519_Skelett_Angriff_Hoehle02_Truppe.lua")

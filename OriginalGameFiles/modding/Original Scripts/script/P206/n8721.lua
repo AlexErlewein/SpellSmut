@@ -1,1 +1,0 @@
-dofile("script/p206/n8721_VierteTrakanTruppeAnfuehrer.lua")
