@@ -1,4 +1,0 @@
-LangId =
-{
-	ClientLanguage = 0,
-}

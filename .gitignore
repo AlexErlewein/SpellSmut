@@ -6,6 +6,8 @@ src/TirganachReloaded/data/cache/*
 
 # other extra files we dont need in the repo
 ModdingTools/Inspiration/*
+ExtractedAssets/*
+!ExtractedAssets/UI/
 
 # Executables and DLLs (game binaries)
 *.exe
