@@ -3,6 +3,7 @@ Quest Details Widget
 Shows detailed quest information including dialogs and related data
 """
 
+from loguru import logger
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QGroupBox,
@@ -23,6 +24,7 @@ class QuestDetailsWidget(QWidget):
 
     def __init__(self, data_model):
         super().__init__()
+        logger.warning("⚠️  OLD QuestDetailsWidget initialized (THIS SHOULD NOT HAPPEN!)")
         self.data_model = data_model
         self.current_quest = None
 
@@ -358,7 +360,7 @@ class QuestDetailsWidget(QWidget):
             self.cache_valid = True
 
         except Exception as e:
-            print(f"Error building localisation index: {e}")
+            logger.error(f"Error building localisation index: {e}")
 
     def find_quest_dialogs(self, quest_id):
         """Find dialogs related to a quest (optimized with caching)"""
@@ -440,7 +442,7 @@ class QuestDetailsWidget(QWidget):
                                 break
 
         except Exception as e:
-            print(f"Error finding quest dialogs: {e}")
+            logger.error(f"Error finding quest dialogs: {e}")
             import traceback
 
             traceback.print_exc()
@@ -483,4 +485,4 @@ class QuestDetailsWidget(QWidget):
         """Display Lua quest data in the details panel"""
         # This could be enhanced to show Lua-specific information
         # For now, we'll just log that Lua data is available
-        print(f"Lua quest data available for quest {lua_quest.quest_id}: {lua_quest.quest_name}")
+        logger.info(f"Lua quest data available for quest {lua_quest.quest_id}: {lua_quest.quest_name}")

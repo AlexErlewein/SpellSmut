@@ -30,6 +30,8 @@ class QuestReward:
     reward_flags: List[str] = field(default_factory=list)
     items: List[str] = field(default_factory=list)
     gold: int = 0
+    silver: int = 0
+    copper: int = 0
     source: str = "script/GdsQuestRewards.lua"
 
 

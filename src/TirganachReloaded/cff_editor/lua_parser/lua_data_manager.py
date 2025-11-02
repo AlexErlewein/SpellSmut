@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 from typing import Dict, List, Optional
 
-from loguru import logger as lua_logger
+from loguru import logger
 
 from .quest_lua_parser import (
     LuaQuestParser,
@@ -33,8 +33,7 @@ class LuaDataManager:
         self.cache_dir = Path(cache_dir)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
-        # Configure debug logging for Lua operations
-        self._setup_debug_logging()
+        # Note: Logging is now handled by the global logging system
 
         self.db_path = self.cache_dir / "lua_quest_cache.db"
         self.parser = LuaQuestParser()
@@ -45,22 +44,7 @@ class LuaDataManager:
 
         self._init_database()
 
-    def _setup_debug_logging(self):
-        """Configure debug logging for Lua data manager"""
-        # Configure dedicated lua_logger for Lua operations
-        lua_logger.remove()
 
-        # Add console handler with DEBUG level for Lua operations
-        console_format = (
-            "<green>{time:HH:mm:ss}</green> | "
-            "<level>{level: <8}</level> | "
-            "<cyan>Lua</cyan> | "
-            "<level>{message}</level>"
-        )
-
-        lua_logger.add(sys.stderr, format=console_format, level="DEBUG", colorize=True)
-
-        lua_logger.debug("Lua data manager debug logging initialized")
 
     def _init_database(self):
         """Initialize SQLite database for caching"""
@@ -160,12 +144,12 @@ class LuaDataManager:
         """
         lua_dir = Path(lua_dir)
         if not lua_dir.exists():
-            lua_logger.warning(f"Lua directory not found: {lua_dir}")
+            logger.warning(f"Lua directory not found: {lua_dir}")
             return 0
 
         # Find all .lua files
         lua_files = list(lua_dir.glob("**/*.lua"))
-        lua_logger.info(f"Found {len(lua_files)} Lua files in {lua_dir}")
+        logger.info(f"Found {len(lua_files)} Lua files in {lua_dir}")
 
         quests_parsed = 0
 
@@ -178,18 +162,18 @@ class LuaDataManager:
                 # Skip very large files (likely not quest files)
                 file_size = lua_file.stat().st_size
                 if file_size > 1 * 1024 * 1024:  # 1MB
-                    lua_logger.debug(
+                    logger.debug(
                         f"Skipping large file: {lua_file.name} ({file_size / 1024:.0f}KB)"
                     )
                     continue
 
                 # Parse the file with timeout protection
-                lua_logger.debug(f"Parsing: {lua_file.name}")
+                logger.debug(f"Parsing: {lua_file.name}")
 
                 try:
                     quests = self.parser.parse_file(str(lua_file))
                 except Exception as parse_error:
-                    lua_logger.debug(f"Parse error in {lua_file.name}: {parse_error}")
+                    logger.debug(f"Parse error in {lua_file.name}: {parse_error}")
                     continue
 
                 # Detect platform from file path (e.g., P1, P2, P3)
@@ -202,19 +186,19 @@ class LuaDataManager:
                             quest.platform = platform
                         self._store_quest(quest, lua_file)
                         quests_parsed += 1
-                        lua_logger.debug(
+                        logger.debug(
                             f"Found quest {quest.quest_id}: {quest.quest_name}"
                         )
 
             except Exception as e:
-                lua_logger.error(f"Error processing {lua_file.name}: {e}")
+                logger.error(f"Error processing {lua_file.name}: {e}")
                 continue
 
         # Update metadata
         self._update_metadata("last_parse_time", str(Path(lua_dir).stat().st_mtime))
         self._update_metadata("lua_directory", str(lua_dir))
 
-        lua_logger.info(f"Parsed {quests_parsed} quests from Lua files")
+        logger.info(f"Parsed {quests_parsed} quests from Lua files")
 
         # Parse GdsQuestRewards.lua if it exists
         # Try multiple locations
@@ -228,14 +212,14 @@ class LuaDataManager:
             rewards_file = list(lua_dir.glob("**/GdsQuestRewards.lua"))[0]
 
         if rewards_file:
-            lua_logger.debug(f"Found GdsQuestRewards.lua at: {rewards_file}")
-            lua_logger.debug("Parsing GdsQuestRewards.lua for reward data...")
+            logger.debug(f"Found GdsQuestRewards.lua at: {rewards_file}")
+            logger.debug("Parsing GdsQuestRewards.lua for reward data...")
             self._parse_rewards_file(rewards_file)
         else:
-            lua_logger.warning(
+            logger.warning(
                 "GdsQuestRewards.lua not found - rewards will not be available"
             )
-            lua_logger.debug(f"Searched in: {lua_dir}")
+            logger.debug(f"Searched in: {lua_dir}")
 
         # Preload cache into memory for fast access
         self.preload_cache()
@@ -245,7 +229,7 @@ class LuaDataManager:
     def _parse_rewards_file(self, rewards_file: Path):
         """Parse GdsQuestRewards.lua file to extract reward data"""
         try:
-            lua_logger.debug(f"Reading rewards file: {rewards_file}")
+            logger.debug(f"Reading rewards file: {rewards_file}")
             # Try multiple encodings
             encodings = ["utf-8", "windows-1252", "latin-1"]
             content = None
@@ -254,7 +238,7 @@ class LuaDataManager:
                 try:
                     with open(rewards_file, "r", encoding=encoding) as f:
                         content = f.read()
-                    lua_logger.debug(
+                    logger.debug(
                         f"Successfully read file with encoding: {encoding}"
                     )
                     break
@@ -264,20 +248,20 @@ class LuaDataManager:
             if not content:
                 with open(rewards_file, "r", encoding="utf-8", errors="ignore") as f:
                     content = f.read()
-                lua_logger.debug("Used UTF-8 with errors ignored")
+                logger.debug("Used UTF-8 with errors ignored")
 
-            lua_logger.debug(f"File content length: {len(content)} characters")
+            logger.debug(f"File content length: {len(content)} characters")
 
             # Parse each platform's rewards (P1, P2, P63, etc.)
             platform_pattern = r"QuestRewardsP(\d+)\s*=\s*\{(.*?)(?=\nQuestRewardsP|\Z)"
 
-            lua_logger.debug("Searching for platform patterns...")
+            logger.debug("Searching for platform patterns...")
             platforms_found = 0
             for platform_match in re.finditer(platform_pattern, content, re.DOTALL):
                 platforms_found += 1
                 platform = f"P{platform_match.group(1)}"
                 rewards_section = platform_match.group(2)
-                lua_logger.debug(
+                logger.debug(
                     f"Parsing rewards for platform {platform}... (section length: {len(rewards_section)})"
                 )
 
@@ -287,7 +271,7 @@ class LuaDataManager:
 
                 quest_count = 0
                 matches_list = list(re.finditer(quest_pattern, rewards_section))
-                lua_logger.debug(
+                logger.debug(
                     f"Found {len(matches_list)} quest patterns in {platform}"
                 )
 
@@ -297,8 +281,8 @@ class LuaDataManager:
                     reward_data = quest_match.group(2)
 
                     if quest_count <= 3:  # Show first 3 for debugging
-                        lua_logger.debug(
-                            f"[DEBUG]   Quest name: '{quest_name}', reward data: '{reward_data[:50]}...'"
+                        logger.debug(
+                            f"Quest name: '{quest_name}', reward data: '{reward_data[:50]}...'"
                         )
                     # Extract reward values
                     xp = 0
@@ -337,7 +321,7 @@ class LuaDataManager:
 
                     # Store in a mapping (we'll match to quest IDs later)
                     if quest_count <= 3:  # Show first 3 for debugging
-                        lua_logger.debug(
+                        logger.debug(
                             f"Storing: {quest_name} - XP:{xp}, Gold:{gold}, Items:{items}"
                         )
 
@@ -345,14 +329,14 @@ class LuaDataManager:
                         quest_name, platform, xp, gold, silver, copper, items
                     )
 
-                lua_logger.debug(f"Found {quest_count} quest rewards for {platform}")
+                logger.debug(f"Found {quest_count} quest rewards for {platform}")
 
-            lua_logger.info(
+            logger.info(
                 f"Parsed rewards from GdsQuestRewards.lua - {platforms_found} platforms found"
             )
 
         except Exception as e:
-            lua_logger.error(f"Error parsing GdsQuestRewards.lua: {e}")
+            logger.error(f"Error parsing GdsQuestRewards.lua: {e}")
 
     def _store_reward_by_name(
         self,
@@ -374,7 +358,7 @@ class LuaDataManager:
         )
         quest_count = cursor.fetchone()[0]
         if quest_count == 0:
-            lua_logger.debug(
+            logger.debug(
                 f"WARNING: No quests found in database for platform {platform}"
             )
             conn.close()
@@ -411,7 +395,7 @@ class LuaDataManager:
             result = cursor.fetchone()
             if result:
                 quest_id = result[0]
-                lua_logger.debug(
+                logger.debug(
                     f"Matched '{quest_name}' using parts: {name_parts} → Quest {quest_id}"
                 )
 
@@ -442,7 +426,7 @@ class LuaDataManager:
                 result = cursor.fetchone()
                 if result:
                     quest_id = result[0]
-                    lua_logger.debug(
+                    logger.debug(
                         f"Matched '{quest_name}' using keyword '{first_word}' → Quest {quest_id}"
                     )
 
@@ -464,14 +448,14 @@ class LuaDataManager:
                 (platform,),
             )
             sample_quests = cursor.fetchall()
-            lua_logger.debug(
+            logger.debug(
                 f"Could not match reward '{quest_name}' on platform {platform}"
             )
-            lua_logger.debug(f"Name parts: {name_parts}")
+            logger.debug(f"Name parts: {name_parts}")
             if sample_quests:
-                lua_logger.debug(f"Sample quests on {platform}:")
+                logger.debug(f"Sample quests on {platform}:")
                 for qid, desc in sample_quests:
-                    lua_logger.debug(
+                    logger.debug(
                         f"Quest {qid}: {desc[:60] if desc else 'No description'}..."
                     )
 
@@ -781,7 +765,7 @@ class LuaDataManager:
         self.quest_cache.clear()
         self.cache_loaded = False
 
-        lua_logger.info("Lua quest cache cleared")
+        logger.info("Lua quest cache cleared")
 
     def _update_metadata(self, key: str, value: str):
         """Update metadata in cache"""
@@ -838,13 +822,13 @@ class LuaDataManager:
             return
 
         quest_ids = self.get_all_quest_ids()
-        lua_logger.info(f"Preloading {len(quest_ids)} quests into memory...")
+        logger.info(f"Preloading {len(quest_ids)} quests into memory...")
 
         for quest_id in quest_ids:
             self.get_quest_data(quest_id)  # This will cache in memory
 
         self.cache_loaded = True
-        lua_logger.info(f"Preloaded {len(self.quest_cache)} quests")
+        logger.info(f"Preloaded {len(self.quest_cache)} quests")
 
 
 # Singleton instance

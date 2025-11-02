@@ -21,14 +21,14 @@ def main():
     """Main entry point"""
     # Configure structured logging first
     project_root = Path(__file__).parent.parent.parent.parent
-    debug_mode = "--debug" in sys.argv
-    configure_logging(debug_mode=debug_mode, project_root=project_root)
+    verbose_mode = "-v" in sys.argv
+    configure_logging(debug_mode=verbose_mode, project_root=project_root)
 
     from .logging_config import get_logger
 
     logger = get_logger("main")
     logger.info("Starting SpellForce CFF Editor")
-    logger.debug(f"Debug mode: {debug_mode}")
+    logger.debug(f"Verbose mode: {verbose_mode}")
 
     app = QApplication(sys.argv)
     app.setApplicationName("SpellForce CFF Editor")

@@ -117,10 +117,15 @@ class MainWindow(QMainWindow):
         splitter.addWidget(self.property_editor)
 
         # 4th panel - Enhanced Quest details (initially hidden)
+        self.logger.debug("About to create QuestDetailsViewer...")
         self.quest_details = QuestDetailsViewer(self.data_model)
+        self.logger.debug(f"Created quest_details widget: {type(self.quest_details).__name__}")
         self.quest_details.hide()  # Hidden by default
         self.quest_details.setMinimumWidth(400)  # Wider for enhanced details
         splitter.addWidget(self.quest_details)
+        
+        # Force show quest details panel for testing
+        # self.quest_details.show()  # TEMPORARY: Always show for testing
 
         # Set initial sizes (15%, 25%, 25%, 35% for enhanced quest details)
         splitter.setSizes([200, 350, 300, 500])
@@ -771,8 +776,10 @@ class MainWindow(QMainWindow):
 
     def on_category_changed(self, category):
         """Called when category changes"""
+        self.logger.debug(f"Category changed to: {category}")
         # Show/hide quest details panel and quest hierarchy tree based on category
         if category == "quests":
+            self.logger.debug("Showing quest hierarchy tree and quest details panel")
             # Hide element table, show quest hierarchy tree
             self.element_table.hide()
             self.quest_hierarchy_tree.show()
@@ -780,9 +787,11 @@ class MainWindow(QMainWindow):
 
             # Show quest details panel
             self.quest_details.show()
+            self.logger.debug(f"Quest details panel visible: {self.quest_details.isVisible()}")
             # Adjust splitter sizes to accommodate 4th panel
             self.adjust_splitter_for_quests()
         else:
+            self.logger.debug("Showing element table, hiding quest components")
             # Show element table, hide quest hierarchy tree
             self.element_table.show()
             self.quest_hierarchy_tree.hide()
@@ -886,12 +895,11 @@ class MainWindow(QMainWindow):
 
         from PySide6.QtWidgets import QFileDialog, QMessageBox
 
-        # Suggest the default Original Scripts path if it exists
+        # Suggest the default Lua Scripts path if it exists
         default_path = (
             Path(__file__).parent.parent.parent.parent
-            / "OriginalGameFiles"
-            / "modding"
-            / "Original Scripts"
+            / "ModdingTools"
+            / "SpellForceLUASources"
             / "script"
         )
 

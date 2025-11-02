@@ -10,6 +10,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
 
+from loguru import logger
+
 from ..models.quest_models import (
     Dialogue,
     EnhancedQuestData,
@@ -53,7 +55,10 @@ class QuestDataService:
         
         # Try to load from cache
         if self.use_cache:
-            self._load_from_cache()
+            if not self._load_from_cache():
+                # Cache doesn't exist or is expired, build it
+                logger.info("Building quest data cache...")
+                self.rebuild_cache(force=False)
     
     def _load_extended_dialogues(self) -> Dict[int, List[tuple]]:
         """Load extended story dialogues (from our extraction)"""
@@ -107,24 +112,39 @@ class QuestDataService:
     def _load_quest_descriptions(self) -> Dict:
         """Load quest descriptions from our extraction"""
         if self._quest_descriptions_cache is None:
-            file_path = self.project_root / "quest_descriptions_complete.json"
+            # Use the existing quest_maps_and_descriptions.json file
+            file_path = self.data_dir / "quest_maps_and_descriptions.json"
             if file_path.exists():
                 with open(file_path, 'r', encoding='utf-8') as f:
-                    self._quest_descriptions_cache = json.load(f)
+                    data = json.load(f)
+                    # Transform the data to match expected structure
+                    self._quest_descriptions_cache = {}
+                    for quest_id, quest_info in data.items():
+                        self._quest_descriptions_cache[quest_id] = {
+                            'cff_data': {
+                                'name': quest_info.get('name'),
+                                'parent_id': 0,  # Default value
+                                'order_index': 0  # Default value
+                            },
+                            'lua_original': {
+                                'files': [],
+                                'dialogues': []
+                            }
+                        }
             else:
                 self._quest_descriptions_cache = {}
-        return self._quest_descriptions_cache
+        return self._quest_descriptions_cache or {}
     
     def _load_quest_maps(self) -> Dict:
         """Load quest map locations from our extraction"""
         if self._quest_maps_cache is None:
-            file_path = self.project_root / "quest_maps_and_descriptions.json"
+            file_path = self.data_dir / "quest_maps_and_descriptions.json"
             if file_path.exists():
                 with open(file_path, 'r', encoding='utf-8') as f:
                     self._quest_maps_cache = json.load(f)
             else:
                 self._quest_maps_cache = {}
-        return self._quest_maps_cache
+        return self._quest_maps_cache or {}
     
     def _load_quest_rewards(self) -> Dict:
         """Load quest rewards mapping"""
@@ -137,7 +157,7 @@ class QuestDataService:
             else:
                 # Fallback to hardcoded rewards from our extraction
                 self._quest_rewards_cache = self._get_hardcoded_rewards()
-        return self._quest_rewards_cache
+        return self._quest_rewards_cache or {}
     
     def _get_hardcoded_rewards(self) -> Dict:
         """Hardcoded rewards from our extraction"""
@@ -171,6 +191,20 @@ class QuestDataService:
         Returns:
             EnhancedQuestData object with all available information
         """
+        # Check merged cache first
+        quest_id_str = str(quest_id)
+        if self._merged_cache and quest_id_str in self._merged_cache:
+            cached_data = self._merged_cache[quest_id_str]
+            # If CFF data provided, update the cached data with it
+            if cff_quest_data:
+                cached_data.name = cff_quest_data.get('name', cached_data.name)
+                cached_data.description = cff_quest_data.get('description', cached_data.description)
+                cached_data.parent_id = cff_quest_data.get('parent_quest_id', cached_data.parent_id)
+                cached_data.order_index = cff_quest_data.get('order_index', cached_data.order_index)
+                cached_data.name_id = cff_quest_data.get('name_id', cached_data.name_id)
+                cached_data.description_id = cff_quest_data.get('description_id', cached_data.description_id)
+            return cached_data
+        
         # Load data sources
         quest_descriptions = self._load_quest_descriptions()
         quest_maps = self._load_quest_maps()
@@ -303,10 +337,10 @@ class QuestDataService:
         if parent_id > 0:
             for q in all_quests:
                 q_id = q.get('id') or q.get('quest_id')
-                if q_id == parent_id:
+                if isinstance(q_id, (int, str)) and int(q_id) == parent_id:
                     relationships.append(
                         QuestRelationship(
-                            quest_id=q_id,
+                            quest_id=int(q_id),
                             name=q.get('name', f'Quest {q_id}'),
                             relationship_type='parent'
                         )
@@ -318,10 +352,13 @@ class QuestDataService:
             for q in all_quests:
                 q_id = q.get('id') or q.get('quest_id')
                 q_parent = q.get('parent_quest_id', 0)
-                if q_id != quest_id and q_parent == parent_id:
+                if (isinstance(q_id, (int, str)) and 
+                    isinstance(q_parent, (int, str)) and 
+                    int(q_id) != quest_id and 
+                    int(q_parent) == parent_id):
                     relationships.append(
                         QuestRelationship(
-                            quest_id=q_id,
+                            quest_id=int(q_id),
                             name=q.get('name', f'Quest {q_id}'),
                             relationship_type='sibling'
                         )
@@ -331,10 +368,12 @@ class QuestDataService:
         for q in all_quests:
             q_id = q.get('id') or q.get('quest_id')
             q_parent = q.get('parent_quest_id', 0)
-            if q_parent == quest_id:
+            if (isinstance(q_id, (int, str)) and 
+                isinstance(q_parent, (int, str)) and 
+                int(q_parent) == quest_id):
                 relationships.append(
                     QuestRelationship(
-                        quest_id=q_id,
+                        quest_id=int(q_id),
                         name=q.get('name', f'Quest {q_id}'),
                         relationship_type='child'
                     )
@@ -351,7 +390,7 @@ class QuestDataService:
             # Check if cache is still valid (less than 24 hours old)
             cache_age = datetime.now().timestamp() - self.cache_file.stat().st_mtime
             if cache_age > 86400:  # 24 hours in seconds
-                print("[INFO] Quest data cache expired, will reload")
+                logger.info("Quest data cache expired, will reload")
                 return False
             
             # Load cached data
@@ -363,10 +402,10 @@ class QuestDataService:
             self._quest_rewards_cache = cache_data.get('rewards')
             self._merged_cache = cache_data.get('merged')
             
-            print(f"[INFO] Loaded quest data from cache ({len(self._merged_cache or {})} quests)")
+            logger.info(f"Loaded quest data from cache ({len(self._merged_cache or {})} quests)")
             return True
         except Exception as e:
-            print(f"[WARNING] Failed to load quest data cache: {e}")
+            logger.warning(f"Failed to load quest data cache: {e}")
             return False
     
     def _save_to_cache(self):
@@ -387,15 +426,15 @@ class QuestDataService:
             with open(self.cache_timestamp_file, 'w') as f:
                 f.write(datetime.now().isoformat())
             
-            print(f"[INFO] Saved quest data to cache")
+            logger.info("Saved quest data to cache")
             return True
         except Exception as e:
-            print(f"[WARNING] Failed to save quest data cache: {e}")
+            logger.warning(f"Failed to save quest data cache: {e}")
             return False
     
     def rebuild_cache(self, force: bool = True):
         """Rebuild the quest data cache"""
-        print("[INFO] Rebuilding quest data cache...")
+        logger.info("Rebuilding quest data cache...")
         
         # Clear existing cache
         self.clear_cache()
@@ -417,11 +456,11 @@ class QuestDataService:
                 quest_data = self.get_enhanced_quest_data(quest_id)
                 self._merged_cache[str(quest_id)] = quest_data
             except Exception as e:
-                print(f"[WARNING] Failed to cache quest {quest_id}: {e}")
+                logger.warning(f"Failed to cache quest {quest_id}: {e}")
         
         # Save to disk
         self._save_to_cache()
-        print(f"[INFO] Cache rebuilt with {len(self._merged_cache)} quests")
+        logger.info(f"Cache rebuilt with {len(self._merged_cache)} quests")
     
     def clear_cache(self):
         """Clear all cached data (in-memory and disk)"""
@@ -437,4 +476,4 @@ class QuestDataService:
         if self.cache_timestamp_file.exists():
             self.cache_timestamp_file.unlink()
         
-        print("[INFO] Quest data cache cleared")
+        logger.info("Quest data cache cleared")

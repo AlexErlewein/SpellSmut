@@ -118,16 +118,16 @@ class CFFDataModel(QObject):
             modded_gamedata_path = self.project_root / "ModdedGameFiles" / "GameData.cff"  # Default path, may not exist
             if original_gamedata_path.exists():
                 self.itm_integration = CFFEditorITMIntegration(str(original_gamedata_path), str(modded_gamedata_path))
-                print(f"ITM Integration initialized with {len(self.itm_integration.original_mapper.get_all_itm_mappings())} ITM mappings")
+                logger.info(f"ITM Integration initialized with {len(self.itm_integration.original_mapper.get_all_itm_mappings())} ITM mappings")
             else:
                 self.itm_integration = None
-                print("ITM Integration: Original GameData.cff not found, skipping initialization")
+                logger.warning("ITM Integration: Original GameData.cff not found, skipping initialization")
         except ImportError:
             self.itm_integration = None
-            print("ITM Integration: cff_editor_itm_integration module not available")
+            logger.warning("ITM Integration: cff_editor_itm_integration module not available")
         except Exception as e:
             self.itm_integration = None
-            print(f"ITM Integration: Error initializing - {e}")
+            logger.error(f"ITM Integration: Error initializing - {e}")
 
         # Lua data manager for quest scripts
         self.lua_data_manager = None
@@ -243,14 +243,14 @@ class CFFDataModel(QObject):
 
         except PermissionError as e:
             cache_dir = cache_file.parent if cache_file else self.cache_dir
-            print(f"Permission denied saving cache to {cache_dir}: {e}")
-            print("Cache will not be available for future loads")
+            logger.error(f"Permission denied saving cache to {cache_dir}: {e}")
+            logger.warning("Cache will not be available for future loads")
         except OSError as e:
-            print(f"OS error saving cache: {e}")
-            print("Cache will not be available for future loads")
+            logger.error(f"OS error saving cache: {e}")
+            logger.warning("Cache will not be available for future loads")
         except Exception as e:
-            print(f"Unexpected error saving cache: {e}")
-            print("Cache will not be available for future loads")
+            logger.error(f"Unexpected error saving cache: {e}")
+            logger.warning("Cache will not be available for future loads")
 
     def set_current_language(self, language: Language):
         """Set the current language and save to settings"""
@@ -273,13 +273,37 @@ class CFFDataModel(QObject):
         try:
             path = Path(file_path)
             if not path.exists():
-                print(f"File not found: {file_path}")
+                logger.error(f"File not found: {file_path}")
                 return False
 
             # Generate fingerprint for cache validation
             fingerprint = self._generate_fingerprint(file_path)
 
-            # Try DB provider if enabled
+            # Try to load from cache first (unless force_parse is True)
+            if not force_parse:
+                logger.debug("Attempting to load from cache...")
+                cached_data, cache_failure_reason = self._load_from_cache(fingerprint)
+                if cached_data is not None:
+                    logger.debug("Cache loaded successfully!")
+                    self.game_data = cached_data
+                    self.file_path = file_path
+                    self.modified = False
+
+                    # Load mappings
+                    self._load_weapon_names()
+                    self._load_armor_names()
+
+                    # Save as last opened file
+                    self.settings.setValue("last_opened_file", file_path)
+
+                    # Build indices for faster lookups
+                    self._build_localisation_index()
+                    self._build_advanced_descriptions_index()
+
+                    self.data_loaded.emit()
+                    return True
+
+            # Try DB provider if enabled (and cache failed)
             if self.use_db_provider and DATA_PROVIDERS_AVAILABLE and dp:
                 db_path = str(self.db_dir / "cff_data.db")
                 db_manager = dp.DatabaseManager(db_path)
@@ -310,7 +334,7 @@ class CFFDataModel(QObject):
                             self.data_loaded.emit()
                             return True
                     elif db_failure_reason:
-                        print(f"Database rebuild triggered: {db_failure_reason}")
+                        logger.info(f"Database rebuild triggered: {db_failure_reason}")
 
                 # Need to rebuild database - first load CFF data
                 self.game_data = GameData(file_path)
@@ -335,29 +359,7 @@ class CFFDataModel(QObject):
                 self.data_loaded.emit()
                 return True
 
-            # Try to load from cache unless force_parse is True
-            if not force_parse:
-                cached_data, cache_failure_reason = self._load_from_cache(fingerprint)
-                if cached_data is not None:
-                    self.game_data = cached_data
-                    self.file_path = file_path
-                    self.modified = False
-
-                    # Load mappings
-                    self._load_weapon_names()
-                    self._load_armor_names()
-
-                    # Save as last opened file
-                    self.settings.setValue("last_opened_file", file_path)
-
-                    # Build indices for faster lookups
-                    self._build_localisation_index()
-                    self._build_advanced_descriptions_index()
-
-                    self.data_loaded.emit()
-                    return True
-                elif cache_failure_reason:
-                    print(f"Cache rebuild triggered: {cache_failure_reason}")
+            # Cache already attempted above (miss or force_parse)
 
             # Parse from file (cache miss or force_parse)
             self.game_data = GameData(file_path)
@@ -381,14 +383,14 @@ class CFFDataModel(QObject):
             return True
 
         except FileNotFoundError:
-            print(f"File not found: {file_path}")
+            logger.error(f"File not found: {file_path}")
             return False
         except PermissionError:
-            print(f"Permission denied accessing file: {file_path}")
+            logger.error(f"Permission denied accessing file: {file_path}")
             return False
         except Exception as e:
             error_msg = f"Failed to load CFF file '{file_path}': {str(e)}"
-            print(error_msg)
+            logger.error(error_msg)
             # Could emit an error signal here for UI feedback
             return False
 
@@ -418,7 +420,7 @@ class CFFDataModel(QObject):
                         self.data_loaded.emit()
                         return True
                     elif db_failure_reason:
-                        print(f"Database rebuild triggered: {db_failure_reason}")
+                        logger.info(f"Database rebuild triggered: {db_failure_reason}")
 
                 # Need to rebuild database
                 self.game_data = GameData(file_path)
@@ -449,7 +451,7 @@ class CFFDataModel(QObject):
                         self.data_loaded.emit()
                         return True
                     elif cache_failure_reason:
-                        print(f"Cache rebuild triggered: {cache_failure_reason}")
+                        logger.info(f"Cache rebuild triggered: {cache_failure_reason}")
 
                 # Parse from file (cache miss or force_parse)
                 self.game_data = GameData(file_path)
@@ -472,7 +474,7 @@ class CFFDataModel(QObject):
             return True
 
         except Exception as e:
-            print(f"Error loading file: {e}")
+            logger.error(f"Error loading file: {e}")
             return False
 
     def _load_weapon_names(self):
@@ -492,14 +494,14 @@ class CFFDataModel(QObject):
                     if item_id is not None and name:
                         self.weapon_name_mapping[item_id] = name
 
-                print(f"Loaded {len(self.weapon_name_mapping)} weapon names")
+                logger.info(f"Loaded {len(self.weapon_name_mapping)} weapon names")
             else:
-                print(
+                logger.warning(
                     "enhanced_weapons.json not found, weapon names will not be available"
                 )
                 self.weapon_name_mapping = {}
         except Exception as e:
-            print(f"Error loading weapon names: {e}")
+            logger.error(f"Error loading weapon names: {e}")
             self.weapon_name_mapping = {}
 
     def get_weapon_name(self, item_id: int) -> Optional[str]:
@@ -524,7 +526,7 @@ class CFFDataModel(QObject):
                 elif isinstance(armor_data, list):
                     armors_list = armor_data
                 else:
-                    print("Unexpected armor data format")
+                    logger.warning("Unexpected armor data format")
                     armors_list = []
 
                 for armor in armors_list:
@@ -534,14 +536,14 @@ class CFFDataModel(QObject):
                     if item_id is not None and name:
                         self.armor_name_mapping[item_id] = name
 
-                print(f"Loaded {len(self.armor_name_mapping)} armor names")
+                logger.info(f"Loaded {len(self.armor_name_mapping)} armor names")
             else:
-                print(
+                logger.warning(
                     "enhanced_armor.json not found, armor names will not be available"
                 )
                 self.armor_name_mapping = {}
         except Exception as e:
-            print(f"Error loading armor names: {e}")
+            logger.error(f"Error loading armor names: {e}")
             self.armor_name_mapping = {}
 
     def get_armor_name(self, item_id: int) -> Optional[str]:
@@ -564,7 +566,7 @@ class CFFDataModel(QObject):
             if manifest_path.exists():
                 # Load from chunked files
                 self.logger.info("Loading chunked icon mapping from manifest")
-                print("Loading chunked icon mapping from manifest...")
+                logger.info("Loading chunked icon mapping from manifest...")
 
                 with open(manifest_path, "r") as f:
                     manifest = json.load(f)
@@ -593,9 +595,6 @@ class CFFDataModel(QObject):
                 self.logger.info(
                     f"Loaded chunked icon mapping: {item_count} items in {load_time:.2f}s"
                 )
-                print(
-                    f"Loaded chunked icon mapping: {item_count} items in {load_time:.2f}s"
-                )
 
             elif mapping_path.exists():
                 # Load from single file as before
@@ -607,16 +606,11 @@ class CFFDataModel(QObject):
                     self.logger.info(
                         f"Loaded icon mapping: {item_count} items in {load_time:.2f}s"
                     )
-                    print(
-                        f"Loaded icon mapping: {item_count} items in {load_time:.2f}s"
-                    )
                 except MemoryError:
                     self.logger.error("Icon mapping file too large to load into memory")
-                    print("Icon mapping file too large to load into memory")
                     self.icon_mapping = {"item_to_icons": {}}
             else:
                 self.logger.warning(f"Icon mapping not found: {mapping_path}")
-                print(f"Icon mapping not found: {mapping_path}")
                 self.icon_mapping = {}
 
             # Build a reverse mapping from handles to potential file paths
@@ -624,7 +618,6 @@ class CFFDataModel(QObject):
             self.handle_to_path_mapping = self._build_handle_to_path_mapping()
             build_time = time.time() - start_time
             self.logger.info(f"Built handle-to-path mapping in {build_time:.2f}s")
-            print(f"Built handle-to-path mapping in {build_time:.2f}s")
 
             # Add a cache for frequently accessed handle mappings
             self.handle_cache = {}
@@ -639,7 +632,6 @@ class CFFDataModel(QObject):
                 self.icon_index = self._load_split_icon_index()
                 icon_count = len(self.icon_index.get("icons", {}))
                 self.logger.info(f"Loaded split icon index: {icon_count} icons")
-                print(f"Loaded split icon index: {icon_count} icons")
             else:
                 # Load single file
                 index_path = self.icons_root / "icon_index.json"
@@ -650,10 +642,8 @@ class CFFDataModel(QObject):
                         self.icon_index = json.load(f)
                     icon_count = len(self.icon_index.get("icons", {}))
                     self.logger.info(f"Loaded icon index: {icon_count} icons")
-                    print(f"Loaded icon index: {icon_count} icons")
                 else:
                     self.logger.warning(f"Icon index not found: {index_path}")
-                    print(f"Icon index not found: {index_path}")
                     self.icon_index = {}
 
             # Load verified mappings
@@ -665,12 +655,8 @@ class CFFDataModel(QObject):
                     self.verified_mappings = json.load(f)
                 verified_count = len(self.verified_mappings)
                 self.logger.info(f"Loaded verified mappings: {verified_count} items")
-                print(f"Loaded verified mappings: {verified_count} items")
             else:
                 self.logger.info(
-                    "No verified mappings found (run interactive_icon_mapper.py to create)"
-                )
-                print(
                     "No verified mappings found (run interactive_icon_mapper.py to create)"
                 )
                 self.verified_mappings = {}
@@ -678,7 +664,6 @@ class CFFDataModel(QObject):
         except Exception as e:
             self.logger.error(f"Error loading icon data: {e}")
             perf_logger.error(f"Icon data loading failed: {e}")
-            print(f"Error loading icon data: {e}")
             self.icon_mapping = {}
             self.icon_index = {}
             self.verified_mappings = {}
@@ -700,12 +685,12 @@ class CFFDataModel(QObject):
         mapping = {}
 
         if not self.icon_mapping or "item_to_icons" not in self.icon_mapping:
-            print("No item_to_icons in icon mapping, skipping handle-to-path mapping")
+            logger.warning("No item_to_icons in icon mapping, skipping handle-to-path mapping")
             return mapping
 
         item_to_icons = self.icon_mapping["item_to_icons"]
         total_mappings = len(item_to_icons)
-        print(f"Building handle-to-path mapping for {total_mappings} items...")
+        logger.info(f"Building handle-to-path mapping for {total_mappings} items...")
 
         # For performance, we'll pre-check what atlases actually exist on the filesystem
         # Check which spell atlases exist
@@ -766,7 +751,7 @@ class CFFDataModel(QObject):
                             if (self.icons_root / path).exists():
                                 mapping[handle].append(path)
 
-        print(
+        logger.info(
             f"Built handle-to-path mapping with {len(mapping)} handles in {time.time() - start_time:.2f}s"
         )
         return mapping
@@ -984,7 +969,7 @@ class CFFDataModel(QObject):
             self.data_modified.emit()
             return True
         except Exception as e:
-            print(f"Error updating field: {e}")
+            logger.error(f"Error updating field: {e}")
             return False
 
     def save_file(self, file_path: Optional[str] = None) -> bool:
@@ -1002,7 +987,7 @@ class CFFDataModel(QObject):
             self.modified = False
             return True
         except Exception as e:
-            print(f"Error saving file: {e}")
+            logger.error(f"Error saving file: {e}")
             return False
 
     def is_modified(self) -> bool:
@@ -1479,32 +1464,15 @@ class CFFDataModel(QObject):
             self.localisation_index_language = self.current_language
 
         except Exception as e:
-            print(f"Error building localisation index: {e}")
+            logger.error(f"Error building localisation index: {e}")
             self.localisation_index = None
 
     def _build_advanced_descriptions_index(self):
         """Build an index of advanced descriptions by description_id for fast O(1) lookups"""
-        if not self.game_data:
-            return
-
-        try:
-            descriptions_table = self.get_table("advanced_descriptions")
-            if not descriptions_table:
-                return
-
-            # Build index: {description_id: text}
-            self.advanced_descriptions_index = {}
-
-            for entry in descriptions_table:
-                description_id = getattr(entry, "description_id", None)
-                text = getattr(entry, "text", "")
-
-                if description_id is not None:
-                    self.advanced_descriptions_index[description_id] = text
-
-        except Exception as e:
-            print(f"Error building advanced descriptions index: {e}")
-            self.advanced_descriptions_index = None
+        # Skip building this index for now - it's too slow (5+ seconds)
+        # and not essential for quest functionality
+        self.advanced_descriptions_index = {}
+        return
 
     def get_localised_text(self, entity: Any, field_name: str) -> Optional[str]:
         """
@@ -1588,7 +1556,7 @@ class CFFDataModel(QObject):
                     return self.localisation_index[Language.ENGLISH][text_id]
 
         except (AttributeError, KeyError, TypeError) as e:
-            print(f"Error getting localised text: {e}")
+            logger.debug(f"Error getting localised text: {e}")
 
         return None
 
@@ -1659,7 +1627,7 @@ class CFFDataModel(QObject):
                 return self.advanced_descriptions_index[description_id]
 
         except (AttributeError, KeyError, TypeError) as e:
-            print(f"Error getting advanced description: {e}")
+            logger.debug(f"Error getting advanced description: {e}")
 
         return None
 
@@ -1760,9 +1728,9 @@ class CFFDataModel(QObject):
             try:
                 shutil.rmtree(self.db_dir)
                 self.db_dir.mkdir(parents=True, exist_ok=True)
-                print("Database cache cleared")
+                logger.info("Database cache cleared")
             except Exception as e:
-                print(f"Error clearing database cache: {e}")
+                logger.error(f"Error clearing database cache: {e}")
 
     def get_cache_info(self) -> dict:
         """Get information about cache usage"""
@@ -1790,12 +1758,12 @@ class CFFDataModel(QObject):
     def set_lua_quest_directory(self, lua_dir: Path):
         """Set the directory containing Lua quest scripts"""
         if not LUA_MANAGER_AVAILABLE:
-            print("Warning: Lua data manager not available")
+            logger.warning("Lua data manager not available")
             return False
 
         self.lua_quest_directory = Path(lua_dir)
         if not self.lua_quest_directory.exists():
-            print(f"Warning: Lua quest directory not found: {lua_dir}")
+            logger.warning(f"Lua quest directory not found: {lua_dir}")
             return False
 
         return True
@@ -1843,21 +1811,21 @@ class CFFDataModel(QObject):
         try:
             return self.lua_data_manager.get_quest_data(quest_id)
         except Exception as e:
-            print(f"Error getting Lua quest data for quest {quest_id}: {e}")
+            logger.error(f"Error getting Lua quest data for quest {quest_id}: {e}")
             return None
 
     def has_lua_data(self) -> bool:
         """Check if Lua data is available and loaded"""
         if not LUA_MANAGER_AVAILABLE or not self.lua_data_manager:
-            print("[DEBUG] Lua manager not available")
+            logger.debug("Lua manager not available")
             return False
 
         cache_loaded = self.lua_data_manager.cache_loaded
         cache_size = len(self.lua_data_manager.quest_cache)
         has_data = cache_loaded and cache_size > 0
 
-        print(
-            f"[DEBUG] has_lua_data check: cache_loaded={cache_loaded}, cache_size={cache_size}, has_data={has_data}"
+        logger.debug(
+            f"has_lua_data check: cache_loaded={cache_loaded}, cache_size={cache_size}, has_data={has_data}"
         )
 
         return has_data

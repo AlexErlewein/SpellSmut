@@ -1,8 +1,8 @@
 """
-Launch the SpellForce GameData.cff Editor
+Launch SpellForce GameData.cff Editor
 ==========================================
 
-This script launches the GUI editor for viewing and editing CFF files.
+This script launches GUI editor for viewing and editing CFF files.
 
 Usage:
     python run_cff_editor.py
@@ -11,16 +11,17 @@ Usage:
 import sys
 import os
 
+from loguru import logger
 from PySide6.QtWidgets import QApplication
 from cff_editor.main_window import MainWindow
 
 
 def main():
     """Main entry point"""
-    print("="*60)
-    print("SpellForce GameData.cff Editor")
-    print("="*60)
-    print()
+    logger.info("="*60)
+    logger.info("SpellForce GameData.cff Editor")
+    logger.info("="*60)
+    logger.info("Starting GUI application...")
     print("Starting GUI application...")
     print()
 
@@ -32,9 +33,8 @@ def main():
     window = MainWindow()
     window.show()
 
-    print("Application started successfully!")
-    print("Use File > Open to load a GameData.cff file.")
-    print()
+    logger.info("Application started successfully!")
+    logger.info("Use File > Open to load a GameData.cff file.")
 
     sys.exit(app.exec())
 

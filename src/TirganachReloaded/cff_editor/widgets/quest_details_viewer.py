@@ -5,6 +5,7 @@ Comprehensive view of all quest information including giver, requirements, objec
 
 from pathlib import Path
 
+from loguru import logger
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QGroupBox,
@@ -19,7 +20,10 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from ..services import QuestDataService
+try:
+    from ..services import QuestDataService
+except ImportError:
+    QuestDataService = None
 
 
 class QuestDetailsViewer(QWidget):
@@ -61,19 +65,30 @@ class QuestDetailsViewer(QWidget):
 
     def __init__(self, data_model):
         super().__init__()
+        logger.info("=" * 80)
+        logger.info("🎉 ENHANCED QuestDetailsViewer initialized!")
+        logger.info("=" * 80)
         self.data_model = data_model
         self.current_quest = None
         self.enhanced_quest_data = None  # Store enhanced quest data
         
         # Initialize quest data service
-        try:
-            # Try to find project root (go up from cff_editor/widgets)
-            current_file = Path(__file__)
-            project_root = current_file.parent.parent.parent.parent.parent
-            self.quest_service = QuestDataService(project_root)
-        except Exception as e:
-            print(f"[WARNING] Could not initialize QuestDataService: {e}")
-            self.quest_service = None
+        self.quest_service = None
+        if QuestDataService:
+            try:
+                # Try to find project root (go up from cff_editor/widgets)
+                current_file = Path(__file__)
+                project_root = current_file.parent.parent.parent.parent.parent
+                logger.debug(f"Initializing QuestDataService with project_root: {project_root}")
+                self.quest_service = QuestDataService(project_root)
+                logger.info("✅ QuestDataService initialized successfully")
+            except Exception as e:
+                logger.warning(f"Could not initialize QuestDataService: {e}")
+                import traceback
+                traceback.print_exc()
+                self.quest_service = None
+        else:
+            logger.warning("QuestDataService not available")
 
         self.setup_ui()
         self.connect_signals()
@@ -469,10 +484,11 @@ class QuestDetailsViewer(QWidget):
 
         # Debug: Show which quest we're updating
         quest_id = getattr(self.current_quest, "quest_id", None)
-        print(f"[DEBUG] Updating quest details for quest ID: {quest_id}")
-        print(f"[DEBUG] Has Lua data available: {self.data_model.has_lua_data()}")
+        logger.debug(f"Updating quest details for quest ID: {quest_id}")
+        logger.debug(f"Has Lua data available: {self.data_model.has_lua_data()}")
 
         # Load enhanced quest data if service is available
+        logger.debug(f"Quest service available: {self.quest_service is not None}")
         if self.quest_service and quest_id:
             try:
                 # Convert CFF quest to dict for service
@@ -484,12 +500,20 @@ class QuestDetailsViewer(QWidget):
                     'name_id': getattr(self.current_quest, 'name_id', 0),
                     'description_id': getattr(self.current_quest, 'description_id', 0),
                 }
+                logger.debug(f"Calling get_enhanced_quest_data for quest {quest_id}")
                 self.enhanced_quest_data = self.quest_service.get_enhanced_quest_data(quest_id, cff_data)
-                print(f"[DEBUG] Loaded enhanced data: {len(self.enhanced_quest_data.map_locations)} maps, "
+                logger.debug(f"Loaded enhanced data: {len(self.enhanced_quest_data.map_locations)} maps, "
                       f"{len(self.enhanced_quest_data.dialogues)} dialogues")
+                logger.debug(f"Enhanced quest data name: {self.enhanced_quest_data.name}")
+                logger.debug(f"Enhanced quest data rewards: {self.enhanced_quest_data.rewards}")
             except Exception as e:
-                print(f"[WARNING] Could not load enhanced quest data: {e}")
+                logger.warning(f"Could not load enhanced quest data: {e}")
+                import traceback
+                traceback.print_exc()
                 self.enhanced_quest_data = None
+        else:
+            logger.debug(f"Not loading enhanced data - service: {self.quest_service is not None}, quest_id: {quest_id}")
+            self.enhanced_quest_data = None
 
         self.update_basic_info()
         self.update_map_locations()  # NEW
@@ -530,15 +554,24 @@ class QuestDetailsViewer(QWidget):
 
     def update_map_locations(self):
         """Update map locations section"""
+        logger.debug("update_map_locations called")
         self.map_locations_list.clear()
         
         # Check if we have enhanced data with map locations
+        logger.debug(f"enhanced_quest_data: {self.enhanced_quest_data is not None}")
+        if self.enhanced_quest_data:
+            logger.debug(f"map_locations: {len(self.enhanced_quest_data.map_locations)}")
+        else:
+            logger.debug("enhanced_quest_data is None")
+            
         if self.enhanced_quest_data and self.enhanced_quest_data.map_locations:
             # Add each map location as a list item
             for map_loc in self.enhanced_quest_data.map_locations:
+                logger.debug(f"Adding map location: {map_loc.code}: {map_loc.name}")
                 self.map_locations_list.addItem(f"{map_loc.code}: {map_loc.name}")
         else:
             # Show placeholder if no map data
+            logger.debug("No map data available, showing placeholder")
             self.map_locations_list.addItem("No map location data available")
 
     def update_quest_giver(self):
@@ -550,13 +583,9 @@ class QuestDetailsViewer(QWidget):
         lua_data = None
         if quest_id and self.data_model.has_lua_data():
             lua_data = self.data_model.get_lua_quest_data(quest_id)
-            print(
-                f"[DEBUG] Quest Giver - Lua data for quest {quest_id}: {lua_data is not None}"
-            )
+            logger.debug(f"Quest Giver - Lua data for quest {quest_id}: {lua_data is not None}")
             if lua_data:
-                print(
-                    f"[DEBUG]   NPC ID: {lua_data.npc_id}, Platform: {lua_data.platform}"
-                )
+                logger.debug(f"  NPC ID: {lua_data.npc_id}, Platform: {lua_data.platform}")
 
         # Try to get quest giver NPC ID
         giver_id = None
@@ -600,11 +629,9 @@ class QuestDetailsViewer(QWidget):
         lua_data = None
         if quest_id and self.data_model.has_lua_data():
             lua_data = self.data_model.get_lua_quest_data(quest_id)
-            print(
-                f"[DEBUG] Requirements - Lua data for quest {quest_id}: {lua_data is not None}"
-            )
+            logger.debug(f"Requirements - Lua data for quest {quest_id}: {lua_data is not None}")
             if lua_data:
-                print(f"[DEBUG]   Requirements count: {len(lua_data.requirements)}")
+                logger.debug(f"  Requirements count: {len(lua_data.requirements)}")
 
         # Minimum level
         min_level = getattr(quest, "min_level", None)
@@ -659,10 +686,10 @@ class QuestDetailsViewer(QWidget):
         if quest_id and self.data_model.has_lua_data():
             lua_data = self.data_model.get_lua_quest_data(quest_id)
             print(
-                f"[DEBUG] Objectives - Lua data for quest {quest_id}: {lua_data is not None}"
+                f"Objectives - Lua data for quest {quest_id}: {lua_data is not None}"
             )
             if lua_data:
-                print(f"[DEBUG]   Objectives count: {len(lua_data.objectives)}")
+                logger.debug(f"  Objectives count: {len(lua_data.objectives)}")
 
         # Check Lua data for objectives
         if lua_data and lua_data.objectives:
@@ -789,8 +816,15 @@ class QuestDetailsViewer(QWidget):
             return
 
         # Check enhanced quest data first
+        logger.debug(f"update_dialogues: enhanced_quest_data={self.enhanced_quest_data is not None}")
+        if self.enhanced_quest_data:
+            logger.debug(f"update_dialogues: {len(self.enhanced_quest_data.dialogues)} dialogues available")
+        else:
+            logger.debug("update_dialogues: no enhanced quest data")
+            
         if self.enhanced_quest_data and self.enhanced_quest_data.dialogues:
-            for dialogue in self.enhanced_quest_data.dialogues:
+            for i, dialogue in enumerate(self.enhanced_quest_data.dialogues):
+                logger.debug(f"Adding dialogue {i}: {dialogue.dialogue_type} - {dialogue.text[:50]}...")
                 # Truncate text for display
                 text_de = dialogue.text[:80] + "..." if len(dialogue.text) > 80 else dialogue.text
                 text_en = ""
