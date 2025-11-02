@@ -71,6 +71,39 @@ Documentation and guides
 - `PAK_EXTRACTION_FIX.md` - PAK extraction troubleshooting
 - `DDS_CONVERTER_README.md` - DDS conversion guide
 
+### 📁 quest_extraction/
+Quest-specific extraction and analysis tools:
+
+- `extract_cff_quest_data.py` - Extract CFF quest data
+- `extract_complete_quest_data.py` - Complete quest data extraction
+- `extract_map_and_descriptions.py` - Extract quest maps and descriptions
+- `extract_quest_379_dialogues.py` - Extract specific quest dialogues
+- `extract_quest_descriptions.py` - Extract quest descriptions
+- `extract_quest_dialogues.py` - Extract quest dialogues
+
+### 📁 debugging/
+Debugging and diagnostic utilities:
+
+- `debug_gui.py` - GUI debugging tools
+- `debug_icon_browser.py` - Icon browser debugging
+- `debug_item_ui_mapping.py` - Item-UI mapping debugging
+
+### 📁 integration/
+System integration tools:
+
+- `cff_editor_itm_integration.py` - CFF editor ITM integration
+
+## Root-Level Tools
+
+These frequently used tools are kept at the root level for easy access:
+
+- `launch_tirganach.sh` - Launch script for TirganachReloaded application
+- `run_icon_browser.py` - Icon browser utility
+- `update_with_maps.py` - Update utilities for mappings
+- `create_final_documentation.py` - Documentation generator
+- `final_status.py` - Status reporting tool
+- `test_spell_icon_display.py` - Test spell icon display
+
 ## Usage
 
 All scripts can be run using UV (project standard):

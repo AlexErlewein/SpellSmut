@@ -51,10 +51,15 @@ def test_quest_functionality():
         window.data_model.element_selected.emit("quests", 0)
         print("✓ Selected first quest")
 
-        # Check quest details are populated
-        quest_id = window.quest_details.quest_id_label.text()
-        quest_name = window.quest_details.quest_name_label.text()
-        print(f"✓ Quest details populated: ID={quest_id}, Name='{quest_name}'")
+        # Check quest details are populated (title_label is what exists)
+        quest_title = window.quest_details.title_label.text()
+        print(f"✓ Quest details populated: Title='{quest_title}'")
+        
+        # Also check if we have current_quest data
+        if hasattr(window.quest_details, 'current_quest') and window.quest_details.current_quest:
+            print(f"✓ Current quest object available")
+        else:
+            print("⚠ No current quest object")
 
         # Check dialogs are loaded
         dialog_count = window.quest_details.dialogs_tree.topLevelItemCount()

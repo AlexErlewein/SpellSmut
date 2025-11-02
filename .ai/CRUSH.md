@@ -20,11 +20,16 @@ All AI instruction files are in the `.ai/` hidden folder, separate from user doc
 ```bash
 # Python (TirganachReloaded CFF editor)
 cd TirganachReloaded
-python test_cff_extract.py                    # Test CFF loading
-python export_to_json.py                      # Export GameData to JSON
-python export_to_xml.py                       # Export GameData to XML
-python cff_modding_examples.py                # Run modding examples
-python run_cff_editor.py                      # Launch GUI editor
+python debug_cff_structure.py               # Debug CFF structure exploration
+python export_to_json.py                     # Export GameData to JSON
+python export_to_xml.py                      # Export GameData to XML
+python cff_modding_examples.py               # Run modding examples
+python run_cff_editor.py                     # Launch GUI editor
+
+# Testing (using pytest with uv)
+uv run pytest src/tests/ -v                # Run all tests
+uv run pytest src/tests/test_name.py -v      # Run specific test
+uv run pytest src/tests/ -k "quest" -v     # Run tests matching keyword
 
 # Run single test (no test framework - manual testing only)
 python -c "from tirganach import GameData; gd = GameData('path/to/GameData.cff'); print('OK')"

@@ -15,9 +15,9 @@ echo ""
 if [ $# -eq 1 ]; then
     echo "Loading CFF file: $1"
     echo ""
-    python test_quest_hierarchy_cli.py "$1"
+    python quest_hierarchy_cli.py "$1"
 else
     echo "Loading default CFF file..."
     echo ""
-    python test_quest_hierarchy_cli.py
+    python quest_hierarchy_cli.py
 fi
