@@ -26,6 +26,7 @@ Thumbs.db
 desktop.ini
 
 # Logs
+logs
 *.log
 
 # Python
