@@ -40,6 +40,8 @@ dev = [
     "mypy>=1.0.0",
     "PyQt6>=6.0.0",
     "PyQt6-Qt6>=6.0.0",
+    "flake8>=6.0.0",
+    "pre-commit>=3.0.0",
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -55,17 +57,19 @@ dependencies = ["PySide6", "pillow", "pyyaml"]
 dependencies = ["pytest", "black", "isort", "mypy"]
 
 [tool.black]
-line-length = 88
-target-version = ['py39']
+line-length = 100
+target-version = ['py310']
 
 [tool.isort]
 profile = "black"
-line_length = 88
+line_length = 100
 
 [tool.mypy]
 python_version = "3.9"
+strict = true
 warn_return_any = true
 warn_unused_configs = true
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["src/tests"]
@@ -74,11 +78,19 @@ python_files = "test_*.py"
 python_classes = "Test*"
 python_functions = "test_*"
 cache_dir = "src/tests/test_data/.pytest_cache"
-addopts = ["--verbose", "--tb=short", "--basetemp=src/tests/test_data/tmp"]
+addopts = [
+    "--verbose",
+    "--tb=short",
+    "--basetemp=src/tests/test_data/tmp",
+    "--strict-markers",
+    "--disable-warnings",
+]
 markers = [
     "gui: marks tests that require GUI (deselect with '-m \"not gui\"')",
     "integration: marks tests that require external resources",
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "unit: marks unit tests",
+    "cff: marks CFF-specific tests",
 ]
 
 [tool.coverage.run]

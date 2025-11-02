@@ -35,6 +35,7 @@ Different AI coding assistants (like Claude Code, Gemini CLI, etc.) need to know
   - Claude Code → reads `.ai/CLAUDE.md`
   - Gemini CLI → reads `.ai/GEMINI.md`
   - Qwen → reads `.ai/QWEN.md`
+  - Crush → reads `.ai/CRUSH.md`
 - This folder is **hidden** (starts with dot) to keep it separate from user documentation
 - Do NOT place AI instruction files in root or `docs/` folder
 

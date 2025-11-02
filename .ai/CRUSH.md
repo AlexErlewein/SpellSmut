@@ -15,15 +15,21 @@ All AI instruction files are in the `.ai/` hidden folder, separate from user doc
 
 ---
 
+## Project Rules
+
+This project follows the organization rules defined in `.rules/RULES.md`. Key rules include:
+- File organization: `.ai/` for AI instructions, `docs/` for documentation, `src/` for code
+- AI assistant file naming: Each AI has their own instruction file in `.ai/`
+- Planning docs go in `ProjectPlanning/`, never in `docs/` or root
+- All tests go in `src/tests/` with proper naming conventions
+
+See `.rules/RULES.md` for complete project organization rules.
+
 ## Build/Test Commands
 
 ```bash
 # Python (TirganachReloaded CFF editor)
-cd TirganachReloaded
-python debug_cff_structure.py               # Debug CFF structure exploration
-python export_to_json.py                     # Export GameData to JSON
-python export_to_xml.py                      # Export GameData to XML
-python cff_modding_examples.py               # Run modding examples
+cd src/TirganachReloaded
 python run_cff_editor.py                     # Launch GUI editor
 
 # Testing (using pytest with uv)
@@ -31,19 +37,28 @@ uv run pytest src/tests/ -v                # Run all tests
 uv run pytest src/tests/test_name.py -v      # Run specific test
 uv run pytest src/tests/ -k "quest" -v     # Run tests matching keyword
 
-# Run single test (no test framework - manual testing only)
-python -c "from tirganach import GameData; gd = GameData('path/to/GameData.cff'); print('OK')"
+# Code quality (if available)
+uv run black src/                           # Format code
+uv run isort src/                           # Sort imports
+uv run mypy src/                            # Type checking
+uv run flake8 src/                          # Linting
+uv run pre-commit run --all-files          # Pre-commit hooks
+uv run pytest src/tests/ --cov=src          # Run tests with coverage
+uv run pytest src/tests/ -m "unit"          # Run unit tests only
+uv run pytest src/tests/ -m "cff"           # Run CFF-specific tests only
 ```
 
 ## Code Style
 
 ### Python
 - **Indentation**: 4 spaces (never tabs)
-- **Line length**: 100 characters max
+- **Line length**: 100 characters (updated from 88)
 - **Imports**: Standard library, third-party, local (separated by blank lines)
 - **Types**: Use type hints for function signatures
 - **Naming**: `snake_case` for functions/variables, `PascalCase` for classes
 - **Docstrings**: Use triple quotes for module/class/function docs
+- **Code formatting**: Use Black formatter, isort for import sorting
+- **Target Python**: 3.10+ (updated from 3.9+)
 
 ### Lua (Lua 4.0 - NOT modern Lua!)
 - **Indentation**: 4 spaces
@@ -64,8 +79,8 @@ python -c "from tirganach import GameData; gd = GameData('path/to/GameData.cff')
 
 ### Python CFF Editing
 ```python
-from tirganach import GameData
-from tirganach.types import *
+from TirganachReloaded import GameData
+from TirganachReloaded.types import *
 
 gd = GameData('path/to/GameData.cff')
 items = gd.items.where(item_type=ItemType.EQUIPMENT)
@@ -80,9 +95,12 @@ local assets = list_concat(files, manifest)
 ```
 
 ## Critical Rules
+- Use UV for Python package management (not pip directly)
 - Use Lua 4.0 syntax only (no modern Lua 5.x features)
 - Windows paths use backslashes in Lua scripts
 - Always backup GameData.cff before modifications
 - Test mod compatibility after changes
 - Update docs/index.md when adding new guides
 - Place planning docs in ProjectPlanning/, not docs/
+- Run linting and type checking before committing changes
+- Use test markers: `-m "not gui"` to skip GUI tests, `-m "not slow"` for fast tests
