@@ -1,0 +1,90 @@
+================================================================================
+AMRA AND LEA QUEST (ID 379) - COMPREHENSIVE SUMMARY
+================================================================================
+
+QUEST CONFIRMATION:
+Quest ID 379 is definitively the "Amra and Lea" quest, as evidenced by:
+- Multiple Lua files with comments: "------------------------- AMRA UND LEA ------------------"
+- Quest flags: "AmraUndLea1Liannon1", "AmraUndLea2Liannon1", "AmraUndLea3Sentos", "AmraUndLea4", etc.
+- Character names: Amra (warrior), Lea (beautiful woman)
+- Story elements: Amra's search for Lea, his armor, and the "Pfand der Götter" (Pledge of the Gods)
+
+QUEST STORYLINE:
+Based on extracted dialogues, the story involves:
+
+1. **The Romance**: Amra and Lea were in love, but Lea's father (a wealthy man) 
+   disapproved and sent Amra away. A rich magician was also courting Lea.
+
+2. **The Gift**: Before leaving, Lea gave Amra her most valuable possession - 
+   "das Pfand der Götter" (the Pledge of the Gods), a golden ring she received 
+   from the goddess Elen herself.
+
+3. **The Search**: Amra went on a quest to find Lea, taking the ring with him.
+   He was accompanied by warrior brothers including Tyrgar (a fisherman) and 
+   Craig.
+
+4. **The Tragedy**: In the desert, they encountered a powerful dark magician 
+   who demanded the ring. Amra fought bravely but was killed. His companions 
+   buried him with his weapons and armor.
+
+5. **The Aftermath**: Lea disappeared, possibly buried in Wisper. Various 
+   NPCs hold pieces of this story and guide the player to find Amra's armor.
+
+KEY LOCATIONS:
+- Liannon (city where Sunder the blacksmith lives)
+- Wildland Pass (meeting location)
+- Wisper (where Lea's supposed grave is)
+- Desert location (where Amra died)
+
+KEY CHARACTERS:
+- **Amra**: The protagonist warrior, hot-headed but good-hearted
+- **Lea**: The beautiful woman Amra loved
+- **Orthanc**: Mentions Amra wearing the ring while searching for Lea
+- **Sunder**: Blacksmith in Liannon, former apprentice who searched for Amra
+- **Tyrgar**: Fisherman, one of Amra's warrior brothers
+- **Shan**: Lea's brother, provides backstory
+- **Craig**: Another of Amra's warrior companions
+- **Sentos**: Merchant who tracked Amra to Wildland Pass
+
+QUEST FLAGS AND REWARDS:
+From GdsQuestRewards.lua:
+- AmraUndLea1Liannon1 = { XP = {200}}
+- AmraUndLea1Liannon2 = { XP = {400}}
+- AmraUndLea2Liannon1 = { XP = {500}}
+- AmraUndLea2Liannon2 = { XP = {300}}
+- AmraUndLea2Sentos = { XP = {800}}
+- AmraUndLea3Sentos = { XP = {500}}
+- AmraUndLea4 = { XP = {1200}}
+- AmraUndLea5 = { XP = {1200}}
+- AmraLeaGrab = { XP = {800}}
+
+DIALOGUE THEMES:
+1. **Warrior Brotherhood**: "Ihr wart einst ein Waffenbruder Amras?" (Were you once Amra's warrior brother?)
+2. **Tragic Romance**: Stories of Amra and Lea's love
+3. **The Search**: Player looking for Amra's armor
+4. **The Ring**: The magical "Pfand der Götter" that caused the conflict
+5. **Betrayal and Loss**: The dark magician's attack and Amra's death
+
+RELATED QUESTS:
+- Quest 380 appears to be a subquest or related quest
+- Multiple quest flags suggest this is a multi-part quest series
+
+GAMEPLAY ELEMENTS:
+- Finding Amra's armor (multiple pieces)
+- Locating Lea's grave in Wisper
+- Getting keys to unlock Amra's tomb
+- Combat with undead and dark magic
+- NPC interactions across multiple maps (P1, P6, P15, P25, P63, P7)
+
+================================================================================
+EXTRACTION SUMMARY:
+- Main Quest ID: 379 ("Amra and Lea")
+- Related Quest ID: 380 (subquest)
+- Total unique dialogues found: 5 (Quest 379) + 4 (Quest 380) = 9
+- Source files: 2+ Lua files across multiple game maps
+- Languages: German
+- Quest appears to be a major storyline quest with multiple parts
+
+This is clearly one of the main romance/tragedy storylines in SpellForce, 
+involving the search for a fallen warrior's armor and uncovering the fate 
+of two star-crossed lovers.

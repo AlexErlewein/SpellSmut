@@ -1,0 +1,151 @@
+{
+  "379": {
+    "quest_id": 379,
+    "name": "Amra and Lea",
+    "description": null,
+    "maps": [
+      {
+        "code": "P15",
+        "name": "Desert / Burning Sands"
+      },
+      {
+        "code": "P63",
+        "name": "Greyfell"
+      }
+    ]
+  },
+  "380": {
+    "quest_id": 380,
+    "name": "Talk to Sunder in Liannon about Amra's armor",
+    "description": null,
+    "maps": [
+      {
+        "code": "P63",
+        "name": "Greyfell"
+      }
+    ]
+  },
+  "381": {
+    "quest_id": 381,
+    "name": "Ask Shan Muir about Arma and Lea",
+    "description": null,
+    "maps": []
+  },
+  "382": {
+    "quest_id": 382,
+    "name": "Examine the events by the house of the Muir family in Liannon.",
+    "description": null,
+    "maps": []
+  },
+  "383": {
+    "quest_id": 383,
+    "name": "A search of the aggressors should deliver further information.",
+    "description": null,
+    "maps": []
+  },
+  "384": {
+    "quest_id": 384,
+    "name": "Confront Sentos in Greyfell",
+    "description": null,
+    "maps": [
+      {
+        "code": "P63",
+        "name": "Greyfell"
+      }
+    ]
+  },
+  "385": {
+    "quest_id": 385,
+    "name": "Sentos wants to meet with you at the Wildland Pass.",
+    "description": null,
+    "maps": [
+      {
+        "code": "P6",
+        "name": "Wildland Pass / Greyfell area"
+      },
+      {
+        "code": "P63",
+        "name": "Greyfell"
+      }
+    ]
+  },
+  "386": {
+    "quest_id": 386,
+    "name": "Interogate Sentos once again",
+    "description": null,
+    "maps": [
+      {
+        "code": "P6",
+        "name": "Wildland Pass / Greyfell area"
+      }
+    ]
+  },
+  "387": {
+    "quest_id": 387,
+    "name": "Look for Lea's grave in Whisper",
+    "description": null,
+    "maps": [
+      {
+        "code": "P6",
+        "name": "Wildland Pass / Greyfell area"
+      }
+    ]
+  },
+  "388": {
+    "quest_id": 388,
+    "name": "Bring Lea's possessions to Shan in Liannon",
+    "description": null,
+    "maps": []
+  },
+  "389": {
+    "quest_id": 389,
+    "name": "Talk to Tyrgar in Liannon",
+    "description": null,
+    "maps": []
+  },
+  "390": {
+    "quest_id": 390,
+    "name": "Craig Un'Shallach is our last hope",
+    "description": null,
+    "maps": [
+      {
+        "code": "P25",
+        "name": "Godmark / Mountains"
+      },
+      {
+        "code": "P7",
+        "name": "Ice Gate"
+      }
+    ]
+  },
+  "391": {
+    "quest_id": 391,
+    "name": "Look for Amra's grave in the desert areas.",
+    "description": null,
+    "maps": [
+      {
+        "code": "P15",
+        "name": "Desert / Burning Sands"
+      },
+      {
+        "code": "P25",
+        "name": "Godmark / Mountains"
+      },
+      {
+        "code": "P7",
+        "name": "Ice Gate"
+      }
+    ]
+  },
+  "393": {
+    "quest_id": 393,
+    "name": "Renewed troubles with Sentos",
+    "description": null,
+    "maps": [
+      {
+        "code": "P6",
+        "name": "Wildland Pass / Greyfell area"
+      }
+    ]
+  }
+}
