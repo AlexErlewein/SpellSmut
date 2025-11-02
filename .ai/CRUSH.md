@@ -63,7 +63,8 @@ uv run tirganach                                     # Launch via script entry
 - **Naming**: `snake_case` for functions/variables, `PascalCase` for classes
 - **Docstrings**: Use triple quotes for module/class/function docs
 - **Code formatting**: Use Black formatter, isort for import sorting
-- **Target Python**: 3.10+ (updated from 3.9+)
+- **Target Python**: 3.10+ (updated from 3.9+, removed 3.9 support)
+- **Qt Framework**: PySide6 only (removed PyQt6 duplicates)
 
 ### Lua (Lua 4.0 - NOT modern Lua!)
 - **Indentation**: 4 spaces
