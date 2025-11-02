@@ -30,7 +30,7 @@ from .widgets.category_tree import CategoryTreeWidget
 from .widgets.element_table import ElementTableWidget
 from .widgets.progress_dialog import ProgressDialog
 from .widgets.property_editor import PropertyEditorWidget
-from .widgets.quest_details import QuestDetailsWidget
+from .widgets.quest_details_viewer import QuestDetailsViewer
 from .widgets.quest_hierarchy_tree import QuestHierarchyTreeWidget
 
 
@@ -116,14 +116,14 @@ class MainWindow(QMainWindow):
         self.property_editor = PropertyEditorWidget(self.data_model)
         splitter.addWidget(self.property_editor)
 
-        # 4th panel - Quest details (initially hidden)
-        self.quest_details = QuestDetailsWidget(self.data_model)
+        # 4th panel - Enhanced Quest details (initially hidden)
+        self.quest_details = QuestDetailsViewer(self.data_model)
         self.quest_details.hide()  # Hidden by default
-        self.quest_details.setMinimumWidth(150)  # Ensure minimum width when visible
+        self.quest_details.setMinimumWidth(400)  # Wider for enhanced details
         splitter.addWidget(self.quest_details)
 
-        # Set initial sizes (20%, 35%, 30%, 15%)
-        splitter.setSizes([250, 400, 350, 150])
+        # Set initial sizes (15%, 25%, 25%, 35% for enhanced quest details)
+        splitter.setSizes([200, 350, 300, 500])
 
         main_layout.addWidget(splitter)
 

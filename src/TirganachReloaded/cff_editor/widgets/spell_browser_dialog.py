@@ -195,7 +195,7 @@ class SpellBrowserDialog(QDialog):
     def load_game_spells(self) -> List[Dict]:
         """Load spells from original game script"""
         spells = []
-        script_path = Path(__file__).parent.parent.parent.parent.parent / "OriginalGameFiles" / "modding" / "Original Scripts" / "script" / "sql_spellline.lua"
+        script_path = Path(__file__).parent.parent.parent.parent.parent / "ModdingTools" / "SpellForceLUASources" / "script" / "sql_spellline.lua"
         
         if script_path.exists():
             try:

@@ -8,7 +8,7 @@ class SpellLoader:
     
     def __init__(self):
         self.templates_dir = Path(__file__).parent.parent / "templates"
-        self.game_script_path = Path(__file__).parent.parent.parent.parent.parent / "OriginalGameFiles" / "modding" / "Original Scripts" / "script" / "sql_spellline.lua"
+        self.game_script_path = Path(__file__).parent.parent.parent.parent.parent / "ModdingTools" / "SpellForceLUASources" / "script" / "sql_spellline.lua"
     
     def load_spell_from_data(self, spell_info: Dict) -> Optional[SpellCreationData]:
         """Load spell data from browser selection"""

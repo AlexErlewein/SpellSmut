@@ -3,6 +3,8 @@ Quest Details Viewer Widget
 Comprehensive view of all quest information including giver, requirements, objectives, and dialogues
 """
 
+from pathlib import Path
+
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QGroupBox,
@@ -17,29 +19,31 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
+from ..services import QuestDataService
+
 
 class QuestDetailsViewer(QWidget):
     """Comprehensive quest details viewer"""
 
-    # Platform ID to map name mapping
+    # Platform ID to map name mapping (updated with Amra & Lea quest data)
     PLATFORM_NAMES = {
         "P1": "Liannon",
         "P2": "Eloni",
         "P3": "Leafshade",
         "P4": "Wildland Pass",
         "P5": "Shiel",
-        "P6": "Wildland Pass",
-        "P7": "Greyfell",
+        "P6": "Wildland Pass / Greyfell area",  # Updated
+        "P7": "Ice Gate",  # Updated
         "P8": "Underhall",
         "P10": "Iron Fields",
         "P11": "The Shiel",
         "P12": "峡谷",
-        "P15": "Shal",
+        "P15": "Desert / Burning Sands",  # Updated
         "P16": "Whisper",
         "P17": "Tirganach",
         "P19": "Dun Mora",
         "P23": "The Gorge",
-        "P25": "Sword Storm",
+        "P25": "Godmark / Mountains",  # Updated
         "P27": "Urgath",
         "P30": "Breathing Forest",
         "P32": "Soul Forge",
@@ -59,6 +63,17 @@ class QuestDetailsViewer(QWidget):
         super().__init__()
         self.data_model = data_model
         self.current_quest = None
+        self.enhanced_quest_data = None  # Store enhanced quest data
+        
+        # Initialize quest data service
+        try:
+            # Try to find project root (go up from cff_editor/widgets)
+            current_file = Path(__file__)
+            project_root = current_file.parent.parent.parent.parent.parent
+            self.quest_service = QuestDataService(project_root)
+        except Exception as e:
+            print(f"[WARNING] Could not initialize QuestDataService: {e}")
+            self.quest_service = None
 
         self.setup_ui()
         self.connect_signals()
@@ -97,6 +112,10 @@ class QuestDetailsViewer(QWidget):
         # Basic Info Section
         self.basic_info_group = self.create_basic_info_section()
         content_layout.addWidget(self.basic_info_group)
+
+        # Map Locations Section (NEW)
+        self.map_locations_group = self.create_map_locations_section()
+        content_layout.addWidget(self.map_locations_group)
 
         # Quest Giver Section
         self.quest_giver_group = self.create_quest_giver_section()
@@ -224,6 +243,18 @@ class QuestDetailsViewer(QWidget):
 
         return group
 
+    def create_map_locations_section(self):
+        """Create map locations section"""
+        group = QGroupBox("Map Locations")
+        layout = QVBoxLayout(group)
+        
+        # Map locations list
+        self.map_locations_list = QListWidget()
+        self.map_locations_list.setMaximumHeight(100)
+        layout.addWidget(self.map_locations_list)
+        
+        return group
+
     def create_quest_giver_section(self):
         """Create quest giver information section"""
         group = QGroupBox("Quest Giver (⚠ Usually in Lua)")
@@ -325,16 +356,8 @@ class QuestDetailsViewer(QWidget):
 
     def create_rewards_section(self):
         """Create quest rewards section"""
-        group = QGroupBox("Quest Rewards (⚠ Usually in Lua)")
+        group = QGroupBox("Quest Rewards")
         layout = QVBoxLayout(group)
-
-        # Add note
-        note = QLabel(
-            "<i>Note: Quest rewards are typically defined in Lua scripts.</i>"
-        )
-        note.setWordWrap(True)
-        note.setStyleSheet("color: #666; font-size: 10px;")
-        layout.addWidget(note)
 
         # XP reward
         xp_layout = QHBoxLayout()
@@ -344,6 +367,12 @@ class QuestDetailsViewer(QWidget):
         xp_layout.addWidget(self.xp_reward_label)
         xp_layout.addStretch()
         layout.addLayout(xp_layout)
+
+        # Reward flags
+        layout.addWidget(QLabel("Reward Flags:"))
+        self.reward_flags_list = QListWidget()
+        self.reward_flags_list.setMaximumHeight(80)
+        layout.addWidget(self.reward_flags_list)
 
         # Money rewards
         money_layout = QHBoxLayout()
@@ -356,8 +385,13 @@ class QuestDetailsViewer(QWidget):
         # Item rewards
         layout.addWidget(QLabel("Item Rewards:"))
         self.item_rewards_list = QListWidget()
-        self.item_rewards_list.setMaximumHeight(100)
+        self.item_rewards_list.setMaximumHeight(80)
         layout.addWidget(self.item_rewards_list)
+        
+        # Source info
+        self.reward_source_label = QLabel("")
+        self.reward_source_label.setStyleSheet("color: #666; font-size: 10px; font-style: italic;")
+        layout.addWidget(self.reward_source_label)
 
         return group
 
@@ -366,12 +400,14 @@ class QuestDetailsViewer(QWidget):
         group = QGroupBox("Quest Dialogues")
         layout = QVBoxLayout(group)
 
-        # Dialogue tree
+        # Dialogue tree (enhanced with translation column)
         self.dialogues_tree = QTreeWidget()
-        self.dialogues_tree.setHeaderLabels(["Speaker", "Dialogue", "Type"])
+        self.dialogues_tree.setHeaderLabels(["Type", "Text (German)", "Translation (English)", "Source"])
         self.dialogues_tree.setAlternatingRowColors(True)
-        self.dialogues_tree.setColumnWidth(0, 100)
-        self.dialogues_tree.setColumnWidth(1, 400)
+        self.dialogues_tree.setColumnWidth(0, 80)
+        self.dialogues_tree.setColumnWidth(1, 300)
+        self.dialogues_tree.setColumnWidth(2, 300)
+        self.dialogues_tree.setColumnWidth(3, 200)
         layout.addWidget(self.dialogues_tree)
 
         return group
@@ -436,7 +472,27 @@ class QuestDetailsViewer(QWidget):
         print(f"[DEBUG] Updating quest details for quest ID: {quest_id}")
         print(f"[DEBUG] Has Lua data available: {self.data_model.has_lua_data()}")
 
+        # Load enhanced quest data if service is available
+        if self.quest_service and quest_id:
+            try:
+                # Convert CFF quest to dict for service
+                cff_data = {
+                    'name': getattr(self.current_quest, 'name', ''),
+                    'description': getattr(self.current_quest, 'description', ''),
+                    'parent_quest_id': getattr(self.current_quest, 'parent_quest_id', 0),
+                    'order_index': getattr(self.current_quest, 'order_index', 0),
+                    'name_id': getattr(self.current_quest, 'name_id', 0),
+                    'description_id': getattr(self.current_quest, 'description_id', 0),
+                }
+                self.enhanced_quest_data = self.quest_service.get_enhanced_quest_data(quest_id, cff_data)
+                print(f"[DEBUG] Loaded enhanced data: {len(self.enhanced_quest_data.map_locations)} maps, "
+                      f"{len(self.enhanced_quest_data.dialogues)} dialogues")
+            except Exception as e:
+                print(f"[WARNING] Could not load enhanced quest data: {e}")
+                self.enhanced_quest_data = None
+
         self.update_basic_info()
+        self.update_map_locations()  # NEW
         self.update_quest_giver()
         self.update_accept_requirements()
         self.update_objectives()
@@ -471,6 +527,19 @@ class QuestDetailsViewer(QWidget):
         if not quest_desc:
             quest_desc = "No description available"
         self.quest_desc_text.setPlainText(str(quest_desc))
+
+    def update_map_locations(self):
+        """Update map locations section"""
+        self.map_locations_list.clear()
+        
+        # Check if we have enhanced data with map locations
+        if self.enhanced_quest_data and self.enhanced_quest_data.map_locations:
+            # Add each map location as a list item
+            for map_loc in self.enhanced_quest_data.map_locations:
+                self.map_locations_list.addItem(f"{map_loc.code}: {map_loc.name}")
+        else:
+            # Show placeholder if no map data
+            self.map_locations_list.addItem("No map location data available")
 
     def update_quest_giver(self):
         """Update quest giver information"""
@@ -635,72 +704,80 @@ class QuestDetailsViewer(QWidget):
     def update_rewards(self):
         """Update quest rewards"""
         quest = self.current_quest
-
-        # Try to get Lua quest data first
         quest_id = getattr(quest, "quest_id", None)
-        lua_data = None
-        if quest_id and self.data_model.has_lua_data():
-            lua_data = self.data_model.get_lua_quest_data(quest_id)
-            print(
-                f"[DEBUG] Rewards - Lua data for quest {quest_id}: {lua_data is not None}"
-            )
-            if lua_data and lua_data.rewards:
-                print(
-                    f"[DEBUG]   XP: {lua_data.rewards.xp}, Gold: {lua_data.rewards.gold}, Items: {len(lua_data.rewards.items)}"
-                )
 
-        # XP reward - check Lua first
-        if lua_data and lua_data.rewards and lua_data.rewards.xp > 0:
-            self.xp_reward_label.setText(f"{lua_data.rewards.xp} XP [from Lua]")
-        else:
-            # Fall back to CFF data
-            xp = getattr(quest, "xp_reward", None)
-            if not xp:
-                xp = getattr(quest, "experience", 0)
-            self.xp_reward_label.setText(f"{xp} XP" if xp else "0 XP")
-
-        # Money rewards - check Lua first
-        if lua_data and lua_data.rewards:
-            gold = lua_data.rewards.gold
-            silver = lua_data.rewards.silver
-            copper = lua_data.rewards.copper
-            if gold > 0 or silver > 0 or copper > 0:
+        # Check enhanced quest data first
+        if self.enhanced_quest_data and self.enhanced_quest_data.rewards:
+            rewards = self.enhanced_quest_data.rewards
+            
+            # XP reward
+            if rewards.xp > 0:
+                self.xp_reward_label.setText(f"{rewards.xp} XP")
+            else:
+                self.xp_reward_label.setText("0 XP")
+            
+            # Reward flags
+            self.reward_flags_list.clear()
+            if rewards.reward_flags:
+                for flag in rewards.reward_flags:
+                    self.reward_flags_list.addItem(flag)
+            else:
+                self.reward_flags_list.addItem("No reward flags")
+            
+            # Money rewards
+            if rewards.gold > 0:
                 self.money_reward_label.setText(
-                    f"{gold} Gold, {silver} Silver, {copper} Copper [from Lua]"
+                    f"{rewards.gold} Gold, {rewards.silver} Silver, {rewards.copper} Copper"
                 )
             else:
-                # Fall back to CFF
-                gold = getattr(quest, "gold_reward", 0)
-                silver = getattr(quest, "silver_reward", 0)
-                copper = getattr(quest, "copper_reward", 0)
-                self.money_reward_label.setText(
-                    f"{gold} Gold, {silver} Silver, {copper} Copper"
-                )
+                self.money_reward_label.setText("0 Gold, 0 Silver, 0 Copper")
+            
+            # Item rewards
+            self.item_rewards_list.clear()
+            if rewards.items:
+                for item in rewards.items:
+                    self.item_rewards_list.addItem(f"Item: {item}")
+            else:
+                self.item_rewards_list.addItem("No item rewards")
+            
+            # Source info
+            self.reward_source_label.setText(f"Source: {rewards.source}")
         else:
-            gold = getattr(quest, "gold_reward", 0)
-            silver = getattr(quest, "silver_reward", 0)
-            copper = getattr(quest, "copper_reward", 0)
-            self.money_reward_label.setText(
-                f"{gold} Gold, {silver} Silver, {copper} Copper"
-            )
-
-        # Item rewards - check Lua first
-        self.item_rewards_list.clear()
-        if lua_data and lua_data.rewards and lua_data.rewards.items:
-            for item_id in lua_data.rewards.items:
-                self.item_rewards_list.addItem(f"[Lua] Item ID: {item_id}")
-        else:
-            # Fall back to CFF data
-            item_rewards = getattr(quest, "item_rewards", None)
-            if item_rewards:
-                if isinstance(item_rewards, list):
-                    for item in item_rewards:
-                        self.item_rewards_list.addItem(f"Item ID: {item}")
-                else:
-                    self.item_rewards_list.addItem(str(item_rewards))
-
-        if self.item_rewards_list.count() == 0:
-            self.item_rewards_list.addItem("No item rewards (check Lua scripts)")
+            # Try Lua data as fallback
+            lua_data = None
+            if quest_id and self.data_model.has_lua_data():
+                lua_data = self.data_model.get_lua_quest_data(quest_id)
+            
+            # XP reward
+            if lua_data and lua_data.rewards and lua_data.rewards.xp > 0:
+                self.xp_reward_label.setText(f"{lua_data.rewards.xp} XP")
+            else:
+                xp = getattr(quest, "xp_reward", None) or getattr(quest, "experience", 0)
+                self.xp_reward_label.setText(f"{xp} XP" if xp else "0 XP")
+            
+            # Reward flags
+            self.reward_flags_list.clear()
+            self.reward_flags_list.addItem("No reward data available")
+            
+            # Money rewards
+            if lua_data and lua_data.rewards:
+                gold = lua_data.rewards.gold
+                silver = lua_data.rewards.silver
+                copper = lua_data.rewards.copper
+                self.money_reward_label.setText(f"{gold} Gold, {silver} Silver, {copper} Copper")
+            else:
+                self.money_reward_label.setText("0 Gold, 0 Silver, 0 Copper")
+            
+            # Item rewards
+            self.item_rewards_list.clear()
+            if lua_data and lua_data.rewards and lua_data.rewards.items:
+                for item_id in lua_data.rewards.items:
+                    self.item_rewards_list.addItem(f"Item ID: {item_id}")
+            else:
+                self.item_rewards_list.addItem("No item rewards")
+            
+            # Source info
+            self.reward_source_label.setText("Source: Lua scripts or CFF")
 
     def update_dialogues(self):
         """Update quest dialogues"""
@@ -711,30 +788,45 @@ class QuestDetailsViewer(QWidget):
         if not quest_id:
             return
 
-        # Find dialogues related to this quest
-        dialogues = self.find_quest_dialogues(quest_id)
-
-        for dialogue_name, dialogue_text, speaker_type in dialogues:
-            # Truncate text for display
-            display_text = (
-                dialogue_text[:100] + "..."
-                if len(dialogue_text) > 100
-                else dialogue_text
-            )
-            item = QTreeWidgetItem([speaker_type, display_text, "Quest Dialogue"])
-
-            # Format based on speaker
-            if "Player" in speaker_type:
-                font = item.font(0)
-                font.setItalic(True)
-                item.setFont(0, font)
-                item.setFont(1, font)
-
-            self.dialogues_tree.addTopLevelItem(item)
+        # Check enhanced quest data first
+        if self.enhanced_quest_data and self.enhanced_quest_data.dialogues:
+            for dialogue in self.enhanced_quest_data.dialogues:
+                # Truncate text for display
+                text_de = dialogue.text[:80] + "..." if len(dialogue.text) > 80 else dialogue.text
+                text_en = ""
+                if dialogue.translation:
+                    text_en = dialogue.translation[:80] + "..." if len(dialogue.translation) > 80 else dialogue.translation
+                
+                # Extract filename from source
+                source = dialogue.source_file
+                if "/" in source:
+                    source = source.split("/")[-1]  # Get just filename
+                
+                item = QTreeWidgetItem([
+                    dialogue.dialogue_type,
+                    text_de,
+                    text_en or "-",
+                    source
+                ])
+                
+                # Highlight story dialogues
+                if dialogue.dialogue_type == "Story":
+                    font = item.font(0)
+                    font.setBold(True)
+                    item.setFont(0, font)
+                
+                self.dialogues_tree.addTopLevelItem(item)
+        else:
+            # Fall back to original method
+            dialogues = self.find_quest_dialogues(quest_id)
+            for dialogue_name, dialogue_text, speaker_type in dialogues:
+                display_text = dialogue_text[:80] + "..." if len(dialogue_text) > 80 else dialogue_text
+                item = QTreeWidgetItem([speaker_type, display_text, "-", "CFF"])
+                self.dialogues_tree.addTopLevelItem(item)
 
         if self.dialogues_tree.topLevelItemCount() == 0:
             item = QTreeWidgetItem(
-                ["No dialogues", "No dialogues found for this quest", "-"]
+                ["No dialogues", "No dialogues found for this quest", "-", "-"]
             )
             self.dialogues_tree.addTopLevelItem(item)
 
