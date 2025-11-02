@@ -58,9 +58,9 @@
       "ModdingTools/SpellForceLUASources/script",
       "OriginalGameFiles/script"
     ],
-    "maxPreload": 5000,
-    "preloadFileSize": 2000,
-    "checkThirdParty": false,
+    "maxPreload": 50000,
+    "preloadFileSize": 20000,
+    "checkThirdParty": true,
     "ignoreDir": [
       ".git",
       ".vscode",
@@ -71,13 +71,13 @@
     ]
   },
   "completion": {
-    "enable": true,
+    "enable": false,
     "callSnippet": "Replace",
     "keywordSnippet": "Replace"
   },
   "hint": {
-    "enable": true,
-    "setType": true
+    "enable": false,
+    "setType": false
   },
   "format": {
     "enable": false
