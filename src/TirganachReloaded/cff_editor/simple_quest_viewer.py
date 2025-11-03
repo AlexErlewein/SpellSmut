@@ -28,6 +28,7 @@ sys.path.insert(0, str(project_root / "src"))
 
 from TirganachReloaded.cff_editor.logging_config import configure_logging, get_logger
 from TirganachReloaded.cff_editor.lua_parser.lua_data_manager import LuaDataManager
+from TirganachReloaded.cff_editor.widgets.quest_creation_wizard import QuestCreationWizard
 
 
 class SimpleQuestViewer(QMainWindow):
@@ -37,8 +38,9 @@ class SimpleQuestViewer(QMainWindow):
         super().__init__()
         self.logger = None
         self.lua_manager = None
+        self.data_model = None
         self.quest_data = {}
-        
+
         self.init_ui()
         self.load_data()
     
@@ -61,11 +63,15 @@ class SimpleQuestViewer(QMainWindow):
         header_layout.addWidget(title_label)
         
         header_layout.addStretch()
-        
+
+        create_quest_btn = QPushButton("Create Quest")
+        create_quest_btn.clicked.connect(self.create_new_quest)
+        header_layout.addWidget(create_quest_btn)
+
         reload_btn = QPushButton("Reload Data")
         reload_btn.clicked.connect(self.reload_data)
         header_layout.addWidget(reload_btn)
-        
+
         rebuild_cache_btn = QPushButton("Rebuild Cache")
         rebuild_cache_btn.clicked.connect(self.rebuild_cache)
         header_layout.addWidget(rebuild_cache_btn)
@@ -129,12 +135,18 @@ class SimpleQuestViewer(QMainWindow):
         """Load quest data"""
         try:
             self.statusBar().showMessage("Loading quest data...")
-            
+
             # Configure logging
             if not self.logger:
                 configure_logging()
                 self.logger = get_logger("quest_viewer")
-            
+
+            # Initialize data model for CFF operations
+            if not self.data_model:
+                from TirganachReloaded.cff_editor.data_model import CFFDataModel
+                self.data_model = CFFDataModel()
+                self.data_model.data_modified.connect(self.on_data_model_modified)
+
             # Initialize Lua data manager
             cache_dir = Path("src/TirganachReloaded/data/cache")
             self.lua_manager = LuaDataManager(cache_dir=cache_dir)
@@ -348,31 +360,124 @@ class SimpleQuestViewer(QMainWindow):
                 Path("ModdingTools/SpellForceLUASources"),
                 Path("OriginalGameFiles/lua"),
             ]
-            
+
             lua_source_path = None
             for path in lua_paths:
                 if path.exists() and path.is_dir():
                     lua_source_path = path
                     break
-            
+
             if lua_source_path:
                 progress = QProgressDialog("Rebuilding cache from Lua files...", None, 0, 0, self)
                 progress.setWindowModality(Qt.WindowModal)
                 progress.show()
-                
+
                 QApplication.processEvents()
-                
+
                 self.lua_manager.parse_lua_directory(lua_source_path, force_refresh=True)
-                
+
                 progress.close()
-                
+
                 QMessageBox.information(self, "Success", "Cache rebuilt successfully!")
                 self.reload_data()
             else:
                 QMessageBox.warning(self, "Warning", "No Lua source directory found.")
-                
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to rebuild cache:\n{e}")
+
+    def create_new_quest(self):
+        """Launch the Quest Creation Wizard"""
+        try:
+            if not self.data_model:
+                QMessageBox.warning(self, "Warning", "Data model not initialized. Please reload data first.")
+                return
+
+            # Create and show the wizard
+            wizard = QuestCreationWizard(self.quest_data, self)
+            wizard.quest_created.connect(self.on_quest_created)
+
+            # Execute wizard
+            if wizard.exec() == QWizard.Accepted:
+                # Quest creation handled by on_quest_created signal
+                pass
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to launch quest creation wizard:\n{e}")
+
+    def on_quest_created(self, quest_data):
+        """Handle quest creation from wizard"""
+        try:
+            if not self.data_model:
+                QMessageBox.critical(self, "Error", "Data model not available")
+                return
+
+            # Create quest in CFF
+            new_quest = self.data_model.create_quest(quest_data)
+
+            if new_quest:
+                # Add to our quest data
+                quest_id = quest_data['quest_id']
+                self.quest_data[quest_id] = {
+                    'id': quest_id,
+                    'name': quest_data['name'],
+                    'description': quest_data.get('description', ''),
+                    'parent_id': quest_data.get('parent_id', 0),
+                    'order_index': quest_data.get('order_index', 0),
+                    'platform': quest_data.get('platform'),
+                    'npc_id': quest_data.get('npc_id', 0),
+                    'objectives': quest_data.get('objectives', []),
+                    'requirements': quest_data.get('requirements', []),
+                    'rewards': quest_data.get('rewards', {}),
+                    'dialogues': quest_data.get('dialogues', [])
+                }
+
+                # Refresh quest tree
+                self.populate_quest_tree()
+
+                # Find and select the new quest
+                self.select_quest_in_tree(quest_id)
+
+                # Show success message
+                QMessageBox.information(self, "Success",
+                                      f"Quest '{quest_data['name']}' (ID: {quest_id}) created successfully!")
+            else:
+                QMessageBox.critical(self, "Error", "Failed to create quest in data model")
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to create quest:\n{e}")
+
+    def on_data_model_modified(self):
+        """Handle data model modification signals"""
+        # Refresh data when CFF changes
+        self.reload_data()
+
+    def select_quest_in_tree(self, quest_id):
+        """Select a quest in the tree by ID"""
+        def find_item(parent, target_id):
+            for i in range(parent.childCount()):
+                child = parent.child(i)
+                child_id = child.data(0, Qt.UserRole)
+                if child_id == target_id:
+                    return child
+                # Recursively search
+                found = find_item(child, target_id)
+                if found:
+                    return found
+            return None
+
+        # Search top level items first
+        for i in range(self.quest_tree.topLevelItemCount()):
+            item = self.quest_tree.topLevelItem(i)
+            item_id = item.data(0, Qt.UserRole)
+            if item_id == quest_id:
+                self.quest_tree.setCurrentItem(item)
+                return
+            # Search children
+            found = find_item(item, quest_id)
+            if found:
+                self.quest_tree.setCurrentItem(found)
+                return
 
 
 def main():

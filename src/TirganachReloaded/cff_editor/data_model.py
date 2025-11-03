@@ -2022,14 +2022,17 @@ class CFFDataModel(QObject):
         try:
             from TirganachReloaded.tirganach.entities import Localisation, Language
 
-            # Get localisation table
-            localisation_table = self.game_data.get_table('localisation')
+            # Get localisation table (access as attribute)
+            localisation_table = getattr(self.game_data, 'localisation', None)
             if localisation_table is None:
                 print("Localisation table not found")
                 return False
 
             # Create new localisation entry
-            new_entry = Localisation()
+            # Create empty bytes of the correct length for the entity
+            localisation_length = Localisation._length()
+            empty_bytes = b'\x00' * localisation_length
+            new_entry = Localisation(empty_bytes, self.game_data)
             new_entry.text_id = text_id
             new_entry.language = Language[language]
             new_entry.text = text
@@ -2067,14 +2070,17 @@ class CFFDataModel(QObject):
         try:
             from TirganachReloaded.tirganach.entities import AdvancedDescription
 
-            # Get advanced_descriptions table
-            descriptions_table = self.game_data.get_table('advanced_descriptions')
+            # Get advanced_descriptions table (access as attribute)
+            descriptions_table = getattr(self.game_data, 'advanced_descriptions', None)
             if descriptions_table is None:
                 print("Advanced descriptions table not found")
                 return False
 
             # Create new description entry
-            new_entry = AdvancedDescription()
+            # Create empty bytes of the correct length for the entity
+            description_length = AdvancedDescription._length()
+            empty_bytes = b'\x00' * description_length
+            new_entry = AdvancedDescription(empty_bytes, self.game_data)
             new_entry.description_id = description_id
             new_entry.text = text
             new_entry.text2 = text2 if text2 else ""
@@ -2130,15 +2136,18 @@ class CFFDataModel(QObject):
                     return None
 
             # Create quest entity
-            new_quest = Quest()
+            # Create empty bytes of the correct length for the entity
+            quest_length = Quest._length()
+            empty_bytes = b'\x00' * quest_length
+            new_quest = Quest(empty_bytes, self.game_data)
             new_quest.quest_id = quest_data['quest_id']
             new_quest.parent_quest_id = quest_data.get('parent_id', 0)
             new_quest.name_id = name_id
             new_quest.description_id = description_id
             new_quest.order_index = quest_data.get('order_index', 0)
 
-            # Get quests table
-            quests_table = self.game_data.get_table('quests')
+            # Get quests table (access as attribute)
+            quests_table = getattr(self.game_data, 'quests', None)
             if quests_table is None:
                 print("Quests table not found")
                 return None
