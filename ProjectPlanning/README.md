@@ -15,7 +15,11 @@ ProjectPlanning/
 │   ├── GUI_EDITOR.md            # PySide6 GUI editor status
 │   ├── ICON_SYSTEM.md           # Icon extraction & integration
 │   ├── QUEST_EDITOR.md          # Quest creation tools
-│   └── ASSET_EXTRACTION.md      # PAK extraction pipeline
+│   ├── ASSET_EXTRACTION.md      # PAK extraction pipeline
+│   ├── MAP_VIEWER_ARCHITECTURE.md    # Map Viewer technical architecture
+│   ├── MAP_VIEWER_STATUS.md          # Map Viewer current status
+│   ├── MAP_VIEWER_ROADMAP.md         # Map Viewer development roadmap
+│   └── MAP_VIEWER_TECHNICAL_SPECS.md # Map Viewer detailed specifications
 │
 ├── Status/                      # Current status tracking
 │   ├── CURRENT_STATUS.md        # Live project status
@@ -42,6 +46,7 @@ ProjectPlanning/
 - **Asset Extraction**: `Components/ASSET_EXTRACTION.md`
 - **Icon System**: `Components/ICON_SYSTEM.md`
 - **Quest Editor**: `Components/QUEST_EDITOR.md`
+- **Map Viewer**: `Components/MAP_VIEWER_ARCHITECTURE.md` (+ STATUS, ROADMAP, TECHNICAL_SPECS)
 - **Current Blockers**: `Status/BLOCKERS.md`
 - **Completed Work**: `Status/COMPLETED_WORK.md`
 
@@ -60,6 +65,10 @@ ProjectPlanning/
 - **ICON_SYSTEM.md**: Icon extraction and GUI integration
 - **QUEST_EDITOR.md**: Interactive quest creation tools
 - **ASSET_EXTRACTION.md**: PAK file extraction pipeline
+- **MAP_VIEWER_ARCHITECTURE.md**: 3D map viewer technical architecture
+- **MAP_VIEWER_STATUS.md**: Map viewer current status and progress
+- **MAP_VIEWER_ROADMAP.md**: Map viewer development roadmap (5 phases)
+- **MAP_VIEWER_TECHNICAL_SPECS.md**: Detailed technical specifications
 
 ### 📈 Status Files
 - **CURRENT_STATUS.md**: Live project status and next steps
@@ -124,3 +133,5 @@ ProjectPlanning/
 ---
 
 *This structure was created October 26, 2025 to improve project organization and reduce planning document fragmentation.*
+
+*Map Viewer documentation added November 3, 2024 following Phase 1 completion.*
