@@ -71,6 +71,14 @@ class MapViewerWidget(QOpenGLWidget):
         self.mouse_dragging = False
         self.keys_pressed = set()
 
+        # Lighting state
+        self.lighting_enabled = True
+        self.sun_azimuth = 45.0  # Degrees
+        self.sun_altitude = 45.0  # Degrees
+
+        # Display state
+        self.grid_enabled = True
+
         # Rendering state
         self.gl_initialized = False
         self.frame_count = 0
@@ -148,6 +156,10 @@ class MapViewerWidget(QOpenGLWidget):
             # Enable blending for transparency
             glEnable(GL_BLEND)
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+
+            # Enable color material so colors work with lighting
+            glEnable(GL_COLOR_MATERIAL)
+            glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
 
             # Anti-aliasing hints (only if supported)
             try:
@@ -231,6 +243,9 @@ class MapViewerWidget(QOpenGLWidget):
                 up[1],
                 up[2],
             )
+
+            # Update lighting
+            self._update_lighting()
         except Exception as e:
             logger.error(f"Error in paintGL setup: {e}")
             return
@@ -269,6 +284,35 @@ class MapViewerWidget(QOpenGLWidget):
         # Update FPS counter
         self._update_fps()
 
+    def _update_lighting(self):
+        """Update sun light position based on azimuth and altitude"""
+        import math
+
+        if self.lighting_enabled:
+            glEnable(GL_LIGHTING)
+            glEnable(GL_LIGHT0)
+
+            # Convert angles to radians
+            azimuth_rad = math.radians(self.sun_azimuth)
+            altitude_rad = math.radians(self.sun_altitude)
+
+            # Calculate light direction
+            lx = math.cos(altitude_rad) * math.cos(azimuth_rad)
+            ly = math.sin(altitude_rad)
+            lz = math.cos(altitude_rad) * math.sin(azimuth_rad)
+
+            light_position = [lx, ly, lz, 0.0]  # Directional light (w=0)
+            light_ambient = [0.3, 0.3, 0.3, 1.0]
+            light_diffuse = [0.8, 0.8, 0.7, 1.0]
+            light_specular = [0.2, 0.2, 0.2, 1.0]
+
+            glLightfv(GL_LIGHT0, GL_POSITION, light_position)
+            glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient)
+            glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse)
+            glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular)
+        else:
+            glDisable(GL_LIGHTING)
+
     def _draw_heightmap(self):
         """Draw the terrain heightmap"""
         heightmap = self.map_loader.heightmap
@@ -296,6 +340,12 @@ class MapViewerWidget(QOpenGLWidget):
         # Disable culling to see both sides
         glDisable(GL_CULL_FACE)
 
+        # Enable lighting for this terrain if enabled
+        if self.lighting_enabled:
+            glEnable(GL_LIGHTING)
+        else:
+            glDisable(GL_LIGHTING)
+
         # Get height range for coloring
         all_heights = [
             heightmap.get_height(x, y)
@@ -313,29 +363,76 @@ class MapViewerWidget(QOpenGLWidget):
         for y in range(0, height - step, step):
             glBegin(GL_TRIANGLE_STRIP)
             for x in range(0, width, step):
+                # Get heights for normal calculation
+                h_center = heightmap.get_height(x, y)
+                h_right = heightmap.get_height(x + step, y)
+                h_down = heightmap.get_height(x, y + step)
+
+                # Calculate normal vector (cross product of tangent vectors)
+                # Tangent along x: (step, h_right - h_center, 0)
+                # Tangent along z: (0, h_down - h_center, step)
+                tx = [float(step), h_right - h_center, 0.0]
+                tz = [0.0, h_down - h_center, float(step)]
+
+                # Cross product: tx × tz
+                nx = tx[1] * tz[2] - tx[2] * tz[1]
+                ny = tx[2] * tz[0] - tx[0] * tz[2]
+                nz = tx[0] * tz[1] - tx[1] * tz[0]
+
+                # Normalize
+                length = (nx * nx + ny * ny + nz * nz) ** 0.5
+                if length > 0:
+                    nx, ny, nz = nx / length, ny / length, nz / length
+                else:
+                    nx, ny, nz = 0.0, 1.0, 0.0
+
                 # Current row
-                h1 = heightmap.get_height(x, y)
-                # Color based on height - darker green at low, lighter/yellow at high
+                h1 = h_center
                 t1 = (h1 - min_h) / height_range
                 glColor3f(0.2 + t1 * 0.5, 0.4 + t1 * 0.4, 0.1 + t1 * 0.2)
+                glNormal3f(nx, ny, nz)  # Set normal for lighting
                 glVertex3f(float(x), h1, float(y))
                 vertices_drawn += 1
 
-                # Next row
-                h2 = heightmap.get_height(x, y + step)
+                # Next row - calculate its normal too
+                h2 = h_down
+                h_right2 = heightmap.get_height(x + step, y + step)
+                h_down2 = heightmap.get_height(x, y + step * 2)
+
+                tx2 = [float(step), h_right2 - h2, 0.0]
+                tz2 = [0.0, h_down2 - h2, float(step)]
+
+                nx2 = tx2[1] * tz2[2] - tx2[2] * tz2[1]
+                ny2 = tx2[2] * tz2[0] - tx2[0] * tz2[2]
+                nz2 = tx2[0] * tz2[1] - tx2[1] * tz2[0]
+
+                length2 = (nx2 * nx2 + ny2 * ny2 + nz2 * nz2) ** 0.5
+                if length2 > 0:
+                    nx2, ny2, nz2 = nx2 / length2, ny2 / length2, nz2 / length2
+                else:
+                    nx2, ny2, nz2 = 0.0, 1.0, 0.0
+
                 t2 = (h2 - min_h) / height_range
                 glColor3f(0.2 + t2 * 0.5, 0.4 + t2 * 0.4, 0.1 + t2 * 0.2)
+                glNormal3f(nx2, ny2, nz2)
                 glVertex3f(float(x), h2, float(y + step))
                 vertices_drawn += 1
 
             glEnd()
+
+        # Disable lighting after terrain
+        glDisable(GL_LIGHTING)
 
         if self.frame_count % 60 == 0:
             logger.debug(f"Drew {vertices_drawn} vertices")
 
     def _draw_grid(self):
         """Draw a grid overlay on the terrain"""
-        if not self.map_loader or not self.map_loader.heightmap:
+        if (
+            not self.map_loader
+            or not self.map_loader.heightmap
+            or not self.grid_enabled
+        ):
             return
 
         heightmap = self.map_loader.heightmap
@@ -438,6 +535,7 @@ class MapViewerWidget(QOpenGLWidget):
         """Draw coordinate axes for debugging at map center"""
         glLineWidth(3.0)
         glDisable(GL_DEPTH_TEST)  # Draw on top
+        glDisable(GL_LIGHTING)  # No lighting on axes
 
         # Draw axes at map center if map is loaded
         if self.map_loader and self.map_loader.heightmap:
@@ -474,6 +572,7 @@ class MapViewerWidget(QOpenGLWidget):
             return
 
         glDisable(GL_DEPTH_TEST)  # Draw on top
+        glDisable(GL_LIGHTING)  # No lighting on debug box
 
         # Get map center
         center_x = self.map_loader.heightmap.width / 2
@@ -531,6 +630,9 @@ class MapViewerWidget(QOpenGLWidget):
         # Only draw this if no map is loaded
         if self.map_loader and self.map_loader.heightmap:
             return
+
+        glDisable(GL_LIGHTING)  # No lighting on 2D overlay
+
         # Switch to 2D orthographic projection
         glMatrixMode(GL_PROJECTION)
         glPushMatrix()
@@ -574,6 +676,8 @@ class MapViewerWidget(QOpenGLWidget):
         """Draw status text overlay showing FPS and info"""
         if not self.map_loader or not self.map_loader.heightmap:
             return
+
+        glDisable(GL_LIGHTING)  # No lighting on 2D overlay
 
         # Switch to 2D orthographic projection
         glMatrixMode(GL_PROJECTION)
@@ -998,6 +1102,35 @@ class MapViewerWidget(QOpenGLWidget):
             self.camera.rotate(rotation_delta, altitude_delta)
             self.update()
 
+        # Sun position adjustment with Shift + Arrow keys
+        if Qt.Key.Key_Shift in self.keys_pressed:
+            sun_changed = False
+            if (
+                Qt.Key.Key_Left in self.keys_pressed
+                or Qt.Key.Key_A in self.keys_pressed
+            ):
+                self.sun_azimuth -= 30.0 * delta_time
+                sun_changed = True
+            if (
+                Qt.Key.Key_Right in self.keys_pressed
+                or Qt.Key.Key_D in self.keys_pressed
+            ):
+                self.sun_azimuth += 30.0 * delta_time
+                sun_changed = True
+            if Qt.Key.Key_Up in self.keys_pressed or Qt.Key.Key_W in self.keys_pressed:
+                self.sun_altitude = min(90.0, self.sun_altitude + 30.0 * delta_time)
+                sun_changed = True
+            if (
+                Qt.Key.Key_Down in self.keys_pressed
+                or Qt.Key.Key_S in self.keys_pressed
+            ):
+                self.sun_altitude = max(-90.0, self.sun_altitude - 30.0 * delta_time)
+                sun_changed = True
+
+            if sun_changed:
+                self.sun_azimuth = self.sun_azimuth % 360.0
+                self.update()
+
     def mousePressEvent(self, event: QMouseEvent):
         """Handle mouse press"""
         if event.button() == Qt.MouseButton.MiddleButton:
@@ -1050,6 +1183,12 @@ class MapViewerWidget(QOpenGLWidget):
         elif event.key() == Qt.Key.Key_Delete:
             self.camera.add_zoom(1)
             self.update()
+        elif event.key() == Qt.Key.Key_L:
+            # Toggle lighting (handled by parent window)
+            pass
+        elif event.key() == Qt.Key.Key_G:
+            # Toggle grid (handled by parent window)
+            pass
         elif event.key() == Qt.Key.Key_D:
             # Debug info
             logger.info("=== DEBUG INFO ===")
@@ -1058,6 +1197,10 @@ class MapViewerWidget(QOpenGLWidget):
             logger.info(f"Lookat: {self.camera.lookat}")
             logger.info(f"Forward: {self.camera.forward}")
             logger.info(f"Up: {self.camera.up}")
+            logger.info(f"Lighting: {'ON' if self.lighting_enabled else 'OFF'}")
+            logger.info(
+                f"Sun: azimuth={self.sun_azimuth:.1f}°, altitude={self.sun_altitude:.1f}°"
+            )
             if self.map_loader and self.map_loader.heightmap:
                 h = self.map_loader.heightmap
                 logger.info(f"Map size: {h.width}x{h.height}")
@@ -1069,6 +1212,18 @@ class MapViewerWidget(QOpenGLWidget):
         """Handle key release"""
         self.keys_pressed.discard(event.key())
 
+    def toggle_lighting(self):
+        """Toggle lighting state"""
+        self.lighting_enabled = not self.lighting_enabled
+        logger.info(f"Lighting: {'ON' if self.lighting_enabled else 'OFF'}")
+        self.update()
+
+    def toggle_grid(self):
+        """Toggle grid state"""
+        self.grid_enabled = not self.grid_enabled
+        logger.info(f"Grid: {'ON' if self.grid_enabled else 'OFF'}")
+        self.update()
+
 
 class MapViewerWindow(QMainWindow):
     """Main window for the map viewer application"""
@@ -1077,46 +1232,107 @@ class MapViewerWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("SpellForce Map Viewer")
-        self.setMinimumSize(1024, 768)
+        self.setMinimumSize(1280, 800)
 
         # Create central widget
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
 
-        # Create layout
-        layout = QVBoxLayout(central_widget)
-        layout.setContentsMargins(0, 0, 0, 0)
+        # Create main layout - horizontal split
+        main_layout = QHBoxLayout(central_widget)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setSpacing(0)
 
-        # Create toolbar
-        toolbar_widget = QWidget()
-        toolbar_layout = QHBoxLayout(toolbar_widget)
+        # Left side: Compact controls panel
+        controls_widget = QWidget()
+        controls_widget.setMaximumWidth(200)
+        controls_widget.setMinimumWidth(200)
+        controls_layout = QVBoxLayout(controls_widget)
+        controls_layout.setContentsMargins(5, 5, 5, 5)
 
-        self.open_button = QPushButton("Open Map")
+        # Buttons
+        self.open_button = QPushButton("📂 Open Map")
         self.open_button.clicked.connect(self.open_map)
-        toolbar_layout.addWidget(self.open_button)
+        controls_layout.addWidget(self.open_button)
 
-        self.reset_button = QPushButton("Reset Camera")
+        self.reset_button = QPushButton("🔄 Reset Camera")
         self.reset_button.clicked.connect(self.reset_camera)
-        toolbar_layout.addWidget(self.reset_button)
+        controls_layout.addWidget(self.reset_button)
 
-        toolbar_layout.addStretch()
+        controls_layout.addSpacing(5)
+
+        # Checkboxes for toggles
+        from PySide6.QtWidgets import QCheckBox
+
+        self.lighting_checkbox = QCheckBox("💡 Lighting (L)")
+        self.lighting_checkbox.setChecked(True)
+        self.lighting_checkbox.stateChanged.connect(self.toggle_lighting_checkbox)
+        controls_layout.addWidget(self.lighting_checkbox)
+
+        self.grid_checkbox = QCheckBox("⊞ Grid (G)")
+        self.grid_checkbox.setChecked(True)
+        self.grid_checkbox.stateChanged.connect(self.toggle_grid_checkbox)
+        controls_layout.addWidget(self.grid_checkbox)
+
+        controls_layout.addSpacing(10)
+
+        # Info section
+        info_group = QWidget()
+        info_layout = QVBoxLayout(info_group)
+        info_layout.setContentsMargins(0, 0, 0, 0)
 
         self.info_label = QLabel("No map loaded")
-        toolbar_layout.addWidget(self.info_label)
+        self.info_label.setWordWrap(True)
+        self.info_label.setStyleSheet("font-size: 11px; color: #aaa;")
+        info_layout.addWidget(self.info_label)
 
         self.fps_label = QLabel("FPS: 0")
-        toolbar_layout.addWidget(self.fps_label)
+        self.fps_label.setStyleSheet("font-size: 11px; color: #0a0;")
+        info_layout.addWidget(self.fps_label)
 
-        layout.addWidget(toolbar_widget)
+        controls_layout.addWidget(info_group)
+        controls_layout.addSpacing(10)
 
-        # Create OpenGL viewer widget
+        # Shortcuts section
+        shortcuts_label = QLabel("<b>⌨️ Controls</b>")
+        shortcuts_label.setStyleSheet("font-size: 12px;")
+        controls_layout.addWidget(shortcuts_label)
+
+        shortcuts_text = QLabel(
+            "<small>"
+            "<b>Movement:</b><br>"
+            "• WASD / Arrows<br>"
+            "• Middle Mouse Drag<br><br>"
+            "<b>View:</b><br>"
+            "• Mouse Wheel: Zoom<br>"
+            "• Home/End: Rotate<br>"
+            "• PgUp/PgDn: Tilt<br><br>"
+            "<b>Lighting:</b><br>"
+            "• L: Toggle light<br>"
+            "• Shift + WASD: Sun<br><br>"
+            "<b>Display:</b><br>"
+            "• G: Toggle grid<br><br>"
+            "<b>Other:</b><br>"
+            "• D: Debug info<br>"
+            "• Insert/Del: Zoom<br>"
+            "</small>"
+        )
+        shortcuts_text.setWordWrap(True)
+        shortcuts_text.setStyleSheet("font-size: 10px; color: #ccc;")
+        controls_layout.addWidget(shortcuts_text)
+
+        controls_layout.addStretch()
+
+        main_layout.addWidget(controls_widget)
+
+        # Right side: OpenGL viewer widget (takes all remaining space)
         self.viewer = MapViewerWidget()
-        layout.addWidget(self.viewer)
+        main_layout.addWidget(self.viewer, 1)  # Stretch factor 1
 
-        # Status bar
+        # Status bar at bottom
         self.status_bar = QStatusBar()
         self.setStatusBar(self.status_bar)
-        self.status_bar.showMessage("Ready")
+        self.status_bar.showMessage("Ready • Phase 2: Lighting System Active ✨")
 
         # FPS update timer
         self.fps_timer = QTimer()
@@ -1127,7 +1343,7 @@ class MapViewerWindow(QMainWindow):
         self.setStyleSheet(
             """
             QMainWindow {
-                background-color: #2b2b2b;
+                background-color: #1e1e1e;
             }
             QWidget {
                 background-color: #2b2b2b;
@@ -1136,20 +1352,67 @@ class MapViewerWindow(QMainWindow):
             QPushButton {
                 background-color: #3c3f41;
                 border: 1px solid #555555;
-                padding: 5px 15px;
-                border-radius: 3px;
+                padding: 8px 12px;
+                border-radius: 4px;
+                font-size: 11px;
             }
             QPushButton:hover {
                 background-color: #4c4f51;
+                border: 1px solid #6c6f71;
             }
             QPushButton:pressed {
                 background-color: #2c2f31;
             }
             QLabel {
-                padding: 5px;
+                padding: 3px;
+            }
+            QStatusBar {
+                background-color: #1e1e1e;
+                color: #888;
+                font-size: 10px;
+            }
+            QCheckBox {
+                color: #ccc;
+                font-size: 11px;
+                spacing: 5px;
+            }
+            QCheckBox::indicator {
+                width: 16px;
+                height: 16px;
+                border: 1px solid #555;
+                border-radius: 3px;
+                background-color: #2b2b2b;
+            }
+            QCheckBox::indicator:checked {
+                background-color: #4a9eff;
+                border: 1px solid #6ab0ff;
+            }
+            QCheckBox::indicator:hover {
+                border: 1px solid #6c6f71;
             }
         """
         )
+
+        # Set up global shortcuts
+        from PySide6.QtGui import QKeySequence, QShortcut
+
+        # Lighting toggle shortcut
+        self.lighting_shortcut = QShortcut(QKeySequence("L"), self)
+        self.lighting_shortcut.activated.connect(self.toggle_lighting_shortcut)
+
+        # Grid toggle shortcut
+        self.grid_shortcut = QShortcut(QKeySequence("G"), self)
+        self.grid_shortcut.activated.connect(self.toggle_grid_shortcut)
+
+    def toggle_lighting_shortcut(self):
+        """Toggle lighting from keyboard shortcut"""
+        self.viewer.toggle_lighting()
+        self.lighting_checkbox.setChecked(self.viewer.lighting_enabled)
+
+    def toggle_grid_shortcut(self):
+        """Toggle grid from keyboard shortcut"""
+        self.viewer.toggle_grid()
+        self.grid_checkbox.setChecked(self.viewer.grid_enabled)
 
     def open_map(self):
         """Open a map file"""
@@ -1166,17 +1429,18 @@ class MapViewerWindow(QMainWindow):
                 if self.viewer.load_map(Path(filepath)):
                     map_loader = self.viewer.map_loader
                     if map_loader.heightmap:
-                        info = f"Map: {map_loader.heightmap.width}x{map_loader.heightmap.height}"
+                        info = f"<b>Map:</b> {map_loader.heightmap.width}x{map_loader.heightmap.height}<br>"
+                        info += f"<small>{Path(filepath).name}</small>"
                         self.info_label.setText(info)
-                    self.status_bar.showMessage(f"Loaded: {Path(filepath).name}")
+                    self.status_bar.showMessage(f"✓ Loaded: {Path(filepath).name}")
                 else:
                     QMessageBox.warning(
                         self,
-                        "Error",
+                        "Load Error",
                         "Failed to load map file. Check the log for details.\n\n"
                         "The map format may not be fully supported yet.",
                     )
-                    self.status_bar.showMessage("Failed to load map")
+                    self.status_bar.showMessage("✗ Failed to load map")
             except Exception as e:
                 logger.exception(f"Error loading map: {e}")
                 QMessageBox.critical(
@@ -1187,7 +1451,7 @@ class MapViewerWindow(QMainWindow):
                     "Try using the map inspector tool to analyze the file:\n"
                     "python -m TirganachReloaded.map_viewer.inspect_map <file.map>",
                 )
-                self.status_bar.showMessage(f"Error: {str(e)}")
+                self.status_bar.showMessage(f"✗ Error: {str(e)}")
 
     def reset_camera(self):
         """Reset camera to default position"""
@@ -1197,11 +1461,21 @@ class MapViewerWindow(QMainWindow):
                 self.viewer.map_loader.heightmap.height,
             )
             self.viewer.update()
-            self.status_bar.showMessage("Camera reset")
+            self.status_bar.showMessage("✓ Camera reset to center")
 
     def update_info(self):
         """Update FPS and other info"""
         self.fps_label.setText(f"FPS: {self.viewer.fps:.1f}")
+
+    def toggle_lighting_checkbox(self, state):
+        """Toggle lighting from checkbox"""
+        self.viewer.lighting_enabled = bool(state)
+        self.viewer.update()
+
+    def toggle_grid_checkbox(self, state):
+        """Toggle grid from checkbox"""
+        self.viewer.grid_enabled = bool(state)
+        self.viewer.update()
 
 
 def main():

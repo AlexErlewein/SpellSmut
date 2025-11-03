@@ -83,6 +83,10 @@ def main():
         logger.info("  - Home/End: Rotate left/right")
         logger.info("  - Page Up/Down: Tilt camera")
         logger.info("  - Insert/Delete: Zoom in/out")
+        logger.info("  - L: Toggle lighting on/off")
+        logger.info("  - G: Toggle grid on/off")
+        logger.info("  - Shift + Arrow/WASD: Adjust sun position")
+        logger.info("  - D: Print debug info")
 
         sys.exit(app.exec())
 
