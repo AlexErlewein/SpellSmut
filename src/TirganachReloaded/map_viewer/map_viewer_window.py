@@ -33,8 +33,10 @@ except ImportError:
     logger.error("PyOpenGL not installed. Install with: pip install PyOpenGL")
     raise
 
+
 from .camera import Camera
 from .simple_map_loader import SimpleMapLoader
+from .simple_texture_manager import SimpleTextureManager
 
 
 class MapViewerWidget(QOpenGLWidget):
@@ -65,6 +67,13 @@ class MapViewerWidget(QOpenGLWidget):
         # Map data
         self.map_loader: Optional[SimpleMapLoader] = None
         self.camera = Camera()
+
+        # Texture system
+        self.texture_manager: Optional[SimpleTextureManager] = None
+        self.textures_loaded = False
+        self.texture_ids = []  # OpenGL texture IDs
+        self.base_textures = {}  # Index -> texture data
+        self.use_textures = True  # Enable/disable texture rendering
 
         # Input state
         self.last_mouse_pos = QPointF(0, 0)
@@ -97,6 +106,10 @@ class MapViewerWidget(QOpenGLWidget):
     def load_map(self, filepath: Path) -> bool:
         """Load a map file"""
         try:
+            # Initialize texture manager if not already done
+            if self.texture_manager is None:
+                self._init_texture_manager()
+
             self.map_loader = SimpleMapLoader()
             if self.map_loader.load(filepath):
                 # Reset camera to center of map
@@ -135,6 +148,87 @@ class MapViewerWidget(QOpenGLWidget):
         except Exception as e:
             logger.exception(f"Failed to load map: {e}")
             return False
+
+    def _init_texture_manager(self):
+        """Initialize texture manager and load test textures"""
+        try:
+            logger.info("Initializing texture manager...")
+            self.texture_manager = SimpleTextureManager()
+
+            # Try to load from ExtractedAssets
+            assets_path = Path("ExtractedAssets")
+            if not assets_path.exists():
+                assets_path = Path("../../ExtractedAssets")
+
+            if assets_path.exists():
+                count = self.texture_manager.load_available_textures(str(assets_path))
+                logger.info(f"Found {count} available textures")
+
+            # Create test texture set (colorful textures for now)
+            logger.info("Creating test texture set...")
+            self.base_textures = self.texture_manager.create_test_texture_set(32)
+            logger.info(f"Created {len(self.base_textures)} test textures")
+
+            # Upload to OpenGL if initialized
+            if self.gl_initialized:
+                self._upload_textures_to_opengl()
+
+        except Exception as e:
+            logger.error(f"Failed to initialize texture manager: {e}")
+            self.texture_manager = None
+
+    def _upload_textures_to_opengl(self):
+        """Upload textures to OpenGL"""
+        if not self.base_textures or self.textures_loaded:
+            return
+
+        try:
+            logger.info("Uploading textures to OpenGL...")
+
+            # Generate texture IDs
+            num_textures = len(self.base_textures)
+            self.texture_ids = glGenTextures(num_textures)
+
+            # Handle single texture case
+            if not isinstance(self.texture_ids, (list, tuple)):
+                self.texture_ids = [self.texture_ids]
+
+            # Upload each texture
+            for i, texture_data in self.base_textures.items():
+                if i >= len(self.texture_ids):
+                    break
+
+                tex_id = self.texture_ids[i]
+
+                glBindTexture(GL_TEXTURE_2D, tex_id)
+
+                # Set texture parameters
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+
+                # Upload texture data
+                height, width = texture_data.shape[:2]
+                glTexImage2D(
+                    GL_TEXTURE_2D,
+                    0,
+                    GL_RGBA,
+                    width,
+                    height,
+                    0,
+                    GL_RGBA,
+                    GL_UNSIGNED_BYTE,
+                    texture_data,
+                )
+
+            glBindTexture(GL_TEXTURE_2D, 0)
+            self.textures_loaded = True
+            logger.info(f"✓ Uploaded {len(self.texture_ids)} textures to OpenGL")
+
+        except Exception as e:
+            logger.error(f"Failed to upload textures: {e}")
+            self.textures_loaded = False
 
     def initializeGL(self):
         """Initialize OpenGL context"""
@@ -181,6 +275,10 @@ class MapViewerWidget(QOpenGLWidget):
 
             self.gl_initialized = True
             logger.info("OpenGL initialized successfully")
+
+            # Upload textures if texture manager is ready
+            if self.texture_manager and self.base_textures:
+                self._upload_textures_to_opengl()
 
         except Exception as e:
             logger.exception(f"OpenGL initialization failed: {e}")
@@ -356,6 +454,15 @@ class MapViewerWidget(QOpenGLWidget):
         max_h = max(all_heights)
         height_range = max_h - min_h if max_h > min_h else 1.0
 
+        # Enable texturing if available
+        if self.textures_loaded and self.use_textures and len(self.texture_ids) > 0:
+            glEnable(GL_TEXTURE_2D)
+            # Bind first texture (for now, just use texture 0)
+            glBindTexture(GL_TEXTURE_2D, self.texture_ids[0])
+
+        # Texture scaling factor (controls texture repeat)
+        texture_scale = 0.1  # Lower value = more repetition
+
         # Draw with reduced resolution for better performance
         step = 2  # Changed from 4 to 2 for better detail
         vertices_drawn = 0
@@ -389,12 +496,20 @@ class MapViewerWidget(QOpenGLWidget):
                 # Current row
                 h1 = h_center
                 t1 = (h1 - min_h) / height_range
-                glColor3f(0.2 + t1 * 0.5, 0.4 + t1 * 0.4, 0.1 + t1 * 0.2)
+
+                # Color: use white if textured, height-based if not
+                if self.textures_loaded and self.use_textures:
+                    glColor3f(1.0, 1.0, 1.0)  # White to show texture
+                else:
+                    glColor3f(0.2 + t1 * 0.5, 0.4 + t1 * 0.4, 0.1 + t1 * 0.2)
+
+                # Texture coordinates
+                glTexCoord2f(x * texture_scale, y * texture_scale)
                 glNormal3f(nx, ny, nz)  # Set normal for lighting
                 glVertex3f(float(x), h1, float(y))
                 vertices_drawn += 1
 
-                # Next row - calculate its normal too
+                # Next row vertex
                 h2 = h_down
                 h_right2 = heightmap.get_height(x + step, y + step)
                 h_down2 = heightmap.get_height(x, y + step * 2)
@@ -413,18 +528,31 @@ class MapViewerWidget(QOpenGLWidget):
                     nx2, ny2, nz2 = 0.0, 1.0, 0.0
 
                 t2 = (h2 - min_h) / height_range
-                glColor3f(0.2 + t2 * 0.5, 0.4 + t2 * 0.4, 0.1 + t2 * 0.2)
+
+                # Color: use white if textured, height-based if not
+                if self.textures_loaded and self.use_textures:
+                    glColor3f(1.0, 1.0, 1.0)  # White to show texture
+                else:
+                    glColor3f(0.2 + t2 * 0.5, 0.4 + t2 * 0.4, 0.1 + t2 * 0.2)
+
+                # Texture coordinates
+                glTexCoord2f(x * texture_scale, (y + step) * texture_scale)
                 glNormal3f(nx2, ny2, nz2)
                 glVertex3f(float(x), h2, float(y + step))
                 vertices_drawn += 1
 
             glEnd()
 
-        # Disable lighting after terrain
+        # Disable lighting and texturing after terrain
         glDisable(GL_LIGHTING)
+        if self.textures_loaded and self.use_textures:
+            glDisable(GL_TEXTURE_2D)
+            glBindTexture(GL_TEXTURE_2D, 0)
 
         if self.frame_count % 60 == 0:
-            logger.debug(f"Drew {vertices_drawn} vertices")
+            logger.debug(
+                f"Drew {vertices_drawn} vertices (textures: {self.textures_loaded})"
+            )
 
     def _draw_grid(self):
         """Draw a grid overlay on the terrain"""
