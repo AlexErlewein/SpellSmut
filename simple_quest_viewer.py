@@ -534,23 +534,23 @@ class SimpleQuestViewer(QMainWindow):
         """Show details for selected quest with enhanced formatting"""
         quest_info = self.quest_data[quest_id]
 
-        # Build HTML content with styling
-        html = "<html><body style='font-family: Arial; font-size: 11pt;'>"
+        # Build HTML content with dark theme styling
+        html = "<html><body style='font-family: Arial; font-size: 11pt; background-color: #1e1e1e; color: #e0e0e0;'>"
 
         # Quest Header
-        html += f"<h2 style='color: #2c3e50; margin-bottom: 5px;'>{quest_info.get('name', 'Unknown')}</h2>"
+        html += f"<h2 style='color: #6fb3d2; margin-bottom: 5px;'>{quest_info.get('name', 'Unknown')}</h2>"
         html += (
-            f"<p style='color: #7f8c8d; margin-top: 0;'><b>Quest ID:</b> {quest_id}</p>"
+            f"<p style='color: #a0a0a0; margin-top: 0;'><b>Quest ID:</b> {quest_id}</p>"
         )
 
         # Description
         if quest_info.get("description"):
-            html += "<div style='background-color: #ecf0f1; padding: 10px; border-radius: 5px; margin: 10px 0;'>"
+            html += "<div style='background-color: #2d2d30; padding: 10px; border-radius: 5px; margin: 10px 0; border: 1px solid #3c3c3c;'>"
             html += f"<p><b>Description:</b><br>{quest_info['description']}</p>"
             html += "</div>"
 
         # Location & Quest Giver Section
-        html += "<h3 style='color: #34495e; margin-top: 15px; margin-bottom: 5px;'>Location & Quest Giver</h3>"
+        html += "<h3 style='color: #6fb3d2; margin-top: 15px; margin-bottom: 5px;'>Location & Quest Giver</h3>"
         html += "<ul style='margin-top: 5px;'>"
 
         # Platform/Location
@@ -560,7 +560,7 @@ class SimpleQuestViewer(QMainWindow):
             html += f"<li><b>Location:</b> {location}</li>"
         else:
             html += (
-                "<li><b>Location:</b> <span style='color: #95a5a6;'>Unknown</span></li>"
+                "<li><b>Location:</b> <span style='color: #808080;'>Unknown</span></li>"
             )
 
         # Quest Giver (NPC)
@@ -568,7 +568,7 @@ class SimpleQuestViewer(QMainWindow):
         if npc_id:
             html += f"<li><b>Quest Giver:</b> NPC ID {npc_id}</li>"
         else:
-            html += "<li><b>Quest Giver:</b> <span style='color: #95a5a6;'>Unknown</span></li>"
+            html += "<li><b>Quest Giver:</b> <span style='color: #808080;'>Unknown</span></li>"
 
         # Parent Quest
         parent_id = quest_info.get("parent_id")
@@ -583,29 +583,29 @@ class SimpleQuestViewer(QMainWindow):
         # Requirements
         requirements = quest_info.get("requirements", [])
         if requirements:
-            html += "<h3 style='color: #e74c3c; margin-top: 15px; margin-bottom: 5px;'>Requirements</h3>"
+            html += "<h3 style='color: #f48771; margin-top: 15px; margin-bottom: 5px;'>Requirements</h3>"
             html += "<ul style='margin-top: 5px;'>"
             for req in requirements:
                 req_type = getattr(req, "requirement_type", "Unknown")
                 req_text = getattr(req, "description", "")
-                html += f"<li><span style='color: #c0392b;'>[{req_type}]</span> {req_text}</li>"
+                html += f"<li><span style='color: #e67e68;'>[{req_type}]</span> {req_text}</li>"
             html += "</ul>"
 
         # Objectives
         objectives = quest_info.get("objectives", [])
         if objectives:
-            html += "<h3 style='color: #3498db; margin-top: 15px; margin-bottom: 5px;'>Objectives</h3>"
+            html += "<h3 style='color: #6fb3d2; margin-top: 15px; margin-bottom: 5px;'>Objectives</h3>"
             html += "<ol style='margin-top: 5px;'>"
             for obj in objectives:
                 obj_type = getattr(obj, "objective_type", "Unknown")
                 obj_text = getattr(obj, "description", "")
-                html += f"<li><span style='color: #2980b9;'>[{obj_type}]</span> {obj_text}</li>"
+                html += f"<li><span style='color: #5fa3c4;'>[{obj_type}]</span> {obj_text}</li>"
             html += "</ol>"
 
         # Rewards
         rewards = quest_info.get("rewards")
         if rewards:
-            html += "<h3 style='color: #27ae60; margin-top: 15px; margin-bottom: 5px;'>Rewards</h3>"
+            html += "<h3 style='color: #4ec9b0; margin-top: 15px; margin-bottom: 5px;'>Rewards</h3>"
             html += "<ul style='margin-top: 5px;'>"
 
             if hasattr(rewards, "xp") and rewards.xp > 0:
@@ -624,8 +624,8 @@ class SimpleQuestViewer(QMainWindow):
         # Dialogues
         dialogues = quest_info.get("dialogues", [])
         if dialogues:
-            html += "<h3 style='color: #9b59b6; margin-top: 15px; margin-bottom: 5px;'>Dialogues</h3>"
-            html += "<div style='background-color: #f8f9fa; padding: 10px; border-radius: 5px;'>"
+            html += "<h3 style='color: #c586c0; margin-top: 15px; margin-bottom: 5px;'>Dialogues</h3>"
+            html += "<div style='background-color: #2d2d30; padding: 10px; border-radius: 5px; border: 1px solid #3c3c3c;'>"
 
             for dlg in dialogues:
                 speaker = getattr(dlg, "speaker", "Unknown")
@@ -635,10 +635,10 @@ class SimpleQuestViewer(QMainWindow):
                 if dlg_text:
                     if speaker == "Player" or is_player:
                         # Player dialogue in blue
-                        html += f"<p style='margin: 5px 0;'><b style='color: #3498db;'>Player:</b> {dlg_text}</p>"
+                        html += f"<p style='margin: 5px 0;'><b style='color: #6fb3d2;'>Player:</b> {dlg_text}</p>"
                     else:
                         # NPC dialogue in green
-                        html += f"<p style='margin: 5px 0;'><b style='color: #27ae60;'>NPC:</b> {dlg_text}</p>"
+                        html += f"<p style='margin: 5px 0;'><b style='color: #4ec9b0;'>NPC:</b> {dlg_text}</p>"
 
             html += "</div>"
 
@@ -650,7 +650,7 @@ class SimpleQuestViewer(QMainWindow):
             and not rewards
             and not dialogues
         ):
-            html += "<p style='color: #95a5a6; font-style: italic; margin-top: 20px;'>No additional details available for this quest.</p>"
+            html += "<p style='color: #808080; font-style: italic; margin-top: 20px;'>No additional details available for this quest.</p>"
 
         html += "</body></html>"
 
