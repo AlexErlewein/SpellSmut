@@ -43,6 +43,7 @@ sys.path.insert(0, str(project_root / "src"))
 from TirganachReloaded.cff_editor.data_model import CFFDataModel
 from TirganachReloaded.cff_editor.logging_config import configure_logging, get_logger
 from TirganachReloaded.cff_editor.lua_parser.lua_data_manager import LuaDataManager
+from TirganachReloaded.cff_editor.services.quest_data_service import QuestDataService
 
 # Platform/Map location name mappings
 PLATFORM_NAMES = {
@@ -100,6 +101,7 @@ class SimpleQuestViewer(QMainWindow):
         self.data_model = None
         self.quest_data = {}
         self.current_quest_id = None
+        self.quest_service = None
 
         # Initialize settings for preferences persistence
         self.settings = QSettings("SpellSmut", "QuestViewer")
@@ -271,6 +273,15 @@ class SimpleQuestViewer(QMainWindow):
             QApplication.processEvents()
 
             self.data_model = CFFDataModel()
+
+            # Initialize QuestDataService
+            try:
+                project_root = Path(__file__).parent
+                self.quest_service = QuestDataService(project_root)
+                self.logger.info("QuestDataService initialized")
+            except Exception as e:
+                self.logger.warning(f"Could not initialize QuestDataService: {e}")
+                self.quest_service = None
 
             # Step 2: Load GameData.cff file
             cff_file = Path("OriginalGameFiles/data/GameData.cff")
@@ -453,6 +464,74 @@ class SimpleQuestViewer(QMainWindow):
             if self.logger:
                 self.logger.warning(f"Failed to load Lua quest data: {e}")
 
+        # Enhance quest data with QuestDataService
+        if self.quest_service:
+            self.logger.info("Enhancing quest data with QuestDataService...")
+            enhanced_count = 0
+            for quest_id in list(self.quest_data.keys()):
+                try:
+                    # Get CFF data for this quest
+                    cff_data = {
+                        "name": self.quest_data[quest_id].get("name", ""),
+                        "description": self.quest_data[quest_id].get("description", ""),
+                        "parent_quest_id": self.quest_data[quest_id].get(
+                            "parent_id", 0
+                        ),
+                        "order_index": self.quest_data[quest_id].get("order_index", 0),
+                    }
+
+                    # Get enhanced data from service
+                    enhanced_data = self.quest_service.get_enhanced_quest_data(
+                        quest_id, cff_data
+                    )
+
+                    quest_enhanced = False
+
+                    # Add enhanced dialogues (if not already present or if we have more)
+                    if enhanced_data.dialogues:
+                        existing_dialogues = self.quest_data[quest_id].get(
+                            "dialogues", []
+                        )
+                        if not existing_dialogues or len(enhanced_data.dialogues) > len(
+                            existing_dialogues
+                        ):
+                            self.quest_data[quest_id]["dialogues"] = (
+                                enhanced_data.dialogues
+                            )
+                            quest_enhanced = True
+                            self.logger.debug(
+                                f"Quest {quest_id}: Added {len(enhanced_data.dialogues)} dialogues"
+                            )
+
+                    # Add enhanced rewards (always add if available from service)
+                    if enhanced_data.rewards and enhanced_data.rewards.xp > 0:
+                        self.quest_data[quest_id]["rewards"] = enhanced_data.rewards
+                        quest_enhanced = True
+                        self.logger.debug(
+                            f"Quest {quest_id}: Added rewards (XP: {enhanced_data.rewards.xp})"
+                        )
+
+                    if quest_enhanced:
+                        enhanced_count += 1
+
+                except Exception as e:
+                    # Don't fail on individual quest enhancement
+                    self.logger.debug(f"Failed to enhance quest {quest_id}: {e}")
+                    pass
+
+            self.logger.info(f"Enhanced {enhanced_count} quests with service data")
+
+            # Log enhancement stats
+            enhanced_with_dialogues = sum(
+                1 for q in self.quest_data.values() if q.get("dialogues")
+            )
+            enhanced_with_rewards = sum(
+                1 for q in self.quest_data.values() if q.get("rewards")
+            )
+            self.logger.info(
+                f"Quest data enhancement complete: {enhanced_with_dialogues} quests with dialogues, {enhanced_with_rewards} quests with rewards"
+            )
+
     def populate_quest_tree(self):
         """Populate the quest tree"""
         self.quest_tree.clear()
@@ -534,6 +613,20 @@ class SimpleQuestViewer(QMainWindow):
         """Show details for selected quest with enhanced formatting"""
         quest_info = self.quest_data[quest_id]
 
+        # Debug: Check what data we have
+        if self.logger:
+            dialogues = quest_info.get("dialogues", [])
+            rewards = quest_info.get("rewards")
+            self.logger.debug(
+                f"Quest {quest_id}: {len(dialogues)} dialogues, rewards={rewards is not None}"
+            )
+            if dialogues:
+                self.logger.debug(f"  First dialogue type: {type(dialogues[0])}")
+            if rewards:
+                self.logger.debug(
+                    f"  Rewards type: {type(rewards)}, has xp: {hasattr(rewards, 'xp')}"
+                )
+
         # Build HTML content with dark theme styling
         html = "<html><body style='font-family: Arial; font-size: 11pt; background-color: #1e1e1e; color: #e0e0e0;'>"
 
@@ -608,18 +701,59 @@ class SimpleQuestViewer(QMainWindow):
             html += "<h3 style='color: #4ec9b0; margin-top: 15px; margin-bottom: 5px;'>Rewards</h3>"
             html += "<ul style='margin-top: 5px;'>"
 
-            if hasattr(rewards, "xp") and rewards.xp > 0:
-                html += f"<li><b>XP:</b> {rewards.xp}</li>"
-            if hasattr(rewards, "gold") and rewards.gold > 0:
-                html += f"<li><b>Gold:</b> {rewards.gold}</li>"
-            if hasattr(rewards, "silver") and hasattr(rewards, "copper"):
-                if rewards.silver > 0 or rewards.copper > 0:
-                    html += f"<li><b>Silver:</b> {getattr(rewards, 'silver', 0)} <b>Copper:</b> {getattr(rewards, 'copper', 0)}</li>"
-            if hasattr(rewards, "items") and rewards.items:
-                items_str = ", ".join(map(str, rewards.items))
+            has_any_reward = False
+
+            # XP
+            xp = getattr(rewards, "xp", 0)
+            if xp > 0:
+                html += f"<li><b>XP:</b> {xp:,}</li>"
+                has_any_reward = True
+
+            # Gold
+            gold = getattr(rewards, "gold", 0)
+            if gold > 0:
+                html += f"<li><b>Gold:</b> {gold:,}</li>"
+                has_any_reward = True
+
+            # Silver and Copper
+            silver = getattr(rewards, "silver", 0)
+            copper = getattr(rewards, "copper", 0)
+            if silver > 0 or copper > 0:
+                html += f"<li><b>Silver:</b> {silver} <b>Copper:</b> {copper}</li>"
+                has_any_reward = True
+
+            # Items
+            items = getattr(rewards, "items", [])
+            if items:
+                items_str = ", ".join(map(str, items))
                 html += f"<li><b>Items:</b> {items_str}</li>"
+                has_any_reward = True
+
+            # Reward flags (from QuestDataService)
+            reward_flags = getattr(rewards, "reward_flags", [])
+            if reward_flags:
+                # Make flags more readable by splitting camelCase
+                readable_flags = []
+                for flag in reward_flags:
+                    # Add spaces before capital letters
+                    import re
+
+                    readable = re.sub(r"([a-z])([A-Z])", r"\1 \2", flag)
+                    readable_flags.append(readable)
+
+                flags_str = ", ".join(readable_flags)
+                html += f"<li><b>Reward Type:</b> <span style='color: #d4a959;'>{flags_str}</span></li>"
+                has_any_reward = True
+
+            if not has_any_reward:
+                html += "<li><span style='color: #808080;'>No reward information available</span></li>"
 
             html += "</ul>"
+
+            # Add note about item rewards
+            html += "<p style='color: #a0a0a0; font-size: 10pt; font-style: italic; margin-top: 5px;'>"
+            html += "Note: Item and gold rewards are often given through quest dialogue or completion scripts, not stored in reward tables."
+            html += "</p>"
 
         # Dialogues
         dialogues = quest_info.get("dialogues", [])
@@ -628,17 +762,42 @@ class SimpleQuestViewer(QMainWindow):
             html += "<div style='background-color: #2d2d30; padding: 10px; border-radius: 5px; border: 1px solid #3c3c3c;'>"
 
             for dlg in dialogues:
-                speaker = getattr(dlg, "speaker", "Unknown")
-                dlg_text = getattr(dlg, "text", "")
-                is_player = getattr(dlg, "is_player_choice", False)
+                # Handle both Lua cache format and QuestDataService format
+                if hasattr(dlg, "speaker"):
+                    # Lua cache format
+                    speaker = dlg.speaker
+                    dlg_text = getattr(dlg, "text", "")
+                    translation = getattr(dlg, "translation", None)
+                    is_player = getattr(dlg, "is_player_choice", False)
+                    dialogue_type = getattr(dlg, "dialogue_type", "Standard")
+                elif hasattr(dlg, "text"):
+                    # QuestDataService format
+                    dlg_text = dlg.text
+                    translation = getattr(dlg, "translation", None)
+                    dialogue_type = getattr(dlg, "dialogue_type", "Standard")
+                    is_player = False
+                    speaker = "NPC"
+                else:
+                    continue
 
                 if dlg_text:
+                    # Show dialogue type if it's a Story dialogue
+                    type_prefix = ""
+                    if dialogue_type == "Story":
+                        type_prefix = "<span style='color: #d4a959;'>[Story]</span> "
+
                     if speaker == "Player" or is_player:
                         # Player dialogue in blue
-                        html += f"<p style='margin: 5px 0;'><b style='color: #6fb3d2;'>Player:</b> {dlg_text}</p>"
+                        html += f"<p style='margin: 5px 0;'>{type_prefix}<b style='color: #6fb3d2;'>Player:</b> {dlg_text}"
                     else:
                         # NPC dialogue in green
-                        html += f"<p style='margin: 5px 0;'><b style='color: #4ec9b0;'>NPC:</b> {dlg_text}</p>"
+                        html += f"<p style='margin: 5px 0;'>{type_prefix}<b style='color: #4ec9b0;'>NPC:</b> {dlg_text}"
+
+                    # Add translation if available
+                    if translation:
+                        html += f"<br><span style='color: #a0a0a0; font-size: 10pt; font-style: italic;'>({translation})</span>"
+
+                    html += "</p>"
 
             html += "</div>"
 
