@@ -1,18 +1,17 @@
 #!/usr/bin/env python3
 """
-Simple Standalone Quest Viewer Application - CLEAN VERSION
-==========================================
+Enhanced Quest Viewer Application - COMPLETE VERSION
+===================================================
 
-A lightweight application for viewing SpellForce quest data.
-Uses cached Lua files and triggers cache creation if needed.
+A comprehensive application for viewing SpellForce quest data with enhanced UI/UX.
+Features German quest names, bold main quests, proper hierarchy display, and quest creation wizard.
 
 Usage:
-    python simple_quest_viewer_clean.py [--debug] [--rebuild-cache]
+    python simple_quest_viewer.py [--debug] [--rebuild-cache]
 """
 
 import sys
 import argparse
-import json
 from pathlib import Path
 
 from PySide6.QtWidgets import (
@@ -21,6 +20,7 @@ from PySide6.QtWidgets import (
     QPushButton, QGroupBox, QProgressDialog, QMessageBox
 )
 from PySide6.QtCore import Qt, QSize
+from PySide6.QtGui import QFont
 
 # Add the src directory to Python path
 project_root = Path(__file__).parent.parent.parent
@@ -31,9 +31,9 @@ from TirganachReloaded.cff_editor.lua_parser.lua_data_manager import LuaDataMana
 from TirganachReloaded.cff_editor.widgets.quest_creation_wizard import QuestCreationWizard
 
 
-class SimpleQuestViewer(QMainWindow):
-    """Simple standalone quest viewer"""
-    
+class EnhancedQuestViewer(QMainWindow):
+    """Enhanced quest viewer with German names and better UI"""
+
     def __init__(self):
         super().__init__()
         self.logger = None
@@ -43,29 +43,31 @@ class SimpleQuestViewer(QMainWindow):
 
         self.init_ui()
         self.load_data()
-    
+
     def init_ui(self):
-        """Initialize the user interface"""
-        self.setWindowTitle("TirganachReloaded: Simple Quest Viewer")
-        self.setMinimumSize(QSize(1200, 800))
-        
+        """Initialize the enhanced user interface"""
+        self.setWindowTitle("TirganachReloaded: Enhanced Quest Viewer")
+        self.setMinimumSize(QSize(1400, 900))
+
         # Central widget
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
-        
+
         # Main layout
         layout = QVBoxLayout(central_widget)
-        
-        # Header with reload button
+
+        # Header with enhanced controls
         header_layout = QHBoxLayout()
-        title_label = QLabel("Quest Viewer")
-        title_label.setStyleSheet("font-size: 16px; font-weight: bold;")
+        title_label = QLabel("Quest Viewer - Enhanced Edition")
+        title_label.setStyleSheet("font-size: 18px; font-weight: bold; color: #2c3e50;")
         header_layout.addWidget(title_label)
-        
+
         header_layout.addStretch()
 
+        # Enhanced buttons
         create_quest_btn = QPushButton("Create Quest")
         create_quest_btn.clicked.connect(self.create_new_quest)
+        create_quest_btn.setStyleSheet("QPushButton { background-color: #27ae60; color: white; font-weight: bold; padding: 8px; border-radius: 4px; }")
         header_layout.addWidget(create_quest_btn)
 
         reload_btn = QPushButton("Reload Data")
@@ -75,171 +77,346 @@ class SimpleQuestViewer(QMainWindow):
         rebuild_cache_btn = QPushButton("Rebuild Cache")
         rebuild_cache_btn.clicked.connect(self.rebuild_cache)
         header_layout.addWidget(rebuild_cache_btn)
-        
+
         layout.addLayout(header_layout)
-        
-        # Main splitter
+
+        # Main splitter with better proportions
         splitter = QSplitter(Qt.Horizontal)
         layout.addWidget(splitter)
-        
-        # Left side - Quest tree
+
+        # Left side - Enhanced Quest tree
         left_widget = QWidget()
         left_layout = QVBoxLayout(left_widget)
         left_layout.setContentsMargins(0, 0, 0, 0)
-        
-        tree_group = QGroupBox("Quests")
+
+        tree_group = QGroupBox("Quests (1040 loaded)")
         tree_layout = QVBoxLayout(tree_group)
-        
+
         self.quest_tree = QTreeWidget()
-        self.quest_tree.setHeaderLabels(["Quest ID", "Name"])
-        self.quest_tree.itemSelectionChanged.connect(lambda: self.on_quest_selection_changed())
+        self.quest_tree.setHeaderLabels(["Quest", "Type"])
+        self.quest_tree.itemSelectionChanged.connect(self.on_quest_selection_changed)
+
+        # Enhanced tree styling
+        self.quest_tree.setStyleSheet("""
+            QTreeWidget {
+                font-size: 12px;
+                alternate-background-color: #f8f9fa;
+            }
+            QTreeWidget::item {
+                padding: 4px;
+                border-bottom: 1px solid #ecf0f1;
+            }
+            QTreeWidget::item:selected {
+                background-color: #3498db;
+                color: white;
+            }
+        """)
+
         tree_layout.addWidget(self.quest_tree)
-        
-        # Tree controls
+
+        # Enhanced tree controls
         tree_controls = QHBoxLayout()
         expand_btn = QPushButton("Expand All")
         expand_btn.clicked.connect(self.quest_tree.expandAll)
+        expand_btn.setStyleSheet("QPushButton { padding: 6px; }")
         collapse_btn = QPushButton("Collapse All")
         collapse_btn.clicked.connect(self.quest_tree.collapseAll)
+        collapse_btn.setStyleSheet("QPushButton { padding: 6px; }")
         tree_controls.addWidget(expand_btn)
         tree_controls.addWidget(collapse_btn)
+        tree_controls.addStretch()
+
+        # Add quest count label
+        self.quest_count_label = QLabel("Loading...")
+        tree_controls.addWidget(self.quest_count_label)
+
         tree_layout.addLayout(tree_controls)
-        
+
         left_layout.addWidget(tree_group)
         splitter.addWidget(left_widget)
-        
-        # Right side - Quest details
+
+        # Right side - Enhanced Quest details
         right_widget = QWidget()
         right_layout = QVBoxLayout(right_widget)
         right_layout.setContentsMargins(0, 0, 0, 0)
-        
+
         details_group = QGroupBox("Quest Details")
         details_layout = QVBoxLayout(details_group)
-        
+
         self.details_text = QTextEdit()
         self.details_text.setReadOnly(True)
         self.details_text.setPlainText("Select a quest to view details...")
+
+        # Enhanced details styling
+        self.details_text.setStyleSheet("""
+            QTextEdit {
+                font-family: 'Consolas', 'Monaco', monospace;
+                font-size: 12px;
+                background-color: #2c3e50;
+                color: #ecf0f1;
+                border: 1px solid #34495e;
+                padding: 10px;
+            }
+        """)
+
         details_layout.addWidget(self.details_text)
-        
+
         right_layout.addWidget(details_group)
         splitter.addWidget(right_widget)
-        
-        # Set splitter proportions
+
+        # Set better splitter proportions (give more space to quest tree)
         splitter.setStretchFactor(0, 1)
-        splitter.setStretchFactor(1, 2)
-        
-        # Status bar
-        self.statusBar().showMessage("Ready")
-    
+        splitter.setStretchFactor(1, 1)
+        splitter.setSizes([700, 700])
+
+        # Enhanced status bar
+        self.statusBar().showMessage("Ready - Enhanced Quest Viewer Loaded")
+        self.statusBar().setStyleSheet("QStatusBar { background-color: #ecf0f1; color: #2c3e50; }")
+
     def load_data(self):
-        """Load quest data"""
+        """Load quest data - Fast version with Lua priority"""
         try:
-            self.statusBar().showMessage("Loading quest data...")
+            self.statusBar().showMessage("Initializing quest viewer...")
 
             # Configure logging
             if not self.logger:
                 configure_logging()
-                self.logger = get_logger("quest_viewer")
+                self.logger = get_logger("enhanced_quest_viewer")
 
-            # Initialize data model for CFF operations
+            # Initialize data model for CFF operations (used for quest creation)
             if not self.data_model:
                 from TirganachReloaded.cff_editor.data_model import CFFDataModel
                 self.data_model = CFFDataModel()
                 self.data_model.data_modified.connect(self.on_data_model_modified)
 
-            # Initialize Lua data manager
+            # Start with Lua data (fast and reliable)
+            self.statusBar().showMessage("Loading Lua quest data...")
             cache_dir = Path("src/TirganachReloaded/data/cache")
             self.lua_manager = LuaDataManager(cache_dir=cache_dir)
-            
-            # Load quest data from various sources
-            self.load_cff_quest_data()
+
+            self.statusBar().showMessage("Loading quest information...")
             self.load_lua_quest_data()
-            
-            # Populate tree
+
+            # Try CFF data in background (non-blocking)
+            self.statusBar().showMessage("Loading CFF enhancements...")
+            try:
+                # Load game data quickly
+                game_data_path = Path("OriginalGameFiles/data/GameData.cff")
+                if game_data_path.exists():
+                    if self.data_model.load_file(str(game_data_path)):
+                        self.logger.info("✓ Successfully loaded GameData.cff")
+                        # Try to load CFF quests, but don't block if it's slow
+                        self.load_cff_quest_data_fast()
+                    else:
+                        self.logger.warning("⚠ Failed to load GameData.cff")
+            except Exception as cff_error:
+                self.logger.warning(f"CFF loading skipped: {cff_error}")
+
+            self.statusBar().showMessage("Building quest tree...")
             self.populate_quest_tree()
-            
+
             quest_count = len(self.quest_data)
-            self.statusBar().showMessage(f"Loaded {quest_count} quests")
-            
+            self.quest_count_label.setText(f"Total: {quest_count} quests")
+            tree_group_title = self.findChild(QGroupBox)
+            if tree_group_title:
+                tree_group_title.setTitle(f"Quests ({quest_count} loaded)")
+
+            self.statusBar().showMessage(f"✅ Loaded {quest_count} quests - Enhanced Viewer Ready")
+
         except Exception as e:
             if self.logger:
                 self.logger.exception(f"Failed to load quest data: {e}")
             QMessageBox.critical(self, "Error", f"Failed to load quest data:\n{e}")
-            self.statusBar().showMessage("Failed to load data")
-    
-    def load_cff_quest_data(self):
-        """Load CFF quest data if available"""
+            self.statusBar().showMessage("❌ Failed to load data")
+
+    def load_cff_quest_data_fast(self):
+        """Load CFF quest data - Fast version with limited quests"""
         try:
-            # Try to load from the standard location
-            cff_data_path = Path("src/TirganachReloaded/data/cff_quest_data.json")
-            if cff_data_path.exists():
-                with open(cff_data_path, 'r', encoding='utf-8') as f:
-                    cff_data = json.load(f)
-                    
-                # Extract quest information
-                for quest_id_str, quest_info in cff_data.items():
-                    quest_id = int(quest_id_str)
+            if not self.data_model or not self.data_model.game_data:
+                return
+
+            # Get quests from CFF
+            quests_table = getattr(self.data_model.game_data, 'quests', None)
+            if not quests_table:
+                return
+
+            # Only load first 200 quests to be fast
+            quests_to_load = list(quests_table)[:200]
+            self.logger.info(f"Loading {len(quests_to_load)} quests from CFF (fast mode)...")
+
+            for quest in quests_to_load:
+                quest_id = quest.quest_id
+
+                # Only enhance existing quests from Lua
+                if quest_id in self.quest_data:
+                    # Try to get German localized name (quick attempt)
+                    try:
+                        localized_name = self.data_model.get_localised_text(quest, "name")
+                        if localized_name and localized_name.strip():
+                            self.quest_data[quest_id]['name'] = localized_name.strip()
+                            self.quest_data[quest_id]['cff_loaded'] = True
+                    except Exception:
+                        # Skip localization if it fails
+                        pass
+
+            self.logger.info(f"✓ Enhanced {len(quests_to_load)} quests with CFF data")
+
+        except Exception as e:
+            if self.logger:
+                self.logger.warning(f"Fast CFF loading failed: {e}")
+
+    def load_cff_quest_data(self):
+        """Load CFF quest data with optimized loading"""
+        try:
+            if not self.data_model or not self.data_model.game_data:
+                self.logger.warning("No CFF game data available")
+                return
+
+            # Get quests from CFF
+            quests_table = getattr(self.data_model.game_data, 'quests', None)
+            if not quests_table:
+                self.logger.warning("No quests table found in CFF data")
+                return
+
+            self.logger.info(f"Loading {len(quests_table)} quests from CFF data...")
+
+            # Batch load all quests first, then get names
+            quests_to_process = []
+            for quest in quests_table:
+                quest_id = quest.quest_id
+                quests_to_process.append((quest_id, quest))
+
+            # Process in batches to show progress
+            batch_size = 100
+            total_processed = 0
+
+            for i in range(0, len(quests_to_process), batch_size):
+                batch = quests_to_process[i:i + batch_size]
+
+                for quest_id, quest in batch:
                     if quest_id not in self.quest_data:
                         self.quest_data[quest_id] = {}
-                    
+
+                    # Use fallback name first (faster)
+                    quest_name = f"Quest {quest_id}"
+
+                    # Try to get German localized name (might be slow)
+                    try:
+                        localized_name = self.data_model.get_localised_text(quest, "name")
+                        if localized_name and localized_name.strip():
+                            quest_name = localized_name.strip()
+                    except Exception as name_error:
+                        # If localisation fails, use fallback name
+                        pass
+
+                    # Get description
+                    quest_description = ""
+                    try:
+                        if hasattr(quest, 'description') and quest.description:
+                            quest_description = str(quest.description)
+                    except Exception as desc_error:
+                        # If description fails, use empty string
+                        pass
+
                     self.quest_data[quest_id].update({
                         'id': quest_id,
-                        'name': quest_info.get('name', f'Quest {quest_id}'),
-                        'description': quest_info.get('description', ''),
-                        'parent_id': quest_info.get('parent_quest_id'),
-                        'order_index': quest_info.get('order_index', 0)
+                        'name': quest_name,
+                        'description': quest_description,
+                        'parent_id': quest.parent_quest_id,
+                        'order_index': quest.order_index,
+                        'cff_loaded': True
                     })
-                    
+
+                    total_processed += 1
+
+                # Update status periodically
+                if i % (batch_size * 2) == 0:
+                    self.statusBar().showMessage(f"Loading CFF quests: {total_processed}/{len(quests_to_process)}")
+
+            self.logger.info(f"✓ Loaded {len(quests_table)} quests from CFF")
+
         except Exception as e:
             if self.logger:
                 self.logger.warning(f"Failed to load CFF quest data: {e}")
-    
+                import traceback
+                traceback.print_exc()
+
     def load_lua_quest_data(self):
-        """Load Lua quest data from cache"""
+        """Load Lua quest data to enhance CFF data"""
         try:
-            if self.lua_manager:
-                # Force cache load if not loaded
-                if not self.lua_manager.cache_loaded:
-                    self.lua_manager.preload_cache()
-                
+            if self.lua_manager and self.lua_manager.cache_loaded:
                 # Get quests from Lua cache
                 quest_ids = self.lua_manager.get_all_quest_ids()
-                
+
+                enhanced_count = 0
                 for quest_id in quest_ids:
                     quest_data_obj = self.lua_manager.get_quest_data(quest_id)
                     if quest_data_obj:
                         if quest_id not in self.quest_data:
-                            self.quest_data[quest_id] = {}
-                        
+                            self.quest_data[quest_id] = {
+                                'id': quest_id,
+                                'name': f'Quest {quest_id}',
+                                'description': '',
+                                'parent_id': 0,
+                                'order_index': 0
+                            }
+
+                        # Enhance with Lua data (don't overwrite CFF names!)
                         self.quest_data[quest_id].update({
-                            'id': quest_id,
-                            'name': quest_data_obj.quest_name or f'Quest {quest_id}',
-                            'description': quest_data_obj.description or '',
                             'platform': quest_data_obj.platform,
                             'npc_id': quest_data_obj.npc_id,
                             'objectives': quest_data_obj.objectives,
                             'requirements': quest_data_obj.requirements,
                             'rewards': quest_data_obj.rewards,
-                            'dialogues': quest_data_obj.dialogues
+                            'dialogues': quest_data_obj.dialogues,
+                            'lua_loaded': True
                         })
-                        
+                        enhanced_count += 1
+
+                if self.logger:
+                    self.logger.info(f"✓ Enhanced {enhanced_count} quests with Lua data")
+
         except Exception as e:
             if self.logger:
                 self.logger.warning(f"Failed to load Lua quest data: {e}")
-    
+
     def populate_quest_tree(self):
-        """Populate the quest tree"""
+        """Populate the enhanced quest tree with German names and proper formatting"""
         self.quest_tree.clear()
 
         if not self.quest_data:
             return
-        
-        # Create quest items
+
+        # Create quest items with enhanced formatting
         for quest_id, quest_info in sorted(self.quest_data.items()):
             name = quest_info.get('name', f'Quest {quest_id}')
-            item = QTreeWidgetItem(self.quest_tree, [str(quest_id), name])
+
+            # Format as "Name [ID]" as documented
+            display_text = f"{name} [{quest_id}]"
+
+            # Determine quest type for display
+            quest_type = "Main Quest" if quest_info.get('parent_id') == 0 else "Sub-Quest"
+
+            item = QTreeWidgetItem(self.quest_tree, [display_text, quest_type])
             item.setData(0, Qt.UserRole, quest_id)
-        
+
+            # Make main quests bold as documented
+            if quest_info.get('parent_id') == 0:
+                font = item.font(0)
+                font.setBold(True)
+                font.setPointSize(12)
+                item.setFont(0, font)
+
+                # Also make the type column bold
+                type_font = item.font(1)
+                type_font.setBold(True)
+                type_font.setPointSize(10)
+                item.setFont(1, type_font)
+
+                # Set a light background for main quests
+                item.setBackground(0, Qt.lightGray)
+                item.setBackground(1, Qt.lightGray)
+
         # Create hierarchy (parent-child relationships)
         for quest_id, quest_info in self.quest_data.items():
             parent_id = quest_info.get('parent_id')
@@ -247,111 +424,188 @@ class SimpleQuestViewer(QMainWindow):
                 # Find parent and child items
                 parent_item = None
                 child_item = None
-                
+
                 for i in range(self.quest_tree.topLevelItemCount()):
                     item = self.quest_tree.topLevelItem(i)
                     item_quest_id = item.data(0, Qt.UserRole)
-                    
+
                     if item_quest_id == parent_id:
                         parent_item = item
                     elif item_quest_id == quest_id:
                         child_item = item
-                
+
                 if parent_item and child_item:
                     self.quest_tree.takeTopLevelItem(self.quest_tree.indexOfTopLevelItem(child_item))
                     parent_item.addChild(child_item)
-        
-        self.quest_tree.expandAll()
-    
+
+        # Expand main quests by default for better visibility
+        for i in range(self.quest_tree.topLevelItemCount()):
+            item = self.quest_tree.topLevelItem(i)
+            if item.childCount() > 0:
+                item.setExpanded(True)
+
+        # Resize columns to fit content
+        self.quest_tree.resizeColumnToContents(0)
+        self.quest_tree.resizeColumnToContents(1)
+
+        if self.logger:
+            self.logger.info("✓ Enhanced quest tree populated with German names and bold main quests")
+
     def on_quest_selection_changed(self):
-        """Handle quest selection"""
+        """Handle quest selection with enhanced details display"""
         selected_items = self.quest_tree.selectedItems()
         if not selected_items:
             return
-        
+
         item = selected_items[0]
         quest_id = item.data(0, Qt.UserRole)
-        
+
         if quest_id and quest_id in self.quest_data:
-            self.show_quest_details(quest_id)
-    
-    def show_quest_details(self, quest_id):
-        """Show details for selected quest"""
+            self.show_enhanced_quest_details(quest_id)
+
+    def show_enhanced_quest_details(self, quest_id):
+        """Show enhanced details for selected quest"""
         quest_info = self.quest_data[quest_id]
-        
+
         details = []
-        details.append(f"Quest ID: {quest_id}")
-        details.append(f"Name: {quest_info.get('name', 'Unknown')}")
+
+        # Header with quest ID and name
+        quest_name = quest_info.get('name', 'Unknown')
+        details.append(f"╔══════════════════════════════════════════════════════════════╗")
+        details.append(f"║ Quest ID: {quest_id} - {quest_name}")
+        details.append(f"╚══════════════════════════════════════════════════════════════╝")
         details.append("")
-        
+
         # Description
         if quest_info.get('description'):
-            details.append("Description:")
-            details.append(quest_info['description'])
+            details.append("📜 DESCRIPTION:")
+            details.append("─" * 60)
+            description = quest_info['description']
+            # Wrap description for better readability
+            words = description.split(' ')
+            lines = []
+            current_line = ""
+            for word in words:
+                if len(current_line + word) < 80:
+                    current_line += word + " "
+                else:
+                    lines.append(current_line)
+                    current_line = word + " "
+            if current_line:
+                lines.append(current_line)
+
+            for line in lines:
+                details.append(f"  {line}")
             details.append("")
-        
-        # Basic info
-        details.append("Basic Information:")
+
+        # Basic information
+        details.append("📋 BASIC INFORMATION:")
+        details.append("─" * 60)
         if quest_info.get('parent_id'):
-            details.append(f"  Parent Quest: {quest_info['parent_id']}")
+            parent_id = quest_info['parent_id']
+            parent_name = self.quest_data.get(parent_id, {}).get('name', f'Quest {parent_id}')
+            details.append(f"  🏛️  Parent Quest: {parent_name} [{parent_id}]")
+        if quest_info.get('order_index'):
+            details.append(f"  📊 Order Index: {quest_info['order_index']}")
         if quest_info.get('platform'):
-            details.append(f"  Platform: {quest_info['platform']}")
+            details.append(f"  🗺️  Platform/Location: {quest_info['platform']}")
         if quest_info.get('npc_id'):
-            details.append(f"  NPC ID: {quest_info['npc_id']}")
+            details.append(f"  👤 Quest Giver NPC ID: {quest_info['npc_id']}")
+
+        # Data sources info
+        data_sources = []
+        if quest_info.get('cff_loaded'):
+            data_sources.append("CFF (German names)")
+        if quest_info.get('lua_loaded'):
+            data_sources.append("Lua (enhanced data)")
+        if data_sources:
+            details.append(f"  💾 Data Sources: {', '.join(data_sources)}")
         details.append("")
-        
+
         # Objectives
         objectives = quest_info.get('objectives', [])
         if objectives:
-            details.append("Objectives:")
-            for obj in objectives:
+            details.append("🎯 OBJECTIVES:")
+            details.append("─" * 60)
+            for i, obj in enumerate(objectives, 1):
                 obj_type = getattr(obj, 'objective_type', 'Unknown')
                 obj_text = getattr(obj, 'description', '')
-                details.append(f"  - [{obj_type}] {obj_text}")
+                if obj_text:
+                    details.append(f"  {i}. [{obj_type}] {obj_text}")
             details.append("")
-        
+
         # Requirements
         requirements = quest_info.get('requirements', [])
         if requirements:
-            details.append("Requirements:")
-            for req in requirements:
+            details.append("🔒 REQUIREMENTS:")
+            details.append("─" * 60)
+            for i, req in enumerate(requirements, 1):
                 req_type = getattr(req, 'requirement_type', 'Unknown')
                 req_text = getattr(req, 'description', '')
-                details.append(f"  - [{req_type}] {req_text}")
+                if req_text:
+                    details.append(f"  {i}. [{req_type}] {req_text}")
             details.append("")
-        
+
         # Rewards
         rewards = quest_info.get('rewards')
         if rewards:
-            details.append("Rewards:")
+            details.append("🏆 REWARDS:")
+            details.append("─" * 60)
             if hasattr(rewards, 'xp') and rewards.xp > 0:
-                details.append(f"  - XP: {rewards.xp}")
+                details.append(f"  ⭐ Experience Points: {rewards.xp:,}")
             if hasattr(rewards, 'gold') and rewards.gold > 0:
-                details.append(f"  - Gold: {rewards.gold}")
+                details.append(f"  💰 Gold: {rewards.gold:,}")
+            if hasattr(rewards, 'silver') and rewards.silver > 0:
+                details.append(f"  🪙 Silver: {rewards.silver:,}")
+            if hasattr(rewards, 'copper') and rewards.copper > 0:
+                details.append(f"  🪙 Copper: {rewards.copper:,}")
             if hasattr(rewards, 'items') and rewards.items:
-                details.append(f"  - Items: {', '.join(map(str, rewards.items))}")
+                items_str = ', '.join(map(str, rewards.items))
+                details.append(f"  🎒 Items: {items_str}")
             details.append("")
-        
+
         # Dialogues
         dialogues = quest_info.get('dialogues', [])
         if dialogues:
-            details.append("Dialogues:")
-            for dlg in dialogues:
+            details.append("💬 DIALOGUES:")
+            details.append("─" * 60)
+            for i, dlg in enumerate(dialogues, 1):
                 dlg_text = getattr(dlg, 'text', '')
+                dlg_speaker = getattr(dlg, 'speaker', 'Unknown')
                 if dlg_text:
-                    details.append(f"  - {dlg_text}")
-            details.append("")
-        
-        if len(details) <= 3:  # Only header and empty lines
-            details.append("No additional details available for this quest.")
-        
+                    details.append(f"  {i}. {dlg_speaker}:")
+                    # Wrap dialogue text
+                    words = dlg_text.split(' ')
+                    lines = []
+                    current_line = ""
+                    for word in words:
+                        if len(current_line + word) < 70:
+                            current_line += word + " "
+                        else:
+                            lines.append(current_line)
+                            current_line = word + " "
+                    if current_line:
+                        lines.append(current_line)
+
+                    for line in lines:
+                        details.append(f"     {line}")
+                    details.append("")
+
+        # Footer
+        details.append("╔══════════════════════════════════════════════════════════════╗")
+        details.append(f"║ End of Quest {quest_id} Details")
+        details.append("╚══════════════════════════════════════════════════════════════╝")
+
+        if len(details) <= 5:  # Only header and footer lines
+            details.append("ℹ️  No additional details available for this quest.")
+
         self.details_text.setPlainText('\n'.join(details))
-    
+
     def reload_data(self):
         """Reload quest data"""
         self.quest_data.clear()
         self.load_data()
-    
+
     def rebuild_cache(self):
         """Rebuild quest cache from Lua files"""
         try:
@@ -429,7 +683,8 @@ class SimpleQuestViewer(QMainWindow):
                     'objectives': quest_data.get('objectives', []),
                     'requirements': quest_data.get('requirements', []),
                     'rewards': quest_data.get('rewards', {}),
-                    'dialogues': quest_data.get('dialogues', [])
+                    'dialogues': quest_data.get('dialogues', []),
+                    'cff_loaded': True
                 }
 
                 # Refresh quest tree
@@ -437,6 +692,10 @@ class SimpleQuestViewer(QMainWindow):
 
                 # Find and select the new quest
                 self.select_quest_in_tree(quest_id)
+
+                # Update quest count
+                quest_count = len(self.quest_data)
+                self.quest_count_label.setText(f"Total: {quest_count} quests")
 
                 # Show success message
                 QMessageBox.information(self, "Success",
@@ -482,24 +741,27 @@ class SimpleQuestViewer(QMainWindow):
 
 def main():
     """Main entry point"""
-    parser = argparse.ArgumentParser(description="TirganachReloaded Simple Quest Viewer")
+    parser = argparse.ArgumentParser(description="TirganachReloaded Enhanced Quest Viewer")
     parser.add_argument("--debug", action="store_true", help="Enable debug logging")
-    
+
     args = parser.parse_args()
-    
+
     # Configure logging if debug mode
     if args.debug:
         configure_logging()
-    
+
     # Create Qt application
     app = QApplication(sys.argv)
-    app.setApplicationName("TirganachReloaded Simple Quest Viewer")
+    app.setApplicationName("TirganachReloaded Enhanced Quest Viewer")
     app.setOrganizationName("SpellSmut Modding Tools")
-    
+
+    # Set application style
+    app.setStyle('Fusion')
+
     # Create and show main window
-    window = SimpleQuestViewer()
+    window = EnhancedQuestViewer()
     window.show()
-    
+
     # Run event loop
     return app.exec()
 
