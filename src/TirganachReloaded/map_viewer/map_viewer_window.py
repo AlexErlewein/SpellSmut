@@ -75,6 +75,10 @@ class MapViewerWidget(QOpenGLWidget):
         self.base_textures = {}  # Index -> texture data
         self.use_textures = True  # Enable/disable texture rendering
 
+        # Terrain texture mapping system
+        self.terrain_texture_mapper: Optional[TerrainTextureMapper] = None
+        self.texture_map = {}  # Maps tile coordinates to texture assignments
+
         # Input state
         self.last_mouse_pos = QPointF(0, 0)
         self.mouse_dragging = False
@@ -142,6 +146,21 @@ class MapViewerWidget(QOpenGLWidget):
                     self.camera._update_vectors()
 
                     logger.info(f"Camera: {self.camera}")
+
+                # Create terrain texture map after map is loaded
+                if self.terrain_texture_mapper and self.texture_manager:
+                    texture_ids = list(self.base_textures.keys())
+                    if texture_ids:
+                        logger.info("Creating terrain texture map...")
+                        self.texture_map = (
+                            self.terrain_texture_mapper.create_simple_height_based_map(
+                                self.map_loader.heightmap, texture_ids
+                            )
+                        )
+                        logger.info(
+                            f"Created texture map for {len(self.texture_map)} tiles"
+                        )
+
                 self.update()
                 return True
             return False
@@ -154,6 +173,9 @@ class MapViewerWidget(QOpenGLWidget):
         try:
             logger.info("Initializing texture manager...")
             self.texture_manager = SimpleTextureManager()
+
+            # Initialize terrain texture mapper
+            self.terrain_texture_mapper = TerrainTextureMapper()
 
             # Try to load from ExtractedAssets
             assets_path = Path("ExtractedAssets")
@@ -412,7 +434,7 @@ class MapViewerWidget(QOpenGLWidget):
             glDisable(GL_LIGHTING)
 
     def _draw_heightmap(self):
-        """Draw the terrain heightmap"""
+        """Draw the terrain heightmap with proper texture mapping based on height and slope"""
         heightmap = self.map_loader.heightmap
         if not heightmap:
             logger.warning("No heightmap data available")
@@ -454,94 +476,252 @@ class MapViewerWidget(QOpenGLWidget):
         max_h = max(all_heights)
         height_range = max_h - min_h if max_h > min_h else 1.0
 
-        # Enable texturing if available
-        if self.textures_loaded and self.use_textures and len(self.texture_ids) > 0:
-            glEnable(GL_TEXTURE_2D)
-            # Bind first texture (for now, just use texture 0)
-            glBindTexture(GL_TEXTURE_2D, self.texture_ids[0])
-
         # Texture scaling factor (controls texture repeat)
-        texture_scale = 0.1  # Lower value = more repetition
+        texture_scale = 0.05  # Lower value = more repetition for better texture detail
 
         # Draw with reduced resolution for better performance
         step = 2  # Changed from 4 to 2 for better detail
         vertices_drawn = 0
 
-        for y in range(0, height - step, step):
-            glBegin(GL_TRIANGLE_STRIP)
-            for x in range(0, width, step):
-                # Get heights for normal calculation
-                h_center = heightmap.get_height(x, y)
-                h_right = heightmap.get_height(x + step, y)
-                h_down = heightmap.get_height(x, y + step)
+        # Determine if we have texture mapping available
+        has_texture_mapping = bool(
+            self.texture_map
+            and self.textures_loaded
+            and self.use_textures
+            and len(self.texture_ids) > 0
+        )
 
-                # Calculate normal vector (cross product of tangent vectors)
-                # Tangent along x: (step, h_right - h_center, 0)
-                # Tangent along z: (0, h_down - h_center, step)
-                tx = [float(step), h_right - h_center, 0.0]
-                tz = [0.0, h_down - h_center, float(step)]
+        if has_texture_mapping:
+            # Use improved texture mapping approach based on tile coordinates
+            glEnable(GL_TEXTURE_2D)
 
-                # Cross product: tx × tz
-                nx = tx[1] * tz[2] - tx[2] * tz[1]
-                ny = tx[2] * tz[0] - tx[0] * tz[2]
-                nz = tx[0] * tz[1] - tx[1] * tz[0]
+            # Draw terrain in blocks where each block can have different textures
+            block_size = 32  # Size of blocks for texture switching
 
-                # Normalize
-                length = (nx * nx + ny * ny + nz * nz) ** 0.5
-                if length > 0:
-                    nx, ny, nz = nx / length, ny / length, nz / length
-                else:
-                    nx, ny, nz = 0.0, 1.0, 0.0
+            for block_y in range(0, height, block_size):
+                for block_x in range(0, width, block_size):
+                    # Calculate which texture to use for this block based on center position
+                    center_x = block_x + block_size // 2
+                    center_y = block_y + block_size // 2
 
-                # Current row
-                h1 = h_center
-                t1 = (h1 - min_h) / height_range
+                    # Get texture assignment for this block
+                    tile_x = center_x // 4  # Assuming 4-unit tiles from texture mapper
+                    tile_y = center_y // 4
+                    tile_key = (tile_x, tile_y)
 
-                # Color: use white if textured, height-based if not
-                if self.textures_loaded and self.use_textures:
-                    glColor3f(1.0, 1.0, 1.0)  # White to show texture
-                else:
-                    glColor3f(0.2 + t1 * 0.5, 0.4 + t1 * 0.4, 0.1 + t1 * 0.2)
+                    texture_id = 0  # Default texture
+                    if tile_key in self.texture_map:
+                        # Use the texture with the highest weight
+                        texture_assignments = self.texture_map[tile_key]
+                        if texture_assignments:
+                            primary_texture_id = max(
+                                texture_assignments.items(), key=lambda x: x[1]
+                            )[0]
+                            if primary_texture_id < len(self.texture_ids):
+                                texture_id = primary_texture_id
+                    else:
+                        # If no texture assignment, use height-based approach
+                        avg_height = 0
+                        height_count = 0
+                        for by in range(block_y, min(block_y + block_size, height)):
+                            for bx in range(block_x, min(block_x + block_size, width)):
+                                avg_height += heightmap.get_height(bx, by)
+                                height_count += 1
+                        if height_count > 0:
+                            avg_height /= height_count
 
-                # Texture coordinates
-                glTexCoord2f(x * texture_scale, y * texture_scale)
-                glNormal3f(nx, ny, nz)  # Set normal for lighting
-                glVertex3f(float(x), h1, float(y))
-                vertices_drawn += 1
+                        # Map height to texture: low = grass, mid = mix, high = rock
+                        if avg_height < (min_h + height_range * 0.3):
+                            # Low elevation - grass type
+                            texture_id = 0
+                        elif avg_height < (min_h + height_range * 0.7):
+                            # Mid elevation - mixed
+                            texture_id = 1 if len(self.texture_ids) > 1 else 0
+                        else:
+                            # High elevation - rock type
+                            texture_id = 2 if len(self.texture_ids) > 2 else 0
 
-                # Next row vertex
-                h2 = h_down
-                h_right2 = heightmap.get_height(x + step, y + step)
-                h_down2 = heightmap.get_height(x, y + step * 2)
+                    # Bind the texture for this block
+                    glBindTexture(GL_TEXTURE_2D, self.texture_ids[texture_id])
 
-                tx2 = [float(step), h_right2 - h2, 0.0]
-                tz2 = [0.0, h_down2 - h2, float(step)]
+                    # Draw this block
+                    for y in range(
+                        block_y, min(block_y + block_size, height - step), step
+                    ):
+                        glBegin(GL_TRIANGLE_STRIP)
+                        for x in range(block_x, min(block_x + block_size, width), step):
+                            # Get heights for normal calculation
+                            h_center = heightmap.get_height(x, y)
+                            h_right = (
+                                heightmap.get_height(x + step, y)
+                                if x + step < width
+                                else h_center
+                            )
+                            h_down = (
+                                heightmap.get_height(x, y + step)
+                                if y + step < height
+                                else h_center
+                            )
 
-                nx2 = tx2[1] * tz2[2] - tx2[2] * tz2[1]
-                ny2 = tx2[2] * tz2[0] - tx2[0] * tz2[2]
-                nz2 = tx2[0] * tz2[1] - tx2[1] * tz2[0]
+                            # Calculate normal vector (cross product of tangent vectors)
+                            # Tangent along x: (step, h_right - h_center, 0)
+                            # Tangent along z: (0, h_down - h_center, step)
+                            tx = [float(step), h_right - h_center, 0.0]
+                            tz = [0.0, h_down - h_center, float(step)]
 
-                length2 = (nx2 * nx2 + ny2 * ny2 + nz2 * nz2) ** 0.5
-                if length2 > 0:
-                    nx2, ny2, nz2 = nx2 / length2, ny2 / length2, nz2 / length2
-                else:
-                    nx2, ny2, nz2 = 0.0, 1.0, 0.0
+                            # Cross product: tx × tz
+                            nx = tx[1] * tz[2] - tx[2] * tz[1]
+                            ny = tx[2] * tz[0] - tx[0] * tz[2]
+                            nz = tx[0] * tz[1] - tx[1] * tz[0]
 
-                t2 = (h2 - min_h) / height_range
+                            # Normalize
+                            length = (nx * nx + ny * ny + nz * nz) ** 0.5
+                            if length > 0:
+                                nx, ny, nz = nx / length, ny / length, nz / length
+                            else:
+                                nx, ny, nz = 0.0, 1.0, 0.0
 
-                # Color: use white if textured, height-based if not
-                if self.textures_loaded and self.use_textures:
-                    glColor3f(1.0, 1.0, 1.0)  # White to show texture
-                else:
-                    glColor3f(0.2 + t2 * 0.5, 0.4 + t2 * 0.4, 0.1 + t2 * 0.2)
+                            # Current row
+                            h1 = h_center
+                            t1 = (h1 - min_h) / height_range
 
-                # Texture coordinates
-                glTexCoord2f(x * texture_scale, (y + step) * texture_scale)
-                glNormal3f(nx2, ny2, nz2)
-                glVertex3f(float(x), h2, float(y + step))
-                vertices_drawn += 1
+                            # Color: use white to show texture properly
+                            glColor3f(1.0, 1.0, 1.0)
 
-            glEnd()
+                            # Texture coordinates
+                            glTexCoord2f(x * texture_scale, y * texture_scale)
+                            glNormal3f(nx, ny, nz)  # Set normal for lighting
+                            glVertex3f(float(x), h1, float(y))
+                            vertices_drawn += 1
+
+                            # Next row vertex
+                            if y + step < height:
+                                h2 = h_down
+                                h_right2 = (
+                                    heightmap.get_height(x + step, y + step)
+                                    if x + step < width and y + step < height
+                                    else h_center
+                                )
+                                h_down2 = (
+                                    heightmap.get_height(x, y + step * 2)
+                                    if y + step * 2 < height
+                                    else h2
+                                )
+
+                                tx2 = [float(step), h_right2 - h2, 0.0]
+                                tz2 = [0.0, h_down2 - h2, float(step)]
+
+                                nx2 = tx2[1] * tz2[2] - tx2[2] * tz2[1]
+                                ny2 = tx2[2] * tz2[0] - tx2[0] * tz2[2]
+                                nz2 = tx2[0] * tz2[1] - tx2[1] * tz2[0]
+
+                                length2 = (nx2 * nx2 + ny2 * ny2 + nz2 * nz2) ** 0.5
+                                if length2 > 0:
+                                    nx2, ny2, nz2 = (
+                                        nx2 / length2,
+                                        ny2 / length2,
+                                        nz2 / length2,
+                                    )
+                                else:
+                                    nx2, ny2, nz2 = 0.0, 1.0, 0.0
+
+                                t2 = (h2 - min_h) / height_range
+
+                                # Color: use white to show texture properly
+                                glColor3f(1.0, 1.0, 1.0)
+
+                                # Texture coordinates
+                                glTexCoord2f(
+                                    x * texture_scale, (y + step) * texture_scale
+                                )
+                                glNormal3f(nx2, ny2, nz2)
+                                glVertex3f(float(x), h2, float(y + step))
+                                vertices_drawn += 1
+
+                        glEnd()
+        else:
+            # Fallback: Draw with single texture as before if no texture mapping is available
+            if self.textures_loaded and self.use_textures and len(self.texture_ids) > 0:
+                glEnable(GL_TEXTURE_2D)
+                glBindTexture(
+                    GL_TEXTURE_2D, self.texture_ids[0] if self.texture_ids else 0
+                )
+
+            for y in range(0, height - step, step):
+                glBegin(GL_TRIANGLE_STRIP)
+                for x in range(0, width, step):
+                    # Get heights for normal calculation
+                    h_center = heightmap.get_height(x, y)
+                    h_right = heightmap.get_height(x + step, y)
+                    h_down = heightmap.get_height(x, y + step)
+
+                    # Calculate normal vector (cross product of tangent vectors)
+                    # Tangent along x: (step, h_right - h_center, 0)
+                    # Tangent along z: (0, h_down - h_center, step)
+                    tx = [float(step), h_right - h_center, 0.0]
+                    tz = [0.0, h_down - h_center, float(step)]
+
+                    # Cross product: tx × tz
+                    nx = tx[1] * tz[2] - tx[2] * tz[1]
+                    ny = tx[2] * tz[0] - tx[0] * tz[2]
+                    nz = tx[0] * tz[1] - tx[1] * tz[0]
+
+                    # Normalize
+                    length = (nx * nx + ny * ny + nz * nz) ** 0.5
+                    if length > 0:
+                        nx, ny, nz = nx / length, ny / length, nz / length
+                    else:
+                        nx, ny, nz = 0.0, 1.0, 0.0
+
+                    # Current row
+                    h1 = h_center
+                    t1 = (h1 - min_h) / height_range
+
+                    # Color: use white if textured, height-based if not
+                    if self.textures_loaded and self.use_textures:
+                        glColor3f(1.0, 1.0, 1.0)  # White to show texture
+                    else:
+                        glColor3f(0.2 + t1 * 0.5, 0.4 + t1 * 0.4, 0.1 + t1 * 0.2)
+
+                    # Texture coordinates
+                    glTexCoord2f(x * texture_scale, y * texture_scale)
+                    glNormal3f(nx, ny, nz)  # Set normal for lighting
+                    glVertex3f(float(x), h1, float(y))
+                    vertices_drawn += 1
+
+                    # Next row vertex
+                    h2 = h_down
+                    h_right2 = heightmap.get_height(x + step, y + step)
+                    h_down2 = heightmap.get_height(x, y + step * 2)
+
+                    tx2 = [float(step), h_right2 - h2, 0.0]
+                    tz2 = [0.0, h_down2 - h2, float(step)]
+
+                    nx2 = tx2[1] * tz2[2] - tx2[2] * tz2[1]
+                    ny2 = tx2[2] * tz2[0] - tx2[0] * tz2[2]
+                    nz2 = tx2[0] * tz2[1] - tx2[1] * tz2[0]
+
+                    length2 = (nx2 * nx2 + ny2 * ny2 + nz2 * nz2) ** 0.5
+                    if length2 > 0:
+                        nx2, ny2, nz2 = nx2 / length2, ny2 / length2, nz2 / length2
+                    else:
+                        nx2, ny2, nz2 = 0.0, 1.0, 0.0
+
+                    t2 = (h2 - min_h) / height_range
+
+                    # Color: use white if textured, height-based if not
+                    if self.textures_loaded and self.use_textures:
+                        glColor3f(1.0, 1.0, 1.0)  # White to show texture
+                    else:
+                        glColor3f(0.2 + t2 * 0.5, 0.4 + t2 * 0.4, 0.1 + t2 * 0.2)
+
+                    # Texture coordinates
+                    glTexCoord2f(x * texture_scale, (y + step) * texture_scale)
+                    glNormal3f(nx2, ny2, nz2)
+                    glVertex3f(float(x), h2, float(y + step))
+                    vertices_drawn += 1
+
+                glEnd()
 
         # Disable lighting and texturing after terrain
         glDisable(GL_LIGHTING)
@@ -551,7 +731,7 @@ class MapViewerWidget(QOpenGLWidget):
 
         if self.frame_count % 60 == 0:
             logger.debug(
-                f"Drew {vertices_drawn} vertices (textures: {self.textures_loaded})"
+                f"Drew {vertices_drawn} vertices (textures: {self.textures_loaded}, texture_map: {bool(self.texture_map)})"
             )
 
     def _draw_grid(self):
