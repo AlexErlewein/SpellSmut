@@ -18,7 +18,7 @@
 | **NPC Creator** | ✅ COMPLETE | Phase 7/7 | In production use |
 | **ID Manager** | ✅ COMPLETE | Shared System | Active & working |
 | **Asset Extraction**| ✅ COMPLETE | Phase 3/3 | Maintenance only |
-| **Map Viewer** | 🔄 IN PROGRESS | 43% (Phase 2/5) | Multi-layer texture blending |
+| **Map Viewer** | 🔄 IN PROGRESS | 45% (Phase 2/5) | Multi-layer texture blending |
 | **Icon System** | ⚠️ MAPPING REQ. | 85% | **Resolve Handle-to-Atlas Mapping** |
 | **Documentation** | ✅ COMPLETE | Comprehensive | Regular updates |
 
@@ -28,10 +28,11 @@
 
 ### 🔄 Map Viewer: Phase 2 - Visual Fidelity (HIGH PRIORITY)
 
-**Status**: 75% Complete - Texture rendering and lighting systems implemented!
+**Status**: 80% Complete - Texture rendering, lighting, and sample viewer systems implemented!
 **Current Phase**: Phase 2 of 5 (Visual Fidelity)
 
 #### Recently Completed
+- ✅ **Texture Sample Viewer Enhancement**: Compact 48x48 thumbnails showing all 32 textures
 - ✅ **Texture Rendering System**: Full DDS texture loading with OpenGL (1,185 lines of code)
 - ✅ **DDS Loader**: Loads all 119 terrain textures from ExtractedAssets
 - ✅ **Simple Texture Manager**: Caching system with 494 DDS files discovered

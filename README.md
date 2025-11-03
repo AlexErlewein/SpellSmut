@@ -24,6 +24,7 @@ Comprehensive visual tools for creating mod content:
 - **Weapon Creator** - 7-phase "Weapon Forge" with edit-existing feature (719 weapons to modify)
 - **Armor Creator** - 7-phase "Armor Forge" for custom armor pieces with stat bonuses
 - **NPC Creator** - 7-phase "NPC Workshop" system for custom characters
+- **Map Viewer** - 3D terrain viewer with texture rendering and lighting
 - **Universal Savefile System** - ModSave Framework with custom file extensions
 - **Utility Tools Suite** - Asset management, testing, and automation utilities
 
@@ -55,6 +56,7 @@ SpellSmut/
 │       ├── WEAPON_CREATION_PLAN.md  # Weapon Creator system plan
 │       ├── ARMOR_CREATION_PLAN.md   # Armor Creator system plan
 │       ├── NPC_CREATION_PLAN.md     # NPC Creator system plan
+│       ├── MAP_VIEWER_STATUS.md     # Map Viewer development status
 │       ├── SAVEFILE_SYSTEM.md       # Universal Savefile system plan
 │       ├── UTILITY_TOOLS.md         # Utility tools suite plan
 │       └── ID_MANAGEMENT_SYSTEM.md  # ID Management system plan

@@ -14,7 +14,7 @@
 |--------|-------|--------|
 | **Overall Progress** | 43% | 🔄 In Progress |
 | **Phase 1 (Core)** | 100% | ✅ Complete |
-| **Phase 2 (Textures)** | 75% | 🔄 In Progress |
+| **Phase 2 (Textures)** | 80% | 🔄 In Progress |
 | **Phase 3 (Assets)** | 0% | 📋 Planned |
 | **Phase 4 (Editing)** | 0% | 📋 Planned |
 | **Phase 5 (Polish)** | 0% | 📋 Planned |
@@ -35,6 +35,7 @@
 
 ### Recent Completions (Last 7 Days)
 
+- ✅ **Texture Sample Viewer Enhancement** - Compact 48x48 thumbnails showing all 32 textures (2024-11-03)
 - ✅ **OpenGL Texture Rendering** - Full texture display with glTexImage2D (2024-11-03)
 - ✅ **Texture Coordinates** - World-space UV generation for terrain mesh (2024-11-03)
 - ✅ **Texture Toggle System** - Press 'T' to toggle between textures and height colors (2024-11-03)
@@ -135,7 +136,7 @@
 
 ## Phase 2: Visual Fidelity 🔄 IN PROGRESS
 
-**Status**: 50% Complete  
+**Status**: 80% Complete  
 **Started**: 2024-11-04  
 **Target**: End of November 2024  
 **Priority**: High
@@ -630,8 +631,9 @@
 - ✅ **Created dds_loader.py** - ~200 lines, handles BC1/BC3 compression
 - ✅ **Created simple_texture_manager.py** - ~300 lines, manages all 119 textures
 - ✅ **Updated map_viewer_window.py** - ~150 lines of texture rendering code
-- 📊 **Phase 2 progress: 50% → 75%**
-- 📊 **Overall progress: 35% → 43%**
+- ✅ **Texture Sample Viewer Enhancement** - Compact 48x48 thumbnails, all 32 textures visible
+- 📊 **Phase 2 progress: 50% → 80%**
+- 📊 **Overall progress: 35% → 45%**
 
 ### 2024-11-03 (Morning)
 - ✅ Completed Phase 1

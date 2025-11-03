@@ -13,7 +13,7 @@ from typing import Optional
 import numpy as np
 from loguru import logger
 from PySide6.QtCore import QPointF, Qt, QTimer
-from PySide6.QtGui import QKeyEvent, QMouseEvent, QSurfaceFormat, QWheelEvent
+from PySide6.QtGui import QKeyEvent, QMouseEvent, QSurfaceFormat, QWheelEvent, QPixmap, QImage
 from PySide6.QtOpenGLWidgets import QOpenGLWidget
 from PySide6.QtWidgets import (
     QFileDialog,
@@ -25,6 +25,7 @@ from PySide6.QtWidgets import (
     QStatusBar,
     QVBoxLayout,
     QWidget,
+    QScrollArea,
 )
 
 try:
@@ -237,6 +238,15 @@ class MapViewerWidget(QOpenGLWidget):
             else:
                 logger.info("OpenGL not ready yet, textures will be uploaded when OpenGL initializes")
                 
+            # Update texture preview and samples immediately
+            logger.info("About to call _update_texture_preview...")
+            self._update_texture_preview()
+            logger.info("Finished calling _update_texture_preview")
+            
+            # Update texture samples in window (UI belongs to window)
+            if hasattr(self, 'parent') and hasattr(self.parent(), 'update_texture_samples'):
+                self.parent().update_texture_samples()
+                
             # Initialize multi-layer texture blending if we have map data
             if self.multi_layer_system and self.map_loader and hasattr(self.map_loader, 'terrain_textures'):
                 if self.map_loader.terrain_textures:
@@ -397,24 +407,23 @@ class MapViewerWidget(QOpenGLWidget):
             self.textures_loaded = False
 
     def _update_texture_preview(self):
-        """Update the texture preview label with loaded texture info"""
+        """Update texture preview information"""
+        logger.info("Updating texture preview...")
         if self.texture_preview_label is not None:
-            if self.base_textures and len(self.base_textures) > 0:
-                texture_info = f"Loaded: {len(self.base_textures)} textures\n"
-                texture_info += f"OpenGL: {'✅' if self.textures_loaded else '❌'}\n\n"
-                
-                # Show first few textures
-                sorted_textures = sorted(self.base_textures.items())[:8]
-                for tid, texture_data in sorted_textures:
-                    shape = texture_data.shape if hasattr(texture_data, 'shape') else 'Unknown'
-                    texture_info += f"• {tid:03d}: {shape}\n"
-                
-                if len(self.base_textures) > 8:
-                    texture_info += f"... and {len(self.base_textures) - 8} more"
-                
+            if self.textures_loaded and len(self.texture_ids) > 0:
+                texture_info = (
+                    f"✅ Loaded {len(self.texture_ids)} textures\n"
+                    f"OpenGL IDs: {self.texture_ids[:5]}{'...' if len(self.texture_ids) > 5 else ''}\n"
+                    f"Texture mapping: {len(self.texture_id_map)} IDs mapped"
+                )
                 self.texture_preview_label.setText(texture_info)
             else:
                 self.texture_preview_label.setText("No textures loaded")
+                
+        # Update texture samples viewer
+        self._update_texture_samples()
+        
+    
 
     def initializeGL(self):
         """Initialize OpenGL context"""
@@ -2040,6 +2049,64 @@ class MapViewerWindow(QMainWindow):
         self.texture_preview_label.setWordWrap(True)
         self.texture_preview_label.setStyleSheet("font-size: 10px; color: #aaa;")
         texture_layout.addWidget(self.texture_preview_label)
+        
+        # Add texture samples viewer
+        
+        texture_samples_label = QLabel("<b>📋 Texture Samples</b>")
+        texture_samples_label.setStyleSheet("font-size: 12px; margin-top: 10px;")
+        texture_layout.addWidget(texture_samples_label)
+        
+        # Create scrollable area for texture thumbnails
+        self.texture_scroll_area = QScrollArea()
+        self.texture_scroll_area.setWidgetResizable(True)
+        self.texture_scroll_area.setMaximumHeight(400)  # Increased height for larger thumbnails
+        self.texture_scroll_area.setStyleSheet("""
+            QScrollArea {
+                border: 1px solid #444;
+                border-radius: 4px;
+                background-color: #2a2a2a;
+            }
+            QScrollBar:vertical {
+                background-color: #2a2a2a;
+                width: 12px;
+                border-radius: 6px;
+            }
+            QScrollBar::handle:vertical {
+                background-color: #555;
+                border-radius: 6px;
+                min-height: 20px;
+            }
+        """)
+        
+        self.texture_samples_widget = QWidget()
+        self.texture_samples_layout = QVBoxLayout(self.texture_samples_widget)
+        self.texture_samples_layout.setSpacing(2)
+        self.texture_samples_layout.setContentsMargins(5, 5, 5, 5)
+        
+        self.texture_scroll_area.setWidget(self.texture_samples_widget)
+        texture_layout.addWidget(self.texture_scroll_area)
+        
+        # Add refresh button for texture samples
+        refresh_textures_btn = QPushButton("🔄 Refresh Samples")
+        refresh_textures_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #444;
+                border: 1px solid #666;
+                border-radius: 4px;
+                padding: 4px 8px;
+                font-size: 10px;
+                color: #ccc;
+            }
+            QPushButton:hover {
+                background-color: #555;
+                border-color: #777;
+            }
+            QPushButton:pressed {
+                background-color: #333;
+            }
+        """)
+        refresh_textures_btn.clicked.connect(self.update_texture_samples)
+        texture_layout.addWidget(refresh_textures_btn)
 
         controls_layout.addWidget(texture_group)
         controls_layout.addSpacing(10)
@@ -2253,8 +2320,93 @@ class MapViewerWindow(QMainWindow):
             super().keyPressEvent(event)
 
 
+
+
+    def update_texture_samples(self):
+        """Update texture samples viewer with thumbnails"""
+        logger.info("Updating texture samples viewer...")
+        if not hasattr(self, 'texture_samples_layout'):
+            logger.warning("texture_samples_layout not found in window")
+            return
+            
+        # Clear existing samples
+        while self.texture_samples_layout.count():
+            child = self.texture_samples_layout.takeAt(0)
+            if child.widget():
+                child.widget().deleteLater()
+                
+        # Get textures from viewer
+        if not hasattr(self.viewer, 'base_textures') or not self.viewer.base_textures:
+            no_textures_label = QLabel("No textures loaded")
+            no_textures_label.setStyleSheet("color: #888; font-style: italic;")
+            self.texture_samples_layout.addWidget(no_textures_label)
+            return
+            
+        base_textures = self.viewer.base_textures
+        samples_shown = 0
+        
+        # Show all textures - no limit for complete viewing
+        for texture_mgr_id, texture_data in list(base_textures.items()):
+            # Convert numpy array to QImage
+            try:
+                height, width = texture_data.shape[:2]
+                
+                # Create QImage from numpy array (RGBA format)
+                if len(texture_data.shape) == 3:
+                    # RGB format
+                    bytes_per_line = 3 * width
+                    q_image = QImage(texture_data.tobytes(), width, height, QImage.Format.Format_RGB888)
+                else:
+                    # RGBA format
+                    bytes_per_line = 4 * width
+                    q_image = QImage(texture_data.tobytes(), width, height, QImage.Format.Format_RGBA8888)
+                
+                # Scale to thumbnail size (smaller for compact display)
+                thumbnail = q_image.scaled(48, 48, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+                
+                # Create label with thumbnail
+                thumbnail_label = QLabel()
+                thumbnail_label.setPixmap(QPixmap.fromImage(thumbnail))
+                thumbnail_label.setStyleSheet("""
+                    QLabel {
+                        border: 1px solid #555;
+                        border-radius: 4px;
+                        padding: 2px;
+                        background-color: #333;
+                    }
+                    QLabel:hover {
+                        border-color: #777;
+                        background-color: #444;
+                    }
+                """)
+                thumbnail_label.setToolTip(f"Texture ID: {texture_mgr_id}\nSize: {width}x{height}")
+                
+                self.texture_samples_layout.addWidget(thumbnail_label)
+                samples_shown += 1
+                
+            except Exception as e:
+                logger.warning(f"Failed to create thumbnail for texture {texture_mgr_id}: {e}")
+                # Add fallback label
+                fallback_label = QLabel(f"ID: {texture_mgr_id}")
+                fallback_label.setStyleSheet("""
+                    QLabel {
+                        border: 1px solid #555;
+                        border-radius: 4px;
+                        padding: 8px;
+                        background-color: #333;
+                        color: #aaa;
+                        font-size: 10px;
+                    }
+                """)
+                self.texture_samples_layout.addWidget(fallback_label)
+                samples_shown += 1
+                
+        
+            
+        logger.info(f"Updated texture samples viewer: {samples_shown} thumbnails shown")
+
 def main():
-    """Run the map viewer application"""
+    """Run map viewer application"""
     from PySide6.QtWidgets import QApplication
 
     app = QApplication(sys.argv)
