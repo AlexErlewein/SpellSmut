@@ -1928,4 +1928,269 @@ class CFFDataModel(QObject):
 
         return None
 
+    # Quest Creation Methods
+
+    def generate_next_text_id(self, start_range: int = 50000, end_range: int = 59999) -> int:
+        """
+        Generate next available text ID for localisation table.
+
+        Args:
+            start_range: Start of custom text ID range
+            end_range: End of custom text ID range
+
+        Returns:
+            Next available text ID
+        """
+        if not self.game_data:
+            return start_range
+
+        try:
+            localisation = self.game_data.get_table('localisation')
+            if not localisation:
+                return start_range
+
+            # Find existing text IDs in our custom range
+            used_ids = set()
+            for entry in localisation:
+                text_id = getattr(entry, 'text_id', 0)
+                if start_range <= text_id <= end_range:
+                    used_ids.add(text_id)
+
+            # Find first unused ID
+            for text_id in range(start_range, end_range + 1):
+                if text_id not in used_ids:
+                    return text_id
+
+            # If all IDs are used, return the end of range (will cause error)
+            return end_range
+        except Exception as e:
+            print(f"Error generating text ID: {e}")
+            return start_range
+
+    def generate_next_description_id(self, start_range: int = 60000, end_range: int = 69999) -> int:
+        """
+        Generate next available description ID for advanced_descriptions table.
+
+        Args:
+            start_range: Start of custom description ID range
+            end_range: End of custom description ID range
+
+        Returns:
+            Next available description ID
+        """
+        if not self.game_data:
+            return start_range
+
+        try:
+            descriptions = self.game_data.get_table('advanced_descriptions')
+            if not descriptions:
+                return start_range
+
+            # Find existing description IDs in our custom range
+            used_ids = set()
+            for entry in descriptions:
+                desc_id = getattr(entry, 'description_id', 0)
+                if start_range <= desc_id <= end_range:
+                    used_ids.add(desc_id)
+
+            # Find first unused ID
+            for desc_id in range(start_range, end_range + 1):
+                if desc_id not in used_ids:
+                    return desc_id
+
+            # If all IDs are used, return the end of range (will cause error)
+            return end_range
+        except Exception as e:
+            print(f"Error generating description ID: {e}")
+            return start_range
+
+    def add_to_localisation(self, text_id: int, text: str, language: str = 'GERMAN') -> bool:
+        """
+        Add a new entry to the localisation table.
+
+        Args:
+            text_id: Unique text identifier
+            text: The localized text
+            language: Language code (GERMAN, ENGLISH, etc.)
+
+        Returns:
+            True if successful, False otherwise
+        """
+        if not self.game_data:
+            return False
+
+        try:
+            from TirganachReloaded.tirganach.entities import Localisation, Language
+
+            # Get localisation table
+            localisation_table = self.game_data.get_table('localisation')
+            if localisation_table is None:
+                print("Localisation table not found")
+                return False
+
+            # Create new localisation entry
+            new_entry = Localisation()
+            new_entry.text_id = text_id
+            new_entry.language = Language[language]
+            new_entry.text = text
+
+            # Add to table
+            localisation_table.append(new_entry)
+
+            # Mark as modified
+            self.modified = True
+            self.data_modified.emit()
+
+            # Invalidate localisation index cache
+            self.invalidate_localisation_index()
+
+            return True
+        except Exception as e:
+            print(f"Error adding to localisation: {e}")
+            return False
+
+    def add_to_advanced_descriptions(self, description_id: int, text: str, text2: str = "") -> bool:
+        """
+        Add a new entry to the advanced_descriptions table.
+
+        Args:
+            description_id: Unique description identifier
+            text: The main description text
+            text2: Optional secondary text
+
+        Returns:
+            True if successful, False otherwise
+        """
+        if not self.game_data:
+            return False
+
+        try:
+            from TirganachReloaded.tirganach.entities import AdvancedDescription
+
+            # Get advanced_descriptions table
+            descriptions_table = self.game_data.get_table('advanced_descriptions')
+            if descriptions_table is None:
+                print("Advanced descriptions table not found")
+                return False
+
+            # Create new description entry
+            new_entry = AdvancedDescription()
+            new_entry.description_id = description_id
+            new_entry.text = text
+            new_entry.text2 = text2 if text2 else ""
+
+            # Add to table
+            descriptions_table.append(new_entry)
+
+            # Mark as modified
+            self.modified = True
+            self.data_modified.emit()
+
+            return True
+        except Exception as e:
+            print(f"Error adding to advanced descriptions: {e}")
+            return False
+
+    def create_quest(self, quest_data: dict) -> Optional['Quest']:
+        """
+        Create a new quest with all necessary data.
+
+        Args:
+            quest_data: Dictionary containing quest information:
+                - quest_id: Quest identifier (required)
+                - name: Quest name (required)
+                - description: Quest description (optional)
+                - parent_id: Parent quest ID (0 for main quests)
+                - order_index: Display order for sub-quests
+
+        Returns:
+            Created Quest object or None if failed
+        """
+        if not self.game_data:
+            print("No game data loaded")
+            return None
+
+        try:
+            from TirganachReloaded.tirganach.entities import Quest
+
+            # Generate IDs for name and description
+            name_id = self.generate_next_text_id()
+            description_id = self.generate_next_description_id()
+
+            # Add name to localisation table
+            if not self.add_to_localisation(name_id, quest_data['name'], 'GERMAN'):
+                print("Failed to add quest name to localisation")
+                return None
+
+            # Add description to advanced_descriptions table
+            description_text = quest_data.get('description', '')
+            if description_text:
+                if not self.add_to_advanced_descriptions(description_id, description_text):
+                    print("Failed to add quest description")
+                    return None
+
+            # Create quest entity
+            new_quest = Quest()
+            new_quest.quest_id = quest_data['quest_id']
+            new_quest.parent_quest_id = quest_data.get('parent_id', 0)
+            new_quest.name_id = name_id
+            new_quest.description_id = description_id
+            new_quest.order_index = quest_data.get('order_index', 0)
+
+            # Get quests table
+            quests_table = self.game_data.get_table('quests')
+            if quests_table is None:
+                print("Quests table not found")
+                return None
+
+            # Add to table
+            quests_table.append(new_quest)
+
+            # Mark as modified
+            self.modified = True
+            self.data_modified.emit()
+
+            return new_quest
+        except Exception as e:
+            print(f"Error creating quest: {e}")
+            import traceback
+            traceback.print_exc()
+            return None
+
+    def delete_quest(self, quest_id: int) -> bool:
+        """
+        Delete a quest and optionally its sub-quests.
+
+        Args:
+            quest_id: ID of quest to delete
+
+        Returns:
+            True if successful, False otherwise
+        """
+        if not self.game_data:
+            return False
+
+        try:
+            quests_table = self.game_data.get_table('quests')
+            if not quests_table:
+                return False
+
+            # Find and remove the quest
+            quest_to_remove = None
+            for quest in quests_table:
+                if getattr(quest, 'quest_id', None) == quest_id:
+                    quest_to_remove = quest
+                    break
+
+            if quest_to_remove:
+                quests_table.remove(quest_to_remove)
+                self.modified = True
+                self.data_modified.emit()
+                return True
+
+            return False
+        except Exception as e:
+            print(f"Error deleting quest: {e}")
+            return False
+
     
