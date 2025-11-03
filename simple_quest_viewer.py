@@ -18,7 +18,8 @@ from pathlib import Path
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
     QSplitter, QTreeWidget, QTreeWidgetItem, QTextEdit, QLabel,
-    QPushButton, QGroupBox, QProgressDialog, QMessageBox, QLineEdit, QComboBox
+    QPushButton, QGroupBox, QProgressDialog, QMessageBox, QLineEdit, QComboBox,
+    QFileDialog
 )
 from PySide6.QtCore import Qt, QSize
 
@@ -85,6 +86,7 @@ class SimpleQuestViewer(QMainWindow):
         self.lua_manager = None
         self.data_model = None
         self.quest_data = {}
+        self.current_quest_id = None
 
         self.init_ui()
         self.load_data()
@@ -109,10 +111,16 @@ class SimpleQuestViewer(QMainWindow):
         
         header_layout.addStretch()
         
+        export_btn = QPushButton("Export Quest")
+        export_btn.clicked.connect(self.export_quest)
+        export_btn.setEnabled(False)  # Disabled until quest is selected
+        self.export_btn = export_btn
+        header_layout.addWidget(export_btn)
+
         reload_btn = QPushButton("Reload Data")
         reload_btn.clicked.connect(self.reload_data)
         header_layout.addWidget(reload_btn)
-        
+
         rebuild_cache_btn = QPushButton("Rebuild Cache")
         rebuild_cache_btn.clicked.connect(self.rebuild_cache)
         header_layout.addWidget(rebuild_cache_btn)
@@ -130,7 +138,47 @@ class SimpleQuestViewer(QMainWindow):
         
         tree_group = QGroupBox("Quests")
         tree_layout = QVBoxLayout(tree_group)
-        
+
+        # Search bar
+        search_layout = QHBoxLayout()
+        search_label = QLabel("Search:")
+        self.search_input = QLineEdit()
+        self.search_input.setPlaceholderText("Search by ID, name, or description...")
+        self.search_input.textChanged.connect(self.on_search_changed)
+        search_layout.addWidget(search_label)
+        search_layout.addWidget(self.search_input)
+        tree_layout.addLayout(search_layout)
+
+        # Filter dropdowns
+        filter_layout = QHBoxLayout()
+
+        # Platform/Location filter
+        platform_label = QLabel("Location:")
+        self.platform_filter = QComboBox()
+        self.platform_filter.addItem("All Locations", None)
+        for pid in sorted(PLATFORM_NAMES.keys(), key=lambda x: int(x[1:]) if x[1:].isdigit() else 999):
+            name = PLATFORM_NAMES[pid]
+            self.platform_filter.addItem(f"{name} ({pid})", pid)
+        self.platform_filter.currentIndexChanged.connect(self.on_filter_changed)
+        filter_layout.addWidget(platform_label)
+        filter_layout.addWidget(self.platform_filter)
+
+        # Quest Giver filter (will be populated after data loads)
+        giver_label = QLabel("Quest Giver:")
+        self.giver_filter = QComboBox()
+        self.giver_filter.addItem("All Quest Givers", None)
+        self.giver_filter.currentIndexChanged.connect(self.on_filter_changed)
+        filter_layout.addWidget(giver_label)
+        filter_layout.addWidget(self.giver_filter)
+
+        filter_layout.addStretch()
+        tree_layout.addLayout(filter_layout)
+
+        # Search results label
+        self.search_results_label = QLabel("")
+        self.search_results_label.setStyleSheet("color: #7f8c8d; font-style: italic;")
+        tree_layout.addWidget(self.search_results_label)
+
         self.quest_tree = QTreeWidget()
         self.quest_tree.setHeaderLabels(["Quest Name"])
         self.quest_tree.setColumnWidth(0, 400)  # Make name column wider
@@ -209,6 +257,9 @@ class SimpleQuestViewer(QMainWindow):
 
             # Populate tree
             self.populate_quest_tree()
+
+            # Populate quest giver filter dropdown
+            self.populate_quest_giver_filter()
 
             quest_count = len(self.quest_data)
             self.statusBar().showMessage(f"Loaded {quest_count} quests")
@@ -340,7 +391,7 @@ class SimpleQuestViewer(QMainWindow):
 
             # Debug: Log first 5 items
             if items_created <= 5 and self.logger:
-                self.logger.debug(f"Created tree item: {display_text}")
+                self.logger.debug(f"Created tree item: ID={quest_id}, Name={name}")
         
         # Create hierarchy (parent-child relationships)
         for quest_id, quest_info in self.quest_data.items():
@@ -376,13 +427,20 @@ class SimpleQuestViewer(QMainWindow):
         """Handle quest selection"""
         selected_items = self.quest_tree.selectedItems()
         if not selected_items:
+            self.export_btn.setEnabled(False)
+            self.current_quest_id = None
             return
-        
+
         item = selected_items[0]
         quest_id = item.data(0, Qt.UserRole)
-        
+
         if quest_id and quest_id in self.quest_data:
+            self.current_quest_id = quest_id
+            self.export_btn.setEnabled(True)
             self.show_quest_details(quest_id)
+        else:
+            self.current_quest_id = None
+            self.export_btn.setEnabled(False)
     
     def show_quest_details(self, quest_id):
         """Show details for selected quest with enhanced formatting"""
@@ -497,7 +555,98 @@ class SimpleQuestViewer(QMainWindow):
         html += "</body></html>"
 
         self.details_text.setHtml(html)
-    
+
+    def on_search_changed(self, text):
+        """Handle search text changes - filter tree items"""
+        search_text = text.lower().strip()
+        platform_filter = self.platform_filter.currentData()
+        giver_filter = self.giver_filter.currentData()
+
+        visible_count = 0
+
+        # Iterate through all top-level items
+        for i in range(self.quest_tree.topLevelItemCount()):
+            item = self.quest_tree.topLevelItem(i)
+            visible = self.filter_tree_item(item, search_text, platform_filter, giver_filter)
+            if visible:
+                visible_count += 1
+
+        # Update search results label
+        if search_text or platform_filter or giver_filter:
+            self.search_results_label.setText(f"Showing {visible_count} quest(s)")
+        else:
+            self.search_results_label.setText("")
+
+    def on_filter_changed(self):
+        """Handle filter dropdown changes"""
+        # Trigger the same filtering logic as search
+        self.on_search_changed(self.search_input.text())
+
+    def filter_tree_item(self, item, search_text, platform_filter, giver_filter):
+        """
+        Recursively filter tree items based on search text and filters.
+        Returns True if item or any child should be visible.
+        """
+        quest_id = item.data(0, Qt.UserRole)
+        quest_info = self.quest_data.get(quest_id, {})
+
+        # Check if this item matches filters
+        matches = True
+
+        # Search text filter (ID, name, description)
+        if search_text:
+            quest_id_str = str(quest_id).lower()
+            name = quest_info.get('name', '').lower()
+            description = quest_info.get('description', '').lower()
+
+            matches = (search_text in quest_id_str or
+                      search_text in name or
+                      search_text in description)
+
+        # Platform filter
+        if matches and platform_filter:
+            quest_platform = quest_info.get('platform', '')
+            matches = (quest_platform == platform_filter)
+
+        # Quest giver filter
+        if matches and giver_filter:
+            quest_npc = quest_info.get('npc_id')
+            matches = (quest_npc == giver_filter)
+
+        # Check children recursively
+        child_visible = False
+        for child_idx in range(item.childCount()):
+            child = item.child(child_idx)
+            if self.filter_tree_item(child, search_text, platform_filter, giver_filter):
+                child_visible = True
+
+        # Show item if it matches OR if any child is visible
+        should_show = matches or child_visible
+        item.setHidden(not should_show)
+
+        # Expand item if it has visible children
+        if child_visible and search_text:
+            item.setExpanded(True)
+
+        return should_show
+
+    def populate_quest_giver_filter(self):
+        """Populate quest giver filter with unique NPC IDs from loaded quests"""
+        # Clear existing items (keep "All Quest Givers")
+        self.giver_filter.clear()
+        self.giver_filter.addItem("All Quest Givers", None)
+
+        # Collect unique NPC IDs
+        npc_ids = set()
+        for quest_info in self.quest_data.values():
+            npc_id = quest_info.get('npc_id')
+            if npc_id:
+                npc_ids.add(npc_id)
+
+        # Add to combo box sorted
+        for npc_id in sorted(npc_ids):
+            self.giver_filter.addItem(f"NPC {npc_id}", npc_id)
+
     def reload_data(self):
         """Reload quest data"""
         self.quest_data.clear()
@@ -537,6 +686,246 @@ class SimpleQuestViewer(QMainWindow):
                 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to rebuild cache:\n{e}")
+
+    def export_quest(self):
+        """Export the currently selected quest"""
+        if not self.current_quest_id:
+            QMessageBox.warning(self, "Warning", "Please select a quest to export.")
+            return
+
+        # Ask user for export format
+        from PySide6.QtWidgets import QDialog, QDialogButtonBox, QRadioButton, QCheckBox
+
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Export Quest")
+        dialog_layout = QVBoxLayout(dialog)
+
+        # Format selection
+        format_label = QLabel("Select export format:")
+        dialog_layout.addWidget(format_label)
+
+        json_radio = QRadioButton("JSON")
+        json_radio.setChecked(True)
+        markdown_radio = QRadioButton("Markdown")
+
+        dialog_layout.addWidget(json_radio)
+        dialog_layout.addWidget(markdown_radio)
+
+        # Include sub-quests option
+        include_subquests_checkbox = QCheckBox("Include all sub-quests")
+        include_subquests_checkbox.setChecked(True)
+        dialog_layout.addWidget(include_subquests_checkbox)
+
+        # Buttons
+        button_box = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        button_box.accepted.connect(dialog.accept)
+        button_box.rejected.connect(dialog.reject)
+        dialog_layout.addWidget(button_box)
+
+        if dialog.exec() != QDialog.Accepted:
+            return
+
+        # Get export settings
+        export_json = json_radio.isChecked()
+        include_subquests = include_subquests_checkbox.isChecked()
+
+        # Get file path from user
+        if export_json:
+            file_filter = "JSON Files (*.json)"
+            default_ext = ".json"
+        else:
+            file_filter = "Markdown Files (*.md)"
+            default_ext = ".md"
+
+        quest_name = self.quest_data[self.current_quest_id].get('name', f'Quest_{self.current_quest_id}')
+        # Sanitize filename
+        safe_name = "".join(c for c in quest_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
+        default_filename = f"{safe_name}{default_ext}"
+
+        file_path, _ = QFileDialog.getSaveFileName(
+            self,
+            "Export Quest",
+            default_filename,
+            file_filter
+        )
+
+        if not file_path:
+            return
+
+        try:
+            # Collect quest data
+            quests_to_export = [self.current_quest_id]
+
+            if include_subquests:
+                # Find all sub-quests recursively
+                quests_to_export.extend(self.get_all_subquests(self.current_quest_id))
+
+            # Export based on format
+            if export_json:
+                self.export_to_json(quests_to_export, file_path)
+            else:
+                self.export_to_markdown(quests_to_export, file_path)
+
+            QMessageBox.information(self, "Success", f"Quest(s) exported successfully to:\n{file_path}")
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to export quest:\n{e}")
+
+    def get_all_subquests(self, parent_quest_id):
+        """Recursively get all sub-quest IDs for a parent quest"""
+        subquests = []
+
+        for quest_id, quest_info in self.quest_data.items():
+            if quest_info.get('parent_id') == parent_quest_id:
+                subquests.append(quest_id)
+                # Recursively get sub-quests of this sub-quest
+                subquests.extend(self.get_all_subquests(quest_id))
+
+        return subquests
+
+    def export_to_json(self, quest_ids, file_path):
+        """Export quests to JSON format"""
+        export_data = []
+
+        for quest_id in quest_ids:
+            quest_info = self.quest_data[quest_id].copy()
+
+            # Convert complex objects to serializable format
+            if 'objectives' in quest_info and quest_info['objectives']:
+                quest_info['objectives'] = [
+                    {
+                        'type': getattr(obj, 'type', 'unknown'),
+                        'text': getattr(obj, 'text', ''),
+                    }
+                    for obj in quest_info['objectives']
+                ]
+
+            if 'requirements' in quest_info and quest_info['requirements']:
+                quest_info['requirements'] = [
+                    {
+                        'type': getattr(req, 'type', 'unknown'),
+                        'text': getattr(req, 'text', ''),
+                    }
+                    for req in quest_info['requirements']
+                ]
+
+            if 'rewards' in quest_info and quest_info['rewards']:
+                rewards = quest_info['rewards']
+                quest_info['rewards'] = {
+                    'xp': getattr(rewards, 'xp', 0),
+                    'gold': getattr(rewards, 'gold', 0),
+                    'silver': getattr(rewards, 'silver', 0),
+                    'copper': getattr(rewards, 'copper', 0),
+                    'items': list(getattr(rewards, 'items', [])),
+                }
+
+            if 'dialogues' in quest_info and quest_info['dialogues']:
+                quest_info['dialogues'] = [
+                    {
+                        'speaker': getattr(dlg, 'speaker', 'Unknown'),
+                        'text': getattr(dlg, 'text', ''),
+                        'is_player': getattr(dlg, 'is_player_choice', False),
+                    }
+                    for dlg in quest_info['dialogues']
+                ]
+
+            export_data.append(quest_info)
+
+        # Write to JSON file
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(export_data, f, indent=2, ensure_ascii=False)
+
+    def export_to_markdown(self, quest_ids, file_path):
+        """Export quests to Markdown format"""
+        lines = []
+
+        for idx, quest_id in enumerate(quest_ids):
+            quest_info = self.quest_data[quest_id]
+
+            # Quest header
+            if idx == 0:
+                lines.append(f"# {quest_info.get('name', 'Unknown Quest')}")
+            else:
+                lines.append(f"\n## {quest_info.get('name', 'Unknown Quest')}")
+
+            lines.append(f"\n**Quest ID:** {quest_id}")
+
+            # Parent quest
+            parent_id = quest_info.get('parent_id')
+            if parent_id:
+                parent_name = self.quest_data.get(parent_id, {}).get('name', f'Quest {parent_id}')
+                lines.append(f"**Parent Quest:** {parent_name} (ID: {parent_id})")
+
+            # Location
+            platform = quest_info.get('platform')
+            if platform:
+                location = get_platform_display_name(platform)
+                lines.append(f"**Location:** {location}")
+
+            # Quest Giver
+            npc_id = quest_info.get('npc_id')
+            if npc_id:
+                lines.append(f"**Quest Giver:** NPC {npc_id}")
+
+            # Description
+            if quest_info.get('description'):
+                lines.append(f"\n### Description\n\n{quest_info['description']}")
+
+            # Objectives
+            objectives = quest_info.get('objectives', [])
+            if objectives:
+                lines.append("\n### Objectives\n")
+                for obj in objectives:
+                    obj_type = getattr(obj, 'type', 'unknown')
+                    obj_text = getattr(obj, 'text', '')
+                    lines.append(f"- **[{obj_type}]** {obj_text}")
+
+            # Requirements
+            requirements = quest_info.get('requirements', [])
+            if requirements:
+                lines.append("\n### Requirements\n")
+                for req in requirements:
+                    req_type = getattr(req, 'type', 'unknown')
+                    req_text = getattr(req, 'text', '')
+                    lines.append(f"- **[{req_type}]** {req_text}")
+
+            # Rewards
+            rewards = quest_info.get('rewards')
+            if rewards:
+                lines.append("\n### Rewards\n")
+                if hasattr(rewards, 'xp') and rewards.xp > 0:
+                    lines.append(f"- **XP:** {rewards.xp}")
+                if hasattr(rewards, 'gold') and rewards.gold > 0:
+                    lines.append(f"- **Gold:** {rewards.gold}")
+                if hasattr(rewards, 'silver') or hasattr(rewards, 'copper'):
+                    silver = getattr(rewards, 'silver', 0)
+                    copper = getattr(rewards, 'copper', 0)
+                    if silver > 0 or copper > 0:
+                        lines.append(f"- **Silver:** {silver}, **Copper:** {copper}")
+                if hasattr(rewards, 'items') and rewards.items:
+                    items_str = ', '.join(map(str, rewards.items))
+                    lines.append(f"- **Items:** {items_str}")
+
+            # Dialogues
+            dialogues = quest_info.get('dialogues', [])
+            if dialogues:
+                lines.append("\n### Dialogues\n")
+                for dlg in dialogues:
+                    speaker = getattr(dlg, 'speaker', 'Unknown')
+                    dlg_text = getattr(dlg, 'text', '')
+                    is_player = getattr(dlg, 'is_player_choice', False)
+
+                    if dlg_text:
+                        if speaker == 'Player' or is_player:
+                            lines.append(f"- **Player:** {dlg_text}")
+                        else:
+                            lines.append(f"- **NPC:** {dlg_text}")
+
+            lines.append("\n---\n")
+
+        # Write to markdown file
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write('\n'.join(lines))
 
 
 def main():
