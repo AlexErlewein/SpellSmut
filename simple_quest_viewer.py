@@ -21,7 +21,7 @@ from PySide6.QtWidgets import (
     QPushButton, QGroupBox, QProgressDialog, QMessageBox, QLineEdit, QComboBox,
     QFileDialog
 )
-from PySide6.QtCore import Qt, QSize
+from PySide6.QtCore import Qt, QSize, QSettings
 
 # Add the src directory to Python path
 project_root = Path(__file__).parent.parent.parent
@@ -88,7 +88,11 @@ class SimpleQuestViewer(QMainWindow):
         self.quest_data = {}
         self.current_quest_id = None
 
+        # Initialize settings for preferences persistence
+        self.settings = QSettings("SpellSmut", "QuestViewer")
+
         self.init_ui()
+        self.restore_preferences()
         self.load_data()
     
     def init_ui(self):
@@ -128,8 +132,8 @@ class SimpleQuestViewer(QMainWindow):
         layout.addLayout(header_layout)
         
         # Main splitter
-        splitter = QSplitter(Qt.Horizontal)
-        layout.addWidget(splitter)
+        self.splitter = QSplitter(Qt.Horizontal)
+        layout.addWidget(self.splitter)
         
         # Left side - Quest tree
         left_widget = QWidget()
@@ -196,33 +200,46 @@ class SimpleQuestViewer(QMainWindow):
         tree_layout.addLayout(tree_controls)
         
         left_layout.addWidget(tree_group)
-        splitter.addWidget(left_widget)
-        
+        self.splitter.addWidget(left_widget)
+
         # Right side - Quest details
         right_widget = QWidget()
         right_layout = QVBoxLayout(right_widget)
         right_layout.setContentsMargins(0, 0, 0, 0)
-        
+
         details_group = QGroupBox("Quest Details")
         details_layout = QVBoxLayout(details_group)
-        
+
         self.details_text = QTextEdit()
         self.details_text.setReadOnly(True)
         self.details_text.setHtml("<p>Select a quest to view details...</p>")
         details_layout.addWidget(self.details_text)
-        
+
         right_layout.addWidget(details_group)
-        splitter.addWidget(right_widget)
-        
+        self.splitter.addWidget(right_widget)
+
         # Set splitter proportions
-        splitter.setStretchFactor(0, 1)
-        splitter.setStretchFactor(1, 2)
+        self.splitter.setStretchFactor(0, 1)
+        self.splitter.setStretchFactor(1, 2)
         
         # Status bar
         self.statusBar().showMessage("Ready")
     
     def load_data(self):
-        """Load quest data"""
+        """Load quest data with progress indication"""
+        import time
+
+        # Create progress dialog
+        progress = QProgressDialog("Loading quest data...", None, 0, 5, self)
+        progress.setWindowModality(Qt.WindowModal)
+        progress.setWindowTitle("Loading")
+        progress.setMinimumDuration(0)  # Show immediately
+        progress.setValue(0)
+        progress.show()
+        QApplication.processEvents()
+
+        start_time = time.time()
+
         try:
             self.statusBar().showMessage("Loading quest data...")
 
@@ -231,22 +248,40 @@ class SimpleQuestViewer(QMainWindow):
                 configure_logging()
                 self.logger = get_logger("quest_viewer")
 
-            # Initialize data model (loads CFF data)
+            # Step 1: Initialize data model
+            progress.setLabelText("Initializing data model...")
+            progress.setValue(1)
+            QApplication.processEvents()
+
             self.data_model = CFFDataModel()
 
-            # Load GameData.cff file
+            # Step 2: Load GameData.cff file
             cff_file = Path("OriginalGameFiles/data/GameData.cff")
             if not cff_file.exists():
+                progress.close()
                 QMessageBox.critical(self, "Error", f"GameData.cff not found at:\n{cff_file}")
                 return
 
+            progress.setLabelText("Loading GameData.cff...")
+            progress.setValue(2)
+            QApplication.processEvents()
+
+            cff_start = time.time()
             self.logger.info(f"Loading CFF file: {cff_file}")
             if not self.data_model.load_file(str(cff_file)):
+                progress.close()
                 QMessageBox.critical(self, "Error", "Failed to load GameData.cff")
                 return
+            cff_time = time.time() - cff_start
+            self.logger.info(f"CFF loaded in {cff_time:.2f}s")
 
-            # Initialize Lua data manager for additional details
+            # Step 3: Initialize Lua data manager
+            progress.setLabelText("Loading Lua quest cache...")
+            progress.setValue(3)
+            QApplication.processEvents()
+
             cache_dir = Path("src/TirganachReloaded/data/cache")
+            lua_start = time.time()
             self.lua_manager = LuaDataManager(cache_dir=cache_dir)
 
             # Load quest data from CFF (all quests with names!)
@@ -254,18 +289,39 @@ class SimpleQuestViewer(QMainWindow):
 
             # Enhance with Lua data (dialogues, rewards, etc.)
             self.load_lua_quest_data()
+            lua_time = time.time() - lua_start
+            self.logger.info(f"Lua data loaded in {lua_time:.2f}s")
 
-            # Populate tree
+            # Step 4: Populate tree
+            progress.setLabelText("Building quest tree...")
+            progress.setValue(4)
+            QApplication.processEvents()
+
+            tree_start = time.time()
             self.populate_quest_tree()
+            tree_time = time.time() - tree_start
+            self.logger.info(f"Tree populated in {tree_time:.2f}s")
 
-            # Populate quest giver filter dropdown
+            # Step 5: Populate quest giver filter
+            progress.setLabelText("Finalizing...")
+            progress.setValue(5)
+            QApplication.processEvents()
+
             self.populate_quest_giver_filter()
 
+            progress.close()
+
             quest_count = len(self.quest_data)
-            self.statusBar().showMessage(f"Loaded {quest_count} quests")
-            self.logger.info(f"Successfully loaded {quest_count} quests")
+            total_time = time.time() - start_time
+            status_msg = f"Loaded {quest_count} quests in {total_time:.2f}s"
+            self.statusBar().showMessage(status_msg)
+            self.logger.info(f"Successfully loaded {quest_count} quests in {total_time:.2f}s")
+
+            # Restore preferences that require loaded data
+            self.restore_preferences_after_load()
 
         except Exception as e:
+            progress.close()
             if self.logger:
                 self.logger.exception(f"Failed to load quest data: {e}")
             QMessageBox.critical(self, "Error", f"Failed to load quest data:\n{e}")
@@ -926,6 +982,137 @@ class SimpleQuestViewer(QMainWindow):
         # Write to markdown file
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write('\n'.join(lines))
+
+    def restore_preferences(self):
+        """Restore user preferences from settings"""
+        # Restore window geometry
+        geometry = self.settings.value("geometry")
+        if geometry:
+            self.restoreGeometry(geometry)
+
+        # Restore window state (maximized, etc.)
+        window_state = self.settings.value("windowState")
+        if window_state:
+            self.restoreState(window_state)
+
+    def restore_preferences_after_load(self):
+        """Restore preferences that require data to be loaded first"""
+        # Restore splitter state
+        splitter_state = self.settings.value("splitterState")
+        if splitter_state:
+            self.splitter.restoreState(splitter_state)
+
+        # Restore last selected quest
+        last_quest_id = self.settings.value("lastQuestId", type=int)
+        if last_quest_id and last_quest_id in self.quest_data:
+            self.select_quest_by_id(last_quest_id)
+
+        # Restore tree expansion state
+        expanded_quests = self.settings.value("expandedQuests", [])
+        if expanded_quests:
+            self.restore_tree_expansion(expanded_quests)
+
+        # Restore search and filter state
+        search_text = self.settings.value("searchText", "")
+        if search_text:
+            self.search_input.setText(search_text)
+
+        platform_filter = self.settings.value("platformFilter")
+        if platform_filter:
+            index = self.platform_filter.findData(platform_filter)
+            if index >= 0:
+                self.platform_filter.setCurrentIndex(index)
+
+        giver_filter = self.settings.value("giverFilter")
+        if giver_filter:
+            index = self.giver_filter.findData(giver_filter)
+            if index >= 0:
+                self.giver_filter.setCurrentIndex(index)
+
+    def select_quest_by_id(self, quest_id):
+        """Select a quest in the tree by its ID"""
+        for i in range(self.quest_tree.topLevelItemCount()):
+            item = self.quest_tree.topLevelItem(i)
+            if self.find_and_select_item(item, quest_id):
+                return True
+        return False
+
+    def find_and_select_item(self, item, quest_id):
+        """Recursively find and select an item by quest ID"""
+        item_quest_id = item.data(0, Qt.UserRole)
+        if item_quest_id == quest_id:
+            self.quest_tree.setCurrentItem(item)
+            self.quest_tree.scrollToItem(item)
+            return True
+
+        # Check children
+        for i in range(item.childCount()):
+            child = item.child(i)
+            if self.find_and_select_item(child, quest_id):
+                return True
+
+        return False
+
+    def restore_tree_expansion(self, expanded_quest_ids):
+        """Restore tree expansion state"""
+        for i in range(self.quest_tree.topLevelItemCount()):
+            item = self.quest_tree.topLevelItem(i)
+            self.restore_item_expansion(item, expanded_quest_ids)
+
+    def restore_item_expansion(self, item, expanded_quest_ids):
+        """Recursively restore expansion state for an item"""
+        quest_id = item.data(0, Qt.UserRole)
+        if quest_id in expanded_quest_ids:
+            item.setExpanded(True)
+
+        # Process children
+        for i in range(item.childCount()):
+            child = item.child(i)
+            self.restore_item_expansion(child, expanded_quest_ids)
+
+    def save_tree_expansion_state(self):
+        """Save which quests are expanded"""
+        expanded = []
+        for i in range(self.quest_tree.topLevelItemCount()):
+            item = self.quest_tree.topLevelItem(i)
+            self.collect_expanded_items(item, expanded)
+        return expanded
+
+    def collect_expanded_items(self, item, expanded_list):
+        """Recursively collect expanded quest IDs"""
+        if item.isExpanded():
+            quest_id = item.data(0, Qt.UserRole)
+            if quest_id:
+                expanded_list.append(quest_id)
+
+        # Process children
+        for i in range(item.childCount()):
+            child = item.child(i)
+            self.collect_expanded_items(child, expanded_list)
+
+    def closeEvent(self, event):
+        """Save preferences when closing"""
+        # Save window geometry and state
+        self.settings.setValue("geometry", self.saveGeometry())
+        self.settings.setValue("windowState", self.saveState())
+
+        # Save splitter state
+        self.settings.setValue("splitterState", self.splitter.saveState())
+
+        # Save last selected quest
+        if self.current_quest_id:
+            self.settings.setValue("lastQuestId", self.current_quest_id)
+
+        # Save tree expansion state
+        expanded_quests = self.save_tree_expansion_state()
+        self.settings.setValue("expandedQuests", expanded_quests)
+
+        # Save search and filter state
+        self.settings.setValue("searchText", self.search_input.text())
+        self.settings.setValue("platformFilter", self.platform_filter.currentData())
+        self.settings.setValue("giverFilter", self.giver_filter.currentData())
+
+        super().closeEvent(event)
 
 
 def main():
