@@ -83,6 +83,7 @@ def main():
         logger.info("  - Home/End: Rotate left/right")
         logger.info("  - Page Up/Down: Tilt camera")
         logger.info("  - Insert/Delete: Zoom in/out")
+        logger.info("  - T: Toggle textures on/off")
         logger.info("  - L: Toggle lighting on/off")
         logger.info("  - G: Toggle grid on/off")
         logger.info("  - Shift + Arrow/WASD: Adjust sun position")

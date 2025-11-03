@@ -37,6 +37,7 @@ except ImportError:
 from .camera import Camera
 from .simple_map_loader import SimpleMapLoader
 from .simple_texture_manager import SimpleTextureManager
+from .terrain_texture_mapper import TerrainTextureMapper
 
 
 class MapViewerWidget(QOpenGLWidget):
@@ -195,10 +196,21 @@ class MapViewerWidget(QOpenGLWidget):
                 count = self.texture_manager.load_available_textures(str(assets_path))
                 logger.info(f"Found {count} available textures")
 
-            # Create test texture set (colorful textures for now)
-            logger.info("Creating test texture set...")
-            self.base_textures = self.texture_manager.create_test_texture_set(32)
-            logger.info(f"Created {len(self.base_textures)} test textures")
+            # Load real textures if available, otherwise create test textures
+            if len(self.texture_manager.texture_files) > 0:
+                logger.info("Loading real terrain textures...")
+                self.base_textures = {}
+                loaded_count = 0
+                for texture_id in sorted(self.texture_manager.texture_files.keys())[:32]:  # Load first 32
+                    texture = self.texture_manager.get_texture(texture_id)
+                    if texture is not None:
+                        self.base_textures[texture_id] = texture
+                        loaded_count += 1
+                logger.info(f"Loaded {loaded_count} real terrain textures")
+            else:
+                logger.info("No terrain textures found, creating test texture set...")
+                self.base_textures = self.texture_manager.create_test_texture_set(32)
+                logger.info(f"Created {len(self.base_textures)} test textures")
 
             # Upload to OpenGL if initialized
             if self.gl_initialized:
@@ -1556,6 +1568,9 @@ class MapViewerWidget(QOpenGLWidget):
         elif event.key() == Qt.Key.Key_G:
             # Toggle grid (handled by parent window)
             pass
+        elif event.key() == Qt.Key.Key_T:
+            # Toggle textures (handled by parent window)
+            pass
         elif event.key() == Qt.Key.Key_D:
             # Debug info
             logger.info("=== DEBUG INFO ===")
@@ -1565,6 +1580,7 @@ class MapViewerWidget(QOpenGLWidget):
             logger.info(f"Forward: {self.camera.forward}")
             logger.info(f"Up: {self.camera.up}")
             logger.info(f"Lighting: {'ON' if self.lighting_enabled else 'OFF'}")
+            logger.info(f"Textures: {'ON' if self.use_textures else 'OFF'}")
             logger.info(
                 f"Sun: azimuth={self.sun_azimuth:.1f}°, altitude={self.sun_altitude:.1f}°"
             )
@@ -1573,6 +1589,9 @@ class MapViewerWidget(QOpenGLWidget):
                 logger.info(f"Map size: {h.width}x{h.height}")
                 center_h = h.get_height(h.width // 2, h.height // 2)
                 logger.info(f"Center terrain height: {center_h}")
+            if self.textures_loaded:
+                logger.info(f"Textures loaded: {len(self.texture_ids)} texture IDs")
+                logger.info(f"Texture manager has {len(self.texture_map)} tile mappings")
             logger.info("==================")
 
     def keyReleaseEvent(self, event: QKeyEvent):
@@ -1589,6 +1608,12 @@ class MapViewerWidget(QOpenGLWidget):
         """Toggle grid state"""
         self.grid_enabled = not self.grid_enabled
         logger.info(f"Grid: {'ON' if self.grid_enabled else 'OFF'}")
+        self.update()
+
+    def toggle_textures(self):
+        """Toggle texture rendering state"""
+        self.use_textures = not self.use_textures
+        logger.info(f"Textures: {'ON' if self.use_textures else 'OFF'}")
         self.update()
 
     def _get_texture_for_position(self, x, y):
@@ -1674,6 +1699,11 @@ class MapViewerWindow(QMainWindow):
         self.grid_checkbox.stateChanged.connect(self.toggle_grid_checkbox)
         controls_layout.addWidget(self.grid_checkbox)
 
+        self.texture_checkbox = QCheckBox("🎨 Textures (T)")
+        self.texture_checkbox.setChecked(True)
+        self.texture_checkbox.stateChanged.connect(self.toggle_texture_checkbox)
+        controls_layout.addWidget(self.texture_checkbox)
+
         controls_layout.addSpacing(10)
 
         # Info section
@@ -1711,6 +1741,7 @@ class MapViewerWindow(QMainWindow):
             "• L: Toggle light<br>"
             "• Shift + WASD: Sun<br><br>"
             "<b>Display:</b><br>"
+            "• T: Toggle textures<br>"
             "• G: Toggle grid<br><br>"
             "<b>Other:</b><br>"
             "• D: Debug info<br>"
@@ -1876,6 +1907,23 @@ class MapViewerWindow(QMainWindow):
         """Toggle grid from checkbox"""
         self.viewer.grid_enabled = bool(state)
         self.viewer.update()
+
+    def toggle_texture_checkbox(self, state):
+        """Toggle textures from checkbox"""
+        self.viewer.use_textures = bool(state)
+        self.viewer.update()
+
+    def keyPressEvent(self, event: QKeyEvent):
+        """Handle key press events for main window"""
+        # Check for T key to toggle textures
+        if event.key() == Qt.Key.Key_T:
+            self.viewer.use_textures = not self.viewer.use_textures
+            self.texture_checkbox.setChecked(self.viewer.use_textures)
+            logger.info(f"Textures: {'ON' if self.viewer.use_textures else 'OFF'}")
+            self.viewer.update()
+        else:
+            # Pass other keys to viewer widget
+            super().keyPressEvent(event)
 
 
 def main():
