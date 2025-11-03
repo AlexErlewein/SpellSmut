@@ -15,7 +15,7 @@ Based on reverse engineering of map files:
 import math
 import struct
 import zlib
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import List, Optional, Tuple
 
@@ -35,12 +35,45 @@ class SimpleMapHeader:
 
 @dataclass
 class TerrainTextureAssignment:
-    """Terrain texture assignment for a tile"""
+    """Terrain texture assignment for a tile with multi-layer support"""
 
     x: int
     y: int
-    texture_id: int
-    blend_weights: List[float]  # For multi-texture blending
+    texture_id: int  # Primary texture ID
+    blend_weights: List[float]  # Blend weights for all layers
+    additional_textures: List[int] = field(default_factory=list)  # Additional texture layers (2nd, 3rd)
+    
+    def get_all_textures(self) -> List[int]:
+        """Get all texture IDs for this assignment"""
+        all_textures = [self.texture_id] + self.additional_textures
+        return [tid for tid in all_textures if tid > 0]  # Filter out invalid IDs
+        
+    def get_effective_weights(self) -> List[float]:
+        """Get effective blend weights (matching get_all_textures)"""
+        if len(self.blend_weights) >= len(self.get_all_textures()):
+            return self.blend_weights[:len(self.get_all_textures())]
+        else:
+            # Pad with zeros if needed
+            weights = self.blend_weights.copy()
+            while len(weights) < len(self.get_all_textures()):
+                weights.append(0.0)
+            return weights
+            
+    def get_all_textures(self) -> List[int]:
+        """Get all texture IDs for this assignment"""
+        all_textures = [self.texture_id] + self.additional_textures
+        return [tid for tid in all_textures if tid > 0]  # Filter out invalid IDs
+        
+    def get_effective_weights(self) -> List[float]:
+        """Get effective blend weights (matching get_all_textures)"""
+        if len(self.blend_weights) >= len(self.get_all_textures()):
+            return self.blend_weights[:len(self.get_all_textures())]
+        else:
+            # Pad with zeros if needed
+            weights = self.blend_weights.copy()
+            while len(weights) < len(self.get_all_textures()):
+                weights.append(0.0)
+            return weights
 
 
 @dataclass
@@ -299,53 +332,99 @@ class SimpleMapLoader:
         )
 
     def _parse_chunk_3_terrain_textures(self, data: bytes):
-        """Parse chunk 3 - Terrain texture assignments"""
+        """Parse chunk 3 - Terrain texture assignments with multi-layer support"""
         logger.debug(f"Parsing terrain texture chunk (size: {len(data)})")
 
         texture_assignments = []
 
-        # Enhanced parsing based on C# SFEngine patterns
+        # Enhanced parsing based on SpellForce terrain system
         try:
-            # Parse as a 255-entry table with 14 bytes per entry
-            # Each entry: [ind1][ind2][ind3][weight1][weight2][weight3][padding]
+            # Method 1: Parse as tile-based texture assignments
+            # SpellForce uses a tile grid where each tile can have up to 3 texture layers
             expected_entries = 255
-            entry_size = 14  # 3 indices + 3 weights + 8 padding bytes
+            entry_size = 14  # 3 texture indices + 3 blend weights + 8 padding
+            
             total_expected_size = expected_entries * entry_size
-
             if len(data) >= total_expected_size:
-                logger.debug("Parsing Chunk 3 as 255-entry texture assignment table")
-
+                logger.debug("Parsing Chunk 3 as tile-based texture assignment table")
+                
+                # Create a tile grid (16x16 tiles for 255 entries)
+                tile_grid = {}
+                
                 for i in range(expected_entries):
                     offset = i * entry_size
-
-                    # Extract texture indices (3 bytes)
-                    ind1 = data[offset] if offset < len(data) else 0
-                    ind2 = data[offset + 1] if offset + 1 < len(data) else 0
-                    ind3 = data[offset + 2] if offset + 2 < len(data) else 0
-
+                    
+                    # Extract texture indices (3 bytes) - up to 3 texture layers per tile
+                    tex_indices = [
+                        data[offset] if offset < len(data) else 0,
+                        data[offset + 1] if offset + 1 < len(data) else 0,
+                        data[offset + 2] if offset + 2 < len(data) else 0
+                    ]
+                    
                     # Extract blend weights (3 bytes, 0-255 scale)
-                    weight1 = data[offset + 3] if offset + 3 < len(data) else 0
-                    weight2 = data[offset + 4] if offset + 4 < len(data) else 0
-                    weight3 = data[offset + 5] if offset + 5 < len(data) else 0
-
-                    # Convert weights to 0.0-1.0 scale
-                    weights = [weight1 / 255.0, weight2 / 255.0, weight3 / 255.0]
-
-                    # Create texture assignments for non-zero weights
-                    indices = [ind1, ind2, ind3]
-                    for j, (idx, weight) in enumerate(zip(indices, weights)):
-                        if weight > 0.01:  # Threshold to ignore negligible weights
-                            assignment = TerrainTextureAssignment(
-                                x=i % 16 * 16,  # Distribute across map grid
-                                y=i // 16 * 16,
-                                texture_id=idx,
-                                blend_weights=[weight],
-                            )
-                            texture_assignments.append(assignment)
-
+                    raw_weights = [
+                        data[offset + 3] if offset + 3 < len(data) else 0,
+                        data[offset + 4] if offset + 4 < len(data) else 0,
+                        data[offset + 5] if offset + 5 < len(data) else 0
+                    ]
+                    
+                    # Convert to 0.0-1.0 scale and normalize
+                    weights = [w / 255.0 for w in raw_weights]
+                    total_weight = sum(weights)
+                    
+                    if total_weight > 0:
+                        weights = [w / total_weight for w in weights]
+                    else:
+                        weights = [0.0, 0.0, 0.0]
+                    
+                    # Calculate tile position (16x16 grid)
+                    tile_x = i % 16
+                    tile_y = i // 16
+                    
+                    # Convert tile coordinates to world coordinates (4x4 meter tiles)
+                    world_x = tile_x * 4
+                    world_y = tile_y * 4
+                    
+                    # Create multi-layer texture assignment for this tile
+                    valid_layers = []
+                    for tex_idx, weight in zip(tex_indices, weights):
+                        if tex_idx > 0 and weight > 0.01:  # Valid texture with meaningful weight
+                            valid_layers.append((tex_idx, weight))
+                    
+                    if valid_layers:
+                        # Create assignment with all layers and weights
+                        primary_texture = valid_layers[0][0]
+                        all_weights = [layer[1] for layer in valid_layers]
+                        additional_textures = [layer[0] for layer in valid_layers[1:]]
+                        
+                        assignment = TerrainTextureAssignment(
+                            x=world_x,
+                            y=world_y,
+                            texture_id=primary_texture,  # Primary texture
+                            blend_weights=all_weights,  # All weights
+                            additional_textures=additional_textures  # Additional textures
+                        )
+                        
+                        texture_assignments.append(assignment)
+                        
+                        # Store in tile grid for reference
+                        tile_grid[(tile_x, tile_y)] = {
+                            'textures': [layer[0] for layer in valid_layers],
+                            'weights': [layer[1] for layer in valid_layers]
+                        }
+                
                 logger.info(
-                    f"Successfully parsed {len(texture_assignments)} texture assignments from Chunk 3"
+                    f"Successfully parsed {len(texture_assignments)} multi-layer texture assignments "
+                    f"from {len(tile_grid)} tiles"
                 )
+                
+                # Log some examples for debugging
+                example_tiles = list(tile_grid.items())[:5]
+                for (tx, ty), tile_data in example_tiles:
+                    logger.debug(
+                        f"Tile ({tx},{ty}): textures={tile_data['textures']}, "
+                        f"weights={tile_data['weights']}"
+                    )
             else:
                 logger.warning(
                     f"Chunk 3 data size mismatch: expected {total_expected_size}, got {len(data)}. "
@@ -419,6 +498,7 @@ class SimpleMapLoader:
                             texture_assignments.append(assignment)
 
         self.terrain_textures = texture_assignments
+        return texture_assignments
 
     def _parse_original_format(self) -> bool:
         """Parse the map using the original single heightmap format"""

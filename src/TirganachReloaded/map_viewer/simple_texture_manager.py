@@ -52,64 +52,62 @@ class SimpleTextureManager:
 
     def load_available_textures(self, base_path: str) -> int:
         """
-        Scan directory for available landscape_island_*.dds textures
-
+        Scan for and load available terrain textures
+        
         Args:
             base_path: Root directory to search (e.g., "ExtractedAssets")
-
+            
         Returns:
-            Number of textures found
+            Number of texture files found
         """
         logger.info(f"Scanning for terrain textures in {base_path}")
-
-        base = Path(base_path)
-        if not base.exists():
-            logger.warning(f"Base path does not exist: {base_path}")
-            return 0
-
-        # Find all landscape_island_*.dds files
-        pattern = "**/landscape_island_*.dds"
-        texture_files = list(base.glob(pattern))
-
-        logger.info(f"Found {len(texture_files)} terrain texture files")
-
+        
+        # Look for DDS files in the texture directory or directories
+        texture_paths = []
+        base_dir = Path(base_path)
+        
+        if base_dir.is_dir() and "sf" in base_dir.name:
+            # Single sf directory
+            texture_paths = [base_dir]
+        else:
+            # Search for all sf*/texture directories
+            texture_paths = list(base_dir.glob("UI/raw_reextraction/sf*/texture"))
+        
+        all_dds_files = []
+        
+        for texture_dir in texture_paths:
+            logger.debug(f"Searching in: {texture_dir}")
+            # Search for landscape island textures
+            pattern = "landscape_island_*.dds"
+            dds_files = list(texture_dir.glob(pattern))
+            all_dds_files.extend(dds_files)
+        
+        logger.info(f"Found {len(all_dds_files)} terrain texture files")
+        
         # Parse texture IDs from filenames
-        for filepath in texture_files:
-            # Extract ID from filename: landscape_island_XXX_*.dds
-            filename = filepath.stem  # Without extension
-            parts = filename.split("_")
-
-            if len(parts) >= 3:
-                try:
-                    # Third part should be the ID (e.g., "001", "050", "119")
+        for dds_file in all_dds_files:
+            # Extract texture ID from filename like "landscape_island_001_based.dds"
+            try:
+                parts = dds_file.stem.split("_")
+                if len(parts) >= 3 and parts[2].isdigit():
                     texture_id = int(parts[2])
-
-                    # Prefer "d" suffix (diffuse texture)
-                    # landscape_island_050_grassd.dds vs landscape_island_050_grass.dds
-                    if filepath.stem.endswith("d"):
-                        # Higher priority for diffuse textures
-                        if texture_id not in self.texture_files or not str(
-                            self.texture_files[texture_id]
-                        ).endswith("d.dds"):
-                            self.texture_files[texture_id] = filepath
-                            logger.debug(f"Texture {texture_id}: {filepath.name}")
-                    else:
-                        # Only use non-diffuse if we don't have diffuse version
-                        if texture_id not in self.texture_files:
-                            self.texture_files[texture_id] = filepath
-                            logger.debug(f"Texture {texture_id}: {filepath.name}")
-
-                except (ValueError, IndexError):
-                    logger.warning(f"Could not parse texture ID from: {filename}")
-
+                    # Only keep the first occurrence of each texture ID
+                    if texture_id not in self.texture_files:
+                        self.texture_files[texture_id] = dds_file
+                else:
+                    logger.warning(f"Could not parse texture ID from: {dds_file.name}")
+                    
+            except (ValueError, IndexError):
+                logger.warning(f"Could not parse texture ID from: {dds_file.name}")
+        
         logger.info(f"Mapped {len(self.texture_files)} unique texture IDs")
-
+        
         # Log some examples
         if self.texture_files:
             examples = sorted(self.texture_files.items())[:5]
             for tid, path in examples:
                 logger.info(f"  Texture {tid:03d}: {path.name}")
-
+        
         return len(self.texture_files)
 
     def get_texture(

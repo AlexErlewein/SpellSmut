@@ -10,6 +10,7 @@ import time
 from pathlib import Path
 from typing import Optional
 
+import numpy as np
 from loguru import logger
 from PySide6.QtCore import QPointF, Qt, QTimer
 from PySide6.QtGui import QKeyEvent, QMouseEvent, QSurfaceFormat, QWheelEvent
@@ -38,6 +39,7 @@ from .camera import Camera
 from .simple_map_loader import SimpleMapLoader
 from .simple_texture_manager import SimpleTextureManager
 from .terrain_texture_mapper import TerrainTextureMapper
+from .multi_layer_texture_system import MultiLayerTextureSystem
 
 
 class MapViewerWidget(QOpenGLWidget):
@@ -74,7 +76,13 @@ class MapViewerWidget(QOpenGLWidget):
         self.textures_loaded = False
         self.texture_ids = []  # OpenGL texture IDs
         self.base_textures = {}  # Index -> texture data
-        self.use_textures = True  # Enable/disable texture rendering
+        self.texture_id_map = {}  # Texture manager ID -> OpenGL texture ID mapping
+        self.use_textures = False  # Enable/disable texture rendering (start OFF)
+        self.texture_preview_label: Optional['QLabel'] = None  # Will be set by window
+        
+        # Multi-layer texture system
+        self.multi_layer_system: Optional[MultiLayerTextureSystem] = None
+        self.use_multi_layer_blending = False  # Enable multi-layer blending
 
         # Terrain texture mapping system
         self.terrain_texture_mapper: Optional[TerrainTextureMapper] = None
@@ -186,14 +194,25 @@ class MapViewerWidget(QOpenGLWidget):
 
             # Initialize terrain texture mapper
             self.terrain_texture_mapper = TerrainTextureMapper()
+            
+            # Initialize multi-layer texture system
+            try:
+                from .multi_layer_texture_system import MultiLayerTextureSystem
+                self.multi_layer_system = MultiLayerTextureSystem()
+                logger.info("Multi-layer texture system initialized")
+            except ImportError as e:
+                logger.warning(f"Could not import multi-layer texture system: {e}")
+                self.multi_layer_system = None
 
-            # Try to load from ExtractedAssets
-            assets_path = Path("ExtractedAssets")
-            if not assets_path.exists():
-                assets_path = Path("../../ExtractedAssets")
+            # Try to load from ExtractedAssets - the texture manager will search all sf directories
+            base_assets_path = Path("ExtractedAssets")
+            if not base_assets_path.exists():
+                base_assets_path = Path("../../ExtractedAssets")
+            if not base_assets_path.exists():
+                base_assets_path = Path("/Users/alex/Desktop/code/Others/SpellSmut/ExtractedAssets")
 
-            if assets_path.exists():
-                count = self.texture_manager.load_available_textures(str(assets_path))
+            if base_assets_path.exists():
+                count = self.texture_manager.load_available_textures(str(base_assets_path))
                 logger.info(f"Found {count} available textures")
 
             # Load real textures if available, otherwise create test textures
@@ -212,9 +231,40 @@ class MapViewerWidget(QOpenGLWidget):
                 self.base_textures = self.texture_manager.create_test_texture_set(32)
                 logger.info(f"Created {len(self.base_textures)} test textures")
 
-            # Upload to OpenGL if initialized
+            # Upload to OpenGL if initialized, otherwise mark for later upload
             if self.gl_initialized:
                 self._upload_textures_to_opengl()
+            else:
+                logger.info("OpenGL not ready yet, textures will be uploaded when OpenGL initializes")
+                
+            # Initialize multi-layer texture blending if we have map data
+            if self.multi_layer_system and self.map_loader and hasattr(self.map_loader, 'terrain_textures'):
+                if self.map_loader.terrain_textures:
+                    logger.info("Initializing multi-layer texture blending...")
+                    
+                    # Convert enhanced terrain assignments to format expected by multi-layer system
+                    enhanced_assignments = []
+                    for assignment in self.map_loader.terrain_textures:
+                        # Create assignment objects for multi-layer system
+                        all_textures = assignment.get_all_textures()
+                        weights = assignment.get_effective_weights()
+                        
+                        for i, (tex_id, weight) in enumerate(zip(all_textures, weights)):
+                            enhanced_assignments.append(type('MockAssignment', (), {
+                                'x': assignment.x,
+                                'y': assignment.y, 
+                                'texture_id': tex_id
+                            })())
+                    
+                    self.multi_layer_system.parse_texture_assignments(enhanced_assignments)
+                    self.use_multi_layer_blending = True
+                    
+                    # Log statistics
+                    stats = self.multi_layer_system.get_statistics()
+                    logger.info(f"Multi-layer blending stats: {stats}")
+                    logger.info(f"Enhanced texture assignments: {len(self.map_loader.terrain_textures)}")
+                else:
+                    logger.info("No terrain texture data available for multi-layer blending")
 
         except Exception as e:
             logger.error(f"Failed to initialize texture manager: {e}")
@@ -222,7 +272,9 @@ class MapViewerWidget(QOpenGLWidget):
 
     def _upload_textures_to_opengl(self):
         """Upload textures to OpenGL"""
+        logger.debug(f"Upload check: base_textures={len(self.base_textures) if self.base_textures else None}, textures_loaded={self.textures_loaded}")
         if not self.base_textures or self.textures_loaded:
+            logger.debug("Skipping texture upload - either no textures or already loaded")
             return
 
         try:
@@ -230,21 +282,46 @@ class MapViewerWidget(QOpenGLWidget):
 
             # Generate texture IDs
             num_textures = len(self.base_textures)
-            self.texture_ids = glGenTextures(num_textures)
+            logger.debug(f"Generating {num_textures} texture IDs")
+            
+            try:
+                self.texture_ids = glGenTextures(num_textures)
+                logger.debug(f"glGenTextures returned: {self.texture_ids}")
+            except Exception as e:
+                logger.error(f"glGenTextures failed: {e}")
+                raise
 
             # Handle single texture case
             if not isinstance(self.texture_ids, (list, tuple)):
                 self.texture_ids = [self.texture_ids]
+                logger.debug("Converted single texture ID to list")
 
-            # Upload each texture
-            for i, texture_data in self.base_textures.items():
+            # Convert to list of individual texture IDs
+            if len(self.texture_ids) == 1 and hasattr(self.texture_ids[0], '__len__'):
+                # glGenTextures returned a single array with all IDs
+                texture_id_array = self.texture_ids[0]
+                self.texture_ids = list(texture_id_array)
+                logger.debug(f"Extracted individual texture IDs: {self.texture_ids}")
+
+            # Upload each texture and create mapping
+            for i, (texture_mgr_id, texture_data) in enumerate(self.base_textures.items()):
                 if i >= len(self.texture_ids):
                     break
 
                 tex_id = self.texture_ids[i]
+                
+                logger.debug(f"Processing texture {i}: ID={texture_mgr_id}, OpenGL ID={tex_id}")
+                
+                # Convert texture manager ID to regular Python int for mapping
+                texture_mgr_id_int = int(texture_mgr_id)
+                
+                # Create mapping from texture manager ID to OpenGL texture ID
+                self.texture_id_map[texture_mgr_id_int] = tex_id
 
-                glBindTexture(GL_TEXTURE_2D, tex_id)
+                logger.debug(f"Binding texture {tex_id}")
+                glBindTexture(GL_TEXTURE_2D, int(tex_id))
 
+                logger.debug(f"Setting texture parameters")
                 # Set texture parameters
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
@@ -253,25 +330,91 @@ class MapViewerWidget(QOpenGLWidget):
 
                 # Upload texture data
                 height, width = texture_data.shape[:2]
-                glTexImage2D(
-                    GL_TEXTURE_2D,
-                    0,
-                    GL_RGBA,
-                    width,
-                    height,
-                    0,
-                    GL_RGBA,
-                    GL_UNSIGNED_BYTE,
-                    texture_data,
-                )
+                
+                # Ensure texture data is contiguous and properly formatted for OpenGL
+                texture_data_gl = np.ascontiguousarray(texture_data, dtype=np.uint8)
+                
+                # Try different approaches for texture upload
+                try:
+                    # Method 1: Direct array (works on most systems)
+                    glTexImage2D(
+                        GL_TEXTURE_2D,
+                        0,
+                        GL_RGBA,
+                        width,
+                        height,
+                        0,
+                        GL_RGBA,
+                        GL_UNSIGNED_BYTE,
+                        texture_data_gl,
+                    )
+                    logger.debug(f"Texture {texture_mgr_id_int}: Method 1 succeeded")
+                except Exception as e1:
+                    logger.debug(f"Texture {texture_mgr_id_int}: Method 1 failed: {e1}")
+                    try:
+                        # Method 2: Flattened array
+                        glTexImage2D(
+                            GL_TEXTURE_2D,
+                            0,
+                            GL_RGBA,
+                            width,
+                            height,
+                            0,
+                            GL_RGBA,
+                            GL_UNSIGNED_BYTE,
+                            texture_data_gl.flatten(),
+                        )
+                        logger.debug(f"Texture {texture_mgr_id_int}: Method 2 succeeded")
+                    except Exception as e2:
+                        logger.debug(f"Texture {texture_mgr_id_int}: Method 2 failed: {e2}")
+                        try:
+                            # Method 3: Bytes data
+                            glTexImage2D(
+                                GL_TEXTURE_2D,
+                                0,
+                                GL_RGBA,
+                                width,
+                                height,
+                                0,
+                                GL_RGBA,
+                                GL_UNSIGNED_BYTE,
+                                texture_data_gl.tobytes(),
+                            )
+                            logger.debug(f"Texture {texture_mgr_id_int}: Method 3 succeeded")
+                        except Exception as e3:
+                            logger.debug(f"Texture {texture_mgr_id_int}: Method 3 failed: {e3}")
+                            raise e3
 
             glBindTexture(GL_TEXTURE_2D, 0)
             self.textures_loaded = True
             logger.info(f"✓ Uploaded {len(self.texture_ids)} textures to OpenGL")
+            
+            # Update texture preview
+            self._update_texture_preview()
 
         except Exception as e:
             logger.error(f"Failed to upload textures: {e}")
             self.textures_loaded = False
+
+    def _update_texture_preview(self):
+        """Update the texture preview label with loaded texture info"""
+        if self.texture_preview_label is not None:
+            if self.base_textures and len(self.base_textures) > 0:
+                texture_info = f"Loaded: {len(self.base_textures)} textures\n"
+                texture_info += f"OpenGL: {'✅' if self.textures_loaded else '❌'}\n\n"
+                
+                # Show first few textures
+                sorted_textures = sorted(self.base_textures.items())[:8]
+                for tid, texture_data in sorted_textures:
+                    shape = texture_data.shape if hasattr(texture_data, 'shape') else 'Unknown'
+                    texture_info += f"• {tid:03d}: {shape}\n"
+                
+                if len(self.base_textures) > 8:
+                    texture_info += f"... and {len(self.base_textures) - 8} more"
+                
+                self.texture_preview_label.setText(texture_info)
+            else:
+                self.texture_preview_label.setText("No textures loaded")
 
     def initializeGL(self):
         """Initialize OpenGL context"""
@@ -401,7 +544,11 @@ class MapViewerWidget(QOpenGLWidget):
                 logger.debug(f"Camera position: {self.camera.position}")
                 logger.debug(f"Camera lookat: {self.camera.lookat}")
 
-            self._draw_heightmap()
+            # Choose terrain rendering method
+            if self.use_multi_layer_blending and self.multi_layer_system:
+                self._draw_multi_layer_textured_terrain()
+            else:
+                self._draw_heightmap()
             self._draw_grid()
             self._draw_units()
             self._draw_buildings()
@@ -563,7 +710,9 @@ class MapViewerWidget(QOpenGLWidget):
                             texture_id = 2 if len(self.texture_ids) > 2 else 0
 
                     # Bind the texture for this block
-                    glBindTexture(GL_TEXTURE_2D, self.texture_ids[texture_id])
+                    # Convert texture manager ID to OpenGL texture ID
+                    gl_texture_id = self.texture_id_map.get(texture_id, self.texture_ids[0] if self.texture_ids else 0)
+                    glBindTexture(GL_TEXTURE_2D, int(gl_texture_id))
 
                     # Draw this block
                     for y in range(
@@ -664,9 +813,8 @@ class MapViewerWidget(QOpenGLWidget):
             # Fallback: Draw with single texture as before if no texture mapping is available
             if self.textures_loaded and self.use_textures and len(self.texture_ids) > 0:
                 glEnable(GL_TEXTURE_2D)
-                glBindTexture(
-                    GL_TEXTURE_2D, self.texture_ids[0] if self.texture_ids else 0
-                )
+                fallback_tex_id = self.texture_ids[0] if self.texture_ids else 0
+                glBindTexture(GL_TEXTURE_2D, int(fallback_tex_id))
 
             for y in range(0, height - step, step):
                 glBegin(GL_TRIANGLE_STRIP)
@@ -754,6 +902,161 @@ class MapViewerWidget(QOpenGLWidget):
             logger.debug(
                 f"Drew {vertices_drawn} vertices (textures: {self.textures_loaded}, texture_map: {bool(self.texture_map)}, real_texture_assignments: {bool(getattr(self, 'texture_map_from_map', None))})"
             )
+
+    def _draw_multi_layer_textured_terrain(self):
+        """Draw terrain with multi-layer texture blending"""
+        if not self.multi_layer_system or not self.use_multi_layer_blending:
+            return
+            
+        heightmap = self.map_loader.heightmap
+        if not heightmap:
+            return
+            
+        width = heightmap.width
+        height = heightmap.height
+        
+        logger.info(f"Drawing multi-layer textured terrain: {width}x{height}")
+        
+        # Enable depth testing and texturing
+        glEnable(GL_DEPTH_TEST)
+        glDisable(GL_CULL_FACE)
+        
+        if self.lighting_enabled:
+            glEnable(GL_LIGHTING)
+        else:
+            glDisable(GL_LIGHTING)
+            
+        if self.textures_loaded and self.use_textures:
+            glEnable(GL_TEXTURE_2D)
+        else:
+            glDisable(GL_TEXTURE_2D)
+            return
+            
+        # Texture scaling
+        texture_scale = 0.05
+        step = 2  # Resolution step
+        vertices_drawn = 0
+        
+        # Draw terrain in tiles for multi-layer blending
+        tile_size = 4  # 4x4 tiles match SpellForce's system
+        
+        for tile_y in range(0, height, tile_size):
+            for tile_x in range(0, width, tile_size):
+                # Get multi-layer blend for this tile
+                blend = self.multi_layer_system.get_blend_for_tile(tile_x // tile_size, tile_y // tile_size)
+                
+                if not blend or not blend.is_valid():
+                    # Fallback to height-based blending
+                    avg_height = 0
+                    height_count = 0
+                    for y in range(tile_y, min(tile_y + tile_size, height)):
+                        for x in range(tile_x, min(tile_x + tile_size, width)):
+                            avg_height += heightmap.get_height(x, y)
+                            height_count += 1
+                    if height_count > 0:
+                        avg_height /= height_count
+                        
+                    # Get height range for fallback
+                    all_heights = [
+                        heightmap.get_height(x, y)
+                        for y in range(0, height, 8)
+                        for x in range(0, width, 8)
+                    ]
+                    min_h = min(all_heights)
+                    max_h = max(all_heights)
+                    
+                    blend = self.multi_layer_system.create_fallback_blend(avg_height, min_h, max_h)
+                
+                # Draw this tile with multi-layer blending
+                self._draw_tile_with_multi_layer_blend(
+                    tile_x, tile_y, tile_size, width, height,
+                    heightmap, blend, texture_scale, step
+                )
+                vertices_drawn += (tile_size // step) * (tile_size // step) * 6  # Approximate
+        
+        logger.info(f"Drew multi-layer terrain with ~{vertices_drawn} vertices")
+        
+        # Clean up
+        glDisable(GL_LIGHTING)
+        glDisable(GL_TEXTURE_2D)
+        glBindTexture(GL_TEXTURE_2D, 0)
+        
+    def _draw_tile_with_multi_layer_blend(self, tile_x: int, tile_y: int, tile_size: int,
+                                        map_width: int, map_height: int, heightmap,
+                                        blend, texture_scale: float, step: int):
+        """Draw a single tile with multi-layer texture blending using OpenGL fixed-function pipeline"""
+        
+        # For OpenGL fixed-function multi-texturing, we'll use multi-pass rendering
+        # with alpha blending to achieve the multi-layer effect
+        
+        # Get texture IDs for this blend
+        texture_layers = []
+        for i, (tid, weight) in enumerate(zip(blend.texture_ids, blend.blend_weights)):
+            gl_tex_id = self.texture_id_map.get(tid)
+            if gl_tex_id:
+                texture_layers.append((gl_tex_id, weight))
+                
+        if not texture_layers:
+            return
+            
+        # Enable blending for multi-layer effect
+        glEnable(GL_BLEND)
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+        
+        # Draw each layer with appropriate alpha
+        for layer_idx, (gl_tex_id, weight) in enumerate(texture_layers):
+            # Bind texture for this layer
+            glBindTexture(GL_TEXTURE_2D, int(gl_tex_id))
+            
+            # Set alpha based on blend weight
+            if layer_idx == 0:
+                # Base layer: full opacity
+                alpha = 1.0
+            else:
+                # Additional layers: use blend weight as alpha
+                alpha = weight
+                
+            # Draw the tile
+            glBegin(GL_TRIANGLE_STRIP)
+            for y in range(tile_y, min(tile_y + tile_size, map_height), step):
+                for x in range(tile_x, min(tile_x + tile_size, map_width), step):
+                    # Get heights and calculate normals
+                    h_center = heightmap.get_height(x, y)
+                    h_right = heightmap.get_height(min(x + step, map_width - 1), y)
+                    h_down = heightmap.get_height(x, min(y + step, map_height - 1))
+                    
+                    # Calculate normal
+                    tx = [float(step), h_right - h_center, 0.0]
+                    tz = [0.0, h_down - h_center, float(step)]
+                    nx = tx[1] * tz[2] - tx[2] * tz[1]
+                    ny = tx[2] * tz[0] - tx[0] * tz[2]
+                    nz = tx[0] * tz[1] - tx[1] * tz[0]
+                    
+                    length = (nx * nx + ny * ny + nz * nz) ** 0.5
+                    if length > 0:
+                        nx, ny, nz = nx / length, ny / length, nz / length
+                    else:
+                        nx, ny, nz = 0.0, 1.0, 0.0
+                    
+                    # Set color with alpha for blending
+                    glColor4f(1.0, 1.0, 1.0, alpha)
+                    glNormal3f(nx, ny, nz)
+                    
+                    # Texture coordinates
+                    glTexCoord2f(x * texture_scale, y * texture_scale)
+                    glVertex3f(float(x), h_center, float(y))
+                    
+                    if y + step < map_height:
+                        h_next = heightmap.get_height(x, y + step)
+                        glColor4f(1.0, 1.0, 1.0, alpha)
+                        glNormal3f(nx, ny, nz)
+                        glTexCoord2f(x * texture_scale, (y + step) * texture_scale)
+                        glVertex3f(float(x), h_next, float(y + step))
+                        
+                glEnd()
+                
+        # Disable blending
+        glDisable(GL_BLEND)
 
     def _create_texture_map_from_assignments(self):
         """Create a texture map from the actual terrain texture assignments in the map file"""
@@ -1700,7 +2003,8 @@ class MapViewerWindow(QMainWindow):
         controls_layout.addWidget(self.grid_checkbox)
 
         self.texture_checkbox = QCheckBox("🎨 Textures (T)")
-        self.texture_checkbox.setChecked(True)
+        # Will be initialized after viewer is created
+        self.texture_checkbox.setChecked(False)
         self.texture_checkbox.stateChanged.connect(self.toggle_texture_checkbox)
         controls_layout.addWidget(self.texture_checkbox)
 
@@ -1721,6 +2025,23 @@ class MapViewerWindow(QMainWindow):
         info_layout.addWidget(self.fps_label)
 
         controls_layout.addWidget(info_group)
+        controls_layout.addSpacing(10)
+
+        # Texture preview section
+        texture_group = QWidget()
+        texture_layout = QVBoxLayout(texture_group)
+        texture_layout.setContentsMargins(0, 0, 0, 0)
+
+        texture_label = QLabel("<b>🎨 Loaded Textures</b>")
+        texture_label.setStyleSheet("font-size: 12px;")
+        texture_layout.addWidget(texture_label)
+
+        self.texture_preview_label = QLabel("No textures loaded")
+        self.texture_preview_label.setWordWrap(True)
+        self.texture_preview_label.setStyleSheet("font-size: 10px; color: #aaa;")
+        texture_layout.addWidget(self.texture_preview_label)
+
+        controls_layout.addWidget(texture_group)
         controls_layout.addSpacing(10)
 
         # Shortcuts section
@@ -1759,6 +2080,12 @@ class MapViewerWindow(QMainWindow):
         # Right side: OpenGL viewer widget (takes all remaining space)
         self.viewer = MapViewerWidget()
         main_layout.addWidget(self.viewer, 1)  # Stretch factor 1
+        
+        # Connect texture preview label to widget
+        self.viewer.texture_preview_label = self.texture_preview_label
+        
+        # Sync checkbox state with viewer
+        self.texture_checkbox.setChecked(self.viewer.use_textures)
 
         # Status bar at bottom
         self.status_bar = QStatusBar()
