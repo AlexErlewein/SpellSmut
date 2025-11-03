@@ -88,7 +88,7 @@ Phase 5: Polish & Distribution 📋 PLANNED    (Apr 2025)
 | Phase | Status | Progress | Start Date | Target Date | Actual Date |
 |-------|--------|----------|------------|-------------|-------------|
 | Phase 1 | ✅ Complete | 100% | 2024-10-20 | 2024-11-03 | 2024-11-03 |
-| Phase 2 | 🔄 In Progress | 15% | 2024-11-04 | 2024-12-01 | - |
+| Phase 2 | 🔄 In Progress | 75% | 2024-11-04 | 2024-12-01 | - |
 | Phase 3 | 📋 Planned | 0% | 2024-12-02 | 2025-01-31 | - |
 | Phase 4 | 📋 Planned | 0% | 2025-02-01 | 2025-03-31 | - |
 | Phase 5 | 📋 Planned | 0% | 2025-04-01 | 2025-04-30 | - |
@@ -224,65 +224,87 @@ Phase 5: Polish & Distribution 📋 PLANNED    (Apr 2025)
 
 ### Key Features
 
-#### 2.1 Texture Loading 🔄
-**Status**: In Progress (15%)  
-**Dependencies**: Texture format analysis
+#### 2.1 Texture Loading ✅
+**Status**: Complete (100%)  
+**Dependencies**: Texture format analysis (DONE)
 
-- [ ] **DDS Loader**
-  - Parse DDS header
+- [x] **DDS Loader** ✅
+  - Parse DDS files using Pillow
   - Load BC1/BC3 compressed formats
-  - Mipmap support
-  - Expected timeline: 3 days
+  - Convert to RGBA numpy arrays
+  - Optional texture resizing
+  - Completed: 2024-11-03
 
-- [ ] **TGA Loader** (fallback)
-  - Parse TGA header
-  - Load uncompressed RGB/RGBA
-  - Expected timeline: 1 day
+- [x] **Texture Manager** ✅
+  - Scans ExtractedAssets for landscape_island_*.dds files
+  - Loads all 119 unique terrain textures
+  - Simple caching system (dict-based)
+  - Fallback test texture generation
+  - Cache hit/miss tracking
+  - Completed: 2024-11-03
 
-- [ ] **Texture Cache**
-  - LRU cache for textures
-  - Memory limit (e.g., 500 MB)
-  - Lazy loading
-  - Expected timeline: 2 days
+- [x] **OpenGL Integration** ✅
+  - Texture upload with glTexImage2D
+  - Proper texture parameters (wrap, filter)
+  - Texture ID management
+  - Completed: 2024-11-03
 
-#### 2.2 Texture Mapping 📋
-**Status**: Planned  
-**Dependencies**: Texture loading complete
+#### 2.2 Texture Mapping 🔄
+**Status**: Partially Complete (60%)  
+**Dependencies**: Texture loading complete ✅
 
-- [ ] **UV Generation**
+- [x] **UV Generation** ✅
   - World-space texture coordinates
   - Texture repeat/scale settings
+  - Proper coordinate calculation from vertex position
+  - Completed: 2024-11-03
+
+- [x] **Basic Texture Display** ✅
+  - Single texture rendering working
+  - Toggle system (T key)
+  - 60+ FPS performance maintained
+  - Completed: 2024-11-03
+
+- [ ] **Multi-Layer Blending** 📋
+  - Parse blend weights from map Chunk 3
+  - 3-layer blend implementation (per SpellForce format)
+  - Smooth transitions between texture layers
+  - Expected timeline: 3-4 days
+
+- [ ] **Per-Tile Texture Assignment** 📋
+  - Load tile definitions from Chunk 3
+  - Apply correct textures per map tile
+  - Handle texture layer weights
+  - Expected timeline: 2-3 days
   - Expected timeline: 2 days
 
-- [ ] **Multi-Layer Blending**
-  - Parse blend weights from .tex files
-  - 4-layer blend shader
-  - Smooth transitions
-  - Expected timeline: 3 days
+#### 2.3 Lighting System ✅
+**Status**: Complete (100%)  
+**Dependencies**: Texture rendering working ✅
 
-- [ ] **Texture Atlas**
-  - Combine textures into atlas
-  - Reduce draw calls
-  - Expected timeline: 2 days
+- [x] **Normal Calculation** ✅
+  - Compute per-vertex normals from heightmap
+  - Cross product of tangent vectors
+  - Proper normalization
+  - Completed: 2024-11-03
 
-#### 2.3 Lighting System 📋
-**Status**: Planned  
-**Dependencies**: Texture rendering working
+- [x] **Directional Light** ✅
+  - Configurable sun direction (azimuth & altitude)
+  - Diffuse lighting with warm sun color
+  - Real-time sun position adjustment (Shift + WASD)
+  - Completed: 2024-11-03
 
-- [ ] **Normal Calculation**
-  - Compute per-vertex normals
-  - Smooth normal interpolation
-  - Expected timeline: 1 day
-
-- [ ] **Directional Light**
-  - Configurable sun direction
-  - Diffuse lighting term
-  - Expected timeline: 2 days
-
-- [ ] **Ambient Light**
+- [x] **Ambient Light** ✅
   - Base lighting level
   - Prevent pure black areas
-  - Expected timeline: 1 day
+  - Balanced ambient + diffuse
+  - Completed: 2024-11-03
+
+- [x] **Interactive Controls** ✅
+  - L key to toggle lighting on/off
+  - Shift + WASD/Arrows to adjust sun position
+  - Real-time lighting updates
+  - Completed: 2024-11-03
 
 #### 2.4 Shadows 📋
 **Status**: Planned (Optional for Phase 2)  

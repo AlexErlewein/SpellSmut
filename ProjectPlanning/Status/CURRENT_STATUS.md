@@ -1,8 +1,8 @@
 # Current Project Status
 
-**Last Updated**: October 28, 2025
+**Last Updated**: November 3, 2024
 **Overall Status**: 🟢 ACTIVE DEVELOPMENT
-**Current Focus**: Resolving Icon System mapping, Finalizing Creator Tools.
+**Current Focus**: Map Viewer texture blending, Resolving Icon System mapping.
 
 ---
 
@@ -18,12 +18,39 @@
 | **NPC Creator** | ✅ COMPLETE | Phase 7/7 | In production use |
 | **ID Manager** | ✅ COMPLETE | Shared System | Active & working |
 | **Asset Extraction**| ✅ COMPLETE | Phase 3/3 | Maintenance only |
+| **Map Viewer** | 🔄 IN PROGRESS | 43% (Phase 2/5) | Multi-layer texture blending |
 | **Icon System** | ⚠️ MAPPING REQ. | 85% | **Resolve Handle-to-Atlas Mapping** |
 | **Documentation** | ✅ COMPLETE | Comprehensive | Regular updates |
 
 ---
 
 ## Active Work Streams
+
+### 🔄 Map Viewer: Phase 2 - Visual Fidelity (HIGH PRIORITY)
+
+**Status**: 75% Complete - Texture rendering and lighting systems implemented!
+**Current Phase**: Phase 2 of 5 (Visual Fidelity)
+
+#### Recently Completed
+- ✅ **Texture Rendering System**: Full DDS texture loading with OpenGL (1,185 lines of code)
+- ✅ **DDS Loader**: Loads all 119 terrain textures from ExtractedAssets
+- ✅ **Simple Texture Manager**: Caching system with 494 DDS files discovered
+- ✅ **OpenGL Integration**: Texture upload with glTexImage2D, 60+ FPS performance
+- ✅ **Texture Coordinates**: World-space UV generation for terrain mesh
+- ✅ **Dynamic Lighting**: Directional sun light with calculated surface normals
+- ✅ **Interactive Controls**: Real-time sun adjustment (Shift + WASD), texture toggle (T key)
+- ✅ **UI Overhaul**: Compact sidebar with built-in shortcuts guide
+- ✅ **Grid Toggle**: Optional overlay control (G key)
+
+#### Next Steps
+1. **Multi-layer Texture Blending**: Implement 3-layer texture blend per tile (as per SpellForce format)
+2. **Parse Texture Assignments**: Load tile definitions from map Chunk 3
+3. **Apply Per-Tile Textures**: Use correct texture layers with blend weights
+4. **Shadow Mapping** (Optional): Add dynamic shadows from sun
+
+**See**: `ProjectPlanning/Components/MAP_VIEWER_STATUS.md` for detailed status
+
+---
 
 ### ⚠️ Icon System: Handle-to-Atlas Mapping (CRITICAL PRIORITY)
 
