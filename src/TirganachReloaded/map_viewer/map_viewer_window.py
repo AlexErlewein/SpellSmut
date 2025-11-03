@@ -149,17 +149,26 @@ class MapViewerWidget(QOpenGLWidget):
 
                 # Create terrain texture map after map is loaded
                 if self.terrain_texture_mapper and self.texture_manager:
-                    texture_ids = list(self.base_textures.keys())
-                    if texture_ids:
-                        logger.info("Creating terrain texture map...")
-                        self.texture_map = (
-                            self.terrain_texture_mapper.create_simple_height_based_map(
+                    # Check if the map file contains actual texture assignments
+                    if self.map_loader.terrain_textures:
+                        # Use real texture assignments from the map file
+                        logger.info(
+                            f"Using {len(self.map_loader.terrain_textures)} real texture assignments from map file"
+                        )
+                        self.texture_map_from_map = (
+                            self._create_texture_map_from_assignments()
+                        )
+                    else:
+                        # Fallback to height-based assignment
+                        texture_ids = list(self.base_textures.keys())
+                        if texture_ids:
+                            logger.info("Creating height-based terrain texture map...")
+                            self.texture_map = self.terrain_texture_mapper.create_simple_height_based_map(
                                 self.map_loader.heightmap, texture_ids
                             )
-                        )
-                        logger.info(
-                            f"Created texture map for {len(self.texture_map)} tiles"
-                        )
+                            logger.info(
+                                f"Created texture map for {len(self.texture_map)} tiles"
+                            )
 
                 self.update()
                 return True
@@ -731,8 +740,58 @@ class MapViewerWidget(QOpenGLWidget):
 
         if self.frame_count % 60 == 0:
             logger.debug(
-                f"Drew {vertices_drawn} vertices (textures: {self.textures_loaded}, texture_map: {bool(self.texture_map)})"
+                f"Drew {vertices_drawn} vertices (textures: {self.textures_loaded}, texture_map: {bool(self.texture_map)}, real_texture_assignments: {bool(getattr(self, 'texture_map_from_map', None))})"
             )
+
+    def _create_texture_map_from_assignments(self):
+        """Create a texture map from the actual terrain texture assignments in the map file"""
+        if not self.map_loader.terrain_textures or not self.texture_manager:
+            return {}
+
+        # Create a mapping from (tile_x, tile_y) to texture assignments
+        texture_map = {}
+
+        # Group the assignments by tile
+        for assignment in self.map_loader.terrain_textures:
+            # Group by 4x4 tile blocks like in the terrain texture mapper
+            tile_x = assignment.x // 4
+            tile_y = assignment.y // 4
+            tile_key = (tile_x, tile_y)
+
+            # Initialize the tile entry if it doesn't exist
+            if tile_key not in texture_map:
+                texture_map[tile_key] = {}
+
+            # Add this texture assignment with its weight (currently just 1.0)
+            texture_map[tile_key][assignment.texture_id] = 1.0
+
+        logger.info(
+            f"Created texture map from {len(self.map_loader.terrain_textures)} assignments, {len(texture_map)} tiles"
+        )
+        return texture_map
+
+    def _get_texture_for_position_from_map(self, x, y):
+        """Get texture assignment for a position using real map data"""
+        if not hasattr(self, "texture_map_from_map") or not self.texture_map_from_map:
+            return -1  # Use fallback
+
+        # Convert world coordinates to tile coordinates
+        tile_x = int(x) // 4  # Using 4 as tile size like in texture mapper
+        tile_y = int(y) // 4
+        tile_key = (tile_x, tile_y)
+
+        if tile_key in self.texture_map_from_map:
+            # Get the texture with highest weight (for now, all are 1.0)
+            texture_assignments = self.texture_map_from_map[tile_key]
+            if texture_assignments:
+                primary_texture_id = max(
+                    texture_assignments.items(), key=lambda x: x[1]
+                )[0]
+                # Make sure the texture ID is valid
+                if primary_texture_id < len(self.texture_ids):
+                    return self.texture_ids[primary_texture_id]
+
+        return -1  # Use fallback
 
     def _draw_grid(self):
         """Draw a grid overlay on the terrain"""
@@ -1531,6 +1590,39 @@ class MapViewerWidget(QOpenGLWidget):
         self.grid_enabled = not self.grid_enabled
         logger.info(f"Grid: {'ON' if self.grid_enabled else 'OFF'}")
         self.update()
+
+    def _get_texture_for_position(self, x, y):
+        """Get the appropriate texture ID for a given position, using real or fallback data"""
+        # First try to use real texture assignments from the map file
+        if hasattr(self, "texture_map_from_map") and self.texture_map_from_map:
+            texture_id = self._get_texture_for_position_from_map(x, y)
+            if texture_id != -1:
+                return texture_id
+
+        # Otherwise fall back to the height-based texture mapping
+        if self.texture_map:
+            # Convert world coordinates to tile coordinates
+            tile_x = int(x) // 4
+            tile_y = int(y) // 4
+            tile_key = (tile_x, tile_y)
+
+            if tile_key in self.texture_map:
+                # Get the primary texture for this tile
+                texture_assignments = self.texture_map[tile_key]
+                if texture_assignments:
+                    primary_texture_id = max(
+                        texture_assignments.items(), key=lambda x: x[1]
+                    )[0]
+                    # Make sure the texture ID is valid
+                    if primary_texture_id < len(self.texture_ids):
+                        return self.texture_ids[primary_texture_id]
+
+        # Default fallback to first texture
+        return (
+            self.texture_ids[0]
+            if (self.texture_ids and len(self.texture_ids) > 0)
+            else 0
+        )
 
 
 class MapViewerWindow(QMainWindow):
