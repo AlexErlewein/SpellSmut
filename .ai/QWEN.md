@@ -38,21 +38,61 @@ SpellSmut is a comprehensive modding project and documentation repository for **
 ### Directory Structure
 ```
 SpellSmut/
+├── README.md                      # Main project documentation
+├── STRUCTURE.md                   # Project structure reference
+├── pyproject.toml                 # Python project configuration
+├── pytest.ini                     # Pytest configuration
+├── uv.lock                        # UV dependency lock file
+├── _config.yml                    # Jekyll/GitHub Pages configuration
+├── .gitignore                     # Git ignore rules
+├── .gitattributes                 # Git attributes
+├── .luarc.json                    # Lua configuration
+├── package.json                   # Node.js configuration
+├── package-lock.json              # Node.js dependencies
 ├── docs/                          # Comprehensive modding documentation
+│   ├── Guides/                    # User guides and tutorials
+│   ├── Project/                   # Project-level documentation
+│   ├── Extraction/                # Asset extraction guides
+│   ├── Tools/                     # Tool documentation
+│   ├── Technical/                 # Technical implementation guides
+│   ├── Site/                      # Jekyll/GitHub Pages site
+│   └── README.md                  # Documentation index
 ├── OriginalGameFiles/             # Reference game files
 ├── ModdedGameFiles/               # Modified game files
 ├── ExtractedAssets/               # Assets extracted from game PAK files
 ├── ModdingTools/                  # Third-party modding utilities
 ├── ProjectPlanning/               # Project plans and roadmaps
 ├── src/                           # Python scripts and modding utilities
+│   ├── TirganachReloaded/         # Main CFF editor application
+│   │   ├── run_cff_editor.py      # Launch GUI editor
+│   │   ├── cff_editor/            # CFF Editor GUI application
+│   │   ├── tirganach/             # Core CFF parsing library
+│   │   ├── data/                  # Reference data files
+│   │   ├── docs/                  # Documentation
+│   │   ├── examples/              # Example scripts & utilities
+│   │   ├── exports/               # Exported data (gitignored)
+│   │   ├── tests/                 # TirganachReloaded-specific tests
+│   │   ├── armor_forge.py         # Armor creation system
+│   │   ├── enhanced_armor.json    # Active armor database
+│   │   └── enhanced_weapons.json  # Active weapon database
 │   ├── helper_tools/              # Asset extraction and organization scripts
-│   └── TirganachReloaded/          # CFF editing library and tools
+│   │   ├── analysis/              # Analysis and debugging tools
+│   │   ├── debugging/             # Debugging utilities
+│   │   ├── extraction/            # Asset extraction tools
+│   │   ├── quest_extraction/      # Quest-specific extraction
+│   │   └── README.md              # Helper tools overview
+│   └── tests/                     # Main test suite
+│       ├── conftest.py            # Pytest fixtures and configuration
+│       └── test_*.py              # Test modules
+├── .ai/                           # AI assistant instructions
+│   ├── README.md                  # AI instructions overview
+│   ├── CLAUDE.md                  # Claude assistant config
+│   ├── CRUSH.md                   # Crush assistant config
+│   ├── GEMINI.md                  # Gemini assistant config
+│   ├── QWEN.md                    # Qwen assistant config
+│   └── RULES.md                   # Folder structure rules
 ├── .claude/                       # Claude-specific settings
 ├── .crush/                        # Database files
-├── README.md                      # Project overview
-├── RULES.md                       # File organization conventions
-├── CLAUDE.md                      # Codebase analysis
-├── _config.yml                    # Jekyll/GitHub Pages configuration
 └── ...
 ```
 
@@ -116,20 +156,24 @@ All creator tools integrate with shared components and follow consistent design 
 ### File Organization Rules
 The project follows strict organization conventions documented in RULES.md:
 1. Planning files go in `ProjectPlanning/`
-2. Documentation files go in `docs/`
-3. Source code goes in `src/`
+2. Documentation files go in `docs/` (with subfolders for different types)
+3. Source code goes in `src/` (with `src/helper_tools/` for utilities and `src/tests/` for tests)
 4. Extracted assets go in `ExtractedAssets/`
 5. Modding tools go in `ModdingTools/`
 6. Original game files remain in `OriginalGameFiles/` (never modified)
 7. Modified files go in `ModdedGameFiles/`
+8. AI assistant instructions go in `.ai/` (hidden directory)
 
 ### Building and Running
 The project is primarily a documentation and tooling effort rather than a compiled application. For using the modding tools:
 
-1. **Python Scripts**: Most tools are Python-based and can be run directly
+1. **Python Scripts**: Most tools are Python-based and can be run with uv:
    ```bash
-   python TirganachReloaded/run_cff_editor.py
-   python src/helper_tools/batch_extract_ui.py
+   cd src/TirganachReloaded
+   uv run python run_cff_editor.py
+   
+   # Or run helper tools
+   uv run python -m src.helper_tools.batch_extract_ui
    ```
 
 2. **Documentation Site**: Built using Jekyll with the cayman theme
@@ -140,6 +184,15 @@ The project is primarily a documentation and tooling effort rather than a compil
    - PAK extraction utilities
    - UI asset extraction
    - Audio extraction tools
+
+4. **Running Tests**: The project uses pytest for testing:
+   ```bash
+   # Run all tests
+   uv run pytest src/tests/
+   
+   # Run specific test
+   uv run pytest src/tests/test_quest_data_service.py
+   ```
 
 ## Development Conventions
 
@@ -239,8 +292,9 @@ The project welcomes contributions to documentation and tools. See the README.md
 - Multiplayer & FreeGame Guide
 
 ### Key Scripts in src/
-- `TirganachReloaded/` - CFF editor and game data tools
-- `helper_tools/` - Asset extraction and organization utilities
-- Various batch files for automation
+- `TirganachReloaded/` - Main CFF editor application and game data tools
+- `helper_tools/` - Asset extraction and organization utilities (subdivided by function)
+- `tests/` - Main test suite with pytest configuration
+- Various debug and test scripts now properly organized
 
 This project represents a professional approach to game modding with comprehensive documentation, robust tooling, and clear organization principles.
