@@ -96,19 +96,18 @@ class EnhancedQuestViewer(QMainWindow):
         self.quest_tree.setHeaderLabels(["Quest", "Type"])
         self.quest_tree.itemSelectionChanged.connect(self.on_quest_selection_changed)
 
-        # Enhanced tree styling
+        # Minimal tree styling (clean interface)
         self.quest_tree.setStyleSheet("""
             QTreeWidget {
                 font-size: 12px;
-                alternate-background-color: #f8f9fa;
+                border: 1px solid #ccc;
             }
             QTreeWidget::item {
-                padding: 4px;
-                border-bottom: 1px solid #ecf0f1;
+                padding: 3px;
             }
             QTreeWidget::item:selected {
-                background-color: #3498db;
-                color: white;
+                background-color: #e0e0e0;
+                color: black;
             }
         """)
 
@@ -147,14 +146,14 @@ class EnhancedQuestViewer(QMainWindow):
         self.details_text.setReadOnly(True)
         self.details_text.setPlainText("Select a quest to view details...")
 
-        # Enhanced details styling
+        # Minimal details styling (clean interface)
         self.details_text.setStyleSheet("""
             QTextEdit {
                 font-family: 'Consolas', 'Monaco', monospace;
                 font-size: 12px;
-                background-color: #2c3e50;
-                color: #ecf0f1;
-                border: 1px solid #34495e;
+                background-color: white;
+                color: black;
+                border: 1px solid #ccc;
                 padding: 10px;
             }
         """)
@@ -169,9 +168,8 @@ class EnhancedQuestViewer(QMainWindow):
         splitter.setStretchFactor(1, 1)
         splitter.setSizes([700, 700])
 
-        # Enhanced status bar
-        self.statusBar().showMessage("Ready - Enhanced Quest Viewer Loaded")
-        self.statusBar().setStyleSheet("QStatusBar { background-color: #ecf0f1; color: #2c3e50; }")
+        # Simple status bar
+        self.statusBar().showMessage("Ready - Quest Viewer Loaded")
 
     def load_data(self):
         """Load quest data - Fast version with Lua priority"""
@@ -193,6 +191,11 @@ class EnhancedQuestViewer(QMainWindow):
             self.statusBar().showMessage("Loading Lua quest data...")
             cache_dir = Path("src/TirganachReloaded/data/cache")
             self.lua_manager = LuaDataManager(cache_dir=cache_dir)
+
+            # Make sure Lua cache is loaded
+            if not self.lua_manager.cache_loaded:
+                self.statusBar().showMessage("Preloading Lua cache...")
+                self.lua_manager.preload_cache()
 
             self.statusBar().showMessage("Loading quest information...")
             self.load_lua_quest_data()
@@ -347,6 +350,8 @@ class EnhancedQuestViewer(QMainWindow):
             if self.lua_manager and self.lua_manager.cache_loaded:
                 # Get quests from Lua cache
                 quest_ids = self.lua_manager.get_all_quest_ids()
+                if self.logger:
+                    self.logger.info(f"Found {len(quest_ids)} quests in Lua cache")
 
                 enhanced_count = 0
                 for quest_id in quest_ids:
@@ -375,19 +380,31 @@ class EnhancedQuestViewer(QMainWindow):
 
                 if self.logger:
                     self.logger.info(f"✓ Enhanced {enhanced_count} quests with Lua data")
+                    self.logger.info(f"✓ Total quests in data: {len(self.quest_data)}")
+            else:
+                if self.logger:
+                    self.logger.warning("Lua manager not available or cache not loaded")
 
         except Exception as e:
             if self.logger:
                 self.logger.warning(f"Failed to load Lua quest data: {e}")
+                import traceback
+                traceback.print_exc()
 
     def populate_quest_tree(self):
         """Populate the enhanced quest tree with German names and proper formatting"""
         self.quest_tree.clear()
 
+        if self.logger:
+            self.logger.info(f"populate_quest_tree called with {len(self.quest_data)} quests")
+
         if not self.quest_data:
+            if self.logger:
+                self.logger.warning("No quest data to populate tree")
             return
 
         # Create quest items with enhanced formatting
+        items_created = 0
         for quest_id, quest_info in sorted(self.quest_data.items()):
             name = quest_info.get('name', f'Quest {quest_id}')
 
@@ -417,7 +434,13 @@ class EnhancedQuestViewer(QMainWindow):
                 item.setBackground(0, Qt.lightGray)
                 item.setBackground(1, Qt.lightGray)
 
+            items_created += 1
+
+        if self.logger:
+            self.logger.info(f"Created {items_created} tree items")
+
         # Create hierarchy (parent-child relationships)
+        hierarchy_moved = 0
         for quest_id, quest_info in self.quest_data.items():
             parent_id = quest_info.get('parent_id')
             if parent_id is not None and parent_id in self.quest_data:
@@ -437,19 +460,26 @@ class EnhancedQuestViewer(QMainWindow):
                 if parent_item and child_item:
                     self.quest_tree.takeTopLevelItem(self.quest_tree.indexOfTopLevelItem(child_item))
                     parent_item.addChild(child_item)
+                    hierarchy_moved += 1
+
+        if self.logger:
+            self.logger.info(f"Moved {hierarchy_moved} items to create hierarchy")
 
         # Expand main quests by default for better visibility
+        expanded_count = 0
         for i in range(self.quest_tree.topLevelItemCount()):
             item = self.quest_tree.topLevelItem(i)
             if item.childCount() > 0:
                 item.setExpanded(True)
+                expanded_count += 1
 
         # Resize columns to fit content
         self.quest_tree.resizeColumnToContents(0)
         self.quest_tree.resizeColumnToContents(1)
 
         if self.logger:
-            self.logger.info("✓ Enhanced quest tree populated with German names and bold main quests")
+            self.logger.info(f"✓ Enhanced quest tree populated: {items_created} items, {hierarchy_moved} hierarchy moves, {expanded_count} expanded")
+            self.logger.info(f"Tree now has {self.quest_tree.topLevelItemCount()} top-level items")
 
     def on_quest_selection_changed(self):
         """Handle quest selection with enhanced details display"""
