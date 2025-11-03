@@ -303,10 +303,23 @@ logger.add(sys.stderr, level="INFO")   # Default
 logger.add(sys.stderr, level="WARNING")  # Minimal
 ```
 
-## Known Issues
+## Known Issues & Current Status
 
-1. **Map Format**: Current parser is based on estimated format and may not work with all maps
-   - **Solution**: Needs reverse engineering of actual SpellForce .map format
+### Phase 1 Status: Core Functionality Working ✅
+
+The viewer successfully runs and displays basic 3D terrain. However, map loading is still being refined.
+
+### Known Issues
+
+1. **Map Format Reverse Engineering** 🔴 **PRIORITY**
+   - Current parser uses estimated chunk IDs
+   - Real SpellForce maps may use different chunk numbering
+   - **Solution**: Use `inspect_map.py` tool to analyze actual files
+   - **Help Needed**: Community knowledge of .map format
+
+2. **macOS OpenGL Compatibility** ✅ **FIXED**
+   - Fixed deprecated OpenGL calls
+   - Now compatible with macOS OpenGL 3.3 Core Profile
    
 2. **Texture Support**: Textures not yet implemented (terrain shows solid green)
    - **Solution**: Parse chunk 3, load texture files from PAK archives

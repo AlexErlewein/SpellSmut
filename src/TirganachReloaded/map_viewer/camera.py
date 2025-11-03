@@ -35,7 +35,7 @@ class Camera:
         self,
         position: Tuple[float, float, float] = (0, 0, 0),
         azimuth: float = math.pi / 2,  # 90 degrees (facing forward)
-        altitude: float = -math.pi * 70 / 180,  # -70 degrees (looking down)
+        altitude: float = -math.pi * 45 / 180,  # -45 degrees (looking down)
         zoom_level: float = 1.0,
     ):
         """
@@ -53,7 +53,9 @@ class Camera:
         self.zoom_level = max(0.1, min(6.0, zoom_level))
 
         # Camera properties
-        self.base_elevation = 25.0  # Base height above terrain
+        self.base_elevation = (
+            100.0  # Base height above terrain (increased for better view)
+        )
         self.movement_speed = 60.0  # Units per second
         self.rotation_speed = 2.0  # Radians per second
 
@@ -183,9 +185,14 @@ class Camera:
             map_width: Map width in grid units
             map_height: Map height in grid units
         """
-        self.position = np.array([map_width / 2, 0.0, map_height / 2], dtype=np.float32)
-        self.azimuth = math.pi / 2  # 90 degrees
-        self.altitude = -math.pi * 70 / 180  # -70 degrees
+        # Position camera high above center of map
+        camera_height = max(map_width, map_height) * 0.5  # 50% of map size as height
+        self.position = np.array(
+            [map_width / 2, camera_height, map_height / 2 + map_height * 0.3],
+            dtype=np.float32,
+        )
+        self.azimuth = math.pi / 2  # 90 degrees (facing north)
+        self.altitude = -math.pi * 45 / 180  # -45 degrees (looking down at angle)
         self.zoom_level = 1.0
         self._update_vectors()
 

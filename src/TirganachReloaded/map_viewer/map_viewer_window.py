@@ -34,7 +34,7 @@ except ImportError:
     raise
 
 from .camera import Camera
-from .map_loader import MapLoader
+from .simple_map_loader import SimpleMapLoader
 
 
 class MapViewerWidget(QOpenGLWidget):
@@ -46,17 +46,24 @@ class MapViewerWidget(QOpenGLWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        # Set OpenGL format
+        # Set OpenGL format - use Compatibility Profile for macOS
         fmt = QSurfaceFormat()
-        fmt.setVersion(3, 3)
-        fmt.setProfile(QSurfaceFormat.OpenGLContextProfile.CoreProfile)
+        fmt.setVersion(2, 1)  # OpenGL 2.1 for better compatibility
+        fmt.setProfile(QSurfaceFormat.OpenGLContextProfile.CompatibilityProfile)
         fmt.setDepthBufferSize(24)
         fmt.setStencilBufferSize(8)
         fmt.setSamples(4)  # Anti-aliasing
+        fmt.setSwapBehavior(QSurfaceFormat.SwapBehavior.DoubleBuffer)
         self.setFormat(fmt)
 
+        # Ensure Qt doesn't interfere with OpenGL rendering
+        self.setAutoFillBackground(False)
+
+        # Force full updates
+        self.setUpdateBehavior(QOpenGLWidget.UpdateBehavior.NoPartialUpdate)
+
         # Map data
-        self.map_loader: Optional[MapLoader] = None
+        self.map_loader: Optional[SimpleMapLoader] = None
         self.camera = Camera()
 
         # Input state
@@ -82,21 +89,38 @@ class MapViewerWidget(QOpenGLWidget):
     def load_map(self, filepath: Path) -> bool:
         """Load a map file"""
         try:
-            self.map_loader = MapLoader()
+            self.map_loader = SimpleMapLoader()
             if self.map_loader.load(filepath):
                 # Reset camera to center of map
-                if self.map_loader.header:
-                    self.camera.reset(
-                        self.map_loader.header.width, self.map_loader.header.height
-                    )
-                    # Adjust camera elevation
-                    center_x = self.map_loader.header.width / 2
-                    center_y = self.map_loader.header.height / 2
+                if self.map_loader.heightmap:
+                    width = self.map_loader.heightmap.width
+                    height = self.map_loader.heightmap.height
+
+                    logger.info(f"Map loaded: {width}x{height}")
+
+                    # Position camera at center of map
+                    center_x = width / 2.0
+                    center_y = height / 2.0
+
+                    # Get terrain height at center
                     terrain_height = self.map_loader.get_height_at(center_x, center_y)
-                    self.camera.set_elevation(
-                        self.camera.base_elevation * self.camera.zoom_level,
-                        terrain_height,
+
+                    # Set camera position with elevation above terrain
+                    camera_elevation = (
+                        self.camera.base_elevation * self.camera.zoom_level
                     )
+                    camera_y = terrain_height + camera_elevation
+
+                    logger.info(
+                        f"Camera at ({center_x}, {camera_y}, {center_y}), terrain height: {terrain_height}"
+                    )
+
+                    # Reset camera with proper elevation
+                    self.camera.reset(width, height)
+                    self.camera.position[1] = camera_y  # Set Y elevation
+                    self.camera._update_vectors()
+
+                    logger.info(f"Camera: {self.camera}")
                 self.update()
                 return True
             return False
@@ -116,23 +140,32 @@ class MapViewerWidget(QOpenGLWidget):
             glEnable(GL_DEPTH_TEST)
             glDepthFunc(GL_LEQUAL)
 
-            # Enable backface culling
-            glEnable(GL_CULL_FACE)
-            glCullFace(GL_BACK)
+            # Disable backface culling for now to debug visibility
+            glDisable(GL_CULL_FACE)
+            # glEnable(GL_CULL_FACE)
+            # glCullFace(GL_BACK)
 
             # Enable blending for transparency
             glEnable(GL_BLEND)
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
-            # Smooth shading
-            glShadeModel(GL_SMOOTH)
+            # Anti-aliasing hints (only if supported)
+            try:
+                glHint(GL_LINE_SMOOTH_HINT, GL_NICEST)
+                glEnable(GL_LINE_SMOOTH)
+            except:
+                pass  # Ignore if not supported
 
-            # Nice perspective calculations
-            glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST)
-
-            # Anti-aliasing hints
-            glHint(GL_LINE_SMOOTH_HINT, GL_NICEST)
-            glEnable(GL_LINE_SMOOTH)
+            # Log OpenGL info
+            try:
+                vendor = glGetString(GL_VENDOR)
+                renderer = glGetString(GL_RENDERER)
+                version = glGetString(GL_VERSION)
+                logger.info(f"OpenGL Vendor: {vendor}")
+                logger.info(f"OpenGL Renderer: {renderer}")
+                logger.info(f"OpenGL Version: {version}")
+            except:
+                pass
 
             self.gl_initialized = True
             logger.info("OpenGL initialized successfully")
@@ -146,47 +179,92 @@ class MapViewerWidget(QOpenGLWidget):
         if h == 0:
             h = 1
 
+        # Set viewport
         glViewport(0, 0, w, h)
 
-        # Update projection matrix
-        glMatrixMode(GL_PROJECTION)
-        glLoadIdentity()
-
-        aspect = w / h
-        gluPerspective(60.0, aspect, 0.1, 1000.0)
-
-        glMatrixMode(GL_MODELVIEW)
+        logger.info(f"Viewport resized to {w}x{h}")
 
     def paintGL(self):
         """Render the scene"""
         if not self.gl_initialized:
+            logger.warning("OpenGL not initialized, skipping render")
             return
 
-        # Clear buffers
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        try:
+            # Make sure we're using the right context
+            self.makeCurrent()
 
-        # Set up view matrix
-        glMatrixMode(GL_MODELVIEW)
-        glLoadIdentity()
+            # Clear buffers
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
-        # Apply camera transformation
-        eye = self.camera.position
-        lookat = self.camera.lookat
-        up = self.camera.up
+            # Set up projection matrix
+            w = self.width()
+            h = self.height() if self.height() > 0 else 1
+            aspect = w / h
 
-        gluLookAt(
-            eye[0], eye[1], eye[2], lookat[0], lookat[1], lookat[2], up[0], up[1], up[2]
-        )
+            glMatrixMode(GL_PROJECTION)
+            glLoadIdentity()
+            gluPerspective(60.0, aspect, 1.0, 5000.0)
+
+            # Set up view matrix
+            glMatrixMode(GL_MODELVIEW)
+            glLoadIdentity()
+
+            # Apply camera transformation
+            eye = self.camera.position
+            lookat = self.camera.lookat
+            up = self.camera.up
+
+            # Debug output occasionally
+            if self.frame_count % 60 == 0:
+                logger.debug(f"Rendering frame {self.frame_count}")
+                logger.debug(f"Viewport: {w}x{h}, Camera: {eye}")
+
+            gluLookAt(
+                eye[0],
+                eye[1],
+                eye[2],
+                lookat[0],
+                lookat[1],
+                lookat[2],
+                up[0],
+                up[1],
+                up[2],
+            )
+        except Exception as e:
+            logger.error(f"Error in paintGL setup: {e}")
+            return
 
         # Draw the scene
         if self.map_loader and self.map_loader.heightmap:
+            heightmap = self.map_loader.heightmap
+
+            # Only log once per second
+            if self.frame_count % 60 == 0:
+                logger.debug(f"Rendering map: {heightmap.width}x{heightmap.height}")
+                logger.debug(f"Camera position: {self.camera.position}")
+                logger.debug(f"Camera lookat: {self.camera.lookat}")
+
             self._draw_heightmap()
             self._draw_grid()
             self._draw_units()
             self._draw_buildings()
+        else:
+            # Draw something to verify rendering is working
+            logger.warning("No map loaded, drawing test scene")
+            self._draw_test_triangle()
 
-        # Draw coordinate axes (debug)
+        # Draw coordinate axes (debug) - always draw for reference
         self._draw_axes()
+
+        # Draw large test box at map center for debugging
+        self._draw_test_box()
+
+        # Draw 2D test overlay to verify rendering works AT ALL
+        self._draw_2d_test()
+
+        # Draw status overlay
+        self._draw_status_overlay()
 
         # Update FPS counter
         self._update_fps()
@@ -195,26 +273,65 @@ class MapViewerWidget(QOpenGLWidget):
         """Draw the terrain heightmap"""
         heightmap = self.map_loader.heightmap
         if not heightmap:
+            logger.warning("No heightmap data available")
             return
 
         width = heightmap.width
         height = heightmap.height
 
-        # Draw terrain as triangle strips
-        glColor3f(0.4, 0.6, 0.3)  # Green terrain
+        # Only log once per second
+        if self.frame_count % 60 == 0:
+            logger.debug(f"Drawing heightmap: {width}x{height}")
+            # Sample some heights to verify data
+            sample_heights = [
+                heightmap.get_height(0, 0),
+                heightmap.get_height(width // 2, height // 2),
+                heightmap.get_height(width - 1, height - 1),
+            ]
+            logger.debug(f"Sample heights: {sample_heights}")
 
-        for y in range(height - 1):
+        # Enable depth testing
+        glEnable(GL_DEPTH_TEST)
+
+        # Disable culling to see both sides
+        glDisable(GL_CULL_FACE)
+
+        # Get height range for coloring
+        all_heights = [
+            heightmap.get_height(x, y)
+            for y in range(0, height, 8)
+            for x in range(0, width, 8)
+        ]
+        min_h = min(all_heights)
+        max_h = max(all_heights)
+        height_range = max_h - min_h if max_h > min_h else 1.0
+
+        # Draw with reduced resolution for better performance
+        step = 2  # Changed from 4 to 2 for better detail
+        vertices_drawn = 0
+
+        for y in range(0, height - step, step):
             glBegin(GL_TRIANGLE_STRIP)
-            for x in range(width):
+            for x in range(0, width, step):
                 # Current row
                 h1 = heightmap.get_height(x, y)
-                glVertex3f(x, h1, y)
+                # Color based on height - darker green at low, lighter/yellow at high
+                t1 = (h1 - min_h) / height_range
+                glColor3f(0.2 + t1 * 0.5, 0.4 + t1 * 0.4, 0.1 + t1 * 0.2)
+                glVertex3f(float(x), h1, float(y))
+                vertices_drawn += 1
 
                 # Next row
-                h2 = heightmap.get_height(x, y + 1)
-                glVertex3f(x, h2, y + 1)
+                h2 = heightmap.get_height(x, y + step)
+                t2 = (h2 - min_h) / height_range
+                glColor3f(0.2 + t2 * 0.5, 0.4 + t2 * 0.4, 0.1 + t2 * 0.2)
+                glVertex3f(float(x), h2, float(y + step))
+                vertices_drawn += 1
 
             glEnd()
+
+        if self.frame_count % 60 == 0:
+            logger.debug(f"Drew {vertices_drawn} vertices")
 
     def _draw_grid(self):
         """Draw a grid overlay on the terrain"""
@@ -228,57 +345,36 @@ class MapViewerWidget(QOpenGLWidget):
         glColor3f(0.3, 0.3, 0.3)  # Gray grid lines
         glLineWidth(1.0)
 
-        # Grid spacing (draw every 10 units)
-        spacing = 10
+        # Grid spacing (draw every 16 units for better visibility on larger maps)
+        spacing = max(16, width // 16)
 
         # Draw vertical lines
         for x in range(0, width, spacing):
             glBegin(GL_LINE_STRIP)
-            for y in range(height):
-                h = heightmap.get_height(x, y) + 0.1  # Slightly above terrain
+            for y in range(0, height, 4):  # Sample every 4th point for performance
+                h = heightmap.get_height(x, y) + 0.2  # Slightly above terrain
                 glVertex3f(x, h, y)
             glEnd()
 
         # Draw horizontal lines
         for y in range(0, height, spacing):
             glBegin(GL_LINE_STRIP)
-            for x in range(width):
-                h = heightmap.get_height(x, y) + 0.1
+            for x in range(0, width, 4):  # Sample every 4th point for performance
+                h = heightmap.get_height(x, y) + 0.2
                 glVertex3f(x, h, y)
             glEnd()
 
     def _draw_units(self):
         """Draw unit markers"""
-        if not self.map_loader:
-            return
-
-        glColor3f(0.0, 0.5, 1.0)  # Blue for units
-
-        for unit in self.map_loader.units:
-            # Get terrain height at unit position
-            terrain_h = self.map_loader.get_height_at(unit.x, unit.y)
-
-            # Draw a simple cube marker
-            glPushMatrix()
-            glTranslatef(unit.x, terrain_h + 1.0, unit.y)
-            self._draw_cube(0.5)
-            glPopMatrix()
+        # Units not yet supported in simplified loader
+        # TODO: Load units from companion files
+        pass
 
     def _draw_buildings(self):
         """Draw building markers"""
-        if not self.map_loader:
-            return
-
-        glColor3f(0.7, 0.3, 0.1)  # Brown for buildings
-
-        for building in self.map_loader.buildings:
-            terrain_h = self.map_loader.get_height_at(building.x, building.y)
-
-            # Draw a larger cube for buildings
-            glPushMatrix()
-            glTranslatef(building.x, terrain_h + 2.0, building.y)
-            self._draw_cube(1.5)
-            glPopMatrix()
+        # Buildings not yet supported in simplified loader
+        # TODO: Load buildings from companion files
+        pass
 
     def _draw_cube(self, size: float):
         """Draw a simple cube"""
@@ -324,28 +420,524 @@ class MapViewerWidget(QOpenGLWidget):
 
         glEnd()
 
+    def _draw_test_triangle(self):
+        """Draw a test triangle to verify OpenGL is working"""
+        glPushMatrix()
+        glTranslatef(0, 0, -20)  # Move it in front of camera
+
+        glColor3f(1.0, 0.0, 0.0)  # Red
+        glBegin(GL_TRIANGLES)
+        glVertex3f(-5.0, -5.0, 0.0)
+        glVertex3f(5.0, -5.0, 0.0)
+        glVertex3f(0.0, 5.0, 0.0)
+        glEnd()
+
+        glPopMatrix()
+
     def _draw_axes(self):
-        """Draw coordinate axes for debugging"""
-        glLineWidth(2.0)
+        """Draw coordinate axes for debugging at map center"""
+        glLineWidth(3.0)
+        glDisable(GL_DEPTH_TEST)  # Draw on top
+
+        # Draw axes at map center if map is loaded
+        if self.map_loader and self.map_loader.heightmap:
+            center_x = self.map_loader.heightmap.width / 2
+            center_z = self.map_loader.heightmap.height / 2
+            center_y = self.map_loader.get_height_at(center_x, center_z)
+        else:
+            center_x, center_y, center_z = 0, 0, 0
 
         glBegin(GL_LINES)
 
         # X axis (red)
         glColor3f(1.0, 0.0, 0.0)
-        glVertex3f(0, 0, 0)
-        glVertex3f(10, 0, 0)
+        glVertex3f(center_x, center_y, center_z)
+        glVertex3f(center_x + 30, center_y, center_z)
 
-        # Y axis (green)
+        # Y axis (green) - up
         glColor3f(0.0, 1.0, 0.0)
-        glVertex3f(0, 0, 0)
-        glVertex3f(0, 10, 0)
+        glVertex3f(center_x, center_y, center_z)
+        glVertex3f(center_x, center_y + 30, center_z)
 
         # Z axis (blue)
         glColor3f(0.0, 0.0, 1.0)
-        glVertex3f(0, 0, 0)
-        glVertex3f(0, 0, 10)
+        glVertex3f(center_x, center_y, center_z)
+        glVertex3f(center_x, center_y, center_z + 30)
 
         glEnd()
+
+        glEnable(GL_DEPTH_TEST)  # Re-enable depth testing
+
+    def _draw_test_box(self):
+        """Draw a large colorful box at map center to verify rendering"""
+        if not self.map_loader or not self.map_loader.heightmap:
+            return
+
+        glDisable(GL_DEPTH_TEST)  # Draw on top
+
+        # Get map center
+        center_x = self.map_loader.heightmap.width / 2
+        center_z = self.map_loader.heightmap.height / 2
+        center_y = (
+            self.map_loader.get_height_at(center_x, center_z) + 10
+        )  # 10 units above terrain
+
+        # Draw a large wireframe cube
+        size = 20.0
+        glColor3f(1.0, 1.0, 0.0)  # Yellow
+        glLineWidth(5.0)
+
+        # Draw wireframe box
+        glPushMatrix()
+        glTranslatef(center_x, center_y, center_z)
+
+        # Bottom square
+        glBegin(GL_LINE_LOOP)
+        glVertex3f(-size, -size, -size)
+        glVertex3f(size, -size, -size)
+        glVertex3f(size, -size, size)
+        glVertex3f(-size, -size, size)
+        glEnd()
+
+        # Top square
+        glBegin(GL_LINE_LOOP)
+        glVertex3f(-size, size, -size)
+        glVertex3f(size, size, -size)
+        glVertex3f(size, size, size)
+        glVertex3f(-size, size, size)
+        glEnd()
+
+        # Vertical lines
+        glBegin(GL_LINES)
+        glVertex3f(-size, -size, -size)
+        glVertex3f(-size, size, -size)
+
+        glVertex3f(size, -size, -size)
+        glVertex3f(size, size, -size)
+
+        glVertex3f(size, -size, size)
+        glVertex3f(size, size, size)
+
+        glVertex3f(-size, -size, size)
+        glVertex3f(-size, size, size)
+        glEnd()
+
+        glPopMatrix()
+
+        glEnable(GL_DEPTH_TEST)
+
+    def _draw_2d_test(self):
+        """Draw simple 2D overlay to verify OpenGL is working at all"""
+        # Only draw this if no map is loaded
+        if self.map_loader and self.map_loader.heightmap:
+            return
+        # Switch to 2D orthographic projection
+        glMatrixMode(GL_PROJECTION)
+        glPushMatrix()
+        glLoadIdentity()
+        glOrtho(0, self.width(), self.height(), 0, -1, 1)
+
+        glMatrixMode(GL_MODELVIEW)
+        glPushMatrix()
+        glLoadIdentity()
+
+        glDisable(GL_DEPTH_TEST)
+
+        # Draw a large red rectangle that MUST be visible
+        glColor3f(1.0, 0.0, 0.0)
+        glBegin(GL_QUADS)
+        glVertex2f(100, 100)
+        glVertex2f(300, 100)
+        glVertex2f(300, 300)
+        glVertex2f(100, 300)
+        glEnd()
+
+        # Draw green outline
+        glColor3f(0.0, 1.0, 0.0)
+        glLineWidth(5.0)
+        glBegin(GL_LINE_LOOP)
+        glVertex2f(100, 100)
+        glVertex2f(300, 100)
+        glVertex2f(300, 300)
+        glVertex2f(100, 300)
+        glEnd()
+
+        # Restore matrices
+        glPopMatrix()
+        glMatrixMode(GL_PROJECTION)
+        glPopMatrix()
+        glMatrixMode(GL_MODELVIEW)
+
+        glEnable(GL_DEPTH_TEST)
+
+    def _draw_status_overlay(self):
+        """Draw status text overlay showing FPS and info"""
+        if not self.map_loader or not self.map_loader.heightmap:
+            return
+
+        # Switch to 2D orthographic projection
+        glMatrixMode(GL_PROJECTION)
+        glPushMatrix()
+        glLoadIdentity()
+        glOrtho(0, self.width(), self.height(), 0, -1, 1)
+
+        glMatrixMode(GL_MODELVIEW)
+        glPushMatrix()
+        glLoadIdentity()
+
+        glDisable(GL_DEPTH_TEST)
+
+        # Draw semi-transparent background (larger to fit labels)
+        glColor4f(0.0, 0.0, 0.0, 0.5)
+        glBegin(GL_QUADS)
+        glVertex2f(10, 10)
+        glVertex2f(320, 10)
+        glVertex2f(320, 130)
+        glVertex2f(10, 130)
+        glEnd()
+
+        h = self.map_loader.heightmap
+
+        # Draw colored bars with labels using simple geometric shapes
+
+        # FPS indicator (green = good)
+        fps_color = 0.0 if self.fps < 30 else (1.0 if self.fps > 60 else 0.5)
+        glColor3f(1.0 - fps_color, fps_color, 0.0)
+        glBegin(GL_QUADS)
+        glVertex2f(90, 20)
+        glVertex2f(90 + min(self.fps * 2, 220), 20)
+        glVertex2f(90 + min(self.fps * 2, 220), 35)
+        glVertex2f(90, 35)
+        glEnd()
+
+        # FPS label using simple shapes (F P S)
+        glColor3f(1.0, 1.0, 1.0)
+        # F
+        glBegin(GL_QUADS)
+        glVertex2f(20, 20)
+        glVertex2f(22, 20)
+        glVertex2f(22, 35)
+        glVertex2f(20, 35)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(20, 20)
+        glVertex2f(28, 20)
+        glVertex2f(28, 22)
+        glVertex2f(20, 22)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(20, 26)
+        glVertex2f(26, 26)
+        glVertex2f(26, 28)
+        glVertex2f(20, 28)
+        glEnd()
+
+        # P
+        glBegin(GL_QUADS)
+        glVertex2f(32, 20)
+        glVertex2f(34, 20)
+        glVertex2f(34, 35)
+        glVertex2f(32, 35)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(32, 20)
+        glVertex2f(40, 20)
+        glVertex2f(40, 22)
+        glVertex2f(32, 22)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(38, 20)
+        glVertex2f(40, 20)
+        glVertex2f(40, 28)
+        glVertex2f(38, 28)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(32, 26)
+        glVertex2f(40, 26)
+        glVertex2f(40, 28)
+        glVertex2f(32, 28)
+        glEnd()
+
+        # S
+        glBegin(GL_QUADS)
+        glVertex2f(44, 20)
+        glVertex2f(52, 20)
+        glVertex2f(52, 22)
+        glVertex2f(44, 22)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(44, 20)
+        glVertex2f(46, 20)
+        glVertex2f(46, 28)
+        glVertex2f(44, 28)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(44, 26)
+        glVertex2f(52, 26)
+        glVertex2f(52, 28)
+        glVertex2f(44, 28)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(50, 26)
+        glVertex2f(52, 26)
+        glVertex2f(52, 35)
+        glVertex2f(50, 35)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(44, 33)
+        glVertex2f(52, 33)
+        glVertex2f(52, 35)
+        glVertex2f(44, 35)
+        glEnd()
+
+        # Colon
+        glBegin(GL_QUADS)
+        glVertex2f(56, 22)
+        glVertex2f(58, 22)
+        glVertex2f(58, 24)
+        glVertex2f(56, 24)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(56, 31)
+        glVertex2f(58, 31)
+        glVertex2f(58, 33)
+        glVertex2f(56, 33)
+        glEnd()
+
+        # Display FPS number as bar length indicator
+        # (actual number rendering would need font texture)
+
+        # Map size indicator
+        glColor3f(0.3, 0.7, 1.0)
+        map_width_bar = (h.width / 1024.0) * 220
+        glBegin(GL_QUADS)
+        glVertex2f(90, 50)
+        glVertex2f(90 + map_width_bar, 50)
+        glVertex2f(90 + map_width_bar, 65)
+        glVertex2f(90, 65)
+        glEnd()
+
+        # MAP label
+        glColor3f(1.0, 1.0, 1.0)
+        # M
+        glBegin(GL_QUADS)
+        glVertex2f(20, 50)
+        glVertex2f(22, 50)
+        glVertex2f(22, 65)
+        glVertex2f(20, 65)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(30, 50)
+        glVertex2f(32, 50)
+        glVertex2f(32, 65)
+        glVertex2f(30, 65)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(20, 50)
+        glVertex2f(26, 56)
+        glVertex2f(24, 56)
+        glVertex2f(20, 52)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(26, 56)
+        glVertex2f(32, 50)
+        glVertex2f(32, 52)
+        glVertex2f(28, 56)
+        glEnd()
+
+        # A
+        glBegin(GL_QUADS)
+        glVertex2f(36, 50)
+        glVertex2f(38, 50)
+        glVertex2f(38, 65)
+        glVertex2f(36, 65)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(44, 50)
+        glVertex2f(46, 50)
+        glVertex2f(46, 65)
+        glVertex2f(44, 65)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(36, 50)
+        glVertex2f(46, 50)
+        glVertex2f(46, 52)
+        glVertex2f(36, 52)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(36, 56)
+        glVertex2f(46, 56)
+        glVertex2f(46, 58)
+        glVertex2f(36, 58)
+        glEnd()
+
+        # P
+        glBegin(GL_QUADS)
+        glVertex2f(50, 50)
+        glVertex2f(52, 50)
+        glVertex2f(52, 65)
+        glVertex2f(50, 65)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(50, 50)
+        glVertex2f(58, 50)
+        glVertex2f(58, 52)
+        glVertex2f(50, 52)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(56, 50)
+        glVertex2f(58, 50)
+        glVertex2f(58, 58)
+        glVertex2f(56, 58)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(50, 56)
+        glVertex2f(58, 56)
+        glVertex2f(58, 58)
+        glVertex2f(50, 58)
+        glEnd()
+
+        # Colon
+        glBegin(GL_QUADS)
+        glVertex2f(62, 52)
+        glVertex2f(64, 52)
+        glVertex2f(64, 54)
+        glVertex2f(62, 54)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(62, 61)
+        glVertex2f(64, 61)
+        glVertex2f(64, 63)
+        glVertex2f(62, 63)
+        glEnd()
+
+        # Camera height indicator
+        glColor3f(1.0, 0.7, 0.3)
+        cam_height_bar = min((self.camera.position[1] / 200.0) * 220, 220)
+        glBegin(GL_QUADS)
+        glVertex2f(90, 80)
+        glVertex2f(90 + cam_height_bar, 80)
+        glVertex2f(90 + cam_height_bar, 95)
+        glVertex2f(90, 95)
+        glEnd()
+
+        # CAM label
+        glColor3f(1.0, 1.0, 1.0)
+        # C
+        glBegin(GL_QUADS)
+        glVertex2f(20, 80)
+        glVertex2f(28, 80)
+        glVertex2f(28, 82)
+        glVertex2f(20, 82)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(20, 80)
+        glVertex2f(22, 80)
+        glVertex2f(22, 95)
+        glVertex2f(20, 95)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(20, 93)
+        glVertex2f(28, 93)
+        glVertex2f(28, 95)
+        glVertex2f(20, 95)
+        glEnd()
+
+        # A
+        glBegin(GL_QUADS)
+        glVertex2f(32, 80)
+        glVertex2f(34, 80)
+        glVertex2f(34, 95)
+        glVertex2f(32, 95)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(40, 80)
+        glVertex2f(42, 80)
+        glVertex2f(42, 95)
+        glVertex2f(40, 95)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(32, 80)
+        glVertex2f(42, 80)
+        glVertex2f(42, 82)
+        glVertex2f(32, 82)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(32, 86)
+        glVertex2f(42, 86)
+        glVertex2f(42, 88)
+        glVertex2f(32, 88)
+        glEnd()
+
+        # M
+        glBegin(GL_QUADS)
+        glVertex2f(46, 80)
+        glVertex2f(48, 80)
+        glVertex2f(48, 95)
+        glVertex2f(46, 95)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(56, 80)
+        glVertex2f(58, 80)
+        glVertex2f(58, 95)
+        glVertex2f(56, 95)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(46, 80)
+        glVertex2f(52, 86)
+        glVertex2f(50, 86)
+        glVertex2f(46, 82)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(52, 86)
+        glVertex2f(58, 80)
+        glVertex2f(58, 82)
+        glVertex2f(54, 86)
+        glEnd()
+
+        # Colon
+        glBegin(GL_QUADS)
+        glVertex2f(62, 82)
+        glVertex2f(64, 82)
+        glVertex2f(64, 84)
+        glVertex2f(62, 84)
+        glEnd()
+        glBegin(GL_QUADS)
+        glVertex2f(62, 91)
+        glVertex2f(64, 91)
+        glVertex2f(64, 93)
+        glVertex2f(62, 93)
+        glEnd()
+
+        # Add small text indicator for values
+        # FPS value indicator (small dots representing ~60, 120, etc.)
+        glColor4f(0.8, 0.8, 0.8, 0.5)
+        # 60 FPS marker
+        glBegin(GL_QUADS)
+        glVertex2f(210, 24)
+        glVertex2f(211, 24)
+        glVertex2f(211, 31)
+        glVertex2f(210, 31)
+        glEnd()
+
+        # Map size indicators (256, 512, 1024)
+        # Small tick marks
+        for i, size in enumerate([256, 512, 1024]):
+            x_pos = 90 + (size / 1024.0) * 220
+            glBegin(GL_QUADS)
+            glVertex2f(x_pos, 54)
+            glVertex2f(x_pos + 1, 54)
+            glVertex2f(x_pos + 1, 61)
+            glVertex2f(x_pos, 61)
+            glEnd()
+
+        # Restore matrices
+        glPopMatrix()
+        glMatrixMode(GL_PROJECTION)
+        glPopMatrix()
+        glMatrixMode(GL_MODELVIEW)
+
+        glEnable(GL_DEPTH_TEST)
 
     def _update_fps(self):
         """Update FPS counter"""
@@ -458,6 +1050,20 @@ class MapViewerWidget(QOpenGLWidget):
         elif event.key() == Qt.Key.Key_Delete:
             self.camera.add_zoom(1)
             self.update()
+        elif event.key() == Qt.Key.Key_D:
+            # Debug info
+            logger.info("=== DEBUG INFO ===")
+            logger.info(f"Camera: {self.camera}")
+            logger.info(f"Position: {self.camera.position}")
+            logger.info(f"Lookat: {self.camera.lookat}")
+            logger.info(f"Forward: {self.camera.forward}")
+            logger.info(f"Up: {self.camera.up}")
+            if self.map_loader and self.map_loader.heightmap:
+                h = self.map_loader.heightmap
+                logger.info(f"Map size: {h.width}x{h.height}")
+                center_h = h.get_height(h.width // 2, h.height // 2)
+                logger.info(f"Center terrain height: {center_h}")
+            logger.info("==================")
 
     def keyReleaseEvent(self, event: QKeyEvent):
         """Handle key release"""
@@ -556,23 +1162,39 @@ class MapViewerWindow(QMainWindow):
 
         if filepath:
             self.status_bar.showMessage(f"Loading {filepath}...")
-            if self.viewer.load_map(Path(filepath)):
-                map_loader = self.viewer.map_loader
-                info = f"Map: {map_loader.header.width}x{map_loader.header.height}"
-                if map_loader.metadata.map_name:
-                    info += f" - {map_loader.metadata.map_name}"
-                self.info_label.setText(info)
-                self.status_bar.showMessage(f"Loaded: {Path(filepath).name}")
-            else:
-                QMessageBox.warning(self, "Error", "Failed to load map file")
-                self.status_bar.showMessage("Failed to load map")
+            try:
+                if self.viewer.load_map(Path(filepath)):
+                    map_loader = self.viewer.map_loader
+                    if map_loader.heightmap:
+                        info = f"Map: {map_loader.heightmap.width}x{map_loader.heightmap.height}"
+                        self.info_label.setText(info)
+                    self.status_bar.showMessage(f"Loaded: {Path(filepath).name}")
+                else:
+                    QMessageBox.warning(
+                        self,
+                        "Error",
+                        "Failed to load map file. Check the log for details.\n\n"
+                        "The map format may not be fully supported yet.",
+                    )
+                    self.status_bar.showMessage("Failed to load map")
+            except Exception as e:
+                logger.exception(f"Error loading map: {e}")
+                QMessageBox.critical(
+                    self,
+                    "Load Error",
+                    f"Failed to load map file:\n\n{str(e)}\n\n"
+                    "This map format may not be fully supported yet.\n"
+                    "Try using the map inspector tool to analyze the file:\n"
+                    "python -m TirganachReloaded.map_viewer.inspect_map <file.map>",
+                )
+                self.status_bar.showMessage(f"Error: {str(e)}")
 
     def reset_camera(self):
         """Reset camera to default position"""
-        if self.viewer.map_loader and self.viewer.map_loader.header:
+        if self.viewer.map_loader and self.viewer.map_loader.heightmap:
             self.viewer.camera.reset(
-                self.viewer.map_loader.header.width,
-                self.viewer.map_loader.header.height,
+                self.viewer.map_loader.heightmap.width,
+                self.viewer.map_loader.heightmap.height,
             )
             self.viewer.update()
             self.status_bar.showMessage("Camera reset")

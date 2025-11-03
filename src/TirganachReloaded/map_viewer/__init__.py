@@ -14,8 +14,10 @@ __version__ = "0.1.0"
 
 from .map_loader import MapLoader
 from .map_viewer_window import MapViewerWindow
+from .simple_map_loader import SimpleMapLoader
 
 __all__ = [
     "MapLoader",
+    "SimpleMapLoader",
     "MapViewerWindow",
 ]
