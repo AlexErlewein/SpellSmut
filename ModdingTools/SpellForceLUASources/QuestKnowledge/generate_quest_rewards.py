@@ -6,6 +6,7 @@ import csv
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 import json
+import argparse
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_DIR = ROOT / "script"
@@ -453,7 +454,7 @@ def split_compound_parts(name: str) -> List[str]:
     return norm
 
 
-def match_flag_to_qid_by_text(flag: str, platform_code: str, qmeta: Dict[int, dict], cff: Dict[int, dict], loc_de: Optional[Dict[int, str]] = None) -> Optional[int]:
+def match_flag_to_qid_by_text(flag: str, platform_code: str, qmeta: Dict[int, dict], cff: Dict[int, dict], loc_map: Optional[Dict[int, str]] = None) -> Optional[int]:
     parts = split_compound_parts(flag)
     # significant parts
     sig = [p for p in parts if p.lower() not in _STOPWORDS_DE and len(p) > 2 and not p.isdigit()]
@@ -471,13 +472,13 @@ def match_flag_to_qid_by_text(flag: str, platform_code: str, qmeta: Dict[int, di
         texts_all = " \n ".join(_texts_from_cff_record(cff_rec)).lower()
         name_de = ""
         desc_de = ""
-        if loc_de and isinstance(cff_rec, dict):
+        if loc_map and isinstance(cff_rec, dict):
             name_id = cff_rec.get("name_id") or (cff_rec.get("attributes") or {}).get("name_id")
             desc_id = cff_rec.get("description_id") or (cff_rec.get("attributes") or {}).get("description_id")
-            if isinstance(name_id, int) and name_id in loc_de:
-                name_de = loc_de[name_id] or ""
-            if isinstance(desc_id, int) and desc_id in loc_de:
-                desc_de = loc_de[desc_id] or ""
+            if isinstance(name_id, int) and name_id in loc_map:
+                name_de = loc_map[name_id] or ""
+            if isinstance(desc_id, int) and desc_id in loc_map:
+                desc_de = loc_map[desc_id] or ""
         texts_de = (name_de + " \n " + desc_de).strip().lower()
         if not texts_all and not texts_de:
             continue
@@ -508,16 +509,48 @@ def match_flag_to_qid_by_text(flag: str, platform_code: str, qmeta: Dict[int, di
     return None
 
 
-def augment_reward2qid_with_text_matching(sections: List[Section], reward2qid: Dict[str, int], qmeta: Dict[int, dict], cff: Dict[int, dict], loc_de: Optional[Dict[int, str]] = None):
+def augment_reward2qid_with_text_matching(sections: List[Section], reward2qid: Dict[str, int], qmeta: Dict[int, dict], cff: Dict[int, dict], loc_map: Optional[Dict[int, str]] = None):
     for sec in sections:
         platform_code = f"P{sec['platform_id']}"
         for e in sec["entries"]:
             flag = e["flag"]
             if flag in reward2qid:
                 continue
-            qid = match_flag_to_qid_by_text(flag, platform_code, qmeta, cff, loc_de)
+            qid = match_flag_to_qid_by_text(flag, platform_code, qmeta, cff, loc_map)
             if qid is not None:
                 reward2qid[flag] = qid
+
+
+# ---------- Quest hierarchy helpers ----------
+
+def _immediate_parent_id(cff_rec: dict) -> Optional[int]:
+    attrs = cff_rec.get("attributes") or {}
+    p1 = attrs.get("parent_quest_id")
+    p2 = cff_rec.get("parent_id")
+    if isinstance(p1, int) and p1:
+        return p1
+    if isinstance(p2, int) and p2:
+        return p2
+    return None
+
+
+def build_parent_chain(qid: int, cff: Dict[int, dict], max_depth: int = 20) -> List[int]:
+    chain: List[int] = []
+    seen: set[int] = set()
+    current = qid
+    depth = 0
+    while depth < max_depth:
+        rec = cff.get(current)
+        if not isinstance(rec, dict):
+            break
+        pid = _immediate_parent_id(rec)
+        if not isinstance(pid, int) or pid == 0 or pid in seen:
+            break
+        chain.append(pid)
+        seen.add(pid)
+        current = pid
+        depth += 1
+    return chain
 
 
 # ---------- Minimal CFF reader for NPC names ----------
@@ -605,8 +638,10 @@ def load_cff_npc_map(cff_path: Optional[Path] = None) -> Dict[int, str]:
         return {}
 
 
-def load_cff_localisation_de(cff_path: Optional[Path] = None) -> Dict[int, str]:
-    """Return mapping of text_id -> German text from CFF localisation table."""
+def load_cff_localisation(lang: str = "de", cff_path: Optional[Path] = None) -> Dict[int, str]:
+    """Return mapping of text_id -> localised text from CFF localisation table for the given language.
+    Supported langs: 'de' (0), 'en' (1). Defaults to 'de'.
+    """
     tables_order = [
         "spells", "spell_names", "unknown3", "creature_stats", "creature_skills", "hero_spells",
         "items", "armor", "item_installs", "weapons", "item_requirements", "item_effects", "item_ui",
@@ -648,18 +683,19 @@ def load_cff_localisation_de(cff_path: Optional[Path] = None) -> Dict[int, str]:
             if loc_body is None:
                 return {}
             row_len_loc = 566
-            de_texts: Dict[int, str] = {}
+            texts: Dict[int, str] = {}
+            lang_code = 0 if (lang or "de").lower() == "de" else 1
             rows = len(loc_body) // row_len_loc
             for i in range(rows):
                 off = i * row_len_loc
                 text_id = int.from_bytes(loc_body[off:off+2], "little", signed=False)
                 language = loc_body[off+2]
-                if language != 0:
+                if language != lang_code:
                     continue
                 text = _decode_fixed_string(loc_body[off+54:off+566])
                 if text:
-                    de_texts[text_id] = text
-            return de_texts
+                    texts[text_id] = text
+            return texts
     except Exception:
         return {}
 
@@ -737,11 +773,11 @@ def guess_quest_giver_npc(quest_ids: List[int]) -> Dict[int, Optional[int]]:
 
 # ---------- Emit CSV and Markdown ----------
 
-def write_csv(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Dict[int, Optional[int]], qmeta: Dict[int, dict], npc_map: Dict[int, str], cff: Dict[int, dict], loc_de: Dict[int, str]):
+def write_csv(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Dict[int, Optional[int]], qmeta: Dict[int, dict], npc_map: Dict[int, str], cff: Dict[int, dict], loc_map: Dict[int, str], lang: str):
     with open(CSV_PATH, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow([
-            "platform_id", "platform_name", "quest_flag", "quest_id", "quest_name", "quest_name_de", "quest_description_de", "quest_giver_npc_id", "quest_giver_name", "parent_quest_id", "order_index", "quest_maps",
+            "platform_id", "platform_name", "quest_flag", "quest_id", "quest_name", "quest_name_de", "quest_description_de", "quest_name_loc", "quest_description_loc", "quest_giver_npc_id", "quest_giver_name", "parent_quest_id", "parent_chain", "order_index", "quest_maps",
             "xp", "gold", "silver", "copper", "items_given", "items_taken",
         ])
         for sec in sorted(sections, key=lambda s: int(s["platform_id"])):
@@ -755,6 +791,8 @@ def write_csv(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Di
                 qname = ""
                 qname_de = ""
                 qdesc_de = ""
+                qname_loc = ""
+                qdesc_loc = ""
                 parent_qid = ""
                 order_index = ""
                 qmaps = ""
@@ -763,13 +801,20 @@ def write_csv(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Di
                     # prefer German name via localisation
                     cff_rec = cff.get(qid) or {}
                     name_id = cff_rec.get("name_id") or (cff_rec.get("attributes") or {}).get("name_id")
-                    if isinstance(name_id, int) and name_id in loc_de:
-                        qname_de = loc_de.get(name_id, "")
+                    if isinstance(name_id, int) and name_id in loc_map:
+                        qname_loc = loc_map.get(name_id, "")
+                    # Also try DE for explicit de column if current lang isn't de
+                    # Note: we don't require both maps; de column may be empty in non-DE mode
+                    # Fill qname_de only if lang is de and available via loc_map
+                    if isinstance(name_id, int) and lang.lower() == "de" and name_id in loc_map:
+                        qname_de = loc_map.get(name_id, "")
                     desc_id = cff_rec.get("description_id") or (cff_rec.get("attributes") or {}).get("description_id")
-                    if isinstance(desc_id, int) and desc_id in loc_de:
-                        qdesc_de = loc_de.get(desc_id, "")
+                    if isinstance(desc_id, int) and desc_id in loc_map:
+                        qdesc_loc = loc_map.get(desc_id, "")
+                    if isinstance(desc_id, int) and lang.lower() == "de" and desc_id in loc_map:
+                        qdesc_de = loc_map.get(desc_id, "")
                     # fallback to meta name
-                    qname = qname_de or meta.get("name") or meta.get("quest_name") or ""
+                    qname = (qname_loc or qname_de) or meta.get("name") or meta.get("quest_name") or ""
                     # parent / order
                     attrs = cff_rec.get("attributes") or {}
                     p1 = attrs.get("parent_quest_id")
@@ -787,12 +832,17 @@ def write_csv(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Di
                         qmaps = "|".join(codes)
                 items_given = "|".join(str(x) for x in e["items_given"]) if e["items_given"] else ""
                 items_taken = "|".join(str(x) for x in e["items_taken"]) if e["items_taken"] else ""
+                parent_chain = ""
+                if isinstance(qid, int):
+                    chain_ids = build_parent_chain(qid, cff)
+                    if chain_ids:
+                        parent_chain = ">".join(str(x) for x in chain_ids)
                 w.writerow([
                     pid, pname, flag, qid if qid is not None else "",
-                    qname, qname_de, qdesc_de,
+                    qname, qname_de, qdesc_de, qname_loc, qdesc_loc,
                     giver if giver is not None else "",
                     giver_name,
-                    parent_qid, order_index,
+                    parent_qid, parent_chain, order_index,
                     qmaps,
                     e["xp"] if e["xp"] is not None else "",
                     e["gold"], e["silver"], e["copper"],
@@ -800,7 +850,7 @@ def write_csv(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Di
                 ])
 
 
-def write_md(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Dict[int, Optional[int]], qmeta: Dict[int, dict], npc_map: Dict[int, str], cff: Dict[int, dict], loc_de: Dict[int, str]):
+def write_md(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Dict[int, Optional[int]], qmeta: Dict[int, dict], npc_map: Dict[int, str], cff: Dict[int, dict], loc_map: Dict[int, str], lang: str):
     lines: List[str] = []
     lines.append("# Quest Rewards by Platform/Map")
     lines.append("")
@@ -812,29 +862,31 @@ def write_md(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Dic
         pname = sec["platform_name"]
         lines.append(f"## {pname} (P{pid})")
         lines.append("")
-        lines.append("| Quest/Subquest Flag | Quest ID | Quest Name (DE) | Description (DE) | Quest Giver | Parent QID | Order | Maps | XP | Gold | Silver | Copper | Items |")
-        lines.append("|---|---:|---|---|---|---:|---:|---|---:|---:|---:|---:|---|")
+        lang_label = lang.upper()
+        lines.append(f"| Quest/Subquest Flag | Quest ID | Quest Name ({lang_label}) | Description ({lang_label}) | Quest Giver | Parent QID | Parent Chain | Order | Maps | XP | Gold | Silver | Copper | Items |")
+        lines.append("|---|---:|---|---|---|---|---:|---:|---|---:|---:|---:|---:|---|")
         for e in sec["entries"]:
             flag = e["flag"]
             qid = reward2qid.get(flag)
             giver = qid2giver.get(qid) if qid is not None else None
             giver_name = npc_map.get(giver, "") if giver is not None else ""
-            qname_de = ""
-            qdesc_de = ""
+            qname_loc = ""
+            qdesc_loc = ""
             parent_qid = ""
+            parent_chain = ""
             order_index = ""
             qmaps = ""
             if qid is not None and qid in qmeta:
                 meta = qmeta[qid]
                 cff_rec = cff.get(qid) or {}
                 name_id = cff_rec.get("name_id") or (cff_rec.get("attributes") or {}).get("name_id")
-                if isinstance(name_id, int) and name_id in loc_de:
-                    qname_de = loc_de.get(name_id, "")
+                if isinstance(name_id, int) and name_id in loc_map:
+                    qname_loc = loc_map.get(name_id, "")
                 desc_id = cff_rec.get("description_id") or (cff_rec.get("attributes") or {}).get("description_id")
-                if isinstance(desc_id, int) and desc_id in loc_de:
-                    qdesc_de = loc_de.get(desc_id, "")
-                if not qname_de:
-                    qname_de = meta.get("name") or meta.get("quest_name") or ""
+                if isinstance(desc_id, int) and desc_id in loc_map:
+                    qdesc_loc = loc_map.get(desc_id, "")
+                if not qname_loc:
+                    qname_loc = meta.get("name") or meta.get("quest_name") or ""
                 attrs = cff_rec.get("attributes") or {}
                 p1 = attrs.get("parent_quest_id")
                 p2 = cff_rec.get("parent_id")
@@ -843,6 +895,11 @@ def write_md(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Dic
                     parent_qid = p1
                 elif isinstance(p2, int) and p2:
                     parent_qid = p2
+                # build parent chain
+                if isinstance(qid, int):
+                    chain_ids = build_parent_chain(qid, cff)
+                    if chain_ids:
+                        parent_chain = " > ".join(str(x) for x in chain_ids)
                 if isinstance(oi, int):
                     order_index = oi
                 maps = meta.get("maps") or []
@@ -862,14 +919,21 @@ def write_md(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Dic
                 )
             )
             lines.append(
-                f"| {flag} | {qid if qid is not None else ''} | {qname_de} | {qdesc_de} | {giver_cell} | {parent_qid} | {order_index} | {qmaps} | {xp} | {e['gold']} | {e['silver']} | {e['copper']} | {items} |")
+                f"| {flag} | {qid if qid is not None else ''} | {qname_loc} | {qdesc_loc} | {giver_cell} | {parent_qid} | {parent_chain} | {order_index} | {qmaps} | {xp} | {e['gold']} | {e['silver']} | {e['copper']} | {items} |")
         lines.append("")
 
     with open(MD_PATH, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
 
+def parse_args():
+    ap = argparse.ArgumentParser(description="Generate quest rewards tables from Lua and CFF data")
+    ap.add_argument("--lang", choices=["de", "en"], default="de", help="Localisation language for matching and display")
+    return ap.parse_args()
+
+
 def main():
+    args = parse_args()
     text = read_text(REWARDS_LUA)
     sections = parse_rewards_file(text)
 
@@ -893,17 +957,17 @@ def main():
     complete = load_quest_rewards_complete()
     integrate_rewards_complete(sections, reward2qid, complete)
     qmeta = load_quest_maps_and_names()
-    # Dynamic text-based matching to fill remaining flags (prefer German localisation)
+    # Dynamic text-based matching to fill remaining flags (prefer selected localisation)
     cff = load_cff_quest_data()
-    loc_de = load_cff_localisation_de()
-    augment_reward2qid_with_text_matching(sections, reward2qid, qmeta, cff, loc_de)
+    loc_map = load_cff_localisation(args.lang)
+    augment_reward2qid_with_text_matching(sections, reward2qid, qmeta, cff, loc_map)
     qids = sorted(set(reward2qid.values()))
     qid2giver = guess_quest_giver_npc(qids)
     npc_map = load_cff_npc_map()
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    write_csv(sections, reward2qid, qid2giver, qmeta, npc_map, cff, loc_de)
-    write_md(sections, reward2qid, qid2giver, qmeta, npc_map, cff, loc_de)
+    write_csv(sections, reward2qid, qid2giver, qmeta, npc_map, cff, loc_map, args.lang)
+    write_md(sections, reward2qid, qid2giver, qmeta, npc_map, cff, loc_map, args.lang)
 
     print(f"Parsed sections: {len(sections)}")
     total_entries = sum(len(s['entries']) for s in sections)
