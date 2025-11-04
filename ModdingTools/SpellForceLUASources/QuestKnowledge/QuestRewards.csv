@@ -8,16 +8,16 @@ platform_id,platform_name,quest_flag,quest_id,quest_name,quest_name_de,quest_des
 1,liannon,Zwergenaxt,,,,,,,,,,,,,20,0,0,0,,2005
 1,liannon,GeistInDerMine,36,,,,,,1393,Brok Dalingar,,,,,35,0,2,50,,1998
 1,liannon,EinSeltsamerRing,41,,,,,,1393,Brok Dalingar,,,,,20,0,0,0,833,1995|1996
-1,liannon,AusDerTiefe1Schreiber,382,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",1394,Shan Muir,379,379,3,,250,0,0,0,617,1995|1996|1997
-1,liannon,AusDerTiefe1Buch,382,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",1394,Shan Muir,379,379,3,,150,0,0,0,707,
-1,liannon,AusDerTiefe2Spaeher,382,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",1394,Shan Muir,379,379,3,,350,0,0,0,555,1996|1997
-1,liannon,AmraUndLea1Liannon1,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379,2,,200,0,0,0,,
-1,liannon,AmraUndLea1Liannon2,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379,2,,400,0,0,0,,
-1,liannon,AmraUndLea2Liannon1,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379,2,,500,0,0,0,,3045|3046
-1,liannon,AmraUndLea2Liannon2,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379,2,,300,0,0,0,,
-1,liannon,EchosBuch,14,,,,,,1240,Darius,,,,,200,0,0,0,626,3042
-1,liannon,BefreiungShiel1Alfalas,93,,,,,,1394,Shan Muir,,,,,60,0,0,0,,2362
-1,liannon,Einsiedler1Shan,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379,2,,100,0,0,0,,
+379,liannon,AusDerTiefe1Schreiber,382,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",1394,Shan Muir,379,379 (Amra und Lea),3,,250,0,0,0,617,1995|1996|1997
+379,liannon,AusDerTiefe1Buch,382,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",1394,Shan Muir,379,379 (Amra und Lea),3,,150,0,0,0,707,
+379,liannon,AusDerTiefe2Spaeher,382,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",1394,Shan Muir,379,379 (Amra und Lea),3,,350,0,0,0,555,1996|1997
+379,liannon,AmraUndLea1Liannon1,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379 (Amra und Lea),2,,200,0,0,0,,
+379,liannon,AmraUndLea1Liannon2,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379 (Amra und Lea),2,,400,0,0,0,,
+379,liannon,AmraUndLea2Liannon1,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379 (Amra und Lea),2,,500,0,0,0,,3045|3046
+379,liannon,AmraUndLea2Liannon2,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379 (Amra und Lea),2,,300,0,0,0,,
+379,liannon,EchosBuch,14,,,,,,1240,Darius,,,,,200,0,0,0,626,3042
+379,liannon,BefreiungShiel1Alfalas,93,,,,,,1394,Shan Muir,,,,,60,0,0,0,,2362
+379,liannon,Einsiedler1Shan,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379 (Amra und Lea),2,,100,0,0,0,,
 2,eloni,TrommelnInWaeldern,28,,,,,,1399,Lycande,,,,,90,0,0,0,,
 2,eloni,WundtinkturSwerdis,357,,,,,,2628,Swerdis,,,,,80,0,0,0,,2670
 2,eloni,DieLetztenSchuetzen1,31,,,,,,1501,Eloni Schütze,,,,,15,0,0,0,695,
@@ -28,16 +28,16 @@ platform_id,platform_name,quest_flag,quest_id,quest_name,quest_name_de,quest_des
 2,eloni,StaubDerSterne1,71,,,,,,2905,Shadira Sundancer,,,,,20,0,2,0,,2155
 2,eloni,StaubDerSterne2,,,,,,,,,,,,,10,0,4,0,,2155
 2,eloni,StaubDerSterne3,,,,,,,,,,,,,5,0,6,0,,2155
-4,leafshade,DurchDenSchattenhain,383,Eine Durchsuchung der Angreifer sollte weitere Informationen liefern,Eine Durchsuchung der Angreifer sollte weitere Informationen liefern,"Um herauszufinden, was die Kerle wollten, sollten sie einer genaueren Untersuchung unterzogen werden.",Eine Durchsuchung der Angreifer sollte weitere Informationen liefern,"Um herauszufinden, was die Kerle wollten, sollten sie einer genaueren Untersuchung unterzogen werden.",,,379,379,4,,130,0,0,0,,
-4,leafshade,Bannwerk1,,,,,,,,,,,,,60,0,0,0,,2191|2193|2194|2200|2201|2205
-4,leafshade,Bannwerk2,97,,,,,,1956,Lord Kommandant Tynar Utran,,,,,60,0,0,0,,2191|2193|2194|2200|2201|2205
-4,leafshade,Kopfjagd1Head1,455,,,,,,1362,Sergeant Einar,,,,,15,0,0,0,,
-4,leafshade,Kopfjagd2Head2,458,,,,,,1362,Sergeant Einar,,,,,15,0,0,0,,
-4,leafshade,Kopfjagd3Head3,456,,,,,,1362,Sergeant Einar,,,,,15,0,0,0,,
-4,leafshade,Kopfjagd4Head4,457,,,,,,1362,Sergeant Einar,,,,,15,0,0,0,,
-4,leafshade,Kopfjagd5Head5,454,,,,,,1362,Sergeant Einar,,,,,15,0,0,0,,
-4,leafshade,Kopfjagd6Complete,463,,,,,,1362,Sergeant Einar,,,,,60,0,0,0,,3202|3203|3204|3205|3206
-4,leafshade,DieGeiseln,462,,,,,,1387,Sinwen Whiteleaf,,,,,40,0,0,0,,2191
+379,leafshade,DurchDenSchattenhain,383,Eine Durchsuchung der Angreifer sollte weitere Informationen liefern,Eine Durchsuchung der Angreifer sollte weitere Informationen liefern,"Um herauszufinden, was die Kerle wollten, sollten sie einer genaueren Untersuchung unterzogen werden.",Eine Durchsuchung der Angreifer sollte weitere Informationen liefern,"Um herauszufinden, was die Kerle wollten, sollten sie einer genaueren Untersuchung unterzogen werden.",,,379,379 (Amra und Lea),4,,130,0,0,0,,
+379,leafshade,Bannwerk1,,,,,,,,,,,,,60,0,0,0,,2191|2193|2194|2200|2201|2205
+379,leafshade,Bannwerk2,97,,,,,,1956,Lord Kommandant Tynar Utran,,,,,60,0,0,0,,2191|2193|2194|2200|2201|2205
+379,leafshade,Kopfjagd1Head1,455,,,,,,1362,Sergeant Einar,,,,,15,0,0,0,,
+379,leafshade,Kopfjagd2Head2,458,,,,,,1362,Sergeant Einar,,,,,15,0,0,0,,
+379,leafshade,Kopfjagd3Head3,456,,,,,,1362,Sergeant Einar,,,,,15,0,0,0,,
+379,leafshade,Kopfjagd4Head4,457,,,,,,1362,Sergeant Einar,,,,,15,0,0,0,,
+379,leafshade,Kopfjagd5Head5,454,,,,,,1362,Sergeant Einar,,,,,15,0,0,0,,
+379,leafshade,Kopfjagd6Complete,463,,,,,,1362,Sergeant Einar,,,,,60,0,0,0,,3202|3203|3204|3205|3206
+379,leafshade,DieGeiseln,462,,,,,,1387,Sinwen Whiteleaf,,,,,40,0,0,0,,2191
 5,shiel,BefreiungShiel1Kommandant,,,,,,,,,,,,,40,0,0,0,,
 5,shiel,BefreiungShiel2Dryaden,,,,,,,,,,,,,140,0,0,0,,
 5,shiel,PurpurnesBanner1Kettchen,,,,,,,,,,,,,35,0,0,0,,2350
@@ -47,10 +47,10 @@ platform_id,platform_name,quest_flag,quest_id,quest_name,quest_name_de,quest_des
 6,wildland pass,KoenigDerSpinnen,107,,,,,,1989,Spider King,,,,,45,0,10,0,2467|2467,2382
 6,wildland pass,AlterMannUndMusik,410,,,,,,1989,Spider King,,,,,45,0,0,0,628,2371
 6,wildland pass,FeineStoffe1,413,,,,,,2183,Miria Thalindar,,,,,45,0,0,0,,
-6,wildland pass,AmraUndLea2Sentos,385,Sentos will sich am Wildlandpass mit Euch treffen,Sentos will sich am Wildlandpass mit Euch treffen,"Sentos spricht von einer unglücklichen Verkettung der Umstände und bedauert den Zwischenfall sehr. Da er auch auf der Suche nach Amras Vermächtnis ist, schlägt er eine Zusammenarbeit vor und will sich dafür mit Euch am Wildlandpass treffen.",Sentos will sich am Wildlandpass mit Euch treffen,"Sentos spricht von einer unglücklichen Verkettung der Umstände und bedauert den Zwischenfall sehr. Da er auch auf der Suche nach Amras Vermächtnis ist, schlägt er eine Zusammenarbeit vor und will sich dafür mit Euch am Wildlandpass treffen.",2898,Sentos the Trader,379,379,6,P6|P63,800,0,0,0,,
+379,wildland pass,AmraUndLea2Sentos,385,Sentos will sich am Wildlandpass mit Euch treffen,Sentos will sich am Wildlandpass mit Euch treffen,"Sentos spricht von einer unglücklichen Verkettung der Umstände und bedauert den Zwischenfall sehr. Da er auch auf der Suche nach Amras Vermächtnis ist, schlägt er eine Zusammenarbeit vor und will sich dafür mit Euch am Wildlandpass treffen.",Sentos will sich am Wildlandpass mit Euch treffen,"Sentos spricht von einer unglücklichen Verkettung der Umstände und bedauert den Zwischenfall sehr. Da er auch auf der Suche nach Amras Vermächtnis ist, schlägt er eine Zusammenarbeit vor und will sich dafür mit Euch am Wildlandpass treffen.",2898,Sentos the Trader,379,379 (Amra und Lea),6,P6|P63,800,0,0,0,,
 7,icegate marsh,EndeDesOrdens1Erreichen,521,,,,,,4010,Craig Un´Shallach,,,,,1500,0,0,0,,
 7,icegate marsh,EndeDesOrdens2DreiItems,532,,,,,,4010,Craig Un´Shallach,,,,,1500,0,0,0,,
-7,icegate marsh,AmraUndLea4,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379,2,,1200,0,0,0,,
+379,icegate marsh,AmraUndLea4,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379 (Amra und Lea),2,,1200,0,0,0,,
 9,northern windwalls,Marcia1,121,,,,,,2016,Marcia,,,,,150,0,0,0,2652,
 9,northern windwalls,SchlachtUmBrunnenfels1,112,,,,,,2016,Marcia,,,,,100,0,0,0,,
 9,northern windwalls,SchlachtUmBrunnenfels2,120,,,,,,2017,Lord Jonir Hallit,,,,,150,0,0,0,708|545,
@@ -98,8 +98,8 @@ platform_id,platform_name,quest_flag,quest_id,quest_name,quest_name_de,quest_des
 16,whisper,FluesterndeStadt3Item3,,,,,,,,,,,,,250,0,0,0,,
 16,whisper,FluesterndeStadt4Endkampf,490,,,,,,3602,Uthar Griffonsteel,,,,,450,0,0,0,,
 16,whisper,FluesterndeStadt5Maske,,,,,,,,,,,,,350,0,0,0,,2337|2615
-16,whisper,AmraLeaGrab,387,Sucht Leas Grab in Wisper,Sucht Leas Grab in Wisper,"In Wisper, der Stadt der Untoten, ist eine Grabstätte zu finden, in der Lea bestattet sein soll. Eine Untersuchung des Grabes könnte Aufschluss geben, was aus Lea geworden ist.",Sucht Leas Grab in Wisper,"In Wisper, der Stadt der Untoten, ist eine Grabstätte zu finden, in der Lea bestattet sein soll. Eine Untersuchung des Grabes könnte Aufschluss geben, was aus Lea geworden ist.",2909,Lea,379,379,9,P6,800,0,0,0,,
-16,whisper,MosaikDesTodes,,,,,,,,,,,,,800,0,0,0,,3233|3234|3235|3236
+379,whisper,AmraLeaGrab,387,Sucht Leas Grab in Wisper,Sucht Leas Grab in Wisper,"In Wisper, der Stadt der Untoten, ist eine Grabstätte zu finden, in der Lea bestattet sein soll. Eine Untersuchung des Grabes könnte Aufschluss geben, was aus Lea geworden ist.",Sucht Leas Grab in Wisper,"In Wisper, der Stadt der Untoten, ist eine Grabstätte zu finden, in der Lea bestattet sein soll. Eine Untersuchung des Grabes könnte Aufschluss geben, was aus Lea geworden ist.",2909,Lea,379,379 (Amra und Lea),9,P6,800,0,0,0,,
+379,whisper,MosaikDesTodes,,,,,,,,,,,,,800,0,0,0,,3233|3234|3235|3236
 17,godwall,AufDemWall1Village1,249,,,,,,2615,Bren Fallwind,,,,,200,0,0,0,,
 17,godwall,AufDemWall2Village2,,,,,,,,,,,,,300,0,0,0,,
 17,godwall,AufDemWall3Village3,258,,,,,,2616,Sunder Dundrew,,,,,300,0,0,0,,
@@ -126,7 +126,7 @@ platform_id,platform_name,quest_flag,quest_id,quest_name,quest_name_de,quest_des
 23,the rift,Ulather,,,,,,,,,,,,,800,0,0,0,,
 25,southern godmark,Klingensturm1Monument,550,,,,,,,,,,,,1000,0,0,0,,
 25,southern godmark,Klingensturm2Sartarius,,,,,,,,,,,,,2600,0,0,0,2241,3461|2814
-25,southern godmark,AmraUndLea4,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379,2,,1200,0,0,0,,
+379,southern godmark,AmraUndLea4,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379 (Amra und Lea),2,,1200,0,0,0,,
 27,nightwhisper dale,NachUrgath1Elfensiedlung,,,,,,,,,,,,,1000,0,0,0,,
 27,nightwhisper dale,NachUrgath2Monument,537,,,,,,4200,Arr! Diebe am Schatz! Menschling schlecht! Kraga töten und zermalmen wird!,,,,,1400,0,0,0,,
 27,nightwhisper dale,NachUrgath3Archon,,,,,,,,,,,,,2000,0,0,0,1456|1550,
@@ -137,38 +137,38 @@ platform_id,platform_name,quest_flag,quest_id,quest_name,quest_name_de,quest_des
 32,sharrowdale,KreisSchluss3Tor3,,,,,,,,,,,,,2000,0,0,0,,
 32,sharrowdale,KreisSchluss4Soulforger,547,,,,,,4651,Closed Stone Gate,,,,,10000,0,0,0,,
 63,Greyfell,NachGraufurtPartVillage,439,,,,,,3110,Peasant Lemuel,,,,,20,0,0,0,532,
-63,Greyfell,NachGraufurtPartEnde,384,Stellt Sentos in Graufurt zur Rede,Stellt Sentos in Graufurt zur Rede,"Die beiden Kerle hatten ein Schreiben dabei, welches auf den Kaufmann Sentos aus Graufurt hinweist. Er scheint also ebenfalls an der Geschichte von Amras Rüstung interessiert zu sein.",Stellt Sentos in Graufurt zur Rede,"Die beiden Kerle hatten ein Schreiben dabei, welches auf den Kaufmann Sentos aus Graufurt hinweist. Er scheint also ebenfalls an der Geschichte von Amras Rüstung interessiert zu sein.",2897,Sentos the Trader,379,379,5,P63,10,0,0,0,,
-63,Greyfell,AngriffDerHoehlenorks,438,,,,,,3110,Peasant Lemuel,,,,,20,0,0,0,,
-63,Greyfell,Zauberwerk1Augenglas,335,,,,,,2860,Gabar,,,,,10,0,0,0,,2893|2001
-63,Greyfell,Zauberwerk2Feder,,,,,,,,,,,,,25,0,0,0,,2893|2001|2896
-63,Greyfell,Zauberwerk3Kreide,,,,,,,,,,,,,35,0,0,0,,2001|2896|2895
-63,Greyfell,Zauberwerk4Robe,,,,,,,,,,,,,120,0,0,0,,2896|2895
-63,Greyfell,ZahnbrechersZangen,371,,,,,,2863,Seno the toothbreaker,,,,,35,0,0,0,,2486
-63,Greyfell,WundtinkturValdis,357,,,,,,2628,Swerdis,,,,,30,0,0,0,,2671
-63,Greyfell,BlutAdhiraTrank,402,,,,,,2993,Adhira,,,,,4000,0,0,0,,3166|3165|2540|3167
-63,Greyfell,BlutTombardTot,397,,,,,,2992,Tombard,,,,,2000,0,0,0,,3169
-63,Greyfell,SickHermit1Zirfar,358,,,,,,2873,Illirias,,,,,600,0,0,0,,2900|2901
-63,Greyfell,SickHermit2Locke,,,,,,,,,,,,,600,0,0,0,,2901|2903
-63,Greyfell,Schattenwelt1Castagir,111,,,,,,3035,Rohen,,,,,120,0,0,0,,
-63,Greyfell,Schattenwelt3Manifest,,,,,,,,,,,,,1000,0,0,0,,3200
-63,Greyfell,SchattenweltShadowpulse,,,,,,,,,,,,,500,0,0,0,,
-63,Greyfell,EchosBuchstabe1,325,,,,,,3323,Seltsamer Grabstein,,,,,500,0,0,0,,
-63,Greyfell,EchosBuchstabe2,325,,,,,,3323,Seltsamer Grabstein,,,,,500,0,0,0,,
-63,Greyfell,EchosBuchstabe3,325,,,,,,3323,Seltsamer Grabstein,,,,,500,0,0,0,,
-63,Greyfell,EchosGoran,330,,,,,,2867,Sandor the cobbler,,,,,700,0,0,0,,
-63,Greyfell,EchosShinTarGuar,333,,,,,,4879,<No String ID>,,,,,1000,0,0,0,,
-63,Greyfell,AmraUndLea3Sentos,384,Stellt Sentos in Graufurt zur Rede,Stellt Sentos in Graufurt zur Rede,"Die beiden Kerle hatten ein Schreiben dabei, welches auf den Kaufmann Sentos aus Graufurt hinweist. Er scheint also ebenfalls an der Geschichte von Amras Rüstung interessiert zu sein.",Stellt Sentos in Graufurt zur Rede,"Die beiden Kerle hatten ein Schreiben dabei, welches auf den Kaufmann Sentos aus Graufurt hinweist. Er scheint also ebenfalls an der Geschichte von Amras Rüstung interessiert zu sein.",2897,Sentos the Trader,379,379,5,P63,500,0,0,0,,3047
-63,Greyfell,Zwergendienste1Hinrik,,,,,,,,,,,,,120,0,0,0,,2662
-63,Greyfell,Schwarzeibe,414,,,,,,3044,Zarim,,,,,35,0,0,0,,2002
-63,Greyfell,Seelenschwerter,110,,,,,,3035,Rohen,,,,,600,0,0,0,,2384|2627|2614|2386|2620
-63,Greyfell,KlingzogsBeinlinge,,,,,,,,,,,,,35,0,0,0,,2628|1994
-63,Greyfell,ThurgonBrief,388,Bringt Leas Besitztümer zu Shan in Liannon,Bringt Leas Besitztümer zu Shan in Liannon,"Leas Geist ließ einen Brief und ein Schmuckstück zurück. Shan Muir sollte als ihre Schwester diese Gegenstände erhalten. Vielleicht geben sie ja auch Aufschluss darüber, was geschehen ist.",Bringt Leas Besitztümer zu Shan in Liannon,"Leas Geist ließ einen Brief und ein Schmuckstück zurück. Shan Muir sollte als ihre Schwester diese Gegenstände erhalten. Vielleicht geben sie ja auch Aufschluss darüber, was geschehen ist.",1394,Shan Muir,379,379,10,,250,2,0,0,,2628|1994
-63,Greyfell,FeineStoffe3Seide,344,,,,,,2861,Tanara the Seamstress,,,,,400,0,0,0,,2383
-63,Greyfell,FeineStoffe4Robe,,,,,,,,,,,,,1100,0,0,0,3352,2511|3437
-63,Greyfell,Drachenpanzer1,,,,,,,,,,,,,100,0,0,0,,
-63,Greyfell,Drachenpanzer2,,,,,,,,,,,,,800,0,0,0,557|572,2667|2516
-63,Greyfell,TricksterFindFlink,220,,,,,,2331,Flink McWinter,,,,,500,0,0,0,,3466|3467
-63,Greyfell,TricksterReturn,,,,,,,,,,,,,1000,0,0,0,3621,3466|3467
+379,Greyfell,NachGraufurtPartEnde,384,Stellt Sentos in Graufurt zur Rede,Stellt Sentos in Graufurt zur Rede,"Die beiden Kerle hatten ein Schreiben dabei, welches auf den Kaufmann Sentos aus Graufurt hinweist. Er scheint also ebenfalls an der Geschichte von Amras Rüstung interessiert zu sein.",Stellt Sentos in Graufurt zur Rede,"Die beiden Kerle hatten ein Schreiben dabei, welches auf den Kaufmann Sentos aus Graufurt hinweist. Er scheint also ebenfalls an der Geschichte von Amras Rüstung interessiert zu sein.",2897,Sentos the Trader,379,379 (Amra und Lea),5,P63,10,0,0,0,,
+379,Greyfell,AngriffDerHoehlenorks,438,,,,,,3110,Peasant Lemuel,,,,,20,0,0,0,,
+379,Greyfell,Zauberwerk1Augenglas,335,,,,,,2860,Gabar,,,,,10,0,0,0,,2893|2001
+379,Greyfell,Zauberwerk2Feder,,,,,,,,,,,,,25,0,0,0,,2893|2001|2896
+379,Greyfell,Zauberwerk3Kreide,,,,,,,,,,,,,35,0,0,0,,2001|2896|2895
+379,Greyfell,Zauberwerk4Robe,,,,,,,,,,,,,120,0,0,0,,2896|2895
+379,Greyfell,ZahnbrechersZangen,371,,,,,,2863,Seno the toothbreaker,,,,,35,0,0,0,,2486
+379,Greyfell,WundtinkturValdis,357,,,,,,2628,Swerdis,,,,,30,0,0,0,,2671
+379,Greyfell,BlutAdhiraTrank,402,,,,,,2993,Adhira,,,,,4000,0,0,0,,3166|3165|2540|3167
+379,Greyfell,BlutTombardTot,397,,,,,,2992,Tombard,,,,,2000,0,0,0,,3169
+379,Greyfell,SickHermit1Zirfar,358,,,,,,2873,Illirias,,,,,600,0,0,0,,2900|2901
+379,Greyfell,SickHermit2Locke,,,,,,,,,,,,,600,0,0,0,,2901|2903
+379,Greyfell,Schattenwelt1Castagir,111,,,,,,3035,Rohen,,,,,120,0,0,0,,
+379,Greyfell,Schattenwelt3Manifest,,,,,,,,,,,,,1000,0,0,0,,3200
+379,Greyfell,SchattenweltShadowpulse,,,,,,,,,,,,,500,0,0,0,,
+379,Greyfell,EchosBuchstabe1,325,,,,,,3323,Seltsamer Grabstein,,,,,500,0,0,0,,
+379,Greyfell,EchosBuchstabe2,325,,,,,,3323,Seltsamer Grabstein,,,,,500,0,0,0,,
+379,Greyfell,EchosBuchstabe3,325,,,,,,3323,Seltsamer Grabstein,,,,,500,0,0,0,,
+379,Greyfell,EchosGoran,330,,,,,,2867,Sandor the cobbler,,,,,700,0,0,0,,
+379,Greyfell,EchosShinTarGuar,333,,,,,,4879,<No String ID>,,,,,1000,0,0,0,,
+379,Greyfell,AmraUndLea3Sentos,384,Stellt Sentos in Graufurt zur Rede,Stellt Sentos in Graufurt zur Rede,"Die beiden Kerle hatten ein Schreiben dabei, welches auf den Kaufmann Sentos aus Graufurt hinweist. Er scheint also ebenfalls an der Geschichte von Amras Rüstung interessiert zu sein.",Stellt Sentos in Graufurt zur Rede,"Die beiden Kerle hatten ein Schreiben dabei, welches auf den Kaufmann Sentos aus Graufurt hinweist. Er scheint also ebenfalls an der Geschichte von Amras Rüstung interessiert zu sein.",2897,Sentos the Trader,379,379 (Amra und Lea),5,P63,500,0,0,0,,3047
+379,Greyfell,Zwergendienste1Hinrik,,,,,,,,,,,,,120,0,0,0,,2662
+379,Greyfell,Schwarzeibe,414,,,,,,3044,Zarim,,,,,35,0,0,0,,2002
+379,Greyfell,Seelenschwerter,110,,,,,,3035,Rohen,,,,,600,0,0,0,,2384|2627|2614|2386|2620
+379,Greyfell,KlingzogsBeinlinge,,,,,,,,,,,,,35,0,0,0,,2628|1994
+379,Greyfell,ThurgonBrief,388,Bringt Leas Besitztümer zu Shan in Liannon,Bringt Leas Besitztümer zu Shan in Liannon,"Leas Geist ließ einen Brief und ein Schmuckstück zurück. Shan Muir sollte als ihre Schwester diese Gegenstände erhalten. Vielleicht geben sie ja auch Aufschluss darüber, was geschehen ist.",Bringt Leas Besitztümer zu Shan in Liannon,"Leas Geist ließ einen Brief und ein Schmuckstück zurück. Shan Muir sollte als ihre Schwester diese Gegenstände erhalten. Vielleicht geben sie ja auch Aufschluss darüber, was geschehen ist.",1394,Shan Muir,379,379 (Amra und Lea),10,,250,2,0,0,,2628|1994
+379,Greyfell,FeineStoffe3Seide,344,,,,,,2861,Tanara the Seamstress,,,,,400,0,0,0,,2383
+379,Greyfell,FeineStoffe4Robe,,,,,,,,,,,,,1100,0,0,0,3352,2511|3437
+379,Greyfell,Drachenpanzer1,,,,,,,,,,,,,100,0,0,0,,
+379,Greyfell,Drachenpanzer2,,,,,,,,,,,,,800,0,0,0,557|572,2667|2516
+379,Greyfell,TricksterFindFlink,220,,,,,,2331,Flink McWinter,,,,,500,0,0,0,,3466|3467
+379,Greyfell,TricksterReturn,,,,,,,,,,,,,1000,0,0,0,3621,3466|3467
 101,SwampCity,ImCampMitAllenGeredet,715,,,,,,,,,,,,15,0,0,0,,
 101,SwampCity,HeldenErschaffen,588,,,,,,32004,,,,,,45,0,0,0,,
 101,SwampCity,HQBefreien,586,,,,,,,,,,,,150,0,0,0,,
@@ -311,29 +311,29 @@ platform_id,platform_name,quest_flag,quest_id,quest_name,quest_name_de,quest_des
 203,Onyx Shores,ZuTarioGegangen,1031,,,,,,11213,Source of Poison,,,,,7000,0,0,0,,
 204,Empyiria,P204KarteErreicht,809,,,,,,,,,,,,3000,0,0,0,,7219
 204,Empyiria,FlinkAbgeliefert,,,,,,,,,,,,,5500,0,0,0,,
-204,Empyiria,Tor1DurchTrickGeoeffnet,383,Eine Durchsuchung der Angreifer sollte weitere Informationen liefern,Eine Durchsuchung der Angreifer sollte weitere Informationen liefern,"Um herauszufinden, was die Kerle wollten, sollten sie einer genaueren Untersuchung unterzogen werden.",Eine Durchsuchung der Angreifer sollte weitere Informationen liefern,"Um herauszufinden, was die Kerle wollten, sollten sie einer genaueren Untersuchung unterzogen werden.",,,379,379,4,,11000,0,0,0,,
-204,Empyiria,Tor2DurchTrickGeoeffnet,970,,,,,,8830,Townguard Endo,,,,,7000,0,0,0,,7303
-204,Empyiria,Tor3DurchTrickGeoeffnet,948,,,,,,9999,Locked Town Gate,,,,,9000,0,0,0,,7217
-204,Empyiria,OberstadtRechtsErreicht,,,,,,,,,,,,,6500,0,0,0,,
-204,Empyiria,OberstadtLinksErreicht,,,,,,,,,,,,,6500,0,0,0,,
-204,Empyiria,PalastgartenErreicht,816,,,,,,32324,,,,,,10000,0,0,0,,7219
-204,Empyiria,LyrioQuestGeloest,810,,,,,,11000,Shazam,,,,,6000,0,0,0,,7271
-204,Empyiria,IshtarTraumstabGebracht,,,,,,,,,,,,,4000,0,0,0,,
-204,Empyiria,TruppenZumPortalGesandt,,,,,,,,,,,,,9000,0,0,0,,
-204,Empyiria,ArenaKampf32,,,,,,,,,,,,,5000,0,0,0,,
-204,Empyiria,ArenaKampf36,,,,,,,,,,,,,7000,0,0,0,,
-204,Empyiria,ArenaKampf38,,,,,,,,,,,,,10000,0,0,0,,
-204,Empyiria,ArenaKampf40,,,,,,,,,,,,,12500,0,0,0,,
-204,Empyiria,ArenaKampf42,1011,,,,,,10582,Unique Gladiator Emypria 32,,,,,15000,0,0,0,,
-204,Empyiria,SQSethHealed,1020,,,,,,11002,The Puppet Master,,,,,5000,0,0,0,,
-204,Empyiria,SQBotschafterGefunden,1039,,,,,,11251,Tuomi,,,,,5000,0,0,0,,7368
-204,Empyiria,SQBotschafterTot,1068,,,,,,,,,,,,10000,0,0,0,,7368
-204,Empyiria,SQCraigIstBotschafter,1068,,,,,,,,,,,,20000,0,0,0,,7368
-204,Empyiria,SQSchutzgeldSmall,,,,,,,,,,,,,6000,0,0,0,,
-204,Empyiria,SQSchutzgeldMedium,,,,,,,,,,,,,12000,0,0,0,,
-204,Empyiria,SQSchutzgeldLarge,,,,,,,,,,,,,18000,0,0,0,,
-204,Empyiria,SQHaendlerFriedlich,1075,,,,,,11604,Palace Guard,,,,,10000,0,0,0,,
-204,Empyiria,SQAuftragGescheitert,1068,,,,,,,,,,,,3000,0,0,0,,7368
+379,Empyiria,Tor1DurchTrickGeoeffnet,383,Eine Durchsuchung der Angreifer sollte weitere Informationen liefern,Eine Durchsuchung der Angreifer sollte weitere Informationen liefern,"Um herauszufinden, was die Kerle wollten, sollten sie einer genaueren Untersuchung unterzogen werden.",Eine Durchsuchung der Angreifer sollte weitere Informationen liefern,"Um herauszufinden, was die Kerle wollten, sollten sie einer genaueren Untersuchung unterzogen werden.",,,379,379 (Amra und Lea),4,,11000,0,0,0,,
+379,Empyiria,Tor2DurchTrickGeoeffnet,970,,,,,,8830,Townguard Endo,,,,,7000,0,0,0,,7303
+379,Empyiria,Tor3DurchTrickGeoeffnet,948,,,,,,9999,Locked Town Gate,,,,,9000,0,0,0,,7217
+379,Empyiria,OberstadtRechtsErreicht,,,,,,,,,,,,,6500,0,0,0,,
+379,Empyiria,OberstadtLinksErreicht,,,,,,,,,,,,,6500,0,0,0,,
+379,Empyiria,PalastgartenErreicht,816,,,,,,32324,,,,,,10000,0,0,0,,7219
+379,Empyiria,LyrioQuestGeloest,810,,,,,,11000,Shazam,,,,,6000,0,0,0,,7271
+379,Empyiria,IshtarTraumstabGebracht,,,,,,,,,,,,,4000,0,0,0,,
+379,Empyiria,TruppenZumPortalGesandt,,,,,,,,,,,,,9000,0,0,0,,
+379,Empyiria,ArenaKampf32,,,,,,,,,,,,,5000,0,0,0,,
+379,Empyiria,ArenaKampf36,,,,,,,,,,,,,7000,0,0,0,,
+379,Empyiria,ArenaKampf38,,,,,,,,,,,,,10000,0,0,0,,
+379,Empyiria,ArenaKampf40,,,,,,,,,,,,,12500,0,0,0,,
+379,Empyiria,ArenaKampf42,1011,,,,,,10582,Unique Gladiator Emypria 32,,,,,15000,0,0,0,,
+379,Empyiria,SQSethHealed,1020,,,,,,11002,The Puppet Master,,,,,5000,0,0,0,,
+379,Empyiria,SQBotschafterGefunden,1039,,,,,,11251,Tuomi,,,,,5000,0,0,0,,7368
+379,Empyiria,SQBotschafterTot,1068,,,,,,,,,,,,10000,0,0,0,,7368
+379,Empyiria,SQCraigIstBotschafter,1068,,,,,,,,,,,,20000,0,0,0,,7368
+379,Empyiria,SQSchutzgeldSmall,,,,,,,,,,,,,6000,0,0,0,,
+379,Empyiria,SQSchutzgeldMedium,,,,,,,,,,,,,12000,0,0,0,,
+379,Empyiria,SQSchutzgeldLarge,,,,,,,,,,,,,18000,0,0,0,,
+379,Empyiria,SQHaendlerFriedlich,1075,,,,,,11604,Palace Guard,,,,,10000,0,0,0,,
+379,Empyiria,SQAuftragGescheitert,1068,,,,,,,,,,,,3000,0,0,0,,7368
 205,DryadCove,P205KarteErreicht,810,,,,,,11000,Shazam,,,,,5000,0,0,0,,
 205,DryadCove,Nymphe1Befreit,,,,,,,,,,,,,6000,0,0,0,,
 205,DryadCove,Nymphe2Befreit,,,,,,,,,,,,,6000,0,0,0,,
@@ -385,26 +385,26 @@ platform_id,platform_name,quest_flag,quest_id,quest_name,quest_name_de,quest_des
 208,BlazingStones,ArgamunVerwandeltSich,855,,,,,,9506,Argamun,,,,,10000,0,0,0,,
 208,BlazingStones,MasterGameWon,1070,,,,,,11464,Zerbite Ghost,,,,,30000,0,0,0,7437,
 209,Kathai,P209KarteErreicht,779,,,,,,5,,,,,,5000,0,0,0,,
-209,Kathai,UntotenlagerNord,382,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",1394,Shan Muir,379,379,3,,9000,0,0,0,,
-209,Kathai,UntotenlagerWest,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379,2,,9000,0,0,0,,
-209,Kathai,UntotenlagerSued,,,,,,,,,,,,,9000,0,0,0,,
-209,Kathai,StadtKathaiErreicht,782,,,,,,5,,,,,,6000,0,0,0,,
-209,Kathai,GespraechMitKhal,1083,,,,,,10085,Khal,,,,,2000,0,0,0,,
-209,Kathai,UruSpricht1,1083,,,,,,10085,Khal,,,,,2000,0,0,0,,
-209,Kathai,KathaiStadtTorOffen,784,,,,,,5,,,,,,8000,0,0,0,,
-209,Kathai,KathaiStadtBefreit,781,,,,,,5,,,,,,10000,0,0,0,,
-209,Kathai,UruSpricht2,934,,,,,,6,,,,,,2000,0,0,0,,
-209,Kathai,HolyArtefact1Gefunden,789,,,,,,6,,,,,,4000,0,0,0,,
-209,Kathai,HolyArtefact2Gefunden,,,,,,,,,,,,,4000,0,0,0,,
-209,Kathai,XalabarInArenaBesiegt,791,,,,,,6,,,,,,10000,0,0,0,,
-209,Kathai,UruSpricht3,792,,,,,,6,,,,,,2000,0,0,0,,
-209,Kathai,UruSpricht4,794,,,,,,8576,Jenquai,,,,,2000,0,0,0,,
-209,Kathai,ZwergenMonumentClaimed,795,,,,,,7,,,,,,2000,0,0,0,,
-209,Kathai,LeaderNordarmeeKilled,797,,,,,,7,,,,,,8000,0,0,0,,
-209,Kathai,LeaderSuedarmeeKilled,798,,,,,,7,,,,,,8000,0,0,0,,
-209,Kathai,LeaderHauptarmeeKilled,799,,,,,,7,,,,,,8000,0,0,0,,
-209,Kathai,BronzerieseGetoetet,817,,,,,,7,,,,,,12000,0,0,0,,
-209,Kathai,UruSpricht5,874,,,,,,7,,,,,,2000,0,0,0,,
+379,Kathai,UntotenlagerNord,382,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",Untersucht die Ereignisse beim Haus der Familie Muir in Liannon,"Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon.",1394,Shan Muir,379,379 (Amra und Lea),3,,9000,0,0,0,,
+379,Kathai,UntotenlagerWest,381,Befragt Shan Muir in Liannon zu Arma und Lea,Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",Befragt Shan Muir in Liannon zu Arma und Lea,"Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte.",1390,Sunder Blackhand,379,379 (Amra und Lea),2,,9000,0,0,0,,
+379,Kathai,UntotenlagerSued,,,,,,,,,,,,,9000,0,0,0,,
+379,Kathai,StadtKathaiErreicht,782,,,,,,5,,,,,,6000,0,0,0,,
+379,Kathai,GespraechMitKhal,1083,,,,,,10085,Khal,,,,,2000,0,0,0,,
+379,Kathai,UruSpricht1,1083,,,,,,10085,Khal,,,,,2000,0,0,0,,
+379,Kathai,KathaiStadtTorOffen,784,,,,,,5,,,,,,8000,0,0,0,,
+379,Kathai,KathaiStadtBefreit,781,,,,,,5,,,,,,10000,0,0,0,,
+379,Kathai,UruSpricht2,934,,,,,,6,,,,,,2000,0,0,0,,
+379,Kathai,HolyArtefact1Gefunden,789,,,,,,6,,,,,,4000,0,0,0,,
+379,Kathai,HolyArtefact2Gefunden,,,,,,,,,,,,,4000,0,0,0,,
+379,Kathai,XalabarInArenaBesiegt,791,,,,,,6,,,,,,10000,0,0,0,,
+379,Kathai,UruSpricht3,792,,,,,,6,,,,,,2000,0,0,0,,
+379,Kathai,UruSpricht4,794,,,,,,8576,Jenquai,,,,,2000,0,0,0,,
+379,Kathai,ZwergenMonumentClaimed,795,,,,,,7,,,,,,2000,0,0,0,,
+379,Kathai,LeaderNordarmeeKilled,797,,,,,,7,,,,,,8000,0,0,0,,
+379,Kathai,LeaderSuedarmeeKilled,798,,,,,,7,,,,,,8000,0,0,0,,
+379,Kathai,LeaderHauptarmeeKilled,799,,,,,,7,,,,,,8000,0,0,0,,
+379,Kathai,BronzerieseGetoetet,817,,,,,,7,,,,,,12000,0,0,0,,
+379,Kathai,UruSpricht5,874,,,,,,7,,,,,,2000,0,0,0,,
 210,Clockwork Crypts,P210KarteErreicht,875,,,,,,7,,,,,,5000,0,0,0,,
 210,Clockwork Crypts,EntryMenhirComboCorrect,,,,,,,,,,,,,3500,0,0,0,,
 210,Clockwork Crypts,AugenSet1Solved,,,,,,,,,,,,,3500,0,0,0,,

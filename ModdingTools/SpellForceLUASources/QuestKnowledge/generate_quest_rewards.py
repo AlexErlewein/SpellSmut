@@ -553,6 +553,15 @@ def build_parent_chain(qid: int, cff: Dict[int, dict], max_depth: int = 20) -> L
     return chain
 
 
+def resolve_quest_name(qid: int, cff: Dict[int, dict], loc_map: Dict[int, str], qmeta: Dict[int, dict]) -> str:
+    cff_rec = cff.get(qid) or {}
+    name_id = cff_rec.get("name_id") or (cff_rec.get("attributes") or {}).get("name_id")
+    if isinstance(name_id, int) and name_id in loc_map:
+        return loc_map.get(name_id, "") or ""
+    meta = qmeta.get(qid) or {}
+    return meta.get("name") or meta.get("quest_name") or ""
+
+
 # ---------- Minimal CFF reader for NPC names ----------
 
 def _decode_fixed_string(b: bytes) -> str:
@@ -836,7 +845,11 @@ def write_csv(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Di
                 if isinstance(qid, int):
                     chain_ids = build_parent_chain(qid, cff)
                     if chain_ids:
-                        parent_chain = ">".join(str(x) for x in chain_ids)
+                        parts = []
+                        for pid in chain_ids:
+                            nm = resolve_quest_name(pid, cff, loc_map, qmeta)
+                            parts.append(f"{pid} ({nm})" if nm else str(pid))
+                        parent_chain = ">".join(parts)
                 w.writerow([
                     pid, pname, flag, qid if qid is not None else "",
                     qname, qname_de, qdesc_de, qname_loc, qdesc_loc,
@@ -899,7 +912,11 @@ def write_md(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Dic
                 if isinstance(qid, int):
                     chain_ids = build_parent_chain(qid, cff)
                     if chain_ids:
-                        parent_chain = " > ".join(str(x) for x in chain_ids)
+                        parts = []
+                        for pid in chain_ids:
+                            nm = resolve_quest_name(pid, cff, loc_map, qmeta)
+                            parts.append(f"{pid} ({nm})" if nm else str(pid))
+                        parent_chain = " > ".join(parts)
                 if isinstance(oi, int):
                     order_index = oi
                 maps = meta.get("maps") or []

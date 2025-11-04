@@ -15,16 +15,16 @@ Generated from GdsQuestRewards.lua with integration from src/TirganachReloaded/d
 | Zwergenaxt |  |  |  |  |  |  |  |  | 20 | 0 | 0 | 0 | 2005 (taken) |
 | GeistInDerMine | 36 |  |  | Brok Dalingar (1393) |  |  |  |  | 35 | 0 | 2 | 50 | 1998 (taken) |
 | EinSeltsamerRing | 41 |  |  | Brok Dalingar (1393) |  |  |  |  | 20 | 0 | 0 | 0 | 833 (given), 1995 (taken), 1996 (taken) |
-| AusDerTiefe1Schreiber | 382 | Untersucht die Ereignisse beim Haus der Familie Muir in Liannon | Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon. | Shan Muir (1394) | 379 | 379 | 3 |  | 250 | 0 | 0 | 0 | 617 (given), 1995 (taken), 1996 (taken), 1997 (taken) |
-| AusDerTiefe1Buch | 382 | Untersucht die Ereignisse beim Haus der Familie Muir in Liannon | Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon. | Shan Muir (1394) | 379 | 379 | 3 |  | 150 | 0 | 0 | 0 | 707 (given) |
-| AusDerTiefe2Spaeher | 382 | Untersucht die Ereignisse beim Haus der Familie Muir in Liannon | Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon. | Shan Muir (1394) | 379 | 379 | 3 |  | 350 | 0 | 0 | 0 | 555 (given), 1996 (taken), 1997 (taken) |
-| AmraUndLea1Liannon1 | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 | 2 |  | 200 | 0 | 0 | 0 |  |
-| AmraUndLea1Liannon2 | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 | 2 |  | 400 | 0 | 0 | 0 |  |
-| AmraUndLea2Liannon1 | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 | 2 |  | 500 | 0 | 0 | 0 | 3045 (taken), 3046 (taken) |
-| AmraUndLea2Liannon2 | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 | 2 |  | 300 | 0 | 0 | 0 |  |
+| AusDerTiefe1Schreiber | 382 | Untersucht die Ereignisse beim Haus der Familie Muir in Liannon | Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon. | Shan Muir (1394) | 379 | 379 (Amra und Lea) | 3 |  | 250 | 0 | 0 | 0 | 617 (given), 1995 (taken), 1996 (taken), 1997 (taken) |
+| AusDerTiefe1Buch | 382 | Untersucht die Ereignisse beim Haus der Familie Muir in Liannon | Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon. | Shan Muir (1394) | 379 | 379 (Amra und Lea) | 3 |  | 150 | 0 | 0 | 0 | 707 (given) |
+| AusDerTiefe2Spaeher | 382 | Untersucht die Ereignisse beim Haus der Familie Muir in Liannon | Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon. | Shan Muir (1394) | 379 | 379 (Amra und Lea) | 3 |  | 350 | 0 | 0 | 0 | 555 (given), 1996 (taken), 1997 (taken) |
+| AmraUndLea1Liannon1 | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 (Amra und Lea) | 2 |  | 200 | 0 | 0 | 0 |  |
+| AmraUndLea1Liannon2 | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 (Amra und Lea) | 2 |  | 400 | 0 | 0 | 0 |  |
+| AmraUndLea2Liannon1 | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 (Amra und Lea) | 2 |  | 500 | 0 | 0 | 0 | 3045 (taken), 3046 (taken) |
+| AmraUndLea2Liannon2 | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 (Amra und Lea) | 2 |  | 300 | 0 | 0 | 0 |  |
 | EchosBuch | 14 |  |  | Darius (1240) |  |  |  |  | 200 | 0 | 0 | 0 | 626 (given), 3042 (taken) |
 | BefreiungShiel1Alfalas | 93 |  |  | Shan Muir (1394) |  |  |  |  | 60 | 0 | 0 | 0 | 2362 (taken) |
-| Einsiedler1Shan | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 | 2 |  | 100 | 0 | 0 | 0 |  |
+| Einsiedler1Shan | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 (Amra und Lea) | 2 |  | 100 | 0 | 0 | 0 |  |
 
 ## eloni (P2)
 
@@ -45,7 +45,7 @@ Generated from GdsQuestRewards.lua with integration from src/TirganachReloaded/d
 
 | Quest/Subquest Flag | Quest ID | Quest Name (DE) | Description (DE) | Quest Giver | Parent QID | Parent Chain | Order | Maps | XP | Gold | Silver | Copper | Items |
 |---|---:|---|---|---|---|---:|---:|---|---:|---:|---:|---:|---|
-| DurchDenSchattenhain | 383 | Eine Durchsuchung der Angreifer sollte weitere Informationen liefern | Um herauszufinden, was die Kerle wollten, sollten sie einer genaueren Untersuchung unterzogen werden. |  | 379 | 379 | 4 |  | 130 | 0 | 0 | 0 |  |
+| DurchDenSchattenhain | 383 | Eine Durchsuchung der Angreifer sollte weitere Informationen liefern | Um herauszufinden, was die Kerle wollten, sollten sie einer genaueren Untersuchung unterzogen werden. |  | 379 | 379 (Amra und Lea) | 4 |  | 130 | 0 | 0 | 0 |  |
 | Bannwerk1 |  |  |  |  |  |  |  |  | 60 | 0 | 0 | 0 | 2191 (taken), 2193 (taken), 2194 (taken), 2200 (taken), 2201 (taken), 2205 (taken) |
 | Bannwerk2 | 97 |  |  | Lord Kommandant Tynar Utran (1956) |  |  |  |  | 60 | 0 | 0 | 0 | 2191 (taken), 2193 (taken), 2194 (taken), 2200 (taken), 2201 (taken), 2205 (taken) |
 | Kopfjagd1Head1 | 455 |  |  | Sergeant Einar (1362) |  |  |  |  | 15 | 0 | 0 | 0 |  |
@@ -74,7 +74,7 @@ Generated from GdsQuestRewards.lua with integration from src/TirganachReloaded/d
 | KoenigDerSpinnen | 107 |  |  | Spider King (1989) |  |  |  |  | 45 | 0 | 10 | 0 | 2467 (given), 2467 (given), 2382 (taken) |
 | AlterMannUndMusik | 410 |  |  | Spider King (1989) |  |  |  |  | 45 | 0 | 0 | 0 | 628 (given), 2371 (taken) |
 | FeineStoffe1 | 413 |  |  | Miria Thalindar (2183) |  |  |  |  | 45 | 0 | 0 | 0 |  |
-| AmraUndLea2Sentos | 385 | Sentos will sich am Wildlandpass mit Euch treffen | Sentos spricht von einer unglücklichen Verkettung der Umstände und bedauert den Zwischenfall sehr. Da er auch auf der Suche nach Amras Vermächtnis ist, schlägt er eine Zusammenarbeit vor und will sich dafür mit Euch am Wildlandpass treffen. | Sentos the Trader (2898) | 379 | 379 | 6 | P6, P63 | 800 | 0 | 0 | 0 |  |
+| AmraUndLea2Sentos | 385 | Sentos will sich am Wildlandpass mit Euch treffen | Sentos spricht von einer unglücklichen Verkettung der Umstände und bedauert den Zwischenfall sehr. Da er auch auf der Suche nach Amras Vermächtnis ist, schlägt er eine Zusammenarbeit vor und will sich dafür mit Euch am Wildlandpass treffen. | Sentos the Trader (2898) | 379 | 379 (Amra und Lea) | 6 | P6, P63 | 800 | 0 | 0 | 0 |  |
 
 ## icegate marsh (P7)
 
@@ -82,7 +82,7 @@ Generated from GdsQuestRewards.lua with integration from src/TirganachReloaded/d
 |---|---:|---|---|---|---|---:|---:|---|---:|---:|---:|---:|---|
 | EndeDesOrdens1Erreichen | 521 |  |  | Craig Un´Shallach (4010) |  |  |  |  | 1500 | 0 | 0 | 0 |  |
 | EndeDesOrdens2DreiItems | 532 |  |  | Craig Un´Shallach (4010) |  |  |  |  | 1500 | 0 | 0 | 0 |  |
-| AmraUndLea4 | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 | 2 |  | 1200 | 0 | 0 | 0 |  |
+| AmraUndLea4 | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 (Amra und Lea) | 2 |  | 1200 | 0 | 0 | 0 |  |
 
 ## northern windwalls (P9)
 
@@ -160,7 +160,7 @@ Generated from GdsQuestRewards.lua with integration from src/TirganachReloaded/d
 | FluesterndeStadt3Item3 |  |  |  |  |  |  |  |  | 250 | 0 | 0 | 0 |  |
 | FluesterndeStadt4Endkampf | 490 |  |  | Uthar Griffonsteel (3602) |  |  |  |  | 450 | 0 | 0 | 0 |  |
 | FluesterndeStadt5Maske |  |  |  |  |  |  |  |  | 350 | 0 | 0 | 0 | 2337 (taken), 2615 (taken) |
-| AmraLeaGrab | 387 | Sucht Leas Grab in Wisper | In Wisper, der Stadt der Untoten, ist eine Grabstätte zu finden, in der Lea bestattet sein soll. Eine Untersuchung des Grabes könnte Aufschluss geben, was aus Lea geworden ist. | Lea (2909) | 379 | 379 | 9 | P6 | 800 | 0 | 0 | 0 |  |
+| AmraLeaGrab | 387 | Sucht Leas Grab in Wisper | In Wisper, der Stadt der Untoten, ist eine Grabstätte zu finden, in der Lea bestattet sein soll. Eine Untersuchung des Grabes könnte Aufschluss geben, was aus Lea geworden ist. | Lea (2909) | 379 | 379 (Amra und Lea) | 9 | P6 | 800 | 0 | 0 | 0 |  |
 | MosaikDesTodes |  |  |  |  |  |  |  |  | 800 | 0 | 0 | 0 | 3233 (taken), 3234 (taken), 3235 (taken), 3236 (taken) |
 
 ## godwall (P17)
@@ -213,7 +213,7 @@ Generated from GdsQuestRewards.lua with integration from src/TirganachReloaded/d
 |---|---:|---|---|---|---|---:|---:|---|---:|---:|---:|---:|---|
 | Klingensturm1Monument | 550 |  |  |  |  |  |  |  | 1000 | 0 | 0 | 0 |  |
 | Klingensturm2Sartarius |  |  |  |  |  |  |  |  | 2600 | 0 | 0 | 0 | 2241 (given), 3461 (taken), 2814 (taken) |
-| AmraUndLea4 | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 | 2 |  | 1200 | 0 | 0 | 0 |  |
+| AmraUndLea4 | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 (Amra und Lea) | 2 |  | 1200 | 0 | 0 | 0 |  |
 
 ## nightwhisper dale (P27)
 
@@ -244,7 +244,7 @@ Generated from GdsQuestRewards.lua with integration from src/TirganachReloaded/d
 | Quest/Subquest Flag | Quest ID | Quest Name (DE) | Description (DE) | Quest Giver | Parent QID | Parent Chain | Order | Maps | XP | Gold | Silver | Copper | Items |
 |---|---:|---|---|---|---|---:|---:|---|---:|---:|---:|---:|---|
 | NachGraufurtPartVillage | 439 |  |  | Peasant Lemuel (3110) |  |  |  |  | 20 | 0 | 0 | 0 | 532 (given) |
-| NachGraufurtPartEnde | 384 | Stellt Sentos in Graufurt zur Rede | Die beiden Kerle hatten ein Schreiben dabei, welches auf den Kaufmann Sentos aus Graufurt hinweist. Er scheint also ebenfalls an der Geschichte von Amras Rüstung interessiert zu sein. | Sentos the Trader (2897) | 379 | 379 | 5 | P63 | 10 | 0 | 0 | 0 |  |
+| NachGraufurtPartEnde | 384 | Stellt Sentos in Graufurt zur Rede | Die beiden Kerle hatten ein Schreiben dabei, welches auf den Kaufmann Sentos aus Graufurt hinweist. Er scheint also ebenfalls an der Geschichte von Amras Rüstung interessiert zu sein. | Sentos the Trader (2897) | 379 | 379 (Amra und Lea) | 5 | P63 | 10 | 0 | 0 | 0 |  |
 | AngriffDerHoehlenorks | 438 |  |  | Peasant Lemuel (3110) |  |  |  |  | 20 | 0 | 0 | 0 |  |
 | Zauberwerk1Augenglas | 335 |  |  | Gabar (2860) |  |  |  |  | 10 | 0 | 0 | 0 | 2893 (taken), 2001 (taken) |
 | Zauberwerk2Feder |  |  |  |  |  |  |  |  | 25 | 0 | 0 | 0 | 2893 (taken), 2001 (taken), 2896 (taken) |
@@ -264,12 +264,12 @@ Generated from GdsQuestRewards.lua with integration from src/TirganachReloaded/d
 | EchosBuchstabe3 | 325 |  |  | Seltsamer Grabstein (3323) |  |  |  |  | 500 | 0 | 0 | 0 |  |
 | EchosGoran | 330 |  |  | Sandor the cobbler (2867) |  |  |  |  | 700 | 0 | 0 | 0 |  |
 | EchosShinTarGuar | 333 |  |  | <No String ID> (4879) |  |  |  |  | 1000 | 0 | 0 | 0 |  |
-| AmraUndLea3Sentos | 384 | Stellt Sentos in Graufurt zur Rede | Die beiden Kerle hatten ein Schreiben dabei, welches auf den Kaufmann Sentos aus Graufurt hinweist. Er scheint also ebenfalls an der Geschichte von Amras Rüstung interessiert zu sein. | Sentos the Trader (2897) | 379 | 379 | 5 | P63 | 500 | 0 | 0 | 0 | 3047 (taken) |
+| AmraUndLea3Sentos | 384 | Stellt Sentos in Graufurt zur Rede | Die beiden Kerle hatten ein Schreiben dabei, welches auf den Kaufmann Sentos aus Graufurt hinweist. Er scheint also ebenfalls an der Geschichte von Amras Rüstung interessiert zu sein. | Sentos the Trader (2897) | 379 | 379 (Amra und Lea) | 5 | P63 | 500 | 0 | 0 | 0 | 3047 (taken) |
 | Zwergendienste1Hinrik |  |  |  |  |  |  |  |  | 120 | 0 | 0 | 0 | 2662 (taken) |
 | Schwarzeibe | 414 |  |  | Zarim (3044) |  |  |  |  | 35 | 0 | 0 | 0 | 2002 (taken) |
 | Seelenschwerter | 110 |  |  | Rohen (3035) |  |  |  |  | 600 | 0 | 0 | 0 | 2384 (taken), 2627 (taken), 2614 (taken), 2386 (taken), 2620 (taken) |
 | KlingzogsBeinlinge |  |  |  |  |  |  |  |  | 35 | 0 | 0 | 0 | 2628 (taken), 1994 (taken) |
-| ThurgonBrief | 388 | Bringt Leas Besitztümer zu Shan in Liannon | Leas Geist ließ einen Brief und ein Schmuckstück zurück. Shan Muir sollte als ihre Schwester diese Gegenstände erhalten. Vielleicht geben sie ja auch Aufschluss darüber, was geschehen ist. | Shan Muir (1394) | 379 | 379 | 10 |  | 250 | 2 | 0 | 0 | 2628 (taken), 1994 (taken) |
+| ThurgonBrief | 388 | Bringt Leas Besitztümer zu Shan in Liannon | Leas Geist ließ einen Brief und ein Schmuckstück zurück. Shan Muir sollte als ihre Schwester diese Gegenstände erhalten. Vielleicht geben sie ja auch Aufschluss darüber, was geschehen ist. | Shan Muir (1394) | 379 | 379 (Amra und Lea) | 10 |  | 250 | 2 | 0 | 0 | 2628 (taken), 1994 (taken) |
 | FeineStoffe3Seide | 344 |  |  | Tanara the Seamstress (2861) |  |  |  |  | 400 | 0 | 0 | 0 | 2383 (taken) |
 | FeineStoffe4Robe |  |  |  |  |  |  |  |  | 1100 | 0 | 0 | 0 | 3352 (given), 2511 (taken), 3437 (taken) |
 | Drachenpanzer1 |  |  |  |  |  |  |  |  | 100 | 0 | 0 | 0 |  |
@@ -503,7 +503,7 @@ Generated from GdsQuestRewards.lua with integration from src/TirganachReloaded/d
 |---|---:|---|---|---|---|---:|---:|---|---:|---:|---:|---:|---|
 | P204KarteErreicht | 809 |  |  |  |  |  |  |  | 3000 | 0 | 0 | 0 | 7219 (taken) |
 | FlinkAbgeliefert |  |  |  |  |  |  |  |  | 5500 | 0 | 0 | 0 |  |
-| Tor1DurchTrickGeoeffnet | 383 | Eine Durchsuchung der Angreifer sollte weitere Informationen liefern | Um herauszufinden, was die Kerle wollten, sollten sie einer genaueren Untersuchung unterzogen werden. |  | 379 | 379 | 4 |  | 11000 | 0 | 0 | 0 |  |
+| Tor1DurchTrickGeoeffnet | 383 | Eine Durchsuchung der Angreifer sollte weitere Informationen liefern | Um herauszufinden, was die Kerle wollten, sollten sie einer genaueren Untersuchung unterzogen werden. |  | 379 | 379 (Amra und Lea) | 4 |  | 11000 | 0 | 0 | 0 |  |
 | Tor2DurchTrickGeoeffnet | 970 |  |  | Townguard Endo (8830) |  |  |  |  | 7000 | 0 | 0 | 0 | 7303 (taken) |
 | Tor3DurchTrickGeoeffnet | 948 |  |  | Locked Town Gate (9999) |  |  |  |  | 9000 | 0 | 0 | 0 | 7217 (taken) |
 | OberstadtRechtsErreicht |  |  |  |  |  |  |  |  | 6500 | 0 | 0 | 0 |  |
@@ -602,8 +602,8 @@ Generated from GdsQuestRewards.lua with integration from src/TirganachReloaded/d
 | Quest/Subquest Flag | Quest ID | Quest Name (DE) | Description (DE) | Quest Giver | Parent QID | Parent Chain | Order | Maps | XP | Gold | Silver | Copper | Items |
 |---|---:|---|---|---|---|---:|---:|---|---:|---:|---:|---:|---|
 | P209KarteErreicht | 779 |  |  | 5 |  |  |  |  | 5000 | 0 | 0 | 0 |  |
-| UntotenlagerNord | 382 | Untersucht die Ereignisse beim Haus der Familie Muir in Liannon | Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon. | Shan Muir (1394) | 379 | 379 | 3 |  | 9000 | 0 | 0 | 0 |  |
-| UntotenlagerWest | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 | 2 |  | 9000 | 0 | 0 | 0 |  |
+| UntotenlagerNord | 382 | Untersucht die Ereignisse beim Haus der Familie Muir in Liannon | Shan meint, dass noch andere sich für die Geschichte ihrer Familie interessieren. Bei dem alten Haus ihrer Familie hat sie einige finstere Gestalten herumstöbern sehen. Das Haus befindet sich im Nordosten von Liannon. | Shan Muir (1394) | 379 | 379 (Amra und Lea) | 3 |  | 9000 | 0 | 0 | 0 |  |
+| UntotenlagerWest | 381 | Befragt Shan Muir in Liannon zu Arma und Lea | Shan ist die Schwester von Lea, der Erwählten Amras. Sie kennt wohl einen weiteren Teil der Geschichte. | Sunder Blackhand (1390) | 379 | 379 (Amra und Lea) | 2 |  | 9000 | 0 | 0 | 0 |  |
 | UntotenlagerSued |  |  |  |  |  |  |  |  | 9000 | 0 | 0 | 0 |  |
 | StadtKathaiErreicht | 782 |  |  | 5 |  |  |  |  | 6000 | 0 | 0 | 0 |  |
 | GespraechMitKhal | 1083 |  |  | Khal (10085) |  |  |  |  | 2000 | 0 | 0 | 0 |  |
