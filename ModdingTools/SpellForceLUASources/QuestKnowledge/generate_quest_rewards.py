@@ -5,6 +5,7 @@ import os
 import csv
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
+import json
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT_DIR = ROOT / "script"
@@ -12,6 +13,9 @@ REWARDS_LUA = SCRIPT_DIR / "GdsQuestRewards.lua"
 OUT_DIR = ROOT / "QuestKnowledge"
 CSV_PATH = OUT_DIR / "QuestRewards.csv"
 MD_PATH = OUT_DIR / "QuestRewards.md"
+# Workspace root (cleanup TirganachReloaded)
+WORKSPACE_ROOT = ROOT.parents[1]
+DATA_DIR = WORKSPACE_ROOT / "src" / "TirganachReloaded" / "data"
 
 # ---------- Utility ----------
 
@@ -289,6 +293,112 @@ def annotate_taken_items(sections: List[Section], flag2taken: Dict[str, List[int
                 e["items_taken"] = flag2taken[flag]
 
 
+# ---------- External data integration (JSON in src/TirganachReloaded/data) ----------
+
+def _load_json(path: Path) -> Optional[dict]:
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+
+def load_external_flag_to_qid_mappings() -> Dict[str, int]:
+    """Load flag->quest_id mappings from data directory JSONs and merge."""
+    mapping: Dict[str, int] = {}
+    files = [
+        DATA_DIR / "REWARD_TO_QUEST_ID_MASTER_MAP.json",
+        DATA_DIR / "quest_id_to_reward_name_mappings.json",
+    ]
+    for fp in files:
+        data = _load_json(fp)
+        if not data:
+            continue
+        if "mappings" in data and isinstance(data["mappings"], dict):
+            for k, v in data["mappings"].items():
+                try:
+                    mapping[k] = int(v)
+                except Exception:
+                    continue
+        else:
+            # flat mapping
+            for k, v in data.items():
+                try:
+                    mapping[k] = int(v)
+                except Exception:
+                    continue
+    return mapping
+
+
+def load_quest_rewards_complete() -> Dict[int, dict]:
+    """Load quest_rewards_complete.json and return rewards_by_quest_id mapping."""
+    path = DATA_DIR / "quest_rewards_complete.json"
+    data = _load_json(path)
+    by_id: Dict[int, dict] = {}
+    if not data:
+        return by_id
+    rewards = data.get("rewards_by_quest_id", {}) if isinstance(data, dict) else {}
+    for k, v in rewards.items():
+        try:
+            by_id[int(k)] = v
+        except Exception:
+            continue
+    return by_id
+
+
+def load_quest_maps_and_names() -> Dict[int, dict]:
+    """Load quest_maps_and_descriptions.json and return quest_id -> {name, maps:[{code,name}]}"""
+    path = DATA_DIR / "quest_maps_and_descriptions.json"
+    data = _load_json(path)
+    by_id: Dict[int, dict] = {}
+    if not data or not isinstance(data, dict):
+        return by_id
+    for k, v in data.items():
+        try:
+            qid = int(k)
+        except Exception:
+            continue
+        if isinstance(v, dict):
+            by_id[qid] = v
+    return by_id
+
+
+def integrate_rewards_complete(sections: List[Section], reward2qid: Dict[str, int], complete: Dict[int, dict]):
+    """Optionally fill missing XP/Money/Items from quest_rewards_complete for entries with a mapped quest_id."""
+    for sec in sections:
+        for e in sec["entries"]:
+            flag = e["flag"]
+            qid = reward2qid.get(flag)
+            if qid is None:
+                continue
+            comp = complete.get(qid)
+            if not comp:
+                continue
+            # Only fill if missing/zero in parsed entry
+            if e.get("xp") in (None, 0):
+                xp = comp.get("xp")
+                if isinstance(xp, int) and xp > 0:
+                    e["xp"] = xp
+            # Money
+            if e.get("gold", 0) == 0 and e.get("silver", 0) == 0 and e.get("copper", 0) == 0:
+                for k in ("gold", "silver", "copper"):
+                    val = comp.get(k)
+                    if isinstance(val, int) and val > 0:
+                        e[k] = val
+            # Items (given): merge unique
+            citems = comp.get("items")
+            if isinstance(citems, list) and citems:
+                existing = set(e.get("items_given", []))
+                for it in citems:
+                    try:
+                        itn = int(it)
+                    except Exception:
+                        continue
+                    if itn not in existing:
+                        e["items_given"].append(itn)
+                        existing.add(itn)
+
+
 def collect_taken_items_from_events() -> Dict[str, List[int]]:
     """Within each OnOneTimeEvent block, associate any TransferItem{TakeItem} with any SetRewardFlagTrue in the same block."""
     mapping: Dict[str, List[int]] = {}
@@ -363,11 +473,11 @@ def guess_quest_giver_npc(quest_ids: List[int]) -> Dict[int, Optional[int]]:
 
 # ---------- Emit CSV and Markdown ----------
 
-def write_csv(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Dict[int, Optional[int]]):
+def write_csv(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Dict[int, Optional[int]], qmeta: Dict[int, dict]):
     with open(CSV_PATH, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow([
-            "platform_id", "platform_name", "quest_flag", "quest_id", "quest_giver_npc_id",
+            "platform_id", "platform_name", "quest_flag", "quest_id", "quest_name", "quest_giver_npc_id", "quest_maps",
             "xp", "gold", "silver", "copper", "items_given", "items_taken",
         ])
         for sec in sorted(sections, key=lambda s: int(s["platform_id"])):
@@ -377,22 +487,33 @@ def write_csv(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Di
                 flag = e["flag"]
                 qid = reward2qid.get(flag)
                 giver = qid2giver.get(qid) if qid is not None else None
+                qname = ""
+                qmaps = ""
+                if qid is not None and qid in qmeta:
+                    meta = qmeta[qid]
+                    qname = meta.get("name") or meta.get("quest_name") or ""
+                    maps = meta.get("maps") or []
+                    if isinstance(maps, list):
+                        codes = [m.get("code") for m in maps if isinstance(m, dict) and m.get("code")]
+                        qmaps = "|".join(codes)
                 items_given = "|".join(str(x) for x in e["items_given"]) if e["items_given"] else ""
                 items_taken = "|".join(str(x) for x in e["items_taken"]) if e["items_taken"] else ""
                 w.writerow([
                     pid, pname, flag, qid if qid is not None else "",
+                    qname,
                     giver if giver is not None else "",
+                    qmaps,
                     e["xp"] if e["xp"] is not None else "",
                     e["gold"], e["silver"], e["copper"],
                     items_given, items_taken,
                 ])
 
 
-def write_md(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Dict[int, Optional[int]]):
+def write_md(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Dict[int, Optional[int]], qmeta: Dict[int, dict]):
     lines: List[str] = []
     lines.append("# Quest Rewards by Platform/Map")
     lines.append("")
-    lines.append("Generated from GdsQuestRewards.lua. Items are marked as given; taken list will be populated if found in future passes.")
+    lines.append("Generated from GdsQuestRewards.lua with integration from src/TirganachReloaded/data (quest IDs, names, maps). Items are marked as given; taken list populated where detected in scripts.")
     lines.append("")
 
     for sec in sorted(sections, key=lambda s: int(s["platform_id"])):
@@ -400,12 +521,21 @@ def write_md(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Dic
         pname = sec["platform_name"]
         lines.append(f"## {pname} (P{pid})")
         lines.append("")
-        lines.append("| Quest/Subquest Flag | Quest ID | Quest Giver NPC | XP | Gold | Silver | Copper | Items |")
-        lines.append("|---|---:|---:|---:|---:|---:|---:|---|")
+        lines.append("| Quest/Subquest Flag | Quest ID | Quest Name | Quest Giver NPC | Maps | XP | Gold | Silver | Copper | Items |")
+        lines.append("|---|---:|---|---:|---|---:|---:|---:|---:|---|")
         for e in sec["entries"]:
             flag = e["flag"]
             qid = reward2qid.get(flag)
             giver = qid2giver.get(qid) if qid is not None else None
+            qname = ""
+            qmaps = ""
+            if qid is not None and qid in qmeta:
+                meta = qmeta[qid]
+                qname = meta.get("name") or meta.get("quest_name") or ""
+                maps = meta.get("maps") or []
+                if isinstance(maps, list):
+                    codes = [m.get("code") for m in maps if isinstance(m, dict) and m.get("code")]
+                    qmaps = ", ".join(codes)
             parts: List[str] = []
             if e["items_given"]:
                 parts.extend(f"{x} (given)" for x in e["items_given"]) 
@@ -414,7 +544,7 @@ def write_md(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Dic
             items = ", ".join(parts)
             xp = e["xp"] if e["xp"] is not None else ""
             lines.append(
-                f"| {flag} | {qid if qid is not None else ''} | {giver if giver is not None else ''} | {xp} | {e['gold']} | {e['silver']} | {e['copper']} | {items} |")
+                f"| {flag} | {qid if qid is not None else ''} | {qname} | {giver if giver is not None else ''} | {qmaps} | {xp} | {e['gold']} | {e['silver']} | {e['copper']} | {items} |")
         lines.append("")
 
     with open(MD_PATH, "w", encoding="utf-8") as f:
@@ -437,12 +567,20 @@ def main():
     for k, v in flag2taken_win.items():
         flag2taken.setdefault(k, v)
     annotate_taken_items(sections, flag2taken)
+
+    # Integrate external mappings and metadata
+    ext_map = load_external_flag_to_qid_mappings()
+    for flg, qid in ext_map.items():
+        reward2qid.setdefault(flg, qid)
+    complete = load_quest_rewards_complete()
+    integrate_rewards_complete(sections, reward2qid, complete)
+    qmeta = load_quest_maps_and_names()
     qids = sorted(set(reward2qid.values()))
     qid2giver = guess_quest_giver_npc(qids)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    write_csv(sections, reward2qid, qid2giver)
-    write_md(sections, reward2qid, qid2giver)
+    write_csv(sections, reward2qid, qid2giver, qmeta)
+    write_md(sections, reward2qid, qid2giver, qmeta)
 
     print(f"Parsed sections: {len(sections)}")
     total_entries = sum(len(s['entries']) for s in sections)
