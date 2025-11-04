@@ -18,13 +18,13 @@ Generated from GdsQuestRewards.lua with integration from src/TirganachReloaded/d
 | AusDerTiefe1Schreiber |  |  |  |  | 250 | 0 | 0 | 0 | 617 (given), 1995 (taken), 1996 (taken), 1997 (taken) |
 | AusDerTiefe1Buch |  |  |  |  | 150 | 0 | 0 | 0 | 707 (given) |
 | AusDerTiefe2Spaeher |  |  |  |  | 350 | 0 | 0 | 0 | 555 (given), 1996 (taken), 1997 (taken) |
-| AmraUndLea1Liannon1 |  |  |  |  | 200 | 0 | 0 | 0 |  |
-| AmraUndLea1Liannon2 |  |  |  |  | 400 | 0 | 0 | 0 |  |
-| AmraUndLea2Liannon1 |  |  |  |  | 500 | 0 | 0 | 0 | 3045 (taken), 3046 (taken) |
-| AmraUndLea2Liannon2 |  |  |  |  | 300 | 0 | 0 | 0 |  |
+| AmraUndLea1Liannon1 | 388 | Bring Lea's possessions to Shan in Liannon | 1394 |  | 200 | 0 | 0 | 0 |  |
+| AmraUndLea1Liannon2 | 388 | Bring Lea's possessions to Shan in Liannon | 1394 |  | 400 | 0 | 0 | 0 |  |
+| AmraUndLea2Liannon1 | 388 | Bring Lea's possessions to Shan in Liannon | 1394 |  | 500 | 0 | 0 | 0 | 3045 (taken), 3046 (taken) |
+| AmraUndLea2Liannon2 | 388 | Bring Lea's possessions to Shan in Liannon | 1394 |  | 300 | 0 | 0 | 0 |  |
 | EchosBuch | 14 |  | 1240 |  | 200 | 0 | 0 | 0 | 626 (given), 3042 (taken) |
 | BefreiungShiel1Alfalas | 93 |  | 1394 |  | 60 | 0 | 0 | 0 | 2362 (taken) |
-| Einsiedler1Shan |  |  |  |  | 100 | 0 | 0 | 0 |  |
+| Einsiedler1Shan | 381 | Ask Shan Muir about Arma and Lea | 1390 |  | 100 | 0 | 0 | 0 |  |
 
 ## eloni (P2)
 
@@ -82,7 +82,7 @@ Generated from GdsQuestRewards.lua with integration from src/TirganachReloaded/d
 |---|---:|---|---:|---|---:|---:|---:|---:|---|
 | EndeDesOrdens1Erreichen | 521 |  | 4010 |  | 1500 | 0 | 0 | 0 |  |
 | EndeDesOrdens2DreiItems | 532 |  | 4010 |  | 1500 | 0 | 0 | 0 |  |
-| AmraUndLea4 |  |  |  |  | 1200 | 0 | 0 | 0 |  |
+| AmraUndLea4 | 381 | Ask Shan Muir about Arma and Lea | 1390 |  | 1200 | 0 | 0 | 0 |  |
 
 ## northern windwalls (P9)
 
@@ -149,7 +149,7 @@ Generated from GdsQuestRewards.lua with integration from src/TirganachReloaded/d
 | Trickster1Cassius |  |  |  |  | 300 | 0 | 0 | 0 |  |
 | MaskeDesBelial2 | 216 |  | 2322 |  | 300 | 0 | 0 | 0 |  |
 | Schattenwelt4Kristall |  |  |  |  | 1400 | 0 | 0 | 0 |  |
-| AmraUndLea5 |  |  |  |  | 1200 | 0 | 0 | 0 |  |
+| AmraUndLea5 | 379 | Amra and Lea | 2896 | P15, P63 | 1200 | 0 | 0 | 0 |  |
 
 ## whisper (P16)
 
@@ -213,7 +213,7 @@ Generated from GdsQuestRewards.lua with integration from src/TirganachReloaded/d
 |---|---:|---|---:|---|---:|---:|---:|---:|---|
 | Klingensturm1Monument | 550 |  |  |  | 1000 | 0 | 0 | 0 |  |
 | Klingensturm2Sartarius |  |  |  |  | 2600 | 0 | 0 | 0 | 2241 (given), 3461 (taken), 2814 (taken) |
-| AmraUndLea4 |  |  |  |  | 1200 | 0 | 0 | 0 |  |
+| AmraUndLea4 | 381 | Ask Shan Muir about Arma and Lea | 1390 |  | 1200 | 0 | 0 | 0 |  |
 
 ## nightwhisper dale (P27)
 

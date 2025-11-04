@@ -11,13 +11,13 @@ platform_id,platform_name,quest_flag,quest_id,quest_name,quest_giver_npc_id,ques
 1,liannon,AusDerTiefe1Schreiber,,,,,250,0,0,0,617,1995|1996|1997
 1,liannon,AusDerTiefe1Buch,,,,,150,0,0,0,707,
 1,liannon,AusDerTiefe2Spaeher,,,,,350,0,0,0,555,1996|1997
-1,liannon,AmraUndLea1Liannon1,,,,,200,0,0,0,,
-1,liannon,AmraUndLea1Liannon2,,,,,400,0,0,0,,
-1,liannon,AmraUndLea2Liannon1,,,,,500,0,0,0,,3045|3046
-1,liannon,AmraUndLea2Liannon2,,,,,300,0,0,0,,
+1,liannon,AmraUndLea1Liannon1,388,Bring Lea's possessions to Shan in Liannon,1394,,200,0,0,0,,
+1,liannon,AmraUndLea1Liannon2,388,Bring Lea's possessions to Shan in Liannon,1394,,400,0,0,0,,
+1,liannon,AmraUndLea2Liannon1,388,Bring Lea's possessions to Shan in Liannon,1394,,500,0,0,0,,3045|3046
+1,liannon,AmraUndLea2Liannon2,388,Bring Lea's possessions to Shan in Liannon,1394,,300,0,0,0,,
 1,liannon,EchosBuch,14,,1240,,200,0,0,0,626,3042
 1,liannon,BefreiungShiel1Alfalas,93,,1394,,60,0,0,0,,2362
-1,liannon,Einsiedler1Shan,,,,,100,0,0,0,,
+1,liannon,Einsiedler1Shan,381,Ask Shan Muir about Arma and Lea,1390,,100,0,0,0,,
 2,eloni,TrommelnInWaeldern,28,,1399,,90,0,0,0,,
 2,eloni,WundtinkturSwerdis,357,,2628,,80,0,0,0,,2670
 2,eloni,DieLetztenSchuetzen1,31,,1501,,15,0,0,0,695,
@@ -50,7 +50,7 @@ platform_id,platform_name,quest_flag,quest_id,quest_name,quest_giver_npc_id,ques
 6,wildland pass,AmraUndLea2Sentos,385,Sentos wants to meet with you at the Wildland Pass.,2898,P6|P63,800,0,0,0,,
 7,icegate marsh,EndeDesOrdens1Erreichen,521,,4010,,1500,0,0,0,,
 7,icegate marsh,EndeDesOrdens2DreiItems,532,,4010,,1500,0,0,0,,
-7,icegate marsh,AmraUndLea4,,,,,1200,0,0,0,,
+7,icegate marsh,AmraUndLea4,381,Ask Shan Muir about Arma and Lea,1390,,1200,0,0,0,,
 9,northern windwalls,Marcia1,121,,2016,,150,0,0,0,2652,
 9,northern windwalls,SchlachtUmBrunnenfels1,112,,2016,,100,0,0,0,,
 9,northern windwalls,SchlachtUmBrunnenfels2,120,,2017,,150,0,0,0,708|545,
@@ -92,7 +92,7 @@ platform_id,platform_name,quest_flag,quest_id,quest_name,quest_giver_npc_id,ques
 15,howling mounds,Trickster1Cassius,,,,,300,0,0,0,,
 15,howling mounds,MaskeDesBelial2,216,,2322,,300,0,0,0,,
 15,howling mounds,Schattenwelt4Kristall,,,,,1400,0,0,0,,
-15,howling mounds,AmraUndLea5,,,,,1200,0,0,0,,
+15,howling mounds,AmraUndLea5,379,Amra and Lea,2896,P15|P63,1200,0,0,0,,
 16,whisper,FluesterndeStadt1Item1,212,,2322,,250,0,0,0,,
 16,whisper,FluesterndeStadt2Item2,,,,,250,0,0,0,,
 16,whisper,FluesterndeStadt3Item3,,,,,250,0,0,0,,
@@ -126,7 +126,7 @@ platform_id,platform_name,quest_flag,quest_id,quest_name,quest_giver_npc_id,ques
 23,the rift,Ulather,,,,,800,0,0,0,,
 25,southern godmark,Klingensturm1Monument,550,,,,1000,0,0,0,,
 25,southern godmark,Klingensturm2Sartarius,,,,,2600,0,0,0,2241,3461|2814
-25,southern godmark,AmraUndLea4,,,,,1200,0,0,0,,
+25,southern godmark,AmraUndLea4,381,Ask Shan Muir about Arma and Lea,1390,,1200,0,0,0,,
 27,nightwhisper dale,NachUrgath1Elfensiedlung,,,,,1000,0,0,0,,
 27,nightwhisper dale,NachUrgath2Monument,537,,4200,,1400,0,0,0,,
 27,nightwhisper dale,NachUrgath3Archon,,,,,2000,0,0,0,1456|1550,

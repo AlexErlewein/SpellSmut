@@ -309,6 +309,7 @@ def load_external_flag_to_qid_mappings() -> Dict[str, int]:
     files = [
         DATA_DIR / "REWARD_TO_QUEST_ID_MASTER_MAP.json",
         DATA_DIR / "quest_id_to_reward_name_mappings.json",
+        DATA_DIR / "REWARD_NAME_TO_QUEST_ID_MAPPINGS.json",
     ]
     for fp in files:
         data = _load_json(fp)
@@ -397,6 +398,106 @@ def integrate_rewards_complete(sections: List[Section], reward2qid: Dict[str, in
                     if itn not in existing:
                         e["items_given"].append(itn)
                         existing.add(itn)
+
+
+# ---------- Dynamic text-based matching (copied, decoupled) ----------
+
+def load_cff_quest_data() -> Dict[int, dict]:
+    """Load cff_quest_data.json for quest names/descriptions in multiple langs."""
+    path = DATA_DIR / "cff_quest_data.json"
+    data = _load_json(path)
+    by_id: Dict[int, dict] = {}
+    if not data or not isinstance(data, dict):
+        return by_id
+    for k, v in data.items():
+        try:
+            qid = int(k)
+        except Exception:
+            continue
+        if isinstance(v, dict):
+            by_id[qid] = v
+    return by_id
+
+
+def _texts_from_cff_record(rec: dict) -> List[str]:
+    texts: List[str] = []
+    # direct fields
+    for key in ("name", "name_en", "name_de", "description_en", "description_de"):
+        val = rec.get(key)
+        if isinstance(val, str):
+            texts.append(val)
+    # attributes nested
+    attrs = rec.get("attributes") or {}
+    if isinstance(attrs, dict):
+        for key in ("name", "description", "description2"):
+            val = attrs.get(key)
+            if isinstance(val, str):
+                texts.append(val)
+    return texts
+
+
+_STOPWORDS_DE = {"der", "die", "das", "ein", "eine", "und", "nach", "vor", "part", "im", "in", "zu", "zum", "zur", "mit", "von", "den", "dem"}
+
+
+def split_compound_parts(name: str) -> List[str]:
+    # split German compound CamelCase and digits
+    parts = re.findall(r"[A-ZÄÖÜ][a-zäöüß]+|[0-9]+|[A-Za-z]+", name)
+    parts = [p for p in parts if p]
+    # normalize
+    norm = []
+    for p in parts:
+        pn = p.strip()
+        if not pn:
+            continue
+        norm.append(pn)
+    return norm
+
+
+def match_flag_to_qid_by_text(flag: str, platform_code: str, qmeta: Dict[int, dict], cff: Dict[int, dict]) -> Optional[int]:
+    parts = split_compound_parts(flag)
+    # significant parts
+    sig = [p for p in parts if p.lower() not in _STOPWORDS_DE and len(p) > 2 and not p.isdigit()]
+    if not sig:
+        sig = [p for p in parts if len(p) > 2]
+    best_q = None
+    best_score = 0
+    # iterate quests that mention this platform
+    for qid, meta in qmeta.items():
+        maps = meta.get("maps") or []
+        codes = [m.get("code") for m in maps if isinstance(m, dict) and m.get("code")]
+        if platform_code and codes and platform_code not in codes:
+            continue
+        cff_rec = cff.get(qid) or {}
+        texts = " \n ".join(_texts_from_cff_record(cff_rec)).lower()
+        if not texts:
+            continue
+        # score as number of sig parts present
+        score = 0
+        for p in sig:
+            if p.lower() in texts:
+                score += 1
+        # boost exact substring of the raw flag (lower)
+        if flag.lower() in texts:
+            score += 2
+        if score > best_score:
+            best_score = score
+            best_q = qid
+    # thresholds
+    if best_q is not None and (best_score >= 2 or (best_score >= 1 and len(sig) <= 2)):
+        return best_q
+    return None
+
+
+def augment_reward2qid_with_text_matching(sections: List[Section], reward2qid: Dict[str, int], qmeta: Dict[int, dict], cff: Dict[int, dict]):
+    for sec in sections:
+        platform_code = f"P{sec['platform_id']}"
+        for e in sec["entries"]:
+            flag = e["flag"]
+            if flag in reward2qid:
+                continue
+            qid = match_flag_to_qid_by_text(flag, platform_code, qmeta, cff)
+            if qid is not None:
+                reward2qid[flag] = qid
 
 
 def collect_taken_items_from_events() -> Dict[str, List[int]]:
@@ -575,6 +676,9 @@ def main():
     complete = load_quest_rewards_complete()
     integrate_rewards_complete(sections, reward2qid, complete)
     qmeta = load_quest_maps_and_names()
+    # Dynamic text-based matching to fill remaining flags
+    cff = load_cff_quest_data()
+    augment_reward2qid_with_text_matching(sections, reward2qid, qmeta, cff)
     qids = sorted(set(reward2qid.values()))
     qid2giver = guess_quest_giver_npc(qids)
 
