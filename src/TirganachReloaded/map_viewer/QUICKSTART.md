@@ -55,17 +55,25 @@ sf-map-viewer
 ## Controls
 
 ### Movement
-- **W** or **↑** - Move forward
+- **W** or **↑** - Move forward (faster now)
 - **S** or **↓** - Move backward  
 - **A** or **←** - Move left
 - **D** or **→** - Move right
+- **Left Mouse + Drag** - Move camera (drag to move in any direction)
 
 ### Camera Rotation
 - **Middle Mouse + Drag** - Free look (rotate camera)
+- **Q** - Rotate left
+- **E** - Rotate right
 - **Home** - Rotate left
 - **End** - Rotate right
 - **Page Up** - Tilt camera up
 - **Page Down** - Tilt camera down
+
+### Camera Modes
+- **F** - Toggle terrain following / fixed altitude mode
+  - **Terrain Following**: Camera smoothly follows terrain height (default)
+  - **Fixed Altitude**: Camera stays at constant height for smooth movement
 
 ### Zoom
 - **Mouse Wheel** - Zoom in/out

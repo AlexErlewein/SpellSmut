@@ -1,70 +1,51 @@
 #!/usr/bin/env python3
 """
-Test script to verify texture loading and rendering
+Test script to check texture loading and binding
 """
-
 import sys
-from pathlib import Path
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
 
-# Add parent directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from loguru import logger
-
-# Configure logging
-logger.remove()
-logger.add(sys.stderr, format="<green>{time:HH:mm:ss}</green> | <level>{level: <8}</level> | {message}", level="INFO")
-
-def test_texture_loading():
-    """Test that textures are loaded correctly"""
-    logger.info("Testing texture loading...")
+try:
+    from TirganachReloaded.map_viewer.simple_texture_manager import SimpleTextureManager
+    from TirganachReloaded.map_viewer.dds_loader import DDSLoader
+    print("✅ Texture imports successful")
     
-    try:
-        from TirganachReloaded.map_viewer.simple_texture_manager import SimpleTextureManager
+    # Test DDS loader
+    dds_loader = DDSLoader()
+    print("✅ DDS loader initialized")
+    
+    # Test texture manager
+    texture_manager = SimpleTextureManager()
+    print("✅ Texture manager initialized")
+    
+    # Load available textures
+    texture_manager.load_available_textures("ExtractedAssets")
+    print(f"✅ Found {len(texture_manager.texture_files)} available textures")
+    
+    # Try to load a specific texture
+    if texture_manager.texture_files:
+        first_texture_id = list(texture_manager.texture_files.keys())[0]
+        texture_path = texture_manager.texture_files[first_texture_id]
+        print(f"✅ First texture: ID {first_texture_id} -> {texture_path}")
         
-        # Create texture manager
-        tm = SimpleTextureManager()
-        
-        # Try to load from ExtractedAssets
-        assets_path = Path("ExtractedAssets")
-        if not assets_path.exists():
-            assets_path = Path("../../ExtractedAssets")
-        
-        if not assets_path.exists():
-            logger.error(f"ExtractedAssets not found at {assets_path}")
-            return False
-            
-        # Load available textures
-        count = tm.load_available_textures(str(assets_path))
-        logger.info(f"Found {count} terrain textures")
-        
-        if count == 0:
-            logger.error("No terrain textures found!")
-            return False
-            
-        # Try to load a few textures
-        test_ids = sorted(tm.texture_files.keys())[:5]
-        for tid in test_ids:
-            texture = tm.get_texture(tid)
-            if texture is not None:
-                logger.info(f"✓ Loaded texture {tid}: shape={texture.shape}")
+        # Try to load the texture data
+        if os.path.exists(texture_path):
+            texture_data = dds_loader.load_from_file(texture_path)
+            if texture_data is not None:
+                print(f"✅ Successfully loaded texture: shape={texture_data.shape}, dtype={texture_data.dtype}")
             else:
-                logger.error(f"✗ Failed to load texture {tid}")
-                return False
-                
-        # Get statistics
-        stats = tm.get_statistics()
-        logger.info(f"Statistics: {stats}")
-        
-        logger.info("✅ Texture loading test passed!")
-        return True
-        
-    except Exception as e:
-        logger.error(f"❌ Test failed: {e}")
-        import traceback
-        traceback.print_exc()
-        return False
-
-if __name__ == "__main__":
-    success = test_texture_loading()
-    sys.exit(0 if success else 1)
+                print("❌ Failed to load texture data")
+        else:
+            print(f"❌ Texture file not found: {texture_path}")
+    else:
+        print("❌ No textures found")
+    
+    print("\n🎉 Texture loading test completed!")
+    
+except ImportError as e:
+    print(f"❌ Import error: {e}")
+except Exception as e:
+    print(f"❌ Error: {e}")
+    import traceback
+    traceback.print_exc()

@@ -96,12 +96,16 @@ python -m TirganachReloaded.map_viewer.map_viewer_window
 
 | Input | Action |
 |-------|--------|
-| **Arrow Keys** or **WASD** | Move camera forward/backward/left/right |
+| **Arrow Keys** or **WASD** | Move camera forward/backward/left/right (faster) |
+| **Left Mouse Drag** | Move camera (forward/backward/left/right) |
 | **Middle Mouse Drag** | Rotate camera (free look) |
+| **Q / E Keys** | Rotate camera left/right |
+| **F Key** | Toggle terrain following / fixed altitude mode |
 | **Mouse Wheel** | Zoom in/out |
 | **Home / End** | Rotate camera left/right |
 | **Page Up / Page Down** | Tilt camera up/down |
 | **Insert / Delete** | Zoom in/out (alternative) |
+| **D Key** | Show debug info (includes camera mode) |
 | **Open Map Button** | Load a `.map` file |
 | **Reset Camera Button** | Return to center of map |
 

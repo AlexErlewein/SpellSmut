@@ -78,7 +78,7 @@ class MapViewerWidget(QOpenGLWidget):
         self.texture_ids = []  # OpenGL texture IDs
         self.base_textures = {}  # Index -> texture data
         self.texture_id_map = {}  # Texture manager ID -> OpenGL texture ID mapping
-        self.use_textures = False  # Enable/disable texture rendering (start OFF)
+        self.use_textures = True  # Enable/disable texture rendering (start ON)
         self.texture_preview_label: Optional['QLabel'] = None  # Will be set by window
         
         # Multi-layer texture system
@@ -92,6 +92,7 @@ class MapViewerWidget(QOpenGLWidget):
         # Input state
         self.last_mouse_pos = QPointF(0, 0)
         self.mouse_dragging = False
+        self.left_mouse_dragging = False
         self.keys_pressed = set()
 
         # Lighting state
@@ -824,6 +825,8 @@ class MapViewerWidget(QOpenGLWidget):
                 glEnable(GL_TEXTURE_2D)
                 fallback_tex_id = self.texture_ids[0] if self.texture_ids else 0
                 glBindTexture(GL_TEXTURE_2D, int(fallback_tex_id))
+            else:
+                glDisable(GL_TEXTURE_2D)  # Ensure texturing is disabled if no textures
 
             for y in range(0, height - step, step):
                 glBegin(GL_TRIANGLE_STRIP)
@@ -939,6 +942,7 @@ class MapViewerWidget(QOpenGLWidget):
             glEnable(GL_TEXTURE_2D)
         else:
             glDisable(GL_TEXTURE_2D)
+            # Fall back to basic heightmap rendering without textures
             return
             
         # Texture scaling
@@ -1763,10 +1767,12 @@ class MapViewerWidget(QOpenGLWidget):
         if Qt.Key.Key_Right in self.keys_pressed or Qt.Key.Key_D in self.keys_pressed:
             right += 1.0
 
+        needs_update = False
+
         if forward != 0.0 or right != 0.0:
             self.camera.move(forward, right, delta_time)
 
-            # Adjust camera elevation based on terrain
+            # Adjust camera elevation based on terrain (only if terrain following is enabled)
             if self.map_loader and self.map_loader.heightmap:
                 pos = self.camera.position
                 terrain_h = self.map_loader.get_height_at(pos[0], pos[2])
@@ -1774,7 +1780,18 @@ class MapViewerWidget(QOpenGLWidget):
                     self.camera.base_elevation * self.camera.zoom_level, terrain_h
                 )
 
-            self.update()
+            needs_update = True
+
+        # Q/E key rotation
+        qe_rotation_delta = 0.0
+        if Qt.Key.Key_Q in self.keys_pressed:
+            qe_rotation_delta -= self.camera.rotation_speed * delta_time
+        if Qt.Key.Key_E in self.keys_pressed:
+            qe_rotation_delta += self.camera.rotation_speed * delta_time
+
+        if qe_rotation_delta != 0.0:
+            self.camera.rotate(qe_rotation_delta, 0.0)  # Only rotate horizontally
+            needs_update = True
 
         # Rotation with Home/End/PageUp/PageDown
         rotation_delta = 0.0
@@ -1791,6 +1808,10 @@ class MapViewerWidget(QOpenGLWidget):
 
         if rotation_delta != 0.0 or altitude_delta != 0.0:
             self.camera.rotate(rotation_delta, altitude_delta)
+            needs_update = True
+
+        # Single update call at the end
+        if needs_update:
             self.update()
 
         # Sun position adjustment with Shift + Arrow keys
@@ -1828,11 +1849,18 @@ class MapViewerWidget(QOpenGLWidget):
             self.mouse_dragging = True
             self.last_mouse_pos = event.position()
             self.setCursor(Qt.CursorShape.ClosedHandCursor)
+        elif event.button() == Qt.MouseButton.LeftButton:
+            self.left_mouse_dragging = True
+            self.last_mouse_pos = event.position()
+            self.setCursor(Qt.CursorShape.SizeAllCursor)
 
     def mouseReleaseEvent(self, event: QMouseEvent):
         """Handle mouse release"""
         if event.button() == Qt.MouseButton.MiddleButton:
             self.mouse_dragging = False
+            self.setCursor(Qt.CursorShape.ArrowCursor)
+        elif event.button() == Qt.MouseButton.LeftButton:
+            self.left_mouse_dragging = False
             self.setCursor(Qt.CursorShape.ArrowCursor)
 
     def mouseMoveEvent(self, event: QMouseEvent):
@@ -1844,6 +1872,28 @@ class MapViewerWidget(QOpenGLWidget):
             # Rotate camera based on mouse movement
             rotation_speed = 0.005  # Sensitivity
             self.camera.rotate(-delta.x() * rotation_speed, delta.y() * rotation_speed)
+
+            self.last_mouse_pos = current_pos
+            self.update()
+        elif self.left_mouse_dragging:
+            current_pos = event.position()
+            delta = current_pos - self.last_mouse_pos
+
+            # Move camera based on mouse movement
+            movement_speed = 0.5  # Sensitivity for mouse drag movement
+            forward_movement = delta.y() * movement_speed   # Up/down moves forward/backward (fixed)
+            right_movement = -delta.x() * movement_speed    # Left/right moves sideways (fixed)
+
+            # Apply movement using camera's move method
+            self.camera.move(forward_movement, right_movement, 0.016)  # Use fixed delta_time
+
+            # Adjust camera elevation based on terrain
+            if self.map_loader and self.map_loader.heightmap:
+                pos = self.camera.position
+                terrain_h = self.map_loader.get_height_at(pos[0], pos[2])
+                self.camera.set_elevation(
+                    self.camera.base_elevation * self.camera.zoom_level, terrain_h
+                )
 
             self.last_mouse_pos = current_pos
             self.update()
@@ -1893,6 +1943,7 @@ class MapViewerWidget(QOpenGLWidget):
             logger.info(f"Up: {self.camera.up}")
             logger.info(f"Lighting: {'ON' if self.lighting_enabled else 'OFF'}")
             logger.info(f"Textures: {'ON' if self.use_textures else 'OFF'}")
+            logger.info(f"Terrain Following: {'ON' if self.camera.terrain_following else 'OFF'}")
             logger.info(
                 f"Sun: azimuth={self.sun_azimuth:.1f}°, altitude={self.sun_altitude:.1f}°"
             )
@@ -1905,6 +1956,12 @@ class MapViewerWidget(QOpenGLWidget):
                 logger.info(f"Textures loaded: {len(self.texture_ids)} texture IDs")
                 logger.info(f"Texture manager has {len(self.texture_map)} tile mappings")
             logger.info("==================")
+        elif event.key() == Qt.Key.Key_F:
+            # Toggle terrain following mode
+            terrain_following = self.camera.toggle_terrain_following()
+            mode = "Terrain Following" if terrain_following else "Fixed Altitude"
+            logger.info(f"Camera mode: {mode}")
+            self.update()
 
     def keyReleaseEvent(self, event: QKeyEvent):
         """Handle key release"""
@@ -2120,13 +2177,16 @@ class MapViewerWindow(QMainWindow):
             "<small>"
             "<b>Movement:</b><br>"
             "• WASD / Arrows<br>"
+            "• Left Mouse Drag<br>"
             "• Middle Mouse Drag<br><br>"
             "<b>View:</b><br>"
             "• Mouse Wheel: Zoom<br>"
+            "• Q/E: Rotate<br>"
             "• Home/End: Rotate<br>"
             "• PgUp/PgDn: Tilt<br><br>"
             "<b>Lighting:</b><br>"
             "• L: Toggle light<br>"
+            "• F: Toggle terrain follow<br>"
             "• Shift + WASD: Sun<br><br>"
             "<b>Display:</b><br>"
             "• T: Toggle textures<br>"

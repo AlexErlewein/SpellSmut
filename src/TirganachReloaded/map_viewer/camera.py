@@ -56,8 +56,14 @@ class Camera:
         self.base_elevation = (
             100.0  # Base height above terrain (increased for better view)
         )
-        self.movement_speed = 60.0  # Units per second
+        self.movement_speed = 120.0  # Units per second (doubled for better responsiveness)
         self.rotation_speed = 2.0  # Radians per second
+
+        # Terrain following properties
+        self.terrain_following = True  # Whether camera follows terrain height
+        self.smooth_terrain_height = 0.0  # Smoothed terrain height for bumpiness reduction
+        self.terrain_smoothing_factor = 0.1  # Smoothing factor (0.0 = instant, 1.0 = very smooth)
+        self.fixed_altitude = 200.0  # Fixed altitude when not following terrain
 
         # Derived vectors (calculated from angles)
         self.forward = np.array([0.0, 0.0, 0.0], dtype=np.float32)
@@ -112,7 +118,28 @@ class Camera:
             height: Desired height above terrain
             terrain_height: Current terrain height at camera position
         """
-        self.position[1] = terrain_height + height
+        if self.terrain_following:
+            # Smooth terrain following to reduce bumpiness
+            target_height = terrain_height + height
+            self.smooth_terrain_height += (target_height - self.smooth_terrain_height) * self.terrain_smoothing_factor
+            self.position[1] = self.smooth_terrain_height
+        else:
+            # Fixed altitude mode
+            self.position[1] = self.fixed_altitude
+
+    def toggle_terrain_following(self):
+        """Toggle between terrain following and fixed altitude mode"""
+        self.terrain_following = not self.terrain_following
+        if self.terrain_following:
+            # Reset smoothing when enabling terrain following
+            self.smooth_terrain_height = self.position[1]
+        return self.terrain_following
+
+    def set_fixed_altitude(self, altitude: float):
+        """Set fixed altitude for non-terrain-following mode"""
+        self.fixed_altitude = altitude
+        if not self.terrain_following:
+            self.position[1] = altitude
 
     def move(self, forward: float, right: float, delta_time: float):
         """
