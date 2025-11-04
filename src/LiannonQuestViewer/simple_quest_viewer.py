@@ -11,6 +11,7 @@ Usage:
 """
 
 import argparse
+import csv
 import json
 import sys
 from pathlib import Path
@@ -110,6 +111,111 @@ class SimpleQuestViewer(QMainWindow):
         self.init_ui()
         self.restore_preferences()
         self.load_data()
+
+    def load_csv_quest_data(self):
+        """Load quest data from the CSV file to fill holes in existing data"""
+        csv_file = project_root / "ModdingTools/SpellForceLUASources/QuestKnowledge/QuestRewards.csv"
+        
+        if not csv_file.exists():
+            if self.logger:
+                self.logger.warning(f"CSV file not found: {csv_file}")
+            return
+            
+        try:
+            csv_data = {}
+            with open(csv_file, 'r', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    try:
+                        quest_id = int(row['quest_id']) if row['quest_id'] else None
+                        if quest_id is None:
+                            continue
+                            
+                        csv_data[quest_id] = {
+                            'quest_name': row['quest_name'],
+                            'quest_name_de': row['quest_name_de'],
+                            'quest_description_de': row['quest_description_de'],
+                            'quest_name_loc': row['quest_name_loc'],
+                            'quest_description_loc': row['quest_description_loc'],
+                            'quest_giver_npc_id': int(row['quest_giver_npc_id']) if row['quest_giver_npc_id'] and row['quest_giver_npc_id'].strip() else None,
+                            'quest_giver_name': row['quest_giver_name'],
+                            'parent_quest_id': int(row['parent_quest_id']) if row['parent_quest_id'] and row['parent_quest_id'].strip() else None,
+                            'parent_chain': row['parent_chain'],
+                            'order_index': int(row['order_index']) if row['order_index'] and row['order_index'].strip() else 0,
+                            'quest_maps': row['quest_maps'],
+                            'xp': int(row['xp']) if row['xp'] and row['xp'].strip() else 0,
+                            'gold': int(row['gold']) if row['gold'] and row['gold'].strip() else 0,
+                            'silver': int(row['silver']) if row['silver'] and row['silver'].strip() else 0,
+                            'copper': int(row['copper']) if row['copper'] and row['copper'].strip() else 0,
+                            'items_given': row['items_given'],
+                            'items_taken': row['items_taken'],
+                        }
+                    except ValueError as e:
+                        if self.logger:
+                            self.logger.warning(f"Skipping CSV row due to parsing error: {e}")
+                        continue
+            
+            if self.logger:
+                self.logger.info(f"Loaded {len(csv_data)} quest entries from CSV")
+            
+            # Enhance existing quest data with CSV information
+            enhanced_count = 0
+            for quest_id, csv_info in csv_data.items():
+                if quest_id in self.quest_data:
+                    quest = self.quest_data[quest_id]
+                    
+                    # Fill missing quest giver name
+                    if csv_info['quest_giver_name'] and not quest.get('quest_giver_name'):
+                        quest['quest_giver_name'] = csv_info['quest_giver_name']
+                        enhanced_count += 1
+                    
+                    # Fill missing German name/description if available
+                    if csv_info['quest_name_de'] and not quest.get('quest_name_de'):
+                        quest['quest_name_de'] = csv_info['quest_name_de']
+                    
+                    if csv_info['quest_description_de'] and not quest.get('quest_description_de'):
+                        quest['quest_description_de'] = csv_info['quest_description_de']
+                    
+                    # Create enhanced reward object if CSV has reward data
+                    if any([csv_info['xp'], csv_info['gold'], csv_info['silver'], csv_info['copper']]):
+                        if not quest.get('rewards') or (hasattr(quest.get('rewards'), 'xp') and quest['rewards'].xp == 0):
+                            # Create a simple reward object
+                            class CSVReward:
+                                def __init__(self, xp, gold, silver, copper, items_given, items_taken):
+                                    self.xp = xp
+                                    self.gold = gold
+                                    self.silver = silver
+                                    self.copper = copper
+                                    self.items = []
+                                    self.reward_flags = []
+                                    self.items_given = items_given
+                                    self.items_taken = items_taken
+                            
+                            quest['rewards'] = CSVReward(
+                                csv_info['xp'], csv_info['gold'], csv_info['silver'], 
+                                csv_info['copper'], csv_info['items_given'], csv_info['items_taken']
+                            )
+                            enhanced_count += 1
+                    
+                    # Fill missing parent quest info
+                    if csv_info['parent_quest_id'] and not quest.get('parent_id'):
+                        quest['parent_id'] = csv_info['parent_quest_id']
+                        enhanced_count += 1
+                    
+                    # Fill order index
+                    if csv_info['order_index'] and not quest.get('order_index'):
+                        quest['order_index'] = csv_info['order_index']
+                    
+                    # Add quest chain info
+                    if csv_info['parent_chain'] and not quest.get('parent_chain'):
+                        quest['parent_chain'] = csv_info['parent_chain']
+            
+            if self.logger:
+                self.logger.info(f"Enhanced {enhanced_count} quests with CSV data")
+                
+        except Exception as e:
+            if self.logger:
+                self.logger.exception(f"Failed to load CSV quest data: {e}")
 
     def init_ui(self):
         """Initialize the user interface"""
@@ -250,7 +356,7 @@ class SimpleQuestViewer(QMainWindow):
         import time
 
         # Create progress dialog
-        progress = QProgressDialog("Loading quest data...", None, 0, 5, self)
+        progress = QProgressDialog("Loading quest data...", None, 0, 6, self)
         progress.setWindowModality(Qt.WindowModal)
         progress.setWindowTitle("Loading")
         progress.setMinimumDuration(0)  # Show immediately
@@ -324,9 +430,16 @@ class SimpleQuestViewer(QMainWindow):
             lua_time = time.time() - lua_start
             self.logger.info(f"Lua data loaded in {lua_time:.2f}s")
 
+            # Step 3.5: Load CSV data to fill holes
+            progress.setLabelText("Loading CSV quest data...")
+            progress.setValue(4)
+            QApplication.processEvents()
+            
+            self.load_csv_quest_data()
+
             # Step 4: Populate tree
             progress.setLabelText("Building quest tree...")
-            progress.setValue(4)
+            progress.setValue(5)
             QApplication.processEvents()
 
             tree_start = time.time()
@@ -336,7 +449,7 @@ class SimpleQuestViewer(QMainWindow):
 
             # Step 5: Populate quest giver filter
             progress.setLabelText("Finalizing...")
-            progress.setValue(5)
+            progress.setValue(6)
             QApplication.processEvents()
 
             self.populate_quest_giver_filter()
@@ -643,6 +756,12 @@ class SimpleQuestViewer(QMainWindow):
             html += "<div style='background-color: #2d2d30; padding: 10px; border-radius: 5px; margin: 10px 0; border: 1px solid #3c3c3c;'>"
             html += f"<p><b>Description:</b><br>{quest_info['description']}</p>"
             html += "</div>"
+        
+        # German Description (if available)
+        if quest_info.get("quest_description_de"):
+            html += "<div style='background-color: #2d2d30; padding: 10px; border-radius: 5px; margin: 10px 0; border: 1px solid #3c3c3c;'>"
+            html += f"<p><b>German Description:</b><br>{quest_info['quest_description_de']}</p>"
+            html += "</div>"
 
         # Location & Quest Giver Section
         html += "<h3 style='color: #6fb3d2; margin-top: 15px; margin-bottom: 5px;'>Location & Quest Giver</h3>"
@@ -660,7 +779,10 @@ class SimpleQuestViewer(QMainWindow):
 
         # Quest Giver (NPC)
         npc_id = quest_info.get("npc_id")
-        if npc_id:
+        quest_giver_name = quest_info.get("quest_giver_name")
+        if quest_giver_name:
+            html += f"<li><b>Quest Giver:</b> {quest_giver_name} (NPC ID {npc_id})</li>"
+        elif npc_id:
             html += f"<li><b>Quest Giver:</b> NPC ID {npc_id}</li>"
         else:
             html += "<li><b>Quest Giver:</b> <span style='color: #808080;'>Unknown</span></li>"
@@ -726,10 +848,26 @@ class SimpleQuestViewer(QMainWindow):
 
             # Items
             items = getattr(rewards, "items", [])
+            items_given = getattr(rewards, "items_given", "")
+            items_taken = getattr(rewards, "items_taken", "")
+            
             if items:
                 items_str = ", ".join(map(str, items))
                 html += f"<li><b>Items:</b> {items_str}</li>"
                 has_any_reward = True
+            elif items_given:
+                # Parse item IDs from CSV (pipe-separated)
+                item_ids = items_given.split('|') if items_given else []
+                if item_ids:
+                    html += f"<li><b>Items Given:</b> {', '.join(item_ids)}</li>"
+                    has_any_reward = True
+            
+            if items_taken:
+                # Parse item IDs from CSV (pipe-separated)
+                item_ids = items_taken.split('|') if items_taken else []
+                if item_ids:
+                    html += f"<li><b>Items Taken:</b> {', '.join(item_ids)}</li>"
+                    has_any_reward = True
 
             # Reward flags (from QuestDataService)
             reward_flags = getattr(rewards, "reward_flags", [])
