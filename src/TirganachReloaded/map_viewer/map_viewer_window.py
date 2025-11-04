@@ -101,7 +101,7 @@ class MapViewerWidget(QOpenGLWidget):
         self.sun_altitude = 45.0  # Degrees
 
         # Display state
-        self.grid_enabled = True
+        self.grid_enabled = False
 
         # Rendering state
         self.gl_initialized = False
@@ -655,6 +655,9 @@ class MapViewerWidget(QOpenGLWidget):
         else:
             glDisable(GL_LIGHTING)
 
+        # Disable blending for base terrain to avoid alpha-edge gaps
+        glDisable(GL_BLEND)
+
         # Get height range for coloring
         all_heights = [
             heightmap.get_height(x, y)
@@ -666,7 +669,6 @@ class MapViewerWidget(QOpenGLWidget):
         height_range = max_h - min_h if max_h > min_h else 1.0
 
         # Texture scaling factor (controls texture repeat)
-        texture_scale = 0.05  # Lower value = more repetition for better texture detail
 
         # Draw with reduced resolution for better performance
         step = 2  # Changed from 4 to 2 for better detail
@@ -684,7 +686,7 @@ class MapViewerWidget(QOpenGLWidget):
             glEnable(GL_TEXTURE_2D)
 
             # Draw terrain in blocks where each block can have different textures
-            block_size = 32  # Size of blocks for texture switching
+            block_size = 16  # Size of blocks for texture switching (balance between detail and performance)
 
             for block_y in range(0, height, block_size):
                 for block_x in range(0, width, block_size):
@@ -697,7 +699,8 @@ class MapViewerWidget(QOpenGLWidget):
                     
                     if self.texture_map:
                         # Try to use real texture assignments
-                        tile_x = center_x // 4  # Assuming 4-unit tiles from texture mapper
+                        # The texture map uses 4x4 tiles, so calculate tile coordinates
+                        tile_x = center_x // 4
                         tile_y = center_y // 4
                         tile_key = (tile_x, tile_y)
                         
@@ -715,28 +718,32 @@ class MapViewerWidget(QOpenGLWidget):
                                     texture_id = self.texture_ids[0] if self.texture_ids else 0
                             else:
                                 texture_id = self.texture_ids[0] if self.texture_ids else 0
-                    else:
-                        # Use height-based texture assignment as fallback
-                        avg_height = 0
-                        height_count = 0
-                        for by in range(block_y, min(block_y + block_size, height)):
-                            for bx in range(block_x, min(block_x + block_size, width)):
-                                avg_height += heightmap.get_height(bx, by)
-                                height_count += 1
-                        if height_count > 0:
-                            avg_height /= height_count
-
-                        # Map height to texture: low = grass, mid = mix, high = rock
-                        if avg_height < (min_h + height_range * 0.3):
-                            # Low elevation - grass type
-                            texture_id = self.texture_ids[0] if len(self.texture_ids) > 0 else 0
-                        elif avg_height < (min_h + height_range * 0.7):
-                            # Mid elevation - mixed
-                            texture_id = self.texture_ids[1] if len(self.texture_ids) > 1 else self.texture_ids[0]
                         else:
-                            # High elevation - rock type
-                            texture_id = self.texture_ids[2] if len(self.texture_ids) > 2 else self.texture_ids[0]
+                            # No specific texture assignment for this tile, use height-based fallback
+                            avg_height = 0
+                            height_count = 0
+                            for by in range(block_y, min(block_y + block_size, height)):
+                                for bx in range(block_x, min(block_x + block_size, width)):
+                                    avg_height += heightmap.get_height(bx, by)
+                                    height_count += 1
+                            if height_count > 0:
+                                avg_height /= height_count
 
+                            # Map height to texture: low = grass, mid = mix, high = rock
+                            min_h, max_h = heightmap.get_min_max()
+                            height_range = max_h - min_h
+                            if height_range == 0:
+                                height_range = 1
+                            
+                            if avg_height < (min_h + height_range * 0.3):
+                                # Low elevation - grass type
+                                texture_id = self.texture_ids[0] if len(self.texture_ids) > 0 else 0
+                            elif avg_height < (min_h + height_range * 0.7):
+                                # Mid elevation - mixed
+                                texture_id = self.texture_ids[1] if len(self.texture_ids) > 1 else self.texture_ids[0]
+                            else:
+                                # High elevation - rock type
+                                texture_id = self.texture_ids[2] if len(self.texture_ids) > 2 else self.texture_ids[0]
                     # Bind the texture for this block
                     glBindTexture(GL_TEXTURE_2D, int(texture_id))
 
@@ -745,7 +752,8 @@ class MapViewerWidget(QOpenGLWidget):
                         block_y, min(block_y + block_size, height - step), step
                     ):
                         glBegin(GL_TRIANGLE_STRIP)
-                        for x in range(block_x, min(block_x + block_size, width), step):
+                        x_end = min(block_x + block_size, width - 1)
+                        for x in range(block_x, x_end + 1, step):
                             # Get heights for normal calculation
                             h_center = heightmap.get_height(x, y)
                             h_right = (
@@ -784,8 +792,10 @@ class MapViewerWidget(QOpenGLWidget):
                             # Color: use white to show texture properly
                             glColor3f(1.0, 1.0, 1.0)
 
-                            # Texture coordinates
-                            glTexCoord2f(x * texture_scale, y * texture_scale)
+                            # Texture coordinates - use continuous scaling to avoid seams
+                            tex_u = x * 0.125  # Scale factor for texture repetition (1/8 = texture repeats every 8 units)
+                            tex_v = y * 0.125
+                            glTexCoord2f(tex_u, tex_v)
                             glNormal3f(nx, ny, nz)  # Set normal for lighting
                             glVertex3f(float(x), h1, float(y))
                             vertices_drawn += 1
@@ -826,10 +836,10 @@ class MapViewerWidget(QOpenGLWidget):
                                 # Color: use white to show texture properly
                                 glColor3f(1.0, 1.0, 1.0)
 
-                                # Texture coordinates
-                                glTexCoord2f(
-                                    x * texture_scale, (y + step) * texture_scale
-                                )
+                                # Texture coordinates - use continuous scaling to avoid seams
+                                tex_u = x * 0.125
+                                tex_v = (y + step) * 0.125
+                                glTexCoord2f(tex_u, tex_v)
                                 glNormal3f(nx2, ny2, nz2)
                                 glVertex3f(float(x), h2, float(y + step))
                                 vertices_drawn += 1
@@ -880,8 +890,10 @@ class MapViewerWidget(QOpenGLWidget):
                     else:
                         glColor3f(0.2 + t1 * 0.5, 0.4 + t1 * 0.4, 0.1 + t1 * 0.2)
 
-                    # Texture coordinates
-                    glTexCoord2f(x * texture_scale, y * texture_scale)
+                    # Texture coordinates - use continuous scaling to avoid seams
+                    tex_u = x * 0.125
+                    tex_v = y * 0.125
+                    glTexCoord2f(tex_u, tex_v)
                     glNormal3f(nx, ny, nz)  # Set normal for lighting
                     glVertex3f(float(x), h1, float(y))
                     vertices_drawn += 1
@@ -912,8 +924,10 @@ class MapViewerWidget(QOpenGLWidget):
                     else:
                         glColor3f(0.2 + t2 * 0.5, 0.4 + t2 * 0.4, 0.1 + t2 * 0.2)
 
-                    # Texture coordinates
-                    glTexCoord2f(x * texture_scale, (y + step) * texture_scale)
+                    # Texture coordinates - use continuous scaling to avoid seams
+                    tex_u = x * 0.125
+                    tex_v = (y + step) * 0.125
+                    glTexCoord2f(tex_u, tex_v)
                     glNormal3f(nx2, ny2, nz2)
                     glVertex3f(float(x), h2, float(y + step))
                     vertices_drawn += 1
@@ -925,6 +939,9 @@ class MapViewerWidget(QOpenGLWidget):
         if self.textures_loaded and self.use_textures:
             glDisable(GL_TEXTURE_2D)
             glBindTexture(GL_TEXTURE_2D, 0)
+
+        # Re-enable blending for subsequent passes/overlays
+        glEnable(GL_BLEND)
 
         if self.frame_count % 60 == 0:
             logger.debug(
@@ -1071,15 +1088,21 @@ class MapViewerWidget(QOpenGLWidget):
                     glColor4f(1.0, 1.0, 1.0, alpha)
                     glNormal3f(nx, ny, nz)
                     
-                    # Texture coordinates
-                    glTexCoord2f(x * texture_scale, y * texture_scale)
+                    # Texture coordinates - use continuous scaling to avoid seams
+                    tex_u = x * 0.125
+                    tex_v = y * 0.125
+                    glTexCoord2f(tex_u, tex_v)
                     glVertex3f(float(x), h_center, float(y))
                     
                     if y + step < map_height:
                         h_next = heightmap.get_height(x, y + step)
                         glColor4f(1.0, 1.0, 1.0, alpha)
                         glNormal3f(nx, ny, nz)
-                        glTexCoord2f(x * texture_scale, (y + step) * texture_scale)
+                        
+                        # Texture coordinates - use continuous scaling to avoid seams
+                        tex_u = x * 0.125
+                        tex_v = (y + step) * 0.125
+                        glTexCoord2f(tex_u, tex_v)
                         glVertex3f(float(x), h_next, float(y + step))
                         
                 glEnd()
