@@ -4,7 +4,7 @@
 
 ```bash
 cd "cleanup TirganachReloaded"
-uv run python simple_quest_viewer.py
+uv run python quest_viewer_standalone.py
 ```
 
 ## 📊 Current Data
@@ -89,7 +89,7 @@ Rewards:
 ## 🔧 Debug Mode
 
 ```bash
-uv run python simple_quest_viewer.py --debug
+uv run python quest_viewer_standalone.py --debug
 ```
 
 Shows:

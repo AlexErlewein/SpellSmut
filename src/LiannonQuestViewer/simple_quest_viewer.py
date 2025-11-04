@@ -7,7 +7,7 @@ A lightweight application for viewing SpellForce quest data.
 Uses cached Lua files and triggers cache creation if needed.
 
 Usage:
-    python simple_quest_viewer_clean.py [--debug] [--rebuild-cache]
+    python simple_quest_viewer.py [--debug] [--rebuild-cache]
 """
 
 import argparse
@@ -37,6 +37,7 @@ from PySide6.QtWidgets import (
 )
 
 # Add the src directory to Python path
+# This file is in src/LiannonQuestViewer/, so project root is 2 levels up
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root / "src"))
 
@@ -276,7 +277,7 @@ class SimpleQuestViewer(QMainWindow):
 
             # Initialize QuestDataService
             try:
-                project_root = Path(__file__).parent
+                # Use the module-level project_root (already calculated)
                 self.quest_service = QuestDataService(project_root)
                 self.logger.info("QuestDataService initialized")
             except Exception as e:
@@ -310,7 +311,8 @@ class SimpleQuestViewer(QMainWindow):
             progress.setValue(3)
             QApplication.processEvents()
 
-            cache_dir = Path("src/TirganachReloaded/data/cache")
+            # Use absolute cache path to avoid creating duplicate cache directories
+            cache_dir = project_root / "src" / "TirganachReloaded" / "data" / "cache"
             lua_start = time.time()
             self.lua_manager = LuaDataManager(cache_dir=cache_dir)
 

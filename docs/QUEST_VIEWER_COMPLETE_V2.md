@@ -11,10 +11,10 @@ The quest viewer is **fully functional** with comprehensive reward data, dialogu
 ```bash
 # Launch the quest viewer
 cd "cleanup TirganachReloaded"
-uv run python simple_quest_viewer.py
+uv run python quest_viewer_standalone.py
 
 # With debug output to see data loading stats
-uv run python simple_quest_viewer.py --debug
+uv run python quest_viewer_standalone.py --debug
 ```
 
 ---
@@ -147,8 +147,10 @@ QuestRewardsP1 = {
 
 ### Key Components
 
-**`simple_quest_viewer.py`**:
-- Main application with dark theme stylesheet
+**`quest_viewer_standalone.py`**:
+- Main launcher script (convenience wrapper)
+- Actual application at `src/TirganachReloaded/cff_editor/quest_viewer_standalone.py`
+- Full-featured standalone app with dark theme stylesheet
 - Tree view with quest hierarchy
 - Details panel with formatted HTML display
 - Search and filter functionality
@@ -345,7 +347,7 @@ A: These need manual mapping from reward name to quest ID (see CSV file)
 
 ### Debug Mode
 ```bash
-uv run python simple_quest_viewer.py --debug
+uv run python quest_viewer_standalone.py --debug
 ```
 Shows detailed loading information and statistics.
 

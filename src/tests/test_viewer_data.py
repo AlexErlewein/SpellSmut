@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
-"""Diagnostic script to see what simple_quest_viewer.py would display"""
+"""Diagnostic script to see what quest_viewer_standalone.py would display"""
 
 import sys
 from pathlib import Path
 
-# Add src to path (same as simple_quest_viewer.py)
+# Add src to path (same as quest_viewer_standalone.py)
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root / "src"))
 
+from TirganachReloaded.cff_editor.data_model import CFFDataModel
 from TirganachReloaded.cff_editor.logging_config import configure_logging, get_logger
 from TirganachReloaded.cff_editor.lua_parser.lua_data_manager import LuaDataManager
-from TirganachReloaded.cff_editor.data_model import CFFDataModel
 
 print("=" * 80)
-print("DIAGNOSTIC: What simple_quest_viewer.py would display")
+print("DIAGNOSTIC: What quest_viewer_standalone.py would display")
 print("=" * 80)
 
 # Configure logging
@@ -34,11 +34,12 @@ if not data_model.load_file(str(cff_file)):
     print("❌ Failed to load GameData.cff")
     sys.exit(1)
 
-# Initialize Lua data manager (same as simple_quest_viewer.py)
-cache_dir = Path("src/TirganachReloaded/data/cache")
+# Initialize Lua data manager (same as quest_viewer_standalone.py)
+# Use absolute cache path to avoid creating duplicate cache directories
+cache_dir = project_root / "src" / "TirganachReloaded" / "data" / "cache"
 lua_manager = LuaDataManager(cache_dir=cache_dir)
 
-# Load quest data from CFF (EXACTLY as simple_quest_viewer.py does)
+# Load quest data from CFF (EXACTLY as quest_viewer_standalone.py does)
 quest_data = {}
 
 quests = data_model.get_elements("quests")
@@ -70,11 +71,11 @@ for quest in quests:
 
     # Store quest data
     quest_data[quest_id] = {
-        'id': quest_id,
-        'name': name,
-        'description': description,
-        'parent_id': parent_id,
-        'order_index': order_index,
+        "id": quest_id,
+        "name": name,
+        "description": description,
+        "parent_id": parent_id,
+        "order_index": order_index,
     }
 
 print(f"✅ Loaded {len(quest_data)} quests")
@@ -92,14 +93,16 @@ if lua_manager:
         quest_data_obj = lua_manager.get_quest_data(quest_id)
         if quest_data_obj and quest_id in quest_data:
             # Enhance existing quest data (don't overwrite name!)
-            quest_data[quest_id].update({
-                'platform': quest_data_obj.platform,
-                'npc_id': quest_data_obj.npc_id,
-                'objectives': quest_data_obj.objectives,
-                'requirements': quest_data_obj.requirements,
-                'rewards': quest_data_obj.rewards,
-                'dialogues': quest_data_obj.dialogues
-            })
+            quest_data[quest_id].update(
+                {
+                    "platform": quest_data_obj.platform,
+                    "npc_id": quest_data_obj.npc_id,
+                    "objectives": quest_data_obj.objectives,
+                    "requirements": quest_data_obj.requirements,
+                    "rewards": quest_data_obj.rewards,
+                    "dialogues": quest_data_obj.dialogues,
+                }
+            )
             lua_enhanced_count += 1
 
     print(f"✅ Enhanced {lua_enhanced_count} quests with Lua data")
@@ -112,8 +115,8 @@ print(f"{'Quest ID':<12} | {'Name'}")
 print("-" * 80)
 
 for quest_id in sorted(quest_data.keys())[:30]:
-    name = quest_data[quest_id]['name']
-    parent_id = quest_data[quest_id]['parent_id']
+    name = quest_data[quest_id]["name"]
+    parent_id = quest_data[quest_id]["parent_id"]
     indent = "  " if parent_id else ""
     print(f"{indent}{quest_id:<12} | {name}")
 
@@ -122,9 +125,11 @@ print("\n" + "=" * 80)
 print("STATISTICS")
 print("=" * 80)
 
-names_count = sum(1 for q in quest_data.values() if q['name'] and not q['name'].startswith('Quest '))
-generic_names = sum(1 for q in quest_data.values() if q['name'].startswith('Quest '))
-no_names = sum(1 for q in quest_data.values() if not q['name'])
+names_count = sum(
+    1 for q in quest_data.values() if q["name"] and not q["name"].startswith("Quest ")
+)
+generic_names = sum(1 for q in quest_data.values() if q["name"].startswith("Quest "))
+no_names = sum(1 for q in quest_data.values() if not q["name"])
 
 print(f"Total quests: {len(quest_data)}")
 print(f"Quests with proper names: {names_count}")
@@ -136,7 +141,7 @@ if generic_names > 0:
     print("Sample quests with generic names:")
     count = 0
     for quest_id, quest_info in sorted(quest_data.items()):
-        if quest_info['name'].startswith('Quest ') and count < 10:
+        if quest_info["name"].startswith("Quest ") and count < 10:
             print(f"  Quest {quest_id}: {quest_info['name']}")
             count += 1
 else:
