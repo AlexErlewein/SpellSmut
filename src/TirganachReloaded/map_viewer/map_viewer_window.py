@@ -117,6 +117,9 @@ class MapViewerWidget(QOpenGLWidget):
         # Enable mouse tracking
         self.setMouseTracking(True)
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
+        
+        # Initialize texture manager early so textures are available immediately
+        self._init_texture_manager()
 
     def load_map(self, filepath: Path) -> bool:
         """Load a map file"""
@@ -332,7 +335,7 @@ class MapViewerWidget(QOpenGLWidget):
                 logger.debug(f"Binding texture {tex_id}")
                 glBindTexture(GL_TEXTURE_2D, int(tex_id))
 
-                logger.debug(f"Setting texture parameters")
+                logger.debug("Setting texture parameters")
                 # Set texture parameters
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
@@ -401,7 +404,11 @@ class MapViewerWidget(QOpenGLWidget):
             logger.info(f"✓ Uploaded {len(self.texture_ids)} textures to OpenGL")
             
             # Update texture preview
-            self._update_texture_preview()
+            try:
+                self._update_texture_preview()
+            except Exception as preview_error:
+                logger.warning(f"Failed to update texture preview: {preview_error}")
+                # Don't fail the entire texture upload for preview issues
 
         except Exception as e:
             logger.error(f"Failed to upload textures: {e}")
@@ -422,7 +429,11 @@ class MapViewerWidget(QOpenGLWidget):
                 self.texture_preview_label.setText("No textures loaded")
                 
         # Update texture samples viewer
-        self._update_texture_samples()
+        try:
+            self.update_texture_samples()
+        except Exception as samples_error:
+            logger.warning(f"Failed to update texture samples: {samples_error}")
+            # Don't fail the preview for samples issues
         
     
 
@@ -455,7 +466,7 @@ class MapViewerWidget(QOpenGLWidget):
             try:
                 glHint(GL_LINE_SMOOTH_HINT, GL_NICEST)
                 glEnable(GL_LINE_SMOOTH)
-            except:
+            except Exception:
                 pass  # Ignore if not supported
 
             # Log OpenGL info
@@ -466,7 +477,7 @@ class MapViewerWidget(QOpenGLWidget):
                 logger.info(f"OpenGL Vendor: {vendor}")
                 logger.info(f"OpenGL Renderer: {renderer}")
                 logger.info(f"OpenGL Version: {version}")
-            except:
+            except Exception:
                 pass
 
             self.gl_initialized = True
@@ -663,8 +674,7 @@ class MapViewerWidget(QOpenGLWidget):
 
         # Determine if we have texture mapping available
         has_texture_mapping = bool(
-            self.texture_map
-            and self.textures_loaded
+            self.textures_loaded
             and self.use_textures
             and len(self.texture_ids) > 0
         )
@@ -683,22 +693,30 @@ class MapViewerWidget(QOpenGLWidget):
                     center_y = block_y + block_size // 2
 
                     # Get texture assignment for this block
-                    tile_x = center_x // 4  # Assuming 4-unit tiles from texture mapper
-                    tile_y = center_y // 4
-                    tile_key = (tile_x, tile_y)
-
                     texture_id = 0  # Default texture
-                    if tile_key in self.texture_map:
-                        # Use the texture with the highest weight
-                        texture_assignments = self.texture_map[tile_key]
-                        if texture_assignments:
-                            primary_texture_id = max(
-                                texture_assignments.items(), key=lambda x: x[1]
-                            )[0]
-                            if primary_texture_id < len(self.texture_ids):
-                                texture_id = primary_texture_id
+                    
+                    if self.texture_map:
+                        # Try to use real texture assignments
+                        tile_x = center_x // 4  # Assuming 4-unit tiles from texture mapper
+                        tile_y = center_y // 4
+                        tile_key = (tile_x, tile_y)
+                        
+                        if tile_key in self.texture_map:
+                            # Use the texture with the highest weight
+                            texture_assignments = self.texture_map[tile_key]
+                            if texture_assignments:
+                                primary_texture_id = max(
+                                    texture_assignments.items(), key=lambda x: x[1]
+                                )[0]
+                                # Convert texture manager ID to OpenGL texture ID
+                                if primary_texture_id in self.texture_id_map:
+                                    texture_id = self.texture_id_map[primary_texture_id]
+                                else:
+                                    texture_id = self.texture_ids[0] if self.texture_ids else 0
+                            else:
+                                texture_id = self.texture_ids[0] if self.texture_ids else 0
                     else:
-                        # If no texture assignment, use height-based approach
+                        # Use height-based texture assignment as fallback
                         avg_height = 0
                         height_count = 0
                         for by in range(block_y, min(block_y + block_size, height)):
@@ -711,18 +729,16 @@ class MapViewerWidget(QOpenGLWidget):
                         # Map height to texture: low = grass, mid = mix, high = rock
                         if avg_height < (min_h + height_range * 0.3):
                             # Low elevation - grass type
-                            texture_id = 0
+                            texture_id = self.texture_ids[0] if len(self.texture_ids) > 0 else 0
                         elif avg_height < (min_h + height_range * 0.7):
                             # Mid elevation - mixed
-                            texture_id = 1 if len(self.texture_ids) > 1 else 0
+                            texture_id = self.texture_ids[1] if len(self.texture_ids) > 1 else self.texture_ids[0]
                         else:
                             # High elevation - rock type
-                            texture_id = 2 if len(self.texture_ids) > 2 else 0
+                            texture_id = self.texture_ids[2] if len(self.texture_ids) > 2 else self.texture_ids[0]
 
                     # Bind the texture for this block
-                    # Convert texture manager ID to OpenGL texture ID
-                    gl_texture_id = self.texture_id_map.get(texture_id, self.texture_ids[0] if self.texture_ids else 0)
-                    glBindTexture(GL_TEXTURE_2D, int(gl_texture_id))
+                    glBindTexture(GL_TEXTURE_2D, int(texture_id))
 
                     # Draw this block
                     for y in range(
@@ -1913,6 +1929,32 @@ class MapViewerWidget(QOpenGLWidget):
 
         self.update()
 
+    def debug_texture_status(self):
+        """Print debug information about texture status"""
+        print("\n=== Texture Status Debug ===")
+        print(f"Texture manager: {self.texture_manager is not None}")
+        print(f"Textures loaded: {self.textures_loaded}")
+        print(f"Use textures: {self.use_textures}")
+        print(f"Texture IDs count: {len(self.texture_ids) if self.texture_ids else 0}")
+        print(f"Base textures count: {len(self.base_textures) if self.base_textures else 0}")
+        print(f"Texture ID map count: {len(self.texture_id_map) if self.texture_id_map else 0}")
+        print(f"Texture map count: {len(self.texture_map) if self.texture_map else 0}")
+        
+        # Check the rendering condition
+        has_texture_mapping = bool(
+            self.textures_loaded
+            and self.use_textures
+            and len(self.texture_ids) > 0
+        )
+        print(f"Has texture mapping: {has_texture_mapping}")
+        
+        if self.texture_ids:
+            print(f"First 3 texture IDs: {self.texture_ids[:3]}")
+        if self.texture_id_map:
+            print(f"Sample texture ID mappings: {dict(list(self.texture_id_map.items())[:3])}")
+        
+        print("=== End Texture Debug ===\n")
+
     def keyPressEvent(self, event: QKeyEvent):
         """Handle key press"""
         self.keys_pressed.add(event.key())
@@ -1939,6 +1981,8 @@ class MapViewerWidget(QOpenGLWidget):
             logger.info(f"Camera: {self.camera}")
             logger.info(f"Position: {self.camera.position}")
             logger.info(f"Lookat: {self.camera.lookat}")
+            logger.info(f"FPS: {self.fps:.1f}")
+            self.debug_texture_status()
             logger.info(f"Forward: {self.camera.forward}")
             logger.info(f"Up: {self.camera.up}")
             logger.info(f"Lighting: {'ON' if self.lighting_enabled else 'OFF'}")
@@ -2414,11 +2458,9 @@ class MapViewerWindow(QMainWindow):
                 # Create QImage from numpy array (RGBA format)
                 if len(texture_data.shape) == 3:
                     # RGB format
-                    bytes_per_line = 3 * width
                     q_image = QImage(texture_data.tobytes(), width, height, QImage.Format.Format_RGB888)
                 else:
                     # RGBA format
-                    bytes_per_line = 4 * width
                     q_image = QImage(texture_data.tobytes(), width, height, QImage.Format.Format_RGBA8888)
                 
                 # Scale to thumbnail size (smaller for compact display)
