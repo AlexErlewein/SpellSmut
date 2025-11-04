@@ -7,23 +7,23 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 | Quest/Subquest Flag | Quest ID | Quest Giver NPC | XP | Gold | Silver | Copper | Items |
 |---|---:|---:|---:|---:|---:|---:|---|
 | DariusDerKarthograph | 14 | 1240 | 25 | 0 | 0 | 0 |  |
-| WegNachEloni1Snarf |  |  | 25 | 0 | 0 | 0 | 626 (given) |
+| WegNachEloni1Snarf |  |  | 25 | 0 | 0 | 0 | 626 (given), 2336 (taken) |
 | WegNachEloni2Portal |  |  | 30 | 0 | 0 | 0 |  |
 | KleineFische1 |  |  | 10 | 0 | 0 | 0 |  |
-| KleineFische2 |  |  | 10 | 0 | 0 | 0 | 705 (given) |
-| Steckbrief |  |  | 20 | 0 | 2 | 40 |  |
-| Zwergenaxt |  |  | 20 | 0 | 0 | 0 |  |
-| GeistInDerMine |  |  | 35 | 0 | 2 | 50 |  |
-| EinSeltsamerRing |  |  | 20 | 0 | 0 | 0 | 833 (given) |
-| AusDerTiefe1Schreiber |  |  | 250 | 0 | 0 | 0 | 617 (given) |
+| KleineFische2 |  |  | 10 | 0 | 0 | 0 | 705 (given), 2461 (taken) |
+| Steckbrief |  |  | 20 | 0 | 2 | 40 | 2336 (taken), 2004 (taken) |
+| Zwergenaxt |  |  | 20 | 0 | 0 | 0 | 2005 (taken) |
+| GeistInDerMine |  |  | 35 | 0 | 2 | 50 | 1998 (taken) |
+| EinSeltsamerRing |  |  | 20 | 0 | 0 | 0 | 833 (given), 1995 (taken), 1996 (taken) |
+| AusDerTiefe1Schreiber |  |  | 250 | 0 | 0 | 0 | 617 (given), 1995 (taken), 1996 (taken), 1997 (taken) |
 | AusDerTiefe1Buch |  |  | 150 | 0 | 0 | 0 | 707 (given) |
-| AusDerTiefe2Spaeher |  |  | 350 | 0 | 0 | 0 | 555 (given) |
+| AusDerTiefe2Spaeher |  |  | 350 | 0 | 0 | 0 | 555 (given), 1996 (taken), 1997 (taken) |
 | AmraUndLea1Liannon1 |  |  | 200 | 0 | 0 | 0 |  |
 | AmraUndLea1Liannon2 |  |  | 400 | 0 | 0 | 0 |  |
-| AmraUndLea2Liannon1 |  |  | 500 | 0 | 0 | 0 |  |
+| AmraUndLea2Liannon1 |  |  | 500 | 0 | 0 | 0 | 3045 (taken), 3046 (taken) |
 | AmraUndLea2Liannon2 |  |  | 300 | 0 | 0 | 0 |  |
-| EchosBuch | 14 | 1240 | 200 | 0 | 0 | 0 |  |
-| BefreiungShiel1Alfalas |  |  | 60 | 0 | 0 | 0 |  |
+| EchosBuch | 14 | 1240 | 200 | 0 | 0 | 0 | 3042 (taken) |
+| BefreiungShiel1Alfalas |  |  | 60 | 0 | 0 | 0 | 2362 (taken) |
 | Einsiedler1Shan |  |  | 100 | 0 | 0 | 0 |  |
 
 ## eloni (P2)
@@ -31,30 +31,30 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 | Quest/Subquest Flag | Quest ID | Quest Giver NPC | XP | Gold | Silver | Copper | Items |
 |---|---:|---:|---:|---:|---:|---:|---|
 | TrommelnInWaeldern |  |  | 90 | 0 | 0 | 0 |  |
-| WundtinkturSwerdis |  |  | 80 | 0 | 0 | 0 |  |
+| WundtinkturSwerdis |  |  | 80 | 0 | 0 | 0 | 2670 (taken) |
 | DieLetztenSchuetzen1 |  |  | 15 | 0 | 0 | 0 | 695 (given) |
 | DieLetztenSchuetzen2 |  |  | 15 | 0 | 0 | 0 | 601 (given) |
 | DieLetztenSchuetzen3 |  |  | 15 | 0 | 0 | 0 | 690 (given) |
 | DieFreihaendler |  |  | 20 | 0 | 0 | 0 |  |
-| Traumdieb |  |  | 20 | 0 | 0 | 0 |  |
-| StaubDerSterne1 |  |  | 20 | 0 | 2 | 0 |  |
-| StaubDerSterne2 |  |  | 10 | 0 | 4 | 0 |  |
-| StaubDerSterne3 |  |  | 5 | 0 | 6 | 0 |  |
+| Traumdieb |  |  | 20 | 0 | 0 | 0 | 2166 (taken) |
+| StaubDerSterne1 |  |  | 20 | 0 | 2 | 0 | 2155 (taken) |
+| StaubDerSterne2 |  |  | 10 | 0 | 4 | 0 | 2155 (taken) |
+| StaubDerSterne3 |  |  | 5 | 0 | 6 | 0 | 2155 (taken) |
 
 ## leafshade (P4)
 
 | Quest/Subquest Flag | Quest ID | Quest Giver NPC | XP | Gold | Silver | Copper | Items |
 |---|---:|---:|---:|---:|---:|---:|---|
 | DurchDenSchattenhain |  |  | 130 | 0 | 0 | 0 |  |
-| Bannwerk1 |  |  | 60 | 0 | 0 | 0 |  |
-| Bannwerk2 |  |  | 60 | 0 | 0 | 0 |  |
+| Bannwerk1 |  |  | 60 | 0 | 0 | 0 | 2191 (taken), 2193 (taken), 2194 (taken), 2200 (taken), 2201 (taken), 2205 (taken) |
+| Bannwerk2 |  |  | 60 | 0 | 0 | 0 | 2191 (taken), 2193 (taken), 2194 (taken), 2200 (taken), 2201 (taken), 2205 (taken) |
 | Kopfjagd1Head1 |  |  | 15 | 0 | 0 | 0 |  |
 | Kopfjagd2Head2 |  |  | 15 | 0 | 0 | 0 |  |
 | Kopfjagd3Head3 |  |  | 15 | 0 | 0 | 0 |  |
 | Kopfjagd4Head4 |  |  | 15 | 0 | 0 | 0 |  |
 | Kopfjagd5Head5 |  |  | 15 | 0 | 0 | 0 |  |
-| Kopfjagd6Complete |  |  | 60 | 0 | 0 | 0 |  |
-| DieGeiseln |  |  | 40 | 0 | 0 | 0 |  |
+| Kopfjagd6Complete |  |  | 60 | 0 | 0 | 0 | 3202 (taken), 3203 (taken), 3204 (taken), 3205 (taken), 3206 (taken) |
+| DieGeiseln |  |  | 40 | 0 | 0 | 0 | 2191 (taken) |
 
 ## shiel (P5)
 
@@ -62,8 +62,8 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 |---|---:|---:|---:|---:|---:|---:|---|
 | BefreiungShiel1Kommandant |  |  | 40 | 0 | 0 | 0 |  |
 | BefreiungShiel2Dryaden |  |  | 140 | 0 | 0 | 0 |  |
-| PurpurnesBanner1Kettchen |  |  | 35 | 0 | 0 | 0 |  |
-| PurpurnesBanner2 |  |  | 45 | 0 | 0 | 0 | 680 (given), 622 (given) |
+| PurpurnesBanner1Kettchen |  |  | 35 | 0 | 0 | 0 | 2350 (taken) |
+| PurpurnesBanner2 |  |  | 45 | 0 | 0 | 0 | 680 (given), 622 (given), 2488 (taken) |
 
 ## wildland pass (P6)
 
@@ -71,8 +71,8 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 |---|---:|---:|---:|---:|---:|---:|---|
 | AmWildlandPass1 |  |  | 120 | 0 | 0 | 0 |  |
 | AmWildlandPass2 |  |  | 160 | 0 | 0 | 0 |  |
-| KoenigDerSpinnen |  |  | 45 | 0 | 10 | 0 | 2467 (given), 2467 (given) |
-| AlterMannUndMusik |  |  | 45 | 0 | 0 | 0 | 628 (given) |
+| KoenigDerSpinnen |  |  | 45 | 0 | 10 | 0 | 2467 (given), 2467 (given), 2382 (taken) |
+| AlterMannUndMusik |  |  | 45 | 0 | 0 | 0 | 628 (given), 2371 (taken) |
 | FeineStoffe1 |  |  | 45 | 0 | 0 | 0 |  |
 | AmraUndLea2Sentos |  |  | 800 | 0 | 0 | 0 |  |
 
@@ -107,16 +107,16 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 | InsGrauschattental1 |  |  | 50 | 0 | 0 | 0 |  |
 | InsGrauschattental2 | 145 | 2184 | 150 | 0 | 0 | 0 |  |
 | InsGrauschattental3 | 145 | 2184 | 50 | 0 | 0 | 0 |  |
-| InsGrauschattental4 | 145 | 2184 | 350 | 0 | 0 | 0 |  |
-| WeisseSchatten1 | 163 | 2263 | 80 | 0 | 0 | 0 |  |
+| InsGrauschattental4 | 145 | 2184 | 350 | 0 | 0 | 0 | 2515 (taken) |
+| WeisseSchatten1 | 163 | 2263 | 80 | 0 | 0 | 0 | 2513 (taken) |
 | WeisseSchatten2 |  |  | 40 | 0 | 0 | 0 | 774 (given) |
-| Zwergendienste2Cronvig | 488 | 2577 | 250 | 5 | 0 | 0 |  |
-| JeGroesser1 |  |  | 90 | 0 | 0 | 0 |  |
-| JeGroesser2 |  |  | 110 | 0 | 0 | 0 |  |
-| Reisserfell |  |  | 60 | 0 | 0 | 0 |  |
+| Zwergendienste2Cronvig | 488 | 2577 | 250 | 5 | 0 | 0 | 3247 (taken) |
+| JeGroesser1 |  |  | 90 | 0 | 0 | 0 | 2477 (taken), 2478 (taken), 2479 (taken), 2480 (taken), 2510 (taken) |
+| JeGroesser2 |  |  | 110 | 0 | 0 | 0 | 2485 (taken) |
+| Reisserfell |  |  | 60 | 0 | 0 | 0 | 2514 (taken), 2320 (taken) |
 | FeineStoffe2Miria |  |  | 100 | 0 | 0 | 0 |  |
-| Erdenklinge2 |  |  | 200 | 0 | 0 | 0 |  |
-| Erdenklinge3 |  |  | 400 | 0 | 0 | 0 |  |
+| Erdenklinge2 |  |  | 200 | 0 | 0 | 0 | 2536 (taken) |
+| Erdenklinge3 |  |  | 400 | 0 | 0 | 0 | 2544 (taken), 2200 (taken), 2540 (taken), 2541 (taken), 3556 (taken) |
 | Erdenklinge4 |  |  | 400 | 0 | 0 | 0 |  |
 
 ## stoneblade mountain (P11)
@@ -124,10 +124,10 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 | Quest/Subquest Flag | Quest ID | Quest Giver NPC | XP | Gold | Silver | Copper | Items |
 |---|---:|---:|---:|---:|---:|---:|---|
 | Erdklinge11 |  |  | 100 | 0 | 0 | 0 |  |
-| Erdklinge12 |  |  | 250 | 0 | 0 | 0 |  |
-| Giftzwerg |  |  | 150 | 0 | 0 | 0 |  |
+| Erdklinge12 |  |  | 250 | 0 | 0 | 0 | 2815 (taken) |
+| Giftzwerg |  |  | 150 | 0 | 0 | 0 | 2698 (taken), 2695 (taken), 2693 (taken), 2697 (taken), 2696 (taken), 2692 (taken), 2694 (taken), 0 (taken) |
 | Riesenaerger1 |  |  | 100 | 0 | 0 | 0 |  |
-| Riesenaerger2 |  |  | 150 | 0 | 0 | 0 | 644 (given) |
+| Riesenaerger2 |  |  | 150 | 0 | 0 | 0 | 644 (given), 2543 (taken) |
 
 ## greydusk vale (P12)
 
@@ -148,7 +148,7 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 | Homunculus |  |  | 300 | 0 | 0 | 0 | 740 (given) |
 | Trickster1Cassius |  |  | 300 | 0 | 0 | 0 |  |
 | MaskeDesBelial2 |  |  | 300 | 0 | 0 | 0 |  |
-| Schattenwelt4Kristall |  |  | 1400 | 0 | 0 | 0 |  |
+| Schattenwelt4Kristall |  |  | 1400 | 0 | 0 | 0 | 0 (taken) |
 | AmraUndLea5 |  |  | 1200 | 0 | 0 | 0 |  |
 
 ## whisper (P16)
@@ -159,9 +159,9 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 | FluesterndeStadt2Item2 |  |  | 250 | 0 | 0 | 0 |  |
 | FluesterndeStadt3Item3 |  |  | 250 | 0 | 0 | 0 |  |
 | FluesterndeStadt4Endkampf |  |  | 450 | 0 | 0 | 0 |  |
-| FluesterndeStadt5Maske |  |  | 350 | 0 | 0 | 0 |  |
+| FluesterndeStadt5Maske |  |  | 350 | 0 | 0 | 0 | 2337 (taken), 2615 (taken) |
 | AmraLeaGrab |  |  | 800 | 0 | 0 | 0 |  |
-| MosaikDesTodes |  |  | 800 | 0 | 0 | 0 |  |
+| MosaikDesTodes |  |  | 800 | 0 | 0 | 0 | 3233 (taken), 3234 (taken), 3235 (taken), 3236 (taken) |
 
 ## godwall (P17)
 
@@ -172,14 +172,14 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 | AufDemWall3Village3 |  |  | 300 | 0 | 0 | 0 |  |
 | AufDemWall4Village4 |  |  | 300 | 0 | 0 | 0 |  |
 | AufDemWall5Endkampf |  |  | 500 | 0 | 0 | 0 |  |
-| GwensMedizin |  |  | 600 | 0 | 0 | 0 |  |
+| GwensMedizin |  |  | 600 | 0 | 0 | 0 | 2635 (taken) |
 
 ## mulandir (P19)
 
 | Quest/Subquest Flag | Quest ID | Quest Giver NPC | XP | Gold | Silver | Copper | Items |
 |---|---:|---:|---:|---:|---:|---:|---|
 | DerPhoenix1Waechter |  |  | 1000 | 0 | 0 | 0 |  |
-| DerPhoenix2Splitter1 |  |  | 800 | 0 | 0 | 0 |  |
+| DerPhoenix2Splitter1 |  |  | 800 | 0 | 0 | 0 | 2634 (taken), 2666 (taken), 2797 (taken) |
 | DerPhoenix3Splitter2 |  |  | 800 | 0 | 0 | 0 |  |
 | DerPhoenix4Splitter3 |  |  | 800 | 0 | 0 | 0 |  |
 | DerPhoenix5Splitter4 |  |  | 800 | 0 | 0 | 0 |  |
@@ -190,13 +190,13 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 | Quest/Subquest Flag | Quest ID | Quest Giver NPC | XP | Gold | Silver | Copper | Items |
 |---|---:|---:|---:|---:|---:|---:|---|
 | WolfUndDrache1 |  |  | 200 | 0 | 0 | 0 |  |
-| WolfUndDrache2 |  |  | 400 | 0 | 0 | 0 |  |
-| Steinbrecher |  |  | 800 | 0 | 0 | 0 |  |
+| WolfUndDrache2 |  |  | 400 | 0 | 0 | 0 | 3315 (taken), 3316 (taken) |
+| Steinbrecher |  |  | 800 | 0 | 0 | 0 | 2750 (taken), 2751 (taken), 2752 (taken), 2668 (taken) |
 | Thar |  |  | 600 | 50 | 0 | 0 |  |
-| Schattenwelt2Rigour |  |  | 300 | 0 | 0 | 0 |  |
-| Schattenwelt2aRigour |  |  | 400 | 0 | 0 | 0 |  |
-| Schattenwelt2bRigour |  |  | 600 | 0 | 0 | 0 |  |
-| DerKatarakt |  |  | 600 | 0 | 0 | 0 |  |
+| Schattenwelt2Rigour |  |  | 300 | 0 | 0 | 0 | 2390 (taken) |
+| Schattenwelt2aRigour |  |  | 400 | 0 | 0 | 0 | 3201 (taken) |
+| Schattenwelt2bRigour |  |  | 600 | 0 | 0 | 0 | 3226 (taken) |
+| DerKatarakt |  |  | 600 | 0 | 0 | 0 | 2898 (taken) |
 | ShardAutumn |  |  | 400 | 0 | 0 | 0 |  |
 
 ## the rift (P23)
@@ -212,7 +212,7 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 | Quest/Subquest Flag | Quest ID | Quest Giver NPC | XP | Gold | Silver | Copper | Items |
 |---|---:|---:|---:|---:|---:|---:|---|
 | Klingensturm1Monument |  |  | 1000 | 0 | 0 | 0 |  |
-| Klingensturm2Sartarius |  |  | 2600 | 0 | 0 | 0 | 2241 (given) |
+| Klingensturm2Sartarius |  |  | 2600 | 0 | 0 | 0 | 2241 (given), 3461 (taken), 2814 (taken) |
 | AmraUndLea4 |  |  | 1200 | 0 | 0 | 0 |  |
 
 ## nightwhisper dale (P27)
@@ -234,8 +234,8 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 
 | Quest/Subquest Flag | Quest ID | Quest Giver NPC | XP | Gold | Silver | Copper | Items |
 |---|---:|---:|---:|---:|---:|---:|---|
-| KreisSchluss1Tor1 |  |  | 2000 | 0 | 0 | 0 |  |
-| KreisSchluss2Tor2 |  |  | 2000 | 0 | 0 | 0 |  |
+| KreisSchluss1Tor1 |  |  | 2000 | 0 | 0 | 0 | 3462 (taken), 3463 (taken), 3464 (taken) |
+| KreisSchluss2Tor2 |  |  | 2000 | 0 | 0 | 0 | 3465 (taken) |
 | KreisSchluss3Tor3 |  |  | 2000 | 0 | 0 | 0 |  |
 | KreisSchluss4Soulforger |  |  | 10000 | 0 | 0 | 0 |  |
 
@@ -246,36 +246,36 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 | NachGraufurtPartVillage | 439 | 3110 | 20 | 0 | 0 | 0 | 532 (given) |
 | NachGraufurtPartEnde |  |  | 10 | 0 | 0 | 0 |  |
 | AngriffDerHoehlenorks |  |  | 20 | 0 | 0 | 0 |  |
-| Zauberwerk1Augenglas |  |  | 10 | 0 | 0 | 0 |  |
-| Zauberwerk2Feder |  |  | 25 | 0 | 0 | 0 |  |
-| Zauberwerk3Kreide |  |  | 35 | 0 | 0 | 0 |  |
-| Zauberwerk4Robe |  |  | 120 | 0 | 0 | 0 |  |
-| ZahnbrechersZangen |  |  | 35 | 0 | 0 | 0 |  |
-| WundtinkturValdis |  |  | 30 | 0 | 0 | 0 |  |
-| BlutAdhiraTrank |  |  | 4000 | 0 | 0 | 0 |  |
-| BlutTombardTot |  |  | 2000 | 0 | 0 | 0 |  |
-| SickHermit1Zirfar |  |  | 600 | 0 | 0 | 0 |  |
-| SickHermit2Locke |  |  | 600 | 0 | 0 | 0 |  |
+| Zauberwerk1Augenglas |  |  | 10 | 0 | 0 | 0 | 2893 (taken), 2001 (taken) |
+| Zauberwerk2Feder |  |  | 25 | 0 | 0 | 0 | 2893 (taken), 2001 (taken), 2896 (taken), 0 (taken) |
+| Zauberwerk3Kreide |  |  | 35 | 0 | 0 | 0 | 2001 (taken), 2896 (taken), 0 (taken), 2895 (taken) |
+| Zauberwerk4Robe |  |  | 120 | 0 | 0 | 0 | 2896 (taken), 0 (taken), 2895 (taken) |
+| ZahnbrechersZangen |  |  | 35 | 0 | 0 | 0 | 2486 (taken) |
+| WundtinkturValdis |  |  | 30 | 0 | 0 | 0 | 2671 (taken) |
+| BlutAdhiraTrank |  |  | 4000 | 0 | 0 | 0 | 3166 (taken), 3165 (taken), 2540 (taken), 3167 (taken) |
+| BlutTombardTot |  |  | 2000 | 0 | 0 | 0 | 3169 (taken) |
+| SickHermit1Zirfar |  |  | 600 | 0 | 0 | 0 | 2900 (taken), 2901 (taken) |
+| SickHermit2Locke |  |  | 600 | 0 | 0 | 0 | 2901 (taken), 2903 (taken) |
 | Schattenwelt1Castagir |  |  | 120 | 0 | 0 | 0 |  |
-| Schattenwelt3Manifest |  |  | 1000 | 0 | 0 | 0 |  |
+| Schattenwelt3Manifest |  |  | 1000 | 0 | 0 | 0 | 3200 (taken) |
 | SchattenweltShadowpulse |  |  | 500 | 0 | 0 | 0 |  |
 | EchosBuchstabe1 |  |  | 500 | 0 | 0 | 0 |  |
 | EchosBuchstabe2 |  |  | 500 | 0 | 0 | 0 |  |
 | EchosBuchstabe3 |  |  | 500 | 0 | 0 | 0 |  |
 | EchosGoran |  |  | 700 | 0 | 0 | 0 |  |
 | EchosShinTarGuar |  |  | 1000 | 0 | 0 | 0 |  |
-| AmraUndLea3Sentos |  |  | 500 | 0 | 0 | 0 |  |
-| Zwergendienste1Hinrik |  |  | 120 | 0 | 0 | 0 |  |
-| Schwarzeibe |  |  | 35 | 0 | 0 | 0 |  |
-| Seelenschwerter |  |  | 600 | 0 | 0 | 0 |  |
-| KlingzogsBeinlinge |  |  | 35 | 0 | 0 | 0 |  |
-| ThurgonBrief |  |  | 250 | 2 | 0 | 0 |  |
-| FeineStoffe3Seide |  |  | 400 | 0 | 0 | 0 |  |
-| FeineStoffe4Robe |  |  | 1100 | 0 | 0 | 0 | 3352 (given) |
+| AmraUndLea3Sentos |  |  | 500 | 0 | 0 | 0 | 3047 (taken) |
+| Zwergendienste1Hinrik |  |  | 120 | 0 | 0 | 0 | 2662 (taken) |
+| Schwarzeibe |  |  | 35 | 0 | 0 | 0 | 2002 (taken) |
+| Seelenschwerter |  |  | 600 | 0 | 0 | 0 | 2384 (taken), 2627 (taken), 2614 (taken), 2386 (taken), 2620 (taken) |
+| KlingzogsBeinlinge |  |  | 35 | 0 | 0 | 0 | 2628 (taken), 1994 (taken) |
+| ThurgonBrief |  |  | 250 | 2 | 0 | 0 | 2628 (taken), 1994 (taken) |
+| FeineStoffe3Seide |  |  | 400 | 0 | 0 | 0 | 2383 (taken) |
+| FeineStoffe4Robe |  |  | 1100 | 0 | 0 | 0 | 3352 (given), 2511 (taken), 3437 (taken) |
 | Drachenpanzer1 |  |  | 100 | 0 | 0 | 0 |  |
-| Drachenpanzer2 |  |  | 800 | 0 | 0 | 0 | 557 (given), 572 (given) |
-| TricksterFindFlink |  |  | 500 | 0 | 0 | 0 |  |
-| TricksterReturn |  |  | 1000 | 0 | 0 | 0 | 3621 (given) |
+| Drachenpanzer2 |  |  | 800 | 0 | 0 | 0 | 557 (given), 572 (given), 2667 (taken), 2516 (taken) |
+| TricksterFindFlink |  |  | 500 | 0 | 0 | 0 | 3466 (taken), 3467 (taken) |
+| TricksterReturn |  |  | 1000 | 0 | 0 | 0 | 3621 (given), 3466 (taken), 3467 (taken) |
 
 ## SwampCity (P101)
 
@@ -416,15 +416,15 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 | Quest/Subquest Flag | Quest ID | Quest Giver NPC | XP | Gold | Silver | Copper | Items |
 |---|---:|---:|---:|---:|---:|---:|---|
 | P115KarteErreicht |  |  | 400 | 0 | 0 | 0 |  |
-| Drachenstein1 |  |  | 450 | 0 | 0 | 0 |  |
-| Drachenstein2 |  |  | 450 | 0 | 0 | 0 |  |
-| Drachenstein3 |  |  | 450 | 0 | 0 | 0 |  |
-| Drachenstein4 |  |  | 450 | 0 | 0 | 0 |  |
-| Drachenstein5 |  |  | 450 | 0 | 0 | 0 |  |
-| Drachenstein6 |  |  | 450 | 0 | 0 | 0 |  |
-| Drachenstein7 |  |  | 1000 | 0 | 0 | 0 |  |
-| Drachenstein8 |  |  | 1000 | 0 | 0 | 0 |  |
-| Drachenstein9 |  |  | 1000 | 0 | 0 | 0 |  |
+| Drachenstein1 |  |  | 450 | 0 | 0 | 0 | 4096 (taken) |
+| Drachenstein2 |  |  | 450 | 0 | 0 | 0 | 4096 (taken) |
+| Drachenstein3 |  |  | 450 | 0 | 0 | 0 | 4096 (taken) |
+| Drachenstein4 |  |  | 450 | 0 | 0 | 0 | 4096 (taken) |
+| Drachenstein5 |  |  | 450 | 0 | 0 | 0 | 4096 (taken) |
+| Drachenstein6 |  |  | 450 | 0 | 0 | 0 | 4096 (taken) |
+| Drachenstein7 |  |  | 1000 | 0 | 0 | 0 | 4096 (taken) |
+| Drachenstein8 |  |  | 1000 | 0 | 0 | 0 | 4096 (taken) |
+| Drachenstein9 |  |  | 1000 | 0 | 0 | 0 | 4096 (taken) |
 | DracheGetoetet |  |  | 5000 | 0 | 0 | 0 |  |
 
 ## Colloseum (P200)
@@ -467,7 +467,7 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 |---|---:|---:|---:|---:|---:|---:|---|
 | HeldenBeschworen |  |  | 2000 | 0 | 0 | 0 |  |
 | GrabmalGeoeffnet |  |  | 12000 | 0 | 0 | 0 |  |
-| UrneZuHokan |  |  | 16000 | 0 | 0 | 0 |  |
+| UrneZuHokan |  |  | 16000 | 0 | 0 | 0 | 0 (taken) |
 | Seelenwesen1 |  |  | 2400 | 0 | 0 | 0 |  |
 | Seelenwesen2 |  |  | 2400 | 0 | 0 | 0 |  |
 | Seelenwesen3 |  |  | 2400 | 0 | 0 | 0 |  |
@@ -476,7 +476,7 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 | WachgeistTot |  |  | 4000 | 0 | 0 | 0 |  |
 | OpferFreigelassen |  |  | 6000 | 0 | 0 | 0 |  |
 | OpferTot |  |  | 6000 | 0 | 0 | 0 |  |
-| TorZurStaetteOffen |  |  | 10000 | 0 | 0 | 0 |  |
+| TorZurStaetteOffen |  |  | 10000 | 0 | 0 | 0 | 7067 (taken), 0 (taken) |
 | HlStaetteBaumGepflanzt |  |  | 10000 | 0 | 0 | 0 |  |
 | AschetaenzerTot |  |  | 12000 | 0 | 0 | 0 |  |
 | GnomlingBossTot |  |  | 8000 | 0 | 0 | 0 |  |
@@ -501,15 +501,15 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 
 | Quest/Subquest Flag | Quest ID | Quest Giver NPC | XP | Gold | Silver | Copper | Items |
 |---|---:|---:|---:|---:|---:|---:|---|
-| P204KarteErreicht |  |  | 3000 | 0 | 0 | 0 |  |
+| P204KarteErreicht |  |  | 3000 | 0 | 0 | 0 | 7219 (taken) |
 | FlinkAbgeliefert |  |  | 5500 | 0 | 0 | 0 |  |
 | Tor1DurchTrickGeoeffnet |  |  | 11000 | 0 | 0 | 0 |  |
-| Tor2DurchTrickGeoeffnet |  |  | 7000 | 0 | 0 | 0 |  |
-| Tor3DurchTrickGeoeffnet |  |  | 9000 | 0 | 0 | 0 |  |
+| Tor2DurchTrickGeoeffnet |  |  | 7000 | 0 | 0 | 0 | 7303 (taken) |
+| Tor3DurchTrickGeoeffnet |  |  | 9000 | 0 | 0 | 0 | 7217 (taken) |
 | OberstadtRechtsErreicht |  |  | 6500 | 0 | 0 | 0 |  |
 | OberstadtLinksErreicht |  |  | 6500 | 0 | 0 | 0 |  |
-| PalastgartenErreicht |  |  | 10000 | 0 | 0 | 0 |  |
-| LyrioQuestGeloest |  |  | 6000 | 0 | 0 | 0 |  |
+| PalastgartenErreicht |  |  | 10000 | 0 | 0 | 0 | 7219 (taken) |
+| LyrioQuestGeloest |  |  | 6000 | 0 | 0 | 0 | 7271 (taken) |
 | IshtarTraumstabGebracht |  |  | 4000 | 0 | 0 | 0 |  |
 | TruppenZumPortalGesandt |  |  | 9000 | 0 | 0 | 0 |  |
 | ArenaKampf32 |  |  | 5000 | 0 | 0 | 0 |  |
@@ -518,14 +518,14 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 | ArenaKampf40 |  |  | 12500 | 0 | 0 | 0 |  |
 | ArenaKampf42 |  |  | 15000 | 0 | 0 | 0 |  |
 | SQSethHealed |  |  | 5000 | 0 | 0 | 0 |  |
-| SQBotschafterGefunden | 1039 | 11251 | 5000 | 0 | 0 | 0 |  |
-| SQBotschafterTot |  |  | 10000 | 0 | 0 | 0 |  |
-| SQCraigIstBotschafter |  |  | 20000 | 0 | 0 | 0 |  |
+| SQBotschafterGefunden | 1039 | 11251 | 5000 | 0 | 0 | 0 | 7368 (taken) |
+| SQBotschafterTot |  |  | 10000 | 0 | 0 | 0 | 7368 (taken) |
+| SQCraigIstBotschafter |  |  | 20000 | 0 | 0 | 0 | 7368 (taken) |
 | SQSchutzgeldSmall |  |  | 6000 | 0 | 0 | 0 |  |
 | SQSchutzgeldMedium |  |  | 12000 | 0 | 0 | 0 |  |
 | SQSchutzgeldLarge |  |  | 18000 | 0 | 0 | 0 |  |
 | SQHaendlerFriedlich |  |  | 10000 | 0 | 0 | 0 |  |
-| SQAuftragGescheitert |  |  | 3000 | 0 | 0 | 0 |  |
+| SQAuftragGescheitert |  |  | 3000 | 0 | 0 | 0 | 7368 (taken) |
 
 ## DryadCove (P205)
 
@@ -634,15 +634,15 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 | AugenSet3Solved |  |  | 3500 | 0 | 0 | 0 |  |
 | AugenSet4Solved |  |  | 3500 | 0 | 0 | 0 |  |
 | Room2SensoSolved |  |  | 14000 | 0 | 0 | 0 |  |
-| LastChestInRoom5Opened |  |  | 20000 | 0 | 0 | 0 |  |
+| LastChestInRoom5Opened |  |  | 20000 | 0 | 0 | 0 | 4581 (taken) |
 | Room6SpiderGateOpened |  |  | 15000 | 0 | 0 | 0 |  |
 | TurningHeadsCrossed |  |  | 10000 | 0 | 0 | 0 |  |
 | AirCoinPassageOpened |  |  | 15000 | 0 | 0 | 0 |  |
 | Room4SkeletonDoorOpened |  |  | 15000 | 0 | 0 | 0 |  |
 | Room7ChessboardCrossed |  |  | 15000 | 0 | 0 | 0 |  |
 | Room3HeadDoorOpened |  |  | 45000 | 0 | 0 | 0 |  |
-| SceptreOfWindsFound |  |  | 20000 | 0 | 0 | 0 |  |
-| ExitDoorToP211Opened |  |  | 25000 | 0 | 0 | 0 |  |
+| SceptreOfWindsFound |  |  | 20000 | 0 | 0 | 0 | 7222 (taken) |
+| ExitDoorToP211Opened |  |  | 25000 | 0 | 0 | 0 | 7223 (taken) |
 
 ## DarkwindKeep (P211)
 
@@ -659,7 +659,7 @@ Generated from GdsQuestRewards.lua. Items are marked as given; taken list will b
 | DschungelCamp4Killed |  |  | 10000 | 0 | 0 | 0 |  |
 | CraigBefreit |  |  | 10000 | 0 | 0 | 0 |  |
 | SchattenklingeBefreit |  |  | 10000 | 0 | 0 | 0 |  |
-| WerwolfAbgelenkt |  |  | 15000 | 0 | 0 | 0 |  |
+| WerwolfAbgelenkt |  |  | 15000 | 0 | 0 | 0 | 7277 (taken) |
 | EndgegnerSoulforgerKilled |  |  | 15000 | 0 | 0 | 0 |  |
 
 ## Gorge (P212)

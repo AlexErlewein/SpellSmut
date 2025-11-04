@@ -181,6 +181,157 @@ def collect_reward_to_questid() -> Dict[str, int]:
     return mapping
 
 
+# Improved mapping: analyze OnOneTimeEvent blocks
+def collect_reward_to_questid_from_events() -> Dict[str, int]:
+    mapping: Dict[str, int] = {}
+    qstate_re = re.compile(r"QuestState\s*\{\s*QuestId\s*=\s*(\d+)\s*,\s*State\s*=\s*StateSolved\s*\}")
+    flag_re = re.compile(r"SetRewardFlagTrue\s*\{\s*Name\s*=\s*\"([^\"]+)\"\s*\}")
+
+    for p in SCRIPT_DIR.rglob("*.lua"):
+        if p.name == "GdsQuestRewards.lua":
+            continue
+        try:
+            text = read_text(p)
+        except Exception:
+            continue
+
+        idx = 0
+        while True:
+            pos = text.find("OnOneTimeEvent", idx)
+            if pos == -1:
+                break
+            brace = text.find("{", pos)
+            if brace == -1:
+                idx = pos + 1
+                continue
+            try:
+                end = find_matching_brace(text, brace)
+            except Exception:
+                idx = brace + 1
+                continue
+            block = text[brace:end+1]
+
+            qids = [(m.start(), int(m.group(1))) for m in qstate_re.finditer(block)]
+            flags = [(m.start(), m.group(1)) for m in flag_re.finditer(block)]
+
+            unique_qids = sorted(set(q for _, q in qids))
+            if unique_qids:
+                if len(unique_qids) == 1:
+                    qid = unique_qids[0]
+                    for _, flg in flags:
+                        mapping[flg] = qid
+                else:
+                    # multiple quest ids; assign nearest qid to each flag by position
+                    for fpos, flg in flags:
+                        nearest = None
+                        best = None
+                        for qpos, qid in qids:
+                            dist = abs(qpos - fpos)
+                            if best is None or dist < best:
+                                best = dist
+                                nearest = qid
+                        if nearest is not None:
+                            mapping[flg] = nearest
+
+            idx = end + 1
+    return mapping
+
+# ---------- Collect SetRewardFlagTrue contexts and taken items ----------
+
+def collect_reward_matches(window: int = 2500) -> List[Dict[str, object]]:
+    """Find occurrences of SetRewardFlagTrue and capture a window around them for later scans.
+    Returns a list of dicts: {flag, file, start, end}
+    """
+    matches: List[Dict[str, object]] = []
+    setflag_re = re.compile(r"SetRewardFlagTrue\s*\{\s*Name\s*=\s*\"([^\"]+)\"\s*\}")
+    for p in SCRIPT_DIR.rglob("*.lua"):
+        if p.name == "GdsQuestRewards.lua":
+            continue
+        try:
+            text = read_text(p)
+        except Exception:
+            continue
+        for m in setflag_re.finditer(text):
+            flag = m.group(1)
+            s = max(0, m.start() - window)
+            e = min(len(text), m.end() + window)
+            matches.append({"flag": flag, "file": p, "start": s, "end": e})
+    return matches
+
+
+def find_taken_items_for_flags() -> Dict[str, List[int]]:
+    """Scan windows around SetRewardFlagTrue for TransferItem{TakeItem=...} and map to flags."""
+    flag2taken: Dict[str, List[int]] = {}
+    take_re = re.compile(r"TransferItem\s*\{[^}]*TakeItem\s*=\s*(\d+)[^}]*\}", re.S)
+    for m in collect_reward_matches():
+        p: Path = m["file"]  # type: ignore[assignment]
+        try:
+            text = read_text(p)
+        except Exception:
+            continue
+        slice_txt = text[m["start"]:m["end"]]  # type: ignore[index]
+        taken = [int(x) for x in take_re.findall(slice_txt) if int(x) != 0]
+        if taken:
+            flag = m["flag"]  # type: ignore[index]
+            lst = flag2taken.setdefault(flag, [])
+            # keep unique while preserving order
+            for t in taken:
+                if t not in lst:
+                    lst.append(t)
+    return flag2taken
+
+
+def annotate_taken_items(sections: List[Section], flag2taken: Dict[str, List[int]]):
+    for sec in sections:
+        for e in sec["entries"]:
+            flag = e["flag"]
+            if flag in flag2taken:
+                e["items_taken"] = flag2taken[flag]
+
+
+def collect_taken_items_from_events() -> Dict[str, List[int]]:
+    """Within each OnOneTimeEvent block, associate any TransferItem{TakeItem} with any SetRewardFlagTrue in the same block."""
+    mapping: Dict[str, List[int]] = {}
+    qstate_re = re.compile(r"QuestState\s*\{\s*QuestId\s*=\s*(\d+)\s*,\s*State\s*=\s*StateSolved\s*\}")
+    flag_re = re.compile(r"SetRewardFlagTrue\s*\{\s*Name\s*=\s*\"([^\"]+)\"\s*\}")
+    take_re = re.compile(r"TransferItem\s*\{[^}]*TakeItem\s*=\s*(\d+)[^}]*\}", re.S)
+
+    for p in SCRIPT_DIR.rglob("*.lua"):
+        if p.name == "GdsQuestRewards.lua":
+            continue
+        try:
+            text = read_text(p)
+        except Exception:
+            continue
+
+        idx = 0
+        while True:
+            pos = text.find("OnOneTimeEvent", idx)
+            if pos == -1:
+                break
+            brace = text.find("{", pos)
+            if brace == -1:
+                idx = pos + 1
+                continue
+            try:
+                end = find_matching_brace(text, brace)
+            except Exception:
+                idx = brace + 1
+                continue
+            block = text[brace:end+1]
+
+            flags = [m.group(1) for m in flag_re.finditer(block)]
+            taken = [int(x) for x in take_re.findall(block) if int(x) != 0]
+            if flags and taken:
+                for flg in flags:
+                    lst = mapping.setdefault(flg, [])
+                    for t in taken:
+                        if t not in lst:
+                            lst.append(t)
+            idx = end + 1
+    return mapping
+
+
 # ---------- Guess quest giver NPC by scanning for QuestId appearances ----------
 
 def guess_quest_giver_npc(quest_ids: List[int]) -> Dict[int, Optional[int]]:
@@ -255,7 +406,12 @@ def write_md(sections: List[Section], reward2qid: Dict[str, int], qid2giver: Dic
             flag = e["flag"]
             qid = reward2qid.get(flag)
             giver = qid2giver.get(qid) if qid is not None else None
-            items = ", ".join(f"{x} (given)" for x in e["items_given"]) if e["items_given"] else ""
+            parts: List[str] = []
+            if e["items_given"]:
+                parts.extend(f"{x} (given)" for x in e["items_given"]) 
+            if e["items_taken"]:
+                parts.extend(f"{x} (taken)" for x in e["items_taken"]) 
+            items = ", ".join(parts)
             xp = e["xp"] if e["xp"] is not None else ""
             lines.append(
                 f"| {flag} | {qid if qid is not None else ''} | {giver if giver is not None else ''} | {xp} | {e['gold']} | {e['silver']} | {e['copper']} | {items} |")
@@ -270,6 +426,17 @@ def main():
     sections = parse_rewards_file(text)
 
     reward2qid = collect_reward_to_questid()
+    # Merge with event-block mappings (does not overwrite existing unless missing)
+    evt_map = collect_reward_to_questid_from_events()
+    for flg, qid in evt_map.items():
+        reward2qid.setdefault(flg, qid)
+    # detect taken items: prefer event-block mapping, then fallback to window-based
+    flag2taken_evt = collect_taken_items_from_events()
+    flag2taken_win = find_taken_items_for_flags()
+    flag2taken = dict(flag2taken_evt)
+    for k, v in flag2taken_win.items():
+        flag2taken.setdefault(k, v)
+    annotate_taken_items(sections, flag2taken)
     qids = sorted(set(reward2qid.values()))
     qid2giver = guess_quest_giver_npc(qids)
 

@@ -1,51 +1,51 @@
 platform_id,platform_name,quest_flag,quest_id,quest_giver_npc_id,xp,gold,silver,copper,items_given,items_taken
 1,liannon,DariusDerKarthograph,14,1240,25,0,0,0,,
-1,liannon,WegNachEloni1Snarf,,,25,0,0,0,626,
+1,liannon,WegNachEloni1Snarf,,,25,0,0,0,626,2336
 1,liannon,WegNachEloni2Portal,,,30,0,0,0,,
 1,liannon,KleineFische1,,,10,0,0,0,,
-1,liannon,KleineFische2,,,10,0,0,0,705,
-1,liannon,Steckbrief,,,20,0,2,40,,
-1,liannon,Zwergenaxt,,,20,0,0,0,,
-1,liannon,GeistInDerMine,,,35,0,2,50,,
-1,liannon,EinSeltsamerRing,,,20,0,0,0,833,
-1,liannon,AusDerTiefe1Schreiber,,,250,0,0,0,617,
+1,liannon,KleineFische2,,,10,0,0,0,705,2461
+1,liannon,Steckbrief,,,20,0,2,40,,2336|2004
+1,liannon,Zwergenaxt,,,20,0,0,0,,2005
+1,liannon,GeistInDerMine,,,35,0,2,50,,1998
+1,liannon,EinSeltsamerRing,,,20,0,0,0,833,1995|1996
+1,liannon,AusDerTiefe1Schreiber,,,250,0,0,0,617,1995|1996|1997
 1,liannon,AusDerTiefe1Buch,,,150,0,0,0,707,
-1,liannon,AusDerTiefe2Spaeher,,,350,0,0,0,555,
+1,liannon,AusDerTiefe2Spaeher,,,350,0,0,0,555,1996|1997
 1,liannon,AmraUndLea1Liannon1,,,200,0,0,0,,
 1,liannon,AmraUndLea1Liannon2,,,400,0,0,0,,
-1,liannon,AmraUndLea2Liannon1,,,500,0,0,0,,
+1,liannon,AmraUndLea2Liannon1,,,500,0,0,0,,3045|3046
 1,liannon,AmraUndLea2Liannon2,,,300,0,0,0,,
-1,liannon,EchosBuch,14,1240,200,0,0,0,,
-1,liannon,BefreiungShiel1Alfalas,,,60,0,0,0,,
+1,liannon,EchosBuch,14,1240,200,0,0,0,,3042
+1,liannon,BefreiungShiel1Alfalas,,,60,0,0,0,,2362
 1,liannon,Einsiedler1Shan,,,100,0,0,0,,
 2,eloni,TrommelnInWaeldern,,,90,0,0,0,,
-2,eloni,WundtinkturSwerdis,,,80,0,0,0,,
+2,eloni,WundtinkturSwerdis,,,80,0,0,0,,2670
 2,eloni,DieLetztenSchuetzen1,,,15,0,0,0,695,
 2,eloni,DieLetztenSchuetzen2,,,15,0,0,0,601,
 2,eloni,DieLetztenSchuetzen3,,,15,0,0,0,690,
 2,eloni,DieFreihaendler,,,20,0,0,0,,
-2,eloni,Traumdieb,,,20,0,0,0,,
-2,eloni,StaubDerSterne1,,,20,0,2,0,,
-2,eloni,StaubDerSterne2,,,10,0,4,0,,
-2,eloni,StaubDerSterne3,,,5,0,6,0,,
+2,eloni,Traumdieb,,,20,0,0,0,,2166
+2,eloni,StaubDerSterne1,,,20,0,2,0,,2155
+2,eloni,StaubDerSterne2,,,10,0,4,0,,2155
+2,eloni,StaubDerSterne3,,,5,0,6,0,,2155
 4,leafshade,DurchDenSchattenhain,,,130,0,0,0,,
-4,leafshade,Bannwerk1,,,60,0,0,0,,
-4,leafshade,Bannwerk2,,,60,0,0,0,,
+4,leafshade,Bannwerk1,,,60,0,0,0,,2191|2193|2194|2200|2201|2205
+4,leafshade,Bannwerk2,,,60,0,0,0,,2191|2193|2194|2200|2201|2205
 4,leafshade,Kopfjagd1Head1,,,15,0,0,0,,
 4,leafshade,Kopfjagd2Head2,,,15,0,0,0,,
 4,leafshade,Kopfjagd3Head3,,,15,0,0,0,,
 4,leafshade,Kopfjagd4Head4,,,15,0,0,0,,
 4,leafshade,Kopfjagd5Head5,,,15,0,0,0,,
-4,leafshade,Kopfjagd6Complete,,,60,0,0,0,,
-4,leafshade,DieGeiseln,,,40,0,0,0,,
+4,leafshade,Kopfjagd6Complete,,,60,0,0,0,,3202|3203|3204|3205|3206
+4,leafshade,DieGeiseln,,,40,0,0,0,,2191
 5,shiel,BefreiungShiel1Kommandant,,,40,0,0,0,,
 5,shiel,BefreiungShiel2Dryaden,,,140,0,0,0,,
-5,shiel,PurpurnesBanner1Kettchen,,,35,0,0,0,,
-5,shiel,PurpurnesBanner2,,,45,0,0,0,680|622,
+5,shiel,PurpurnesBanner1Kettchen,,,35,0,0,0,,2350
+5,shiel,PurpurnesBanner2,,,45,0,0,0,680|622,2488
 6,wildland pass,AmWildlandPass1,,,120,0,0,0,,
 6,wildland pass,AmWildlandPass2,,,160,0,0,0,,
-6,wildland pass,KoenigDerSpinnen,,,45,0,10,0,2467|2467,
-6,wildland pass,AlterMannUndMusik,,,45,0,0,0,628,
+6,wildland pass,KoenigDerSpinnen,,,45,0,10,0,2467|2467,2382
+6,wildland pass,AlterMannUndMusik,,,45,0,0,0,628,2371
 6,wildland pass,FeineStoffe1,,,45,0,0,0,,
 6,wildland pass,AmraUndLea2Sentos,,,800,0,0,0,,
 7,icegate marsh,EndeDesOrdens1Erreichen,,,1500,0,0,0,,
@@ -65,22 +65,22 @@ platform_id,platform_name,quest_flag,quest_id,quest_giver_npc_id,xp,gold,silver,
 10,southern windwalls,InsGrauschattental1,,,50,0,0,0,,
 10,southern windwalls,InsGrauschattental2,145,2184,150,0,0,0,,
 10,southern windwalls,InsGrauschattental3,145,2184,50,0,0,0,,
-10,southern windwalls,InsGrauschattental4,145,2184,350,0,0,0,,
-10,southern windwalls,WeisseSchatten1,163,2263,80,0,0,0,,
+10,southern windwalls,InsGrauschattental4,145,2184,350,0,0,0,,2515
+10,southern windwalls,WeisseSchatten1,163,2263,80,0,0,0,,2513
 10,southern windwalls,WeisseSchatten2,,,40,0,0,0,774,
-10,southern windwalls,Zwergendienste2Cronvig,488,2577,250,5,0,0,,
-10,southern windwalls,JeGroesser1,,,90,0,0,0,,
-10,southern windwalls,JeGroesser2,,,110,0,0,0,,
-10,southern windwalls,Reisserfell,,,60,0,0,0,,
+10,southern windwalls,Zwergendienste2Cronvig,488,2577,250,5,0,0,,3247
+10,southern windwalls,JeGroesser1,,,90,0,0,0,,2477|2478|2479|2480|2510
+10,southern windwalls,JeGroesser2,,,110,0,0,0,,2485
+10,southern windwalls,Reisserfell,,,60,0,0,0,,2514|2320
 10,southern windwalls,FeineStoffe2Miria,,,100,0,0,0,,
-10,southern windwalls,Erdenklinge2,,,200,0,0,0,,
-10,southern windwalls,Erdenklinge3,,,400,0,0,0,,
+10,southern windwalls,Erdenklinge2,,,200,0,0,0,,2536
+10,southern windwalls,Erdenklinge3,,,400,0,0,0,,2544|2200|2540|2541|3556
 10,southern windwalls,Erdenklinge4,,,400,0,0,0,,
 11,stoneblade mountain,Erdklinge11,,,100,0,0,0,,
-11,stoneblade mountain,Erdklinge12,,,250,0,0,0,,
-11,stoneblade mountain,Giftzwerg,,,150,0,0,0,,
+11,stoneblade mountain,Erdklinge12,,,250,0,0,0,,2815
+11,stoneblade mountain,Giftzwerg,,,150,0,0,0,,2698|2695|2693|2697|2696|2692|2694|0
 11,stoneblade mountain,Riesenaerger1,,,100,0,0,0,,
-11,stoneblade mountain,Riesenaerger2,,,150,0,0,0,644,
+11,stoneblade mountain,Riesenaerger2,,,150,0,0,0,644,2543
 12,greydusk vale,Grenzkrieg1Festung,,,300,0,0,0,,
 12,greydusk vale,Grenzkrieg2Canyon,,,500,0,0,0,,
 12,greydusk vale,Verraeter,,,400,0,0,0,571,
@@ -91,84 +91,84 @@ platform_id,platform_name,quest_flag,quest_id,quest_giver_npc_id,xp,gold,silver,
 15,howling mounds,Homunculus,,,300,0,0,0,740,
 15,howling mounds,Trickster1Cassius,,,300,0,0,0,,
 15,howling mounds,MaskeDesBelial2,,,300,0,0,0,,
-15,howling mounds,Schattenwelt4Kristall,,,1400,0,0,0,,
+15,howling mounds,Schattenwelt4Kristall,,,1400,0,0,0,,0
 15,howling mounds,AmraUndLea5,,,1200,0,0,0,,
 16,whisper,FluesterndeStadt1Item1,212,2322,250,0,0,0,,
 16,whisper,FluesterndeStadt2Item2,,,250,0,0,0,,
 16,whisper,FluesterndeStadt3Item3,,,250,0,0,0,,
 16,whisper,FluesterndeStadt4Endkampf,,,450,0,0,0,,
-16,whisper,FluesterndeStadt5Maske,,,350,0,0,0,,
+16,whisper,FluesterndeStadt5Maske,,,350,0,0,0,,2337|2615
 16,whisper,AmraLeaGrab,,,800,0,0,0,,
-16,whisper,MosaikDesTodes,,,800,0,0,0,,
+16,whisper,MosaikDesTodes,,,800,0,0,0,,3233|3234|3235|3236
 17,godwall,AufDemWall1Village1,,,200,0,0,0,,
 17,godwall,AufDemWall2Village2,,,300,0,0,0,,
 17,godwall,AufDemWall3Village3,,,300,0,0,0,,
 17,godwall,AufDemWall4Village4,,,300,0,0,0,,
 17,godwall,AufDemWall5Endkampf,,,500,0,0,0,,
-17,godwall,GwensMedizin,,,600,0,0,0,,
+17,godwall,GwensMedizin,,,600,0,0,0,,2635
 19,mulandir,DerPhoenix1Waechter,,,1000,0,0,0,,
-19,mulandir,DerPhoenix2Splitter1,,,800,0,0,0,,
+19,mulandir,DerPhoenix2Splitter1,,,800,0,0,0,,2634|2666|2797
 19,mulandir,DerPhoenix3Splitter2,,,800,0,0,0,,
 19,mulandir,DerPhoenix4Splitter3,,,800,0,0,0,,
 19,mulandir,DerPhoenix5Splitter4,,,800,0,0,0,,
 19,mulandir,DerPhoenix6Ablieferung,,,800,0,0,0,,
 21,farlorns hope,WolfUndDrache1,,,200,0,0,0,,
-21,farlorns hope,WolfUndDrache2,,,400,0,0,0,,
-21,farlorns hope,Steinbrecher,,,800,0,0,0,,
+21,farlorns hope,WolfUndDrache2,,,400,0,0,0,,3315|3316
+21,farlorns hope,Steinbrecher,,,800,0,0,0,,2750|2751|2752|2668
 21,farlorns hope,Thar,,,600,50,0,0,,
-21,farlorns hope,Schattenwelt2Rigour,,,300,0,0,0,,
-21,farlorns hope,Schattenwelt2aRigour,,,400,0,0,0,,
-21,farlorns hope,Schattenwelt2bRigour,,,600,0,0,0,,
-21,farlorns hope,DerKatarakt,,,600,0,0,0,,
+21,farlorns hope,Schattenwelt2Rigour,,,300,0,0,0,,2390
+21,farlorns hope,Schattenwelt2aRigour,,,400,0,0,0,,3201
+21,farlorns hope,Schattenwelt2bRigour,,,600,0,0,0,,3226
+21,farlorns hope,DerKatarakt,,,600,0,0,0,,2898
 21,farlorns hope,ShardAutumn,,,400,0,0,0,,
 23,the rift,DurchdenSpalt1Hin,,,1300,0,0,0,,
 23,the rift,DurchdenSpalt2Her,,,1300,0,0,0,2287|2271|3535,
 23,the rift,Ulather,,,800,0,0,0,,
 25,southern godmark,Klingensturm1Monument,,,1000,0,0,0,,
-25,southern godmark,Klingensturm2Sartarius,,,2600,0,0,0,2241,
+25,southern godmark,Klingensturm2Sartarius,,,2600,0,0,0,2241,3461|2814
 25,southern godmark,AmraUndLea4,,,1200,0,0,0,,
 27,nightwhisper dale,NachUrgath1Elfensiedlung,,,1000,0,0,0,,
 27,nightwhisper dale,NachUrgath2Monument,,,1400,0,0,0,,
 27,nightwhisper dale,NachUrgath3Archon,,,2000,0,0,0,1456|1550,
 30,breathing forest,AtmenderWald1Waldherz,,,2000,0,0,0,,
 30,breathing forest,AtmenderWald2Portal,,,3000,0,0,0,,
-32,sharrowdale,KreisSchluss1Tor1,,,2000,0,0,0,,
-32,sharrowdale,KreisSchluss2Tor2,,,2000,0,0,0,,
+32,sharrowdale,KreisSchluss1Tor1,,,2000,0,0,0,,3462|3463|3464
+32,sharrowdale,KreisSchluss2Tor2,,,2000,0,0,0,,3465
 32,sharrowdale,KreisSchluss3Tor3,,,2000,0,0,0,,
 32,sharrowdale,KreisSchluss4Soulforger,,,10000,0,0,0,,
 63,Greyfell,NachGraufurtPartVillage,439,3110,20,0,0,0,532,
 63,Greyfell,NachGraufurtPartEnde,,,10,0,0,0,,
 63,Greyfell,AngriffDerHoehlenorks,,,20,0,0,0,,
-63,Greyfell,Zauberwerk1Augenglas,,,10,0,0,0,,
-63,Greyfell,Zauberwerk2Feder,,,25,0,0,0,,
-63,Greyfell,Zauberwerk3Kreide,,,35,0,0,0,,
-63,Greyfell,Zauberwerk4Robe,,,120,0,0,0,,
-63,Greyfell,ZahnbrechersZangen,,,35,0,0,0,,
-63,Greyfell,WundtinkturValdis,,,30,0,0,0,,
-63,Greyfell,BlutAdhiraTrank,,,4000,0,0,0,,
-63,Greyfell,BlutTombardTot,,,2000,0,0,0,,
-63,Greyfell,SickHermit1Zirfar,,,600,0,0,0,,
-63,Greyfell,SickHermit2Locke,,,600,0,0,0,,
+63,Greyfell,Zauberwerk1Augenglas,,,10,0,0,0,,2893|2001
+63,Greyfell,Zauberwerk2Feder,,,25,0,0,0,,2893|2001|2896|0
+63,Greyfell,Zauberwerk3Kreide,,,35,0,0,0,,2001|2896|0|2895
+63,Greyfell,Zauberwerk4Robe,,,120,0,0,0,,2896|0|2895
+63,Greyfell,ZahnbrechersZangen,,,35,0,0,0,,2486
+63,Greyfell,WundtinkturValdis,,,30,0,0,0,,2671
+63,Greyfell,BlutAdhiraTrank,,,4000,0,0,0,,3166|3165|2540|3167
+63,Greyfell,BlutTombardTot,,,2000,0,0,0,,3169
+63,Greyfell,SickHermit1Zirfar,,,600,0,0,0,,2900|2901
+63,Greyfell,SickHermit2Locke,,,600,0,0,0,,2901|2903
 63,Greyfell,Schattenwelt1Castagir,,,120,0,0,0,,
-63,Greyfell,Schattenwelt3Manifest,,,1000,0,0,0,,
+63,Greyfell,Schattenwelt3Manifest,,,1000,0,0,0,,3200
 63,Greyfell,SchattenweltShadowpulse,,,500,0,0,0,,
 63,Greyfell,EchosBuchstabe1,,,500,0,0,0,,
 63,Greyfell,EchosBuchstabe2,,,500,0,0,0,,
 63,Greyfell,EchosBuchstabe3,,,500,0,0,0,,
 63,Greyfell,EchosGoran,,,700,0,0,0,,
 63,Greyfell,EchosShinTarGuar,,,1000,0,0,0,,
-63,Greyfell,AmraUndLea3Sentos,,,500,0,0,0,,
-63,Greyfell,Zwergendienste1Hinrik,,,120,0,0,0,,
-63,Greyfell,Schwarzeibe,,,35,0,0,0,,
-63,Greyfell,Seelenschwerter,,,600,0,0,0,,
-63,Greyfell,KlingzogsBeinlinge,,,35,0,0,0,,
-63,Greyfell,ThurgonBrief,,,250,2,0,0,,
-63,Greyfell,FeineStoffe3Seide,,,400,0,0,0,,
-63,Greyfell,FeineStoffe4Robe,,,1100,0,0,0,3352,
+63,Greyfell,AmraUndLea3Sentos,,,500,0,0,0,,3047
+63,Greyfell,Zwergendienste1Hinrik,,,120,0,0,0,,2662
+63,Greyfell,Schwarzeibe,,,35,0,0,0,,2002
+63,Greyfell,Seelenschwerter,,,600,0,0,0,,2384|2627|2614|2386|2620
+63,Greyfell,KlingzogsBeinlinge,,,35,0,0,0,,2628|1994
+63,Greyfell,ThurgonBrief,,,250,2,0,0,,2628|1994
+63,Greyfell,FeineStoffe3Seide,,,400,0,0,0,,2383
+63,Greyfell,FeineStoffe4Robe,,,1100,0,0,0,3352,2511|3437
 63,Greyfell,Drachenpanzer1,,,100,0,0,0,,
-63,Greyfell,Drachenpanzer2,,,800,0,0,0,557|572,
-63,Greyfell,TricksterFindFlink,,,500,0,0,0,,
-63,Greyfell,TricksterReturn,,,1000,0,0,0,3621,
+63,Greyfell,Drachenpanzer2,,,800,0,0,0,557|572,2667|2516
+63,Greyfell,TricksterFindFlink,,,500,0,0,0,,3466|3467
+63,Greyfell,TricksterReturn,,,1000,0,0,0,3621,3466|3467
 101,SwampCity,ImCampMitAllenGeredet,,,15,0,0,0,,
 101,SwampCity,HeldenErschaffen,,,45,0,0,0,,
 101,SwampCity,HQBefreien,,,150,0,0,0,,
@@ -249,15 +249,15 @@ platform_id,platform_name,quest_flag,quest_id,quest_giver_npc_id,xp,gold,silver,
 113,FinalBattle,Boss4Getoetet,,,700,0,0,0,,
 113,FinalBattle,FialDargTotCenwenFrei,,,2000,0,0,0,,
 115,Dragonfight,P115KarteErreicht,,,400,0,0,0,,
-115,Dragonfight,Drachenstein1,,,450,0,0,0,,
-115,Dragonfight,Drachenstein2,,,450,0,0,0,,
-115,Dragonfight,Drachenstein3,,,450,0,0,0,,
-115,Dragonfight,Drachenstein4,,,450,0,0,0,,
-115,Dragonfight,Drachenstein5,,,450,0,0,0,,
-115,Dragonfight,Drachenstein6,,,450,0,0,0,,
-115,Dragonfight,Drachenstein7,,,1000,0,0,0,,
-115,Dragonfight,Drachenstein8,,,1000,0,0,0,,
-115,Dragonfight,Drachenstein9,,,1000,0,0,0,,
+115,Dragonfight,Drachenstein1,,,450,0,0,0,,4096
+115,Dragonfight,Drachenstein2,,,450,0,0,0,,4096
+115,Dragonfight,Drachenstein3,,,450,0,0,0,,4096
+115,Dragonfight,Drachenstein4,,,450,0,0,0,,4096
+115,Dragonfight,Drachenstein5,,,450,0,0,0,,4096
+115,Dragonfight,Drachenstein6,,,450,0,0,0,,4096
+115,Dragonfight,Drachenstein7,,,1000,0,0,0,,4096
+115,Dragonfight,Drachenstein8,,,1000,0,0,0,,4096
+115,Dragonfight,Drachenstein9,,,1000,0,0,0,,4096
 115,Dragonfight,DracheGetoetet,,,5000,0,0,0,,
 200,Colloseum,ColosseumRunde01Sieg,,,7000,2500,0,0,4730|4622|4467,
 200,Colloseum,ColosseumRunde02Sieg,,,8000,2700,0,0,7076|4474|4485,
@@ -285,7 +285,7 @@ platform_id,platform_name,quest_flag,quest_id,quest_giver_npc_id,xp,gold,silver,
 201,Blackwater Coast,GurimLebt,,,5000,0,0,0,,
 202,City of Souls,HeldenBeschworen,,,2000,0,0,0,,
 202,City of Souls,GrabmalGeoeffnet,,,12000,0,0,0,,
-202,City of Souls,UrneZuHokan,,,16000,0,0,0,,
+202,City of Souls,UrneZuHokan,,,16000,0,0,0,,0
 202,City of Souls,Seelenwesen1,,,2400,0,0,0,,
 202,City of Souls,Seelenwesen2,,,2400,0,0,0,,
 202,City of Souls,Seelenwesen3,,,2400,0,0,0,,
@@ -294,7 +294,7 @@ platform_id,platform_name,quest_flag,quest_id,quest_giver_npc_id,xp,gold,silver,
 202,City of Souls,WachgeistTot,,,4000,0,0,0,,
 202,City of Souls,OpferFreigelassen,,,6000,0,0,0,,
 202,City of Souls,OpferTot,,,6000,0,0,0,,
-202,City of Souls,TorZurStaetteOffen,,,10000,0,0,0,,
+202,City of Souls,TorZurStaetteOffen,,,10000,0,0,0,,7067|0
 202,City of Souls,HlStaetteBaumGepflanzt,,,10000,0,0,0,,
 202,City of Souls,AschetaenzerTot,,,12000,0,0,0,,
 202,City of Souls,GnomlingBossTot,,,8000,0,0,0,,
@@ -309,15 +309,15 @@ platform_id,platform_name,quest_flag,quest_id,quest_giver_npc_id,xp,gold,silver,
 203,Onyx Shores,TantaroGefunden,1029,11195,5000,0,0,0,,
 203,Onyx Shores,WasserEntgiften,1030,11213,10000,0,0,0,,
 203,Onyx Shores,ZuTarioGegangen,1031,11213,7000,0,0,0,,
-204,Empyiria,P204KarteErreicht,,,3000,0,0,0,,
+204,Empyiria,P204KarteErreicht,,,3000,0,0,0,,7219
 204,Empyiria,FlinkAbgeliefert,,,5500,0,0,0,,
 204,Empyiria,Tor1DurchTrickGeoeffnet,,,11000,0,0,0,,
-204,Empyiria,Tor2DurchTrickGeoeffnet,,,7000,0,0,0,,
-204,Empyiria,Tor3DurchTrickGeoeffnet,,,9000,0,0,0,,
+204,Empyiria,Tor2DurchTrickGeoeffnet,,,7000,0,0,0,,7303
+204,Empyiria,Tor3DurchTrickGeoeffnet,,,9000,0,0,0,,7217
 204,Empyiria,OberstadtRechtsErreicht,,,6500,0,0,0,,
 204,Empyiria,OberstadtLinksErreicht,,,6500,0,0,0,,
-204,Empyiria,PalastgartenErreicht,,,10000,0,0,0,,
-204,Empyiria,LyrioQuestGeloest,,,6000,0,0,0,,
+204,Empyiria,PalastgartenErreicht,,,10000,0,0,0,,7219
+204,Empyiria,LyrioQuestGeloest,,,6000,0,0,0,,7271
 204,Empyiria,IshtarTraumstabGebracht,,,4000,0,0,0,,
 204,Empyiria,TruppenZumPortalGesandt,,,9000,0,0,0,,
 204,Empyiria,ArenaKampf32,,,5000,0,0,0,,
@@ -326,14 +326,14 @@ platform_id,platform_name,quest_flag,quest_id,quest_giver_npc_id,xp,gold,silver,
 204,Empyiria,ArenaKampf40,,,12500,0,0,0,,
 204,Empyiria,ArenaKampf42,,,15000,0,0,0,,
 204,Empyiria,SQSethHealed,,,5000,0,0,0,,
-204,Empyiria,SQBotschafterGefunden,1039,11251,5000,0,0,0,,
-204,Empyiria,SQBotschafterTot,,,10000,0,0,0,,
-204,Empyiria,SQCraigIstBotschafter,,,20000,0,0,0,,
+204,Empyiria,SQBotschafterGefunden,1039,11251,5000,0,0,0,,7368
+204,Empyiria,SQBotschafterTot,,,10000,0,0,0,,7368
+204,Empyiria,SQCraigIstBotschafter,,,20000,0,0,0,,7368
 204,Empyiria,SQSchutzgeldSmall,,,6000,0,0,0,,
 204,Empyiria,SQSchutzgeldMedium,,,12000,0,0,0,,
 204,Empyiria,SQSchutzgeldLarge,,,18000,0,0,0,,
 204,Empyiria,SQHaendlerFriedlich,,,10000,0,0,0,,
-204,Empyiria,SQAuftragGescheitert,,,3000,0,0,0,,
+204,Empyiria,SQAuftragGescheitert,,,3000,0,0,0,,7368
 205,DryadCove,P205KarteErreicht,,,5000,0,0,0,,
 205,DryadCove,Nymphe1Befreit,,,6000,0,0,0,,
 205,DryadCove,Nymphe2Befreit,,,6000,0,0,0,,
@@ -412,15 +412,15 @@ platform_id,platform_name,quest_flag,quest_id,quest_giver_npc_id,xp,gold,silver,
 210,Clockwork Crypts,AugenSet3Solved,,,3500,0,0,0,,
 210,Clockwork Crypts,AugenSet4Solved,,,3500,0,0,0,,
 210,Clockwork Crypts,Room2SensoSolved,,,14000,0,0,0,,
-210,Clockwork Crypts,LastChestInRoom5Opened,,,20000,0,0,0,,
+210,Clockwork Crypts,LastChestInRoom5Opened,,,20000,0,0,0,,4581
 210,Clockwork Crypts,Room6SpiderGateOpened,,,15000,0,0,0,,
 210,Clockwork Crypts,TurningHeadsCrossed,,,10000,0,0,0,,
 210,Clockwork Crypts,AirCoinPassageOpened,,,15000,0,0,0,,
 210,Clockwork Crypts,Room4SkeletonDoorOpened,,,15000,0,0,0,,
 210,Clockwork Crypts,Room7ChessboardCrossed,,,15000,0,0,0,,
 210,Clockwork Crypts,Room3HeadDoorOpened,,,45000,0,0,0,,
-210,Clockwork Crypts,SceptreOfWindsFound,,,20000,0,0,0,,
-210,Clockwork Crypts,ExitDoorToP211Opened,,,25000,0,0,0,,
+210,Clockwork Crypts,SceptreOfWindsFound,,,20000,0,0,0,,7222
+210,Clockwork Crypts,ExitDoorToP211Opened,,,25000,0,0,0,,7223
 211,DarkwindKeep,P211KarteErreicht,,,5000,0,0,0,,
 211,DarkwindKeep,TorJenquaiGeoeffnet,,,6500,0,0,0,,
 211,DarkwindKeep,MonumenteElfClaimed,,,4000,0,0,0,,
@@ -432,7 +432,7 @@ platform_id,platform_name,quest_flag,quest_id,quest_giver_npc_id,xp,gold,silver,
 211,DarkwindKeep,DschungelCamp4Killed,,,10000,0,0,0,,
 211,DarkwindKeep,CraigBefreit,,,10000,0,0,0,,
 211,DarkwindKeep,SchattenklingeBefreit,,,10000,0,0,0,,
-211,DarkwindKeep,WerwolfAbgelenkt,,,15000,0,0,0,,
+211,DarkwindKeep,WerwolfAbgelenkt,,,15000,0,0,0,,7277
 211,DarkwindKeep,EndgegnerSoulforgerKilled,,,15000,0,0,0,,
 212,Gorge,P212KarteErreicht,,,5000,0,0,0,,
 212,Gorge,MiniforgersKilled,,,30000,0,0,0,,
