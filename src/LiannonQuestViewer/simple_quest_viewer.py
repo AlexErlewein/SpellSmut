@@ -1420,17 +1420,10 @@ class SimpleQuestViewer(QMainWindow):
         """Render a single conversation flow as HTML"""
         if not flow:
             return ""
-        
+
+        # Container for this flow (no headline like 'Single Dialogue' to reduce clutter)
         html = "<div style='margin-bottom: 15px; padding: 8px; background-color: #252525; border-radius: 5px;'>"
-        
-        # Determine if this is a complete conversation or a single node
-        if len(flow) == 1:
-            flow_type = "Single Dialogue"
-        else:
-            flow_type = f"Conversation Flow ({len(flow)} steps)"
-        
-        html += f"<div style='color: #c586c0; font-weight: bold; margin-bottom: 8px; font-size: 11pt;'>{flow_type}</div>"
-        
+
         for i, node in enumerate(flow):
             # Calculate indentation based on position
             indent = min(i * 25, 150)  # Cap indentation at 150px
@@ -1438,13 +1431,13 @@ class SimpleQuestViewer(QMainWindow):
             # Determine styling based on speaker - use existing color scheme
             if node.speaker.lower() == "player":
                 speaker_color = "#6fb3d2"
-                speaker_icon = "Player"
-                text_bg = "#1e3a5f"
+                # Subtly tinted background only for the dialogue text area
+                text_bg = "#223246"
                 border_style = "dashed"
             else:
                 speaker_color = "#4ec9b0"
-                speaker_icon = "NPC"
-                text_bg = "#1e3a2f"
+                # Subtly tinted background only for the dialogue text area
+                text_bg = "#223a2b"
                 border_style = "solid"
             
             html += f"<div style='margin-left: {indent}px; margin-bottom: 10px; position: relative;'>"
@@ -1455,32 +1448,33 @@ class SimpleQuestViewer(QMainWindow):
                 if i < len(flow) - 1:  # Not the last node
                     html += f"<div style='position: absolute; left: -25px; top: 15px; width: 2px; height: calc(100% + 5px); background-color: #888;'></div>"
             
-            # Node content with improved styling
-            html += f"<div style='padding: 10px; background-color: {text_bg}; border-radius: 6px; border-left: 4px {border_style} {speaker_color}; box-shadow: 0 2px 4px rgba(0,0,0,0.3);'>"
+            html += f"<div style='padding: 8px; border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.25);'>"
             
-            # Header with speaker and metadata (only if not hiding metadata)
+            html += f"<div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;'>"
+            header_label = "Player" if node.is_player_choice() else "NPC"
+            html += f"<span style='color: {speaker_color}; font-weight: bold; font-size: 12pt;'>{header_label}</span>"
+
             if not hide_metadata:
-                html += f"<div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;'>"
-                html += f"<span style='color: {speaker_color}; font-weight: bold; font-size: 12pt;'>{speaker_icon}: {node.speaker}</span>"
-                
-                # Metadata on the right
+                # Metadata on the right (answer id, step), subtle
                 metadata_parts = []
                 if node.answer_id:
                     metadata_parts.append(f"ID: {node.answer_id}")
                 if i > 0:
                     metadata_parts.append(f"Step {i+1}")
-                
                 if metadata_parts:
                     html += f"<span style='color: #f48771; font-size: 10pt;'>{' | '.join(metadata_parts)}</span>"
-                
-                html += "</div>"
+            html += "</div>"
             
-            # Dialogue text with better formatting - ensure proper encoding
             display_text = node.text
             if len(display_text) > 200:
                 display_text = display_text[:200] + "..."
-            
-            html += f"<div style='color: #f0f0f0; line-height: 1.4; margin-bottom: 6px;'>{display_text}</div>"
+
+            html += (
+                f"<div style='margin-top: 4px; padding: 10px; background-color: {text_bg}; "
+                f"border-left: 3px {border_style} {speaker_color}; border-radius: 4px; color: #f0f0f0; line-height: 1.4; margin-bottom: 6px;'>"
+                f"{display_text}"
+                f"</div>"
+            )
             
             # Footer with conditions and tag (only if not hiding metadata)
             if not hide_metadata:
