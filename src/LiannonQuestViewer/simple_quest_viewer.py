@@ -536,10 +536,10 @@ class SimpleQuestViewer(QMainWindow):
         filter_layout.addWidget(self.dialogue_filter)
         
         # Metadata toggle
-        metadata_label = QLabel("Show Metadata:")
+        metadata_label = QLabel("Show Dialogue Metadata:")
         self.metadata_toggle = QComboBox()
         self.metadata_toggle.addItem("Full Details", "full")
-        self.metadata_toggle.addItem("Dialogue Only", "dialogue_only")
+        self.metadata_toggle.addItem("Clean Dialogues", "dialogue_only")
         self.metadata_toggle.currentIndexChanged.connect(self.on_metadata_view_changed)
         filter_layout.addWidget(metadata_label)
         filter_layout.addWidget(self.metadata_toggle)
@@ -1121,14 +1121,8 @@ class SimpleQuestViewer(QMainWindow):
         # Build HTML content with dark theme styling
         html = "<html><head><meta charset='UTF-8'></head><body style='font-family: Arial; font-size: 12pt; background-color: #1e1e1e; color: #e0e0e0;'>"
         
-        # Check if we should show only dialogue
-        metadata_mode = self.metadata_toggle.currentData() if hasattr(self, 'metadata_toggle') else "full"
-        
-        if metadata_mode == "dialogue_only":
-            # Dialogue-only view - skip all metadata
-            html = self.add_dialogue_only_view(quest_id)
-            self.details_text.setHtml(html)
-            return
+        # Check if we should hide dialogue metadata only
+        hide_dialogue_metadata = (self.metadata_toggle.currentData() == "dialogue_only") if hasattr(self, 'metadata_toggle') else False
 
         # Quest Header
         html += f"<h2 style='color: #6fb3d2; margin-bottom: 5px;'>{quest_info.get('name', 'Unknown')}</h2>"
@@ -1317,7 +1311,7 @@ class SimpleQuestViewer(QMainWindow):
             
             # Add enhanced dialogue tree view if we have dialogue loader
             if self.dialogue_loader and self.current_quest_id:
-                html = self.add_enhanced_dialogue_view(html, self.current_quest_id)
+                html = self.add_enhanced_dialogue_view(html, self.current_quest_id, hide_dialogue_metadata)
 
         # Empty state
         if (
@@ -1509,63 +1503,6 @@ class SimpleQuestViewer(QMainWindow):
         if self.current_quest_id:
             self.show_quest_details(self.current_quest_id)
     
-    def add_dialogue_only_view(self, quest_id: int) -> str:
-        """Add dialogue-only view without any metadata"""
-        html = "<html><head><meta charset='UTF-8'></head><body style='font-family: Arial; font-size: 12pt; background-color: #1e1e1e; color: #e0e0e0;'>"
-        
-        # Add quest name only
-        quest_info = self.quest_data.get(quest_id, {})
-        quest_name = quest_info.get('name', f'Quest {quest_id}')
-        html += f"<h2 style='color: #6fb3d2; margin-bottom: 20px;'>{quest_name}</h2>"
-        
-        # Add enhanced dialogue tree view if we have dialogue loader
-        if self.dialogue_loader and self.current_quest_id:
-            html = self.add_enhanced_dialogue_view(html, self.current_quest_id, hide_metadata=True)
-        else:
-            # Fallback to legacy dialogues if available
-            dialogues = quest_info.get("dialogues", [])
-            if dialogues:
-                html += "<h3 style='color: #c586c0; margin-bottom: 10px;'>Dialogues</h3>"
-                
-                # Group dialogues by speaker
-                npc_dialogues = []
-                player_dialogues = []
-                
-                for dlg in dialogues:
-                    if hasattr(dlg, "speaker"):
-                        speaker = dlg.speaker
-                        text = dlg.text
-                    else:
-                        speaker = dlg.get("speaker", "Unknown")
-                        text = dlg.get("text", "")
-                    
-                    if speaker.lower() == "player":
-                        player_dialogues.append(text)
-                    else:
-                        npc_dialogues.append(text)
-                
-                # Display dialogues
-                if npc_dialogues:
-                    html += "<div style='margin-bottom: 15px;'>"
-                    for text in npc_dialogues:
-                        html += f"<div style='margin: 5px 0; padding: 10px; background-color: #1e3a2f; border-radius: 5px; border-left: 4px solid #4ec9b0;'>"
-                        html += f"<div style='color: #e0e0e0;'>{text}</div>"
-                        html += "</div>"
-                    html += "</div>"
-                
-                if player_dialogues:
-                    html += "<div style='margin-bottom: 15px;'>"
-                    for text in player_dialogues:
-                        html += f"<div style='margin: 5px 0; padding: 10px; background-color: #1e3a5f; border-radius: 5px; border-left: 4px solid #6fb3d2;'>"
-                        html += f"<div style='color: #b3d9ff;'>• {text}</div>"
-                        html += "</div>"
-                    html += "</div>"
-            else:
-                html += "<p style='color: #808080; font-style: italic; margin-top: 20px;'>No dialogues available for this quest.</p>"
-        
-        html += "</body></html>"
-        return html
-
     def on_search_changed(self, text):
         """Handle search text changes - filter tree items"""
         search_text = text.lower().strip()
