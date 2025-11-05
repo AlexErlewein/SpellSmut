@@ -129,6 +129,19 @@ class MultiLayerTextureSystem:
             "grass": 0.5, "rock": 0.3, "snow": 0.2
         }
         
+    def _category_ids(self, category: str) -> List[int]:
+        """Return IDs known for a category."""
+        return [tid for tid, cat in self.texture_categories.items() if cat == category]
+    
+    def _pick_from_category(self, category: str, tile_x: int, tile_y: int, fallback: int) -> int:
+        """Deterministically pick a texture ID from a category based on tile coords."""
+        ids = self._category_ids(category)
+        if not ids:
+            return fallback
+        # Deterministic pseudo-random selection
+        idx = ((tile_x * 73856093) ^ (tile_y * 19349663)) % len(ids)
+        return ids[idx]
+        
     def parse_texture_assignments(self, texture_assignments: List) -> Dict[Tuple[int, int], TerrainTextureBlend]:
         """
         Parse raw texture assignments into multi-layer blends
@@ -164,26 +177,59 @@ class MultiLayerTextureSystem:
         return self.texture_blends
         
     def _create_tile_blend(self, assignments: List) -> TerrainTextureBlend:
-        """Create a texture blend for a single tile from its assignments"""
-        blend = TerrainTextureBlend()
-        
-        # Count texture frequencies in this tile
-        texture_counts: Dict[int, int] = {}
+        """Create a texture blend for a single tile from its assignments.
+        Prefer explicit per-assignment weights if present; otherwise fall back to frequency counts."""
+        # Accumulate weights per texture id
+        weight_map: Dict[int, float] = {}
+
         for assignment in assignments:
-            texture_counts[assignment.texture_id] = texture_counts.get(assignment.texture_id, 0) + 1
-            
-        # Convert counts to weights
-        total_assignments = len(assignments)
-        for texture_id, count in texture_counts.items():
-            weight = count / total_assignments
-            blend.add_layer(texture_id, weight)
-            
-        # Apply intelligent blending based on texture categories
+            # Try to use explicit multi-layer data, else fallback to single-layer
+            textures: List[int] = []
+            weights: List[float] = []
+            if hasattr(assignment, "get_all_textures") and hasattr(assignment, "get_effective_weights"):
+                try:
+                    textures = assignment.get_all_textures()
+                    weights = assignment.get_effective_weights()
+                except Exception:
+                    textures = [getattr(assignment, "texture_id", -1)]
+                    weights = [1.0]
+            else:
+                textures = [getattr(assignment, "texture_id", -1)]
+                weights = [1.0]
+
+            if not textures:
+                continue
+
+            # If weights length mismatches, pad or truncate
+            if len(weights) < len(textures):
+                weights = weights + [0.0] * (len(textures) - len(weights))
+            elif len(weights) > len(textures):
+                weights = weights[: len(textures)]
+
+            for tid, w in zip(textures[:3], weights[:3]):
+                if tid is None or tid <= 0:
+                    continue
+                weight_map[tid] = weight_map.get(tid, 0.0) + float(max(0.0, w))
+
+        # If nothing accumulated, fallback to frequency-based
+        if not weight_map:
+            texture_counts: Dict[int, int] = {}
+            for assignment in assignments:
+                tid = getattr(assignment, "texture_id", -1)
+                if tid and tid > 0:
+                    texture_counts[tid] = texture_counts.get(tid, 0) + 1
+            total = sum(texture_counts.values()) or 1
+            for tid, count in texture_counts.items():
+                weight_map[tid] = count / total
+
+        # Build blend
+        blend = TerrainTextureBlend()
+        for tid, w in weight_map.items():
+            blend.add_layer(int(tid), float(w))
+
+        # Apply intelligent blending and normalize
         self._apply_intelligent_blending(blend)
-        
-        # Normalize weights
         blend.normalize_weights()
-        
         return blend
         
     def _apply_intelligent_blending(self, blend: TerrainTextureBlend):
@@ -224,6 +270,19 @@ class MultiLayerTextureSystem:
         """Get the texture blend for a specific tile"""
         tile_key = (tile_x, tile_y)
         return self.texture_blends.get(tile_key)
+    
+    def get_weight_for_tile_and_texture(self, tile_x: int, tile_y: int, texture_id: int) -> float:
+        """Get the normalized weight for a specific texture on a given tile."""
+        blend = self.get_blend_for_tile(tile_x, tile_y)
+        if not blend or not blend.texture_ids:
+            return 0.0
+        for tid, w in zip(blend.texture_ids, blend.blend_weights):
+            if tid == texture_id:
+                try:
+                    return float(max(0.0, min(1.0, w)))
+                except Exception:
+                    return 0.0
+        return 0.0
         
     def get_blend_for_position(self, world_x: float, world_z: float) -> Optional[TerrainTextureBlend]:
         """Get the texture blend for a world position"""
@@ -232,34 +291,69 @@ class MultiLayerTextureSystem:
         tile_y = int(world_z) // 4
         return self.get_blend_for_tile(tile_x, tile_y)
         
-    def create_fallback_blend(self, height: float, min_height: float, max_height: float) -> TerrainTextureBlend:
-        """Create a fallback texture blend based on height when no map data is available"""
+    def create_fallback_blend_for_tile(self, tile_x: int, tile_y: int, height: float, min_height: float, max_height: float) -> TerrainTextureBlend:
+        """Create a richer fallback blend per tile using height and a deterministic variant pick."""
         blend = TerrainTextureBlend()
         
-        # Height-based texture selection
+        # Height-based selection
         height_range = max_height - min_height
         if height_range <= 0:
             height_range = 1.0
-            
         normalized_height = (height - min_height) / height_range
         
+        # Choose category variants deterministically per tile
+        grass_id = self._pick_from_category("grass", tile_x, tile_y, 1)
+        rock_id = self._pick_from_category("rock", tile_x + 13, tile_y + 7, 44)
+        
         if normalized_height < 0.3:
-            # Low elevation: primarily grass
-            blend.add_layer(1, 0.8)  # Grass texture
-            blend.add_layer(77, 0.2)  # Some stone grass
+            # Mostly grass, little rock
+            blend.add_layer(grass_id, 0.85)
+            blend.add_layer(rock_id, 0.15)
         elif normalized_height < 0.7:
-            # Mid elevation: grass and rock mix
-            blend.add_layer(1, 0.6)  # Grass
-            blend.add_layer(77, 0.3)  # Stone grass  
-            blend.add_layer(44, 0.1)  # Some rock
+            # Mixed
+            blend.add_layer(grass_id, 0.6)
+            blend.add_layer(rock_id, 0.4)
         else:
-            # High elevation: primarily rock
-            blend.add_layer(44, 0.7)  # Rock
-            blend.add_layer(77, 0.2)  # Stone grass
-            blend.add_layer(1, 0.1)  # Some grass
-            
+            # Mostly rock
+            blend.add_layer(rock_id, 0.75)
+            blend.add_layer(grass_id, 0.25)
+        
         blend.normalize_weights()
         return blend
+    
+    def smooth_blends(self, iterations: int = 1):
+        """Apply simple neighbor averaging to smooth blend weights across tile boundaries."""
+        if not self.texture_blends:
+            return
+        for _ in range(max(0, int(iterations))):
+            new_blends: Dict[Tuple[int, int], TerrainTextureBlend] = {}
+            keys = list(self.texture_blends.keys())
+            for tx, ty in keys:
+                center = self.texture_blends.get((tx, ty))
+                if not center:
+                    continue
+                # Collect neighbor weights
+                accum: Dict[int, float] = {}
+                counts: Dict[int, int] = {}
+                def add_weights(b: TerrainTextureBlend):
+                    for tid, w in zip(b.texture_ids, b.blend_weights):
+                        accum[tid] = accum.get(tid, 0.0) + w
+                        counts[tid] = counts.get(tid, 0) + 1
+                add_weights(center)
+                for dx, dy in ((-1,0),(1,0),(0,-1),(0,1)):
+                    nb = self.texture_blends.get((tx+dx, ty+dy))
+                    if nb:
+                        add_weights(nb)
+                # Average
+                averaged: Dict[int, float] = {tid: accum[tid]/counts[tid] for tid in accum}
+                # Rebuild blend (limit to top 3 weights for safety)
+                sorted_items = sorted(averaged.items(), key=lambda kv: kv[1], reverse=True)[:3]
+                nb_blend = TerrainTextureBlend()
+                for tid, w in sorted_items:
+                    nb_blend.add_layer(tid, w)
+                nb_blend.normalize_weights()
+                new_blends[(tx, ty)] = nb_blend
+            self.texture_blends = new_blends
         
     def get_statistics(self) -> Dict[str, int]:
         """Get statistics about the texture blending system"""

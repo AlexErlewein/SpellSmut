@@ -83,7 +83,7 @@ class MapViewerWidget(QOpenGLWidget):
         
         # Multi-layer texture system
         self.multi_layer_system: Optional[MultiLayerTextureSystem] = None
-        self.use_multi_layer_blending = False  # Enable multi-layer blending
+        self.use_multi_layer_blending = True  # Enable multi-layer blending by default
 
         # Terrain texture mapping system
         self.terrain_texture_mapper: Optional[TerrainTextureMapper] = None
@@ -184,6 +184,26 @@ class MapViewerWidget(QOpenGLWidget):
                                 f"Created texture map for {len(self.texture_map)} tiles"
                             )
 
+                # Build multi-layer blends from assignments for rendering
+                if self.multi_layer_system:
+                    try:
+                        if self.map_loader.terrain_textures:
+                            _ = self.multi_layer_system.parse_texture_assignments(
+                                self.map_loader.terrain_textures
+                            )
+                            # Light smoothing to reduce checker edges
+                            self.multi_layer_system.smooth_blends(1)
+                            stats = self.multi_layer_system.get_statistics()
+                            logger.info(
+                                f"Multi-layer blends: tiles={stats.get('total_tiles')}, layers(single/double/triple)="
+                                f"{stats.get('single_layer')}/{stats.get('double_layer')}/{stats.get('triple_layer')}"
+                            )
+                        else:
+                            # Clear blends to force fallback blending per tile
+                            self.multi_layer_system.texture_blends = {}
+                    except Exception as ex:
+                        logger.warning(f"Failed to build multi-layer blends: {ex}")
+
                 self.update()
                 return True
             return False
@@ -225,12 +245,26 @@ class MapViewerWidget(QOpenGLWidget):
                 logger.info("Loading real terrain textures...")
                 self.base_textures = {}
                 loaded_count = 0
-                for texture_id in sorted(self.texture_manager.texture_files.keys())[:32]:  # Load first 32
+                # Prefer IDs used by fallback/categorization to ensure variety
+                priority_ids = [1, 2, 3, 4, 5, 44, 47, 77, 60, 61, 68]
+                available_ids = sorted(self.texture_manager.texture_files.keys())
+                selected_ids = []
+                for pid in priority_ids:
+                    if pid in available_ids and pid not in selected_ids:
+                        selected_ids.append(pid)
+                # Fill up to a higher limit for more variety
+                limit = 64
+                for tid in available_ids:
+                    if tid not in selected_ids:
+                        selected_ids.append(tid)
+                    if len(selected_ids) >= limit:
+                        break
+                for texture_id in selected_ids:
                     texture = self.texture_manager.get_texture(texture_id)
                     if texture is not None:
                         self.base_textures[texture_id] = texture
                         loaded_count += 1
-                logger.info(f"Loaded {loaded_count} real terrain textures")
+                logger.info(f"Loaded {loaded_count} real terrain textures (prioritized: {priority_ids})")
             else:
                 logger.info("No terrain textures found, creating test texture set...")
                 self.base_textures = self.texture_manager.create_test_texture_set(32)
@@ -976,12 +1010,25 @@ class MapViewerWidget(QOpenGLWidget):
         else:
             glDisable(GL_TEXTURE_2D)
             # Fall back to basic heightmap rendering without textures
+            self._draw_heightmap()
             return
             
         # Texture scaling
         texture_scale = 0.05
         step = 2  # Resolution step
         vertices_drawn = 0
+        
+        # Precompute height stats for fallback blending once
+        sampled_heights = [
+            heightmap.get_height(x, y)
+            for y in range(0, height, 8)
+            for x in range(0, width, 8)
+        ]
+        if sampled_heights:
+            min_h = min(sampled_heights)
+            max_h = max(sampled_heights)
+        else:
+            min_h, max_h = 0.0, 1.0
         
         # Draw terrain in tiles for multi-layer blending
         tile_size = 4  # 4x4 tiles match SpellForce's system
@@ -1001,17 +1048,11 @@ class MapViewerWidget(QOpenGLWidget):
                             height_count += 1
                     if height_count > 0:
                         avg_height /= height_count
-                        
-                    # Get height range for fallback
-                    all_heights = [
-                        heightmap.get_height(x, y)
-                        for y in range(0, height, 8)
-                        for x in range(0, width, 8)
-                    ]
-                    min_h = min(all_heights)
-                    max_h = max(all_heights)
                     
-                    blend = self.multi_layer_system.create_fallback_blend(avg_height, min_h, max_h)
+                    # Use precomputed height range and per-tile fallback blend
+                    blend = self.multi_layer_system.create_fallback_blend_for_tile(
+                        tile_x // tile_size, tile_y // tile_size, avg_height, min_h, max_h
+                    )
                 
                 # Draw this tile with multi-layer blending
                 self._draw_tile_with_multi_layer_blend(
@@ -1035,80 +1076,154 @@ class MapViewerWidget(QOpenGLWidget):
         # For OpenGL fixed-function multi-texturing, we'll use multi-pass rendering
         # with alpha blending to achieve the multi-layer effect
         
-        # Get texture IDs for this blend
+        # Get texture IDs for this blend (keep both manager texture id and GL id)
         texture_layers = []
         for i, (tid, weight) in enumerate(zip(blend.texture_ids, blend.blend_weights)):
             gl_tex_id = self.texture_id_map.get(tid)
+            # Fallback to first available texture if mapping is missing (e.g., test textures)
+            if not gl_tex_id and self.texture_ids:
+                gl_tex_id = self.texture_ids[0]
             if gl_tex_id:
-                texture_layers.append((gl_tex_id, weight))
+                texture_layers.append((tid, gl_tex_id, weight))
                 
         if not texture_layers:
             return
-            
-        # Enable blending for multi-layer effect
-        glEnable(GL_BLEND)
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-        
-        # Draw each layer with appropriate alpha
-        for layer_idx, (gl_tex_id, weight) in enumerate(texture_layers):
-            # Bind texture for this layer
-            glBindTexture(GL_TEXTURE_2D, int(gl_tex_id))
-            
-            # Set alpha based on blend weight
-            if layer_idx == 0:
-                # Base layer: full opacity
-                alpha = 1.0
-            else:
-                # Additional layers: use blend weight as alpha
-                alpha = weight
-                
-            # Draw the tile
+
+        # Sort layers by weight descending so we can draw the strongest layer first as the opaque base
+        layers_sorted = sorted(texture_layers, key=lambda t: t[2], reverse=True)
+
+        # Common extents
+        y_end = min(tile_y + tile_size, map_height - 1)
+        x_end = min(tile_x + tile_size, map_width - 1)
+
+        # Draw base layer WITHOUT blending to avoid clear-color bleeding through
+        _base_tid, base_tex_id, _base_weight = layers_sorted[0]
+        glBindTexture(GL_TEXTURE_2D, int(base_tex_id))
+        glDisable(GL_BLEND)
+        for y in range(tile_y, y_end, step):
+            if y + step > map_height - 1:
+                break
             glBegin(GL_TRIANGLE_STRIP)
-            for y in range(tile_y, min(tile_y + tile_size, map_height), step):
-                for x in range(tile_x, min(tile_x + tile_size, map_width), step):
-                    # Get heights and calculate normals
-                    h_center = heightmap.get_height(x, y)
-                    h_right = heightmap.get_height(min(x + step, map_width - 1), y)
-                    h_down = heightmap.get_height(x, min(y + step, map_height - 1))
-                    
-                    # Calculate normal
-                    tx = [float(step), h_right - h_center, 0.0]
-                    tz = [0.0, h_down - h_center, float(step)]
-                    nx = tx[1] * tz[2] - tx[2] * tz[1]
-                    ny = tx[2] * tz[0] - tx[0] * tz[2]
-                    nz = tx[0] * tz[1] - tx[1] * tz[0]
-                    
-                    length = (nx * nx + ny * ny + nz * nz) ** 0.5
-                    if length > 0:
-                        nx, ny, nz = nx / length, ny / length, nz / length
-                    else:
-                        nx, ny, nz = 0.0, 1.0, 0.0
-                    
-                    # Set color with alpha for blending
-                    glColor4f(1.0, 1.0, 1.0, alpha)
-                    glNormal3f(nx, ny, nz)
-                    
-                    # Texture coordinates - use continuous scaling to avoid seams
-                    tex_u = x * 0.125
-                    tex_v = y * 0.125
-                    glTexCoord2f(tex_u, tex_v)
-                    glVertex3f(float(x), h_center, float(y))
-                    
-                    if y + step < map_height:
-                        h_next = heightmap.get_height(x, y + step)
-                        glColor4f(1.0, 1.0, 1.0, alpha)
+            for x in range(tile_x, x_end + 1, step):
+                # Get heights and calculate normals at (x, y)
+                h_center = heightmap.get_height(x, y)
+                h_right = heightmap.get_height(min(x + step, map_width - 1), y)
+                h_down = heightmap.get_height(x, min(y + step, map_height - 1))
+
+                # Calculate normal
+                tx = [float(step), h_right - h_center, 0.0]
+                tz = [0.0, h_down - h_center, float(step)]
+                nx = tx[1] * tz[2] - tx[2] * tz[1]
+                ny = tx[2] * tz[0] - tx[0] * tz[2]
+                nz = tx[0] * tz[1] - tx[1] * tz[0]
+
+                length = (nx * nx + ny * ny + nz * nz) ** 0.5
+                if length > 0:
+                    nx, ny, nz = nx / length, ny / length, nz / length
+                else:
+                    nx, ny, nz = 0.0, 1.0, 0.0
+
+                # Top vertex (x, y)
+                glColor4f(1.0, 1.0, 1.0, 1.0)
+                glNormal3f(nx, ny, nz)
+                tex_u = x * 0.125
+                tex_v = y * 0.125
+                glTexCoord2f(tex_u, tex_v)
+                glVertex3f(float(x), h_center, float(y))
+
+                # Bottom vertex (x, y + step)
+                h_next = heightmap.get_height(x, y + step)
+                glColor4f(1.0, 1.0, 1.0, 1.0)
+                glNormal3f(nx, ny, nz)
+                tex_u = x * 0.125
+                tex_v = (y + step) * 0.125
+                glTexCoord2f(tex_u, tex_v)
+                glVertex3f(float(x), h_next, float(y + step))
+            glEnd()
+
+        # Draw remaining layers WITH blending using their weights as alpha
+        if len(layers_sorted) > 1:
+            glEnable(GL_BLEND)
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+            for (tid, gl_tex_id, weight) in layers_sorted[1:]:
+                glBindTexture(GL_TEXTURE_2D, int(gl_tex_id))
+                for y in range(tile_y, y_end, step):
+                    if y + step > map_height - 1:
+                        break
+                    glBegin(GL_TRIANGLE_STRIP)
+                    for x in range(tile_x, x_end + 1, step):
+                        # Get heights and calculate normals at (x, y)
+                        h_center = heightmap.get_height(x, y)
+                        h_right = heightmap.get_height(min(x + step, map_width - 1), y)
+                        h_down = heightmap.get_height(x, min(y + step, map_height - 1))
+
+                        # Calculate normal
+                        tx = [float(step), h_right - h_center, 0.0]
+                        tz = [0.0, h_down - h_center, float(step)]
+                        nx = tx[1] * tz[2] - tx[2] * tz[1]
+                        ny = tx[2] * tz[0] - tx[0] * tz[2]
+                        nz = tx[0] * tz[1] - tx[1] * tz[0]
+
+                        length = (nx * nx + ny * ny + nz * nz) ** 0.5
+                        if length > 0:
+                            nx, ny, nz = nx / length, ny / length, nz / length
+                        else:
+                            nx, ny, nz = 0.0, 1.0, 0.0
+
+                        # Compute per-vertex alpha using bilinear interpolation across neighboring tiles
+                        alpha_top = self._interpolated_weight_for_texture(tid, x, y, tile_size)
+                        alpha_top = max(0.0, min(1.0, float(alpha_top)))
+                        # Top vertex (x, y)
+                        glColor4f(1.0, 1.0, 1.0, alpha_top)
                         glNormal3f(nx, ny, nz)
-                        
-                        # Texture coordinates - use continuous scaling to avoid seams
+                        tex_u = x * 0.125
+                        tex_v = y * 0.125
+                        glTexCoord2f(tex_u, tex_v)
+                        glVertex3f(float(x), h_center, float(y))
+
+                        # Bottom vertex (x, y + step)
+                        h_next = heightmap.get_height(x, y + step)
+                        alpha_bottom = self._interpolated_weight_for_texture(tid, x, y + step, tile_size)
+                        alpha_bottom = max(0.0, min(1.0, float(alpha_bottom)))
+                        glColor4f(1.0, 1.0, 1.0, alpha_bottom)
+                        glNormal3f(nx, ny, nz)
                         tex_u = x * 0.125
                         tex_v = (y + step) * 0.125
                         glTexCoord2f(tex_u, tex_v)
                         glVertex3f(float(x), h_next, float(y + step))
-                        
-                glEnd()
-                
+                    glEnd()
+
         # Disable blending
         glDisable(GL_BLEND)
+
+    def _interpolated_weight_for_texture(self, texture_tid: int, x: int, y: int, tile_size: int) -> float:
+        """Bilinearly interpolate the weight of a texture id across neighboring tiles at a world vertex (x,y).
+        Uses MultiLayerTextureSystem tile weights; returns 0..1."""
+        try:
+            if not self.multi_layer_system or not texture_tid or tile_size <= 0:
+                return 0.0
+            tx = int(x) // tile_size
+            ty = int(y) // tile_size
+            # Fraction inside the tile of this vertex
+            fx = (float(x) - float(tx * tile_size)) / float(tile_size)
+            fy = (float(y) - float(ty * tile_size)) / float(tile_size)
+            fx = 0.0 if fx < 0.0 else (1.0 if fx > 1.0 else fx)
+            fy = 0.0 if fy < 0.0 else (1.0 if fy > 1.0 else fy)
+
+            w00 = self.multi_layer_system.get_weight_for_tile_and_texture(tx, ty, texture_tid)
+            w10 = self.multi_layer_system.get_weight_for_tile_and_texture(tx + 1, ty, texture_tid)
+            w01 = self.multi_layer_system.get_weight_for_tile_and_texture(tx, ty + 1, texture_tid)
+            w11 = self.multi_layer_system.get_weight_for_tile_and_texture(tx + 1, ty + 1, texture_tid)
+
+            # Bilinear interpolation
+            w0 = (1.0 - fx) * w00 + fx * w10
+            w1 = (1.0 - fx) * w01 + fx * w11
+            w = (1.0 - fy) * w0 + fy * w1
+            if not (w == w):  # NaN guard
+                return 0.0
+            return max(0.0, min(1.0, float(w)))
+        except Exception:
+            return 0.0
 
     def _create_texture_map_from_assignments(self):
         """Create a texture map from the actual terrain texture assignments in the map file"""

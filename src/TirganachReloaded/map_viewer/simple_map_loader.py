@@ -58,22 +58,6 @@ class TerrainTextureAssignment:
             while len(weights) < len(self.get_all_textures()):
                 weights.append(0.0)
             return weights
-            
-    def get_all_textures(self) -> List[int]:
-        """Get all texture IDs for this assignment"""
-        all_textures = [self.texture_id] + self.additional_textures
-        return [tid for tid in all_textures if tid > 0]  # Filter out invalid IDs
-        
-    def get_effective_weights(self) -> List[float]:
-        """Get effective blend weights (matching get_all_textures)"""
-        if len(self.blend_weights) >= len(self.get_all_textures()):
-            return self.blend_weights[:len(self.get_all_textures())]
-        else:
-            # Pad with zeros if needed
-            weights = self.blend_weights.copy()
-            while len(weights) < len(self.get_all_textures()):
-                weights.append(0.0)
-            return weights
 
 
 @dataclass
@@ -339,128 +323,183 @@ class SimpleMapLoader:
 
         # Enhanced parsing based on SpellForce terrain system
         try:
-            # Method 1: Parse as tile-based texture assignments
-            # SpellForce uses a tile grid where each tile can have up to 3 texture layers
-            expected_entries = 255
-            entry_size = 14  # 3 texture indices + 3 blend weights + 8 padding
-            
-            total_expected_size = expected_entries * entry_size
-            if len(data) >= total_expected_size:
-                logger.debug("Parsing Chunk 3 as tile-based texture assignment table")
-                
-                # Create a tile grid (16x16 tiles for 255 entries)
-                tile_grid = {}
-                
-                for i in range(expected_entries):
-                    offset = i * entry_size
-                    
-                    # Extract texture indices (3 bytes) - up to 3 texture layers per tile
-                    tex_indices = [
-                        data[offset] if offset < len(data) else 0,
-                        data[offset + 1] if offset + 1 < len(data) else 0,
-                        data[offset + 2] if offset + 2 < len(data) else 0
-                    ]
-                    
-                    # Extract blend weights (3 bytes, 0-255 scale)
-                    raw_weights = [
-                        data[offset + 3] if offset + 3 < len(data) else 0,
-                        data[offset + 4] if offset + 4 < len(data) else 0,
-                        data[offset + 5] if offset + 5 < len(data) else 0
-                    ]
-                    
-                    # Convert to 0.0-1.0 scale and normalize
-                    weights = [w / 255.0 for w in raw_weights]
-                    total_weight = sum(weights)
-                    
-                    if total_weight > 0:
-                        weights = [w / total_weight for w in weights]
-                    else:
-                        weights = [0.0, 0.0, 0.0]
-                    
-                    # Calculate tile position (16x16 grid)
-                    tile_x = i % 16
-                    tile_y = i // 16
-                    
-                    # Convert tile coordinates to world coordinates (4x4 meter tiles)
-                    world_x = tile_x * 4
-                    world_y = tile_y * 4
-                    
-                    # Create multi-layer texture assignment for this tile
-                    valid_layers = []
-                    for tex_idx, weight in zip(tex_indices, weights):
-                        if tex_idx > 0 and weight > 0.01:  # Valid texture with meaningful weight
-                            valid_layers.append((tex_idx, weight))
-                    
-                    if valid_layers:
-                        # Create assignment with all layers and weights
-                        primary_texture = valid_layers[0][0]
-                        all_weights = [layer[1] for layer in valid_layers]
-                        additional_textures = [layer[0] for layer in valid_layers[1:]]
-                        
-                        assignment = TerrainTextureAssignment(
-                            x=world_x,
-                            y=world_y,
-                            texture_id=primary_texture,  # Primary texture
-                            blend_weights=all_weights,  # All weights
-                            additional_textures=additional_textures  # Additional textures
-                        )
-                        
-                        texture_assignments.append(assignment)
-                        
-                        # Store in tile grid for reference
-                        tile_grid[(tile_x, tile_y)] = {
-                            'textures': [layer[0] for layer in valid_layers],
-                            'weights': [layer[1] for layer in valid_layers]
-                        }
-                
-                logger.info(
-                    f"Successfully parsed {len(texture_assignments)} multi-layer texture assignments "
-                    f"from {len(tile_grid)} tiles"
-                )
-                
-                # Log some examples for debugging
-                example_tiles = list(tile_grid.items())[:5]
-                for (tx, ty), tile_data in example_tiles:
-                    logger.debug(
-                        f"Tile ({tx},{ty}): textures={tile_data['textures']}, "
-                        f"weights={tile_data['weights']}"
-                    )
-            else:
-                logger.warning(
-                    f"Chunk 3 data size mismatch: expected {total_expected_size}, got {len(data)}. "
-                    f"Trying alternative parsing methods."
+            # Determine tile grid from heightmap if available
+            tile_cols = 16
+            tile_rows = 16
+            if self.heightmap:
+                tile_cols = max(1, (self.heightmap.width + 3) // 4)
+                tile_rows = max(1, (self.heightmap.height + 3) // 4)
+            tile_count = tile_cols * tile_rows
+
+            # Try to deduce entry size from chunk size and tile count
+            entry_size = None
+            if tile_count > 0 and len(data) % tile_count == 0:
+                entry_size = len(data) // tile_count
+                logger.debug(
+                    f"Chunk 3: tile grid {tile_cols}x{tile_rows} ({tile_count}), per-tile size candidate: {entry_size}"
                 )
 
-                # Fallback parsing methods
+            # Candidate per-tile formats (bytes)
+            candidates = []
+            if entry_size:
+                candidates.append(entry_size)
+            candidates.extend([6, 14, 8, 12])  # Try common sizes, will ignore if too large
+
+            parsed_tiles = 0
+            tile_grid = {}
+
+            for cand in candidates:
+                if cand <= 0:
+                    continue
+                if tile_count * cand > len(data):
+                    continue  # Not enough data
+
+                # Attempt parse with this candidate size (use first 6 bytes for core data)
+                try:
+                    temp_assignments = []
+                    for i in range(tile_count):
+                        offset = i * cand
+                        # Extract first 6 bytes as (3 indices, 3 weights) in 0..255
+                        b0 = data[offset] if offset < len(data) else 0
+                        b1 = data[offset + 1] if offset + 1 < len(data) else 0
+                        b2 = data[offset + 2] if offset + 2 < len(data) else 0
+                        w0 = data[offset + 3] if offset + 3 < len(data) else 0
+                        w1 = data[offset + 4] if offset + 4 < len(data) else 0
+                        w2 = data[offset + 5] if offset + 5 < len(data) else 0
+
+                        tex_indices = [b0, b1, b2]
+                        raw_weights = [w0, w1, w2]
+
+                        # Convert to 0..1 and normalize
+                        weights = [float(w) / 255.0 for w in raw_weights]
+                        total_w = sum(weights)
+                        if total_w > 0:
+                            weights = [w / total_w for w in weights]
+                        else:
+                            weights = [0.0, 0.0, 0.0]
+
+                        # Tile position in grid
+                        tile_x = i % tile_cols
+                        tile_y = i // tile_cols
+                        world_x = tile_x * 4
+                        world_y = tile_y * 4
+
+                        # Keep only valid layers
+                        valid_layers = []
+                        for tex_idx, weight in zip(tex_indices, weights):
+                            if tex_idx > 0 and weight > 0.001:
+                                valid_layers.append((int(tex_idx), float(weight)))
+
+                        if valid_layers:
+                            primary_texture = valid_layers[0][0]
+                            all_weights = [layer[1] for layer in valid_layers]
+                            additional_textures = [layer[0] for layer in valid_layers[1:]]
+
+                            assignment = TerrainTextureAssignment(
+                                x=world_x,
+                                y=world_y,
+                                texture_id=primary_texture,
+                                blend_weights=all_weights,
+                                additional_textures=additional_textures,
+                            )
+                            temp_assignments.append(assignment)
+                            tile_grid[(tile_x, tile_y)] = {
+                                'textures': [layer[0] for layer in valid_layers],
+                                'weights': [layer[1] for layer in valid_layers],
+                            }
+
+                    # If we parsed a reasonable number of tiles, accept and stop trying
+                    if len(temp_assignments) >= max(1, tile_count // 2):
+                        texture_assignments = temp_assignments
+                        parsed_tiles = len(tile_grid)
+                        logger.info(
+                            f"Parsed terrain textures using per-tile size {cand} bytes: {parsed_tiles} tiles, {len(texture_assignments)} assignments"
+                        )
+                        # Log a few examples
+                        for (tx, ty), tile_data in list(tile_grid.items())[:5]:
+                            logger.debug(
+                                f"Tile ({tx},{ty}): textures={tile_data['textures']}, weights={tile_data['weights']}"
+                            )
+                        break
+                except Exception as ex:
+                    logger.debug(f"Candidate parse with size {cand} failed: {ex}")
+
+            # If candidates failed and data length matches legacy 16x16 grid, try that
+            if not texture_assignments:
+                expected_entries = 255
+                legacy_entry_size = 14
+                total_expected_size = expected_entries * legacy_entry_size
+                if len(data) >= total_expected_size:
+                    logger.debug("Falling back to legacy 16x16 grid parse (14 bytes/entry)")
+                    for i in range(expected_entries):
+                        offset = i * legacy_entry_size
+                        tex_indices = [
+                            data[offset] if offset < len(data) else 0,
+                            data[offset + 1] if offset + 1 < len(data) else 0,
+                            data[offset + 2] if offset + 2 < len(data) else 0,
+                        ]
+                        raw_weights = [
+                            data[offset + 3] if offset + 3 < len(data) else 0,
+                            data[offset + 4] if offset + 4 < len(data) else 0,
+                            data[offset + 5] if offset + 5 < len(data) else 0,
+                        ]
+                        weights = [w / 255.0 for w in raw_weights]
+                        total_weight = sum(weights)
+                        if total_weight > 0:
+                            weights = [w / total_weight for w in weights]
+                        else:
+                            weights = [0.0, 0.0, 0.0]
+                        tile_x = i % 16
+                        tile_y = i // 16
+                        world_x = tile_x * 4
+                        world_y = tile_y * 4
+                        valid_layers = []
+                        for tex_idx, weight in zip(tex_indices, weights):
+                            if tex_idx > 0 and weight > 0.01:
+                                valid_layers.append((tex_idx, weight))
+                        if valid_layers:
+                            primary_texture = valid_layers[0][0]
+                            all_weights = [layer[1] for layer in valid_layers]
+                            additional_textures = [layer[0] for layer in valid_layers[1:]]
+                            assignment = TerrainTextureAssignment(
+                                x=world_x,
+                                y=world_y,
+                                texture_id=primary_texture,
+                                blend_weights=all_weights,
+                                additional_textures=additional_textures,
+                            )
+                            texture_assignments.append(assignment)
+                    logger.info(
+                        f"Legacy parse produced {len(texture_assignments)} assignments"
+                    )
+                else:
+                    logger.warning(
+                        f"Chunk 3 data size {len(data)} did not match any expected per-tile format; trying byte-scan fallback"
+                    )
+
+            # Final fallback: scan for (x,y,tid) triplets and create single-layer assignments
+            if not texture_assignments:
                 offset = 0
-                while offset + 6 <= len(
-                    data
-                ):  # Need at least 6 bytes for (x,y,idx,w1,w2,w3)
+                while offset + 6 <= len(data):
                     try:
-                        # Try to parse as individual texture assignments
                         x = struct.unpack("<H", data[offset : offset + 2])[0]
                         y = struct.unpack("<H", data[offset + 2 : offset + 4])[0]
-                        texture_id = struct.unpack("<H", data[offset + 4 : offset + 6])[
-                            0
-                        ]
-
-                        # Validate reasonable values
-                        if x < 1024 and y < 1024 and texture_id < 256:
+                        texture_id = struct.unpack("<H", data[offset + 4 : offset + 6])[0]
+                        if x < 8192 and y < 8192 and texture_id < 1024:
                             assignment = TerrainTextureAssignment(
                                 x=x,
                                 y=y,
                                 texture_id=texture_id,
-                                blend_weights=[1.0],  # Single texture for now
+                                blend_weights=[1.0],
                             )
                             texture_assignments.append(assignment)
                             offset += 6
                         else:
-                            offset += 1  # Skip one byte and try again
+                            offset += 1
                     except Exception:
-                        offset += 1  # Skip one byte and try again
-
+                        offset += 1
                 logger.info(
-                    f"Fallback parsing found {len(texture_assignments)} texture assignments"
+                    f"Byte-scan fallback found {len(texture_assignments)} texture assignments"
                 )
 
         except Exception as e:
