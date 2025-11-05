@@ -46,6 +46,7 @@ from TirganachReloaded.cff_editor.data_model import CFFDataModel
 from TirganachReloaded.cff_editor.logging_config import configure_logging, get_logger
 from TirganachReloaded.cff_editor.lua_parser.lua_data_manager import LuaDataManager
 from TirganachReloaded.cff_editor.services.quest_data_service import QuestDataService
+from dialogue_loader import DialogueDataLoader
 
 # Platform/Map location name mappings
 PLATFORM_NAMES = {
@@ -148,6 +149,7 @@ class SimpleQuestViewer(QMainWindow):
         self.quest_data = {}
         self.current_quest_id = None
         self.quest_service = None
+        self.dialogue_loader = None
 
         # Initialize settings for preferences persistence
         self.settings = QSettings("SpellSmut", "QuestViewer")
@@ -351,6 +353,16 @@ class SimpleQuestViewer(QMainWindow):
         self.giver_filter.currentIndexChanged.connect(self.on_filter_changed)
         filter_layout.addWidget(giver_label)
         filter_layout.addWidget(self.giver_filter)
+        
+        # Dialogue filter
+        dialogue_label = QLabel("Has Dialogues:")
+        self.dialogue_filter = QComboBox()
+        self.dialogue_filter.addItem("All Quests", None)
+        self.dialogue_filter.addItem("With Dialogues Only", True)
+        self.dialogue_filter.addItem("Without Dialogues", False)
+        self.dialogue_filter.currentIndexChanged.connect(self.on_filter_changed)
+        filter_layout.addWidget(dialogue_label)
+        filter_layout.addWidget(self.dialogue_filter)
 
         filter_layout.addStretch()
         tree_layout.addLayout(filter_layout)
@@ -409,7 +421,7 @@ class SimpleQuestViewer(QMainWindow):
         import time
 
         # Create progress dialog
-        progress = QProgressDialog("Loading quest data...", None, 0, 6, self)
+        progress = QProgressDialog("Loading quest data...", None, 0, 7, self)
         progress.setWindowModality(Qt.WindowModal)
         progress.setWindowTitle("Loading")
         progress.setMinimumDuration(0)  # Show immediately
@@ -489,10 +501,17 @@ class SimpleQuestViewer(QMainWindow):
             QApplication.processEvents()
             
             self.load_csv_quest_data()
-
-            # Step 4: Populate tree
-            progress.setLabelText("Building quest tree...")
+            
+            # Step 4: Load dialogue data
+            progress.setLabelText("Loading dialogue data...")
             progress.setValue(5)
+            QApplication.processEvents()
+            
+            self.load_dialogue_data()
+
+            # Step 5: Populate tree
+            progress.setLabelText("Building quest tree...")
+            progress.setValue(6)
             QApplication.processEvents()
 
             tree_start = time.time()
@@ -500,9 +519,9 @@ class SimpleQuestViewer(QMainWindow):
             tree_time = time.time() - tree_start
             self.logger.info(f"Tree populated in {tree_time:.2f}s")
 
-            # Step 5: Populate quest giver filter
+            # Step 6: Populate quest giver filter
             progress.setLabelText("Finalizing...")
-            progress.setValue(6)
+            progress.setValue(7)
             QApplication.processEvents()
 
             self.populate_quest_giver_filter()
@@ -510,11 +529,12 @@ class SimpleQuestViewer(QMainWindow):
             progress.close()
 
             quest_count = len(self.quest_data)
+            dialogue_count = sum(1 for q in self.quest_data.values() if q.get("dialogues"))
             total_time = time.time() - start_time
-            status_msg = f"Loaded {quest_count} quests in {total_time:.2f}s"
+            status_msg = f"Loaded {quest_count} quests ({dialogue_count} with dialogues) in {total_time:.2f}s"
             self.statusBar().showMessage(status_msg)
             self.logger.info(
-                f"Successfully loaded {quest_count} quests in {total_time:.2f}s"
+                f"Successfully loaded {quest_count} quests ({dialogue_count} with dialogues) in {total_time:.2f}s"
             )
 
             # Restore preferences that require loaded data
@@ -631,6 +651,69 @@ class SimpleQuestViewer(QMainWindow):
         except Exception as e:
             if self.logger:
                 self.logger.warning(f"Failed to load Lua quest data: {e}")
+
+    def load_dialogue_data(self):
+        """Load dialogue data from extracted files"""
+        try:
+            dialogue_dir = project_root / "ModdingTools/SpellForceLUASources/QuestKnowledge"
+            if not dialogue_dir.exists():
+                if self.logger:
+                    self.logger.warning(f"Dialogue data directory not found: {dialogue_dir}")
+                return
+            
+            self.dialogue_loader = DialogueDataLoader(dialogue_dir)
+            if self.dialogue_loader.load_dialogue_data():
+                if self.logger:
+                    self.logger.info(
+                        f"Loaded dialogue data: {self.dialogue_loader.get_npc_count()} NPCs, "
+                        f"{self.dialogue_loader.get_quest_count()} quests, "
+                        f"{self.dialogue_loader.get_total_dialogue_count()} total dialogues"
+                    )
+                
+                # Enhance quest data with dialogues
+                self.enhance_quests_with_dialogues()
+            else:
+                if self.logger:
+                    self.logger.warning("Failed to load dialogue data")
+                    
+        except Exception as e:
+            if self.logger:
+                self.logger.exception(f"Failed to load dialogue data: {e}")
+    
+    def enhance_quests_with_dialogues(self):
+        """Enhance quest data with loaded dialogues"""
+        if not self.dialogue_loader:
+            return
+            
+        enhanced_count = 0
+        for quest_id, quest_info in self.quest_data.items():
+            dialogues = self.dialogue_loader.get_dialogues_for_quest(quest_id)
+            if dialogues:
+                # Convert to dialogue objects compatible with existing format
+                enhanced_dialogues = []
+                for dlg in dialogues:
+                    # Create a simple dialogue object
+                    class SimpleDialogue:
+                        def __init__(self, text, speaker, is_player=False):
+                            self.text = text
+                            self.speaker = speaker
+                            self.is_player_choice = is_player
+                        
+                        @property
+                        def dialogue_type(self):
+                            return "Story" if len(self.text) > 100 else "Standard"
+                    
+                    is_player = dlg.speaker.lower() == "player"
+                    enhanced_dialogues.append(
+                        SimpleDialogue(dlg.text, dlg.speaker, is_player)
+                    )
+                
+                # Add dialogues to quest data
+                quest_info["dialogues"] = enhanced_dialogues
+                enhanced_count += 1
+        
+        if self.logger:
+            self.logger.info(f"Enhanced {enhanced_count} quests with dialogue data")
 
         # Enhance quest data with QuestDataService
         if self.quest_service:
@@ -1031,7 +1114,11 @@ class SimpleQuestViewer(QMainWindow):
         if dialogues:
             html += "<h3 style='color: #c586c0; margin-top: 15px; margin-bottom: 5px;'>Dialogues</h3>"
             html += "<div style='background-color: #2d2d30; padding: 10px; border-radius: 5px; border: 1px solid #3c3c3c;'>"
-
+            
+            # Group dialogues by speaker for better organization
+            npc_dialogues = []
+            player_dialogues = []
+            
             for dlg in dialogues:
                 # Handle both Lua cache format and QuestDataService format
                 if hasattr(dlg, "speaker"):
@@ -1050,27 +1137,62 @@ class SimpleQuestViewer(QMainWindow):
                     speaker = "NPC"
                 else:
                     continue
-
+                
                 if dlg_text:
-                    # Show dialogue type if it's a Story dialogue
-                    type_prefix = ""
-                    if dialogue_type == "Story":
-                        type_prefix = "<span style='color: #d4a959;'>[Story]</span> "
-
+                    dialogue_info = {
+                        'text': dlg_text,
+                        'translation': translation,
+                        'type': dialogue_type,
+                        'is_player': is_player or speaker == "Player"
+                    }
+                    
                     if speaker == "Player" or is_player:
-                        # Player dialogue in blue
-                        html += f"<p style='margin: 5px 0;'>{type_prefix}<b style='color: #6fb3d2;'>Player:</b> {dlg_text}"
+                        player_dialogues.append(dialogue_info)
                     else:
-                        # NPC dialogue in green
-                        html += f"<p style='margin: 5px 0;'>{type_prefix}<b style='color: #4ec9b0;'>NPC:</b> {dlg_text}"
-
+                        npc_dialogues.append(dialogue_info)
+            
+            # Display NPC dialogues first
+            if npc_dialogues:
+                html += "<h4 style='color: #4ec9b0; margin-bottom: 3px;'>NPC Statements:</h4>"
+                for dlg in npc_dialogues:
+                    type_prefix = ""
+                    if dlg['type'] == "Story":
+                        type_prefix = "<span style='color: #d4a959; font-size: 11pt;'>[Story]</span> "
+                    
+                    html += f"<p style='margin: 3px 0; padding-left: 10px;'>{type_prefix}<span style='color: #e0e0e0;'>{dlg['text']}</span>"
+                    
                     # Add translation if available
-                    if translation:
-                        html += f"<br><span style='color: #a0a0a0; font-size: 11pt; font-style: italic;'>({translation})</span>"
-
+                    if dlg['translation']:
+                        html += f"<br><span style='color: #a0a0a0; font-size: 11pt; font-style: italic; padding-left: 10px;'>({dlg['translation']})</span>"
+                    
                     html += "</p>"
-
+            
+            # Display player choices
+            if player_dialogues:
+                html += "<h4 style='color: #6fb3d2; margin-bottom: 3px; margin-top: 10px;'>Player Choices:</h4>"
+                for dlg in player_dialogues:
+                    type_prefix = ""
+                    if dlg['type'] == "Story":
+                        type_prefix = "<span style='color: #d4a959; font-size: 11pt;'>[Story]</span> "
+                    
+                    html += f"<p style='margin: 3px 0; padding-left: 10px;'>{type_prefix}<span style='color: #b3d9ff;'>• {dlg['text']}</span>"
+                    
+                    # Add translation if available
+                    if dlg['translation']:
+                        html += f"<br><span style='color: #a0a0a0; font-size: 11pt; font-style: italic; padding-left: 10px;'>({dlg['translation']})</span>"
+                    
+                    html += "</p>"
+            
+            # Add dialogue statistics
+            html += f"<p style='color: #a0a0a0; font-size: 11pt; font-style: italic; margin-top: 10px;'>"
+            html += f"Total: {len(npc_dialogues)} NPC statements, {len(player_dialogues)} player choices"
+            html += "</p>"
+            
             html += "</div>"
+            
+            # Add enhanced dialogue tree view if we have dialogue loader
+            if self.dialogue_loader and self.current_quest_id:
+                html = self.add_enhanced_dialogue_view(html, self.current_quest_id)
 
         # Empty state
         if (
@@ -1086,11 +1208,66 @@ class SimpleQuestViewer(QMainWindow):
 
         self.details_text.setHtml(html)
 
+    def add_enhanced_dialogue_view(self, html: str, quest_id: int) -> str:
+        """Add enhanced dialogue tree view to the HTML"""
+        if not self.dialogue_loader:
+            return html
+        
+        dialogues = self.dialogue_loader.get_dialogues_for_quest(quest_id)
+        if not dialogues:
+            return html
+        
+        # Group dialogues by NPC
+        npc_groups = {}
+        for dlg in dialogues:
+            npc_name = dlg.npc_name or "Unknown"
+            if npc_name not in npc_groups:
+                npc_groups[npc_name] = []
+            npc_groups[npc_name].append(dlg)
+        
+        # Add enhanced dialogue section
+        html += "<div style='margin-top: 15px; padding: 10px; background-color: #1e1e1e; border-radius: 5px; border: 1px solid #3c3c3c;'>"
+        html += "<h4 style='color: #c586c0; margin-bottom: 8px;'>Complete Dialogue Trees</h4>"
+        
+        for npc_name, npc_dialogues in sorted(npc_groups.items()):
+            html += f"<h5 style='color: #4ec9b0; margin-bottom: 5px; margin-top: 10px;'>{npc_name}</h5>"
+            
+            # Sort dialogues by tag to maintain order
+            npc_dialogues.sort(key=lambda x: x.tag)
+            
+            for dlg in npc_dialogues:
+                # Add conditions if available
+                if dlg.conditions:
+                    html += "<div style='margin-left: 10px; margin-bottom: 3px;'>"
+                    html += f"<span style='color: #f48771; font-size: 10pt;'>Conditions: {', '.join(dlg.conditions[:2])}</span>"
+                    if len(dlg.conditions) > 2:
+                        html += f"<span style='color: #f48771; font-size: 10pt;'> (+{len(dlg.conditions)-2} more)</span>"
+                    html += "</div>"
+                
+                # Add dialogue with proper styling
+                html += "<div style='margin-left: 10px; margin-bottom: 5px;'>"
+                if dlg.speaker.lower() == "player":
+                    html += f"<span style='color: #6fb3d2;'>● Player:</span> <span style='color: #b3d9ff;'>{dlg.text}</span>"
+                else:
+                    html += f"<span style='color: #4ec9b0;'>● NPC:</span> <span style='color: #e0e0e0;'>{dlg.text}</span>"
+                
+                # Add answer ID if available
+                if dlg.answer_id:
+                    html += f"<span style='color: #a0a0a0; font-size: 10pt;'> (Answer ID: {dlg.answer_id})</span>"
+                
+                # Add tag
+                html += f"<br><span style='color: #7f8c8d; font-size: 9pt; font-style: italic;'>Tag: {dlg.tag}</span>"
+                html += "</div>"
+        
+        html += "</div>"
+        return html
+
     def on_search_changed(self, text):
         """Handle search text changes - filter tree items"""
         search_text = text.lower().strip()
         platform_filter = self.platform_filter.currentData()
         giver_filter = self.giver_filter.currentData()
+        dialogue_filter = self.dialogue_filter.currentData()
 
         visible_count = 0
 
@@ -1098,13 +1275,13 @@ class SimpleQuestViewer(QMainWindow):
         for i in range(self.quest_tree.topLevelItemCount()):
             item = self.quest_tree.topLevelItem(i)
             visible = self.filter_tree_item(
-                item, search_text, platform_filter, giver_filter
+                item, search_text, platform_filter, giver_filter, dialogue_filter
             )
             if visible:
                 visible_count += 1
 
         # Update search results label
-        if search_text or platform_filter or giver_filter:
+        if search_text or platform_filter or giver_filter or dialogue_filter:
             self.search_results_label.setText(f"Showing {visible_count} quest(s)")
         else:
             self.search_results_label.setText("")
@@ -1114,7 +1291,7 @@ class SimpleQuestViewer(QMainWindow):
         # Trigger the same filtering logic as search
         self.on_search_changed(self.search_input.text())
 
-    def filter_tree_item(self, item, search_text, platform_filter, giver_filter):
+    def filter_tree_item(self, item, search_text, platform_filter, giver_filter, dialogue_filter):
         """
         Recursively filter tree items based on search text and filters.
         Returns True if item or any child should be visible.
@@ -1146,12 +1323,17 @@ class SimpleQuestViewer(QMainWindow):
         if matches and giver_filter:
             quest_npc = quest_info.get("npc_id")
             matches = quest_npc == giver_filter
+        
+        # Dialogue filter
+        if matches and dialogue_filter is not None:
+            has_dialogues = bool(quest_info.get("dialogues"))
+            matches = has_dialogues == dialogue_filter
 
         # Check children recursively
         child_visible = False
         for child_idx in range(item.childCount()):
             child = item.child(child_idx)
-            if self.filter_tree_item(child, search_text, platform_filter, giver_filter):
+            if self.filter_tree_item(child, search_text, platform_filter, giver_filter, dialogue_filter):
                 child_visible = True
 
         # Show item if it matches OR if any child is visible
