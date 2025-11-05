@@ -273,6 +273,9 @@ class LuaDataManager:
 
             lua_logger.debug("Searching for platform patterns...")
             platforms_found = 0
+            # Accumulate a mapping of (platform, reward_name) -> reward tuple for deterministic joining later
+            reward_map = {}
+
             for platform_match in re.finditer(platform_pattern, content, re.DOTALL):
                 platforms_found += 1
                 platform = f"P{platform_match.group(1)}"
@@ -341,15 +344,82 @@ class LuaDataManager:
                             f"Storing: {quest_name} - XP:{xp}, Gold:{gold}, Items:{items}"
                         )
 
+                    # Store via heuristic match (kept for backward compatibility)
                     self._store_reward_by_name(
                         quest_name, platform, xp, gold, silver, copper, items
                     )
+
+                    # Also record for deterministic flag-based join
+                    reward_map[(platform, quest_name)] = {
+                        "xp": xp,
+                        "gold": gold,
+                        "silver": silver,
+                        "copper": copper,
+                        "items": items,
+                    }
 
                 lua_logger.debug(f"Found {quest_count} quest rewards for {platform}")
 
             lua_logger.info(
                 f"Parsed rewards from GdsQuestRewards.lua - {platforms_found} platforms found"
             )
+
+            # Deterministic join pass: use quest reward flags to match reward names on the same platform
+            try:
+                conn = sqlite3.connect(self.db_path)
+                cursor = conn.cursor()
+
+                # For each quest, get platform and its reward flags
+                cursor.execute(
+                    """
+                    SELECT q.quest_id, q.platform, r.flags
+                    FROM lua_quests q
+                    LEFT JOIN quest_rewards r ON r.quest_id = q.quest_id
+                    """
+                )
+                rows = cursor.fetchall()
+                updated = 0
+                for quest_id, platform, flags_json in rows:
+                    if not flags_json:
+                        continue
+                    try:
+                        flags = json.loads(flags_json)
+                    except Exception:
+                        continue
+                    if not isinstance(flags, list):
+                        continue
+
+                    # Try each flag against the reward map
+                    matched = None
+                    for flag in flags:
+                        key = (platform, flag)
+                        if key in reward_map:
+                            matched = reward_map[key]
+                            break
+
+                    if matched:
+                        cursor.execute(
+                            """
+                            UPDATE quest_rewards
+                            SET xp = ?, gold = ?, silver = ?, copper = ?, items = ?
+                            WHERE quest_id = ?
+                            """,
+                            (
+                                matched["xp"],
+                                matched["gold"],
+                                matched["silver"],
+                                matched["copper"],
+                                json.dumps(matched["items"]),
+                                quest_id,
+                            ),
+                        )
+                        updated += 1
+
+                conn.commit()
+                lua_logger.info(f"Reward join via flags updated {updated} quests")
+                conn.close()
+            except Exception as join_err:
+                lua_logger.debug(f"Reward join via flags skipped: {join_err}")
 
         except Exception as e:
             lua_logger.error(f"Error parsing GdsQuestRewards.lua: {e}")
@@ -446,15 +516,54 @@ class LuaDataManager:
                         f"Matched '{quest_name}' using keyword '{first_word}' → Quest {quest_id}"
                     )
 
+        # Try to match by reward flag first (exact match inside JSON flags)
+        if not quest_id:
+            try:
+                cursor.execute(
+                    """
+                    SELECT r.quest_id
+                    FROM quest_rewards r
+                    JOIN lua_quests q ON q.quest_id = r.quest_id
+                    WHERE q.platform = ? AND r.flags LIKE ?
+                    LIMIT 1
+                    """,
+                    (platform, f'%"{quest_name}"%'),
+                )
+                row = cursor.fetchone()
+                if row:
+                    quest_id = row[0]
+            except Exception:
+                pass
+
         # Store the reward if we found a match
         if quest_id:
+            # Merge quest_name from GdsQuestRewards.lua into existing flags without overwriting
+            try:
+                cursor.execute(
+                    "SELECT flags FROM quest_rewards WHERE quest_id = ?",
+                    (quest_id,),
+                )
+                existing = cursor.fetchone()
+                current_flags = []
+                if existing and existing[0]:
+                    try:
+                        current_flags = json.loads(existing[0])
+                        if not isinstance(current_flags, list):
+                            current_flags = []
+                    except Exception:
+                        current_flags = []
+                if quest_name and quest_name not in current_flags:
+                    current_flags.append(quest_name)
+            except Exception:
+                current_flags = [quest_name] if quest_name else []
+
             cursor.execute(
                 """
                 INSERT OR REPLACE INTO quest_rewards
                 (quest_id, xp, gold, silver, copper, items, flags)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
                 """,
-                (quest_id, xp, gold, silver, copper, json.dumps(items), json.dumps([])),
+                (quest_id, xp, gold, silver, copper, json.dumps(items), json.dumps(current_flags)),
             )
             conn.commit()
         else:

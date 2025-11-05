@@ -787,6 +787,37 @@ class SimpleQuestViewer(QMainWindow):
             if parent_id in quest_items:
                 build_hierarchy_recursive(parent_id, quest_items[parent_id])
 
+    def _ensure_item_index(self):
+        if not hasattr(self, "_items_by_id"):
+            self._items_by_id = {}
+            try:
+                items = self.data_model.get_elements("items") if self.data_model else []
+                for it in items or []:
+                    iid = getattr(it, "item_id", None)
+                    if iid is not None:
+                        self._items_by_id[iid] = it
+            except Exception:
+                self._items_by_id = {}
+
+    def _resolve_item_name(self, item_id):
+        try:
+            self._ensure_item_index()
+            it = self._items_by_id.get(item_id)
+            if it is not None and self.data_model:
+                name = self.data_model.get_localised_text(it, "name")
+                if name:
+                    return name
+            if self.data_model:
+                name = self.data_model.get_weapon_name(item_id)
+                if name:
+                    return name
+                name = self.data_model.get_armor_name(item_id)
+                if name:
+                    return name
+        except Exception:
+            pass
+        return f"Item {item_id}"
+
     def on_quest_selection_changed(self):
         """Handle quest selection"""
         selected_items = self.quest_tree.selectedItems()
@@ -825,7 +856,7 @@ class SimpleQuestViewer(QMainWindow):
                 )
 
         # Build HTML content with dark theme styling
-        html = "<html><body style='font-family: Arial; font-size: 11pt; background-color: #1e1e1e; color: #e0e0e0;'>"
+        html = "<html><body style='font-family: Arial; font-size: 12pt; background-color: #1e1e1e; color: #e0e0e0;'>"
 
         # Quest Header
         html += f"<h2 style='color: #6fb3d2; margin-bottom: 5px;'>{quest_info.get('name', 'Unknown')}</h2>"
@@ -851,15 +882,17 @@ class SimpleQuestViewer(QMainWindow):
 
         # Platform/Location
         platform = quest_info.get("platform")
-        platform_name = quest_info.get("platform_name")
         platform_name_de = quest_info.get("platform_name_de")
-        
-        if platform_name_de and platform_name:
-            location = f"{platform_name} / {platform_name_de}"
-            html += f"<li><b>Location:</b> {location}</li>"
-        elif platform:
-            location = get_platform_display_name(platform)
-            html += f"<li><b>Location:</b> {location}</li>"
+        german_only = None
+        if platform_name_de:
+            german_only = platform_name_de
+        elif platform and platform in PLATFORM_NAMES:
+            en = PLATFORM_NAMES.get(platform)
+            german_only = get_german_platform_name(en)
+        if german_only and platform:
+            html += f"<li><b>Location:</b> {german_only} [{platform}]</li>"
+        elif german_only:
+            html += f"<li><b>Location:</b> {german_only}</li>"
         else:
             html += (
                 "<li><b>Location:</b> <span style='color: #808080;'>Unknown</span></li>"
@@ -938,27 +971,37 @@ class SimpleQuestViewer(QMainWindow):
             items = getattr(rewards, "items", [])
             items_given = getattr(rewards, "items_given", "")
             items_taken = getattr(rewards, "items_taken", "")
-            
+
             if items:
-                items_str = ", ".join(map(str, items))
-                html += f"<li><b>Items:</b> {items_str}</li>"
+                item_names = [self._resolve_item_name(i) for i in items]
+                html += f"<li><b>Items:</b> {', '.join(item_names)}</li>"
                 has_any_reward = True
             elif items_given:
-                # Parse item IDs from CSV (pipe-separated)
-                item_ids = items_given.split('|') if items_given else []
-                if item_ids:
-                    html += f"<li><b>Items Given:</b> {', '.join(item_ids)}</li>"
-                    has_any_reward = True
-            
-            if items_taken:
-                # Parse item IDs from CSV (pipe-separated)
-                item_ids = items_taken.split('|') if items_taken else []
-                if item_ids:
-                    html += f"<li><b>Items Taken:</b> {', '.join(item_ids)}</li>"
+                ids = [s.strip() for s in items_given.split('|') if s.strip()]
+                resolved = []
+                for s in ids:
+                    try:
+                        resolved.append(self._resolve_item_name(int(s)))
+                    except Exception:
+                        resolved.append(s)
+                if resolved:
+                    html += f"<li><b>Items Given:</b> {', '.join(resolved)}</li>"
                     has_any_reward = True
 
-            # Reward flags (from QuestDataService)
-            reward_flags = getattr(rewards, "reward_flags", [])
+            if items_taken:
+                ids = [s.strip() for s in items_taken.split('|') if s.strip()]
+                resolved = []
+                for s in ids:
+                    try:
+                        resolved.append(self._resolve_item_name(int(s)))
+                    except Exception:
+                        resolved.append(s)
+                if resolved:
+                    html += f"<li><b>Items Taken:</b> {', '.join(resolved)}</li>"
+                    has_any_reward = True
+
+            # Reward flags
+            reward_flags = getattr(rewards, "reward_flags", None) or getattr(rewards, "flags", [])
             if reward_flags:
                 # Make flags more readable by splitting camelCase
                 readable_flags = []
@@ -979,7 +1022,7 @@ class SimpleQuestViewer(QMainWindow):
             html += "</ul>"
 
             # Add note about item rewards
-            html += "<p style='color: #a0a0a0; font-size: 10pt; font-style: italic; margin-top: 5px;'>"
+            html += "<p style='color: #a0a0a0; font-size: 11pt; font-style: italic; margin-top: 5px;'>"
             html += "Note: Item and gold rewards are often given through quest dialogue or completion scripts, not stored in reward tables."
             html += "</p>"
 
@@ -1023,7 +1066,7 @@ class SimpleQuestViewer(QMainWindow):
 
                     # Add translation if available
                     if translation:
-                        html += f"<br><span style='color: #a0a0a0; font-size: 10pt; font-style: italic;'>({translation})</span>"
+                        html += f"<br><span style='color: #a0a0a0; font-size: 11pt; font-style: italic;'>({translation})</span>"
 
                     html += "</p>"
 
