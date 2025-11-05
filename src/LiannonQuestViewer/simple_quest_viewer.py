@@ -866,19 +866,19 @@ class SimpleQuestViewer(QMainWindow):
 
         # Description
         if quest_info.get("description"):
-            html += "<div style='background-color: #2d2d30; padding: 10px; border-radius: 5px; margin: 10px 0; border: 1px solid #3c3c3c;'>"
+            html += "<div style='background-color: #2d2d30; padding: 10px; border-radius: 5px; margin: 10px 0; border: 1px solid #3c3c3c; font-size: 15pt;'>"
             html += f"<p><b>Description:</b><br>{quest_info['description']}</p>"
             html += "</div>"
         
         # German Description (if available)
         if quest_info.get("quest_description_de"):
-            html += "<div style='background-color: #2d2d30; padding: 10px; border-radius: 5px; margin: 10px 0; border: 1px solid #3c3c3c;'>"
+            html += "<div style='background-color: #2d2d30; padding: 10px; border-radius: 5px; margin: 10px 0; border: 1px solid #3c3c3c; font-size: 15pt;'>"
             html += f"<p><b>German Description:</b><br>{quest_info['quest_description_de']}</p>"
             html += "</div>"
 
         # Location & Quest Giver Section
         html += "<h3 style='color: #6fb3d2; margin-top: 15px; margin-bottom: 5px;'>Location & Quest Giver</h3>"
-        html += "<ul style='margin-top: 5px;'>"
+        html += "<ul style='margin-top: 5px; font-size: 15pt;'>"
 
         # Platform/Location
         platform = quest_info.get("platform")
@@ -944,27 +944,27 @@ class SimpleQuestViewer(QMainWindow):
         rewards = quest_info.get("rewards")
         if rewards:
             html += "<h3 style='color: #4ec9b0; margin-top: 15px; margin-bottom: 5px;'>Rewards</h3>"
-            html += "<ul style='margin-top: 5px;'>"
+            html += "<ul style='margin-top: 5px; font-size: 15pt;'>"
 
             has_any_reward = False
 
             # XP
             xp = getattr(rewards, "xp", 0)
             if xp > 0:
-                html += f"<li><b>XP:</b> {xp:,}</li>"
+                html += f"<li><b>XP:</b> <span style='color: #d4a959;'>{xp:,}</span></li>"
                 has_any_reward = True
 
             # Gold
             gold = getattr(rewards, "gold", 0)
             if gold > 0:
-                html += f"<li><b>Gold:</b> {gold:,}</li>"
+                html += f"<li><b>Gold:</b> <span style='color: #d4a959;'>{gold:,}</span></li>"
                 has_any_reward = True
 
             # Silver and Copper
             silver = getattr(rewards, "silver", 0)
             copper = getattr(rewards, "copper", 0)
             if silver > 0 or copper > 0:
-                html += f"<li><b>Silver:</b> {silver} <b>Copper:</b> {copper}</li>"
+                html += f"<li><b>Silver:</b> <span style='color: #d4a959;'>{silver}</span> <b>Copper:</b> <span style='color: #d4a959;'>{copper}</span></li>"
                 has_any_reward = True
 
             # Items
@@ -974,7 +974,7 @@ class SimpleQuestViewer(QMainWindow):
 
             if items:
                 item_names = [self._resolve_item_name(i) for i in items]
-                html += f"<li><b>Items:</b> {', '.join(item_names)}</li>"
+                html += f"<li><b>Items:</b> <span style='color: #d4a959;'>{', '.join(item_names)}</span></li>"
                 has_any_reward = True
             elif items_given:
                 ids = [s.strip() for s in items_given.split('|') if s.strip()]
@@ -985,7 +985,7 @@ class SimpleQuestViewer(QMainWindow):
                     except Exception:
                         resolved.append(s)
                 if resolved:
-                    html += f"<li><b>Items Given:</b> {', '.join(resolved)}</li>"
+                    html += f"<li><b>Items Given:</b> <span style='color: #d4a959;'>{', '.join(resolved)}</span></li>"
                     has_any_reward = True
 
             if items_taken:
@@ -997,7 +997,7 @@ class SimpleQuestViewer(QMainWindow):
                     except Exception:
                         resolved.append(s)
                 if resolved:
-                    html += f"<li><b>Items Taken:</b> {', '.join(resolved)}</li>"
+                    html += f"<li><b>Items Taken:</b> <span style='color: #d4a959;'>{', '.join(resolved)}</span></li>"
                     has_any_reward = True
 
             # Reward flags
@@ -1013,7 +1013,7 @@ class SimpleQuestViewer(QMainWindow):
                     readable_flags.append(readable)
 
                 flags_str = ", ".join(readable_flags)
-                html += f"<li><b>Reward Type:</b> <span style='color: #d4a959;'>{flags_str}</span></li>"
+                html += f"<li><b>Reward Type:</b> <span style='color: #ffffff; font-size: 11pt;'>{flags_str}</span></li>"
                 has_any_reward = True
 
             if not has_any_reward:
