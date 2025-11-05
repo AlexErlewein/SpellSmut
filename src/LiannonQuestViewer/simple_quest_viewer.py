@@ -81,6 +81,42 @@ PLATFORM_NAMES = {
     "P115": "Dragon Storm",
 }
 
+# German location name mappings
+GERMAN_PLATFORM_NAMES = {
+    "liannon": "Liannon",
+    "eloni": "Eloni", 
+    "leafshade": "Laubschatten",
+    "wildland pass": "Wildlandpass",
+    "shiel": "Shiel",
+    "icegate marsh": "Eispfortensumpf",
+    "northern windwalls": "Nördliche Windmauern",
+    "southern windwalls": "Südliche Windmauern",
+    "stoneblade mountain": "Steinklippenberg",
+    "greydusk vale": "Graudämmtal",
+    "howling mounds": "Heulende Hügel",
+    "whisper": "Flüstern",
+    "godwall": "Gottwall",
+    "mulandir": "Mulandir",
+    "farlorns hope": "Farlorns Hoffnung",
+    "the rift": "Der Spalt",
+    "southern godmark": "Südliches Gottesmal",
+    "nightwhisper dale": "Nachtflüstertal",
+    "breathing forest": "Atmender Wald",
+    "sharrowdale": "Scharrental",
+    "greyfell": "Graufell",
+    "swamp city": "Sumpfstadt",
+    "onyx shores": "Onyxküsten",
+    "empyiria": "Empyria",
+    "dryad cove": "Dryadenbucht",
+    "red wastes": "Rote Wüsten",
+    "raven pass": "Rabenpass",
+    "blazing stones": "Flammende Steine",
+    "kathai": "Kathai",
+    "colloseum": "Kolosseum",
+    "blackwater coast": "Schwarzwasser Küste",
+    "city of souls": "Stadt der Seelen",
+}
+
 
 def get_platform_display_name(platform_id):
     """Convert platform ID to display name (e.g., P1 -> Liannon (P1))"""
@@ -91,6 +127,14 @@ def get_platform_display_name(platform_id):
     if platform_name:
         return f"{platform_name} ({platform_id})"
     return platform_id
+
+
+def get_german_platform_name(platform_name):
+    """Convert English platform name to German (e.g., liannon -> Liannon)"""
+    if not platform_name:
+        return "Unbekannter Ort"
+    
+    return GERMAN_PLATFORM_NAMES.get(platform_name.lower(), platform_name)
 
 
 class SimpleQuestViewer(QMainWindow):
@@ -143,6 +187,8 @@ class SimpleQuestViewer(QMainWindow):
                             'parent_chain': row['parent_chain'],
                             'order_index': int(row['order_index']) if row['order_index'] and row['order_index'].strip() else 0,
                             'quest_maps': row['quest_maps'],
+                            'platform_name': row['platform_name'],
+                            'platform_name_de': get_german_platform_name(row['platform_name']),
                             'xp': int(row['xp']) if row['xp'] and row['xp'].strip() else 0,
                             'gold': int(row['gold']) if row['gold'] and row['gold'].strip() else 0,
                             'silver': int(row['silver']) if row['silver'] and row['silver'].strip() else 0,
@@ -175,6 +221,13 @@ class SimpleQuestViewer(QMainWindow):
                     
                     if csv_info['quest_description_de'] and not quest.get('quest_description_de'):
                         quest['quest_description_de'] = csv_info['quest_description_de']
+                    
+                    # Fill platform names (both English and German)
+                    if csv_info['platform_name'] and not quest.get('platform_name'):
+                        quest['platform_name'] = csv_info['platform_name']
+                    
+                    if csv_info['platform_name_de'] and not quest.get('platform_name_de'):
+                        quest['platform_name_de'] = csv_info['platform_name_de']
                     
                     # Create enhanced reward object if CSV has reward data
                     if any([csv_info['xp'], csv_info['gold'], csv_info['silver'], csv_info['copper']]):
@@ -674,27 +727,7 @@ class SimpleQuestViewer(QMainWindow):
                 self.logger.debug(f"Created tree item: ID={quest_id}, Name={name}")
 
         # Create hierarchy (parent-child relationships)
-        for quest_id, quest_info in self.quest_data.items():
-            parent_id = quest_info.get("parent_id")
-            if parent_id is not None and parent_id in self.quest_data:
-                # Find parent and child items
-                parent_item = None
-                child_item = None
-
-                for i in range(self.quest_tree.topLevelItemCount()):
-                    item = self.quest_tree.topLevelItem(i)
-                    item_quest_id = item.data(0, Qt.UserRole)
-
-                    if item_quest_id == parent_id:
-                        parent_item = item
-                    elif item_quest_id == quest_id:
-                        child_item = item
-
-                if parent_item and child_item:
-                    self.quest_tree.takeTopLevelItem(
-                        self.quest_tree.indexOfTopLevelItem(child_item)
-                    )
-                    parent_item.addChild(child_item)
+        self.build_quest_hierarchy()
 
         # Make main quests (top-level items without parents) bold
         for i in range(self.quest_tree.topLevelItemCount()):
@@ -704,6 +737,55 @@ class SimpleQuestViewer(QMainWindow):
             item.setFont(0, font)
 
         self.quest_tree.expandAll()
+
+    def build_quest_hierarchy(self):
+        """Build proper multi-level quest hierarchy"""
+        # Create a mapping of quest_id -> tree_item
+        quest_items = {}
+        
+        # First, collect all tree items
+        for i in range(self.quest_tree.topLevelItemCount()):
+            item = self.quest_tree.topLevelItem(i)
+            quest_id = item.data(0, Qt.UserRole)
+            if quest_id:
+                quest_items[quest_id] = item
+        
+        # Build parent-child relationships
+        parent_to_children = {}
+        for quest_id, quest_info in self.quest_data.items():
+            parent_id = quest_info.get("parent_id")
+            if parent_id and parent_id in self.quest_data:
+                if parent_id not in parent_to_children:
+                    parent_to_children[parent_id] = []
+                parent_to_children[parent_id].append(quest_id)
+        
+        # Function to recursively build hierarchy
+        def build_hierarchy_recursive(parent_id, parent_item=None):
+            """Recursively build quest hierarchy"""
+            children = parent_to_children.get(parent_id, [])
+            
+            for child_id in children:
+                if child_id in quest_items:
+                    child_item = quest_items[child_id]
+                    
+                    # Remove from top level if it's there
+                    if parent_item is None:
+                        # This is a root-level quest with children, keep it as parent
+                        pass
+                    else:
+                        # Remove child from top level and add to parent
+                        index = self.quest_tree.indexOfTopLevelItem(child_item)
+                        if index >= 0:
+                            self.quest_tree.takeTopLevelItem(index)
+                        parent_item.addChild(child_item)
+                    
+                    # Recursively build children
+                    build_hierarchy_recursive(child_id, child_item)
+        
+        # Build hierarchy for all parent quests
+        for parent_id in parent_to_children:
+            if parent_id in quest_items:
+                build_hierarchy_recursive(parent_id, quest_items[parent_id])
 
     def on_quest_selection_changed(self):
         """Handle quest selection"""
@@ -769,7 +851,13 @@ class SimpleQuestViewer(QMainWindow):
 
         # Platform/Location
         platform = quest_info.get("platform")
-        if platform:
+        platform_name = quest_info.get("platform_name")
+        platform_name_de = quest_info.get("platform_name_de")
+        
+        if platform_name_de and platform_name:
+            location = f"{platform_name} / {platform_name_de}"
+            html += f"<li><b>Location:</b> {location}</li>"
+        elif platform:
             location = get_platform_display_name(platform)
             html += f"<li><b>Location:</b> {location}</li>"
         else:
