@@ -13,8 +13,10 @@ Usage:
 import argparse
 import csv
 import json
+import re
 import sys
 from pathlib import Path
+from typing import Dict, List, Optional, Set, Tuple
 
 from PySide6.QtCore import QSettings, QSize, Qt
 from PySide6.QtWidgets import (
@@ -47,6 +49,173 @@ from TirganachReloaded.cff_editor.logging_config import configure_logging, get_l
 from TirganachReloaded.cff_editor.lua_parser.lua_data_manager import LuaDataManager
 from TirganachReloaded.cff_editor.services.quest_data_service import QuestDataService
 from dialogue_loader import DialogueDataLoader
+
+
+class DialogueNode:
+    """Represents a single node in a dialogue tree"""
+    
+    def __init__(self, tag: str, text: str, speaker: str, answer_id: Optional[int] = None, conditions: List[str] = None):
+        self.tag = tag
+        self.text = text
+        self.speaker = speaker
+        self.answer_id = answer_id
+        self.conditions = conditions or []
+        self.children = []  # Nodes that can follow this one
+        self.parent = None  # Node that precedes this one
+    
+    def add_child(self, child_node: 'DialogueNode'):
+        """Add a child node (possible response)"""
+        if child_node not in self.children:
+            self.children.append(child_node)
+            child_node.parent = self
+    
+    def is_player_choice(self) -> bool:
+        """Check if this is a player choice"""
+        return self.speaker.lower() == "player"
+    
+    def is_npc_statement(self) -> bool:
+        """Check if this is an NPC statement"""
+        return self.speaker.lower() != "player"
+
+
+class DialogueTree:
+    """Represents a complete dialogue tree for an NPC"""
+    
+    def __init__(self, npc_name: str):
+        self.npc_name = npc_name
+        self.nodes = {}  # tag -> DialogueNode
+        self.root_nodes = []  # Starting nodes (usually NPC statements)
+    
+    def add_node(self, node: DialogueNode):
+        """Add a node to the tree"""
+        self.nodes[node.tag] = node
+        
+        # Determine if this is a root node (no answer_id or answer_id == 0)
+        if node.answer_id is None or node.answer_id == 0:
+            if node not in self.root_nodes:
+                self.root_nodes.append(node)
+    
+    def build_connections(self):
+        """Build connections between nodes based on answer IDs and dialogue flow"""
+        # Group nodes by answer_id
+        answer_groups = {}
+        for node in self.nodes.values():
+            if node.answer_id is not None:
+                if node.answer_id not in answer_groups:
+                    answer_groups[node.answer_id] = []
+                answer_groups[node.answer_id].append(node)
+        
+        # Build connections based on dialogue flow patterns
+        for node in self.nodes.values():
+            if node.is_npc_statement():
+                # NPC statements connect to player choices with same answer_id
+                if node.answer_id in answer_groups:
+                    for child in answer_groups[node.answer_id]:
+                        if child.is_player_choice():
+                            node.add_child(child)
+            
+            elif node.is_player_choice():
+                # Player choices connect to subsequent NPC statements
+                # Look for NPC statements that could logically follow this choice
+                # Sort potential children by answer_id to get the next logical statement
+                potential_children = []
+                for potential_child in self.nodes.values():
+                    if (potential_child.is_npc_statement() and 
+                        potential_child.answer_id is not None and 
+                        potential_child.answer_id > node.answer_id):
+                        potential_children.append(potential_child)
+                
+                # Sort by answer_id to get the closest next statement
+                potential_children.sort(key=lambda x: x.answer_id)
+                
+                # Connect to the next NPC statement(s) with the next higher answer_id(s)
+                if potential_children:
+                    # Connect to the very next statement primarily
+                    node.add_child(potential_children[0])
+                    
+                    # If there are multiple statements with the same answer_id, connect to all
+                    next_answer_id = potential_children[0].answer_id
+                    for child in potential_children:
+                        if child.answer_id == next_answer_id and child != potential_children[0]:
+                            node.add_child(child)
+    
+    def get_conversation_flows(self) -> List[List[DialogueNode]]:
+        """Get all possible conversation flows as linear sequences in proper order"""
+        flows = []
+        
+        # Start from root nodes (usually initial NPC statements)
+        # Sort root nodes by answer_id to get proper starting order
+        sorted_roots = sorted(self.root_nodes, key=lambda x: (x.answer_id or 0, x.tag))
+        
+        for root in sorted_roots:
+            # Build all possible flows from this root
+            root_flows = self._build_all_flows_from_node(root)
+            flows.extend(root_flows)
+        
+        # Add any isolated nodes as individual flows
+        processed_tags = set()
+        for flow in flows:
+            for node in flow:
+                processed_tags.add(node.tag)
+        
+        for tag, node in self.nodes.items():
+            if tag not in processed_tags:
+                flows.append([node])
+        
+        # Sort flows to maintain dialogue order:
+        # 1. Primary: By starting node's answer_id (chronological order)
+        # 2. Secondary: By flow length (longer conversations first)
+        # 3. Tertiary: By tag for consistency
+        def flow_sort_key(flow):
+            if not flow:
+                return (999999, 0, "")
+            start_answer_id = flow[0].answer_id or 0
+            flow_length = len(flow)
+            start_tag = flow[0].tag or ""
+            return (start_answer_id, -flow_length, start_tag)
+        
+        flows.sort(key=flow_sort_key)
+        
+        return flows
+    
+    def _build_all_flows_from_node(self, node: DialogueNode, current_flow: List[DialogueNode] = None, max_depth: int = 8) -> List[List[DialogueNode]]:
+        """Build all possible flows starting from a node"""
+        if current_flow is None:
+            current_flow = []
+        
+        # Avoid infinite loops
+        if node in current_flow or len(current_flow) >= max_depth:
+            return [current_flow.copy()] if current_flow else []
+        
+        current_flow.append(node)
+        
+        if not node.children:
+            # End of this flow
+            return [current_flow.copy()]
+        
+        # Build flows for each child
+        all_flows = []
+        for child in node.children:
+            child_flows = self._build_all_flows_from_node(child, current_flow.copy(), max_depth)
+            all_flows.extend(child_flows)
+        
+        return all_flows
+    
+    def get_statistics(self) -> Dict[str, int]:
+        """Get statistics about this dialogue tree"""
+        total_nodes = len(self.nodes)
+        player_choices = sum(1 for node in self.nodes.values() if node.is_player_choice())
+        npc_statements = total_nodes - player_choices
+        
+        # Count branches (nodes with multiple children)
+        branches = sum(1 for node in self.nodes.values() if len(node.children) > 1)
+        
+        return {
+            'total_nodes': total_nodes,
+            'player_choices': player_choices,
+            'npc_statements': npc_statements,
+            'branches': branches
+        }
 
 # Platform/Map location name mappings
 PLATFORM_NAMES = {
@@ -150,6 +319,8 @@ class SimpleQuestViewer(QMainWindow):
         self.current_quest_id = None
         self.quest_service = None
         self.dialogue_loader = None
+        self.dialogue_view_mode = "simple"  # Default to simple view
+        self.metadata_view_mode = "full"  # Default to full details view
 
         # Initialize settings for preferences persistence
         self.settings = QSettings("SpellSmut", "QuestViewer")
@@ -363,6 +534,15 @@ class SimpleQuestViewer(QMainWindow):
         self.dialogue_filter.currentIndexChanged.connect(self.on_filter_changed)
         filter_layout.addWidget(dialogue_label)
         filter_layout.addWidget(self.dialogue_filter)
+        
+        # Metadata toggle
+        metadata_label = QLabel("Show Metadata:")
+        self.metadata_toggle = QComboBox()
+        self.metadata_toggle.addItem("Full Details", "full")
+        self.metadata_toggle.addItem("Dialogue Only", "dialogue_only")
+        self.metadata_toggle.currentIndexChanged.connect(self.on_metadata_view_changed)
+        filter_layout.addWidget(metadata_label)
+        filter_layout.addWidget(self.metadata_toggle)
 
         filter_layout.addStretch()
         tree_layout.addLayout(filter_layout)
@@ -939,7 +1119,16 @@ class SimpleQuestViewer(QMainWindow):
                 )
 
         # Build HTML content with dark theme styling
-        html = "<html><body style='font-family: Arial; font-size: 12pt; background-color: #1e1e1e; color: #e0e0e0;'>"
+        html = "<html><head><meta charset='UTF-8'></head><body style='font-family: Arial; font-size: 12pt; background-color: #1e1e1e; color: #e0e0e0;'>"
+        
+        # Check if we should show only dialogue
+        metadata_mode = self.metadata_toggle.currentData() if hasattr(self, 'metadata_toggle') else "full"
+        
+        if metadata_mode == "dialogue_only":
+            # Dialogue-only view - skip all metadata
+            html = self.add_dialogue_only_view(quest_id)
+            self.details_text.setHtml(html)
+            return
 
         # Quest Header
         html += f"<h2 style='color: #6fb3d2; margin-bottom: 5px;'>{quest_info.get('name', 'Unknown')}</h2>"
@@ -1005,111 +1194,74 @@ class SimpleQuestViewer(QMainWindow):
         requirements = quest_info.get("requirements", [])
         if requirements:
             html += "<h3 style='color: #f48771; margin-top: 15px; margin-bottom: 5px;'>Requirements</h3>"
-            html += "<ul style='margin-top: 5px;'>"
-            for req in requirements:
-                req_type = getattr(req, "requirement_type", "Unknown")
-                req_text = getattr(req, "description", "")
-                html += f"<li><span style='color: #e67e68;'>[{req_type}]</span> {req_text}</li>"
-            html += "</ul>"
-
         # Objectives
-        objectives = quest_info.get("objectives", [])
+        objectives = quest_info.get("objectives")
         if objectives:
-            html += "<h3 style='color: #6fb3d2; margin-top: 15px; margin-bottom: 5px;'>Objectives</h3>"
-            html += "<ol style='margin-top: 5px;'>"
-            for obj in objectives:
-                obj_type = getattr(obj, "objective_type", "Unknown")
-                obj_text = getattr(obj, "description", "")
-                html += f"<li><span style='color: #5fa3c4;'>[{obj_type}]</span> {obj_text}</li>"
-            html += "</ol>"
+            html += "<h3 style='color: #c586c0; margin-top: 15px; margin-bottom: 5px;'>Objectives</h3>"
+            html += "<div style='background-color: #2d2d30; padding: 10px; border-radius: 5px; border: 1px solid #3c3c3c;'>"
+            if isinstance(objectives, list):
+                for obj in objectives:
+                    html += f"<div style='margin-bottom: 5px;'>• {obj}</div>"
+            else:
+                html += f"<div>{objectives}</div>"
+            html += "</div>"
+
+        # Requirements
+        requirements = quest_info.get("requirements")
+        if requirements:
+            html += "<h3 style='color: #c586c0; margin-top: 15px; margin-bottom: 5px;'>Requirements</h3>"
+            html += "<div style='background-color: #2d2d30; padding: 10px; border-radius: 5px; border: 1px solid #3c3c3c;'>"
+            if hasattr(requirements, "__dict__"):
+                req_items = []
+                if hasattr(requirements, "level") and requirements.level:
+                    req_items.append(f"Level: {requirements.level}")
+                if hasattr(requirements, "class_type") and requirements.class_type:
+                    req_items.append(f"Class: {requirements.class_type}")
+                if hasattr(requirements, "skills") and requirements.skills:
+                    req_items.append(f"Skills: {requirements.skills}")
+                if hasattr(requirements, "items") and requirements.items:
+                    req_items.append(f"Items: {requirements.items}")
+                
+                # Check for quest requirements
+                if hasattr(requirements, "quest_requirements") and requirements.quest_requirements:
+                    for quest_req in requirements.quest_requirements:
+                        if hasattr(quest_req, "quest_id") and hasattr(quest_req, "state"):
+                            req_items.append(f"Quest {quest_req.quest_id}: {quest_req.state}")
+                
+                for item in req_items:
+                    html += f"<div style='margin-bottom: 3px;'>• {item}</div>"
+            else:
+                html += f"<div>{requirements}</div>"
+            html += "</div>"
 
         # Rewards
         rewards = quest_info.get("rewards")
         if rewards:
-            html += "<h3 style='color: #4ec9b0; margin-top: 15px; margin-bottom: 5px;'>Rewards</h3>"
-            html += "<ul style='margin-top: 5px; font-size: 15pt;'>"
+            html += "<h3 style='color: #c586c0; margin-top: 15px; margin-bottom: 5px;'>Rewards</h3>"
+            html += "<div style='background-color: #2d2d30; padding: 10px; border-radius: 5px; border: 1px solid #3c3c3c;'>"
+            
+            # XP Reward
+            if hasattr(rewards, "xp") and rewards.xp:
+                html += f"<div style='margin-bottom: 5px;'><span style='color: #d4d4d4;'>Experience:</span> <span style='color: #4ec9b0;'>{rewards.xp}</span></div>"
+            
+            # Gold Reward
+            if hasattr(rewards, "gold") and rewards.gold:
+                html += f"<div style='margin-bottom: 5px;'><span style='color: #d4d4d4;'>Gold:</span> <span style='color: #f48771;'>{rewards.gold}</span></div>"
+            
+            # Item Rewards (if available)
+            if hasattr(rewards, "items") and rewards.items:
+                html += "<div style='margin-bottom: 5px;'><span style='color: #d4d4d4;'>Items:</span><ul style='margin: 5px 0; padding-left: 20px;'>"
+                for item in rewards.items[:10]:  # Limit to first 10 items
+                    item_name = getattr(item, "name", "Unknown Item")
+                    item_count = getattr(item, "count", 1)
+                    html += f"<li style='color: #a0a0a0; margin-bottom: 2px;'>{item_name} x{item_count}</li>"
+                if len(rewards.items) > 10:
+                    html += f"<li style='color: #7f8c8d; font-style: italic;'>... and {len(rewards.items) - 10} more items</li>"
+                html += "</ul></div>"
+            
+            html += "</div>"
 
-            has_any_reward = False
-
-            # XP
-            xp = getattr(rewards, "xp", 0)
-            if xp > 0:
-                html += f"<li><b>XP:</b> <span style='color: #d4a959;'>{xp:,}</span></li>"
-                has_any_reward = True
-
-            # Gold
-            gold = getattr(rewards, "gold", 0)
-            if gold > 0:
-                html += f"<li><b>Gold:</b> <span style='color: #d4a959;'>{gold:,}</span></li>"
-                has_any_reward = True
-
-            # Silver and Copper
-            silver = getattr(rewards, "silver", 0)
-            copper = getattr(rewards, "copper", 0)
-            if silver > 0 or copper > 0:
-                html += f"<li><b>Silver:</b> <span style='color: #d4a959;'>{silver}</span> <b>Copper:</b> <span style='color: #d4a959;'>{copper}</span></li>"
-                has_any_reward = True
-
-            # Items
-            items = getattr(rewards, "items", [])
-            items_given = getattr(rewards, "items_given", "")
-            items_taken = getattr(rewards, "items_taken", "")
-
-            if items:
-                item_names = [self._resolve_item_name(i) for i in items]
-                html += f"<li><b>Items:</b> <span style='color: #d4a959;'>{', '.join(item_names)}</span></li>"
-                has_any_reward = True
-            elif items_given:
-                ids = [s.strip() for s in items_given.split('|') if s.strip()]
-                resolved = []
-                for s in ids:
-                    try:
-                        resolved.append(self._resolve_item_name(int(s)))
-                    except Exception:
-                        resolved.append(s)
-                if resolved:
-                    html += f"<li><b>Items Given:</b> <span style='color: #d4a959;'>{', '.join(resolved)}</span></li>"
-                    has_any_reward = True
-
-            if items_taken:
-                ids = [s.strip() for s in items_taken.split('|') if s.strip()]
-                resolved = []
-                for s in ids:
-                    try:
-                        resolved.append(self._resolve_item_name(int(s)))
-                    except Exception:
-                        resolved.append(s)
-                if resolved:
-                    html += f"<li><b>Items Taken:</b> <span style='color: #d4a959;'>{', '.join(resolved)}</span></li>"
-                    has_any_reward = True
-
-            # Reward flags
-            reward_flags = getattr(rewards, "reward_flags", None) or getattr(rewards, "flags", [])
-            if reward_flags:
-                # Make flags more readable by splitting camelCase
-                readable_flags = []
-                for flag in reward_flags:
-                    # Add spaces before capital letters
-                    import re
-
-                    readable = re.sub(r"([a-z])([A-Z])", r"\1 \2", flag)
-                    readable_flags.append(readable)
-
-                flags_str = ", ".join(readable_flags)
-                html += f"<li><b>Reward Type:</b> <span style='color: #ffffff; font-size: 11pt;'>{flags_str}</span></li>"
-                has_any_reward = True
-
-            if not has_any_reward:
-                html += "<li><span style='color: #808080;'>No reward information available</span></li>"
-
-            html += "</ul>"
-
-            # Add note about item rewards
-            html += "<p style='color: #a0a0a0; font-size: 11pt; font-style: italic; margin-top: 5px;'>"
-            html += "Note: Item and gold rewards are often given through quest dialogue or completion scripts, not stored in reward tables."
-            html += "</p>"
-
-        # Dialogues
+        # Legacy dialogue handling (for backward compatibility)
         dialogues = quest_info.get("dialogues", [])
         if dialogues:
             html += "<h3 style='color: #c586c0; margin-top: 15px; margin-bottom: 5px;'>Dialogues</h3>"
@@ -1124,64 +1276,37 @@ class SimpleQuestViewer(QMainWindow):
                 if hasattr(dlg, "speaker"):
                     # Lua cache format
                     speaker = dlg.speaker
-                    dlg_text = getattr(dlg, "text", "")
-                    translation = getattr(dlg, "translation", None)
-                    is_player = getattr(dlg, "is_player_choice", False)
-                    dialogue_type = getattr(dlg, "dialogue_type", "Standard")
-                elif hasattr(dlg, "text"):
-                    # QuestDataService format
-                    dlg_text = dlg.text
-                    translation = getattr(dlg, "translation", None)
-                    dialogue_type = getattr(dlg, "dialogue_type", "Standard")
-                    is_player = False
-                    speaker = "NPC"
+                    text = dlg.text
                 else:
-                    continue
+                    # QuestDataService format
+                    speaker = dlg.get("speaker", "Unknown")
+                    text = dlg.get("text", "")
                 
-                if dlg_text:
-                    dialogue_info = {
-                        'text': dlg_text,
-                        'translation': translation,
-                        'type': dialogue_type,
-                        'is_player': is_player or speaker == "Player"
-                    }
-                    
-                    if speaker == "Player" or is_player:
-                        player_dialogues.append(dialogue_info)
-                    else:
-                        npc_dialogues.append(dialogue_info)
+                dialogue_info = {
+                    "text": text,
+                    "speaker": speaker,
+                }
+                
+                if speaker.lower() == "player":
+                    player_dialogues.append(dialogue_info)
+                else:
+                    npc_dialogues.append(dialogue_info)
             
             # Display NPC dialogues first
             if npc_dialogues:
-                html += "<h4 style='color: #4ec9b0; margin-bottom: 3px;'>NPC Statements:</h4>"
+                html += "<h4 style='color: #4ec9b0; margin-bottom: 5px;'>NPC Statements:</h4>"
                 for dlg in npc_dialogues:
-                    type_prefix = ""
-                    if dlg['type'] == "Story":
-                        type_prefix = "<span style='color: #d4a959; font-size: 11pt;'>[Story]</span> "
-                    
-                    html += f"<p style='margin: 3px 0; padding-left: 10px;'>{type_prefix}<span style='color: #e0e0e0;'>{dlg['text']}</span>"
-                    
-                    # Add translation if available
-                    if dlg['translation']:
-                        html += f"<br><span style='color: #a0a0a0; font-size: 11pt; font-style: italic; padding-left: 10px;'>({dlg['translation']})</span>"
-                    
-                    html += "</p>"
+                    html += f"<div style='margin: 5px 0; padding: 8px; background-color: #252526; border-radius: 4px; border-left: 3px solid #4ec9b0;'>"
+                    html += f"<div style='color: #e0e0e0;'>{dlg['text']}</div>"
+                    html += "</div>"
             
             # Display player choices
             if player_dialogues:
-                html += "<h4 style='color: #6fb3d2; margin-bottom: 3px; margin-top: 10px;'>Player Choices:</h4>"
+                html += "<h4 style='color: #6fb3d2; margin-bottom: 5px; margin-top: 10px;'>Player Choices:</h4>"
                 for dlg in player_dialogues:
-                    type_prefix = ""
-                    if dlg['type'] == "Story":
-                        type_prefix = "<span style='color: #d4a959; font-size: 11pt;'>[Story]</span> "
-                    
-                    html += f"<p style='margin: 3px 0; padding-left: 10px;'>{type_prefix}<span style='color: #b3d9ff;'>• {dlg['text']}</span>"
-                    
-                    # Add translation if available
-                    if dlg['translation']:
-                        html += f"<br><span style='color: #a0a0a0; font-size: 11pt; font-style: italic; padding-left: 10px;'>({dlg['translation']})</span>"
-                    
-                    html += "</p>"
+                    html += f"<div style='margin: 5px 0; padding: 8px; background-color: #252526; border-radius: 4px; border-left: 3px solid #6fb3d2;'>"
+                    html += f"<div style='color: #b3d9ff;'>• {dlg['text']}</div>"
+                    html += "</div>"
             
             # Add dialogue statistics
             html += f"<p style='color: #a0a0a0; font-size: 11pt; font-style: italic; margin-top: 10px;'>"
@@ -1202,13 +1327,13 @@ class SimpleQuestViewer(QMainWindow):
             and not rewards
             and not dialogues
         ):
-            html += "<p style='color: #808080; font-style: italic; margin-top: 20px;'>No additional details available for this quest.</p>"
+            html += "<p style='color: #808080; font-style: italic; margin-top: 20px;'>Keine weiteren Informationen verfügbar.</p>"
 
         html += "</body></html>"
 
         self.details_text.setHtml(html)
-
-    def add_enhanced_dialogue_view(self, html: str, quest_id: int) -> str:
+    
+    def add_enhanced_dialogue_view(self, html: str, quest_id: int, hide_metadata: bool = False) -> str:
         """Add enhanced dialogue tree view to the HTML"""
         if not self.dialogue_loader:
             return html
@@ -1217,49 +1342,228 @@ class SimpleQuestViewer(QMainWindow):
         if not dialogues:
             return html
         
-        # Group dialogues by NPC
-        npc_groups = {}
-        for dlg in dialogues:
-            npc_name = dlg.npc_name or "Unknown"
-            if npc_name not in npc_groups:
-                npc_groups[npc_name] = []
-            npc_groups[npc_name].append(dlg)
+        # Build dialogue trees and eliminate duplicates
+        dialogue_trees = self.build_dialogue_trees(dialogues)
+        
+        if not dialogue_trees:
+            return html
         
         # Add enhanced dialogue section
-        html += "<div style='margin-top: 15px; padding: 10px; background-color: #1e1e1e; border-radius: 5px; border: 1px solid #3c3c3c;'>"
-        html += "<h4 style='color: #c586c0; margin-bottom: 8px;'>Complete Dialogue Trees</h4>"
+        if not hide_metadata:
+            html += "<div style='margin-top: 15px; padding: 10px; background-color: #1e1e1e; border-radius: 5px; border: 1px solid #3c3c3c;'>"
+            html += "<h4 style='color: #c586c0; margin-bottom: 8px;'>Dialogue Trees</h4>"
+        else:
+            html += "<div style='margin-top: 10px;'>"
         
-        for npc_name, npc_dialogues in sorted(npc_groups.items()):
-            html += f"<h5 style='color: #4ec9b0; margin-bottom: 5px; margin-top: 10px;'>{npc_name}</h5>"
-            
-            # Sort dialogues by tag to maintain order
-            npc_dialogues.sort(key=lambda x: x.tag)
-            
-            for dlg in npc_dialogues:
-                # Add conditions if available
-                if dlg.conditions:
-                    html += "<div style='margin-left: 10px; margin-bottom: 3px;'>"
-                    html += f"<span style='color: #f48771; font-size: 10pt;'>Conditions: {', '.join(dlg.conditions[:2])}</span>"
-                    if len(dlg.conditions) > 2:
-                        html += f"<span style='color: #f48771; font-size: 10pt;'> (+{len(dlg.conditions)-2} more)</span>"
-                    html += "</div>"
-                
-                # Add dialogue with proper styling
-                html += "<div style='margin-left: 10px; margin-bottom: 5px;'>"
-                if dlg.speaker.lower() == "player":
-                    html += f"<span style='color: #6fb3d2;'>● Player:</span> <span style='color: #b3d9ff;'>{dlg.text}</span>"
-                else:
-                    html += f"<span style='color: #4ec9b0;'>● NPC:</span> <span style='color: #e0e0e0;'>{dlg.text}</span>"
-                
-                # Add answer ID if available
-                if dlg.answer_id:
-                    html += f"<span style='color: #a0a0a0; font-size: 10pt;'> (Answer ID: {dlg.answer_id})</span>"
-                
-                # Add tag
-                html += f"<br><span style='color: #7f8c8d; font-size: 9pt; font-style: italic;'>Tag: {dlg.tag}</span>"
-                html += "</div>"
+        for npc_name, tree in sorted(dialogue_trees.items()):
+            html += self.render_dialogue_tree(npc_name, tree, hide_metadata)
         
         html += "</div>"
+        return html
+    
+    def build_dialogue_trees(self, dialogues) -> Dict[str, 'DialogueTree']:
+        """Build organized dialogue trees from raw dialogue data"""
+        from collections import defaultdict
+        
+        # Group by NPC and eliminate duplicates
+        npc_dialogues = defaultdict(list)
+        seen_dialogues = set()  # Track unique dialogues by tag+text
+        
+        for dlg in dialogues:
+            # Create unique key for dialogue
+            key = (dlg.tag, dlg.text.strip(), dlg.speaker)
+            if key not in seen_dialogues:
+                seen_dialogues.add(key)
+                npc_dialogues[dlg.npc_name or "Unknown"].append(dlg)
+        
+        # Build trees for each NPC
+        trees = {}
+        for npc_name, npc_dialogues in npc_dialogues.items():
+            tree = DialogueTree(npc_name)
+            
+            # Sort dialogues by answer ID and tag to establish flow
+            # This ensures chronological order when building connections
+            npc_dialogues.sort(key=lambda x: (x.answer_id or 0, x.tag))
+            
+            # Build dialogue nodes and connections
+            for dlg in npc_dialogues:
+                node = DialogueNode(
+                    tag=dlg.tag,
+                    text=dlg.text,
+                    speaker=dlg.speaker,
+                    answer_id=dlg.answer_id,
+                    conditions=dlg.conditions
+                )
+                tree.add_node(node)
+            
+            # Build connections between nodes
+            tree.build_connections()
+            trees[npc_name] = tree
+        
+        return trees
+    
+    def render_dialogue_tree(self, npc_name: str, tree: 'DialogueTree', hide_metadata: bool = False) -> str:
+        """Render a single dialogue tree as HTML"""
+        html = f"<div style='margin-bottom: 20px; border-left: 3px solid #4ec9b0; padding-left: 15px;'>"
+        html += f"<h5 style='color: #4ec9b0; margin-bottom: 10px;'>{npc_name}</h5>"
+        
+        # Render conversation flows
+        for flow in tree.get_conversation_flows():
+            html += self.render_conversation_flow(flow, hide_metadata)
+        
+        # Show statistics (only if not hiding metadata)
+        if not hide_metadata:
+            stats = tree.get_statistics()
+            html += f"<div style='margin-top: 10px; padding: 5px; background-color: #2d2d30; border-radius: 3px;'>"
+            html += f"<span style='color: #a0a0a0; font-size: 11pt;'>"
+            html += f"{stats['total_nodes']} dialogues | {stats['player_choices']} player choices | {stats['branches']} branches"
+            html += "</span></div>"
+        
+        html += "</div>"
+        return html
+    
+    def render_conversation_flow(self, flow: List['DialogueNode'], hide_metadata: bool = False) -> str:
+        """Render a single conversation flow as HTML"""
+        if not flow:
+            return ""
+        
+        html = "<div style='margin-bottom: 15px; padding: 8px; background-color: #252525; border-radius: 5px;'>"
+        
+        # Determine if this is a complete conversation or a single node
+        if len(flow) == 1:
+            flow_type = "Single Dialogue"
+        else:
+            flow_type = f"Conversation Flow ({len(flow)} steps)"
+        
+        html += f"<div style='color: #c586c0; font-weight: bold; margin-bottom: 8px; font-size: 11pt;'>{flow_type}</div>"
+        
+        for i, node in enumerate(flow):
+            # Calculate indentation based on position
+            indent = min(i * 25, 150)  # Cap indentation at 150px
+            
+            # Determine styling based on speaker - use existing color scheme
+            if node.speaker.lower() == "player":
+                speaker_color = "#6fb3d2"
+                speaker_icon = "Player"
+                text_bg = "#1e3a5f"
+                border_style = "dashed"
+            else:
+                speaker_color = "#4ec9b0"
+                speaker_icon = "NPC"
+                text_bg = "#1e3a2f"
+                border_style = "solid"
+            
+            html += f"<div style='margin-left: {indent}px; margin-bottom: 10px; position: relative;'>"
+            
+            # Add connection line if not first
+            if i > 0:
+                html += f"<div style='position: absolute; left: -25px; top: 15px; width: 20px; height: 2px; background-color: #888; border-radius: 1px;'></div>"
+                if i < len(flow) - 1:  # Not the last node
+                    html += f"<div style='position: absolute; left: -25px; top: 15px; width: 2px; height: calc(100% + 5px); background-color: #888;'></div>"
+            
+            # Node content with improved styling
+            html += f"<div style='padding: 10px; background-color: {text_bg}; border-radius: 6px; border-left: 4px {border_style} {speaker_color}; box-shadow: 0 2px 4px rgba(0,0,0,0.3);'>"
+            
+            # Header with speaker and metadata (only if not hiding metadata)
+            if not hide_metadata:
+                html += f"<div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;'>"
+                html += f"<span style='color: {speaker_color}; font-weight: bold; font-size: 12pt;'>{speaker_icon}: {node.speaker}</span>"
+                
+                # Metadata on the right
+                metadata_parts = []
+                if node.answer_id:
+                    metadata_parts.append(f"ID: {node.answer_id}")
+                if i > 0:
+                    metadata_parts.append(f"Step {i+1}")
+                
+                if metadata_parts:
+                    html += f"<span style='color: #f48771; font-size: 10pt;'>{' | '.join(metadata_parts)}</span>"
+                
+                html += "</div>"
+            
+            # Dialogue text with better formatting - ensure proper encoding
+            display_text = node.text
+            if len(display_text) > 200:
+                display_text = display_text[:200] + "..."
+            
+            html += f"<div style='color: #f0f0f0; line-height: 1.4; margin-bottom: 6px;'>{display_text}</div>"
+            
+            # Footer with conditions and tag (only if not hiding metadata)
+            if not hide_metadata:
+                if node.conditions:
+                    condition_text = ', '.join(node.conditions[:1])  # Show only first condition
+                    if len(node.conditions) > 1:
+                        condition_text += f" (+{len(node.conditions)-1} more)"
+                    html += f"<div style='color: #f48771; font-size: 10pt; margin-bottom: 4px;'>Condition: {condition_text}</div>"
+                
+                html += f"<div style='color: #7f8c8d; font-size: 9pt; font-style: italic;'>Tag: {node.tag}</div>"
+            
+            html += "</div></div>"
+        
+        html += "</div>"
+        return html
+
+    def on_metadata_view_changed(self):
+        """Handle metadata view mode change"""
+        # Refresh the current quest details if a quest is selected
+        if self.current_quest_id:
+            self.show_quest_details(self.current_quest_id)
+    
+    def add_dialogue_only_view(self, quest_id: int) -> str:
+        """Add dialogue-only view without any metadata"""
+        html = "<html><head><meta charset='UTF-8'></head><body style='font-family: Arial; font-size: 12pt; background-color: #1e1e1e; color: #e0e0e0;'>"
+        
+        # Add quest name only
+        quest_info = self.quest_data.get(quest_id, {})
+        quest_name = quest_info.get('name', f'Quest {quest_id}')
+        html += f"<h2 style='color: #6fb3d2; margin-bottom: 20px;'>{quest_name}</h2>"
+        
+        # Add enhanced dialogue tree view if we have dialogue loader
+        if self.dialogue_loader and self.current_quest_id:
+            html = self.add_enhanced_dialogue_view(html, self.current_quest_id, hide_metadata=True)
+        else:
+            # Fallback to legacy dialogues if available
+            dialogues = quest_info.get("dialogues", [])
+            if dialogues:
+                html += "<h3 style='color: #c586c0; margin-bottom: 10px;'>Dialogues</h3>"
+                
+                # Group dialogues by speaker
+                npc_dialogues = []
+                player_dialogues = []
+                
+                for dlg in dialogues:
+                    if hasattr(dlg, "speaker"):
+                        speaker = dlg.speaker
+                        text = dlg.text
+                    else:
+                        speaker = dlg.get("speaker", "Unknown")
+                        text = dlg.get("text", "")
+                    
+                    if speaker.lower() == "player":
+                        player_dialogues.append(text)
+                    else:
+                        npc_dialogues.append(text)
+                
+                # Display dialogues
+                if npc_dialogues:
+                    html += "<div style='margin-bottom: 15px;'>"
+                    for text in npc_dialogues:
+                        html += f"<div style='margin: 5px 0; padding: 10px; background-color: #1e3a2f; border-radius: 5px; border-left: 4px solid #4ec9b0;'>"
+                        html += f"<div style='color: #e0e0e0;'>{text}</div>"
+                        html += "</div>"
+                    html += "</div>"
+                
+                if player_dialogues:
+                    html += "<div style='margin-bottom: 15px;'>"
+                    for text in player_dialogues:
+                        html += f"<div style='margin: 5px 0; padding: 10px; background-color: #1e3a5f; border-radius: 5px; border-left: 4px solid #6fb3d2;'>"
+                        html += f"<div style='color: #b3d9ff;'>• {text}</div>"
+                        html += "</div>"
+                    html += "</div>"
+            else:
+                html += "<p style='color: #808080; font-style: italic; margin-top: 20px;'>No dialogues available for this quest.</p>"
+        
+        html += "</body></html>"
         return html
 
     def on_search_changed(self, text):
