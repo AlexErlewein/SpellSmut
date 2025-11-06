@@ -22,8 +22,8 @@ classifiers = [
 requires-python = ">=3.10"
 dependencies = [
     "PySide6>=6.0.0",
-    "pillow>=10.0.0", # For image processing
-    "pyyaml>=6.0",    # For configuration files
+    "pillow>=10.0.0",  # For image processing
+    "pyyaml>=6.0",     # For configuration files
     "loguru>=0.7.0",
     "PyOpenGL>=3.1.7", # For 3D map viewer
     "numpy>=1.24.0",   # For camera math and transformations
@@ -31,11 +31,7 @@ dependencies = [
 
 [project.scripts]
 tirganach = "TirganachReloaded.cff_editor.main:main"
-<<<<<<< HEAD
-sf-map-viewer = "TirganachReloaded.map_viewer.map_viewer_window:main"
-=======
 cff-editor = "TirganachReloaded.cff_editor.main:main"
->>>>>>> feat/tirganach-cleanup
 
 [project.optional-dependencies]
 dev = [
@@ -46,11 +42,6 @@ dev = [
     "mypy>=1.0.0",
     "flake8>=6.0.0",
     "pre-commit>=3.0.0",
-]
-map-viewer = [
-    "PyOpenGL>=3.1.7",
-    "PyOpenGL-accelerate>=3.1.7",
-    "numpy>=1.24.0",
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -63,7 +54,15 @@ sources = ["src"]
 dependencies = ["PySide6", "pillow", "pyyaml", "loguru"]
 
 [tool.hatch.envs.dev]
-dependencies = ["PySide6", "pytest", "black", "isort", "mypy", "flake8", "pre-commit"]
+dependencies = [
+    "PySide6",
+    "pytest",
+    "black",
+    "isort",
+    "mypy",
+    "flake8",
+    "pre-commit",
+]
 
 [tool.black]
 line-length = 100
