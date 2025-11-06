@@ -27,8 +27,8 @@ from PySide6.QtWidgets import (
     QMainWindow,
     QMessageBox,
     QPushButton,
+    QScrollArea,
     QSplitter,
-    QTextEdit,
     QTreeWidget,
     QTreeWidgetItem,
     QVBoxLayout,
@@ -182,24 +182,23 @@ class OrthancsWorkshop(QMainWindow):
         details_group = QGroupBox("Item Details")
         details_layout = QVBoxLayout(details_group)
 
-        self.details_text = QTextEdit()
-        self.details_text.setReadOnly(True)
-        self.details_text.setPlainText("Select an item to view details...")
+        # Create scroll area for details
+        self.details_scroll_area = QScrollArea()
+        self.details_scroll_area.setWidgetResizable(True)
+        self.details_scroll_area.setHorizontalScrollBarPolicy(
+            Qt.ScrollBarPolicy.ScrollBarAlwaysOff
+        )
 
-        # Dark theme details styling
-        self.details_text.setStyleSheet("""
-            QTextEdit {
-                font-family: 'Consolas', 'Monaco', monospace;
-                font-size: 12px;
-                background-color: #1e1e1e;
-                color: #e0e0e0;
-                border: 1px solid #3c3c3c;
-                padding: 10px;
-                selection-background-color: #094771;
-            }
-        """)
+        # Create content widget for details
+        self.details_content = QWidget()
+        self.details_content_layout = QVBoxLayout(self.details_content)
+        self.details_content_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
 
-        details_layout.addWidget(self.details_text)
+        # Set content widget in scroll area
+        self.details_scroll_area.setWidget(self.details_content)
+
+        # Add scroll area to layout
+        details_layout.addWidget(self.details_scroll_area)
 
         right_layout.addWidget(details_group)
         splitter.addWidget(right_widget)
@@ -297,6 +296,13 @@ class OrthancsWorkshop(QMainWindow):
             10: "Amulet",
         }
         return slot_names.get(slot_id, f"Slot {slot_id}")
+
+    def clear_details_content(self):
+        """Clear all widgets in the details content area"""
+        while self.details_content_layout.count():
+            child = self.details_content_layout.takeAt(0)
+            if child.widget():
+                child.widget().deleteLater()
 
     def load_armor_data(self):
         """Load armor data from enhanced_armor.json"""
@@ -507,176 +513,500 @@ class OrthancsWorkshop(QMainWindow):
         """Show detailed information for selected weapon"""
         weapon_info = self.weapon_data[weapon_id]
 
-        details = []
+        # Clear previous content
+        self.clear_details_content()
 
-        # Header
-        weapon_name = weapon_info.get("weapon_name", weapon_info.get("name", "Unknown"))
-        if not weapon_name or weapon_name == "Unknown":
-            weapon_name = weapon_info.get("name", "Unknown")
-        details.append(
-            "╔══════════════════════════════════════════════════════════════╗"
+        # Main title
+        title_label = QLabel(
+            f"WEAPON ID: {weapon_id} - {weapon_info.get('weapon_name', weapon_info.get('name', 'Unknown'))}"
         )
-        details.append(f"║ Weapon ID: {weapon_id} - {weapon_name}")
-        details.append(
-            "╚══════════════════════════════════════════════════════════════╝"
-        )
-        details.append("")
+        title_label.setStyleSheet("""
+            QLabel {
+                background-color: #2d2d30;
+                color: #ffffff;
+                padding: 10px;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 14px;
+            }
+        """)
+        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.details_content_layout.addWidget(title_label)
 
-        # Basic information
-        details.append("BASIC INFORMATION:")
-        details.append("=" * 60)
-        details.append(
-            f"Name: {weapon_info.get('weapon_name', weapon_info.get('name', 'Unknown'))}"
-        )
-        details.append(
-            f"Type: {weapon_info.get('weapon_type_name', weapon_info.get('item_subtype', 'Unknown'))}"
-        )
-        details.append(
-            f"Material: {weapon_info.get('weapon_material_name', 'Unknown')}"
-        )
-        details.append(f"Hands: {weapon_info.get('hands', 'Unknown')}")
-        details.append(f"Category: {weapon_info.get('damage_category', 'Unknown')}")
-        details.append("")
+        # Basic Information Section
+        basic_group = QGroupBox("BASIC INFORMATION")
+        basic_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #6fb3d2;
+                border: 2px solid #6fb3d2;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
+        basic_layout = QVBoxLayout(basic_group)
 
-        # Combat stats
-        # Combat stats
-        details.append("COMBAT STATISTICS:")
-        details.append("-" * 60)
-        details.append(
-            f"  Damage: {weapon_info.get('min_damage', 0)} - {weapon_info.get('max_damage', 0)}"
-        )
-        details.append(f"  Damage Type: {weapon_info.get('damage_type', 'Unknown')}")
-        details.append(f"  Attack Speed: {weapon_info.get('attack_speed', 0)}")
-        details.append(
-            f"  Range: {weapon_info.get('min_range', 0)} - {weapon_info.get('max_range', 0)}"
-        )
-        details.append(f"  Attack Arc: {weapon_info.get('attack_arc', 0)}°")
-        details.append("")
+        basic_info = [
+            (
+                "Name",
+                weapon_info.get("weapon_name", weapon_info.get("name", "Unknown")),
+            ),
+            (
+                "Type",
+                weapon_info.get(
+                    "weapon_type_name", weapon_info.get("item_subtype", "Unknown")
+                ),
+            ),
+            ("Material", weapon_info.get("weapon_material_name", "Unknown")),
+            ("Hands", weapon_info.get("hands", "Unknown")),
+            ("Category", weapon_info.get("damage_category", "Unknown")),
+        ]
 
-        # Special properties
-        details.append("SPECIAL PROPERTIES:")
-        details.append("-" * 60)
-        details.append(f"  Critical Chance: {weapon_info.get('critical_chance', 0)}%")
-        details.append(
-            f"  Armor Penetration: {weapon_info.get('armor_penetration', 0)}%"
-        )
-        details.append(f"  Knockback Chance: {weapon_info.get('knockback_chance', 0)}%")
-        details.append("")
+        for label, value in basic_info:
+            row_layout = QHBoxLayout()
+            label_widget = QLabel(f"<strong>{label}:</strong>")
+            label_widget.setStyleSheet("color: #a0a0a0; min-width: 100px;")
+            value_widget = QLabel(str(value))
+            value_widget.setStyleSheet("color: #e0e0e0;")
+            row_layout.addWidget(label_widget)
+            row_layout.addWidget(value_widget)
+            row_layout.addStretch()
+            basic_layout.addLayout(row_layout)
 
-        # Requirements
-        details.append("REQUIREMENTS:")
-        details.append("-" * 60)
-        req = weapon_info.get("requirements", {})
-        details.append(f"  Strength: {req.get('strength', 0)}")
-        details.append(f"  Dexterity: {req.get('dexterity', 0)}")
-        details.append(f"  Intelligence: {req.get('intelligence', 0)}")
-        details.append(f"  Level: {req.get('level', 0)}")
-        details.append("")
+        self.details_content_layout.addWidget(basic_group)
 
-        # Economy
-        details.append("ECONOMY:")
-        details.append("-" * 60)
-        details.append(f"  Sell Value: {weapon_info.get('sell_value', 0)} gold")
-        details.append(f"  Buy Value: {weapon_info.get('buy_value', 0)} gold")
-        details.append(f"  Rarity: {weapon_info.get('rarity', 'Unknown')}")
-        details.append("")
+        # Combat Statistics Section
+        combat_group = QGroupBox("COMBAT STATISTICS")
+        combat_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #76b36f;
+                border: 2px solid #76b36f;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
+        combat_layout = QVBoxLayout(combat_group)
 
-        # Footer
-        details.append(
-            "╔══════════════════════════════════════════════════════════════╗"
-        )
-        details.append(f"║ End of Weapon {weapon_id} Details")
-        details.append(
-            "╚══════════════════════════════════════════════════════════════╝"
-        )
+        combat_info = [
+            (
+                "Damage",
+                f"{weapon_info.get('min_damage', 0)} - {weapon_info.get('max_damage', 0)}",
+            ),
+            ("Damage Type", weapon_info.get("damage_type", "Unknown")),
+            ("Attack Speed", str(weapon_info.get("attack_speed", 0))),
+            (
+                "Range",
+                f"{weapon_info.get('min_range', 0)} - {weapon_info.get('max_range', 0)}",
+            ),
+            ("Attack Arc", f"{weapon_info.get('attack_arc', 0)}°"),
+        ]
 
-        self.details_text.setPlainText("\n".join(details))
+        for label, value in combat_info:
+            row_layout = QHBoxLayout()
+            label_widget = QLabel(f"<strong>{label}:</strong>")
+            label_widget.setStyleSheet("color: #a0a0a0; min-width: 100px;")
+            value_widget = QLabel(str(value))
+            value_widget.setStyleSheet("color: #e0e0e0;")
+            row_layout.addWidget(label_widget)
+            row_layout.addWidget(value_widget)
+            row_layout.addStretch()
+            combat_layout.addLayout(row_layout)
+
+        self.details_content_layout.addWidget(combat_group)
+
+        # Special Properties Section
+        special_group = QGroupBox("SPECIAL PROPERTIES")
+        special_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #d28b6f;
+                border: 2px solid #d28b6f;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
+        special_layout = QVBoxLayout(special_group)
+
+        special_info = [
+            ("Critical Chance", f"{weapon_info.get('critical_chance', 0)}%"),
+            ("Armor Penetration", f"{weapon_info.get('armor_penetration', 0)}%"),
+            ("Knockback Chance", f"{weapon_info.get('knockback_chance', 0)}%"),
+        ]
+
+        for label, value in special_info:
+            row_layout = QHBoxLayout()
+            label_widget = QLabel(f"<strong>{label}:</strong>")
+            label_widget.setStyleSheet("color: #a0a0a0; min-width: 130px;")
+            value_widget = QLabel(str(value))
+            value_widget.setStyleSheet("color: #e0e0e0;")
+            row_layout.addWidget(label_widget)
+            row_layout.addWidget(value_widget)
+            row_layout.addStretch()
+            special_layout.addLayout(row_layout)
+
+        self.details_content_layout.addWidget(special_group)
+
+        # Requirements Section
+        req_group = QGroupBox("REQUIREMENTS")
+        req_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #9e6fb3;
+                border: 2px solid #9e6fb3;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
+        req_layout = QVBoxLayout(req_group)
+
+        req_data = weapon_info.get("requirements", {})
+        req_info = [
+            ("Strength", str(req_data.get("strength", 0))),
+            ("Dexterity", str(req_data.get("dexterity", 0))),
+            ("Intelligence", str(req_data.get("intelligence", 0))),
+            ("Level", str(req_data.get("level", 0))),
+        ]
+
+        for label, value in req_info:
+            row_layout = QHBoxLayout()
+            label_widget = QLabel(f"<strong>{label}:</strong>")
+            label_widget.setStyleSheet("color: #a0a0a0; min-width: 100px;")
+            value_widget = QLabel(str(value))
+            value_widget.setStyleSheet("color: #e0e0e0;")
+            row_layout.addWidget(label_widget)
+            row_layout.addWidget(value_widget)
+            row_layout.addStretch()
+            req_layout.addLayout(row_layout)
+
+        self.details_content_layout.addWidget(req_group)
+
+        # Economy Section
+        eco_group = QGroupBox("ECONOMY")
+        eco_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #b3a26f;
+                border: 2px solid #b3a26f;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
+        eco_layout = QVBoxLayout(eco_group)
+
+        eco_info = [
+            ("Sell Value", f"{weapon_info.get('sell_value', 0)} gold"),
+            ("Buy Value", f"{weapon_info.get('buy_value', 0)} gold"),
+            ("Rarity", weapon_info.get("rarity", "Unknown")),
+        ]
+
+        for label, value in eco_info:
+            row_layout = QHBoxLayout()
+            label_widget = QLabel(f"<strong>{label}:</strong>")
+            label_widget.setStyleSheet("color: #a0a0a0; min-width: 100px;")
+            value_widget = QLabel(str(value))
+            value_widget.setStyleSheet("color: #e0e0e0;")
+            row_layout.addWidget(label_widget)
+            row_layout.addWidget(value_widget)
+            row_layout.addStretch()
+            eco_layout.addLayout(row_layout)
+
+        self.details_content_layout.addWidget(eco_group)
+
+        # Additional Properties Section
+        addl_group = QGroupBox("ADDITIONAL PROPERTIES")
+        addl_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #6fb3a9;
+                border: 2px solid #6fb3a9;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
+        addl_layout = QVBoxLayout(addl_group)
+
+        addl_info = [
+            ("Item ID", str(weapon_info.get("item_id", "N/A"))),
+            ("Weapon Type ID", str(weapon_info.get("weapon_type_id", "N/A"))),
+            ("Weapon Material ID", str(weapon_info.get("weapon_material_id", "N/A"))),
+            ("Weapon Speed", str(weapon_info.get("weapon_speed", 0))),
+            ("Option", str(weapon_info.get("option", 0))),
+            ("Item Set ID", str(weapon_info.get("item_set_id", 0))),
+        ]
+
+        for label, value in addl_info:
+            row_layout = QHBoxLayout()
+            label_widget = QLabel(f"<strong>{label}:</strong>")
+            label_widget.setStyleSheet("color: #a0a0a0; min-width: 130px;")
+            value_widget = QLabel(str(value))
+            value_widget.setStyleSheet("color: #e0e0e0;")
+            row_layout.addWidget(label_widget)
+            row_layout.addWidget(value_widget)
+            row_layout.addStretch()
+            addl_layout.addLayout(row_layout)
+
+        self.details_content_layout.addWidget(addl_group)
+
+        # Add stretch to push everything to the top
+        self.details_content_layout.addStretch()
 
     def show_armor_details(self, armor_id):
         """Show detailed information for selected armor"""
         armor_info = self.armor_data[armor_id]
 
-        details = []
+        # Clear previous content
+        self.clear_details_content()
 
-        # Header
-        armor_name = armor_info.get("armor_name", "Unknown")
-        details.append(
-            "╔══════════════════════════════════════════════════════════════╗"
+        # Main title
+        title_label = QLabel(
+            f"ARMOR ID: {armor_id} - {armor_info.get('armor_name', 'Unknown')}"
         )
-        details.append(f"║ Armor ID: {armor_id} - {armor_name}")
-        details.append(
-            "╚══════════════════════════════════════════════════════════════╝"
-        )
-        details.append("")
+        title_label.setStyleSheet("""
+            QLabel {
+                background-color: #2d2d30;
+                color: #ffffff;
+                padding: 10px;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 14px;
+            }
+        """)
+        title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.details_content_layout.addWidget(title_label)
 
-        # Basic information
-        details.append("BASIC INFORMATION:")
-        details.append("=" * 60)
-        details.append(f"Name: {armor_info.get('armor_name', 'Unknown')}")
-        details.append(f"Slot: {armor_info.get('slot', 'Unknown')}")
-        details.append(f"Type: {armor_info.get('armor_type', 'Unknown')}")
-        details.append(f"Tier: {armor_info.get('tier', 'Unknown')}")
-        details.append(f"Material: {armor_info.get('material_name', 'Unknown')}")
-        details.append("")
+        # Basic Information Section
+        basic_group = QGroupBox("BASIC INFORMATION")
+        basic_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #6fb3d2;
+                border: 2px solid #6fb3d2;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
+        basic_layout = QVBoxLayout(basic_group)
 
-        # Defense stats
-        details.append("DEFENSE STATISTICS:")
-        details.append("=" * 60)
-        details.append(f"Base Armor: {armor_info.get('base_armor', 0)}")
-        details.append(f"Magic Resistance: {armor_info.get('magic_resistance', 0)}")
-        details.append(
-            f"Physical Resistance: {armor_info.get('physical_resistance', 0)}"
-        )
-        details.append("")
+        basic_info = [
+            ("Name", armor_info.get("armor_name", "Unknown")),
+            ("Slot", armor_info.get("slot", "Unknown")),
+            ("Type", armor_info.get("armor_type", "Unknown")),
+            ("Tier", armor_info.get("tier", "Unknown")),
+            ("Material", armor_info.get("material_name", "Unknown")),
+        ]
 
-        # Special properties
-        details.append("SPECIAL PROPERTIES:")
-        details.append("=" * 60)
-        details.append(
-            f"Movement Speed: {armor_info.get('move_speed_bonus', 0) if armor_info.get('move_speed_bonus') else 0}%"
-        )
-        details.append(
-            f"Health Bonus: {armor_info.get('health_bonus', 0) if armor_info.get('health_bonus') else 0}"
-        )
-        details.append(
-            f"Mana Bonus: {armor_info.get('mana_bonus', 0) if armor_info.get('mana_bonus') else 0}"
-        )
-        details.append("")
+        for label, value in basic_info:
+            row_layout = QHBoxLayout()
+            label_widget = QLabel(f"<strong>{label}:</strong>")
+            label_widget.setStyleSheet("color: #a0a0a0; min-width: 100px;")
+            value_widget = QLabel(str(value))
+            value_widget.setStyleSheet("color: #e0e0e0;")
+            row_layout.addWidget(label_widget)
+            row_layout.addWidget(value_widget)
+            row_layout.addStretch()
+            basic_layout.addLayout(row_layout)
 
-        # Requirements
-        details.append("REQUIREMENTS:")
-        details.append("=" * 60)
-        req = armor_info.get("requirements", {})
-        details.append(f"Strength: {req.get('strength', 0)}")
-        details.append(f"Dexterity: {req.get('dexterity', 0)}")
-        details.append(f"Intelligence: {req.get('intelligence', 0)}")
-        details.append(f"Level: {req.get('level', 0)}")
-        details.append("")
+        self.details_content_layout.addWidget(basic_group)
 
-        # Economy
-        details.append("ECONOMY:")
-        details.append("=" * 60)
-        details.append(f"Sell Value: {armor_info.get('sell_value', 0)} gold")
-        details.append(f"Buy Value: {armor_info.get('buy_value', 0)} gold")
-        details.append(f"Rarity: {armor_info.get('rarity', 'Unknown')}")
-        details.append("")
+        # Defense Statistics Section
+        def_group = QGroupBox("DEFENSE STATISTICS")
+        def_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #76b36f;
+                border: 2px solid #76b36f;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
+        def_layout = QVBoxLayout(def_group)
 
-        # Defense stats
-        details.append("DEFENSE STATISTICS:")
-        details.append("-" * 60)
-        details.append(f"  Base Armor: {armor_info.get('base_armor', 0)}")
-        details.append("")
+        def_info = [
+            ("Base Armor", str(armor_info.get("base_armor", 0))),
+            ("Magic Resistance", str(armor_info.get("magic_resistance", 0))),
+            ("Physical Resistance", str(armor_info.get("physical_resistance", 0))),
+        ]
 
-        # Footer
-        details.append(
-            "╔══════════════════════════════════════════════════════════════╗"
-        )
-        details.append(f"║ End of Armor {armor_id} Details")
-        details.append(
-            "╚══════════════════════════════════════════════════════════════╝"
-        )
+        for label, value in def_info:
+            row_layout = QHBoxLayout()
+            label_widget = QLabel(f"<strong>{label}:</strong>")
+            label_widget.setStyleSheet("color: #a0a0a0; min-width: 150px;")
+            value_widget = QLabel(str(value))
+            value_widget.setStyleSheet("color: #e0e0e0;")
+            row_layout.addWidget(label_widget)
+            row_layout.addWidget(value_widget)
+            row_layout.addStretch()
+            def_layout.addLayout(row_layout)
 
-        self.details_text.setPlainText("\n".join(details))
+        self.details_content_layout.addWidget(def_group)
+
+        # Special Properties Section
+        special_group = QGroupBox("SPECIAL PROPERTIES")
+        special_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #d28b6f;
+                border: 2px solid #d28b6f;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
+        special_layout = QVBoxLayout(special_group)
+
+        special_info = [
+            ("Movement Speed", f"{armor_info.get('move_speed_bonus', 0)}%"),
+            ("Health Bonus", str(armor_info.get("health_bonus", 0))),
+            ("Mana Bonus", str(armor_info.get("mana_bonus", 0))),
+        ]
+
+        for label, value in special_info:
+            row_layout = QHBoxLayout()
+            label_widget = QLabel(f"<strong>{label}:</strong>")
+            label_widget.setStyleSheet("color: #a0a0a0; min-width: 130px;")
+            value_widget = QLabel(str(value))
+            value_widget.setStyleSheet("color: #e0e0e0;")
+            row_layout.addWidget(label_widget)
+            row_layout.addWidget(value_widget)
+            row_layout.addStretch()
+            special_layout.addLayout(row_layout)
+
+        self.details_content_layout.addWidget(special_group)
+
+        # Requirements Section
+        req_group = QGroupBox("REQUIREMENTS")
+        req_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #9e6fb3;
+                border: 2px solid #9e6fb3;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
+        req_layout = QVBoxLayout(req_group)
+
+        req_data = armor_info.get("requirements", {})
+        req_info = [
+            ("Strength", str(req_data.get("strength", 0))),
+            ("Dexterity", str(req_data.get("dexterity", 0))),
+            ("Intelligence", str(req_data.get("intelligence", 0))),
+            ("Level", str(req_data.get("level", 0))),
+        ]
+
+        for label, value in req_info:
+            row_layout = QHBoxLayout()
+            label_widget = QLabel(f"<strong>{label}:</strong>")
+            label_widget.setStyleSheet("color: #a0a0a0; min-width: 100px;")
+            value_widget = QLabel(str(value))
+            value_widget.setStyleSheet("color: #e0e0e0;")
+            row_layout.addWidget(label_widget)
+            row_layout.addWidget(value_widget)
+            row_layout.addStretch()
+            req_layout.addLayout(row_layout)
+
+        self.details_content_layout.addWidget(req_group)
+
+        # Economy Section
+        eco_group = QGroupBox("ECONOMY")
+        eco_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #b3a26f;
+                border: 2px solid #b3a26f;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
+        eco_layout = QVBoxLayout(eco_group)
+
+        eco_info = [
+            ("Sell Value", f"{armor_info.get('sell_value', 0)} gold"),
+            ("Buy Value", f"{armor_info.get('buy_value', 0)} gold"),
+            ("Rarity", armor_info.get("rarity", "Unknown")),
+        ]
+
+        for label, value in eco_info:
+            row_layout = QHBoxLayout()
+            label_widget = QLabel(f"<strong>{label}:</strong>")
+            label_widget.setStyleSheet("color: #a0a0a0; min-width: 100px;")
+            value_widget = QLabel(str(value))
+            value_widget.setStyleSheet("color: #e0e0e0;")
+            row_layout.addWidget(label_widget)
+            row_layout.addWidget(value_widget)
+            row_layout.addStretch()
+            eco_layout.addLayout(row_layout)
+
+        self.details_content_layout.addWidget(eco_group)
+
+        # Add stretch to push everything to the top
+        self.details_content_layout.addStretch()
 
     def create_weapon(self):
         """Launch the Weapon Forge Wizard"""
