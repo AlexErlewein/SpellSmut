@@ -116,6 +116,13 @@ src/tests/
 
 The project is now fully compliant with the organization structure defined in `.ai/RULES.md` and `STRUCTURE.md`.
 
+## 🔄 Post-Merge Usage (Main Repo)
+
+- **Verify root whitelist** matches `STRUCTURE.md` (allowed files: `README.md`, `STRUCTURE.md`, `pyproject.toml`, `pytest.ini`, `uv.lock`, `.gitignore`, `.gitattributes`, `.luarc.json`, `package.json`, `package-lock.json`, `_config.yml`).
+- **Move any stray files** to their correct locations per `.rules/STRUCTURE.md`.
+- **Run tests** to ensure nothing broke: `uv run pytest src/tests/`.
+- **Commit cleanup** if changes were needed: `chore: post-merge cleanup (structure compliance)`.
+
 ---
 **Completed:** November 2, 2025
 **Status:** ✅ Root Directory Cleanup Complete

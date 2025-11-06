@@ -18,6 +18,7 @@ SpellSmut/
 ├── .gitattributes         # Git attributes
 ├── .luarc.json            # Lua configuration
 ├── package.json           # Node.js configuration
+├── _config.yml            # Jekyll/GitHub Pages configuration
 └── package-lock.json      # Node.js dependencies
 ```
 
@@ -263,6 +264,15 @@ uv run pytest src/tests/test_weapon_names.py -v
 - Put dev notes in `docs/Development/`
 - Put AI configs in `.ai/`
 - Keep root directory clean!
+
+---
+
+## 🧹 Post-Merge Cleanup Checklist
+
+ - **Ensure root whitelist is clean.** Allowed files: `README.md`, `STRUCTURE.md`, `pyproject.toml`, `pytest.ini`, `uv.lock`, `.gitignore`, `.gitattributes`, `.luarc.json`, `package.json`, `package-lock.json`, `_config.yml`.
+ - **Move any stray tests/docs/AI files.** Follow the "File Placement Rules" table above.
+ - **Re-run tests.** `uv run pytest src/tests/`
+ - **Commit cleanup if needed.** Use a message like: `chore: post-merge cleanup (structure compliance)`.
 
 ---
 
