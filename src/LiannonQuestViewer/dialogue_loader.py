@@ -212,8 +212,32 @@ class DialogueDataLoader:
             self.quest_dialogues[dialogue.quest_id].append(dialogue)
     
     def get_dialogues_for_quest(self, quest_id: int) -> List[DialogueLine]:
-        """Get all dialogues for a specific quest"""
-        return self.quest_dialogues.get(quest_id, [])
+        """Get all dialogues for a specific quest.
+        Primary source: rows explicitly mapped to quest_id in CSV.
+        Fallback: scan all dialogues without quest_id and include those
+        whose conditions mention this quest id (e.g., QuestState {QuestId = X}).
+        """
+        direct = self.quest_dialogues.get(quest_id)
+        if direct:
+            return direct
+
+        # Fallback: scan conditions for QuestId references
+        pattern = re.compile(rf"\\bQuestId\\s*=\\s*{quest_id}\\b")
+        fallback: List[DialogueLine] = []
+        for tree in self.dialogue_trees.values():
+            for d in tree.dialogues:
+                if d.quest_id in (None, 0):
+                    conds = d.conditions or []
+                    for c in conds:
+                        if pattern.search(c):
+                            fallback.append(d)
+                            break
+
+        # Cache fallback so subsequent calls are fast
+        if fallback:
+            self.quest_dialogues[quest_id] = fallback
+            return fallback
+        return []
     
     def get_npc_dialogue_trees(self) -> Dict[str, DialogueTree]:
         """Get all NPC dialogue trees"""

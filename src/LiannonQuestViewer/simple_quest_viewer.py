@@ -1255,63 +1255,12 @@ class SimpleQuestViewer(QMainWindow):
             
             html += "</div>"
 
-        # Legacy dialogue handling (for backward compatibility)
+        # Legacy dialogue list is removed from the main view. Keep value for empty-state check only.
         dialogues = quest_info.get("dialogues", [])
-        if dialogues:
-            html += "<h3 style='color: #c586c0; margin-top: 15px; margin-bottom: 5px;'>Dialogues</h3>"
-            html += "<div style='background-color: #2d2d30; padding: 10px; border-radius: 5px; border: 1px solid #3c3c3c;'>"
-            
-            # Group dialogues by speaker for better organization
-            npc_dialogues = []
-            player_dialogues = []
-            
-            for dlg in dialogues:
-                # Handle both Lua cache format and QuestDataService format
-                if hasattr(dlg, "speaker"):
-                    # Lua cache format
-                    speaker = dlg.speaker
-                    text = dlg.text
-                else:
-                    # QuestDataService format
-                    speaker = dlg.get("speaker", "Unknown")
-                    text = dlg.get("text", "")
-                
-                dialogue_info = {
-                    "text": text,
-                    "speaker": speaker,
-                }
-                
-                if speaker.lower() == "player":
-                    player_dialogues.append(dialogue_info)
-                else:
-                    npc_dialogues.append(dialogue_info)
-            
-            # Display NPC dialogues first
-            if npc_dialogues:
-                html += "<h4 style='color: #4ec9b0; margin-bottom: 5px;'>NPC Statements:</h4>"
-                for dlg in npc_dialogues:
-                    html += f"<div style='margin: 5px 0; padding: 8px; background-color: #252526; border-radius: 4px; border-left: 3px solid #4ec9b0;'>"
-                    html += f"<div style='color: #e0e0e0;'>{dlg['text']}</div>"
-                    html += "</div>"
-            
-            # Display player choices
-            if player_dialogues:
-                html += "<h4 style='color: #6fb3d2; margin-bottom: 5px; margin-top: 10px;'>Player Choices:</h4>"
-                for dlg in player_dialogues:
-                    html += f"<div style='margin: 5px 0; padding: 8px; background-color: #252526; border-radius: 4px; border-left: 3px solid #6fb3d2;'>"
-                    html += f"<div style='color: #b3d9ff;'>• {dlg['text']}</div>"
-                    html += "</div>"
-            
-            # Add dialogue statistics
-            html += f"<p style='color: #a0a0a0; font-size: 11pt; font-style: italic; margin-top: 10px;'>"
-            html += f"Total: {len(npc_dialogues)} NPC statements, {len(player_dialogues)} player choices"
-            html += "</p>"
-            
-            html += "</div>"
-            
-            # Add enhanced dialogue tree view if we have dialogue loader
-            if self.dialogue_loader and self.current_quest_id:
-                html = self.add_enhanced_dialogue_view(html, self.current_quest_id, hide_dialogue_metadata)
+
+        # Always render enhanced dialogue tree when available
+        if self.dialogue_loader:
+            html = self.add_enhanced_dialogue_view(html, quest_id, hide_dialogue_metadata)
 
         # Empty state
         if (

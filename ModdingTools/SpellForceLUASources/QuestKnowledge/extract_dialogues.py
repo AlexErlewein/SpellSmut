@@ -53,6 +53,16 @@ class DialogueExtractor:
         self.lua_sources_path = Path(lua_sources_path)
         self.dialogue_trees = []
         self.quest_mapping = {}
+    
+    def _read_text(self, lua_file: Path) -> str:
+        data = lua_file.read_bytes()
+        try:
+            return data.decode('utf-8')
+        except UnicodeDecodeError:
+            try:
+                return data.decode('cp1252')
+            except UnicodeDecodeError:
+                return data.decode('latin-1', errors='replace')
         
     def extract_all_dialogues(self) -> List[DialogueTree]:
         """Extract all dialogues from Lua files"""
@@ -91,8 +101,7 @@ class DialogueExtractor:
     def extract_dialogues_from_file(self, lua_file: Path) -> Optional[DialogueTree]:
         """Extract dialogues from a single Lua file"""
         try:
-            with open(lua_file, 'r', encoding='utf-8', errors='ignore') as f:
-                content = f.read()
+            content = self._read_text(lua_file)
         except Exception as e:
             print(f"Could not read file {lua_file}: {e}")
             return None
@@ -118,6 +127,11 @@ class DialogueExtractor:
             
         # Organize dialogues into branches
         dialogue_branches = self.organize_dialogue_branches(dialogue_lines)
+        
+        # Fallback: if we still have no quest ids but the file contains QuestId references
+        if not quest_ids:
+            file_qids = re.findall(r'QuestId\s*=\s*(\d+)', content)
+            quest_ids.update(map(int, file_qids))
         
         return DialogueTree(
             npc_name=npc_name,
@@ -208,6 +222,15 @@ class DialogueExtractor:
                 for condition in conditions:
                     quest_matches = re.findall(r'QuestId\s*=\s*(\d+)', condition)
                     quest_ids.update(map(int, quest_matches))
+                
+                # Extract quest IDs from actions inside OnBeginDialog blocks
+                action_matches = re.findall(r'Quest(Begin|Solve)\{\s*QuestId\s*=\s*(\d+)\s*\}', block_content)
+                for action, qid in action_matches:
+                    quest_ids.add(int(qid))
+                
+                # Extract quest IDs anywhere in the block content
+                block_qids = re.findall(r'QuestId\s*=\s*(\d+)', block_content)
+                quest_ids.update(map(int, block_qids))
             else:
                 i += 1
                 
@@ -279,6 +302,10 @@ class DialogueExtractor:
                 action_matches = re.findall(r'Quest(Begin|Solve)\{\s*QuestId\s*=\s*(\d+)\s*\}', block_content)
                 for action, quest_id in action_matches:
                     quest_ids.add(int(quest_id))
+                
+                # Extract quest IDs anywhere in the block content
+                block_qids = re.findall(r'QuestId\s*=\s*(\d+)', block_content)
+                quest_ids.update(map(int, block_qids))
             else:
                 i += 1
                 
@@ -302,15 +329,15 @@ class DialogueExtractor:
     
     def clean_text(self, text: str) -> str:
         """Clean dialogue text"""
-        # Replace escaped characters
-        text = text.replace('�', 'ü')
-        text = text.replace('�', 'ö')
-        text = text.replace('�', 'ä')
-        text = text.replace('�', 'ß')
-        text = text.replace('�', 'Ü')
-        text = text.replace('�', 'Ö')
-        text = text.replace('�', 'Ä')
-        return text.strip()
+        s = text.replace('\\n', '\n')
+        # Fix common mojibake (e.g., 'Ã¤', 'ÃŸ', 'â€¦') by latin1->utf8 roundtrip
+        if 'Ã' in s or 'â' in s or '�' in s:
+            try:
+                s = s.encode('latin1').decode('utf-8')
+            except Exception:
+                # If roundtrip fails, leave as-is
+                pass
+        return s.strip()
     
     def organize_dialogue_branches(self, dialogues: List[DialogueLine]) -> Dict[str, List[DialogueLine]]:
         """Organize dialogues into conversation branches"""
