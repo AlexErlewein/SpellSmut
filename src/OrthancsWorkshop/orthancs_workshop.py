@@ -533,6 +533,9 @@ class OrthancsWorkshop(QMainWindow):
         title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.details_content_layout.addWidget(title_label)
 
+        # Create a grid layout for perfect alignment
+        basic_info_layout = QHBoxLayout()
+
         # Basic Information Section
         basic_group = QGroupBox("BASIC INFORMATION")
         basic_group.setStyleSheet("""
@@ -579,7 +582,59 @@ class OrthancsWorkshop(QMainWindow):
             row_layout.addStretch()
             basic_layout.addLayout(row_layout)
 
-        self.details_content_layout.addWidget(basic_group)
+        # Add basic info to the layout
+        basic_info_layout.addWidget(basic_group)
+
+        # Create icon widget with exact height matching
+        icon_widget = QLabel()
+        icon_widget.setText("ICON")
+        icon_widget.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        icon_widget.setStyleSheet("""
+            QLabel {
+                background-color: #2d2d30;
+                color: #a0a0a0;
+                border: 1px dashed #6fb3d2;
+                font-size: 12px;
+                min-width: 120px;
+                min-height: 1px;  /* Start with minimal height */
+            }
+        """)
+        icon_widget.setFixedWidth(120)  # Fixed width for the icon space
+        # Create container for icon to ensure proper vertical alignment
+        icon_container = QWidget()
+        icon_container.setStyleSheet("""
+            QWidget {
+                background-color: #2d2d30;
+                border: 1px dashed #6fb3d2;
+            }
+        """)
+        icon_container.setFixedWidth(120)  # Fixed width for the icon space
+
+        # Create layout for the icon container to center the icon
+        icon_container_layout = QVBoxLayout(icon_container)
+        icon_container_layout.setAlignment(
+            Qt.AlignmentFlag.AlignCenter
+        )  # Center vertically and horizontally
+
+        # Create the icon label
+        icon_label = QLabel("ICON")
+        icon_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        icon_label.setStyleSheet("""
+            QLabel {
+                color: #a0a0a0;
+                font-size: 12px;
+            }
+        """)
+
+        # Add the icon label to the container's layout
+        icon_container_layout.addWidget(icon_label)
+        icon_container_layout.addStretch()  # Add stretch to push the icon to the center
+
+        # Add icon container to the same layout
+        basic_info_layout.addWidget(icon_container)
+
+        # Add the layout to main content
+        self.details_content_layout.addLayout(basic_info_layout)
 
         # Combat Statistics Section
         combat_group = QGroupBox("COMBAT STATISTICS")
@@ -764,11 +819,21 @@ class OrthancsWorkshop(QMainWindow):
 
         addl_info = [
             ("Item ID", str(weapon_info.get("item_id", "N/A"))),
+            ("Name ID", str(weapon_info.get("name_id", "N/A"))),
+            ("Item Type", str(weapon_info.get("item_type", "N/A"))),
+            ("Item Subtype", str(weapon_info.get("item_subtype", "N/A"))),
             ("Weapon Type ID", str(weapon_info.get("weapon_type_id", "N/A"))),
             ("Weapon Material ID", str(weapon_info.get("weapon_material_id", "N/A"))),
+            (
+                "Weapon Material Name",
+                str(weapon_info.get("weapon_material_name", "N/A")),
+            ),
             ("Weapon Speed", str(weapon_info.get("weapon_speed", 0))),
             ("Option", str(weapon_info.get("option", 0))),
             ("Item Set ID", str(weapon_info.get("item_set_id", 0))),
+            ("Min Range", str(weapon_info.get("min_range", 0))),
+            ("Max Range", str(weapon_info.get("max_range", 0))),
+            ("Weapon Arc", str(weapon_info.get("attack_arc", 0))),
         ]
 
         for label, value in addl_info:
@@ -811,6 +876,9 @@ class OrthancsWorkshop(QMainWindow):
         title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.details_content_layout.addWidget(title_label)
 
+        # Create a grid layout for perfect alignment
+        basic_info_layout = QHBoxLayout()
+
         # Basic Information Section
         basic_group = QGroupBox("BASIC INFORMATION")
         basic_group.setStyleSheet("""
@@ -849,7 +917,59 @@ class OrthancsWorkshop(QMainWindow):
             row_layout.addStretch()
             basic_layout.addLayout(row_layout)
 
-        self.details_content_layout.addWidget(basic_group)
+        # Add basic info to the layout
+        basic_info_layout.addWidget(basic_group)
+
+        # Create icon widget with exact height matching
+        icon_widget = QLabel()
+        icon_widget.setText("ICON")
+        icon_widget.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        icon_widget.setStyleSheet("""
+            QLabel {
+                background-color: #2d2d30;
+                color: #a0a0a0;
+                border: 1px dashed #6fb3d2;
+                font-size: 12px;
+                min-width: 120px;
+                min-height: 1px;  /* Start with minimal height */
+            }
+        """)
+        icon_widget.setFixedWidth(120)  # Fixed width for the icon space
+        # Create container for icon to ensure proper vertical alignment
+        icon_container = QWidget()
+        icon_container.setStyleSheet("""
+            QWidget {
+                background-color: #2d2d30;
+                border: 1px dashed #6fb3d2;
+            }
+        """)
+        icon_container.setFixedWidth(120)  # Fixed width for the icon space
+
+        # Create layout for the icon container to center the icon
+        icon_container_layout = QVBoxLayout(icon_container)
+        icon_container_layout.setAlignment(
+            Qt.AlignmentFlag.AlignCenter
+        )  # Center vertically and horizontally
+
+        # Create the icon label
+        icon_label = QLabel("ICON")
+        icon_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        icon_label.setStyleSheet("""
+            QLabel {
+                color: #a0a0a0;
+                font-size: 12px;
+            }
+        """)
+
+        # Add the icon label to the container's layout
+        icon_container_layout.addWidget(icon_label)
+        icon_container_layout.addStretch()  # Add stretch to push the icon to the center
+
+        # Add icon container to the same layout
+        basic_info_layout.addWidget(icon_container)
+
+        # Add the layout to main content
+        self.details_content_layout.addLayout(basic_info_layout)
 
         # Defense Statistics Section
         def_group = QGroupBox("DEFENSE STATISTICS")
@@ -1004,6 +1124,52 @@ class OrthancsWorkshop(QMainWindow):
             eco_layout.addLayout(row_layout)
 
         self.details_content_layout.addWidget(eco_group)
+
+        # Additional Properties Section (similar to weapons)
+        addl_group = QGroupBox("ADDITIONAL PROPERTIES")
+        addl_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #6fb3a9;
+                border: 2px solid #6fb3a9;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
+        addl_layout = QVBoxLayout(addl_group)
+
+        # Additional armor properties from the JSON data
+        addl_info = [
+            ("Armor ID", str(armor_info.get("id", armor_info.get("armor_id", "N/A")))),
+            ("Description", str(armor_info.get("description", "N/A"))),
+            ("Class Restriction", str(armor_info.get("class_restriction", "N/A"))),
+            ("Level Requirement", str(armor_info.get("level_requirement", 0))),
+            ("Stat Balance Rating", str(armor_info.get("stat_balance_rating", 0.0))),
+            ("Enchantment Slots", str(armor_info.get("enchantment_slots", 0))),
+            ("Set ID", str(armor_info.get("set_id", "None"))),
+            ("Item ID", str(armor_info.get("item_id", "N/A"))),
+            ("Model Reference", str(armor_info.get("model_ref", "N/A"))),
+            ("Texture", str(armor_info.get("texture", "N/A"))),
+        ]
+
+        for label, value in addl_info:
+            row_layout = QHBoxLayout()
+            label_widget = QLabel(f"<strong>{label}:</strong>")
+            label_widget.setStyleSheet("color: #a0a0a0; min-width: 130px;")
+            value_widget = QLabel(str(value))
+            value_widget.setStyleSheet("color: #e0e0e0;")
+            row_layout.addWidget(label_widget)
+            row_layout.addWidget(value_widget)
+            row_layout.addStretch()
+            addl_layout.addLayout(row_layout)
+
+        self.details_content_layout.addWidget(addl_group)
 
         # Add stretch to push everything to the top
         self.details_content_layout.addStretch()
