@@ -14,18 +14,16 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
 ]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
     "PySide6>=6.0.0",
     "pillow>=10.0.0", # For image processing
     "pyyaml>=6.0",    # For configuration files
-    "pytest>=7.0.0",
     "loguru>=0.7.0",
     "PyOpenGL>=3.1.7", # For 3D map viewer
     "numpy>=1.24.0",   # For camera math and transformations
@@ -33,7 +31,11 @@ dependencies = [
 
 [project.scripts]
 tirganach = "TirganachReloaded.cff_editor.main:main"
+<<<<<<< HEAD
 sf-map-viewer = "TirganachReloaded.map_viewer.map_viewer_window:main"
+=======
+cff-editor = "TirganachReloaded.cff_editor.main:main"
+>>>>>>> feat/tirganach-cleanup
 
 [project.optional-dependencies]
 dev = [
@@ -42,8 +44,8 @@ dev = [
     "black>=23.0.0",
     "isort>=5.12.0",
     "mypy>=1.0.0",
-    "PyQt6>=6.0.0",
-    "PyQt6-Qt6>=6.0.0",
+    "flake8>=6.0.0",
+    "pre-commit>=3.0.0",
 ]
 map-viewer = [
     "PyOpenGL>=3.1.7",
@@ -58,23 +60,25 @@ packages = ["src/TirganachReloaded"]
 sources = ["src"]
 
 [tool.hatch.envs.default]
-dependencies = ["PySide6", "pillow", "pyyaml"]
+dependencies = ["PySide6", "pillow", "pyyaml", "loguru"]
 
 [tool.hatch.envs.dev]
-dependencies = ["pytest", "black", "isort", "mypy"]
+dependencies = ["PySide6", "pytest", "black", "isort", "mypy", "flake8", "pre-commit"]
 
 [tool.black]
-line-length = 88
-target-version = ['py39']
+line-length = 100
+target-version = ['py310']
 
 [tool.isort]
 profile = "black"
-line_length = 88
+line_length = 100
 
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.10"
+strict = true
 warn_return_any = true
 warn_unused_configs = true
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["src/tests"]
@@ -83,11 +87,19 @@ python_files = "test_*.py"
 python_classes = "Test*"
 python_functions = "test_*"
 cache_dir = "src/tests/test_data/.pytest_cache"
-addopts = ["--verbose", "--tb=short", "--basetemp=src/tests/test_data/tmp"]
+addopts = [
+    "--verbose",
+    "--tb=short",
+    "--basetemp=src/tests/test_data/tmp",
+    "--strict-markers",
+    "--disable-warnings",
+]
 markers = [
     "gui: marks tests that require GUI (deselect with '-m \"not gui\"')",
     "integration: marks tests that require external resources",
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "unit: marks unit tests",
+    "cff: marks CFF-specific tests",
 ]
 
 [tool.coverage.run]

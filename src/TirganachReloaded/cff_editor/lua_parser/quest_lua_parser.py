@@ -371,6 +371,25 @@ class LuaQuestParser:
                     int(i.strip()) for i in items_str.split(",") if i.strip().isdigit()
                 ]
 
+        # Extract reward flags from the Complete event for this quest
+        try:
+            complete_block = self._extract_event(lua_content, f"Complete.*?QuestId\\s*=\\s*{quest_id}")
+            if complete_block:
+                patterns = [
+                    r'SetRewardFlagTrue\s*\{\s*Name\s*=\s*"([^"]+)"',
+                    r"SetRewardFlagTrue\s*\{\s*Name\s*=\s*'([^']+)'",
+                    r'SetRewardFlag\s*\{\s*Name\s*=\s*"([^"]+)"\s*,\s*Value\s*=\s*True',
+                    r"SetRewardFlag\s*\{\s*Name\s*=\s*'([^']+)'\s*,\s*Value\s*=\s*True",
+                ]
+                flags = set()
+                for p in patterns:
+                    for m in re.finditer(p, complete_block, re.IGNORECASE):
+                        flags.add(m.group(1))
+                if flags:
+                    reward.flags = list(flags)
+        except Exception:
+            pass
+
         return reward
 
     def _extract_dialogues(

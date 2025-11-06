@@ -1,0 +1,5299 @@
+{
+  "rewards_by_quest_id": {
+    "438": {
+      "xp": 20,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AngriffDerHoehlenorks"
+      ],
+      "platform": "P63"
+    },
+    "335": {
+      "xp": 10,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Zauberwerk1Augenglas"
+      ],
+      "platform": "P63"
+    },
+    "371": {
+      "xp": 35,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ZahnbrechersZangen"
+      ],
+      "platform": "P63"
+    },
+    "357": {
+      "xp": 110,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WundtinkturValdis",
+        "WundtinkturSwerdis"
+      ],
+      "platform": "P63"
+    },
+    "402": {
+      "xp": 4000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "BlutAdhiraTrank"
+      ],
+      "platform": "P63"
+    },
+    "397": {
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "BlutTombardTot"
+      ],
+      "platform": "P63"
+    },
+    "358": {
+      "xp": 600,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SickHermit1Zirfar"
+      ],
+      "platform": "P63"
+    },
+    "111": {
+      "xp": 120,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Schattenwelt1Castagir"
+      ],
+      "platform": "P63"
+    },
+    "325": {
+      "xp": 1500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "EchosBuchstabe1",
+        "EchosBuchstabe2",
+        "EchosBuchstabe3"
+      ],
+      "platform": "P63"
+    },
+    "330": {
+      "xp": 700,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "EchosGoran"
+      ],
+      "platform": "P63"
+    },
+    "333": {
+      "xp": 1000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "EchosShinTarGuar"
+      ],
+      "platform": "P63"
+    },
+    "384": {
+      "xp": 500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AmraUndLea3Sentos"
+      ],
+      "platform": "P63"
+    },
+    "414": {
+      "xp": 35,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Schwarzeibe"
+      ],
+      "platform": "P63"
+    },
+    "344": {
+      "xp": 400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "FeineStoffe3Seide"
+      ],
+      "platform": "P63"
+    },
+    "220": {
+      "xp": 500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "TricksterFindFlink"
+      ],
+      "platform": "P63"
+    },
+    "46": {
+      "xp": 25,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DariusDerKarthograph"
+      ],
+      "platform": "P1"
+    },
+    "14": {
+      "xp": 25,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        626
+      ],
+      "flags": [
+        "WegNachEloni1Snarf"
+      ],
+      "platform": "P1"
+    },
+    "16": {
+      "xp": 30,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WegNachEloni2Portal"
+      ],
+      "platform": "P1"
+    },
+    "128": {
+      "xp": 10,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "KleineFische1"
+      ],
+      "platform": "P1"
+    },
+    "131": {
+      "xp": 10,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        705
+      ],
+      "flags": [
+        "KleineFische2"
+      ],
+      "platform": "P1"
+    },
+    "36": {
+      "xp": 35,
+      "gold": 0,
+      "silver": 2,
+      "copper": 50,
+      "items": [],
+      "flags": [
+        "GeistInDerMine"
+      ],
+      "platform": "P1"
+    },
+    "41": {
+      "xp": 20,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        833
+      ],
+      "flags": [
+        "EinSeltsamerRing"
+      ],
+      "platform": "P1"
+    },
+    "93": {
+      "xp": 60,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "BefreiungShiel1Alfalas"
+      ],
+      "platform": "P1"
+    },
+    "31": {
+      "xp": 15,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        695
+      ],
+      "flags": [
+        "DieLetztenSchuetzen1"
+      ],
+      "platform": "P2"
+    },
+    "32": {
+      "xp": 15,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        601
+      ],
+      "flags": [
+        "DieLetztenSchuetzen2"
+      ],
+      "platform": "P2"
+    },
+    "34": {
+      "xp": 15,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        690
+      ],
+      "flags": [
+        "DieLetztenSchuetzen3"
+      ],
+      "platform": "P2"
+    },
+    "66": {
+      "xp": 20,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DieFreihaendler"
+      ],
+      "platform": "P2"
+    },
+    "73": {
+      "xp": 20,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Traumdieb"
+      ],
+      "platform": "P2"
+    },
+    "71": {
+      "xp": 20,
+      "gold": 0,
+      "silver": 2,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "StaubDerSterne1"
+      ],
+      "platform": "P2"
+    },
+    "97": {
+      "xp": 60,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Bannwerk2"
+      ],
+      "platform": "P4"
+    },
+    "455": {
+      "xp": 15,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Kopfjagd1Head1"
+      ],
+      "platform": "P4"
+    },
+    "458": {
+      "xp": 15,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Kopfjagd2Head2"
+      ],
+      "platform": "P4"
+    },
+    "456": {
+      "xp": 15,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Kopfjagd3Head3"
+      ],
+      "platform": "P4"
+    },
+    "457": {
+      "xp": 15,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Kopfjagd4Head4"
+      ],
+      "platform": "P4"
+    },
+    "454": {
+      "xp": 15,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Kopfjagd5Head5"
+      ],
+      "platform": "P4"
+    },
+    "463": {
+      "xp": 60,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Kopfjagd6Complete"
+      ],
+      "platform": "P4"
+    },
+    "462": {
+      "xp": 40,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DieGeiseln"
+      ],
+      "platform": "P4"
+    },
+    "104": {
+      "xp": 120,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AmWildlandPass1"
+      ],
+      "platform": "P6"
+    },
+    "105": {
+      "xp": 160,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AmWildlandPass2"
+      ],
+      "platform": "P6"
+    },
+    "107": {
+      "xp": 45,
+      "gold": 0,
+      "silver": 10,
+      "copper": 0,
+      "items": [
+        2467,
+        2467
+      ],
+      "flags": [
+        "KoenigDerSpinnen"
+      ],
+      "platform": "P6"
+    },
+    "410": {
+      "xp": 45,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        628
+      ],
+      "flags": [
+        "AlterMannUndMusik"
+      ],
+      "platform": "P6"
+    },
+    "413": {
+      "xp": 45,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "FeineStoffe1"
+      ],
+      "platform": "P6"
+    },
+    "385": {
+      "xp": 800,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AmraUndLea2Sentos"
+      ],
+      "platform": "P6"
+    },
+    "121": {
+      "xp": 300,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        2652
+      ],
+      "flags": [
+        "Marcia1",
+        "SchlachtUmBrunnenfels2a"
+      ],
+      "platform": "P9"
+    },
+    "112": {
+      "xp": 100,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SchlachtUmBrunnenfels1"
+      ],
+      "platform": "P9"
+    },
+    "472": {
+      "xp": 50,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "InsGrauschattental1"
+      ],
+      "platform": "P10"
+    },
+    "146": {
+      "xp": 500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "InsGrauschattental2",
+        "InsGrauschattental4"
+      ],
+      "platform": "P10"
+    },
+    "163": {
+      "xp": 80,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WeisseSchatten1"
+      ],
+      "platform": "P10"
+    },
+    "488": {
+      "xp": 250,
+      "gold": 5,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Zwergendienste2Cronvig"
+      ],
+      "platform": "P10"
+    },
+    "480": {
+      "xp": 100,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "FeineStoffe2Miria"
+      ],
+      "platform": "P10"
+    },
+    "170": {
+      "xp": 400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Erdenklinge3"
+      ],
+      "platform": "P10"
+    },
+    "206": {
+      "xp": 300,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Grenzkrieg1Festung"
+      ],
+      "platform": "P12"
+    },
+    "219": {
+      "xp": 300,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "MaskeDesBelial1"
+      ],
+      "platform": "P12"
+    },
+    "216": {
+      "xp": 600,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "MaskeDesBelial2",
+        "MaskeDesBelial2"
+      ],
+      "platform": "P12"
+    },
+    "238": {
+      "xp": 400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "KlagendeSteine1BisTor"
+      ],
+      "platform": "P15"
+    },
+    "236": {
+      "xp": 500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "KlagendeSteine2Korshar"
+      ],
+      "platform": "P15"
+    },
+    "491": {
+      "xp": 250,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "FluesterndeStadt1Item1"
+      ],
+      "platform": "P16"
+    },
+    "490": {
+      "xp": 450,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "FluesterndeStadt4Endkampf"
+      ],
+      "platform": "P16"
+    },
+    "387": {
+      "xp": 800,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AmraLeaGrab"
+      ],
+      "platform": "P16"
+    },
+    "249": {
+      "xp": 200,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AufDemWall1Village1"
+      ],
+      "platform": "P17"
+    },
+    "258": {
+      "xp": 300,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AufDemWall3Village3"
+      ],
+      "platform": "P17"
+    },
+    "250": {
+      "xp": 300,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AufDemWall4Village4"
+      ],
+      "platform": "P17"
+    },
+    "264": {
+      "xp": 500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AufDemWall5Endkampf"
+      ],
+      "platform": "P17"
+    },
+    "308": {
+      "xp": 1000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DerPhoenix1Waechter"
+      ],
+      "platform": "P19"
+    },
+    "322": {
+      "xp": 800,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DerPhoenix6Ablieferung"
+      ],
+      "platform": "P19"
+    },
+    "274": {
+      "xp": 200,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WolfUndDrache1"
+      ],
+      "platform": "P21"
+    },
+    "279": {
+      "xp": 800,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Steinbrecher"
+      ],
+      "platform": "P21"
+    },
+    "512": {
+      "xp": 600,
+      "gold": 50,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Thar"
+      ],
+      "platform": "P21"
+    },
+    "376": {
+      "xp": 600,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DerKatarakt"
+      ],
+      "platform": "P21"
+    },
+    "499": {
+      "xp": 1300,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        2287,
+        2271,
+        3535
+      ],
+      "flags": [
+        "DurchdenSpalt2Her"
+      ],
+      "platform": "P23"
+    },
+    "521": {
+      "xp": 1500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "EndeDesOrdens1Erreichen"
+      ],
+      "platform": "P7"
+    },
+    "532": {
+      "xp": 1500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "EndeDesOrdens2DreiItems"
+      ],
+      "platform": "P7"
+    },
+    "550": {
+      "xp": 1000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Klingensturm1Monument"
+      ],
+      "platform": "P25"
+    },
+    "537": {
+      "xp": 1400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "NachUrgath2Monument"
+      ],
+      "platform": "P27"
+    },
+    "541": {
+      "xp": 3000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AtmenderWald2Portal"
+      ],
+      "platform": "P30"
+    },
+    "547": {
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "KreisSchluss4Soulforger"
+      ],
+      "platform": "P32"
+    },
+    "715": {
+      "xp": 15,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ImCampMitAllenGeredet"
+      ],
+      "platform": "P101"
+    },
+    "588": {
+      "xp": 45,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "HeldenErschaffen"
+      ],
+      "platform": "P101"
+    },
+    "586": {
+      "xp": 150,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "HQBefreien"
+      ],
+      "platform": "P101"
+    },
+    "644": {
+      "xp": 150,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "FluechtlingeNachNorden"
+      ],
+      "platform": "P101"
+    },
+    "572": {
+      "xp": 30,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P102Erreicht"
+      ],
+      "platform": "P102"
+    },
+    "564": {
+      "xp": 175,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "KitharLagerZerstoert"
+      ],
+      "platform": "P102"
+    },
+    "567": {
+      "xp": 175,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "RuneDunhanGenommen"
+      ],
+      "platform": "P102"
+    },
+    "634": {
+      "xp": 0,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        3956
+      ],
+      "flags": [
+        "DreiMagierZolowinFree"
+      ],
+      "platform": "P102"
+    },
+    "636": {
+      "xp": 55,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        3984,
+        3955
+      ],
+      "flags": [
+        "DreiMagierGruolunGive"
+      ],
+      "platform": "P102"
+    },
+    "635": {
+      "xp": 35,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        3904,
+        3957
+      ],
+      "flags": [
+        "DreiMagierRenyaGive"
+      ],
+      "platform": "P102"
+    },
+    "593": {
+      "xp": 250,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WaldschrateKilled"
+      ],
+      "platform": "P103"
+    },
+    "594": {
+      "xp": 500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "RuneReowysGenommen"
+      ],
+      "platform": "P103"
+    },
+    "580": {
+      "xp": 200,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Camp1Befreit"
+      ],
+      "platform": "P104"
+    },
+    "581": {
+      "xp": 200,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Camp2Befreit"
+      ],
+      "platform": "P104"
+    },
+    "582": {
+      "xp": 200,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Camp3Befreit"
+      ],
+      "platform": "P104"
+    },
+    "575": {
+      "xp": 175,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "OrklagerEinnehmen"
+      ],
+      "platform": "P104"
+    },
+    "704": {
+      "xp": 500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQTiondriaSeite1Gefunden"
+      ],
+      "platform": "P104"
+    },
+    "705": {
+      "xp": 500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQTiondriaSeite2Gefunden"
+      ],
+      "platform": "P104"
+    },
+    "706": {
+      "xp": 500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQTiondriaSeite3Gefunden"
+      ],
+      "platform": "P104"
+    },
+    "585": {
+      "xp": 175,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "FugisBroughtToMap"
+      ],
+      "platform": "P105"
+    },
+    "691": {
+      "xp": 450,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "FugisBroughtToTirganach"
+      ],
+      "platform": "P105"
+    },
+    "701": {
+      "xp": 300,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQTiondriaBuchDariusGefunden"
+      ],
+      "platform": "P105"
+    },
+    "765": {
+      "xp": 100,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQTiondriaMordfallNotSolved"
+      ],
+      "platform": "P105"
+    },
+    "684": {
+      "xp": 275,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P107KarteErreicht"
+      ],
+      "platform": "P107"
+    },
+    "291": {
+      "xp": 550,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "GuramMachtSprengung"
+      ],
+      "platform": "P108"
+    },
+    "612": {
+      "xp": 1250,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "RueckkehrMitWindjalf"
+      ],
+      "platform": "P108"
+    },
+    "712": {
+      "xp": 550,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQTiondriaSchatzGefunden"
+      ],
+      "platform": "P108"
+    },
+    "693": {
+      "xp": 750,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "TorZerstoert"
+      ],
+      "platform": "P109"
+    },
+    "653": {
+      "xp": 350,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WerwolfTempel1"
+      ],
+      "platform": "P109"
+    },
+    "654": {
+      "xp": 350,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WerwolfTempel2"
+      ],
+      "platform": "P109"
+    },
+    "655": {
+      "xp": 350,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WerwolfTempel3"
+      ],
+      "platform": "P109"
+    },
+    "744": {
+      "xp": 350,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P111KarteErreicht"
+      ],
+      "platform": "P111"
+    },
+    "673": {
+      "xp": 500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SchattenringBekommen"
+      ],
+      "platform": "P111"
+    },
+    "675": {
+      "xp": 1000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AlleVierFackelnAn"
+      ],
+      "platform": "P111"
+    },
+    "746": {
+      "xp": 350,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P113KarteErreicht"
+      ],
+      "platform": "P113"
+    },
+    "697": {
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "FialDargTotCenwenFrei"
+      ],
+      "platform": "P113"
+    },
+    "667": {
+      "xp": 1000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Drachenstein7"
+      ],
+      "platform": "P115"
+    },
+    "668": {
+      "xp": 1000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Drachenstein8"
+      ],
+      "platform": "P115"
+    },
+    "669": {
+      "xp": 1000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Drachenstein9"
+      ],
+      "platform": "P115"
+    },
+    "670": {
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DracheGetoetet"
+      ],
+      "platform": "P115"
+    },
+    "1103": {
+      "xp": 30000,
+      "gold": 5000,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        4079,
+        4433,
+        4451
+      ],
+      "flags": [
+        "ColosseumRunde10Sieg"
+      ],
+      "platform": "P200"
+    },
+    "776": {
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "InsCampGekommen"
+      ],
+      "platform": "P201"
+    },
+    "893": {
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "RingGefunden"
+      ],
+      "platform": "P201"
+    },
+    "775": {
+      "xp": 8000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "UriasBefreit"
+      ],
+      "platform": "P201"
+    },
+    "777": {
+      "xp": 15000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "CampsZerstoert"
+      ],
+      "platform": "P201"
+    },
+    "895": {
+      "xp": 3500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "LeutnantGesprochen"
+      ],
+      "platform": "P201"
+    },
+    "836": {
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ErstenDrachenGetoetet"
+      ],
+      "platform": "P201"
+    },
+    "840": {
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DrittenDrachenGetoetet"
+      ],
+      "platform": "P201"
+    },
+    "841": {
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ViertenDrachenGetoetet"
+      ],
+      "platform": "P201"
+    },
+    "827": {
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "HeldenBeschworen"
+      ],
+      "platform": "P202"
+    },
+    "831": {
+      "xp": 16000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "UrneZuHokan"
+      ],
+      "platform": "P202"
+    },
+    "1049": {
+      "xp": 6000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "OpferFreigelassen"
+      ],
+      "platform": "P202"
+    },
+    "1048": {
+      "xp": 6000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "OpferTot"
+      ],
+      "platform": "P202"
+    },
+    "845": {
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "TorZurStaetteOffen"
+      ],
+      "platform": "P202"
+    },
+    "844": {
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "HlStaetteBaumGepflanzt"
+      ],
+      "platform": "P202"
+    },
+    "803": {
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "BlockadeDurchbrochen"
+      ],
+      "platform": "P203"
+    },
+    "1002": {
+      "xp": 6000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DialogMitAeltestem"
+      ],
+      "platform": "P203"
+    },
+    "807": {
+      "xp": 24000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ZerstoerungDesLagers"
+      ],
+      "platform": "P203"
+    },
+    "802": {
+      "xp": 4000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "LichkoenigTot"
+      ],
+      "platform": "P203"
+    },
+    "1029": {
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "TantaroGefunden"
+      ],
+      "platform": "P203"
+    },
+    "1030": {
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WasserEntgiften"
+      ],
+      "platform": "P203"
+    },
+    "1031": {
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ZuTarioGegangen"
+      ],
+      "platform": "P203"
+    },
+    "809": {
+      "xp": 3000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P204KarteErreicht"
+      ],
+      "platform": "P204"
+    },
+    "970": {
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Tor2DurchTrickGeoeffnet"
+      ],
+      "platform": "P204"
+    },
+    "948": {
+      "xp": 9000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Tor3DurchTrickGeoeffnet"
+      ],
+      "platform": "P204"
+    },
+    "816": {
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "PalastgartenErreicht"
+      ],
+      "platform": "P204"
+    },
+    "810": {
+      "xp": 11000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "LyrioQuestGeloest",
+        "P205KarteErreicht"
+      ],
+      "platform": "P204"
+    },
+    "1011": {
+      "xp": 15000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ArenaKampf42"
+      ],
+      "platform": "P204"
+    },
+    "1020": {
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQSethHealed"
+      ],
+      "platform": "P204"
+    },
+    "1064": {
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQBotschafterGefunden"
+      ],
+      "platform": "P204"
+    },
+    "1068": {
+      "xp": 33000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQBotschafterTot",
+        "SQCraigIstBotschafter",
+        "SQAuftragGescheitert"
+      ],
+      "platform": "P204"
+    },
+    "1075": {
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQHaendlerFriedlich"
+      ],
+      "platform": "P204"
+    },
+    "818": {
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P206KarteErreicht"
+      ],
+      "platform": "P206"
+    },
+    "819": {
+      "xp": 4500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "RastplatzGefunden"
+      ],
+      "platform": "P206"
+    },
+    "886": {
+      "xp": 13500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DialogMitUnterhaendler",
+        "AlleinEinenWegGefunden"
+      ],
+      "platform": "P206"
+    },
+    "822": {
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "FalleAusgeloest"
+      ],
+      "platform": "P206"
+    },
+    "820": {
+      "xp": 12000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AlleTrolleKommenAn"
+      ],
+      "platform": "P206"
+    },
+    "891": {
+      "xp": 4500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P207KarteErreicht"
+      ],
+      "platform": "P207"
+    },
+    "989": {
+      "xp": 6500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "BergrieseGeholfen"
+      ],
+      "platform": "P207"
+    },
+    "977": {
+      "xp": 8500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SprengzwergBefreit"
+      ],
+      "platform": "P207"
+    },
+    "973": {
+      "xp": 9500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ErsteFestungBesiegt"
+      ],
+      "platform": "P207"
+    },
+    "978": {
+      "xp": 9500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ZweiteFestungBesiegt"
+      ],
+      "platform": "P207"
+    },
+    "981": {
+      "xp": 9500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DritteFestungBesiegt"
+      ],
+      "platform": "P207"
+    },
+    "986": {
+      "xp": 9500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "VierteFestungBesiegt"
+      ],
+      "platform": "P207"
+    },
+    "988": {
+      "xp": 12000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "UndeadRohenGetoetet"
+      ],
+      "platform": "P207"
+    },
+    "863": {
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ArgamunVerwandeltSich"
+      ],
+      "platform": "P208"
+    },
+    "1070": {
+      "xp": 30000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        7437
+      ],
+      "flags": [
+        "MasterGameWon"
+      ],
+      "platform": "P208"
+    },
+    "779": {
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P209KarteErreicht"
+      ],
+      "platform": "P209"
+    },
+    "782": {
+      "xp": 6000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "StadtKathaiErreicht"
+      ],
+      "platform": "P209"
+    },
+    "1083": {
+      "xp": 4000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "GespraechMitKhal",
+        "UruSpricht1"
+      ],
+      "platform": "P209"
+    },
+    "784": {
+      "xp": 8000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "KathaiStadtTorOffen"
+      ],
+      "platform": "P209"
+    },
+    "781": {
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "KathaiStadtBefreit"
+      ],
+      "platform": "P209"
+    },
+    "934": {
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "UruSpricht2"
+      ],
+      "platform": "P209"
+    },
+    "789": {
+      "xp": 4000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "HolyArtefact1Gefunden"
+      ],
+      "platform": "P209"
+    },
+    "791": {
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "XalabarInArenaBesiegt"
+      ],
+      "platform": "P209"
+    },
+    "792": {
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "UruSpricht3"
+      ],
+      "platform": "P209"
+    },
+    "794": {
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "UruSpricht4"
+      ],
+      "platform": "P209"
+    },
+    "795": {
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ZwergenMonumentClaimed"
+      ],
+      "platform": "P209"
+    },
+    "797": {
+      "xp": 8000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "LeaderNordarmeeKilled"
+      ],
+      "platform": "P209"
+    },
+    "798": {
+      "xp": 8000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "LeaderSuedarmeeKilled"
+      ],
+      "platform": "P209"
+    },
+    "799": {
+      "xp": 8000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "LeaderHauptarmeeKilled"
+      ],
+      "platform": "P209"
+    },
+    "874": {
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "UruSpricht5"
+      ],
+      "platform": "P209"
+    },
+    "875": {
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P210KarteErreicht"
+      ],
+      "platform": "P210"
+    },
+    "1061": {
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "CraigBefreit"
+      ],
+      "platform": "P211"
+    },
+    "1097": {
+      "xp": 15000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "EndgegnerSoulforgerKilled"
+      ],
+      "platform": "P211"
+    },
+    "971": {
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P212KarteErreicht"
+      ],
+      "platform": "P212"
+    },
+    "958": {
+      "xp": 30000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "MiniforgersKilled"
+      ],
+      "platform": "P212"
+    },
+    "956": {
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P213KarteErreicht"
+      ],
+      "platform": "P213"
+    },
+    "1008": {
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "NahrungFuerAffenjunge"
+      ],
+      "platform": "P213"
+    },
+    "1006": {
+      "xp": 17500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WegZumTorFreigeraeumt"
+      ],
+      "platform": "P213"
+    }
+  },
+  "rewards_without_quest_id": [
+    {
+      "reward_name": "NachGraufurtPartVillage",
+      "platform": "P63",
+      "xp": 20,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        532
+      ],
+      "flags": [
+        "NachGraufurtPartVillage"
+      ]
+    },
+    {
+      "reward_name": "NachGraufurtPartEnde",
+      "platform": "P63",
+      "xp": 10,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "NachGraufurtPartEnde"
+      ]
+    },
+    {
+      "reward_name": "Zauberwerk2Feder",
+      "platform": "P63",
+      "xp": 25,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Zauberwerk2Feder"
+      ]
+    },
+    {
+      "reward_name": "Zauberwerk3Kreide",
+      "platform": "P63",
+      "xp": 35,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Zauberwerk3Kreide"
+      ]
+    },
+    {
+      "reward_name": "Zauberwerk4Robe",
+      "platform": "P63",
+      "xp": 120,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Zauberwerk4Robe"
+      ]
+    },
+    {
+      "reward_name": "SickHermit2Locke",
+      "platform": "P63",
+      "xp": 600,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SickHermit2Locke"
+      ]
+    },
+    {
+      "reward_name": "Schattenwelt3Manifest",
+      "platform": "P63",
+      "xp": 1000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Schattenwelt3Manifest"
+      ]
+    },
+    {
+      "reward_name": "SchattenweltShadowpulse",
+      "platform": "P63",
+      "xp": 500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SchattenweltShadowpulse"
+      ]
+    },
+    {
+      "reward_name": "Zwergendienste1Hinrik",
+      "platform": "P63",
+      "xp": 120,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Zwergendienste1Hinrik"
+      ]
+    },
+    {
+      "reward_name": "Seelenschwerter",
+      "platform": "P63",
+      "xp": 600,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Seelenschwerter"
+      ]
+    },
+    {
+      "reward_name": "KlingzogsBeinlinge",
+      "platform": "P63",
+      "xp": 35,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "KlingzogsBeinlinge"
+      ]
+    },
+    {
+      "reward_name": "ThurgonBrief",
+      "platform": "P63",
+      "xp": 250,
+      "gold": 2,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ThurgonBrief"
+      ]
+    },
+    {
+      "reward_name": "FeineStoffe4Robe",
+      "platform": "P63",
+      "xp": 1100,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        3352
+      ],
+      "flags": [
+        "FeineStoffe4Robe"
+      ]
+    },
+    {
+      "reward_name": "Drachenpanzer1",
+      "platform": "P63",
+      "xp": 100,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Drachenpanzer1"
+      ]
+    },
+    {
+      "reward_name": "Drachenpanzer2",
+      "platform": "P63",
+      "xp": 800,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        557,
+        572
+      ],
+      "flags": [
+        "Drachenpanzer2"
+      ]
+    },
+    {
+      "reward_name": "TricksterReturn",
+      "platform": "P63",
+      "xp": 1000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        3621
+      ],
+      "flags": [
+        "TricksterReturn"
+      ]
+    },
+    {
+      "reward_name": "Steckbrief",
+      "platform": "P1",
+      "xp": 20,
+      "gold": 0,
+      "silver": 2,
+      "copper": 40,
+      "items": [],
+      "flags": [
+        "Steckbrief"
+      ]
+    },
+    {
+      "reward_name": "Zwergenaxt",
+      "platform": "P1",
+      "xp": 20,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Zwergenaxt"
+      ]
+    },
+    {
+      "reward_name": "AusDerTiefe1Schreiber",
+      "platform": "P1",
+      "xp": 250,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        617
+      ],
+      "flags": [
+        "AusDerTiefe1Schreiber"
+      ]
+    },
+    {
+      "reward_name": "AusDerTiefe1Buch",
+      "platform": "P1",
+      "xp": 150,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        707
+      ],
+      "flags": [
+        "AusDerTiefe1Buch"
+      ]
+    },
+    {
+      "reward_name": "AusDerTiefe2Spaeher",
+      "platform": "P1",
+      "xp": 350,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        555
+      ],
+      "flags": [
+        "AusDerTiefe2Spaeher"
+      ]
+    },
+    {
+      "reward_name": "AmraUndLea1Liannon1",
+      "platform": "P1",
+      "xp": 200,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AmraUndLea1Liannon1"
+      ]
+    },
+    {
+      "reward_name": "AmraUndLea1Liannon2",
+      "platform": "P1",
+      "xp": 400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AmraUndLea1Liannon2"
+      ]
+    },
+    {
+      "reward_name": "AmraUndLea2Liannon1",
+      "platform": "P1",
+      "xp": 500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AmraUndLea2Liannon1"
+      ]
+    },
+    {
+      "reward_name": "AmraUndLea2Liannon2",
+      "platform": "P1",
+      "xp": 300,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AmraUndLea2Liannon2"
+      ]
+    },
+    {
+      "reward_name": "EchosBuch",
+      "platform": "P1",
+      "xp": 200,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "EchosBuch"
+      ]
+    },
+    {
+      "reward_name": "Einsiedler1Shan",
+      "platform": "P1",
+      "xp": 100,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Einsiedler1Shan"
+      ]
+    },
+    {
+      "reward_name": "TrommelnInWaeldern",
+      "platform": "P2",
+      "xp": 90,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "TrommelnInWaeldern"
+      ]
+    },
+    {
+      "reward_name": "StaubDerSterne2",
+      "platform": "P2",
+      "xp": 10,
+      "gold": 0,
+      "silver": 4,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "StaubDerSterne2"
+      ]
+    },
+    {
+      "reward_name": "StaubDerSterne3",
+      "platform": "P2",
+      "xp": 5,
+      "gold": 0,
+      "silver": 6,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "StaubDerSterne3"
+      ]
+    },
+    {
+      "reward_name": "DurchDenSchattenhain",
+      "platform": "P4",
+      "xp": 130,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DurchDenSchattenhain"
+      ]
+    },
+    {
+      "reward_name": "Bannwerk1",
+      "platform": "P4",
+      "xp": 60,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Bannwerk1"
+      ]
+    },
+    {
+      "reward_name": "BefreiungShiel1Kommandant",
+      "platform": "P5",
+      "xp": 40,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "BefreiungShiel1Kommandant"
+      ]
+    },
+    {
+      "reward_name": "BefreiungShiel2Dryaden",
+      "platform": "P5",
+      "xp": 140,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "BefreiungShiel2Dryaden"
+      ]
+    },
+    {
+      "reward_name": "PurpurnesBanner1Kettchen",
+      "platform": "P5",
+      "xp": 35,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "PurpurnesBanner1Kettchen"
+      ]
+    },
+    {
+      "reward_name": "PurpurnesBanner2",
+      "platform": "P5",
+      "xp": 45,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        680,
+        622
+      ],
+      "flags": [
+        "PurpurnesBanner2"
+      ]
+    },
+    {
+      "reward_name": "SchlachtUmBrunnenfels2",
+      "platform": "P9",
+      "xp": 150,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        708,
+        545
+      ],
+      "flags": [
+        "SchlachtUmBrunnenfels2"
+      ]
+    },
+    {
+      "reward_name": "Eisenkarren1",
+      "platform": "P9",
+      "xp": 20,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Eisenkarren1"
+      ]
+    },
+    {
+      "reward_name": "Eisenkarren2",
+      "platform": "P9",
+      "xp": 20,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Eisenkarren2"
+      ]
+    },
+    {
+      "reward_name": "Eisenkarren3",
+      "platform": "P9",
+      "xp": 20,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Eisenkarren3"
+      ]
+    },
+    {
+      "reward_name": "Eisenkarren4",
+      "platform": "P9",
+      "xp": 20,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Eisenkarren4"
+      ]
+    },
+    {
+      "reward_name": "Eisenkarren5",
+      "platform": "P9",
+      "xp": 20,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Eisenkarren5"
+      ]
+    },
+    {
+      "reward_name": "Eisenkarren6",
+      "platform": "P9",
+      "xp": 20,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Eisenkarren6"
+      ]
+    },
+    {
+      "reward_name": "Eisenkarren7",
+      "platform": "P9",
+      "xp": 20,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Eisenkarren7"
+      ]
+    },
+    {
+      "reward_name": "InsGrauschattental3",
+      "platform": "P10",
+      "xp": 50,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "InsGrauschattental3"
+      ]
+    },
+    {
+      "reward_name": "WeisseSchatten2",
+      "platform": "P10",
+      "xp": 40,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        774
+      ],
+      "flags": [
+        "WeisseSchatten2"
+      ]
+    },
+    {
+      "reward_name": "JeGroesser1",
+      "platform": "P10",
+      "xp": 90,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "JeGroesser1"
+      ]
+    },
+    {
+      "reward_name": "JeGroesser2",
+      "platform": "P10",
+      "xp": 110,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "JeGroesser2"
+      ]
+    },
+    {
+      "reward_name": "Reisserfell",
+      "platform": "P10",
+      "xp": 60,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Reisserfell"
+      ]
+    },
+    {
+      "reward_name": "Erdenklinge2",
+      "platform": "P10",
+      "xp": 200,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Erdenklinge2"
+      ]
+    },
+    {
+      "reward_name": "Erdenklinge4",
+      "platform": "P10",
+      "xp": 400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Erdenklinge4"
+      ]
+    },
+    {
+      "reward_name": "Erdklinge11",
+      "platform": "P11",
+      "xp": 100,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Erdklinge11"
+      ]
+    },
+    {
+      "reward_name": "Erdklinge12",
+      "platform": "P11",
+      "xp": 250,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Erdklinge12"
+      ]
+    },
+    {
+      "reward_name": "Giftzwerg",
+      "platform": "P11",
+      "xp": 150,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Giftzwerg"
+      ]
+    },
+    {
+      "reward_name": "Riesenaerger1",
+      "platform": "P11",
+      "xp": 100,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Riesenaerger1"
+      ]
+    },
+    {
+      "reward_name": "Riesenaerger2",
+      "platform": "P11",
+      "xp": 150,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        644
+      ],
+      "flags": [
+        "Riesenaerger2"
+      ]
+    },
+    {
+      "reward_name": "Grenzkrieg2Canyon",
+      "platform": "P12",
+      "xp": 500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Grenzkrieg2Canyon"
+      ]
+    },
+    {
+      "reward_name": "Verraeter",
+      "platform": "P12",
+      "xp": 400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        571
+      ],
+      "flags": [
+        "Verraeter"
+      ]
+    },
+    {
+      "reward_name": "Homunculus",
+      "platform": "P15",
+      "xp": 300,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        740
+      ],
+      "flags": [
+        "Homunculus"
+      ]
+    },
+    {
+      "reward_name": "Trickster1Cassius",
+      "platform": "P15",
+      "xp": 300,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Trickster1Cassius"
+      ]
+    },
+    {
+      "reward_name": "Schattenwelt4Kristall",
+      "platform": "P15",
+      "xp": 1400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Schattenwelt4Kristall"
+      ]
+    },
+    {
+      "reward_name": "AmraUndLea5",
+      "platform": "P15",
+      "xp": 1200,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AmraUndLea5"
+      ]
+    },
+    {
+      "reward_name": "FluesterndeStadt2Item2",
+      "platform": "P16",
+      "xp": 250,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "FluesterndeStadt2Item2"
+      ]
+    },
+    {
+      "reward_name": "FluesterndeStadt3Item3",
+      "platform": "P16",
+      "xp": 250,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "FluesterndeStadt3Item3"
+      ]
+    },
+    {
+      "reward_name": "FluesterndeStadt5Maske",
+      "platform": "P16",
+      "xp": 350,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "FluesterndeStadt5Maske"
+      ]
+    },
+    {
+      "reward_name": "MosaikDesTodes",
+      "platform": "P16",
+      "xp": 800,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "MosaikDesTodes"
+      ]
+    },
+    {
+      "reward_name": "AufDemWall2Village2",
+      "platform": "P17",
+      "xp": 300,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AufDemWall2Village2"
+      ]
+    },
+    {
+      "reward_name": "GwensMedizin",
+      "platform": "P17",
+      "xp": 600,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "GwensMedizin"
+      ]
+    },
+    {
+      "reward_name": "DerPhoenix2Splitter1",
+      "platform": "P19",
+      "xp": 800,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DerPhoenix2Splitter1"
+      ]
+    },
+    {
+      "reward_name": "DerPhoenix3Splitter2",
+      "platform": "P19",
+      "xp": 800,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DerPhoenix3Splitter2"
+      ]
+    },
+    {
+      "reward_name": "DerPhoenix4Splitter3",
+      "platform": "P19",
+      "xp": 800,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DerPhoenix4Splitter3"
+      ]
+    },
+    {
+      "reward_name": "DerPhoenix5Splitter4",
+      "platform": "P19",
+      "xp": 800,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DerPhoenix5Splitter4"
+      ]
+    },
+    {
+      "reward_name": "WolfUndDrache2",
+      "platform": "P21",
+      "xp": 400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WolfUndDrache2"
+      ]
+    },
+    {
+      "reward_name": "Schattenwelt2Rigour",
+      "platform": "P21",
+      "xp": 300,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Schattenwelt2Rigour"
+      ]
+    },
+    {
+      "reward_name": "Schattenwelt2aRigour",
+      "platform": "P21",
+      "xp": 400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Schattenwelt2aRigour"
+      ]
+    },
+    {
+      "reward_name": "Schattenwelt2bRigour",
+      "platform": "P21",
+      "xp": 600,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Schattenwelt2bRigour"
+      ]
+    },
+    {
+      "reward_name": "ShardAutumn",
+      "platform": "P21",
+      "xp": 400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ShardAutumn"
+      ]
+    },
+    {
+      "reward_name": "DurchdenSpalt1Hin",
+      "platform": "P23",
+      "xp": 1300,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DurchdenSpalt1Hin"
+      ]
+    },
+    {
+      "reward_name": "Ulather",
+      "platform": "P23",
+      "xp": 800,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Ulather"
+      ]
+    },
+    {
+      "reward_name": "AmraUndLea4",
+      "platform": "P7",
+      "xp": 1200,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AmraUndLea4"
+      ]
+    },
+    {
+      "reward_name": "Klingensturm2Sartarius",
+      "platform": "P25",
+      "xp": 2600,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        2241
+      ],
+      "flags": [
+        "Klingensturm2Sartarius"
+      ]
+    },
+    {
+      "reward_name": "AmraUndLea4",
+      "platform": "P25",
+      "xp": 1200,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AmraUndLea4"
+      ]
+    },
+    {
+      "reward_name": "NachUrgath1Elfensiedlung",
+      "platform": "P27",
+      "xp": 1000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "NachUrgath1Elfensiedlung"
+      ]
+    },
+    {
+      "reward_name": "NachUrgath3Archon",
+      "platform": "P27",
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        1456,
+        1550
+      ],
+      "flags": [
+        "NachUrgath3Archon"
+      ]
+    },
+    {
+      "reward_name": "AtmenderWald1Waldherz",
+      "platform": "P30",
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AtmenderWald1Waldherz"
+      ]
+    },
+    {
+      "reward_name": "KreisSchluss1Tor1",
+      "platform": "P32",
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "KreisSchluss1Tor1"
+      ]
+    },
+    {
+      "reward_name": "KreisSchluss2Tor2",
+      "platform": "P32",
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "KreisSchluss2Tor2"
+      ]
+    },
+    {
+      "reward_name": "KreisSchluss3Tor3",
+      "platform": "P32",
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "KreisSchluss3Tor3"
+      ]
+    },
+    {
+      "reward_name": "WumpusKilled",
+      "platform": "P101",
+      "xp": 550,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        3685,
+        3694,
+        3956
+      ],
+      "flags": [
+        "WumpusKilled"
+      ]
+    },
+    {
+      "reward_name": "JaninaBefreit",
+      "platform": "P102",
+      "xp": 65,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "JaninaBefreit"
+      ]
+    },
+    {
+      "reward_name": "HuluErreicht",
+      "platform": "P102",
+      "xp": 65,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "HuluErreicht"
+      ]
+    },
+    {
+      "reward_name": "SetriusErreicht",
+      "platform": "P102",
+      "xp": 65,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SetriusErreicht"
+      ]
+    },
+    {
+      "reward_name": "QuelleVergiftet",
+      "platform": "P102",
+      "xp": 65,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "QuelleVergiftet"
+      ]
+    },
+    {
+      "reward_name": "DreiMagierZolowinGive",
+      "platform": "P102",
+      "xp": 55,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        4056
+      ],
+      "flags": [
+        "DreiMagierZolowinGive"
+      ]
+    },
+    {
+      "reward_name": "DreiMagierZolowinSave",
+      "platform": "P102",
+      "xp": 250,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        4032,
+        4079,
+        3671
+      ],
+      "flags": [
+        "DreiMagierZolowinSave"
+      ]
+    },
+    {
+      "reward_name": "DreiMagierGruolunSave",
+      "platform": "P102",
+      "xp": 250,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        3959,
+        4079,
+        705
+      ],
+      "flags": [
+        "DreiMagierGruolunSave"
+      ]
+    },
+    {
+      "reward_name": "DreiMagierRenyaSave",
+      "platform": "P102",
+      "xp": 250,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        3928,
+        4079,
+        627
+      ],
+      "flags": [
+        "DreiMagierRenyaSave"
+      ]
+    },
+    {
+      "reward_name": "P103Erreicht",
+      "platform": "P103",
+      "xp": 75,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P103Erreicht"
+      ]
+    },
+    {
+      "reward_name": "P104Erreicht",
+      "platform": "P104",
+      "xp": 125,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P104Erreicht"
+      ]
+    },
+    {
+      "reward_name": "Schluesselmeisterin",
+      "platform": "P104",
+      "xp": 350,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Schluesselmeisterin"
+      ]
+    },
+    {
+      "reward_name": "SQTiondriaBuchDariusZurueck",
+      "platform": "P105",
+      "xp": 400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQTiondriaBuchDariusZurueck"
+      ]
+    },
+    {
+      "reward_name": "SQTiondriaFlinkBefreit",
+      "platform": "P105",
+      "xp": 250,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQTiondriaFlinkBefreit"
+      ]
+    },
+    {
+      "reward_name": "SQTiondriaSchatzGeteilt",
+      "platform": "P105",
+      "xp": 2500,
+      "gold": 15,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        3957,
+        3598,
+        3776,
+        4418
+      ],
+      "flags": [
+        "SQTiondriaSchatzGeteilt"
+      ]
+    },
+    {
+      "reward_name": "SQTiondriaSchatzBehalten",
+      "platform": "P105",
+      "xp": 250,
+      "gold": 30,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        3957,
+        3955,
+        4407,
+        3773,
+        3692,
+        3598,
+        3776,
+        4418,
+        3726
+      ],
+      "flags": [
+        "SQTiondriaSchatzBehalten"
+      ]
+    },
+    {
+      "reward_name": "SQTiondriaMordfallSolved",
+      "platform": "P105",
+      "xp": 1300,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQTiondriaMordfallSolved"
+      ]
+    },
+    {
+      "reward_name": "SQTiondriaMordfallHalfSolved",
+      "platform": "P105",
+      "xp": 750,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQTiondriaMordfallHalfSolved"
+      ]
+    },
+    {
+      "reward_name": "SQScaramangirKilled",
+      "platform": "P105",
+      "xp": 1500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQScaramangirKilled"
+      ]
+    },
+    {
+      "reward_name": "SkeletonCampDestroyed",
+      "platform": "P105",
+      "xp": 850,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SkeletonCampDestroyed"
+      ]
+    },
+    {
+      "reward_name": "GeistercampBesiegt",
+      "platform": "P107",
+      "xp": 1150,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "GeistercampBesiegt"
+      ]
+    },
+    {
+      "reward_name": "AnfuehrerBesiegt",
+      "platform": "P107",
+      "xp": 1150,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AnfuehrerBesiegt"
+      ]
+    },
+    {
+      "reward_name": "P108KarteErreicht",
+      "platform": "P108",
+      "xp": 350,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P108KarteErreicht"
+      ]
+    },
+    {
+      "reward_name": "WindjalfBefreit",
+      "platform": "P108",
+      "xp": 1150,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WindjalfBefreit"
+      ]
+    },
+    {
+      "reward_name": "MasterOfMosaic",
+      "platform": "P108",
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "MasterOfMosaic"
+      ]
+    },
+    {
+      "reward_name": "P109KarteErreicht",
+      "platform": "P109",
+      "xp": 350,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P109KarteErreicht"
+      ]
+    },
+    {
+      "reward_name": "P109PortalErreicht",
+      "platform": "P109",
+      "xp": 350,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P109PortalErreicht"
+      ]
+    },
+    {
+      "reward_name": "ZwergeBefreit",
+      "platform": "P109",
+      "xp": 550,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ZwergeBefreit"
+      ]
+    },
+    {
+      "reward_name": "TrollcampZerstoert",
+      "platform": "P109",
+      "xp": 900,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "TrollcampZerstoert"
+      ]
+    },
+    {
+      "reward_name": "WerwolfGesamt",
+      "platform": "P109",
+      "xp": 550,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        3727
+      ],
+      "flags": [
+        "WerwolfGesamt"
+      ]
+    },
+    {
+      "reward_name": "P110KarteErreicht",
+      "platform": "P110",
+      "xp": 350,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P110KarteErreicht"
+      ]
+    },
+    {
+      "reward_name": "SternstadtZerstoert",
+      "platform": "P110",
+      "xp": 600,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SternstadtZerstoert"
+      ]
+    },
+    {
+      "reward_name": "MondstadtZerstoert",
+      "platform": "P110",
+      "xp": 600,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "MondstadtZerstoert"
+      ]
+    },
+    {
+      "reward_name": "SonnenstadtZerstoert",
+      "platform": "P110",
+      "xp": 600,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SonnenstadtZerstoert"
+      ]
+    },
+    {
+      "reward_name": "InInnenstadtGekommen",
+      "platform": "P110",
+      "xp": 700,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "InInnenstadtGekommen"
+      ]
+    },
+    {
+      "reward_name": "GrimBesiegt",
+      "platform": "P110",
+      "xp": 750,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "GrimBesiegt"
+      ]
+    },
+    {
+      "reward_name": "ElementBeschworen",
+      "platform": "P111",
+      "xp": 600,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ElementBeschworen"
+      ]
+    },
+    {
+      "reward_name": "WaechterGetoetet",
+      "platform": "P111",
+      "xp": 1000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WaechterGetoetet"
+      ]
+    },
+    {
+      "reward_name": "SQTiondriaObjekteEingesetzt",
+      "platform": "P111",
+      "xp": 350,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQTiondriaObjekteEingesetzt"
+      ]
+    },
+    {
+      "reward_name": "Boss1Getoetet",
+      "platform": "P113",
+      "xp": 700,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Boss1Getoetet"
+      ]
+    },
+    {
+      "reward_name": "Boss2Getoetet",
+      "platform": "P113",
+      "xp": 700,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Boss2Getoetet"
+      ]
+    },
+    {
+      "reward_name": "Boss3Getoetet",
+      "platform": "P113",
+      "xp": 700,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Boss3Getoetet"
+      ]
+    },
+    {
+      "reward_name": "Boss4Getoetet",
+      "platform": "P113",
+      "xp": 700,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Boss4Getoetet"
+      ]
+    },
+    {
+      "reward_name": "P115KarteErreicht",
+      "platform": "P115",
+      "xp": 400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P115KarteErreicht"
+      ]
+    },
+    {
+      "reward_name": "Drachenstein1",
+      "platform": "P115",
+      "xp": 450,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Drachenstein1"
+      ]
+    },
+    {
+      "reward_name": "Drachenstein2",
+      "platform": "P115",
+      "xp": 450,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Drachenstein2"
+      ]
+    },
+    {
+      "reward_name": "Drachenstein3",
+      "platform": "P115",
+      "xp": 450,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Drachenstein3"
+      ]
+    },
+    {
+      "reward_name": "Drachenstein4",
+      "platform": "P115",
+      "xp": 450,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Drachenstein4"
+      ]
+    },
+    {
+      "reward_name": "Drachenstein5",
+      "platform": "P115",
+      "xp": 450,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Drachenstein5"
+      ]
+    },
+    {
+      "reward_name": "Drachenstein6",
+      "platform": "P115",
+      "xp": 450,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Drachenstein6"
+      ]
+    },
+    {
+      "reward_name": "ColosseumRunde01Sieg",
+      "platform": "P200",
+      "xp": 7000,
+      "gold": 2500,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        4730,
+        4622,
+        4467
+      ],
+      "flags": [
+        "ColosseumRunde01Sieg"
+      ]
+    },
+    {
+      "reward_name": "ColosseumRunde02Sieg",
+      "platform": "P200",
+      "xp": 8000,
+      "gold": 2700,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        7076,
+        4474,
+        4485
+      ],
+      "flags": [
+        "ColosseumRunde02Sieg"
+      ]
+    },
+    {
+      "reward_name": "ColosseumRunde03Sieg",
+      "platform": "P200",
+      "xp": 9000,
+      "gold": 2900,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        4450,
+        4440,
+        7066
+      ],
+      "flags": [
+        "ColosseumRunde03Sieg"
+      ]
+    },
+    {
+      "reward_name": "ColosseumRunde04Sieg",
+      "platform": "P200",
+      "xp": 10000,
+      "gold": 3200,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        4767,
+        4478,
+        4499
+      ],
+      "flags": [
+        "ColosseumRunde04Sieg"
+      ]
+    },
+    {
+      "reward_name": "ColosseumRunde05Sieg",
+      "platform": "P200",
+      "xp": 12500,
+      "gold": 3400,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        4079,
+        4561,
+        4461
+      ],
+      "flags": [
+        "ColosseumRunde05Sieg"
+      ]
+    },
+    {
+      "reward_name": "ColosseumRunde06Sieg",
+      "platform": "P200",
+      "xp": 15000,
+      "gold": 3600,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        4563,
+        4679,
+        4651
+      ],
+      "flags": [
+        "ColosseumRunde06Sieg"
+      ]
+    },
+    {
+      "reward_name": "ColosseumRunde07Sieg",
+      "platform": "P200",
+      "xp": 17500,
+      "gold": 3800,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        4541,
+        4534,
+        4444
+      ],
+      "flags": [
+        "ColosseumRunde07Sieg"
+      ]
+    },
+    {
+      "reward_name": "ColosseumRunde08Sieg",
+      "platform": "P200",
+      "xp": 20500,
+      "gold": 4100,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        4775,
+        4676,
+        4486
+      ],
+      "flags": [
+        "ColosseumRunde08Sieg"
+      ]
+    },
+    {
+      "reward_name": "ColosseumRunde09Sieg",
+      "platform": "P200",
+      "xp": 25000,
+      "gold": 4300,
+      "silver": 0,
+      "copper": 0,
+      "items": [
+        4745,
+        4665,
+        4502
+      ],
+      "flags": [
+        "ColosseumRunde09Sieg"
+      ]
+    },
+    {
+      "reward_name": "GoblinRennen",
+      "platform": "P200",
+      "xp": 2000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "GoblinRennen"
+      ]
+    },
+    {
+      "reward_name": "Ordensritter1Befreit",
+      "platform": "P201",
+      "xp": 4000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Ordensritter1Befreit"
+      ]
+    },
+    {
+      "reward_name": "Ordensritter2Befreit",
+      "platform": "P201",
+      "xp": 4000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Ordensritter2Befreit"
+      ]
+    },
+    {
+      "reward_name": "Ordensritter3Befreit",
+      "platform": "P201",
+      "xp": 4000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Ordensritter3Befreit"
+      ]
+    },
+    {
+      "reward_name": "ZweitenDrachenGetoetet",
+      "platform": "P201",
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ZweitenDrachenGetoetet"
+      ]
+    },
+    {
+      "reward_name": "GurimLebt",
+      "platform": "P201",
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "GurimLebt"
+      ]
+    },
+    {
+      "reward_name": "GrabmalGeoeffnet",
+      "platform": "P202",
+      "xp": 12000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "GrabmalGeoeffnet"
+      ]
+    },
+    {
+      "reward_name": "Seelenwesen1",
+      "platform": "P202",
+      "xp": 2400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Seelenwesen1"
+      ]
+    },
+    {
+      "reward_name": "Seelenwesen2",
+      "platform": "P202",
+      "xp": 2400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Seelenwesen2"
+      ]
+    },
+    {
+      "reward_name": "Seelenwesen3",
+      "platform": "P202",
+      "xp": 2400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Seelenwesen3"
+      ]
+    },
+    {
+      "reward_name": "Seelenwesen4",
+      "platform": "P202",
+      "xp": 2400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Seelenwesen4"
+      ]
+    },
+    {
+      "reward_name": "Seelenwesen5",
+      "platform": "P202",
+      "xp": 2400,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Seelenwesen5"
+      ]
+    },
+    {
+      "reward_name": "WachgeistTot",
+      "platform": "P202",
+      "xp": 4000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WachgeistTot"
+      ]
+    },
+    {
+      "reward_name": "AschetaenzerTot",
+      "platform": "P202",
+      "xp": 12000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AschetaenzerTot"
+      ]
+    },
+    {
+      "reward_name": "GnomlingBossTot",
+      "platform": "P202",
+      "xp": 8000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "GnomlingBossTot"
+      ]
+    },
+    {
+      "reward_name": "ExtinctTuermeWeg",
+      "platform": "P202",
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ExtinctTuermeWeg"
+      ]
+    },
+    {
+      "reward_name": "ResistenteGargoyle1Tot",
+      "platform": "P202",
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ResistenteGargoyle1Tot"
+      ]
+    },
+    {
+      "reward_name": "P203KarteErreicht",
+      "platform": "P203",
+      "xp": 1500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P203KarteErreicht"
+      ]
+    },
+    {
+      "reward_name": "Geheimweg",
+      "platform": "P203",
+      "xp": 9000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Geheimweg"
+      ]
+    },
+    {
+      "reward_name": "FlinkAbgeliefert",
+      "platform": "P204",
+      "xp": 5500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "FlinkAbgeliefert"
+      ]
+    },
+    {
+      "reward_name": "Tor1DurchTrickGeoeffnet",
+      "platform": "P204",
+      "xp": 11000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Tor1DurchTrickGeoeffnet"
+      ]
+    },
+    {
+      "reward_name": "OberstadtRechtsErreicht",
+      "platform": "P204",
+      "xp": 6500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "OberstadtRechtsErreicht"
+      ]
+    },
+    {
+      "reward_name": "OberstadtLinksErreicht",
+      "platform": "P204",
+      "xp": 6500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "OberstadtLinksErreicht"
+      ]
+    },
+    {
+      "reward_name": "IshtarTraumstabGebracht",
+      "platform": "P204",
+      "xp": 4000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "IshtarTraumstabGebracht"
+      ]
+    },
+    {
+      "reward_name": "TruppenZumPortalGesandt",
+      "platform": "P204",
+      "xp": 9000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "TruppenZumPortalGesandt"
+      ]
+    },
+    {
+      "reward_name": "ArenaKampf32",
+      "platform": "P204",
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ArenaKampf32"
+      ]
+    },
+    {
+      "reward_name": "ArenaKampf36",
+      "platform": "P204",
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ArenaKampf36"
+      ]
+    },
+    {
+      "reward_name": "ArenaKampf38",
+      "platform": "P204",
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ArenaKampf38"
+      ]
+    },
+    {
+      "reward_name": "ArenaKampf40",
+      "platform": "P204",
+      "xp": 12500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ArenaKampf40"
+      ]
+    },
+    {
+      "reward_name": "SQSchutzgeldSmall",
+      "platform": "P204",
+      "xp": 6000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQSchutzgeldSmall"
+      ]
+    },
+    {
+      "reward_name": "SQSchutzgeldMedium",
+      "platform": "P204",
+      "xp": 12000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQSchutzgeldMedium"
+      ]
+    },
+    {
+      "reward_name": "SQSchutzgeldLarge",
+      "platform": "P204",
+      "xp": 18000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SQSchutzgeldLarge"
+      ]
+    },
+    {
+      "reward_name": "Nymphe1Befreit",
+      "platform": "P205",
+      "xp": 6000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Nymphe1Befreit"
+      ]
+    },
+    {
+      "reward_name": "Nymphe2Befreit",
+      "platform": "P205",
+      "xp": 6000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Nymphe2Befreit"
+      ]
+    },
+    {
+      "reward_name": "Nymphe3Befreit",
+      "platform": "P205",
+      "xp": 6000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Nymphe3Befreit"
+      ]
+    },
+    {
+      "reward_name": "SpinnencampZerstoert",
+      "platform": "P205",
+      "xp": 8000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SpinnencampZerstoert"
+      ]
+    },
+    {
+      "reward_name": "GartenEntgiftet",
+      "platform": "P205",
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "GartenEntgiftet"
+      ]
+    },
+    {
+      "reward_name": "MitDryadeGesprochen",
+      "platform": "P205",
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "MitDryadeGesprochen"
+      ]
+    },
+    {
+      "reward_name": "SmallIrfitReward",
+      "platform": "P205",
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SmallIrfitReward"
+      ]
+    },
+    {
+      "reward_name": "LargeIrfitReward",
+      "platform": "P205",
+      "xp": 13000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "LargeIrfitReward"
+      ]
+    },
+    {
+      "reward_name": "Lager1Kaputtgemacht",
+      "platform": "P206",
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Lager1Kaputtgemacht"
+      ]
+    },
+    {
+      "reward_name": "Lager2Kaputtgemacht",
+      "platform": "P206",
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Lager2Kaputtgemacht"
+      ]
+    },
+    {
+      "reward_name": "KarawaneLosgelaufen",
+      "platform": "P206",
+      "xp": 10300,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "KarawaneLosgelaufen"
+      ]
+    },
+    {
+      "reward_name": "VieleTrolleKommenAn",
+      "platform": "P206",
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "VieleTrolleKommenAn"
+      ]
+    },
+    {
+      "reward_name": "WenigeTrolleKommenAn",
+      "platform": "P206",
+      "xp": 3000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WenigeTrolleKommenAn"
+      ]
+    },
+    {
+      "reward_name": "SchalterraetselGeloest",
+      "platform": "P207",
+      "xp": 7500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SchalterraetselGeloest"
+      ]
+    },
+    {
+      "reward_name": "P208KarteErreicht",
+      "platform": "P208",
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P208KarteErreicht"
+      ]
+    },
+    {
+      "reward_name": "Prinzessin1Befreit",
+      "platform": "P208",
+      "xp": 3000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Prinzessin1Befreit"
+      ]
+    },
+    {
+      "reward_name": "Prinzessin2Befreit",
+      "platform": "P208",
+      "xp": 3000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Prinzessin2Befreit"
+      ]
+    },
+    {
+      "reward_name": "Prinzessin3Befreit",
+      "platform": "P208",
+      "xp": 3000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Prinzessin3Befreit"
+      ]
+    },
+    {
+      "reward_name": "Prinzessin4Befreit",
+      "platform": "P208",
+      "xp": 3000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Prinzessin4Befreit"
+      ]
+    },
+    {
+      "reward_name": "Prinzessin5Befreit",
+      "platform": "P208",
+      "xp": 3000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Prinzessin5Befreit"
+      ]
+    },
+    {
+      "reward_name": "Wolfcamp1Zerstoert",
+      "platform": "P208",
+      "xp": 2500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Wolfcamp1Zerstoert"
+      ]
+    },
+    {
+      "reward_name": "Wolfcamp2Zerstoert",
+      "platform": "P208",
+      "xp": 2500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Wolfcamp2Zerstoert"
+      ]
+    },
+    {
+      "reward_name": "Wolfcamp3Zerstoert",
+      "platform": "P208",
+      "xp": 2500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Wolfcamp3Zerstoert"
+      ]
+    },
+    {
+      "reward_name": "Wolfcamp4Zerstoert",
+      "platform": "P208",
+      "xp": 2500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Wolfcamp4Zerstoert"
+      ]
+    },
+    {
+      "reward_name": "Wolfcamp5Zerstoert",
+      "platform": "P208",
+      "xp": 2500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Wolfcamp5Zerstoert"
+      ]
+    },
+    {
+      "reward_name": "Wolfcamp6Zerstoert",
+      "platform": "P208",
+      "xp": 2500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Wolfcamp6Zerstoert"
+      ]
+    },
+    {
+      "reward_name": "Wolfcamp7Zerstoert",
+      "platform": "P208",
+      "xp": 2500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Wolfcamp7Zerstoert"
+      ]
+    },
+    {
+      "reward_name": "KopfloserTodVernichtet",
+      "platform": "P208",
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "KopfloserTodVernichtet"
+      ]
+    },
+    {
+      "reward_name": "Gremlinlager1Zerstoert",
+      "platform": "P208",
+      "xp": 3000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Gremlinlager1Zerstoert"
+      ]
+    },
+    {
+      "reward_name": "Gremlinlager2Zerstoert",
+      "platform": "P208",
+      "xp": 3000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Gremlinlager2Zerstoert"
+      ]
+    },
+    {
+      "reward_name": "Gremlinlager3Zerstoert",
+      "platform": "P208",
+      "xp": 3000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Gremlinlager3Zerstoert"
+      ]
+    },
+    {
+      "reward_name": "Gremlinlager4Zerstoert",
+      "platform": "P208",
+      "xp": 3000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Gremlinlager4Zerstoert"
+      ]
+    },
+    {
+      "reward_name": "Gremlinlager5Zerstoert",
+      "platform": "P208",
+      "xp": 3000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Gremlinlager5Zerstoert"
+      ]
+    },
+    {
+      "reward_name": "UntotenlagerNord",
+      "platform": "P209",
+      "xp": 9000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "UntotenlagerNord"
+      ]
+    },
+    {
+      "reward_name": "UntotenlagerWest",
+      "platform": "P209",
+      "xp": 9000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "UntotenlagerWest"
+      ]
+    },
+    {
+      "reward_name": "UntotenlagerSued",
+      "platform": "P209",
+      "xp": 9000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "UntotenlagerSued"
+      ]
+    },
+    {
+      "reward_name": "HolyArtefact2Gefunden",
+      "platform": "P209",
+      "xp": 4000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "HolyArtefact2Gefunden"
+      ]
+    },
+    {
+      "reward_name": "BronzerieseGetoetet",
+      "platform": "P209",
+      "xp": 12000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "BronzerieseGetoetet"
+      ]
+    },
+    {
+      "reward_name": "EntryMenhirComboCorrect",
+      "platform": "P210",
+      "xp": 3500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "EntryMenhirComboCorrect"
+      ]
+    },
+    {
+      "reward_name": "AugenSet1Solved",
+      "platform": "P210",
+      "xp": 3500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AugenSet1Solved"
+      ]
+    },
+    {
+      "reward_name": "AugenSet2Solved",
+      "platform": "P210",
+      "xp": 3500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AugenSet2Solved"
+      ]
+    },
+    {
+      "reward_name": "AugenSet3Solved",
+      "platform": "P210",
+      "xp": 3500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AugenSet3Solved"
+      ]
+    },
+    {
+      "reward_name": "AugenSet4Solved",
+      "platform": "P210",
+      "xp": 3500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AugenSet4Solved"
+      ]
+    },
+    {
+      "reward_name": "Room2SensoSolved",
+      "platform": "P210",
+      "xp": 14000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Room2SensoSolved"
+      ]
+    },
+    {
+      "reward_name": "LastChestInRoom5Opened",
+      "platform": "P210",
+      "xp": 20000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "LastChestInRoom5Opened"
+      ]
+    },
+    {
+      "reward_name": "Room6SpiderGateOpened",
+      "platform": "P210",
+      "xp": 15000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Room6SpiderGateOpened"
+      ]
+    },
+    {
+      "reward_name": "TurningHeadsCrossed",
+      "platform": "P210",
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "TurningHeadsCrossed"
+      ]
+    },
+    {
+      "reward_name": "AirCoinPassageOpened",
+      "platform": "P210",
+      "xp": 15000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AirCoinPassageOpened"
+      ]
+    },
+    {
+      "reward_name": "Room4SkeletonDoorOpened",
+      "platform": "P210",
+      "xp": 15000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Room4SkeletonDoorOpened"
+      ]
+    },
+    {
+      "reward_name": "Room7ChessboardCrossed",
+      "platform": "P210",
+      "xp": 15000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Room7ChessboardCrossed"
+      ]
+    },
+    {
+      "reward_name": "Room3HeadDoorOpened",
+      "platform": "P210",
+      "xp": 45000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Room3HeadDoorOpened"
+      ]
+    },
+    {
+      "reward_name": "SceptreOfWindsFound",
+      "platform": "P210",
+      "xp": 20000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SceptreOfWindsFound"
+      ]
+    },
+    {
+      "reward_name": "ExitDoorToP211Opened",
+      "platform": "P210",
+      "xp": 25000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "ExitDoorToP211Opened"
+      ]
+    },
+    {
+      "reward_name": "P211KarteErreicht",
+      "platform": "P211",
+      "xp": 5000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "P211KarteErreicht"
+      ]
+    },
+    {
+      "reward_name": "TorJenquaiGeoeffnet",
+      "platform": "P211",
+      "xp": 6500,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "TorJenquaiGeoeffnet"
+      ]
+    },
+    {
+      "reward_name": "MonumenteElfClaimed",
+      "platform": "P211",
+      "xp": 4000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "MonumenteElfClaimed"
+      ]
+    },
+    {
+      "reward_name": "MonumenteZwerg1Claimed",
+      "platform": "P211",
+      "xp": 4000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "MonumenteZwerg1Claimed"
+      ]
+    },
+    {
+      "reward_name": "MonumenteZwerg2Claimed",
+      "platform": "P211",
+      "xp": 4000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "MonumenteZwerg2Claimed"
+      ]
+    },
+    {
+      "reward_name": "DschungelCamp1Killed",
+      "platform": "P211",
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DschungelCamp1Killed"
+      ]
+    },
+    {
+      "reward_name": "DschungelCamp2Killed",
+      "platform": "P211",
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DschungelCamp2Killed"
+      ]
+    },
+    {
+      "reward_name": "DschungelCamp3Killed",
+      "platform": "P211",
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DschungelCamp3Killed"
+      ]
+    },
+    {
+      "reward_name": "DschungelCamp4Killed",
+      "platform": "P211",
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DschungelCamp4Killed"
+      ]
+    },
+    {
+      "reward_name": "SchattenklingeBefreit",
+      "platform": "P211",
+      "xp": 10000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "SchattenklingeBefreit"
+      ]
+    },
+    {
+      "reward_name": "WerwolfAbgelenkt",
+      "platform": "P211",
+      "xp": 15000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "WerwolfAbgelenkt"
+      ]
+    },
+    {
+      "reward_name": "Stele1Off",
+      "platform": "P212",
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Stele1Off"
+      ]
+    },
+    {
+      "reward_name": "Stele2Off",
+      "platform": "P212",
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Stele2Off"
+      ]
+    },
+    {
+      "reward_name": "Stele3Off",
+      "platform": "P212",
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Stele3Off"
+      ]
+    },
+    {
+      "reward_name": "Stele4Off",
+      "platform": "P212",
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Stele4Off"
+      ]
+    },
+    {
+      "reward_name": "Stele5Off",
+      "platform": "P212",
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Stele5Off"
+      ]
+    },
+    {
+      "reward_name": "Stele6Off",
+      "platform": "P212",
+      "xp": 7000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "Stele6Off"
+      ]
+    },
+    {
+      "reward_name": "AlleStelenOff",
+      "platform": "P212",
+      "xp": 20000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "AlleStelenOff"
+      ]
+    },
+    {
+      "reward_name": "DschungelWeisenDialog",
+      "platform": "P213",
+      "xp": 8000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "DschungelWeisenDialog"
+      ]
+    },
+    {
+      "reward_name": "BeideMumienCampsPlatt",
+      "platform": "P213",
+      "xp": 15000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "BeideMumienCampsPlatt"
+      ]
+    },
+    {
+      "reward_name": "BlutigenDariusBefreit",
+      "platform": "P213",
+      "xp": 30000,
+      "gold": 0,
+      "silver": 0,
+      "copper": 0,
+      "items": [],
+      "flags": [
+        "BlutigenDariusBefreit"
+      ]
+    }
+  ],
+  "statistics": {
+    "total_rewards": 450,
+    "with_quest_id": 197,
+    "without_quest_id": 253,
+    "with_xp": 449,
+    "with_items": 48,
+    "with_money": 21,
+    "platforms_covered": 47,
+    "platforms": [
+      "P1",
+      "P10",
+      "P101",
+      "P102",
+      "P103",
+      "P104",
+      "P105",
+      "P107",
+      "P108",
+      "P109",
+      "P11",
+      "P110",
+      "P111",
+      "P113",
+      "P115",
+      "P12",
+      "P15",
+      "P16",
+      "P17",
+      "P19",
+      "P2",
+      "P200",
+      "P201",
+      "P202",
+      "P203",
+      "P204",
+      "P205",
+      "P206",
+      "P207",
+      "P208",
+      "P209",
+      "P21",
+      "P210",
+      "P211",
+      "P212",
+      "P213",
+      "P23",
+      "P25",
+      "P27",
+      "P30",
+      "P32",
+      "P4",
+      "P5",
+      "P6",
+      "P63",
+      "P7",
+      "P9"
+    ]
+  }
+}
