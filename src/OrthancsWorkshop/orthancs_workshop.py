@@ -12,40 +12,37 @@ Usage:
 Author: TirganachReloaded Modding Tools
 """
 
-import sys
 import argparse
+import sys
 from pathlib import Path
 
+from PySide6.QtCore import QSize, Qt
+from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
     QApplication,
-    QMainWindow,
-    QWidget,
-    QVBoxLayout,
+    QComboBox,
+    QGroupBox,
     QHBoxLayout,
+    QLabel,
+    QMainWindow,
+    QMessageBox,
+    QPushButton,
     QSplitter,
+    QTextEdit,
     QTreeWidget,
     QTreeWidgetItem,
-    QTextEdit,
-    QLabel,
-    QPushButton,
-    QGroupBox,
-    QProgressDialog,
-    QMessageBox,
-    QTabWidget,
-    QComboBox,
-    QStatusBar,
+    QVBoxLayout,
+    QWidget,
 )
-from PySide6.QtCore import Qt, QSize
-from PySide6.QtGui import QFont
 
 # Add the src directory to Python path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root / "src"))
 
 from TirganachReloaded.cff_editor.logging_config import configure_logging, get_logger
-from TirganachReloaded.cff_editor.shared.id_manager import IDManager, ContentType
-from TirganachReloaded.cff_editor.widgets.weapon_forge_wizard import WeaponForgeWizard
+from TirganachReloaded.cff_editor.shared.id_manager import IDManager
 from TirganachReloaded.cff_editor.widgets.armor_forge_wizard import ArmorForgeWizard
+from TirganachReloaded.cff_editor.widgets.weapon_forge_wizard import WeaponForgeWizard
 
 
 class OrthancsWorkshop(QMainWindow):
@@ -284,42 +281,113 @@ class OrthancsWorkshop(QMainWindow):
             if self.logger:
                 self.logger.warning(f"Failed to load weapon data: {e}")
 
+    def get_armor_slot_name(self, slot_id):
+        """Convert armor slot ID to human-readable name"""
+        slot_names = {
+            0: "Unknown",
+            1: "Head",
+            2: "Chest",
+            3: "Shield",  # This is likely the offhand slot
+            4: "Hands",
+            5: "Legs",
+            6: "Feet",
+            7: "Cloak",
+            8: "Belt",
+            9: "Ring",
+            10: "Amulet",
+        }
+        return slot_names.get(slot_id, f"Slot {slot_id}")
+
     def load_armor_data(self):
-        """Load armor data from various sources"""
+        """Load armor data from enhanced_armor.json"""
         try:
-            # For now, create some sample armor data
-            # In a full implementation, this would load from CFF or JSON files
-            sample_armor = [
-                {
-                    "armor_id": 20000,
-                    "armor_name": "Iron Helmet",
-                    "slot": "Head",
-                    "armor_type": "Plate",
-                    "tier": "Common",
-                    "base_armor": 15,
-                    "material_name": "Iron",
-                },
-                {
-                    "armor_id": 20001,
-                    "armor_name": "Dragon Scale Chest",
-                    "slot": "Chest",
-                    "armor_type": "Plate",
-                    "tier": "Epic",
-                    "base_armor": 45,
-                    "material_name": "Dragon Scale",
-                },
-            ]
+            # Try to load from enhanced armor data
+            enhanced_armor_path = Path("src/TirganachReloaded/enhanced_armor.json")
+            if enhanced_armor_path.exists():
+                import json
 
-            for armor in sample_armor:
-                armor_id = armor["armor_id"]
-                self.armor_data[armor_id] = armor
+                with open(enhanced_armor_path, "r", encoding="utf-8") as f:
+                    armor_data = json.load(f)
 
-            if self.logger:
-                self.logger.info(f"✓ Loaded {len(sample_armor)} sample armor items")
+                # Get the list of armor items from the JSON structure
+                armor_items = armor_data.get("armors", [])
+
+                for armor in armor_items:
+                    armor_id = armor.get("id")
+                    if armor_id:
+                        # Normalize field names for consistency with UI expectations
+                        normalized_armor = {
+                            "armor_id": armor_id,
+                            "armor_name": armor.get(
+                                "display_name", armor.get("name", f"Armor {armor_id}")
+                            ),
+                            "name": armor.get("name", f"Armor {armor_id}"),
+                            "slot": self.get_armor_slot_name(armor.get("slot", 0)),
+                            "armor_type": armor.get("armor_type", "Unknown"),
+                            "tier": armor.get("tier", "Unknown"),
+                            "material_name": armor.get("material", "Unknown"),
+                            "base_armor": armor.get("armor_value", 0),
+                            "magic_resistance": armor.get("magic_resist", 0),
+                            "physical_resistance": armor.get("physical_resist", 0),
+                            "move_speed_bonus": armor.get("run_speed", 0),
+                            "health_bonus": armor.get("health", 0),
+                            "mana_bonus": armor.get("mana", 0),
+                            # Requirements section
+                            "requirements": {
+                                "strength": armor.get("strength", 0),
+                                "dexterity": armor.get("dexterity", 0),
+                                "intelligence": armor.get("intelligence", 0),
+                                "level": armor.get("level_requirement", 0),
+                            },
+                            "sell_value": armor.get("sell_value", 0),
+                            "buy_value": armor.get("buy_value", 0),
+                            "rarity": armor.get("tier", "Unknown"),
+                        }
+                        self.armor_data[armor_id] = normalized_armor
+
+                if self.logger:
+                    self.logger.info(
+                        f"✓ Loaded {len(armor_items)} armor items from enhanced data"
+                    )
+            else:
+                if self.logger:
+                    self.logger.warning(
+                        "Enhanced armor data not found, using sample data"
+                    )
+
+                # Fallback to sample armor data if the file is not found
+                sample_armor = [
+                    {
+                        "armor_id": 20000,
+                        "armor_name": "Iron Helmet",
+                        "slot": "Head",
+                        "armor_type": "Plate",
+                        "tier": "Common",
+                        "base_armor": 15,
+                        "material_name": "Iron",
+                    },
+                    {
+                        "armor_id": 20001,
+                        "armor_name": "Dragon Scale Chest",
+                        "slot": "Chest",
+                        "armor_type": "Plate",
+                        "tier": "Epic",
+                        "base_armor": 45,
+                        "material_name": "Dragon Scale",
+                    },
+                ]
+
+                for armor in sample_armor:
+                    armor_id = armor["armor_id"]
+                    self.armor_data[armor_id] = armor
+
+                if self.logger:
+                    self.logger.info(f"✓ Loaded {len(sample_armor)} sample armor items")
 
         except Exception as e:
             if self.logger:
                 self.logger.warning(f"Failed to load armor data: {e}")
+                self.logger.exception(e)
 
     def populate_item_tree(self):
         """Populate the item tree with weapons and armor grouped by type"""
@@ -446,74 +514,71 @@ class OrthancsWorkshop(QMainWindow):
         if not weapon_name or weapon_name == "Unknown":
             weapon_name = weapon_info.get("name", "Unknown")
         details.append(
-            f"╔══════════════════════════════════════════════════════════════╗"
+            "╔══════════════════════════════════════════════════════════════╗"
         )
         details.append(f"║ Weapon ID: {weapon_id} - {weapon_name}")
         details.append(
-            f"╚══════════════════════════════════════════════════════════════╝"
+            "╚══════════════════════════════════════════════════════════════╝"
         )
         details.append("")
 
         # Basic information
         details.append("BASIC INFORMATION:")
         details.append("=" * 60)
-        details.append(f"Name: {armor_info.get('armor_name', 'Unknown')}")
-        details.append(f"Slot: {armor_info.get('slot', 'Unknown')}")
-        details.append(f"Type: {armor_info.get('armor_type', 'Unknown')}")
-        details.append(f"Tier: {armor_info.get('tier', 'Unknown')}")
-        details.append(f"Material: {armor_info.get('material_name', 'Unknown')}")
-        details.append("")
-
-        # Defense stats
-        details.append("DEFENSE STATISTICS:")
-        details.append("=" * 60)
-        details.append(f"Base Armor: {armor_info.get('base_armor', 0)}")
+        details.append(
+            f"Name: {weapon_info.get('weapon_name', weapon_info.get('name', 'Unknown'))}"
+        )
+        details.append(
+            f"Type: {weapon_info.get('weapon_type_name', weapon_info.get('item_subtype', 'Unknown'))}"
+        )
+        details.append(
+            f"Material: {weapon_info.get('weapon_material_name', 'Unknown')}"
+        )
+        details.append(f"Hands: {weapon_info.get('hands', 'Unknown')}")
+        details.append(f"Category: {weapon_info.get('damage_category', 'Unknown')}")
         details.append("")
 
         # Combat stats
-        details.append("⚔️ COMBAT STATISTICS:")
-        details.append("─" * 60)
+        # Combat stats
+        details.append("COMBAT STATISTICS:")
+        details.append("-" * 60)
         details.append(
-            f"  💥 Damage: {weapon_info.get('min_damage', 0)} - {weapon_info.get('max_damage', 0)}"
+            f"  Damage: {weapon_info.get('min_damage', 0)} - {weapon_info.get('max_damage', 0)}"
         )
-        details.append(f"  🔥 Damage Type: {weapon_info.get('damage_type', 'Unknown')}")
-        details.append(f"  ⚡ Attack Speed: {weapon_info.get('attack_speed', 0)}")
+        details.append(f"  Damage Type: {weapon_info.get('damage_type', 'Unknown')}")
+        details.append(f"  Attack Speed: {weapon_info.get('attack_speed', 0)}")
         details.append(
-            f"  📏 Range: {weapon_info.get('min_range', 0)} - {weapon_info.get('max_range', 0)}"
+            f"  Range: {weapon_info.get('min_range', 0)} - {weapon_info.get('max_range', 0)}"
         )
-        details.append(f"  🌀 Attack Arc: {weapon_info.get('attack_arc', 0)}°")
+        details.append(f"  Attack Arc: {weapon_info.get('attack_arc', 0)}°")
         details.append("")
 
         # Special properties
-        details.append("✨ SPECIAL PROPERTIES:")
-        details.append("─" * 60)
+        details.append("SPECIAL PROPERTIES:")
+        details.append("-" * 60)
+        details.append(f"  Critical Chance: {weapon_info.get('critical_chance', 0)}%")
         details.append(
-            f"  🎯 Critical Chance: {weapon_info.get('critical_chance', 0)}%"
+            f"  Armor Penetration: {weapon_info.get('armor_penetration', 0)}%"
         )
-        details.append(
-            f"  🛡️  Armor Penetration: {weapon_info.get('armor_penetration', 0)}%"
-        )
-        details.append(
-            f"  💨 Knockback Chance: {weapon_info.get('knockback_chance', 0)}%"
-        )
+        details.append(f"  Knockback Chance: {weapon_info.get('knockback_chance', 0)}%")
         details.append("")
 
         # Requirements
-        details.append("🔒 REQUIREMENTS:")
-        details.append("─" * 60)
+        details.append("REQUIREMENTS:")
+        details.append("-" * 60)
         req = weapon_info.get("requirements", {})
-        details.append(f"  💪 Strength: {req.get('strength', 0)}")
-        details.append(f"  🏹 Dexterity: {req.get('dexterity', 0)}")
-        details.append(f"  🔮 Intelligence: {req.get('intelligence', 0)}")
-        details.append(f"  📊 Level: {req.get('level', 0)}")
+        details.append(f"  Strength: {req.get('strength', 0)}")
+        details.append(f"  Dexterity: {req.get('dexterity', 0)}")
+        details.append(f"  Intelligence: {req.get('intelligence', 0)}")
+        details.append(f"  Level: {req.get('level', 0)}")
         details.append("")
 
         # Economy
-        details.append("💰 ECONOMY:")
-        details.append("─" * 60)
-        details.append(f"  💸 Sell Value: {weapon_info.get('sell_value', 0)} gold")
-        details.append(f"  🛒 Buy Value: {weapon_info.get('buy_value', 0)} gold")
-        details.append(f"  🌟 Rarity: {weapon_info.get('rarity', 'Unknown')}")
+        details.append("ECONOMY:")
+        details.append("-" * 60)
+        details.append(f"  Sell Value: {weapon_info.get('sell_value', 0)} gold")
+        details.append(f"  Buy Value: {weapon_info.get('buy_value', 0)} gold")
+        details.append(f"  Rarity: {weapon_info.get('rarity', 'Unknown')}")
         details.append("")
 
         # Footer
@@ -536,56 +601,52 @@ class OrthancsWorkshop(QMainWindow):
         # Header
         armor_name = armor_info.get("armor_name", "Unknown")
         details.append(
-            f"╔══════════════════════════════════════════════════════════════╗"
+            "╔══════════════════════════════════════════════════════════════╗"
         )
         details.append(f"║ Armor ID: {armor_id} - {armor_name}")
         details.append(
-            f"╚══════════════════════════════════════════════════════════════╝"
+            "╚══════════════════════════════════════════════════════════════╝"
         )
         details.append("")
 
         # Basic information
         details.append("BASIC INFORMATION:")
         details.append("=" * 60)
-        details.append(
-            f"Name: {weapon_info.get('weapon_name', weapon_info.get('name', 'Unknown'))}"
-        )
-        details.append(
-            f"Type: {weapon_info.get('weapon_type_name', weapon_info.get('item_subtype', 'Unknown'))}"
-        )
-        details.append(
-            f"Material: {weapon_info.get('weapon_material_name', 'Unknown')}"
-        )
-        details.append(f"Hands: {weapon_info.get('hands', 'Unknown')}")
-        details.append(f"Category: {weapon_info.get('damage_category', 'Unknown')}")
+        details.append(f"Name: {armor_info.get('armor_name', 'Unknown')}")
+        details.append(f"Slot: {armor_info.get('slot', 'Unknown')}")
+        details.append(f"Type: {armor_info.get('armor_type', 'Unknown')}")
+        details.append(f"Tier: {armor_info.get('tier', 'Unknown')}")
+        details.append(f"Material: {armor_info.get('material_name', 'Unknown')}")
         details.append("")
 
-        # Combat stats
-        details.append("COMBAT STATISTICS:")
+        # Defense stats
+        details.append("DEFENSE STATISTICS:")
         details.append("=" * 60)
+        details.append(f"Base Armor: {armor_info.get('base_armor', 0)}")
+        details.append(f"Magic Resistance: {armor_info.get('magic_resistance', 0)}")
         details.append(
-            f"Damage: {weapon_info.get('min_damage', 0)} - {weapon_info.get('max_damage', 0)}"
+            f"Physical Resistance: {armor_info.get('physical_resistance', 0)}"
         )
-        details.append(f"Damage Type: {weapon_info.get('damage_type', 'Unknown')}")
-        details.append(f"Attack Speed: {weapon_info.get('attack_speed', 0)}")
-        details.append(
-            f"Range: {weapon_info.get('min_range', 0)} - {weapon_info.get('max_range', 0)}"
-        )
-        details.append(f"Attack Arc: {weapon_info.get('attack_arc', 0)} degrees")
         details.append("")
 
         # Special properties
         details.append("SPECIAL PROPERTIES:")
         details.append("=" * 60)
-        details.append(f"Critical Chance: {weapon_info.get('critical_chance', 0)}%")
-        details.append(f"Armor Penetration: {weapon_info.get('armor_penetration', 0)}%")
-        details.append(f"Knockback Chance: {weapon_info.get('knockback_chance', 0)}%")
+        details.append(
+            f"Movement Speed: {armor_info.get('move_speed_bonus', 0) if armor_info.get('move_speed_bonus') else 0}%"
+        )
+        details.append(
+            f"Health Bonus: {armor_info.get('health_bonus', 0) if armor_info.get('health_bonus') else 0}"
+        )
+        details.append(
+            f"Mana Bonus: {armor_info.get('mana_bonus', 0) if armor_info.get('mana_bonus') else 0}"
+        )
         details.append("")
 
         # Requirements
         details.append("REQUIREMENTS:")
         details.append("=" * 60)
-        req = weapon_info.get("requirements", {})
+        req = armor_info.get("requirements", {})
         details.append(f"Strength: {req.get('strength', 0)}")
         details.append(f"Dexterity: {req.get('dexterity', 0)}")
         details.append(f"Intelligence: {req.get('intelligence', 0)}")
@@ -595,15 +656,15 @@ class OrthancsWorkshop(QMainWindow):
         # Economy
         details.append("ECONOMY:")
         details.append("=" * 60)
-        details.append(f"Sell Value: {weapon_info.get('sell_value', 0)} gold")
-        details.append(f"Buy Value: {weapon_info.get('buy_value', 0)} gold")
-        details.append(f"Rarity: {weapon_info.get('rarity', 'Unknown')}")
+        details.append(f"Sell Value: {armor_info.get('sell_value', 0)} gold")
+        details.append(f"Buy Value: {armor_info.get('buy_value', 0)} gold")
+        details.append(f"Rarity: {armor_info.get('rarity', 'Unknown')}")
         details.append("")
 
         # Defense stats
-        details.append("🛡️ DEFENSE STATISTICS:")
-        details.append("─" * 60)
-        details.append(f"  🛡️  Base Armor: {armor_info.get('base_armor', 0)}")
+        details.append("DEFENSE STATISTICS:")
+        details.append("-" * 60)
+        details.append(f"  Base Armor: {armor_info.get('base_armor', 0)}")
         details.append("")
 
         # Footer
