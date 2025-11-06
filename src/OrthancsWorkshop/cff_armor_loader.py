@@ -9,6 +9,7 @@ Based on the existing armor_loader.py from TirganachReloaded.
 """
 
 import json
+import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
 
@@ -16,7 +17,6 @@ from PySide6.QtCore import QObject, Signal
 
 # Add the project root to Python path
 project_root = Path(__file__).parent.parent.parent
-import sys
 
 sys.path.insert(0, str(project_root))
 
@@ -52,17 +52,12 @@ class CFFArmorLoader(QObject):
                 self.gamedata = GameData(self.gamedata_path)
 
                 # Get all armor directly from the armor table
-                all_armor = (
-                    self.gamedata.armor.all()
-                    if hasattr(self.gamedata.armor, "all")
-                    else []
-                )
-
+                all_armor = list(self.gamedata.armor)  # Convert to list
                 total_armor = len(all_armor)
 
                 for i, armor_entry in enumerate(all_armor):
                     armor_data = self._convert_armor_from_gamedata(armor_entry)
-                    armor_id = armor_data["id"]
+                    armor_id = armor_data["item_id"]  # Use item_id instead of id
                     armor[armor_id] = armor_data
 
                     # Update progress
@@ -86,113 +81,200 @@ class CFFArmorLoader(QObject):
 
         return armor
 
-    def _convert_armor_from_gamedata(self, item) -> Dict[str, Any]:
-        """Convert from GameData Item entity to standard dict format"""
+    def _convert_armor_from_gamedata(self, armor) -> Dict[str, Any]:
+        """Convert from GameData Armor entity to standard dict format"""
 
-        # Get the related item through the relation
+        # Get the related item through the armor's item relation
         item = getattr(armor, "item", None)
-        item_name = "Armor"
-        item_sell_value = 0
-        item_buy_value = 0
-        if item:
-            item_name = getattr(item, "name", f"Armor {getattr(armor, 'item_id', 0)}")
-            item_sell_value = getattr(item, "selling_price", 0)
-            item_buy_value = getattr(item, "buying_price", 0)
 
-        # Initialize basic data structure
+        armor_name = f"Armor {armor.item_id}"
+        sell_value = 0
+        buy_value = 0
+        item_set_id = 0
+        item_type = "EQUIPMENT"
+        item_subtype = "UNKNOWN"
+        name_id = 0
+        unit_stats_id = 0
+        army_unit_id = 0
+        building_id = 0
+        unknown1 = 0
+        
+        if item:
+            armor_name = getattr(item, "name", armor_name)
+            sell_value = getattr(item, "selling_price", 0)
+            buy_value = getattr(item, "buying_price", 0)
+            item_set_id = getattr(item, "item_set_id", 0)
+            item_type = getattr(item, "item_type", "EQUIPMENT")
+            item_subtype = getattr(item, "item_subtype", "UNKNOWN")
+            name_id = getattr(item, "name_id", 0)
+            unit_stats_id = getattr(item, "unit_stats_id", 0)
+            army_unit_id = getattr(item, "army_unit_id", 0)
+            building_id = getattr(item, "building_id", 0)
+            unknown1 = getattr(item, "unknown1", 0)
+
+        # Initialize basic data structure with all available CFF fields
         armor_data = {
-            "id": getattr(armor, "item_id", 0),
-            "armor_id": getattr(armor, "item_id", 0),
-            "name": item_name,
-            "display_name": item_name,
-            "description": getattr(armor, "description", ""),
-            "slot": self._map_slot_from_subtype(0),  # Armor doesn't have item_subtype
-            "armor_type": "Unknown",  # Will be determined differently
-            "material": "Unknown",  # Will be determined differently
-            "tier": "Common",  # Will be inferred
-            "level_requirement": 1,
-            "class_restriction": "None",
-            # Stats from the armor table structure
+            "item_id": armor.item_id,
+            "armor_id": armor.item_id,
+            "name": armor_name,
+            "armor_name": armor_name,  # Add for compatibility
+            "name_id": name_id,
+            "item_type": item_type,
+            "item_subtype": item_subtype,
+            "unit_stats_id": unit_stats_id,
+            "army_unit_id": army_unit_id,
+            "building_id": building_id,
+            "unknown1": unknown1,
+            "item_set_id": item_set_id,
+            # Armor stats from CFF
             "strength": getattr(armor, "strength", 0),
             "stamina": getattr(armor, "stamina", 0),
             "agility": getattr(armor, "agility", 0),
             "dexterity": getattr(armor, "dexterity", 0),
+            "health": getattr(armor, "health", 0),
+            "charisma": getattr(armor, "charisma", 0),
             "intelligence": getattr(armor, "intelligence", 0),
             "wisdom": getattr(armor, "wisdom", 0),
-            "charisma": getattr(armor, "charisma", 0),
-            "health": getattr(armor, "health", 0),
             "mana": getattr(armor, "mana", 0),
-            # Armor values
             "armor_value": getattr(armor, "armor", 0),
             # Resistances
             "resist_fire": getattr(armor, "resist_fire", 0),
             "resist_ice": getattr(armor, "resist_ice", 0),
             "resist_black": getattr(armor, "resist_black", 0),
             "resist_mind": getattr(armor, "resist_mind", 0),
-            # Speed modifiers from the armor table
+            # Speed modifiers
             "run_speed": getattr(armor, "speed_run", 0),
             "fight_speed": getattr(armor, "speed_fight", 0),
             "cast_speed": getattr(armor, "speed_cast", 0),
-            # Other properties (these don't exist in the armor table structure)
-            "stealth_bonus": 0,
-            "swimming_speed": 0,
-            "jump_height": 0,
-            "icon_id": 0,
-            "model_ref": "",
-            "texture": "",
-            "normal_map": "",
-            "set_id": None,
-            "set_bonus": {},
-            "special_abilities": [],
-            "enchantment_slots": 0,
-            "stat_balance_rating": 0.0,
-            # Economy from item relation
-            "buy_value": item_buy_value,
-            "sell_value": item_sell_value,
-            "rarity": "Common",
+            # Economy
+            "sell_value": sell_value,
+            "buy_value": buy_value,
+            "rarity": "Common",  # Default rarity
         }
 
-        # Set requirements to a structured format (armor doesn't directly have requirements)
-        requirements = getattr(armor, "requirements", [])
-        if requirements:
-            reqs = (
-                requirements[0]
-                if isinstance(requirements, list) and len(requirements) > 0
-                else requirements
-            )
+        # Determine armor slot from item_subtype
+        armor_data["slot"] = self._map_slot_from_subtype(item_subtype)
+
+        # Get requirements from item_requirements table
+        try:
+            if hasattr(self.gamedata, 'item_requirements'):
+                item_reqs = self.gamedata.item_requirements.where(item_id=armor.item_id)
+                if item_reqs:
+                    armor_data["requirements"] = {
+                        "strength": 0,
+                        "dexterity": 0,
+                        "intelligence": 0,
+                        "level": max([req.level for req in item_reqs]) if item_reqs else 1,
+                        "school_requirements": [
+                            {
+                                "requirement_number": req.requirement_number,
+                                "requirement_school": str(req.requirement_school),
+                                "level": req.level
+                            } for req in item_reqs
+                        ]
+                    }
+                else:
+                    armor_data["requirements"] = {
+                        "strength": 0, "dexterity": 0, "intelligence": 0, "level": 1, "school_requirements": []
+                    }
+            else:
+                armor_data["requirements"] = {
+                    "strength": 0, "dexterity": 0, "intelligence": 0, "level": 1, "school_requirements": []
+                }
+        except Exception:
             armor_data["requirements"] = {
-                "strength": getattr(reqs, "strength", 0),
-                "dexterity": getattr(reqs, "dexterity", 0),
-                "intelligence": getattr(reqs, "intelligence", 0),
-                "level": getattr(reqs, "level", 1),
+                "strength": 0, "dexterity": 0, "intelligence": 0, "level": 1, "school_requirements": []
             }
-        else:
-            armor_data["requirements"] = {
-                "strength": armor_data["strength"],
-                "dexterity": armor_data["dexterity"],
-                "intelligence": armor_data["intelligence"],
-                "level": 1,
-            }
+
+        # Get UI handle for icons
+        try:
+            if hasattr(self.gamedata, 'item_ui'):
+                item_uis = self.gamedata.item_ui.where(item_id=armor.item_id)
+                if item_uis and item_uis[0].item_ui_handle:
+                    armor_data["icon_handle"] = item_uis[0].item_ui_handle.strip()
+                else:
+                    armor_data["icon_handle"] = ""
+            else:
+                armor_data["icon_handle"] = ""
+        except Exception:
+            armor_data["icon_handle"] = ""
+
+        # Get item effects
+        try:
+            if hasattr(self.gamedata, 'item_effects'):
+                item_effects = self.gamedata.item_effects.where(item_id=armor.item_id)
+                armor_data["effects"] = [
+                    {
+                        "effect_index": eff.effect_index,
+                        "effect_id": eff.effect_id
+                    } for eff in item_effects
+                ]
+            else:
+                armor_data["effects"] = []
+        except Exception:
+            armor_data["effects"] = []
+
+        # Determine armor type based on slot and stats
+        armor_data["armor_type"] = self._determine_armor_type(armor_data["slot"], armor_data["armor_value"])
+        armor_data["tier"] = self._determine_tier(armor_data["armor_value"])
+        armor_data["material"] = "Unknown"  # Would need material mapping table
 
         return armor_data
 
-    def _map_slot_from_subtype(self, subtype: int) -> str:
+    def _map_slot_from_subtype(self, subtype) -> str:
         """Map item_subtype to slot name"""
-        slot_map = {
-            1: "Head",  # In SpellForce, different subtypes represent different slots
-            2: "Chest",
-            3: "Shield",  # This is likely the offhand slot
-            4: "Hands",
-            5: "Legs",
-            6: "Feet",
-            7: "Cloak",
-            8: "Belt",
-            9: "Ring",
-            10: "Amulet",
-        }
+        # Handle both string and integer subtypes
+        if isinstance(subtype, str):
+            subtype_map = {
+                "EquipmentType.HELMET": "Head",
+                "EquipmentType.UPPER": "Chest", 
+                "EquipmentType.LOWER": "Legs",
+                "EquipmentType.BOOTS": "Feet",
+                "EquipmentType.GLOVES": "Hands",
+                "EquipmentType.SHIELD": "Shield",
+                "EquipmentType.RING": "Ring",
+                "EquipmentType.AMULET": "Amulet",
+                "EquipmentType.BELT": "Belt",
+                "EquipmentType.CLOAK": "Cloak",
+            }
+            return subtype_map.get(subtype, f"Slot {subtype}")
+        else:
+            # Handle numeric subtypes
+            slot_map = {
+                1: "Head",
+                2: "Chest", 
+                3: "Shield",
+                4: "Hands",
+                5: "Legs",
+                6: "Feet",
+                7: "Cloak",
+                8: "Belt",
+                9: "Ring",
+                10: "Amulet",
+            }
+            return slot_map.get(subtype, f"Slot {subtype}")
 
-        # Default to "Unknown" if subtype not in map, but return the number as string if it's not known
-        return slot_map.get(subtype, f"Slot {subtype}")
+    def _determine_armor_type(self, slot: str, armor_value: int) -> str:
+        """Determine armor type based on slot and armor value"""
+        if slot == "Shield":
+            return "Shield"
+        elif armor_value >= 50:
+            return "Heavy"
+        elif armor_value >= 25:
+            return "Medium"
+        else:
+            return "Light"
+
+    def _determine_tier(self, armor_value: int) -> str:
+        """Determine tier based on armor value"""
+        if armor_value >= 70:
+            return "Epic"
+        elif armor_value >= 50:
+            return "Rare"
+        elif armor_value >= 30:
+            return "Uncommon"
+        else:
+            return "Common"
 
     def _load_from_enhanced_json(self) -> Dict[int, Dict[str, Any]]:
         """Fallback to load from enhanced_armor.json"""
@@ -337,7 +419,7 @@ def main():
 
     from PySide6.QtWidgets import QApplication
 
-    app = QApplication(sys.argv)
+    QApplication(sys.argv)  # Initialize Qt application
 
     # Initialize the armor loader
     loader = CFFArmorLoader()

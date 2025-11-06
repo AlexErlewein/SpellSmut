@@ -9,6 +9,7 @@ Based on the existing weapon_loader.py from TirganachReloaded.
 """
 
 import json
+import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
 
@@ -16,7 +17,6 @@ from PySide6.QtCore import QObject, Signal
 
 # Add the project root to Python path
 project_root = Path(__file__).parent.parent.parent
-import sys
 
 sys.path.insert(0, str(project_root))
 
@@ -52,11 +52,7 @@ class CFFWeaponLoader(QObject):
                 self.gamedata = GameData(self.gamedata_path)
 
                 # Get all weapons from the GameData
-                all_weapons = (
-                    self.gamedata.weapons.all()
-                    if hasattr(self.gamedata.weapons, "all")
-                    else []
-                )
+                all_weapons = list(self.gamedata.weapons)  # Convert to list
                 total_weapons = len(all_weapons)
 
                 for i, weapon in enumerate(all_weapons):
@@ -87,29 +83,47 @@ class CFFWeaponLoader(QObject):
     def _convert_weapon_from_gamedata(self, weapon) -> Dict[str, Any]:
         """Convert from GameData Weapon entity to standard dict format"""
 
-        # Get the related item through the weapon's item relation (following the pattern from weapon_browser_dialog.py)
+        # Get the related item through the weapon's item relation
         item = getattr(weapon, "item", None)
 
         weapon_name = f"Weapon {weapon.item_id}"
         sell_value = 0
         buy_value = 0
         item_set_id = 0
+        item_type = "WEAPON"
+        item_subtype = "WEAPON"
+        name_id = 0
+        unit_stats_id = 0
+        army_unit_id = 0
+        building_id = 0
+        unknown1 = 0
+        
         if item:
             weapon_name = getattr(item, "name", weapon_name)
             sell_value = getattr(item, "selling_price", 0)
             buy_value = getattr(item, "buying_price", 0)
             item_set_id = getattr(item, "item_set_id", 0)
+            item_type = getattr(item, "item_type", "WEAPON")
+            item_subtype = getattr(item, "item_subtype", "WEAPON")
+            name_id = getattr(item, "name_id", 0)
+            unit_stats_id = getattr(item, "unit_stats_id", 0)
+            army_unit_id = getattr(item, "army_unit_id", 0)
+            building_id = getattr(item, "building_id", 0)
+            unknown1 = getattr(item, "unknown1", 0)
 
-        # Initialize basic data structure
+        # Initialize basic data structure with all available CFF fields
         weapon_data = {
             "item_id": weapon.item_id,
             "weapon_id": weapon.item_id,
             "name": weapon_name,
+            "weapon_name": weapon_name,  # Add for compatibility
+            "name_id": name_id,
             "weapon_type_id": getattr(weapon, "weapon_type", 0),
             "weapon_material_id": getattr(weapon, "material", 0),
             "min_damage": getattr(weapon, "min_damage", 0),
             "max_damage": getattr(weapon, "max_damage", 0),
-            "attack_speed": getattr(weapon, "speed", 100),  # Using 'speed' from the CFF
+            "attack_speed": getattr(weapon, "speed", 100),
+            "weapon_speed": getattr(weapon, "speed", 100),  # Add alternative field name
             "min_range": getattr(weapon, "min_range", 0),
             "max_range": getattr(weapon, "max_range", 2),
             "attack_arc": 90,  # Default melee arc
@@ -118,60 +132,64 @@ class CFFWeaponLoader(QObject):
             "knockback_chance": 0.0,
             "sell_value": sell_value,
             "buy_value": buy_value,
+            "item_type": item_type,
+            "item_subtype": item_subtype,
+            "unit_stats_id": unit_stats_id,
+            "army_unit_id": army_unit_id,
+            "building_id": building_id,
+            "unknown1": unknown1,
+            "item_set_id": item_set_id,
             "hands": "One-handed",  # Will be determined from weapon type
             "damage_category": "Melee",  # Will be determined from range
             "damage_type": "Slashing",  # Will be determined from weapon type
             "rarity": "Common",  # Default rarity
-            "item_set_id": item_set_id,
         }
 
         # Try to get more specific information if available
         try:
-            # Use the item relation directly from the weapon object (as defined in entities.py)
-            if item:
-                # Requirements might be handled separately depending on the structure
-                requirements = getattr(weapon, "requirements", [])
-                if requirements:
-                    reqs = (
-                        requirements[0]
-                        if isinstance(requirements, list) and len(requirements) > 0
-                        else requirements
-                    )
+            # Get requirements from item_requirements table
+            if hasattr(self.gamedata, 'item_requirements'):
+                item_reqs = self.gamedata.item_requirements.where(item_id=weapon.item_id)
+                if item_reqs:
+                    # For SpellForce, requirements are school-based rather than stat-based
+                    # We'll create a basic requirements structure
                     weapon_data["requirements"] = {
-                        "strength": getattr(reqs, "strength", 0),
-                        "dexterity": getattr(reqs, "dexterity", 0),
-                        "intelligence": getattr(reqs, "intelligence", 0),
-                        "level": getattr(reqs, "level", 1),
+                        "strength": 0,
+                        "dexterity": 0,
+                        "intelligence": 0,
+                        "level": max([req.level for req in item_reqs]) if item_reqs else 1,
+                        "school_requirements": [
+                            {
+                                "requirement_number": req.requirement_number,
+                                "requirement_school": str(req.requirement_school),
+                                "level": req.level
+                            } for req in item_reqs
+                        ]
                     }
                 else:
-                    # Try to get requirements from the item
-                    item_requirements = getattr(item, "requirements", [])
-                    if item_requirements:
-                        reqs = (
-                            item_requirements[0]
-                            if isinstance(item_requirements, list) and item_requirements
-                            else item_requirements
-                        )
-                        weapon_data["requirements"] = {
-                            "strength": getattr(reqs, "strength", 0),
-                            "dexterity": getattr(reqs, "dexterity", 0),
-                            "intelligence": getattr(reqs, "intelligence", 0),
-                            "level": getattr(reqs, "level", 1),
-                        }
-                    else:
-                        weapon_data["requirements"] = {
-                            "strength": 0,
-                            "dexterity": 0,
-                            "intelligence": 0,
-                            "level": 1,
-                        }
+                    weapon_data["requirements"] = {
+                        "strength": 0,
+                        "dexterity": 0,
+                        "intelligence": 0,
+                        "level": 1,
+                        "school_requirements": []
+                    }
+            else:
+                weapon_data["requirements"] = {
+                    "strength": 0,
+                    "dexterity": 0,
+                    "intelligence": 0,
+                    "level": 1,
+                    "school_requirements": []
+                }
         except Exception:
-            # If we can't get item data, continue with defaults
+            # If we can't get requirements data, continue with defaults
             weapon_data["requirements"] = {
                 "strength": 0,
                 "dexterity": 0,
                 "intelligence": 0,
                 "level": 1,
+                "school_requirements": []
             }
 
         # Try to get weapon type name
@@ -203,6 +221,34 @@ class CFFWeaponLoader(QObject):
             weapon_data["weapon_material_name"] = (
                 f"Material {weapon_data['weapon_material_id']}"
             )
+
+        # Get UI handle for icons
+        try:
+            if hasattr(self.gamedata, 'item_ui'):
+                item_uis = self.gamedata.item_ui.where(item_id=weapon.item_id)
+                if item_uis and item_uis[0].item_ui_handle:
+                    weapon_data["icon_handle"] = item_uis[0].item_ui_handle.strip()
+                else:
+                    weapon_data["icon_handle"] = ""
+            else:
+                weapon_data["icon_handle"] = ""
+        except Exception:
+            weapon_data["icon_handle"] = ""
+
+        # Get item effects
+        try:
+            if hasattr(self.gamedata, 'item_effects'):
+                item_effects = self.gamedata.item_effects.where(item_id=weapon.item_id)
+                weapon_data["effects"] = [
+                    {
+                        "effect_index": eff.effect_index,
+                        "effect_id": eff.effect_id
+                    } for eff in item_effects
+                ]
+            else:
+                weapon_data["effects"] = []
+        except Exception:
+            weapon_data["effects"] = []
 
         # Determine damage category based on range
         weapon_data["damage_category"] = self._damage_category_from_range(
@@ -308,8 +354,6 @@ class CFFWeaponLoader(QObject):
                             "sell_value": weapon.get("sell_value", 0),
                             "buy_value": weapon.get("buy_value", 0),
                             "rarity": weapon.get("rarity", "Common"),
-                            "weapon_type_id": weapon.get("weapon_type_id", 0),
-                            "weapon_material_id": weapon.get("weapon_material_id", 0),
                             "weapon_speed": weapon.get("weapon_speed", 0),
                             "option": weapon.get("option", 0),
                             "item_set_id": weapon.get("item_set_id", 0),
@@ -354,7 +398,7 @@ def main():
 
     from PySide6.QtWidgets import QApplication
 
-    app = QApplication(sys.argv)
+    QApplication(sys.argv)  # Initialize Qt application
 
     # Initialize the weapon loader
     loader = CFFWeaponLoader()

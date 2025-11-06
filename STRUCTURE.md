@@ -1,6 +1,6 @@
 # SpellSmut Project Structure - Quick Reference
 
-**Last Updated:** October 2025  
+**Last Updated:** November 2025  
 **Status:** ✅ Current
 
 ---
@@ -169,6 +169,13 @@ src/
 │   ├── armor_forge.py           # Armor creation system
 │   ├── enhanced_armor.json      # Active armor database (656 KB)
 │   └── enhanced_weapons.json    # Active weapon database (349 KB)
+│
+├── OrthancsWorkshop/        # Standalone item browser application
+│   ├── README.md               # Application documentation (updated Nov 2025)
+│   ├── orthancs_workshop.py    # Main application window
+│   ├── cff_weapon_loader.py    # Enhanced weapon data extraction from CFF
+│   ├── cff_armor_loader.py     # Enhanced armor data extraction from CFF
+│   └── [other workshop files]
 │
 └── tests/                        # Main test suite (see Tests section)
 ```

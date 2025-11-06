@@ -753,11 +753,11 @@ class OrthancsWorkshop(QMainWindow):
                 str(weapon_info.get("weapon_material_name", "N/A")),
             ),
             ("Weapon Speed", str(weapon_info.get("weapon_speed", 0))),
-            ("Option", str(weapon_info.get("option", 0))),
             ("Item Set ID", str(weapon_info.get("item_set_id", 0))),
             ("Min Range", str(weapon_info.get("min_range", 0))),
             ("Max Range", str(weapon_info.get("max_range", 0))),
             ("Weapon Arc", str(weapon_info.get("attack_arc", 0))),
+            ("Icon Handle", str(weapon_info.get("icon_handle", "N/A"))),
         ]
 
         for label, value in addl_info:
@@ -766,12 +766,92 @@ class OrthancsWorkshop(QMainWindow):
             label_widget.setStyleSheet("color: #a0a0a0; min-width: 130px;")
             value_widget = QLabel(str(value))
             value_widget.setStyleSheet("color: #e0e0e0;")
+            value_widget.setWordWrap(True)  # Allow long icon handles to wrap
             row_layout.addWidget(label_widget)
             row_layout.addWidget(value_widget)
             row_layout.addStretch()
             addl_layout.addLayout(row_layout)
 
         self.details_content_layout.addWidget(addl_group)
+
+        # CFF-Specific Data Section
+        cff_group = QGroupBox("CFF DATA FIELDS")
+        cff_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #b36f9e;
+                border: 2px solid #b36f9e;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
+        cff_layout = QVBoxLayout(cff_group)
+
+        # Show school requirements if available
+        reqs = weapon_info.get("requirements", {})
+        school_reqs = reqs.get("school_requirements", [])
+        if school_reqs:
+            school_label = QLabel("<strong>School Requirements:</strong>")
+            school_label.setStyleSheet("color: #a0a0a0;")
+            cff_layout.addWidget(school_label)
+            
+            for school_req in school_reqs:
+                req_text = f"  • {school_req['requirement_school']} Level {school_req['level']}"
+                req_label = QLabel(req_text)
+                req_label.setStyleSheet("color: #e0e0e0; margin-left: 10px;")
+                cff_layout.addWidget(req_label)
+        else:
+            no_school_label = QLabel("<strong>School Requirements:</strong> None")
+            no_school_label.setStyleSheet("color: #a0a0a0;")
+            cff_layout.addWidget(no_school_label)
+
+        # Show effects if available
+        effects = weapon_info.get("effects", [])
+        if effects:
+            effects_label = QLabel(f"<strong>Item Effects:</strong> {len(effects)} effect(s)")
+            effects_label.setStyleSheet("color: #a0a0a0;")
+            cff_layout.addWidget(effects_label)
+            
+            for effect in effects[:5]:  # Show first 5 effects
+                effect_text = f"  • Effect ID {effect['effect_id']} (Index {effect['effect_index']})"
+                effect_label = QLabel(effect_text)
+                effect_label.setStyleSheet("color: #e0e0e0; margin-left: 10px;")
+                cff_layout.addWidget(effect_label)
+                
+            if len(effects) > 5:
+                more_label = QLabel(f"  • ... and {len(effects) - 5} more")
+                more_label.setStyleSheet("color: #a0a0a0; margin-left: 10px;")
+                cff_layout.addWidget(more_label)
+        else:
+            no_effects_label = QLabel("<strong>Item Effects:</strong> None")
+            no_effects_label.setStyleSheet("color: #a0a0a0;")
+            cff_layout.addWidget(no_effects_label)
+
+        # Show additional CFF fields
+        additional_fields = [
+            ("Unit Stats ID", str(weapon_info.get("unit_stats_id", "N/A"))),
+            ("Army Unit ID", str(weapon_info.get("army_unit_id", "N/A"))),
+            ("Building ID", str(weapon_info.get("building_id", "N/A"))),
+        ]
+
+        for label, value in additional_fields:
+            row_layout = QHBoxLayout()
+            label_widget = QLabel(f"<strong>{label}:</strong>")
+            label_widget.setStyleSheet("color: #a0a0a0; min-width: 130px;")
+            value_widget = QLabel(str(value))
+            value_widget.setStyleSheet("color: #e0e0e0;")
+            row_layout.addWidget(label_widget)
+            row_layout.addWidget(value_widget)
+            row_layout.addStretch()
+            cff_layout.addLayout(row_layout)
+
+        self.details_content_layout.addWidget(cff_group)
 
         # Add stretch to push everything to the top
         self.details_content_layout.addStretch()
@@ -1068,18 +1148,14 @@ class OrthancsWorkshop(QMainWindow):
         """)
         addl_layout = QVBoxLayout(addl_group)
 
-        # Additional armor properties from the JSON data
+        # Additional armor properties from the CFF data
         addl_info = [
-            ("Armor ID", str(armor_info.get("id", armor_info.get("armor_id", "N/A")))),
-            ("Description", str(armor_info.get("description", "N/A"))),
-            ("Class Restriction", str(armor_info.get("class_restriction", "N/A"))),
-            ("Level Requirement", str(armor_info.get("level_requirement", 0))),
-            ("Stat Balance Rating", str(armor_info.get("stat_balance_rating", 0.0))),
-            ("Enchantment Slots", str(armor_info.get("enchantment_slots", 0))),
-            ("Set ID", str(armor_info.get("set_id", "None"))),
             ("Item ID", str(armor_info.get("item_id", "N/A"))),
-            ("Model Reference", str(armor_info.get("model_ref", "N/A"))),
-            ("Texture", str(armor_info.get("texture", "N/A"))),
+            ("Name ID", str(armor_info.get("name_id", "N/A"))),
+            ("Item Type", str(armor_info.get("item_type", "N/A"))),
+            ("Item Subtype", str(armor_info.get("item_subtype", "N/A"))),
+            ("Item Set ID", str(armor_info.get("item_set_id", "N/A"))),
+            ("Icon Handle", str(armor_info.get("icon_handle", "N/A"))),
         ]
 
         for label, value in addl_info:
@@ -1088,12 +1164,92 @@ class OrthancsWorkshop(QMainWindow):
             label_widget.setStyleSheet("color: #a0a0a0; min-width: 130px;")
             value_widget = QLabel(str(value))
             value_widget.setStyleSheet("color: #e0e0e0;")
+            value_widget.setWordWrap(True)  # Allow long icon handles to wrap
             row_layout.addWidget(label_widget)
             row_layout.addWidget(value_widget)
             row_layout.addStretch()
             addl_layout.addLayout(row_layout)
 
         self.details_content_layout.addWidget(addl_group)
+
+        # CFF-Specific Data Section
+        cff_group = QGroupBox("CFF DATA FIELDS")
+        cff_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #b36f9e;
+                border: 2px solid #b36f9e;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
+        cff_layout = QVBoxLayout(cff_group)
+
+        # Show school requirements if available
+        reqs = armor_info.get("requirements", {})
+        school_reqs = reqs.get("school_requirements", [])
+        if school_reqs:
+            school_label = QLabel("<strong>School Requirements:</strong>")
+            school_label.setStyleSheet("color: #a0a0a0;")
+            cff_layout.addWidget(school_label)
+            
+            for school_req in school_reqs:
+                req_text = f"  • {school_req['requirement_school']} Level {school_req['level']}"
+                req_label = QLabel(req_text)
+                req_label.setStyleSheet("color: #e0e0e0; margin-left: 10px;")
+                cff_layout.addWidget(req_label)
+        else:
+            no_school_label = QLabel("<strong>School Requirements:</strong> None")
+            no_school_label.setStyleSheet("color: #a0a0a0;")
+            cff_layout.addWidget(no_school_label)
+
+        # Show effects if available
+        effects = armor_info.get("effects", [])
+        if effects:
+            effects_label = QLabel(f"<strong>Item Effects:</strong> {len(effects)} effect(s)")
+            effects_label.setStyleSheet("color: #a0a0a0;")
+            cff_layout.addWidget(effects_label)
+            
+            for effect in effects[:5]:  # Show first 5 effects
+                effect_text = f"  • Effect ID {effect['effect_id']} (Index {effect['effect_index']})"
+                effect_label = QLabel(effect_text)
+                effect_label.setStyleSheet("color: #e0e0e0; margin-left: 10px;")
+                cff_layout.addWidget(effect_label)
+                
+            if len(effects) > 5:
+                more_label = QLabel(f"  • ... and {len(effects) - 5} more")
+                more_label.setStyleSheet("color: #a0a0a0; margin-left: 10px;")
+                cff_layout.addWidget(more_label)
+        else:
+            no_effects_label = QLabel("<strong>Item Effects:</strong> None")
+            no_effects_label.setStyleSheet("color: #a0a0a0;")
+            cff_layout.addWidget(no_effects_label)
+
+        # Show additional CFF fields
+        additional_fields = [
+            ("Unit Stats ID", str(armor_info.get("unit_stats_id", "N/A"))),
+            ("Army Unit ID", str(armor_info.get("army_unit_id", "N/A"))),
+            ("Building ID", str(armor_info.get("building_id", "N/A"))),
+        ]
+
+        for label, value in additional_fields:
+            row_layout = QHBoxLayout()
+            label_widget = QLabel(f"<strong>{label}:</strong>")
+            label_widget.setStyleSheet("color: #a0a0a0; min-width: 130px;")
+            value_widget = QLabel(str(value))
+            value_widget.setStyleSheet("color: #e0e0e0;")
+            row_layout.addWidget(label_widget)
+            row_layout.addWidget(value_widget)
+            row_layout.addStretch()
+            cff_layout.addLayout(row_layout)
+
+        self.details_content_layout.addWidget(cff_group)
 
         # Add stretch to push everything to the top
         self.details_content_layout.addStretch()
@@ -1133,13 +1289,6 @@ class OrthancsWorkshop(QMainWindow):
                     "ID manager not initialized. Please reload data first.",
                 )
                 return
-
-            # Create armor data object
-            from TirganachReloaded.cff_editor.models.armor_creation_data import (
-                ArmorCreationData,
-            )
-
-            armor_data = ArmorCreationData()
 
             # Create and show the wizard
             wizard = ArmorForgeWizard(self.id_manager, self)
