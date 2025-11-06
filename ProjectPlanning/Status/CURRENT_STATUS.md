@@ -1,8 +1,8 @@
 # Current Project Status
 
-**Last Updated**: November 3, 2024
+**Last Updated**: November 6, 2025
 **Overall Status**: 🟢 ACTIVE DEVELOPMENT
-**Current Focus**: Map Viewer texture blending, Resolving Icon System mapping.
+**Current Focus**: Map Viewer multi-layer texture blending, Resolving Icon System mapping.
 
 ---
 
@@ -18,7 +18,7 @@
 | **NPC Creator** | ✅ COMPLETE | Phase 7/7 | In production use |
 | **ID Manager** | ✅ COMPLETE | Shared System | Active & working |
 | **Asset Extraction**| ✅ COMPLETE | Phase 3/3 | Maintenance only |
-| **Map Viewer** | 🔄 IN PROGRESS | 45% (Phase 2/5) | Multi-layer texture blending |
+| **Map Viewer** | 🔄 IN PROGRESS | 75% (Phase 2/5) | Multi-layer texture blending |
 | **Icon System** | ⚠️ MAPPING REQ. | 85% | **Resolve Handle-to-Atlas Mapping** |
 | **Documentation** | ✅ COMPLETE | Comprehensive | Regular updates |
 
@@ -28,8 +28,9 @@
 
 ### 🔄 Map Viewer: Phase 2 - Visual Fidelity (HIGH PRIORITY)
 
-**Status**: 80% Complete - Texture rendering, lighting, and sample viewer systems implemented!
+**Status**: 75% Complete - Texture rendering, lighting, and sample viewer systems implemented!
 **Current Phase**: Phase 2 of 5 (Visual Fidelity)
+**Session Notes**: See `ProjectPlanning/Status/SESSION_RESUME_NOTES.md` for detailed continuation plan
 
 #### Recently Completed
 - ✅ **Texture Sample Viewer Enhancement**: Compact 48x48 thumbnails showing all 32 textures
@@ -45,9 +46,14 @@
 
 #### Next Steps
 1. **Multi-layer Texture Blending**: Implement 3-layer texture blend per tile (as per SpellForce format)
-2. **Parse Texture Assignments**: Load tile definitions from map Chunk 3
+   - **Option A**: Complete chunk parser for Chunks 3 & 4 (authentic game data)
+   - **Option B**: Use procedural height/slope-based blending (quick results)
+   - **Infrastructure Ready**: `multi_layer_texture_system.py` (383 lines) and `terrain_texture_mapper.py` (275 lines) exist
+2. **Parse Texture Assignments**: Load tile definitions from map Chunk 3 (255 tiles × 14 bytes)
 3. **Apply Per-Tile Textures**: Use correct texture layers with blend weights
 4. **Shadow Mapping** (Optional): Add dynamic shadows from sun
+
+**Session Paused**: Planning information stored in `SESSION_RESUME_NOTES.md` - ready to continue implementation
 
 **See**: `ProjectPlanning/Components/MAP_VIEWER_STATUS.md` for detailed status
 
