@@ -888,6 +888,37 @@ class SimpleQuestViewer(QMainWindow):
                         SimpleDialogue(dlg.text, dlg.speaker, is_player)
                     )
                 
+                # Derive quest giver from dialogues when missing
+                if not quest_info.get("quest_giver_name"):
+                    npc_counts = {}
+                    for d in dialogues:
+                        n = getattr(d, "npc_name", None)
+                        if n:
+                            npc_counts[n] = npc_counts.get(n, 0) + 1
+                    main_npc = max(npc_counts, key=npc_counts.get) if npc_counts else None
+                    if main_npc:
+                        s = re.sub(r'([a-z])([A-Z])', r'\1 \2', main_npc)
+                        s = s.replace("_", " ")
+                        parts = s.split()
+                        if parts and parts[0] == "Serg":
+                            parts[0] = "Sergeant"
+                        quest_info["quest_giver_name"] = " ".join(parts)
+
+                if not quest_info.get("npc_id"):
+                    npc_id_val = None
+                    for d in dialogues:
+                        fp = getattr(d, "file_path", "") or ""
+                        m = re.search(r'n(\d+)\.lua', fp)
+                        if m:
+                            try:
+                                npc_id_val = int(m.group(1))
+                            except Exception:
+                                npc_id_val = None
+                            if npc_id_val:
+                                break
+                    if npc_id_val:
+                        quest_info["npc_id"] = npc_id_val
+                
                 # Add dialogues to quest data
                 quest_info["dialogues"] = enhanced_dialogues
                 enhanced_count += 1
