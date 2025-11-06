@@ -249,36 +249,29 @@ class OrthancsWorkshop(QMainWindow):
             self.statusBar().showMessage("❌ Failed to load data")
 
     def load_weapon_data(self):
-        """Load weapon data from various sources"""
+        """Load weapon data directly from CFF file using CFF-based loader"""
         try:
-            # Try to load from enhanced weapons data
-            enhanced_weapons_path = Path("src/TirganachReloaded/enhanced_weapons.json")
-            if enhanced_weapons_path.exists():
-                import json
+            # Import the CFF Weapon Loader
+            from cff_weapon_loader import CFFWeaponLoader
 
-                with open(enhanced_weapons_path, "r", encoding="utf-8") as f:
-                    weapons_data = json.load(f)
+            # Initialize the loader
+            loader = CFFWeaponLoader()
 
-                for weapon in weapons_data:
-                    weapon_id = weapon.get("weapon_id", weapon.get("item_id"))
-                    if weapon_id:
-                        # Normalize field names for consistency
-                        normalized_weapon = weapon.copy()
-                        if "name" in weapon and "weapon_name" not in weapon:
-                            normalized_weapon["weapon_name"] = weapon["name"]
-                        self.weapon_data[weapon_id] = normalized_weapon
+            # Connect loader signals if needed for progress updates
+            # loader.progress_updated.connect(lambda p, msg: self.statusBar().showMessage(msg))
 
-                if self.logger:
-                    self.logger.info(
-                        f"✓ Loaded {len(weapons_data)} weapons from enhanced data"
-                    )
-            else:
-                if self.logger:
-                    self.logger.warning("Enhanced weapons data not found")
+            # Load weapons from CFF file (with fallback to JSON)
+            self.weapon_data = loader.load_all_weapons()
+
+            if self.logger:
+                self.logger.info(
+                    f"✓ Loaded {len(self.weapon_data)} weapons from CFF data"
+                )
 
         except Exception as e:
             if self.logger:
                 self.logger.warning(f"Failed to load weapon data: {e}")
+                self.logger.exception(e)
 
     def get_armor_slot_name(self, slot_id):
         """Convert armor slot ID to human-readable name"""
@@ -305,90 +298,21 @@ class OrthancsWorkshop(QMainWindow):
                 child.widget().deleteLater()
 
     def load_armor_data(self):
-        """Load armor data from enhanced_armor.json"""
+        """Load armor data directly from CFF file using CFF-based loader"""
         try:
-            # Try to load from enhanced armor data
-            enhanced_armor_path = Path("src/TirganachReloaded/enhanced_armor.json")
-            if enhanced_armor_path.exists():
-                import json
+            # Import the CFF Armor Loader
+            from cff_armor_loader import CFFArmorLoader
 
-                with open(enhanced_armor_path, "r", encoding="utf-8") as f:
-                    armor_data = json.load(f)
+            # Initialize the loader
+            loader = CFFArmorLoader()
 
-                # Get the list of armor items from the JSON structure
-                armor_items = armor_data.get("armors", [])
+            # Load armor from CFF file (with fallback to JSON)
+            self.armor_data = loader.load_all_armor()
 
-                for armor in armor_items:
-                    armor_id = armor.get("id")
-                    if armor_id:
-                        # Normalize field names for consistency with UI expectations
-                        normalized_armor = {
-                            "armor_id": armor_id,
-                            "armor_name": armor.get(
-                                "display_name", armor.get("name", f"Armor {armor_id}")
-                            ),
-                            "name": armor.get("name", f"Armor {armor_id}"),
-                            "slot": self.get_armor_slot_name(armor.get("slot", 0)),
-                            "armor_type": armor.get("armor_type", "Unknown"),
-                            "tier": armor.get("tier", "Unknown"),
-                            "material_name": armor.get("material", "Unknown"),
-                            "base_armor": armor.get("armor_value", 0),
-                            "magic_resistance": armor.get("magic_resist", 0),
-                            "physical_resistance": armor.get("physical_resist", 0),
-                            "move_speed_bonus": armor.get("run_speed", 0),
-                            "health_bonus": armor.get("health", 0),
-                            "mana_bonus": armor.get("mana", 0),
-                            # Requirements section
-                            "requirements": {
-                                "strength": armor.get("strength", 0),
-                                "dexterity": armor.get("dexterity", 0),
-                                "intelligence": armor.get("intelligence", 0),
-                                "level": armor.get("level_requirement", 0),
-                            },
-                            "sell_value": armor.get("sell_value", 0),
-                            "buy_value": armor.get("buy_value", 0),
-                            "rarity": armor.get("tier", "Unknown"),
-                        }
-                        self.armor_data[armor_id] = normalized_armor
-
-                if self.logger:
-                    self.logger.info(
-                        f"✓ Loaded {len(armor_items)} armor items from enhanced data"
-                    )
-            else:
-                if self.logger:
-                    self.logger.warning(
-                        "Enhanced armor data not found, using sample data"
-                    )
-
-                # Fallback to sample armor data if the file is not found
-                sample_armor = [
-                    {
-                        "armor_id": 20000,
-                        "armor_name": "Iron Helmet",
-                        "slot": "Head",
-                        "armor_type": "Plate",
-                        "tier": "Common",
-                        "base_armor": 15,
-                        "material_name": "Iron",
-                    },
-                    {
-                        "armor_id": 20001,
-                        "armor_name": "Dragon Scale Chest",
-                        "slot": "Chest",
-                        "armor_type": "Plate",
-                        "tier": "Epic",
-                        "base_armor": 45,
-                        "material_name": "Dragon Scale",
-                    },
-                ]
-
-                for armor in sample_armor:
-                    armor_id = armor["armor_id"]
-                    self.armor_data[armor_id] = armor
-
-                if self.logger:
-                    self.logger.info(f"✓ Loaded {len(sample_armor)} sample armor items")
+            if self.logger:
+                self.logger.info(
+                    f"✓ Loaded {len(self.armor_data)} armor pieces from CFF data"
+                )
 
         except Exception as e:
             if self.logger:
