@@ -24,6 +24,7 @@ from PySide6.QtWidgets import (
     QGroupBox,
     QHBoxLayout,
     QLabel,
+    QLineEdit,
     QMainWindow,
     QMessageBox,
     QPushButton,
@@ -110,6 +111,13 @@ class OrthancsSchmiede(QMainWindow):
         self.lang_combo.setCurrentText("Deutsch")
         self.lang_combo.currentTextChanged.connect(self.on_language_changed)
         header_layout.addWidget(self.lang_combo)
+
+        # Search field
+        self.search_edit = QLineEdit()
+        self.search_edit.setPlaceholderText("Search weapons...")
+        self.search_edit.setClearButtonEnabled(True)
+        self.search_edit.textChanged.connect(self.on_search_text_changed)
+        header_layout.addWidget(self.search_edit)
 
         # Enhanced buttons
         create_weapon_btn = QPushButton("Forge Weapon")
@@ -755,9 +763,76 @@ class OrthancsSchmiede(QMainWindow):
                 f"✓ Item tree populated: {len(self.weapon_data)} weapons, {len(self.armor_data)} armor"
             )
 
+        # Re-apply any active search filter after repopulating
+        if hasattr(self, "search_edit") and self.search_edit is not None:
+            self.apply_search_filter(self.search_edit.text())
+
+    def on_search_text_changed(self, text: str):
+        self.apply_search_filter(text)
+
+    def apply_search_filter(self, text: str):
+        query = (text or "").strip().lower()
+        # Nothing to filter: show everything
+        if query == "":
+            for i in range(self.item_tree.topLevelItemCount()):
+                root = self.item_tree.topLevelItem(i)
+                root.setHidden(False)
+                self._set_visibility_recursive(root, True)
+            return
+
+        # Determine which root to filter based on current mode
+        current_mode = self.mode_combo.currentText() if hasattr(self, "mode_combo") else "Weapons"
+
+        def filter_node(node):
+            # Leaf node
+            if node.childCount() == 0:
+                name_matches = query in node.text(0).lower()
+                node.setHidden(not name_matches)
+                return name_matches
+
+            # Category/root node
+            any_visible = False
+            for idx in range(node.childCount()):
+                if filter_node(node.child(idx)):
+                    any_visible = True
+
+            # Also match category titles themselves
+            if query in node.text(0).lower():
+                any_visible = True
+
+            node.setHidden(not any_visible)
+            if any_visible:
+                node.setExpanded(True)
+            return any_visible
+
+        for i in range(self.item_tree.topLevelItemCount()):
+            root = self.item_tree.topLevelItem(i)
+            root_name = (root.text(0) or "").lower()
+            is_weapons_root = root_name.startswith("weapons")
+            is_armor_root = root_name.startswith("armor")
+
+            # Only filter within the current mode; hide the other root during search
+            if (current_mode == "Weapons" and is_weapons_root) or (
+                current_mode == "Armor" and is_armor_root
+            ):
+                filter_node(root)
+            else:
+                root.setHidden(True)
+
+    def _set_visibility_recursive(self, node, visible: bool):
+        node.setHidden(not visible)
+        for i in range(node.childCount()):
+            self._set_visibility_recursive(node.child(i), visible)
+
     def on_mode_changed(self, mode):
         """Handle mode change between weapons and armor"""
         self.update_tree_title()
+        if hasattr(self, "search_edit") and self.search_edit is not None:
+            self.search_edit.setPlaceholderText(
+                "Search weapons..." if mode == "Weapons" else "Search armor..."
+            )
+            # Re-apply current filter when mode changes
+            self.apply_search_filter(self.search_edit.text())
 
     def on_language_changed(self, label: str):
         # Update current language based on dropdown
