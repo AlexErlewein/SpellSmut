@@ -335,67 +335,200 @@ class OrthancsWorkshop(QMainWindow):
                 self.logger.warning("No item data to populate tree")
             return
 
-        # Create weapon items grouped by type
+        # Create weapon items with proper categorization
         if self.weapon_data:
             weapons_root = QTreeWidgetItem(self.item_tree, ["Weapons", "", ""])
             weapons_root.setFont(0, QFont("", -1, QFont.Weight.Bold))
 
-            # Group weapons by type
-            weapons_by_type = {}
+            # Group weapons by category (One-Handed, Two-Handed, Others)
+            one_handed_weapons = {}
+            two_handed_weapons = {}
+            other_weapons = {}
+            
+            # Process actual weapons from weapon_data
             for weapon_id, weapon_info in self.weapon_data.items():
-                weapon_type = weapon_info.get(
-                    "weapon_type_name", weapon_info.get("item_subtype", "Unknown")
-                )
-                if weapon_type not in weapons_by_type:
-                    weapons_by_type[weapon_type] = []
-                weapons_by_type[weapon_type].append((weapon_id, weapon_info))
+                weapon_subtype = weapon_info.get("item_subtype", "")
+                weapon_type = weapon_info.get("weapon_type_name", "")
+                name = weapon_info.get("weapon_name", weapon_info.get("name", f"Weapon {weapon_id}"))
+                
+                # Convert enum to string for comparison
+                subtype_str = str(weapon_subtype)
+                
+                # Determine weapon category
+                if subtype_str == "EquipmentType.ONEHANDED_WEAPON":
+                    # Group by weapon type (Sword, Axe, Mace, etc.)
+                    if weapon_type not in one_handed_weapons:
+                        one_handed_weapons[weapon_type] = []
+                    one_handed_weapons[weapon_type].append((weapon_id, weapon_info))
+                elif subtype_str == "EquipmentType.TWOHANDED_WEAPON":
+                    # Group by weapon type (Sword, Axe, Mace, etc.)
+                    if weapon_type not in two_handed_weapons:
+                        two_handed_weapons[weapon_type] = []
+                    two_handed_weapons[weapon_type].append((weapon_id, weapon_info))
+                elif subtype_str == "EquipmentType.BOW":
+                    # Bows can be one-handed or two-handed, categorize by weapon type
+                    if weapon_type:
+                        # Check if it's a two-handed bow based on weapon type or name
+                        weapon_name = name.lower()
+                        if "two" in weapon_name or "2h" in weapon_name or "long" in weapon_name:
+                            if "Bows" not in two_handed_weapons:
+                                two_handed_weapons["Bows"] = []
+                            two_handed_weapons["Bows"].append((weapon_id, weapon_info))
+                        else:
+                            if "Bows" not in one_handed_weapons:
+                                one_handed_weapons["Bows"] = []
+                            one_handed_weapons["Bows"].append((weapon_id, weapon_info))
+                    else:
+                        # Default to one-handed for bows without specific type
+                        if "Bows" not in one_handed_weapons:
+                            one_handed_weapons["Bows"] = []
+                        one_handed_weapons["Bows"].append((weapon_id, weapon_info))
+                elif subtype_str not in ["EquipmentType.NOTHING", "EquipmentType.FIGURE_NPC"]:
+                    # Everything else goes to Others
+                    category = "Others"
+                    if weapon_type:
+                        category = weapon_type.replace("WeaponType ", "").replace("_", " ").title()
+                    if category not in other_weapons:
+                        other_weapons[category] = []
+                    other_weapons[category].append((weapon_id, weapon_info))
+            
+            # Process Wands from armor_data (they appear as ONEHANDED_WEAPON/TWOHANDED_WEAPON in armor table)
+            for armor_id, armor_info in self.armor_data.items():
+                armor_subtype = armor_info.get("item_subtype", "")
+                subtype_str = str(armor_subtype)
+                
+                # Only process Wands from armor table
+                if subtype_str in ["EquipmentType.ONEHANDED_WEAPON", "EquipmentType.TWOHANDED_WEAPON"]:
+                    name = armor_info.get("armor_name", f"Wand {armor_id}")
+                    
+                    if subtype_str == "EquipmentType.ONEHANDED_WEAPON":
+                        if "Wands" not in one_handed_weapons:
+                            one_handed_weapons["Wands"] = []
+                        one_handed_weapons["Wands"].append((armor_id, armor_info))
+                    elif subtype_str == "EquipmentType.TWOHANDED_WEAPON":
+                        if "Wands" not in two_handed_weapons:
+                            two_handed_weapons["Wands"] = []
+                        two_handed_weapons["Wands"].append((armor_id, armor_info))
 
-            # Create type category nodes
-            for weapon_type in sorted(weapons_by_type.keys()):
-                # Clean up the weapon type name for display
-                display_type = weapon_type.replace("WeaponType ", "").replace("_", " ")
-                type_node = QTreeWidgetItem(
-                    weapons_root,
-                    [display_type, "", f"({len(weapons_by_type[weapon_type])} items)"],
-                )
-                type_node.setFont(0, QFont("", -1, QFont.Weight.Bold))
-
-                # Add weapons under this type
-                for weapon_id, weapon_info in sorted(weapons_by_type[weapon_type]):
-                    name = weapon_info.get(
-                        "weapon_name", weapon_info.get("name", f"Weapon {weapon_id}")
+            # Create One-Handed Weapons category
+            if one_handed_weapons:
+                oh_root = QTreeWidgetItem(weapons_root, ["One-Handed Weapons", "", ""])
+                oh_root.setFont(0, QFont("", -1, QFont.Weight.Bold))
+                
+                for weapon_type in sorted(one_handed_weapons.keys()):
+                    display_type = weapon_type.replace("WeaponType ", "").replace("_", " ").title()
+                    if not display_type:
+                        display_type = "Unknown"
+                    type_node = QTreeWidgetItem(
+                        oh_root,
+                        [display_type, "", f"({len(one_handed_weapons[weapon_type])} items)"],
                     )
-                    item = QTreeWidgetItem(type_node, [name, "", str(weapon_id)])
-                    item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
+                    type_node.setFont(0, QFont("", -1, QFont.Weight.Bold))
+
+                    for weapon_id, weapon_info in sorted(one_handed_weapons[weapon_type]):
+                        name = weapon_info.get("weapon_name", weapon_info.get("name", f"Weapon {weapon_id}"))
+                        if not name or name == f"Weapon {weapon_id}":
+                            name = weapon_info.get("armor_name", f"Weapon {weapon_id}")
+                        item = QTreeWidgetItem(type_node, [name, "", str(weapon_id)])
+                        # Mark as weapon for proper handling in UI
+                        item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
+
+            # Create Two-Handed Weapons category
+            if two_handed_weapons:
+                th_root = QTreeWidgetItem(weapons_root, ["Two-Handed Weapons", "", ""])
+                th_root.setFont(0, QFont("", -1, QFont.Weight.Bold))
+                
+                for weapon_type in sorted(two_handed_weapons.keys()):
+                    display_type = weapon_type.replace("WeaponType ", "").replace("_", " ").title()
+                    if not display_type:
+                        display_type = "Unknown"
+                    type_node = QTreeWidgetItem(
+                        th_root,
+                        [display_type, "", f"({len(two_handed_weapons[weapon_type])} items)"],
+                    )
+                    type_node.setFont(0, QFont("", -1, QFont.Weight.Bold))
+
+                    for weapon_id, weapon_info in sorted(two_handed_weapons[weapon_type]):
+                        name = weapon_info.get("weapon_name", weapon_info.get("name", f"Weapon {weapon_id}"))
+                        if not name or name == f"Weapon {weapon_id}":
+                            name = weapon_info.get("armor_name", f"Weapon {weapon_id}")
+                        item = QTreeWidgetItem(type_node, [name, "", str(weapon_id)])
+                        # Mark as weapon for proper handling in UI
+                        item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
+
+            # Create Others category
+            if other_weapons:
+                others_root = QTreeWidgetItem(weapons_root, ["Others", "", ""])
+                others_root.setFont(0, QFont("", -1, QFont.Weight.Bold))
+                
+                for category in sorted(other_weapons.keys()):
+                    type_node = QTreeWidgetItem(
+                        others_root,
+                        [category, "", f"({len(other_weapons[category])} items)"],
+                    )
+                    type_node.setFont(0, QFont("", -1, QFont.Weight.Bold))
+
+                    for weapon_id, weapon_info in sorted(other_weapons[category]):
+                        name = weapon_info.get("weapon_name", weapon_info.get("name", f"Weapon {weapon_id}"))
+                        item = QTreeWidgetItem(type_node, [name, "", str(weapon_id)])
+                        item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
 
             weapons_root.setExpanded(True)
 
-        # Create armor items grouped by slot
+        # Create armor items with proper categorization
         if self.armor_data:
             armor_root = QTreeWidgetItem(self.item_tree, ["Armor", "", ""])
             armor_root.setFont(0, QFont("", -1, QFont.Weight.Bold))
 
-            # Group armor by slot
-            armor_by_slot = {}
+            # Group armor by proper category names
+            armor_categories = {}
+            
             for armor_id, armor_info in self.armor_data.items():
-                armor_slot = armor_info.get("slot", "Unknown")
-                if armor_slot not in armor_by_slot:
-                    armor_by_slot[armor_slot] = []
-                armor_by_slot[armor_slot].append((armor_id, armor_info))
+                armor_subtype = armor_info.get("item_subtype", "")
+                
+                # Convert enum to string for comparison
+                subtype_str = str(armor_subtype)
+                
+                # Skip NOTHING items and WANDS (they should be in weapons)
+                if subtype_str == "EquipmentType.NOTHING" or subtype_str in ["EquipmentType.ONEHANDED_WEAPON", "EquipmentType.TWOHANDED_WEAPON"]:
+                    continue
+                
+                # Determine proper category name
+                category_name = None
+                if subtype_str == "EquipmentType.HELMET":
+                    category_name = "Helmets"
+                elif subtype_str == "EquipmentType.UPPER":
+                    category_name = "Chest Armor"
+                elif subtype_str == "EquipmentType.LOWER":
+                    category_name = "Leg Armor"
+                elif subtype_str == "EquipmentType.RING":
+                    category_name = "Rings"
+                elif subtype_str == "EquipmentType.SHIELD":
+                    category_name = "Shields"
+                elif subtype_str == "EquipmentType.FULL_BODY":
+                    category_name = "Robes"
+                elif subtype_str == "EquipmentType.FIGURE_NPC":
+                    category_name = "Others"
+                else:
+                    category_name = subtype_str.replace("EquipmentType.", "").replace("_", " ").title()
+                
+                if category_name not in armor_categories:
+                    armor_categories[category_name] = []
+                armor_categories[category_name].append((armor_id, armor_info))
 
-            # Create slot category nodes
-            for armor_slot in sorted(armor_by_slot.keys()):
-                slot_node = QTreeWidgetItem(
+            # Create category nodes
+            for category_name in sorted(armor_categories.keys()):
+                category_node = QTreeWidgetItem(
                     armor_root,
-                    [armor_slot, "", f"({len(armor_by_slot[armor_slot])} items)"],
+                    [category_name, "", f"({len(armor_categories[category_name])} items)"],
                 )
-                slot_node.setFont(0, QFont("", -1, QFont.Weight.Bold))
+                category_node.setFont(0, QFont("", -1, QFont.Weight.Bold))
 
-                # Add armor under this slot
-                for armor_id, armor_info in sorted(armor_by_slot[armor_slot]):
+                # Add armor under this category
+                for armor_id, armor_info in sorted(armor_categories[category_name]):
                     name = armor_info.get("armor_name", f"Armor {armor_id}")
                     armor_type = armor_info.get("armor_type", "Unknown")
-                    item = QTreeWidgetItem(slot_node, [name, armor_type, str(armor_id)])
+                    item = QTreeWidgetItem(category_node, [name, armor_type, str(armor_id)])
                     item.setData(0, Qt.ItemDataRole.UserRole, ("armor", armor_id))
 
             armor_root.setExpanded(True)
