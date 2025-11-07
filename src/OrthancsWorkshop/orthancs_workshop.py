@@ -262,13 +262,13 @@ class OrthancsWorkshop(QMainWindow):
             from cff_weapon_loader import CFFWeaponLoader
 
             # Initialize the loader
-            loader = CFFWeaponLoader()
+            self.weapon_loader = CFFWeaponLoader()
 
             # Connect loader signals if needed for progress updates
             # loader.progress_updated.connect(lambda p, msg: self.statusBar().showMessage(msg))
 
             # Load weapons from CFF file (with fallback to JSON)
-            self.weapon_data = loader.load_all_weapons()
+            self.weapon_data = self.weapon_loader.load_all_weapons()
 
             if self.logger:
                 self.logger.info(
@@ -326,6 +326,137 @@ class OrthancsWorkshop(QMainWindow):
                 self.logger.warning(f"Failed to load armor data: {e}")
                 self.logger.exception(e)
 
+    def get_weapon_category_name(self, weapon_type_id):
+        """Convert weapon type ID to human-readable category name"""
+        try:
+            hand, category = self.get_weapon_hand_and_category(weapon_type_id)
+            return category
+        except Exception:
+            return "Unknown"
+
+    def get_weapon_hand_and_category(self, weapon_type_id, name: str | None = None):
+        """Return (handedness, category) derived from weapon_type_names.
+        handedness: 'One-Handed', 'Two-Handed', or None
+        category: cleaned label like 'Swords', 'Axes', etc., or 'Unknown'
+        """
+        try:
+            # Access game data via existing loader
+            if hasattr(self, 'weapon_loader') and hasattr(self.weapon_loader, 'gamedata'):
+                gd = self.weapon_loader.gamedata
+            else:
+                from cff_weapon_loader import CFFWeaponLoader
+                self.weapon_loader = CFFWeaponLoader()
+                gd = self.weapon_loader.gamedata
+
+            if not hasattr(gd, 'weapon_type_names'):
+                return (None, "Unknown")
+
+            if weapon_type_id >= len(gd.weapon_type_names):
+                return (None, "Unknown")
+
+            # Prefer exact lookup by ID; indexing can be misaligned across tables
+            type_name_str = None
+            try:
+                results = gd.weapon_type_names.where(weapon_type_id=weapon_type_id)
+            except Exception:
+                results = []
+
+            if results:
+                first = results[0]
+                type_name_str = getattr(first, "name", str(first))
+            else:
+                # Safe fallback: attempt index, but this may be misaligned in some dumps
+                try:
+                    maybe_obj = gd.weapon_type_names[weapon_type_id]
+                    type_name_str = getattr(maybe_obj, "name", str(maybe_obj))
+                except Exception:
+                    return (None, "Unknown")
+
+            # Determine category
+            category = "Unknown"
+            if "Dagger" in type_name_str:
+                category = "Daggers"
+            elif "Sword" in type_name_str:
+                category = "Swords"
+            elif "Axe" in type_name_str:
+                category = "Axes"
+            elif "Mace" in type_name_str:
+                category = "Maces"
+            elif "Hammer" in type_name_str:
+                category = "Hammers"
+            elif "Staff" in type_name_str:
+                category = "Staves"
+            elif "Spear" in type_name_str:
+                category = "Spears"
+            elif "Halberd" in type_name_str:
+                category = "Halberds"
+            elif "Crossbow" in type_name_str:
+                category = "Crossbows"
+            elif "Bow" in type_name_str:
+                category = "Bows"
+            elif "Hand" in type_name_str:
+                category = "Hand Weapons"
+
+            # Determine handedness strictly from 1H/2H markers.
+            hand = None
+            if "2H" in type_name_str:
+                hand = "Two-Handed"
+            elif "1H" in type_name_str or " Hand" in type_name_str:
+                # Treat explicit Hand types as one-handed
+                hand = "One-Handed"
+            else:
+                # Sensible defaults when no marker exists
+                if category in ["Bows", "Crossbows"]:
+                    hand = "Two-Handed"
+
+            # Secondary correction using weapon display name, if provided
+            if name:
+                n = name.lower()
+                def has(term):
+                    return term in n
+                # Crossbow before Bow to avoid substring collision
+                if has("crossbow") and category != "Crossbows":
+                    category = "Crossbows"
+                    hand = "Two-Handed"
+                elif has("bow") and category != "Bows":
+                    category = "Bows"
+                    if hand is None:
+                        hand = "Two-Handed"
+                elif has("dagger") and category != "Daggers":
+                    category = "Daggers"
+                    if hand is None:
+                        hand = "One-Handed"
+                elif has("sword") and category != "Swords":
+                    category = "Swords"
+                elif has("axe") and category != "Axes":
+                    category = "Axes"
+                elif has("mace") and category != "Maces":
+                    category = "Maces"
+                elif has("hammer") and category != "Hammers":
+                    category = "Hammers"
+                elif has("halberd") and category != "Halberds":
+                    category = "Halberds"
+                elif has("spear") and category != "Spears":
+                    category = "Spears"
+                elif has("staff") and category != "Staves":
+                    category = "Staves"
+
+                # Fine-grained hand detection for bows and crossbows if still ambiguous
+                if category == "Bows":
+                    if any(k in n for k in ["hand bow", "one-hand", "one handed", "1h", "short", "light", "compact"]):
+                        hand = "One-Handed"
+                    elif any(k in n for k in ["two-hand", "two handed", "2h", "long", "greatbow", "warbow", "heavy"]):
+                        hand = "Two-Handed"
+                elif category == "Crossbows":
+                    if any(k in n for k in ["hand crossbow", "pistol crossbow", "wrist crossbow", "one-hand", "one handed", "1h"]):
+                        hand = "One-Handed"
+                    elif any(k in n for k in ["two-hand", "two handed", "2h", "heavy", "siege"]):
+                        hand = "Two-Handed"
+
+            return (hand, category)
+        except Exception:
+            return (None, "Unknown")
+
     def populate_item_tree(self):
         """Populate the item tree with weapons and armor grouped by type"""
         self.item_tree.clear()
@@ -345,49 +476,21 @@ class OrthancsWorkshop(QMainWindow):
             two_handed_weapons = {}
             other_weapons = {}
             
-            # Process actual weapons from weapon_data
+            # Process actual weapons from weapon_data (based on weapon_type, with name correction)
             for weapon_id, weapon_info in self.weapon_data.items():
-                weapon_subtype = weapon_info.get("item_subtype", "")
-                weapon_type = weapon_info.get("weapon_type_name", "")
+                weapon_type_id = weapon_info.get("weapon_type_id", 0)
                 name = weapon_info.get("weapon_name", weapon_info.get("name", f"Weapon {weapon_id}"))
-                
-                # Convert enum to string for comparison
-                subtype_str = str(weapon_subtype)
-                
-                # Determine weapon category
-                if subtype_str == "EquipmentType.ONEHANDED_WEAPON":
-                    # Group by weapon type (Sword, Axe, Mace, etc.)
-                    if weapon_type not in one_handed_weapons:
-                        one_handed_weapons[weapon_type] = []
-                    one_handed_weapons[weapon_type].append((weapon_id, weapon_info))
-                elif subtype_str == "EquipmentType.TWOHANDED_WEAPON":
-                    # Group by weapon type (Sword, Axe, Mace, etc.)
-                    if weapon_type not in two_handed_weapons:
-                        two_handed_weapons[weapon_type] = []
-                    two_handed_weapons[weapon_type].append((weapon_id, weapon_info))
-                elif subtype_str == "EquipmentType.BOW":
-                    # Bows can be one-handed or two-handed, categorize by weapon type
-                    if weapon_type:
-                        # Check if it's a two-handed bow based on weapon type or name
-                        weapon_name = name.lower()
-                        if "two" in weapon_name or "2h" in weapon_name or "long" in weapon_name:
-                            if "Bows" not in two_handed_weapons:
-                                two_handed_weapons["Bows"] = []
-                            two_handed_weapons["Bows"].append((weapon_id, weapon_info))
-                        else:
-                            if "Bows" not in one_handed_weapons:
-                                one_handed_weapons["Bows"] = []
-                            one_handed_weapons["Bows"].append((weapon_id, weapon_info))
-                    else:
-                        # Default to one-handed for bows without specific type
-                        if "Bows" not in one_handed_weapons:
-                            one_handed_weapons["Bows"] = []
-                        one_handed_weapons["Bows"].append((weapon_id, weapon_info))
-                elif subtype_str not in ["EquipmentType.NOTHING", "EquipmentType.FIGURE_NPC"]:
-                    # Everything else goes to Others
-                    category = "Others"
-                    if weapon_type:
-                        category = weapon_type.replace("WeaponType ", "").replace("_", " ").title()
+
+                hand, category = self.get_weapon_hand_and_category(weapon_type_id, name)
+                if hand == "One-Handed":
+                    if category not in one_handed_weapons:
+                        one_handed_weapons[category] = []
+                    one_handed_weapons[category].append((weapon_id, weapon_info))
+                elif hand == "Two-Handed":
+                    if category not in two_handed_weapons:
+                        two_handed_weapons[category] = []
+                    two_handed_weapons[category].append((weapon_id, weapon_info))
+                else:
                     if category not in other_weapons:
                         other_weapons[category] = []
                     other_weapons[category].append((weapon_id, weapon_info))
@@ -416,7 +519,7 @@ class OrthancsWorkshop(QMainWindow):
                 oh_root.setFont(0, QFont("", -1, QFont.Weight.Bold))
                 
                 for weapon_type in sorted(one_handed_weapons.keys()):
-                    display_type = weapon_type.replace("WeaponType ", "").replace("_", " ").title()
+                    display_type = weapon_type  # Already formatted from get_weapon_category_name
                     if not display_type:
                         display_type = "Unknown"
                     type_node = QTreeWidgetItem(
@@ -439,7 +542,7 @@ class OrthancsWorkshop(QMainWindow):
                 th_root.setFont(0, QFont("", -1, QFont.Weight.Bold))
                 
                 for weapon_type in sorted(two_handed_weapons.keys()):
-                    display_type = weapon_type.replace("WeaponType ", "").replace("_", " ").title()
+                    display_type = weapon_type  # Already formatted from get_weapon_category_name
                     if not display_type:
                         display_type = "Unknown"
                     type_node = QTreeWidgetItem(

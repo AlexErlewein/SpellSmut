@@ -65,18 +65,8 @@ class CFFWeaponLoader(QObject):
                         progress, f"Loading weapon {i + 1}/{total_weapons}"
                     )
 
-                self.progress_updated.emit(
-                    100, f"Loaded {len(weapons)} weapons from CFF"
-                )
-                self.loading_complete.emit(len(weapons))
-
             except Exception as e:
                 print(f"Error loading from GameData: {e}")
-                # Fall back to enhanced_weapons.json if CFF loading fails
-                weapons = self._load_from_enhanced_json()
-        else:
-            # If GameData.cff doesn't exist or Tirganach is not available, fall back to JSON
-            weapons = self._load_from_enhanced_json()
 
         return weapons
 
@@ -104,7 +94,8 @@ class CFFWeaponLoader(QObject):
             buy_value = getattr(item, "buying_price", 0)
             item_set_id = getattr(item, "item_set_id", 0)
             item_type = getattr(item, "item_type", "WEAPON")
-            item_subtype = getattr(item, "item_subtype", "WEAPON")
+            raw_subtype = getattr(item, "item_subtype", "WEAPON")
+            item_subtype = str(raw_subtype).strip()
             name_id = getattr(item, "name_id", 0)
             unit_stats_id = getattr(item, "unit_stats_id", 0)
             army_unit_id = getattr(item, "army_unit_id", 0)
