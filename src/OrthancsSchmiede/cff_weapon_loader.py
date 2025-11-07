@@ -1,6 +1,6 @@
 """
-CFF-based Weapon Loader for Orthanc's Workshop
-================================================
+CFF-based Weapon Loader for Orthancs Schmiede
+=============================================
 
 This module provides functionality to load weapon data directly from CFF files,
 ensuring access to the most complete and up-to-date weapon information.

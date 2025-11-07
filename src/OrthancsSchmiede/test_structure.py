@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Simple test script for OrthancsWorkshop structure
+Simple test script for OrthancsSchmiede structure
 """
 
 import sys
@@ -11,7 +11,7 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root / "src"))
 
-print("OrthancsWorkshop Structure Test")
+print("OrthancsSchmiede Structure Test")
 print("=" * 40)
 
 # Test imports
@@ -20,13 +20,13 @@ try:
     print("✓ Added to sys.path:", str(project_root / "src"))
 
     # Check if required modules exist
-    orthancs_file = project_root / "src" / "OrthancsWorkshop" / "orthancs_workshop.py"
+    orthancs_file = project_root / "src" / "OrthancsSchmiede" / "orthancs_schmiede.py"
     if orthancs_file.exists():
         print("✓ Main app file exists:", orthancs_file)
     else:
         print("✗ Main app file missing")
 
-    readme_file = project_root / "src" / "OrthancsWorkshop" / "README.md"
+    readme_file = project_root / "src" / "OrthancsSchmiede" / "README.md"
     if readme_file.exists():
         print("✓ README file exists:", readme_file)
     else:
@@ -50,10 +50,10 @@ try:
     except ImportError as e:
         print("⚠ ID Manager import failed (expected in test env):", e)
 
-    print("\n✅ OrthancsWorkshop structure test completed successfully!")
+    print("\n✅ OrthancsSchmiede structure test completed successfully!")
     print("\nTo run the full application:")
-    print("  cd src/OrthancsWorkshop")
-    print("  python orthancs_workshop.py")
+    print("  cd src/OrthancsSchmiede")
+    print("  python orthancs_schmiede.py")
 
 except Exception as e:
     print("✗ Test failed:", e)

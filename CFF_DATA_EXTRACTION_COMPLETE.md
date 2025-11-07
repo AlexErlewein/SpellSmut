@@ -1,12 +1,12 @@
 # CFF Data Extraction Enhancement - COMPLETED
 
 **Date**: November 6, 2025  
-**Project**: Orthanc's Workshop - SpellForce Item Browser  
+**Project**: Orthancs Schmiede - SpellForce Item Browser  
 **Status**: ✅ **COMPLETE**
 
 ## Overview
 
-Successfully implemented comprehensive data extraction from SpellForce GameData.cff files for both weapons and armor in the Orthanc's Workshop application. This enhancement provides users with complete access to all available item data from the original game files.
+Successfully implemented comprehensive data extraction from SpellForce GameData.cff files for both weapons and armor in the Orthancs Schmiede application. This enhancement provides users with complete access to all available item data from the original game files.
 
 ## 🎯 Objectives Achieved
 
@@ -60,7 +60,7 @@ Successfully implemented comprehensive data extraction from SpellForce GameData.
 - Added CFF-specific data fields
 ```
 
-### UI Enhancements (`orthancs_workshop.py`)
+### UI Enhancements (`orthancs_schmiede.py`)
 ```python
 # New features:
 - Added "CFF DATA FIELDS" section for both weapons and armor
@@ -219,7 +219,7 @@ else: return "Common"
 ## 📚 Documentation Updates
 
 ### Updated Files
-1. **`src/OrthancsWorkshop/README.md`**
+1. **`src/OrthancsSchmiede/README.md`**
    - Added CFF data extraction features
    - Updated data sources section
    - Added comprehensive field listings
@@ -300,9 +300,9 @@ else: return "Common"
 
 ## 🎉 Conclusion
 
-The CFF data extraction enhancement has been **successfully completed**, providing Orthanc's Workshop with comprehensive access to SpellForce's original item data. Users can now browse complete weapon and armor information with all the detail available in the original game files.
+The CFF data extraction enhancement has been **successfully completed**, providing Orthancs Schmiede with comprehensive access to SpellForce's original item data. Users can now browse complete weapon and armor information with all the detail available in the original game files.
 
-The implementation maintains backward compatibility, provides robust error handling, and establishes a solid foundation for future enhancements. The enhanced data extraction significantly improves the utility and completeness of the Orthanc's Workshop application.
+The implementation maintains backward compatibility, provides robust error handling, and establishes a solid foundation for future enhancements. The enhanced data extraction significantly improves the utility and completeness of the Orthancs Schmiede application.
 
 ---
 

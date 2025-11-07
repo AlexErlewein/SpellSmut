@@ -1,4 +1,4 @@
-# Orthanc's Workshop
+# Orthancs Schmiede
 
 A comprehensive standalone application for browsing and creating SpellForce weapons and armor, featuring a dark theme interface styled after the TirganachReloaded quest viewer.
 
@@ -19,8 +19,8 @@ A comprehensive standalone application for browsing and creating SpellForce weap
 ### Running the Application
 
 ```bash
-cd src/OrthancsWorkshop
-python orthancs_workshop.py
+cd src/OrthancsSchmiede
+python orthancs_schmiede.py
 ```
 
 ### Interface Overview

@@ -170,12 +170,12 @@ src/
 │   ├── enhanced_armor.json      # Active armor database (656 KB)
 │   └── enhanced_weapons.json    # Active weapon database (349 KB)
 │
-├── OrthancsWorkshop/        # Standalone item browser application
+├── OrthancsSchmiede/        # Standalone item browser application
 │   ├── README.md               # Application documentation (updated Nov 2025)
-│   ├── orthancs_workshop.py    # Main application window
+│   ├── orthancs_schmiede.py    # Main application window
 │   ├── cff_weapon_loader.py    # Enhanced weapon data extraction from CFF
 │   ├── cff_armor_loader.py     # Enhanced armor data extraction from CFF
-│   └── [other workshop files]
+│   └── [other schmiede files]
 │
 └── tests/                        # Main test suite (see Tests section)
 ```

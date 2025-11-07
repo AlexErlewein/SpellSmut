@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Orthanc's Workshop - Weapon & Armor Browser and Creation Suite
-================================================================
+Orthancs Schmiede - Weapon & Armor Browser and Creation Suite
+=============================================================
 
 A comprehensive application for browsing and creating SpellForce weapons and armor.
 Features enhanced UI/UX, integrated creation wizards, and detailed item inspection.
 
 Usage:
-    python orthancs_workshop.py [--debug] [--rebuild-cache]
+    python orthancs_schmiede.py [--debug] [--rebuild-cache]
 
 Author: TirganachReloaded Modding Tools
 """
@@ -53,8 +53,8 @@ from TirganachReloaded.cff_editor.widgets.weapon_forge_wizard import (
 from TirganachReloaded.tirganach.types import Language  # noqa: E402
 
 
-class OrthancsWorkshop(QMainWindow):
-    """Main application window for Orthanc's Workshop"""
+class OrthancsSchmiede(QMainWindow):
+    """Main application window for Orthancs Schmiede"""
 
     def __init__(self):
         super().__init__()
@@ -69,7 +69,7 @@ class OrthancsWorkshop(QMainWindow):
 
     def init_ui(self):
         """Initialize the enhanced user interface"""
-        self.setWindowTitle("Orthanc's Workshop - Weapon & Armor Suite")
+        self.setWindowTitle("Orthancs Schmiede - Weapon & Armor Suite")
         self.setMinimumSize(QSize(1600, 1000))
 
         # Central widget
@@ -81,7 +81,7 @@ class OrthancsWorkshop(QMainWindow):
 
         # Header with enhanced controls
         header_layout = QHBoxLayout()
-        title_label = QLabel("Orthanc's Workshop")
+        title_label = QLabel("Orthancs Schmiede")
         title_label.setStyleSheet("font-size: 20px; font-weight: bold; color: #6fb3d2;")
         header_layout.addWidget(title_label)
 
@@ -235,17 +235,17 @@ class OrthancsWorkshop(QMainWindow):
         splitter.setSizes([800, 800])
 
         # Simple status bar
-        self.statusBar().showMessage("Ready - Orthanc's Workshop Loaded")
+        self.statusBar().showMessage("Ready - Orthancs Schmiede Loaded")
 
     def load_data(self):
         """Load weapon and armor data"""
         try:
-            self.statusBar().showMessage("Initializing Orthanc's Workshop...")
+            self.statusBar().showMessage("Initializing Orthancs Schmiede...")
 
             # Configure logging
             if not self.logger:
                 configure_logging()
-                self.logger = get_logger("orthancs_workshop")
+                self.logger = get_logger("orthancs_schmiede")
 
             # Initialize ID manager
             if not self.id_manager:
@@ -265,7 +265,7 @@ class OrthancsWorkshop(QMainWindow):
             self.update_tree_title()
 
             self.statusBar().showMessage(
-                f"✅ Loaded {total_items} items - Orthanc's Workshop Ready"
+                f"✅ Loaded {total_items} items - Orthancs Schmiede Ready"
             )
 
         except Exception as e:
@@ -635,6 +635,8 @@ class OrthancsWorkshop(QMainWindow):
                     for weapon_id, weapon_info in sorted(one_handed_weapons[weapon_type]):
                         name = self.get_display_name(weapon_info, is_weapon=True)
                         type_text = self.get_localized_weapon_type_name(weapon_info.get("weapon_type_id", 0)) or weapon_info.get("weapon_type_name", weapon_info.get("item_subtype", ""))
+                        if not isinstance(type_text, str):
+                            type_text = str(type_text)
                         item = QTreeWidgetItem(type_node, [name, type_text, str(weapon_id)])
                         # Mark as weapon for proper handling in UI
                         item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
@@ -657,6 +659,8 @@ class OrthancsWorkshop(QMainWindow):
                     for weapon_id, weapon_info in sorted(two_handed_weapons[weapon_type]):
                         name = self.get_display_name(weapon_info, is_weapon=True)
                         type_text = self.get_localized_weapon_type_name(weapon_info.get("weapon_type_id", 0)) or weapon_info.get("weapon_type_name", weapon_info.get("item_subtype", ""))
+                        if not isinstance(type_text, str):
+                            type_text = str(type_text)
                         item = QTreeWidgetItem(type_node, [name, type_text, str(weapon_id)])
                         # Mark as weapon for proper handling in UI
                         item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
@@ -676,6 +680,8 @@ class OrthancsWorkshop(QMainWindow):
                     for weapon_id, weapon_info in sorted(other_weapons[category]):
                         name = self.get_display_name(weapon_info, is_weapon=True)
                         type_text = self.get_localized_weapon_type_name(weapon_info.get("weapon_type_id", 0)) or weapon_info.get("weapon_type_name", weapon_info.get("item_subtype", ""))
+                        if not isinstance(type_text, str):
+                            type_text = str(type_text)
                         item = QTreeWidgetItem(type_node, [name, type_text, str(weapon_id)])
                         item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
 
@@ -1748,7 +1754,7 @@ class OrthancsWorkshop(QMainWindow):
 def main():
     """Main entry point"""
     parser = argparse.ArgumentParser(
-        description="Orthanc's Workshop - Weapon & Armor Suite"
+        description="Orthancs Schmiede - Weapon & Armor Suite"
     )
     parser.add_argument("--debug", action="store_true", help="Enable debug logging")
 
@@ -1760,7 +1766,7 @@ def main():
 
     # Create Qt application
     app = QApplication(sys.argv)
-    app.setApplicationName("Orthanc's Workshop")
+    app.setApplicationName("Orthancs Schmiede")
     app.setOrganizationName("TirganachReloaded Modding Tools")
 
     # Set application style
@@ -1912,7 +1918,7 @@ def main():
     """)
 
     # Create and show main window
-    window = OrthancsWorkshop()
+    window = OrthancsSchmiede()
     window.show()
 
     # Run event loop

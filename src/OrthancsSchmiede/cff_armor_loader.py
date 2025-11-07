@@ -1,6 +1,6 @@
 """
-CFF-based Armor Loader for Orthanc's Workshop
-================================================
+CFF-based Armor Loader for Orthancs Schmiede
+============================================
 
 This module provides functionality to load armor data directly from CFF files,
 ensuring access to the most complete and up-to-date armor information.
