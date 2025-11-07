@@ -50,6 +50,7 @@ from TirganachReloaded.cff_editor.widgets.armor_forge_wizard import (
 from TirganachReloaded.cff_editor.widgets.weapon_forge_wizard import (
     WeaponForgeWizard,  # noqa: E402
 )
+from TirganachReloaded.tirganach.types import Language  # noqa: E402
 
 
 class OrthancsWorkshop(QMainWindow):
@@ -61,6 +62,7 @@ class OrthancsWorkshop(QMainWindow):
         self.id_manager = None
         self.weapon_data = {}
         self.armor_data = {}
+        self.current_language = Language.GERMAN
 
         self.init_ui()
         self.load_data()
@@ -91,6 +93,23 @@ class OrthancsWorkshop(QMainWindow):
         self.mode_combo.currentTextChanged.connect(self.on_mode_changed)
         header_layout.addWidget(QLabel("Mode:"))
         header_layout.addWidget(self.mode_combo)
+
+        # Language selector
+        header_layout.addWidget(QLabel("Language:"))
+        self.lang_combo = QComboBox()
+        # Visible labels mapped to Language enum
+        self._lang_map = {
+            "Deutsch": Language.GERMAN,
+            "English": Language.ENGLISH,
+            "Français": Language.FRENCH,
+            "Español": Language.SPANISH,
+            "Italiano": Language.ITALIAN,
+        }
+        self.lang_combo.addItems(list(self._lang_map.keys()))
+        # Default to German
+        self.lang_combo.setCurrentText("Deutsch")
+        self.lang_combo.currentTextChanged.connect(self.on_language_changed)
+        header_layout.addWidget(self.lang_combo)
 
         # Enhanced buttons
         create_weapon_btn = QPushButton("Forge Weapon")
@@ -334,6 +353,91 @@ class OrthancsWorkshop(QMainWindow):
         except Exception:
             return "Unknown"
 
+    def _get_gamedata(self):
+        # Access shared GameData instance
+        try:
+            if hasattr(self, 'weapon_loader') and getattr(self.weapon_loader, 'gamedata', None):
+                return self.weapon_loader.gamedata
+            from cff_weapon_loader import CFFWeaponLoader
+            self.weapon_loader = CFFWeaponLoader()
+            return self.weapon_loader.gamedata
+        except Exception:
+            return None
+
+    def get_localised_text(self, text_id: int) -> str:
+        """Return localisation text for current language by text_id, with fallback."""
+        gd = self._get_gamedata()
+        if not gd or not hasattr(gd, 'localisation') or not text_id:
+            return ""
+        try:
+            rows = gd.localisation.where(text_id=text_id, language=self.current_language)
+            if rows:
+                return getattr(rows[0], 'text', '') or ''
+        except Exception:
+            pass
+        # Fallback: try English
+        try:
+            rows_en = gd.localisation.where(text_id=text_id, language=Language.ENGLISH)
+            if rows_en:
+                return getattr(rows_en[0], 'text', '') or ''
+        except Exception:
+            pass
+        return ""
+
+    def get_localized_weapon_type_name(self, weapon_type_id: int) -> str:
+        gd = self._get_gamedata()
+        if not gd or not hasattr(gd, 'weapon_type_names'):
+            return ""
+        try:
+            res = gd.weapon_type_names.where(weapon_type_id=weapon_type_id)
+            if res:
+                text_id = getattr(res[0], 'text_id', 0)
+                return self.get_localised_text(text_id) or ''
+        except Exception:
+            pass
+        return ""
+
+    def get_localized_weapon_material_name(self, material_id: int) -> str:
+        gd = self._get_gamedata()
+        if not gd or not hasattr(gd, 'weapon_material_names'):
+            return ""
+        try:
+            res = gd.weapon_material_names.where(weapon_material_id=material_id)
+            if res:
+                text_id = getattr(res[0], 'text_id', 0)
+                return self.get_localised_text(text_id) or ''
+        except Exception:
+            pass
+        return ""
+
+    def get_item_set_description_text(self, item_set_id: int) -> str:
+        """Return localized ItemSet description by set_id if available."""
+        if not item_set_id:
+            return ""
+        gd = self._get_gamedata()
+        if not gd or not hasattr(gd, 'item_sets'):
+            return ""
+        try:
+            rows = gd.item_sets.where(set_id=item_set_id)
+        except Exception:
+            rows = []
+        if rows:
+            text_id = getattr(rows[0], 'text_id', 0)
+            return self.get_localised_text(text_id) or ''
+        return ""
+
+    def get_display_name(self, info: dict, is_weapon: bool) -> str:
+        """Resolve display name from CFF localisation by name_id, fallback to stored name."""
+        name_id = info.get('name_id', 0)
+        loc = self.get_localised_text(name_id) if name_id else ''
+        if loc:
+            return loc
+        # Fallback to existing fields
+        if is_weapon:
+            return info.get('weapon_name', info.get('name', 'Unknown'))
+        else:
+            return info.get('armor_name', info.get('name', 'Unknown'))
+
     def get_weapon_hand_and_category(self, weapon_type_id, name: str | None = None):
         """Return (handedness, category) derived from weapon_type_names.
         handedness: 'One-Handed', 'Two-Handed', or None
@@ -479,7 +583,7 @@ class OrthancsWorkshop(QMainWindow):
             # Process actual weapons from weapon_data (based on weapon_type, with name correction)
             for weapon_id, weapon_info in self.weapon_data.items():
                 weapon_type_id = weapon_info.get("weapon_type_id", 0)
-                name = weapon_info.get("weapon_name", weapon_info.get("name", f"Weapon {weapon_id}"))
+                name = self.get_display_name(weapon_info, is_weapon=True)
 
                 hand, category = self.get_weapon_hand_and_category(weapon_type_id, name)
                 if hand == "One-Handed":
@@ -529,9 +633,7 @@ class OrthancsWorkshop(QMainWindow):
                     type_node.setFont(0, QFont("", -1, QFont.Weight.Bold))
 
                     for weapon_id, weapon_info in sorted(one_handed_weapons[weapon_type]):
-                        name = weapon_info.get("weapon_name", weapon_info.get("name", f"Weapon {weapon_id}"))
-                        if not name or name == f"Weapon {weapon_id}":
-                            name = weapon_info.get("armor_name", f"Weapon {weapon_id}")
+                        name = self.get_display_name(weapon_info, is_weapon=True)
                         item = QTreeWidgetItem(type_node, [name, "", str(weapon_id)])
                         # Mark as weapon for proper handling in UI
                         item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
@@ -552,9 +654,7 @@ class OrthancsWorkshop(QMainWindow):
                     type_node.setFont(0, QFont("", -1, QFont.Weight.Bold))
 
                     for weapon_id, weapon_info in sorted(two_handed_weapons[weapon_type]):
-                        name = weapon_info.get("weapon_name", weapon_info.get("name", f"Weapon {weapon_id}"))
-                        if not name or name == f"Weapon {weapon_id}":
-                            name = weapon_info.get("armor_name", f"Weapon {weapon_id}")
+                        name = self.get_display_name(weapon_info, is_weapon=True)
                         item = QTreeWidgetItem(type_node, [name, "", str(weapon_id)])
                         # Mark as weapon for proper handling in UI
                         item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
@@ -572,7 +672,7 @@ class OrthancsWorkshop(QMainWindow):
                     type_node.setFont(0, QFont("", -1, QFont.Weight.Bold))
 
                     for weapon_id, weapon_info in sorted(other_weapons[category]):
-                        name = weapon_info.get("weapon_name", weapon_info.get("name", f"Weapon {weapon_id}"))
+                        name = self.get_display_name(weapon_info, is_weapon=True)
                         item = QTreeWidgetItem(type_node, [name, "", str(weapon_id)])
                         item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
 
@@ -629,7 +729,7 @@ class OrthancsWorkshop(QMainWindow):
 
                 # Add armor under this category
                 for armor_id, armor_info in sorted(armor_categories[category_name]):
-                    name = armor_info.get("armor_name", f"Armor {armor_id}")
+                    name = self.get_display_name(armor_info, is_weapon=False)
                     armor_type = armor_info.get("armor_type", "Unknown")
                     item = QTreeWidgetItem(category_node, [name, armor_type, str(armor_id)])
                     item.setData(0, Qt.ItemDataRole.UserRole, ("armor", armor_id))
@@ -649,6 +749,12 @@ class OrthancsWorkshop(QMainWindow):
     def on_mode_changed(self, mode):
         """Handle mode change between weapons and armor"""
         self.update_tree_title()
+
+    def on_language_changed(self, label: str):
+        # Update current language based on dropdown
+        self.current_language = self._lang_map.get(label, Language.GERMAN)
+        # Rebuild tree with new localisation
+        self.populate_item_tree()
 
     def update_tree_title(self):
         """Update the tree group title based on current mode"""
@@ -684,9 +790,8 @@ class OrthancsWorkshop(QMainWindow):
         self.clear_details_content()
 
         # Main title
-        title_label = QLabel(
-            f"WEAPON ID: {weapon_id} - {weapon_info.get('weapon_name', weapon_info.get('name', 'Unknown'))}"
-        )
+        display_name = self.get_display_name(weapon_info, is_weapon=True)
+        title_label = QLabel(f"WEAPON ID: {weapon_id} - {display_name}")
         title_label.setStyleSheet("""
             QLabel {
                 background-color: #2d2d30;
@@ -722,18 +827,13 @@ class OrthancsWorkshop(QMainWindow):
         """)
         basic_layout = QVBoxLayout(basic_group)
 
+        # Localize type/material
+        localized_type = self.get_localized_weapon_type_name(weapon_info.get('weapon_type_id', 0)) or weapon_info.get("weapon_type_name", weapon_info.get("item_subtype", "Unknown"))
+        localized_material = self.get_localized_weapon_material_name(weapon_info.get('weapon_material_id', 0)) or weapon_info.get("weapon_material_name", "Unknown")
         basic_info = [
-            (
-                "Name",
-                weapon_info.get("weapon_name", weapon_info.get("name", "Unknown")),
-            ),
-            (
-                "Type",
-                weapon_info.get(
-                    "weapon_type_name", weapon_info.get("item_subtype", "Unknown")
-                ),
-            ),
-            ("Material", weapon_info.get("weapon_material_name", "Unknown")),
+            ("Name", display_name),
+            ("Type", localized_type),
+            ("Material", localized_material),
             ("Hands", weapon_info.get("hands", "Unknown")),
             ("Category", weapon_info.get("damage_category", "Unknown")),
         ]
@@ -886,6 +986,58 @@ class OrthancsWorkshop(QMainWindow):
             special_layout.addLayout(row_layout)
 
         self.details_content_layout.addWidget(special_group)
+
+        # Description Section (from Item Set when available)
+        desc_text = self.get_item_set_description_text(weapon_info.get('item_set_id', 0))
+        if desc_text:
+            desc_group = QGroupBox("DESCRIPTION")
+            desc_group.setStyleSheet("""
+                QGroupBox {
+                    font-weight: bold;
+                    color: #c7c76f;
+                    border: 2px solid #c7c76f;
+                    border-radius: 5px;
+                    margin-top: 1ex;
+                    padding-top: 10px;
+                }
+                QGroupBox::title {
+                    subcontrol-origin: margin;
+                    left: 10px;
+                    padding: 0 5px 0 5px;
+                }
+            """)
+            desc_layout = QVBoxLayout(desc_group)
+            desc_label = QLabel(desc_text)
+            desc_label.setWordWrap(True)
+            desc_label.setStyleSheet("color: #e0e0e0;")
+            desc_layout.addWidget(desc_label)
+            self.details_content_layout.addWidget(desc_group)
+
+        # Description Section (from Item Set when available)
+        armor_desc_text = self.get_item_set_description_text(armor_info.get('item_set_id', 0))
+        if armor_desc_text:
+            a_desc_group = QGroupBox("DESCRIPTION")
+            a_desc_group.setStyleSheet("""
+                QGroupBox {
+                    font-weight: bold;
+                    color: #c7c76f;
+                    border: 2px solid #c7c76f;
+                    border-radius: 5px;
+                    margin-top: 1ex;
+                    padding-top: 10px;
+                }
+                QGroupBox::title {
+                    subcontrol-origin: margin;
+                    left: 10px;
+                    padding: 0 5px 0 5px;
+                }
+            """)
+            a_desc_layout = QVBoxLayout(a_desc_group)
+            a_desc_label = QLabel(armor_desc_text)
+            a_desc_label.setWordWrap(True)
+            a_desc_label.setStyleSheet("color: #e0e0e0;")
+            a_desc_layout.addWidget(a_desc_label)
+            self.details_content_layout.addWidget(a_desc_group)
 
         # Requirements Section
         req_group = QGroupBox("REQUIREMENTS")
@@ -1109,8 +1261,9 @@ class OrthancsWorkshop(QMainWindow):
         self.clear_details_content()
 
         # Main title
+        armor_display_name = self.get_display_name(armor_info, is_weapon=False)
         title_label = QLabel(
-            f"ARMOR ID: {armor_id} - {armor_info.get('armor_name', 'Unknown')}"
+            f"ARMOR ID: {armor_id} - {armor_display_name}"
         )
         title_label.setStyleSheet("""
             QLabel {
