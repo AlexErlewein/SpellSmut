@@ -1,7 +1,7 @@
 # CSV Integration Summary - Quest Viewer Enhancement
 
 ## Project Overview
-Successfully integrated CSV data from the QuestKnowledge extraction into the LiannonQuestViewer to fill existing data holes and provide comprehensive quest information.
+Successfully integrated CSV data from the QuestKnowledge extraction into the DariusAlmanach to fill existing data holes and provide comprehensive quest information.
 
 ## Date Completed
 November 4, 2025
@@ -23,7 +23,7 @@ Found and documented these gaps in the quest viewer:
 
 ### 3. Implementation ✅
 #### Core Changes Made:
-- **Added CSV import functionality** in `simple_quest_viewer.py`
+- **Added CSV import functionality** in `darius_almanach.py`
 - **Enhanced data loading pipeline** with new step 3.5 for CSV processing
 - **Updated quest details display** to show:
   - Quest giver names with NPC IDs
@@ -48,12 +48,12 @@ Found and documented these gaps in the quest viewer:
 ## Files Modified
 
 ### Primary Files:
-1. **`src/LiannonQuestViewer/simple_quest_viewer.py`**
+1. **`src/DariusAlmanach/darius_almanach.py`**
    - Added CSV import functionality
    - Enhanced data loading pipeline
    - Updated quest details display
 
-2. **`src/LiannonQuestViewer/test_csv_integration.py`** (NEW)
+2. **`src/DariusAlmanach/test_csv_integration.py`** (NEW)
    - Comprehensive test script for CSV integration
    - Validates data parsing and integration
 

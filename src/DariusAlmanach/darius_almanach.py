@@ -7,7 +7,7 @@ A lightweight application for viewing SpellForce quest data.
 Uses cached Lua files and triggers cache creation if needed.
 
 Usage:
-    python simple_quest_viewer.py [--debug] [--rebuild-cache]
+    python darius_almanach.py [--debug] [--rebuild-cache]
 """
 
 import argparse
@@ -40,7 +40,7 @@ from PySide6.QtWidgets import (
 )
 
 # Add the src directory to Python path
-# This file is in src/LiannonQuestViewer/, so project root is 2 levels up
+# This file is in src/DariusAlmanach/, so project root is 2 levels up
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root / "src"))
 
@@ -445,7 +445,7 @@ class SimpleQuestViewer(QMainWindow):
 
     def init_ui(self):
         """Initialize the user interface"""
-        self.setWindowTitle("TirganachReloaded: Simple Quest Viewer")
+        self.setWindowTitle("TirganachReloaded: Darius Almanach")
         self.setMinimumSize(QSize(1200, 800))
 
         # Central widget
@@ -457,7 +457,7 @@ class SimpleQuestViewer(QMainWindow):
 
         # Header with reload button
         header_layout = QHBoxLayout()
-        title_label = QLabel("Quest Viewer")
+        title_label = QLabel("Darius Almanach")
         title_label.setStyleSheet("font-size: 16px; font-weight: bold;")
         header_layout.addWidget(title_label)
 
@@ -2002,7 +2002,7 @@ class SimpleQuestViewer(QMainWindow):
 def main():
     """Main entry point"""
     parser = argparse.ArgumentParser(
-        description="TirganachReloaded Simple Quest Viewer"
+        description="Darius Almanach"
     )
     parser.add_argument("--debug", action="store_true", help="Enable debug logging")
 
@@ -2014,7 +2014,7 @@ def main():
 
     # Create Qt application
     app = QApplication(sys.argv)
-    app.setApplicationName("TirganachReloaded Simple Quest Viewer")
+    app.setApplicationName("Darius Almanach")
     app.setOrganizationName("SpellSmut Modding Tools")
 
     # Apply dark theme stylesheet

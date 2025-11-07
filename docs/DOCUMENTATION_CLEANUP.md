@@ -79,7 +79,7 @@ cleanup TirganachReloaded/
 │   └── tests/                             (Test directory)
 │       └── *.py                           (Including 10 moved test/debug scripts)
 │
-└── simple_quest_viewer.py                 (Main application)
+└── src/DariusAlmanach/darius_almanach.py  (Main application)
 ```
 
 ---
@@ -163,7 +163,7 @@ cleanup TirganachReloaded/
 ## Files Kept in Root
 
 ### Active Applications
-- `simple_quest_viewer.py` - Main quest viewer app
+- `src/DariusAlmanach/darius_almanach.py` - Main quest viewer app
 - `quest_viewer.py` - Launcher script
 - `run_quest_viewer.sh` - Shell launcher
 - `questview.sh` - Alternative launcher

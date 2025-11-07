@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Liannon Quest Viewer - Launcher Script
-======================================
+Darius Almanach - Launcher Script
+=================================
 
-Convenience launcher for the Liannon Quest Viewer application.
+Convenience launcher for the Darius Almanach application.
 
 Usage:
-    python run_viewer.py [--debug] [--rebuild-cache]
+    python run_darius_almanach.py [--debug] [--rebuild-cache]
 
 Features:
     - Browse all SpellForce quests
@@ -17,8 +17,8 @@ Features:
     - Dark theme interface
 
 Location:
-    This launcher is in: src/LiannonQuestViewer/
-    Main application: ./simple_quest_viewer.py
+    This launcher is in: src/DariusAlmanach/
+    Main application: ./darius_almanach.py
     Uses cache from: src/TirganachReloaded/data/cache/
 """
 
@@ -33,6 +33,6 @@ sys.path.insert(0, str(viewer_dir))
 
 # Import and run the viewer
 if __name__ == "__main__":
-    import simple_quest_viewer
+    import darius_almanach
 
-    sys.exit(simple_quest_viewer.main())
+    sys.exit(darius_almanach.main())

@@ -1,4 +1,4 @@
-# Liannon Quest Viewer
+# Darius Almanach
 
 A standalone application for browsing and analyzing SpellForce quests with advanced search, filtering, and export capabilities.
 
@@ -6,17 +6,17 @@ A standalone application for browsing and analyzing SpellForce quests with advan
 
 ### From this directory:
 ```bash
-python simple_quest_viewer.py
+python darius_almanach.py
 ```
 
 ### Or use the launcher:
 ```bash
-python run_viewer.py
+python run_darius_almanach.py
 ```
 
 ### With debug output:
 ```bash
-python simple_quest_viewer.py --debug
+python darius_almanach.py --debug
 ```
 
 ## 📋 Features
@@ -58,10 +58,10 @@ View comprehensive information for each quest:
 ## 📁 Project Structure
 
 ```
-src/LiannonQuestViewer/
+src/DariusAlmanach/
 ├── README.md                    # This file
-├── run_viewer.py                # Convenience launcher
-└── simple_quest_viewer.py       # Main application (1450+ lines)
+├── run_darius_almanach.py       # Convenience launcher
+└── darius_almanach.py           # Main application (1450+ lines)
 ```
 
 ## 🗄️ Data Sources
@@ -81,7 +81,7 @@ The viewer uses cached data from:
 ### Basic Usage
 ```bash
 # Launch the viewer
-python simple_quest_viewer.py
+python darius_almanach.py
 
 # Browse quests in the tree view
 # Click on any quest to see details
@@ -109,7 +109,7 @@ python simple_quest_viewer.py
 ### Rebuild Cache
 If quest data is outdated or corrupted:
 ```bash
-python simple_quest_viewer.py --rebuild-cache
+python darius_almanach.py --rebuild-cache
 ```
 
 This will:
@@ -120,7 +120,7 @@ This will:
 ### Debug Mode
 See detailed loading information and statistics:
 ```bash
-python simple_quest_viewer.py --debug
+python darius_almanach.py --debug
 ```
 
 Shows:
@@ -172,12 +172,12 @@ The viewer uses a professional dark theme:
 - Ensure GameData.cff is accessible
 
 ### "Import error: TirganachReloaded module not found"
-- The viewer should be run from its directory or use `run_viewer.py`
+- The viewer should be run from its directory or use `run_darius_almanach.py`
 - Check that `src/TirganachReloaded/` exists in the project
 
 ### "Cache directory created in wrong location"
 - This has been fixed! Cache now always uses: `src/TirganachReloaded/data/cache/`
-- Delete any `src/LiannonQuestViewer/src/` folders if they exist
+- Delete any `src/DariusAlmanach/src/` folders if they exist
 
 ### Slow startup
 - First load builds cache (slower)
