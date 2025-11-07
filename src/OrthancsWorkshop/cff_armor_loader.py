@@ -136,13 +136,23 @@ class CFFArmorLoader(QObject):
             "intelligence": getattr(armor, "intelligence", 0),
             "wisdom": getattr(armor, "wisdom", 0),
             "mana": getattr(armor, "mana", 0),
+            # UI field mapping - provide both names for compatibility
             "armor_value": getattr(armor, "armor", 0),
-            # Resistances
+            "base_armor": getattr(armor, "armor", 0),  # UI expects "base_armor"
+            # Special properties - map to UI expected fields
+            "health_bonus": getattr(armor, "health", 0),  # UI expects "health_bonus"
+            "mana_bonus": getattr(armor, "mana", 0),  # UI expects "mana_bonus"
+            "move_speed_bonus": getattr(armor, "speed_run", 0),  # UI expects "move_speed_bonus"
+            "fight_speed_bonus": getattr(armor, "speed_fight", 0),  # UI expects "fight_speed_bonus"
+            "cast_speed_bonus": getattr(armor, "speed_cast", 0),  # UI expects "cast_speed_bonus"
+            # Resistances - map to UI expected fields
             "resist_fire": getattr(armor, "resist_fire", 0),
             "resist_ice": getattr(armor, "resist_ice", 0),
             "resist_black": getattr(armor, "resist_black", 0),
             "resist_mind": getattr(armor, "resist_mind", 0),
-            # Speed modifiers
+            "magic_resistance": getattr(armor, "resist_black", 0),  # UI expects "magic_resistance"
+            "physical_resistance": getattr(armor, "armor", 0),  # UI expects "physical_resistance" - use armor value as approximation
+            # Speed modifiers (keep original names for CFF data section)
             "run_speed": getattr(armor, "speed_run", 0),
             "fight_speed": getattr(armor, "speed_fight", 0),
             "cast_speed": getattr(armor, "speed_cast", 0),

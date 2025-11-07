@@ -39,10 +39,17 @@ from PySide6.QtWidgets import (
 project_root = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(project_root / "src"))
 
-from TirganachReloaded.cff_editor.logging_config import configure_logging, get_logger
-from TirganachReloaded.cff_editor.shared.id_manager import IDManager
-from TirganachReloaded.cff_editor.widgets.armor_forge_wizard import ArmorForgeWizard
-from TirganachReloaded.cff_editor.widgets.weapon_forge_wizard import WeaponForgeWizard
+from TirganachReloaded.cff_editor.logging_config import (  # noqa: E402
+    configure_logging,
+    get_logger,
+)
+from TirganachReloaded.cff_editor.shared.id_manager import IDManager  # noqa: E402
+from TirganachReloaded.cff_editor.widgets.armor_forge_wizard import (
+    ArmorForgeWizard,  # noqa: E402
+)
+from TirganachReloaded.cff_editor.widgets.weapon_forge_wizard import (
+    WeaponForgeWizard,  # noqa: E402
+)
 
 
 class OrthancsWorkshop(QMainWindow):
@@ -800,7 +807,7 @@ class OrthancsWorkshop(QMainWindow):
             school_label = QLabel("<strong>School Requirements:</strong>")
             school_label.setStyleSheet("color: #a0a0a0;")
             cff_layout.addWidget(school_label)
-            
+
             for school_req in school_reqs:
                 req_text = f"  • {school_req['requirement_school']} Level {school_req['level']}"
                 req_label = QLabel(req_text)
@@ -814,16 +821,18 @@ class OrthancsWorkshop(QMainWindow):
         # Show effects if available
         effects = weapon_info.get("effects", [])
         if effects:
-            effects_label = QLabel(f"<strong>Item Effects:</strong> {len(effects)} effect(s)")
+            effects_label = QLabel(
+                f"<strong>Item Effects:</strong> {len(effects)} effect(s)"
+            )
             effects_label.setStyleSheet("color: #a0a0a0;")
             cff_layout.addWidget(effects_label)
-            
+
             for effect in effects[:5]:  # Show first 5 effects
                 effect_text = f"  • Effect ID {effect['effect_id']} (Index {effect['effect_index']})"
                 effect_label = QLabel(effect_text)
                 effect_label.setStyleSheet("color: #e0e0e0; margin-left: 10px;")
                 cff_layout.addWidget(effect_label)
-                
+
             if len(effects) > 5:
                 more_label = QLabel(f"  • ... and {len(effects) - 5} more")
                 more_label.setStyleSheet("color: #a0a0a0; margin-left: 10px;")
@@ -1013,6 +1022,59 @@ class OrthancsWorkshop(QMainWindow):
 
         self.details_content_layout.addWidget(def_group)
 
+        # Stat Bonuses Section
+        stats_group = QGroupBox("STAT BONUSES")
+        stats_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                color: #6f9eb3;
+                border: 2px solid #6f9eb3;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+        """)
+        stats_layout = QVBoxLayout(stats_group)
+
+        # Only show stats that have non-zero values
+        stats_info = []
+        if armor_info.get("strength", 0) != 0:
+            stats_info.append(("Strength", f"+{armor_info.get('strength', 0)}"))
+        if armor_info.get("stamina", 0) != 0:
+            stats_info.append(("Stamina", f"+{armor_info.get('stamina', 0)}"))
+        if armor_info.get("agility", 0) != 0:
+            stats_info.append(("Agility", f"+{armor_info.get('agility', 0)}"))
+        if armor_info.get("dexterity", 0) != 0:
+            stats_info.append(("Dexterity", f"+{armor_info.get('dexterity', 0)}"))
+        if armor_info.get("intelligence", 0) != 0:
+            stats_info.append(("Intelligence", f"+{armor_info.get('intelligence', 0)}"))
+        if armor_info.get("wisdom", 0) != 0:
+            stats_info.append(("Wisdom", f"+{armor_info.get('wisdom', 0)}"))
+        if armor_info.get("charisma", 0) != 0:
+            stats_info.append(("Charisma", f"+{armor_info.get('charisma', 0)}"))
+
+        # If no stat bonuses, show a message
+        if not stats_info:
+            stats_info = [("None", "No stat bonuses")]
+
+        for label, value in stats_info:
+            row_layout = QHBoxLayout()
+            label_widget = QLabel(f"<strong>{label}:</strong>")
+            label_widget.setStyleSheet("color: #a0a0a0; min-width: 130px;")
+            value_widget = QLabel(str(value))
+            value_widget.setStyleSheet("color: #e0e0e0;")
+            row_layout.addWidget(label_widget)
+            row_layout.addWidget(value_widget)
+            row_layout.addStretch()
+            stats_layout.addLayout(row_layout)
+
+        self.details_content_layout.addWidget(stats_group)
+
         # Special Properties Section
         special_group = QGroupBox("SPECIAL PROPERTIES")
         special_group.setStyleSheet("""
@@ -1034,6 +1096,8 @@ class OrthancsWorkshop(QMainWindow):
 
         special_info = [
             ("Movement Speed", f"{armor_info.get('move_speed_bonus', 0)}%"),
+            ("Fight Speed", f"{armor_info.get('fight_speed_bonus', 0)}%"),
+            ("Cast Speed", f"{armor_info.get('cast_speed_bonus', 0)}%"),
             ("Health Bonus", str(armor_info.get("health_bonus", 0))),
             ("Mana Bonus", str(armor_info.get("mana_bonus", 0))),
         ]
@@ -1198,7 +1262,7 @@ class OrthancsWorkshop(QMainWindow):
             school_label = QLabel("<strong>School Requirements:</strong>")
             school_label.setStyleSheet("color: #a0a0a0;")
             cff_layout.addWidget(school_label)
-            
+
             for school_req in school_reqs:
                 req_text = f"  • {school_req['requirement_school']} Level {school_req['level']}"
                 req_label = QLabel(req_text)
@@ -1212,16 +1276,18 @@ class OrthancsWorkshop(QMainWindow):
         # Show effects if available
         effects = armor_info.get("effects", [])
         if effects:
-            effects_label = QLabel(f"<strong>Item Effects:</strong> {len(effects)} effect(s)")
+            effects_label = QLabel(
+                f"<strong>Item Effects:</strong> {len(effects)} effect(s)"
+            )
             effects_label.setStyleSheet("color: #a0a0a0;")
             cff_layout.addWidget(effects_label)
-            
+
             for effect in effects[:5]:  # Show first 5 effects
                 effect_text = f"  • Effect ID {effect['effect_id']} (Index {effect['effect_index']})"
                 effect_label = QLabel(effect_text)
                 effect_label.setStyleSheet("color: #e0e0e0; margin-left: 10px;")
                 cff_layout.addWidget(effect_label)
-                
+
             if len(effects) > 5:
                 more_label = QLabel(f"  • ... and {len(effects) - 5} more")
                 more_label.setStyleSheet("color: #a0a0a0; margin-left: 10px;")
