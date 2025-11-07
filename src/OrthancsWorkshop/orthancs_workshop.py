@@ -634,7 +634,8 @@ class OrthancsWorkshop(QMainWindow):
 
                     for weapon_id, weapon_info in sorted(one_handed_weapons[weapon_type]):
                         name = self.get_display_name(weapon_info, is_weapon=True)
-                        item = QTreeWidgetItem(type_node, [name, "", str(weapon_id)])
+                        type_text = self.get_localized_weapon_type_name(weapon_info.get("weapon_type_id", 0)) or weapon_info.get("weapon_type_name", weapon_info.get("item_subtype", ""))
+                        item = QTreeWidgetItem(type_node, [name, type_text, str(weapon_id)])
                         # Mark as weapon for proper handling in UI
                         item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
 
@@ -655,7 +656,8 @@ class OrthancsWorkshop(QMainWindow):
 
                     for weapon_id, weapon_info in sorted(two_handed_weapons[weapon_type]):
                         name = self.get_display_name(weapon_info, is_weapon=True)
-                        item = QTreeWidgetItem(type_node, [name, "", str(weapon_id)])
+                        type_text = self.get_localized_weapon_type_name(weapon_info.get("weapon_type_id", 0)) or weapon_info.get("weapon_type_name", weapon_info.get("item_subtype", ""))
+                        item = QTreeWidgetItem(type_node, [name, type_text, str(weapon_id)])
                         # Mark as weapon for proper handling in UI
                         item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
 
@@ -673,7 +675,8 @@ class OrthancsWorkshop(QMainWindow):
 
                     for weapon_id, weapon_info in sorted(other_weapons[category]):
                         name = self.get_display_name(weapon_info, is_weapon=True)
-                        item = QTreeWidgetItem(type_node, [name, "", str(weapon_id)])
+                        type_text = self.get_localized_weapon_type_name(weapon_info.get("weapon_type_id", 0)) or weapon_info.get("weapon_type_name", weapon_info.get("item_subtype", ""))
+                        item = QTreeWidgetItem(type_node, [name, type_text, str(weapon_id)])
                         item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
 
             weapons_root.setExpanded(True)
@@ -1013,31 +1016,7 @@ class OrthancsWorkshop(QMainWindow):
             desc_layout.addWidget(desc_label)
             self.details_content_layout.addWidget(desc_group)
 
-        # Description Section (from Item Set when available)
-        armor_desc_text = self.get_item_set_description_text(armor_info.get('item_set_id', 0))
-        if armor_desc_text:
-            a_desc_group = QGroupBox("DESCRIPTION")
-            a_desc_group.setStyleSheet("""
-                QGroupBox {
-                    font-weight: bold;
-                    color: #c7c76f;
-                    border: 2px solid #c7c76f;
-                    border-radius: 5px;
-                    margin-top: 1ex;
-                    padding-top: 10px;
-                }
-                QGroupBox::title {
-                    subcontrol-origin: margin;
-                    left: 10px;
-                    padding: 0 5px 0 5px;
-                }
-            """)
-            a_desc_layout = QVBoxLayout(a_desc_group)
-            a_desc_label = QLabel(armor_desc_text)
-            a_desc_label.setWordWrap(True)
-            a_desc_label.setStyleSheet("color: #e0e0e0;")
-            a_desc_layout.addWidget(a_desc_label)
-            self.details_content_layout.addWidget(a_desc_group)
+        # (Removed erroneous armor description block in weapon details)
 
         # Requirements Section
         req_group = QGroupBox("REQUIREMENTS")
