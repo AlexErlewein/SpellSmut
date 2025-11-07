@@ -10,26 +10,58 @@ ProjectPlanning/
 ├── PROJECT_OVERVIEW.md           # ← Start here: Complete project status
 ├── DOCS_STRUCTURE_MERMAID.md     # ← Documentation organization
 ├── REORGANIZATION_PROPOSAL.md    # ← How this structure was created
+├── CLEANUP_SUMMARY.md           # ← Previous cleanup documentation
 │
 ├── Components/                   # Component-specific planning
-│   ├── GUI_EDITOR.md            # PySide6 GUI editor status
-│   ├── ICON_SYSTEM.md           # Icon extraction & integration
-│   ├── QUEST_EDITOR.md          # Quest creation tools
-│   ├── ASSET_EXTRACTION.md      # PAK extraction pipeline
-│   ├── MAP_VIEWER_ARCHITECTURE.md    # Map Viewer technical architecture
-│   ├── MAP_VIEWER_STATUS.md          # Map Viewer current status
-│   ├── MAP_VIEWER_ROADMAP.md         # Map Viewer development roadmap
-│   └── MAP_VIEWER_TECHNICAL_SPECS.md # Map Viewer detailed specifications
+│   ├── CoreSystems/             # Core system planning
+│   │   ├── ASSET_EXTRACTION.md  # PAK extraction pipeline
+│   │   ├── DATA_EXTRACTION_PLAN.md
+│   │   ├── ID_MANAGEMENT_SYSTEM.md
+│   │   └── SAVEFILE_SYSTEM.md
+│   ├── Editor/                  # GUI Editor planning
+│   │   ├── GUI_EDITOR.md        # PySide6 GUI editor status
+│   │   └── LAUNCHING_TIRGANACH.md
+│   ├── EntityCreators/          # Content creation tools
+│   │   ├── BUILDING_CREATOR_PLAN.md
+│   │   ├── NPC_CREATOR_PLAN.md
+│   │   └── RACE_CREATOR_PLAN.md
+│   ├── IconSystem/              # Icon extraction & integration
+│   │   ├── ICON_SYSTEM.md       # Main icon system documentation
+│   │   └── ICON_EXTRACTION_*.md # Various extraction status files
+│   ├── ItemCreators/            # Weapon/Armor creation
+│   │   ├── ARMOR_CREATOR_PLAN.md
+│   │   └── WEAPON_CREATION_PLAN.md
+│   ├── MapViewer/               # Map Viewer component
+│   │   ├── MAP_VIEWER_ARCHITECTURE.md
+│   │   ├── MAP_VIEWER_STATUS.md
+│   │   ├── MAP_VIEWER_ROADMAP.md
+│   │   └── MAP_VIEWER_TECHNICAL_SPECS.md
+│   ├── QuestSystem/             # Quest system planning
+│   │   ├── QUEST_CREATION_PLAN.md
+│   │   └── QUEST_EDITOR.md
+│   ├── SpellSystem/             # Spell system planning
+│   │   └── SPELL_CREATION_PLAN.md
+│   └── MODDING_PLAN.md          # Overall modding strategy
 │
 ├── Status/                      # Current status tracking
 │   ├── CURRENT_STATUS.md        # Live project status
 │   ├── COMPLETED_WORK.md        # Achievement summary
-│   └── BLOCKERS.md              # Current issues & blockers
+│   ├── BLOCKERS.md              # Current issues & blockers
+│   └── Various *_STATUS.md      # Component-specific status
+│
+├── Research/                    # Research and analysis
+│   └── CHARACTER_APPEARANCE_RESEARCH.md
 │
 ├── Archive/                     # Historical files (preserved)
-│   ├── GUI/                     # Old GUI planning files
-│   ├── Internal/                # Old internal planning files
-│   └── Legacy/                  # Old root-level files
+│   ├── IconSystem/              # Old icon system planning
+│   ├── Internal/                # Completed plans and analysis
+│   │   ├── QUEST_*_PLAN.md      # Completed quest plans
+│   │   ├── TEXTURE_*.md         # Completed texture work
+│   │   └── *_CSHARP_ANALYSIS.md # Technical analysis docs
+│   └── Legacy/                  # Old implementation plans
+│       ├── WEEK*_SUMMARY.md     # Old weekly summaries
+│       ├── *_ROADMAP.md         # Superseded roadmaps
+│       └── EDITOR_PLANNING.md   # Original editor planning
 │
 └── README.md                    # This file
 ```
@@ -42,13 +74,17 @@ ProjectPlanning/
 3. **Browse** `Components/` - Detailed status for specific areas
 
 ### Looking for Specific Information?
-- **GUI Editor**: `Components/GUI_EDITOR.md`
-- **Asset Extraction**: `Components/ASSET_EXTRACTION.md`
-- **Icon System**: `Components/ICON_SYSTEM.md`
-- **Quest Editor**: `Components/QUEST_EDITOR.md`
-- **Map Viewer**: `Components/MAP_VIEWER_ARCHITECTURE.md` (+ STATUS, ROADMAP, TECHNICAL_SPECS)
+- **GUI Editor**: `Components/Editor/GUI_EDITOR.md`
+- **Asset Extraction**: `Components/CoreSystems/ASSET_EXTRACTION.md`
+- **Icon System**: `Components/IconSystem/ICON_SYSTEM.md`
+- **Quest Editor**: `Components/QuestSystem/QUEST_EDITOR.md`
+- **Map Viewer**: `Components/MapViewer/MAP_VIEWER_ARCHITECTURE.md` (+ STATUS, ROADMAP, TECHNICAL_SPECS)
+- **Weapon/Armor Creation**: `Components/ItemCreators/`
+- **Entity Creation**: `Components/EntityCreators/`
+- **Spell System**: `Components/SpellSystem/SPELL_CREATION_PLAN.md`
 - **Current Blockers**: `Status/BLOCKERS.md`
 - **Completed Work**: `Status/COMPLETED_WORK.md`
+- **Research**: `Research/CHARACTER_APPEARANCE_RESEARCH.md`
 
 ### Technical Details?
 - **Documentation Structure**: `DOCS_STRUCTURE_MERMAID.md`

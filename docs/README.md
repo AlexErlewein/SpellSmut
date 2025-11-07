@@ -8,7 +8,8 @@ This folder contains all documentation for the SpellForce Platinum Edition moddi
 Asset and data extraction guides, tools, and results.
 - **CFF Extraction**: GameData.cff parsing and modding guides
 - **Asset Extraction**: Audio, UI, and other asset extraction plans
-- **Modding Guides**: How to modify extracted data
+- **Quest Extraction**: Quest data, dialogues, and reward extraction
+- **Icon Extraction**: UI icon mapping and extraction tools
 
 ### 📁 [Guides](./Guides/)
 Comprehensive guides for SpellForce game systems and modding.
@@ -16,13 +17,28 @@ Comprehensive guides for SpellForce game systems and modding.
 - **Quest System**: Campaign and quest creation
 - **Race Creation**: Custom races and units
 - **Multiplayer**: Free game and multiplayer modding
+- **Sound System**: Audio and music integration
 
 ### 📁 [Project](./Project/)
-Project-wide documentation and reports.
-- **Implementation Summary**: Technical overviews
-- **Completion Reports**: Milestone achievements
-- **ID Mappings**: Database ID references
-- **Lua Sources**: Script analysis
+Project-wide documentation and status reports.
+- **Implementation Summary**: Technical overviews and completion reports
+- **Status Reports**: Feature completion and milestone tracking
+- **ID Mappings**: Database ID references and mappings
+- **Quest Editor**: Quest editor specific documentation
+- **Performance Fixes**: Optimization and bug fix documentation
+
+### 📁 [Development](./Development/)
+Technical implementation and development documentation.
+- **Lua Integration**: Script parsing and integration guides
+- **Dialogue System**: Dialogue parsing and relationship mapping
+- **Performance**: Localization and performance optimization
+- **Testing**: Integration testing and validation procedures
+- **Logging**: System logging and debugging guides
+
+### 📁 [Technical](./Technical/)
+Deep technical documentation for specific systems.
+- **Map Viewer**: 3D map rendering and implementation
+- **Texture Rendering**: Graphics and texture system documentation
 
 ### 📁 [Site](./Site/)
 Jekyll website source files for project documentation site.
@@ -34,6 +50,12 @@ Jekyll website source files for project documentation site.
 Development tools and editor configurations.
 - **AI Tools**: Claude integration and workflows
 - **Editor Settings**: Zed and other editor configs
+
+### 📁 [archive](./archive/)
+Deprecated and superseded documentation.
+- **Old Quest Viewer Docs**: Previous versions of quest viewer documentation
+- **Amra & Lea**: Duplicate quest documentation files
+- **Phase Reports**: Old implementation phase reports
 
 ## Quick Access
 
