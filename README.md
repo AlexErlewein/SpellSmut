@@ -19,6 +19,15 @@ Our documentation includes detailed guides for:
 
 Comprehensive visual tools for creating mod content:
 
+### Recently Enhanced Tools
+- **Enhanced Weapon & Armor Browser:** Detailed item inspection with German localization support when available
+- **Weapon Forge Wizard:** Now properly carries over attributes from source weapons as defaults
+- **Armor Forge Wizard:** Now properly carries over attributes from source armor as defaults
+- **Fixed UI Issues:** Resolved overlapping content problems in item detail views
+- **Unified Launcher:** Single access point for all creator tools
+
+### Current Features:
+
 - **Quest Creator** - 6-phase wizard for custom quests with test maps
 - **Spell Creator** - 7-phase "Spell Wizard" with 1-15 level progression system
 - **Weapon Creator** - 7-phase "Weapon Forge" with edit-existing feature (719 weapons to modify)

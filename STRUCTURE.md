@@ -117,6 +117,9 @@ src/
 │   │   │   ├── quest_editor.py
 │   │   │   ├── spell_creator_wizard.py
 │   │   │   ├── weapon_forge_wizard.py
+│   │   │   ├── armor_forge_wizard.py
+│   │   │   ├── enhanced_weapon_browser.py
+│   │   │   ├── enhanced_armor_browser.py
 │   │   │   └── docs/            # Widget-specific documentation
 │   │   ├── models/              # Data models
 │   │   ├── exporters/           # Export functionality
