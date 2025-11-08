@@ -33,6 +33,7 @@ from ..models.weapon_creation_data import (
 from ..shared.id_manager import ContentType, IDManager
 from .weapon_sound_manager import create_sound_selector_widget, auto_assign_weapon_sounds
 from .weapon_validation import WeaponValidator
+from .weapon_browser_dialog import WeaponBrowserDialog
 
 
 class WeaponForgeWizard(QWizard):
@@ -277,10 +278,11 @@ class ModeSelectionPage(QWizardPage):
             self.selected_weapon_label.setStyleSheet("color: gray; font-style: italic;")
 
     def browse_weapons(self):
-        """Open weapon browser dialog"""
-        dialog = WeaponBrowserDialog(self)
+        """Open enhanced weapon browser dialog"""
+        from .enhanced_weapon_browser import EnhancedWeaponBrowser
+        dialog = EnhancedWeaponBrowser(self)
         if dialog.exec() == QDialog.DialogCode.Accepted:
-            weapon_dict = dialog.get_selected_weapon()
+            weapon_dict = dialog.get_selected_weapon_data()
             if weapon_dict:
                 try:
                     # Load the weapon using WeaponLoader with GameData path
@@ -631,10 +633,20 @@ class VisualAudioPage(QWizardPage):
         
     def initializePage(self):
         """Initialize visual and audio page with data from previous wizard pages"""
+        # Create fresh layout for this initialization
+        layout = QFormLayout()
+        layout.addRow("Icon:", QLabel("Icon browser placeholder"))
+        
         self._setup_sound_selection()
+        if self.sound_selector_widget:
+            layout.addRow("Sounds:", self.sound_selector_widget)
+        else:
+            layout.addRow("Sounds:", QLabel("Sound selector placeholder"))
+        
         layout.addRow("3D Model:", QLabel("Model browser placeholder"))
         layout.addRow("Trail Effect:", QLineEdit())
         layout.addRow("Impact Effect:", QLineEdit())
+        
         self.setLayout(layout)
 
 

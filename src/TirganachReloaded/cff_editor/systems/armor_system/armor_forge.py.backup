@@ -22,18 +22,11 @@ except ImportError:
     import sys
     from pathlib import Path
     sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
-    try:
-        from TirganachReloaded.tirganach import GameData
-        from TirganachReloaded.cff_editor.shared.id_manager import IDManager, ContentType
-        from TirganachReloaded.cff_editor.systems.armor_system.armor_model import Armor, ARMOR_TYPES, MATERIAL_CATEGORIES, QUALITY_TIERS, CLASS_RESTRICTIONS, SLOT_HEAD, SLOT_CHEST, SLOT_LEGS, SLOT_FEET, SLOT_RIGHT_RING, SLOT_LEFT_RING, SLOT_LEFT_HAND
-        from TirganachReloaded.cff_editor.systems.armor_system.armor_sets import ArmorSetManager
-        from TirganachReloaded.cff_editor.systems.armor_system.cff_armor_export import export_armor_to_cff
-    except ImportError:
-        from tirganach import GameData
-        from cff_editor.shared.id_manager import IDManager, ContentType
-        from armor_system.armor_model import Armor, ARMOR_TYPES, MATERIAL_CATEGORIES, QUALITY_TIERS, CLASS_RESTRICTIONS, SLOT_HEAD, SLOT_CHEST, SLOT_LEGS, SLOT_FEET, SLOT_RIGHT_RING, SLOT_LEFT_RING, SLOT_LEFT_HAND
-        from armor_system.armor_sets import ArmorSetManager
-        from armor_system.cff_armor_export import export_armor_to_cff
+    from tirganach import GameData
+    from cff_editor.shared.id_manager import IDManager, ContentType
+    from armor_system.armor_model import Armor, ARMOR_TYPES, MATERIAL_CATEGORIES, QUALITY_TIERS, CLASS_RESTRICTIONS, SLOT_HEAD, SLOT_CHEST, SLOT_LEGS, SLOT_FEET, SLOT_RIGHT_RING, SLOT_LEFT_RING, SLOT_LEFT_HAND
+    from armor_system.armor_sets import ArmorSetManager
+    from armor_system.cff_armor_export import export_armor_to_cff
 
 
 
@@ -863,16 +856,6 @@ class ArmorForge:
             abs(min(0, armor.physical_resist)) + abs(min(0, armor.magic_resist)) +
             abs(min(0, armor.run_speed)) + abs(min(0, armor.fight_speed)) + abs(min(0, armor.cast_speed))
         )
-        
-        # Calculate effective stat value considering requirements
-        effective_stats = total_positive_stats - total_negative_stats
-        
-        # Consider level requirement as a balancing factor
-        # Higher level requirement allows for more powerful items
-        if armor.level_requirement > 0:
-            effective_value = effective_stats / armor.level_requirement * 5  # Arbitrary scaling factor
-        else:
-            effective_value = effective_stats
         
         # Calculate a more nuanced balance rating
         # Base rating on effective value but capped to reasonable levels
