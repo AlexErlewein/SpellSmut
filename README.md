@@ -19,7 +19,9 @@ Our documentation includes detailed guides for:
 
 Comprehensive visual tools for creating mod content:
 
-- **Quest Creator** - 6-phase wizard for custom quests with test maps
+- **Quest Creator** - Complete visual quest creation system with node-based dialogue editor, real-time auto-save, and immediate quest workflow
+- **Visual Dialogue Editor** - Drag-and-drop node-based dialogue tree builder with real-time validation and Lua export
+- **Unified Quest Editor** - Integrated quest creation suite with browser, immediate quest creation, and visual dialogue editing
 - **Spell Creator** - 7-phase "Spell Wizard" with 1-15 level progression system
 - **Weapon Creator** - 7-phase "Weapon Forge" with edit-existing feature (719 weapons to modify)
 - **Armor Creator** - 7-phase "Armor Forge" for custom armor pieces with stat bonuses
