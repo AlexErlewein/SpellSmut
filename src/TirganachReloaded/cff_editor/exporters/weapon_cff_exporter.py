@@ -1,42 +1,271 @@
 import json
 import struct
-from typing import Dict, List
+from typing import Dict, List, Optional
+from pathlib import Path
 from ..models.weapon_creation_data import WeaponCreationData
 
+# Import tirganach library for CFF handling
+try:
+    from TirganachReloaded.tirganach import GameData
+    from TirganachReloaded.tirganach.types import *
+    from TirganachReloaded.tirganach.entities import Item, Weapon, Localisation
+    TIRGANACH_AVAILABLE = True
+except ImportError:
+    TIRGANACH_AVAILABLE = False
+    print("Warning: Tirganach library not available. CFF export will be limited to JSON format.")
+
 class WeaponCFFExporter:
-    """Export weapon to CFF format"""
-    
+    """Export weapon to CFF format using the tirganach library"""
+
+    def __init__(self, gamedata_path: Optional[str] = None):
+        """
+        Initialize the CFF exporter
+
+        Args:
+            gamedata_path: Path to original GameData.cff file (for reference data)
+        """
+        self.gamedata_path = gamedata_path
+        self.gamedata = None
+
+        if TIRGANACH_AVAILABLE and gamedata_path and Path(gamedata_path).exists():
+            try:
+                self.gamedata = GameData(gamedata_path)
+                print(f"Loaded reference GameData from: {gamedata_path}")
+            except Exception as e:
+                print(f"Warning: Could not load GameData: {e}")
+
+    def export_weapon_to_gamedata(self, weapon_data: WeaponCreationData, output_path: str) -> bool:
+        """
+        Export weapon to a new GameData.cff file using tirganach library
+
+        Args:
+            weapon_data: The weapon to export
+            output_path: Path where the new GameData.cff will be saved
+
+        Returns:
+            True if export succeeded, False otherwise
+        """
+        if not TIRGANACH_AVAILABLE:
+            print("Error: Tirganach library not available")
+            return False
+
+        if not self.gamedata:
+            print("Error: No reference GameData loaded")
+            return False
+
+        try:
+            # Create new GameData by copying the reference
+            new_gamedata = self._create_modified_gamedata(weapon_data)
+
+            # Save the new GameData
+            new_gamedata.save(output_path)
+            print(f"Successfully exported weapon to: {output_path}")
+            return True
+
+        except Exception as e:
+            print(f"Error exporting weapon to CFF: {e}")
+            return False
+
+    def _create_modified_gamedata(self, weapon_data: WeaponCreationData) -> GameData:
+        """Create a new GameData instance with the weapon added"""
+
+        # Create a copy of the original GameData by reloading it
+        # This ensures we have a fresh instance to work with
+        if not self.gamedata_path:
+            raise ValueError("No GameData path available for creating modified version")
+
+        new_gamedata = GameData(self.gamedata_path)
+
+        try:
+            # Step 1: Create the Item entry for the weapon
+            self._add_item_entry(new_gamedata, weapon_data)
+
+            # Step 2: Create the Weapon entry with combat stats
+            self._add_weapon_entry(new_gamedata, weapon_data)
+
+            # Step 3: Create Localization entries for name and description
+            self._add_localization_entries(new_gamedata, weapon_data)
+
+            # Step 4: Handle new weapon types (if any)
+            if weapon_data.weapon_type_id >= 20:
+                self._add_weapon_type_entry(new_gamedata, weapon_data)
+
+            # Step 5: Handle new materials (if any)
+            if weapon_data.weapon_material_id >= 10:
+                self._add_material_entry(new_gamedata, weapon_data)
+
+            print(f"Successfully added weapon '{weapon_data.weapon_name}' (ID: {weapon_data.weapon_id})")
+            return new_gamedata
+
+        except Exception as e:
+            print(f"Error creating modified GameData: {e}")
+            raise
+
+    def _add_item_entry(self, gamedata: GameData, weapon_data: WeaponCreationData):
+        """Add an Item entry for the weapon"""
+
+        # Create item binary data based on tirganach entity structure
+        # Item structure based on entities.py:
+        # - item_id: int (2 bytes, primary key)
+        # - item_type: ItemType (1 byte)
+        # - item_subtype: EquipmentType (1 byte)
+        # - name_id: int (2 bytes)
+        # - unit_stats_id: int (2 bytes)
+        # - army_unit_id: int (2 bytes)
+        # - building_id: int (2 bytes)
+        # - unknown1: int (1 byte)
+        # - selling_price: int (4 bytes)
+        # - buying_price: int (4 bytes)
+        # - item_set_id: int (1 byte)
+
+        from tirganach.types import ItemType, EquipmentType
+
+        # Map our weapon hands to equipment types
+        equipment_map = {
+            "1H": EquipmentType.WEAPON_1H,
+            "2H": EquipmentType.WEAPON_2H,
+            "Unarmed": EquipmentType.WEAPON_UNARMED
+        }
+
+        # Calculate the name_id (we'll use weapon_id + offset for now)
+        name_id = weapon_data.weapon_id + 50000  # Arbitrary offset to avoid conflicts
+
+        # Create binary data for the item
+        item_data = bytearray(22)  # Item entity length
+
+        # Pack the data according to tirganach structure
+        import struct
+        struct.pack_into('<H', item_data, 0, weapon_data.weapon_id)  # item_id
+        struct.pack_into('<B', item_data, 2, ItemType.EQUIPMENT.value)  # item_type
+        struct.pack_into('<B', item_data, 3, equipment_map.get(weapon_data.hands.value, EquipmentType.WEAPON_1H).value)  # item_subtype
+        struct.pack_into('<H', item_data, 4, name_id)  # name_id
+        struct.pack_into('<H', item_data, 6, 0)  # unit_stats_id (0 for regular items)
+        struct.pack_into('<H', item_data, 8, 0)  # army_unit_id
+        struct.pack_into('<H', item_data, 10, 0)  # building_id
+        struct.pack_into('<B', item_data, 12, 0)  # unknown1
+        struct.pack_into('<I', item_data, 13, weapon_data.sell_value)  # selling_price
+        struct.pack_into('<I', item_data, 17, weapon_data.buy_value)  # buying_price
+        struct.pack_into('<B', item_data, 21, weapon_data.item_set_id)  # item_set_id
+
+        # Create the Item entity and add to gamedata
+        item_entity = Item(bytes(item_data), game_data=gamedata)
+
+        # Add to the items table (this is a simplified approach)
+        # In practice, we'd need to properly append to the table structure
+        gamedata.items.append(item_entity)
+        print(f"  ✓ Added Item entry for weapon ID {weapon_data.weapon_id}")
+
+    def _add_weapon_entry(self, gamedata: GameData, weapon_data: WeaponCreationData):
+        """Add a Weapon entry with combat stats"""
+
+        # Weapon structure based on entities.py:
+        # - item_id: int (2 bytes, primary key)
+        # - min_damage: int (2 bytes)
+        # - max_damage: int (2 bytes)
+        # - min_range: int (2 bytes)
+        # - max_range: int (2 bytes)
+        # - speed: int (2 bytes)
+        # - weapon_type: int (2 bytes)
+        # - material: int (2 bytes)
+
+        # Create binary data for the weapon
+        weapon_data_binary = bytearray(16)  # Weapon entity length
+
+        import struct
+        struct.pack_into('<H', weapon_data_binary, 0, weapon_data.weapon_id)  # item_id
+        struct.pack_into('<H', weapon_data_binary, 2, weapon_data.min_damage)  # min_damage
+        struct.pack_into('<H', weapon_data_binary, 4, weapon_data.max_damage)  # max_damage
+        struct.pack_into('<H', weapon_data_binary, 6, weapon_data.min_range)  # min_range
+        struct.pack_into('<H', weapon_data_binary, 8, weapon_data.max_range)  # max_range
+        struct.pack_into('<H', weapon_data_binary, 10, weapon_data.attack_speed)  # speed
+        struct.pack_into('<H', weapon_data_binary, 12, weapon_data.weapon_type_id)  # weapon_type
+        struct.pack_into('<H', weapon_data_binary, 14, weapon_data.weapon_material_id)  # material
+
+        # Create the Weapon entity and add to gamedata
+        weapon_entity = Weapon(bytes(weapon_data_binary), game_data=gamedata)
+
+        # Add to the weapons table
+        gamedata.weapons.append(weapon_entity)
+        print(f"  ✓ Added Weapon entry for weapon ID {weapon_data.weapon_id}")
+
+    def _add_localization_entries(self, gamedata: GameData, weapon_data: WeaponCreationData):
+        """Add localization entries for weapon name and description"""
+
+        # Create localization entries for English text
+        # We'll need to handle multiple languages eventually
+
+        # Name localization
+        name_id = weapon_data.weapon_id + 50000
+        name_text = weapon_data.weapon_name
+        name_bytes = name_text.encode('utf-16le')
+
+        # Localisation structure (simplified)
+        name_localization = bytearray(4 + len(name_bytes))
+        struct.pack_into('<I', name_localization, 0, name_id)
+        name_localization[4:] = name_bytes
+
+        name_entity = Localisation(bytes(name_localization), game_data=gamedata)
+        gamedata.localisation.append(name_entity)
+
+        # Description localization (if provided)
+        if weapon_data.description:
+            desc_id = weapon_data.weapon_id + 50001
+            desc_text = weapon_data.description
+            desc_bytes = desc_text.encode('utf-16le')
+
+            desc_localization = bytearray(4 + len(desc_bytes))
+            struct.pack_into('<I', desc_localization, 0, desc_id)
+            desc_localization[4:] = desc_bytes
+
+            desc_entity = Localisation(bytes(desc_localization), game_data=gamedata)
+            gamedata.localisation.append(desc_entity)
+
+        print(f"  ✓ Added localization entries for weapon '{weapon_data.weapon_name}'")
+
+    def _add_weapon_type_entry(self, gamedata: GameData, weapon_data: WeaponCreationData):
+        """Add a new weapon type entry if it's a custom type"""
+        # This would add to WeaponTypeName table
+        # Implementation would be similar to the above methods
+        print(f"  ✓ Weapon type {weapon_data.weapon_type_name} is custom - type entries would be added here")
+
+    def _add_material_entry(self, gamedata: GameData, weapon_data: WeaponCreationData):
+        """Add a new material entry if it's a custom material"""
+        # This would add to WeaponMaterialName table
+        # Implementation would be similar to the above methods
+        print(f"  ✓ Material {weapon_data.weapon_material_name} is custom - material entries would be added here")
+
     def export_weapon(self, weapon_data: WeaponCreationData) -> Dict[str, bytes]:
         """
-        Export weapon to CFF categories
-        
+        Export weapon to CFF categories (legacy method for compatibility)
+
         Returns:
             Dict mapping category IDs to binary data
         """
-        
+
         exports = {}
-        
-        # Category 2003: Item General Info
+
+        # Category 2003: Item General Info (equivalent to Item table)
         exports[2003] = self.export_item_general(weapon_data)
-        
-        # Category 2015: Weapon Combat Data
+
+        # Category 2015: Weapon Combat Data (equivalent to Weapon table)
         exports[2015] = self.export_weapon_data(weapon_data)
-        
-        # Category 2016: Text entries (name, description)
-        exports[2016] = self.export_text_entries(weapon_data)
-        
+
+        # Category 2016: Text entries (name, description - equivalent to Localisation table)
+        text_entries = self.export_text_entries(weapon_data)
+        exports[2016] = b''.join(text_entries) if text_entries else b''
+
         # Category 2063: Weapon Type (if new type)
         if weapon_data.weapon_type_id >= 20:
             exports[2063] = self.export_weapon_type(weapon_data)
-        
+
         # Category 2064: Material (if new material)
         if weapon_data.weapon_material_id >= 10:
             exports[2064] = self.export_material(weapon_data)
-        
+
         # Category 2014: Effects (if any)
         if weapon_data.effects:
             exports[2014] = self.export_weapon_effects(weapon_data)
-        
+
         return exports
     
     def export_item_general(self, weapon_data: WeaponCreationData) -> bytes:

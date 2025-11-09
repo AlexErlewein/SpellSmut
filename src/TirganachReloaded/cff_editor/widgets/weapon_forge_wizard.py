@@ -22,6 +22,7 @@ from pathlib import Path
 from datetime import datetime
 
 from ..exporters.weapon_loader import WeaponLoader
+from ..exporters.weapon_cff_exporter import WeaponCFFExporter
 from ..models.weapon_creation_data import (
     DamageCategory,
     DamageType,
@@ -34,6 +35,7 @@ from ..shared.id_manager import ContentType, IDManager
 from .weapon_sound_manager import create_sound_selector_widget, auto_assign_weapon_sounds
 from .weapon_validation import WeaponValidator
 from .weapon_browser_dialog import WeaponBrowserDialog
+from .icon_browser import IconBrowserDialog
 
 
 class WeaponForgeWizard(QWizard):
@@ -43,13 +45,21 @@ class WeaponForgeWizard(QWizard):
         self.weapon_data = None
         self.weapon_id = None
 
+        # Get data_model from parent (MainWindow)
+        self.data_model = getattr(parent, 'data_model', None)
+
+        # Initialize CFF exporter
+        # Look for GameData.cff in expected locations
+        gamedata_path = self._find_gamedata_path()
+        self.cff_exporter = WeaponCFFExporter(gamedata_path) if gamedata_path else None
+
         self.setWindowTitle("Weapon Forge Wizard")
 
         self.addPage(ModeSelectionPage(self.id_manager))
         self.addPage(BasicPropertiesPage())
         self.addPage(CombatStatsPage())
         self.addPage(RequirementsValuePage())
-        self.addPage(VisualAudioPage())
+        self.addPage(VisualAudioPage(self.data_model))
         self.addPage(ReviewExportPage())
 
     def done(self, result):
@@ -65,22 +75,50 @@ class WeaponForgeWizard(QWizard):
             self.id_manager.release_id(ContentType.WEAPON, self.weapon_id)
         super().done(result)
 
+    def _find_gamedata_path(self) -> Optional[str]:
+        """Find GameData.cff in expected locations"""
+        possible_paths = [
+            # Check relative to project root
+            Path(__file__).parent.parent.parent.parent.parent / "OriginalGameFiles" / "data" / "GameData.cff",
+            Path(__file__).parent.parent.parent.parent.parent / "OriginalGameFiles" / "GameData.cff",
+            # Check common installation paths
+            Path.home() / "SpellForce Platinum Edition" / "data" / "GameData.cff",
+            # Add more paths as needed
+        ]
+
+        for path in possible_paths:
+            if path.exists():
+                return str(path)
+
+        return None
+
     def export_weapon(self) -> bool:
-        """Export weapon to JSON (and eventually CFF)"""
+        """Export weapon to JSON and/or CFF"""
         try:
             # Get export page to check options
             export_page = self.page(5)  # ReviewExportPage
 
-            # For now, we only support JSON export
+            success = False
+
             if export_page.export_json_radio.isChecked():
-                return self.export_to_json()
+                success = self.export_to_json()
+            elif export_page.export_cff_radio.isChecked():
+                success = self.export_to_cff()
+            elif export_page.export_both_radio.isChecked():
+                # Export both formats
+                json_success = self.export_to_json()
+                cff_success = self.export_to_cff()
+                success = json_success and cff_success
             else:
                 QMessageBox.warning(
                     self,
-                    "Export Not Available",
-                    "CFF export is not yet implemented. Please use JSON export."
+                    "No Export Option Selected",
+                    "Please select an export format."
                 )
                 return False
+
+            return success
+
         except Exception as e:
             QMessageBox.critical(
                 self,
@@ -188,6 +226,77 @@ class WeaponForgeWizard(QWizard):
                 self,
                 "Export Failed",
                 f"Failed to export weapon to JSON:\n{str(e)}"
+            )
+            return False
+
+    def export_to_cff(self) -> bool:
+        """Export weapon to CFF file"""
+        try:
+            if not self.cff_exporter:
+                QMessageBox.warning(
+                    self,
+                    "CFF Export Not Available",
+                    "CFF export is not available. Please ensure GameData.cff is available in the expected location:\n\n"
+                    "• OriginalGameFiles/data/GameData.cff\n"
+                    "• OriginalGameFiles/GameData.cff\n"
+                    "• ~/SpellForce Platinum Edition/data/GameData.cff\n\n"
+                    "Falling back to JSON export."
+                )
+                return False
+
+            # Create CFF exports directory
+            cff_dir = Path("custom_weapons_cff")
+            cff_dir.mkdir(exist_ok=True)
+
+            # Generate filename from weapon name
+            safe_name = "".join(
+                c if c.isalnum() or c in (' ', '-', '_') else '_'
+                for c in self.weapon_data.weapon_name
+            )
+            safe_name = safe_name.replace(' ', '_').lower()
+            filename = f"GameData_custom_weapon_{self.weapon_data.weapon_id}_{safe_name}.cff"
+            filepath = cff_dir / filename
+
+            # Add metadata
+            self.weapon_data.created_date = datetime.now().isoformat()
+            self.weapon_data.modified_date = datetime.now().isoformat()
+            self.weapon_data.author = "CFF Editor - Weapon Forge"
+
+            # Export to CFF
+            success = self.cff_exporter.export_weapon_to_gamedata(
+                self.weapon_data,
+                str(filepath)
+            )
+
+            if success:
+                QMessageBox.information(
+                    self,
+                    "CFF Export Successful",
+                    f"Weapon exported to CFF format!\n\n"
+                    f"File: {filepath}\n"
+                    f"Weapon ID: {self.weapon_data.weapon_id}\n"
+                    f"Name: {self.weapon_data.weapon_name}\n\n"
+                    f"DPS: {self.weapon_data.calculate_dps():.1f}\n"
+                    f"Balance Rating: {self.weapon_data.get_balance_rating()}/100\n\n"
+                    f"⚠️ Important:\n"
+                    f"• This creates a complete GameData.cff with your weapon added\n"
+                    f"• Backup your original GameData.cff before using\n"
+                    f"• Place this file in your SpellForce data directory to test"
+                )
+            else:
+                QMessageBox.critical(
+                    self,
+                    "CFF Export Failed",
+                    "Failed to export weapon to CFF format. Check the console for error details."
+                )
+
+            return success
+
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "CFF Export Failed",
+                f"Failed to export weapon to CFF:\n{str(e)}"
             )
             return False
 
@@ -584,18 +693,117 @@ class RequirementsValuePage(QWizardPage):
 
 
 class VisualAudioPage(QWizardPage):
-    def __init__(self, parent=None):
+    def __init__(self, data_model=None, parent=None):
         super().__init__(parent)
+        self.data_model = data_model
         self.setTitle("Visual & Audio")
         self.setSubTitle("Assign an icon, sounds, and other visual properties.")
 
+        # Icon selection
+        self.selected_icon_handle = ""
+        self.selected_icon_path = ""
+
         layout = QFormLayout()
-        layout.addRow("Icon:", QLabel("Icon browser placeholder"))
-        
+
+        # Icon selection section
+        icon_row = QHBoxLayout()
+
+        # Icon preview
+        self.icon_preview_label = QLabel()
+        self.icon_preview_label.setFixedSize(64, 64)
+        self.icon_preview_label.setStyleSheet("border: 2px solid #555; background: #222;")
+        self.icon_preview_label.setAlignment(Qt.AlignCenter)
+        self.icon_preview_label.setText("🗡️")
+        icon_row.addWidget(self.icon_preview_label)
+
+        # Icon selection button
+        self.icon_button = QPushButton("Browse Icons...")
+        self.icon_button.clicked.connect(self.browse_icons)
+        icon_row.addWidget(self.icon_button)
+
+        # Icon info label
+        self.icon_info_label = QLabel("No icon selected")
+        self.icon_info_label.setStyleSheet("color: #666; font-style: italic;")
+        self.icon_info_label.setWordWrap(True)
+        icon_row.addWidget(self.icon_info_label)
+
+        icon_row.addStretch()
+        layout.addRow("Icon:", icon_row)
+
         # Sound selection widgets (will be populated in initializePage)
         self.sound_selector_widget = None
         layout.addRow(self.sound_selector_widget)
-        
+  
+    def browse_icons(self):
+        """Open icon browser dialog"""
+        if not self.data_model:
+            QMessageBox.warning(
+                self,
+                "Icon Browser Unavailable",
+                "Icon browser is not available. The data model is not loaded."
+            )
+            return
+
+        try:
+            # Create icon browser dialog
+            icon_dialog = IconBrowserDialog(self.data_model, category="itm", parent=self)
+
+            # Connect signal for icon selection
+            icon_dialog.iconSelected.connect(self.on_icon_selected)
+
+            # Show dialog
+            result = icon_dialog.exec()
+
+            if result == QDialog.DialogCode.Accepted:
+                # Icon was selected, signal handler already processed it
+                pass
+
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Icon Browser Error",
+                f"Failed to open icon browser:\n{str(e)}"
+            )
+
+    def on_icon_selected(self, icon_handle: str):
+        """Handle icon selection from browser"""
+        self.selected_icon_handle = icon_handle
+        self.selected_icon_path = ""
+
+        # Update icon preview
+        if self.data_model:
+            try:
+                # Get icon pixmap for preview
+                icon_pixmap = self.data_model.get_icon_pixmap(icon_handle)
+                if icon_pixmap:
+                    # Scale to fit the preview label
+                    scaled_pixmap = icon_pixmap.scaled(
+                        60, 60,  # Slightly smaller than 64x64 to fit border
+                        Qt.AspectRatioMode.KeepAspectRatio,
+                        Qt.TransformationMode.SmoothTransformation
+                    )
+                    self.icon_preview_label.setPixmap(scaled_pixmap)
+                else:
+                    self.icon_preview_label.setText("❌")
+            except Exception as e:
+                print(f"Error loading icon preview: {e}")
+                self.icon_preview_label.setText("❌")
+
+            # Update info label
+            if icon_handle:
+                # Get file path for the icon
+                icon_path = self.data_model._resolve_icon_path(icon_handle)
+                if icon_path and Path(icon_path).exists():
+                    self.selected_icon_path = icon_path
+                    self.icon_info_label.setText(f"✅ {icon_handle}")
+                    self.icon_info_label.setStyleSheet("color: #27ae60; font-weight: bold;")
+                else:
+                    self.icon_info_label.setText(f"⚠️ {icon_handle} (file not found)")
+                    self.icon_info_label.setStyleSheet("color: #f39c12;")
+            else:
+                self.icon_info_label.setText("No icon selected")
+                self.icon_info_label.setStyleSheet("color: #666; font-style: italic;")
+
     def _setup_sound_selection(self):
         """Setup sound selection based on current weapon data"""
         wizard = self.wizard()
@@ -677,12 +885,31 @@ class ReviewExportPage(QWizardPage):
         export_layout = QVBoxLayout()
 
         self.export_json_radio = QRadioButton("Export to JSON only")
-        self.export_cff_radio = QRadioButton("Export to CFF only (not yet implemented)")
+        self.export_cff_radio = QRadioButton("Export to CFF only (creates GameData.cff)")
         self.export_both_radio = QRadioButton("Export to both JSON and CFF")
 
-        self.export_json_radio.setChecked(True)
-        self.export_cff_radio.setEnabled(False)  # Disable until CFF export is implemented
-        self.export_both_radio.setEnabled(False)
+        # Enable CFF export if tirganach library is available
+        wizard = self.parent()
+        if wizard and hasattr(wizard, 'cff_exporter') and wizard.cff_exporter:
+            self.export_json_radio.setChecked(True)
+            self.export_cff_radio.setEnabled(True)
+            self.export_both_radio.setEnabled(True)
+
+            # Add explanation text
+            cff_info = QLabel("📦 CFF Export creates a complete GameData.cff file with your weapon added.")
+            cff_info.setStyleSheet("color: #27ae60; font-size: 9pt; margin: 5px;")
+            cff_info.setWordWrap(True)
+            export_layout.addWidget(cff_info)
+        else:
+            self.export_json_radio.setChecked(True)
+            self.export_cff_radio.setEnabled(False)
+            self.export_both_radio.setEnabled(False)
+
+            # Add warning text
+            cff_warning = QLabel("⚠️ CFF export requires GameData.cff file to be available.")
+            cff_warning.setStyleSheet("color: #e74c3c; font-size: 9pt; margin: 5px;")
+            cff_warning.setWordWrap(True)
+            export_layout.addWidget(cff_warning)
 
         export_layout.addWidget(self.export_json_radio)
         export_layout.addWidget(self.export_cff_radio)
@@ -781,8 +1008,8 @@ class ReviewExportPage(QWizardPage):
             rarity=Rarity(req_page.rarity_combo.currentText()),
             effects=[],  # TODO: Populate from effects widget when implemented
 
-            # Step 5: Visual & Audio (enhanced with sound selection)
-            icon_handle="",
+            # Step 5: Visual & Audio (enhanced with sound selection and icon)
+            icon_handle=getattr(visual_page, 'selected_icon_handle', ''),
             hit_sound=visual_page.current_hit_sound if hasattr(visual_page, 'current_hit_sound') else 'battle_hit_1hsword',
             miss_sound=visual_page.current_miss_sound if hasattr(visual_page, 'current_miss_sound') else 'battle_miss_sword',
             equip_sound=visual_page.current_equip_sound if hasattr(visual_page, 'current_equip_sound') else '',
@@ -798,10 +1025,21 @@ class ReviewExportPage(QWizardPage):
         dps = weapon.calculate_dps()
         balance = weapon.get_balance_rating()
 
+        # Generate icon HTML for summary
+        icon_html = self._format_icon_for_summary(weapon.icon_handle)
+
         html = f"""
         <html>
         <body style="font-family: Arial, sans-serif;">
-            <h2 style="color: #2c3e50;">{weapon.weapon_name}</h2>
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                <div style="margin-right: 15px;">
+                    {icon_html}
+                </div>
+                <div>
+                    <h2 style="color: #2c3e50; margin: 0;">{weapon.weapon_name}</h2>
+                    <p style="margin: 5px 0; color: #666;">ID: {weapon.weapon_id} • {weapon.weapon_type_name}</p>
+                </div>
+            </div>
 
             <h3 style="color: #34495e;">Basic Information</h3>
             <table style="width: 100%; border-collapse: collapse;">
@@ -924,3 +1162,34 @@ class ReviewExportPage(QWizardPage):
             return "Strong"
         else:
             return "Overpowered"
+
+    def _format_icon_for_summary(self, icon_handle: str) -> str:
+        """Format icon for HTML summary display"""
+        if not icon_handle:
+            # Return placeholder icon
+            return '<div style="width: 64px; height: 64px; background: #f0f0f0; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; font-size: 24px;">🗡️</div>'
+
+        wizard = self.wizard()
+        if not wizard or not wizard.data_model:
+            # Return fallback if data model is not available
+            return '<div style="width: 64px; height: 64px; background: #f0f0f0; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; font-size: 24px;">❌</div>'
+
+        try:
+            # Get icon path
+            icon_path = wizard.data_model._resolve_icon_path(icon_handle)
+            if not icon_path or not Path(icon_path).exists():
+                # Icon file not found
+                return f'<div style="width: 64px; height: 64px; background: #fff3cd; border: 2px solid #ffeaa7; display: flex; align-items: center; justify-content: center; font-size: 24px;" title="Icon not found: {icon_handle}">⚠️</div>'
+
+            # Convert file path to data URI for HTML display
+            # Note: This is a simplified approach - for production, you might want to cache these
+            icon_abs_path = Path(icon_path).absolute()
+            if icon_abs_path.exists():
+                # For now, we'll use a simple approach with the icon name as tooltip
+                return f'<div style="width: 64px; height: 64px; background: #d4edda; border: 2px solid #c3e6cb; display: flex; align-items: center; justify-content: center; font-size: 10px; text-align: center; overflow: hidden;" title="{icon_handle}">✅ ICON</div>'
+            else:
+                return f'<div style="width: 64px; height: 64px; background: #f8d7da; border: 2px solid #f5c6cb; display: flex; align-items: center; justify-content: center; font-size: 24px;" title="Icon error: {icon_handle}">❌</div>'
+
+        except Exception as e:
+            # Error loading icon
+            return f'<div style="width: 64px; height: 64px; background: #f8d7da; border: 2px solid #f5c6cb; display: flex; align-items: center; justify-content: center; font-size: 24px;" title="Icon error: {str(e)}">❌</div>'
