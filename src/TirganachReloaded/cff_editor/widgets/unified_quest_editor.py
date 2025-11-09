@@ -1267,7 +1267,7 @@ class UnifiedQuestEditor(QMainWindow):
 
             quest_count = len(self.quest_data)
             self.status_bar.showMessage(f"Loaded {quest_count} quests")
-            self.status_indicator.setText(f"Loaded {quest_count} quests")
+            self.edit_status_text.setText(f"Loaded {quest_count} quests")
 
             if self.logger:
                 self.logger.info(f"Loaded {quest_count} quests")
@@ -1280,8 +1280,17 @@ class UnifiedQuestEditor(QMainWindow):
                 print(error_msg)
 
             self.status_bar.showMessage(error_msg)
-            self.status_indicator.setText("Load Failed")
-            self.status_indicator.setStyleSheet("padding: 5px; background-color: #e74c3c; color: white; border-radius: 3px;")
+            self.edit_status_text.setText("Load Failed")
+            self.edit_status_text.setStyleSheet("""
+                QLabel {
+                    background-color: #e74c3c;
+                    color: white;
+                    padding: 4px 12px;
+                    border-radius: 12px;
+                    font-weight: 500;
+                    font-size: 11px;
+                }
+            """)
 
     def _on_quest_selected(self, quest_id: int):
         """Handle quest selection"""
