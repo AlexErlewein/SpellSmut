@@ -68,9 +68,23 @@ SpellSmut/
 
 ## 🚀 Quick Start
 
+### 🎯 Launch the Quest Creator
+
+The Quest Creator is now ready to use! Launch it with:
+
+```bash
+# Install dependencies (once)
+uv add PySide6
+
+# Launch the quest creator
+uv run python quest_creator.py
+```
+
+### 📚 Getting Started
+
 1. **Read the documentation**: Visit the [documentation site](https://alexerlewein.github.io/SpellSmut/)
 2. **Start with basics**: Begin with the Quest System Guide
-3. **Experiment**: Try creating simple quests and spells
+3. **Experiment**: Try creating simple quests and spells with the tools
 4. **Build up**: Gradually work towards more complex mods
 
 ## 📋 Project Plan
