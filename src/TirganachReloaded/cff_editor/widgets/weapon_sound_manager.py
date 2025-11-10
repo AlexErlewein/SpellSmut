@@ -23,6 +23,10 @@ from PySide6.QtWidgets import (
     QSplitter,
     QTextEdit,
     QWidget,
+    QTabWidget,
+    QListWidget,
+    QListWidgetItem,
+    QScrollArea,
 )
 from PySide6.QtCore import Qt
 
@@ -175,30 +179,178 @@ class WeaponSoundManager:
         suggested_hit = ""
         suggested_miss = ""
 
-        # Find sound with matching handedness
+        # Enhanced weapon type matching with specific fallbacks
+        weapon_type_lower = weapon_type.lower()
+
+        # Priority 1: Find sound with matching handedness
         for sound in hit_sounds:
-            if hands.lower() in sound.lower():
-                suggested_hit = sound
+            sound_str = sound if isinstance(sound, str) else str(sound)
+            if hands.lower() in sound_str.lower():
+                suggested_hit = sound_str
                 break
 
-        # If no exact match, use first available
+        # Priority 2: Find exact weapon type match in sound name
+        if not suggested_hit:
+            weapon_type_mappings = {
+                "1h": ["1h", "one", "dagger", "sword", "axe", "hammer", "mace", "staff"],
+                "2h": ["2h", "two", "sword", "axe", "hammer", "mace", "staff", "spear", "halberd"],
+                "dagger": ["dagger", "1hdagger"],
+                "sword": ["sword", "1hsword"],
+                "axe": ["axe", "1haxe"],
+                "hammer": ["hammer", "1hhammer"],
+                "staff": ["staff", "1hstaff"],
+                "bow": ["bow", "2hbow"],
+                "crossbow": ["crossbow", "2hcrossbow"],
+                "spear": ["spear", "2hspear"],
+                "halberd": ["halberd", "2hhalberd"],
+                "mace": ["mace", "1hmace"],
+                "claw": ["claw", "1hclaw"],
+                "fist": ["fist", "hand"],
+                "mouth": ["mouth"]
+            }
+
+            # Check specific weapon type keywords
+            for weapon_key, keywords in weapon_type_mappings.items():
+                if weapon_key in weapon_type_lower:
+                    for sound in hit_sounds:
+                        for keyword in keywords:
+                            if keyword in sound.lower():
+                                suggested_hit = sound
+                                break
+                        if suggested_hit:
+                            break
+                    if suggested_hit:
+                        break
+
+        # Priority 3: Use first available hit sound
         if not suggested_hit and hit_sounds:
             suggested_hit = hit_sounds[0]
-        elif not suggested_hit:
-            suggested_hit = "battle_hit_1hsword"  # Ultimate fallback
 
-        # Same for miss sounds
+        # Priority 4: Use fallback based on weapon type
+        if not suggested_hit:
+            fallback_hits = {
+                "dagger": "battle_hit_1hdagger",
+                "sword": "battle_hit_1hsword",
+                "axe": "battle_hit_1haxe",
+                "hammer": "battle_hit_1hhammer",
+                "staff": "battle_miss_staff",  # Staff use miss sounds
+                "bow": "battle_hit_2hbow",
+                "crossbow": "battle_hit_2hcrossbow",
+                "spear": "battle_hit_2hspear",
+                "halberd": "battle_hit_2hsword",  # Halberd uses sword sounds
+                "mace": "battle_hit_1hmacespiky",
+                "claw": "battle_hit_1hsword",  # Claw uses sword sounds
+                "fist": "battle_hit_fist",
+                "default": "battle_hit_1hsword"
+            }
+
+            for weapon_type_key, fallback in fallback_hits.items():
+                if weapon_type_key in weapon_type_lower:
+                    suggested_hit = fallback
+                    break
+
+        # Ultimate fallback
+        if not suggested_hit:
+            suggested_hit = "battle_hit_1hsword"
+
+        # Similar logic for miss sounds
         for sound in miss_sounds:
-            if hands.lower() in sound.lower():
-                suggested_miss = sound
+            sound_str = sound if isinstance(sound, str) else str(sound)
+            if hands.lower() in sound_str.lower():
+                suggested_miss = sound_str
                 break
 
         if not suggested_miss and miss_sounds:
             suggested_miss = miss_sounds[0]
-        elif not suggested_miss:
-            suggested_miss = "battle_miss_sword"  # Ultimate fallback
+
+        # Fallback miss sounds by weapon type
+        if not suggested_miss:
+            fallback_misses = {
+                "dagger": "battle_miss_sword",
+                "sword": "battle_miss_sword",
+                "axe": "battle_miss_sword",
+                "hammer": "battle_miss_hammer",
+                "staff": "battle_miss_staff",
+                "bow": "battle_miss_bow",
+                "crossbow": "battle_miss_bow",
+                "spear": "battle_miss_staff",
+                "halberd": "battle_miss_sword",
+                "mace": "battle_miss_hammer",
+                "claw": "battle_miss_sword",
+                "fist": "battle_miss_fist",
+                "default": "battle_miss_sword"
+            }
+
+            for weapon_type_key, fallback in fallback_misses.items():
+                if weapon_type_key in weapon_type_lower:
+                    suggested_miss = fallback
+                    break
+
+        # Ultimate fallback for miss
+        if not suggested_miss:
+            suggested_miss = "battle_miss_sword"
 
         return {"hit": suggested_hit, "miss": suggested_miss}
+
+    def get_all_available_sounds(self) -> Dict[str, List[str]]:
+        """Get all available battle sounds organized by type"""
+        all_sounds = {}
+
+        # Extract sounds from the loaded DrwSound.lua data
+        if hasattr(self, 'lua_data') and self.lua_data:
+            for sound_name, sound_data in self.lua_data.items():
+                if sound_name.startswith("battle_hit_") or sound_name.startswith("battle_miss_"):
+                    sound_type = "hit" if "hit_" in sound_name else "miss"
+                    if sound_type not in all_sounds:
+                        all_sounds[sound_type] = []
+
+                    if isinstance(sound_data, dict) and "File" in sound_data:
+                        files = sound_data["File"]
+                        if isinstance(files, list):
+                            all_sounds[sound_type].extend(files)
+                        else:
+                            all_sounds[sound_type].append(files)
+                    else:
+                        all_sounds[sound_type].append(sound_name)
+
+        # If no Lua data loaded, return the mapped sounds
+        if not all_sounds:
+            # Flatten the sound mappings
+            for weapon_type, sounds in self.sound_mappings.items():
+                for sound_type, sound_list in sounds.items():
+                    if sound_type not in all_sounds:
+                        all_sounds[sound_type] = []
+                    all_sounds[sound_type].extend(sound_list)
+
+        # Remove duplicates and sort
+        for sound_type in all_sounds:
+            unique_sounds = set()
+            for sound in all_sounds[sound_type]:
+                if isinstance(sound, (tuple, list)):
+                    # Flatten tuples/lists
+                    for s in sound:
+                        if isinstance(s, (tuple, list)):
+                            unique_sounds.update(str(item) for item in s)
+                        else:
+                            unique_sounds.add(str(s))
+                else:
+                    unique_sounds.add(str(sound))
+            all_sounds[sound_type] = sorted(unique_sounds)
+
+        return all_sounds
+
+    def get_sound_categories(self) -> List[str]:
+        """Get available sound categories for filtering"""
+        categories = []
+        for sound_name in self.get_all_available_sounds().get("hit", []):
+            if "battle_hit_" in sound_name:
+                weapon_type = sound_name.replace("battle_hit_", "")
+                if weapon_type not in categories:
+                    categories.append(weapon_type)
+
+        # Add common categories
+        categories.extend(["sword", "axe", "hammer", "dagger", "staff", "bow", "crossbow"])
+        return sorted(list(set(categories)))
 
 
 class WeaponSoundSelectionDialog(QDialog):
@@ -228,7 +380,7 @@ class WeaponSoundSelectionDialog(QDialog):
         self._populate_sounds()
 
     def _setup_ui(self):
-        """Setup the user interface"""
+        """Setup the enhanced user interface"""
         layout = QVBoxLayout()
 
         # Weapon info
@@ -236,47 +388,43 @@ class WeaponSoundSelectionDialog(QDialog):
         info_layout = QVBoxLayout()
         info_layout.addWidget(QLabel(f"Weapon Type: {self.weapon_type.title()}"))
         info_layout.addWidget(QLabel(f"Hands: {self.hands}"))
+
+        # Add auto-assigned sounds info
+        auto_sounds = self.sound_manager.suggest_sounds(self.weapon_type, self.hands)
+        auto_hit = auto_sounds.get('hit', 'None')
+        auto_miss = auto_sounds.get('miss', 'None')
+        info_layout.addWidget(QLabel(f"Suggested Hit: {auto_hit}"))
+        info_layout.addWidget(QLabel(f"Suggested Miss: {auto_miss}"))
+
         info_group.setLayout(info_layout)
         layout.addWidget(info_group)
 
-        # Main content area
-        splitter = QSplitter(Qt.Orientation.Horizontal)
+        # Tab widget for different sound selection modes
+        self.tab_widget = QTabWidget()
+        layout.addWidget(self.tab_widget)
 
-        # Hit sounds
-        hit_group = QGroupBox("Hit Sound")
-        hit_layout = QVBoxLayout()
+        # Tab 1: Quick Selection (current functionality)
+        self._setup_quick_selection_tab()
 
-        self.hit_combo = QComboBox()
-        self.hit_combo.setMinimumWidth(300)
-        self.hit_combo.currentTextChanged.connect(self.on_hit_sound_changed)
-        hit_layout.addWidget(self.hit_combo)
+        # Tab 2: Advanced Browser
+        self._setup_advanced_browser_tab()
 
-        # Miss sounds
-        miss_group = QGroupBox("Miss Sound")
-        miss_layout = QVBoxLayout()
-
-        self.miss_combo = QComboBox()
-        self.miss_combo.setMinimumWidth(300)
-        self.miss_combo.currentTextChanged.connect(self.on_miss_sound_changed)
-        miss_layout.addWidget(self.miss_combo)
-
-        hit_group.setLayout(hit_layout)
-        miss_group.setLayout(miss_layout)
-
-        # Add to splitter
-        splitter.addWidget(hit_group)
-        splitter.addWidget(miss_group)
-
-        layout.addWidget(splitter)
+        # Tab 3: Category Browser
+        self._setup_category_browser_tab()
 
         # Preview area
         preview_group = QGroupBox("Sound Preview")
         preview_layout = QVBoxLayout()
 
-        self.preview_text = QTextEdit()
-        self.preview_text.setMaximumHeight(100)
-        self.preview_text.setReadOnly(True)
-        preview_layout.addWidget(self.preview_text)
+        # Sound details
+        self.sound_details = QTextEdit()
+        self.sound_details.setMaximumHeight(100)
+        self.sound_details.setReadOnly(True)
+        preview_layout.addWidget(self.sound_details)
+
+        # Sound info labels
+        self.current_sounds_label = QLabel("Current Selections: None")
+        preview_layout.addWidget(self.current_sounds_label)
 
         preview_group.setLayout(preview_layout)
         layout.addWidget(preview_group)
@@ -291,30 +439,130 @@ class WeaponSoundSelectionDialog(QDialog):
 
         self.setLayout(layout)
 
+    def _setup_quick_selection_tab(self):
+        """Setup quick selection tab with recommended sounds"""
+        quick_widget = QWidget()
+        layout = QVBoxLayout()
+
+        # Recommended sounds section
+        recommended_group = QGroupBox("Recommended Sounds")
+        recommended_layout = QVBoxLayout()
+
+        self.quick_hit_combo = QComboBox()
+        self.quick_hit_combo.setMinimumWidth(300)
+        self.quick_hit_combo.currentTextChanged.connect(self.on_quick_hit_sound_changed)
+        recommended_layout.addWidget(QLabel("Hit Sound:"))
+        recommended_layout.addWidget(self.quick_hit_combo)
+
+        self.quick_miss_combo = QComboBox()
+        self.quick_miss_combo.setMinimumWidth(300)
+        self.quick_miss_combo.currentTextChanged.connect(self.on_quick_miss_sound_changed)
+        recommended_layout.addWidget(QLabel("Miss Sound:"))
+        recommended_layout.addWidget(self.quick_miss_combo)
+
+        recommended_group.setLayout(recommended_layout)
+        layout.addWidget(recommended_group)
+
+        quick_widget.setLayout(layout)
+        self.tab_widget.addTab(quick_widget, "Quick Selection")
+
+    def _setup_advanced_browser_tab(self):
+        """Setup advanced browser tab with all sounds"""
+        browser_widget = QWidget()
+        layout = QVBoxLayout()
+
+        # Search box
+        search_layout = QHBoxLayout()
+        search_layout.addWidget(QLabel("Search:"))
+        self.search_edit = QLineEdit()
+        self.search_edit.setPlaceholderText("Search sounds...")
+        self.search_edit.textChanged.connect(self.filter_sounds)
+        search_layout.addWidget(self.search_edit)
+        layout.addLayout(search_layout)
+
+        # All sounds lists
+        sounds_layout = QHBoxLayout()
+
+        # Hit sounds
+        hit_group = QGroupBox("Hit Sounds")
+        hit_layout = QVBoxLayout()
+        self.hit_list = QListWidget()
+        self.hit_list.setMaximumHeight(200)
+        self.hit_list.itemDoubleClicked.connect(self.on_hit_list_double_clicked)
+        hit_layout.addWidget(self.hit_list)
+        hit_group.setLayout(hit_layout)
+
+        # Miss sounds
+        miss_group = QGroupBox("Miss Sounds")
+        miss_layout = QVBoxLayout()
+        self.miss_list = QListWidget()
+        self.miss_list.setMaximumHeight(200)
+        self.miss_list.itemDoubleClicked.connect(self.on_miss_list_double_clicked)
+        miss_layout.addWidget(self.miss_list)
+        miss_group.setLayout(miss_layout)
+
+        sounds_layout.addWidget(hit_group)
+        sounds_layout.addWidget(miss_group)
+
+        layout.addLayout(sounds_layout)
+        browser_widget.setLayout(layout)
+        self.tab_widget.addTab(browser_widget, "Advanced Browser")
+
+    def _setup_category_browser_tab(self):
+        """Setup category browser tab"""
+        browser_widget = QWidget()
+        layout = QVBoxLayout()
+
+        # Category selection
+        category_layout = QHBoxLayout()
+        category_layout.addWidget(QLabel("Weapon Type:"))
+        self.category_combo = QComboBox()
+        self.category_combo.addItems(["All"] + self.sound_manager.get_sound_categories())
+        self.category_combo.currentTextChanged.connect(self.on_category_changed)
+        category_layout.addWidget(self.category_combo)
+        layout.addLayout(category_layout)
+
+        # Category sounds display
+        self.category_sounds_list = QListWidget()
+        self.category_sounds_list.setMaximumHeight(250)
+        layout.addWidget(self.category_sounds_list)
+
+        browser_widget.setLayout(layout)
+        self.tab_widget.addTab(browser_widget, "Category Browser")
+
     def _populate_sounds(self):
-        """Populate sound combos with available sounds"""
+        """Populate sound widgets with available sounds"""
         sounds = self.sound_manager.get_weapon_sounds(self.weapon_type)
 
-        # Populate hit sounds
-        self.hit_combo.clear()
+        # Populate quick selection combos
+        self.quick_hit_combo.clear()
         if "hit" in sounds and sounds["hit"]:
-            self.hit_combo.addItems(sounds["hit"])
+            self.quick_hit_combo.addItems(sounds["hit"])
 
-        # Populate miss sounds
-        self.miss_combo.clear()
+        self.quick_miss_combo.clear()
         if "miss" in sounds and sounds["miss"]:
-            self.miss_combo.addItems(sounds["miss"])
+            self.quick_miss_combo.addItems(sounds["miss"])
 
         # Set current selections
         if self.selected_hit:
-            index = self.hit_combo.findText(self.selected_hit)
+            index = self.quick_hit_combo.findText(self.selected_hit)
             if index >= 0:
-                self.hit_combo.setCurrentIndex(index)
+                self.quick_hit_combo.setCurrentIndex(index)
 
         if self.selected_miss:
-            index = self.miss_combo.findText(self.selected_miss)
+            index = self.quick_miss_combo.findText(self.selected_miss)
             if index >= 0:
-                self.miss_combo.setCurrentIndex(index)
+                self.quick_miss_combo.setCurrentIndex(index)
+
+        # Populate advanced browser with all sounds
+        all_sounds = self.sound_manager.get_all_available_sounds()
+        for sound in all_sounds.get("hit", []):
+            self.hit_list.addItem(sound)
+        for sound in all_sounds.get("miss", []):
+            self.miss_list.addItem(sound)
+
+        # Populate category browser
+        self.on_category_changed("All")  # Load all sounds initially
 
         # Update preview
         self._update_preview()
@@ -341,7 +589,78 @@ class WeaponSoundSelectionDialog(QDialog):
                 "These sounds are referenced from the game's DrwSound.lua file."
             )
 
-        self.preview_text.setPlainText(preview_text)
+        self.sound_details.setPlainText(preview_text)
+        self.current_sounds_label.setText(
+            f"Current Selections: Hit={self.selected_hit or 'None'}, Miss={self.selected_miss or 'None'}"
+        )
+
+    def on_quick_hit_sound_changed(self, sound_name: str):
+        """Handle quick hit sound selection change"""
+        self.selected_hit = sound_name
+        self._update_preview()
+
+    def on_quick_miss_sound_changed(self, sound_name: str):
+        """Handle quick miss sound selection change"""
+        self.selected_miss = sound_name
+        self._update_preview()
+
+    def on_hit_list_double_clicked(self, item: QListWidgetItem):
+        """Handle hit sound selection from advanced browser"""
+        sound_name = item.text()
+        self.selected_hit = sound_name
+        self._update_preview()
+
+    def on_miss_list_double_clicked(self, item: QListWidgetItem):
+        """Handle miss sound selection from advanced browser"""
+        sound_name = item.text()
+        self.selected_miss = sound_name
+        self._update_preview()
+
+    def filter_sounds(self, search_text: str):
+        """Filter sounds in advanced browser"""
+        search_lower = search_text.lower()
+
+        # Clear lists
+        self.hit_list.clear()
+        self.miss_list.clear()
+
+        if not search_text:
+            # Load all sounds
+            all_sounds = self.sound_manager.get_all_available_sounds()
+        else:
+            # Filter sounds
+            all_sounds = self.sound_manager.get_all_available_sounds()
+            for sound_type in all_sounds:
+                all_sounds[sound_type] = [
+                    sound for sound in all_sounds[sound_type]
+                    if search_lower in sound.lower()
+                ]
+
+        # Populate filtered lists
+        for sound in all_sounds.get("hit", []):
+            self.hit_list.addItem(sound)
+        for sound in all_sounds.get("miss", []):
+            self.miss_list.addItem(sound)
+
+    def on_category_changed(self, category: str):
+        """Handle category selection change"""
+        all_sounds = self.sound_manager.get_all_available_sounds()
+        self.category_sounds_list.clear()
+
+        if category == "All":
+            # Show all sounds
+            for sound_type in all_sounds:
+                for sound in all_sounds[sound_type]:
+                    item = QListWidgetItem(f"{sound_type.upper()}: {sound}")
+                    self.category_sounds_list.addItem(item)
+        else:
+            # Show category-specific sounds
+            category_lower = category.lower()
+            for sound_type in all_sounds:
+                for sound in all_sounds[sound_type]:
+                    if category_lower in sound.lower():
+                        item = QListWidgetItem(f"{sound_type.upper()}: {sound}")
+                        self.category_sounds_list.addItem(item)
 
     def get_selected_sounds(self) -> Tuple[str, str]:
         """Get the selected hit and miss sounds"""

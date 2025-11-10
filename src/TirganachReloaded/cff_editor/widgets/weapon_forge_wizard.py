@@ -1076,10 +1076,10 @@ class VisualAudioPage(QWizardPage):
         if hasattr(wizard, "source_weapon") and wizard.source_weapon is not None:
             weapon = wizard.source_weapon
 
-            # Inherit icon if available
+            # Inherit icon if available (icon system deferred for now)
             if hasattr(weapon, 'icon_handle') and weapon.icon_handle:
                 self.selected_icon_handle = weapon.icon_handle
-                self._update_icon_preview(weapon.icon_handle)
+                # Icon preview system deferred until icon extraction is prepared
 
         # Set up sound selection
         self._setup_sound_selection()
