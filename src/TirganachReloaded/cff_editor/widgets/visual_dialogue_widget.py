@@ -141,28 +141,34 @@ class VisualDialogueWidget(QWidget):
         palette_layout = QVBoxLayout()
 
         # Node type buttons
-        self.start_btn = QPushButton("Start Node")
+        self.start_btn = QPushButton("🟢 Start Node")
         self.start_btn.clicked.connect(lambda: self.add_node(NodeType.START))
+        self.start_btn.setToolTip("Starting point of your dialogue tree\nEvery conversation begins here")
         palette_layout.addWidget(self.start_btn)
 
-        self.npc_btn = QPushButton("NPC Dialogue")
+        self.npc_btn = QPushButton("👤 NPC Dialogue")
         self.npc_btn.clicked.connect(lambda: self.add_node(NodeType.NPC))
+        self.npc_btn.setToolTip("NPC speaks to the player\nAdd dialogue text for characters")
         palette_layout.addWidget(self.npc_btn)
 
-        self.player_btn = QPushButton("Player Dialogue")
+        self.player_btn = QPushButton("🗣️ Player Dialogue")
         self.player_btn.clicked.connect(lambda: self.add_node(NodeType.PLAYER))
+        self.player_btn.setToolTip("Player response options\nWhat the player can say back")
         palette_layout.addWidget(self.player_btn)
 
-        self.choice_btn = QPushButton("Choice Node")
+        self.choice_btn = QPushButton("🔀 Choice Node")
         self.choice_btn.clicked.connect(lambda: self.add_node(NodeType.CHOICE))
+        self.choice_btn.setToolTip("Branching dialogue choices\nCreate multiple conversation paths")
         palette_layout.addWidget(self.choice_btn)
 
-        self.conditional_btn = QPushButton("Conditional Node")
+        self.conditional_btn = QPushButton("❓ Conditional Node")
         self.conditional_btn.clicked.connect(lambda: self.add_node(NodeType.CONDITIONAL))
+        self.conditional_btn.setToolTip("Conditional dialogue\nShow different text based on conditions")
         palette_layout.addWidget(self.conditional_btn)
 
-        self.end_btn = QPushButton("End Node")
+        self.end_btn = QPushButton("🔴 End Node")
         self.end_btn.clicked.connect(lambda: self.add_node(NodeType.END))
+        self.end_btn.setToolTip("End of conversation\nWhere dialogue paths conclude")
         palette_layout.addWidget(self.end_btn)
 
         # Spacer
@@ -186,46 +192,76 @@ class VisualDialogueWidget(QWidget):
         self.toolbar.clear()
 
         # File operations
-        new_action = QAction("New", self)
+        new_action = QAction("📄 New", self)
         new_action.triggered.connect(self.new_dialogue)
+        new_action.setToolTip("Create a new dialogue tree\nClears all current nodes")
+        new_action.setShortcut(QKeySequence.New)
         self.toolbar.addAction(new_action)
 
-        open_action = QAction("Load Sample", self)
+        open_action = QAction("📂 Load Sample", self)
         open_action.triggered.connect(self.load_sample_dialogue)
+        open_action.setToolTip("Load a sample dialogue tree\nSee how dialogue structures work")
         self.toolbar.addAction(open_action)
 
-        save_action = QAction("Save", self)
+        save_action = QAction("💾 Save", self)
         save_action.triggered.connect(self.save_dialogue)
+        save_action.setToolTip("Save current dialogue tree\nExport to JSON format")
+        save_action.setShortcut(QKeySequence.Save)
         self.toolbar.addAction(save_action)
 
         self.toolbar.addSeparator()
 
+        # Auto-arrange
+        auto_arrange_action = QAction("🎯 Auto-Arrange", self)
+        auto_arrange_action.triggered.connect(self.auto_arrange_nodes)
+        auto_arrange_action.setToolTip("Automatically arrange nodes\nOrganize your dialogue tree neatly")
+        self.toolbar.addAction(auto_arrange_action)
+
+        self.toolbar.addSeparator()
+
         # Validation
-        validate_action = QAction("Validate", self)
+        validate_action = QAction("✅ Validate", self)
         validate_action.triggered.connect(self.validate_dialogue)
+        validate_action.setToolTip("Check dialogue tree for errors\nFind missing connections or text")
         self.toolbar.addAction(validate_action)
 
         self.toolbar.addSeparator()
 
         # Export operations
-        export_lua_action = QAction("Export Lua", self)
+        export_lua_action = QAction("🔧 Export Lua", self)
         export_lua_action.triggered.connect(self.export_to_lua)
+        export_lua_action.setToolTip("Export dialogue to Lua format\nFor use in SpellForce game")
         self.toolbar.addAction(export_lua_action)
 
         self.toolbar.addSeparator()
 
         # View operations
-        zoom_in_action = QAction("Zoom In", self)
+        zoom_in_action = QAction("🔍+ Zoom In", self)
         zoom_in_action.triggered.connect(self.zoom_in)
+        zoom_in_action.setToolTip("Zoom in for better visibility\nShortcut: Ctrl++")
+        zoom_in_action.setShortcut(QKeySequence.ZoomIn)
         self.toolbar.addAction(zoom_in_action)
 
-        zoom_out_action = QAction("Zoom Out", self)
+        zoom_out_action = QAction("🔍- Zoom Out", self)
         zoom_out_action.triggered.connect(self.zoom_out)
+        zoom_out_action.setToolTip("Zoom out to see more\nShortcut: Ctrl+-")
+        zoom_out_action.setShortcut(QKeySequence.ZoomOut)
         self.toolbar.addAction(zoom_out_action)
 
-        reset_zoom_action = QAction("Reset Zoom", self)
+        reset_zoom_action = QAction("🎯 Reset Zoom", self)
         reset_zoom_action.triggered.connect(self.reset_zoom)
+        reset_zoom_action.setToolTip("Reset zoom to 100%\nShortcut: Ctrl+0")
+        reset_zoom_action.setShortcut(QKeySequence("Ctrl+0"))
         self.toolbar.addAction(reset_zoom_action)
+
+        self.toolbar.addSeparator()
+
+        # Help
+        help_action = QAction("❓ Help", self)
+        help_action.triggered.connect(self.show_help)
+        help_action.setToolTip("Show help and tutorial\nLearn how to use the dialogue editor")
+        help_action.setShortcut(QKeySequence("F1"))
+        self.toolbar.addAction(help_action)
 
     def add_node(self, node_type: str):
         """Add a new dialogue node"""
@@ -856,6 +892,133 @@ class VisualDialogueWidget(QWidget):
             })
 
         return dialogue_data
+
+    def auto_arrange_nodes(self):
+        """Automatically arrange nodes in a tree layout"""
+        if not self.nodes:
+            self.status_bar.showMessage("No nodes to arrange")
+            return
+
+        self.status_bar.showMessage("Auto-arranging nodes...")
+
+        # Find start node
+        start_node = None
+        for node in self.nodes.values():
+            if node.node_type == NodeType.START:
+                start_node = node
+                break
+
+        if not start_node:
+            self.status_bar.showMessage("No start node found")
+            return
+
+        # Simple tree layout algorithm
+        visited = set()
+        positions = {}
+
+        def arrange_node(node, x, y, level_width):
+            """Recursively arrange nodes in tree layout"""
+            if node.id in visited:
+                return
+
+            visited.add(node.id)
+            positions[node.id] = (x, y)
+
+            # Get outgoing connections
+            outgoing = []
+            for connection in self.graphics_view.connections:
+                if hasattr(connection, 'start_node') and connection.start_node.node.id == node.id:
+                    outgoing.append(connection.end_node.node)
+
+            if outgoing:
+                child_width = level_width / len(outgoing)
+                start_x = x - level_width / 2 + child_width / 2
+
+                for i, child in enumerate(outgoing):
+                    child_x = start_x + i * child_width
+                    child_y = y + 150  # Vertical spacing
+                    arrange_node(child, child_x, child_y, child_width * 0.8)
+
+        # Start arrangement from root
+        arrange_node(start_node, 400, 100, 600)
+
+        # Apply positions
+        for node_id, (x, y) in positions.items():
+            if node_id in self.nodes:
+                node_item = None
+                for item in self.scene.items():
+                    if hasattr(item, 'node') and item.node.id == node_id:
+                        node_item = item
+                        break
+
+                if node_item:
+                    node_item.setPos(x, y)
+
+        self.status_bar.showMessage(f"Auto-arranged {len(positions)} nodes")
+
+    def show_help(self):
+        """Show help dialog"""
+        help_text = """
+# Visual Dialogue Editor Help
+
+## 🎯 How to Use
+
+### 1. Create Nodes
+- Click buttons in the **Node Palette** (left panel)
+- Each node type has a specific purpose:
+  - 🟢 **Start Node**: Where every conversation begins
+  - 👤 **NPC Dialogue**: What characters say to the player
+  - 🗣️ **Player Dialogue**: Player response options
+  - 🔀 **Choice Node**: Multiple conversation paths
+  - ❓ **Conditional Node**: Show different text based on conditions
+  - 🔴 **End Node**: Where dialogue paths conclude
+
+### 2. Connect Nodes
+- Click and drag from one node to another
+- Create conversation flow paths
+- Use right-click to delete connections
+
+### 3. Edit Content
+- Click any node to select it
+- Edit text and properties in the **Properties Panel** (right)
+- Changes are saved automatically
+
+### 4. Navigation
+- **Mouse Wheel**: Zoom in/out
+- **Click & Drag**: Pan around the canvas
+- **Double-click**: Center on node
+
+## ⌨️ Keyboard Shortcuts
+
+- **Ctrl+N**: New dialogue tree
+- **Ctrl+S**: Save dialogue
+- **Ctrl++**: Zoom in
+- **Ctrl+-**: Zoom out
+- **Ctrl+0**: Reset zoom
+- **F1**: Show this help
+
+## 💡 Tips
+
+- Start with a **Start Node** and build outward
+- Use **Auto-Arrange** to organize your tree
+- **Validate** your dialogue to check for errors
+- Export to **Lua** when ready for the game
+
+## 🔧 Troubleshooting
+
+- **Nodes not connecting?** Make sure you're dragging from the edge of one node to another
+- **Lost in the canvas?** Use Reset Zoom or zoom out to see everything
+- **Validation errors?** Check that all paths have proper connections and text
+
+Need more help? Check the quest documentation!
+        """
+
+        help_dialog = QMessageBox(self)
+        help_dialog.setWindowTitle("Visual Dialogue Editor Help")
+        help_dialog.setTextFormat(Qt.MarkdownText)
+        help_dialog.setText(help_text)
+        help_dialog.setStandardButtons(QMessageBox.Ok)
+        help_dialog.exec()
 
 
 # Test function
