@@ -28,7 +28,7 @@ from PySide6.QtGui import (
 
 # Import from visual_dialogue_editor
 try:
-    from .visual_dialogue_editor import (
+    from visual_dialogue_editor import (
         DialogueNode, NodeType, DialogueNodeItem, DialogueConnectionItem,
         DialogueGraphicsView, DialoguePropertiesWidget, DialogueTreeWidget
     )

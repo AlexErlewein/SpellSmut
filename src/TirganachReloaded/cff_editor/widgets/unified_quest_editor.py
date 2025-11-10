@@ -108,12 +108,8 @@ try:
 except ImportError:
     QuestValidator = None
 
-try:
-    from .visual_dialogue_widget import VisualDialogueWidget
-    VISUAL_DIALOGUE_EDITOR_AVAILABLE = True
-except ImportError:
-    VisualDialogueWidget = None
-    VISUAL_DIALOGUE_EDITOR_AVAILABLE = False
+# Visual dialogue widget will be imported dynamically after directory change
+VISUAL_DIALOGUE_EDITOR_AVAILABLE = True  # Assume available, will verify at runtime
 
 # Platform names from Darius Almanach
 PLATFORM_NAMES = {
@@ -915,10 +911,12 @@ class UnifiedQuestEditor(QMainWindow):
         self.quest_editor_tabs.addTab(self.objectives_widget, "Objectives")
 
         # Tab 4: Visual Dialogue Editor
-        if VISUAL_DIALOGUE_EDITOR_AVAILABLE:
+        try:
+            from visual_dialogue_widget import VisualDialogueWidget
             self.visual_dialogue_widget = VisualDialogueWidget()
             self.quest_editor_tabs.addTab(self.visual_dialogue_widget, "Dialogues (Visual)")
-        else:
+        except ImportError as e:
+            print(f"Warning: Visual dialogue editor not available: {e}")
             # Fallback dialogue editor
             self.dialogue_widget = self._create_simple_dialogue_editor()
             self.quest_editor_tabs.addTab(self.dialogue_widget, "Dialogues (Simple)")
