@@ -20,7 +20,8 @@ from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QTextEdit, QLineEdit,
     QPushButton, QLabel, QGroupBox, QFormLayout, QScrollArea,
     QFrame, QMessageBox, QComboBox, QSplitter, QTreeWidget,
-    QTreeWidgetItem, QCheckBox, QRadioButton, QButtonGroup
+    QTreeWidgetItem, QCheckBox, QRadioButton, QButtonGroup,
+    QDialog, QDialogButtonBox, QButtonGroup
 )
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QFont, QPixmap
@@ -63,6 +64,112 @@ class DialogueStep:
         return data
 
 
+class StepTypeSelectionDialog(QDialog):
+    """Dialog for selecting the type of next step"""
+
+    def __init__(self, current_step_type, parent=None):
+        super().__init__(parent)
+        self.current_step_type = current_step_type
+        self.selected_type = None
+        self.setup_ui()
+
+    def setup_ui(self):
+        """Setup the dialog UI"""
+        self.setWindowTitle("Choose Next Step Type")
+        self.setMinimumWidth(400)
+
+        layout = QVBoxLayout()
+        self.setLayout(layout)
+
+        # Instructions
+        instructions = QLabel("What type of step comes next in the conversation?")
+        instructions.setStyleSheet("font-weight: bold; margin-bottom: 15px;")
+        layout.addWidget(instructions)
+
+        # Step type options
+        self.button_group = QButtonGroup()
+        self.step_buttons = {}
+
+        # Determine available options based on current step type
+        available_types = self.get_available_step_types()
+
+        for step_type, description in available_types.items():
+            radio = QRadioButton(f"{step_type.name}: {description}")
+            radio.setStyleSheet("""
+                QRadioButton {
+                    padding: 8px;
+                    margin: 2px;
+                }
+                QRadioButton::indicator {
+                    width: 16px;
+                    height: 16px;
+                }
+            """)
+            self.button_group.addButton(radio)
+            self.step_buttons[step_type] = radio
+            layout.addWidget(radio)
+
+        # Select first option by default
+        if self.step_buttons:
+            first_radio = next(iter(self.step_buttons.values()))
+            first_radio.setChecked(True)
+            self.selected_type = first_radio.text().split(":")[0]
+
+        # Connect button group
+        self.button_group.buttonClicked.connect(self.on_selection_changed)
+
+        # Dialog buttons
+        button_box = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        button_box.accepted.connect(self.accept)
+        button_box.rejected.connect(self.reject)
+        layout.addWidget(button_box)
+
+    def get_available_step_types(self):
+        """Get available step types based on current step type"""
+        if self.current_step_type == DialogueStepType.START:
+            return {
+                DialogueStepType.NPC_SPEECH: "NPC speaks to the player"
+            }
+        elif self.current_step_type == DialogueStepType.NPC_SPEECH:
+            return {
+                DialogueStepType.PLAYER_CHOICE: "Player chooses a response",
+                DialogueStepType.NPC_RESPONSE: "NPC continues speaking",
+                DialogueStepType.END: "Conversation ends"
+            }
+        elif self.current_step_type == DialogueStepType.PLAYER_CHOICE:
+            return {
+                DialogueStepType.NPC_RESPONSE: "NPC responds to player choice",
+                DialogueStepType.NPC_SPEECH: "Different NPC speaks",
+                DialogueStepType.END: "Conversation ends"
+            }
+        elif self.current_step_type == DialogueStepType.NPC_RESPONSE:
+            return {
+                DialogueStepType.PLAYER_CHOICE: "Player chooses next action",
+                DialogueStepType.NPC_SPEECH: "Same NPC continues",
+                DialogueStepType.NPC_RESPONSE: "Same NPC responds again",
+                DialogueStepType.END: "Conversation ends"
+            }
+        else:
+            return {
+                DialogueStepType.NPC_SPEECH: "NPC speaks",
+                DialogueStepType.PLAYER_CHOICE: "Player choice",
+                DialogueStepType.END: "End conversation"
+            }
+
+    def on_selection_changed(self, button):
+        """Handle selection change"""
+        text = button.text()
+        self.selected_type = text.split(":")[0]
+
+    def get_selected_type(self):
+        """Get the selected step type"""
+        if self.selected_type:
+            for step_type in DialogueStepType:
+                if step_type.name == self.selected_type:
+                    return step_type
+        return DialogueStepType.NPC_SPEECH  # Default
+
+
 class DialogueStepWidget(QFrame):
     """Widget for a single dialogue step"""
 
@@ -85,24 +192,24 @@ class DialogueStepWidget(QFrame):
         # Step header
         header_layout = QHBoxLayout()
 
-        # Step type indicator
+        # Step type indicator - subtle colors with good contrast
         type_colors = {
-            DialogueStepType.START: "#27ae60",
-            DialogueStepType.NPC_SPEECH: "#3498db",
-            DialogueStepType.PLAYER_CHOICE: "#e74c3c",
-            DialogueStepType.NPC_RESPONSE: "#f39c12",
-            DialogueStepType.END: "#95a5a6"
+            DialogueStepType.START: "#2c3e50",  # Dark blue-gray
+            DialogueStepType.NPC_SPEECH: "#34495e",  # Dark gray
+            DialogueStepType.PLAYER_CHOICE: "#2c3e50",  # Dark blue-gray
+            DialogueStepType.NPC_RESPONSE: "#34495e",  # Dark gray
+            DialogueStepType.END: "#7f8c8d"  # Medium gray
         }
 
         type_names = {
-            DialogueStepType.START: "🟢 START",
-            DialogueStepType.NPC_SPEECH: "👤 NPC SPEAKS",
-            DialogueStepType.PLAYER_CHOICE: "🗣️ PLAYER CHOICE",
-            DialogueStepType.NPC_RESPONSE: "💬 NPC RESPONSE",
-            DialogueStepType.END: "🔴 END"
+            DialogueStepType.START: "START",
+            DialogueStepType.NPC_SPEECH: "NPC SPEAKS",
+            DialogueStepType.PLAYER_CHOICE: "PLAYER CHOICE",
+            DialogueStepType.NPC_RESPONSE: "NPC RESPONSE",
+            DialogueStepType.END: "END"
         }
 
-        color = type_colors.get(self.step.type, "#95a5a6")
+        color = type_colors.get(self.step.type, "#34495e")
         name = type_names.get(self.step.type, "STEP")
 
         self.type_label = QLabel(name)
@@ -114,6 +221,7 @@ class DialogueStepWidget(QFrame):
                 border-radius: 4px;
                 font-weight: bold;
                 font-size: 12px;
+                border: 1px solid #1a252f;
             }}
         """)
 
@@ -150,7 +258,7 @@ class DialogueStepWidget(QFrame):
             layout.addLayout(speaker_layout)
         else:
             if self.step.speaker:
-                speaker_label = QLabel(f"👤 {self.step.speaker}")
+                speaker_label = QLabel(f"{self.step.speaker}:")
                 speaker_label.setStyleSheet("font-weight: bold; color: #2c3e50; margin: 5px;")
                 layout.addWidget(speaker_label)
 
@@ -168,30 +276,33 @@ class DialogueStepWidget(QFrame):
                 text_label.setWordWrap(True)
                 text_label.setStyleSheet("""
                     QLabel {
-                        background-color: #f8f9fa;
+                        background-color: #ffffff;
+                        color: #2c3e50;
                         padding: 15px;
                         border-radius: 8px;
-                        border-left: 4px solid #3498db;
+                        border-left: 4px solid #34495e;
                         margin: 5px;
+                        border: 1px solid #bdc3c7;
                     }
                 """)
                 layout.addWidget(text_label)
 
         # Add next step button
         if self.is_editable:
-            self.add_next_btn = QPushButton("➕ Add Next Part")
+            self.add_next_btn = QPushButton("Add Next Part")
             self.add_next_btn.clicked.connect(self.add_next_step)
             self.add_next_btn.setStyleSheet("""
                 QPushButton {
-                    background-color: #27ae60;
+                    background-color: #34495e;
                     color: white;
                     padding: 10px;
                     border-radius: 5px;
                     font-weight: bold;
                     margin-top: 10px;
+                    border: 1px solid #2c3e50;
                 }
                 QPushButton:hover {
-                    background-color: #2ecc71;
+                    background-color: #2c3e50;
                 }
             """)
             layout.addWidget(self.add_next_btn)
@@ -245,35 +356,38 @@ class DialogueStepWidget(QFrame):
         else:
             # Display mode
             if self.step.text:
-                question_label = QLabel("❓ " + self.step.text)
-                question_label.setStyleSheet("font-weight: bold; color: #e74c3c; margin: 10px;")
+                question_label = QLabel("What do you want to say?")
+                question_label.setStyleSheet("font-weight: bold; color: #2c3e50; margin: 10px;")
                 layout.addWidget(question_label)
 
             for choice in self.step.choices:
                 choice_label = QLabel(f"• {choice.get('text', 'No text')}")
                 choice_label.setStyleSheet("""
                     QLabel {
-                        background-color: #fff3cd;
+                        background-color: #ffffff;
+                        color: #2c3e50;
                         padding: 8px 12px;
                         border-radius: 4px;
                         margin: 3px;
-                        border-left: 3px solid #ffc107;
+                        border-left: 3px solid #34495e;
+                        border: 1px solid #bdc3c7;
                     }
                 """)
                 layout.addWidget(choice_label)
 
     def setup_end_ui(self, layout):
         """Setup end dialogue UI"""
-        end_label = QLabel("🏁 Conversation Ends Here")
+        end_label = QLabel("Conversation Ends Here")
         end_label.setStyleSheet("""
             QLabel {
-                background-color: #ecf0f1;
-                color: #7f8c8d;
+                background-color: #ffffff;
+                color: #2c3e50;
                 padding: 20px;
                 border-radius: 8px;
                 text-align: center;
                 font-weight: bold;
                 font-size: 14px;
+                border: 1px solid #bdc3c7;
             }
         """)
         end_label.setAlignment(Qt.AlignCenter)
@@ -354,7 +468,7 @@ class SimpleDialogueBuilder(QWidget):
         left_panel.setMaximumWidth(300)
 
         # Tree title
-        title_label = QLabel("🌳 Dialogue Tree")
+        title_label = QLabel("Dialogue Tree")
         title_label.setStyleSheet("font-size: 16px; font-weight: bold; margin-bottom: 10px;")
         left_layout.addWidget(title_label)
 
@@ -373,7 +487,7 @@ class SimpleDialogueBuilder(QWidget):
 
         # Instructions
         instructions = QLabel("""
-📝 <b>How to Build Dialogue:</b><br>
+<b>How to Build Dialogue:</b><br>
 1. Start with NPC speech<br>
 2. Add player choices when needed<br>
 3. Create NPC responses for each choice<br>
@@ -382,10 +496,12 @@ class SimpleDialogueBuilder(QWidget):
         """)
         instructions.setStyleSheet("""
             QLabel {
-                background-color: #e8f5e8;
+                background-color: #ffffff;
+                color: #2c3e50;
                 padding: 15px;
                 border-radius: 8px;
                 margin-bottom: 15px;
+                border: 1px solid #bdc3c7;
             }
         """)
         instructions.setWordWrap(True)
@@ -623,39 +739,50 @@ class SimpleDialogueBuilder(QWidget):
         if not parent_step:
             return
 
-        # Determine what type of step to add
-        if parent_step.type == DialogueStepType.NPC_SPEECH:
-            # Add player choice after NPC speech
+        # Show step type selection dialog
+        dialog = StepTypeSelectionDialog(parent_step.type, self)
+        if dialog.exec() == QDialog.Accepted:
+            selected_type = dialog.get_selected_type()
+            self.create_step_of_type(selected_type, parent_step)
+        else:
+            # User cancelled, don't add step
+            pass
+
+    def create_step_of_type(self, step_type, parent_step):
+        """Create a step of the specified type"""
+        new_step = None
+
+        if step_type == DialogueStepType.NPC_SPEECH:
+            new_step = DialogueStep(
+                id=f"step_{self.next_step_id}",
+                type=DialogueStepType.NPC_SPEECH,
+                speaker="NPC",
+                text="What would you like to say?"
+            )
+        elif step_type == DialogueStepType.PLAYER_CHOICE:
             new_step = DialogueStep(
                 id=f"step_{self.next_step_id}",
                 type=DialogueStepType.PLAYER_CHOICE,
-                text="What does the player say?",
+                text="What do you want to do?",
                 choices=[
-                    {"text": "Continue conversation"},
+                    {"text": "Continue"},
                     {"text": "Ask something else"}
                 ]
             )
-        elif parent_step.type == DialogueStepType.PLAYER_CHOICE:
-            # Add NPC response after player choice
+        elif step_type == DialogueStepType.NPC_RESPONSE:
             new_step = DialogueStep(
                 id=f"step_{self.next_step_id}",
                 type=DialogueStepType.NPC_RESPONSE,
                 speaker="NPC",
                 text="I understand. Let me help you with that."
             )
-        elif parent_step.type == DialogueStepType.NPC_RESPONSE:
-            # Add player choice again to continue conversation
+        elif step_type == DialogueStepType.END:
             new_step = DialogueStep(
                 id=f"step_{self.next_step_id}",
-                type=DialogueStepType.PLAYER_CHOICE,
-                text="What would you like to do next?",
-                choices=[
-                    {"text": "Tell me more"},
-                    {"text": "Goodbye"}
-                ]
+                type=DialogueStepType.END
             )
         else:
-            # Add NPC speech as default
+            # Default to NPC speech
             new_step = DialogueStep(
                 id=f"step_{self.next_step_id}",
                 type=DialogueStepType.NPC_SPEECH,
@@ -663,11 +790,11 @@ class SimpleDialogueBuilder(QWidget):
                 text="Hello!"
             )
 
-        self.add_step(new_step)
-        parent_step.next_step_id = new_step.id
-
-        self.update_tree()
-        self.rebuild_steps_display()
+        if new_step:
+            self.add_step(new_step)
+            parent_step.next_step_id = new_step.id
+            self.update_tree()
+            self.rebuild_steps_display()
 
     def validate_dialogue(self):
         """Validate the dialogue"""
