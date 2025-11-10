@@ -42,23 +42,28 @@ A comprehensive modding toolkit and documentation project for SpellForce: The Or
 
 ### Phase 3: Quest Creator Development (Recently Completed - November 2025)
 
-**Status**: ✅ **DIALOGUE SYSTEM COMPLETE**
+**Status**: ✅ **DIALOGUE SYSTEM COMPLETE - WITH INTERACTIVE FLOW CHART**
 
-The Quest Creator's dialogue system has been fully implemented with major user experience improvements.
+The Quest Creator's dialogue system has been fully implemented with revolutionary flow chart visualization and interactive connection drawing capabilities.
 
 #### Key Achievements:
-- ✅ **Step-by-Step Guided Interface**: Replaced complex node-based editing with intuitive top-down tree view
-- ✅ **Choice-to-Response Mapping**: Visual system showing which player choices lead to which NPC responses
+- ✅ **Flow Chart Visualization**: Replaced tree view with intuitive color-coded flow chart showing dialogue structure
+- ✅ **Interactive Connection Drawing**: Click-and-drag functionality to create connections between dialogue nodes
+- ✅ **Vibrant Color System**: High-contrast colors with dark background for excellent visibility
+- ✅ **Smart Branching Layout**: Automatic hierarchical positioning that clearly shows player choice branches
 - ✅ **Enhanced Step Types**: Including new PLAYER_SPEECH type for single-option player dialogue
-- ✅ **Visual Connection Indicators**: Green/red borders showing connection status between choices and responses
-- ✅ **Clean UI Design**: Fixed contrast issues, removed excessive colors, improved readability
+- ✅ **Real-time Connection Feedback**: Yellow preview lines and success messages for connection creation
+- ✅ **Connection Status Indicators**: Visual feedback showing which choices are connected to responses
+- ✅ **Clean UI Design**: Professional appearance with optimized color contrast
 - ✅ **Single Launcher System**: Cleaned up multiple confusing launch scripts to single entry point
 - ✅ **Error Handling**: Fixed QLabel deletion issues and improved stability
 
 #### Technical Implementation:
 - **File**: `src/TirganachReloaded/cff_editor/widgets/simple_dialogue_builder.py`
-- **Architecture**: Enhanced data structure with choice-specific response mapping via `next_step_id`
-- **UI Framework**: PySide6 with improved signal/slot patterns and widget lifecycle management
+- **Architecture**: Interactive flow chart with mouse event handling and automatic layout algorithms
+- **UI Framework**: PySide6 graphics framework with QGraphicsView/QGraphicsScene
+- **Connection Drawing**: Mouse-based interaction with temporary preview lines and smart data structure updates
+- **Color System**: Vibrant RGB colors with dark blue background for optimal contrast
 - **Launch System**: `quest_creator.py` with uv virtual environment support
 
 #### User Features:

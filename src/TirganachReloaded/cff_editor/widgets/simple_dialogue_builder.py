@@ -12,6 +12,7 @@ A user-friendly, step-by-step dialogue creation tool with:
 
 import sys
 import json
+import math
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, asdict
 from enum import Enum
@@ -21,10 +22,14 @@ from PySide6.QtWidgets import (
     QPushButton, QLabel, QGroupBox, QFormLayout, QScrollArea,
     QFrame, QMessageBox, QComboBox, QSplitter, QTreeWidget,
     QTreeWidgetItem, QCheckBox, QRadioButton, QButtonGroup,
-    QDialog, QDialogButtonBox, QButtonGroup
+    QDialog, QDialogButtonBox, QButtonGroup, QGraphicsView,
+    QGraphicsScene, QGraphicsItem, QGraphicsEllipseItem,
+    QGraphicsRectItem, QGraphicsTextItem, QGraphicsLineItem,
+    QGraphicsPolygonItem, QSizePolicy, QMenu
 )
-from PySide6.QtCore import Qt, Signal
-from PySide6.QtGui import QFont, QPixmap
+from PySide6.QtCore import Qt, Signal, QRectF, QPointF, QTimer
+from PySide6.QtWidgets import QStyle
+from PySide6.QtGui import QFont, QPixmap, QPen, QBrush, QColor, QPainter, QPolygonF
 
 try:
     from TirganachReloaded.cff_editor.logging_config import get_logger
@@ -170,6 +175,461 @@ class StepTypeSelectionDialog(QDialog):
                 if step_type.name == self.selected_type:
                     return step_type
         return DialogueStepType.NPC_SPEECH  # Default
+
+
+class FlowChartNode(QGraphicsRectItem):
+    """A single node in the flow chart representing a dialogue step"""
+
+    def __init__(self, step, x=0, y=0, width=200, height=80):
+        super().__init__(0, 0, width, height)
+        self.step = step
+        self.setPos(x, y)
+        self.setFlag(QGraphicsItem.ItemIsSelectable, True)
+        self.setFlag(QGraphicsItem.ItemIsMovable, True)
+
+        # Set vibrant colors based on step type (better contrast with dark background)
+        self.colors = {
+            DialogueStepType.START: "#00ff88",      # Bright Green
+            DialogueStepType.NPC_SPEECH: "#4488ff", # Bright Blue
+            DialogueStepType.PLAYER_CHOICE: "#ff44ff", # Bright Magenta
+            DialogueStepType.PLAYER_SPEECH: "#44ffff", # Bright Cyan
+            DialogueStepType.NPC_RESPONSE: "#ffaa44", # Bright Orange
+            DialogueStepType.END: "#ff4444"          # Bright Red
+        }
+
+        self.color = QColor(self.colors.get(step.type, "#aaaaaa"))
+        self.selected_color = QColor("#ffffff")  # White for selection
+
+        # Create text item
+        self.text_item = QGraphicsTextItem(self)
+        self.update_text()
+
+    def update_text(self):
+        """Update the text displayed in the node"""
+        type_names = {
+            DialogueStepType.START: "START",
+            DialogueStepType.NPC_SPEECH: "NPC",
+            DialogueStepType.PLAYER_CHOICE: "CHOICE",
+            DialogueStepType.PLAYER_SPEECH: "SPEAK",
+            DialogueStepType.NPC_RESPONSE: "RESPONSE",
+            DialogueStepType.END: "END"
+        }
+
+        type_name = type_names.get(self.step.type, "STEP")
+
+        # Create display text with connection status
+        if self.step.type == DialogueStepType.NPC_SPEECH or self.step.type == DialogueStepType.NPC_RESPONSE:
+            display_text = f"{type_name}\n{self.step.speaker}: {self.step.text[:30]}..."
+        elif self.step.type == DialogueStepType.PLAYER_CHOICE:
+            connected_choices = sum(1 for choice in self.step.choices if choice.get('next_step_id'))
+            total_choices = len(self.step.choices)
+            if connected_choices < total_choices:
+                display_text = f"{type_name}\n{connected_choices}/{total_choices} connected"
+            else:
+                display_text = f"{type_name}\n{total_choices} options"
+        elif self.step.type == DialogueStepType.PLAYER_SPEECH:
+            display_text = f"{type_name}\n{self.step.text[:30]}..."
+        else:
+            display_text = type_name
+
+        self.text_item.setPlainText(display_text)
+        self.text_item.setDefaultTextColor(Qt.black)  # Black text on bright colored nodes
+
+        # Center text
+        text_rect = self.text_item.boundingRect()
+        self.text_item.setPos(
+            (self.rect().width() - text_rect.width()) / 2,
+            (self.rect().height() - text_rect.height()) / 2
+        )
+
+    def paint(self, painter, option, widget):
+        """Paint the node"""
+        # Set brush based on selection
+        if option.state & QStyle.State_Selected:
+            painter.setBrush(QBrush(self.selected_color))
+        else:
+            painter.setBrush(QBrush(self.color))
+
+        # Draw rounded rectangle
+        painter.setPen(QPen(Qt.black, 2))
+        painter.drawRoundedRect(self.rect(), 10, 10)
+
+    def get_connection_point(self, direction="bottom"):
+        """Get connection point position"""
+        rect = self.rect()
+        if direction == "bottom":
+            return self.pos() + QPointF(rect.width() / 2, rect.height())
+        elif direction == "top":
+            return self.pos() + QPointF(rect.width() / 2, 0)
+        elif direction == "left":
+            return self.pos() + QPointF(0, rect.height() / 2)
+        elif direction == "right":
+            return self.pos() + QPointF(rect.width(), rect.height() / 2)
+        return self.pos() + QPointF(rect.width() / 2, rect.height() / 2)
+
+
+class FlowChartConnection(QGraphicsLineItem):
+    """A connection line between two nodes with choice branching support"""
+
+    def __init__(self, start_node, end_node, choice_text="", choice_index=None):
+        super().__init__()
+        self.start_node = start_node
+        self.end_node = end_node
+        self.choice_text = choice_text
+        self.choice_index = choice_index
+
+        # Vibrant, high-contrast colors for different choice branches
+        branch_colors = [
+            QColor("#FF4444"),  # Bright Red
+            QColor("#4444FF"),  # Bright Blue
+            QColor("#44FF44"),  # Bright Green
+            QColor("#FFAA00"),  # Bright Orange/Yellow
+            QColor("#FF44FF"),  # Bright Magenta
+            QColor("#00FFFF"),  # Cyan
+            QColor("#FF8844")   # Orange
+        ]
+        self.color = branch_colors[choice_index % len(branch_colors)] if choice_index is not None else QColor("#888888")
+
+        self.setPen(QPen(self.color, 4, Qt.SolidLine))
+        self.setZValue(-1)  # Draw behind nodes
+
+        # Create arrow
+        self.arrow = QGraphicsPolygonItem(self)
+        self.arrow.setBrush(QBrush(self.color))
+
+        # Create choice label if provided - no white background, just outline text
+        self.label = QGraphicsTextItem(self)
+        if choice_text:
+            self.label.setPlainText(choice_text)
+            self.label.setDefaultTextColor(Qt.white)  # White text for better contrast
+            self.label.setFont(QFont("Arial", 10, QFont.Bold))
+
+            # Add outline effect for better visibility
+            outline_effect = self.create_text_outline()
+            self.label.setGraphicsEffect(outline_effect)
+
+        self.update_position()
+
+    def create_text_outline(self):
+        """Create a text outline effect for better visibility"""
+        from PySide6.QtWidgets import QGraphicsDropShadowEffect
+
+        shadow = QGraphicsDropShadowEffect()
+        shadow.setColor(QColor(0, 0, 0, 200))  # Semi-transparent black
+        shadow.setOffset(1, 1)
+        shadow.setBlurRadius(2)
+        return shadow
+
+    def update_position(self):
+        """Update the line position based on node positions"""
+        start_point = self.start_node.get_connection_point("bottom")
+        end_point = self.end_node.get_connection_point("top")
+
+        self.setLine(start_point.x(), start_point.y(), end_point.x(), end_point.y())
+
+        # Update arrow
+        self.update_arrow(start_point, end_point)
+
+        # Update label position
+        if self.choice_text:
+            mid_point = QPointF((start_point.x() + end_point.x()) / 2,
+                              (start_point.y() + end_point.y()) / 2)
+
+            # Position label above the line
+            label_width = self.label.boundingRect().width()
+            label_height = self.label.boundingRect().height()
+
+            self.label.setPos(mid_point.x() - label_width / 2, mid_point.y() - label_height - 15)
+
+    def update_arrow(self, start_point, end_point):
+        """Update arrow head"""
+        # Calculate arrow direction
+        dx = end_point.x() - start_point.x()
+        dy = end_point.y() - start_point.y()
+        angle = math.atan2(dy, dx)
+
+        # Arrow size
+        arrow_length = 10
+        arrow_angle = math.pi / 6
+
+        # Calculate arrow points
+        arrow_x1 = end_point.x() - arrow_length * math.cos(angle - arrow_angle)
+        arrow_y1 = end_point.y() - arrow_length * math.sin(angle - arrow_angle)
+        arrow_x2 = end_point.x() - arrow_length * math.cos(angle + arrow_angle)
+        arrow_y2 = end_point.y() - arrow_length * math.sin(angle + arrow_angle)
+
+        # Create arrow polygon
+        arrow_polygon = QPolygonF([
+            QPointF(end_point.x(), end_point.y()),
+            QPointF(arrow_x1, arrow_y1),
+            QPointF(arrow_x2, arrow_y2)
+        ])
+
+        self.arrow.setPolygon(arrow_polygon)
+
+
+class FlowChartView(QGraphicsView):
+    """Flow chart view for visualizing dialogue structure with interactive connection drawing"""
+
+    node_selected = Signal(str)  # step_id
+    connection_created = Signal(str, str)  # start_step_id, end_step_id
+
+    def __init__(self):
+        super().__init__()
+        self.scene = QGraphicsScene()
+        self.setScene(self.scene)
+
+        # Set a dark background for better contrast with colorful branches
+        self.scene.setBackgroundBrush(QBrush(QColor("#2b3e50")))
+
+        self.nodes = {}
+        self.connections = []
+
+        # Interactive connection drawing state
+        self.is_drawing_connection = False
+        self.connection_start_node = None
+        self.temp_connection_line = None
+        self.connection_mode = False  # Toggle for connection mode
+
+        # Set view properties
+        self.setRenderHint(QPainter.Antialiasing)
+        self.setDragMode(QGraphicsView.RubberBandDrag)
+        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+        # Enable selection
+        self.scene.selectionChanged.connect(self.on_selection_changed)
+
+    def clear_flow_chart(self):
+        """Clear all items from the flow chart"""
+        self.scene.clear()
+        self.nodes.clear()
+        self.connections.clear()
+
+    def add_node(self, step, x=0, y=0):
+        """Add a node to the flow chart"""
+        node = FlowChartNode(step, x, y)
+        self.scene.addItem(node)
+        self.nodes[step.id] = node
+        return node
+
+    def add_connection(self, start_step_id, end_step_id, choice_text="", choice_index=None):
+        """Add a connection between two nodes with optional choice branching"""
+        if start_step_id in self.nodes and end_step_id in self.nodes:
+            start_node = self.nodes[start_step_id]
+            end_node = self.nodes[end_step_id]
+
+            connection = FlowChartConnection(start_node, end_node, choice_text, choice_index)
+            self.scene.addItem(connection)
+            self.connections.append(connection)
+
+            # Note: Auto-layout is now handled by the branching layout system
+            connection.update_position()
+
+    def update_flow_chart(self, steps):
+        """Update the entire flow chart based on steps with proper branching layout"""
+        self.clear_flow_chart()
+
+        if not steps:
+            return
+
+        # Create a hierarchical layout for branching
+        self.create_branching_layout(steps)
+
+        # Add connections based on dialogue flow
+        for step in steps.values():
+            if step.next_step_id and step.next_step_id in steps:
+                # Only add linear connection if there are no choices branching from this step
+                if not step.choices or not any(c.get('next_step_id') for c in step.choices):
+                    self.add_connection(step.id, step.next_step_id)
+
+            # Connect choices to their responses with clear branching
+            if step.choices:
+                for i, choice in enumerate(step.choices):
+                    next_step_id = choice.get('next_step_id')
+                    if next_step_id and next_step_id in steps:
+                        choice_text = choice.get('text', f'Option {i+1}')
+                        self.add_connection(step.id, next_step_id, choice_text, choice_index=i)
+
+        # Fit all items in view
+        self.fitInView(self.scene.itemsBoundingRect(), Qt.KeepAspectRatio)
+
+    def create_branching_layout(self, steps):
+        """Create a hierarchical layout that shows branching clearly"""
+        if not steps:
+            return
+
+        # Find the start step
+        start_step = None
+        for step in steps.values():
+            if step.type == DialogueStepType.START:
+                start_step = step
+                break
+
+        if not start_step:
+            return
+
+        # Position nodes hierarchically
+        level_width = 250  # Horizontal spacing
+        level_height = 180  # Vertical spacing
+        start_x = 100
+        start_y = 50
+
+        # Track positioned nodes and their levels
+        positioned = {}
+        levels = {}  # step_id -> (level, position_in_level)
+
+        # Position start step at top center
+        self.add_node(start_step, start_x, start_y)
+        positioned[start_step.id] = (start_x, start_y)
+        levels[start_step.id] = (0, 0)
+
+        # Build the tree structure and position nodes
+        self._position_children(start_step, steps, positioned, levels, start_x, start_y, level_width, level_height)
+
+        # Position any remaining unpositioned nodes (orphans)
+        for step in steps.values():
+            if step.id not in positioned:
+                # Position orphan nodes to the right
+                orphan_y = start_y + len(positioned) * 100
+                self.add_node(step, start_x + 800, orphan_y)
+                positioned[step.id] = (start_x + 800, orphan_y)
+
+    def _position_children(self, parent_step, steps, positioned, levels, parent_x, parent_y, level_width, level_height):
+        """Recursively position child nodes with proper branching"""
+        if parent_step.type == DialogueStepType.PLAYER_CHOICE and parent_step.choices:
+            # Branch out for each choice
+            num_choices = len(parent_step.choices)
+            total_width = (num_choices - 1) * level_width
+            start_x = parent_x - total_width // 2
+
+            for i, choice in enumerate(parent_step.choices):
+                next_step_id = choice.get('next_step_id')
+                if next_step_id and next_step_id in steps:
+                    child_step = steps[next_step_id]
+                    child_x = start_x + i * level_width
+                    child_y = parent_y + level_height
+
+                    if child_step.id not in positioned:
+                        self.add_node(child_step, child_x, child_y)
+                        positioned[child_step.id] = (child_x, child_y)
+                        levels[child_step.id] = (levels[parent_step.id][0] + 1, i)
+
+                        # Continue positioning children
+                        self._position_children(child_step, steps, positioned, levels, child_x, child_y, level_width, level_height)
+
+        elif parent_step.next_step_id and parent_step.next_step_id in steps:
+            # Linear connection (single child)
+            child_step = steps[parent_step.next_step_id]
+            child_x = parent_x
+            child_y = parent_y + level_height
+
+            if child_step.id not in positioned:
+                self.add_node(child_step, child_x, child_y)
+                positioned[child_step.id] = (child_x, child_y)
+                levels[child_step.id] = (levels[parent_step.id][0] + 1, 0)
+
+                # Continue positioning children
+                self._position_children(child_step, steps, positioned, levels, child_x, child_y, level_width, level_height)
+
+    def mousePressEvent(self, event):
+        """Handle mouse press for interactive connection drawing"""
+        if event.button() == Qt.LeftButton and self.connection_mode:
+            # Get the item under the mouse
+            pos = self.mapToScene(event.pos())
+            item = self.scene.itemAt(pos, self.transform())
+
+            if isinstance(item, FlowChartNode):
+                if not self.is_drawing_connection:
+                    # Start drawing a connection
+                    self.is_drawing_connection = True
+                    self.connection_start_node = item
+
+                    # Create a temporary line for visual feedback
+                    start_point = item.get_connection_point("bottom")
+                    self.temp_connection_line = QGraphicsLineItem(
+                        start_point.x(), start_point.y(),
+                        start_point.x(), start_point.y()
+                    )
+                    self.temp_connection_line.setPen(QPen(QColor("#ffff00"), 3, Qt.DashLine))
+                    self.scene.addItem(self.temp_connection_line)
+                else:
+                    # Finish drawing a connection
+                    if item != self.connection_start_node:
+                        self.finish_connection(item)
+                    else:
+                        # Cancel if clicking the same node
+                        self.cancel_connection()
+            else:
+                # Clicked on empty space - cancel connection drawing
+                self.cancel_connection()
+        else:
+            super().mousePressEvent(event)
+
+    def mouseMoveEvent(self, event):
+        """Handle mouse move for connection drawing preview"""
+        if self.is_drawing_connection and self.temp_connection_line:
+            pos = self.mapToScene(event.pos())
+            start_point = self.connection_start_node.get_connection_point("bottom")
+
+            # Update the temporary line
+            self.temp_connection_line.setLine(
+                start_point.x(), start_point.y(),
+                pos.x(), pos.y()
+            )
+        else:
+            super().mouseMoveEvent(event)
+
+    def mouseReleaseEvent(self, event):
+        """Handle mouse release for connection drawing"""
+        if event.button() == Qt.LeftButton and self.is_drawing_connection:
+            pos = self.mapToScene(event.pos())
+            item = self.scene.itemAt(pos, self.transform())
+
+            if isinstance(item, FlowChartNode) and item != self.connection_start_node:
+                self.finish_connection(item)
+            else:
+                self.cancel_connection()
+        else:
+            super().mouseReleaseEvent(event)
+
+    def finish_connection(self, end_node):
+        """Finish drawing a connection between two nodes"""
+        if self.connection_start_node and end_node:
+            # Emit signal to create the connection
+            self.connection_created.emit(self.connection_start_node.step.id, end_node.step.id)
+
+        self.cancel_connection()
+
+    def cancel_connection(self):
+        """Cancel the current connection drawing"""
+        self.is_drawing_connection = False
+        self.connection_start_node = None
+
+        if self.temp_connection_line:
+            self.scene.removeItem(self.temp_connection_line)
+            self.temp_connection_line = None
+
+    def toggle_connection_mode(self):
+        """Toggle connection drawing mode"""
+        self.connection_mode = not self.connection_mode
+        if self.connection_mode:
+            self.setDragMode(QGraphicsView.NoDrag)
+            self.setCursor(Qt.CrossCursor)
+        else:
+            self.setDragMode(QGraphicsView.RubberBandDrag)
+            self.setCursor(Qt.ArrowCursor)
+            self.cancel_connection()
+
+        return self.connection_mode
+
+    def on_selection_changed(self):
+        """Handle node selection"""
+        selected_items = self.scene.selectedItems()
+        if selected_items:
+            for item in selected_items:
+                if isinstance(item, FlowChartNode):
+                    self.node_selected.emit(item.step.id)
+                    break
 
 
 class DialogueStepWidget(QFrame):
@@ -577,6 +1037,7 @@ class SimpleDialogueBuilder(QWidget):
         self.next_step_id = 1
         self.selected_step_id = None
         self.current_step_widget = None
+        self._updating_selection = False  # Prevent recursive selection updates
         self.setup_ui()
         self.create_initial_dialogue()
 
@@ -585,22 +1046,67 @@ class SimpleDialogueBuilder(QWidget):
         main_layout = QHBoxLayout()
         self.setLayout(main_layout)
 
-        # Left panel - Tree view
+        # Left panel - Flow chart view
         left_panel = QWidget()
         left_layout = QVBoxLayout()
         left_panel.setLayout(left_layout)
-        left_panel.setMaximumWidth(300)
+        left_panel.setMinimumWidth(400)
+        left_panel.setMaximumWidth(600)
 
-        # Tree title
-        title_label = QLabel("Dialogue Tree")
-        title_label.setStyleSheet("font-size: 16px; font-weight: bold; margin-bottom: 10px;")
+        # Flow chart title
+        title_label = QLabel("Dialogue Flow Chart")
+        title_label.setStyleSheet("font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #2c3e50;")
         left_layout.addWidget(title_label)
 
-        # Tree widget
-        self.tree_widget = QTreeWidget()
-        self.tree_widget.setHeaderHidden(True)
-        self.tree_widget.itemClicked.connect(self.on_tree_item_clicked)
-        left_layout.addWidget(self.tree_widget)
+        # Instructions and controls
+        instructions_widget = QWidget()
+        instructions_layout = QVBoxLayout()
+        instructions_widget.setLayout(instructions_layout)
+
+        instructions = QLabel("📊 Click nodes to select • See colored branches for player choices • Connection status shows in choice nodes")
+        instructions.setStyleSheet("font-size: 11px; color: #7f8c8d; margin-bottom: 10px; padding: 8px; background-color: #f8f9fa; border-radius: 4px; border-left: 4px solid #3498db;")
+        instructions.setWordWrap(True)
+        instructions_layout.addWidget(instructions)
+
+        # Connection mode toggle
+        connection_controls = QHBoxLayout()
+
+        self.connection_mode_btn = QPushButton("🔗 Enable Connection Mode")
+        self.connection_mode_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #3498db;
+                color: white;
+                padding: 8px 16px;
+                border-radius: 5px;
+                font-weight: bold;
+                border: 1px solid #2980b9;
+            }
+            QPushButton:hover {
+                background-color: #2980b9;
+            }
+            QPushButton:checked {
+                background-color: #27ae60;
+                border: 1px solid #229954;
+            }
+        """)
+        self.connection_mode_btn.setCheckable(True)
+        self.connection_mode_btn.clicked.connect(self.toggle_connection_mode)
+        connection_controls.addWidget(self.connection_mode_btn)
+
+        connection_help = QLabel("Click and drag between nodes to create connections")
+        connection_help.setStyleSheet("font-size: 10px; color: #95a5a6; font-style: italic;")
+        connection_controls.addWidget(connection_help)
+        connection_controls.addStretch()
+
+        instructions_layout.addLayout(connection_controls)
+        left_layout.addWidget(instructions_widget)
+
+        # Flow chart view
+        self.flow_chart = FlowChartView()
+        self.flow_chart.node_selected.connect(self.on_flow_chart_node_selected)
+        self.flow_chart.connection_created.connect(self.on_connection_created)
+        self.flow_chart.setMinimumHeight(300)
+        left_layout.addWidget(self.flow_chart)
 
         main_layout.addWidget(left_panel)
 
@@ -738,7 +1244,7 @@ class SimpleDialogueBuilder(QWidget):
         self.add_step(choice_step)
         npc_step.next_step_id = choice_step.id
 
-        self.update_tree()
+        self.update_flow_chart()
         # Select the first NPC step by default
         self.select_step("step_2")
 
@@ -752,7 +1258,7 @@ class SimpleDialogueBuilder(QWidget):
         """Remove a dialogue step"""
         if step_id in self.steps and self.steps[step_id].type != DialogueStepType.START:
             del self.steps[step_id]
-            self.update_tree()
+            self.update_flow_chart()
 
             # If we deleted the selected step, select another one
             if self.selected_step_id == step_id:
@@ -778,7 +1284,7 @@ class SimpleDialogueBuilder(QWidget):
 
     def select_step(self, step_id):
         """Select a step for editing"""
-        if step_id not in self.steps:
+        if step_id not in self.steps or self._updating_selection:
             return
 
         self.selected_step_id = step_id
@@ -818,25 +1324,38 @@ class SimpleDialogueBuilder(QWidget):
         can_add_next = step.type != DialogueStepType.END
         self.add_next_btn.setEnabled(can_add_next)
 
-        # Update tree selection
-        self.update_tree_selection(step_id)
+        # Update flow chart selection (without triggering recursion)
+        self._updating_selection = True
+        self.update_flow_chart_selection(step_id)
+        self._updating_selection = False
+
+    def update_flow_chart_selection(self, selected_step_id):
+        """Update flow chart selection to highlight selected step"""
+        if hasattr(self, 'flow_chart') and selected_step_id in self.flow_chart.nodes:
+            # Clear all selections
+            for node in self.flow_chart.nodes.values():
+                node.setSelected(False)
+
+            # Select the target node
+            self.flow_chart.nodes[selected_step_id].setSelected(True)
 
     def update_tree_selection(self, selected_step_id):
-        """Update tree selection to highlight selected step"""
-        # Clear current selection
-        self.tree_widget.clearSelection()
+        """Update tree selection to highlight selected step (legacy - kept for compatibility)"""
+        if hasattr(self, 'tree_widget'):
+            # Clear current selection
+            self.tree_widget.clearSelection()
 
-        # Find and select the tree item
-        def find_item(items):
-            for item in items:
-                if item.data(0, Qt.UserRole) == selected_step_id:
-                    item.setSelected(True)
-                    return True
-                if find_item([item.child(i) for i in range(item.childCount())]):
-                    return True
-            return False
+            # Find and select the tree item
+            def find_item(items):
+                for item in items:
+                    if item.data(0, Qt.UserRole) == selected_step_id:
+                        item.setSelected(True)
+                        return True
+                    if find_item([item.child(i) for i in range(item.childCount())]):
+                        return True
+                return False
 
-        # Search top level items
+            # Search top level items
         find_item([self.tree_widget.topLevelItem(i) for i in range(self.tree_widget.topLevelItemCount())])
 
     def add_next_step_for_selected(self):
@@ -878,35 +1397,41 @@ class SimpleDialogueBuilder(QWidget):
 
         return order
 
+    def update_flow_chart(self):
+        """Update the flow chart view"""
+        if hasattr(self, 'flow_chart'):
+            self.flow_chart.update_flow_chart(self.steps)
+
     def update_tree(self):
-        """Update the tree view"""
-        self.tree_widget.clear()
+        """Update the tree view (legacy - kept for compatibility)"""
+        if hasattr(self, 'tree_widget'):
+            self.tree_widget.clear()
 
-        step_order = self.get_step_order()
-        parent_items = {}
+            step_order = self.get_step_order()
+            parent_items = {}
 
-        for step_id in step_order:
-            step = self.steps[step_id]
+            for step_id in step_order:
+                step = self.steps[step_id]
 
-            # Create tree item
-            type_names = {
-                DialogueStepType.START: "START",
-                DialogueStepType.NPC_SPEECH: step.speaker or "NPC",
-                DialogueStepType.PLAYER_CHOICE: "CHOICE",
-                DialogueStepType.NPC_RESPONSE: step.speaker or "NPC",
-                DialogueStepType.END: "END"
-            }
+                # Create tree item
+                type_names = {
+                    DialogueStepType.START: "START",
+                    DialogueStepType.NPC_SPEECH: step.speaker or "NPC",
+                    DialogueStepType.PLAYER_CHOICE: "CHOICE",
+                    DialogueStepType.NPC_RESPONSE: step.speaker or "NPC",
+                    DialogueStepType.END: "END"
+                }
 
-            name = type_names.get(step.type, "STEP")
-            if step.type == DialogueStepType.PLAYER_CHOICE:
-                name += f" ({len(step.choices)} options)"
+                name = type_names.get(step.type, "STEP")
+                if step.type == DialogueStepType.PLAYER_CHOICE:
+                    name += f" ({len(step.choices)} options)"
 
-            item = QTreeWidgetItem([name])
-            item.setData(0, Qt.UserRole, step_id)
+                item = QTreeWidgetItem([name])
+                item.setData(0, Qt.UserRole, step_id)
 
-            # Add to tree
-            if step_id == "step_1":  # Start step
-                self.tree_widget.addTopLevelItem(item)
+                # Add to tree
+                if step_id == "step_1":  # Start step
+                    self.tree_widget.addTopLevelItem(item)
                 parent_items[step_id] = item
             else:
                 # Find parent
@@ -928,8 +1453,87 @@ class SimpleDialogueBuilder(QWidget):
                 return step.id
         return None
 
+    def toggle_connection_mode(self):
+        """Toggle connection drawing mode"""
+        is_enabled = self.flow_chart.toggle_connection_mode()
+        if is_enabled:
+            self.connection_mode_btn.setText("🔗 Connection Mode ON")
+            self.connection_mode_btn.setChecked(True)
+        else:
+            self.connection_mode_btn.setText("🔗 Enable Connection Mode")
+            self.connection_mode_btn.setChecked(False)
+
+    def on_connection_created(self, start_step_id, end_step_id):
+        """Handle connection created by user"""
+        if start_step_id in self.steps and end_step_id in self.steps:
+            start_step = self.steps[start_step_id]
+            end_step = self.steps[end_step_id]
+
+            # Check if this is a player choice step
+            if start_step.type == DialogueStepType.PLAYER_CHOICE:
+                # Find an available choice slot or create a new one
+                available_choice = None
+                for choice in start_step.choices:
+                    if not choice.get('next_step_id'):
+                        available_choice = choice
+                        break
+
+                if not available_choice:
+                    # Create a new choice
+                    new_choice = {'text': f'Choice {len(start_step.choices) + 1}', 'next_step_id': ''}
+                    start_step.choices.append(new_choice)
+                    available_choice = new_choice
+
+                # Set the connection
+                available_choice['next_step_id'] = end_step_id
+
+                # Update the step widget if it's currently selected
+                if self.selected_step_id == start_step_id and self.current_step_widget:
+                    self.current_step_widget.rebuild_ui()
+
+            elif start_step.type != DialogueStepType.PLAYER_CHOICE:
+                # For non-choice steps, set the linear next_step
+                start_step.next_step_id = end_step_id
+
+            # Update the flow chart and emit change signal
+            self.update_flow_chart()
+            self.dialogue_changed.emit()
+
+            # Show success feedback
+            self.show_connection_feedback(f"Connected: {start_step.id} → {end_step_id}")
+
+    def show_connection_feedback(self, message):
+        """Show temporary feedback for connection creation"""
+        feedback_label = QLabel(message)
+        feedback_label.setStyleSheet("""
+            QLabel {
+                background-color: #27ae60;
+                color: white;
+                padding: 8px 16px;
+                border-radius: 4px;
+                font-weight: bold;
+            }
+        """)
+        feedback_label.setAlignment(Qt.AlignCenter)
+
+        # Add to the flow chart scene temporarily
+        self.flow_chart.scene.addWidget(feedback_label)
+
+        # Position at center of view
+        view_center = self.flow_chart.mapToScene(self.flow_chart.rect().center())
+        feedback_label.setPos(view_center.x() - feedback_label.width()//2,
+                              view_center.y() - feedback_label.height()//2)
+
+        # Remove after 2 seconds
+        QTimer.singleShot(2000, lambda: self.flow_chart.scene.removeItem(feedback_label) if feedback_label.scene() else None)
+
+    def on_flow_chart_node_selected(self, step_id):
+        """Handle flow chart node selection"""
+        if step_id and step_id in self.steps and not self._updating_selection:
+            self.select_step(step_id)
+
     def on_tree_item_clicked(self, item, column):
-        """Handle tree item click"""
+        """Handle tree item click (legacy - kept for compatibility)"""
         step_id = item.data(0, Qt.UserRole)
         if step_id and step_id in self.steps:
             self.select_step(step_id)
@@ -943,7 +1547,7 @@ class SimpleDialogueBuilder(QWidget):
         elif action_type == "delete":
             self.remove_step(step_id)
         elif action_type == "update":
-            self.update_tree()
+            self.update_flow_chart()
             self.dialogue_changed.emit()
 
     def add_next_step(self, parent_step_id):
@@ -1015,7 +1619,7 @@ class SimpleDialogueBuilder(QWidget):
         if new_step:
             self.add_step(new_step)
             parent_step.next_step_id = new_step.id
-            self.update_tree()
+            self.update_flow_chart()
             # Automatically select the newly created step
             self.select_step(new_step.id)
 
