@@ -910,13 +910,13 @@ class UnifiedQuestEditor(QMainWindow):
         self._setup_objectives_tab()
         self.quest_editor_tabs.addTab(self.objectives_widget, "Objectives")
 
-        # Tab 4: Visual Dialogue Editor
+        # Tab 4: Simple Guided Dialogue Editor
         try:
-            from visual_dialogue_widget import VisualDialogueWidget
-            self.visual_dialogue_widget = VisualDialogueWidget()
-            self.quest_editor_tabs.addTab(self.visual_dialogue_widget, "Dialogues (Visual)")
+            from simple_dialogue_builder import SimpleDialogueBuilder
+            self.simple_dialogue_widget = SimpleDialogueBuilder()
+            self.quest_editor_tabs.addTab(self.simple_dialogue_widget, "📝 Dialogue Builder")
         except ImportError as e:
-            print(f"Warning: Visual dialogue editor not available: {e}")
+            print(f"Warning: Simple dialogue builder not available: {e}")
             # Fallback dialogue editor
             self.dialogue_widget = self._create_simple_dialogue_editor()
             self.quest_editor_tabs.addTab(self.dialogue_widget, "Dialogues (Simple)")
