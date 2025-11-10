@@ -39,6 +39,7 @@ class DialogueStepType(Enum):
     START = "start"
     NPC_SPEECH = "npc_speech"
     PLAYER_CHOICE = "player_choice"
+    PLAYER_SPEECH = "player_speech"  # Single option player speech (looks like one option)
     NPC_RESPONSE = "npc_response"
     END = "end"
 
@@ -50,8 +51,8 @@ class DialogueStep:
     type: DialogueStepType
     speaker: str = ""
     text: str = ""
-    choices: List[Dict[str, str]] = None
-    next_step_id: str = ""
+    choices: List[Dict[str, str]] = None  # Each choice: {'text': 'Option text', 'next_step_id': 'target_step_id'}
+    next_step_id: str = ""  # For linear flow when no branching
 
     def __post_init__(self):
         if self.choices is None:
@@ -133,6 +134,7 @@ class StepTypeSelectionDialog(QDialog):
         elif self.current_step_type == DialogueStepType.NPC_SPEECH:
             return {
                 DialogueStepType.PLAYER_CHOICE: "Player chooses a response",
+                DialogueStepType.PLAYER_SPEECH: "Player says something (single option)",
                 DialogueStepType.NPC_RESPONSE: "NPC continues speaking",
                 DialogueStepType.END: "Conversation ends"
             }
@@ -197,6 +199,7 @@ class DialogueStepWidget(QFrame):
             DialogueStepType.START: "#2c3e50",  # Dark blue-gray
             DialogueStepType.NPC_SPEECH: "#34495e",  # Dark gray
             DialogueStepType.PLAYER_CHOICE: "#2c3e50",  # Dark blue-gray
+            DialogueStepType.PLAYER_SPEECH: "#16a085",  # Dark teal
             DialogueStepType.NPC_RESPONSE: "#34495e",  # Dark gray
             DialogueStepType.END: "#7f8c8d"  # Medium gray
         }
@@ -205,6 +208,7 @@ class DialogueStepWidget(QFrame):
             DialogueStepType.START: "START",
             DialogueStepType.NPC_SPEECH: "NPC SPEAKS",
             DialogueStepType.PLAYER_CHOICE: "PLAYER CHOICE",
+            DialogueStepType.PLAYER_SPEECH: "PLAYER SPEAKS",
             DialogueStepType.NPC_RESPONSE: "NPC RESPONSE",
             DialogueStepType.END: "END"
         }
@@ -242,6 +246,8 @@ class DialogueStepWidget(QFrame):
             self.setup_npc_speech_ui(layout)
         elif self.step.type == DialogueStepType.PLAYER_CHOICE:
             self.setup_player_choice_ui(layout)
+        elif self.step.type == DialogueStepType.PLAYER_SPEECH:
+            self.setup_player_speech_ui(layout)
         elif self.step.type == DialogueStepType.END:
             self.setup_end_ui(layout)
 
@@ -319,8 +325,8 @@ class DialogueStepWidget(QFrame):
             layout.addWidget(self.question_edit)
 
             # Choices section
-            choices_label = QLabel("📝 Player Options:")
-            choices_label.setStyleSheet("font-weight: bold; margin-top: 10px;")
+            choices_label = QLabel("📝 Player Options (each leads to different NPC response):")
+            choices_label.setStyleSheet("font-weight: bold; margin-top: 10px; color: #2c3e50;")
             layout.addWidget(choices_label)
 
             self.choices_widget = QWidget()
@@ -328,24 +334,72 @@ class DialogueStepWidget(QFrame):
             self.choices_widget.setLayout(self.choices_layout)
 
             self.choice_edits = []
+            self.choice_response_labels = []
             for i, choice in enumerate(self.step.choices):
-                choice_layout = QHBoxLayout()
+                # Choice group
+                choice_group = QGroupBox()
+                choice_group.setStyleSheet("""
+                    QGroupBox {
+                        border: 1px solid #bdc3c7;
+                        border-radius: 6px;
+                        margin-top: 6px;
+                        padding-top: 8px;
+                        background-color: #ffffff;
+                    }
+                    QGroupBox::title {
+                        subcontrol-origin: margin;
+                        left: 7px;
+                        padding: 0 5px 0 5px;
+                        color: #7f8c8d;
+                        font-weight: bold;
+                    }
+                """)
+                choice_group.setTitle(f"Choice {i+1}")
+                choice_layout = QVBoxLayout()
+                choice_group.setLayout(choice_layout)
 
+                # Choice text
                 choice_edit = QLineEdit(choice.get('text', ''))
                 choice_edit.setPlaceholderText(f"Option {i+1}...")
                 choice_edit.textChanged.connect(self.on_step_changed)
                 self.choice_edits.append(choice_edit)
+                choice_layout.addWidget(QLabel("Player option text:"))
+                choice_layout.addWidget(choice_edit)
 
-                if len(self.step.choices) > 2:  # Allow removal if more than 2 choices
-                    remove_btn = QPushButton("❌")
-                    remove_btn.setMaximumWidth(30)
-                    remove_btn.clicked.connect(lambda checked, idx=i: self.remove_choice(idx))
-                    choice_layout.addWidget(choice_edit)
-                    choice_layout.addWidget(remove_btn)
+                # Response mapping info
+                target_step_id = choice.get('next_step_id', '')
+                if target_step_id:
+                    response_label = QLabel(f"→ Leads to: {target_step_id}")
+                    response_label.setStyleSheet("color: #27ae60; font-style: italic; padding: 4px;")
+                    response_label.setWordWrap(True)
                 else:
-                    choice_layout.addWidget(choice_edit)
+                    response_label = QLabel("→ Not connected to any response yet")
+                    response_label.setStyleSheet("color: #e74c3c; font-style: italic; padding: 4px;")
+                    response_label.setWordWrap(True)
 
-                self.choices_layout.addLayout(choice_layout)
+                self.choice_response_labels.append(response_label)
+                choice_layout.addWidget(response_label)
+
+                # Remove button
+                if len(self.step.choices) > 2:  # Allow removal if more than 2 choices
+                    remove_btn = QPushButton("🗑️ Remove this choice")
+                    remove_btn.setStyleSheet("""
+                        QPushButton {
+                            background-color: #e74c3c;
+                            color: white;
+                            border: none;
+                            padding: 6px 12px;
+                            border-radius: 4px;
+                            font-weight: bold;
+                        }
+                        QPushButton:hover {
+                            background-color: #c0392b;
+                        }
+                    """)
+                    remove_btn.clicked.connect(lambda checked, idx=i: self.remove_choice(idx))
+                    choice_layout.addWidget(remove_btn)
+
+                self.choices_layout.addWidget(choice_group)
 
             layout.addWidget(self.choices_widget)
 
@@ -360,20 +414,86 @@ class DialogueStepWidget(QFrame):
                 question_label.setStyleSheet("font-weight: bold; color: #2c3e50; margin: 10px;")
                 layout.addWidget(question_label)
 
-            for choice in self.step.choices:
-                choice_label = QLabel(f"• {choice.get('text', 'No text')}")
-                choice_label.setStyleSheet("""
+            for i, choice in enumerate(self.step.choices):
+                choice_text = choice.get('text', 'No text')
+                target_step_id = choice.get('next_step_id', '')
+
+                if target_step_id:
+                    # Show choice with connection indicator
+                    choice_label = QLabel(f"• {choice_text} → Leads to response")
+                    choice_label.setStyleSheet("""
+                        QLabel {
+                            background-color: #ffffff;
+                            color: #2c3e50;
+                            padding: 8px 12px;
+                            border-radius: 4px;
+                            margin: 3px;
+                            border-left: 3px solid #27ae60;
+                            border: 1px solid #bdc3c7;
+                        }
+                    """)
+                else:
+                    # Show choice without connection
+                    choice_label = QLabel(f"• {choice_text}")
+                    choice_label.setStyleSheet("""
+                        QLabel {
+                            background-color: #ffffff;
+                            color: #2c3e50;
+                            padding: 8px 12px;
+                            border-radius: 4px;
+                            margin: 3px;
+                            border-left: 3px solid #e74c3c;
+                            border: 1px solid #bdc3c7;
+                        }
+                    """)
+
+                layout.addWidget(choice_label)
+
+    def setup_player_speech_ui(self, layout):
+        """Setup player speech UI (single option that looks like a speech)"""
+        if self.is_editable:
+            # Speech text label
+            speech_label = QLabel("💬 Player says:")
+            speech_label.setStyleSheet("font-weight: bold; margin-top: 10px; color: #16a085;")
+            layout.addWidget(speech_label)
+
+            # Single speech text edit
+            self.speech_edit = QTextEdit()
+            self.speech_edit.setPlaceholderText("What does the player say?")
+            self.speech_edit.setPlainText(self.step.text)
+            self.speech_edit.setMaximumHeight(80)
+            self.speech_edit.textChanged.connect(self.on_step_changed)
+            layout.addWidget(self.speech_edit)
+
+            # Ensure we have exactly one choice
+            if len(self.step.choices) == 0:
+                self.step.choices.append({'text': '', 'next_step_id': ''})
+            elif len(self.step.choices) > 1:
+                # Keep only the first choice
+                self.step.choices = [self.step.choices[0]]
+        else:
+            # Display mode - show as a single clear player speech option
+            speech_label = QLabel("💬 Player says:")
+            speech_label.setStyleSheet("font-weight: bold; margin: 10px; color: #16a085;")
+            layout.addWidget(speech_label)
+
+            # Show the speech text
+            if self.step.text:
+                speech_text_label = QLabel(self.step.text)
+                speech_text_label.setStyleSheet("""
                     QLabel {
                         background-color: #ffffff;
                         color: #2c3e50;
-                        padding: 8px 12px;
-                        border-radius: 4px;
-                        margin: 3px;
-                        border-left: 3px solid #34495e;
+                        padding: 12px 16px;
+                        border-radius: 8px;
+                        margin: 5px;
+                        border-left: 4px solid #16a085;
                         border: 1px solid #bdc3c7;
+                        font-style: italic;
                     }
                 """)
-                layout.addWidget(choice_label)
+                speech_text_label.setWordWrap(True)
+                layout.addWidget(speech_text_label)
 
     def setup_end_ui(self, layout):
         """Setup end dialogue UI"""
@@ -422,6 +542,8 @@ class DialogueStepWidget(QFrame):
                 self.step.text = self.text_edit.toPlainText()
             if hasattr(self, 'question_edit'):
                 self.step.text = self.question_edit.toPlainText()
+            if hasattr(self, 'speech_edit'):
+                self.step.text = self.speech_edit.toPlainText()
 
             # Update choices
             if hasattr(self, 'choice_edits'):
@@ -453,6 +575,8 @@ class SimpleDialogueBuilder(QWidget):
         super().__init__()
         self.steps = {}
         self.next_step_id = 1
+        self.selected_step_id = None
+        self.current_step_widget = None
         self.setup_ui()
         self.create_initial_dialogue()
 
@@ -480,58 +604,92 @@ class SimpleDialogueBuilder(QWidget):
 
         main_layout.addWidget(left_panel)
 
-        # Right panel - Dialogue builder
+        # Right panel - Selected step editor
         right_panel = QWidget()
         right_layout = QVBoxLayout()
         right_panel.setLayout(right_layout)
 
-        # Instructions
-        instructions = QLabel("""
-<b>How to Build Dialogue:</b><br>
-1. Start with NPC speech<br>
-2. Add player choices when needed<br>
-3. Create NPC responses for each choice<br>
-4. Continue until conversation ends<br>
-5. Click "Add Next Part" to extend dialogue
-        """)
-        instructions.setStyleSheet("""
+        # Top section with step info and controls
+        top_section = QWidget()
+        top_layout = QVBoxLayout()
+        top_section.setLayout(top_layout)
+
+        # Current step info
+        self.step_info_label = QLabel("No step selected")
+        self.step_info_label.setStyleSheet("""
             QLabel {
-                background-color: #ffffff;
+                font-size: 14px;
+                font-weight: bold;
                 color: #2c3e50;
-                padding: 15px;
-                border-radius: 8px;
-                margin-bottom: 15px;
-                border: 1px solid #bdc3c7;
+                padding: 10px;
+                background-color: #f8f9fa;
+                border-radius: 4px;
+                margin-bottom: 10px;
+                border: 1px solid #dee2e6;
             }
         """)
-        instructions.setWordWrap(True)
-        right_layout.addWidget(instructions)
+        top_layout.addWidget(self.step_info_label)
 
-        # Scroll area for dialogue steps
-        scroll_area = QScrollArea()
-        scroll_area.setWidgetResizable(True)
-        scroll_area.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        # Add Next Part button (at the top)
+        self.add_next_btn = QPushButton("Add Next Part")
+        self.add_next_btn.clicked.connect(self.add_next_step_for_selected)
+        self.add_next_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #34495e;
+                color: white;
+                padding: 12px;
+                border-radius: 5px;
+                font-weight: bold;
+                border: 1px solid #2c3e50;
+            }
+            QPushButton:hover {
+                background-color: #2c3e50;
+            }
+            QPushButton:disabled {
+                background-color: #bdc3c7;
+                border: 1px solid #95a5a6;
+            }
+        """)
+        self.add_next_btn.setEnabled(False)  # Disabled until step is selected
+        top_layout.addWidget(self.add_next_btn)
 
-        self.steps_widget = QWidget()
-        self.steps_layout = QVBoxLayout()
-        self.steps_layout.setAlignment(Qt.AlignTop)
-        self.steps_widget.setLayout(self.steps_layout)
-        scroll_area.setWidget(self.steps_widget)
+        right_layout.addWidget(top_section)
 
-        right_layout.addWidget(scroll_area)
+        # Selected step editor area
+        self.step_editor_widget = QWidget()
+        self.step_editor_layout = QVBoxLayout()
+        self.step_editor_layout.setAlignment(Qt.AlignTop)
+        self.step_editor_widget.setLayout(self.step_editor_layout)
+
+        # No selection placeholder
+        self.no_selection_label = QLabel("Select a step from the tree to edit")
+        self.no_selection_label.setAlignment(Qt.AlignCenter)
+        self.no_selection_label.setStyleSheet("""
+            QLabel {
+                color: #6c757d;
+                font-style: italic;
+                padding: 40px;
+                background-color: #f8f9fa;
+                border-radius: 8px;
+                border: 2px dashed #dee2e6;
+            }
+        """)
+        self.step_editor_layout.addWidget(self.no_selection_label)
+
+        right_layout.addWidget(self.step_editor_widget)
 
         # Bottom toolbar
         toolbar_layout = QHBoxLayout()
 
-        self.validate_btn = QPushButton("✅ Validate")
+        self.validate_btn = QPushButton("Validate")
         self.validate_btn.clicked.connect(self.validate_dialogue)
         toolbar_layout.addWidget(self.validate_btn)
 
-        self.export_btn = QPushButton("🔧 Export Lua")
+        self.export_btn = QPushButton("Export Lua")
         self.export_btn.clicked.connect(self.export_to_lua)
         toolbar_layout.addWidget(self.export_btn)
 
-        self.help_btn = QPushButton("❓ Help")
+        self.help_btn = QPushButton("Help")
         self.help_btn.clicked.connect(self.show_help)
         toolbar_layout.addWidget(self.help_btn)
 
@@ -581,7 +739,8 @@ class SimpleDialogueBuilder(QWidget):
         npc_step.next_step_id = choice_step.id
 
         self.update_tree()
-        self.rebuild_steps_display()
+        # Select the first NPC step by default
+        self.select_step("step_2")
 
     def add_step(self, step: DialogueStep):
         """Add a dialogue step"""
@@ -594,33 +753,96 @@ class SimpleDialogueBuilder(QWidget):
         if step_id in self.steps and self.steps[step_id].type != DialogueStepType.START:
             del self.steps[step_id]
             self.update_tree()
-            self.rebuild_steps_display()
+
+            # If we deleted the selected step, select another one
+            if self.selected_step_id == step_id:
+                # Select the first available step
+                available_steps = [sid for sid, step in self.steps.items() if step.type != DialogueStepType.START]
+                if available_steps:
+                    self.select_step(available_steps[0])
+                else:
+                    # No steps left, show no selection
+                    self.selected_step_id = None
+                    self.current_step_widget = None
+                    # Show no selection label (check if widget still exists)
+                    if hasattr(self, 'no_selection_label') and self.no_selection_label is not None:
+                        try:
+                            self.no_selection_label.show()
+                        except RuntimeError:
+                            # Widget was already deleted, ignore
+                            pass
+                    self.add_next_btn.setEnabled(False)
+                    self.step_info_label.setText("No step selected")
+
             self.dialogue_changed.emit()
 
-    def rebuild_steps_display(self):
-        """Rebuild the steps display"""
-        # Clear current display
-        while self.steps_layout.count():
-            item = self.steps_layout.takeAt(0)
+    def select_step(self, step_id):
+        """Select a step for editing"""
+        if step_id not in self.steps:
+            return
+
+        self.selected_step_id = step_id
+        step = self.steps[step_id]
+
+        # Update step info label
+        type_names = {
+            DialogueStepType.START: "START",
+            DialogueStepType.NPC_SPEECH: f"NPC SPEECH ({step.speaker})",
+            DialogueStepType.PLAYER_CHOICE: f"PLAYER CHOICE ({len(step.choices)} options)",
+            DialogueStepType.NPC_RESPONSE: f"NPC RESPONSE ({step.speaker})",
+            DialogueStepType.END: "END"
+        }
+
+        self.step_info_label.setText(f"Editing: {type_names.get(step.type, 'STEP')}")
+
+        # Hide no selection label first (before clearing layout)
+        if hasattr(self, 'no_selection_label') and self.no_selection_label is not None:
+            try:
+                self.no_selection_label.hide()
+            except RuntimeError:
+                # Widget was already deleted, ignore
+                pass
+
+        # Clear current step editor
+        while self.step_editor_layout.count():
+            item = self.step_editor_layout.takeAt(0)
             if item.widget():
                 item.widget().deleteLater()
 
-        # Display steps in order
-        step_order = self.get_step_order()
-        for i, step_id in enumerate(step_order):
-            step = self.steps[step_id]
+        # Create step widget for selected step
+        self.current_step_widget = DialogueStepWidget(step, is_editable=True)
+        self.current_step_widget.step_changed.connect(self.on_step_widget_changed)
+        self.step_editor_layout.addWidget(self.current_step_widget)
 
-            # Add connection line if not first step
-            if i > 0:
-                line = QLabel("⬇️")
-                line.setAlignment(Qt.AlignCenter)
-                line.setStyleSheet("color: #95a5a6; font-size: 20px; margin: 5px;")
-                self.steps_layout.addWidget(line)
+        # Enable/disable add next button based on step type
+        can_add_next = step.type != DialogueStepType.END
+        self.add_next_btn.setEnabled(can_add_next)
 
-            # Create step widget
-            step_widget = DialogueStepWidget(step, is_editable=True)
-            step_widget.step_changed.connect(self.on_step_widget_changed)
-            self.steps_layout.addWidget(step_widget)
+        # Update tree selection
+        self.update_tree_selection(step_id)
+
+    def update_tree_selection(self, selected_step_id):
+        """Update tree selection to highlight selected step"""
+        # Clear current selection
+        self.tree_widget.clearSelection()
+
+        # Find and select the tree item
+        def find_item(items):
+            for item in items:
+                if item.data(0, Qt.UserRole) == selected_step_id:
+                    item.setSelected(True)
+                    return True
+                if find_item([item.child(i) for i in range(item.childCount())]):
+                    return True
+            return False
+
+        # Search top level items
+        find_item([self.tree_widget.topLevelItem(i) for i in range(self.tree_widget.topLevelItemCount())])
+
+    def add_next_step_for_selected(self):
+        """Add next step for the currently selected step"""
+        if self.selected_step_id:
+            self.add_next_step(self.selected_step_id)
 
     def get_step_order(self):
         """Get steps in display order"""
@@ -710,16 +932,7 @@ class SimpleDialogueBuilder(QWidget):
         """Handle tree item click"""
         step_id = item.data(0, Qt.UserRole)
         if step_id and step_id in self.steps:
-            self.scroll_to_step(step_id)
-
-    def scroll_to_step(self, step_id):
-        """Scroll to a specific step"""
-        # Find the step widget
-        step_order = self.get_step_order()
-        if step_id in step_order:
-            index = step_order.index(step_id)
-            # Scroll to show this step (implementation depends on scroll area)
-            pass
+            self.select_step(step_id)
 
     def on_step_widget_changed(self, action):
         """Handle step widget changes"""
@@ -765,8 +978,17 @@ class SimpleDialogueBuilder(QWidget):
                 type=DialogueStepType.PLAYER_CHOICE,
                 text="What do you want to do?",
                 choices=[
-                    {"text": "Continue"},
-                    {"text": "Ask something else"}
+                    {"text": "Continue", "next_step_id": ""},
+                    {"text": "Ask something else", "next_step_id": ""}
+                ]
+            )
+        elif step_type == DialogueStepType.PLAYER_SPEECH:
+            new_step = DialogueStep(
+                id=f"step_{self.next_step_id}",
+                type=DialogueStepType.PLAYER_SPEECH,
+                text="I'd like to know more about this.",
+                choices=[
+                    {"text": "Continue", "next_step_id": ""}
                 ]
             )
         elif step_type == DialogueStepType.NPC_RESPONSE:
@@ -794,7 +1016,8 @@ class SimpleDialogueBuilder(QWidget):
             self.add_step(new_step)
             parent_step.next_step_id = new_step.id
             self.update_tree()
-            self.rebuild_steps_display()
+            # Automatically select the newly created step
+            self.select_step(new_step.id)
 
     def validate_dialogue(self):
         """Validate the dialogue"""

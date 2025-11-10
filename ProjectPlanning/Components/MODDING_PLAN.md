@@ -40,9 +40,38 @@ A comprehensive modding toolkit and documentation project for SpellForce: The Or
 
 ---
 
+### Phase 3: Quest Creator Development (Recently Completed - November 2025)
+
+**Status**: ✅ **DIALOGUE SYSTEM COMPLETE**
+
+The Quest Creator's dialogue system has been fully implemented with major user experience improvements.
+
+#### Key Achievements:
+- ✅ **Step-by-Step Guided Interface**: Replaced complex node-based editing with intuitive top-down tree view
+- ✅ **Choice-to-Response Mapping**: Visual system showing which player choices lead to which NPC responses
+- ✅ **Enhanced Step Types**: Including new PLAYER_SPEECH type for single-option player dialogue
+- ✅ **Visual Connection Indicators**: Green/red borders showing connection status between choices and responses
+- ✅ **Clean UI Design**: Fixed contrast issues, removed excessive colors, improved readability
+- ✅ **Single Launcher System**: Cleaned up multiple confusing launch scripts to single entry point
+- ✅ **Error Handling**: Fixed QLabel deletion issues and improved stability
+
+#### Technical Implementation:
+- **File**: `src/TirganachReloaded/cff_editor/widgets/simple_dialogue_builder.py`
+- **Architecture**: Enhanced data structure with choice-specific response mapping via `next_step_id`
+- **UI Framework**: PySide6 with improved signal/slot patterns and widget lifecycle management
+- **Launch System**: `quest_creator.py` with uv virtual environment support
+
+#### User Features:
+- **Intuitive Workflow**: Click step → edit → add next step → select type
+- **Real-time Validation**: Visual feedback for dialogue flow connections
+- **Auto-save**: Preserves work progress automatically
+- **Branching Support**: Full support for complex dialogue trees with multiple response paths
+
+---
+
 ## 🔄 In Progress Tasks
 
-_(Currently no active tasks - focus is on resolving the Icon System mapping blocker.)_
+_(Currently no active tasks - Quest Creator dialogue system is complete, focus shifting to full quest wizard implementation.)_
 
 ---
 
