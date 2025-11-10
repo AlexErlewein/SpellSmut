@@ -7,12 +7,13 @@ from ..models.weapon_creation_data import WeaponCreationData
 # Import tirganach library for CFF handling
 try:
     from TirganachReloaded.tirganach import GameData
-    from TirganachReloaded.tirganach.types import *
+    from TirganachReloaded.tirganach.types import ItemType, EquipmentType
     from TirganachReloaded.tirganach.entities import Item, Weapon, Localisation
     TIRGANACH_AVAILABLE = True
-except ImportError:
+except ImportError as e:
     TIRGANACH_AVAILABLE = False
-    print("Warning: Tirganach library not available. CFF export will be limited to JSON format.")
+    print(f"Warning: Tirganach library not available: {e}")
+    print("CFF export will be limited to legacy binary format.")
 
 class WeaponCFFExporter:
     """Export weapon to CFF format using the tirganach library"""
@@ -118,7 +119,7 @@ class WeaponCFFExporter:
         # - buying_price: int (4 bytes)
         # - item_set_id: int (1 byte)
 
-        from tirganach.types import ItemType, EquipmentType
+        from TirganachReloaded.tirganach.types import ItemType, EquipmentType
 
         # Map our weapon hands to equipment types
         equipment_map = {
@@ -271,32 +272,39 @@ class WeaponCFFExporter:
     def export_item_general(self, weapon_data: WeaponCreationData) -> bytes:
         """Export to Category 2003 (Item General Info)"""
         # Structure:
-        # - ItemID (ushort)
-        # - NameID (ushort)
+        # - ItemID (uint) - Changed from ushort to handle larger IDs
+        # - NameID (uint) - Changed from ushort to handle larger IDs
         # - ItemType (byte) - EQUIPMENT
         # - ItemSubtype (byte) - WEAPON
         # - SellValue (uint)
         # - BuyValue (uint)
         # - Option (byte)
         # - ItemSetID (ushort)
-        
-        data = struct.pack('<HHBBIIBxH',
-            weapon_data.weapon_id,          # ItemID
-            weapon_data.weapon_id + 20000,  # NameID (arbitrary offset)
+
+        # Clamp and validate values to prevent overflow
+        item_id = min(max(weapon_data.weapon_id, 0), 4294967295)  # uint32 max
+        name_id = min(max(item_id + 20000, 0), 4294967295)  # uint32 max
+        sell_value = min(max(weapon_data.sell_value, 0), 4294967295)  # uint32 max
+        buy_value = min(max(weapon_data.buy_value, 0), 4294967295)  # uint32 max
+        item_set_id = min(max(weapon_data.item_set_id, 0), 65535)  # ushort max
+
+        data = struct.pack('<IIBBIIBxH',
+            item_id,                         # ItemID (uint)
+            name_id,                         # NameID (uint)
             1,                               # ItemType: EQUIPMENT
             2,                               # ItemSubtype: WEAPON
-            weapon_data.sell_value,
-            weapon_data.buy_value,
+            sell_value,                      # SellValue (uint)
+            buy_value,                       # BuyValue (uint)
             0,                               # Option
-            weapon_data.item_set_id
+            item_set_id                      # ItemSetID (ushort)
         )
-        
+
         return data
     
     def export_weapon_data(self, weapon_data: WeaponCreationData) -> bytes:
         """Export to Category 2015 (Weapon Combat Data)"""
         # Structure:
-        # - ItemID (ushort) - Foreign key to 2003
+        # - ItemID (uint) - Changed from ushort to handle larger IDs, Foreign key to 2003
         # - MinDamage (ushort)
         # - MaxDamage (ushort)
         # - MinRange (ushort)
@@ -304,18 +312,28 @@ class WeaponCFFExporter:
         # - WeaponSpeed (ushort)
         # - WeaponType (ushort) - Foreign key to 2063
         # - WeaponMaterial (ushort) - Foreign key to 2064
-        
-        data = struct.pack('<HHHHHHHH',
-            weapon_data.weapon_id,
-            weapon_data.min_damage,
-            weapon_data.max_damage,
-            weapon_data.min_range,
-            weapon_data.max_range,
-            weapon_data.attack_speed,
-            weapon_data.weapon_type_id,
-            weapon_data.weapon_material_id
+
+        # Clamp and validate values to prevent overflow
+        item_id = min(max(weapon_data.weapon_id, 0), 4294967295)  # uint32 max
+        min_damage = min(max(weapon_data.min_damage, 0), 65535)  # ushort max
+        max_damage = min(max(weapon_data.max_damage, 0), 65535)  # ushort max
+        min_range = min(max(weapon_data.min_range, 0), 65535)  # ushort max
+        max_range = min(max(weapon_data.max_range, 0), 65535)  # ushort max
+        attack_speed = min(max(weapon_data.attack_speed, 0), 65535)  # ushort max
+        weapon_type_id = min(max(weapon_data.weapon_type_id, 0), 65535)  # ushort max
+        weapon_material_id = min(max(weapon_data.weapon_material_id, 0), 65535)  # ushort max
+
+        data = struct.pack('<IHHHHHHH',
+            item_id,                         # ItemID (uint)
+            min_damage,                      # MinDamage (ushort)
+            max_damage,                      # MaxDamage (ushort)
+            min_range,                       # MinRange (ushort)
+            max_range,                       # MaxRange (ushort)
+            attack_speed,                    # WeaponSpeed (ushort)
+            weapon_type_id,                  # WeaponType (ushort)
+            weapon_material_id               # WeaponMaterial (ushort)
         )
-        
+
         return data
     
     def export_text_entries(self, weapon_data: WeaponCreationData) -> List[bytes]:
