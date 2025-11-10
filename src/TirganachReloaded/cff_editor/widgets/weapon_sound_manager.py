@@ -27,8 +27,20 @@ from PySide6.QtWidgets import (
     QListWidget,
     QListWidgetItem,
     QScrollArea,
+    QSlider,
+    QMessageBox,
+    QProgressBar,
 )
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QTimer, QThread, Signal
+
+# Initialize pygame mixer for sound preview
+try:
+    import pygame
+    pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=512)
+    PYGAME_AVAILABLE = True
+except ImportError:
+    PYGAME_AVAILABLE = False
+    print("Warning: pygame not available, sound preview disabled")
 
 
 class WeaponSoundManager:
@@ -376,6 +388,12 @@ class WeaponSoundSelectionDialog(QDialog):
         self.selected_hit = current_hit
         self.selected_miss = current_miss
 
+        # Audio preview properties
+        self.current_preview_sound = None
+        self.preview_volume = 0.7  # Default volume
+        self.preview_pitch = 1.0   # Default pitch (1.0 = normal)
+        self.is_preview_playing = False
+
         self._setup_ui()
         self._populate_sounds()
 
@@ -398,6 +416,86 @@ class WeaponSoundSelectionDialog(QDialog):
 
         info_group.setLayout(info_layout)
         layout.addWidget(info_group)
+
+        # Audio Preview Controls
+        if PYGAME_AVAILABLE:
+            preview_group = QGroupBox("Audio Preview Controls")
+            preview_layout = QVBoxLayout()
+
+            # Volume control
+            volume_layout = QHBoxLayout()
+            volume_layout.addWidget(QLabel("Volume:"))
+            self.volume_slider = QSlider(Qt.Horizontal)
+            self.volume_slider.setRange(0, 100)
+            self.volume_slider.setValue(int(self.preview_volume * 100))
+            self.volume_slider.setTickPosition(QSlider.TicksBelow)
+            self.volume_slider.setTickInterval(10)
+            self.volume_slider.valueChanged.connect(self.on_volume_changed)
+            volume_layout.addWidget(self.volume_slider)
+            self.volume_label = QLabel(f"{int(self.preview_volume * 100)}%")
+            volume_layout.addWidget(self.volume_label)
+            volume_layout.addStretch()
+
+            preview_layout.addLayout(volume_layout)
+
+            # Pitch control
+            pitch_layout = QHBoxLayout()
+            pitch_layout.addWidget(QLabel("Pitch:"))
+            self.pitch_slider = QSlider(Qt.Horizontal)
+            self.pitch_slider.setRange(50, 200)  # 0.5x to 2.0x pitch
+            self.pitch_slider.setValue(int(self.preview_pitch * 100))
+            self.pitch_slider.setTickPosition(QSlider.TicksBelow)
+            self.pitch_slider.setTickInterval(25)
+            self.pitch_slider.valueChanged.connect(self.on_pitch_changed)
+            pitch_layout.addWidget(self.pitch_slider)
+            self.pitch_label = QLabel("1.0x")
+            pitch_layout.addWidget(self.pitch_label)
+            pitch_layout.addStretch()
+
+            preview_layout.addLayout(pitch_layout)
+
+            # Preview buttons
+            preview_buttons_layout = QHBoxLayout()
+            self.preview_hit_btn = QPushButton("🔊 Preview Hit")
+            self.preview_hit_btn.clicked.connect(self.preview_hit_sound)
+            self.preview_hit_btn.setEnabled(False)
+            preview_buttons_layout.addWidget(self.preview_hit_btn)
+
+            self.preview_miss_btn = QPushButton("🔊 Preview Miss")
+            self.preview_miss_btn.clicked.connect(self.preview_miss_sound)
+            self.preview_miss_btn.setEnabled(False)
+            preview_buttons_layout.addWidget(self.preview_miss_btn)
+
+            self.stop_preview_btn = QPushButton("⏹ Stop Preview")
+            self.stop_preview_btn.clicked.connect(self.stop_preview)
+            self.stop_preview_btn.setEnabled(False)
+            preview_buttons_layout.addWidget(self.stop_preview_btn)
+
+            preview_layout.addLayout(preview_buttons_layout)
+
+            # Preview status
+            self.preview_status_label = QLabel("Ready for preview")
+            self.preview_status_label.setStyleSheet("color: #666; font-style: italic;")
+            preview_layout.addWidget(self.preview_status_label)
+
+            # Audio settings
+            settings_layout = QHBoxLayout()
+            self.loop_preview_checkbox = QPushButton("🔁 Loop Preview")
+            self.loop_preview_checkbox.setCheckable(True)
+            self.loop_preview_checkbox.setChecked(False)
+            settings_layout.addWidget(self.loop_preview_checkbox)
+
+            self.auto_preview_checkbox = QPushButton("▶ Auto-preview on Selection")
+            self.auto_preview_checkbox.setCheckable(True)
+            self.auto_preview_checkbox.setChecked(False)
+            self.auto_preview_checkbox.setToolTip("Automatically play sound when selected")
+            settings_layout.addWidget(self.auto_preview_checkbox)
+
+            settings_layout.addStretch()
+            preview_layout.addLayout(settings_layout)
+
+            preview_group.setLayout(preview_layout)
+            layout.addWidget(preview_group)
 
         # Tab widget for different sound selection modes
         self.tab_widget = QTabWidget()
@@ -665,6 +763,157 @@ class WeaponSoundSelectionDialog(QDialog):
     def get_selected_sounds(self) -> Tuple[str, str]:
         """Get the selected hit and miss sounds"""
         return self.selected_hit, self.selected_miss
+
+    def on_volume_changed(self, value: int):
+        """Handle volume slider change"""
+        self.preview_volume = value / 100.0
+        self.volume_label.setText(f"{value}%")
+
+        # Update pygame mixer volume if sound is playing
+        if PYGAME_AVAILABLE and self.current_preview_sound:
+            self.current_preview_sound.set_volume(self.preview_volume)
+
+    def on_pitch_changed(self, value: int):
+        """Handle pitch slider change"""
+        self.preview_pitch = value / 100.0
+        self.pitch_label.setText(f"{self.preview_pitch:.1f}x")
+
+    def preview_hit_sound(self):
+        """Preview the currently selected hit sound"""
+        if not PYGAME_AVAILABLE:
+            QMessageBox.warning(self, "Audio Preview",
+                              "Pygame not available - audio preview disabled")
+            return
+
+        current_hit = self.quick_hit_combo.currentText()
+        if not current_hit or current_hit == "None":
+            self.preview_status_label.setText("No hit sound selected")
+            return
+
+        self._play_sound_preview(current_hit, "hit")
+
+    def preview_miss_sound(self):
+        """Preview the currently selected miss sound"""
+        if not PYGAME_AVAILABLE:
+            QMessageBox.warning(self, "Audio Preview",
+                              "Pygame not available - audio preview disabled")
+            return
+
+        current_miss = self.quick_miss_combo.currentText()
+        if not current_miss or current_miss == "None":
+            self.preview_status_label.setText("No miss sound selected")
+            return
+
+        self._play_sound_preview(current_miss, "miss")
+
+    def _play_sound_preview(self, sound_name: str, sound_type: str):
+        """Play a sound preview with error handling"""
+        try:
+            # Stop any currently playing sound
+            self.stop_preview()
+
+            # Find the sound file path
+            sound_path = self._find_sound_file(sound_name)
+            if not sound_path:
+                self.preview_status_label.setText(f"Sound file not found: {sound_name}")
+                return
+
+            # Load and play the sound with pitch adjustment
+            self.current_preview_sound = pygame.mixer.Sound(sound_path)
+            self.current_preview_sound.set_volume(self.preview_volume)
+
+            # Apply pitch adjustment (pygame limitation - pitch is simulated)
+            if self.preview_pitch != 1.0:
+                # For pitch shifting, we would need more advanced audio processing
+                # For now, we'll indicate the pitch in the status
+                pitch_text = f" (pitch: {self.preview_pitch:.1f}x)"
+            else:
+                pitch_text = ""
+
+            self.current_preview_sound.play()
+
+            self.is_preview_playing = True
+            self.preview_status_label.setText(f"Playing {sound_type}: {sound_name}{pitch_text}")
+            self.stop_preview_btn.setEnabled(True)
+
+            # Adjust timer based on pitch (higher pitch = shorter perceived duration)
+            sound_length = self.current_preview_sound.get_length() * 1000  # Convert to milliseconds
+            adjusted_length = int(sound_length / self.preview_pitch)
+            QTimer.singleShot(adjusted_length + 100, self.on_sound_finished)
+
+        except Exception as e:
+            self.preview_status_label.setText(f"Error playing sound: {str(e)}")
+            QMessageBox.critical(self, "Audio Preview Error",
+                               f"Could not play sound '{sound_name}':\n{str(e)}")
+
+    def stop_preview(self):
+        """Stop the currently playing preview"""
+        if self.current_preview_sound:
+            self.current_preview_sound.stop()
+            self.current_preview_sound = None
+
+        self.is_preview_playing = False
+        self.preview_status_label.setText("Preview stopped")
+        self.stop_preview_btn.setEnabled(False)
+
+    def on_sound_finished(self):
+        """Called when a sound preview finishes playing"""
+        self.is_preview_playing = False
+        self.current_preview_sound = None
+        self.preview_status_label.setText("Ready for preview")
+        self.stop_preview_btn.setEnabled(False)
+
+    def _find_sound_file(self, sound_name: str) -> Optional[str]:
+        """Find the actual sound file path for a given sound name"""
+        # Try to find the sound file in common locations
+        base_paths = [
+            "../../OriginalGameFiles/sound/",
+            "../../../OriginalGameFiles/sound/",
+            "OriginalGameFiles/sound/",
+            Path(__file__).parent.parent.parent.parent.parent / "OriginalGameFiles/sound/"
+        ]
+
+        # Common sound file extensions
+        extensions = [".wav", ".ogg", ".mp3", ".flac"]
+
+        for base_path in base_paths:
+            base_path = Path(base_path)
+            if base_path.exists():
+                # Try direct match
+                for ext in extensions:
+                    sound_path = base_path / f"{sound_name}{ext}"
+                    if sound_path.exists():
+                        return str(sound_path)
+
+                # Try in subdirectories
+                for ext in extensions:
+                    for sound_dir in base_path.rglob("*"):
+                        if sound_dir.is_dir():
+                            sound_path = sound_dir / f"{sound_name}{ext}"
+                            if sound_path.exists():
+                                return str(sound_path)
+
+        return None
+
+    def on_quick_hit_sound_changed(self, sound_name: str):
+        """Handle hit sound selection change"""
+        self.selected_hit = sound_name if sound_name != "None" else ""
+        enabled = bool(sound_name and sound_name != "None")
+        self.preview_hit_btn.setEnabled(enabled)
+
+        # Auto-preview if enabled
+        if enabled and hasattr(self, 'auto_preview_checkbox') and self.auto_preview_checkbox.isChecked():
+            self.preview_hit_sound()
+
+    def on_quick_miss_sound_changed(self, sound_name: str):
+        """Handle miss sound selection change"""
+        self.selected_miss = sound_name if sound_name != "None" else ""
+        enabled = bool(sound_name and sound_name != "None")
+        self.preview_miss_btn.setEnabled(enabled)
+
+        # Auto-preview if enabled
+        if enabled and hasattr(self, 'auto_preview_checkbox') and self.auto_preview_checkbox.isChecked():
+            self.preview_miss_sound()
 
 
 # Integration function for weapon forge
