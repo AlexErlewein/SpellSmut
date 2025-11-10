@@ -16,7 +16,9 @@ from PySide6.QtWidgets import (
     QWizard,
     QWizardPage,
 )
-from PySide6.QtCore import QDir
+from PySide6.QtCore import QDir, Qt, QFileInfo
+from PySide6.QtGui import QPixmap
+from typing import Optional
 import json
 from pathlib import Path
 from datetime import datetime
@@ -494,13 +496,11 @@ class BasicPropertiesPage(QWizardPage):
         layout.addRow("Weapon Name:", self.weapon_name_edit)
 
         self.weapon_type_combo = QComboBox()
-        # This would be populated with existing and new weapon types
-        self.weapon_type_combo.addItems(["1H Sword", "2H Axe", "Dagger"])  # Placeholder
+        self._populate_weapon_types()
         layout.addRow("Weapon Type:", self.weapon_type_combo)
 
         self.weapon_material_combo = QComboBox()
-        # This would be populated with existing and new materials
-        self.weapon_material_combo.addItems(["Metal", "Wood", "Bone"])  # Placeholder
+        self._populate_weapon_materials()
         layout.addRow("Weapon Material:", self.weapon_material_combo)
 
         self.hands_combo = QComboBox()
@@ -516,6 +516,74 @@ class BasicPropertiesPage(QWizardPage):
 
         self.setLayout(layout)
 
+    def _populate_weapon_types(self):
+        """Load real weapon types from the game data mappings"""
+        try:
+            # Load weapon types from mappings file
+            mappings_path = Path(__file__).parent.parent.parent.parent / "data" / "id_name_mappings.json"
+            if mappings_path.exists():
+                with open(mappings_path, 'r', encoding='utf-8') as f:
+                    mappings = json.load(f)
+
+                weapon_types = []
+                if "weapon_types" in mappings:
+                    for type_id, type_data in mappings["weapon_types"].items():
+                        # Use the display name which includes the ID for clarity
+                        display_name = type_data.get("display", type_data.get("name", f"Weapon Type {type_id}"))
+                        weapon_types.append(display_name)
+
+                # Sort by numeric ID
+                weapon_types.sort(key=lambda x: int(x.split('[')[-1].replace(']', '') if '[' in x else 0))
+                self.weapon_type_combo.addItems(weapon_types)
+            else:
+                # Fallback to all known weapon types
+                self.weapon_type_combo.addItems([
+                    "Default/Fist [0]",
+                    "Mouth/Bite [1]",
+                    "Unarmed/Fist [2]",
+                    "One-handed Dagger [3]",
+                    "One-handed Sword [4]",
+                    "One-handed Axe [5]",
+                    "One-handed Mace (Spiky) [6]",
+                    "One-handed Mace (Blunt) [7]",
+                    "One-handed Hammer [8]",
+                    "One-handed Staff [9]",
+                    "Two-handed Sword [10]",
+                    "Two-handed Axe [11]",
+                    "Two-handed Mace [12]",
+                    "Two-handed Hammer [13]",
+                    "Two-handed Staff [14]",
+                    "Two-handed Spear [15]",
+                    "Two-handed Halberd [16]",
+                    "Two-handed Bow [17]",
+                    "Two-handed Crossbow [18]",
+                    "One-handed Claw [19]"
+                ])
+        except Exception:
+            # Ultimate fallback if anything fails
+            self.weapon_type_combo.addItems([
+                "One-handed Sword [4]", "One-handed Axe [5]", "Two-handed Axe [11]",
+                "One-handed Dagger [3]", "Two-handed Bow [17]", "One-handed Staff [9]"
+            ])
+
+    def _populate_weapon_materials(self):
+        """Load weapon materials - use common materials as base"""
+        # Weapon materials in SpellForce are typically stored as IDs 0-9
+        # We'll use common material names that map to these IDs
+        materials = [
+            "Metal [1]",  # Most common
+            "Wood [2]",
+            "Bone [3]",
+            "Stone [4]",
+            "Iron [5]",
+            "Steel [6]",
+            "Silver [7]",
+            "Gold [8]",
+            "Diamond [9]",
+            "Crystal [0]"  # Special/default
+        ]
+        self.weapon_material_combo.addItems(materials)
+
     def initializePage(self):
         """Populate fields from source weapon if in edit/duplicate mode"""
         wizard = self.wizard()
@@ -526,15 +594,15 @@ class BasicPropertiesPage(QWizardPage):
             # Populate basic properties from source weapon
             self.weapon_name_edit.setText(weapon.weapon_name)
 
-            # Find and select the weapon type
+            # Find and select the weapon type (smart matching)
             type_text = weapon.weapon_type_name
-            index = self.weapon_type_combo.findText(type_text)
+            index = self._find_best_weapon_type_match(type_text)
             if index >= 0:
                 self.weapon_type_combo.setCurrentIndex(index)
 
-            # Find and select the material
+            # Find and select the material (smart matching)
             material_text = weapon.weapon_material_name
-            index = self.weapon_material_combo.findText(material_text)
+            index = self._find_best_material_match(material_text)
             if index >= 0:
                 self.weapon_material_combo.setCurrentIndex(index)
 
@@ -550,6 +618,167 @@ class BasicPropertiesPage(QWizardPage):
 
             # Set description
             self.description_edit.setPlainText(weapon.description)
+
+    def _find_best_weapon_type_match(self, weapon_type_name: str) -> int:
+        """Find the best matching weapon type in the combo box"""
+        # First try exact match
+        index = self.weapon_type_combo.findText(weapon_type_name)
+        if index >= 0:
+            return index
+
+        # Try partial match (contains the weapon type name)
+        for i in range(self.weapon_type_combo.count()):
+            item_text = self.weapon_type_combo.itemText(i)
+            if weapon_type_name.lower() in item_text.lower():
+                return i
+
+        # Handle "WeaponType X" format from enhanced_weapons.json
+        type_mappings = {
+            # "WeaponType X" format to display names
+            "WeaponType 1HDagger": "One-handed Dagger",
+            "WeaponType 1HSword": "One-handed Sword",
+            "WeaponType 1HAxe": "One-handed Axe",
+            "WeaponType 1HHammer": "One-handed Hammer",
+            "WeaponType 1HMaceSpiky": "One-handed Mace (Spiky)",
+            "WeaponType 1HMaceBlunt": "One-handed Mace (Blunt)",
+            "WeaponType 1HStaff": "One-handed Staff",
+            "WeaponType 2HSword": "Two-handed Sword",
+            "WeaponType 2HAxe": "Two-handed Axe",
+            "WeaponType 2HHammer": "Two-handed Hammer",
+            "WeaponType 2HMace": "Two-handed Mace",
+            "WeaponType 2HStaff": "Two-handed Staff",
+            "WeaponType 2HSpear": "Two-handed Spear",
+            "WeaponType 2HHalberd": "Two-handed Halberd",
+            "WeaponType 2HBow": "Two-handed Bow",
+            "WeaponType 2HCrossbow": "Two-handed Crossbow",
+            "WeaponType Hand": "Unarmed/Fist",
+            "defaultweapontype": "Default/Fist",
+            "Unknown_Type_19": "One-handed Claw",
+
+            # Short format mappings
+            "1H Sword": "One-handed Sword",
+            "2H Sword": "Two-handed Sword",
+            "1H Axe": "One-handed Axe",
+            "2H Axe": "Two-handed Axe",
+            "1H Dagger": "One-handed Dagger",
+            "1H Hammer": "One-handed Hammer",
+            "2H Hammer": "Two-handed Hammer",
+            "1H Staff": "One-handed Staff",
+            "2H Staff": "Two-handed Staff",
+            "2H Bow": "Two-handed Bow",
+            "2H Crossbow": "Two-handed Crossbow",
+
+            # Simple names
+            "Sword": "One-handed Sword",
+            "Axe": "One-handed Axe",
+            "Dagger": "One-handed Dagger",
+            "Mace": "One-handed Mace (Spiky)",
+            "Hammer": "One-handed Hammer",
+            "Staff": "One-handed Staff",
+            "Spear": "Two-handed Spear",
+            "Bow": "Two-handed Bow",
+            "Crossbow": "Two-handed Crossbow",
+            "Halberd": "Two-handed Halberd",
+            "Claw": "One-handed Claw"
+        }
+
+        mapped_name = type_mappings.get(weapon_type_name)
+        if mapped_name:
+            for i in range(self.weapon_type_combo.count()):
+                item_text = self.weapon_type_combo.itemText(i)
+                if mapped_name.lower() in item_text.lower():
+                    return i
+
+        # Additional fallback: try to match by weapon type keywords
+        for i in range(self.weapon_type_combo.count()):
+            item_text = self.weapon_type_combo.itemText(i).lower()
+            weapon_type_lower = weapon_type_name.lower()
+
+            # Match by key words
+            if "dagger" in weapon_type_lower and "dagger" in item_text:
+                return i
+            elif "sword" in weapon_type_lower and "sword" in item_text:
+                return i
+            elif "axe" in weapon_type_lower and "axe" in item_text:
+                return i
+            elif "hammer" in weapon_type_lower and "hammer" in item_text:
+                return i
+            elif "staff" in weapon_type_lower and "staff" in item_text:
+                return i
+            elif "bow" in weapon_type_lower and "bow" in item_text:
+                return i
+            elif "crossbow" in weapon_type_lower and "crossbow" in item_text:
+                return i
+
+        return -1  # Not found
+
+    def _find_best_material_match(self, material_name: str) -> int:
+        """Find the best matching material in the combo box"""
+        # First try exact match
+        index = self.weapon_material_combo.findText(material_name)
+        if index >= 0:
+            return index
+
+        # Try partial match (contains the material name)
+        for i in range(self.weapon_material_combo.count()):
+            item_text = self.weapon_material_combo.itemText(i)
+            if material_name.lower() in item_text.lower():
+                return i
+
+        # Try common mappings
+        material_mappings = {
+            "Metal": "Metal",
+            "Wood": "Wood",
+            "Bone": "Bone",
+            "Stone": "Stone",
+            "Iron": "Iron",
+            "Steel": "Steel",
+            "Silver": "Silver",
+            "Gold": "Gold",
+            "Diamond": "Diamond",
+            "Crystal": "Crystal"
+        }
+
+        mapped_name = material_mappings.get(material_name)
+        if mapped_name:
+            for i in range(self.weapon_material_combo.count()):
+                item_text = self.weapon_material_combo.itemText(i)
+                if mapped_name.lower() in item_text.lower():
+                    return i
+
+        return -1  # Not found
+
+    def _extract_weapon_type_id(self, type_text: str) -> int:
+        """Extract weapon type ID from the display text"""
+        if '[' in type_text and ']' in type_text:
+            try:
+                id_str = type_text.split('[')[-1].replace(']', '')
+                return int(id_str)
+            except (ValueError, IndexError):
+                pass
+        return 1  # Default fallback
+
+    def _extract_weapon_type_name(self, type_text: str) -> str:
+        """Extract clean weapon type name without the ID"""
+        if '[' in type_text:
+            return type_text.split('[')[0].strip()
+        return type_text
+
+    def _extract_material_id(self, material_text: str) -> int:
+        """Extract material ID from the display text"""
+        if '[' in material_text and ']' in material_text:
+            try:
+                id_str = material_text.split('[')[-1].replace(']', '')
+                return int(id_str)
+            except (ValueError, IndexError):
+                pass
+        return 1  # Default fallback
+
+    def _extract_material_name(self, material_text: str) -> str:
+        """Extract clean material name without the ID"""
+        if '[' in material_text:
+            return material_text.split('[')[0].strip()
+        return material_text
 
 
 class CombatStatsPage(QWizardPage):
@@ -841,21 +1070,23 @@ class VisualAudioPage(QWizardPage):
         
     def initializePage(self):
         """Initialize visual and audio page with data from previous wizard pages"""
-        # Create fresh layout for this initialization
-        layout = QFormLayout()
-        layout.addRow("Icon:", QLabel("Icon browser placeholder"))
-        
+        wizard = self.wizard()
+
+        # Check if we have a source weapon with icon data to inherit
+        if hasattr(wizard, "source_weapon") and wizard.source_weapon is not None:
+            weapon = wizard.source_weapon
+
+            # Inherit icon if available
+            if hasattr(weapon, 'icon_handle') and weapon.icon_handle:
+                self.selected_icon_handle = weapon.icon_handle
+                self._update_icon_preview(weapon.icon_handle)
+
+        # Set up sound selection
         self._setup_sound_selection()
-        if self.sound_selector_widget:
-            layout.addRow("Sounds:", self.sound_selector_widget)
-        else:
-            layout.addRow("Sounds:", QLabel("Sound selector placeholder"))
-        
-        layout.addRow("3D Model:", QLabel("Model browser placeholder"))
-        layout.addRow("Trail Effect:", QLineEdit())
-        layout.addRow("Impact Effect:", QLineEdit())
-        
-        self.setLayout(layout)
+
+        # Call the parent initialization
+        if hasattr(super(), 'initializePage'):
+            super().initializePage()
 
 
 class ReviewExportPage(QWizardPage):
@@ -981,10 +1212,10 @@ class ReviewExportPage(QWizardPage):
 
             # Step 2: Basic Properties
             weapon_name=basic_page.weapon_name_edit.text(),
-            weapon_type_id=basic_page.weapon_type_combo.currentIndex() + 1,  # Adjust for 0-based index
-            weapon_type_name=basic_page.weapon_type_combo.currentText(),
-            weapon_material_id=basic_page.weapon_material_combo.currentIndex() + 1,
-            weapon_material_name=basic_page.weapon_material_combo.currentText(),
+            weapon_type_id=basic_page._extract_weapon_type_id(basic_page.weapon_type_combo.currentText()),
+            weapon_type_name=basic_page._extract_weapon_type_name(basic_page.weapon_type_combo.currentText()),
+            weapon_material_id=basic_page._extract_material_id(basic_page.weapon_material_combo.currentText()),
+            weapon_material_name=basic_page._extract_material_name(basic_page.weapon_material_combo.currentText()),
             hands=WeaponHands(basic_page.hands_combo.currentText()),
             damage_category=DamageCategory(basic_page.damage_category_combo.currentText()),
             description=basic_page.description_edit.toPlainText(),

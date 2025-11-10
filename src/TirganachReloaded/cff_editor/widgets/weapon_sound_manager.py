@@ -164,6 +164,10 @@ class WeaponSoundManager:
         """Suggest appropriate hit and miss sounds for a weapon"""
         sounds = self.get_weapon_sounds(weapon_type)
 
+        # Ensure hands is a string
+        if not isinstance(hands, str):
+            hands = str(hands)
+
         # Prefer sounds that match the weapon's handedness
         hit_sounds = sounds.get("hit", [])
         miss_sounds = sounds.get("miss", [])
