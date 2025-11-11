@@ -23,6 +23,12 @@ cd src/OrthancsSchmiede
 python orthancs_schmiede.py
 ```
 
+Or with uv:
+
+```bash
+uv run src/OrthancsSchmiede/orthancs_schmiede.py
+```
+
 ### Interface Overview
 
 - **Header**: Contains mode selector (Weapons/Armor) and creation buttons
@@ -55,6 +61,22 @@ python orthancs_schmiede.py
 - PySide6 (Qt for Python)
 - TirganachReloaded CFF Editor modules
 - GameData.cff file from SpellForce original files
+
+### GameData.cff Placement and Discovery
+
+Place a copy of `GameData.cff` at:
+
+- Preferred (used by app and Enhanced Weapon Browser):
+  - `forge/OriginalGameFiles/data/GameData.cff`
+- Additional paths some tools try (wizard/test harness):
+  - `forge/src/OriginalGameFiles/data/GameData.cff`
+  - `forge/src/OriginalGameFiles/GameData.cff`
+  - System install example (macOS): `/Users/<you>/SpellForce Platinum Edition/data/GameData.cff`
+
+Notes:
+
+- The Enhanced Weapon Browser shows School Requirements in the right-side REQUIREMENTS panel when CFF is found.
+- If not found, some features may fall back to JSON and requirements may be limited.
 
 ## Data Sources
 

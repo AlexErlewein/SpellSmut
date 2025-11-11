@@ -26,6 +26,7 @@ from PySide6.QtWidgets import (
 )
 
 from ..exporters.weapon_loader import WeaponLoader
+from ..shared.gamedata_resolver import find_gamedata_path
 from ..models.weapon_creation_data import (
     DamageCategory,
     DamageType,
@@ -48,6 +49,10 @@ except ImportError:
         SPANISH = 3
         ITALIAN = 4
 
+
+def find_json_data_path():
+    json_path = Path(__file__).parent.parent.parent / "enhanced_weapons.json"
+    return str(json_path) if json_path.exists() else None
 
 class EnhancedWeaponBrowser(QDialog):
     """Enhanced weapon browser dialog with detailed weapon inspection"""
@@ -75,35 +80,23 @@ class EnhancedWeaponBrowser(QDialog):
     def _init_localization(self):
         """Initialize localization support from GameData"""
         try:
-            # Try different possible paths for GameData.cff
-            possible_paths = [
-                # Path relative to this file (cff_editor/widgets/)
-                Path(__file__).parent.parent.parent.parent / "OriginalGameFiles" / "data" / "GameData.cff",
-                # Alternative path structures
-                Path(__file__).parent.parent.parent.parent / "OriginalGameFiles" / "GameData.cff",
-                Path(__file__).parent.parent.parent.parent.parent / "OriginalGameFiles" / "data" / "GameData.cff"
-            ]
-
-            for gamedata_path in possible_paths:
-                if gamedata_path.exists():
-                    # Try importing GameData using different approaches
+            gamedata_path_str = find_gamedata_path()
+            if gamedata_path_str:
+                try:
+                    from ...tirganach import GameData
+                    self.gamedata = GameData(gamedata_path_str)
+                    print(f"Loaded GameData from {gamedata_path_str} for localization")
+                except ImportError:
+                    import sys
+                    sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
                     try:
-                        from ...tirganach import GameData
-                        self.gamedata = GameData(str(gamedata_path))
+                        from tirganach import GameData
+                        self.gamedata = GameData(gamedata_path_str)
+                        print(f"Loaded GameData from {gamedata_path_str} for localization")
                     except ImportError:
-                        # Handle when running as a standalone module
-                        import sys
-                        sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
-                        try:
-                            from tirganach import GameData
-                            self.gamedata = GameData(str(gamedata_path))
-                        except ImportError:
-                            print(f"Could not import GameData from tirganach module")
-                            continue
-                    print(f"Loaded GameData from {gamedata_path} for localization")
-                    return
-
-            print(f"GameData.cff not found in any of the expected locations")
+                        print("Could not import GameData from tirganach module")
+            else:
+                print("GameData.cff not found in any of the expected locations")
         except Exception as e:
             print(f"Warning: Could not initialize GameData for localization: {e}")
             import traceback
@@ -112,11 +105,10 @@ class EnhancedWeaponBrowser(QDialog):
     def load_weapons_from_cff(self):
         """Load weapons directly from GameData.cff for consistent localization"""
         try:
-            gamedata_path = Path(__file__).parent.parent.parent.parent / "OriginalGameFiles" / "data" / "GameData.cff"
-            
-            if gamedata_path.exists():
+            gamedata_path_str = find_gamedata_path()
+            if gamedata_path_str:
                 from ...tirganach import GameData
-                gamedata = GameData(str(gamedata_path))
+                gamedata = GameData(gamedata_path_str)
                 
                 # Load weapons from GameData
                 for weapon in gamedata.weapons:
@@ -141,6 +133,7 @@ class EnhancedWeaponBrowser(QDialog):
                             'selling_price': weapon.item.selling_price if hasattr(weapon.item, 'selling_price') else 0,
                             'buying_price': weapon.item.buying_price if hasattr(weapon.item, 'buying_price') else 0,
                             'item_set_id': weapon.item.item_set_id if hasattr(weapon.item, 'item_set_id') else 0,
+                            'data_source': 'CFF',
                         }
 
                         # Try to get type and material names from GameData
@@ -168,24 +161,69 @@ class EnhancedWeaponBrowser(QDialog):
                         except:
                             weapon_dict['ui_handle'] = f"icon_{weapon.item_id}"
 
+                        # Try to get school requirements from item_requirements
+                        try:
+                            if hasattr(gamedata, 'item_requirements'):
+                                item_reqs = gamedata.item_requirements.where(item_id=weapon.item_id)
+                                if item_reqs:
+                                    school_reqs = [
+                                        {
+                                            'requirement_school': str(req.requirement_school),
+                                            'level': getattr(req, 'level', 0),
+                                            'requirement_number': getattr(req, 'requirement_number', 0),
+                                        }
+                                        for req in item_reqs
+                                    ]
+                                    weapon_dict['requirements'] = {
+                                        'level': max([getattr(req, 'level', 0) for req in item_reqs]) if item_reqs else 1,
+                                        'school_requirements': school_reqs,
+                                        'strength': 0,
+                                        'dexterity': 0,
+                                        'intelligence': 0,
+                                    }
+                                else:
+                                    weapon_dict['requirements'] = {
+                                        'level': 1,
+                                        'school_requirements': [],
+                                        'strength': 0,
+                                        'dexterity': 0,
+                                        'intelligence': 0,
+                                    }
+                        except Exception:
+                            weapon_dict['requirements'] = {
+                                'level': 1,
+                                'school_requirements': [],
+                                'strength': 0,
+                                'dexterity': 0,
+                                'intelligence': 0,
+                            }
+
                         # Add to weapons data
                         self.weapons_data[weapon.item_id] = weapon_dict
 
                 print(f"EnhancedWeaponBrowser loaded {len(self.weapons_data)} weapons from GameData.cff with proper localization IDs")
             else:
-                print(f"GameData.cff not found at {gamedata_path}")
+                print("GameData.cff not found in expected locations")
                 # Fallback loading from JSON
-                weapons_file = Path(__file__).parent.parent.parent / "enhanced_weapons.json"
-                
-                if weapons_file.exists():
-                    with open(weapons_file, 'r') as f:
+                json_data_path = find_json_data_path()
+                if json_data_path:
+                    with open(json_data_path, 'r') as f:
                         weapons_list = json.load(f)
                     
                     # Convert list to dict with item_id as key
                     for weapon_dict in weapons_list:
+                        weapon_dict['data_source'] = 'JSON'
+                        # Ensure required fields exist
+                        weapon_dict.setdefault('requirements', {
+                            'level': 1,
+                            'school_requirements': [],
+                            'strength': 0,
+                            'dexterity': 0,
+                            'intelligence': 0,
+                        })
                         self.weapons_data[weapon_dict['item_id']] = weapon_dict
                     
-                    print(f"Loaded {len(self.weapons_data)} weapons from enhanced_weapons.json")
+                    print(f"Loaded {len(self.weapons_data)} weapons from {json_data_path}")
                 else:
                     print("Both GameData.cff and enhanced_weapons.json not found")
                 
@@ -195,17 +233,17 @@ class EnhancedWeaponBrowser(QDialog):
             traceback.print_exc()
             
             # Fallback to JSON
-            weapons_file = Path(__file__).parent.parent.parent / "enhanced_weapons.json"
-            
-            if weapons_file.exists():
-                with open(weapons_file, 'r') as f:
+            json_data_path = find_json_data_path()
+            if json_data_path:
+                with open(json_data_path, 'r') as f:
                     weapons_list = json.load(f)
                 
                 # Convert list to dict with item_id as key
                 for weapon_dict in weapons_list:
+                    weapon_dict['data_source'] = 'JSON'
                     self.weapons_data[weapon_dict['item_id']] = weapon_dict
                 
-                print(f"Loaded {len(self.weapons_data)} weapons from enhanced_weapons.json (fallback)")
+                print(f"Loaded {len(self.weapons_data)} weapons from {json_data_path} (fallback)")
             else:
                 print("GameData.cff and enhanced_weapons.json files not found")
 
@@ -660,6 +698,7 @@ class EnhancedWeaponBrowser(QDialog):
             ("Material", localized_material),
             ("Hands", weapon_info.get("hands", "Unknown")),
             ("Category", weapon_info.get("damage_category", "Unknown")),
+            ("Source", weapon_info.get("data_source", "Unknown")),
         ]
 
         for label, value in basic_info:
@@ -808,6 +847,40 @@ class EnhancedWeaponBrowser(QDialog):
             row_layout.addWidget(value_widget)
             row_layout.addStretch()
             req_layout.addLayout(row_layout)
+
+        # Add school requirements if available
+        school_requirements = req_data.get("school_requirements", [])
+        if school_requirements:
+            # Separator
+            separator_label = QLabel("─")
+            separator_label.setStyleSheet("color: #6fb3d2; font-weight: bold;")
+            separator_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            req_layout.addWidget(separator_label)
+
+            # Title
+            school_title = QLabel("<strong>SCHOOL REQUIREMENTS:</strong>")
+            school_title.setStyleSheet("color: #6fb3d2; font-weight: bold; margin-top: 10px;")
+            req_layout.addWidget(school_title)
+
+            # List each school requirement
+            for sr in school_requirements:
+                raw_name = sr.get("requirement_school", "")
+                level = sr.get("level", 0)
+                # Normalize/format name
+                name = str(raw_name)
+                if "." in name:
+                    name = name.split(".")[-1]
+                name = name.replace("_", " ").title()
+
+                row = QHBoxLayout()
+                school_label = QLabel(f"  • {name}")
+                school_label.setStyleSheet("color: #6fb3d2; min-width: 150px;")
+                level_label = QLabel(f"Level {level}")
+                level_label.setStyleSheet("color: #e0e0e0; font-weight: bold;")
+                row.addWidget(school_label)
+                row.addWidget(level_label)
+                row.addStretch()
+                req_layout.addLayout(row)
 
         self.details_content_layout.addWidget(req_group)
 

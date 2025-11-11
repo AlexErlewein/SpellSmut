@@ -32,8 +32,10 @@ from ..models.weapon_creation_data import (
     WeaponHands,
     WeaponCreationData,
     WeaponRequirements,
+    SchoolRequirement,
 )
 from ..shared.id_manager import ContentType, IDManager
+from ..shared.gamedata_resolver import find_gamedata_path
 from .weapon_sound_manager import (
     create_sound_selector_widget,
     auto_assign_weapon_sounds,
@@ -53,9 +55,8 @@ class WeaponForgeWizard(QWizard):
         # Get data_model from parent (MainWindow)
         self.data_model = getattr(parent, "data_model", None)
 
-        # Initialize CFF exporter
-        # Look for GameData.cff in expected locations
-        gamedata_path = self._find_gamedata_path()
+        # Initialize CFF exporter using unified resolver
+        gamedata_path = find_gamedata_path()
         self.cff_exporter = WeaponCFFExporter(gamedata_path) if gamedata_path else None
 
         self.setWindowTitle("Weapon Forge Wizard")
@@ -81,26 +82,8 @@ class WeaponForgeWizard(QWizard):
         super().done(result)
 
     def _find_gamedata_path(self) -> Optional[str]:
-        """Find GameData.cff in expected locations"""
-        possible_paths = [
-            # Check relative to project root
-            Path(__file__).parent.parent.parent.parent.parent
-            / "OriginalGameFiles"
-            / "data"
-            / "GameData.cff",
-            Path(__file__).parent.parent.parent.parent.parent
-            / "OriginalGameFiles"
-            / "GameData.cff",
-            # Check common installation paths
-            Path.home() / "SpellForce Platinum Edition" / "data" / "GameData.cff",
-            # Add more paths as needed
-        ]
-
-        for path in possible_paths:
-            if path.exists():
-                return str(path)
-
-        return None
+        """Deprecated: use shared resolver. Kept for backward compatibility."""
+        return find_gamedata_path()
 
     def export_weapon(self) -> bool:
         """Export weapon to JSON and/or CFF"""
@@ -449,15 +432,7 @@ class ModeSelectionPage(QWizardPage):
             if weapon_dict:
                 try:
                     # Load the weapon using WeaponLoader with GameData path
-                    gamedata_path = (
-                        Path(__file__).parent.parent.parent.parent.parent
-                        / "OriginalGameFiles"
-                        / "data"
-                        / "GameData.cff"
-                    )
-                    gamedata_path_str = (
-                        str(gamedata_path) if gamedata_path.exists() else None
-                    )
+                    gamedata_path_str = find_gamedata_path()
                     self.selected_weapon_data = self.weapon_loader.load_weapon(
                         weapon_dict["item_id"], gamedata_path=gamedata_path_str
                     )
@@ -1105,7 +1080,7 @@ class RequirementsValuePage(QWizardPage):
                 parts = text.split(" Level ")
                 school_name = parts[0]
                 level = int(parts[1])
-                requirements.append({"school_name": school_name, "level": level})
+                requirements.append(SchoolRequirement(school_name=school_name, level=level))
         return requirements
 
     def initializePage(self):
@@ -1530,6 +1505,23 @@ class ReviewExportPage(QWizardPage):
         # Generate icon HTML for summary
         icon_html = self._format_icon_for_summary(weapon.icon_handle)
 
+        # Format school requirements (if any)
+        school_reqs_html = ""
+        try:
+            if weapon.requirements and weapon.requirements.school_requirements:
+                items = "".join(
+                    [
+                        f"<li>{sr.school_name.replace('_', ' ').title()} — Level {sr.level}</li>"
+                        for sr in weapon.requirements.school_requirements
+                    ]
+                )
+                school_reqs_html = (
+                    "<h4 style=\"color: #34495e;\">School Requirements</h4>"
+                    f"<ul style=\"margin-top: 0;\">{items}</ul>"
+                )
+        except Exception:
+            school_reqs_html = ""
+
         html = f"""
         <html>
         <body style="font-family: Arial, sans-serif;">
@@ -1579,6 +1571,7 @@ class ReviewExportPage(QWizardPage):
                 <tr><td><b>Intelligence:</b></td><td>{weapon.requirements.intelligence}</td></tr>
                 <tr><td><b>Level:</b></td><td>{weapon.requirements.level}</td></tr>
             </table>
+            {school_reqs_html}
 
             <h3 style="color: #34495e;">Economy</h3>
             <table style="width: 100%; border-collapse: collapse;">

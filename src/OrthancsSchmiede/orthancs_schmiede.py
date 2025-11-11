@@ -705,11 +705,24 @@ class OrthancsSchmiede(QMainWindow):
                         )
                         if not isinstance(type_text, str):
                             type_text = str(type_text)
+
+                        # Detect entries originating from armor_data (e.g., Wands)
+                        is_armor_entry = (
+                            "armor_type" in weapon_info
+                            or "slot" in weapon_info
+                            or (isinstance(weapon_info.get("item_subtype", ""), str) and
+                                weapon_info.get("item_subtype", "").startswith("EquipmentType."))
+                        )
+
                         item = QTreeWidgetItem(
                             type_node, [name, type_text, str(weapon_id)]
                         )
-                        # Mark as weapon for proper handling in UI
-                        item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
+                        # Mark item type for proper handling in UI
+                        item.setData(
+                            0,
+                            Qt.ItemDataRole.UserRole,
+                            ("armor", weapon_id) if is_armor_entry else ("weapon", weapon_id),
+                        )
 
             # Create Two-Handed Weapons category
             if two_handed_weapons:
@@ -743,11 +756,24 @@ class OrthancsSchmiede(QMainWindow):
                         )
                         if not isinstance(type_text, str):
                             type_text = str(type_text)
+
+                        # Detect entries originating from armor_data (e.g., Wands)
+                        is_armor_entry = (
+                            "armor_type" in weapon_info
+                            or "slot" in weapon_info
+                            or (isinstance(weapon_info.get("item_subtype", ""), str) and
+                                weapon_info.get("item_subtype", "").startswith("EquipmentType."))
+                        )
+
                         item = QTreeWidgetItem(
                             type_node, [name, type_text, str(weapon_id)]
                         )
-                        # Mark as weapon for proper handling in UI
-                        item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
+                        # Mark item type for proper handling in UI
+                        item.setData(
+                            0,
+                            Qt.ItemDataRole.UserRole,
+                            ("armor", weapon_id) if is_armor_entry else ("weapon", weapon_id),
+                        )
 
             # Create Others category
             if other_weapons:
@@ -770,10 +796,23 @@ class OrthancsSchmiede(QMainWindow):
                         )
                         if not isinstance(type_text, str):
                             type_text = str(type_text)
+
+                        # Detect entries originating from armor_data
+                        is_armor_entry = (
+                            "armor_type" in weapon_info
+                            or "slot" in weapon_info
+                            or (isinstance(weapon_info.get("item_subtype", ""), str) and
+                                weapon_info.get("item_subtype", "").startswith("EquipmentType."))
+                        )
+
                         item = QTreeWidgetItem(
                             type_node, [name, type_text, str(weapon_id)]
                         )
-                        item.setData(0, Qt.ItemDataRole.UserRole, ("weapon", weapon_id))
+                        item.setData(
+                            0,
+                            Qt.ItemDataRole.UserRole,
+                            ("armor", weapon_id) if is_armor_entry else ("weapon", weapon_id),
+                        )
 
             weapons_root.setExpanded(True)
 
@@ -1264,7 +1303,10 @@ class OrthancsSchmiede(QMainWindow):
                 school_level = school_req.get("level", 0)
 
                 # Format school name for better display
-                formatted_name = school_name.replace("_", " ").title()
+                formatted_name = str(school_name)
+                if "." in formatted_name:
+                    formatted_name = formatted_name.split(".")[-1]
+                formatted_name = formatted_name.replace("_", " ").title()
 
                 row_layout = QHBoxLayout()
                 school_label = QLabel(f"  • {formatted_name}")
@@ -1768,7 +1810,10 @@ class OrthancsSchmiede(QMainWindow):
                 school_level = school_req.get("level", 0)
 
                 # Format school name for better display
-                formatted_name = school_name.replace("_", " ").title()
+                formatted_name = str(school_name)
+                if "." in formatted_name:
+                    formatted_name = formatted_name.split(".")[-1]
+                formatted_name = formatted_name.replace("_", " ").title()
 
                 row_layout = QHBoxLayout()
                 school_label = QLabel(f"  • {formatted_name}")
