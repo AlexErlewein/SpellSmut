@@ -932,16 +932,36 @@ def create_sound_selector_widget(
     miss_label = QLabel(f"Miss: {current_miss or 'None'}")
 
     def open_sound_dialog():
-        dialog = WeaponSoundSelectionDialog(
-            weapon_type, hands, current_hit, current_miss
-        )
-        if dialog.exec() == QDialog.DialogCode.Accepted:
-            hit_sound, miss_sound = dialog.get_selected_sounds()
-            hit_label.setText(f"Hit: {hit_sound}")
-            miss_label.setText(f"Miss: {miss_sound}")
-            # Store the sounds somewhere accessible to the main wizard
-            widget.hit_sound = hit_sound
-            widget.miss_sound = miss_sound
+        try:
+            dialog = WeaponSoundSelectionDialog(
+                weapon_type, hands, current_hit, current_miss
+            )
+
+            # Debug: Check if audio controls are present
+            if hasattr(dialog, 'volume_slider'):
+                print("✅ Audio preview controls available in dialog")
+            else:
+                print("⚠️ Audio preview controls missing from dialog")
+
+            result = dialog.exec()
+            if result == QDialog.Accepted:
+                hit_sound, miss_sound = dialog.get_selected_sounds()
+                hit_label.setText(f"Hit: {hit_sound}")
+                miss_label.setText(f"Miss: {miss_sound}")
+                # Store the sounds somewhere accessible to the main wizard
+                widget.hit_sound = hit_sound
+                widget.miss_sound = miss_sound
+                print(f"✅ Sound selection updated: Hit={hit_sound}, Miss={miss_sound}")
+            else:
+                print("📝 Sound dialog cancelled")
+
+        except Exception as e:
+            print(f"❌ Error opening sound dialog: {e}")
+            QMessageBox.critical(
+                None,
+                "Sound Dialog Error",
+                f"Failed to open sound selection dialog:\n{str(e)}"
+            )
 
     # Browse button
     browse_btn = QPushButton("Browse Sounds...")

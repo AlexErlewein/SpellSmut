@@ -286,10 +286,21 @@ class WeaponForgeWizard(QWizard):
                     f"• Place this file in your SpellForce data directory to test"
                 )
             else:
+                # Try to provide more helpful error information
+                try:
+                    from TirganachReloaded.cff_editor.exporters.weapon_cff_exporter import TIRGANACH_AVAILABLE
+                    if not TIRGANACH_AVAILABLE:
+                        error_msg = "CFF export failed: Tirganach library not available. Please install required dependencies."
+                    else:
+                        error_msg = "CFF export failed. The tirganach library had an error processing the export. Check console for details."
+                except:
+                    error_msg = "CFF export failed: Unknown error with export system."
+
                 QMessageBox.critical(
                     self,
                     "CFF Export Failed",
-                    "Failed to export weapon to CFF format. Check the console for error details."
+                    f"{error_msg}\n\n"
+                    f"Falling back to JSON export. Please try JSON format instead."
                 )
 
             return success
@@ -316,6 +327,24 @@ class ModeSelectionPage(QWizardPage):
 
         # Creation Mode
         mode_group = QGroupBox("Creation Mode")
+        mode_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                border: 2px solid #555;
+                border-radius: 8px;
+                margin-top: 1ex;
+                padding-top: 10px;
+                background-color: #2d2d2d;
+                color: #ffffff;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+                background-color: #2d2d2d;
+                color: #ffffff;
+            }
+        """)
         mode_layout = QVBoxLayout()
         self.new_weapon_radio = QRadioButton("Create New Weapon (blank slate)")
         self.edit_weapon_radio = QRadioButton(
@@ -352,6 +381,24 @@ class ModeSelectionPage(QWizardPage):
 
         # ID Assignment
         id_group = QGroupBox("ID Assignment")
+        id_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                border: 2px solid #555;
+                border-radius: 8px;
+                margin-top: 1ex;
+                padding-top: 10px;
+                background-color: #2d2d2d;
+                color: #ffffff;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+                background-color: #2d2d2d;
+                color: #ffffff;
+            }
+        """)
         id_layout = QVBoxLayout()
         self.auto_id_radio = QRadioButton("Auto-assign next available ID (recommended)")
         self.manual_id_radio = QRadioButton("Manual ID entry (with validation)")
@@ -1113,6 +1160,24 @@ class ReviewExportPage(QWizardPage):
 
         # Export Options Section
         export_group = QGroupBox("Export Options")
+        export_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                border: 2px solid #555;
+                border-radius: 8px;
+                margin-top: 1ex;
+                padding-top: 10px;
+                background-color: #2d2d2d;
+                color: #ffffff;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+                background-color: #2d2d2d;
+                color: #ffffff;
+            }
+        """)
         export_layout = QVBoxLayout()
 
         self.export_json_radio = QRadioButton("Export to JSON only")
