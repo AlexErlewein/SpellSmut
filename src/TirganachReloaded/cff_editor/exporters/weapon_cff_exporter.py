@@ -123,9 +123,9 @@ class WeaponCFFExporter:
 
         # Map our weapon hands to equipment types
         equipment_map = {
-            "1H": EquipmentType.WEAPON_1H,
-            "2H": EquipmentType.WEAPON_2H,
-            "Unarmed": EquipmentType.WEAPON_UNARMED
+            "1H": EquipmentType.ONEHANDED_WEAPON,
+            "2H": EquipmentType.TWOHANDED_WEAPON,
+            "Unarmed": EquipmentType.ONEHANDED_WEAPON
         }
 
         # Calculate the name_id (we'll use weapon_id + offset for now)

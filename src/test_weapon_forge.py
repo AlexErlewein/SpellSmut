@@ -19,6 +19,7 @@ from PySide6.QtGui import QFont
 from TirganachReloaded.cff_editor.data_model import CFFDataModel
 from TirganachReloaded.cff_editor.shared.id_manager import IDManager
 from TirganachReloaded.cff_editor.widgets.weapon_forge_wizard import WeaponForgeWizard
+from TirganachReloaded.cff_editor.shared.gamedata_resolver import find_gamedata_path
 
 
 def test_components_only():
@@ -219,25 +220,22 @@ def check_dependencies():
     except ImportError:
         print("   ⚠️  Tirganach library not found - CFF export will be disabled")
 
-    # Check GameData.cff file
-    gamedata_paths = [
-        project_root / "OriginalGameFiles" / "data" / "GameData.cff",
-        project_root / "OriginalGameFiles" / "GameData.cff",
-        Path.home() / "SpellForce Platinum Edition" / "data" / "GameData.cff",
-    ]
-
-    gamedata_found = False
-    for path in gamedata_paths:
-        if path.exists():
-            print(f"   ✅ GameData.cff found: {path}")
-            gamedata_found = True
-            break
-
-    if not gamedata_found:
+    # Check GameData.cff file using shared resolver
+    gd_path = find_gamedata_path()
+    if gd_path:
+        print(f"   ✅ GameData.cff found: {gd_path}")
+    else:
         print("   ⚠️  GameData.cff not found - some features may be limited")
         print("      Expected locations:")
-        for path in gamedata_paths:
-            print(f"        - {path}")
+        expected = [
+            project_root.parent / "OriginalGameFiles" / "data" / "GameData.cff",
+            project_root.parent / "OriginalGameFiles" / "GameData.cff",
+            project_root / "OriginalGameFiles" / "data" / "GameData.cff",
+            project_root / "OriginalGameFiles" / "GameData.cff",
+            Path.home() / "SpellForce Platinum Edition" / "data" / "GameData.cff",
+        ]
+        for p in expected:
+            print(f"        - {p}")
 
     print()
 
@@ -281,10 +279,9 @@ def main():
 
         # Try to load game data if available
         try:
-            gamedata_path = project_root / "OriginalGameFiles" / "data" / "GameData.cff"
-            if gamedata_path.exists():
-                # Note: CFFDataModel loads data automatically during initialization
-                print(f"   ✅ Game data available at {gamedata_path}")
+            gd_path = find_gamedata_path()
+            if gd_path:
+                print(f"   ✅ Game data available at {gd_path}")
             else:
                 print("   ⚠️  GameData.cff not found, using empty data model")
         except Exception as e:

@@ -7,6 +7,7 @@ from PySide6.QtWidgets import (
     QHBoxLayout,
     QLabel,
     QLineEdit,
+    QFileDialog,
     QMessageBox,
     QPushButton,
     QRadioButton,
@@ -220,6 +221,12 @@ class WeaponForgeWizard(QWizard):
         """Export weapon to CFF file"""
         try:
             if not self.cff_exporter:
+                # Try to initialize exporter now using resolver
+                gd_path = find_gamedata_path()
+                if gd_path:
+                    self.cff_exporter = WeaponCFFExporter(gd_path)
+
+            if not self.cff_exporter:
                 QMessageBox.warning(
                     self,
                     "CFF Export Not Available",
@@ -231,20 +238,33 @@ class WeaponForgeWizard(QWizard):
                 )
                 return False
 
-            # Create CFF exports directory
+            # Suggest a default location and name, but allow user to choose
             cff_dir = Path("custom_weapons_cff")
             cff_dir.mkdir(exist_ok=True)
 
-            # Generate filename from weapon name
             safe_name = "".join(
-                c if c.isalnum() or c in (" ", "-", "_") else "_"
-                for c in self.weapon_data.weapon_name
+                c if c.isalnum() or c in (" ", "-", "_") else "_" for c in self.weapon_data.weapon_name
+            ).replace(" ", "_").lower()
+
+            default_filename = f"GameData_custom_weapon_{self.weapon_data.weapon_id}_{safe_name}.cff"
+            default_path = cff_dir / default_filename
+
+            # File Save dialog
+            selected_path, _ = QFileDialog.getSaveFileName(
+                self,
+                "Save CFF As",
+                str(default_path),
+                "CFF Files (*.cff)"
             )
-            safe_name = safe_name.replace(" ", "_").lower()
-            filename = (
-                f"GameData_custom_weapon_{self.weapon_data.weapon_id}_{safe_name}.cff"
-            )
-            filepath = cff_dir / filename
+
+            if not selected_path:
+                # User cancelled save dialog
+                QMessageBox.information(self, "Export Cancelled", "CFF export cancelled.")
+                return False
+
+            filepath = Path(selected_path)
+            if filepath.suffix.lower() != ".cff":
+                filepath = filepath.with_suffix(".cff")
 
             # Add metadata
             self.weapon_data.created_date = datetime.now().isoformat()
@@ -1348,32 +1368,16 @@ class ReviewExportPage(QWizardPage):
         )
         self.export_both_radio = QRadioButton("Export to both JSON and CFF")
 
-        # Enable CFF export if tirganach library is available
-        wizard = self.parent()
-        if wizard and hasattr(wizard, "cff_exporter") and wizard.cff_exporter:
-            self.export_json_radio.setChecked(True)
-            self.export_cff_radio.setEnabled(True)
-            self.export_both_radio.setEnabled(True)
+        # Default state; will be updated when the page is shown
+        self.export_json_radio.setChecked(True)
+        self.export_cff_radio.setEnabled(False)
+        self.export_both_radio.setEnabled(False)
 
-            # Add explanation text
-            cff_info = QLabel(
-                "📦 CFF Export creates a complete GameData.cff file with your weapon added."
-            )
-            cff_info.setStyleSheet("color: #27ae60; font-size: 9pt; margin: 5px;")
-            cff_info.setWordWrap(True)
-            export_layout.addWidget(cff_info)
-        else:
-            self.export_json_radio.setChecked(True)
-            self.export_cff_radio.setEnabled(False)
-            self.export_both_radio.setEnabled(False)
-
-            # Add warning text
-            cff_warning = QLabel(
-                "⚠️ CFF export requires GameData.cff file to be available."
-            )
-            cff_warning.setStyleSheet("color: #e74c3c; font-size: 9pt; margin: 5px;")
-            cff_warning.setWordWrap(True)
-            export_layout.addWidget(cff_warning)
+        # Dynamic CFF availability label (updated in initializePage)
+        self.cff_state_label = QLabel("Checking GameData.cff availability...")
+        self.cff_state_label.setStyleSheet("color: #bdc3c7; font-size: 9pt; margin: 5px;")
+        self.cff_state_label.setWordWrap(True)
+        export_layout.addWidget(self.cff_state_label)
 
         export_layout.addWidget(self.export_json_radio)
         export_layout.addWidget(self.export_cff_radio)
@@ -1403,6 +1407,57 @@ class ReviewExportPage(QWizardPage):
         errors, warnings = validator.validate(weapon_data)
         validation_html = self.format_validation(errors, warnings)
         self.validation_text.setHtml(validation_html)
+
+        # Enable/disable CFF export dynamically now that we have access to the wizard
+        self._sync_cff_export_state()
+
+    def _sync_cff_export_state(self):
+        """Enable/disable CFF export based on wizard.cff_exporter and availability."""
+        try:
+            wiz = self.wizard()
+            cff_exp = getattr(wiz, "cff_exporter", None) if wiz else None
+
+            # Try to lazily initialize if missing
+            if wiz and not cff_exp:
+                gd_path = find_gamedata_path()
+                if gd_path:
+                    try:
+                        wiz.cff_exporter = WeaponCFFExporter(gd_path)
+                        cff_exp = wiz.cff_exporter
+                    except Exception:
+                        cff_exp = None
+
+            if cff_exp:
+                self.export_cff_radio.setEnabled(True)
+                self.export_both_radio.setEnabled(True)
+                if hasattr(self, "cff_state_label") and self.cff_state_label:
+                    self.cff_state_label.setText(
+                        "📦 CFF Export available. A complete GameData.cff will be written."
+                    )
+                    self.cff_state_label.setStyleSheet(
+                        "color: #27ae60; font-size: 9pt; margin: 5px;"
+                    )
+            else:
+                self.export_cff_radio.setEnabled(False)
+                self.export_both_radio.setEnabled(False)
+                if hasattr(self, "cff_state_label") and self.cff_state_label:
+                    self.cff_state_label.setText(
+                        "⚠️ CFF export requires GameData.cff. Place it under OriginalGameFiles/data (or documented paths)."
+                    )
+                    self.cff_state_label.setStyleSheet(
+                        "color: #e74c3c; font-size: 9pt; margin: 5px;"
+                    )
+        except Exception:
+            # Keep JSON-only as a safe default on any error
+            self.export_cff_radio.setEnabled(False)
+            self.export_both_radio.setEnabled(False)
+            if hasattr(self, "cff_state_label") and self.cff_state_label:
+                self.cff_state_label.setText(
+                    "⚠️ CFF export temporarily unavailable due to an error. Use JSON."
+                )
+                self.cff_state_label.setStyleSheet(
+                    "color: #e74c3c; font-size: 9pt; margin: 5px;"
+                )
 
     def build_weapon_data_from_wizard(self) -> WeaponCreationData:
         """Gather data from all wizard pages and build WeaponCreationData object"""
