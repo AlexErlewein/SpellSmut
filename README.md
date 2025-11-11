@@ -19,9 +19,9 @@ Our documentation includes detailed guides for:
 
 Comprehensive visual tools for creating mod content:
 
-- **Quest Creator** - Complete visual quest creation system with step-by-step dialogue editor, real-time auto-save, and branching dialogue support
-- **Visual Dialogue Editor** - Top-down tree view dialogue builder with choice-to-response mapping and step-by-step guidance
-- **Unified Quest Editor** - Integrated quest creation suite with browser, immediate quest creation, and guided dialogue editing
+- **Quest Creator** - Complete quest creation system with text-based dialogue editor, automatic choice-to-response linking, and branching dialogue support
+- **Visual Dialogue Editor** - Clean text-based tree view dialogue builder with intelligent choice mapping and step-by-step guidance
+- **Unified Quest Editor** - Integrated quest creation suite with browser, immediate quest creation, and simplified dialogue editing
 - **Spell Creator** - 7-phase "Spell Wizard" with 1-15 level progression system
 - **Weapon Creator** - 7-phase "Weapon Forge" with edit-existing feature (719 weapons to modify)
 - **Armor Creator** - 7-phase "Armor Forge" for custom armor pieces with stat bonuses

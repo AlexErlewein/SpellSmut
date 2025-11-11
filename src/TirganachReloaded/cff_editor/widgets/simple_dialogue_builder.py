@@ -58,6 +58,7 @@ class DialogueStep:
     text: str = ""
     choices: List[Dict[str, str]] = None  # Each choice: {'text': 'Option text', 'next_step_id': 'target_step_id'}
     next_step_id: str = ""  # For linear flow when no branching
+    response_to_choice: str = ""  # ID of the choice this NPC response is responding to
 
     def __post_init__(self):
         if self.choices is None:
@@ -218,8 +219,16 @@ class FlowChartNode(QGraphicsRectItem):
         type_name = type_names.get(self.step.type, "STEP")
 
         # Create display text with connection status
-        if self.step.type == DialogueStepType.NPC_SPEECH or self.step.type == DialogueStepType.NPC_RESPONSE:
+        if self.step.type == DialogueStepType.NPC_SPEECH:
             display_text = f"{type_name}\n{self.step.speaker}: {self.step.text[:30]}..."
+        elif self.step.type == DialogueStepType.NPC_RESPONSE:
+            # Show which choice this response is for
+            if self.step.response_to_choice:
+                # Extract a short choice identifier
+                choice_info = f"→ {self.step.response_to_choice[-15:]}" if len(self.step.response_to_choice) > 15 else f"→ {self.step.response_to_choice}"
+                display_text = f"{type_name} {choice_info}\n{self.step.speaker}: {self.step.text[:20]}..."
+            else:
+                display_text = f"{type_name}\n{self.step.speaker}: {self.step.text[:30]}..."
         elif self.step.type == DialogueStepType.PLAYER_CHOICE:
             connected_choices = sum(1 for choice in self.step.choices if choice.get('next_step_id'))
             total_choices = len(self.step.choices)
@@ -728,6 +737,22 @@ class DialogueStepWidget(QFrame):
                 speaker_label.setStyleSheet("font-weight: bold; color: #2c3e50; margin: 5px;")
                 layout.addWidget(speaker_label)
 
+        # Choice selector for NPC Response steps
+        if self.step.type == DialogueStepType.NPC_RESPONSE:
+            if self.is_editable:
+                choice_layout = QHBoxLayout()
+                choice_layout.addWidget(QLabel("Responds to choice:"))
+                self.choice_selector = QComboBox()
+                self.choice_selector.addItem("Select which player choice this responds to", "")
+                self.choice_selector.currentIndexChanged.connect(self.on_choice_selected)
+                choice_layout.addWidget(self.choice_selector)
+                layout.addLayout(choice_layout)
+            else:
+                if self.step.response_to_choice:
+                    choice_label = QLabel(f"Response to: {self.step.response_to_choice}")
+                    choice_label.setStyleSheet("font-style: italic; color: #7f8c8d; margin: 5px;")
+                    layout.addWidget(choice_label)
+
         # Dialogue text
         if self.is_editable:
             self.text_edit = QTextEdit()
@@ -742,7 +767,7 @@ class DialogueStepWidget(QFrame):
                 text_label.setWordWrap(True)
                 text_label.setStyleSheet("""
                     QLabel {
-                        background-color: #ffffff;
+                        background-color: #f8f9fa;
                         color: #2c3e50;
                         padding: 15px;
                         border-radius: 8px;
@@ -804,7 +829,7 @@ class DialogueStepWidget(QFrame):
                         border-radius: 6px;
                         margin-top: 6px;
                         padding-top: 8px;
-                        background-color: #ffffff;
+                        background-color: #f8f9fa;
                     }
                     QGroupBox::title {
                         subcontrol-origin: margin;
@@ -883,7 +908,7 @@ class DialogueStepWidget(QFrame):
                     choice_label = QLabel(f"• {choice_text} → Leads to response")
                     choice_label.setStyleSheet("""
                         QLabel {
-                            background-color: #ffffff;
+                            background-color: #f8f9fa;
                             color: #2c3e50;
                             padding: 8px 12px;
                             border-radius: 4px;
@@ -897,7 +922,7 @@ class DialogueStepWidget(QFrame):
                     choice_label = QLabel(f"• {choice_text}")
                     choice_label.setStyleSheet("""
                         QLabel {
-                            background-color: #ffffff;
+                            background-color: #f8f9fa;
                             color: #2c3e50;
                             padding: 8px 12px;
                             border-radius: 4px;
@@ -942,7 +967,7 @@ class DialogueStepWidget(QFrame):
                 speech_text_label = QLabel(self.step.text)
                 speech_text_label.setStyleSheet("""
                     QLabel {
-                        background-color: #ffffff;
+                        background-color: #f8f9fa;
                         color: #2c3e50;
                         padding: 12px 16px;
                         border-radius: 8px;
@@ -960,7 +985,7 @@ class DialogueStepWidget(QFrame):
         end_label = QLabel("Conversation Ends Here")
         end_label.setStyleSheet("""
             QLabel {
-                background-color: #ffffff;
+                background-color: #f8f9fa;
                 color: #2c3e50;
                 padding: 20px;
                 border-radius: 8px;
@@ -1013,6 +1038,60 @@ class DialogueStepWidget(QFrame):
 
             self.step_changed.emit(f"update:{self.step.id}")
 
+    def on_choice_selected(self, index):
+        """Handle choice selection for NPC response"""
+        if self.is_editable and hasattr(self, 'choice_selector'):
+            if index > 0:  # Skip placeholder item
+                choice_data = self.choice_selector.itemData(index)
+                if choice_data:
+                    self.step.response_to_choice = choice_data
+                    # Auto-link the choice to this response step
+                    self._link_choice_to_response(choice_data, self.step.id)
+                    self.step_changed.emit(f"update:{self.step.id}")
+            else:
+                self.step.response_to_choice = ""
+                self.step_changed.emit(f"update:{self.step.id}")
+
+    def _link_choice_to_response(self, choice_id, response_step_id):
+        """Automatically link a player choice to an NPC response step"""
+        # Parse choice_id to get parent step and choice index
+        # Format: "{parent_step_id}_choice_{choice_index}"
+        if "_choice_" in choice_id:
+            parts = choice_id.split("_choice_")
+            if len(parts) == 2:
+                parent_step_id = parts[0]
+                try:
+                    choice_index = int(parts[1])
+                    # Find all steps in the dialogue (we'll need access to parent)
+                    # This is a simplified approach - in practice, we'd need better access to all steps
+                    # For now, we'll emit a signal that the parent can handle
+                    self.step_changed.emit(f"link_choice:{parent_step_id}:{choice_index}:{response_step_id}")
+                except ValueError:
+                    pass  # Invalid choice index
+
+    def update_choice_options(self, all_steps):
+        """Update the choice selector with available player choices"""
+        if hasattr(self, 'choice_selector') and self.step.type == DialogueStepType.NPC_RESPONSE:
+            # Clear current items
+            self.choice_selector.clear()
+            self.choice_selector.addItem("Select which player choice this responds to", "")
+
+            # Find all player choice steps and add their options
+            for step in all_steps.values():
+                if step.type == DialogueStepType.PLAYER_CHOICE:
+                    for i, choice in enumerate(step.choices):
+                        choice_id = f"{step.id}_choice_{i}"
+                        choice_text = choice.get('text', f'Choice {i+1}')
+                        display_text = f"{step.id}: {choice_text[:30]}..."
+                        self.choice_selector.addItem(display_text, choice_id)
+
+            # Select current choice if set
+            if self.step.response_to_choice:
+                for i in range(self.choice_selector.count()):
+                    if self.choice_selector.itemData(i) == self.step.response_to_choice:
+                        self.choice_selector.setCurrentIndex(i)
+                        break
+
     def rebuild_ui(self):
         """Rebuild the UI"""
         # Clear current layout
@@ -1053,60 +1132,17 @@ class SimpleDialogueBuilder(QWidget):
         left_panel.setMinimumWidth(400)
         left_panel.setMaximumWidth(600)
 
-        # Flow chart title
-        title_label = QLabel("Dialogue Flow Chart")
+        # Tree view title
+        title_label = QLabel("Dialogue Structure")
         title_label.setStyleSheet("font-size: 16px; font-weight: bold; margin-bottom: 10px; color: #2c3e50;")
         left_layout.addWidget(title_label)
 
-        # Instructions and controls
-        instructions_widget = QWidget()
-        instructions_layout = QVBoxLayout()
-        instructions_widget.setLayout(instructions_layout)
-
-        instructions = QLabel("📊 Click nodes to select • See colored branches for player choices • Connection status shows in choice nodes")
-        instructions.setStyleSheet("font-size: 11px; color: #7f8c8d; margin-bottom: 10px; padding: 8px; background-color: #f8f9fa; border-radius: 4px; border-left: 4px solid #3498db;")
-        instructions.setWordWrap(True)
-        instructions_layout.addWidget(instructions)
-
-        # Connection mode toggle
-        connection_controls = QHBoxLayout()
-
-        self.connection_mode_btn = QPushButton("🔗 Enable Connection Mode")
-        self.connection_mode_btn.setStyleSheet("""
-            QPushButton {
-                background-color: #3498db;
-                color: white;
-                padding: 8px 16px;
-                border-radius: 5px;
-                font-weight: bold;
-                border: 1px solid #2980b9;
-            }
-            QPushButton:hover {
-                background-color: #2980b9;
-            }
-            QPushButton:checked {
-                background-color: #27ae60;
-                border: 1px solid #229954;
-            }
-        """)
-        self.connection_mode_btn.setCheckable(True)
-        self.connection_mode_btn.clicked.connect(self.toggle_connection_mode)
-        connection_controls.addWidget(self.connection_mode_btn)
-
-        connection_help = QLabel("Click and drag between nodes to create connections")
-        connection_help.setStyleSheet("font-size: 10px; color: #95a5a6; font-style: italic;")
-        connection_controls.addWidget(connection_help)
-        connection_controls.addStretch()
-
-        instructions_layout.addLayout(connection_controls)
-        left_layout.addWidget(instructions_widget)
-
-        # Flow chart view
-        self.flow_chart = FlowChartView()
-        self.flow_chart.node_selected.connect(self.on_flow_chart_node_selected)
-        self.flow_chart.connection_created.connect(self.on_connection_created)
-        self.flow_chart.setMinimumHeight(300)
-        left_layout.addWidget(self.flow_chart)
+        # Tree widget for dialogue structure
+        self.tree_widget = QTreeWidget()
+        self.tree_widget.setHeaderHidden(True)
+        self.tree_widget.itemClicked.connect(self.on_tree_item_clicked)
+        self.tree_widget.setMinimumHeight(400)
+        left_layout.addWidget(self.tree_widget)
 
         main_layout.addWidget(left_panel)
 
@@ -1244,7 +1280,7 @@ class SimpleDialogueBuilder(QWidget):
         self.add_step(choice_step)
         npc_step.next_step_id = choice_step.id
 
-        self.update_flow_chart()
+        self.update_tree()
         # Select the first NPC step by default
         self.select_step("step_2")
 
@@ -1258,7 +1294,7 @@ class SimpleDialogueBuilder(QWidget):
         """Remove a dialogue step"""
         if step_id in self.steps and self.steps[step_id].type != DialogueStepType.START:
             del self.steps[step_id]
-            self.update_flow_chart()
+            self.update_tree()
 
             # If we deleted the selected step, select another one
             if self.selected_step_id == step_id:
@@ -1320,13 +1356,17 @@ class SimpleDialogueBuilder(QWidget):
         self.current_step_widget.step_changed.connect(self.on_step_widget_changed)
         self.step_editor_layout.addWidget(self.current_step_widget)
 
+        # Update choice options for NPC Response steps
+        if step.type == DialogueStepType.NPC_RESPONSE:
+            self.current_step_widget.update_choice_options(self.steps)
+
         # Enable/disable add next button based on step type
         can_add_next = step.type != DialogueStepType.END
         self.add_next_btn.setEnabled(can_add_next)
 
-        # Update flow chart selection (without triggering recursion)
+        # Update tree selection (without triggering recursion)
         self._updating_selection = True
-        self.update_flow_chart_selection(step_id)
+        self.update_tree_selection(step_id)
         self._updating_selection = False
 
     def update_flow_chart_selection(self, selected_step_id):
@@ -1425,6 +1465,8 @@ class SimpleDialogueBuilder(QWidget):
                 name = type_names.get(step.type, "STEP")
                 if step.type == DialogueStepType.PLAYER_CHOICE:
                     name += f" ({len(step.choices)} options)"
+                elif step.type == DialogueStepType.NPC_RESPONSE and step.response_to_choice:
+                    name += f" → {step.response_to_choice[-10:]}"
 
                 item = QTreeWidgetItem([name])
                 item.setData(0, Qt.UserRole, step_id)
@@ -1496,7 +1538,7 @@ class SimpleDialogueBuilder(QWidget):
                 start_step.next_step_id = end_step_id
 
             # Update the flow chart and emit change signal
-            self.update_flow_chart()
+            self.update_tree()
             self.dialogue_changed.emit()
 
             # Show success feedback
@@ -1547,8 +1589,26 @@ class SimpleDialogueBuilder(QWidget):
         elif action_type == "delete":
             self.remove_step(step_id)
         elif action_type == "update":
-            self.update_flow_chart()
+            self.update_tree()
             self.dialogue_changed.emit()
+        elif action_type == "link_choice":
+            # Format: "link_choice:{parent_step_id}:{choice_index}:{response_step_id}"
+            parts = action.split(':', 3)
+            if len(parts) >= 4:
+                parent_step_id = parts[1]
+                choice_index = int(parts[2])
+                response_step_id = parts[3]
+                self._link_choice_to_response(parent_step_id, choice_index, response_step_id)
+
+    def _link_choice_to_response(self, parent_step_id, choice_index, response_step_id):
+        """Link a player choice to an NPC response step"""
+        parent_step = self.steps.get(parent_step_id)
+        if parent_step and parent_step.type == DialogueStepType.PLAYER_CHOICE:
+            if 0 <= choice_index < len(parent_step.choices):
+                # Set the next_step_id for the choice
+                parent_step.choices[choice_index]['next_step_id'] = response_step_id
+                self.update_tree()
+                self.dialogue_changed.emit()
 
     def add_next_step(self, parent_step_id):
         """Add a new step after the given step"""
@@ -1619,7 +1679,7 @@ class SimpleDialogueBuilder(QWidget):
         if new_step:
             self.add_step(new_step)
             parent_step.next_step_id = new_step.id
-            self.update_flow_chart()
+            self.update_tree()
             # Automatically select the newly created step
             self.select_step(new_step.id)
 
