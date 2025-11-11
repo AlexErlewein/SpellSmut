@@ -897,50 +897,64 @@ class UnifiedQuestEditor(QMainWindow):
     def _setup_editor_tabs(self):
         """Setup the quest editor tabs"""
 
-        # Tab 1: Basic Info
+        # Tab 1: Overview (Text Mode) - NEW
+        try:
+            from .text_mode_dialogue_overview import TextModeDialogueOverview
+            self.text_mode_overview = TextModeDialogueOverview()
+            self.text_mode_overview.node_selected.connect(self._on_text_mode_node_selected)
+            self.text_mode_overview.node_edited.connect(self._on_text_mode_node_edited)
+            self.text_mode_overview.node_added.connect(self._on_text_mode_node_added)
+            self.text_mode_overview.node_deleted.connect(self._on_text_mode_node_deleted)
+            self.text_mode_overview.jump_to_visual.connect(self._on_jump_to_visual)
+            self.quest_editor_tabs.addTab(self.text_mode_overview, "📋 Overview")
+        except ImportError as e:
+            print(f"Warning: Text mode overview not available: {e}")
+            self.text_mode_overview = None
+
+        # Tab 2: Basic Info
         self.basic_info_widget = QuestBasicInfoWidget()
         self.quest_editor_tabs.addTab(self.basic_info_widget, "Basic Info")
 
-        # Tab 2: Location & NPC
+        # Tab 3: Location & NPC
         self.location_widget = QuestLocationWidget()
         self.quest_editor_tabs.addTab(self.location_widget, "Location & NPC")
 
-        # Tab 3: Objectives & Requirements
+        # Tab 4: Objectives & Requirements
         self.objectives_widget = QWidget()
         self._setup_objectives_tab()
         self.quest_editor_tabs.addTab(self.objectives_widget, "Objectives")
 
-        # Tab 4: Simple Guided Dialogue Editor
-        try:
-            from simple_dialogue_builder import SimpleDialogueBuilder
-            self.simple_dialogue_widget = SimpleDialogueBuilder()
-            self.quest_editor_tabs.addTab(self.simple_dialogue_widget, "📝 Dialogue Builder")
-        except ImportError as e:
-            print(f"Warning: Simple dialogue builder not available: {e}")
+        # Tab 5: Dialogue Editor (Visual)
+        self.visual_dialogue_widget = None
+        if VISUAL_DIALOGUE_EDITOR_AVAILABLE:
+            try:
+                from .visual_dialogue_widget import VisualDialogueWidget
+                self.visual_dialogue_widget = VisualDialogueWidget()
+                self.visual_dialogue_widget.dialogue_changed.connect(self._on_visual_dialogue_changed)
+                self.quest_editor_tabs.addTab(self.visual_dialogue_widget, "🎨 Dialogue (Visual)")
+            except (ImportError, NameError, AttributeError) as e:
+                print(f"Warning: Visual dialogue widget not available: {e}")
+                self.visual_dialogue_widget = None
+                # Fallback to simple dialogue editor
+                if not hasattr(self, 'dialogue_widget'):
+                    self.dialogue_widget = self._create_simple_dialogue_editor()
+                    self.quest_editor_tabs.addTab(self.dialogue_widget, "Dialogues (Simple)")
+        else:
             # Fallback dialogue editor
-            self.dialogue_widget = self._create_simple_dialogue_editor()
-            self.quest_editor_tabs.addTab(self.dialogue_widget, "Dialogues (Simple)")
+            if not hasattr(self, 'dialogue_widget'):
+                self.dialogue_widget = self._create_simple_dialogue_editor()
+                self.quest_editor_tabs.addTab(self.dialogue_widget, "Dialogues (Simple)")
 
-        # Tab 5: Original Tree Dialogue Editor (if available)
-        if DIALOGUE_EDITOR_AVAILABLE:
-            self.dialogue_editor = DialogueTreeEditor()
-            self.quest_editor_tabs.addTab(self.dialogue_editor, "Dialogues (Tree)")
-
-        # Tab 6: Simple Dialogue Editor (always available as fallback)
-        if not hasattr(self, 'dialogue_widget'):
-            self.dialogue_widget = self._create_simple_dialogue_editor()
-            self.quest_editor_tabs.addTab(self.dialogue_widget, "Dialogues (Simple)")
-
-        # Tab 7: Rewards
+        # Tab 6: Rewards
         self.rewards_widget = QWidget()
         self._setup_rewards_tab()
         self.quest_editor_tabs.addTab(self.rewards_widget, "Rewards")
 
-        # Tab 8: Preview
+        # Tab 7: Preview
         self.preview_widget = QuestPreviewWidget()
         self.quest_editor_tabs.addTab(self.preview_widget, "Preview")
 
-        # Tab 9: Validation
+        # Tab 8: Validation
         self.validation_widget = QWidget()
         self._setup_validation_tab()
         self.quest_editor_tabs.addTab(self.validation_widget, "Validation")
@@ -1310,6 +1324,7 @@ class UnifiedQuestEditor(QMainWindow):
 
         # Load dialogues
         self._load_quest_dialogues(quest_info)
+        
 
         # Update preview
         self.preview_widget.update_preview(quest_info)
@@ -1470,8 +1485,23 @@ class UnifiedQuestEditor(QMainWindow):
     def _load_quest_dialogues(self, quest_info: Dict):
         """Load quest dialogues"""
         dialogues = quest_info.get('dialogues', [])
+        
+        # Get dialogue data (could be in visual editor format)
+        dialogue_data = quest_info.get('dialogue_data', {})
+        if not dialogue_data and dialogues:
+            # Convert simple dialogue list to visual editor format
+            dialogue_data = self._convert_dialogues_to_visual_format(dialogues)
 
-        if DIALOGUE_EDITOR_AVAILABLE and hasattr(self, 'dialogue_editor'):
+        # Load into text mode overview first (so it's always available)
+        if hasattr(self, 'text_mode_overview') and self.text_mode_overview:
+            if dialogue_data:
+                self.text_mode_overview.set_dialogue_data(dialogue_data)
+
+        # Load into visual dialogue widget if available
+        if hasattr(self, 'visual_dialogue_widget') and self.visual_dialogue_widget:
+            if dialogue_data:
+                self.visual_dialogue_widget.set_dialogue_data(dialogue_data)
+        elif DIALOGUE_EDITOR_AVAILABLE and hasattr(self, 'dialogue_editor'):
             # Load into visual dialogue editor
             dialogue_dicts = []
             for dlg in dialogues:
@@ -1488,21 +1518,22 @@ class UnifiedQuestEditor(QMainWindow):
             self.dialogue_editor.load_dialogues(dialogue_dicts)
         else:
             # Load into simple dialogue list
-            self.dialogues_list.clear()
-            for dlg in dialogues:
-                if isinstance(dlg, dict):
-                    speaker = dlg.get('speaker', 'NPC')
-                    text = dlg.get('text', '')
-                    dlg_type = dlg.get('type', 'Standard')
-                else:
-                    speaker = getattr(dlg, 'speaker', 'NPC')
-                    text = getattr(dlg, 'text', str(dlg))
-                    dlg_type = getattr(dlg, 'dialogue_type', 'Standard')
+            if hasattr(self, 'dialogues_list'):
+                self.dialogues_list.clear()
+                for dlg in dialogues:
+                    if isinstance(dlg, dict):
+                        speaker = dlg.get('speaker', 'NPC')
+                        text = dlg.get('text', '')
+                        dlg_type = dlg.get('type', 'Standard')
+                    else:
+                        speaker = getattr(dlg, 'speaker', 'NPC')
+                        text = getattr(dlg, 'text', str(dlg))
+                        dlg_type = getattr(dlg, 'dialogue_type', 'Standard')
 
-                display_text = f"[{speaker}] {text[:50]}{'...' if len(text) > 50 else ''}"
-                item = QListWidgetItem(display_text)
-                item.setData(Qt.UserRole, dlg)
-                self.dialogues_list.addItem(item)
+                    display_text = f"[{speaker}] {text[:50]}{'...' if len(text) > 50 else ''}"
+                    item = QListWidgetItem(display_text)
+                    item.setData(Qt.UserRole, dlg)
+                    self.dialogues_list.addItem(item)
 
     def _on_data_changed(self):
         """Handle data changes"""
@@ -1579,17 +1610,26 @@ class UnifiedQuestEditor(QMainWindow):
 
         quest_data['rewards'] = rewards
 
-        # Add dialogues
-        if DIALOGUE_EDITOR_AVAILABLE and hasattr(self, 'dialogue_editor'):
+        # Add dialogues - prioritize visual dialogue widget, then text mode, then fallback
+        if hasattr(self, 'visual_dialogue_widget') and self.visual_dialogue_widget:
+            dialogue_data = self.visual_dialogue_widget.get_dialogue_data()
+            quest_data['dialogue_data'] = dialogue_data
+            quest_data['dialogues'] = self._convert_visual_format_to_dialogues(dialogue_data)
+        elif hasattr(self, 'text_mode_overview') and self.text_mode_overview:
+            dialogue_data = self.text_mode_overview.get_dialogue_data()
+            quest_data['dialogue_data'] = dialogue_data
+            quest_data['dialogues'] = self._convert_visual_format_to_dialogues(dialogue_data)
+        elif DIALOGUE_EDITOR_AVAILABLE and hasattr(self, 'dialogue_editor'):
             dialogues = self.dialogue_editor.get_dialogues()
             quest_data['dialogues'] = dialogues
         else:
             dialogues = []
-            for i in range(self.dialogues_list.count()):
-                item = self.dialogues_list.item(i)
-                dlg_data = item.data(Qt.UserRole)
-                if dlg_data:
-                    dialogues.append(dlg_data)
+            if hasattr(self, 'dialogues_list'):
+                for i in range(self.dialogues_list.count()):
+                    item = self.dialogues_list.item(i)
+                    dlg_data = item.data(Qt.UserRole)
+                    if dlg_data:
+                        dialogues.append(dlg_data)
             quest_data['dialogues'] = dialogues
 
         return quest_data
@@ -2044,6 +2084,126 @@ end
             for child in self.findChildren(QSplitter):
                 child.restoreState(splitter_state)
                 break
+
+    # Text mode overview sync methods
+    def _on_text_mode_node_selected(self, node_id: str):
+        """Handle node selection in text mode"""
+        # Could switch to visual editor and highlight node
+        self.status_bar.showMessage(f"Selected node in text mode: {node_id}")
+    
+    def _on_text_mode_node_edited(self, node_id: str, node_data: dict):
+        """Handle node edit in text mode"""
+        # Sync to visual editor if available
+        if hasattr(self, 'visual_dialogue_widget') and self.visual_dialogue_widget:
+            # Update visual editor
+            dialogue_data = self.text_mode_overview.get_dialogue_data()
+            self.visual_dialogue_widget.set_dialogue_data(dialogue_data)
+        
+        # Trigger data change
+        self._on_data_changed()
+        self.status_bar.showMessage(f"Updated node in text mode: {node_id}")
+    
+    def _on_text_mode_node_added(self, node_id: str, node_data: dict):
+        """Handle node addition in text mode"""
+        # Sync to visual editor if available
+        if hasattr(self, 'visual_dialogue_widget') and self.visual_dialogue_widget:
+            dialogue_data = self.text_mode_overview.get_dialogue_data()
+            self.visual_dialogue_widget.set_dialogue_data(dialogue_data)
+        
+        # Trigger data change
+        self._on_data_changed()
+        self.status_bar.showMessage(f"Added node in text mode: {node_id}")
+    
+    def _on_text_mode_node_deleted(self, node_id: str):
+        """Handle node deletion in text mode"""
+        # Sync to visual editor if available
+        if hasattr(self, 'visual_dialogue_widget') and self.visual_dialogue_widget:
+            dialogue_data = self.text_mode_overview.get_dialogue_data()
+            self.visual_dialogue_widget.set_dialogue_data(dialogue_data)
+        
+        # Trigger data change
+        self._on_data_changed()
+        self.status_bar.showMessage(f"Deleted node in text mode: {node_id}")
+    
+    def _on_jump_to_visual(self, node_id: str):
+        """Handle jump to visual editor request"""
+        # Switch to visual dialogue tab
+        if hasattr(self, 'visual_dialogue_widget') and self.visual_dialogue_widget:
+            # Find tab index
+            for i in range(self.quest_editor_tabs.count()):
+                if self.quest_editor_tabs.widget(i) == self.visual_dialogue_widget:
+                    self.quest_editor_tabs.setCurrentIndex(i)
+                    break
+            self.status_bar.showMessage(f"Jumped to visual editor for node: {node_id}")
+        else:
+            self.status_bar.showMessage("Visual dialogue editor not available")
+    
+    def _on_visual_dialogue_changed(self, dialogue_data: dict):
+        """Handle dialogue change in visual editor"""
+        # Sync to text mode overview
+        if hasattr(self, 'text_mode_overview') and self.text_mode_overview:
+            self.text_mode_overview.set_dialogue_data(dialogue_data)
+        
+        # Trigger data change
+        self._on_data_changed()
+        self.status_bar.showMessage("Dialogue updated in visual editor")
+    
+    def _convert_dialogues_to_visual_format(self, dialogues: List) -> Dict[str, Any]:
+        """Convert simple dialogue list to visual editor format"""
+        nodes = []
+        connections = []
+        
+        for i, dlg in enumerate(dialogues):
+            if isinstance(dlg, dict):
+                node_id = dlg.get('id', f'node_{i+1}')
+                node_type = dlg.get('type', 'npc').lower()
+                speaker = dlg.get('speaker', 'NPC')
+                text = dlg.get('text', '')
+            else:
+                node_id = getattr(dlg, 'id', f'node_{i+1}')
+                node_type = getattr(dlg, 'dialogue_type', 'npc').lower()
+                speaker = getattr(dlg, 'speaker', 'NPC')
+                text = getattr(dlg, 'text', str(dlg))
+            
+            node = {
+                'id': node_id,
+                'node_type': node_type,
+                'speaker': speaker,
+                'text': text,
+                'choices': dlg.get('choices', []) if isinstance(dlg, dict) else [],
+                'conditions': dlg.get('conditions', []) if isinstance(dlg, dict) else [],
+                'actions': dlg.get('actions', []) if isinstance(dlg, dict) else [],
+                'next_nodes': dlg.get('next_nodes', []) if isinstance(dlg, dict) else [],
+                'answer_id': dlg.get('answer_id') if isinstance(dlg, dict) else None,
+                'tag': dlg.get('tag', '') if isinstance(dlg, dict) else ''
+            }
+            nodes.append(node)
+            
+            # Add connections
+            next_nodes = node.get('next_nodes', [])
+            for next_id in next_nodes:
+                connections.append({'from': node_id, 'to': next_id})
+        
+        return {'nodes': nodes, 'connections': connections}
+    
+    def _convert_visual_format_to_dialogues(self, dialogue_data: Dict[str, Any]) -> List[Dict]:
+        """Convert visual editor format to simple dialogue list"""
+        dialogues = []
+        
+        if 'nodes' in dialogue_data:
+            for node_data in dialogue_data['nodes']:
+                dialogue = {
+                    'id': node_data.get('id', ''),
+                    'speaker': node_data.get('speaker', 'NPC'),
+                    'text': node_data.get('text', ''),
+                    'type': node_data.get('node_type', 'npc'),
+                    'choices': node_data.get('choices', []),
+                    'conditions': node_data.get('conditions', []),
+                    'actions': node_data.get('actions', [])
+                }
+                dialogues.append(dialogue)
+        
+        return dialogues
 
     def closeEvent(self, event):
         """Handle window close"""

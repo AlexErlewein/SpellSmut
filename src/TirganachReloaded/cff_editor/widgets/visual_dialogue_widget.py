@@ -28,16 +28,19 @@ from PySide6.QtGui import (
 
 # Import from visual_dialogue_editor
 try:
-    from visual_dialogue_editor import (
+    from .visual_dialogue_editor import (
         DialogueNode, NodeType, DialogueNodeItem, DialogueConnectionItem,
         DialogueGraphicsView, DialoguePropertiesWidget, DialogueTreeWidget
     )
     from TirganachReloaded.cff_editor.logging_config import get_logger
     logger = get_logger(__name__)
-except ImportError:
+    VISUAL_EDITOR_COMPONENTS_AVAILABLE = True
+except (ImportError, AttributeError) as e:
     # Fallback for standalone testing
     import logging
     logger = logging.getLogger(__name__)
+    VISUAL_EDITOR_COMPONENTS_AVAILABLE = False
+    logger.warning(f"Visual dialogue editor components not fully available: {e}")
 
     # Define fallback classes
     @dataclass
@@ -69,6 +72,29 @@ except ImportError:
         def __init__(self, start_node, end_node):
             self.start_node = start_node
             self.end_node = end_node
+    
+    # Stub classes for missing components
+    class DialogueTreeWidget:
+        def __init__(self):
+            pass
+        def set_nodes(self, nodes):
+            pass
+    
+    class DialogueGraphicsView:
+        def __init__(self, scene):
+            self.scene = scene
+            self.nodes = {}
+            self.connections = []
+        def add_node(self, node):
+            pass
+        def add_connection(self, from_id, to_id):
+            pass
+    
+    class DialoguePropertiesWidget:
+        def __init__(self):
+            pass
+        def set_node(self, node):
+            pass
 
 
 class VisualDialogueWidget(QWidget):
@@ -110,22 +136,73 @@ class VisualDialogueWidget(QWidget):
         self.setup_node_palette(left_layout)
 
         # Tree view
-        self.tree_widget = DialogueTreeWidget()
-        self.tree_widget.node_selected.connect(self.select_node)
-        left_layout.addWidget(self.tree_widget)
+        if VISUAL_EDITOR_COMPONENTS_AVAILABLE:
+            try:
+                self.tree_widget = DialogueTreeWidget()
+                if hasattr(self.tree_widget, 'node_selected'):
+                    self.tree_widget.node_selected.connect(self.select_node)
+                left_layout.addWidget(self.tree_widget)
+            except Exception as e:
+                logger.warning(f"Could not create DialogueTreeWidget: {e}")
+                from PySide6.QtWidgets import QTreeWidget
+                self.tree_widget = QTreeWidget()
+                self.tree_widget.setHeaderLabels(["Node ID", "Type", "Speaker"])
+                left_layout.addWidget(self.tree_widget)
+        else:
+            # Fallback if components not available
+            from PySide6.QtWidgets import QTreeWidget
+            self.tree_widget = QTreeWidget()
+            self.tree_widget.setHeaderLabels(["Node ID", "Type", "Speaker"])
+            left_layout.addWidget(self.tree_widget)
 
         splitter.addWidget(left_panel)
 
         # Center - Graphics view
-        self.scene = QGraphicsScene()
-        self.graphics_view = DialogueGraphicsView(self.scene)
-        self.graphics_view.node_selected.connect(self.on_node_selected)
-        splitter.addWidget(self.graphics_view)
+        if VISUAL_EDITOR_COMPONENTS_AVAILABLE:
+            try:
+                self.scene = QGraphicsScene()
+                self.graphics_view = DialogueGraphicsView(self.scene)
+                if hasattr(self.graphics_view, 'node_selected'):
+                    self.graphics_view.node_selected.connect(self.on_node_selected)
+                splitter.addWidget(self.graphics_view)
+            except Exception as e:
+                logger.warning(f"Could not create DialogueGraphicsView: {e}")
+                from PySide6.QtWidgets import QGraphicsView, QGraphicsScene, QLabel
+                self.scene = QGraphicsScene()
+                self.graphics_view = QGraphicsView(self.scene)
+                fallback_label = QLabel("Visual dialogue editor components not fully available.\nUse Text Mode Overview instead.")
+                fallback_label.setAlignment(Qt.AlignCenter)
+                self.scene.addWidget(fallback_label)
+                splitter.addWidget(self.graphics_view)
+        else:
+            # Fallback if components not available
+            from PySide6.QtWidgets import QGraphicsView, QGraphicsScene, QLabel
+            self.scene = QGraphicsScene()
+            self.graphics_view = QGraphicsView(self.scene)
+            fallback_label = QLabel("Visual dialogue editor components not fully available.\nUse Text Mode Overview tab instead.")
+            fallback_label.setAlignment(Qt.AlignCenter)
+            self.scene.addWidget(fallback_label)
+            splitter.addWidget(self.graphics_view)
 
         # Right panel - Properties
-        self.properties_widget = DialoguePropertiesWidget()
-        self.properties_widget.properties_changed.connect(self.on_properties_changed)
-        splitter.addWidget(self.properties_widget)
+        if VISUAL_EDITOR_COMPONENTS_AVAILABLE:
+            try:
+                self.properties_widget = DialoguePropertiesWidget()
+                if hasattr(self.properties_widget, 'properties_changed'):
+                    self.properties_widget.properties_changed.connect(self.on_properties_changed)
+                splitter.addWidget(self.properties_widget)
+            except Exception as e:
+                logger.warning(f"Could not create DialoguePropertiesWidget: {e}")
+                from PySide6.QtWidgets import QLabel
+                self.properties_widget = QLabel("Properties panel not available.")
+                self.properties_widget.setAlignment(Qt.AlignCenter)
+                splitter.addWidget(self.properties_widget)
+        else:
+            # Fallback if components not available
+            from PySide6.QtWidgets import QLabel
+            self.properties_widget = QLabel("Properties panel not available.\nUse Text Mode Overview for editing.")
+            self.properties_widget.setAlignment(Qt.AlignCenter)
+            splitter.addWidget(self.properties_widget)
 
         # Set splitter sizes
         splitter.setSizes([250, 700, 350])
@@ -265,29 +342,35 @@ class VisualDialogueWidget(QWidget):
 
     def add_node(self, node_type: str):
         """Add a new dialogue node"""
-        # Generate unique ID
-        node_id = f"{node_type}_{len(self.nodes) + 1}"
+        try:
+            # Generate unique ID
+            node_id = f"{node_type}_{len(self.nodes) + 1}"
 
-        # Create node
-        node = DialogueNode(
-            id=node_id,
-            node_type=node_type,
-            position=(100 + len(self.nodes) * 50, 100 + len(self.nodes) * 50)
-        )
+            # Create node
+            node = DialogueNode(
+                id=node_id,
+                node_type=node_type,
+                position=(100 + len(self.nodes) * 50, 100 + len(self.nodes) * 50)
+            )
 
-        # Add to collection
-        self.nodes[node_id] = node
+            # Add to collection
+            self.nodes[node_id] = node
 
-        # Add to graphics view
-        self.graphics_view.add_node(node)
+            # Add to graphics view (if available)
+            if hasattr(self, 'graphics_view') and hasattr(self.graphics_view, 'add_node'):
+                self.graphics_view.add_node(node)
 
-        # Update tree view
-        self.tree_widget.set_nodes(self.nodes)
+            # Update tree view (if available)
+            if hasattr(self, 'tree_widget') and hasattr(self.tree_widget, 'set_nodes'):
+                self.tree_widget.set_nodes(self.nodes)
 
-        # Emit change signal
-        self.emit_dialogue_changed()
+            # Emit change signal
+            self.emit_dialogue_changed()
 
-        self.status_bar.showMessage(f"Added {node_type} node: {node_id}")
+            self.status_bar.showMessage(f"Added {node_type} node: {node_id}")
+        except Exception as e:
+            logger.error(f"Error adding node: {e}")
+            self.status_bar.showMessage(f"Error adding node: {e}")
 
     def create_connection_mode(self):
         """Enter connection creation mode"""
