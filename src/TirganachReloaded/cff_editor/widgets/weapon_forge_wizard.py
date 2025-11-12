@@ -79,6 +79,19 @@ class WeaponForgeWizard(QWizard):
                 if not success:
                     # Export failed, don't close wizard yet
                     return
+                # On success, restart wizard to the beginning instead of closing
+                try:
+                    # Clear transient state for next run
+                    self.weapon_data = None
+                    self.creation_mode = None
+                    self.source_weapon = None
+                    self.weapon_id = None
+                    # Restart to the first page
+                    self.restart()
+                    return  # Keep dialog open
+                except Exception:
+                    # If restart isn't available, fall back to closing
+                    pass
         elif result == QDialog.DialogCode.Rejected and self.weapon_id:
             # Release ID if cancelled
             self.id_manager.release_id(ContentType.WEAPON, self.weapon_id)
@@ -293,6 +306,20 @@ class WeaponForgeWizard(QWizard):
                     f"• Backup your original GameData.cff before using\n"
                     f"• Place this file in your SpellForce data directory to test",
                 )
+                # Automatically switch to the newly exported CFF for subsequent operations
+                try:
+                    self.custom_gamedata_path = str(filepath)
+                    self.cff_exporter = WeaponCFFExporter(str(filepath))
+                    # Update label on first page if available
+                    try:
+                        first_page = self.page(0)
+                        if hasattr(first_page, "gamedata_path_label"):
+                            first_page.gamedata_path_label.setText(f"Using GameData: {Path(filepath).name}")
+                            first_page.gamedata_path_label.setStyleSheet("color: #27ae60;")
+                    except Exception:
+                        pass
+                except Exception:
+                    pass
             else:
                 # Try to provide more helpful error information
                 try:
@@ -387,8 +414,11 @@ class ModeSelectionPage(QWizardPage):
         self.load_json_button.clicked.connect(self.load_from_json)
         self.choose_cff_button = QPushButton("Choose GameData.cff...")
         self.choose_cff_button.clicked.connect(self.choose_gamedata_file)
+        self.use_default_cff_button = QPushButton("Use Default GameData")
+        self.use_default_cff_button.clicked.connect(self.use_default_gamedata_file)
         tools_layout.addWidget(self.load_json_button)
         tools_layout.addWidget(self.choose_cff_button)
+        tools_layout.addWidget(self.use_default_cff_button)
         tools_layout.addStretch()
         mode_layout.addLayout(tools_layout)
 
@@ -450,6 +480,39 @@ class ModeSelectionPage(QWizardPage):
         layout.addWidget(id_group)
 
         self.setLayout(layout)
+
+    def initializePage(self):
+        """Prompt for GameData.cff on first show, unless already selected."""
+        wizard = self.wizard()
+        if not hasattr(wizard, "_startup_cff_prompt_done"):
+            wizard._startup_cff_prompt_done = False
+
+        if not wizard._startup_cff_prompt_done:
+            wizard._startup_cff_prompt_done = True
+
+            # If no custom path is set, prompt user to choose one; Cancel uses default
+            try:
+                file_path, _ = QFileDialog.getOpenFileName(
+                    self,
+                    "Choose GameData.cff",
+                    str(Path.cwd()),
+                    "CFF Files (*.cff)"
+                )
+                if file_path:
+                    wizard.custom_gamedata_path = file_path
+                    wizard.cff_exporter = WeaponCFFExporter(file_path)
+                    # Update label
+                    self.gamedata_path_label.setText(f"Using GameData: {Path(file_path).name}")
+                    self.gamedata_path_label.setStyleSheet("color: #27ae60;")
+                else:
+                    # Keep or set default
+                    gd_path = find_gamedata_path()
+                    wizard.cff_exporter = WeaponCFFExporter(gd_path) if gd_path else None
+                    current_gd_text = Path(gd_path).name if gd_path else "Auto (not found)"
+                    self.gamedata_path_label.setText(f"Using GameData: {current_gd_text}")
+                    self.gamedata_path_label.setStyleSheet("color: #a0a0a0;")
+            except Exception:
+                pass
 
     def on_mode_changed(self):
         """Enable/disable browse button based on mode selection"""
@@ -551,6 +614,21 @@ class ModeSelectionPage(QWizardPage):
             QMessageBox.information(self, "GameData Selected", f"Now using:\n{file_path}")
         except Exception as e:
             QMessageBox.warning(self, "GameData Selection Failed", f"Could not set GameData:\n{str(e)}")
+
+    def use_default_gamedata_file(self):
+        """Reset to auto-discovered GameData.cff and update exporter/label."""
+        try:
+            wiz = self.wizard()
+            wiz.custom_gamedata_path = None
+            gd_path = find_gamedata_path()
+            wiz.cff_exporter = WeaponCFFExporter(gd_path) if gd_path else None
+
+            current_gd_text = Path(gd_path).name if gd_path else "Auto (not found)"
+            self.gamedata_path_label.setText(f"Using GameData: {current_gd_text}")
+            self.gamedata_path_label.setStyleSheet("color: #a0a0a0;")
+            QMessageBox.information(self, "GameData Reset", f"Using default: {gd_path if gd_path else 'Auto (not found)'}")
+        except Exception as e:
+            QMessageBox.warning(self, "Reset Failed", f"Could not reset GameData:\n{str(e)}")
 
     def validatePage(self):
         """Validate the page before moving to next"""
