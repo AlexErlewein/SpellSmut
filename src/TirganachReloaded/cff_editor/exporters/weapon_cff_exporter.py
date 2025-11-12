@@ -64,7 +64,12 @@ class WeaponCFFExporter:
             return True
 
         except Exception as e:
-            print(f"Error exporting weapon to CFF: {e}")
+            try:
+                import traceback
+                print(f"Error exporting weapon to CFF: {e!r} ({type(e).__name__})")
+                traceback.print_exc()
+            except Exception:
+                print(f"Error exporting weapon to CFF: {e}")
             return False
 
     def _create_modified_gamedata(self, weapon_data: WeaponCreationData) -> GameData:
@@ -99,7 +104,12 @@ class WeaponCFFExporter:
             return new_gamedata
 
         except Exception as e:
-            print(f"Error creating modified GameData: {e}")
+            try:
+                import traceback
+                print(f"Error creating modified GameData: {e!r} ({type(e).__name__})")
+                traceback.print_exc()
+            except Exception:
+                print(f"Error creating modified GameData: {e}")
             raise
 
     def _add_item_entry(self, gamedata: GameData, weapon_data: WeaponCreationData):
@@ -128,8 +138,8 @@ class WeaponCFFExporter:
             "Unarmed": EquipmentType.ONEHANDED_WEAPON
         }
 
-        # Calculate the name_id (we'll use weapon_id + offset for now)
-        name_id = weapon_data.weapon_id + 50000  # Arbitrary offset to avoid conflicts
+        # Calculate the name_id (must fit into ushort -> use +20000 range)
+        name_id = weapon_data.weapon_id + 20000
 
         # Create binary data for the item
         item_data = bytearray(22)  # Item entity length
@@ -137,8 +147,20 @@ class WeaponCFFExporter:
         # Pack the data according to tirganach structure
         import struct
         struct.pack_into('<H', item_data, 0, weapon_data.weapon_id)  # item_id
-        struct.pack_into('<B', item_data, 2, ItemType.EQUIPMENT.value)  # item_type
-        struct.pack_into('<B', item_data, 3, equipment_map.get(weapon_data.hands.value, EquipmentType.WEAPON_1H).value)  # item_subtype
+        item_type_val = (
+            ItemType.EQUIPMENT.value[0]
+            if isinstance(ItemType.EQUIPMENT.value, tuple)
+            else ItemType.EQUIPMENT.value
+        )
+        struct.pack_into('<B', item_data, 2, item_type_val)  # item_type
+
+        equip_enum = equipment_map.get(
+            weapon_data.hands.value, EquipmentType.ONEHANDED_WEAPON
+        )
+        equip_val = (
+            equip_enum.value[0] if isinstance(equip_enum.value, tuple) else equip_enum.value
+        )
+        struct.pack_into('<B', item_data, 3, equip_val)  # item_subtype
         struct.pack_into('<H', item_data, 4, name_id)  # name_id
         struct.pack_into('<H', item_data, 6, 0)  # unit_stats_id (0 for regular items)
         struct.pack_into('<H', item_data, 8, 0)  # army_unit_id
@@ -193,32 +215,27 @@ class WeaponCFFExporter:
         """Add localization entries for weapon name and description"""
 
         # Create localization entries for English text
-        # We'll need to handle multiple languages eventually
+        from TirganachReloaded.tirganach.types import Language
 
-        # Name localization
-        name_id = weapon_data.weapon_id + 50000
-        name_text = weapon_data.weapon_name
-        name_bytes = name_text.encode('utf-16le')
-
-        # Localisation structure (simplified)
-        name_localization = bytearray(4 + len(name_bytes))
-        struct.pack_into('<I', name_localization, 0, name_id)
-        name_localization[4:] = name_bytes
-
-        name_entity = Localisation(bytes(name_localization), game_data=gamedata)
+        # Name localisation entity (ensure correct record length)
+        name_id = weapon_data.weapon_id + 20000
+        name_entity = Localisation(b"\x00" * Localisation._length(), game_data=gamedata)
+        name_entity.text_id = name_id  # ushort
+        name_entity.language = Language.ENGLISH
+        name_entity.is_dialogue = False
+        name_entity.dialogue_name = ""
+        name_entity.text = weapon_data.weapon_name or ""
         gamedata.localisation.append(name_entity)
 
-        # Description localization (if provided)
+        # Description localisation entity (optional)
         if weapon_data.description:
-            desc_id = weapon_data.weapon_id + 50001
-            desc_text = weapon_data.description
-            desc_bytes = desc_text.encode('utf-16le')
-
-            desc_localization = bytearray(4 + len(desc_bytes))
-            struct.pack_into('<I', desc_localization, 0, desc_id)
-            desc_localization[4:] = desc_bytes
-
-            desc_entity = Localisation(bytes(desc_localization), game_data=gamedata)
+            desc_id = weapon_data.weapon_id + 20001
+            desc_entity = Localisation(b"\x00" * Localisation._length(), game_data=gamedata)
+            desc_entity.text_id = desc_id
+            desc_entity.language = Language.ENGLISH
+            desc_entity.is_dialogue = False
+            desc_entity.dialogue_name = ""
+            desc_entity.text = weapon_data.description
             gamedata.localisation.append(desc_entity)
 
         print(f"  ✓ Added localization entries for weapon '{weapon_data.weapon_name}'")
