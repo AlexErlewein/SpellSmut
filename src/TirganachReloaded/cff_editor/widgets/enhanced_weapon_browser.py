@@ -22,7 +22,8 @@ from PySide6.QtWidgets import (
     QWidget,
     QMessageBox,
     QHeaderView,
-    QApplication
+    QApplication,
+    QCheckBox
 )
 
 from ..exporters.weapon_loader import WeaponLoader
@@ -57,13 +58,14 @@ def find_json_data_path():
 class EnhancedWeaponBrowser(QDialog):
     """Enhanced weapon browser dialog with detailed weapon inspection"""
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, gamedata_path_override=None):
         super().__init__(parent)
         self.setWindowTitle("Enhanced Weapon Browser")
         self.setMinimumSize(QSize(1400, 800))
         self.weapon_loader = WeaponLoader()
         self.weapons_data = {}
         self.selected_weapon = None
+        self.gamedata_path_override = gamedata_path_override
         
         # Initialize localization support
         self.current_language = Language.GERMAN  # Default to German
@@ -80,7 +82,7 @@ class EnhancedWeaponBrowser(QDialog):
     def _init_localization(self):
         """Initialize localization support from GameData"""
         try:
-            gamedata_path_str = find_gamedata_path()
+            gamedata_path_str = self.gamedata_path_override or find_gamedata_path()
             if gamedata_path_str:
                 try:
                     from ...tirganach import GameData
@@ -105,7 +107,7 @@ class EnhancedWeaponBrowser(QDialog):
     def load_weapons_from_cff(self):
         """Load weapons directly from GameData.cff for consistent localization"""
         try:
-            gamedata_path_str = find_gamedata_path()
+            gamedata_path_str = self.gamedata_path_override or find_gamedata_path()
             if gamedata_path_str:
                 from ...tirganach import GameData
                 gamedata = GameData(gamedata_path_str)
@@ -318,6 +320,11 @@ class EnhancedWeaponBrowser(QDialog):
         self.type_filter.setPlaceholderText("Filter by weapon type...")
         self.type_filter.textChanged.connect(self.on_filter_changed)
         header_layout.addWidget(self.type_filter)
+
+        # Custom ID toggle
+        self.only_custom_checkbox = QCheckBox("Show only custom (10000–19999)")
+        self.only_custom_checkbox.toggled.connect(lambda _: self.apply_filter(self.search_edit.text(), self.type_filter.text()))
+        header_layout.addWidget(self.only_custom_checkbox)
         
         layout.addLayout(header_layout)
 
@@ -587,21 +594,25 @@ class EnhancedWeaponBrowser(QDialog):
         search_query = (search_text or "").strip().lower()
         filter_query = (filter_text or "").strip().lower()
         
-        # Nothing to filter: show everything
-        if search_query == "" and filter_query == "":
-            for i in range(self.item_tree.topLevelItemCount()):
-                root = self.item_tree.topLevelItem(i)
-                root.setHidden(False)
-                self._set_visibility_recursive(root, True)
-            return
+        only_custom = getattr(self, 'only_custom_checkbox', None)
+        only_custom_on = only_custom.isChecked() if only_custom else False
 
         def filter_node(node):
             # Leaf node
             if node.childCount() == 0:
                 name_matches = search_query in node.text(0).lower() if search_query else True
                 type_matches = filter_query in node.text(1).lower() if filter_query else True
-                name_id_matches = search_query in node.text(2).lower() if search_query else True
-                matches = name_matches and type_matches and name_id_matches
+                id_matches = search_query in node.text(2).lower() if search_query else True
+                custom_ok = True
+                if only_custom_on:
+                    try:
+                        wid = int(node.text(2))
+                        custom_ok = 10000 <= wid <= 19999
+                    except Exception:
+                        custom_ok = False
+                # Match if either name OR ID matches, and type filter matches
+                text_matches = name_matches or id_matches
+                matches = text_matches and type_matches and custom_ok
                 node.setHidden(not matches)
                 return matches
 

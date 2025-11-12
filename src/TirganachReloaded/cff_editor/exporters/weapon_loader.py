@@ -327,26 +327,66 @@ class WeaponLoader:
                 )
             )
 
+        # Accept both formats: loader JSON (item_id/name/weapon_speed) and wizard JSON (weapon_id/weapon_name/attack_speed)
+        item_id = weapon_dict.get("item_id") or weapon_dict.get("weapon_id")
+        name = weapon_dict.get("name") or weapon_dict.get("weapon_name", "")
+        weapon_speed = weapon_dict.get("weapon_speed", weapon_dict.get("attack_speed", 100))
+
+        # Optional enums
+        dmg_type_str = weapon_dict.get("damage_type") or "slash"
+        try:
+            dmg_type = DamageType(dmg_type_str)
+        except Exception:
+            dmg_type = DamageType.SLASH
+
+        hands_val = weapon_dict.get("hands")
+        try:
+            hands = WeaponHands(hands_val) if hands_val else WeaponHands.ONE_HANDED
+        except Exception:
+            hands = WeaponHands.ONE_HANDED
+
+        dmg_cat_str = weapon_dict.get("damage_category") or DamageCategory.MELEE.value
+        try:
+            dmg_cat = DamageCategory(dmg_cat_str)
+        except Exception:
+            dmg_cat = DamageCategory.MELEE
+
         # Create WeaponCreationData
         weapon = WeaponCreationData(
-            weapon_id=weapon_dict["item_id"],
+            weapon_id=int(item_id),
             creation_mode=weapon_dict.get("creation_mode", "new"),
-            weapon_name=weapon_dict["name"],
+            source_weapon_id=weapon_dict.get("source_weapon_id"),
+            weapon_name=name,
             weapon_type_id=weapon_dict.get("weapon_type_id", 4),
             weapon_type_name=weapon_dict.get("weapon_type_name", ""),
             weapon_material_id=weapon_dict.get("weapon_material_id", 5),
             weapon_material_name=weapon_dict.get("weapon_material_name", ""),
+            hands=hands,
+            damage_category=dmg_cat,
+            description=weapon_dict.get("description", ""),
             min_damage=weapon_dict.get("min_damage", 10),
             max_damage=weapon_dict.get("max_damage", 15),
-            attack_speed=weapon_dict.get("weapon_speed", 100),
+            damage_type=dmg_type,
+            attack_speed=weapon_speed,
             min_range=weapon_dict.get("min_range", 0),
             max_range=weapon_dict.get("max_range", 2),
+            attack_arc=weapon_dict.get("attack_arc", 90),
+            critical_chance=weapon_dict.get("critical_chance", 5.0),
+            armor_penetration=weapon_dict.get("armor_penetration", 0.0),
+            knockback_chance=weapon_dict.get("knockback_chance", 0.0),
+            requirements=requirements,
             sell_value=weapon_dict.get("sell_value", 50),
             buy_value=weapon_dict.get("buy_value", 100),
             rarity=Rarity(weapon_dict.get("rarity", "common")),
-            icon_handle=weapon_dict.get("icon_handle", ""),
-            requirements=requirements,
             effects=effects,
+            item_set_id=weapon_dict.get("item_set_id", 0),
+            icon_handle=weapon_dict.get("icon_handle", ""),
+            hit_sound=weapon_dict.get("hit_sound", "battle_hit_1hsword"),
+            miss_sound=weapon_dict.get("miss_sound", "battle_miss_sword"),
+            equip_sound=weapon_dict.get("equip_sound", ""),
+            model_file=weapon_dict.get("model_file", ""),
+            trail_effect=weapon_dict.get("trail_effect", ""),
+            impact_effect=weapon_dict.get("impact_effect", ""),
             created_date=weapon_dict.get("created_date", ""),
             modified_date=weapon_dict.get("modified_date", ""),
             author=weapon_dict.get("author", ""),

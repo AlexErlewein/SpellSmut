@@ -59,6 +59,8 @@ class WeaponForgeWizard(QWizard):
         # Initialize CFF exporter using unified resolver
         gamedata_path = find_gamedata_path()
         self.cff_exporter = WeaponCFFExporter(gamedata_path) if gamedata_path else None
+        # Optional override selected by the user
+        self.custom_gamedata_path = None
 
         self.setWindowTitle("Weapon Forge Wizard")
 
@@ -379,6 +381,27 @@ class ModeSelectionPage(QWizardPage):
         self.selected_weapon_label.setStyleSheet("color: gray; font-style: italic;")
         mode_layout.addWidget(self.selected_weapon_label)
 
+        # Import/Reference tools
+        tools_layout = QHBoxLayout()
+        self.load_json_button = QPushButton("Load from JSON...")
+        self.load_json_button.clicked.connect(self.load_from_json)
+        self.choose_cff_button = QPushButton("Choose GameData.cff...")
+        self.choose_cff_button.clicked.connect(self.choose_gamedata_file)
+        tools_layout.addWidget(self.load_json_button)
+        tools_layout.addWidget(self.choose_cff_button)
+        tools_layout.addStretch()
+        mode_layout.addLayout(tools_layout)
+
+        # Current GameData path label
+        try:
+            current_gd = find_gamedata_path()
+            current_gd_text = Path(current_gd).name if current_gd else "Auto (not found)"
+        except Exception:
+            current_gd_text = "Auto (not found)"
+        self.gamedata_path_label = QLabel(f"Using GameData: {current_gd_text}")
+        self.gamedata_path_label.setStyleSheet("color: #a0a0a0;")
+        mode_layout.addWidget(self.gamedata_path_label)
+
         # Enable browse button when edit/duplicate modes are selected
         self.edit_weapon_radio.toggled.connect(self.on_mode_changed)
         self.duplicate_weapon_radio.toggled.connect(self.on_mode_changed)
@@ -446,13 +469,14 @@ class ModeSelectionPage(QWizardPage):
         """Open enhanced weapon browser dialog"""
         from .enhanced_weapon_browser import EnhancedWeaponBrowser
 
-        dialog = EnhancedWeaponBrowser(self)
+        dialog = EnhancedWeaponBrowser(self, gamedata_path_override=getattr(self.wizard(), "custom_gamedata_path", None))
         if dialog.exec() == QDialog.DialogCode.Accepted:
             weapon_dict = dialog.get_selected_weapon_data()
             if weapon_dict:
                 try:
-                    # Load the weapon using WeaponLoader with GameData path
-                    gamedata_path_str = find_gamedata_path()
+                    # Load the weapon using WeaponLoader with selected/override GameData path
+                    wiz = self.wizard()
+                    gamedata_path_str = getattr(wiz, "custom_gamedata_path", None) or find_gamedata_path()
                     self.selected_weapon_data = self.weapon_loader.load_weapon(
                         weapon_dict["item_id"], gamedata_path=gamedata_path_str
                     )
@@ -472,6 +496,61 @@ class ModeSelectionPage(QWizardPage):
                     self.selected_weapon_data = None
                     self.selected_weapon_label.setText("Error loading weapon")
                     self.selected_weapon_label.setStyleSheet("color: red;")
+
+    def load_from_json(self):
+        """Load a weapon from a previously saved JSON file."""
+        try:
+            file_path, _ = QFileDialog.getOpenFileName(
+                self,
+                "Load Weapon JSON",
+                str(Path.cwd()),
+                "JSON Files (*.json)"
+            )
+            if not file_path:
+                return
+
+            weapon = self.weapon_loader.load_weapon_from_file(file_path)
+            self.selected_weapon_data = weapon
+
+            # Default to Edit mode and keep the same ID
+            self.edit_weapon_radio.setChecked(True)
+            self.manual_id_radio.setChecked(True)
+            if hasattr(self, "manual_id_spin"):
+                self.manual_id_spin.setValue(int(weapon.weapon_id))
+
+            # Update label
+            self.selected_weapon_label.setText(
+                f"Loaded from JSON: {weapon.weapon_name} (ID: {weapon.weapon_id})"
+            )
+            self.selected_weapon_label.setStyleSheet("color: green; font-weight: bold;")
+
+        except Exception as e:
+            QMessageBox.warning(self, "Load JSON Failed", f"Could not load weapon JSON:\n{str(e)}")
+
+    def choose_gamedata_file(self):
+        """Choose a different GameData.cff to use as the reference."""
+        try:
+            file_path, _ = QFileDialog.getOpenFileName(
+                self,
+                "Choose GameData.cff",
+                str(Path.cwd()),
+                "CFF Files (*.cff)"
+            )
+            if not file_path:
+                return
+
+            wiz = self.wizard()
+            wiz.custom_gamedata_path = file_path
+            # Reinitialize exporter to use the new reference
+            wiz.cff_exporter = WeaponCFFExporter(file_path)
+
+            # Update status label
+            self.gamedata_path_label.setText(f"Using GameData: {Path(file_path).name}")
+            self.gamedata_path_label.setStyleSheet("color: #27ae60;")
+
+            QMessageBox.information(self, "GameData Selected", f"Now using:\n{file_path}")
+        except Exception as e:
+            QMessageBox.warning(self, "GameData Selection Failed", f"Could not set GameData:\n{str(e)}")
 
     def validatePage(self):
         """Validate the page before moving to next"""

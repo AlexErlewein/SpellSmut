@@ -83,14 +83,27 @@ class WeaponCFFExporter:
         new_gamedata = GameData(self.gamedata_path)
 
         try:
-            # Step 1: Create the Item entry for the weapon
-            self._add_item_entry(new_gamedata, weapon_data)
+            # Allocate localisation IDs to avoid collisions with existing text rows
+            # Prefer weapon_id-based offset when free; otherwise pick a free ID in a safe high range
+            preferred_name_id = weapon_data.weapon_id + 20000
+            name_id = self._allocate_localisation_id(new_gamedata, preferred_name_id)
+
+            desc_id = None
+            if weapon_data.description:
+                preferred_desc_id = weapon_data.weapon_id + 20001
+                # Ensure description ID does not collide with name_id
+                if preferred_desc_id == name_id:
+                    preferred_desc_id = preferred_desc_id + 1
+                desc_id = self._allocate_localisation_id(new_gamedata, preferred_desc_id)
+
+            # Step 1: Create the Item entry for the weapon (with allocated name_id)
+            self._add_item_entry(new_gamedata, weapon_data, name_id)
 
             # Step 2: Create the Weapon entry with combat stats
             self._add_weapon_entry(new_gamedata, weapon_data)
 
-            # Step 3: Create Localization entries for name and description
-            self._add_localization_entries(new_gamedata, weapon_data)
+            # Step 3: Create Localization entries for name and description using allocated IDs
+            self._add_localization_entries(new_gamedata, weapon_data, name_id, desc_id)
 
             # Step 4: Handle new weapon types (if any)
             if weapon_data.weapon_type_id >= 20:
@@ -112,8 +125,8 @@ class WeaponCFFExporter:
                 print(f"Error creating modified GameData: {e}")
             raise
 
-    def _add_item_entry(self, gamedata: GameData, weapon_data: WeaponCreationData):
-        """Add an Item entry for the weapon"""
+    def _add_item_entry(self, gamedata: GameData, weapon_data: WeaponCreationData, name_id: int):
+        """Add an Item entry for the weapon, using provided name_id"""
 
         # Create item binary data based on tirganach entity structure
         # Item structure based on entities.py:
@@ -137,9 +150,6 @@ class WeaponCFFExporter:
             "2H": EquipmentType.TWOHANDED_WEAPON,
             "Unarmed": EquipmentType.ONEHANDED_WEAPON
         }
-
-        # Calculate the name_id (must fit into ushort -> use +20000 range)
-        name_id = weapon_data.weapon_id + 20000
 
         # Create binary data for the item
         item_data = bytearray(22)  # Item entity length
@@ -211,14 +221,13 @@ class WeaponCFFExporter:
         gamedata.weapons.append(weapon_entity)
         print(f"  ✓ Added Weapon entry for weapon ID {weapon_data.weapon_id}")
 
-    def _add_localization_entries(self, gamedata: GameData, weapon_data: WeaponCreationData):
-        """Add localization entries for weapon name and description"""
+    def _add_localization_entries(self, gamedata: GameData, weapon_data: WeaponCreationData, name_id: int, desc_id: Optional[int]):
+        """Add localization entries for weapon name and description using allocated IDs"""
 
         # Create localization entries for English text
         from TirganachReloaded.tirganach.types import Language
 
         # Name localisation entity (ensure correct record length)
-        name_id = weapon_data.weapon_id + 20000
         name_entity = Localisation(b"\x00" * Localisation._length(), game_data=gamedata)
         name_entity.text_id = name_id  # ushort
         name_entity.language = Language.ENGLISH
@@ -228,8 +237,7 @@ class WeaponCFFExporter:
         gamedata.localisation.append(name_entity)
 
         # Description localisation entity (optional)
-        if weapon_data.description:
-            desc_id = weapon_data.weapon_id + 20001
+        if weapon_data.description and desc_id is not None:
             desc_entity = Localisation(b"\x00" * Localisation._length(), game_data=gamedata)
             desc_entity.text_id = desc_id
             desc_entity.language = Language.ENGLISH
@@ -239,6 +247,39 @@ class WeaponCFFExporter:
             gamedata.localisation.append(desc_entity)
 
         print(f"  ✓ Added localization entries for weapon '{weapon_data.weapon_name}'")
+
+    def _allocate_localisation_id(self, gamedata: GameData, preferred_id: int) -> int:
+        """Return a free localisation text_id (ushort) avoiding collisions with existing rows."""
+        try:
+            used: set[int] = set()
+            try:
+                for row in gamedata.localisation:
+                    # Some entity implementations might not expose text_id directly
+                    tid = getattr(row, 'text_id', None)
+                    if isinstance(tid, int):
+                        used.add(tid)
+            except Exception:
+                pass
+
+            # If preferred is valid and free, use it
+            if isinstance(preferred_id, int) and 0 <= preferred_id <= 0xFFFF and preferred_id not in used:
+                return preferred_id
+
+            # Otherwise, search a safe high range (65000 down to 40000)
+            for tid in range(65000, 39999, -1):
+                if tid not in used:
+                    return tid
+
+            # As a last resort, search upwards from 30000
+            for tid in range(30000, 65535):
+                if tid not in used:
+                    return tid
+
+            # If nothing free found (extremely unlikely), fallback to preferred masked to ushort
+            return preferred_id & 0xFFFF
+        except Exception:
+            # On any error, fallback to preferred within ushort
+            return preferred_id & 0xFFFF
 
     def _add_weapon_type_entry(self, gamedata: GameData, weapon_data: WeaponCreationData):
         """Add a new weapon type entry if it's a custom type"""
