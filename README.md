@@ -2,6 +2,23 @@
 
 A comprehensive modding project and documentation repository for **SpellForce: The Order of Dawn - Platinum Edition**.
 
+## 📋 Issue Tracking with Beads
+
+**This project uses [beads](https://github.com/ben-vargas/ai-beads) for task tracking.**
+
+All development work is tracked in beads - a distributed, git-backed issue tracker designed for AI-agent collaboration.
+
+**Quick Commands:**
+```bash
+bd ready              # View ready work (no blockers)
+bd show SpellSmut-ID  # Show issue details
+bd update ID --status in_progress  # Claim work
+bd close ID           # Complete work
+```
+
+📖 **See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete workflow.**
+🤖 **AI Agents:** See [.claude/instructions.md](.claude/instructions.md) for detailed guidelines.
+
 ## 📚 Documentation
 
 **[View Complete Modding Documentation →](https://alexerlewein.github.io/SpellSmut/)**
