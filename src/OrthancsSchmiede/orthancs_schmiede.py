@@ -21,6 +21,7 @@ from PySide6.QtGui import QFont
 from PySide6.QtWidgets import (
     QApplication,
     QComboBox,
+    QFileDialog,
     QGroupBox,
     QHBoxLayout,
     QLabel,
@@ -64,6 +65,7 @@ class OrthancsSchmiede(QMainWindow):
         self.weapon_data = {}
         self.armor_data = {}
         self.current_language = Language.GERMAN
+        self.custom_cff_path = None
 
         self.init_ui()
         self.load_data()
@@ -133,6 +135,14 @@ class OrthancsSchmiede(QMainWindow):
             "QPushButton { background-color: #3c3c3c; color: #e0e0e0; font-weight: bold; padding: 8px; border-radius: 4px; border: 1px solid #555; } QPushButton:hover { background-color: #4a4a4a; }"
         )
         header_layout.addWidget(create_armor_btn)
+
+        # CFF File loading button
+        cff_btn = QPushButton("Load CFF File")
+        cff_btn.clicked.connect(self.load_cff_file)
+        cff_btn.setStyleSheet(
+            "QPushButton { background-color: #2d5a2d; color: #e0e0e0; font-weight: bold; padding: 8px; border-radius: 4px; border: 1px solid #555; } QPushButton:hover { background-color: #3a6a3a; }"
+        )
+        header_layout.addWidget(cff_btn)
 
         reload_btn = QPushButton("Reload Data")
         reload_btn.clicked.connect(self.reload_data)
@@ -245,6 +255,9 @@ class OrthancsSchmiede(QMainWindow):
         # Simple status bar
         self.statusBar().showMessage("Ready - Orthancs Schmiede Loaded")
 
+        # Update status with current file info
+        self.update_status_with_file_info()
+
     def load_data(self):
         """Load weapon and armor data"""
         try:
@@ -259,10 +272,19 @@ class OrthancsSchmiede(QMainWindow):
             if not self.id_manager:
                 self.id_manager = IDManager()
 
-            self.statusBar().showMessage("Loading weapon data...")
+            # Update status message based on whether we're loading custom CFF
+            if self.custom_cff_path:
+                file_name = Path(self.custom_cff_path).name
+                self.statusBar().showMessage(f"Loading weapons from {file_name}...")
+            else:
+                self.statusBar().showMessage("Loading weapon data...")
             self.load_weapon_data()
 
-            self.statusBar().showMessage("Loading armor data...")
+            if self.custom_cff_path:
+                file_name = Path(self.custom_cff_path).name
+                self.statusBar().showMessage(f"Loading armor from {file_name}...")
+            else:
+                self.statusBar().showMessage("Loading armor data...")
             self.load_armor_data()
 
             self.statusBar().showMessage("Building item trees...")
@@ -272,9 +294,8 @@ class OrthancsSchmiede(QMainWindow):
             self.item_count_label.setText(f"Total: {total_items} items")
             self.update_tree_title()
 
-            self.statusBar().showMessage(
-                f"✅ Loaded {total_items} items - Orthancs Schmiede Ready"
-            )
+            # Update final status message
+            self.update_status_with_file_info("Orthancs Schmiede Ready")
 
         except Exception as e:
             if self.logger:
@@ -295,12 +316,16 @@ class OrthancsSchmiede(QMainWindow):
             # loader.progress_updated.connect(lambda p, msg: self.statusBar().showMessage(msg))
 
             # Load weapons from CFF file (with fallback to JSON)
-            self.weapon_data = self.weapon_loader.load_all_weapons()
-
-            if self.logger:
-                self.logger.info(
-                    f"✓ Loaded {len(self.weapon_data)} weapons from CFF data"
-                )
+            if self.custom_cff_path:
+                self.weapon_data = self.weapon_loader.load_all_weapons(cff_file_path=self.custom_cff_path)
+                if self.logger:
+                    self.logger.info(f"✓ Loaded {len(self.weapon_data)} weapons from custom CFF: {self.custom_cff_path}")
+            else:
+                self.weapon_data = self.weapon_loader.load_all_weapons()
+                if self.logger:
+                    self.logger.info(
+                        f"✓ Loaded {len(self.weapon_data)} weapons from default CFF data"
+                    )
 
         except Exception as e:
             if self.logger:
@@ -341,12 +366,16 @@ class OrthancsSchmiede(QMainWindow):
             loader = CFFArmorLoader()
 
             # Load armor from CFF file (with fallback to JSON)
-            self.armor_data = loader.load_all_armor()
-
-            if self.logger:
-                self.logger.info(
-                    f"✓ Loaded {len(self.armor_data)} armor pieces from CFF data"
-                )
+            if self.custom_cff_path:
+                self.armor_data = loader.load_all_armor(cff_file_path=self.custom_cff_path)
+                if self.logger:
+                    self.logger.info(f"✓ Loaded {len(self.armor_data)} armor pieces from custom CFF: {self.custom_cff_path}")
+            else:
+                self.armor_data = loader.load_all_armor()
+                if self.logger:
+                    self.logger.info(
+                        f"✓ Loaded {len(self.armor_data)} armor pieces from CFF data"
+                    )
 
         except Exception as e:
             if self.logger:
@@ -2049,11 +2078,81 @@ class OrthancsSchmiede(QMainWindow):
                 self, "Error", f"Failed to launch armor forge wizard:\n{e}"
             )
 
+    def load_cff_file(self):
+        """Open a file dialog to select and load a specific CFF file"""
+        try:
+            # Open file dialog for CFF files
+            # Start in current working directory (script directory)
+            current_dir = Path.cwd()
+            file_path, _ = QFileDialog.getOpenFileName(
+                self,
+                "Select CFF File",
+                str(current_dir),
+                "CFF Files (*.cff);;All Files (*)"
+            )
+
+            if not file_path:
+                # User cancelled the dialog
+                return
+
+            # Validate that the file exists
+            if not Path(file_path).exists():
+                QMessageBox.critical(
+                    self,
+                    "Error",
+                    f"The selected file does not exist:\n{file_path}"
+                )
+                return
+
+            # Set the custom CFF path
+            self.custom_cff_path = file_path
+
+            # Clear current data and reload with new file
+            self.weapon_data.clear()
+            self.armor_data.clear()
+            self.load_data()
+
+            # Show success message with file info
+            file_name = Path(file_path).name
+            QMessageBox.information(
+                self,
+                "Success",
+                f"Successfully loaded CFF file:\n{file_name}\n\n"
+                f"Path: {file_path}"
+            )
+
+            # Update status bar
+            self.update_status_with_file_info(f"Loaded custom CFF")
+
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Error",
+                f"Failed to load CFF file:\n{e}"
+            )
+            if self.logger:
+                self.logger.exception("Error loading CFF file")
+
     def reload_data(self):
         """Reload all item data"""
         self.weapon_data.clear()
         self.armor_data.clear()
+        # Don't reset custom_cff_path anymore - preserve it
         self.load_data()
+
+    def update_status_with_file_info(self, message_suffix: str = "Ready"):
+        """Update status bar with current file information"""
+        if self.custom_cff_path:
+            file_name = Path(self.custom_cff_path).name
+            total_items = len(self.weapon_data) + len(self.armor_data)
+            self.statusBar().showMessage(
+                f"📁 {file_name} | {total_items} items | {message_suffix}"
+            )
+        else:
+            total_items = len(self.weapon_data) + len(self.armor_data)
+            self.statusBar().showMessage(
+                f"📁 Default GameData.cff | {total_items} items | {message_suffix}"
+            )
 
 
 def main():

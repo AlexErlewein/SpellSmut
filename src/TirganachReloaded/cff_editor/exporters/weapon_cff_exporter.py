@@ -102,14 +102,17 @@ class WeaponCFFExporter:
             # Step 2: Create the Weapon entry with combat stats
             self._add_weapon_entry(new_gamedata, weapon_data)
 
-            # Step 3: Create Localization entries for name and description using allocated IDs
+            # Step 3: Create Item Requirements entries for school requirements
+            self._add_item_requirements(new_gamedata, weapon_data)
+
+            # Step 4: Create Localization entries for name and description using allocated IDs
             self._add_localization_entries(new_gamedata, weapon_data, name_id, desc_id)
 
-            # Step 4: Handle new weapon types (if any)
+            # Step 5: Handle new weapon types (if any)
             if weapon_data.weapon_type_id >= 20:
                 self._add_weapon_type_entry(new_gamedata, weapon_data)
 
-            # Step 5: Handle new materials (if any)
+            # Step 6: Handle new materials (if any)
             if weapon_data.weapon_material_id >= 10:
                 self._add_material_entry(new_gamedata, weapon_data)
 
@@ -394,6 +397,99 @@ class WeaponCFFExporter:
 
         return data
     
+    def _add_item_requirements(self, gamedata: GameData, weapon_data: WeaponCreationData):
+        """Add Item Requirements entries for school requirements"""
+
+        if not weapon_data.requirements.school_requirements:
+            print(f"  ✓ No school requirements to add for weapon ID {weapon_data.weapon_id}")
+            return
+
+        try:
+            # Check if gamedata has item_requirements table
+            if not hasattr(gamedata, 'item_requirements'):
+                print(f"  ⚠ Warning: item_requirements table not found in GameData")
+                return
+
+            # Import ItemRequirement entity
+            from TirganachReloaded.tirganach.entities import ItemRequirement
+
+            # Create ItemRequirements entries for each school requirement
+            for req_number, school_req in enumerate(weapon_data.requirements.school_requirements):
+                try:
+                    # ItemRequirement structure based on entities.py:
+                    # - item_id: int (2 bytes, primary key)
+                    # - requirement_number: int (1 byte)
+                    # - requirement_school: School (2 bytes enum)
+                    # - level: int (1 byte)
+
+                    # Create binary data for the item requirement
+                    req_data = bytearray(6)  # ItemRequirement entity length
+
+                    # Pack the data according to tirganach structure
+                    import struct
+                    struct.pack_into('<H', req_data, 0, weapon_data.weapon_id)  # item_id
+                    struct.pack_into('<B', req_data, 2, req_number)  # requirement_number
+
+                    # Convert school name to school enum value
+                    school_value = self._get_school_enum_value(school_req.school_name)
+                    struct.pack_into('<H', req_data, 3, school_value)  # requirement_school (2 bytes)
+                    struct.pack_into('<B', req_data, 5, school_req.level)  # level
+
+                    # Create the ItemRequirement entity and add to gamedata
+                    item_req_entity = ItemRequirement(bytes(req_data), game_data=gamedata)
+
+                    # Add to the item_requirements table
+                    gamedata.item_requirements.append(item_req_entity)
+
+                    print(f"  ✓ Added ItemRequirement entry: {school_req.school_name} Level {school_req.level}")
+
+                except Exception as e:
+                    print(f"  ⚠ Warning: Failed to add school requirement {school_req.school_name}: {e}")
+                    continue
+
+            print(f"  ✓ Added {len(weapon_data.requirements.school_requirements)} school requirements for weapon ID {weapon_data.weapon_id}")
+
+        except Exception as e:
+            print(f"  ⚠ Warning: Failed to add item requirements for weapon ID {weapon_data.weapon_id}: {e}")
+
+    def _get_school_enum_value(self, school_name: str) -> int:
+        """Convert school name string to enum value"""
+        # Map school names to their enum values
+        # These values come from the tirganach School enum
+        school_mapping = {
+            "LEVEL_ONLY": 0,
+            "LIGHT_COMBAT": 1,
+            "PIERCING_WEAPONS": 2,
+            "LIGHT_BLADE_WEAPONS": 3,
+            "LIGHT_BLUNT_WEAPONS": 4,
+            "LIGHT_ARMOR": 5,
+            "HEAVY_COMBAT": 6,
+            "HEAVY_BLADE_WEAPONS": 7,
+            "HEAVY_BLUNT_WEAPONS": 8,
+            "HEAVY_ARMOR": 9,
+            "SHIELDS": 10,
+            "RANGED_COMBAT": 11,
+            "BOWS": 12,
+            "CROSSBOWS": 13,
+            "WHITE_MAGIC": 14,
+            "LIFE": 15,
+            "NATURE": 16,
+            "BOONS": 17,
+            "ELEMENTAL_MAGIC": 18,
+            "FIRE": 19,
+            "ICE": 20,
+            "EARTH": 21,
+            "MIND_MAGIC": 22,
+            "ENCHANTMENT": 23,
+            "OFFENSIVE": 24,
+            "DEFENSIVE": 25,
+            "BLACK_MAGIC": 26,
+            "DEATH": 27,
+            "NECROMANCY": 28,
+        }
+
+        return school_mapping.get(school_name, 0)  # Default to LEVEL_ONLY (0) if not found
+
     def export_text_entries(self, weapon_data: WeaponCreationData) -> List[bytes]:
         """Export to Category 2016 (Text Strings)"""
         # Two entries:

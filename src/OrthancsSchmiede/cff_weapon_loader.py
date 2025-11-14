@@ -41,15 +41,19 @@ class CFFWeaponLoader(QObject):
         )
         self.gamedata = None
 
-    def load_all_weapons(self) -> Dict[int, Dict[str, Any]]:
+    def load_all_weapons(self, cff_file_path: Optional[str] = None) -> Dict[int, Dict[str, Any]]:
         """Load all weapons from CFF file"""
         weapons = {}
 
+        # Use custom CFF file path if provided, otherwise use default
+        gamedata_path = cff_file_path or self.gamedata_path
+
         # Try to load from GameData.cff for complete stats
-        if GameData and Path(self.gamedata_path).exists():
+        if GameData and Path(gamedata_path).exists():
             try:
-                self.progress_updated.emit(10, "Loading GameData.cff...")
-                self.gamedata = GameData(self.gamedata_path)
+                file_name = Path(gamedata_path).name
+                self.progress_updated.emit(10, f"Loading {file_name}...")
+                self.gamedata = GameData(gamedata_path)
 
                 # Get all weapons from the GameData
                 all_weapons = list(self.gamedata.weapons)  # Convert to list
@@ -67,6 +71,10 @@ class CFFWeaponLoader(QObject):
 
             except Exception as e:
                 print(f"Error loading from GameData: {e}")
+        elif not GameData:
+            print("Warning: Tirganach library not available")
+        elif not Path(gamedata_path).exists():
+            print(f"Warning: CFF file not found: {gamedata_path}")
 
         return weapons
 

@@ -181,6 +181,13 @@ class WeaponForgeWizard(QWizard):
                     "dexterity": self.weapon_data.requirements.dexterity,
                     "intelligence": self.weapon_data.requirements.intelligence,
                     "level": self.weapon_data.requirements.level,
+                    "school_requirements": [
+                        {
+                            "requirement_school": sr.school_name,
+                            "requirement_number": idx,  # Add sequential requirement numbers
+                            "level": sr.level
+                        } for idx, sr in enumerate(self.weapon_data.requirements.school_requirements)
+                    ],
                 },
                 "sell_value": self.weapon_data.sell_value,
                 "buy_value": self.weapon_data.buy_value,
@@ -659,38 +666,50 @@ class ModeSelectionPage(QWizardPage):
             wizard.creation_mode = "duplicate"
             wizard.source_weapon = self.selected_weapon_data
 
-        # Allocate or validate ID
-        if self.auto_id_radio.isChecked():
-            try:
-                wizard.weapon_id = self.id_manager.allocate_id(ContentType.WEAPON)
-            except ValueError as e:
-                QMessageBox.critical(self, "ID Allocation Error", str(e))
-                return False
+        # Handle ID allocation/validation based on creation mode
+        if wizard.creation_mode == "edit":
+            # In edit mode, use the source weapon's ID
+            wizard.weapon_id = wizard.source_weapon.weapon_id
+            print(f"Edit mode: Using existing weapon ID {wizard.weapon_id}")
         else:
-            requested_id = self.manual_id_spin.value()
-            if not self.id_manager.is_valid_id(ContentType.WEAPON, requested_id):
-                QMessageBox.warning(
-                    self,
-                    "Invalid ID",
-                    f"ID {requested_id} is outside the valid range (10000-19999)",
-                )
-                return False
+            # For new and duplicate modes, allocate or validate ID
+            if self.auto_id_radio.isChecked():
+                try:
+                    wizard.weapon_id = self.id_manager.allocate_id(ContentType.WEAPON)
+                except ValueError as e:
+                    QMessageBox.critical(self, "ID Allocation Error", str(e))
+                    return False
+            else:
+                requested_id = self.manual_id_spin.value()
+                if not self.id_manager.is_valid_id(ContentType.WEAPON, requested_id):
+                    QMessageBox.warning(
+                        self,
+                        "Invalid ID",
+                        f"ID {requested_id} is outside the valid range (10000-19999)",
+                    )
+                    return False
 
-            if self.id_manager.is_id_used(ContentType.WEAPON, requested_id):
-                QMessageBox.warning(
-                    self,
-                    "ID Already In Use",
-                    f"ID {requested_id} is already allocated. Please choose another ID.",
-                )
-                return False
+                if wizard.creation_mode == "new" and self.id_manager.is_id_used(ContentType.WEAPON, requested_id):
+                    QMessageBox.warning(
+                        self,
+                        "ID Already In Use",
+                        f"ID {requested_id} is already allocated. Please choose another ID.",
+                    )
+                    return False
 
-            try:
-                wizard.weapon_id = self.id_manager.allocate_id(
-                    ContentType.WEAPON, requested_id
-                )
-            except ValueError as e:
-                QMessageBox.critical(self, "ID Allocation Error", str(e))
-                return False
+                # For duplicate mode, allow using the same ID as the source if manual
+                if wizard.creation_mode == "duplicate" and requested_id == wizard.source_weapon.weapon_id:
+                    wizard.weapon_id = requested_id
+                else:
+                    wizard.weapon_id = requested_id
+
+                try:
+                    wizard.weapon_id = self.id_manager.allocate_id(
+                        ContentType.WEAPON, requested_id
+                    )
+                except ValueError as e:
+                    QMessageBox.critical(self, "ID Allocation Error", str(e))
+                    return False
 
         return True
 
