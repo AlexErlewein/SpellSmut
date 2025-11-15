@@ -1429,6 +1429,9 @@ class OrthancsSchmiede(QMainWindow):
             ("Min Range", str(weapon_info.get("min_range", 0))),
             ("Max Range", str(weapon_info.get("max_range", 0))),
             ("Weapon Arc", str(weapon_info.get("attack_arc", 0))),
+            ("Hit Sound", str(weapon_info.get("hit_sound", "N/A"))),
+            ("Miss Sound", str(weapon_info.get("miss_sound", "N/A"))),
+            ("Equip Sound", str(weapon_info.get("equip_sound", "N/A"))),
             ("Icon Handle", str(weapon_info.get("icon_handle", "N/A"))),
         ]
 
