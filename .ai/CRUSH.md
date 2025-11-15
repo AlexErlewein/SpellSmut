@@ -28,6 +28,10 @@ See `.rules/RULES.md` for complete project organization rules.
 ## Build/Test Commands
 
 ```bash
+# Orthancs Schmiede (Main Forge Application)
+python3 src/OrthancsSchmiede/orthancs_schmiede.py    # Launch unified forge suite
+# Features: Weapon Forge, Armor Forge, item browsers with localization
+
 # Python (TirganachReloaded CFF editor)
 cd src/TirganachReloaded
 python run_cff_editor.py                     # Launch GUI editor
@@ -83,6 +87,34 @@ uv run tirganach                                     # Launch via script entry
 
 ## Common Patterns
 
+### Orthancs Schmiede (Weapon/Armor Forge)
+```python
+# CFF Loaders - Load items with complete data including requirements
+from OrthancsSchmiede.cff_weapon_loader import CFFWeaponLoader
+from OrthancsSchmiede.cff_armor_loader import CFFArmorLoader
+
+# Load weapons with school requirements
+weapon_loader = CFFWeaponLoader()
+weapons = weapon_loader.load_all_weapons()
+# Returns: dict[int, dict] with requirements field
+
+# Load armor with school requirements
+armor_loader = CFFArmorLoader()
+armors = armor_loader.load_all_armor()
+# Returns: dict[int, dict] with requirements field
+
+# Requirements structure:
+# {
+#   "strength": 0,
+#   "dexterity": 0,
+#   "intelligence": 0,
+#   "level": 1,
+#   "school_requirements": [
+#     {"requirement_school": "School.ELEMENTAL", "level": 5}
+#   ]
+# }
+```
+
 ### Python CFF Editing
 ```python
 from TirganachReloaded import GameData
@@ -90,6 +122,13 @@ from TirganachReloaded.types import *
 
 gd = GameData('path/to/GameData.cff')
 items = gd.items.where(item_type=ItemType.EQUIPMENT)
+
+# Access item requirements
+if hasattr(gd, 'item_requirements'):
+    reqs = gd.item_requirements.where(item_id=item_id)
+    for req in reqs:
+        print(f"School: {req.requirement_school}, Level: {req.level}")
+
 gd.save('path/to/GameData_modified.cff')
 ```
 
@@ -110,3 +149,49 @@ local assets = list_concat(files, manifest)
 - Place planning docs in ProjectPlanning/, not docs/
 - Run linting and type checking before committing changes
 - Use test markers: `-m "not gui"` to skip GUI tests, `-m "not slow"` for fast tests
+
+## Project-Specific Knowledge
+
+### Armor System (Updated Nov 2025)
+- **Armor Model**: Located at `src/TirganachReloaded/cff_editor/systems/armor_system/armor_model.py`
+- **Requirements Field**: Added to Armor model to support school requirements
+  - Structure matches weapon requirements format
+  - Preserved through `to_dict()` and `from_dict()` serialization
+- **CFFArmorLoader**: `src/OrthancsSchmiede/cff_armor_loader.py`
+  - Loads complete armor data from GameData.cff
+  - Includes school requirements from `item_requirements` table
+  - Used by EnhancedArmorBrowser for consistent data loading
+- **EnhancedArmorBrowser**: `src/TirganachReloaded/cff_editor/widgets/enhanced_armor_browser.py`
+  - Uses CFFArmorLoader for complete data with requirements
+  - Displays school requirements in details panel
+  - Preserves requirements when duplicating armor
+
+### Weapon System
+- **CFFWeaponLoader**: `src/OrthancsSchmiede/cff_weapon_loader.py`
+- Similar requirements loading pattern as armor system
+- Both systems share common requirements structure
+
+### School Requirements
+School requirements are stored in the `item_requirements` table:
+- Fields: `item_id`, `requirement_number`, `requirement_school`, `level`
+- Schools include: ELEMENTAL, WHITE, BLACK, and other magic schools
+- Multiple requirements can exist per item
+- Displayed as formatted text: "Elemental L5, White L3"
+
+### Key Data Structures
+```python
+# Requirements structure (armor and weapons)
+requirements = {
+    "strength": 0,
+    "dexterity": 0,
+    "intelligence": 0,
+    "level": 1,
+    "school_requirements": [
+        {
+            "requirement_number": 0,
+            "requirement_school": "School.ELEMENTAL",
+            "level": 5
+        }
+    ]
+}
+```
