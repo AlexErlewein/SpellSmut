@@ -11,6 +11,7 @@ from ..models.weapon_creation_data import (
     WeaponEffect,
     WeaponHands,
     WeaponRequirements,
+    SchoolRequirement,
 )
 
 
@@ -18,29 +19,31 @@ class WeaponLoader:
     """Load and save weapon data"""
 
     @staticmethod
-    def load_weapon(weapon_id: int, gamedata_path: Optional[str] = None) -> WeaponCreationData:
+    def load_weapon(
+        weapon_id: int, gamedata_path: Optional[str] = None
+    ) -> WeaponCreationData:
         """Load existing weapon by ID from GameData.cff"""
-        
+
         # Try to load from GameData.cff first for full stats
         if gamedata_path and Path(gamedata_path).exists():
             try:
                 gd = GameData(gamedata_path)
                 weapons = gd.weapons.where(item_id=weapon_id)
-                
+
                 if weapons:
                     weapon = weapons[0]
                     return WeaponLoader._convert_from_gamedata(weapon, gd)
             except Exception as e:
                 print(f"Warning: Could not load from GameData: {e}")
                 # Fall back to JSON
-        
+
         # Fallback to enhanced_weapons.json (basic info only)
         current_file = Path(__file__)
         weapons_file = current_file.parent.parent.parent / "enhanced_weapons.json"
-        
+
         if not weapons_file.exists():
             raise FileNotFoundError(f"Weapons file not found at: {weapons_file}")
-        
+
         with open(weapons_file, "r") as f:
             weapons = json.load(f)
 
@@ -58,7 +61,9 @@ class WeaponLoader:
             weapon_type_name=weapon_data.get("weapon_type_name", ""),
             weapon_material_id=weapon_data.get("weapon_material_id", 5),
             weapon_material_name=weapon_data.get("weapon_material_name", ""),
-            hands=WeaponLoader._determine_hands_from_type(weapon_data.get("weapon_type_name", "")),
+            hands=WeaponLoader._determine_hands_from_type(
+                weapon_data.get("weapon_type_name", "")
+            ),
             damage_category=DamageCategory.MELEE,  # Default, can be updated based on weapon type
             description=weapon_data.get("description", ""),
             min_damage=weapon_data.get("min_damage", 10),
@@ -83,66 +88,90 @@ class WeaponLoader:
             equip_sound="",
             model_file="",  # Would need to be populated from model mapping
             trail_effect="",
-            impact_effect=""
+            impact_effect="",
         )
 
     @staticmethod
     def _convert_from_gamedata(weapon, gd) -> WeaponCreationData:
         """Convert from GameData Weapon entity to WeaponCreationData"""
-        
+
         # Get related item data
         item = weapon.item
         item_ui = None
         icon_handle = ""
-        
+
         # Try to get UI data for icon
         try:
             item_uis = gd.item_ui.where(item_id=weapon.item_id)
             if item_uis:
                 item_ui = item_uis[0]
-                icon_handle = item_ui.item_ui_handle.strip() if item_ui.item_ui_handle else ""
+                icon_handle = (
+                    item_ui.item_ui_handle.strip() if item_ui.item_ui_handle else ""
+                )
         except:
             pass
-        
+
         # Get type and material names
         weapon_type_name = ""
         weapon_material_name = ""
-        
+
         try:
             type_names = gd.weapon_type_names.where(weapon_type_id=weapon.weapon_type)
             if type_names:
                 weapon_type_name = type_names[0].name
         except:
             pass
-            
+
         try:
-            material_names = gd.weapon_material_names.where(weapon_material_id=weapon.material)
+            material_names = gd.weapon_material_names.where(
+                weapon_material_id=weapon.material
+            )
             if material_names:
                 weapon_material_name = material_names[0].name
         except:
             pass
-        
+
         # Determine damage type based on weapon type
-        damage_type = WeaponLoader._determine_damage_type(weapon.weapon_type, weapon_type_name)
-        
+        damage_type = WeaponLoader._determine_damage_type(
+            weapon.weapon_type, weapon_type_name
+        )
+
         # Determine hands and category
         hands = WeaponLoader._determine_hands_from_type(weapon_type_name)
         damage_category = WeaponLoader._damage_category_from_range(weapon.max_range)
-        
+
         # Get requirements from item if available
         requirements = WeaponRequirements()
         try:
-            if hasattr(item, 'requirements') and item.requirements:
-                reqs = item.requirements[0] if isinstance(item.requirements, list) else item.requirements
-                requirements = WeaponRequirements(
-                    strength=getattr(reqs, 'strength', 0),
-                    dexterity=getattr(reqs, 'dexterity', 0), 
-                    intelligence=getattr(reqs, 'intelligence', 0),
-                    level=getattr(reqs, 'level', 1)
+            if hasattr(item, "requirements") and item.requirements:
+                # Handle school requirements
+                school_requirements = []
+
+                for req in item.requirements:
+                    # Convert school requirement
+                    if hasattr(req, "requirement_school") and req.requirement_school:
+                        school_req = SchoolRequirement(
+                            school_name=req.requirement_school.name, level=req.level
+                        )
+                        school_requirements.append(school_req)
+
+                # Get stat requirements (if available)
+                reqs = (
+                    item.requirements[0]
+                    if isinstance(item.requirements, list)
+                    else item.requirements
                 )
-        except:
+                requirements = WeaponRequirements(
+                    strength=getattr(reqs, "strength", 0),
+                    dexterity=getattr(reqs, "dexterity", 0),
+                    intelligence=getattr(reqs, "intelligence", 0),
+                    level=getattr(reqs, "level", 1),
+                    school_requirements=school_requirements,
+                )
+        except Exception as e:
+            print(f"Warning: Could not load requirements: {e}")
             pass
-        
+
         return WeaponCreationData(
             weapon_id=weapon.item_id,
             creation_mode="edit",
@@ -177,37 +206,52 @@ class WeaponLoader:
             equip_sound="",
             model_file="",
             trail_effect="",
-            impact_effect=""
+            impact_effect="",
         )
 
     @staticmethod
     def _determine_hands_from_type(weapon_type_name: str) -> WeaponHands:
         """Determine if weapon is one-handed or two-handed based on type name"""
         weapon_type_lower = weapon_type_name.lower()
-        
-        if any(two_hand in weapon_type_lower for two_hand in ['2h', 'twoh', 'twohanded', 'two-handed', 'great', 'polearm']):
+
+        if any(
+            two_hand in weapon_type_lower
+            for two_hand in [
+                "2h",
+                "twoh",
+                "twohanded",
+                "two-handed",
+                "great",
+                "polearm",
+            ]
+        ):
             return WeaponHands.TWO_HANDED
-        elif '1h' in weapon_type_lower or 'oneh' in weapon_type_lower:
+        elif "1h" in weapon_type_lower or "oneh" in weapon_type_lower:
             return WeaponHands.ONE_HANDED
-        elif any(ranged in weapon_type_lower for ranged in ['bow', 'crossbow', 'xbow']):
+        elif any(ranged in weapon_type_lower for ranged in ["bow", "crossbow", "xbow"]):
             return WeaponHands.TWO_HANDED  # Most ranged weapons are two-handed
         else:
             return WeaponHands.ONE_HANDED  # Default assumption
-    
+
     @staticmethod
-    def _determine_damage_type(weapon_type_id: int, weapon_type_name: str) -> DamageType:
+    def _determine_damage_type(
+        weapon_type_id: int, weapon_type_name: str
+    ) -> DamageType:
         """Determine damage type based on weapon type"""
         type_lower = weapon_type_name.lower()
-        
-        if any(slash in type_lower for slash in ['sword', 'blade', 'axe', 'dagger', 'cleaver']):
+
+        if any(
+            slash in type_lower
+            for slash in ["sword", "blade", "axe", "dagger", "cleaver"]
+        ):
             return DamageType.SLASH
-        elif any(pierce in type_lower for pierce in ['spear', 'pike', 'bolt', 'arrow']):
+        elif any(pierce in type_lower for pierce in ["spear", "pike", "bolt", "arrow"]):
             return DamageType.PIERCE
-        elif any(crush in type_lower for crush in ['hammer', 'mace', 'club', 'staff']):
+        elif any(crush in type_lower for crush in ["hammer", "mace", "club", "staff"]):
             return DamageType.CRUSH
         else:
             return DamageType.SLASH  # Default
-    
+
     @staticmethod
     def _damage_category_from_range(max_range: int) -> DamageCategory:
         """Determine if weapon is melee or ranged based on range"""
@@ -283,26 +327,66 @@ class WeaponLoader:
                 )
             )
 
+        # Accept both formats: loader JSON (item_id/name/weapon_speed) and wizard JSON (weapon_id/weapon_name/attack_speed)
+        item_id = weapon_dict.get("item_id") or weapon_dict.get("weapon_id")
+        name = weapon_dict.get("name") or weapon_dict.get("weapon_name", "")
+        weapon_speed = weapon_dict.get("weapon_speed", weapon_dict.get("attack_speed", 100))
+
+        # Optional enums
+        dmg_type_str = weapon_dict.get("damage_type") or "slash"
+        try:
+            dmg_type = DamageType(dmg_type_str)
+        except Exception:
+            dmg_type = DamageType.SLASH
+
+        hands_val = weapon_dict.get("hands")
+        try:
+            hands = WeaponHands(hands_val) if hands_val else WeaponHands.ONE_HANDED
+        except Exception:
+            hands = WeaponHands.ONE_HANDED
+
+        dmg_cat_str = weapon_dict.get("damage_category") or DamageCategory.MELEE.value
+        try:
+            dmg_cat = DamageCategory(dmg_cat_str)
+        except Exception:
+            dmg_cat = DamageCategory.MELEE
+
         # Create WeaponCreationData
         weapon = WeaponCreationData(
-            weapon_id=weapon_dict["item_id"],
+            weapon_id=int(item_id),
             creation_mode=weapon_dict.get("creation_mode", "new"),
-            weapon_name=weapon_dict["name"],
+            source_weapon_id=weapon_dict.get("source_weapon_id"),
+            weapon_name=name,
             weapon_type_id=weapon_dict.get("weapon_type_id", 4),
             weapon_type_name=weapon_dict.get("weapon_type_name", ""),
             weapon_material_id=weapon_dict.get("weapon_material_id", 5),
             weapon_material_name=weapon_dict.get("weapon_material_name", ""),
+            hands=hands,
+            damage_category=dmg_cat,
+            description=weapon_dict.get("description", ""),
             min_damage=weapon_dict.get("min_damage", 10),
             max_damage=weapon_dict.get("max_damage", 15),
-            attack_speed=weapon_dict.get("weapon_speed", 100),
+            damage_type=dmg_type,
+            attack_speed=weapon_speed,
             min_range=weapon_dict.get("min_range", 0),
             max_range=weapon_dict.get("max_range", 2),
+            attack_arc=weapon_dict.get("attack_arc", 90),
+            critical_chance=weapon_dict.get("critical_chance", 5.0),
+            armor_penetration=weapon_dict.get("armor_penetration", 0.0),
+            knockback_chance=weapon_dict.get("knockback_chance", 0.0),
+            requirements=requirements,
             sell_value=weapon_dict.get("sell_value", 50),
             buy_value=weapon_dict.get("buy_value", 100),
             rarity=Rarity(weapon_dict.get("rarity", "common")),
-            icon_handle=weapon_dict.get("icon_handle", ""),
-            requirements=requirements,
             effects=effects,
+            item_set_id=weapon_dict.get("item_set_id", 0),
+            icon_handle=weapon_dict.get("icon_handle", ""),
+            hit_sound=weapon_dict.get("hit_sound", "battle_hit_1hsword"),
+            miss_sound=weapon_dict.get("miss_sound", "battle_miss_sword"),
+            equip_sound=weapon_dict.get("equip_sound", ""),
+            model_file=weapon_dict.get("model_file", ""),
+            trail_effect=weapon_dict.get("trail_effect", ""),
+            impact_effect=weapon_dict.get("impact_effect", ""),
             created_date=weapon_dict.get("created_date", ""),
             modified_date=weapon_dict.get("modified_date", ""),
             author=weapon_dict.get("author", ""),

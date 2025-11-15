@@ -13,8 +13,8 @@ from typing import Dict, List, Any, Optional
 # Import from existing modules
 try:
     from ....tirganach import GameData
-    from ....shared.id_manager import IDManager
-    from .armor_model import Armor, ARMOR_TYPES, MATERIAL_CATEGORIES, QUALITY_TIERS, CLASS_RESTRICTIONS
+    from ....shared.id_manager import IDManager, ContentType
+    from .armor_model import Armor, ARMOR_TYPES, MATERIAL_CATEGORIES, QUALITY_TIERS, CLASS_RESTRICTIONS, SLOT_HEAD, SLOT_CHEST, SLOT_LEGS, SLOT_FEET, SLOT_RIGHT_RING, SLOT_LEFT_RING, SLOT_LEFT_HAND
     from .armor_sets import ArmorSetManager
     from .cff_armor_export import export_armor_to_cff
 except ImportError:
@@ -22,11 +22,18 @@ except ImportError:
     import sys
     from pathlib import Path
     sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
-    from tirganach import GameData
-    from cff_editor.shared.id_manager import IDManager
-    from armor_system.armor_model import Armor, ARMOR_TYPES, MATERIAL_CATEGORIES, QUALITY_TIERS, CLASS_RESTRICTIONS
-    from armor_system.armor_sets import ArmorSetManager
-    from armor_system.cff_armor_export import export_armor_to_cff
+    try:
+        from TirganachReloaded.tirganach import GameData
+        from TirganachReloaded.cff_editor.shared.id_manager import IDManager, ContentType
+        from TirganachReloaded.cff_editor.systems.armor_system.armor_model import Armor, ARMOR_TYPES, MATERIAL_CATEGORIES, QUALITY_TIERS, CLASS_RESTRICTIONS, SLOT_HEAD, SLOT_CHEST, SLOT_LEGS, SLOT_FEET, SLOT_RIGHT_RING, SLOT_LEFT_RING, SLOT_LEFT_HAND
+        from TirganachReloaded.cff_editor.systems.armor_system.armor_sets import ArmorSetManager
+        from TirganachReloaded.cff_editor.systems.armor_system.cff_armor_export import export_armor_to_cff
+    except ImportError:
+        from tirganach import GameData
+        from cff_editor.shared.id_manager import IDManager, ContentType
+        from armor_system.armor_model import Armor, ARMOR_TYPES, MATERIAL_CATEGORIES, QUALITY_TIERS, CLASS_RESTRICTIONS, SLOT_HEAD, SLOT_CHEST, SLOT_LEGS, SLOT_FEET, SLOT_RIGHT_RING, SLOT_LEFT_RING, SLOT_LEFT_HAND
+        from armor_system.armor_sets import ArmorSetManager
+        from armor_system.cff_armor_export import export_armor_to_cff
 
 
 
@@ -221,10 +228,6 @@ class ArmorForge:
 
     def get_available_id(self) -> int:
         """Get the next available ID in the armor range"""
-        try:
-            from .cff_editor.shared.id_manager import ContentType
-        except ImportError:
-            from cff_editor.shared.id_manager import ContentType
         return self.id_manager.get_next_id(ContentType.ARMOR)
 
     def create_new_armor(self) -> Armor:
@@ -758,10 +761,32 @@ class ArmorForge:
             abs(min(0, armor.run_speed)) + abs(min(0, armor.fight_speed)) + abs(min(0, armor.cast_speed))
         )
         
-        # Calculate a rough balance (this is a very simplified calculation)
-        max_possible_stats = 500  # Arbitrary max for balance calculation
-        total_stats = total_positive_stats + total_negative_stats
-        balance_rating = min(100.0, (total_stats / max_possible_stats) * 100 if max_possible_stats > 0 else 0)
+        # Calculate effective stat value considering requirements
+        effective_stats = total_positive_stats - total_negative_stats
+        
+        # Consider level requirement as a balancing factor
+        # Higher level requirement allows for more powerful items
+        if armor.level_requirement > 0:
+            effective_value = effective_stats / armor.level_requirement * 5  # Arbitrary scaling factor
+        else:
+            effective_value = effective_stats
+            
+        # Calculate a more nuanced balance rating
+        # Base rating on effective value but capped to reasonable levels
+        if armor.tier == "Common":
+            max_expected_value = 100
+        elif armor.tier == "Uncommon":
+            max_expected_value = 200
+        elif armor.tier == "Rare":
+            max_expected_value = 400
+        elif armor.tier == "Epic":
+            max_expected_value = 700
+        elif armor.tier == "Legendary":
+            max_expected_value = 1200
+        else:  # Unique
+            max_expected_value = 2000
+            
+        balance_rating = min(100.0, (effective_value / max_expected_value) * 100 if max_expected_value > 0 else 0)
         setattr(armor, 'stat_balance_rating', round(balance_rating, 2))
         
         print(f"\nStat Balance Rating: {balance_rating:.2f}%")
@@ -839,10 +864,32 @@ class ArmorForge:
             abs(min(0, armor.run_speed)) + abs(min(0, armor.fight_speed)) + abs(min(0, armor.cast_speed))
         )
         
-        # Calculate a rough balance (this is a very simplified calculation)
-        max_possible_stats = 500  # Arbitrary max for balance calculation
-        total_stats = total_positive_stats + total_negative_stats
-        balance_rating = min(100.0, (total_stats / max_possible_stats) * 100 if max_possible_stats > 0 else 0)
+        # Calculate effective stat value considering requirements
+        effective_stats = total_positive_stats - total_negative_stats
+        
+        # Consider level requirement as a balancing factor
+        # Higher level requirement allows for more powerful items
+        if armor.level_requirement > 0:
+            effective_value = effective_stats / armor.level_requirement * 5  # Arbitrary scaling factor
+        else:
+            effective_value = effective_stats
+        
+        # Calculate a more nuanced balance rating
+        # Base rating on effective value but capped to reasonable levels
+        if armor.tier == "Common":
+            max_expected_value = 100
+        elif armor.tier == "Uncommon":
+            max_expected_value = 200
+        elif armor.tier == "Rare":
+            max_expected_value = 400
+        elif armor.tier == "Epic":
+            max_expected_value = 700
+        elif armor.tier == "Legendary":
+            max_expected_value = 1200
+        else:  # Unique
+            max_expected_value = 2000
+            
+        balance_rating = min(100.0, (effective_value / max_expected_value) * 100 if max_expected_value > 0 else 0)
         return round(balance_rating, 2)
 
 
