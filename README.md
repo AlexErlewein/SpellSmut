@@ -17,7 +17,7 @@ bd close ID           # Complete work
 ```
 
 📖 **See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete workflow.**
-🤖 **AI Agents:** See [.claude/instructions.md](.claude/instructions.md) for detailed guidelines.
+🤖 **AI Agents:** See [.ai/WORKFLOW.md](.ai/WORKFLOW.md) for universal workflow (works for Claude, GPT-4, Gemini, Qwen, Cursor, Windsurf, Zed, etc.).
 
 ## 📚 Documentation
 

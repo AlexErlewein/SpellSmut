@@ -186,14 +186,14 @@ Addresses SpellSmut-7f1, SpellSmut-kls, SpellSmut-9at
 
 ## Getting Help
 
-- **Beads usage**: See `.claude/instructions.md`
+- **Beads usage**: See `.ai/WORKFLOW.md` (universal guide for all AI agents)
 - **Project structure**: See `ProjectPlanning/PROJECT_OVERVIEW.md`
 - **Current status**: See `ProjectPlanning/Status/CURRENT_STATUS.md`
 - **Beads docs**: https://github.com/ben-vargas/ai-beads
 
 ## Special Notes for AI Agents
 
-AI coding agents (like Claude) should:
+AI coding agents (Claude, GPT-4, Gemini, Qwen, Cursor, Windsurf, Zed, etc.) should:
 
 1. **Always check beads first** - Don't start work without checking `bd ready`
 2. **Read full issue descriptions** - They contain detailed implementation guidance
@@ -201,7 +201,7 @@ AI coding agents (like Claude) should:
 4. **Create subtasks** - Break down large work into smaller beads issues
 5. **Commit .beads/ changes** - Always include beads updates in commits
 
-See `.claude/instructions.md` for detailed AI agent guidelines.
+See `.ai/WORKFLOW.md` for the universal AI agent workflow guide (works for ALL agents).
 
 ## Questions?
 

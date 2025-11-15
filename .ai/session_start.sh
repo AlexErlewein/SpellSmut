@@ -1,0 +1,26 @@
+#!/bin/bash
+# Universal session start hook for all AI agents
+# Works with Claude, GPT-4, Gemini, Qwen, Cursor, Windsurf, Zed, etc.
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "📋 BEADS ISSUE TRACKER ACTIVE"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "This project uses beads for task tracking (ALL AI agents)."
+echo ""
+echo "Quick Commands:"
+echo "  bd ready              # Show ready work"
+echo "  bd show ISSUE-ID      # View issue details"
+echo "  bd update ID --status in_progress  # Claim work"
+echo "  bd close ID           # Complete work"
+echo ""
+echo "Documentation:"
+echo "  - Universal Workflow: .ai/WORKFLOW.md"
+echo "  - Contributing: CONTRIBUTING.md"
+echo "  - Your IDE: .ai/README.md (integration guides)"
+echo ""
+echo "Current Status:"
+bd list --status open | wc -l | xargs echo "  -" "open issues"
+bd ready | wc -l | xargs echo "  -" "ready tasks (unblocked)"
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

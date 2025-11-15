@@ -8,6 +8,20 @@ This **hidden directory** contains instructions and guidelines for various AI as
 
 These files provide context, rules, and project-specific information to AI assistants to ensure consistent and high-quality contributions to the codebase.
 
+## 🔴 CRITICAL: Beads Issue Tracker
+
+**ALL AI assistants MUST use beads for task tracking.**
+
+Beads is a distributed, git-backed issue tracker. Quick commands:
+```bash
+bd ready              # Show available work
+bd show SpellSmut-ID  # View issue details
+bd update ID --status in_progress  # Claim work
+bd close ID           # Complete work
+```
+
+📖 **See `WORKFLOW.md` for complete beads workflow guide.**
+
 ---
 
 ## 🤖 Which File for Which AI?
@@ -59,8 +73,18 @@ Instructions for Windsurf AI assistant. Contains:
 **Location:** `.ai/QWEN.md`  
 Instructions for Qwen AI assistant.
 
+### WORKFLOW.md
+**Location:** `.ai/WORKFLOW.md`
+**CRITICAL:** Universal beads workflow guide for ALL AI assistants.
+- How to use beads issue tracker
+- Required workflow steps
+- JSON output for automation
+- IDE integration instructions
+
+ALL AI assistants MUST use beads for task tracking.
+
 ### RULES.md
-**Location:** `.ai/RULES.md` (also available in root as `RULES.md`)  
+**Location:** `.ai/RULES.md` (also available in root as `RULES.md`)
 **CRITICAL:** Complete folder structure rules and file organization conventions.
 - Where to place test files
 - Where to place documentation
@@ -74,16 +98,22 @@ ALL AI assistants MUST follow the rules in RULES.md when creating or organizing 
 
 ## 🎯 Quick Start for AI Assistants
 
-1. **Find your file:** Look for your specific instruction file in `.ai/` folder
+1. **Read beads workflow:** Check `.ai/WORKFLOW.md` - **REQUIRED FOR ALL ASSISTANTS**
+
+2. **Find your file:** Look for your specific instruction file in `.ai/` folder
    - Claude Code? → Read `.ai/CLAUDE.md`
    - Gemini CLI? → Read `.ai/GEMINI.md`
    - Qwen? → Read `.ai/QWEN.md`
    - Crush? → Read `.ai/CRUSH.md`
    - Windsurf? → Read `.ai/WINDSURF.md`
+   - Cursor? → Read `.ai/WORKFLOW.md` + IDE integration
+   - Zed? → Read `.ai/WORKFLOW.md` + IDE integration
 
-2. **Read the rules:** Check `.ai/RULES.md` for folder organization
+3. **Check beads for work:** Run `bd ready` before starting ANY development
 
-3. **Follow standards:** All AI assistants must follow the same organizational rules
+4. **Read the rules:** Check `.ai/RULES.md` for folder organization
+
+5. **Follow standards:** All AI assistants must follow the same organizational rules
 
 ---
 
@@ -97,6 +127,14 @@ When working with an AI assistant on this project:
 4. **Quick onboarding**: New AI assistants can quickly understand project structure
 
 ## Key Standards (All Assistants)
+
+### Beads Issue Tracker (MANDATORY)
+- **ALWAYS check beads before starting work:** `bd ready`
+- **Mark issues in progress:** `bd update ID --status in_progress`
+- **Close completed work:** `bd close ID`
+- **Read full issue descriptions:** They contain implementation guidance
+- **Commit .beads/ changes:** Always include beads updates in commits
+- **See WORKFLOW.md for complete guide**
 
 ### Python Environment
 - **ALWAYS use UV** for package management and execution
