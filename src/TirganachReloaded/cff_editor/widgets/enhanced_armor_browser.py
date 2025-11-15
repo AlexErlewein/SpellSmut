@@ -111,6 +111,24 @@ class EnhancedArmorBrowser(QDialog):
     def load_armor_from_cff(self):
         """Load armor directly from GameData.cff for consistent localization"""
         try:
+            # Try to use CFFArmorLoader from OrthancsSchmiede first (has complete requirements loading)
+            try:
+                import sys
+                project_root = Path(__file__).parent.parent.parent.parent
+                sys.path.insert(0, str(project_root / "src"))
+                
+                from OrthancsSchmiede.cff_armor_loader import CFFArmorLoader
+                
+                armor_loader = CFFArmorLoader()
+                self.armor_data = armor_loader.load_all_armor()
+                
+                if self.armor_data:
+                    print(f"EnhancedArmorBrowser loaded {len(self.armor_data)} armors from CFFArmorLoader with requirements")
+                    return
+            except Exception as e:
+                print(f"Failed to use CFFArmorLoader: {e}")
+            
+            # Fallback to manual loading
             gamedata_path = Path(__file__).parent.parent.parent.parent / "OriginalGameFiles" / "data" / "GameData.cff"
             
             if gamedata_path.exists():
@@ -179,6 +197,43 @@ class EnhancedArmorBrowser(QDialog):
                             'enchantment_slots': 0,
                             'stat_balance_rating': 0.0
                         }
+                        
+                        # Try to get school requirements from item_requirements
+                        try:
+                            if hasattr(gamedata, 'item_requirements'):
+                                item_reqs = gamedata.item_requirements.where(item_id=item.item_id)
+                                if item_reqs:
+                                    school_reqs = [
+                                        {
+                                            'requirement_school': str(req.requirement_school),
+                                            'level': getattr(req, 'level', 0),
+                                            'requirement_number': getattr(req, 'requirement_number', 0),
+                                        }
+                                        for req in item_reqs
+                                    ]
+                                    armor_dict['requirements'] = {
+                                        'level': max([getattr(req, 'level', 0) for req in item_reqs]) if item_reqs else 1,
+                                        'school_requirements': school_reqs,
+                                        'strength': 0,
+                                        'dexterity': 0,
+                                        'intelligence': 0,
+                                    }
+                                else:
+                                    armor_dict['requirements'] = {
+                                        'level': 1,
+                                        'school_requirements': [],
+                                        'strength': 0,
+                                        'dexterity': 0,
+                                        'intelligence': 0,
+                                    }
+                        except Exception:
+                            armor_dict['requirements'] = {
+                                'level': 1,
+                                'school_requirements': [],
+                                'strength': 0,
+                                'dexterity': 0,
+                                'intelligence': 0,
+                            }
                         
                         # Add armor to data
                         self.armor_data[item.item_id] = armor_dict
@@ -857,15 +912,17 @@ class EnhancedArmorBrowser(QDialog):
 
         # Check if armor_info is dict or object
         if isinstance(armor_info, dict):
-            strength_req = str(armor_info.get("strength_requirement", 0))
-            dexterity_req = str(armor_info.get("dexterity_requirement", 0))
-            intelligence_req = str(armor_info.get("intelligence_requirement", 0))
-            level_req = str(armor_info.get("level_requirement", 1))
+            req_data = armor_info.get("requirements", {})
+            strength_req = str(req_data.get("strength", armor_info.get("strength_requirement", 0)))
+            dexterity_req = str(req_data.get("dexterity", armor_info.get("dexterity_requirement", 0)))
+            intelligence_req = str(req_data.get("intelligence", armor_info.get("intelligence_requirement", 0)))
+            level_req = str(req_data.get("level", armor_info.get("level_requirement", 1)))
         else:
-            strength_req = str(getattr(armor_info, 'strength_requirement', 0))
-            dexterity_req = str(getattr(armor_info, 'dexterity_requirement', 0))
-            intelligence_req = str(getattr(armor_info, 'intelligence_requirement', 0))
-            level_req = str(getattr(armor_info, 'level_requirement', 1))
+            req_data = getattr(armor_info, 'requirements', {})
+            strength_req = str(req_data.get("strength", getattr(armor_info, 'strength_requirement', 0)))
+            dexterity_req = str(req_data.get("dexterity", getattr(armor_info, 'dexterity_requirement', 0)))
+            intelligence_req = str(req_data.get("intelligence", getattr(armor_info, 'intelligence_requirement', 0)))
+            level_req = str(req_data.get("level", getattr(armor_info, 'level_requirement', 1)))
 
         req_info = [
             ("Strength", strength_req),
@@ -884,6 +941,50 @@ class EnhancedArmorBrowser(QDialog):
             row_layout.addWidget(value_widget)
             row_layout.addStretch()
             req_layout.addLayout(row_layout)
+
+        # Add school requirements if available
+        school_requirements = req_data.get("school_requirements", []) if isinstance(req_data, dict) else []
+        if school_requirements:
+            # Add separator
+            separator_label = QLabel("─")
+            separator_label.setStyleSheet("color: #6fb3d2; font-weight: bold;")
+            separator_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            req_layout.addWidget(separator_label)
+
+            # Add school requirements title
+            school_title = QLabel("<strong>SCHOOL REQUIREMENTS:</strong>")
+            school_title.setStyleSheet(
+                "color: #6fb3d2; font-weight: bold; margin-top: 10px;"
+            )
+            req_layout.addWidget(school_title)
+
+            # Add each school requirement
+            for school_req in school_requirements:
+                school_name = school_req.get("requirement_school", "Unknown School")
+                school_level = school_req.get("level", 0)
+
+                # Format school name for better display
+                formatted_name = str(school_name)
+                if "." in formatted_name:
+                    formatted_name = formatted_name.split(".")[-1]
+                formatted_name = formatted_name.replace("_", " ").title()
+
+                row_layout = QHBoxLayout()
+                school_label = QLabel(f"  • {formatted_name}")
+                school_label.setStyleSheet("color: #6fb3d2; min-width: 150px;")
+                level_label = QLabel(f"Level {school_level}")
+                level_label.setStyleSheet("color: #e0e0e0; font-weight: bold;")
+                row_layout.addWidget(school_label)
+                row_layout.addWidget(level_label)
+                row_layout.addStretch()
+                req_layout.addLayout(row_layout)
+        else:
+            # Show no school requirements message
+            no_school_label = QLabel("  No school requirements")
+            no_school_label.setStyleSheet(
+                "color: #666; font-style: italic; margin-top: 5px;"
+            )
+            req_layout.addWidget(no_school_label)
 
         self.details_content_layout.addWidget(req_group)
 

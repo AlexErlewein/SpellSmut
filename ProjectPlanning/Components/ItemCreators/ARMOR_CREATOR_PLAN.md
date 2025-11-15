@@ -3,11 +3,17 @@
 
 ## Overview
 
-The **Armor Creation System** allows users to create custom armor pieces (helmets, chest armor, legs, boots, shields, rings) with full stat customization. Similar to the Weapon Forge, users can create new armor, edit existing pieces, and save under new IDs. The system includes material integration, set bonuses, and visual customization.
+The **Armor Creation System** allows users to create custom armor pieces (helmets, chest armor, legs, boots, shields, rings) with full stat customization. Similar to the Weapon Forge, users can create new armor, edit existing pieces, and save under new IDs. The system includes material integration, set bonuses, visual customization, and **school requirements** support.
 
-**Status**: 🟡 Planning Phase  
+**Status**: ✅ **IMPLEMENTED**  
 **Priority**: High  
 **Dependencies**: ID Management System, Weapon Forge (for architecture reference)
+
+**Latest Updates**:
+- ✅ Armor model now supports school requirements (Nov 2025)
+- ✅ Enhanced armor browser displays school requirements
+- ✅ Requirements preserved during duplication
+- ✅ Full integration with CFFArmorLoader
 
 ---
 
@@ -99,7 +105,8 @@ Slot & Type Classification:
 Quality & Rarity:
   ├─ Tier (Common/Rare/Epic/Legendary/Unique)
   ├─ Base Level Requirement
-  └─ Class Restrictions (optional)
+  ├─ Class Restrictions (optional)
+  └─ School Requirements (elemental/white/black magic schools)
 ```
 
 ### Phase 3: Core Stat Bonuses
@@ -215,9 +222,34 @@ Set Bonuses:
 
 - ✅ Create new armor in < 20 minutes
 - ✅ Edit existing armor pieces
+- ✅ Duplicate armor with all properties preserved (including school requirements)
 - ✅ Armor sets work with bonuses
+- ✅ School requirements displayed and preserved
 - ✅ Armor works in-game without errors
 - ✅ ID Manager prevents conflicts
+- ✅ Browser shows requirements in details panel
+
+---
+
+## Implementation Status
+
+### ✅ Completed Features
+- **Armor Model**: Requirements field added with school requirements support
+- **Enhanced Armor Browser**: 
+  - Uses CFFArmorLoader for complete data loading
+  - Displays school requirements in details panel
+  - Preserves requirements during duplication
+- **CFFArmorLoader Integration**: Full requirements loading from `item_requirements` table
+- **Localization**: Multi-language support for armor names and properties
+
+### 🔄 In Progress
+- Export to CFF format with requirements
+- Advanced armor set creation UI
+
+### 📋 Planned
+- Visual properties customization
+- Enhanced material system
+- Special abilities system
 
 ---
 
@@ -229,6 +261,7 @@ Set Bonuses:
 
 ---
 
-**Document Version**: 1.1  
+**Document Version**: 1.2  
 **Created**: 2025-10-27  
-**Status**: ✅ Planning Complete - Ready for Implementation
+**Last Updated**: 2025-11-15  
+**Status**: ✅ Core System Implemented - School Requirements Support Added
