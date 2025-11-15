@@ -19,6 +19,16 @@ bd close ID           # Complete work
 📖 **See [CONTRIBUTING.md](CONTRIBUTING.md) for the complete workflow.**
 🤖 **AI Agents:** See [.ai/WORKFLOW.md](.ai/WORKFLOW.md) for universal workflow (works for Claude, GPT-4, Gemini, Qwen, Cursor, Windsurf, Zed, etc.).
 
+### 📊 Visual Kanban Board
+
+**For humans**: View tasks visually in a Kanban board!
+
+1. **Open** `task-manager.html` in your browser (Chrome/Edge/Opera)
+2. **Select** the SpellSmut folder
+3. **View** all tasks organized by status: To Do → In Progress → Review → Blocked → Done
+
+The Kanban board auto-syncs from beads on every commit. [Learn more →](KANBAN.md)
+
 ## 📚 Documentation
 
 **[View Complete Modding Documentation →](https://alexerlewein.github.io/SpellSmut/)**
