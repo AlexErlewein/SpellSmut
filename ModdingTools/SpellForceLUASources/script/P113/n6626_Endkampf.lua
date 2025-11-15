@@ -24,9 +24,7 @@ OnToggleEvent
 	},
 	OffConditions =
 	{
-		ODER
-		(
-		Negated(PlayerHasItemEquipped {ItemId = 3764, Amount = 1 ,UpdateInterval = 10}),
+		ODER(		Negated(PlayerHasItemEquipped {ItemId = 3764, Amount = 1 ,UpdateInterval = 10}),
 		Negated(FigureInRangeNpc{TargetNpcId = 6626, NpcId = Avatar , Range = 5 , UpdateInterval = 10})
 		)
 	},
@@ -78,7 +76,7 @@ OnEvent
 
 OneTimeInitAction (SetNpcTimeStamp{Name = "FialDargFlickerFixer"} )
 --Fial spawnt um, wenn er weniger als 30% Health hat
---füllt somit seine Health wieder auf etc. bis Spieler Gebäude zerstört hat
+--fllt somit seine Health wieder auf etc. bis Spieler Gebude zerstrt hat
 Umspawn
 {
 	 
@@ -94,7 +92,7 @@ Umspawn
 		SetGlobalFlagFalse{Name = "P113FialDargUmspawn"},
 		SetNpcTimeStamp{Name = "FialDargFlickerFixer"},
 		SetGlobalFlagFalse{Name = "P113FialDargBesiegt"},
-		ChangeRace{Race = 190, NpcId = 6626}, --von neutral auf dunkelelfböse
+		ChangeRace{Race = 190, NpcId = 6626}, --von neutral auf dunkelelfbse
 		SetEffect{Effect = "AreaHit", X = 143, Y = 209, Length = 0, TargetType = World },
 		--Goto {X = 155, Y = 223, NpcId = 6626, Range = 3, WalkMode = Walk, GotoMode = GotoNormal, XRand = 0, YRand = 0},
 		--SetGlobalFlagTrue{Name = "P113EndkampfBeginnt"},
@@ -102,7 +100,7 @@ Umspawn
 }
 
 
---wenn Fial Darg endgültig tot
+--wenn Fial Darg endgltig tot
 OnEvent
 {
 	NotInDialog = FALSE,

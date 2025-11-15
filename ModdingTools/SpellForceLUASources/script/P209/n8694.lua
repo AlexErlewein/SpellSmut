@@ -34,7 +34,7 @@ OnPlatformOneTimeEvent
 		SetNpcFlagTrue{Name = "BitteUmspawnen"},
 	}
 }
---OnOneTimeEvent	-- gleich wieder löschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
+--OnOneTimeEvent	-- gleich wieder lschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
 NewState{Name = "AvoidUmspawnAfterMapStartCutscene"}
 AddTransition
 {
@@ -60,9 +60,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                           
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 		IsGlobalFlagTrue {Name = "g_sP209UriasFollow"}, 
@@ -98,7 +96,7 @@ OnFollowToggle
 }
 
 
---Urias lösst den FollowMode auf und begibt sich zur Arena.
+--Urias lsst den FollowMode auf und begibt sich zur Arena.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -113,7 +111,7 @@ OnOneTimeEvent
 	}
 }
 
---Urias wurde als Mitstreiter auserwählt.
+--Urias wurde als Mitstreiter auserwhlt.
 OnPlatformOneTimeEvent
 {
 	Conditions = 
@@ -193,7 +191,7 @@ Despawn
 	
 
 	-- 3 globale flags steuern das an/abschalten eines NPC Dialogs
-	-- die flags lösen die entspr. aktion aus und werden dabei wieder auf false gesetzt
+	-- die flags lsen die entspr. aktion aus und werden dabei wieder auf false gesetzt
 	-- dies sind die flags, nach dem underscore kommt die NpcId:
 	-- SetGlobalFlagTrue{Name = "PleaseRemoveDialog_1234"},
 	-- SetGlobalFlagTrue{Name = "PleaseEnableMainQuestDialog_5678"},
@@ -206,7 +204,7 @@ Despawn
 			IsNpcFlagFalse{Name = "known"},
 		},
 		Actions = {
-			Say{Tag = "uriasP209_001", String = "Freund! Ich beschwöre Euch, lasst mich gegen diesen Kerl antreten! Ich werde ihm Manieren beibringen!"},
+			Say{Tag = "uriasP209_001", String = "Freund! Ich beschwre Euch, lasst mich gegen diesen Kerl antreten! Ich werde ihm Manieren beibringen!"},
 			Answer{Tag = "uriasP209_002PC", String = "Seid Ihr sicher, das Wut ein guter Ratgeber ist, Urias?", AnswerId = 1},
 		}}
 
@@ -223,7 +221,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "uriasP209_003", String = "Nach all dem, was Ihr getan habt, nun das? Wer wäre da nicht wütend? Nein! Die Götter sind auf unserer Seite! Wählt mich aus!"},
+			Say{Tag = "uriasP209_003", String = "Nach all dem, was Ihr getan habt, nun das? Wer wre da nicht wtend? Nein! Die Gtter sind auf unserer Seite! Whlt mich aus!"},
 			Answer{Tag = "", String = "", AnswerId = 2},
 		}}
 
@@ -259,7 +257,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "uriasP209_005PC", String = "Ihr sollt meien Mitstreiter sein Urias!", AnswerId = 6},
-			OfferAnswer{Tag = "uriasP209_008PC", String = "Ich muss meine Entscheidung noch überdenken.", AnswerId = 9},
+			OfferAnswer{Tag = "uriasP209_008PC", String = "Ich muss meine Entscheidung noch berdenken.", AnswerId = 9},
 		}}
 
 	OnAnswer{5;
@@ -268,14 +266,14 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "uriasP209_008PC", String = "Ich muss meine Entscheidung noch überdenken.", AnswerId = 9},
+			OfferAnswer{Tag = "uriasP209_008PC", String = "Ich muss meine Entscheidung noch berdenken.", AnswerId = 9},
 		}}
 
 	OnAnswer{6;
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "uriasP209_006", String = "Ihr habt gut gewählt! Jetzt lasst uns diesem Streithahn etwas Dankbarkeit einbläuen!"},
+			Say{Tag = "uriasP209_006", String = "Ihr habt gut gewhlt! Jetzt lasst uns diesem Streithahn etwas Dankbarkeit einbluen!"},
 			Answer{Tag = "uriasP209_007PC", String = "Wir sehen uns auf dem Kampfplatz!", AnswerId = 7},
 		}}
 
@@ -299,7 +297,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "uriasP209_009", String = "Wie Ihr meint. Aber die Zeit drängt, wir haben noch einen weiten Weg vor uns!"},
+			Say{Tag = "uriasP209_009", String = "Wie Ihr meint. Aber die Zeit drngt, wir haben noch einen weiten Weg vor uns!"},
 			Answer{Tag = "", String = "", AnswerId = 10},
 		}}
 

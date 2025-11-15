@@ -14,36 +14,100 @@ from enum import Enum
 import math
 
 from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-    QTabWidget, QSplitter, QTreeWidget, QTreeWidgetItem, QTextEdit,
-    QLineEdit, QSpinBox, QComboBox, QPushButton, QLabel, QGroupBox,
-    QFormLayout, QListWidget, QListWidgetItem, QMessageBox, QProgressBar,
-    QStatusBar, QMenuBar, QToolBar, QDialog, QDialogButtonBox,
-    QCheckBox, QRadioButton, QButtonGroup, QFrame, QScrollArea,
-    QTableWidget, QTableWidgetItem, QHeaderView, QAbstractItemView,
-    QGraphicsView, QGraphicsScene, QGraphicsItem, QGraphicsRectItem,
-    QGraphicsTextItem, QGraphicsLineItem, QGraphicsPolygonItem,
-    QSlider, QStyleOptionViewItem, QStyle
+    QApplication,
+    QMainWindow,
+    QWidget,
+    QVBoxLayout,
+    QHBoxLayout,
+    QTabWidget,
+    QSplitter,
+    QTreeWidget,
+    QTreeWidgetItem,
+    QTextEdit,
+    QLineEdit,
+    QSpinBox,
+    QComboBox,
+    QPushButton,
+    QLabel,
+    QGroupBox,
+    QFormLayout,
+    QListWidget,
+    QListWidgetItem,
+    QMessageBox,
+    QProgressBar,
+    QStatusBar,
+    QMenuBar,
+    QToolBar,
+    QDialog,
+    QDialogButtonBox,
+    QCheckBox,
+    QRadioButton,
+    QButtonGroup,
+    QFrame,
+    QScrollArea,
+    QTableWidget,
+    QTableWidgetItem,
+    QHeaderView,
+    QAbstractItemView,
+    QGraphicsView,
+    QGraphicsScene,
+    QGraphicsItem,
+    QGraphicsRectItem,
+    QGraphicsTextItem,
+    QGraphicsLineItem,
+    QGraphicsPolygonItem,
+    QSlider,
+    QStyleOptionViewItem,
+    QStyle,
 )
 from PySide6.QtCore import (
-    Qt, Signal, Slot, QThread, QTimer, QSettings, QSize, QPoint,
-    QSortFilterProxyModel, QItemSelectionModel, QRectF, QPointF,
-    QObject, Signal, QPropertyAnimation, QEasingCurve
+    Qt,
+    Signal,
+    Slot,
+    QThread,
+    QTimer,
+    QSettings,
+    QSize,
+    QPoint,
+    QSortFilterProxyModel,
+    QItemSelectionModel,
+    QRectF,
+    QPointF,
+    QObject,
+    Signal,
+    QPropertyAnimation,
+    QEasingCurve,
 )
 from PySide6.QtGui import (
-    QFont, QPixmap, QIcon, QAction, QKeySequence, QPalette,
-    QColor, QTextCursor, QIntValidator, QPen, QBrush, QPainter,
-    QPolygonF, QTransform, QMouseEvent, QWheelEvent, QKeyEvent
+    QFont,
+    QPixmap,
+    QIcon,
+    QAction,
+    QKeySequence,
+    QPalette,
+    QColor,
+    QTextCursor,
+    QIntValidator,
+    QPen,
+    QBrush,
+    QPainter,
+    QPolygonF,
+    QTransform,
+    QMouseEvent,
+    QWheelEvent,
+    QKeyEvent,
 )
 
 # Import CFF components
 try:
     from TirganachReloaded.cff_editor.models.quest_models import Dialogue
     from TirganachReloaded.cff_editor.logging_config import get_logger
+
     logger = get_logger(__name__)
 except ImportError:
     # Fallback for standalone testing
     import logging
+
     logger = logging.getLogger(__name__)
 
     # Simple Dialogue class for fallback
@@ -60,6 +124,7 @@ except ImportError:
 
 class NodeType(Enum):
     """Types of dialogue nodes"""
+
     PLAYER = "player"
     NPC = "npc"
     CONDITIONAL = "conditional"
@@ -71,6 +136,7 @@ class NodeType(Enum):
 @dataclass
 class DialogueNode:
     """Represents a single dialogue node"""
+
     id: str
     node_type: NodeType
     speaker: str = ""
@@ -84,40 +150,37 @@ class DialogueNode:
     def to_dict(self) -> Dict[str, Any]:
         """Convert node to dictionary"""
         return {
-            'id': self.id,
-            'type': self.node_type.value,
-            'speaker': self.speaker,
-            'text': self.text,
-            'choices': self.choices,
-            'conditions': self.conditions,
-            'actions': self.actions,
-            'position': self.position,
-            'next_nodes': self.next_nodes
+            "id": self.id,
+            "type": self.node_type.value,
+            "speaker": self.speaker,
+            "text": self.text,
+            "choices": self.choices,
+            "conditions": self.conditions,
+            "actions": self.actions,
+            "position": self.position,
+            "next_nodes": self.next_nodes,
         }
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> 'DialogueNode':
+    def from_dict(cls, data: Dict[str, Any]) -> "DialogueNode":
         """Create node from dictionary"""
+        # Handle both "type" and "node_type" for backward compatibility
+        node_type_key = "type" if "type" in data else "node_type"
         return cls(
-            id=data['id'],
-            node_type=NodeType(data['type']),
-            speaker=data.get('speaker', ''),
-            text=data.get('text', ''),
-            choices=data.get('choices', []),
-            conditions=data.get('conditions', []),
-            actions=data.get('actions', []),
-            position=tuple(data.get('position', (0.0, 0.0))),
-            next_nodes=data.get('next_nodes', [])
+            id=data["id"],
+            node_type=NodeType(data[node_type_key]),
+            speaker=data.get("speaker", ""),
+            text=data.get("text", ""),
+            choices=data.get("choices", []),
+            conditions=data.get("conditions", []),
+            actions=data.get("actions", []),
+            position=tuple(data.get("position", (0.0, 0.0))),
+            next_nodes=data.get("next_nodes", []),
         )
 
 
 class DialogueNodeItem(QGraphicsRectItem):
     """Visual representation of a dialogue node"""
-
-    # Signals
-    node_selected = Signal(object)
-    node_moved = Signal(str, float, float)
-    connection_requested = Signal(str, str)
 
     def __init__(self, node: DialogueNode, width: int = 200, height: int = 120):
         super().__init__(0, 0, width, height)
@@ -156,7 +219,7 @@ class DialogueNodeItem(QGraphicsRectItem):
             NodeType.NPC: QColor(100, 150, 200),
             NodeType.PLAYER: QColor(150, 200, 100),
             NodeType.CHOICE: QColor(200, 150, 100),
-            NodeType.CONDITIONAL: QColor(200, 100, 200)
+            NodeType.CONDITIONAL: QColor(200, 100, 200),
         }
 
         color = colors.get(self.node.node_type, QColor(150, 150, 150))
@@ -205,20 +268,21 @@ class DialogueNodeItem(QGraphicsRectItem):
         self.output_point = QPointF(self.width, self.height / 2)
 
         # Draw connection points as small circles
-        input_circle = QGraphicsRectItem(-5, self.height/2 - 5, 10, 10, self)
+        input_circle = QGraphicsRectItem(-5, self.height / 2 - 5, 10, 10, self)
         input_circle.setBrush(QBrush(QColor(255, 255, 0)))
         input_circle.setPen(QPen(QColor(200, 200, 0), 1))
 
-        output_circle = QGraphicsRectItem(self.width-5, self.height/2 - 5, 10, 10, self)
+        output_circle = QGraphicsRectItem(
+            self.width - 5, self.height / 2 - 5, 10, 10, self
+        )
         output_circle.setBrush(QBrush(QColor(0, 255, 0)))
         output_circle.setPen(QPen(QColor(0, 200, 0), 1))
 
     def itemChange(self, change, value):
         """Handle item changes"""
         if change == QGraphicsItem.ItemPositionHasChanged:
-            # Emit signal when node is moved
+            # Update node position
             self.node.position = (value.x(), value.y())
-            self.node_moved.emit(self.node.id, value.x(), value.y())
 
         return super().itemChange(change, value)
 
@@ -252,7 +316,7 @@ class DialogueNodeItem(QGraphicsRectItem):
         """Handle mouse press"""
         if event.button() == Qt.LeftButton:
             self.setSelected(True)
-            self.node_selected.emit(self.node)
+            # Selection will be handled by the scene/view
 
         super().mousePressEvent(event)
 
@@ -273,9 +337,7 @@ class DialogueConnectionItem(QGraphicsLineItem):
         # Update position
         self.update_position()
 
-        # Track node movements
-        start_node.node_moved.connect(self.update_position)
-        end_node.node_moved.connect(self.update_position)
+        # Track node movements (handled by scene updates)
 
     def update_position(self):
         """Update line position based on node positions"""
@@ -285,12 +347,9 @@ class DialogueConnectionItem(QGraphicsLineItem):
         # Calculate connection points
         start_point = QPointF(
             start_pos.x() + self.start_node.width,
-            start_pos.y() + self.start_node.height / 2
+            start_pos.y() + self.start_node.height / 2,
         )
-        end_point = QPointF(
-            end_pos.x(),
-            end_pos.y() + self.end_node.height / 2
-        )
+        end_point = QPointF(end_pos.x(), end_pos.y() + self.end_node.height / 2)
 
         self.setLine(start_point.x(), start_point.y(), end_point.x(), end_point.y())
 
@@ -358,9 +417,7 @@ class DialogueGraphicsView(QGraphicsView):
         # Store reference
         self.nodes[node.id] = node_item
 
-        # Connect signals
-        node_item.node_selected.connect(self.on_node_selected)
-        node_item.node_moved.connect(self.on_node_moved)
+        # Signals handled by scene selection changes
 
         return node_item
 
@@ -626,8 +683,8 @@ class DialoguePropertiesWidget(QWidget):
         self.choices_table.setRowCount(len(self.current_node.choices))
 
         for row, choice in enumerate(self.current_node.choices):
-            text_item = QTableWidgetItem(choice.get('text', ''))
-            next_node_item = QTableWidgetItem(choice.get('next_node', ''))
+            text_item = QTableWidgetItem(choice.get("text", ""))
+            next_node_item = QTableWidgetItem(choice.get("next_node", ""))
 
             self.choices_table.setItem(row, 0, text_item)
             self.choices_table.setItem(row, 1, next_node_item)
@@ -637,7 +694,7 @@ class DialoguePropertiesWidget(QWidget):
         if not self.current_node:
             return
 
-        new_choice = {'text': '', 'next_node': ''}
+        new_choice = {"text": "", "next_node": ""}
         self.current_node.choices.append(new_choice)
         self.update_choices_table()
         self.on_properties_changed()
@@ -750,8 +807,8 @@ class DialoguePropertiesWidget(QWidget):
 
             if text_item:
                 choice = {
-                    'text': text_item.text(),
-                    'next_node': next_node_item.text() if next_node_item else ''
+                    "text": text_item.text(),
+                    "next_node": next_node_item.text() if next_node_item else "",
                 }
                 self.current_node.choices.append(choice)
 
@@ -908,7 +965,7 @@ class VisualDialogueEditor(QMainWindow):
         left_layout = QVBoxLayout()
         left_panel.setLayout(left_layout)
 
-        # Node palette
+        # Node palette (NPC button first as it's the most common starting point)
         self.setup_node_palette(left_layout)
 
         # Tree view
@@ -960,7 +1017,9 @@ class VisualDialogueEditor(QMainWindow):
         palette_layout.addWidget(self.choice_btn)
 
         self.conditional_btn = QPushButton("Conditional Node")
-        self.conditional_btn.clicked.connect(lambda: self.add_node(NodeType.CONDITIONAL))
+        self.conditional_btn.clicked.connect(
+            lambda: self.add_node(NodeType.CONDITIONAL)
+        )
         palette_layout.addWidget(self.conditional_btn)
 
         self.end_btn = QPushButton("End Node")
@@ -1081,21 +1140,50 @@ class VisualDialogueEditor(QMainWindow):
         # Generate unique ID
         node_id = f"{node_type.value}_{len(self.nodes) + 1}"
 
+        # Calculate position based on selected node or default
+        if self.selected_node:
+            # Position new node to the right of selected node
+            selected_pos = self.selected_node.position
+            new_x = selected_pos[0] + 250  # Space nodes horizontally
+            new_y = selected_pos[1]
+        else:
+            # Default positioning
+            new_x = 100 + len(self.nodes) * 50
+            new_y = 100 + len(self.nodes) * 50
+
         # Create node
         node = DialogueNode(
             id=node_id,
             node_type=node_type,
-            position=(100 + len(self.nodes) * 50, 100 + len(self.nodes) * 50)
+            position=(new_x, new_y),
         )
 
         # Add to collection
         self.nodes[node_id] = node
+
+        # Auto-connect to selected node if appropriate
+        if self.selected_node and node_type != NodeType.START:
+            # For NPC responses, auto-connect from selected player choice
+            if (
+                node_type == NodeType.NPC
+                and self.selected_node.node_type == NodeType.PLAYER
+            ):
+                # This is a response to a player choice
+                node.speaker = "NPC"  # Default speaker
+                # Note: In a full implementation, we'd need to handle choice indexing
+            elif self.selected_node.node_type in [NodeType.NPC, NodeType.START]:
+                # Connect sequentially
+                self.selected_node.next_nodes.append(node_id)
+                self.graphics_view.add_connection(self.selected_node.id, node_id)
 
         # Add to graphics view
         self.graphics_view.add_node(node)
 
         # Update tree view
         self.tree_widget.set_nodes(self.nodes)
+
+        # Auto-select the new node
+        self.select_node(node_id)
 
         self.status_bar.showMessage(f"Added {node_type.value} node: {node_id}")
 
@@ -1149,6 +1237,75 @@ class VisualDialogueEditor(QMainWindow):
 
             self.status_bar.showMessage(f"Updated node: {node_id}")
 
+    def connect_choice_to_response(self, choice_node_id: str, choice_index: int):
+        """Show dialog to connect a choice to a response"""
+        if choice_node_id not in self.nodes:
+            return
+
+        choice_node = self.nodes[choice_node_id]
+        if choice_index >= len(choice_node.choices):
+            return
+
+        # Create dialog to select response node
+        dialog = QDialog(self)
+        dialog.setWindowTitle(
+            f"Connect Choice '{choice_node.choices[choice_index].get('text', '')}'"
+        )
+        dialog.setMinimumWidth(400)
+
+        layout = QVBoxLayout(dialog)
+
+        # Instructions
+        instructions = QLabel(
+            "Select which NPC response this player choice should lead to:"
+        )
+        instructions.setWordWrap(True)
+        layout.addWidget(instructions)
+
+        # Node selection
+        self.response_combo = QComboBox()
+        self.response_combo.addItem("Select a response node...", "")
+
+        # Add all NPC response nodes
+        for node_id, node in self.nodes.items():
+            if node.node_type in [NodeType.NPC, NodeType.CONDITIONAL]:
+                display_text = (
+                    f"{node_id}: {node.text[:50]}..."
+                    if len(node.text) > 50
+                    else f"{node_id}: {node.text}"
+                )
+                self.response_combo.addItem(display_text, node_id)
+
+        layout.addWidget(self.response_combo)
+
+        # Buttons
+        button_box = QDialogButtonBox(
+            QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel
+        )
+        button_box.accepted.connect(dialog.accept)
+        button_box.rejected.connect(dialog.reject)
+        layout.addWidget(button_box)
+
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            selected_response_id = self.response_combo.currentData()
+            if selected_response_id:
+                # Connect the choice to the response
+                choice_node.choices[choice_index]["next_node"] = selected_response_id
+
+                # Update connections
+                self.graphics_view.add_connection(choice_node_id, selected_response_id)
+
+                # Update tree view
+                self.tree_widget.set_nodes(self.nodes)
+
+                # Update properties if this node is selected
+                if self.selected_node and self.selected_node.id == choice_node_id:
+                    self.properties_widget.set_node(choice_node)
+
+                self.status_bar.showMessage(
+                    f"Connected choice to response: {selected_response_id}"
+                )
+
     def delete_selected_node(self):
         """Delete the selected node"""
         if not self.selected_node:
@@ -1156,9 +1313,10 @@ class VisualDialogueEditor(QMainWindow):
 
         # Confirm deletion
         reply = QMessageBox.question(
-            self, "Delete Node",
+            self,
+            "Delete Node",
             f"Are you sure you want to delete node '{self.selected_node.id}'?",
-            QMessageBox.Yes | QMessageBox.No
+            QMessageBox.Yes | QMessageBox.No,
         )
 
         if reply == QMessageBox.Yes:
@@ -1176,8 +1334,10 @@ class VisualDialogueEditor(QMainWindow):
             # Remove connections
             connections_to_remove = []
             for connection in self.graphics_view.connections:
-                if (connection.start_node.node.id == node_id or
-                    connection.end_node.node.id == node_id):
+                if (
+                    connection.start_node.node.id == node_id
+                    or connection.end_node.node.id == node_id
+                ):
                     connections_to_remove.append(connection)
 
             for connection in connections_to_remove:
@@ -1237,22 +1397,24 @@ class VisualDialogueEditor(QMainWindow):
 
         # Convert to dictionary
         dialogue_data = {
-            'nodes': [node.to_dict() for node in self.nodes.values()],
-            'connections': []
+            "nodes": [node.to_dict() for node in self.nodes.values()],
+            "connections": [],
         }
 
         # Add connections
         for connection in self.graphics_view.connections:
-            dialogue_data['connections'].append({
-                'from': connection.start_node.node.id,
-                'to': connection.end_node.node.id
-            })
+            dialogue_data["connections"].append(
+                {
+                    "from": connection.start_node.node.id,
+                    "to": connection.end_node.node.id,
+                }
+            )
 
         # In a full implementation, this would show a file dialog
         filename = "dialogue_export.json"
 
         try:
-            with open(filename, 'w') as f:
+            with open(filename, "w") as f:
                 json.dump(dialogue_data, f, indent=2)
 
             QMessageBox.information(self, "Success", f"Dialogue saved to {filename}")
@@ -1273,7 +1435,7 @@ class VisualDialogueEditor(QMainWindow):
         filename = "dialogue_export.lua"
 
         try:
-            with open(filename, 'w') as f:
+            with open(filename, "w") as f:
                 f.write(lua_code)
 
             QMessageBox.information(self, "Success", f"Dialogue exported to {filename}")
@@ -1311,7 +1473,9 @@ class VisualDialogueEditor(QMainWindow):
             if node.choices:
                 lua_lines.append("    choices = {")
                 for choice in node.choices:
-                    lua_lines.append(f'        {{text = "{choice["text"]}", next = "{choice["next_node"]}"}},')
+                    lua_lines.append(
+                        f'        {{text = "{choice["text"]}", next = "{choice["next_node"]}"}},'
+                    )
                 lua_lines.append("    },")
 
             if node.conditions:
@@ -1353,7 +1517,7 @@ class VisualDialogueEditor(QMainWindow):
             node_type=NodeType.START,
             speaker="System",
             text="Dialogue starts here...",
-            position=(100, 100)
+            position=(100, 100),
         )
 
         npc_node = DialogueNode(
@@ -1361,7 +1525,7 @@ class VisualDialogueEditor(QMainWindow):
             node_type=NodeType.NPC,
             speaker="Guard",
             text="Welcome to our town, traveler. How can I help you?",
-            position=(350, 100)
+            position=(350, 100),
         )
 
         choice_node = DialogueNode(
@@ -1371,9 +1535,9 @@ class VisualDialogueEditor(QMainWindow):
             choices=[
                 {"text": "I'm looking for work.", "next_node": "quest_node"},
                 {"text": "Just passing through.", "next_node": "leave_node"},
-                {"text": "Tell me about this town.", "next_node": "info_node"}
+                {"text": "Tell me about this town.", "next_node": "info_node"},
             ],
-            position=(600, 100)
+            position=(600, 100),
         )
 
         quest_node = DialogueNode(
@@ -1381,7 +1545,7 @@ class VisualDialogueEditor(QMainWindow):
             node_type=NodeType.NPC,
             speaker="Guard",
             text="We have a goblin problem in the nearby caves. Could you help us?",
-            position=(850, 50)
+            position=(850, 50),
         )
 
         info_node = DialogueNode(
@@ -1389,7 +1553,7 @@ class VisualDialogueEditor(QMainWindow):
             node_type=NodeType.NPC,
             speaker="Guard",
             text="This is the town of Greenhaven. We're a peaceful community of traders and farmers.",
-            position=(850, 150)
+            position=(850, 150),
         )
 
         leave_node = DialogueNode(
@@ -1397,7 +1561,7 @@ class VisualDialogueEditor(QMainWindow):
             node_type=NodeType.NPC,
             speaker="Guard",
             text="Safe travels, then!",
-            position=(850, 250)
+            position=(850, 250),
         )
 
         end_node = DialogueNode(
@@ -1405,7 +1569,7 @@ class VisualDialogueEditor(QMainWindow):
             node_type=NodeType.END,
             speaker="System",
             text="Dialogue ends",
-            position=(1100, 150)
+            position=(1100, 150),
         )
 
         # Set up connections
@@ -1416,15 +1580,17 @@ class VisualDialogueEditor(QMainWindow):
         leave_node.next_nodes = ["end"]
 
         # Add nodes
-        self.nodes.update({
-            "start": start_node,
-            "npc_greeting": npc_node,
-            "player_choice": choice_node,
-            "quest_node": quest_node,
-            "info_node": info_node,
-            "leave_node": leave_node,
-            "end": end_node
-        })
+        self.nodes.update(
+            {
+                "start": start_node,
+                "npc_greeting": npc_node,
+                "player_choice": choice_node,
+                "quest_node": quest_node,
+                "info_node": info_node,
+                "leave_node": leave_node,
+                "end": end_node,
+            }
+        )
 
         # Add to graphics view
         for node in self.nodes.values():

@@ -34,9 +34,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			FigureDead {NpcId = Avatar}
 		),
 		IsGlobalFlagTrue {Name = "g_sP209UriasFollow"}, 
@@ -50,7 +48,7 @@ Umspawn
 
 }
 
---Urais lösst den FollowMode auf und begibt sich zur Arena
+--Urais lsst den FollowMode auf und begibt sich zur Arena
 OnOneTimeEvent
 {
 	Conditions = 
@@ -64,7 +62,7 @@ OnOneTimeEvent
 	}
 }
 
---Urias wurde als Mitstreiter auserwählt.
+--Urias wurde als Mitstreiter auserwhlt.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -92,7 +90,7 @@ OnOneTimeEvent
 	
 
 	-- 3 globale flags steuern das an/abschalten eines NPC Dialogs
-	-- die flags lösen die entspr. aktion aus und werden dabei wieder auf false gesetzt
+	-- die flags lsen die entspr. aktion aus und werden dabei wieder auf false gesetzt
 	-- dies sind die flags, nach dem underscore kommt die NpcId:
 	-- SetGlobalFlagTrue{Name = "PleaseRemoveDialog_1234"},
 	-- SetGlobalFlagTrue{Name = "PleaseEnableMainQuestDialog_5678"},
@@ -114,7 +112,7 @@ OnOneTimeEvent
 			Negated(IsNpcFlagFalse{Name = "known"}),
 		},
 		Actions = {
-			Say{Tag = "Urias209_004", String = "Wieder zurück?"},
+			Say{Tag = "Urias209_004", String = "Wieder zurck?"},
 			Answer{Tag = "", String = "", AnswerId = 5},
 		}}
 
@@ -157,8 +155,8 @@ OnOneTimeEvent
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "Urias209_005PC", String = "Ich möchte dich als Mitstreiter bestimmen.", AnswerId = 6},
-			OfferAnswer{Tag = "Urias209_008PC", String = "Ich überlege es mir noch dich als Mitstreiter zu bestimmen.", AnswerId = 9},
+			OfferAnswer{Tag = "Urias209_005PC", String = "Ich mchte dich als Mitstreiter bestimmen.", AnswerId = 6},
+			OfferAnswer{Tag = "Urias209_008PC", String = "Ich berlege es mir noch dich als Mitstreiter zu bestimmen.", AnswerId = 9},
 		}}
 
 	OnAnswer{5;
@@ -167,7 +165,7 @@ OnOneTimeEvent
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "Urias209_008PC", String = "Ich überlege es mir noch dich als Mitstreiter zu bestimmen.", AnswerId = 9},
+			OfferAnswer{Tag = "Urias209_008PC", String = "Ich berlege es mir noch dich als Mitstreiter zu bestimmen.", AnswerId = 9},
 		}}
 
 	OnAnswer{6;
@@ -198,7 +196,7 @@ OnOneTimeEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "Urias209_009", String = "Überlegt es euch gut. Es wird ein Kampf auf Leben und Tod!"},
+			Say{Tag = "Urias209_009", String = "berlegt es euch gut. Es wird ein Kampf auf Leben und Tod!"},
 			Answer{Tag = "", String = "", AnswerId = 10},
 		}}
 

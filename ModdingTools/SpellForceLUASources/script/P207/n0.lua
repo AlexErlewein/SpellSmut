@@ -15,7 +15,7 @@ dofile("script/Hadeko.lua")
 -------------
 -- Questen --
 -------------
-	-- Quest von Red Waste lösen
+	-- Quest von Red Waste lsen
 OnOneTimeEvent
 {
 	Conditions = 
@@ -24,11 +24,11 @@ OnOneTimeEvent
 	},
 	Actions =
 	{			
-			QuestSolve {QuestId = 891}, -- Quest 891 lösen
+			QuestSolve {QuestId = 891}, -- Quest 891 lsen
 	},
 }
 
-	-- Quest von Red Waste lösen
+	-- Quest von Red Waste lsen
 OnOneTimeEvent
 {
 	Conditions = 
@@ -37,7 +37,7 @@ OnOneTimeEvent
 	},
 	Actions =
 	{			
-			QuestSolve {QuestId = 818}, -- Quest 891 lösen
+			QuestSolve {QuestId = 818}, -- Quest 891 lsen
 	},
 }
 
@@ -50,12 +50,12 @@ OnOneTimeEvent
 	{			
 			QuestBegin {QuestId = 972}, -- Quest 972 aktivieren
 			QuestBegin {QuestId = 973}, -- Quest 973 aktivieren
-			QuestBegin {QuestId = 975}, -- Quest 975 aktivieren / gelöst in n10662.lua +nächste Auftrag
+			QuestBegin {QuestId = 975}, -- Quest 975 aktivieren / gelst in n10662.lua +nchste Auftrag
 	},
 }
 
 --------------------------------------------------
--- Räubergolbins vernichtet, neuer RiesenDialog --
+-- Rubergolbins vernichtet, neuer RiesenDialog --
 --------------------------------------------------
 
 OnOneTimeEvent
@@ -124,16 +124,14 @@ OnOneTimeEvent
 --		}
 
 --------------------------------------------------------------------------------------------
--- Übergeben der Dunkelelfen-Gebäude nachdem man die Festung(DE-Monument) eingenommen hat --
+-- bergeben der Dunkelelfen-Gebude nachdem man die Festung(DE-Monument) eingenommen hat --
 --------------------------------------------------------------------------------------------
 
 OnOneTimeEvent
 {
 		Conditions = 
 		{
-			UND
-			(
-				IsMonumentInUse {X = 455, Y = 254, Range = 0},
+			UND(				IsMonumentInUse {X = 455, Y = 254, Range = 0},
 				IsGlobalFlagTrue {Name = "g_P207_Zweite_Festung_Camp_Besiegt"}
 			)
 		},
@@ -141,8 +139,8 @@ OnOneTimeEvent
 		{
 			SetGlobalFlagTrue{Name = "g_P207_Zweite_Festung_Eingenommen"},
 			ChangeBuildingOwner {X = 417, Y = 300},  -- Arkanum
-			ChangeBuildingOwner {X = 446, Y = 248},  -- Gebäudezerstörer
-			ChangeBuildingOwner {X = 419, Y = 281},  -- Großes Haupthaus
+			ChangeBuildingOwner {X = 446, Y = 248},  -- Gebudezerstrer
+			ChangeBuildingOwner {X = 419, Y = 281},  -- Groes Haupthaus
 			ChangeBuildingOwner {X = 435, Y = 235},  -- Mine
 			ChangeBuildingOwner {X = 450, Y = 269},  -- Mondsilbermine
 			ChangeBuildingOwner {X = 450, Y = 274},  -- Mondsilberwerkstatt
@@ -157,11 +155,11 @@ OnOneTimeEvent
 			ChangeBuildingOwner {X = 412, Y = 316},  -- Schwarze Schule
 			ChangeBuildingOwner {X = 453, Y = 280},  -- Steinbruch
 			ChangeBuildingOwner {X = 452, Y = 285},  -- Steinmetz
-			ChangeBuildingOwner {X = 417, Y = 261},  -- Züchter
+			ChangeBuildingOwner {X = 417, Y = 261},  -- Zchter
 			-- Race wieder auf RaceTrolle
 			ChangeBuildingRace {X = 417, Y = 300, Race = 6},  -- Arkanum            
-			ChangeBuildingRace {X = 446, Y = 248, Race = 6},  -- Gebäudezerstörer   
-			ChangeBuildingRace {X = 419, Y = 281, Race = 6},  -- Großes Haupthaus   
+			ChangeBuildingRace {X = 446, Y = 248, Race = 6},  -- Gebudezerstrer   
+			ChangeBuildingRace {X = 419, Y = 281, Race = 6},  -- Groes Haupthaus   
 			ChangeBuildingRace {X = 435, Y = 235, Race = 6},  -- Mine               
 			ChangeBuildingRace {X = 450, Y = 269, Race = 6},  -- Mondsilbermine     
 			ChangeBuildingRace {X = 450, Y = 274, Race = 6},  -- Mondsilberwerkstatt
@@ -176,11 +174,11 @@ OnOneTimeEvent
 			ChangeBuildingRace {X = 412, Y = 316, Race = 6},  -- Schwarze Schule    
 			ChangeBuildingRace {X = 453, Y = 280, Race = 6},  -- Steinbruch         
 			ChangeBuildingRace {X = 452, Y = 285, Race = 6},  -- Steinmetz          
-			ChangeBuildingRace {X = 417, Y = 261, Race = 6},  -- Züchter            
-			-- Questen lösen/starten
+			ChangeBuildingRace {X = 417, Y = 261, Race = 6},  -- Zchter            
+			-- Questen lsen/starten
 			QuestSolve {QuestId = 980},
 			QuestBegin {QuestId = 992},
-			-- Timer für Verteidigung
+			-- Timer fr Verteidigung
 			SetGlobalTimeStamp{Name = "g_p207_defend_second_base"},
 		},  
 }           
@@ -197,8 +195,8 @@ OnOneTimeEvent
 		Actions =
 		{   
 			ChangeBuildingRace {X = 417, Y = 300, Race = 152},  -- Arkanum
-			ChangeBuildingRace {X = 446, Y = 248, Race = 152},  -- Gebäudezerstörer
-			ChangeBuildingRace {X = 419, Y = 281, Race = 152},  -- Großes Haupthaus
+			ChangeBuildingRace {X = 446, Y = 248, Race = 152},  -- Gebudezerstrer
+			ChangeBuildingRace {X = 419, Y = 281, Race = 152},  -- Groes Haupthaus
 			ChangeBuildingRace {X = 435, Y = 235, Race = 152},  -- Mine
 			ChangeBuildingRace {X = 450, Y = 269, Race = 152},  -- Mondsilbermine
 			ChangeBuildingRace {X = 450, Y = 274, Race = 152},  -- Mondsilberwerkstatt
@@ -213,7 +211,7 @@ OnOneTimeEvent
 			ChangeBuildingRace {X = 412, Y = 316, Race = 152},  -- Schwarze Schule
 			ChangeBuildingRace {X = 453, Y = 280, Race = 152},  -- Steinbruch
 			ChangeBuildingRace {X = 452, Y = 285, Race = 152},  -- Steinmetz
-			ChangeBuildingRace {X = 417, Y = 261, Race = 152},  -- Züchter
+			ChangeBuildingRace {X = 417, Y = 261, Race = 152},  -- Zchter
 		},
 }
 
@@ -446,7 +444,7 @@ OnOneTimeEvent
 }
 
 ------------------------------------------------------------
--- Zweite Festung Verteidigung / Fünfte Truppe vernichtet --
+-- Zweite Festung Verteidigung / Fnfte Truppe vernichtet --
 ------------------------------------------------------------
 
 OnOneTimeEvent
@@ -496,7 +494,7 @@ OnOneTimeEvent
 }
 
 ---------------------------------------------------------------------
--- Zweite Festung Questen lösen / Dritte Festung Questen verteilen --
+-- Zweite Festung Questen lsen / Dritte Festung Questen verteilen --
 ---------------------------------------------------------------------
 
 OnOneTimeEvent
@@ -520,7 +518,7 @@ OnOneTimeEvent
 }
 
 ----------------------------------------------------------------
--- Dritte Festung Questen lösen / SchalterätselQuest vergeben --
+-- Dritte Festung Questen lsen / SchaltertselQuest vergeben --
 ----------------------------------------------------------------
 
 OnOneTimeEvent
@@ -536,7 +534,7 @@ OnOneTimeEvent
 }
 
 ------------------------------------------------------------------
--- Dritte Festung Questen lösen / Gelange in die Festung gelöst --
+-- Dritte Festung Questen lsen / Gelange in die Festung gelst --
 ------------------------------------------------------------------
 
 OnOneTimeEvent
@@ -554,7 +552,7 @@ OnOneTimeEvent
 }
 
 ---------------------------------------------------------
--- Dritte Festung Questen lösen / Schalterätsel gelöst --
+-- Dritte Festung Questen lsen / Schaltertsel gelst --
 ---------------------------------------------------------
 
 OnOneTimeEvent
@@ -576,7 +574,7 @@ OnOneTimeEvent
 }
 
 -------------------------------------------------------------------------
--- Dritte Festung Questen lösen / Camp vernichtet, Festung eingenommen --
+-- Dritte Festung Questen lsen / Camp vernichtet, Festung eingenommen --
 -------------------------------------------------------------------------
 
 OnOneTimeEvent
@@ -595,7 +593,7 @@ OnOneTimeEvent
 }
 
 ------------------------------------------------------------
--- Vierte Festung Questen lösen / In Festung eingedrungen --
+-- Vierte Festung Questen lsen / In Festung eingedrungen --
 ------------------------------------------------------------
 
 OnOneTimeEvent
@@ -631,7 +629,7 @@ OnOneTimeEvent
 }
 
 ----------------------------------------------------------------------------
--- Vierte Festung Questen Lösen / Vernichte Untoten Rohen und seine Armee --
+-- Vierte Festung Questen Lsen / Vernichte Untoten Rohen und seine Armee --
 ----------------------------------------------------------------------------
 
 OnOneTimeEvent
@@ -707,9 +705,7 @@ OnToggleEvent
 	},
 	OffConditions =
 	{
-		ODER
-		(
-			FigureInRange {X = 158, Y = 237, Range = 2, NpcId = Avatar},
+		ODER(			FigureInRange {X = 158, Y = 237, Range = 2, NpcId = Avatar},
 			IsGlobalFlagFalse {Name = "g_p207_Avatar_Im_Labyrinth"}
 		),
 	},
@@ -784,7 +780,7 @@ OnOneTimeEvent
 }
 
 -------------------------------
--- FigureInRange für Truppen --
+-- FigureInRange fr Truppen --
 -------------------------------
 
 --	n11026_Dritte_Festung_Weg_Zur_Vierten_Festung_Truppe01
@@ -905,7 +901,7 @@ OnOneTimeEvent
 }
 
 ------------------------------------------------------------------
--- Avatar läuft weg vom Portal solange Rohen noch nicht tot ist --
+-- Avatar luft weg vom Portal solange Rohen noch nicht tot ist --
 ------------------------------------------------------------------
 
 OnToggleEvent
@@ -931,8 +927,8 @@ OnToggleEvent
 ----I---------------------------------------I
 ----I                                       I
 ----I           Bank von Empyria            I
-----I           Schatzbrief-Zähler          I
-----I         (muß auf alle Karten!)        I
+----I           Schatzbrief-Zhler          I
+----I         (mu auf alle Karten!)        I
 ----I                                       I
 ----I---------------------------------------I
 

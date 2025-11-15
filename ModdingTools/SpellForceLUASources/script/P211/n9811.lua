@@ -15,7 +15,7 @@ SpawnOnlyWhen
 }
 
 
---Dialog aus am Anfang, wenn Spieler Clockwork Crypt gelöst
+--Dialog aus am Anfang, wenn Spieler Clockwork Crypt gelst
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 20,
@@ -41,7 +41,7 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{
-		Outcry {NpcId = 9811, String = "Der Weg ist frei! Ich hole meine Männer!", Tag = "oca2jenquaiP211_005", Delay = TRUE, Color = ColorWhite},
+		Outcry {NpcId = 9811, String = "Der Weg ist frei! Ich hole meine Mnner!", Tag = "oca2jenquaiP211_005", Delay = TRUE, Color = ColorWhite},
 		
 	}
 }
@@ -140,7 +140,7 @@ OnPlatformOneTimeEvent
 	}
 }
 
---OnOneTimeEvent	-- gleich wieder löschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
+--OnOneTimeEvent	-- gleich wieder lschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
 NewState{Name = "AvoidUmspawnAfterMapStartCutscene"}
 AddTransition
 {
@@ -166,9 +166,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 			IsGlobalFlagTrue {Name = "g_P211_KathaiFallenEin", UpdateInterval = 20},
@@ -184,7 +182,7 @@ Umspawn
 }
 
 
---Jenquai löst den FollowMode auf
+--Jenquai lst den FollowMode auf
 OnOneTimeEvent
 {
 	Conditions = 
@@ -198,7 +196,7 @@ OnOneTimeEvent
 }
 
 ---------------------------------------
---OC, wenn Verstärkung
+--OC, wenn Verstrkung
 OnOneTimeEvent
 {
 	Conditions = 
@@ -208,7 +206,7 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{ 
-		Outcry {NpcId = 9811, String = "Da ist Verstärkung!" , Tag = "oca2jenquaiP211_006" , Delay = TRUE , Color = ColorWhite},
+		Outcry {NpcId = 9811, String = "Da ist Verstrkung!" , Tag = "oca2jenquaiP211_006" , Delay = TRUE , Color = ColorWhite},
 	}
 }
 
@@ -231,7 +229,7 @@ Umspawn
 
 -------------------------------------------------------------------------------------
 
--- nach CS position mit seinen Männern
+-- nach CS position mit seinen Mnnern
 
 OnIdleGoHome
 {
@@ -262,7 +260,7 @@ OnIdleGoHome
 	
 
 	-- 3 globale flags steuern das an/abschalten eines NPC Dialogs
-	-- die flags lösen die entspr. aktion aus und werden dabei wieder auf false gesetzt
+	-- die flags lsen die entspr. aktion aus und werden dabei wieder auf false gesetzt
 	-- dies sind die flags, nach dem underscore kommt die NpcId:
 	-- SetGlobalFlagTrue{Name = "PleaseRemoveDialog_1234"},
 	-- SetGlobalFlagTrue{Name = "PleaseEnableMainQuestDialog_5678"},
@@ -282,7 +280,7 @@ OnIdleGoHome
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "jenquaiP211_001", String = "Hier gibt es kein Durchkommen, Freund! Das Tor läßt sich von dieser Seite aus nicht öffnen!"},
+			Say{Tag = "jenquaiP211_001", String = "Hier gibt es kein Durchkommen, Freund! Das Tor lt sich von dieser Seite aus nicht ffnen!"},
 			Answer{Tag = "", String = "", AnswerId = 2},
 		}}
 
@@ -290,7 +288,7 @@ OnIdleGoHome
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "jenquaiP211_002", String = "Ihr müsst durch die Uhrwerkhallen und von dort aus in die Wachfeste! Öffnet dann dieses Tor von Innen, ich werde mit meinen Jägern dann zu euch stossen!"},
+			Say{Tag = "jenquaiP211_002", String = "Ihr msst durch die Uhrwerkhallen und von dort aus in die Wachfeste! ffnet dann dieses Tor von Innen, ich werde mit meinen Jgern dann zu euch stossen!"},
 			Answer{Tag = "", String = "", AnswerId = 3},
 		}}
 

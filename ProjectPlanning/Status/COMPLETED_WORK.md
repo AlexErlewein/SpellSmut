@@ -1,6 +1,6 @@
 # Completed Work Summary
 
-**Last Updated**: October 26, 2025
+**Last Updated**: November 12, 2025
 
 ## Major Achievements ✅
 
@@ -40,6 +40,12 @@
 - ✅ **Multilingual Support**: 6 languages with real-time switching
 - ✅ **Performance**: Handles 176k+ localization entries efficiently
 - ✅ **Data Integrity**: Proper validation and change tracking
+
+### Visual Dialogue Widget (Completed November 12, 2025)
+- ✅ **Toolbar Actions**: "Add Response" and "Add Choice" buttons with automatic node linking
+- ✅ **Node Creation Logic**: Automatic positioning and connection of new dialogue nodes
+- ✅ **Selection Management**: Dynamic toolbar state based on selected nodes
+- ✅ **Type Safety**: Fixed NodeType enum usage and DialogueNode dataclass defaults
 
 ### Icon System Achievements
 - ✅ **ITM Icon Extraction**: 4096+ icons from 16 atlases

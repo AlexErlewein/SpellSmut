@@ -31,9 +31,7 @@ OnToggleEvent
 	},
 	OffConditions =
 	{
-		ODER
-		(
-			FigureDead {NpcId = Avatar},
+		ODER(			FigureDead {NpcId = Avatar},
 			IsGlobalFlagTrue {Name = "g_p207_urias_wait_for_me"}
 		),
 	},

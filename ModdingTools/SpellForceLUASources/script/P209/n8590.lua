@@ -36,7 +36,7 @@ OnPlatformOneTimeEvent
 		SetNpcFlagTrue{Name = "BitteUmspawnen"},
 	}
 }
---OnOneTimeEvent	-- gleich wieder löschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
+--OnOneTimeEvent	-- gleich wieder lschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
 NewState{Name = "AvoidUmspawnAfterMapStartCutscene"}
 AddTransition
 {
@@ -62,9 +62,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 		IsGlobalFlagTrue {Name = "g_sP209AlyahFollow"}, 
@@ -96,7 +94,7 @@ OnFollowToggle
 		StopFollowActions = {},
 }
 
---Aliah lösst den FollowMode auf und begibt sich zur Arena.
+--Aliah lsst den FollowMode auf und begibt sich zur Arena.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -277,7 +275,7 @@ Despawn
 }
 
 --Outcries.
---1 Streitgespräch zwischen Alyah und Urias.
+--1 Streitgesprch zwischen Alyah und Urias.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -289,15 +287,15 @@ OnOneTimeEvent
 	{ 
 		Outcry {NpcId = 8590, String = "Wenn die Kathai schon aus der Stadt geflohen sind, dann sollten wir das auch tun!" , Tag = "oca2alyahP209_001" , Delay = FALSE , Color = ColorWhite},
 		Outcry {NpcId = 8694, String = "Wollt Ihr schon wieder davonlaufen?" , Tag = "oca2uriasP209_001" , Delay = FALSE , Color = ColorWhite},
-		Outcry {NpcId = 8694, String = "Zum Schutze aller Völker müssen wir die Untoten zurückschlagen, koste es, was es wolle!" , Tag = "oca2uriasP209_002" , Delay = FALSE , Color = ColorWhite},
-		Outcry {NpcId = 8590, String = "Klingt wie berühmte letzte Worte." , Tag = "oca2alyahP209_002" , Delay = FALSE , Color = ColorWhite},
+		Outcry {NpcId = 8694, String = "Zum Schutze aller Vlker mssen wir die Untoten zurckschlagen, koste es, was es wolle!" , Tag = "oca2uriasP209_002" , Delay = FALSE , Color = ColorWhite},
+		Outcry {NpcId = 8590, String = "Klingt wie berhmte letzte Worte." , Tag = "oca2alyahP209_002" , Delay = FALSE , Color = ColorWhite},
 		Outcry {NpcId = 8694, String = "So ist der Weg meines Ordens!" , Tag = "oca2uriasP209_003" , Delay = FALSE , Color = ColorWhite},
 		Outcry {NpcId = 8590, String = "Ja ja, ich lasse es Euch aufs Grab schreiben!" , Tag = "oca2alyahP209_003" , Delay = FALSE , Color = ColorWhite},
 		Outcry {NpcId = 8590, String = "Hier ruht Urias, erschlagen von seiner eigenen Dummheit!" , Tag = "oca2alyahP209_004" , Delay = FALSE , Color = ColorWhite},
 	}
 }
 
---2 Streitgespräch zwischen Alyah und Urias.
+--2 Streitgesprch zwischen Alyah und Urias.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -306,16 +304,16 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{ 
-		Outcry {NpcId = 8694, String = "Plunder sammeln und unnötige Zweikämpfe! Soll das Gastfreundschaft sein?" , Tag = "oca2uriasP209_004" , Delay = FALSE , Color = ColorWhite},
-		Outcry {NpcId = 8590, String = "Mäßigt Euch! Der Runenkrieger braucht die Hilfe der Kathai!" , Tag = "oca2alyahP209_005" , Delay = FALSE , Color = ColorWhite},
+		Outcry {NpcId = 8694, String = "Plunder sammeln und unntige Zweikmpfe! Soll das Gastfreundschaft sein?" , Tag = "oca2uriasP209_004" , Delay = FALSE , Color = ColorWhite},
+		Outcry {NpcId = 8590, String = "Migt Euch! Der Runenkrieger braucht die Hilfe der Kathai!" , Tag = "oca2alyahP209_005" , Delay = FALSE , Color = ColorWhite},
 		Outcry {NpcId = 8694, String = "Wir werden den Gefahren des Dschungels auch alleine trotzen!" , Tag = "oca2uriasP209_005" , Delay = FALSE , Color = ColorWhite},
-		Outcry {NpcId = 8694, String = "Hokan Ashir kann keinen Zauber weben, der den Glauben an Aonir überwindet!" , Tag = "oca2uriasP209_006" , Delay = FALSE , Color = ColorWhite},
-		Outcry {NpcId = 8590, String = "Darf ich mich jetzt bitte in meinen Dolch stürzen ..." , Tag = "oca2alyahP209_006" , Delay = FALSE , Color = ColorWhite},
+		Outcry {NpcId = 8694, String = "Hokan Ashir kann keinen Zauber weben, der den Glauben an Aonir berwindet!" , Tag = "oca2uriasP209_006" , Delay = FALSE , Color = ColorWhite},
+		Outcry {NpcId = 8590, String = "Darf ich mich jetzt bitte in meinen Dolch strzen ..." , Tag = "oca2alyahP209_006" , Delay = FALSE , Color = ColorWhite},
 		Outcry {NpcId = 8590, String = "Das ist ja nicht auszuhalten!" , Tag = "oca2alyahP209_007" , Delay = FALSE , Color = ColorWhite},
 	}
 }
 
---1 Streitgespräch zwischen Alyah und Jenquai.
+--1 Streitgesprch zwischen Alyah und Jenquai.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -324,9 +322,9 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{ 
-		Outcry {NpcId = 8590, String = "Urias ist tot! Dieser verdammte, dickschädelige, Dummkopf!" , Tag = "oca2alyahP209_008" , Delay = FALSE , Color = ColorWhite},
-		Outcry {NpcId = 8576, String = "Er hat sein Leben für dich gegeben, Rabenhaar! Du solltest Ihn ehren!" , Tag = "oca2jenquaiP209_004" , Delay = FALSE , Color = ColorWhite},
-		Outcry {NpcId = 8590, String = "Ich wollte aber nicht, dass er sein leben für mich gibt!" , Tag = "oca2alyahP209_009" , Delay = FALSE , Color = ColorWhite},
+		Outcry {NpcId = 8590, String = "Urias ist tot! Dieser verdammte, dickschdelige, Dummkopf!" , Tag = "oca2alyahP209_008" , Delay = FALSE , Color = ColorWhite},
+		Outcry {NpcId = 8576, String = "Er hat sein Leben fr dich gegeben, Rabenhaar! Du solltest Ihn ehren!" , Tag = "oca2jenquaiP209_004" , Delay = FALSE , Color = ColorWhite},
+		Outcry {NpcId = 8590, String = "Ich wollte aber nicht, dass er sein leben fr mich gibt!" , Tag = "oca2alyahP209_009" , Delay = FALSE , Color = ColorWhite},
 		Outcry {NpcId = 8590, String = "Er hat kein Recht, mir solch eine Schuld aufzuladen!" , Tag = "oca2alyahP209_010" , Delay = FALSE , Color = ColorWhite},
 		Outcry {NpcId = 8576, String = "Er ist nur seinem herzen gefolgt! Rede nicht schlecht von ihm!" , Tag = "oca2jenquaiP209_005" , Delay = FALSE , Color = ColorWhite},
 	}
@@ -344,7 +342,7 @@ OnOneTimeEvent
 	
 
 	-- 3 globale flags steuern das an/abschalten eines NPC Dialogs
-	-- die flags lösen die entspr. aktion aus und werden dabei wieder auf false gesetzt
+	-- die flags lsen die entspr. aktion aus und werden dabei wieder auf false gesetzt
 	-- dies sind die flags, nach dem underscore kommt die NpcId:
 	-- SetGlobalFlagTrue{Name = "PleaseRemoveDialog_1234"},
 	-- SetGlobalFlagTrue{Name = "PleaseEnableMainQuestDialog_5678"},
@@ -365,7 +363,7 @@ OnOneTimeEvent
 		},
 		Actions = {
 			Say{Tag = "alyahP209_002", String = "Gebt mir nur eine Weile um auszuruhen ..."},
-			Answer{Tag = "alyahP209_003PC", String = "Ihr seid völlig erschöpft!", AnswerId = 2},
+			Answer{Tag = "alyahP209_003PC", String = "Ihr seid vllig erschpft!", AnswerId = 2},
 		}}
 
 	OnAnswer{2;
@@ -381,7 +379,7 @@ OnOneTimeEvent
 		},
 		Actions = {
 			Say{Tag = "alyahP209_006", String = "Mein Vater, dieser Hund! Ich war Urias sein Leben schuldig! Was habt Ihr nun vor?"},
-			Answer{Tag = "alyahP209_007PC", String = "Ich durchquere die Uhrwerkhallen und versuche von der Südseite her die Wachfeste zu öffnen. Dann werden die Kathai nachkommen..", AnswerId = 4},
+			Answer{Tag = "alyahP209_007PC", String = "Ich durchquere die Uhrwerkhallen und versuche von der Sdseite her die Wachfeste zu ffnen. Dann werden die Kathai nachkommen..", AnswerId = 4},
 		}}
 
 	OnAnswer{4;
@@ -389,7 +387,7 @@ OnOneTimeEvent
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			Answer{Tag = "alyahP209_008PC", String = "Bleibt hier und ruht, Ihr könnt dann mit den Kathai wieder zu mir stossen, wenn Ihr wollt.", AnswerId = 5},
+			Answer{Tag = "alyahP209_008PC", String = "Bleibt hier und ruht, Ihr knnt dann mit den Kathai wieder zu mir stossen, wenn Ihr wollt.", AnswerId = 5},
 		}}
 
 	OnAnswer{5;

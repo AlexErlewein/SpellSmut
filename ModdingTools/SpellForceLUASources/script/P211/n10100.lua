@@ -58,7 +58,7 @@ OnPlatformOneTimeEvent
 	}
 }
 
---OnOneTimeEvent	-- gleich wieder löschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
+--OnOneTimeEvent	-- gleich wieder lschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
 NewState{Name = "AvoidUmspawnAfterMapStartCutscene"}
 AddTransition
 {
@@ -84,9 +84,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 		--IsGlobalFlagTrue {Name = "g_P211AlyahFollow"}, 
@@ -103,7 +101,7 @@ Umspawn
 
 
 
---Alyah löst den FollowMode auf
+--Alyah lst den FollowMode auf
 OnOneTimeEvent
 {
 	Conditions = 
@@ -118,7 +116,7 @@ OnOneTimeEvent
 
 
 ------------------------------------------------------------
---Umspawn für CS Ishtar
+--Umspawn fr CS Ishtar
 Umspawn
 {
 	UnitId = self, Clan = 0, X = 249, Y = 193, Target = none, NoSpawnEffect = FALSE, OnlyOnce = TRUE, PlayDeathAnim = FALSE,

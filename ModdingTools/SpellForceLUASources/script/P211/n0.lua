@@ -2,12 +2,12 @@
 --P211_Darkwind_Keep
 
 
--- Coords für Eingangsportal von Clockwork Crypt aus
+-- Coords fr Eingangsportal von Clockwork Crypt aus
 --PortalX = 391
 --PortalY = 387
 
 
--- Coords für Eingangsportal von Kathai aus
+-- Coords fr Eingangsportal von Kathai aus
 --PortalX = 269
 --PortalY = 455
 
@@ -37,7 +37,7 @@ dofile("script/HeiligeStaetteWorkaround.lua")
 
 
 ------------------------------------------------------------
---Reset des Timers für Angriffswellen
+--Reset des Timers fr Angriffswellen
 OnPlatformOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 10,
@@ -50,7 +50,7 @@ OnPlatformOneTimeEvent
 	}
 }
 
---Angriffswellentimer clearen, wenn Spawncamps noch nicht zerstört
+--Angriffswellentimer clearen, wenn Spawncamps noch nicht zerstrt
 OnPlatformOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 10,
@@ -94,7 +94,7 @@ OnPlatformOneTimeEvent
 }
 
 ----------------------------------------------------------
---Questmanagement außerhalb von CS / Dialogen:
+--Questmanagement auerhalb von CS / Dialogen:
 ----------------------------------------------------------
 
 --Flag + Quests, wenn Spieler den richtigen Weg auf die Map gefunden hat
@@ -124,7 +124,7 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{
-		QuestBegin{QuestId = 937, SubQuestActivate = FALSE}, -- Camps im Tal am Fluß (cleare die Camps)
+		QuestBegin{QuestId = 937, SubQuestActivate = FALSE}, -- Camps im Tal am Flu (cleare die Camps)
 		QuestSolve{QuestId = 936, ActivateNextQuest = FALSE }--Die Belagerer von DK (erobere die Monumente)
 	}
 }
@@ -144,7 +144,7 @@ OnOneTimeEvent
 	{
 		QuestBegin{QuestId = 971, SubQuestActivate = FALSE}, -- Finde einen Weg in den Schlund
 		QuestSolve{QuestId = 936, ActivateNextQuest = FALSE}, --lager verteidigen
-		QuestSolve{QuestId = 937, ActivateNextQuest = FALSE}, --Die Camps am Fluß cleared
+		QuestSolve{QuestId = 937, ActivateNextQuest = FALSE}, --Die Camps am Flu cleared
 	}
 }
 
@@ -337,7 +337,7 @@ OnPlatformOneTimeEvent
 		ClanAttack {Number = 11, SourceClan = 24, TargetX = 236, TargetY = 420, WalkMode = Run},
 		
 		SetGlobalFlagTrue {Name = "g_P211GoalWechsel2"},
-		Outcry {NpcId = 9811, String = "Sie werden bald angreifen! Stärkt die Abwehr!" , Tag = "oca2jenquaiP211_002" , Delay = TRUE , Color = ColorWhite},
+		Outcry {NpcId = 9811, String = "Sie werden bald angreifen! Strkt die Abwehr!" , Tag = "oca2jenquaiP211_002" , Delay = TRUE , Color = ColorWhite},
 		SetGlobalFlagTrue {Name = "g_P211TestFlagAngriff2"},
 		
 	}
@@ -437,7 +437,7 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{
-		Outcry {NpcId = 9811, String = "Sie haben einen Zugang gefunden! Sie fallen uns in den Rücken!", Tag = "oca2jenquaiP211_004", Delay = TRUE, Color = ColorWhite},
+		Outcry {NpcId = 9811, String = "Sie haben einen Zugang gefunden! Sie fallen uns in den Rcken!", Tag = "oca2jenquaiP211_004", Delay = TRUE, Color = ColorWhite},
 	}
 }
 
@@ -546,9 +546,7 @@ OnPlatformOneTimeEvent
 	NotInDialog = FALSE, UpdateInterval = 10,
 	Conditions = 
 	{
-		ODER
-		(
-			IsGlobalTimeElapsed {Name = "gt_P211MonumentElfen2", Seconds = 980, UpdateInterval = 30},
+		ODER(			IsGlobalTimeElapsed {Name = "gt_P211MonumentElfen2", Seconds = 980, UpdateInterval = 30},
 			IsGlobalTimeElapsed {Name = "gt_P211MonumentZwerge3", Seconds = 980, UpdateInterval = 30}
 		),
 			IsClanSize{Clan = 25, Size = 1},
@@ -593,9 +591,7 @@ OnPlatformOneTimeEvent
 	NotInDialog = FALSE, UpdateInterval = 10,
 	Conditions = 
 	{
-		ODER
-		(
-			IsGlobalTimeElapsed {Name = "gt_P211MonumentElfen2", Seconds = 1790, UpdateInterval = 30},
+		ODER(			IsGlobalTimeElapsed {Name = "gt_P211MonumentElfen2", Seconds = 1790, UpdateInterval = 30},
 			IsGlobalTimeElapsed {Name = "gt_P211MonumentZwerge3", Seconds = 1790, UpdateInterval = 30}
 		),
 			IsClanSize{Clan = 25, Size = 1},
@@ -636,7 +632,7 @@ OnPlatformOneTimeEvent
 
 --CS Ishtar
 ---------------------------------------------------------------------
--- Zweite Kathai-Einheit fällt ein
+-- Zweite Kathai-Einheit fllt ein
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 20,
@@ -654,7 +650,7 @@ OnOneTimeEvent
 
 ------------------------------------------------------------------
 --------------------------------------------------------------------
---Init für Ishtar Cutscene, wenn Spawncamps platt
+--Init fr Ishtar Cutscene, wenn Spawncamps platt
 --und Avatar in Range
 OnOneTimeEvent
 {
@@ -706,7 +702,7 @@ OnOneTimeEvent
 
 ------------------------------------------------------------------------
 --------------------------------------------------------------------------
---RewardFlags für geclearte Spawncamps Dschungelebene
+--RewardFlags fr geclearte Spawncamps Dschungelebene
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 20,
@@ -764,7 +760,7 @@ OnOneTimeEvent
 -----------------------------------------------------------------------
 --Das Tier und die HoehlenBlades
 -----------------------------------------------------------------------
---Timer für Hoehlenspawning Schattenkrieger
+--Timer fr Hoehlenspawning Schattenkrieger
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 20,
@@ -780,7 +776,7 @@ OnOneTimeEvent
 }
 
 
---Timer für Hoehlenspawning Phoenixkrieger
+--Timer fr Hoehlenspawning Phoenixkrieger
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 20,
@@ -797,8 +793,8 @@ OnOneTimeEvent
 }
 
 
---Toggle Events für besetzen der Höhlen
---Höhle 1
+--Toggle Events fr besetzen der Hhlen
+--Hhle 1
 OnToggleEvent
 {
 	NotInDialog = FALSE , UpdateInterval = 10 ,
@@ -823,7 +819,7 @@ OnToggleEvent
 	},
 }
 
---Effekt, wenn Höhle besetzt
+--Effekt, wenn Hhle besetzt
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 20,
@@ -839,7 +835,7 @@ OnOneTimeEvent
 }
 
 
---Höhle 2
+--Hhle 2
 OnToggleEvent
 {
 	NotInDialog = FALSE , UpdateInterval = 10 ,
@@ -863,7 +859,7 @@ OnToggleEvent
 	},
 }
 
---Effekt, wenn Höhle besetzt
+--Effekt, wenn Hhle besetzt
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 20,
@@ -879,7 +875,7 @@ OnOneTimeEvent
 }
 
 
---Höhle 3
+--Hhle 3
 OnToggleEvent
 {
 	NotInDialog = FALSE , UpdateInterval = 10 ,
@@ -904,7 +900,7 @@ OnToggleEvent
 	},
 }
 
---Effekt, wenn Höhle besetzt
+--Effekt, wenn Hhle besetzt
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 20,
@@ -919,7 +915,7 @@ OnOneTimeEvent
 	},
 }
 		
---Höhle 4
+--Hhle 4
 OnToggleEvent
 {
 	NotInDialog = FALSE , UpdateInterval = 10 ,
@@ -944,7 +940,7 @@ OnToggleEvent
 	},
 }
 
---Effekt, wenn Höhle besetzt
+--Effekt, wenn Hhle besetzt
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 20,
@@ -961,7 +957,7 @@ OnOneTimeEvent
 
 
 -----------------------------------------
---Das Tier geht um, wenn eine der Höhlen besetzt ist
+--Das Tier geht um, wenn eine der Hhlen besetzt ist
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 20,
@@ -1053,9 +1049,9 @@ OnOneTimeEvent
 }
 
 ----------------------------------------------------------------------------
--- Flags für CS Ende
+-- Flags fr CS Ende
 -----------------------------------------
---Phönixsteinspieler
+--Phnixsteinspieler
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 20,
@@ -1099,7 +1095,7 @@ OnOneTimeEvent
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
---Quest Heilige Stätten Q 844
+--Quest Heilige Sttten Q 844
 ------------------------------------------------------------------
 --Nebel am Anfang
 OnOneTimeEvent
@@ -1113,7 +1109,7 @@ OnOneTimeEvent
 }
 
 
---Spawning Dämonen Ende
+--Spawning Dmonen Ende
 --Quest solved
 OnOneTimeEvent
 {
@@ -1123,13 +1119,13 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{ 
-		SetGlobalFlagTrue {Name = "g_P211DarkwindDämonenSpawnStopHlStätte"},
-		QuestSolve {QuestId = 1053, ActivateNextQuest = FALSE} -- hl. Stätte Onyx Shore
+		SetGlobalFlagTrue {Name = "g_P211DarkwindDmonenSpawnStopHlSttte"},
+		QuestSolve {QuestId = 1053, ActivateNextQuest = FALSE} -- hl. Sttte Onyx Shore
 	}
 }
 
 
---wenn schon alle gepflanzt, zurück zur Dryade Quest begin
+--wenn schon alle gepflanzt, zurck zur Dryade Quest begin
 OnOneTimeEvent
 {
 	Conditions = 
@@ -1142,14 +1138,14 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{ 
-		QuestBegin {QuestId = 1055}, --zurück zur Dryade1
+		QuestBegin {QuestId = 1055}, --zurck zur Dryade1
 		SetGlobalFlagTrue {Name = "g_P205FirstShrinesCleansed"}
 	}
 }
 
 
 
---Baum wächst nach Lösen der Quest
+--Baum wchst nach Lsen der Quest
 -- nach 2 sek: kleiner Baum
 OnOneTimeEvent
 {
@@ -1186,7 +1182,7 @@ OnOneTimeEvent
 }
 
 
---nach 45 Minuten: großer Baum
+--nach 45 Minuten: groer Baum
 OnOneTimeEvent
 {
 	Conditions = 
@@ -1207,7 +1203,7 @@ OnOneTimeEvent
 --I______________________________________I
 
 
---Wenn der Spieler in der NQ Der letzte Dracon auf Craig stösst und der Archonwächter noch lebt, bekommt er den Auftrag ihn zu töten!
+--Wenn der Spieler in der NQ Der letzte Dracon auf Craig stsst und der Archonwchter noch lebt, bekommt er den Auftrag ihn zu tten!
 OnOneTimeEvent
 {
 	Conditions = 
@@ -1224,7 +1220,7 @@ OnOneTimeEvent
 	},
 }
 
---Wenn der Spieler in der NQ Der letzte Dracon auf Craig stösst und der Archonwächter nicht mehr lebt, bekommt er den Auftrag Craig zu befreien!
+--Wenn der Spieler in der NQ Der letzte Dracon auf Craig stsst und der Archonwchter nicht mehr lebt, bekommt er den Auftrag Craig zu befreien!
 OnOneTimeEvent
 {
 	Conditions = 
@@ -1241,7 +1237,7 @@ OnOneTimeEvent
 	},
 }
 
---Wenn der Spieler den Wächter getötet hat, bekommt er den Auftrag Craig zu befreien!
+--Wenn der Spieler den Wchter gettet hat, bekommt er den Auftrag Craig zu befreien!
 OnOneTimeEvent
 {
 	Conditions = 
@@ -1274,7 +1270,7 @@ OnOneTimeEvent
 	},
 }
 
---Wenn man in die Nähe von Craig kommt und der Wächter tot ist, wird er befreit und der Sidequestdialog wird angeschaltet.
+--Wenn man in die Nhe von Craig kommt und der Wchter tot ist, wird er befreit und der Sidequestdialog wird angeschaltet.
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 20,
@@ -1315,7 +1311,7 @@ OnOneTimeEvent
 	},
 }
 
---Sicherung das tatsächlich das Ausrufezeichen gelöscht wurde bevor das Fragezeichen erscheint.
+--Sicherung das tatschlich das Ausrufezeichen gelscht wurde bevor das Fragezeichen erscheint.
 OnOneTimeEvent
 {
 	
@@ -1334,9 +1330,9 @@ OnOneTimeEvent
 
 
 ---------------------------------------------
--- Fuer die beiden gegenavatare prüfen welcher Bindstone in Use ist
--- Wenn der Spieler die Karte erneut betritt wird die Liste gelöscht und neu angelegt, 
--- damit der Zweitavatar mit über die Bindstones reisen kann
+-- Fuer die beiden gegenavatare prfen welcher Bindstone in Use ist
+-- Wenn der Spieler die Karte erneut betritt wird die Liste gelscht und neu angelegt, 
+-- damit der Zweitavatar mit ber die Bindstones reisen kann
 OnPlatformOneTimeEvent
 {
 	Conditions =
@@ -1468,8 +1464,8 @@ OnToggleEvent
 ----I---------------------------------------I
 ----I                                       I
 ----I           Bank von Empyria            I
-----I           Schatzbrief-Zähler          I
-----I         (muß auf alle Karten!)        I
+----I           Schatzbrief-Zhler          I
+----I         (mu auf alle Karten!)        I
 ----I                                       I
 ----I---------------------------------------I
 

@@ -84,7 +84,7 @@ OnPlatformOneTimeEvent
 		SetNpcFlagTrue{Name = "BitteUmspawnen"},
 	}
 }
---OnOneTimeEvent	-- gleich wieder löschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
+--OnOneTimeEvent	-- gleich wieder lschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
 NewState{Name = "AvoidUmspawnAfterMapStartCutscene"}
 AddTransition
 {
@@ -110,9 +110,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		)	
 	}, 
@@ -223,7 +221,7 @@ OnOneTimeEvent
 	},
 	Actions =
 	{
-		Outcry {NpcId = 5951, String = "Rostende Waffen und Wasser in den Stiefeln ... dieser Sumpf schlägt mir langsam auf das Gemüt!", Tag = "ocGrimP001_005"},
+		Outcry {NpcId = 5951, String = "Rostende Waffen und Wasser in den Stiefeln ... dieser Sumpf schlgt mir langsam auf das Gemt!", Tag = "ocGrimP001_005"},
 		Outcry {NpcId = 6311, String = "Du findest auch immer etwas zum jammern!" ,Tag = "ocLenaP001_005" },
 	}
 }
@@ -237,8 +235,8 @@ OnPlatformOneTimeEvent
 	},
 	Actions =
 	{
-		Outcry {NpcId = 5951, String = "Hm, wenn Setrius noch einige der Waldläufer um sich geschart hat, werden sie auf Orks nicht gut zu sprechen sein.", Tag = "ocGrimP001_006"},
-		Outcry {NpcId = 6311, String = "Das stimmt. Sobald wir uns dem Lager nähern, solltest du deine Truppen zurücklassen, sonst kommt es zum Kampf!", Tag = "ocLenaP001_006"},
+		Outcry {NpcId = 5951, String = "Hm, wenn Setrius noch einige der Waldlufer um sich geschart hat, werden sie auf Orks nicht gut zu sprechen sein.", Tag = "ocGrimP001_006"},
+		Outcry {NpcId = 6311, String = "Das stimmt. Sobald wir uns dem Lager nhern, solltest du deine Truppen zurcklassen, sonst kommt es zum Kampf!", Tag = "ocLenaP001_006"},
 	}
 }
 
@@ -271,7 +269,7 @@ OnPlatformOneTimeEvent
 	}
 }
 
---Wenn Schlußszene beendet wurde
+--Wenn Schluszene beendet wurde
 
 OnOneTimeEvent
 {
@@ -282,7 +280,7 @@ OnOneTimeEvent
 	},
 	Actions =
 	{
-		Outcry {NpcId = 5951, String = "Wir haben hier getan was wir konnten. Lass uns nach Mirraw Thur zurückkehren. Benutze den Seelenfelsen.", Tag = "ocGrimP001_008"},
+		Outcry {NpcId = 5951, String = "Wir haben hier getan was wir konnten. Lass uns nach Mirraw Thur zurckkehren. Benutze den Seelenfelsen.", Tag = "ocGrimP001_008"},
 	}
 }
 

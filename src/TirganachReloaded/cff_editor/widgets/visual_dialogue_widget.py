@@ -12,32 +12,69 @@ from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass
 
 from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QSplitter, QTreeWidget,
-    QTreeWidgetItem, QTextEdit, QLineEdit, QSpinBox, QComboBox,
-    QPushButton, QLabel, QGroupBox, QFormLayout, QListWidget,
-    QListWidgetItem, QMessageBox, QTableWidget, QTableWidgetItem,
-    QHeaderView, QGraphicsView, QGraphicsScene, QToolBar,
-    QStatusBar, QScrollArea, QFrame, QApplication, QDialog,
-    QDialogButtonBox
+    QWidget,
+    QVBoxLayout,
+    QHBoxLayout,
+    QSplitter,
+    QTreeWidget,
+    QTreeWidgetItem,
+    QTextEdit,
+    QLineEdit,
+    QSpinBox,
+    QComboBox,
+    QPushButton,
+    QLabel,
+    QGroupBox,
+    QFormLayout,
+    QListWidget,
+    QListWidgetItem,
+    QMessageBox,
+    QTableWidget,
+    QTableWidgetItem,
+    QHeaderView,
+    QGraphicsView,
+    QGraphicsScene,
+    QToolBar,
+    QStatusBar,
+    QScrollArea,
+    QFrame,
+    QApplication,
+    QDialog,
+    QDialogButtonBox,
 )
 from PySide6.QtCore import Qt, Signal, QRectF, QPointF
 from PySide6.QtGui import (
-    QFont, QPixmap, QIcon, QAction, QKeySequence, QPen,
-    QBrush, QPainter, QColor, QPolygonF
+    QFont,
+    QPixmap,
+    QIcon,
+    QAction,
+    QKeySequence,
+    QPen,
+    QBrush,
+    QPainter,
+    QColor,
+    QPolygonF,
 )
 
 # Import from visual_dialogue_editor
 try:
     from .visual_dialogue_editor import (
-        DialogueNode, NodeType, DialogueNodeItem, DialogueConnectionItem,
-        DialogueGraphicsView, DialoguePropertiesWidget, DialogueTreeWidget
+        DialogueNode,
+        NodeType,
+        DialogueNodeItem,
+        DialogueConnectionItem,
+        DialogueGraphicsView,
+        DialoguePropertiesWidget,
+        DialogueTreeWidget,
     )
     from TirganachReloaded.cff_editor.logging_config import get_logger
+
     logger = get_logger(__name__)
     VISUAL_EDITOR_COMPONENTS_AVAILABLE = True
 except (ImportError, AttributeError) as e:
     # Fallback for standalone testing
     import logging
+
     logger = logging.getLogger(__name__)
     VISUAL_EDITOR_COMPONENTS_AVAILABLE = False
     logger.warning(f"Visual dialogue editor components not fully available: {e}")
@@ -49,11 +86,26 @@ except (ImportError, AttributeError) as e:
         node_type: str
         speaker: str = ""
         text: str = ""
-        choices: List[Dict[str, str]] = None
-        conditions: List[str] = None
-        actions: List[str] = None
+        choices: Optional[List[Dict[str, str]]] = None
+        conditions: Optional[List[str]] = None
+        actions: Optional[List[str]] = None
         position: Tuple[float, float] = (0.0, 0.0)
-        next_nodes: List[str] = None
+        next_nodes: Optional[List[str]] = None
+
+        @classmethod
+        def from_dict(cls, data: dict) -> "DialogueNode":
+            """Create DialogueNode from dictionary"""
+            return cls(
+                id=data.get("id", ""),
+                node_type=data.get("node_type", "npc"),
+                speaker=data.get("speaker", ""),
+                text=data.get("text", ""),
+                choices=data.get("choices") or [],
+                conditions=data.get("conditions") or [],
+                actions=data.get("actions") or [],
+                position=data.get("position", (0.0, 0.0)),
+                next_nodes=data.get("next_nodes") or [],
+            )
 
     class NodeType:
         START = "start"
@@ -72,27 +124,31 @@ except (ImportError, AttributeError) as e:
         def __init__(self, start_node, end_node):
             self.start_node = start_node
             self.end_node = end_node
-    
+
     # Stub classes for missing components
-    class DialogueTreeWidget:
+    class DialogueTreeWidget(QWidget):
         def __init__(self):
-            pass
+            super().__init__()
+
         def set_nodes(self, nodes):
             pass
-    
-    class DialogueGraphicsView:
+
+    class DialogueGraphicsView(QGraphicsView):
         def __init__(self, scene):
-            self.scene = scene
+            super().__init__(scene)
             self.nodes = {}
             self.connections = []
+
         def add_node(self, node):
             pass
+
         def add_connection(self, from_id, to_id):
             pass
-    
-    class DialoguePropertiesWidget:
+
+    class DialoguePropertiesWidget(QWidget):
         def __init__(self):
-            pass
+            super().__init__()
+
         def set_node(self, node):
             pass
 
@@ -139,18 +195,20 @@ class VisualDialogueWidget(QWidget):
         if VISUAL_EDITOR_COMPONENTS_AVAILABLE:
             try:
                 self.tree_widget = DialogueTreeWidget()
-                if hasattr(self.tree_widget, 'node_selected'):
+                if hasattr(self.tree_widget, "node_selected"):
                     self.tree_widget.node_selected.connect(self.select_node)
                 left_layout.addWidget(self.tree_widget)
             except Exception as e:
                 logger.warning(f"Could not create DialogueTreeWidget: {e}")
                 from PySide6.QtWidgets import QTreeWidget
+
                 self.tree_widget = QTreeWidget()
                 self.tree_widget.setHeaderLabels(["Node ID", "Type", "Speaker"])
                 left_layout.addWidget(self.tree_widget)
         else:
             # Fallback if components not available
             from PySide6.QtWidgets import QTreeWidget
+
             self.tree_widget = QTreeWidget()
             self.tree_widget.setHeaderLabels(["Node ID", "Type", "Speaker"])
             left_layout.addWidget(self.tree_widget)
@@ -159,27 +217,18 @@ class VisualDialogueWidget(QWidget):
 
         # Center - Graphics view
         if VISUAL_EDITOR_COMPONENTS_AVAILABLE:
-            try:
-                self.scene = QGraphicsScene()
-                self.graphics_view = DialogueGraphicsView(self.scene)
-                if hasattr(self.graphics_view, 'node_selected'):
-                    self.graphics_view.node_selected.connect(self.on_node_selected)
-                splitter.addWidget(self.graphics_view)
-            except Exception as e:
-                logger.warning(f"Could not create DialogueGraphicsView: {e}")
-                from PySide6.QtWidgets import QGraphicsView, QGraphicsScene, QLabel
-                self.scene = QGraphicsScene()
-                self.graphics_view = QGraphicsView(self.scene)
-                fallback_label = QLabel("Visual dialogue editor components not fully available.\nUse Text Mode Overview instead.")
-                fallback_label.setAlignment(Qt.AlignCenter)
-                self.scene.addWidget(fallback_label)
-                splitter.addWidget(self.graphics_view)
+            self.scene = QGraphicsScene()
+            self.graphics_view = DialogueGraphicsView(self.scene)
+            if hasattr(self.graphics_view, "node_selected"):
+                self.graphics_view.node_selected.connect(self.on_node_selected)
+            splitter.addWidget(self.graphics_view)
         else:
             # Fallback if components not available
-            from PySide6.QtWidgets import QGraphicsView, QGraphicsScene, QLabel
             self.scene = QGraphicsScene()
             self.graphics_view = QGraphicsView(self.scene)
-            fallback_label = QLabel("Visual dialogue editor components not fully available.\nUse Text Mode Overview tab instead.")
+            fallback_label = QLabel(
+                "Visual dialogue editor components not fully available.\nUse Text Mode Overview tab instead."
+            )
             fallback_label.setAlignment(Qt.AlignCenter)
             self.scene.addWidget(fallback_label)
             splitter.addWidget(self.graphics_view)
@@ -188,19 +237,25 @@ class VisualDialogueWidget(QWidget):
         if VISUAL_EDITOR_COMPONENTS_AVAILABLE:
             try:
                 self.properties_widget = DialoguePropertiesWidget()
-                if hasattr(self.properties_widget, 'properties_changed'):
-                    self.properties_widget.properties_changed.connect(self.on_properties_changed)
+                if hasattr(self.properties_widget, "properties_changed"):
+                    self.properties_widget.properties_changed.connect(
+                        self.on_properties_changed
+                    )
                 splitter.addWidget(self.properties_widget)
             except Exception as e:
                 logger.warning(f"Could not create DialoguePropertiesWidget: {e}")
                 from PySide6.QtWidgets import QLabel
+
                 self.properties_widget = QLabel("Properties panel not available.")
                 self.properties_widget.setAlignment(Qt.AlignCenter)
                 splitter.addWidget(self.properties_widget)
         else:
             # Fallback if components not available
             from PySide6.QtWidgets import QLabel
-            self.properties_widget = QLabel("Properties panel not available.\nUse Text Mode Overview for editing.")
+
+            self.properties_widget = QLabel(
+                "Properties panel not available.\nUse Text Mode Overview for editing."
+            )
             self.properties_widget.setAlignment(Qt.AlignCenter)
             splitter.addWidget(self.properties_widget)
 
@@ -220,27 +275,39 @@ class VisualDialogueWidget(QWidget):
         # Node type buttons
         self.start_btn = QPushButton("🟢 Start Node")
         self.start_btn.clicked.connect(lambda: self.add_node(NodeType.START))
-        self.start_btn.setToolTip("Starting point of your dialogue tree\nEvery conversation begins here")
+        self.start_btn.setToolTip(
+            "Starting point of your dialogue tree\nEvery conversation begins here"
+        )
         palette_layout.addWidget(self.start_btn)
 
         self.npc_btn = QPushButton("👤 NPC Dialogue")
         self.npc_btn.clicked.connect(lambda: self.add_node(NodeType.NPC))
-        self.npc_btn.setToolTip("NPC speaks to the player\nAdd dialogue text for characters")
+        self.npc_btn.setToolTip(
+            "NPC speaks to the player\nAdd dialogue text for characters"
+        )
         palette_layout.addWidget(self.npc_btn)
 
         self.player_btn = QPushButton("🗣️ Player Dialogue")
         self.player_btn.clicked.connect(lambda: self.add_node(NodeType.PLAYER))
-        self.player_btn.setToolTip("Player response options\nWhat the player can say back")
+        self.player_btn.setToolTip(
+            "Player response options\nWhat the player can say back"
+        )
         palette_layout.addWidget(self.player_btn)
 
         self.choice_btn = QPushButton("🔀 Choice Node")
         self.choice_btn.clicked.connect(lambda: self.add_node(NodeType.CHOICE))
-        self.choice_btn.setToolTip("Branching dialogue choices\nCreate multiple conversation paths")
+        self.choice_btn.setToolTip(
+            "Branching dialogue choices\nCreate multiple conversation paths"
+        )
         palette_layout.addWidget(self.choice_btn)
 
         self.conditional_btn = QPushButton("❓ Conditional Node")
-        self.conditional_btn.clicked.connect(lambda: self.add_node(NodeType.CONDITIONAL))
-        self.conditional_btn.setToolTip("Conditional dialogue\nShow different text based on conditions")
+        self.conditional_btn.clicked.connect(
+            lambda: self.add_node(NodeType.CONDITIONAL)
+        )
+        self.conditional_btn.setToolTip(
+            "Conditional dialogue\nShow different text based on conditions"
+        )
         palette_layout.addWidget(self.conditional_btn)
 
         self.end_btn = QPushButton("🔴 End Node")
@@ -277,7 +344,9 @@ class VisualDialogueWidget(QWidget):
 
         open_action = QAction("📂 Load Sample", self)
         open_action.triggered.connect(self.load_sample_dialogue)
-        open_action.setToolTip("Load a sample dialogue tree\nSee how dialogue structures work")
+        open_action.setToolTip(
+            "Load a sample dialogue tree\nSee how dialogue structures work"
+        )
         self.toolbar.addAction(open_action)
 
         save_action = QAction("💾 Save", self)
@@ -291,7 +360,9 @@ class VisualDialogueWidget(QWidget):
         # Auto-arrange
         auto_arrange_action = QAction("🎯 Auto-Arrange", self)
         auto_arrange_action.triggered.connect(self.auto_arrange_nodes)
-        auto_arrange_action.setToolTip("Automatically arrange nodes\nOrganize your dialogue tree neatly")
+        auto_arrange_action.setToolTip(
+            "Automatically arrange nodes\nOrganize your dialogue tree neatly"
+        )
         self.toolbar.addAction(auto_arrange_action)
 
         self.toolbar.addSeparator()
@@ -299,15 +370,38 @@ class VisualDialogueWidget(QWidget):
         # Validation
         validate_action = QAction("✅ Validate", self)
         validate_action.triggered.connect(self.validate_dialogue)
-        validate_action.setToolTip("Check dialogue tree for errors\nFind missing connections or text")
+        validate_action.setToolTip(
+            "Check dialogue tree for errors\nFind missing connections or text"
+        )
         self.toolbar.addAction(validate_action)
+
+        self.toolbar.addSeparator()
+
+        # Node operations (require selected node)
+        self.add_response_action = QAction("💬 Add Response", self)
+        self.add_response_action.triggered.connect(self.add_response_to_selected)
+        self.add_response_action.setToolTip(
+            "Add NPC response connected to selected node\nCreates a new NPC dialogue node linked to the current selection"
+        )
+        self.add_response_action.setEnabled(False)  # Disabled until node selected
+        self.toolbar.addAction(self.add_response_action)
+
+        self.add_choice_action = QAction("🔀 Add Choice", self)
+        self.add_choice_action.triggered.connect(self.add_choice_to_selected)
+        self.add_choice_action.setToolTip(
+            "Add player choice connected to selected node\nCreates a new choice node linked to the current selection"
+        )
+        self.add_choice_action.setEnabled(False)  # Disabled until node selected
+        self.toolbar.addAction(self.add_choice_action)
 
         self.toolbar.addSeparator()
 
         # Export operations
         export_lua_action = QAction("🔧 Export Lua", self)
         export_lua_action.triggered.connect(self.export_to_lua)
-        export_lua_action.setToolTip("Export dialogue to Lua format\nFor use in SpellForce game")
+        export_lua_action.setToolTip(
+            "Export dialogue to Lua format\nFor use in SpellForce game"
+        )
         self.toolbar.addAction(export_lua_action)
 
         self.toolbar.addSeparator()
@@ -336,7 +430,9 @@ class VisualDialogueWidget(QWidget):
         # Help
         help_action = QAction("❓ Help", self)
         help_action.triggered.connect(self.show_help)
-        help_action.setToolTip("Show help and tutorial\nLearn how to use the dialogue editor")
+        help_action.setToolTip(
+            "Show help and tutorial\nLearn how to use the dialogue editor"
+        )
         help_action.setShortcut(QKeySequence("F1"))
         self.toolbar.addAction(help_action)
 
@@ -350,18 +446,20 @@ class VisualDialogueWidget(QWidget):
             node = DialogueNode(
                 id=node_id,
                 node_type=node_type,
-                position=(100 + len(self.nodes) * 50, 100 + len(self.nodes) * 50)
+                position=(100 + len(self.nodes) * 50, 100 + len(self.nodes) * 50),
             )
 
             # Add to collection
             self.nodes[node_id] = node
 
             # Add to graphics view (if available)
-            if hasattr(self, 'graphics_view') and hasattr(self.graphics_view, 'add_node'):
+            if hasattr(self, "graphics_view") and hasattr(
+                self.graphics_view, "add_node"
+            ):
                 self.graphics_view.add_node(node)
 
             # Update tree view (if available)
-            if hasattr(self, 'tree_widget') and hasattr(self.tree_widget, 'set_nodes'):
+            if hasattr(self, "tree_widget") and hasattr(self.tree_widget, "set_nodes"):
                 self.tree_widget.set_nodes(self.nodes)
 
             # Emit change signal
@@ -371,6 +469,130 @@ class VisualDialogueWidget(QWidget):
         except Exception as e:
             logger.error(f"Error adding node: {e}")
             self.status_bar.showMessage(f"Error adding node: {e}")
+
+    def update_toolbar_actions(self):
+        """Update toolbar action states based on selected node"""
+        has_selection = self.selected_node is not None
+
+        self.add_response_action.setEnabled(has_selection)
+        self.add_choice_action.setEnabled(has_selection)
+
+        if has_selection:
+            self.add_response_action.setToolTip(
+                f"Add NPC response connected to '{self.selected_node.id}'\nCreates a new NPC dialogue node linked to the current selection"
+            )
+            self.add_choice_action.setToolTip(
+                f"Add player choice connected to '{self.selected_node.id}'\nCreates a new choice node linked to the current selection"
+            )
+
+    def add_response_to_selected(self):
+        """Add an NPC response node connected to the selected node"""
+        if not self.selected_node:
+            QMessageBox.warning(self, "No Selection", "Please select a node first.")
+            return
+
+        try:
+            # Generate unique ID
+            node_id = f"npc_response_{len(self.nodes) + 1}"
+
+            # Position the new node below and to the right of the selected node
+            base_pos = self.selected_node.position
+            new_position = (base_pos[0] + 250, base_pos[1] + 150)
+
+            # Create NPC response node
+            node = DialogueNode(
+                id=node_id,
+                node_type=NodeType.NPC,
+                speaker=self.selected_node.speaker
+                or "NPC",  # Inherit speaker if possible
+                text="",
+                position=new_position,
+            )
+
+            # Add to collection
+            self.nodes[node_id] = node
+
+            # Connect to selected node
+            self.selected_node.next_nodes.append(node_id)
+
+            # Add to graphics view
+            if hasattr(self.graphics_view, "add_node"):
+                self.graphics_view.add_node(node)
+
+            # Add connection
+            if hasattr(self.graphics_view, "add_connection"):
+                self.graphics_view.add_connection(self.selected_node.id, node_id)
+
+            # Update tree view
+            if hasattr(self.tree_widget, "set_nodes"):
+                self.tree_widget.set_nodes(self.nodes)
+
+            # Select the new node
+            self.select_node(node_id)
+
+            # Emit change signal
+            self.emit_dialogue_changed()
+
+            self.status_bar.showMessage(f"Added NPC response: {node_id}")
+        except Exception as e:
+            logger.error(f"Error adding response: {e}")
+            QMessageBox.critical(self, "Error", f"Failed to add response: {e}")
+
+    def add_choice_to_selected(self):
+        """Add a choice node connected to the selected node"""
+        if not self.selected_node:
+            QMessageBox.warning(self, "No Selection", "Please select a node first.")
+            return
+
+        try:
+            # Generate unique ID
+            node_id = f"choice_{len(self.nodes) + 1}"
+
+            # Position the new node below and to the right of the selected node
+            base_pos = self.selected_node.position
+            new_position = (base_pos[0] + 250, base_pos[1] + 150)
+
+            # Create choice node with default choices
+            node = DialogueNode(
+                id=node_id,
+                node_type=NodeType.CHOICE,
+                speaker="Player",
+                text="",
+                choices=[
+                    {"text": "Option 1", "next_node": ""},
+                    {"text": "Option 2", "next_node": ""},
+                ],
+                position=new_position,
+            )
+
+            # Add to collection
+            self.nodes[node_id] = node
+
+            # Connect to selected node
+            self.selected_node.next_nodes.append(node_id)
+
+            # Add to graphics view
+            if hasattr(self.graphics_view, "add_node"):
+                self.graphics_view.add_node(node)
+
+            # Add connection
+            if hasattr(self.graphics_view, "add_connection"):
+                self.graphics_view.add_connection(self.selected_node.id, node_id)
+
+            # Update tree view
+            if hasattr(self.tree_widget, "set_nodes"):
+                self.tree_widget.set_nodes(self.nodes)
+
+            # Select the new node
+            self.select_node(node_id)
+
+            # Emit change signal
+            self.emit_dialogue_changed()
+
+            self.status_bar.showMessage(f"Added choice node: {node_id}")
+        except Exception as e:
+            logger.error(f"Error adding choice: {e}")
+            QMessageBox.critical(self, "Error", f"Failed to add choice: {e}")
 
     def create_connection_mode(self):
         """Enter connection creation mode"""
@@ -386,7 +608,10 @@ class VisualDialogueWidget(QWidget):
             self.selected_node = node
 
             # Update graphics view selection
-            if node_id in self.graphics_view.nodes:
+            if (
+                hasattr(self.graphics_view, "nodes")
+                and node_id in self.graphics_view.nodes
+            ):
                 node_item = self.graphics_view.nodes[node_id]
                 self.graphics_view.scene.clearSelection()
                 node_item.setSelected(True)
@@ -394,7 +619,13 @@ class VisualDialogueWidget(QWidget):
             # Update properties
             self.properties_widget.set_node(node)
 
+            # Enable/disable toolbar actions based on node type
+            self.update_toolbar_actions()
+
             self.status_bar.showMessage(f"Selected node: {node_id}")
+        else:
+            self.selected_node = None
+            self.update_toolbar_actions()
 
     def on_node_selected(self, node):
         """Handle node selection from graphics view"""
@@ -409,7 +640,10 @@ class VisualDialogueWidget(QWidget):
             self.nodes[node_id] = DialogueNode.from_dict(node_data)
 
             # Update graphics view
-            if node_id in self.graphics_view.nodes:
+            if (
+                hasattr(self.graphics_view, "nodes")
+                and node_id in self.graphics_view.nodes
+            ):
                 node_item = self.graphics_view.nodes[node_id]
                 node_item.node = self.nodes[node_id]
                 node_item.update()
@@ -429,9 +663,10 @@ class VisualDialogueWidget(QWidget):
 
         # Confirm deletion
         reply = QMessageBox.question(
-            self, "Delete Node",
+            self,
+            "Delete Node",
             f"Are you sure you want to delete node '{self.selected_node.id}'?",
-            QMessageBox.Yes | QMessageBox.No
+            QMessageBox.Yes | QMessageBox.No,
         )
 
         if reply == QMessageBox.Yes:
@@ -441,21 +676,28 @@ class VisualDialogueWidget(QWidget):
             del self.nodes[node_id]
 
             # Remove from graphics view
-            if node_id in self.graphics_view.nodes:
+            if (
+                hasattr(self.graphics_view, "nodes")
+                and node_id in self.graphics_view.nodes
+            ):
                 node_item = self.graphics_view.nodes[node_id]
                 self.graphics_view.scene.removeItem(node_item)
                 del self.graphics_view.nodes[node_id]
 
             # Remove connections
             connections_to_remove = []
-            for connection in self.graphics_view.connections:
-                if (connection.start_node.node.id == node_id or
-                    connection.end_node.node.id == node_id):
-                    connections_to_remove.append(connection)
+            if hasattr(self.graphics_view, "connections"):
+                for connection in self.graphics_view.connections:
+                    if (
+                        connection.start_node.node.id == node_id
+                        or connection.end_node.node.id == node_id
+                    ):
+                        connections_to_remove.append(connection)
 
             for connection in connections_to_remove:
                 self.graphics_view.scene.removeItem(connection)
-                self.graphics_view.connections.remove(connection)
+                if hasattr(self.graphics_view, "connections"):
+                    self.graphics_view.connections.remove(connection)
 
             # Clear selection
             self.selected_node = None
@@ -471,15 +713,18 @@ class VisualDialogueWidget(QWidget):
 
     def zoom_in(self):
         """Zoom in the graphics view"""
-        self.graphics_view.scale(1.2, 1.2)
+        if hasattr(self.graphics_view, "scale"):
+            self.graphics_view.scale(1.2, 1.2)
 
     def zoom_out(self):
         """Zoom out the graphics view"""
-        self.graphics_view.scale(0.8, 0.8)
+        if hasattr(self.graphics_view, "scale"):
+            self.graphics_view.scale(0.8, 0.8)
 
     def reset_zoom(self):
         """Reset zoom to default"""
-        self.graphics_view.resetTransform()
+        if hasattr(self.graphics_view, "resetTransform"):
+            self.graphics_view.resetTransform()
 
     def new_dialogue(self):
         """Create new dialogue"""
@@ -490,11 +735,21 @@ class VisualDialogueWidget(QWidget):
 
         # Clear graphics view
         self.scene.clear()
-        self.graphics_view.nodes.clear()
-        self.graphics_view.connections.clear()
+        if hasattr(self.graphics_view, "nodes"):
+            self.graphics_view.nodes.clear()
+        if hasattr(self.graphics_view, "connections"):
+            self.graphics_view.connections.clear()
 
         # Update tree view
-        self.tree_widget.set_nodes(self.nodes)
+        if (
+            hasattr(self, "tree_widget")
+            and self.tree_widget
+            and hasattr(self.tree_widget, "set_nodes")
+        ):
+            self.tree_widget.set_nodes(self.nodes)
+
+        # Update toolbar actions
+        self.update_toolbar_actions()
 
         # Emit change signal
         self.emit_dialogue_changed()
@@ -514,16 +769,18 @@ class VisualDialogueWidget(QWidget):
 
         # Convert to dictionary
         dialogue_data = {
-            'nodes': [node.to_dict() for node in self.nodes.values()],
-            'connections': []
+            "nodes": [node.to_dict() for node in self.nodes.values()],
+            "connections": [],
         }
 
         # Add connections
         for connection in self.graphics_view.connections:
-            dialogue_data['connections'].append({
-                'from': connection.start_node.node.id,
-                'to': connection.end_node.node.id
-            })
+            dialogue_data["connections"].append(
+                {
+                    "from": connection.start_node.node.id,
+                    "to": connection.end_node.node.id,
+                }
+            )
 
         QMessageBox.information(self, "Success", "Dialogue data prepared")
         self.status_bar.showMessage("Dialogue data saved to memory")
@@ -592,7 +849,9 @@ class VisualDialogueWidget(QWidget):
             if node.choices:
                 lua_lines.append("    choices = {")
                 for choice in node.choices:
-                    lua_lines.append(f'        {{text = "{choice["text"]}", next = "{choice["next_node"]}"}},')
+                    lua_lines.append(
+                        f'        {{text = "{choice["text"]}", next = "{choice["next_node"]}"}},'
+                    )
                 lua_lines.append("    },")
 
             if node.conditions:
@@ -634,7 +893,7 @@ class VisualDialogueWidget(QWidget):
             node_type=NodeType.START,
             speaker="System",
             text="Dialogue starts here...",
-            position=(100, 100)
+            position=(100, 100),
         )
 
         npc_node = DialogueNode(
@@ -642,7 +901,7 @@ class VisualDialogueWidget(QWidget):
             node_type=NodeType.NPC,
             speaker="Guard",
             text="Welcome to our town, traveler. How can I help you?",
-            position=(350, 100)
+            position=(350, 100),
         )
 
         choice_node = DialogueNode(
@@ -652,9 +911,9 @@ class VisualDialogueWidget(QWidget):
             choices=[
                 {"text": "I'm looking for work.", "next_node": "quest_node"},
                 {"text": "Just passing through.", "next_node": "leave_node"},
-                {"text": "Tell me about this town.", "next_node": "info_node"}
+                {"text": "Tell me about this town.", "next_node": "info_node"},
             ],
-            position=(600, 100)
+            position=(600, 100),
         )
 
         quest_node = DialogueNode(
@@ -662,7 +921,7 @@ class VisualDialogueWidget(QWidget):
             node_type=NodeType.NPC,
             speaker="Guard",
             text="We have a goblin problem in the nearby caves. Could you help us?",
-            position=(850, 50)
+            position=(850, 50),
         )
 
         info_node = DialogueNode(
@@ -670,7 +929,7 @@ class VisualDialogueWidget(QWidget):
             node_type=NodeType.NPC,
             speaker="Guard",
             text="This is the town of Greenhaven. We're a peaceful community of traders and farmers.",
-            position=(850, 150)
+            position=(850, 150),
         )
 
         leave_node = DialogueNode(
@@ -678,7 +937,7 @@ class VisualDialogueWidget(QWidget):
             node_type=NodeType.NPC,
             speaker="Guard",
             text="Safe travels, then!",
-            position=(850, 250)
+            position=(850, 250),
         )
 
         end_node = DialogueNode(
@@ -686,7 +945,7 @@ class VisualDialogueWidget(QWidget):
             node_type=NodeType.END,
             speaker="System",
             text="Dialogue ends",
-            position=(1100, 150)
+            position=(1100, 150),
         )
 
         # Set up connections
@@ -697,29 +956,33 @@ class VisualDialogueWidget(QWidget):
         leave_node.next_nodes = ["end"]
 
         # Add nodes
-        self.nodes.update({
-            "start": start_node,
-            "npc_greeting": npc_node,
-            "player_choice": choice_node,
-            "quest_node": quest_node,
-            "info_node": info_node,
-            "leave_node": leave_node,
-            "end": end_node
-        })
+        self.nodes.update(
+            {
+                "start": start_node,
+                "npc_greeting": npc_node,
+                "player_choice": choice_node,
+                "quest_node": quest_node,
+                "info_node": info_node,
+                "leave_node": leave_node,
+                "end": end_node,
+            }
+        )
 
         # Add to graphics view
-        for node in self.nodes.values():
-            self.graphics_view.add_node(node)
+        if hasattr(self.graphics_view, "add_node"):
+            for node in self.nodes.values():
+                self.graphics_view.add_node(node)
 
         # Add connections
-        self.graphics_view.add_connection("start", "npc_greeting")
-        self.graphics_view.add_connection("npc_greeting", "player_choice")
-        self.graphics_view.add_connection("player_choice", "quest_node")
-        self.graphics_view.add_connection("player_choice", "info_node")
-        self.graphics_view.add_connection("player_choice", "leave_node")
-        self.graphics_view.add_connection("quest_node", "end")
-        self.graphics_view.add_connection("info_node", "end")
-        self.graphics_view.add_connection("leave_node", "end")
+        if hasattr(self.graphics_view, "add_connection"):
+            self.graphics_view.add_connection("start", "npc_greeting")
+            self.graphics_view.add_connection("npc_greeting", "player_choice")
+            self.graphics_view.add_connection("player_choice", "quest_node")
+            self.graphics_view.add_connection("player_choice", "info_node")
+            self.graphics_view.add_connection("player_choice", "leave_node")
+            self.graphics_view.add_connection("quest_node", "end")
+            self.graphics_view.add_connection("info_node", "end")
+            self.graphics_view.add_connection("leave_node", "end")
 
         # Update tree view
         self.tree_widget.set_nodes(self.nodes)
@@ -740,16 +1003,24 @@ class VisualDialogueWidget(QWidget):
         validation_info = []
 
         # Check for start node
-        start_nodes = [node for node in self.nodes.values() if node.node_type == NodeType.START]
+        start_nodes = [
+            node for node in self.nodes.values() if node.node_type == NodeType.START
+        ]
         if not start_nodes:
             validation_errors.append("No start node found - dialogue cannot begin")
         elif len(start_nodes) > 1:
-            validation_warnings.append(f"Multiple start nodes found ({len(start_nodes)}) - only first will be used")
+            validation_warnings.append(
+                f"Multiple start nodes found ({len(start_nodes)}) - only first will be used"
+            )
 
         # Check for end nodes
-        end_nodes = [node for node in self.nodes.values() if node.node_type == NodeType.END]
+        end_nodes = [
+            node for node in self.nodes.values() if node.node_type == NodeType.END
+        ]
         if not end_nodes:
-            validation_warnings.append("No end nodes found - dialogue may not terminate properly")
+            validation_warnings.append(
+                "No end nodes found - dialogue may not terminate properly"
+            )
 
         # Check for disconnected nodes
         connected_nodes = set()
@@ -771,7 +1042,9 @@ class VisualDialogueWidget(QWidget):
 
             disconnected_nodes = set(self.nodes.keys()) - connected_nodes
             if disconnected_nodes:
-                validation_warnings.append(f"Disconnected nodes found: {', '.join(disconnected_nodes)}")
+                validation_warnings.append(
+                    f"Disconnected nodes found: {', '.join(disconnected_nodes)}"
+                )
 
         # Check for orphaned nodes (no incoming connections except start)
         nodes_with_incoming = set()
@@ -780,34 +1053,47 @@ class VisualDialogueWidget(QWidget):
 
         orphaned_nodes = []
         for node_id, node in self.nodes.items():
-            if (node.node_type != NodeType.START and
-                node_id not in nodes_with_incoming and
-                node_id not in connected_nodes):
+            if (
+                node.node_type != NodeType.START
+                and node_id not in nodes_with_incoming
+                and node_id not in connected_nodes
+            ):
                 orphaned_nodes.append(node_id)
 
         if orphaned_nodes:
-            validation_warnings.append(f"Orphaned nodes (no incoming connections): {', '.join(orphaned_nodes)}")
+            validation_warnings.append(
+                f"Orphaned nodes (no incoming connections): {', '.join(orphaned_nodes)}"
+            )
 
         # Check for empty text
         empty_text_nodes = []
         for node_id, node in self.nodes.items():
-            if not node.text.strip() and node.node_type not in [NodeType.START, NodeType.END]:
+            if not node.text.strip() and node.node_type not in [
+                NodeType.START,
+                NodeType.END,
+            ]:
                 empty_text_nodes.append(node_id)
 
         if empty_text_nodes:
-            validation_warnings.append(f"Nodes with empty text: {', '.join(empty_text_nodes)}")
+            validation_warnings.append(
+                f"Nodes with empty text: {', '.join(empty_text_nodes)}"
+            )
 
         # Check choice nodes
-        choice_nodes = [node for node in self.nodes.values() if node.node_type == NodeType.CHOICE]
+        choice_nodes = [
+            node for node in self.nodes.values() if node.node_type == NodeType.CHOICE
+        ]
         for node in choice_nodes:
             if not node.choices:
                 validation_errors.append(f"Choice node '{node.id}' has no choices")
             else:
                 # Check if choices have valid next nodes
                 for i, choice in enumerate(node.choices):
-                    next_node = choice.get('next_node', '')
+                    next_node = choice.get("next_node", "")
                     if next_node and next_node not in self.nodes:
-                        validation_warnings.append(f"Choice {i+1} in node '{node.id}' points to non-existent node '{next_node}'")
+                        validation_warnings.append(
+                            f"Choice {i + 1} in node '{node.id}' points to non-existent node '{next_node}'"
+                        )
 
         # Check for cycles
         def detect_cycles(start_id):
@@ -842,7 +1128,9 @@ class VisualDialogueWidget(QWidget):
         if start_nodes:
             cycle = detect_cycles(start_nodes[0].id)
             if cycle:
-                validation_errors.append(f"Circular dialogue flow detected: {' -> '.join(reversed(cycle))}")
+                validation_errors.append(
+                    f"Circular dialogue flow detected: {' -> '.join(reversed(cycle))}"
+                )
 
         # Count nodes by type
         node_counts = {}
@@ -855,9 +1143,13 @@ class VisualDialogueWidget(QWidget):
             validation_info.append(f"  {node_type}: {count}")
 
         # Show validation results
-        self.show_validation_results(validation_errors, validation_warnings, validation_info)
+        self.show_validation_results(
+            validation_errors, validation_warnings, validation_info
+        )
 
-    def show_validation_results(self, errors: List[str], warnings: List[str], info: List[str]):
+    def show_validation_results(
+        self, errors: List[str], warnings: List[str], info: List[str]
+    ):
         """Show validation results in a dialog"""
         dialog = QDialog(self)
         dialog.setWindowTitle("Dialogue Validation Results")
@@ -892,7 +1184,9 @@ class VisualDialogueWidget(QWidget):
 
         if not errors and not warnings:
             result_html += "<h4 style='color: green;'>✅ Validation Passed</h4>"
-            result_html += "<p style='color: green;'>No issues found in dialogue flow.</p>"
+            result_html += (
+                "<p style='color: green;'>No issues found in dialogue flow.</p>"
+            )
 
         results_text.setHtml(result_html)
         layout.addWidget(results_text)
@@ -907,9 +1201,13 @@ class VisualDialogueWidget(QWidget):
 
         # Update status bar
         if errors:
-            self.status_bar.showMessage(f"Validation failed: {len(errors)} errors, {len(warnings)} warnings")
+            self.status_bar.showMessage(
+                f"Validation failed: {len(errors)} errors, {len(warnings)} warnings"
+            )
         elif warnings:
-            self.status_bar.showMessage(f"Validation passed with warnings: {len(warnings)} warnings")
+            self.status_bar.showMessage(
+                f"Validation passed with warnings: {len(warnings)} warnings"
+            )
         else:
             self.status_bar.showMessage("Validation passed: No issues found")
 
@@ -917,43 +1215,61 @@ class VisualDialogueWidget(QWidget):
         """Emit dialogue changed signal with current data"""
         if self.nodes:
             dialogue_data = {
-                'nodes': [node.to_dict() for node in self.nodes.values()],
-                'connections': []
+                "nodes": [node.to_dict() for node in self.nodes.values()],
+                "connections": [],
             }
 
             # Add connections
             for connection in self.graphics_view.connections:
-                dialogue_data['connections'].append({
-                    'from': connection.start_node.node.id,
-                    'to': connection.end_node.node.id
-                })
+                dialogue_data["connections"].append(
+                    {
+                        "from": connection.start_node.node.id,
+                        "to": connection.end_node.node.id,
+                    }
+                )
 
             self.dialogue_changed.emit(dialogue_data)
 
     def set_dialogue_data(self, dialogue_data: dict):
         """Set dialogue data from dictionary"""
-        if not dialogue_data or 'nodes' not in dialogue_data:
+        if not dialogue_data or "nodes" not in dialogue_data:
             return
 
         # Clear current dialogue
         self.new_dialogue()
 
         # Load nodes
-        for node_data in dialogue_data['nodes']:
+        for node_data in dialogue_data["nodes"]:
             node = DialogueNode.from_dict(node_data)
             self.nodes[node.id] = node
-            self.graphics_view.add_node(node)
+            if (
+                hasattr(self, "graphics_view")
+                and self.graphics_view
+                and hasattr(self.graphics_view, "add_node")
+            ):
+                self.graphics_view.add_node(node)
 
         # Load connections
-        if 'connections' in dialogue_data:
-            for connection_data in dialogue_data['connections']:
-                from_node = connection_data.get('from')
-                to_node = connection_data.get('to')
-                if from_node and to_node:
+        if "connections" in dialogue_data:
+            for connection_data in dialogue_data["connections"]:
+                from_node = connection_data.get("from")
+                to_node = connection_data.get("to")
+                if (
+                    from_node
+                    and to_node
+                    and hasattr(self, "graphics_view")
+                    and self.graphics_view
+                    and hasattr(self.graphics_view, "add_connection")
+                ):
                     self.graphics_view.add_connection(from_node, to_node)
 
         # Update views
-        self.tree_widget.set_nodes(self.nodes)
+        if (
+            hasattr(self, "tree_widget")
+            and self.tree_widget
+            and hasattr(self.tree_widget, "set_nodes")
+        ):
+            self.tree_widget.set_nodes(self.nodes)
 
         self.status_bar.showMessage("Loaded dialogue data")
 
@@ -963,16 +1279,18 @@ class VisualDialogueWidget(QWidget):
             return {}
 
         dialogue_data = {
-            'nodes': [node.to_dict() for node in self.nodes.values()],
-            'connections': []
+            "nodes": [node.to_dict() for node in self.nodes.values()],
+            "connections": [],
         }
 
         # Add connections
         for connection in self.graphics_view.connections:
-            dialogue_data['connections'].append({
-                'from': connection.start_node.node.id,
-                'to': connection.end_node.node.id
-            })
+            dialogue_data["connections"].append(
+                {
+                    "from": connection.start_node.node.id,
+                    "to": connection.end_node.node.id,
+                }
+            )
 
         return dialogue_data
 
@@ -1010,7 +1328,10 @@ class VisualDialogueWidget(QWidget):
             # Get outgoing connections
             outgoing = []
             for connection in self.graphics_view.connections:
-                if hasattr(connection, 'start_node') and connection.start_node.node.id == node.id:
+                if (
+                    hasattr(connection, "start_node")
+                    and connection.start_node.node.id == node.id
+                ):
                     outgoing.append(connection.end_node.node)
 
             if outgoing:
@@ -1030,7 +1351,7 @@ class VisualDialogueWidget(QWidget):
             if node_id in self.nodes:
                 node_item = None
                 for item in self.scene.items():
-                    if hasattr(item, 'node') and item.node.id == node_id:
+                    if hasattr(item, "node") and item.node.id == node_id:
                         node_item = item
                         break
 

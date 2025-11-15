@@ -24,22 +24,65 @@ from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple, Union
 
 from PySide6.QtWidgets import (
-    QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-    QTabWidget, QSplitter, QTreeWidget, QTreeWidgetItem, QTextEdit,
-    QLineEdit, QSpinBox, QComboBox, QPushButton, QLabel, QGroupBox,
-    QFormLayout, QListWidget, QListWidgetItem, QMessageBox, QProgressBar,
-    QStatusBar, QMenuBar, QToolBar, QDialog, QDialogButtonBox,
-    QCheckBox, QRadioButton, QButtonGroup, QFrame, QScrollArea,
-    QTableWidget, QTableWidgetItem, QHeaderView, QAbstractItemView,
-    QTreeWidgetItemIterator
+    QApplication,
+    QMainWindow,
+    QWidget,
+    QVBoxLayout,
+    QHBoxLayout,
+    QTabWidget,
+    QSplitter,
+    QTreeWidget,
+    QTreeWidgetItem,
+    QTextEdit,
+    QLineEdit,
+    QSpinBox,
+    QComboBox,
+    QPushButton,
+    QLabel,
+    QGroupBox,
+    QFormLayout,
+    QListWidget,
+    QListWidgetItem,
+    QMessageBox,
+    QProgressBar,
+    QStatusBar,
+    QMenuBar,
+    QToolBar,
+    QDialog,
+    QDialogButtonBox,
+    QCheckBox,
+    QRadioButton,
+    QButtonGroup,
+    QFrame,
+    QScrollArea,
+    QTableWidget,
+    QTableWidgetItem,
+    QHeaderView,
+    QAbstractItemView,
+    QTreeWidgetItemIterator,
 )
 from PySide6.QtCore import (
-    Qt, Signal, Slot, QThread, QTimer, QSettings, QSize, QPoint,
-    QSortFilterProxyModel, QItemSelectionModel
+    Qt,
+    Signal,
+    Slot,
+    QThread,
+    QTimer,
+    QSettings,
+    QSize,
+    QPoint,
+    QSortFilterProxyModel,
+    QItemSelectionModel,
 )
 from PySide6.QtGui import (
-    QFont, QPixmap, QIcon, QAction, QKeySequence, QPalette,
-    QColor, QTextCursor, QIntValidator
+    QFont,
+    QPixmap,
+    QIcon,
+    QAction,
+    QKeySequence,
+    QPalette,
+    QColor,
+    QTextCursor,
+    QIntValidator,
 )
 
 # Add to path with better error handling
@@ -47,7 +90,9 @@ try:
     script_path = Path(__file__).resolve()
     # script_path is in: quest-wizard/src/TirganachReloaded/cff_editor/widgets/
     # We need to add quest-wizard/src to Python path
-    src_dir = script_path.parent.parent.parent  # widgets -> cff_editor -> TirganachReloaded -> src
+    src_dir = (
+        script_path.parent.parent.parent
+    )  # widgets -> cff_editor -> TirganachReloaded -> src
 
     if src_dir.exists() and (src_dir / "TirganachReloaded").exists():
         sys.path.insert(0, str(src_dir))
@@ -63,6 +108,7 @@ except Exception as e:
     # Try fallback
     try:
         import os
+
         # Add parent directories to path as fallback
         current_dir = Path(__file__).parent
         for _ in range(4):  # Go up 4 levels
@@ -76,10 +122,17 @@ except Exception as e:
 # Try imports with graceful fallback
 try:
     from TirganachReloaded.cff_editor.data_model import CFFDataModel
-    from TirganachReloaded.cff_editor.logging_config import configure_logging, get_logger
-    from TirganachReloaded.cff_editor.models.quest_models import (
-        EnhancedQuestData, QuestReward, Dialogue, MapLocation
+    from TirganachReloaded.cff_editor.logging_config import (
+        configure_logging,
+        get_logger,
     )
+    from TirganachReloaded.cff_editor.models.quest_models import (
+        EnhancedQuestData,
+        QuestReward,
+        Dialogue,
+        MapLocation,
+    )
+
     CFF_AVAILABLE = True
 except ImportError as e:
     print(f"Warning: CFF components not available: {e}")
@@ -98,12 +151,14 @@ VISUAL_DIALOGUE_EDITOR_AVAILABLE = False
 
 try:
     from .dialogue_editor import DialogueTreeEditor
+
     DIALOGUE_EDITOR_AVAILABLE = True
 except ImportError:
     DialogueTreeEditor = None
 
 try:
     from .quest_validator import QuestValidator
+
     QUEST_VALIDATOR_AVAILABLE = True
 except ImportError:
     QuestValidator = None
@@ -113,16 +168,36 @@ VISUAL_DIALOGUE_EDITOR_AVAILABLE = True  # Assume available, will verify at runt
 
 # Platform names from Darius Almanach
 PLATFORM_NAMES = {
-    "P1": "Liannon", "P2": "Eloni", "P3": "Leafshade", "P4": "Wildland Pass",
-    "P5": "Shiel", "P6": "Wildland Pass / Greyfell area", "P7": "Ice Gate",
-    "P8": "Underhall", "P10": "Iron Fields", "P11": "The Shiel", "P12": "峡谷",
-    "P15": "Desert / Burning Sands", "P16": "Whisper", "P17": "Tirganach",
-    "P19": "Dun Mora", "P23": "The Gorge", "P25": "Godmark / Mountains",
-    "P27": "Urgath", "P30": "Breathing Forest", "P32": "Soul Forge",
-    "P63": "Greyfell", "P101": "Tutorial", "P105": "Tirganach",
-    "P107": "Encounter Map", "P108": "Encounter Map", "P109": "Warzone",
-    "P110": "Ghost Watch", "P111": "Shadow Realm", "P113": "Underground",
-    "P115": "Dragon Storm"
+    "P1": "Liannon",
+    "P2": "Eloni",
+    "P3": "Leafshade",
+    "P4": "Wildland Pass",
+    "P5": "Shiel",
+    "P6": "Wildland Pass / Greyfell area",
+    "P7": "Ice Gate",
+    "P8": "Underhall",
+    "P10": "Iron Fields",
+    "P11": "The Shiel",
+    "P12": "峡谷",
+    "P15": "Desert / Burning Sands",
+    "P16": "Whisper",
+    "P17": "Tirganach",
+    "P19": "Dun Mora",
+    "P23": "The Gorge",
+    "P25": "Godmark / Mountains",
+    "P27": "Urgath",
+    "P30": "Breathing Forest",
+    "P32": "Soul Forge",
+    "P63": "Greyfell",
+    "P101": "Tutorial",
+    "P105": "Tirganach",
+    "P107": "Encounter Map",
+    "P108": "Encounter Map",
+    "P109": "Warzone",
+    "P110": "Ghost Watch",
+    "P111": "Shadow Realm",
+    "P113": "Underground",
+    "P115": "Dragon Storm",
 }
 
 
@@ -159,10 +234,16 @@ class QuestBrowser(QWidget):
         search_layout.addWidget(self.search_edit)
 
         self.filter_combo = QComboBox()
-        self.filter_combo.addItems([
-            "All Quests", "Main Quests", "Side Quests", "Custom Quests (9000+)",
-            "With Dialogues", "Without Dialogues"
-        ])
+        self.filter_combo.addItems(
+            [
+                "All Quests",
+                "Main Quests",
+                "Side Quests",
+                "Custom Quests (9000+)",
+                "With Dialogues",
+                "Without Dialogues",
+            ]
+        )
         search_layout.addWidget(self.filter_combo)
 
         self.refresh_btn = QPushButton("Refresh")
@@ -171,7 +252,9 @@ class QuestBrowser(QWidget):
 
         self.new_quest_btn = QPushButton("New Quest")
         self.new_quest_btn.setMaximumWidth(100)
-        self.new_quest_btn.setStyleSheet("QPushButton { background-color: #27ae60; color: white; font-weight: bold; }")
+        self.new_quest_btn.setStyleSheet(
+            "QPushButton { background-color: #27ae60; color: white; font-weight: bold; }"
+        )
         search_layout.addWidget(self.new_quest_btn)
 
         layout.addWidget(search_frame)
@@ -186,7 +269,9 @@ class QuestBrowser(QWidget):
 
         # Status label
         self.status_label = QLabel("No quests loaded")
-        self.status_label.setStyleSheet("color: #666; font-style: italic; padding: 5px;")
+        self.status_label.setStyleSheet(
+            "color: #666; font-style: italic; padding: 5px;"
+        )
         layout.addWidget(self.status_label)
 
     def _setup_connections(self):
@@ -217,13 +302,11 @@ class QuestBrowser(QWidget):
         root_items = []
 
         for quest_id, quest_info in sorted(self.filtered_quests.items()):
-            name = quest_info.get('name', f'Quest {quest_id}')
+            name = quest_info.get("name", f"Quest {quest_id}")
             location = self._get_quest_location(quest_info)
             quest_type = self._get_quest_type(quest_id, quest_info)
 
-            item = QTreeWidgetItem([
-                name, str(quest_id), location, quest_type
-            ])
+            item = QTreeWidgetItem([name, str(quest_id), location, quest_type])
             item.setData(0, Qt.UserRole, quest_id)
 
             # Styling based on quest type
@@ -236,13 +319,13 @@ class QuestBrowser(QWidget):
             items_by_id[quest_id] = item
 
             # Check if it's a root quest (no parent in current data)
-            parent_id = quest_info.get('parent_id', 0)
+            parent_id = quest_info.get("parent_id", 0)
             if parent_id == 0 or parent_id not in self.filtered_quests:
                 root_items.append(item)
 
         # Build hierarchy
         for quest_id, quest_info in self.filtered_quests.items():
-            parent_id = quest_info.get('parent_id', 0)
+            parent_id = quest_info.get("parent_id", 0)
             if parent_id in items_by_id and quest_id in items_by_id:
                 parent_item = items_by_id[parent_id]
                 child_item = items_by_id[quest_id]
@@ -277,11 +360,15 @@ class QuestBrowser(QWidget):
         for quest_id, quest_info in self.quest_data.items():
             # Search filter
             if search_text:
-                name = quest_info.get('name', '').lower()
-                description = quest_info.get('description', '').lower()
+                name = quest_info.get("name", "").lower()
+                description = quest_info.get("description", "").lower()
                 quest_id_str = str(quest_id)
 
-                if not (search_text in name or search_text in description or search_text in quest_id_str):
+                if not (
+                    search_text in name
+                    or search_text in description
+                    or search_text in quest_id_str
+                ):
                     continue
 
             # Type filter
@@ -290,13 +377,18 @@ class QuestBrowser(QWidget):
 
                 if filter_type == "Main Quests" and quest_type != "Main Quest":
                     continue
-                elif filter_type == "Side Quests" and quest_type not in ["Side Quest", "Sub-Quest"]:
+                elif filter_type == "Side Quests" and quest_type not in [
+                    "Side Quest",
+                    "Sub-Quest",
+                ]:
                     continue
                 elif filter_type == "Custom Quests (9000+)" and quest_id < 9000:
                     continue
-                elif filter_type == "With Dialogues" and not quest_info.get('dialogues'):
+                elif filter_type == "With Dialogues" and not quest_info.get(
+                    "dialogues"
+                ):
                     continue
-                elif filter_type == "Without Dialogues" and quest_info.get('dialogues'):
+                elif filter_type == "Without Dialogues" and quest_info.get("dialogues"):
                     continue
 
             self.filtered_quests[quest_id] = quest_info
@@ -324,13 +416,17 @@ class QuestBrowser(QWidget):
         # Try various location fields
         location = None
 
-        if 'map_locations' in quest_info and quest_info['map_locations']:
-            location = quest_info['map_locations'][0].get('name') if quest_info['map_locations'][0] else None
-        elif 'platform' in quest_info:
-            platform = quest_info['platform']
+        if "map_locations" in quest_info and quest_info["map_locations"]:
+            location = (
+                quest_info["map_locations"][0].get("name")
+                if quest_info["map_locations"][0]
+                else None
+            )
+        elif "platform" in quest_info:
+            platform = quest_info["platform"]
             location = PLATFORM_NAMES.get(platform, platform)
-        elif 'platform_name' in quest_info:
-            location = quest_info['platform_name']
+        elif "platform_name" in quest_info:
+            location = quest_info["platform_name"]
 
         return location or "Unknown"
 
@@ -338,7 +434,7 @@ class QuestBrowser(QWidget):
         """Get quest type classification"""
         if quest_id >= 9000:
             return "Custom Quest"
-        elif quest_info.get('parent_id', 0) == 0:
+        elif quest_info.get("parent_id", 0) == 0:
             return "Main Quest"
         else:
             return "Side Quest"
@@ -361,19 +457,19 @@ class QuestBrowser(QWidget):
 
         # Create quest data with placeholder name
         quest_data = {
-            'id': quest_id,
-            'name': f"New Quest {quest_id}",
-            'description': "Click to edit this quest...",
-            'type': "Side Quest",
-            'location': "Liannon",
-            'suggested_level': 1,
-            'is_custom': True,
-            'created_at': "2025-11-08",  # Current date
-            'objectives': [],
-            'rewards': [],
-            'dialogues': [],
-            'script': "",
-            'prerequisites': []
+            "id": quest_id,
+            "name": f"New Quest {quest_id}",
+            "description": "Click to edit this quest...",
+            "type": "Side Quest",
+            "location": "Liannon",
+            "suggested_level": 1,
+            "is_custom": True,
+            "created_at": "2025-11-08",  # Current date
+            "objectives": [],
+            "rewards": [],
+            "dialogues": [],
+            "script": "",
+            "prerequisites": [],
         }
 
         # Add to quest data
@@ -505,13 +601,13 @@ class QuestBasicInfoWidget(QWidget):
         """Load quest data into form"""
         self.current_quest = quest_data
 
-        self.quest_id_spin.setValue(quest_data.get('quest_id', 9000))
-        self.name_edit.setText(quest_data.get('name', ''))
-        self.description_edit.setPlainText(quest_data.get('description', ''))
-        self.order_spin.setValue(quest_data.get('order_index', 0))
+        self.quest_id_spin.setValue(quest_data.get("quest_id", 9000))
+        self.name_edit.setText(quest_data.get("name", ""))
+        self.description_edit.setPlainText(quest_data.get("description", ""))
+        self.order_spin.setValue(quest_data.get("order_index", 0))
 
         # Set parent
-        parent_id = quest_data.get('parent_id', 0)
+        parent_id = quest_data.get("parent_id", 0)
         for i in range(self.parent_combo.count()):
             if self.parent_combo.itemData(i) == parent_id:
                 self.parent_combo.setCurrentIndex(i)
@@ -536,12 +632,12 @@ class QuestBasicInfoWidget(QWidget):
             quest_type = "Side Quest"
 
         return {
-            'quest_id': self.quest_id_spin.value(),
-            'name': self.name_edit.text().strip(),
-            'description': self.description_edit.toPlainText().strip(),
-            'parent_id': parent_id,
-            'order_index': self.order_spin.value(),
-            'quest_type': quest_type
+            "quest_id": self.quest_id_spin.value(),
+            "name": self.name_edit.text().strip(),
+            "description": self.description_edit.toPlainText().strip(),
+            "parent_id": parent_id,
+            "order_index": self.order_spin.value(),
+            "quest_type": quest_type,
         }
 
     def set_parent_quests(self, quest_data: Dict[int, Dict]):
@@ -555,7 +651,7 @@ class QuestBasicInfoWidget(QWidget):
         # Add available quests (excluding current quest)
         for quest_id, quest_info in sorted(quest_data.items()):
             if quest_id != current_id:
-                name = quest_info.get('name', f'Quest {quest_id}')
+                name = quest_info.get("name", f"Quest {quest_id}")
                 self.parent_combo.addItem(f"{name} [{quest_id}]", quest_id)
 
     def clear_form(self):
@@ -586,7 +682,9 @@ class QuestLocationWidget(QWidget):
         # Platform/location
         self.platform_combo = QComboBox()
         self.platform_combo.addItem("Select Location...", "")
-        for code in sorted(PLATFORM_NAMES.keys(), key=lambda x: int(x[1:]) if x[1:].isdigit() else 999):
+        for code in sorted(
+            PLATFORM_NAMES.keys(), key=lambda x: int(x[1:]) if x[1:].isdigit() else 999
+        ):
             name = PLATFORM_NAMES[code]
             self.platform_combo.addItem(f"{name} ({code})", code)
         layout.addRow("Location*:", self.platform_combo)
@@ -627,7 +725,7 @@ class QuestLocationWidget(QWidget):
     def load_quest_data(self, quest_data: Dict):
         """Load quest location data"""
         # Platform
-        platform = quest_data.get('platform')
+        platform = quest_data.get("platform")
         if platform:
             for i in range(self.platform_combo.count()):
                 if self.platform_combo.itemData(i) == platform:
@@ -635,15 +733,15 @@ class QuestLocationWidget(QWidget):
                     break
 
         # NPC info
-        self.npc_id_edit.setText(str(quest_data.get('npc_id', '')))
-        self.npc_name_edit.setText(quest_data.get('quest_giver_name', ''))
+        self.npc_id_edit.setText(str(quest_data.get("npc_id", "")))
+        self.npc_name_edit.setText(quest_data.get("quest_giver_name", ""))
 
         # Additional locations
         self.additional_locations.clear()
-        additional_locations = quest_data.get('additional_locations', [])
+        additional_locations = quest_data.get("additional_locations", [])
         for location in additional_locations:
-            code = location.get('code', '')
-            name = location.get('name', PLATFORM_NAMES.get(code, code))
+            code = location.get("code", "")
+            name = location.get("name", PLATFORM_NAMES.get(code, code))
             self.additional_locations.addItem(f"{name} ({code})")
 
     def get_location_data(self) -> Dict:
@@ -653,16 +751,18 @@ class QuestLocationWidget(QWidget):
         for i in range(self.additional_locations.count()):
             item_text = self.additional_locations.item(i).text()
             # Extract platform code from format "Name (P1)"
-            if '(' in item_text and ')' in item_text:
-                code = item_text.split('(')[-1].rstrip(')')
-                name = item_text.split('(')[0].strip()
-                additional_locations.append({'code': code, 'name': name})
+            if "(" in item_text and ")" in item_text:
+                code = item_text.split("(")[-1].rstrip(")")
+                name = item_text.split("(")[0].strip()
+                additional_locations.append({"code": code, "name": name})
 
         return {
-            'platform': self.platform_combo.currentData(),
-            'npc_id': int(self.npc_id_edit.text()) if self.npc_id_edit.text().isdigit() else 0,
-            'quest_giver_name': self.npc_name_edit.text().strip(),
-            'additional_locations': additional_locations
+            "platform": self.platform_combo.currentData(),
+            "npc_id": int(self.npc_id_edit.text())
+            if self.npc_id_edit.text().isdigit()
+            else 0,
+            "quest_giver_name": self.npc_name_edit.text().strip(),
+            "additional_locations": additional_locations,
         }
 
     def _add_additional_location(self):
@@ -716,13 +816,15 @@ class QuestPreviewWidget(QWidget):
         html = "<html><body style='font-family: Arial; font-size: 11pt;'>"
 
         # Quest header
-        quest_name = quest_data.get('name', 'Unnamed Quest')
-        quest_id = quest_data.get('quest_id', 0)
+        quest_name = quest_data.get("name", "Unnamed Quest")
+        quest_id = quest_data.get("quest_id", 0)
         html += f"<h2 style='color: #2c3e50; margin-bottom: 5px;'>{quest_name}</h2>"
-        html += f"<p style='color: #7f8c8d; margin-top: 0;'><b>Quest ID:</b> {quest_id}</p>"
+        html += (
+            f"<p style='color: #7f8c8d; margin-top: 0;'><b>Quest ID:</b> {quest_id}</p>"
+        )
 
         # Description
-        description = quest_data.get('description', '')
+        description = quest_data.get("description", "")
         if description:
             html += "<div style='background-color: #ecf0f1; padding: 10px; border-radius: 5px; margin: 10px 0;'>"
             html += f"<p><b>Description:</b></p><p>{description}</p>"
@@ -730,50 +832,50 @@ class QuestPreviewWidget(QWidget):
 
         # Location and NPC
         location_name = "Unknown"
-        platform = quest_data.get('platform')
+        platform = quest_data.get("platform")
         if platform and platform in PLATFORM_NAMES:
             location_name = PLATFORM_NAMES[platform]
 
-        npc_name = quest_data.get('quest_giver_name', 'Unknown NPC')
-        npc_id = quest_data.get('npc_id', 0)
+        npc_name = quest_data.get("quest_giver_name", "Unknown NPC")
+        npc_id = quest_data.get("npc_id", 0)
 
         html += "<h3 style='color: #34495e; margin-top: 15px;'>Quest Details</h3>"
         html += "<ul>"
         html += f"<li><b>Location:</b> {location_name}</li>"
         html += f"<li><b>Quest Giver:</b> {npc_name} (ID: {npc_id})</li>"
 
-        parent_id = quest_data.get('parent_id', 0)
+        parent_id = quest_data.get("parent_id", 0)
         if parent_id > 0:
             html += f"<li><b>Parent Quest:</b> ID {parent_id}</li>"
 
         html += "</ul>"
 
         # Objectives
-        objectives = quest_data.get('objectives', [])
+        objectives = quest_data.get("objectives", [])
         if objectives:
             html += "<h3 style='color: #34495e; margin-top: 15px;'>Objectives</h3>"
             html += "<ul>"
             for obj in objectives:
                 if isinstance(obj, dict):
-                    obj_text = obj.get('text', str(obj))
-                    obj_type = obj.get('type', 'other')
+                    obj_text = obj.get("text", str(obj))
+                    obj_type = obj.get("type", "other")
                     html += f"<li>[{obj_type.title()}] {obj_text}</li>"
                 else:
                     html += f"<li>{obj}</li>"
             html += "</ul>"
 
         # Rewards
-        rewards = quest_data.get('rewards', {})
+        rewards = quest_data.get("rewards", {})
         if rewards:
             html += "<h3 style='color: #27ae60; margin-top: 15px;'>Rewards</h3>"
             html += "<ul>"
 
             if isinstance(rewards, dict):
-                xp = rewards.get('xp', 0)
-                gold = rewards.get('gold', 0)
-                silver = rewards.get('silver', 0)
-                copper = rewards.get('copper', 0)
-                items = rewards.get('items', [])
+                xp = rewards.get("xp", 0)
+                gold = rewards.get("gold", 0)
+                silver = rewards.get("silver", 0)
+                copper = rewards.get("copper", 0)
+                items = rewards.get("items", [])
 
                 if xp > 0:
                     html += f"<li><b>Experience:</b> {xp} XP</li>"
@@ -789,22 +891,26 @@ class QuestPreviewWidget(QWidget):
             html += "</ul>"
 
         # Dialogues (sample)
-        dialogues = quest_data.get('dialogues', [])
+        dialogues = quest_data.get("dialogues", [])
         if dialogues:
-            html += "<h3 style='color: #8e44ad; margin-top: 15px;'>Dialogue Preview</h3>"
+            html += (
+                "<h3 style='color: #8e44ad; margin-top: 15px;'>Dialogue Preview</h3>"
+            )
             html += "<div style='background-color: #f8f9fa; padding: 10px; border-radius: 5px; border-left: 4px solid #8e44ad;'>"
 
             # Show first few dialogues as sample
             for i, dialogue in enumerate(dialogues[:3]):
                 if isinstance(dialogue, dict):
-                    speaker = dialogue.get('speaker', 'NPC')
-                    text = dialogue.get('text', '')
+                    speaker = dialogue.get("speaker", "NPC")
+                    text = dialogue.get("text", "")
                 else:
-                    speaker = getattr(dialogue, 'speaker', 'NPC')
-                    text = getattr(dialogue, 'text', str(dialogue))
+                    speaker = getattr(dialogue, "speaker", "NPC")
+                    text = getattr(dialogue, "text", str(dialogue))
 
                 speaker_color = "#3498db" if speaker.lower() == "player" else "#27ae60"
-                html += f"<p><b style='color: {speaker_color};'>{speaker}:</b> {text}</p>"
+                html += (
+                    f"<p><b style='color: {speaker_color};'>{speaker}:</b> {text}</p>"
+                )
 
             if len(dialogues) > 3:
                 html += f"<p><i>... and {len(dialogues) - 3} more dialogues</i></p>"
@@ -855,6 +961,7 @@ class UnifiedQuestEditor(QMainWindow):
                 self.logger = get_logger("unified_quest_editor")
             else:
                 import logging
+
                 logging.basicConfig(level=logging.INFO)
                 self.logger = logging.getLogger("unified_quest_editor")
         except Exception as e:
@@ -900,11 +1007,16 @@ class UnifiedQuestEditor(QMainWindow):
         # Tab 1: Overview (Text Mode) - NEW
         try:
             from .text_mode_dialogue_overview import TextModeDialogueOverview
+
             self.text_mode_overview = TextModeDialogueOverview()
-            self.text_mode_overview.node_selected.connect(self._on_text_mode_node_selected)
+            self.text_mode_overview.node_selected.connect(
+                self._on_text_mode_node_selected
+            )
             self.text_mode_overview.node_edited.connect(self._on_text_mode_node_edited)
             self.text_mode_overview.node_added.connect(self._on_text_mode_node_added)
-            self.text_mode_overview.node_deleted.connect(self._on_text_mode_node_deleted)
+            self.text_mode_overview.node_deleted.connect(
+                self._on_text_mode_node_deleted
+            )
             self.text_mode_overview.jump_to_visual.connect(self._on_jump_to_visual)
             self.quest_editor_tabs.addTab(self.text_mode_overview, "📋 Overview")
         except ImportError as e:
@@ -929,21 +1041,30 @@ class UnifiedQuestEditor(QMainWindow):
         if VISUAL_DIALOGUE_EDITOR_AVAILABLE:
             try:
                 from .visual_dialogue_widget import VisualDialogueWidget
+
                 self.visual_dialogue_widget = VisualDialogueWidget()
-                self.visual_dialogue_widget.dialogue_changed.connect(self._on_visual_dialogue_changed)
-                self.quest_editor_tabs.addTab(self.visual_dialogue_widget, "🎨 Dialogue (Visual)")
+                self.visual_dialogue_widget.dialogue_changed.connect(
+                    self._on_visual_dialogue_changed
+                )
+                self.quest_editor_tabs.addTab(
+                    self.visual_dialogue_widget, "🎨 Dialogue (Visual)"
+                )
             except (ImportError, NameError, AttributeError) as e:
                 print(f"Warning: Visual dialogue widget not available: {e}")
                 self.visual_dialogue_widget = None
                 # Fallback to simple dialogue editor
-                if not hasattr(self, 'dialogue_widget'):
+                if not hasattr(self, "dialogue_widget"):
                     self.dialogue_widget = self._create_simple_dialogue_editor()
-                    self.quest_editor_tabs.addTab(self.dialogue_widget, "Dialogues (Simple)")
+                    self.quest_editor_tabs.addTab(
+                        self.dialogue_widget, "Dialogues (Simple)"
+                    )
         else:
             # Fallback dialogue editor
-            if not hasattr(self, 'dialogue_widget'):
+            if not hasattr(self, "dialogue_widget"):
                 self.dialogue_widget = self._create_simple_dialogue_editor()
-                self.quest_editor_tabs.addTab(self.dialogue_widget, "Dialogues (Simple)")
+                self.quest_editor_tabs.addTab(
+                    self.dialogue_widget, "Dialogues (Simple)"
+                )
 
         # Tab 6: Rewards
         self.rewards_widget = QWidget()
@@ -1038,15 +1159,30 @@ class UnifiedQuestEditor(QMainWindow):
         items_group = QGroupBox("Item Rewards")
         items_layout = QVBoxLayout(items_group)
 
+        # Item type selector
+        type_layout = QHBoxLayout()
+        type_layout.addWidget(QLabel("Browse:"))
+        self.item_type_combo = QComboBox()
+        self.item_type_combo.addItems(["General Items", "Weapons", "Armor", "Spells"])
+        self.item_type_combo.currentTextChanged.connect(self._on_item_type_changed)
+        type_layout.addWidget(self.item_type_combo)
+        type_layout.addStretch()
+        items_layout.addLayout(type_layout)
+
+        # Items list
         self.items_list = QListWidget()
         items_layout.addWidget(self.items_list)
 
+        # Item management buttons
         items_btn_layout = QHBoxLayout()
         add_item_btn = QPushButton("Add Item")
         add_item_btn.clicked.connect(self._add_reward_item)
         remove_item_btn = QPushButton("Remove Selected")
         remove_item_btn.clicked.connect(self._remove_reward_item)
+        edit_quantity_btn = QPushButton("Edit Quantity")
+        edit_quantity_btn.clicked.connect(self._edit_item_quantity)
         items_btn_layout.addWidget(add_item_btn)
+        items_btn_layout.addWidget(edit_quantity_btn)
         items_btn_layout.addWidget(remove_item_btn)
         items_btn_layout.addStretch()
         items_layout.addLayout(items_btn_layout)
@@ -1230,7 +1366,9 @@ class UnifiedQuestEditor(QMainWindow):
                 # Calculate project root from script path
                 script_path = Path(__file__).resolve()
                 calculated_project_root = script_path.parent.parent.parent.parent
-                cff_path = calculated_project_root / "OriginalGameFiles/data/GameData.cff"
+                cff_path = (
+                    calculated_project_root / "OriginalGameFiles/data/GameData.cff"
+                )
                 if cff_path.exists():
                     if self.data_model.load_file(str(cff_path)):
                         if self.logger:
@@ -1248,22 +1386,31 @@ class UnifiedQuestEditor(QMainWindow):
                 self.quest_data = {}
 
                 for quest in quests:
-                    quest_id = getattr(quest, 'quest_id', None)
+                    quest_id = getattr(quest, "quest_id", None)
                     if quest_id is not None:
-                        name = self.data_model.get_localised_text(quest, 'name')
+                        name = self.data_model.get_localised_text(quest, "name")
                         if not name:
-                            name = getattr(quest, 'name', f'Quest {quest_id}')
+                            name = getattr(quest, "name", f"Quest {quest_id}")
 
                         self.quest_data[quest_id] = {
-                            'name': name,
-                            'description': self.data_model.get_localised_text(quest, 'description') or '',
-                            'quest_object': quest
+                            "name": name,
+                            "description": self.data_model.get_localised_text(
+                                quest, "description"
+                            )
+                            or "",
+                            "quest_object": quest,
                         }
             else:
                 # Mock data for testing
                 self.quest_data = {
-                    1: {'name': 'Staub der Sterne', 'description': 'Quest description...'},
-                    12: {'name': 'Darius der Kartograph', 'description': 'Quest description...'},
+                    1: {
+                        "name": "Staub der Sterne",
+                        "description": "Quest description...",
+                    },
+                    12: {
+                        "name": "Darius der Kartograph",
+                        "description": "Quest description...",
+                    },
                 }
 
             # Load into browser
@@ -1324,7 +1471,6 @@ class UnifiedQuestEditor(QMainWindow):
 
         # Load dialogues
         self._load_quest_dialogues(quest_info)
-        
 
         # Update preview
         self.preview_widget.update_preview(quest_info)
@@ -1333,14 +1479,16 @@ class UnifiedQuestEditor(QMainWindow):
         if self.auto_validate_check.isChecked():
             self._validate_current_quest()
 
-        self.status_bar.showMessage(f"Editing quest: {quest_info.get('name', f'Quest {quest_id}')}")
+        self.status_bar.showMessage(
+            f"Editing quest: {quest_info.get('name', f'Quest {quest_id}')}"
+        )
 
         # Enable editing
         self._set_editing_enabled(True)
 
     def _on_quest_created(self, quest_data: dict):
         """Handle quest creation"""
-        quest_id = quest_data['id']
+        quest_id = quest_data["id"]
 
         # Add to quest data
         self.quest_data[quest_id] = quest_data
@@ -1348,7 +1496,9 @@ class UnifiedQuestEditor(QMainWindow):
         # Select the new quest
         self._on_quest_selected(quest_id)
 
-        self.status_bar.showMessage(f"Created new quest: {quest_data.get('name', f'Quest {quest_id}')}")
+        self.status_bar.showMessage(
+            f"Created new quest: {quest_data.get('name', f'Quest {quest_id}')}"
+        )
 
     def _on_quest_updated(self, quest_id: int, quest_data: dict):
         """Handle quest updates"""
@@ -1357,7 +1507,9 @@ class UnifiedQuestEditor(QMainWindow):
             self.quest_data[quest_id] = quest_data
 
             # Update status bar to show auto-save
-            self.status_bar.showMessage(f"Auto-saved: {quest_data.get('name', f'Quest {quest_id}')}")
+            self.status_bar.showMessage(
+                f"Auto-saved: {quest_data.get('name', f'Quest {quest_id}')}"
+            )
 
             # Trigger auto-save timer
             self.auto_save_timer.start(self.auto_save_delay)
@@ -1381,11 +1533,11 @@ class UnifiedQuestEditor(QMainWindow):
             filename = f"quest_{self.current_quest_id}.json"
             filepath = saves_dir / filename
 
-            with open(filepath, 'w') as f:
+            with open(filepath, "w") as f:
                 json.dump(quest_data, f, indent=2)
 
             # Update status
-            quest_name = quest_data.get('name', f'Quest {self.current_quest_id}')
+            quest_name = quest_data.get("name", f"Quest {self.current_quest_id}")
             self.status_bar.showMessage(f"Auto-saved: {quest_name}")
 
             self.logger.info(f"Auto-saved quest {self.current_quest_id} to {filepath}")
@@ -1432,48 +1584,48 @@ class UnifiedQuestEditor(QMainWindow):
         self.objectives_list.clear()
         self.requirements_list.clear()
 
-        objectives = quest_info.get('objectives', [])
+        objectives = quest_info.get("objectives", [])
         for obj in objectives:
             if isinstance(obj, dict):
-                obj_type = obj.get('type', 'other')
-                obj_text = obj.get('text', str(obj))
+                obj_type = obj.get("type", "other")
+                obj_text = obj.get("text", str(obj))
                 item = QListWidgetItem(f"[{obj_type.title()}] {obj_text}")
                 item.setData(Qt.UserRole, obj)
             else:
                 item = QListWidgetItem(str(obj))
-                item.setData(Qt.UserRole, {'text': str(obj), 'type': 'other'})
+                item.setData(Qt.UserRole, {"text": str(obj), "type": "other"})
             self.objectives_list.addItem(item)
 
-        requirements = quest_info.get('requirements', [])
+        requirements = quest_info.get("requirements", [])
         for req in requirements:
             if isinstance(req, dict):
-                req_type = req.get('type', 'other')
-                req_text = req.get('text', str(req))
+                req_type = req.get("type", "other")
+                req_text = req.get("text", str(req))
                 item = QListWidgetItem(f"[{req_type.title()}] {req_text}")
                 item.setData(Qt.UserRole, req)
             else:
                 item = QListWidgetItem(str(req))
-                item.setData(Qt.UserRole, {'text': str(req), 'type': 'other'})
+                item.setData(Qt.UserRole, {"text": str(req), "type": "other"})
             self.requirements_list.addItem(item)
 
     def _load_quest_rewards(self, quest_info: Dict):
         """Load quest rewards"""
-        rewards = quest_info.get('rewards', {})
+        rewards = quest_info.get("rewards", {})
 
         if isinstance(rewards, dict):
-            self.xp_spin.setValue(rewards.get('xp', 0))
-            self.gold_spin.setValue(rewards.get('gold', 0))
-            self.silver_spin.setValue(rewards.get('silver', 0))
-            self.copper_spin.setValue(rewards.get('copper', 0))
+            self.xp_spin.setValue(rewards.get("xp", 0))
+            self.gold_spin.setValue(rewards.get("gold", 0))
+            self.silver_spin.setValue(rewards.get("silver", 0))
+            self.copper_spin.setValue(rewards.get("copper", 0))
 
             # Load items
             self.items_list.clear()
-            items = rewards.get('items', [])
+            items = rewards.get("items", [])
             for item in items:
                 if isinstance(item, dict):
-                    item_id = item.get('id', 'Unknown')
-                    item_name = item.get('name', f'Item {item_id}')
-                    count = item.get('count', 1)
+                    item_id = item.get("id", "Unknown")
+                    item_name = item.get("name", f"Item {item_id}")
+                    count = item.get("count", 1)
                     display_text = f"{item_name} x{count}" if count > 1 else item_name
                 else:
                     display_text = f"Item {item}"
@@ -1484,24 +1636,24 @@ class UnifiedQuestEditor(QMainWindow):
 
     def _load_quest_dialogues(self, quest_info: Dict):
         """Load quest dialogues"""
-        dialogues = quest_info.get('dialogues', [])
-        
+        dialogues = quest_info.get("dialogues", [])
+
         # Get dialogue data (could be in visual editor format)
-        dialogue_data = quest_info.get('dialogue_data', {})
+        dialogue_data = quest_info.get("dialogue_data", {})
         if not dialogue_data and dialogues:
             # Convert simple dialogue list to visual editor format
             dialogue_data = self._convert_dialogues_to_visual_format(dialogues)
 
         # Load into text mode overview first (so it's always available)
-        if hasattr(self, 'text_mode_overview') and self.text_mode_overview:
+        if hasattr(self, "text_mode_overview") and self.text_mode_overview:
             if dialogue_data:
                 self.text_mode_overview.set_dialogue_data(dialogue_data)
 
         # Load into visual dialogue widget if available
-        if hasattr(self, 'visual_dialogue_widget') and self.visual_dialogue_widget:
+        if hasattr(self, "visual_dialogue_widget") and self.visual_dialogue_widget:
             if dialogue_data:
                 self.visual_dialogue_widget.set_dialogue_data(dialogue_data)
-        elif DIALOGUE_EDITOR_AVAILABLE and hasattr(self, 'dialogue_editor'):
+        elif DIALOGUE_EDITOR_AVAILABLE and hasattr(self, "dialogue_editor"):
             # Load into visual dialogue editor
             dialogue_dicts = []
             for dlg in dialogues:
@@ -1509,28 +1661,32 @@ class UnifiedQuestEditor(QMainWindow):
                     dialogue_dicts.append(dlg)
                 else:
                     # Convert object to dict
-                    dialogue_dicts.append({
-                        'text': getattr(dlg, 'text', str(dlg)),
-                        'speaker': getattr(dlg, 'speaker', 'NPC'),
-                        'type': getattr(dlg, 'dialogue_type', 'Standard')
-                    })
+                    dialogue_dicts.append(
+                        {
+                            "text": getattr(dlg, "text", str(dlg)),
+                            "speaker": getattr(dlg, "speaker", "NPC"),
+                            "type": getattr(dlg, "dialogue_type", "Standard"),
+                        }
+                    )
 
             self.dialogue_editor.load_dialogues(dialogue_dicts)
         else:
             # Load into simple dialogue list
-            if hasattr(self, 'dialogues_list'):
+            if hasattr(self, "dialogues_list"):
                 self.dialogues_list.clear()
                 for dlg in dialogues:
                     if isinstance(dlg, dict):
-                        speaker = dlg.get('speaker', 'NPC')
-                        text = dlg.get('text', '')
-                        dlg_type = dlg.get('type', 'Standard')
+                        speaker = dlg.get("speaker", "NPC")
+                        text = dlg.get("text", "")
+                        dlg_type = dlg.get("type", "Standard")
                     else:
-                        speaker = getattr(dlg, 'speaker', 'NPC')
-                        text = getattr(dlg, 'text', str(dlg))
-                        dlg_type = getattr(dlg, 'dialogue_type', 'Standard')
+                        speaker = getattr(dlg, "speaker", "NPC")
+                        text = getattr(dlg, "text", str(dlg))
+                        dlg_type = getattr(dlg, "dialogue_type", "Standard")
 
-                    display_text = f"[{speaker}] {text[:50]}{'...' if len(text) > 50 else ''}"
+                    display_text = (
+                        f"[{speaker}] {text[:50]}{'...' if len(text) > 50 else ''}"
+                    )
                     item = QListWidgetItem(display_text)
                     item.setData(Qt.UserRole, dlg)
                     self.dialogues_list.addItem(item)
@@ -1582,7 +1738,7 @@ class UnifiedQuestEditor(QMainWindow):
             obj_data = item.data(Qt.UserRole)
             if obj_data:
                 objectives.append(obj_data)
-        quest_data['objectives'] = objectives
+        quest_data["objectives"] = objectives
 
         # Add requirements
         requirements = []
@@ -1591,46 +1747,50 @@ class UnifiedQuestEditor(QMainWindow):
             req_data = item.data(Qt.UserRole)
             if req_data:
                 requirements.append(req_data)
-        quest_data['requirements'] = requirements
+        quest_data["requirements"] = requirements
 
         # Add rewards
         rewards = {
-            'xp': self.xp_spin.value(),
-            'gold': self.gold_spin.value(),
-            'silver': self.silver_spin.value(),
-            'copper': self.copper_spin.value(),
-            'items': []
+            "xp": self.xp_spin.value(),
+            "gold": self.gold_spin.value(),
+            "silver": self.silver_spin.value(),
+            "copper": self.copper_spin.value(),
+            "items": [],
         }
 
         for i in range(self.items_list.count()):
             item = self.items_list.item(i)
             item_data = item.data(Qt.UserRole)
             if item_data:
-                rewards['items'].append(item_data)
+                rewards["items"].append(item_data)
 
-        quest_data['rewards'] = rewards
+        quest_data["rewards"] = rewards
 
         # Add dialogues - prioritize visual dialogue widget, then text mode, then fallback
-        if hasattr(self, 'visual_dialogue_widget') and self.visual_dialogue_widget:
+        if hasattr(self, "visual_dialogue_widget") and self.visual_dialogue_widget:
             dialogue_data = self.visual_dialogue_widget.get_dialogue_data()
-            quest_data['dialogue_data'] = dialogue_data
-            quest_data['dialogues'] = self._convert_visual_format_to_dialogues(dialogue_data)
-        elif hasattr(self, 'text_mode_overview') and self.text_mode_overview:
+            quest_data["dialogue_data"] = dialogue_data
+            quest_data["dialogues"] = self._convert_visual_format_to_dialogues(
+                dialogue_data
+            )
+        elif hasattr(self, "text_mode_overview") and self.text_mode_overview:
             dialogue_data = self.text_mode_overview.get_dialogue_data()
-            quest_data['dialogue_data'] = dialogue_data
-            quest_data['dialogues'] = self._convert_visual_format_to_dialogues(dialogue_data)
-        elif DIALOGUE_EDITOR_AVAILABLE and hasattr(self, 'dialogue_editor'):
+            quest_data["dialogue_data"] = dialogue_data
+            quest_data["dialogues"] = self._convert_visual_format_to_dialogues(
+                dialogue_data
+            )
+        elif DIALOGUE_EDITOR_AVAILABLE and hasattr(self, "dialogue_editor"):
             dialogues = self.dialogue_editor.get_dialogues()
-            quest_data['dialogues'] = dialogues
+            quest_data["dialogues"] = dialogues
         else:
             dialogues = []
-            if hasattr(self, 'dialogues_list'):
+            if hasattr(self, "dialogues_list"):
                 for i in range(self.dialogues_list.count()):
                     item = self.dialogues_list.item(i)
                     dlg_data = item.data(Qt.UserRole)
                     if dlg_data:
                         dialogues.append(dlg_data)
-            quest_data['dialogues'] = dialogues
+            quest_data["dialogues"] = dialogues
 
         return quest_data
 
@@ -1638,14 +1798,20 @@ class UnifiedQuestEditor(QMainWindow):
         """Validate the current quest"""
         if not self.current_quest_id:
             self.validation_status.setText("No quest selected for validation")
-            self.validation_status.setStyleSheet("padding: 10px; font-weight: bold; background-color: #f39c12; color: white;")
+            self.validation_status.setStyleSheet(
+                "padding: 10px; font-weight: bold; background-color: #f39c12; color: white;"
+            )
             self.validation_results.clear()
             return
 
         if not QUEST_VALIDATOR_AVAILABLE or not self.validator:
             self.validation_status.setText("Validator not available")
-            self.validation_status.setStyleSheet("padding: 10px; font-weight: bold; background-color: #e74c3c; color: white;")
-            self.validation_results.setPlainText("Quest validation component is not available.")
+            self.validation_status.setStyleSheet(
+                "padding: 10px; font-weight: bold; background-color: #e74c3c; color: white;"
+            )
+            self.validation_results.setPlainText(
+                "Quest validation component is not available."
+            )
             return
 
         try:
@@ -1660,37 +1826,59 @@ class UnifiedQuestEditor(QMainWindow):
 
                     # Update validation status
                     if result.is_valid:
-                        self.validation_status.setText("✓ Quest is valid and ready to save")
-                        self.validation_status.setStyleSheet("padding: 10px; font-weight: bold; background-color: #27ae60; color: white;")
+                        self.validation_status.setText(
+                            "✓ Quest is valid and ready to save"
+                        )
+                        self.validation_status.setStyleSheet(
+                            "padding: 10px; font-weight: bold; background-color: #27ae60; color: white;"
+                        )
                     else:
-                        self.validation_status.setText(f"✗ Quest has {len(result.errors)} errors")
-                        self.validation_status.setStyleSheet("padding: 10px; font-weight: bold; background-color: #e74c3c; color: white;")
+                        self.validation_status.setText(
+                            f"✗ Quest has {len(result.errors)} errors"
+                        )
+                        self.validation_status.setStyleSheet(
+                            "padding: 10px; font-weight: bold; background-color: #e74c3c; color: white;"
+                        )
 
                     # Display validation results
-                    results_html = "<html><body style='font-family: Arial; font-size: 10pt;'>"
+                    results_html = (
+                        "<html><body style='font-family: Arial; font-size: 10pt;'>"
+                    )
 
                     if result.errors:
                         results_html += "<h3 style='color: #e74c3c;'>Errors</h3><ul>"
                         for error in result.errors:
-                            results_html += f"<li><b>{error.category}:</b> {error.message}"
+                            results_html += (
+                                f"<li><b>{error.category}:</b> {error.message}"
+                            )
                             if error.suggestion:
-                                results_html += f"<br><i>Suggestion: {error.suggestion}</i>"
+                                results_html += (
+                                    f"<br><i>Suggestion: {error.suggestion}</i>"
+                                )
                             results_html += "</li>"
                         results_html += "</ul>"
 
                     if result.warnings:
                         results_html += "<h3 style='color: #f39c12;'>Warnings</h3><ul>"
                         for warning in result.warnings:
-                            results_html += f"<li><b>{warning.category}:</b> {warning.message}"
+                            results_html += (
+                                f"<li><b>{warning.category}:</b> {warning.message}"
+                            )
                             if warning.suggestion:
-                                results_html += f"<br><i>Suggestion: {warning.suggestion}</i>"
+                                results_html += (
+                                    f"<br><i>Suggestion: {warning.suggestion}</i>"
+                                )
                             results_html += "</li>"
                         results_html += "</ul>"
 
                     if result.info:
-                        results_html += "<h3 style='color: #3498db;'>Information</h3><ul>"
+                        results_html += (
+                            "<h3 style='color: #3498db;'>Information</h3><ul>"
+                        )
                         for info in result.info:
-                            results_html += f"<li><b>{info.category}:</b> {info.message}</li>"
+                            results_html += (
+                                f"<li><b>{info.category}:</b> {info.message}</li>"
+                            )
                         results_html += "</ul>"
 
                     if result.is_valid and not result.errors and not result.warnings:
@@ -1699,11 +1887,19 @@ class UnifiedQuestEditor(QMainWindow):
                     results_html += "</body></html>"
                     self.validation_results.setHtml(results_html)
                 else:
-                    self.validation_status.setText("Failed to convert quest data for validation")
-                    self.validation_status.setStyleSheet("padding: 10px; font-weight: bold; background-color: #e74c3c; color: white;")
+                    self.validation_status.setText(
+                        "Failed to convert quest data for validation"
+                    )
+                    self.validation_status.setStyleSheet(
+                        "padding: 10px; font-weight: bold; background-color: #e74c3c; color: white;"
+                    )
             else:
-                self.validation_status.setText("Enhanced quest data model not available")
-                self.validation_status.setStyleSheet("padding: 10px; font-weight: bold; background-color: #f39c12; color: white;")
+                self.validation_status.setText(
+                    "Enhanced quest data model not available"
+                )
+                self.validation_status.setStyleSheet(
+                    "padding: 10px; font-weight: bold; background-color: #f39c12; color: white;"
+                )
 
         except Exception as e:
             error_msg = f"Validation error: {e}"
@@ -1711,52 +1907,59 @@ class UnifiedQuestEditor(QMainWindow):
                 self.logger.exception(error_msg)
 
             self.validation_status.setText("Validation failed")
-            self.validation_status.setStyleSheet("padding: 10px; font-weight: bold; background-color: #e74c3c; color: white;")
+            self.validation_status.setStyleSheet(
+                "padding: 10px; font-weight: bold; background-color: #e74c3c; color: white;"
+            )
             self.validation_results.setPlainText(error_msg)
 
-    def _convert_to_enhanced_data(self, quest_data: Dict) -> Optional[EnhancedQuestData]:
+    def _convert_to_enhanced_data(
+        self, quest_data: Dict
+    ) -> Optional[EnhancedQuestData]:
         """Convert dictionary data to EnhancedQuestData"""
         try:
             if not EnhancedQuestData:
                 return None
 
             # Extract basic fields
-            quest_id = quest_data.get('quest_id', 0)
-            name = quest_data.get('name', '')
-            description = quest_data.get('description', '')
-            parent_id = quest_data.get('parent_id', 0)
-            order_index = quest_data.get('order_index', 0)
+            quest_id = quest_data.get("quest_id", 0)
+            name = quest_data.get("name", "")
+            description = quest_data.get("description", "")
+            parent_id = quest_data.get("parent_id", 0)
+            order_index = quest_data.get("order_index", 0)
 
             # Convert locations
             locations = []
-            platform = quest_data.get('platform')
+            platform = quest_data.get("platform")
             if platform and MapLocation:
-                locations.append(MapLocation(
-                    code=platform,
-                    name=PLATFORM_NAMES.get(platform, platform)
-                ))
+                locations.append(
+                    MapLocation(
+                        code=platform, name=PLATFORM_NAMES.get(platform, platform)
+                    )
+                )
 
             # Convert dialogues
             dialogues = []
-            for dlg_data in quest_data.get('dialogues', []):
+            for dlg_data in quest_data.get("dialogues", []):
                 if isinstance(dlg_data, dict) and Dialogue:
-                    dialogues.append(Dialogue(
-                        text=dlg_data.get('text', ''),
-                        speaker=dlg_data.get('speaker', 'NPC'),
-                        dialogue_type=dlg_data.get('type', 'Standard')
-                    ))
+                    dialogues.append(
+                        Dialogue(
+                            text=dlg_data.get("text", ""),
+                            speaker=dlg_data.get("speaker", "NPC"),
+                            dialogue_type=dlg_data.get("type", "Standard"),
+                        )
+                    )
 
             # Convert rewards
             rewards = None
-            rewards_data = quest_data.get('rewards', {})
+            rewards_data = quest_data.get("rewards", {})
             if rewards_data and QuestReward:
                 if isinstance(rewards_data, dict):
                     rewards = QuestReward(
-                        xp=rewards_data.get('xp', 0),
-                        gold=rewards_data.get('gold', 0),
-                        silver=rewards_data.get('silver', 0),
-                        copper=rewards_data.get('copper', 0),
-                        items=rewards_data.get('items', [])
+                        xp=rewards_data.get("xp", 0),
+                        gold=rewards_data.get("gold", 0),
+                        silver=rewards_data.get("silver", 0),
+                        copper=rewards_data.get("copper", 0),
+                        items=rewards_data.get("items", []),
                     )
 
             return EnhancedQuestData(
@@ -1767,7 +1970,7 @@ class UnifiedQuestEditor(QMainWindow):
                 order_index=order_index,
                 map_locations=locations,
                 dialogues=dialogues,
-                rewards=rewards
+                rewards=rewards,
             )
 
         except Exception as e:
@@ -1784,7 +1987,9 @@ class UnifiedQuestEditor(QMainWindow):
     def _save_quest(self):
         """Save current quest"""
         if not self.current_quest_id:
-            QMessageBox.warning(self, "No Quest", "Please select or create a quest first.")
+            QMessageBox.warning(
+                self, "No Quest", "Please select or create a quest first."
+            )
             return
 
         # Validate first
@@ -1794,9 +1999,10 @@ class UnifiedQuestEditor(QMainWindow):
             # Check if validation passed
             if not self.validation_status.text().startswith("✓"):
                 reply = QMessageBox.question(
-                    self, "Validation Issues",
+                    self,
+                    "Validation Issues",
                     "Quest has validation issues. Save anyway?",
-                    QMessageBox.Yes | QMessageBox.No
+                    QMessageBox.Yes | QMessageBox.No,
                 )
                 if reply != QMessageBox.Yes:
                     return
@@ -1812,14 +2018,16 @@ class UnifiedQuestEditor(QMainWindow):
                 "Quest Saved",
                 f"Quest '{quest_data.get('name', 'Unnamed')}' has been saved successfully!\n\n"
                 f"Quest ID: {quest_data.get('quest_id')}\n"
-                f"Note: Actual CFF/Lua saving would be implemented here."
+                f"Note: Actual CFF/Lua saving would be implemented here.",
             )
 
             # Update quest data in browser
             self.quest_data[self.current_quest_id] = quest_data
             self.quest_browser.refresh_quests()
 
-            self.status_bar.showMessage(f"Quest saved: {quest_data.get('name', 'Unnamed')}")
+            self.status_bar.showMessage(
+                f"Quest saved: {quest_data.get('name', 'Unnamed')}"
+            )
 
         except Exception as e:
             error_msg = f"Failed to save quest: {e}"
@@ -1849,9 +2057,7 @@ class UnifiedQuestEditor(QMainWindow):
             script_edit.setFont(QFont("Courier", 10))
             layout.addWidget(script_edit)
 
-            button_box = QDialogButtonBox(
-                QDialogButtonBox.Ok | QDialogButtonBox.Save
-            )
+            button_box = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Save)
             button_box.accepted.connect(dialog.accept)
             # TODO: Implement save functionality
             layout.addWidget(button_box)
@@ -1866,14 +2072,14 @@ class UnifiedQuestEditor(QMainWindow):
 
     def _generate_lua_script(self, quest_data: Dict) -> str:
         """Generate Lua quest script"""
-        quest_id = quest_data.get('quest_id', 0)
-        quest_name = quest_data.get('name', 'Unnamed Quest')
-        platform = quest_data.get('platform', 'P1')
-        description = quest_data.get('description', '')
+        quest_id = quest_data.get("quest_id", 0)
+        quest_name = quest_data.get("name", "Unnamed Quest")
+        platform = quest_data.get("platform", "P1")
+        description = quest_data.get("description", "")
 
         # Escape Lua strings
         def escape_lua_string(s):
-            return s.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n')
+            return s.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n")
 
         script = f'''-- Generated Quest Script: {escape_lua_string(quest_name)}
 -- Quest ID: {quest_id}
@@ -1888,7 +2094,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 -- Initialize quest when conditions are met
 OnOneTimeEvent
 {{
-    EventName = "Init_{quest_name.replace(' ', '')}",
+    EventName = "Init_{quest_name.replace(" ", "")}",
     Conditions =
     {{
         -- Add prerequisites here
@@ -1910,7 +2116,7 @@ OnOneTimeEvent
 -- Quest completion conditions
 OnOneTimeEvent
 {{
-    EventName = "Complete_{quest_name.replace(' ', '')}",
+    EventName = "Complete_{quest_name.replace(" ", "")}",
     Conditions =
     {{
         QuestState{{QuestId = {quest_id}, State = StateActive}},
@@ -1943,7 +2149,9 @@ end
         from PySide6.QtWidgets import QInputDialog
 
         types = ["talk", "kill", "gather", "explore", "escort", "other"]
-        obj_type, ok = QInputDialog.getItem(self, "Objective Type", "Select type:", types, 0, False)
+        obj_type, ok = QInputDialog.getItem(
+            self, "Objective Type", "Select type:", types, 0, False
+        )
         if not ok:
             return
 
@@ -1952,7 +2160,7 @@ end
             return
 
         item = QListWidgetItem(f"[{obj_type}] {obj_text}")
-        item.setData(Qt.UserRole, {'type': obj_type, 'text': obj_text})
+        item.setData(Qt.UserRole, {"type": obj_type, "text": obj_text})
         self.objectives_list.addItem(item)
 
         self._on_data_changed()
@@ -1969,16 +2177,20 @@ end
         from PySide6.QtWidgets import QInputDialog
 
         types = ["quest", "level", "item", "flag", "other"]
-        req_type, ok = QInputDialog.getItem(self, "Requirement Type", "Select type:", types, 0, False)
+        req_type, ok = QInputDialog.getItem(
+            self, "Requirement Type", "Select type:", types, 0, False
+        )
         if not ok:
             return
 
-        req_text, ok = QInputDialog.getText(self, "Requirement Text", "Enter requirement:")
+        req_text, ok = QInputDialog.getText(
+            self, "Requirement Text", "Enter requirement:"
+        )
         if not ok or not req_text.strip():
             return
 
         item = QListWidgetItem(f"[{req_type}] {req_text}")
-        item.setData(Qt.UserRole, {'type': req_type, 'text': req_text})
+        item.setData(Qt.UserRole, {"type": req_type, "text": req_text})
         self.requirements_list.addItem(item)
 
         self._on_data_changed()
@@ -1995,17 +2207,29 @@ end
         """Add reward item"""
         from PySide6.QtWidgets import QInputDialog
 
-        item_id, ok = QInputDialog.getInt(self, "Item ID", "Enter item ID:", 1, 1, 99999)
+        item_id, ok = QInputDialog.getInt(
+            self, "Item ID", "Enter item ID:", 1, 1, 99999
+        )
         if not ok:
             return
 
-        item_name, ok = QInputDialog.getText(self, "Item Name", "Enter item name (optional):")
-        item_count, ok = QInputDialog.getInt(self, "Item Count", "Enter count:", 1, 1, 99)
+        item_name, ok = QInputDialog.getText(
+            self, "Item Name", "Enter item name (optional):"
+        )
+        item_count, ok = QInputDialog.getInt(
+            self, "Item Count", "Enter count:", 1, 1, 99
+        )
 
-        display_text = f"{item_name or f'Item {item_id}'} x{item_count}" if item_count > 1 else (item_name or f"Item {item_id}")
+        display_text = (
+            f"{item_name or f'Item {item_id}'} x{item_count}"
+            if item_count > 1
+            else (item_name or f"Item {item_id}")
+        )
 
         item = QListWidgetItem(display_text)
-        item.setData(Qt.UserRole, {'id': item_id, 'name': item_name, 'count': item_count})
+        item.setData(
+            Qt.UserRole, {"id": item_id, "name": item_name, "count": item_count}
+        )
         self.items_list.addItem(item)
 
         self._on_data_changed()
@@ -2056,7 +2280,10 @@ end
 
         display_text = f"[{speaker}] {text[:50]}{'...' if len(text) > 50 else ''}"
         item = QListWidgetItem(display_text)
-        item.setData(Qt.UserRole, {'speaker': speaker, 'text': text, 'is_player': speaker == 'Player'})
+        item.setData(
+            Qt.UserRole,
+            {"speaker": speaker, "text": text, "is_player": speaker == "Player"},
+        )
         self.dialogues_list.addItem(item)
 
         self._on_data_changed()
@@ -2079,7 +2306,7 @@ end
             self.restoreState(window_state)
 
         splitter_state = self.settings.value("splitterState")
-        if splitter_state and hasattr(self, 'quest_browser'):
+        if splitter_state and hasattr(self, "quest_browser"):
             # Find the splitter
             for child in self.findChildren(QSplitter):
                 child.restoreState(splitter_state)
@@ -2090,45 +2317,45 @@ end
         """Handle node selection in text mode"""
         # Could switch to visual editor and highlight node
         self.status_bar.showMessage(f"Selected node in text mode: {node_id}")
-    
+
     def _on_text_mode_node_edited(self, node_id: str, node_data: dict):
         """Handle node edit in text mode"""
         # Sync to visual editor if available
-        if hasattr(self, 'visual_dialogue_widget') and self.visual_dialogue_widget:
+        if hasattr(self, "visual_dialogue_widget") and self.visual_dialogue_widget:
             # Update visual editor
             dialogue_data = self.text_mode_overview.get_dialogue_data()
             self.visual_dialogue_widget.set_dialogue_data(dialogue_data)
-        
+
         # Trigger data change
         self._on_data_changed()
         self.status_bar.showMessage(f"Updated node in text mode: {node_id}")
-    
+
     def _on_text_mode_node_added(self, node_id: str, node_data: dict):
         """Handle node addition in text mode"""
         # Sync to visual editor if available
-        if hasattr(self, 'visual_dialogue_widget') and self.visual_dialogue_widget:
+        if hasattr(self, "visual_dialogue_widget") and self.visual_dialogue_widget:
             dialogue_data = self.text_mode_overview.get_dialogue_data()
             self.visual_dialogue_widget.set_dialogue_data(dialogue_data)
-        
+
         # Trigger data change
         self._on_data_changed()
         self.status_bar.showMessage(f"Added node in text mode: {node_id}")
-    
+
     def _on_text_mode_node_deleted(self, node_id: str):
         """Handle node deletion in text mode"""
         # Sync to visual editor if available
-        if hasattr(self, 'visual_dialogue_widget') and self.visual_dialogue_widget:
+        if hasattr(self, "visual_dialogue_widget") and self.visual_dialogue_widget:
             dialogue_data = self.text_mode_overview.get_dialogue_data()
             self.visual_dialogue_widget.set_dialogue_data(dialogue_data)
-        
+
         # Trigger data change
         self._on_data_changed()
         self.status_bar.showMessage(f"Deleted node in text mode: {node_id}")
-    
+
     def _on_jump_to_visual(self, node_id: str):
         """Handle jump to visual editor request"""
         # Switch to visual dialogue tab
-        if hasattr(self, 'visual_dialogue_widget') and self.visual_dialogue_widget:
+        if hasattr(self, "visual_dialogue_widget") and self.visual_dialogue_widget:
             # Find tab index
             for i in range(self.quest_editor_tabs.count()):
                 if self.quest_editor_tabs.widget(i) == self.visual_dialogue_widget:
@@ -2137,72 +2364,78 @@ end
             self.status_bar.showMessage(f"Jumped to visual editor for node: {node_id}")
         else:
             self.status_bar.showMessage("Visual dialogue editor not available")
-    
+
     def _on_visual_dialogue_changed(self, dialogue_data: dict):
         """Handle dialogue change in visual editor"""
         # Sync to text mode overview
-        if hasattr(self, 'text_mode_overview') and self.text_mode_overview:
+        if hasattr(self, "text_mode_overview") and self.text_mode_overview:
             self.text_mode_overview.set_dialogue_data(dialogue_data)
-        
+
         # Trigger data change
         self._on_data_changed()
         self.status_bar.showMessage("Dialogue updated in visual editor")
-    
+
     def _convert_dialogues_to_visual_format(self, dialogues: List) -> Dict[str, Any]:
         """Convert simple dialogue list to visual editor format"""
         nodes = []
         connections = []
-        
+
         for i, dlg in enumerate(dialogues):
             if isinstance(dlg, dict):
-                node_id = dlg.get('id', f'node_{i+1}')
-                node_type = dlg.get('type', 'npc').lower()
-                speaker = dlg.get('speaker', 'NPC')
-                text = dlg.get('text', '')
+                node_id = dlg.get("id", f"node_{i + 1}")
+                node_type = dlg.get("type", "npc").lower()
+                speaker = dlg.get("speaker", "NPC")
+                text = dlg.get("text", "")
             else:
-                node_id = getattr(dlg, 'id', f'node_{i+1}')
-                node_type = getattr(dlg, 'dialogue_type', 'npc').lower()
-                speaker = getattr(dlg, 'speaker', 'NPC')
-                text = getattr(dlg, 'text', str(dlg))
-            
+                node_id = getattr(dlg, "id", f"node_{i + 1}")
+                node_type = getattr(dlg, "dialogue_type", "npc").lower()
+                speaker = getattr(dlg, "speaker", "NPC")
+                text = getattr(dlg, "text", str(dlg))
+
             node = {
-                'id': node_id,
-                'node_type': node_type,
-                'speaker': speaker,
-                'text': text,
-                'choices': dlg.get('choices', []) if isinstance(dlg, dict) else [],
-                'conditions': dlg.get('conditions', []) if isinstance(dlg, dict) else [],
-                'actions': dlg.get('actions', []) if isinstance(dlg, dict) else [],
-                'next_nodes': dlg.get('next_nodes', []) if isinstance(dlg, dict) else [],
-                'answer_id': dlg.get('answer_id') if isinstance(dlg, dict) else None,
-                'tag': dlg.get('tag', '') if isinstance(dlg, dict) else ''
+                "id": node_id,
+                "node_type": node_type,
+                "speaker": speaker,
+                "text": text,
+                "choices": dlg.get("choices", []) if isinstance(dlg, dict) else [],
+                "conditions": dlg.get("conditions", [])
+                if isinstance(dlg, dict)
+                else [],
+                "actions": dlg.get("actions", []) if isinstance(dlg, dict) else [],
+                "next_nodes": dlg.get("next_nodes", [])
+                if isinstance(dlg, dict)
+                else [],
+                "answer_id": dlg.get("answer_id") if isinstance(dlg, dict) else None,
+                "tag": dlg.get("tag", "") if isinstance(dlg, dict) else "",
             }
             nodes.append(node)
-            
+
             # Add connections
-            next_nodes = node.get('next_nodes', [])
+            next_nodes = node.get("next_nodes", [])
             for next_id in next_nodes:
-                connections.append({'from': node_id, 'to': next_id})
-        
-        return {'nodes': nodes, 'connections': connections}
-    
-    def _convert_visual_format_to_dialogues(self, dialogue_data: Dict[str, Any]) -> List[Dict]:
+                connections.append({"from": node_id, "to": next_id})
+
+        return {"nodes": nodes, "connections": connections}
+
+    def _convert_visual_format_to_dialogues(
+        self, dialogue_data: Dict[str, Any]
+    ) -> List[Dict]:
         """Convert visual editor format to simple dialogue list"""
         dialogues = []
-        
-        if 'nodes' in dialogue_data:
-            for node_data in dialogue_data['nodes']:
+
+        if "nodes" in dialogue_data:
+            for node_data in dialogue_data["nodes"]:
                 dialogue = {
-                    'id': node_data.get('id', ''),
-                    'speaker': node_data.get('speaker', 'NPC'),
-                    'text': node_data.get('text', ''),
-                    'type': node_data.get('node_type', 'npc'),
-                    'choices': node_data.get('choices', []),
-                    'conditions': node_data.get('conditions', []),
-                    'actions': node_data.get('actions', [])
+                    "id": node_data.get("id", ""),
+                    "speaker": node_data.get("speaker", "NPC"),
+                    "text": node_data.get("text", ""),
+                    "type": node_data.get("node_type", "npc"),
+                    "choices": node_data.get("choices", []),
+                    "conditions": node_data.get("conditions", []),
+                    "actions": node_data.get("actions", []),
                 }
                 dialogues.append(dialogue)
-        
+
         return dialogues
 
     def closeEvent(self, event):
@@ -2246,5 +2479,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(f"Fatal error: {e}")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)

@@ -1,6 +1,6 @@
--- TRUPPE 1, Anführer
+-- TRUPPE 1, Anfhrer
 
--- erst spawnen wenn die letzten flüchtlinge aus dem portal sind
+-- erst spawnen wenn die letzten flchtlinge aus dem portal sind
 SpawnOnlyWhen
 {
 	X = PortalX, Y = PortalY, NoSpawnEffect = TRUE,
@@ -20,13 +20,7 @@ Respawn
 	X = PortalX, Y = PortalY, NoSpawnEffect = TRUE, WaitTime = 60,
 	Conditions = 
 	{ 
-		UND
-		(
-			ODER 
-			(
-				UND 
-				(
-					FigureDead {NpcId = 5392},
+		UND(			ODER(				UND(					FigureDead {NpcId = 5392},
 					IsGlobalTimeElapsed {Name = "RebirthChef2", Seconds = 300}
 				),
 				IsGlobalCounter{Name = "DarkElfAttackGroup2DeadCounter", Operator = IsGreaterOrEqual, Value = 10}

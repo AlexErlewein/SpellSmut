@@ -1,5 +1,5 @@
 -------------------------------------------------------
---	Echo Sümpfe
+--	Echo Smpfe
 -------------------------------------------------------
 OnOneTimeEvent
 {
@@ -204,9 +204,7 @@ OnOneTimeEvent
 {
 	Conditions =
 	{
-		ODER
-		(
-			IsItemFlagTrue {Name = "PlayerHasItemBeinteilePrinceps"},
+		ODER(			IsItemFlagTrue {Name = "PlayerHasItemBeinteilePrinceps"},
 			IsItemFlagTrue {Name = "PlayerHasItemBrustPanzerPrinzeps"}
 		),
 		QuestState {QuestId = 728, State = StateUnknown},

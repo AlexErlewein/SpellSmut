@@ -1,18 +1,18 @@
 --P202_City_Of_Souls
 
 
--- Coords für Eingangsportal Oststadt (Hauptquestbereich)
+-- Coords fr Eingangsportal Oststadt (Hauptquestbereich)
 --PortalX = 328
 --PortalY = 424
 
 
--- Coords für Eingangsportal Weststadt (Nebenquestbereich)
+-- Coords fr Eingangsportal Weststadt (Nebenquestbereich)
 --PortalX = 225	
 --PortalY = 93
 
 -----------------------------------
 
---XP gibts für:
+--XP gibts fr:
 
 --HeldenBeschworen 	(Flag in n0)
 --GrabmalGeoeffnet 	(Flag in n0)
@@ -61,7 +61,7 @@ dofile("script/Hadeko.lua")
 --Oststadt (Hauptquestbereich)
 ----------------------------------------------------
 
---Umspawn Avatar für CS Begin
+--Umspawn Avatar fr CS Begin
 --OnOneTimeEvent
 --{
 --	NotInDialog = FALSE , UpdateInterval = 10 ,
@@ -76,21 +76,19 @@ dofile("script/Hadeko.lua")
 --}
 
 
---OC, wenn Spieler in die Nähe des Pentagramms kommt
+--OC, wenn Spieler in die Nhe des Pentagramms kommt
 OnOneTimeEvent
 {
 	NotInDialog = FALSE , UpdateInterval = 10 ,
 	Conditions = 
 	{
-	ODER
-		(
-		FigureInRange {X = 433, Y = 323, NpcId = self, Range = 5},
+	ODER(		FigureInRange {X = 433, Y = 323, NpcId = self, Range = 5},
 		FigureInRange {X = 305, Y = 331, NpcId = self, Range = 5}
 		)
 	},
 	Actions = 
 	{
-		Outcry{NpcId = 9010, String = "Achtet auf das Pentagramm! Es spielt eine Rolle in dem Rätsel!" , Tag = "oca2maskedP202_001" , Delay = TRUE , Color = ColorWhite}
+		Outcry{NpcId = 9010, String = "Achtet auf das Pentagramm! Es spielt eine Rolle in dem Rtsel!" , Tag = "oca2maskedP202_001" , Delay = TRUE , Color = ColorWhite}
 	}
 }
 
@@ -110,7 +108,7 @@ OnOneTimeEvent
 	
 	SetEffect{Effect = "FogForever", X = 377, Y = 258, Length = 0 , TargetType = World}, --Grabmal
 	
-	--Effekte um Opferstätten
+	--Effekte um Opfersttten
 	SetEffect{Effect = "FogForever", X = 318, Y = 188, Length = 0 , TargetType = World}, --Screamer
 	SetEffect{Effect = "FogForever", X = 289, Y = 279, Length = 0 , TargetType = World}, --Spectre
 	SetEffect{Effect = "FogForever", X = 373, Y = 343, Length = 0 , TargetType = World}, --Succubus
@@ -120,7 +118,7 @@ OnOneTimeEvent
 }
 
 
---OC, wenn Wächter tot ist
+--OC, wenn Wchter tot ist
 OnOneTimeEvent
 {
 	Conditions = 
@@ -130,14 +128,14 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{ 
-		--Outcry {NpcId = 9080, String = "Der Dunkle ist erschlagen! Wehe, der Wächter ist besiegt!" , Tag = "oca2strangevoicesP202_001" , Delay = TRUE , Color = ColorWhite},
-		Outcry {NpcId = 9080, String = "Beschwörer, tut Euer Werk! Ruft einen neuen Wächter, ruft einen Fial Darg!" , Tag = "oca2strangevoicesP202_001" , Delay = TRUE , Color = ColorWhite}
+		--Outcry {NpcId = 9080, String = "Der Dunkle ist erschlagen! Wehe, der Wchter ist besiegt!" , Tag = "oca2strangevoicesP202_001" , Delay = TRUE , Color = ColorWhite},
+		Outcry {NpcId = 9080, String = "Beschwrer, tut Euer Werk! Ruft einen neuen Wchter, ruft einen Fial Darg!" , Tag = "oca2strangevoicesP202_001" , Delay = TRUE , Color = ColorWhite}
 	}
 }
 	
 
 	
--- Spawnen eines neuen Wächters (Fial Darg), wenn alle 5 Gegner in der Mitte
+-- Spawnen eines neuen Wchters (Fial Darg), wenn alle 5 Gegner in der Mitte
 
 OnEvent
 {
@@ -195,7 +193,7 @@ OnToggleEvent
 		StopEffect{X = 373, Y = 337, TargetType = World},
 		SetEffect{Effect = "AreaHit", X = 373, Y = 337, Length = 3000},
 		SetEffect{Effect = "Lightning", X = 373, Y = 337, Length = 3500},
-		Outcry{NpcId = 9010, String = "Ja! Gut! Die Lebenskraft eines Helden verhindert, dass sie dort erscheinen können!" , Tag = "oca2maskedP202_002" , Delay = TRUE , Color = ColorWhite}
+		Outcry{NpcId = 9010, String = "Ja! Gut! Die Lebenskraft eines Helden verhindert, dass sie dort erscheinen knnen!" , Tag = "oca2maskedP202_002" , Delay = TRUE , Color = ColorWhite}
 	},
 	OffConditions = 
 	{  
@@ -228,7 +226,7 @@ OnToggleEvent
 		StopEffect{X = 295, Y = 278, TargetType = World},
 		SetEffect{Effect = "AreaHit", X = 295, Y = 278, Length = 3000},
 		SetEffect{Effect = "Lightning", X = 295, Y = 278, Length = 3500},
-		Outcry{NpcId = 9010, String = "Ja! Gut! Die Lebenskraft eines Helden verhindert, dass sie dort erscheinen können!" , Tag = "oca2maskedP202_002" , Delay = TRUE , Color = ColorWhite}
+		Outcry{NpcId = 9010, String = "Ja! Gut! Die Lebenskraft eines Helden verhindert, dass sie dort erscheinen knnen!" , Tag = "oca2maskedP202_002" , Delay = TRUE , Color = ColorWhite}
 	},
 	OffConditions = 
 	{  
@@ -261,7 +259,7 @@ OnToggleEvent
 		StopEffect{ X = 323, Y = 193, TargetType = World},
 		SetEffect{Effect = "AreaHit", X = 323, Y = 193, Length = 3000},
 		SetEffect{Effect = "Lightning", X = 323, Y = 193, Length = 3500},
-		Outcry{NpcId = 9010, String = "Ja! Gut! Die Lebenskraft eines Helden verhindert, dass sie dort erscheinen können!" , Tag = "oca2maskedP202_002" , Delay = TRUE , Color = ColorWhite}
+		Outcry{NpcId = 9010, String = "Ja! Gut! Die Lebenskraft eines Helden verhindert, dass sie dort erscheinen knnen!" , Tag = "oca2maskedP202_002" , Delay = TRUE , Color = ColorWhite}
 	},
 	OffConditions = 
 	{  
@@ -295,7 +293,7 @@ OnToggleEvent
 		StopEffect{X = 419, Y = 191, TargetType = World},
 		SetEffect{Effect = "AreaHit", X = 419, Y = 191, Length = 3000},
 		SetEffect{Effect = "Lightning", X = 419, Y = 191, Length = 3500},
-		Outcry{NpcId = 9010, String = "Ja! Gut! Die Lebenskraft eines Helden verhindert, dass sie dort erscheinen können!" , Tag = "oca2maskedP202_002" , Delay = TRUE , Color = ColorWhite}
+		Outcry{NpcId = 9010, String = "Ja! Gut! Die Lebenskraft eines Helden verhindert, dass sie dort erscheinen knnen!" , Tag = "oca2maskedP202_002" , Delay = TRUE , Color = ColorWhite}
 	},
 	OffConditions = 
 	{  
@@ -329,7 +327,7 @@ OnToggleEvent
 		StopEffect{X = 447, Y = 280, TargetType = World},
 		SetEffect{Effect = "AreaHit", X = 447, Y = 280, Length = 3000},
 		SetEffect{Effect = "Lightning", X = 447, Y = 280, Length = 3500},
-		Outcry{NpcId = 9010, String = "Ja! Gut! Die Lebenskraft eines Helden verhindert, dass sie dort erscheinen können!" , Tag = "oca2maskedP202_002" , Delay = TRUE , Color = ColorWhite}
+		Outcry{NpcId = 9010, String = "Ja! Gut! Die Lebenskraft eines Helden verhindert, dass sie dort erscheinen knnen!" , Tag = "oca2maskedP202_002" , Delay = TRUE , Color = ColorWhite}
 	},
 	OffConditions = 
 	{  
@@ -359,14 +357,14 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{
-		SetGlobalFlagTrue{Name = "g_P202Spawnpunktebesetzt"}, --Tor öffnet sich
+		SetGlobalFlagTrue{Name = "g_P202Spawnpunktebesetzt"}, --Tor ffnet sich
 		SetRewardFlagTrue {Name = "GrabmalGeoeffnet"},
 	},
 }
 
 --------------------------------------------------------------------
 -----------------------------------------------------------------
---FÜR PATCH	
+--FR PATCH	
 --message, wenn alle Punkte besetzt und Fial darg noch am leben: Nimm das Schattenschwert
 
 OnOneTimeEvent
@@ -384,7 +382,7 @@ OnOneTimeEvent
 }
 
 ----------------------------------------------------------------------
---message, wenn avatar in der nähe des fial darg
+--message, wenn avatar in der nhe des fial darg
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 20,
@@ -402,7 +400,7 @@ OnOneTimeEvent
 -------------------------------------------------------------------------
 -------------------------------------------------------------------------
 
--- wenn Rätsel gelöst, Fial Darg tot, Grab offen
+-- wenn Rtsel gelst, Fial Darg tot, Grab offen
 OnOneTimeEvent
 {
 	NotInDialog = FALSE , UpdateInterval = 10 ,
@@ -413,14 +411,14 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{
-		Outcry {NpcId = 9010, String = "Ihr habt die Wächter gebannt! Holt nun die Urne aus dem Grab!", Tag = "oca2maskedP202_003", Delay = TRUE, Color = ColorWhite}
+		Outcry {NpcId = 9010, String = "Ihr habt die Wchter gebannt! Holt nun die Urne aus dem Grab!", Tag = "oca2maskedP202_003", Delay = TRUE, Color = ColorWhite}
 	}
 }
 
 
 --------------------------------------------------------------
---Massenspawn + GegnerWelle nach öffnen des Grabmals
---Init für CS MassenSpawn
+--Massenspawn + GegnerWelle nach ffnen des Grabmals
+--Init fr CS MassenSpawn
 OnOneTimeEvent
 {
 	Conditions = 
@@ -437,7 +435,7 @@ OnOneTimeEvent
 
 --------------------------------------------------------------
 ---------------------------------------------------------------
---Je nach Stufe des Avatars werden Loot-Kisten zur Verfügung gestellt.
+--Je nach Stufe des Avatars werden Loot-Kisten zur Verfgung gestellt.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -455,10 +453,10 @@ OnOneTimeEvent
 
 --------------------------------------------------------------
 --------------------------------------------------------------
---Questmanagement außerhalb der CS / Dialoge
+--Questmanagement auerhalb der CS / Dialoge
 
 
---Heldenbeschwören (Fünf Gehilfen)
+--Heldenbeschwren (Fnf Gehilfen)
 OnOneTimeEvent
 {
 	Conditions = 
@@ -469,11 +467,11 @@ OnOneTimeEvent
 	Actions = 
 	{ 
 		SetRewardFlagTrue {Name = "HeldenBeschworen"},
-		QuestSolve {QuestId = 827, ActivateNextQuest = FALSE},--Q beschwöre helden
+		QuestSolve {QuestId = 827, ActivateNextQuest = FALSE},--Q beschwre helden
 	}
 }
 
---Die Punkte besetzt (Wächterquest)
+--Die Punkte besetzt (Wchterquest)
 OnOneTimeEvent
 {
 	Conditions = 
@@ -483,7 +481,7 @@ OnOneTimeEvent
 	Actions = 
 	{ 
 		
-		QuestSolve {QuestId = 828, ActivateNextQuest = FALSE}, --Die Wächter des Grabmals
+		QuestSolve {QuestId = 828, ActivateNextQuest = FALSE}, --Die Wchter des Grabmals
 	}
 }
 
@@ -539,7 +537,7 @@ OnOneTimeEvent
 
 ------------------------------------------------------------------
 ------------------------------------------------------------------
---Quest Heilige Stätten Q 844
+--Quest Heilige Sttten Q 844
 ------------------------------------------------------------------
 --Nebel am Anfang
 OnOneTimeEvent
@@ -553,7 +551,7 @@ OnOneTimeEvent
 }
 -----------------------------------
 --wenn Samen gepflanzt
---Spawning Dämonen Ende
+--Spawning Dmonen Ende
 --Quest solved
 
 OnOneTimeEvent
@@ -564,14 +562,14 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{ 
-		SetGlobalFlagTrue {Name = "g_P202SoulcityDämonenSpawnStopHlStätte"},
-		QuestSolve {QuestId = 844, ActivateNextQuest = FALSE}, --hl Stätte CoS
-		QuestBegin {QuestId = 1056}, --zurück zur Dryade2
+		SetGlobalFlagTrue {Name = "g_P202SoulcityDmonenSpawnStopHlSttte"},
+		QuestSolve {QuestId = 844, ActivateNextQuest = FALSE}, --hl Sttte CoS
+		QuestBegin {QuestId = 1056}, --zurck zur Dryade2
 		SetRewardFlagTrue {Name = "HlStaetteBaumGepflanzt"},
 	}
 }
 
---Baum wächst nach Lösen der Quest
+--Baum wchst nach Lsen der Quest
 -- nach 2 Sekunden: kleiner Baum
 OnOneTimeEvent
 {
@@ -609,7 +607,7 @@ OnOneTimeEvent
 }
 
 
---nach 15 Minuten: großer Baum
+--nach 15 Minuten: groer Baum
 OnOneTimeEvent
 {
 	Conditions = 
@@ -646,9 +644,7 @@ OnOneTimeEvent
 {
 	Conditions = 
 	{ 
-	ODER
-	(
-		FigureInRange {X = 99, Y = 186, NpcId = self, Range = 4},
+	ODER(		FigureInRange {X = 99, Y = 186, NpcId = self, Range = 4},
 		FigureInRange {X = 99, Y = 244, NpcId = self, Range = 3}
 	)
 	},
@@ -660,7 +656,7 @@ OnOneTimeEvent
 }
 
 
---wenn Wasserbehälter genommen, Timer los
+--wenn Wasserbehlter genommen, Timer los
 OnEvent
 {
 	Conditions = 
@@ -717,7 +713,7 @@ OnEvent
 	},
 	Actions = 
 	{ 
-		Outcry {NpcId = 11740, String = "Das heilige Wasser aus Eurem Behälter ist vollständig verdunstet!", Tag = "oca2noteP202_001" , Delay = TRUE , Color = ColorWhite},
+		Outcry {NpcId = 11740, String = "Das heilige Wasser aus Eurem Behlter ist vollstndig verdunstet!", Tag = "oca2noteP202_001" , Delay = TRUE , Color = ColorWhite},
 		TransferItem {TakeItem = 7067, GiveItem = 0, Amount = 1, Flag = Take}, --Schale wasser weg
 		TransferItem {TakeItem = 0, GiveItem = 7341, Amount = 1, Flag = Give}, --Schale Dryade her
 		SetGlobalFlagFalse {Name = "g_P202WasserTimerAn"},
@@ -880,7 +876,7 @@ OnToggleEvent
 --{
 --	Conditions =
 --	{
---		QuestState{QuestId = 998, State = StateActive }, -- Quest: Finde den Torwächter
+--		QuestState{QuestId = 998, State = StateActive }, -- Quest: Finde den Torwchter
 --		IsItemFlagTrue {Name = "PlayerHasItemHadekoDoorkeeper"},
 --	},
 --	Actions =
@@ -944,7 +940,7 @@ OnOneTimeEvent
 {
 	Conditions = 
 	{ 
-		IsGlobalFlagTrue{Name = "g_P202_OptionOpferTöten", UpdateInterval = 20},
+		IsGlobalFlagTrue{Name = "g_P202_OptionOpferTten", UpdateInterval = 20},
 		FigureDead {NpcId = 11006}
 	},
 	Actions = 
@@ -954,7 +950,7 @@ OnOneTimeEvent
 }
 
 
---wenn Wachgeist tot, Tor auf zum nächsten Abschnitt
+--wenn Wachgeist tot, Tor auf zum nchsten Abschnitt
 OnOneTimeEvent
 {
 	Conditions = 
@@ -974,7 +970,7 @@ OnOneTimeEvent
 {
 	Conditions = 
 	{ 
-		IsGlobalFlagTrue{Name = "g_P202_OptionOpferTöten", UpdateInterval = 20},
+		IsGlobalFlagTrue{Name = "g_P202_OptionOpferTten", UpdateInterval = 20},
 		FigureDead {NpcId = 11005}
 	},
 	Actions = 
@@ -1006,12 +1002,12 @@ OnOneTimeEvent
 
 -------------------------------------------------------------
 -------------------------------------------------------------
--- Wächter- / GargoyleUhr Quest
+-- Wchter- / GargoyleUhr Quest
 -------------------------------------------------------------
 
---Flags für ToggleEvents mit Effekten in Npc Scripten
+--Flags fr ToggleEvents mit Effekten in Npc Scripten
 
--- Schale Nord NpcId 8810, Wächter NpcId 8824
+-- Schale Nord NpcId 8810, Wchter NpcId 8824
 -- 0h bis 24h, 8h bis 9h, 16h bis 17h
 OnEvent
 {
@@ -1040,7 +1036,7 @@ OnEvent
 	}
 }
 
--- Zwischenstück, keine Schale
+-- Zwischenstck, keine Schale
 -- 1h bis 2h, 9h bis 10h, 17h bis 18h
 OnEvent
 {
@@ -1068,7 +1064,7 @@ OnEvent
 	}
 }
 
--- Schale Ost NpcId 8809, Wächter NpcId 8823
+-- Schale Ost NpcId 8809, Wchter NpcId 8823
 -- 2h bis 3h ,10h bis 11h, 18h bis 19h
 OnEvent
 {
@@ -1097,7 +1093,7 @@ OnEvent
 	}
 }
 
--- Zwischenstück, keine Schale
+-- Zwischenstck, keine Schale
 -- 3h bis 4 h, 11h bis 12h, 19h bis 20h
 OnEvent
 {
@@ -1125,7 +1121,7 @@ OnEvent
 	}
 }
 
--- Schale Süd NpcId 8812, Wächter NpcId 8826
+-- Schale Sd NpcId 8812, Wchter NpcId 8826
 -- 4h bis 5h, 12h bis 13h, 20h bis 21h
 OnEvent
 {
@@ -1154,7 +1150,7 @@ OnEvent
 	}
 }
 
--- Zwischenstück, keine Schale
+-- Zwischenstck, keine Schale
 -- 5h bis 6h, 13h bis 14h, 21h bis 22h
 OnEvent
 {
@@ -1182,7 +1178,7 @@ OnEvent
 	}
 }
 
--- Schale West NpcId 8811, Wächter NpcId 8825
+-- Schale West NpcId 8811, Wchter NpcId 8825
 -- 6h bis 7h, 14h bis 15h, 22h bis 23h
 OnEvent
 {
@@ -1212,7 +1208,7 @@ OnEvent
 	}
 }
 
--- Zwischenstück, keine Schale
+-- Zwischenstck, keine Schale
 -- 7h bis 8h, 15h bis 16h, 23h bis 0h
 OnEvent
 {
@@ -1258,9 +1254,9 @@ OnOneTimeEvent
 
 ---------------------------------------------------------------------------
 --------------------------------------------------------------------------
---Aschetänzer 
+--Aschetnzer 
 ----------------------------------------------------------------------------
---Flag, wenn alle Aschetänzer1 HelferSkelette Low tot sind
+--Flag, wenn alle Aschetnzer1 HelferSkelette Low tot sind
 OnOneTimeEvent
 {
 	NotInDialog = FALSE , UpdateInterval = 10 ,
@@ -1281,7 +1277,7 @@ OnOneTimeEvent
 }
 
 
---Flag, wenn alle Aschetänzer1 HelferSkelette High tot sind
+--Flag, wenn alle Aschetnzer1 HelferSkelette High tot sind
 
 OnOneTimeEvent
 {
@@ -1305,7 +1301,7 @@ OnOneTimeEvent
 }
 
 
---Timer für Skelettspawning, wenn Avatar / Helden in der Nähe
+--Timer fr Skelettspawning, wenn Avatar / Helden in der Nhe
 OnOneTimeEvent
 {
 	NotInDialog = FALSE , UpdateInterval = 10 ,
@@ -1321,7 +1317,7 @@ OnOneTimeEvent
 }
 
 
---Tor auf zum nächsten Bereich, wenn  alle 3 Aschetänzer tot
+--Tor auf zum nchsten Bereich, wenn  alle 3 Aschetnzer tot
 OnOneTimeEvent
 {
 	NotInDialog = FALSE , UpdateInterval = 10 ,
@@ -1340,7 +1336,7 @@ OnOneTimeEvent
 }
 
 -----------------------------------------------
---RewardFlag, wenn exctinct Türme weg
+--RewardFlag, wenn exctinct Trme weg
 ---------------------------------------------------
 OnOneTimeEvent
 {
@@ -1427,7 +1423,7 @@ OnEvent
 }
 --------------------------
 
---Dämonen
+--Dmonen
 OnEvent
 {
 	NotInDialog = FALSE,
@@ -1447,8 +1443,8 @@ OnEvent
 ----I---------------------------------------I
 ----I                                       I
 ----I           Bank von Empyria            I
-----I           Schatzbrief-Zähler          I
-----I         (muß auf alle Karten!)        I
+----I           Schatzbrief-Zhler          I
+----I         (mu auf alle Karten!)        I
 ----I                                       I
 ----I---------------------------------------I
 
@@ -1472,7 +1468,7 @@ OnEvent
 --				Storyquest Part.
 ----------------------------------------------------------
 
----Überquest starten, wenn Schattenklinge
+---berquest starten, wenn Schattenklinge
 OnOneTimeEvent
 {
 	Conditions = 
@@ -1486,7 +1482,7 @@ OnOneTimeEvent
 	}
 }
 
----Dryade töten, wenn Cutscene abgelaufen, bzw. Auftrag gelöst
+---Dryade tten, wenn Cutscene abgelaufen, bzw. Auftrag gelst
 OnOneTimeEvent
 {
 	Conditions = 

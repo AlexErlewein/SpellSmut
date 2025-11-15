@@ -23,6 +23,7 @@ from PySide6.QtGui import (
     QSyntaxHighlighter,
     QTextCharFormat,
     QTextCursor,
+    QTextDocument,
 )
 from PySide6.QtWidgets import (
     QComboBox,
@@ -44,6 +45,7 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
+from PySide6.QtCore import Qt
 
 
 @dataclass
@@ -105,13 +107,13 @@ class DialogueTextHighlighter(QSyntaxHighlighter):
         # Node ID format
         node_id_format = QTextCharFormat()
         node_id_format.setForeground(QColor(41, 128, 185))  # Blue
-        node_id_format.setFontWeight(QFont.Bold)
+        node_id_format.setFontWeight(QFont.Weight.Bold)
         self.node_id_pattern = r"#\d+|node_\w+|answer_\d+"
 
         # Speaker format
         speaker_format = QTextCharFormat()
         speaker_format.setForeground(QColor(39, 174, 96))  # Green
-        speaker_format.setFontWeight(QFont.Bold)
+        speaker_format.setFontWeight(QFont.Weight.Bold)
         self.speaker_pattern = r"\(NPC\)|\(Player\)"
 
         # Choice format
@@ -127,7 +129,7 @@ class DialogueTextHighlighter(QSyntaxHighlighter):
         # Error format
         error_format = QTextCharFormat()
         error_format.setForeground(QColor(231, 76, 60))  # Red
-        error_format.setFontWeight(QFont.Bold)
+        error_format.setFontWeight(QFont.Weight.Bold)
         self.error_pattern = r"\[ERROR\].*"
 
         # Warning format
@@ -148,14 +150,14 @@ class DialogueTextHighlighter(QSyntaxHighlighter):
         for match in re.finditer(self.node_id_pattern, text):
             format = QTextCharFormat()
             format.setForeground(QColor(41, 128, 185))
-            format.setFontWeight(QFont.Bold)
+            format.setFontWeight(QFont.Weight.Bold)
             self.setFormat(match.start(), match.end() - match.start(), format)
 
         # Highlight speakers
         for match in re.finditer(self.speaker_pattern, text):
             format = QTextCharFormat()
             format.setForeground(QColor(39, 174, 96))
-            format.setFontWeight(QFont.Bold)
+            format.setFontWeight(QFont.Weight.Bold)
             self.setFormat(match.start(), match.end() - match.start(), format)
 
         # Highlight choices
@@ -174,7 +176,7 @@ class DialogueTextHighlighter(QSyntaxHighlighter):
         for match in re.finditer(self.error_pattern, text):
             format = QTextCharFormat()
             format.setForeground(QColor(231, 76, 60))
-            format.setFontWeight(QFont.Bold)
+            format.setFontWeight(QFont.Weight.Bold)
             self.setFormat(match.start(), match.end() - match.start(), format)
 
         # Highlight warnings
@@ -199,12 +201,17 @@ class TextModeDialogueOverview(QWidget):
     node_added = Signal(str, dict)  # node_id, node_data
     node_deleted = Signal(str)  # node_id
     jump_to_visual = Signal(str)  # node_id - request to jump to node in visual editor
+    choice_selected = Signal(
+        str, int
+    )  # node_id, choice_index - for connecting choices to responses
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self.nodes: Dict[str, DialogueNodeData] = {}
         self.node_hierarchy: Dict[str, List[str]] = {}  # parent_id -> [child_ids]
         self.selected_node_id: Optional[str] = None
+        self.selected_choice_node_id: Optional[str] = None
+        self.selected_choice_index: int = -1
         self.search_text: str = ""
         self.filter_speaker: str = "All"
 
@@ -219,7 +226,7 @@ class TextModeDialogueOverview(QWidget):
 
         # Toolbar
         toolbar = QToolBar()
-        toolbar.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
+        toolbar.setToolButtonStyle(Qt.ToolButtonStyle.ToolButtonTextBesideIcon)
         layout.addWidget(toolbar)
 
         # Search and filter
@@ -246,6 +253,14 @@ class TextModeDialogueOverview(QWidget):
         self.add_node_btn.setMaximumWidth(100)
         search_layout.addWidget(self.add_node_btn)
 
+        self.add_response_btn = QPushButton("💬 Add Response")
+        self.add_response_btn.setMaximumWidth(110)
+        self.add_response_btn.setToolTip(
+            "Quickly add an NPC response to the selected choice"
+        )
+        self.add_response_btn.setEnabled(False)  # Disabled until a choice is selected
+        search_layout.addWidget(self.add_response_btn)
+
         self.jump_to_visual_btn = QPushButton("🔍 Jump to Visual")
         self.jump_to_visual_btn.setMaximumWidth(120)
         search_layout.addWidget(self.jump_to_visual_btn)
@@ -253,7 +268,7 @@ class TextModeDialogueOverview(QWidget):
         layout.addWidget(search_frame)
 
         # Main content area - splitter
-        splitter = QSplitter(Qt.Horizontal)
+        splitter = QSplitter(Qt.Orientation.Horizontal)
         layout.addWidget(splitter)
 
         # Left: Tree view (optional, for navigation)
@@ -262,7 +277,7 @@ class TextModeDialogueOverview(QWidget):
         tree_layout.setContentsMargins(0, 0, 0, 0)
 
         tree_label = QLabel("Node Tree")
-        tree_label.setFont(QFont("Arial", 9, QFont.Bold))
+        tree_label.setFont(QFont("Arial", 9, QFont.Weight.Bold))
         tree_layout.addWidget(tree_label)
 
         self.tree_widget = QTreeWidget()
@@ -279,7 +294,7 @@ class TextModeDialogueOverview(QWidget):
         text_layout.setContentsMargins(0, 0, 0, 0)
 
         text_label = QLabel("Dialogue Tree (Text Mode)")
-        text_label.setFont(QFont("Arial", 9, QFont.Bold))
+        text_label.setFont(QFont("Arial", 9, QFont.Weight.Bold))
         text_layout.addWidget(text_label)
 
         self.text_edit = QTextEdit()
@@ -306,7 +321,7 @@ class TextModeDialogueOverview(QWidget):
         details_layout.setContentsMargins(0, 0, 0, 0)
 
         details_label = QLabel("Node Details")
-        details_label.setFont(QFont("Arial", 9, QFont.Bold))
+        details_label.setFont(QFont("Arial", 9, QFont.Weight.Bold))
         details_layout.addWidget(details_label)
 
         self.details_text = QTextEdit()
@@ -344,8 +359,21 @@ class TextModeDialogueOverview(QWidget):
         self.search_edit.textChanged.connect(self.on_search_changed)
         self.speaker_filter.currentTextChanged.connect(self.on_filter_changed)
         self.add_node_btn.clicked.connect(self.on_add_node)
+        self.add_response_btn.clicked.connect(self.on_add_response)
         self.jump_to_visual_btn.clicked.connect(self.on_jump_to_visual)
         self.text_edit.cursorPositionChanged.connect(self.on_cursor_changed)
+
+        # Connect mouse press for choice selection
+        self.text_edit.mousePressEvent = self._text_mouse_press_event
+
+    def _text_mouse_press_event(self, event):
+        """Custom mouse press event for text edit to handle choice selection"""
+        # Call the original mouse press event first
+        QTextEdit.mousePressEvent(self.text_edit, event)
+
+        # Then handle our custom choice selection
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.on_text_clicked(event.pos())
 
     def set_dialogue_data(self, dialogue_data: Dict[str, Any]):
         """Set dialogue data from dictionary (compatible with visual editor format)"""
@@ -531,15 +559,33 @@ class TextModeDialogueOverview(QWidget):
 
         # Add choices if present
         if node.choices:
+            connected_count = sum(
+                1 for choice in node.choices if choice.get("next_node")
+            )
+            total_count = len(node.choices)
+            line += (
+                f"\n{indent}    ┌─ Choices ({connected_count}/{total_count} connected):"
+            )
+
             for i, choice in enumerate(node.choices):
                 choice_text = choice.get("text", "")
                 choice_label = chr(65 + i)  # A, B, C, ...
                 next_node = choice.get("next_node", "")
-                line += (
-                    f"\n{indent}    -> [{choice_label}] (Player): {choice_text[:40]}"
-                )
+
+                # Use different symbols for connected vs unconnected choices
+                connector = "└─" if i == len(node.choices) - 1 else "├─"
+                status_icon = "✓" if next_node else "○"
+
+                choice_line = f"\n{indent}    {connector} [{choice_label}] {status_icon} {choice_text[:35]}"
+                if len(choice_text) > 35:
+                    choice_line += "..."
+
                 if next_node:
-                    line += f" -> {next_node}"
+                    choice_line += f" → {next_node}"
+                else:
+                    choice_line += f" → [UNCONNECTED]"
+
+                line += choice_line
 
         # Add actions if present
         if node.actions:
@@ -636,7 +682,7 @@ class TextModeDialogueOverview(QWidget):
         visited.add(node.id)
 
         item = QTreeWidgetItem([node.id, node.node_type.upper(), node.speaker or "N/A"])
-        item.setData(0, Qt.UserRole, node.id)
+        item.setData(0, Qt.ItemDataRole.UserRole, node.id)
 
         if parent:
             parent.addChild(item)
@@ -680,7 +726,7 @@ class TextModeDialogueOverview(QWidget):
 
     def on_tree_item_clicked(self, item: QTreeWidgetItem, column: int):
         """Handle tree item click"""
-        node_id = item.data(0, Qt.UserRole)
+        node_id = item.data(0, Qt.ItemDataRole.UserRole)
         if node_id:
             self.select_node(node_id)
 
@@ -752,7 +798,7 @@ class TextModeDialogueOverview(QWidget):
 
         # Find position
         cursor = self.text_edit.textCursor()
-        cursor.movePosition(QTextCursor.Start)
+        cursor.movePosition(QTextCursor.MoveOperation.Start)
 
         # Search for node
         if node_pattern in text:
@@ -765,6 +811,78 @@ class TextModeDialogueOverview(QWidget):
         """Handle cursor position change"""
         # Could implement node selection based on cursor position
         pass
+
+    def on_text_clicked(self, position):
+        """Handle clicks on the text view to detect choice selection"""
+        cursor = self.text_edit.cursorForPosition(position)
+        line = cursor.block().text()
+
+        # Check if this line contains a choice
+        if (
+            "[A]" in line
+            or "[B]" in line
+            or "[C]" in line
+            or "[D]" in line
+            or "[E]" in line
+        ):
+            # Extract choice letter and find the node
+            for i, letter in enumerate(["A", "B", "C", "D", "E"]):
+                if f"[{letter}]" in line:
+                    choice_index = i
+                    # Find which node this choice belongs to by looking backwards
+                    current_block = cursor.block()
+                    node_id = None
+
+                    # Look up to 10 lines back for a node ID
+                    for _ in range(10):
+                        current_block = current_block.previous()
+                        if not current_block.isValid():
+                            break
+
+                        block_text = current_block.text()
+                        # Look for node ID pattern like #node_123 or #answer_456
+                        import re
+
+                        node_match = re.search(r"#(\w+)", block_text)
+                        if node_match:
+                            node_id = node_match.group(1)
+                            if not node_id.startswith(
+                                "node_"
+                            ) and not node_id.startswith("answer_"):
+                                node_id = (
+                                    f"node_{node_id}" if node_id.isdigit() else node_id
+                                )
+                            break
+
+                    if node_id and node_id in self.nodes:
+                        node = self.nodes[node_id]
+                        if choice_index < len(node.choices):
+                            # Track selected choice for quick response feature
+                            self.selected_choice_node_id = node_id
+                            self.selected_choice_index = choice_index
+                            self.add_response_btn.setEnabled(True)
+
+                            self.choice_selected.emit(node_id, choice_index)
+                            self.status_bar.showMessage(
+                                f"Selected choice {letter} for node {node_id} - Click 'Add Response' to create NPC response"
+                            )
+                            return
+
+        # If not a choice, try to select the node this line belongs to
+        cursor = self.text_edit.textCursor()
+        line_text = cursor.block().text()
+
+        # Look for node ID in current line
+        import re
+
+        node_match = re.search(r"#(\w+)", line_text)
+        if node_match:
+            node_id = node_match.group(1)
+            if not node_id.startswith("node_") and not node_id.startswith("answer_"):
+                node_id = f"node_{node_id}" if node_id.isdigit() else node_id
+
+            if node_id in self.nodes:
+                self.select_node(node_id)
 
     def on_add_node(self):
         """Add a new node"""
@@ -781,6 +899,8 @@ class TextModeDialogueOverview(QWidget):
         node_type_combo.addItems(
             ["NPC", "Player", "Choice", "Conditional", "Start", "End"]
         )
+        # Default to NPC for new dialogues (most common starting point)
+        node_type_combo.setCurrentText("NPC")
         form.addRow("Node Type:", node_type_combo)
 
         # Node ID
@@ -801,12 +921,14 @@ class TextModeDialogueOverview(QWidget):
 
         layout.addLayout(form)
 
-        buttons = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        buttons = QDialogButtonBox(
+            QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel
+        )
         buttons.accepted.connect(dialog.accept)
         buttons.rejected.connect(dialog.reject)
         layout.addWidget(buttons)
 
-        if dialog.exec() == QDialog.Accepted:
+        if dialog.exec() == QDialog.DialogCode.Accepted:
             node_type = node_type_combo.currentText().lower()
             node_id = (
                 node_id_edit.text().strip() or f"{node_type}_{len(self.nodes) + 1}"
@@ -826,13 +948,154 @@ class TextModeDialogueOverview(QWidget):
                 id=node_id, node_type=node_type, speaker=speaker, text=text
             )
 
+            # Add node to collection
             self.nodes[node_id] = node
-            self.refresh_view()
 
-            # Emit signal
+            # Auto-connect to previous node if one exists
+            if self.selected_node_id and self.selected_node_id in self.nodes:
+                # Connect the new node after the selected node
+                selected_node = self.nodes[self.selected_node_id]
+                if node_id not in selected_node.next_nodes:
+                    selected_node.next_nodes.append(node_id)
+
+                # Update hierarchy
+                if self.selected_node_id not in self.node_hierarchy:
+                    self.node_hierarchy[self.selected_node_id] = []
+                if node_id not in self.node_hierarchy[self.selected_node_id]:
+                    self.node_hierarchy[self.selected_node_id].append(node_id)
+
+                self.status_bar.showMessage(
+                    f"Added node: {node_id} (connected after {self.selected_node_id})"
+                )
+            elif self.nodes:
+                # If no selection but nodes exist, connect to the last added node
+                # Find the most recently added node
+                sorted_nodes = sorted(self.nodes.keys(), key=lambda x: x)
+                if sorted_nodes:
+                    last_node_id = sorted_nodes[-1]
+                    last_node = self.nodes[last_node_id]
+                    if node_id not in last_node.next_nodes:
+                        last_node.next_nodes.append(node_id)
+
+                    # Update hierarchy
+                    if last_node_id not in self.node_hierarchy:
+                        self.node_hierarchy[last_node_id] = []
+                    if node_id not in self.node_hierarchy[last_node_id]:
+                        self.node_hierarchy[last_node_id].append(node_id)
+
+                    self.status_bar.showMessage(
+                        f"Added node: {node_id} (connected after {last_node_id})"
+                    )
+            else:
+                self.status_bar.showMessage(f"Added node: {node_id}")
+
+            # Emit signal to notify other components (like visual editor)
             self.node_added.emit(node_id, node.to_dict())
 
-            self.status_bar.showMessage(f"Added node: {node_id}")
+            # Refresh the view to show the new node
+            self.refresh_view()
+
+    def on_add_response(self):
+        """Quickly add an NPC response to the selected choice"""
+        if self.selected_choice_node_id is None or self.selected_choice_index < 0:
+            QMessageBox.information(
+                self,
+                "No Choice Selected",
+                "Please click on a choice option (like [A], [B], etc.) in the dialogue tree to select it first.",
+            )
+            return
+
+        choice_node_id = self.selected_choice_node_id
+        choice_index = self.selected_choice_index
+
+        if choice_node_id not in self.nodes:
+            return
+
+        node = self.nodes[choice_node_id]
+        if choice_index >= len(node.choices):
+            return
+
+        choice = node.choices[choice_index]
+
+        # Create a quick response dialog
+        dialog = QDialog(self)
+        dialog.setWindowTitle(f"Add Response to Choice '{choice.get('text', '')}'")
+        dialog.setMinimumWidth(400)
+
+        layout = QVBoxLayout(dialog)
+
+        # Instructions
+        instructions = QLabel("Create a quick NPC response for this player choice:")
+        instructions.setWordWrap(True)
+        layout.addWidget(instructions)
+
+        form = QFormLayout()
+
+        # Response speaker
+        speaker_edit = QLineEdit("NPC")
+        speaker_edit.setPlaceholderText(
+            "Who is responding? (e.g., NPC, Guard, Merchant)"
+        )
+        form.addRow("Speaker:", speaker_edit)
+
+        # Response text
+        response_edit = QTextEdit()
+        response_edit.setPlaceholderText("What does the character say in response?")
+        response_edit.setMaximumHeight(80)
+        form.addRow("Response:", response_edit)
+
+        layout.addLayout(form)
+
+        buttons = QDialogButtonBox(
+            QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel
+        )
+        buttons.accepted.connect(dialog.accept)
+        buttons.rejected.connect(dialog.reject)
+        layout.addWidget(buttons)
+
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            speaker = speaker_edit.text().strip() or "NPC"
+            response_text = response_edit.toPlainText().strip()
+
+            if response_text:
+                # Generate response node ID
+                response_id = f"response_{choice_node_id}_choice_{choice_index}"
+
+                # Ensure unique ID
+                counter = 1
+                original_id = response_id
+                while response_id in self.nodes:
+                    response_id = f"{original_id}_{counter}"
+                    counter += 1
+
+                # Create response node
+                response_node = DialogueNodeData(
+                    id=response_id, node_type="npc", speaker=speaker, text=response_text
+                )
+
+                # Connect the choice to this response
+                choice["next_node"] = response_id
+
+                # Update hierarchy
+                if choice_node_id not in self.node_hierarchy:
+                    self.node_hierarchy[choice_node_id] = []
+                if response_id not in self.node_hierarchy[choice_node_id]:
+                    self.node_hierarchy[choice_node_id].append(response_id)
+
+                self.nodes[response_id] = response_node
+                self.refresh_view()
+
+                # Select the new response
+                self.select_node(response_id)
+
+                # Emit signal
+                self.node_added.emit(response_id, response_node.to_dict())
+
+                self.status_bar.showMessage(f"Added response: {response_id}")
+            else:
+                QMessageBox.warning(
+                    self, "Empty Response", "Please enter some response text."
+                )
 
     def on_jump_to_visual(self):
         """Jump to selected node in visual editor"""
@@ -865,6 +1128,32 @@ class TextModeDialogueOverview(QWidget):
             self.node_edited.emit(node_id, node_data)
 
             self.status_bar.showMessage(f"Updated node: {node_id}")
+
+    def connect_choice_to_response(
+        self, choice_node_id: str, choice_index: int, response_node_id: str
+    ):
+        """Connect a player choice to an NPC response"""
+        if choice_node_id in self.nodes:
+            node = self.nodes[choice_node_id]
+            if choice_index < len(node.choices):
+                # Update the choice to point to the response
+                node.choices[choice_index]["next_node"] = response_node_id
+
+                # Update the hierarchy
+                if choice_node_id not in self.node_hierarchy:
+                    self.node_hierarchy[choice_node_id] = []
+                if response_node_id not in self.node_hierarchy[choice_node_id]:
+                    self.node_hierarchy[choice_node_id].append(response_node_id)
+
+                # Refresh the view
+                self.refresh_view()
+
+                # Emit change signal
+                self.node_edited.emit(choice_node_id, node.to_dict())
+
+                self.status_bar.showMessage(
+                    f"Connected choice {chr(65 + choice_index)} to response {response_node_id}"
+                )
 
     def delete_node(self, node_id: str):
         """Delete a node"""

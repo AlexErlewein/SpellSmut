@@ -8,13 +8,7 @@ OnPlatformOneTimeEvent
 {
 	Conditions = 
 	{
-		ODER
-		(
-			ODER 
-			(
-				ODER
-				(
-					IsMonumentInUse {X = 173, Y = 397, Range = 0},IsMonumentInUse {X = 151, Y = 358, Range = 0}
+		ODER(			ODER(				ODER(					IsMonumentInUse {X = 173, Y = 397, Range = 0},IsMonumentInUse {X = 151, Y = 358, Range = 0}
 				),
 					IsMonumentInUse {X = 233, Y = 272, Range = 0}
 			),

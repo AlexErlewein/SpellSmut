@@ -880,7 +880,61 @@ src/TirganachReloaded/cff_editor/
 
 ---
 
-**Document Version**: 1.0  
+## Current Quest Editor Enhancement Tasks
+
+### High Priority Tasks
+
+1. **Location & NPC Tab Enhancement**
+   - Add dropdown menu for Quest giver selection with existing NPCs (ID and name)
+   - Research and test if object NPCs (gravestones, etc.) are included in NPC IDs or need separate handling
+   - **Task ID**: `quest_npc_giver_dropdown`
+
+2. **Objectives Tab Data Research**
+   - Investigate game's objective/requirement data format
+   - Determine correct data structure needed for game compatibility
+   - Plan UI improvements (dropdown menus, predefined elements) based on findings
+   - **Task ID**: `quest_objectives_data_research`
+
+### Medium Priority Tasks
+
+3. **Rewards Tab Item Browser**
+   - Create comprehensive item browser showing all obtainable items (weapons, armor, spells, etc.) with names and IDs
+   - Research if existing weapon/armor/spell browsers can be reused or if new browser is needed
+   - **Task ID**: `quest_rewards_item_browser`
+
+4. **Preview Tab Visual Fix**
+   - Remove white background fillings in preview tab for better readability and visual consistency
+   - **Task ID**: `quest_preview_visual_fix`
+
+### Low Priority Tasks
+
+5. **Original Quest Loading**
+   - Implement ability to load original game quests into editor for editing and analysis
+   - Analyze existing quest structure (NPC locations, rewards, requirements, etc.)
+   - **Task ID**: `quest_original_loading`
+
+### Dialogue System Enhancement (Based on George from Jungle Example)
+
+**Reference**: `ModdingTools/SpellForceLUASources/script/P213/n10983.lua`
+
+**Key Elements Identified**:
+- Player choices with unique `AnswerId` system
+- Conditional responses using `IsNpcFlagTrue/False`, `IsGlobalFlagTrue/False`
+- Complex branching with `OnAnswer{Id; ...}` blocks
+- State management through NPC flags
+- Multiple choice options with `OfferAnswer` vs `Answer` distinction
+
+**Planned Dialogue Enhancements**:
+- Enhanced choice management system
+- Conditional logic builder for dialogue availability
+- State flag management interface
+- Improved dialogue tree visualization
+- Import/export compatibility with LUA dialogue format
+
+---
+
+**Document Version**: 1.1  
 **Created**: 2025-10-27  
+**Updated**: 2025-11-14  
 **Author**: SpellSmut Development Team  
-**Status**: 🟡 Planning Complete - Ready for Implementation
+**Status**: 🟢 Active Development - Enhancement Tasks Defined

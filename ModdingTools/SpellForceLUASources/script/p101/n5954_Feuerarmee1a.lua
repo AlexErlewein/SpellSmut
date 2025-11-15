@@ -12,7 +12,7 @@ SpawnOnlyWhen
 	X = 403, Y = 248, Clan = 0, UnitId = 0, NoSpawnEffect = TRUE, 
 	Conditions = 
 	{
-		--IsGlobalFlagTrue{Name = "FeuerArmeeFälltEin", UpdateInterval = 30},
+		--IsGlobalFlagTrue{Name = "FeuerArmeeFlltEin", UpdateInterval = 30},
 		IsGlobalTimeElapsed{Name = "CounterFeuerarmee1", Seconds = 1, UpdateInterval = 20 },
 		
 	}, 
@@ -32,9 +32,7 @@ Respawn
 	WaitTime = 15, UnitId = self, Clan = 0, Target = none, X = 403, Y = 248, Chief = none, NoSpawnEffect = FALSE, 
 	Conditions = 
 	{
-		ODER
-		(
-		Negated(QuestState{QuestId = 631, State = StateActive, UpdateInterval = 10}), --Knochenquest
+		ODER(		Negated(QuestState{QuestId = 631, State = StateActive, UpdateInterval = 10}), --Knochenquest
 		Negated(QuestState{QuestId = 615, State = StateSolved, UpdateInterval = 10}) --Q Shal Dun
 		)
 		

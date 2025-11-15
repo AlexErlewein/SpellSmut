@@ -46,7 +46,7 @@ OnPlatformOneTimeEvent
 	}
 }
 
---OnOneTimeEvent	-- gleich wieder löschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
+--OnOneTimeEvent	-- gleich wieder lschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
 NewState{Name = "AvoidUmspawnAfterMapStartCutscene"}
 AddTransition
 {
@@ -72,9 +72,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 		IsGlobalFlagTrue{Name = "P113WillitFolgtAvatar", UpdateInterval = 3},
@@ -102,9 +100,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 		IsGlobalFlagTrue{Name = "P113WillitFolgtAvatar", UpdateInterval = 3},
@@ -139,9 +135,7 @@ OnPlatformOneTimeEvent
 	NotInDialog = FALSE , UpdateInterval = 60 ,
 	Conditions = 
 	{
-		ODER
-		(
-			IsMonumentInUse{X = 442, Y = 287, Range = 3 , UpdateInterval = 40},
+		ODER(			IsMonumentInUse{X = 442, Y = 287, Range = 3 , UpdateInterval = 40},
 			IsMonumentInUse{X = 96, Y = 368, Range = 3 , UpdateInterval = 40}
 		)
 	},
@@ -178,7 +172,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "willit113_001", String = "Oh, oh! Gut! Da Ihr seid! Willit hat vergessen zu erzählen ..."},
+			Say{Tag = "willit113_001", String = "Oh, oh! Gut! Da Ihr seid! Willit hat vergessen zu erzhlen ..."},
 			Answer{Tag = "willit113_002PC", String = "Was gibt es?", AnswerId = 1},
 		}}
 
@@ -186,8 +180,8 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "willit113_003", String = "Kreaturen hausen im Abgrund! Gefährlich! Aber Willit ihre Schwächen kennt, jaja!"},
-			Answer{Tag = "willit113_004PC", String = "Lass hören!", AnswerId = 2},
+			Say{Tag = "willit113_003", String = "Kreaturen hausen im Abgrund! Gefhrlich! Aber Willit ihre Schwchen kennt, jaja!"},
+			Answer{Tag = "willit113_004PC", String = "Lass hren!", AnswerId = 2},
 		}}
 
 	OnAnswer{2;
@@ -202,7 +196,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "willit113_006", String = "Manche mögen das Feuer, andere hassen es! Pelz gut brennen!"},
+			Say{Tag = "willit113_006", String = "Manche mgen das Feuer, andere hassen es! Pelz gut brennen!"},
 			Answer{Tag = "willit113_007PC", String = "Nun ... lass gut sein, Willit!", AnswerId = 4},
 		}}
 

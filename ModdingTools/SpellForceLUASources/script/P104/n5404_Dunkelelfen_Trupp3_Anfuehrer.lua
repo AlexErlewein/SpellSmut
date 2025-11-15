@@ -1,9 +1,9 @@
--- TRUPPE 1, Anführer
+-- TRUPPE 1, Anfhrer
 
--- erst spawnen wenn die letzten flüchtlinge aus dem portal sind
+-- erst spawnen wenn die letzten flchtlinge aus dem portal sind
 SpawnOnlyWhen
 {
-	-- Spawnen an der Höhle
+	-- Spawnen an der Hhle
 	X = 371, Y = 307, NoSpawnEffect = TRUE,
 	Conditions = 
 	{
@@ -21,9 +21,7 @@ Respawn
 	X = 371, Y = 307, NoSpawnEffect = TRUE, WaitTime = 30,
 	Conditions = 
 	{ 
-		ODER 
-		(
-			IsGlobalTimeElapsed {Name = "RebirthChef3", Seconds = 360},
+		ODER(			IsGlobalTimeElapsed {Name = "RebirthChef3", Seconds = 360},
 			IsGlobalCounter{Name = "DarkElfAttackGroup3DeadCounter", Operator = IsGreaterOrEqual, Value = 10}
 		),
 		Negated (QuestState {QuestId = 615, State = StateSolved})

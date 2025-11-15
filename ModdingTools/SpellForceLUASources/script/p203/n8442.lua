@@ -2,7 +2,7 @@ function CreateStateMachine(_Type,_PlatformId,_NpcId,_X,_Y)
 
 BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 
--- Portal direkt am Eingang von Onyx Shore, wird geöffnet wenn der Grabräuber tot ist
+-- Portal direkt am Eingang von Onyx Shore, wird geffnet wenn der Grabruber tot ist
 OnPortalEvent
 {
 	UpdateInterval = 20,
@@ -10,9 +10,7 @@ OnPortalEvent
 	Type = SteinTorGross,		-- type of portal
 	OpenConditions = 
 	{ 
-		ODER
-		(
-			IsPlatformFlagTrue {Name = "p_n_P203GrabraeuberTot"},
+		ODER(			IsPlatformFlagTrue {Name = "p_n_P203GrabraeuberTot"},
 			IsGlobalFlagTrue {Name = "g_P204_TorOnyxOffen"}
 		)
 		

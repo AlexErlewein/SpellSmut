@@ -44,9 +44,7 @@ CreateCutScene
 	{
 		-- bedingungen, die angeben, wann die cutscene gestartet werden soll:
 		FigureInRange { X = 405, Y = 415, Range = 10, NpcId = 0,  UpdateInterval = 5},
-		ODER 
-			(
-				Negated (PlayerHasItem {ItemId = 2337, Amount = 1, UpdateInterval = 15}),
+		ODER(				Negated (PlayerHasItem {ItemId = 2337, Amount = 1, UpdateInterval = 15}),
 				Negated (PlayerHasItem {ItemId = 2615, Amount = 1, UpdateInterval = 15})
 			),
 		Negated(QuestState{QuestId = 210 , State = StateSolved}),		
@@ -88,18 +86,18 @@ CreateCutScene
 		{
 			WaitForEndOfSpeech,	
 			ExecuteCameraScript{Script = CameraHokanIV},						
-			CutSceneSay {Tag = "cutmaincharWhis001", NpcId = 0, String = "Ich bin nicht gekommen, um gegen Euch zu kämpfen, Hokan Ashir. In Eurem Vermächtnis schlummert ein Geheimnis! Ein Geheimnis von großem Wert! Das Schicksal der Völker hängt von ihm ab!"},
+			CutSceneSay {Tag = "cutmaincharWhis001", NpcId = 0, String = "Ich bin nicht gekommen, um gegen Euch zu kmpfen, Hokan Ashir. In Eurem Vermchtnis schlummert ein Geheimnis! Ein Geheimnis von groem Wert! Das Schicksal der Vlker hngt von ihm ab!"},
 		},
 		[320] = 
 		{
 			WaitForEndOfSpeech,	
 			ExecuteCameraScript{Script = CameraHokanIII},						
-			CutSceneSay {Tag = "cuthokanWhis002", NpcId = 2576, String = "Ha! Was habe ich schon mit Euren Völkern zu schaffen, Sklave?"},
+			CutSceneSay {Tag = "cuthokanWhis002", NpcId = 2576, String = "Ha! Was habe ich schon mit Euren Vlkern zu schaffen, Sklave?"},
 		},
 		[360] = 
 		{
 			WaitForEndOfSpeech,			
-			CutSceneSay {Tag = "cuthokanWhis003", NpcId = 2576, String = "Ich begehre nur eins! Die Maske! Die Maske des Belial! Der Schmerz ist unerträglich ohne sie! Alles andere hat keine Bedeutung für mich!"},
+			CutSceneSay {Tag = "cuthokanWhis003", NpcId = 2576, String = "Ich begehre nur eins! Die Maske! Die Maske des Belial! Der Schmerz ist unertrglich ohne sie! Alles andere hat keine Bedeutung fr mich!"},
 		},
 		[440] = 
 		{
