@@ -60,6 +60,7 @@ from PySide6.QtWidgets import (
     QHeaderView,
     QAbstractItemView,
     QTreeWidgetItemIterator,
+    QInputDialog,
 )
 from PySide6.QtCore import (
     Qt,
@@ -208,13 +209,9 @@ class QuestBrowser(QWidget):
     quest_created = Signal(dict)  # quest_data
     quest_updated = Signal(int, dict)  # quest_id, quest_data
 
-    def __init__(self, parent=None):
+    def __init__(self, item_loader=None, parent=None):
         super().__init__(parent)
-        self.quest_data = {}
-        self.filtered_quests = {}
-        self.current_quest_id = None
-        self.next_custom_quest_id = 9000  # Starting ID for custom quests
-
+        self.item_loader = item_loader
         self._setup_ui()
         self._setup_connections()
 
@@ -401,9 +398,11 @@ class QuestBrowser(QWidget):
         current_items = self.quest_tree.selectedItems()
         if current_items:
             quest_id = current_items[0].data(0, Qt.UserRole)
-            if quest_id and quest_id != self.current_quest_id:
-                self.current_quest_id = quest_id
-                self.quest_selected.emit(quest_id)
+            parent = self.parent()
+            if quest_id and parent and hasattr(parent, "current_quest_id"):
+                if quest_id != parent.current_quest_id:
+                    parent.current_quest_id = quest_id
+                    self.quest_selected.emit(quest_id)
 
     def _on_item_double_clicked(self, item, column):
         """Handle double click - edit quest"""
@@ -451,9 +450,14 @@ class QuestBrowser(QWidget):
 
     def _create_new_quest(self):
         """Create a new quest immediately with placeholder data"""
-        # Generate new quest ID
-        quest_id = self.next_custom_quest_id
-        self.next_custom_quest_id += 1
+        # Generate new quest ID from parent UnifiedQuestEditor
+        parent = self.parent()
+        if parent and hasattr(parent, "next_custom_quest_id"):
+            quest_id = parent.next_custom_quest_id
+            parent.next_custom_quest_id += 1
+        else:
+            # Fallback if parent doesn't have the attribute
+            quest_id = 10000
 
         # Create quest data with placeholder name
         quest_data = {
@@ -528,10 +532,9 @@ class QuestBasicInfoWidget(QWidget):
 
     data_changed = Signal()
 
-    def __init__(self, parent=None):
+    def __init__(self, item_loader=None, parent=None):
         super().__init__(parent)
-        self.current_quest = None
-
+        self.item_loader = item_loader
         self._setup_ui()
         self._setup_connections()
 
@@ -782,8 +785,9 @@ class QuestLocationWidget(QWidget):
 class QuestPreviewWidget(QWidget):
     """Quest preview widget showing how quest will appear in game"""
 
-    def __init__(self, parent=None):
+    def __init__(self, item_loader=None, parent=None):
         super().__init__(parent)
+        self.item_loader = item_loader
         self._setup_ui()
 
     def _setup_ui(self):
@@ -798,7 +802,19 @@ class QuestPreviewWidget(QWidget):
         # Preview content
         self.preview_edit = QTextEdit()
         self.preview_edit.setReadOnly(True)
-        self.preview_edit.setHtml("<p>Select a quest to preview...</p>")
+        # Apply dark theme for better readability and consistency
+        self.preview_edit.setStyleSheet("""
+            QTextEdit {
+                background-color: #2c3e50;
+                color: #ecf0f1;
+                border: 1px solid #34495e;
+                border-radius: 4px;
+                padding: 8px;
+            }
+        """)
+        self.preview_edit.setHtml(
+            "<p style='color: #ecf0f1;'>Select a quest to preview...</p>"
+        )
         layout.addWidget(self.preview_edit)
 
     def update_preview(self, quest_data: Dict):
@@ -813,21 +829,23 @@ class QuestPreviewWidget(QWidget):
 
     def _generate_preview_html(self, quest_data: Dict) -> str:
         """Generate HTML preview of quest"""
-        html = "<html><body style='font-family: Arial; font-size: 11pt;'>"
+        html = (
+            "<html><body style='font-family: Arial; font-size: 11pt; color: #ecf0f1;'>"
+        )
 
         # Quest header
         quest_name = quest_data.get("name", "Unnamed Quest")
         quest_id = quest_data.get("quest_id", 0)
-        html += f"<h2 style='color: #2c3e50; margin-bottom: 5px;'>{quest_name}</h2>"
+        html += f"<h2 style='color: #3498db; margin-bottom: 5px;'>{quest_name}</h2>"
         html += (
-            f"<p style='color: #7f8c8d; margin-top: 0;'><b>Quest ID:</b> {quest_id}</p>"
+            f"<p style='color: #bdc3c7; margin-top: 0;'><b>Quest ID:</b> {quest_id}</p>"
         )
 
         # Description
         description = quest_data.get("description", "")
         if description:
-            html += "<div style='background-color: #ecf0f1; padding: 10px; border-radius: 5px; margin: 10px 0;'>"
-            html += f"<p><b>Description:</b></p><p>{description}</p>"
+            html += "<div style='background-color: #34495e; padding: 10px; border-radius: 5px; margin: 10px 0; border-left: 4px solid #3498db;'>"
+            html += f"<p style='color: #ecf0f1; margin: 0;'><b>Description:</b></p><p style='color: #ecf0f1; margin: 5px 0 0 0;'>{description}</p>"
             html += "</div>"
 
         # Location and NPC
@@ -839,7 +857,7 @@ class QuestPreviewWidget(QWidget):
         npc_name = quest_data.get("quest_giver_name", "Unknown NPC")
         npc_id = quest_data.get("npc_id", 0)
 
-        html += "<h3 style='color: #34495e; margin-top: 15px;'>Quest Details</h3>"
+        html += "<h3 style='color: #e74c3c; margin-top: 15px;'>Quest Details</h3>"
         html += "<ul>"
         html += f"<li><b>Location:</b> {location_name}</li>"
         html += f"<li><b>Quest Giver:</b> {npc_name} (ID: {npc_id})</li>"
@@ -884,7 +902,24 @@ class QuestPreviewWidget(QWidget):
                 if silver > 0 or copper > 0:
                     html += f"<li><b>Money:</b> {silver} Silver, {copper} Copper</li>"
                 if items:
-                    html += f"<li><b>Items:</b> {len(items)} items</li>"
+                    html += f"<li><b>Items ({len(items)}):</b></li>"
+                    html += "<ul style='margin-left: 20px;'>"
+                    for item in items:
+                        if isinstance(item, dict):
+                            item_id = item.get("id", 0)
+                            count = item.get("count", 1)
+
+                            # Try to resolve item name from item loader
+                            item_name = f"Item {item_id}"  # Default fallback
+                            if hasattr(self, "item_loader") and self.item_loader:
+                                item_data = self.item_loader.get_item_by_id(item_id)
+                                if item_data:
+                                    item_name = item_data.get("name", f"Item {item_id}")
+
+                            html += f"<li>{item_name} (ID: {item_id}) x{count}</li>"
+                        else:
+                            html += f"<li>{item}</li>"
+                    html += "</ul>"
             else:
                 html += f"<li>{rewards}</li>"
 
@@ -930,9 +965,11 @@ class UnifiedQuestEditor(QMainWindow):
         # Initialize components
         self.logger = None
         self.data_model = None
+        self.item_loader = None  # Will be initialized if needed
         self.quest_data = {}
         self.current_quest_id = None
         self.validator = None
+        self.next_custom_quest_id = 10000  # Start custom quests at 10000
 
         # Initialize settings
         self.settings = QSettings("SpellSmut", "UnifiedQuestEditor")
@@ -1072,7 +1109,7 @@ class UnifiedQuestEditor(QMainWindow):
         self.quest_editor_tabs.addTab(self.rewards_widget, "Rewards")
 
         # Tab 7: Preview
-        self.preview_widget = QuestPreviewWidget()
+        self.preview_widget = QuestPreviewWidget(self.item_loader)
         self.quest_editor_tabs.addTab(self.preview_widget, "Preview")
 
         # Tab 8: Validation
@@ -2239,6 +2276,69 @@ end
         current_row = self.items_list.currentRow()
         if current_row >= 0:
             self.items_list.takeItem(current_row)
+            self._on_data_changed()
+
+    def _on_item_type_changed(self, item_type):
+        """Handle item type selection change"""
+        # This method is called when the user changes the item type dropdown
+        # For now, we'll just show a message about which browser would be used
+        if item_type == "Weapons":
+            QMessageBox.information(
+                self,
+                "Weapon Browser",
+                "Weapon browser would show detailed weapon stats (damage, speed, etc.) from game data.",
+            )
+        elif item_type == "Armor":
+            QMessageBox.information(
+                self,
+                "Armor Browser",
+                "Armor browser would show detailed armor stats (defense, slots, etc.) from game data.",
+            )
+        elif item_type == "Spells":
+            QMessageBox.information(
+                self,
+                "Spell Browser",
+                "Spell browser would show spell details (mana cost, effects, etc.) from game data.",
+            )
+        # General Items uses the existing ItemBrowserWidget
+
+    def _edit_item_quantity(self):
+        """Edit quantity of selected reward item"""
+        current_item = self.items_list.currentItem()
+        if not current_item:
+            QMessageBox.warning(
+                self, "No Selection", "Please select an item to edit quantity."
+            )
+            return
+
+        # Get current quantity from item data
+        item_data = current_item.data(Qt.UserRole)
+        if not item_data or not isinstance(item_data, dict):
+            QMessageBox.warning(self, "Invalid Item", "Selected item has invalid data.")
+            return
+
+        current_quantity = item_data.get("count", 1)
+
+        # Show quantity dialog
+        quantity, ok = QInputDialog.getInt(
+            self,
+            "Edit Quantity",
+            f"Enter quantity for {item_data.get('name', 'item')}:",
+            current_quantity,
+            1,
+            999,
+            1,
+        )
+
+        if ok and quantity != current_quantity:
+            # Update item data
+            item_data["count"] = quantity
+            current_item.setData(Qt.UserRole, item_data)
+
+            # Update display text
+            item_name = item_data.get("name", f"Item {item_data.get('id', 0)}")
+            current_item.setText(f"{item_name} x{quantity}")
+
             self._on_data_changed()
 
     # Dialogue management methods
