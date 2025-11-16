@@ -52,6 +52,7 @@ from PySide6.QtWidgets import (
     QGraphicsPolygonItem,
     QSizePolicy,
     QMenu,
+    QApplication,
 )
 from PySide6.QtCore import Qt, Signal, QRectF, QPointF, QTimer
 from PySide6.QtWidgets import QStyle
@@ -59,10 +60,12 @@ from PySide6.QtGui import QFont, QPixmap, QPen, QBrush, QColor, QPainter, QPolyg
 
 try:
     from TirganachReloaded.cff_editor.logging_config import get_logger
+    from TirganachReloaded.cff_editor.widgets.answer_id_manager import AnswerIdManager
 
     logger = get_logger(__name__)
 except ImportError:
     import logging
+    from TirganachReloaded.cff_editor.widgets.answer_id_manager import AnswerIdManager
 
     logger = logging.getLogger(__name__)
 
@@ -89,7 +92,7 @@ class DialogueStep:
     speaker: str = ""
     text: str = ""
     choices: List[Dict[str, Any]] = (
-        None  # Each choice: {'text': 'Option text', 'next_step_id': 'target_step_id', 'availability_rules': []}
+        None  # Each choice: {'text': 'Option text', 'next_step_id': 'target_step_id', 'answer_id': int, 'availability_rules': []}
     )
     next_step_id: str = ""  # For linear flow when no branching
     response_to_choice: str = ""  # ID of the choice this NPC response is responding to
@@ -977,6 +980,49 @@ class DialogueStepWidget(QFrame):
                 choice_layout.addWidget(QLabel("Player option text:"))
                 choice_layout.addWidget(choice_edit)
 
+                # AnswerId section
+                answer_id_layout = QHBoxLayout()
+                answer_id_layout.addWidget(QLabel("AnswerId:"))
+                
+                # Get or assign AnswerId
+                answer_id = choice.get("answer_id")
+                if not answer_id:
+                    # Auto-assign if not present
+                    answer_id = self.answer_id_manager.assign_answer_id(
+                        self.step.id, i, choice.get("text", "")
+                    )
+                    choice["answer_id"] = answer_id
+                
+                # Display AnswerId with indicator
+                answer_id_label = QLabel(f"<b>{answer_id}</b>")
+                answer_id_label.setStyleSheet("""
+                    QLabel {
+                        color: #2980b9;
+                        font-size: 14px;
+                        padding: 4px 8px;
+                        background-color: #ecf0f1;
+                        border-radius: 3px;
+                        border: 1px solid #bdc3c7;
+                    }
+                """)
+                answer_id_label.setToolTip(f"Unique AnswerId for this choice")
+                answer_id_layout.addWidget(answer_id_label)
+                
+                # Auto-assigned indicator
+                assignment = self.answer_id_manager.get_step_assignments(self.step.id)
+                is_auto = True
+                for assign in assignment:
+                    if assign.choice_index == i:
+                        is_auto = assign.auto_assigned
+                        break
+                
+                auto_indicator = QLabel("🤖" if is_auto else "✋")
+                auto_indicator.setToolTip("Auto-assigned" if is_auto else "Manually assigned")
+                answer_id_layout.addWidget(auto_indicator)
+                answer_id_layout.addStretch()
+                
+                choice_layout.addLayout(answer_id_layout)
+
                 # Response mapping info
                 target_step_id = choice.get("next_step_id", "")
                 if target_step_id:
@@ -1138,12 +1184,26 @@ class DialogueStepWidget(QFrame):
 
     def add_choice(self):
         """Add a new choice"""
-        self.step.choices.append({"text": "", "next_step": ""})
+        new_choice = {"text": "", "next_step": ""}
+        self.step.choices.append(new_choice)
+        
+        # Auto-assign AnswerId for the new choice
+        choice_index = len(self.step.choices) - 1
+        answer_id = self.parent().answer_id_manager.assign_answer_id(
+            self.step.id, choice_index, ""
+        )
+        new_choice["answer_id"] = answer_id
+        logger.info(f"Added new choice with AnswerId {answer_id} to step {self.step.id}")
+        
         self.rebuild_ui()
 
     def remove_choice(self, index):
         """Remove a choice"""
         if len(self.step.choices) > 2:  # Keep at least 2 choices
+            # Remove AnswerId assignment
+            self.parent().answer_id_manager.remove_assignment(self.step.id, index)
+            logger.info(f"Removed choice {index} and its AnswerId from step {self.step.id}")
+            
             self.step.choices.pop(index)
             self.rebuild_ui()
 
@@ -1255,13 +1315,18 @@ class SimpleDialogueBuilder(QWidget):
 
     dialogue_changed = Signal()
 
-    def __init__(self):
+    def __init__(self, quest_name: str = ""):
         super().__init__()
         self.steps = {}
         self.next_step_id = 1
         self.selected_step_id = None
         self.current_step_widget = None
         self._updating_selection = False  # Prevent recursive selection updates
+        
+        # Initialize AnswerId Manager
+        self.answer_id_manager = AnswerIdManager(start_id=1000, quest_name=quest_name or "New Quest")
+        logger.info(f"Initialized AnswerIdManager for quest: {quest_name}")
+        
         self.setup_ui()
         self.create_initial_dialogue()
 
@@ -1377,6 +1442,12 @@ class SimpleDialogueBuilder(QWidget):
         self.export_btn = QPushButton("Export Lua")
         self.export_btn.clicked.connect(self.export_to_lua)
         toolbar_layout.addWidget(self.export_btn)
+        
+        # AnswerId management button
+        self.answerid_btn = QPushButton("AnswerId Info")
+        self.answerid_btn.setToolTip("View AnswerId assignments and detect conflicts")
+        self.answerid_btn.clicked.connect(self.show_answerid_info)
+        toolbar_layout.addWidget(self.answerid_btn)
 
         self.help_btn = QPushButton("Help")
         self.help_btn.clicked.connect(self.show_help)
@@ -2194,6 +2265,110 @@ class SimpleDialogueBuilder(QWidget):
         dialog.setStandardButtons(QMessageBox.Ok)
         dialog.exec()
 
+    def show_answerid_info(self):
+        """Show AnswerId assignment information and conflicts"""
+        # Get usage report
+        report = self.answer_id_manager.get_usage_report()
+        conflicts = self.answer_id_manager.validate_uniqueness()
+        
+        # Build info dialog
+        dialog = QDialog(self)
+        dialog.setWindowTitle("AnswerId Management")
+        dialog.setMinimumWidth(700)
+        dialog.setMinimumHeight(500)
+        
+        layout = QVBoxLayout(dialog)
+        
+        # Summary section
+        summary_group = QGroupBox("Summary")
+        summary_layout = QFormLayout()
+        summary_layout.addRow("Quest:", report["quest_name"])
+        summary_layout.addRow("Total Assignments:", str(report["total_assignments"]))
+        summary_layout.addRow("Auto-Assigned:", str(report["auto_assigned"]))
+        summary_layout.addRow("Manual-Assigned:", str(report["manual_assigned"]))
+        summary_layout.addRow("Next Available ID:", str(report["next_available_id"]))
+        summary_group.setLayout(summary_layout)
+        layout.addWidget(summary_group)
+        
+        # Conflicts section
+        if conflicts:
+            conflicts_group = QGroupBox("⚠️ Conflicts Detected")
+            conflicts_layout = QVBoxLayout()
+            conflicts_text = QTextEdit()
+            conflicts_text.setReadOnly(True)
+            conflicts_text.setMaximumHeight(150)
+            
+            conflict_msg = "The following AnswerIds are used multiple times:\n\n"
+            for conflict in conflicts:
+                conflict_msg += f"• {conflict}\n"
+            
+            conflicts_text.setPlainText(conflict_msg)
+            conflicts_text.setStyleSheet("background-color: #fff3cd; color: #856404;")
+            conflicts_layout.addWidget(conflicts_text)
+            conflicts_group.setLayout(conflicts_layout)
+            layout.addWidget(conflicts_group)
+        else:
+            no_conflicts = QLabel("✅ No conflicts detected - all AnswerIds are unique!")
+            no_conflicts.setStyleSheet("color: #27ae60; font-weight: bold; padding: 10px;")
+            layout.addWidget(no_conflicts)
+        
+        # Detailed assignments
+        assignments_group = QGroupBox("Detailed Assignments")
+        assignments_layout = QVBoxLayout()
+        
+        assignments_text = QTextEdit()
+        assignments_text.setReadOnly(True)
+        assignments_text.setPlainText(self.answer_id_manager.preview_assignments(format="text"))
+        assignments_text.setFont(QFont("Courier", 10))
+        assignments_layout.addWidget(assignments_text)
+        assignments_group.setLayout(assignments_layout)
+        layout.addWidget(assignments_group)
+        
+        # Buttons
+        btn_layout = QHBoxLayout()
+        
+        export_btn = QPushButton("Export to JSON")
+        export_btn.clicked.connect(lambda: self._export_answerids())
+        btn_layout.addWidget(export_btn)
+        
+        close_btn = QPushButton("Close")
+        close_btn.clicked.connect(dialog.accept)
+        btn_layout.addWidget(close_btn)
+        
+        layout.addLayout(btn_layout)
+        
+        dialog.exec()
+    
+    def _export_answerids(self):
+        """Export AnswerId assignments to JSON file"""
+        json_str = self.answer_id_manager.export_to_json()
+        
+        # Show export dialog with JSON content
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Export AnswerIds")
+        dialog.setMinimumWidth(600)
+        dialog.setMinimumHeight(400)
+        
+        layout = QVBoxLayout(dialog)
+        layout.addWidget(QLabel("AnswerId assignments in JSON format:"))
+        
+        text_edit = QTextEdit()
+        text_edit.setPlainText(json_str)
+        text_edit.setFont(QFont("Courier", 10))
+        layout.addWidget(text_edit)
+        
+        btn_layout = QHBoxLayout()
+        copy_btn = QPushButton("Copy to Clipboard")
+        copy_btn.clicked.connect(lambda: QApplication.clipboard().setText(json_str))
+        btn_layout.addWidget(copy_btn)
+        
+        close_btn = QPushButton("Close")
+        close_btn.clicked.connect(dialog.accept)
+        btn_layout.addWidget(close_btn)
+        
+        layout.addLayout(btn_layout)
+        dialog.exec()
+    
     def show_help(self):
         """Show help dialog"""
         help_text = """

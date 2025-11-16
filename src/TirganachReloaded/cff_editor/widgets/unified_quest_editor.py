@@ -692,15 +692,26 @@ class QuestLocationWidget(QWidget):
             self.platform_combo.addItem(f"{name} ({code})", code)
         layout.addRow("Location*:", self.platform_combo)
 
-        # Quest giver NPC ID
+        # Quest giver NPC selection with browser
+        npc_giver_layout = QHBoxLayout()
+        
         self.npc_id_edit = QLineEdit()
         self.npc_id_edit.setPlaceholderText("NPC ID (e.g., 100)")
         self.npc_id_edit.setValidator(QIntValidator(0, 99999))
-        layout.addRow("Quest Giver NPC ID:", self.npc_id_edit)
+        npc_giver_layout.addWidget(self.npc_id_edit)
+        
+        # Browse NPCs button
+        browse_npc_btn = QPushButton("Browse NPCs...")
+        browse_npc_btn.setToolTip("Open NPC browser to select quest giver")
+        browse_npc_btn.clicked.connect(self._browse_quest_giver)
+        npc_giver_layout.addWidget(browse_npc_btn)
+        
+        layout.addRow("Quest Giver NPC ID:", npc_giver_layout)
 
-        # Quest giver name (for reference)
+        # Quest giver name (for reference - auto-filled when browsing)
         self.npc_name_edit = QLineEdit()
-        self.npc_name_edit.setPlaceholderText("NPC name (for reference)")
+        self.npc_name_edit.setPlaceholderText("NPC name (auto-filled from browser)")
+        self.npc_name_edit.setReadOnly(True)  # Make read-only since it's auto-filled
         layout.addRow("Quest Giver Name:", self.npc_name_edit)
 
         # Additional locations (for multi-location quests)
@@ -780,6 +791,27 @@ class QuestLocationWidget(QWidget):
         current_row = self.additional_locations.currentRow()
         if current_row >= 0:
             self.additional_locations.takeItem(current_row)
+    
+    def _browse_quest_giver(self):
+        """Open NPC browser to select quest giver"""
+        try:
+            from TirganachReloaded.cff_editor.widgets.npc_browser_dialog import choose_quest_giver
+            
+            npc = choose_quest_giver(parent=self)
+            if npc:
+                # Update NPC ID and name fields
+                self.npc_id_edit.setText(str(npc.npc_id))
+                self.npc_name_edit.setText(npc.name)
+                
+                self.logger.info(f"Selected quest giver: {npc.name} (ID: {npc.npc_id})")
+                self.status_bar.showMessage(f"Quest giver set to: {npc.name}", 3000)
+        except ImportError as e:
+            self.logger.error(f"Failed to import NPC browser: {e}")
+            QMessageBox.warning(
+                self,
+                "NPC Browser Not Available",
+                "The NPC browser could not be loaded. Please select NPC ID manually."
+            )
 
 
 class QuestPreviewWidget(QWidget):
