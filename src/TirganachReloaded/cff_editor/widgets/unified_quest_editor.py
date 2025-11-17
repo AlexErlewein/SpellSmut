@@ -694,18 +694,18 @@ class QuestLocationWidget(QWidget):
 
         # Quest giver NPC selection with browser
         npc_giver_layout = QHBoxLayout()
-        
+
         self.npc_id_edit = QLineEdit()
         self.npc_id_edit.setPlaceholderText("NPC ID (e.g., 100)")
         self.npc_id_edit.setValidator(QIntValidator(0, 99999))
         npc_giver_layout.addWidget(self.npc_id_edit)
-        
+
         # Browse NPCs button
         browse_npc_btn = QPushButton("Browse NPCs...")
         browse_npc_btn.setToolTip("Open NPC browser to select quest giver")
         browse_npc_btn.clicked.connect(self._browse_quest_giver)
         npc_giver_layout.addWidget(browse_npc_btn)
-        
+
         layout.addRow("Quest Giver NPC ID:", npc_giver_layout)
 
         # Quest giver name (for reference - auto-filled when browsing)
@@ -791,18 +791,20 @@ class QuestLocationWidget(QWidget):
         current_row = self.additional_locations.currentRow()
         if current_row >= 0:
             self.additional_locations.takeItem(current_row)
-    
+
     def _browse_quest_giver(self):
         """Open NPC browser to select quest giver"""
         try:
-            from TirganachReloaded.cff_editor.widgets.npc_browser_dialog import choose_quest_giver
-            
+            from TirganachReloaded.cff_editor.widgets.npc_browser_dialog import (
+                choose_quest_giver,
+            )
+
             npc = choose_quest_giver(parent=self)
             if npc:
                 # Update NPC ID and name fields
                 self.npc_id_edit.setText(str(npc.npc_id))
                 self.npc_name_edit.setText(npc.name)
-                
+
                 self.logger.info(f"Selected quest giver: {npc.name} (ID: {npc.npc_id})")
                 self.status_bar.showMessage(f"Quest giver set to: {npc.name}", 3000)
         except ImportError as e:
@@ -810,7 +812,7 @@ class QuestLocationWidget(QWidget):
             QMessageBox.warning(
                 self,
                 "NPC Browser Not Available",
-                "The NPC browser could not be loaded. Please select NPC ID manually."
+                "The NPC browser could not be loaded. Please select NPC ID manually.",
             )
 
 
@@ -1099,6 +1101,46 @@ class UnifiedQuestEditor(QMainWindow):
         # Tab 3: Location & NPC
         self.location_widget = QuestLocationWidget()
         self.quest_editor_tabs.addTab(self.location_widget, "Location & NPC")
+
+        # Tab 3.5: Conditions & Flags - NEW
+        try:
+            from .flag_manager import FlagManagerWidget
+            from .condition_builder import ConditionBuilderWidget
+
+            # Create a combined widget for conditions and flags
+            conditions_flags_widget = QWidget()
+            conditions_flags_layout = QVBoxLayout(conditions_flags_widget)
+            conditions_flags_layout.setContentsMargins(5, 5, 5, 5)
+
+            # Create splitter for conditions and flags
+            cf_splitter = QSplitter(Qt.Vertical)
+
+            # Flag Manager (top)
+            self.flag_manager = FlagManagerWidget()
+            self.flag_manager.flags_changed.connect(self._on_flags_changed)
+            cf_splitter.addWidget(self.flag_manager)
+
+            # Condition Builder (bottom) - pass flag manager for integration
+            self.condition_builder = ConditionBuilderWidget(
+                flag_manager=self.flag_manager
+            )
+            self.condition_builder.conditions_changed.connect(
+                self._on_conditions_changed
+            )
+            cf_splitter.addWidget(self.condition_builder)
+
+            # Set initial sizes (60% flags, 40% conditions)
+            cf_splitter.setSizes([600, 400])
+
+            conditions_flags_layout.addWidget(cf_splitter)
+
+            self.quest_editor_tabs.addTab(
+                conditions_flags_widget, "🔧 Conditions & Flags"
+            )
+        except ImportError as e:
+            print(f"Warning: Conditions & Flags widgets not available: {e}")
+            self.flag_manager = None
+            self.condition_builder = None
 
         # Tab 4: Objectives & Requirements
         self.objectives_widget = QWidget()
@@ -1540,6 +1582,25 @@ class UnifiedQuestEditor(QMainWindow):
 
         # Load dialogues
         self._load_quest_dialogues(quest_info)
+
+        # Load flags and conditions
+        if hasattr(self, "flag_manager") and self.flag_manager:
+            flags_data = quest_info.get("flags", {})
+            if flags_data:
+                self.flag_manager.load_from_dict(flags_data)
+            else:
+                # Clear flags for new quest
+                self.flag_manager.flags.clear()
+                self.flag_manager.refresh_table()
+
+        if hasattr(self, "condition_builder") and self.condition_builder:
+            conditions_data = quest_info.get("conditions", {})
+            if conditions_data:
+                self.condition_builder.load_from_dict(conditions_data)
+            else:
+                # Clear conditions for new quest
+                self.condition_builder.root_condition.children.clear()
+                self.condition_builder.refresh_tree()
 
         # Update preview
         self.preview_widget.update_preview(quest_info)
@@ -2506,6 +2567,36 @@ end
         # Trigger data change
         self._on_data_changed()
         self.status_bar.showMessage("Dialogue updated in visual editor")
+
+    def _on_flags_changed(self):
+        """Handle flag changes"""
+        if not self.current_quest_id:
+            return
+
+        # Save flags to quest data
+        if hasattr(self, "flag_manager") and self.flag_manager:
+            quest_data = self._get_current_quest_data()
+            quest_data["flags"] = self.flag_manager.to_dict()
+            self.quest_data[self.current_quest_id] = quest_data
+
+        # Trigger auto-save
+        self.auto_save_timer.start(self.auto_save_delay)
+        self.status_bar.showMessage("Flags updated")
+
+    def _on_conditions_changed(self):
+        """Handle condition changes"""
+        if not self.current_quest_id:
+            return
+
+        # Save conditions to quest data
+        if hasattr(self, "condition_builder") and self.condition_builder:
+            quest_data = self._get_current_quest_data()
+            quest_data["conditions"] = self.condition_builder.to_dict()
+            self.quest_data[self.current_quest_id] = quest_data
+
+        # Trigger auto-save
+        self.auto_save_timer.start(self.auto_save_delay)
+        self.status_bar.showMessage("Conditions updated")
 
     def _convert_dialogues_to_visual_format(self, dialogues: List) -> Dict[str, Any]:
         """Convert simple dialogue list to visual editor format"""

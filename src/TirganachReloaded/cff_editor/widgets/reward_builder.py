@@ -140,7 +140,8 @@ class RewardBuilderWidget(QWidget):
             'gold': 0,
             'silver': 0,
             'copper': 0,
-            'items': []
+            'items_given': [],  # Items player receives
+            'items_taken': []   # Items removed from player (quest items)
         }
         
         # Balance data
@@ -290,15 +291,51 @@ class RewardBuilderWidget(QWidget):
         
         layout.addWidget(basic_group)
         
-        # Selected items
-        items_group = QGroupBox("Selected Items")
-        items_layout = QVBoxLayout(items_group)
+        # Items tabs (given vs taken)
+        items_tabs = QTabWidget()
         
-        self.reward_items_list = QListWidget()
-        self.reward_items_list.setMaximumHeight(150)
-        items_layout.addWidget(self.reward_items_list)
+        # Items GIVEN tab
+        items_given_widget = QWidget()
+        items_given_layout = QVBoxLayout(items_given_widget)
         
-        layout.addWidget(items_group)
+        items_given_layout.addWidget(QLabel("Items the player receives as rewards:"))
+        self.items_given_list = QListWidget()
+        self.items_given_list.setMaximumHeight(120)
+        items_given_layout.addWidget(self.items_given_list)
+        
+        items_given_btn_layout = QHBoxLayout()
+        add_given_btn = QPushButton("Add Selected Item")
+        add_given_btn.clicked.connect(lambda: self._add_selected_item('given'))
+        items_given_btn_layout.addWidget(add_given_btn)
+        
+        remove_given_btn = QPushButton("Remove")
+        remove_given_btn.clicked.connect(lambda: self._remove_item('given'))
+        items_given_btn_layout.addWidget(remove_given_btn)
+        items_given_layout.addLayout(items_given_btn_layout)
+        
+        items_tabs.addTab(items_given_widget, "Items Given")
+        
+        # Items TAKEN tab
+        items_taken_widget = QWidget()
+        items_taken_layout = QVBoxLayout(items_taken_widget)
+        
+        items_taken_layout.addWidget(QLabel("Quest items removed from player upon completion:"))
+        self.items_taken_list = QListWidget()
+        self.items_taken_list.setMaximumHeight(120)
+        items_taken_layout.addWidget(self.items_taken_list)
+        
+        items_taken_btn_layout = QHBoxLayout()
+        add_taken_btn = QPushButton("Add Selected Item")
+        add_taken_btn.clicked.connect(lambda: self._add_selected_item('taken'))
+        items_taken_btn_layout.addWidget(add_taken_btn)
+        
+        remove_taken_btn = QPushButton("Remove")
+        remove_taken_btn.clicked.connect(lambda: self._remove_item('taken'))
+        items_taken_layout.addLayout(items_taken_btn_layout)
+        
+        items_tabs.addTab(items_taken_widget, "Items Taken")
+        
+        layout.addWidget(items_tabs)
         
         # Reward preview
         preview_group = QGroupBox("Reward Preview")
@@ -475,8 +512,8 @@ class RewardBuilderWidget(QWidget):
         pass
     
     @Slot()
-    def _add_selected_item(self):
-        """Add currently selected item to rewards"""
+    def _add_selected_item(self, item_type='given'):
+        """Add currently selected item to rewards (given or taken)"""
         selected_items = self.item_table.selectedItems()
         if not selected_items:
             QMessageBox.warning(self, "No Selection", "Please select an item to add.")
@@ -484,59 +521,61 @@ class RewardBuilderWidget(QWidget):
         
         # Get full item data
         row = selected_items[0].row()
-        item = self.item_table.item(row, 0).data(Qt.UserRole)
+        item = self.item_table.item(row, 0).data(Qt.ItemDataRole.UserRole)
         
-        self._add_item_to_rewards(item)
+        self._add_item_to_rewards(item, item_type)
     
     @Slot(int)
     def _add_item_at_row(self, row: int):
-        """Add item at specific row to rewards"""
-        item = self.item_table.item(row, 0).data(Qt.UserRole)
-        self._add_item_to_rewards(item)
+        """Add item at specific row to rewards (defaults to given)"""
+        item = self.item_table.item(row, 0).data(Qt.ItemDataRole.UserRole)
+        self._add_item_to_rewards(item, 'given')
     
-    def _add_item_to_rewards(self, item: Dict):
-        """Add item to reward list"""
+    def _add_item_to_rewards(self, item: Dict, item_type='given'):
+        """Add item to reward list (given or taken)"""
+        # Select target list
+        target_list = self.items_given_list if item_type == 'given' else self.items_taken_list
+        target_rewards = self.current_rewards['items_given'] if item_type == 'given' else self.current_rewards['items_taken']
+        
         # Check if already added
-        for existing in self.selected_items:
+        for existing in target_rewards:
             if existing['id'] == item['id']:
-                QMessageBox.information(self, "Already Added", f"{item['name']} is already in rewards.")
+                type_str = "given to" if item_type == 'given' else "taken from"
+                QMessageBox.information(self, "Already Added", f"{item['name']} is already in items {type_str} player.")
                 return
         
-        # Add to selected items
-        self.selected_items.append(item)
+        # Add to rewards
+        target_rewards.append(item)
         
         # Update list widget
-        list_item = QListWidgetItem(f"{item['name']} ({item['type']})")
-        list_item.setData(Qt.UserRole, item)
-        self.reward_items_list.addItem(list_item)
-        
-        # Update current rewards
-        self.current_rewards['items'] = self.selected_items.copy()
+        list_item = QListWidgetItem(f"[{item['id']}] {item['name']} ({item['type']})")
+        list_item.setData(Qt.ItemDataRole.UserRole, item)
+        target_list.addItem(list_item)
         
         # Emit change and update balance
         self._on_rewards_changed()
     
     @Slot()
-    def _remove_selected_reward(self):
-        """Remove selected reward item"""
-        selected_items = self.reward_items_list.selectedItems()
+    def _remove_item(self, item_type='given'):
+        """Remove selected item from rewards (given or taken)"""
+        target_list = self.items_given_list if item_type == 'given' else self.items_taken_list
+        target_rewards = self.current_rewards['items_given'] if item_type == 'given' else self.current_rewards['items_taken']
+        
+        selected_items = target_list.selectedItems()
         if not selected_items:
             QMessageBox.warning(self, "No Selection", "Please select an item to remove.")
             return
         
-        # Remove from selected items
+        # Remove from rewards
         list_item = selected_items[0]
-        item = list_item.data(Qt.UserRole)
+        item = list_item.data(Qt.ItemDataRole.UserRole)
         
-        if item in self.selected_items:
-            self.selected_items.remove(item)
+        if item in target_rewards:
+            target_rewards.remove(item)
         
         # Remove from list widget
-        row = self.reward_items_list.row(list_item)
-        self.reward_items_list.takeItem(row)
-        
-        # Update current rewards
-        self.current_rewards['items'] = self.selected_items.copy()
+        row = target_list.row(list_item)
+        target_list.takeItem(row)
         
         # Emit change and update balance
         self._on_rewards_changed()
@@ -579,10 +618,15 @@ class RewardBuilderWidget(QWidget):
         if money_parts:
             preview_lines.append(f"Money: {', '.join(money_parts)}")
         
-        # Items
-        if self.selected_items:
-            item_names = [item['name'] for item in self.selected_items]
-            preview_lines.append(f"Items: {', '.join(item_names)}")
+        # Items Given
+        if self.current_rewards['items_given']:
+            item_names = [f"{item['name']} ({item['id']})" for item in self.current_rewards['items_given']]
+            preview_lines.append(f"Items Given: {', '.join(item_names)}")
+        
+        # Items Taken
+        if self.current_rewards['items_taken']:
+            item_names = [f"{item['name']} ({item['id']})" for item in self.current_rewards['items_taken']]
+            preview_lines.append(f"Items Taken: {', '.join(item_names)}")
         
         # Update preview
         preview_text = '\n'.join(preview_lines) if preview_lines else "No rewards set"
