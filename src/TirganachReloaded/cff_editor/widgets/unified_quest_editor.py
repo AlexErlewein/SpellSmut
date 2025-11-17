@@ -1476,7 +1476,7 @@ class UnifiedQuestEditor(QMainWindow):
                 # Try to load CFF file
                 # Calculate project root from script path
                 script_path = Path(__file__).resolve()
-                calculated_project_root = script_path.parent.parent.parent.parent
+                calculated_project_root = script_path.parent.parent.parent.parent.parent
                 cff_path = (
                     calculated_project_root / "OriginalGameFiles/data/GameData.cff"
                 )
@@ -1710,16 +1710,46 @@ class UnifiedQuestEditor(QMainWindow):
             """)
 
     def _load_quest_objectives(self, quest_info: Dict):
-        """Load quest objectives"""
+        """Load quest objectives with enhanced display"""
         self.objectives_list.clear()
         self.requirements_list.clear()
 
         objectives = quest_info.get("objectives", [])
         for obj in objectives:
             if isinstance(obj, dict):
+                # Enhanced objective data
                 obj_type = obj.get("type", "other")
-                obj_text = obj.get("text", str(obj))
-                item = QListWidgetItem(f"[{obj_type.title()}] {obj_text}")
+
+                # Try to create enhanced display text
+                if "target_name" in obj and obj["target_name"]:
+                    if obj_type == "talk":
+                        display_text = f"💬 Talk to {obj['target_name']}"
+                    elif obj_type == "kill":
+                        quantity = obj.get("quantity", 1)
+                        display_text = f"⚔️ Kill {quantity}x {obj['target_name']}"
+                    elif obj_type == "gather":
+                        quantity = obj.get("quantity", 1)
+                        display_text = f"📦 Gather {quantity}x {obj['target_name']}"
+                    elif obj_type == "explore":
+                        location = obj.get("location", "")
+                        display_text = (
+                            f"🗺 Explore {location}"
+                            if location
+                            else "🗺 Explore location"
+                        )
+                    elif obj_type == "escort":
+                        target = obj.get("target_name", "NPC")
+                        location = obj.get("location", "destination")
+                        display_text = f"👥 Escort {target} to {location}"
+                    else:
+                        obj_text = obj.get("text", str(obj))
+                        display_text = f"📝 {obj_text}"
+                else:
+                    # Fallback to simple display
+                    obj_text = obj.get("text", str(obj))
+                    display_text = f"[{obj_type}] {obj_text}"
+
+                item = QListWidgetItem(display_text)
                 item.setData(Qt.UserRole, obj)
             else:
                 item = QListWidgetItem(str(obj))
@@ -1731,7 +1761,7 @@ class UnifiedQuestEditor(QMainWindow):
             if isinstance(req, dict):
                 req_type = req.get("type", "other")
                 req_text = req.get("text", str(req))
-                item = QListWidgetItem(f"[{req_type.title()}] {req_text}")
+                item = QListWidgetItem(f"[{req_type}] {req_text}")
                 item.setData(Qt.UserRole, req)
             else:
                 item = QListWidgetItem(str(req))
@@ -2275,25 +2305,44 @@ end
 
     # Objective management methods
     def _add_objective(self):
-        """Add new objective"""
-        from PySide6.QtWidgets import QInputDialog
+        """Add new objective with enhanced editor"""
+        try:
+            from .objective_editor_simple import ObjectiveEditorDialog, ObjectiveData
 
-        types = ["talk", "kill", "gather", "explore", "escort", "other"]
-        obj_type, ok = QInputDialog.getItem(
-            self, "Objective Type", "Select type:", types, 0, False
-        )
-        if not ok:
-            return
+            dialog = ObjectiveEditorDialog(self, data_model=self.data_model)
+            if dialog.exec() == QDialog.DialogCode.Accepted:
+                objective = dialog.get_objective()
+                if objective:
+                    # Create list item with enhanced display
+                    display_text = objective.get_display_text()
+                    item = QListWidgetItem(display_text)
+                    item.setData(Qt.UserRole, objective.to_dict())
+                    self.objectives_list.addItem(item)
 
-        obj_text, ok = QInputDialog.getText(self, "Objective Text", "Enter objective:")
-        if not ok or not obj_text.strip():
-            return
+                    self._on_data_changed()
 
-        item = QListWidgetItem(f"[{obj_type}] {obj_text}")
-        item.setData(Qt.UserRole, {"type": obj_type, "text": obj_text})
-        self.objectives_list.addItem(item)
+        except ImportError as e:
+            # Fallback to simple dialog if enhanced editor not available
+            from PySide6.QtWidgets import QInputDialog
 
-        self._on_data_changed()
+            types = ["talk", "kill", "gather", "explore", "escort", "other"]
+            obj_type, ok = QInputDialog.getItem(
+                self, "Objective Type", "Select type:", types, 0, False
+            )
+            if not ok:
+                return
+
+            obj_text, ok = QInputDialog.getText(
+                self, "Objective Text", "Enter objective:"
+            )
+            if not ok or not obj_text.strip():
+                return
+
+            item = QListWidgetItem(f"[{obj_type}] {obj_text}")
+            item.setData(Qt.UserRole, {"type": obj_type, "text": obj_text})
+            self.objectives_list.addItem(item)
+
+            self._on_data_changed()
 
     def _remove_objective(self):
         """Remove selected objective"""
@@ -2334,35 +2383,87 @@ end
 
     # Reward management methods
     def _add_reward_item(self):
-        """Add reward item"""
-        from PySide6.QtWidgets import QInputDialog
+        """Add reward item with item browser"""
+        try:
+            from .item_browser_widget import ItemBrowserDialog
 
-        item_id, ok = QInputDialog.getInt(
-            self, "Item ID", "Enter item ID:", 1, 1, 99999
-        )
-        if not ok:
-            return
+            dialog = ItemBrowserDialog(
+                parent=self,
+                title="Select Reward Item",
+                categories=[
+                    "General Items",
+                    "Weapons",
+                    "Armor",
+                    "Quest Items",
+                    "Materials",
+                ],
+            )
+            if dialog.exec() == QDialog.DialogCode.Accepted:
+                selected = dialog.get_selected_item()
+                if selected:
+                    # Ask for quantity
+                    from PySide6.QtWidgets import QInputDialog
 
-        item_name, ok = QInputDialog.getText(
-            self, "Item Name", "Enter item name (optional):"
-        )
-        item_count, ok = QInputDialog.getInt(
-            self, "Item Count", "Enter count:", 1, 1, 99
-        )
+                    item_count, ok = QInputDialog.getInt(
+                        self, "Item Count", "Enter count:", 1, 1, 99
+                    )
+                    if not ok:
+                        return
 
-        display_text = (
-            f"{item_name or f'Item {item_id}'} x{item_count}"
-            if item_count > 1
-            else (item_name or f"Item {item_id}")
-        )
+                    if item_count > 1:
+                        item_id = selected.get("id", 0)
+                        item_name = selected.get("name", "")
+                        display_text = f"{item_name} (Item {item_id}) x{item_count}"
+                    else:
+                        item_id = selected.get("id", 0)
+                        item_name = selected.get("name", "")
+                        display_text = f"{item_name} (Item {item_id})"
 
-        item = QListWidgetItem(display_text)
-        item.setData(
-            Qt.UserRole, {"id": item_id, "name": item_name, "count": item_count}
-        )
-        self.items_list.addItem(item)
+                    item = QListWidgetItem(display_text)
+                    item.setData(
+                        Qt.UserRole,
+                        {
+                            "id": selected.get("id", 0),
+                            "name": selected.get("name", ""),
+                            "count": item_count,
+                            "type": selected.get("type", "item"),
+                            "description": selected.get("description", ""),
+                        },
+                    )
+                    self.items_list.addItem(item)
 
-        self._on_data_changed()
+                    self._on_data_changed()
+
+        except ImportError:
+            # Fallback to manual entry
+            from PySide6.QtWidgets import QInputDialog
+
+            item_id, ok = QInputDialog.getInt(
+                self, "Item ID", "Enter item ID:", 1, 1, 99999
+            )
+            if not ok:
+                return
+
+            item_name, ok = QInputDialog.getText(
+                self, "Item Name", "Enter item name (optional):"
+            )
+            item_count, ok = QInputDialog.getInt(
+                self, "Item Count", "Enter count:", 1, 1, 99
+            )
+
+            display_text = (
+                f"{item_name or f'Item {item_id}'} x{item_count}"
+                if item_count > 1
+                else (item_name or f"Item {item_id}")
+            )
+
+            item = QListWidgetItem(display_text)
+            item.setData(
+                Qt.UserRole, {"id": item_id, "name": item_name, "count": item_count}
+            )
+            self.items_list.addItem(item)
+
+            self._on_data_changed()
 
     def _remove_reward_item(self):
         """Remove selected reward item"""
