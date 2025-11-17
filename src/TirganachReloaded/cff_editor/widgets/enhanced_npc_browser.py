@@ -24,9 +24,11 @@ class EnhancedNpcBrowser(QDialog):
         self.setMinimumSize(900, 600)
 
         # Data structures
-        self.npc_data = {}  # Dictionary indexed by npc_id
+        self.npc_data = {}  # Dictionary indexed by npc_id (custom NPCs)
+        self.game_npc_data = {}  # Dictionary indexed by npc_id (game NPCs from CFF)
         self.selected_npc = None
         self.selected_npc_id = None
+        self.selected_is_custom = False  # Track if selected NPC is custom or from game
 
         # Initialize UI
         self.init_ui()
@@ -125,14 +127,26 @@ class EnhancedNpcBrowser(QDialog):
         self.setLayout(layout)
 
     def load_npcs(self):
-        """Load NPCs from JSON file"""
+        """Load NPCs from both custom JSON and game CFF file"""
         try:
+            # Load custom NPCs from JSON
             self.npc_data = NpcLoader.load_all_npcs()
-            print(f"Loaded {len(self.npc_data)} NPCs")
+            print(f"Loaded {len(self.npc_data)} custom NPCs")
 
-            # Show info message if no NPCs found
-            if not self.npc_data:
-                print("No NPCs found - database is empty")
+            # Load game NPCs from CFF
+            try:
+                from OrthancsSchmiede.cff_npc_loader import CFFNpcLoader
+
+                npc_loader = CFFNpcLoader()
+                self.game_npc_data = npc_loader.load_all_npcs()
+                print(f"Loaded {len(self.game_npc_data)} game NPCs from CFF")
+
+            except Exception as cff_error:
+                print(f"Could not load game NPCs from CFF: {cff_error}")
+                self.game_npc_data = {}
+
+            total_npcs = len(self.npc_data) + len(self.game_npc_data)
+            print(f"Total NPCs available: {total_npcs} ({len(self.npc_data)} custom + {len(self.game_npc_data)} game)")
 
         except Exception as e:
             print(f"Error loading NPCs: {e}")
@@ -143,11 +157,13 @@ class EnhancedNpcBrowser(QDialog):
             )
 
     def populate_npc_tree(self):
-        """Populate the NPC tree with all NPCs grouped by type"""
+        """Populate the NPC tree with all NPCs grouped by custom/game and type"""
         self.npc_tree.clear()
 
-        # If no NPCs, show helpful message
-        if not self.npc_data:
+        total_npcs = len(self.npc_data) + len(self.game_npc_data)
+
+        # If no NPCs at all, show helpful message
+        if total_npcs == 0:
             placeholder_item = QTreeWidgetItem(
                 self.npc_tree,
                 ["No NPCs found", "", "", "", ""]
@@ -163,32 +179,71 @@ class EnhancedNpcBrowser(QDialog):
             self.count_label.setText("NPCs: 0")
             return
 
-        # Group NPCs by type
-        npcs_by_type = {
-            "friendly": [],
-            "merchant": [],
-            "guard": [],
-            "hostile": []
-        }
+        # --- CUSTOM NPCs SECTION ---
+        if self.npc_data:
+            custom_root = QTreeWidgetItem(
+                self.npc_tree,
+                [f"📝 Custom NPCs ({len(self.npc_data)})", "", "", "", ""]
+            )
+            custom_root.setExpanded(True)
+            custom_root.setForeground(0, Qt.GlobalColor.darkBlue)
 
-        for npc_id, npc_info in self.npc_data.items():
-            npc_type = npc_info.get("npc_type", "friendly").lower()
-            if npc_type in npcs_by_type:
-                npcs_by_type[npc_type].append((npc_id, npc_info))
+            # Group custom NPCs by type
+            custom_by_type = {
+                "friendly": [],
+                "merchant": [],
+                "guard": [],
+                "hostile": []
+            }
 
-        # Create category nodes
+            for npc_id, npc_info in self.npc_data.items():
+                npc_type = npc_info.get("npc_type", "friendly").lower()
+                if npc_type in custom_by_type:
+                    custom_by_type[npc_type].append((npc_id, npc_info, True))  # True = custom
+
+            self._populate_type_categories(custom_root, custom_by_type, is_custom=True)
+
+        # --- GAME NPCs SECTION ---
+        if self.game_npc_data:
+            game_root = QTreeWidgetItem(
+                self.npc_tree,
+                [f"🎮 Game NPCs ({len(self.game_npc_data)})", "", "", "", ""]
+            )
+            game_root.setExpanded(False)  # Collapsed by default
+            game_root.setForeground(0, Qt.GlobalColor.darkGreen)
+
+            # Group game NPCs by type
+            game_by_type = {
+                "friendly": [],
+                "merchant": [],
+                "guard": [],
+                "hostile": []
+            }
+
+            for npc_id, npc_info in self.game_npc_data.items():
+                npc_type = npc_info.get("npc_type", "friendly").lower()
+                if npc_type in game_by_type:
+                    game_by_type[npc_type].append((npc_id, npc_info, False))  # False = game NPC
+
+            self._populate_type_categories(game_root, game_by_type, is_custom=False)
+
+        # Update count
+        self.count_label.setText(f"NPCs: {total_npcs} ({len(self.npc_data)} custom + {len(self.game_npc_data)} game)")
+
+    def _populate_type_categories(self, parent_node, npcs_by_type, is_custom):
+        """Helper to populate NPC type categories under a parent node"""
         type_labels = {
-            "friendly": "Friendly NPCs",
+            "friendly": "Friendly",
             "merchant": "Merchants",
             "guard": "Guards",
-            "hostile": "Hostile NPCs"
+            "hostile": "Hostile"
         }
 
         for npc_type, label in type_labels.items():
             if npcs_by_type[npc_type]:
                 type_node = QTreeWidgetItem(
-                    self.npc_tree,
-                    [label, "", "", "", f"({len(npcs_by_type[npc_type])} NPCs)"]
+                    parent_node,
+                    [f"{label} ({len(npcs_by_type[npc_type])})", "", "", "", ""]
                 )
                 type_node.setExpanded(True)
 
@@ -196,7 +251,7 @@ class EnhancedNpcBrowser(QDialog):
                 npcs_by_type[npc_type].sort(key=lambda x: x[1].get("name", "Unnamed"))
 
                 # Add NPC items under category
-                for npc_id, npc_info in npcs_by_type[npc_type]:
+                for npc_id, npc_info, is_custom_flag in npcs_by_type[npc_type]:
                     name = npc_info.get("name", "Unnamed NPC")
                     title = npc_info.get("title", "")
                     if title:
@@ -211,10 +266,8 @@ class EnhancedNpcBrowser(QDialog):
                         type_node,
                         [display_name, npc_type.capitalize(), character_class, level, str(npc_id)]
                     )
-                    item.setData(0, Qt.ItemDataRole.UserRole, npc_id)
-
-        # Update count
-        self.count_label.setText(f"NPCs: {len(self.npc_data)}")
+                    # Store both npc_id and whether it's custom
+                    item.setData(0, Qt.ItemDataRole.UserRole, (npc_id, is_custom_flag))
 
     def filter_npcs(self, search_text: str):
         """Filter NPCs based on search text"""
@@ -269,6 +322,7 @@ class EnhancedNpcBrowser(QDialog):
         if not selected_items:
             self.selected_npc = None
             self.selected_npc_id = None
+            self.selected_is_custom = False
             self.details_text.clear()
             self.edit_btn.setEnabled(False)
             self.duplicate_btn.setEnabled(False)
@@ -277,30 +331,48 @@ class EnhancedNpcBrowser(QDialog):
             return
 
         item = selected_items[0]
-        npc_id = item.data(0, Qt.ItemDataRole.UserRole)
+        user_data = item.data(0, Qt.ItemDataRole.UserRole)
 
         # Skip if this is a category node
-        if npc_id is None:
+        if user_data is None:
             return
 
-        self.selected_npc_id = npc_id
-        self.selected_npc = self.npc_data.get(npc_id)
+        # Extract npc_id and is_custom flag from tuple
+        if isinstance(user_data, tuple):
+            npc_id, is_custom = user_data
+        else:
+            # Fallback for old format
+            npc_id = user_data
+            is_custom = True
 
-        # Enable action buttons
-        self.edit_btn.setEnabled(True)
+        self.selected_npc_id = npc_id
+        self.selected_is_custom = is_custom
+
+        # Get NPC data from appropriate source
+        if is_custom:
+            self.selected_npc = self.npc_data.get(npc_id)
+        else:
+            self.selected_npc = self.game_npc_data.get(npc_id)
+
+        # Enable action buttons based on whether it's custom or game NPC
+        # Edit and Delete only for custom NPCs
+        self.edit_btn.setEnabled(is_custom)
+        self.delete_btn.setEnabled(is_custom)
+        # Duplicate works for both
         self.duplicate_btn.setEnabled(True)
-        self.delete_btn.setEnabled(True)
         self.select_btn.setEnabled(True)
 
         # Display NPC details
-        self.display_npc_details(self.selected_npc)
+        self.display_npc_details(self.selected_npc, is_custom)
 
-    def display_npc_details(self, npc_info: Dict[str, Any]):
+    def display_npc_details(self, npc_info: Dict[str, Any], is_custom: bool = True):
         """Display detailed information about selected NPC"""
         if not npc_info:
             return
 
-        details = f"<h2>{npc_info.get('name', 'Unnamed NPC')}</h2>"
+        # Add badge to indicate source
+        source_badge = "📝 Custom" if is_custom else "🎮 Game"
+        details = f"<h2>{npc_info.get('name', 'Unnamed NPC')} <small style='color: gray;'>({source_badge})</small></h2>"
 
         if npc_info.get('title'):
             details += f"<p><b>Title:</b> {npc_info['title']}</p>"
@@ -356,8 +428,8 @@ class EnhancedNpcBrowser(QDialog):
 
     def on_npc_double_clicked(self, item, column):
         """Handle double-click on NPC (same as selecting and clicking OK)"""
-        npc_id = item.data(0, Qt.ItemDataRole.UserRole)
-        if npc_id is not None:
+        user_data = item.data(0, Qt.ItemDataRole.UserRole)
+        if user_data is not None:
             self.accept()
 
     def create_npc(self):
