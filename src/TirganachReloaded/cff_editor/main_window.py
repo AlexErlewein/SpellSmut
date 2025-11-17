@@ -245,6 +245,16 @@ class MainWindow(QMainWindow):
         npc_creator_action.triggered.connect(self.show_npc_creator)
         tools_menu.addAction(npc_creator_action)
 
+        npc_browser_action = QAction("N&PC Browser", self)
+        npc_browser_action.setShortcut("Ctrl+N, B")
+        npc_browser_action.setStatusTip(
+            "Browse, search, and manage NPCs"
+        )
+        npc_browser_action.triggered.connect(self.show_npc_browser)
+        tools_menu.addAction(npc_browser_action)
+
+        tools_menu.addSeparator()
+
         building_wizard_action = QAction("&Building Wizard", self)
         building_wizard_action.setStatusTip("Create and edit custom buildings")
         building_wizard_action.triggered.connect(self.show_building_wizard)
@@ -1173,6 +1183,23 @@ class MainWindow(QMainWindow):
         except Exception as e:
             QMessageBox.critical(
                 self, "Error", f"An error occurred while creating NPC: {str(e)}"
+            )
+
+    def show_npc_browser(self):
+        """Show the NPC Browser"""
+        try:
+            from .widgets.enhanced_npc_browser import EnhancedNpcBrowser
+
+            browser = EnhancedNpcBrowser(self)
+            browser.exec()
+
+        except ImportError as e:
+            QMessageBox.warning(
+                self, "Import Error", f"Failed to load NPC browser: {str(e)}"
+            )
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Error", f"An error occurred while opening NPC browser: {str(e)}"
             )
 
     def show_main_interface(self):
