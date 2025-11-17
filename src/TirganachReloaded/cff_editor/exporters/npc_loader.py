@@ -29,14 +29,26 @@ class NpcLoader:
         """Load all NPCs from JSON file"""
         try:
             NpcLoader.ensure_directory()
+
             if not os.path.exists(NpcLoader.NPC_DATA_FILE):
+                print(f"NPC data file not found: {NpcLoader.NPC_DATA_FILE}")
+                print(f"Creating empty NPC database...")
+                # Create empty file
+                with open(NpcLoader.NPC_DATA_FILE, 'w') as f:
+                    json.dump([], f)
                 return {}
 
             with open(NpcLoader.NPC_DATA_FILE, 'r') as f:
                 npc_list = json.load(f)
 
+            if not npc_list:
+                print("NPC data file is empty - no NPCs have been created yet")
+                return {}
+
             # Convert list to dict indexed by npc_id
-            return {npc['npc_id']: npc for npc in npc_list}
+            result = {npc['npc_id']: npc for npc in npc_list}
+            print(f"Successfully loaded {len(result)} NPCs from {NpcLoader.NPC_DATA_FILE}")
+            return result
 
         except (FileNotFoundError, json.JSONDecodeError) as e:
             print(f"Error loading NPCs: {e}")

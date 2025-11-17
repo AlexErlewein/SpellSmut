@@ -1,0 +1,124 @@
+[
+  {
+    "npc_id": 40000,
+    "creation_mode": "new",
+    "source_npc_id": null,
+    "name": "Test Guard",
+    "title": "City Watchman",
+    "description": "A test NPC to verify the browser is working",
+    "npc_type": "guard",
+    "character_class": "warrior",
+    "level": 5,
+    "faction": "HUMANS",
+    "base_stats": {
+      "strength": 15,
+      "stamina": 14,
+      "agility": 12,
+      "dexterity": 10,
+      "intelligence": 8,
+      "wisdom": 9,
+      "charisma": 10
+    },
+    "derived_stats": {
+      "health": 120,
+      "mana": 40,
+      "melee_attack": 20,
+      "ranged_attack": 5,
+      "magic_attack": 0,
+      "physical_defense": 15,
+      "magic_defense": 8,
+      "fire_resistance": 0,
+      "ice_resistance": 0,
+      "black_resistance": 0,
+      "mind_resistance": 0
+    },
+    "appearance": {
+      "head_id": 3,
+      "race": "HUMANS",
+      "gender": "MALE",
+      "voice_type": "hero_male_1"
+    },
+    "behavior": {
+      "movement_type": "patrol",
+      "interaction_radius": 5,
+      "spawn_location": [100, 200],
+      "spawn_conditions": {}
+    },
+    "equipment": {
+      "helmet_item_id": null,
+      "chest_item_id": null,
+      "legs_item_id": null,
+      "right_hand_item_id": null,
+      "left_hand_item_id": null,
+      "right_ring_item_id": null,
+      "left_ring_item_id": null
+    },
+    "rewards": {
+      "experience": 50,
+      "gold": 25,
+      "items": []
+    },
+    "special_abilities": []
+  },
+  {
+    "npc_id": 40001,
+    "creation_mode": "new",
+    "source_npc_id": null,
+    "name": "Merchant Joe",
+    "title": "Traveling Trader",
+    "description": "A friendly merchant selling goods",
+    "npc_type": "merchant",
+    "character_class": "rogue",
+    "level": 3,
+    "faction": "HUMANS",
+    "base_stats": {
+      "strength": 8,
+      "stamina": 10,
+      "agility": 12,
+      "dexterity": 14,
+      "intelligence": 11,
+      "wisdom": 10,
+      "charisma": 16
+    },
+    "derived_stats": {
+      "health": 80,
+      "mana": 50,
+      "melee_attack": 8,
+      "ranged_attack": 10,
+      "magic_attack": 0,
+      "physical_defense": 6,
+      "magic_defense": 8,
+      "fire_resistance": 0,
+      "ice_resistance": 0,
+      "black_resistance": 0,
+      "mind_resistance": 0
+    },
+    "appearance": {
+      "head_id": 7,
+      "race": "HUMANS",
+      "gender": "MALE",
+      "voice_type": "hero_male_3"
+    },
+    "behavior": {
+      "movement_type": "wander",
+      "interaction_radius": 8,
+      "spawn_location": [50, 75],
+      "spawn_conditions": {}
+    },
+    "equipment": {
+      "helmet_item_id": null,
+      "chest_item_id": null,
+      "legs_item_id": null,
+      "right_hand_item_id": null,
+      "left_hand_item_id": null,
+      "right_ring_item_id": null,
+      "left_ring_item_id": null
+    },
+    "rewards": {
+      "experience": 0,
+      "gold": 0,
+      "items": []
+    },
+    "special_abilities": []
+  }
+]

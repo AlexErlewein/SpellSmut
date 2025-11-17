@@ -129,6 +129,11 @@ class EnhancedNpcBrowser(QDialog):
         try:
             self.npc_data = NpcLoader.load_all_npcs()
             print(f"Loaded {len(self.npc_data)} NPCs")
+
+            # Show info message if no NPCs found
+            if not self.npc_data:
+                print("No NPCs found - database is empty")
+
         except Exception as e:
             print(f"Error loading NPCs: {e}")
             QMessageBox.warning(
@@ -140,6 +145,23 @@ class EnhancedNpcBrowser(QDialog):
     def populate_npc_tree(self):
         """Populate the NPC tree with all NPCs grouped by type"""
         self.npc_tree.clear()
+
+        # If no NPCs, show helpful message
+        if not self.npc_data:
+            placeholder_item = QTreeWidgetItem(
+                self.npc_tree,
+                ["No NPCs found", "", "", "", ""]
+            )
+            placeholder_item.setForeground(0, Qt.GlobalColor.gray)
+
+            help_item = QTreeWidgetItem(
+                self.npc_tree,
+                ["Click 'Create New NPC' to get started!", "", "", "", ""]
+            )
+            help_item.setForeground(0, Qt.GlobalColor.blue)
+
+            self.count_label.setText("NPCs: 0")
+            return
 
         # Group NPCs by type
         npcs_by_type = {
