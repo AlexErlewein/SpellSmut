@@ -27,6 +27,23 @@ cd /path/to/SpellSmut/src
 
 ## Quick Start
 
+### First Time Setup
+
+Populate template spells to have examples for browsing:
+
+```bash
+# Populate 6 example template spells
+python populate_spell_templates.py
+```
+
+This creates:
+- **Fireball** (Fire Attack) - ID 301
+- **Ice Blast** (Ice Attack) - ID 302
+- **Holy Heal** (White Heal) - ID 303
+- **Chain Lightning** (Earth AOE) - ID 304
+- **Regeneration Aura** (White Buff) - ID 305
+- **Summon Wolf** (Black Summon) - ID 306
+
 ### Running the Spell Forge
 
 ```bash

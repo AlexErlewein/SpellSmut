@@ -30,8 +30,24 @@ The Spell Forge GUI requires:
 ```bash
 cd /path/to/SpellSmut/src
 pip install PySide6
+
+# Populate template spells (first time only)
+python populate_spell_templates.py
+
+# Launch the wizard
 python spell_forge_wizard.py
 ```
+
+**First Time Setup:**
+Run `populate_spell_templates.py` to create 6 example spells:
+- **Fireball** (Fire Attack) - ID 301
+- **Ice Blast** (Ice Attack) - ID 302
+- **Holy Heal** (White Heal) - ID 303
+- **Chain Lightning** (Earth AOE) - ID 304
+- **Regeneration Aura** (White Buff) - ID 305
+- **Summon Wolf** (Black Summon) - ID 306
+
+These templates provide a great starting point for browsing, learning, and duplication!
 
 ## Usage
 
