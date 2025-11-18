@@ -149,16 +149,113 @@ class CFFNpcLoader(QObject):
             except Exception as e:
                 print(f"Warning: Could not load localized name for creature {creature_id}: {e}")
 
-        # Try to determine NPC type (default to friendly for now)
-        npc_type = "friendly"
-
         # Get stats if available
         stats_id = getattr(creature, "stats_id", 0)
         
-        # TODO-007: Load Head IDs
-        # Note: Heads in SpellForce are typically stored at race/gender level, not per-creature
-        # For now, we use default head_id from creature (if it exists)
-        head_id = getattr(creature, "head_id", 0)
+        # TODO-003, 004, 005, 006: Load real data from creature_stats table
+        level = 1
+        npc_type = "friendly"
+        character_class = "warrior"
+        race = "HUMANS"
+        gender = "MALE"
+        head_id = 0
+        base_stats = {
+            "strength": 10,
+            "stamina": 10,
+            "agility": 10,
+            "dexterity": 10,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10,
+        }
+        
+        # Load from creature_stats if available
+        if stats_id > 0 and hasattr(self.gamedata, "creature_stats"):
+            try:
+                stats_obj = next((s for s in self.gamedata.creature_stats 
+                                 if s.stats_id == stats_id), None)
+                if stats_obj:
+                    # TODO-005: Load real level
+                    level = getattr(stats_obj, "level", 1)
+                    
+                    # TODO-007: Load real head_id from stats
+                    head_id = getattr(stats_obj, "head_id", 0)
+                    
+                    # TODO-006: Load real base stats
+                    base_stats = {
+                        "strength": getattr(stats_obj, "strength", 10),
+                        "stamina": getattr(stats_obj, "stamina", 10),
+                        "agility": getattr(stats_obj, "agility", 10),
+                        "dexterity": getattr(stats_obj, "dexterity", 10),
+                        "intelligence": getattr(stats_obj, "intelligence", 10),
+                        "wisdom": getattr(stats_obj, "wisdom", 10),
+                        "charisma": getattr(stats_obj, "charisma", 10),
+                    }
+                    
+                    # Load race and gender
+                    race_enum = getattr(stats_obj, "race", None)
+                    if race_enum:
+                        race = str(race_enum).split(".")[-1].replace("_", "")
+                    
+                    gender_enum = getattr(stats_obj, "gender", None)
+                    if gender_enum:
+                        gender = str(gender_enum).split(".")[-1].replace("_ESSENTIAL", "")
+                    
+            except Exception as e:
+                print(f"Warning: Could not load stats for creature {creature_id}: {e}")
+        
+        # TODO-003: Determine NPC type
+        # Check race first (most reliable)
+        if "MERCHANT" in race.upper():
+            npc_type = "merchant"
+        # Check if in merchant inventory table
+        elif hasattr(self.gamedata, "merchant_inventories"):
+            try:
+                is_merchant = any(m.creature_id == creature_id 
+                                for m in self.gamedata.merchant_inventories)
+                if is_merchant:
+                    npc_type = "merchant"
+            except Exception as e:
+                pass
+        
+        # Check if guard/military based on race
+        if "GUARD" in race.upper() or "SOLDIER" in race.upper():
+            npc_type = "guard"
+        
+        # Check if hostile (has significant XP reward) - only if not already classified
+        if npc_type == "friendly":
+            experience = getattr(creature, "experience", 0)
+            if experience > 50:
+                npc_type = "hostile"
+        
+        # TODO-004: Determine character class from skills
+        if stats_id > 0 and hasattr(self.gamedata, "creature_skills"):
+            try:
+                skill_items = [sk for sk in self.gamedata.creature_skills 
+                              if sk.stats_id == stats_id]
+                
+                if skill_items:
+                    # Analyze skills to determine class
+                    skill_schools = [str(sk.skill_school).split(".")[-1] 
+                                    for sk in skill_items]
+                    
+                    # Count skill types
+                    magic_skills = sum(1 for s in skill_schools 
+                                      if "MAGIC" in s or "ELEMENTAL" in s)
+                    combat_skills = sum(1 for s in skill_schools 
+                                       if "BLADE" in s or "BLUNT" in s or "AXE" in s)
+                    
+                    if magic_skills > combat_skills:
+                        character_class = "mage"
+                    elif combat_skills > 0:
+                        character_class = "warrior"
+                    
+                    # Check for hybrid (both magic and combat)
+                    if magic_skills > 0 and combat_skills > 0:
+                        character_class = "multi_class"
+                        
+            except Exception as e:
+                print(f"Warning: Could not determine class for creature {creature_id}: {e}")
         
         # TODO-008: Load Equipment Data
         equipment_dict = {
@@ -245,41 +342,33 @@ class CFFNpcLoader(QObject):
             "title": "",
             "description": f"Game creature from GameData.cff",
             "npc_type": npc_type,
-            "character_class": "warrior",  # Default
-            "level": 1,  # Default
-            "faction": "NEUTRAL",  # Default
+            "character_class": character_class,
+            "level": level,
+            "faction": race,  # Use race as faction
 
-            # Base stats (simplified - we'd need to lookup via stats_id)
-            "base_stats": {
-                "strength": 10,
-                "stamina": 10,
-                "agility": 10,
-                "dexterity": 10,
-                "intelligence": 10,
-                "wisdom": 10,
-                "charisma": 10,
-            },
+            # Base stats (loaded from creature_stats)
+            "base_stats": base_stats,
 
             # Derived stats
             "derived_stats": {
-                "health": 100,
-                "mana": 50,
-                "melee_attack": 10,
-                "ranged_attack": 0,
-                "magic_attack": 0,
+                "health": base_stats["stamina"] * 10,  # Rough calculation
+                "mana": base_stats["intelligence"] * 5,  # Rough calculation
+                "melee_attack": base_stats["strength"],
+                "ranged_attack": base_stats["dexterity"],
+                "magic_attack": base_stats["intelligence"],
                 "physical_defense": getattr(creature, "armor", 5),
-                "magic_defense": 5,
+                "magic_defense": base_stats["wisdom"],
                 "fire_resistance": 0,
                 "ice_resistance": 0,
                 "black_resistance": 0,
                 "mind_resistance": 0,
             },
 
-            # Appearance (TODO-007: head_id loaded)
+            # Appearance (loaded from creature_stats)
             "appearance": {
                 "head_id": head_id,
-                "race": "HUMANS",
-                "gender": "MALE",
+                "race": race,
+                "gender": gender,
                 "voice_type": "main_male"
             },
 

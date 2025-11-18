@@ -51,6 +51,27 @@ from TirganachReloaded.tirganach.types import Language  # noqa: E402
 from npc_creator_wizard import NpcCreatorWizard  # noqa: E402
 from id_manager import IDManager  # noqa: E402
 
+# Initialize logger
+logger = get_logger(__name__)
+
+
+class NumericTreeWidgetItem(QTreeWidgetItem):
+    """QTreeWidgetItem subclass that sorts numeric columns correctly"""
+    
+    def __lt__(self, other):
+        """Custom comparison for sorting"""
+        column = self.treeWidget().sortColumn()
+        
+        # For Level (column 3) and ID (column 4), sort numerically
+        if column in (3, 4):
+            try:
+                return int(self.text(column)) < int(other.text(column))
+            except ValueError:
+                return self.text(column) < other.text(column)
+        
+        # For other columns, sort alphabetically
+        return self.text(column).lower() < other.text(column).lower()
+
 
 class GraufurterBuergerBuero(QMainWindow):
     """Main application window for Graufurter Bürger Büro (NPC Creator)"""
@@ -145,8 +166,12 @@ class GraufurterBuergerBuero(QMainWindow):
         tree_layout = QVBoxLayout(self.tree_group)
 
         self.npc_tree = QTreeWidget()
-        self.npc_tree.setHeaderLabels(["Name", "Type", "Class", "Level", "ID"])
+        self.npc_tree.setHeaderLabels(["Name", "Type", "Race", "Level", "ID"])
         self.npc_tree.itemSelectionChanged.connect(self.on_npc_selection_changed)
+        
+        # Enable sorting by clicking column headers
+        self.npc_tree.setSortingEnabled(True)
+        self.npc_tree.sortByColumn(0, Qt.SortOrder.AscendingOrder)  # Default sort by Name
 
         # Dark theme tree styling
         self.npc_tree.setStyleSheet("""
@@ -347,6 +372,11 @@ class GraufurterBuergerBuero(QMainWindow):
         game_npcs = {}
         
         for npc_id, npc_info in self.npc_data.items():
+            # Skip if npc_id is None or not an integer
+            if npc_id is None or not isinstance(npc_id, int):
+                logger.warning(f"Skipping NPC with invalid ID: {npc_id}")
+                continue
+            
             # Custom NPCs have ID >= 40000
             if npc_id >= 40000:
                 custom_npcs[npc_id] = npc_info
@@ -410,11 +440,11 @@ class GraufurterBuergerBuero(QMainWindow):
             for npc_id, npc_info in sorted(npc_categories[category_name]):
                 name = npc_info.get("name", f"NPC {npc_id}")
                 npc_type = npc_info.get("npc_type", "Unknown")
-                char_class = npc_info.get("character_class", "Unknown")
+                race = npc_info.get("appearance", {}).get("race", "Unknown")
                 level = npc_info.get("level", 0)
                 
-                item = QTreeWidgetItem(
-                    category_node, [name, npc_type, char_class, str(level), str(npc_id)]
+                item = NumericTreeWidgetItem(
+                    category_node, [name, npc_type, race, str(level), str(npc_id)]
                 )
                 item.setData(0, Qt.ItemDataRole.UserRole, ("npc", npc_id))
 
@@ -544,6 +574,91 @@ class GraufurterBuergerBuero(QMainWindow):
             basic_layout.addLayout(row_layout)
 
         self.details_content_layout.addWidget(basic_group)
+
+        # Appearance Section
+        appearance = npc_info.get("appearance", {})
+        if appearance:
+            appearance_group = QGroupBox("APPEARANCE")
+            appearance_group.setStyleSheet("""
+                QGroupBox {
+                    font-weight: bold;
+                    color: #c49fd2;
+                    border: 2px solid #c49fd2;
+                    border-radius: 5px;
+                    margin-top: 1ex;
+                    padding-top: 10px;
+                }
+                QGroupBox::title {
+                    subcontrol-origin: margin;
+                    left: 10px;
+                    padding: 0 5px 0 5px;
+                }
+            """)
+            appearance_layout = QVBoxLayout(appearance_group)
+
+            appearance_info = [
+                ("Race", appearance.get("race", "Unknown")),
+                ("Gender", appearance.get("gender", "Unknown")),
+                ("Head ID", str(appearance.get("head_id", 0))),
+                ("Voice Type", appearance.get("voice_type", "Unknown")),
+            ]
+
+            for label, value in appearance_info:
+                row_layout = QHBoxLayout()
+                label_widget = QLabel(f"<strong>{label}:</strong>")
+                label_widget.setStyleSheet("color: #a0a0a0; min-width: 120px;")
+                value_widget = QLabel(str(value))
+                value_widget.setStyleSheet("color: #e0e0e0;")
+                row_layout.addWidget(label_widget)
+                row_layout.addWidget(value_widget)
+                row_layout.addStretch()
+                appearance_layout.addLayout(row_layout)
+
+            self.details_content_layout.addWidget(appearance_group)
+
+        # Base Stats Section
+        base_stats = npc_info.get("base_stats", {})
+        if base_stats:
+            base_stats_group = QGroupBox("BASE STATS")
+            base_stats_group.setStyleSheet("""
+                QGroupBox {
+                    font-weight: bold;
+                    color: #6fd2a0;
+                    border: 2px solid #6fd2a0;
+                    border-radius: 5px;
+                    margin-top: 1ex;
+                    padding-top: 10px;
+                }
+                QGroupBox::title {
+                    subcontrol-origin: margin;
+                    left: 10px;
+                    padding: 0 5px 0 5px;
+                }
+            """)
+            base_stats_layout = QVBoxLayout(base_stats_group)
+
+            stats_info = [
+                ("Strength", str(base_stats.get("strength", 0))),
+                ("Stamina", str(base_stats.get("stamina", 0))),
+                ("Agility", str(base_stats.get("agility", 0))),
+                ("Dexterity", str(base_stats.get("dexterity", 0))),
+                ("Intelligence", str(base_stats.get("intelligence", 0))),
+                ("Wisdom", str(base_stats.get("wisdom", 0))),
+                ("Charisma", str(base_stats.get("charisma", 0))),
+            ]
+
+            for label, value in stats_info:
+                row_layout = QHBoxLayout()
+                label_widget = QLabel(f"<strong>{label}:</strong>")
+                label_widget.setStyleSheet("color: #a0a0a0; min-width: 120px;")
+                value_widget = QLabel(str(value))
+                value_widget.setStyleSheet("color: #e0e0e0;")
+                row_layout.addWidget(label_widget)
+                row_layout.addWidget(value_widget)
+                row_layout.addStretch()
+                base_stats_layout.addLayout(row_layout)
+
+            self.details_content_layout.addWidget(base_stats_group)
 
         # Combat Stats Section
         derived_stats = npc_info.get("derived_stats", {})

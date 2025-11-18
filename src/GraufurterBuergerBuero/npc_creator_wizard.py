@@ -180,6 +180,7 @@ class ModeSelectionPage(QWizardPage):
         self.new_radio = QRadioButton("Create New NPC")
         self.new_radio.setChecked(True)
         self.new_radio.toggled.connect(self._on_mode_changed)
+        self.new_radio.toggled.connect(self._on_new_mode_selected)
         mode_layout.addWidget(self.new_radio)
 
         self.edit_radio = QRadioButton("Edit Existing NPC")
@@ -240,6 +241,15 @@ class ModeSelectionPage(QWizardPage):
         layout.addStretch()
         self.setLayout(layout)
 
+        # Auto-allocate ID for "Create New" mode (which is checked by default)
+        self._on_new_mode_selected(True)
+
+    def _on_new_mode_selected(self, checked):
+        """Handle "Create New NPC" selection - auto-allocate ID"""
+        if checked:
+            # Auto-allocate ID for new NPCs to avoid user confusion
+            self.allocate_npc_id()
+
     def _on_mode_changed(self):
         """Handle mode selection changes"""
         # Enable browse button only for edit/duplicate modes
@@ -252,6 +262,14 @@ class ModeSelectionPage(QWizardPage):
             wizard = self.wizard()
             if wizard:
                 wizard.source_npc = None
+        else:
+            # Switching to edit/duplicate mode - clear auto-allocated ID
+            if self.npc_id and self.new_radio.isChecked():
+                # Release the auto-allocated ID since user switched modes
+                self.id_manager.release_id(ContentType.NPC, self.npc_id)
+                self.npc_id = None
+                self.id_status_label.setText("")
+                self.completeChanged.emit()
 
     def browse_npcs(self):
         """Open NPC browser to select an existing NPC"""
@@ -338,6 +356,7 @@ class BasicIdentityPage(QWizardPage):
 
         self.name_edit = QLineEdit()
         self.name_edit.setMaxLength(32)
+        self.name_edit.textChanged.connect(lambda: self.completeChanged.emit())
         identity_layout.addRow("NPC Name:", self.name_edit)
 
         self.title_edit = QLineEdit()
@@ -784,19 +803,19 @@ class EquipmentSelectionPage(QWizardPage):
 
         # Filter items based on slot type
         if slot_type in ["helmet", "chest", "legs"]:
-            # Armor items
+            # Armor items - map slot type to friendly name used by CFFArmorLoader
             slot_map = {
-                "helmet": 0,   # HEAD slot
-                "chest": 2,    # CHEST slot
-                "legs": 5      # LEGS slot
+                "helmet": "Head",      # CFFArmorLoader uses "Head" not "HELMET"
+                "chest": "Chest",      # CFFArmorLoader uses "Chest" not "UPPER"
+                "legs": "Legs"         # CFFArmorLoader uses "Legs" not "LOWER"
             }
-            target_slot = slot_map.get(slot_type, -1)
+            target_slot_name = slot_map.get(slot_type, "")
 
-            # Filter and sort armor by slot
+            # Filter and sort armor by slot (exact match on friendly name)
             filtered_items = [
                 (item_id, item_data)
                 for item_id, item_data in self.armor_items.items()
-                if item_data.get("slot") == target_slot
+                if item_data.get("slot", "") == target_slot_name
             ]
 
             # Sort by name
@@ -826,11 +845,11 @@ class EquipmentSelectionPage(QWizardPage):
 
         elif slot_type == "shield":
             # Shields (left hand armor or one-handed weapons)
-            # Add shields from armor (LEFT_HAND slot = 3)
+            # Add shields from armor (check for Shield in slot string)
             shield_armor = [
                 (item_id, item_data)
                 for item_id, item_data in self.armor_items.items()
-                if item_data.get("slot") == 3  # LEFT_HAND
+                if item_data.get("slot", "") == "Shield"
             ]
 
             # Sort by name
@@ -852,11 +871,11 @@ class EquipmentSelectionPage(QWizardPage):
                 combo.addItem(f"{item_id}: {name} (Off-hand)", item_id)
 
         elif slot_type == "ring":
-            # Rings (RIGHT_RING = 4, LEFT_RING = 6)
+            # Rings (check for Ring in slot string)
             ring_items = [
                 (item_id, item_data)
                 for item_id, item_data in self.armor_items.items()
-                if item_data.get("slot") in [4, 6]
+                if item_data.get("slot", "") == "Ring"
             ]
 
             # Sort by name

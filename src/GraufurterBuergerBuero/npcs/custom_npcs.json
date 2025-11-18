@@ -1,1 +1,68 @@
-[]
+[
+  {
+    "npc_id": null,
+    "creation_mode": "new",
+    "source_npc_id": null,
+    "name": "Fischiger Peter",
+    "title": "Angler",
+    "description": "M\u00f6bel stinkt!",
+    "npc_type": "merchant",
+    "character_class": "warrior",
+    "level": 12,
+    "faction": "HUMANS",
+    "base_stats": {
+      "strength": 10,
+      "stamina": 10,
+      "agility": 10,
+      "dexterity": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "derived_stats": {
+      "health": 100,
+      "mana": 50,
+      "melee_attack": 10,
+      "ranged_attack": 0,
+      "magic_attack": 0,
+      "physical_defense": 5,
+      "magic_defense": 5,
+      "fire_resistance": 0,
+      "ice_resistance": 0,
+      "black_resistance": 0,
+      "mind_resistance": 0
+    },
+    "appearance": {
+      "head_id": 2,
+      "race": "HUMANS",
+      "gender": "MALE",
+      "voice_type": "hero_male_3"
+    },
+    "behavior": {
+      "movement_type": "stationary",
+      "interaction_radius": 5,
+      "spawn_location": [
+        0,
+        0
+      ],
+      "spawn_conditions": {}
+    },
+    "equipment": {
+      "helmet_item_id": null,
+      "chest_item_id": null,
+      "legs_item_id": null,
+      "right_hand_item_id": 3277,
+      "left_hand_item_id": null,
+      "right_ring_item_id": null,
+      "left_ring_item_id": null
+    },
+    "rewards": {
+      "experience": 0,
+      "gold": 0,
+      "items": []
+    },
+    "special_abilities": [],
+    "skills": [],
+    "spells": []
+  }
+]

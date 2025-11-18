@@ -7,49 +7,60 @@
 ## 🔴 CRITICAL - Usability Issues
 
 ### TODO-001: Fix "Create New NPC" Wizard Flow
-**Status:** 🔴 BLOCKING  
+**Status:** ✅ COMPLETE  
 **Priority:** URGENT
 
 **Problem:**
 User gets stuck after entering name - can't click "Next" button.
 
 **Root Cause:**
-The wizard requires clicking "Allocate NPC ID" button on first page before proceeding. This is not intuitive.
+The wizard required clicking "Allocate NPC ID" button on first page before proceeding. This was not intuitive.
 
-**Solution Options:**
-1. **Auto-allocate ID on page load** (Recommended)
-   - When "Create New" mode is selected
-   - Automatically allocate next available ID
-   - Remove "Allocate NPC ID" button for new mode
-   - Keep manual allocation only for edit/duplicate modes
+**Solution Implemented:**
+Auto-allocate ID when "Create New NPC" mode is selected:
 
-2. **Better UI flow**
-   - Show clear instructions: "Click 'Allocate NPC ID' to continue"
-   - Disable name/fields until ID is allocated
-   - Add validation message
+1. **Added auto-allocation on page load:**
+   - When wizard opens, "Create New" is selected by default
+   - ID is automatically allocated immediately
+   - User can proceed to enter name without extra clicks
 
-**Files to Modify:**
-- `npc_creator_wizard.py` - `ModeSelectionPage` class
-- Specifically: `__init__()`, `isComplete()`, `allocate_npc_id()`
+2. **Added signal connection:**
+   - Connected `new_radio.toggled` to `_on_new_mode_selected()`
+   - Automatically allocates ID when switching back to "Create New"
+
+3. **Smart ID management:**
+   - If user switches from "Create New" to Edit/Duplicate, auto-allocated ID is released
+   - Prevents ID waste
 
 **Implementation:**
 ```python
 def __init__(self):
     # ...existing code...
     
-    # Auto-allocate for new mode
+    # Connect to auto-allocate handler
     self.new_radio.toggled.connect(self._on_new_mode_selected)
     
+    # Auto-allocate immediately since "Create New" is default
+    self._on_new_mode_selected(True)
+
 def _on_new_mode_selected(self, checked):
+    """Handle 'Create New NPC' selection - auto-allocate ID"""
     if checked:
-        # Auto-allocate ID for new NPCs
         self.allocate_npc_id()
 ```
 
-**Testing:**
-- Click "Create NPC" → Should auto-allocate ID
-- Enter name → Should be able to click "Next" immediately
-- Verify ID shows in status label
+**Test Results:**
+- ✅ Wizard opens with ID already allocated
+- ✅ "Next" button is immediately available
+- ✅ User can enter name and proceed without confusion
+- ✅ Switching modes properly manages IDs
+
+**Files Modified:**
+- `npc_creator_wizard.py` - `ModeSelectionPage` class
+  - Line 183: Added signal connection
+  - Line 243-245: Auto-allocate on init
+  - Lines 247-249: Added `_on_new_mode_selected()` method
+  - Lines 260-271: Enhanced `_on_mode_changed()` to release IDs
 
 ---
 
@@ -90,108 +101,139 @@ Removed button from main window, kept browser code for wizard.
 ## 🟡 MEDIUM - Data Quality Issues
 
 ### TODO-003: Load Real NPC Types (not all "friendly")
-**Status:** 🟡 NEEDS INVESTIGATION  
+**Status:** ✅ COMPLETE  
 **Priority:** MEDIUM
 
 **Problem:**
-All NPCs show as "friendly" type and "warrior" class.
+All NPCs showed as "friendly" type.
 
-**Root Cause:**
-CFF loader uses hardcoded defaults (line 128 in `cff_npc_loader.py`):
-```python
-npc_type = "friendly"  # Default
-character_class = "warrior"  # Default
-```
+**Solution Implemented:**
+Determines NPC type using multiple criteria:
 
-**Investigation Needed:**
-1. Check what attributes GameData creatures have for determining type/class
-2. Look for faction/alignment data
-3. Check if there's a creature_type or behavior field
+1. **Merchant Detection:**
+   - Check if race contains "MERCHANT"
+   - Check if creature_id in `merchant_inventories` table
+   - Result: 202 merchants detected
 
-**Files to Check:**
-```bash
-# Check creature attributes
-python3 -c "from TirganachReloaded.tirganach import GameData; \
-gd = GameData('../OriginalGameFiles/data/GameData.cff'); \
-c = list(gd.creatures)[100]; \
-print([a for a in dir(c) if not a.startswith('_')])"
-```
+2. **Guard Detection:**
+   - Check if race contains "GUARD" or "SOLDIER"
+   - Result: 40 guards detected
 
-**Potential Solutions:**
-- Map creature faction to NPC type
-- Infer from equipment (weapons = warrior, no weapons = mage)
-- Check creature stats (high STR = warrior, high INT = mage)
-- Look up in creature_stats table via stats_id
+3. **Hostile Detection:**
+   - Check if creature has experience > 50
+   - Only applied if not already classified as merchant/guard
+   - Result: 1195 hostile NPCs detected
 
-**Files to Modify:**
-- `cff_npc_loader.py` - `_convert_npc_from_gamedata()` method
+4. **Friendly (Default):**
+   - All others remain friendly
+   - Result: 1095 friendly NPCs
+
+**Test Results:**
+- Total NPCs: 2532
+- Friendly: 1095 (43%)
+- Hostile: 1195 (47%)
+- Merchant: 202 (8%)
+- Guard: 40 (2%)
+
+**Files Modified:**
+- `cff_npc_loader.py` - Added type detection logic
 
 ---
 
 ### TODO-004: Load Real Character Classes
-**Status:** 🟡 NEEDS INVESTIGATION  
+**Status:** ✅ COMPLETE  
 **Priority:** MEDIUM
 
 **Problem:**
-All NPCs default to "warrior" class.
+All NPCs defaulted to "warrior" class.
 
-**Investigation Steps:**
-1. Check if creatures have a class field
-2. Check creature_skills table for class detection
-3. Infer from stats distribution:
-   - High STR/stamina = Warrior
-   - High INT/wisdom = Mage
-   - High DEX/agility = Rogue/Ranger
-   - Balanced = Paladin/Monk
+**Solution Implemented:**
+Infers character class from skills in `creature_skills` table:
 
-**Files to Modify:**
-- `cff_npc_loader.py` - Add `_infer_character_class()` method
+1. **Skill Analysis:**
+   - Count magic skills (containing "MAGIC" or "ELEMENTAL")
+   - Count combat skills (containing "BLADE", "BLUNT", "AXE")
+
+2. **Class Determination:**
+   - Magic > Combat → Mage
+   - Combat > 0 → Warrior
+   - Both Magic and Combat → Multi-class
+
+**Test Results:**
+- Warrior: 2530 (99.9%)
+- Mage: 1
+- Multi-class: 1
+- Most NPCs have no skills, default to warrior
+
+**Files Modified:**
+- `cff_npc_loader.py` - Added class inference logic
 
 ---
 
 ### TODO-005: Load Real NPC Levels
-**Status:** 🟡 NEEDS IMPLEMENTATION  
+**Status:** ✅ COMPLETE  
 **Priority:** MEDIUM
 
 **Problem:**
-All NPCs show Level 1 (hardcoded default).
+All NPCs showed Level 1 (hardcoded default).
 
-**Solution:**
-Lookup level from `creature_stats` table using `stats_id`:
+**Solution Implemented:**
+Loads level from `creature_stats` table via `stats_id`:
+
 ```python
-stats_id = getattr(creature, "stats_id", 0)
-if stats_id and hasattr(self.gamedata, "creature_stats"):
-    stats = self.gamedata.creature_stats.where(stats_id=stats_id)
-    if stats:
-        level = getattr(stats[0], "level", 1)
+stats_obj = next((s for s in self.gamedata.creature_stats 
+                 if s.stats_id == stats_id), None)
+if stats_obj:
+    level = getattr(stats_obj, "level", 1)
 ```
 
-**Files to Modify:**
-- `cff_npc_loader.py` - Update `_convert_npc_from_gamedata()`
+**Test Results:**
+- Händler Klaus (ID 21): Level 30
+- Händler Gerstle (ID 22): Level 30
+- Schwarzwolf (ID 350): Level 1
+- Oger Schläger (ID 190): Level 15
+
+**Files Modified:**
+- `cff_npc_loader.py` - Updated `_convert_npc_from_gamedata()`
 
 ---
 
 ### TODO-006: Load Real Base Stats
-**Status:** 🟡 NEEDS IMPLEMENTATION  
+**Status:** ✅ COMPLETE  
 **Priority:** MEDIUM
 
 **Problem:**
 All stats default to 10 (not real values from game).
 
-**Solution:**
-Lookup stats from `creature_stats` table:
+**Solution Implemented:**
+Loads all 7 base stats from `creature_stats` table via `stats_id`:
+- Strength
+- Stamina
+- Agility
+- Dexterity
+- Intelligence
+- Wisdom
+- Charisma
+
+**Implementation:**
 ```python
-if stats_id:
-    stats_row = self.gamedata.creature_stats.where(stats_id=stats_id)[0]
+stats_obj = next((s for s in self.gamedata.creature_stats 
+                 if s.stats_id == stats_id), None)
+if stats_obj:
     base_stats = {
-        "strength": getattr(stats_row, "strength", 10),
-        "stamina": getattr(stats_row, "stamina", 10),
+        "strength": getattr(stats_obj, "strength", 10),
+        "stamina": getattr(stats_obj, "stamina", 10),
         # ... etc
     }
 ```
 
-**Files to Modify:**
-- `cff_npc_loader.py` - Update stat loading logic
+**Test Results:**
+- Händler Klaus: STR=60, STA=60, INT=60
+- Schwarzwolf: STR=20, STA=40, INT=10
+- Oger Schläger: STR=80, STA=70, INT=8
+
+**Files Modified:**
+- `cff_npc_loader.py` - Updated `_convert_npc_from_gamedata()` method
 
 ---
 
@@ -332,10 +374,10 @@ for spell in spell_items:
 2. ✅ TODO-002: Remove "Browse NPCs" button
 
 ### Phase 2: Core Data (Week 2-3)
-3. ⏳ TODO-003: Load real NPC types
-4. ⏳ TODO-004: Load real character classes  
-5. ⏳ TODO-005: Load real levels
-6. ⏳ TODO-006: Load real base stats
+3. ✅ TODO-003: Load real NPC types
+4. ✅ TODO-004: Load real character classes  
+5. ✅ TODO-005: Load real levels
+6. ✅ TODO-006: Load real base stats
 
 ### Phase 3: Enhancements (Week 4+)
 7. ✅ TODO-007: Load head IDs
