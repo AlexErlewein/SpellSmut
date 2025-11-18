@@ -13,15 +13,17 @@ from pathlib import Path
 
 # Import spell models from TirganachReloaded
 try:
-    from TirganachReloaded.cff_editor.models.spell_creation_data import SpellCreationData
-    from TirganachReloaded.cff_editor.models.spell_level import SpellLevel
-    from TirganachReloaded.cff_editor.models.spell_enums import (
-        MagicSchool, SpellType, TargetType, ScalingMode
+    from TirganachReloaded.cff_editor.models.spell_templates import (
+        FireballTemplate,
+        IceBlastTemplate,
+        HolyHealTemplate,
+        ChainLightningTemplate,
+        RegenerationAuraTemplate,
+        SummonWolfTemplate
     )
-except ImportError:
-    print("Error: Could not import spell models from TirganachReloaded")
-    print("Please ensure the TirganachReloaded module is available")
-    exit(1)
+except ImportError as e:
+    print(f"Error importing templates: {e}")
+    sys.exit(1)
 
 # Import validator
 try:

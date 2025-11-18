@@ -1,0 +1,14 @@
+{
+  "quest": [],
+  "spell": [],
+  "weapon": [],
+  "armor": [],
+  "item": [],
+  "npc": [
+    40000,
+    40001
+  ],
+  "creature": [],
+  "building": [],
+  "race": []
+}

@@ -12,6 +12,10 @@ from pathlib import Path
 # Add src directory to path
 sys.path.insert(0, str(Path(__file__).parent))
 
+import json
+from pathlib import Path
+import sys
+
 try:
     from TirganachReloaded.cff_editor.models.spell_templates import (
         FireballTemplate,
@@ -21,6 +25,7 @@ try:
         RegenerationAuraTemplate,
         SummonWolfTemplate
     )
+    from TirganachReloaded.cff_editor.models.spell_creation_data import SpellCreationData
 except ImportError as e:
     print(f"Error importing templates: {e}")
     sys.exit(1)
@@ -78,6 +83,48 @@ def populate_template_spells():
 
         print(f"  ✓ Saved to {individual_file.name}")
 
+    # Load and add original game spells from extracted CFF data
+    print(f"\nLoading original game spells from CFF extraction...")
+    cff_spells_dir = Path(__file__).parent.parent.parent / "extracted_spells"  # Changed to match actual location
+    
+    if cff_spells_dir.exists():
+        # Load the all_cff_spells.json file
+        all_cff_spells_file = cff_spells_dir / "all_cff_spells.json"
+        if all_cff_spells_file.exists():
+            with open(all_cff_spells_file, 'r', encoding='utf-8') as f:
+                cff_spells = json.load(f)
+            
+            print(f"  Found {len(cff_spells)} original game spells from CFF extraction")
+            
+            # Add CFF spells to all_spells list (with IDs adjusted to start from 1000 to avoid conflicts)
+            for spell_data in cff_spells:
+                # Create a SpellCreationData object from the CFF spell data
+                cff_spell = SpellCreationData.from_dict(spell_data)
+                
+                # Adjust ID to avoid conflicts with template spells (300+) and custom spells
+                # Use original CFF ID if it's in the game range (1-999), otherwise keep it
+                if 1 <= cff_spell.spell_line_id <= 999:
+                    cff_spell.spell_line_id += 1000  # Shift to 1000+ range to avoid conflicts
+                
+                # Update the spell data
+                cff_spell_dict = cff_spell.to_dict()
+                
+                # Add to all spells
+                all_spells.append(cff_spell_dict)
+                
+                # Save individual file for CFF spell
+                safe_name = cff_spell.internal_name.lower().replace(" ", "_").replace("/", "_").replace("\\", "_")
+                individual_file = individual_dir / f"spell_{cff_spell.spell_line_id}_{safe_name}.json"
+
+                with open(individual_file, 'w', encoding='utf-8') as f:
+                    json.dump([cff_spell_dict], f, indent=2)  # Save as single-element array for consistency
+
+                print(f"  ✓ Added CFF spell: {cff_spell.spell_name} (ID: {cff_spell.spell_line_id})")
+        else:
+            print(f"  Warning: {all_cff_spells_file} not found. Original game spells will not be loaded.")
+    else:
+        print(f"  Warning: CFF extracted spells directory not found at {cff_spells_dir}. Original game spells will not be loaded.")
+
     # Save all spells to main file
     spells_file = spells_dir / 'spells.json'
 
@@ -85,7 +132,7 @@ def populate_template_spells():
         json.dump(all_spells, f, indent=2)
 
     print(f"\n{'='*60}")
-    print(f"✓ Successfully created {len(all_spells)} template spells")
+    print(f"✓ Successfully created {len(all_spells)} total spells")
     print(f"✓ Saved to {spells_file}")
     print(f"{'='*60}")
 
@@ -94,7 +141,7 @@ def populate_template_spells():
     print(f"{'ID':<6} {'Name':<25} {'School':<12} {'Type':<12} {'Max DPS':<10}")
     print("-"*70)
 
-    for spell_dict in sorted(all_spells, key=lambda x: x['spell_line_id']):
+    for spell_dict in sorted(all_spells, key=lambda x: x['spell_line_id'])[:10]:  # Show first 10 spells
         spell_id = spell_dict['spell_line_id']
         name = spell_dict['spell_name']
         school = spell_dict['magic_school']
@@ -113,8 +160,12 @@ def populate_template_spells():
 
         print(f"{spell_id:<6} {name:<25} {school_name:<12} {spell_type:<12} {max_dps:<10.1f}")
 
+    if len(all_spells) > 10:
+        print(f"... and {len(all_spells) - 10} more spells")
+    
     print("-"*70)
-    print("\nYou can now browse these spells in the Spell Forge!")
+    print(f"\nTotal spells available: {len(all_spells)}")
+    print("You can now browse all spells (templates + original game) in the Spell Forge!")
     print("Run: python spell_forge_wizard.py")
 
 
