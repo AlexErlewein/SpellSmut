@@ -21,7 +21,7 @@ try:
     from TirganachReloaded.cff_editor.models.spell_enums import (
         MagicSchool, SpellType, TargetType, ScalingMode
     )
-    from spell_browser_dialog import SpellBrowserDialog
+    from spell_browser import SpellBrowser
     from spell_validator import SpellValidator
 except ImportError as e:
     print(f"Import error: {e}")
@@ -36,6 +36,7 @@ class SpellForgeWizard(QWizard):
         self.spell_id = None
         self.creation_mode = None
         self.source_spell = None
+        self.loaded_spell_data = None  # For loading directly from browser
 
         self.setWindowTitle("Spell Forge Wizard")
         self.setMinimumSize(800, 600)
@@ -73,6 +74,33 @@ class SpellForgeWizard(QWizard):
                         return
 
         super().done(result)
+
+    def load_spell(self, spell_dict: dict):
+        """Load a spell directly into the wizard"""
+        try:
+            self.loaded_spell_data = SpellCreationData.from_dict(spell_dict)
+            self.source_spell = self.loaded_spell_data
+            self.creation_mode = "edit"
+            self.spell_id = self.loaded_spell_data.spell_line_id
+            
+            # Set the mode selection page to "Edit Existing Spell"
+            mode_page = self.page(0)
+            mode_page.edit_spell_radio.setChecked(True)
+            mode_page.browse_button.setEnabled(False)
+            mode_page.selected_spell = self.loaded_spell_data
+            mode_page.selected_label.setText(
+                f"Loaded: {self.loaded_spell_data.spell_name} (ID: {self.loaded_spell_data.spell_line_id})"
+            )
+            mode_page.selected_label.setStyleSheet("color: green; font-weight: bold;")
+            mode_page.spell_id_spin.setValue(self.loaded_spell_data.spell_line_id)
+            
+        except Exception as e:
+            print(f"Error loading spell: {e}")
+            QMessageBox.critical(
+                self,
+                "Load Error",
+                f"Failed to load spell:\n{str(e)}"
+            )
 
     def export_spell(self) -> bool:
         """Export spell to JSON"""
@@ -165,7 +193,7 @@ class ModeSelectionPage(QWizardPage):
 
         # Browse button
         browse_layout = QHBoxLayout()
-        self.browse_button = QPushButton("Browse Spells...")
+        self.browse_button = QPushButton("Browse Original Spells...")
         self.browse_button.clicked.connect(self.browse_spells)
         self.browse_button.setEnabled(False)
         browse_layout.addWidget(self.browse_button)
@@ -211,7 +239,7 @@ class ModeSelectionPage(QWizardPage):
 
     def browse_spells(self):
         """Open spell browser"""
-        dialog = SpellBrowserDialog(self)
+        dialog = SpellBrowser(self)
         if dialog.exec():
             spell_dict = dialog.get_selected_spell_data()
             if spell_dict:

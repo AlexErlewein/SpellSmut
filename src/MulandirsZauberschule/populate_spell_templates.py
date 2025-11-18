@@ -169,6 +169,46 @@ def populate_template_spells():
     print("Run: python spell_forge_wizard.py")
 
 
+def load_spells_from_json():
+    """Load template spells from JSON file"""
+    spells_file = Path(__file__).parent / 'custom_spells' / 'spells.json'
+    
+    if spells_file.exists():
+        with open(spells_file, 'r', encoding='utf-8') as f:
+            return {spell.get('spell_line_id'): spell for spell in json.load(f)}
+    return {}
+
+
+def load_spells_from_cff_extraction():
+    """Load original game spells from CFF extraction"""
+    spells = {}
+    
+    # First try to load from all_cff_spells.json
+    cff_spells_file = Path(__file__).parent.parent.parent / "extracted_spells" / "all_cff_spells.json"
+    
+    if cff_spells_file.exists():
+        with open(cff_spells_file, 'r', encoding='utf-8') as f:
+            cff_spell_data = json.load(f)
+        
+        # Add CFF spells with IDs adjusted to avoid conflicts
+        for spell_data in cff_spell_data:
+            # Create a SpellCreationData object from the CFF spell data
+            cff_spell = SpellCreationData.from_dict(spell_data)
+            
+            # Adjust ID to avoid conflicts with template spells (300+) and custom spells
+            # Use original CFF ID if it's in the game range (1-999), otherwise keep it
+            if 1 <= cff_spell.spell_line_id <= 999:
+                cff_spell.spell_line_id += 1000  # Shift to 1000+ range to avoid conflicts
+            
+            # Update the spell data
+            cff_spell_dict = cff_spell.to_dict()
+            cff_spell_dict['is_template'] = False  # Mark as original game spell
+            
+            spells[cff_spell.spell_line_id] = cff_spell_dict
+    
+    return spells
+
+
 if __name__ == "__main__":
     try:
         populate_template_spells()
