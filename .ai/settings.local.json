@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv run:*)",
+      "Bash(timeout:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(python3 -m py_compile:*)",
+      "Bash(/tmp/export_methods.txt)",
+      "Bash(/tmp/wizard_before_methods.py)",
+      "Bash(/Users/alex/Desktop/code/Others/SpellSmut/src/GraufurterBuergerBuero/npc_creator_wizard.py)",
+      "Bash(python3:*)",
+      "Bash(pkill:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

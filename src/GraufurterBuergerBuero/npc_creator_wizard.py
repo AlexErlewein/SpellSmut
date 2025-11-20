@@ -1,11 +1,22 @@
+from id_manager import ContentType, IDManager
+from npc_creation_data import (
+    CharacterClass,
+    NpcAppearance,
+    NpcBehavior,
+    NpcCombatStats,
+    NpcCreationData,
+    NpcEquipment,
+    NpcStats,
+    NpcType,
+    VoiceType,
+)
 from PySide6.QtWidgets import (
     QCheckBox,
     QComboBox,
     QDialog,
-    QDoubleSpinBox,
+    QFileDialog,
     QFormLayout,
     QGroupBox,
-    QHBoxLayout,
     QLabel,
     QLineEdit,
     QMessageBox,
@@ -16,20 +27,6 @@ from PySide6.QtWidgets import (
     QVBoxLayout,
     QWizard,
     QWizardPage,
-)
-from PySide6.QtCore import Qt
-
-from id_manager import ContentType, IDManager
-from npc_creation_data import (
-    NpcCreationData,
-    NpcType,
-    CharacterClass,
-    VoiceType,
-    NpcStats,
-    NpcCombatStats,
-    NpcEquipment,
-    NpcAppearance,
-    NpcBehavior,
 )
 
 
@@ -74,13 +71,23 @@ class NpcCreatorWizard(QWizard):
         elif mode_page.duplicate_radio.isChecked():
             creation_mode = "duplicate"
 
+        # Ensure we have a valid NPC ID
+        if self.npc_id is None:
+            # Fallback ID allocation if not properly allocated
+            from shared.id_manager import IDManager, ContentType
+            id_manager = IDManager()
+            self.npc_id = id_manager.allocate_id(ContentType.NPC)
+            print(f"Warning: NPC ID was None, allocated fallback ID: {self.npc_id}")
+
         # Basic identity (page 1)
         identity_page = self.page(1)
         name = identity_page.name_edit.text().strip()
         title = identity_page.title_edit.text().strip()
         description = identity_page.description_edit.toPlainText().strip()
         npc_type = NpcType(identity_page.npc_type_combo.currentText().lower())
-        character_class = CharacterClass(identity_page.character_class_combo.currentText().lower())
+        character_class = CharacterClass(
+            identity_page.character_class_combo.currentText().lower()
+        )
         level = identity_page.level_spin.value()
         faction = identity_page.faction_edit.text().strip()
 
@@ -116,7 +123,9 @@ class NpcCreatorWizard(QWizard):
             head_id=appear_page.head_id_spin.value(),
             race=appear_page.race_combo.currentText(),
             gender=appear_page.gender_combo.currentText(),
-            voice_type=VoiceType(appear_page.voice_type_combo.currentText().lower().replace(" ", "_")),
+            voice_type=VoiceType(
+                appear_page.voice_type_combo.currentText().lower().replace(" ", "_")
+            ),
         )
 
         # Equipment (page 5)
@@ -136,7 +145,10 @@ class NpcCreatorWizard(QWizard):
         behavior = NpcBehavior(
             movement_type=behavior_page.movement_combo.currentText(),
             interaction_radius=behavior_page.interaction_radius_spin.value(),
-            spawn_location=(behavior_page.spawn_x_spin.value(), behavior_page.spawn_y_spin.value()),
+            spawn_location=(
+                behavior_page.spawn_x_spin.value(),
+                behavior_page.spawn_y_spin.value(),
+            ),
         )
 
         # Create the complete NPC data object
@@ -253,7 +265,9 @@ class ModeSelectionPage(QWizardPage):
     def _on_mode_changed(self):
         """Handle mode selection changes"""
         # Enable browse button only for edit/duplicate modes
-        is_edit_or_duplicate = self.edit_radio.isChecked() or self.duplicate_radio.isChecked()
+        is_edit_or_duplicate = (
+            self.edit_radio.isChecked() or self.duplicate_radio.isChecked()
+        )
         self.browse_button.setEnabled(is_edit_or_duplicate)
 
         # Clear selected NPC when switching modes
@@ -287,7 +301,9 @@ class ModeSelectionPage(QWizardPage):
 
                 # Update label
                 npc_name = selected_npc.name or "Unnamed NPC"
-                self.selected_npc_label.setText(f"Selected: {npc_name} (ID: {selected_npc_id})")
+                self.selected_npc_label.setText(
+                    f"Selected: {npc_name} (ID: {selected_npc_id})"
+                )
 
                 # For edit mode, use the same ID
                 if self.edit_radio.isChecked():
@@ -299,7 +315,9 @@ class ModeSelectionPage(QWizardPage):
                 else:
                     # For duplicate mode, clear ID (will allocate new one)
                     self.npc_id = None
-                    self.id_status_label.setText("Please allocate a new ID for the duplicated NPC")
+                    self.id_status_label.setText(
+                        "Please allocate a new ID for the duplicated NPC"
+                    )
                     self.id_status_label.setStyleSheet("color: blue;")
                     self.completeChanged.emit()
 
@@ -315,9 +333,7 @@ class ModeSelectionPage(QWizardPage):
                 npc_id = self.id_manager.allocate_id(ContentType.NPC, requested_id)
 
             self.npc_id = npc_id
-            self.id_status_label.setText(
-                f"✓ NPC ID {npc_id} allocated successfully!"
-            )
+            self.id_status_label.setText(f"✓ NPC ID {npc_id} allocated successfully!")
             self.id_status_label.setStyleSheet("color: green;")
 
             # Enable next button
@@ -330,6 +346,13 @@ class ModeSelectionPage(QWizardPage):
     def isComplete(self):
         """Page is complete when ID is allocated"""
         return self.npc_id is not None
+
+    def validatePage(self):
+        """Propagate the allocated ID to the wizard when moving to next page"""
+        wizard = self.wizard()
+        if self.npc_id is not None:
+            wizard.npc_id = self.npc_id
+        return True
 
     def nextId(self):
         """Determine next page based on mode"""
@@ -399,7 +422,7 @@ class BasicIdentityPage(QWizardPage):
     def initializePage(self):
         """Pre-populate fields from source NPC if in edit/duplicate mode"""
         wizard = self.wizard()
-        if hasattr(wizard, 'source_npc') and wizard.source_npc:
+        if hasattr(wizard, "source_npc") and wizard.source_npc:
             npc = wizard.source_npc
             self.name_edit.setText(npc.name)
             self.title_edit.setText(npc.title)
@@ -494,9 +517,15 @@ class BaseStatsPage(QWizardPage):
         layout.addWidget(derived_group)
 
         # Connect stat changes to preview updates
-        for spin in [self.strength_spin, self.stamina_spin, self.agility_spin,
-                     self.dexterity_spin, self.intelligence_spin, self.wisdom_spin,
-                     self.charisma_spin]:
+        for spin in [
+            self.strength_spin,
+            self.stamina_spin,
+            self.agility_spin,
+            self.dexterity_spin,
+            self.intelligence_spin,
+            self.wisdom_spin,
+            self.charisma_spin,
+        ]:
             spin.valueChanged.connect(self.update_derived_preview)
 
         layout.addStretch()
@@ -519,7 +548,7 @@ class BaseStatsPage(QWizardPage):
     def initializePage(self):
         """Pre-populate fields from source NPC if in edit/duplicate mode"""
         wizard = self.wizard()
-        if hasattr(wizard, 'source_npc') and wizard.source_npc:
+        if hasattr(wizard, "source_npc") and wizard.source_npc:
             stats = wizard.source_npc.base_stats
             self.strength_spin.setValue(stats.strength)
             self.stamina_spin.setValue(stats.stamina)
@@ -607,7 +636,7 @@ class CombatStatsPage(QWizardPage):
     def initializePage(self):
         """Pre-populate fields from source NPC if in edit/duplicate mode"""
         wizard = self.wizard()
-        if hasattr(wizard, 'source_npc') and wizard.source_npc:
+        if hasattr(wizard, "source_npc") and wizard.source_npc:
             stats = wizard.source_npc.derived_stats
             self.melee_attack_spin.setValue(stats.melee_attack)
             self.ranged_attack_spin.setValue(stats.ranged_attack)
@@ -642,14 +671,26 @@ class AppearanceVoicePage(QWizardPage):
         visual_layout.addRow("Head Model ID:", self.head_id_spin)
 
         self.race_combo = QComboBox()
-        self.race_combo.addItems([
-            "HUMANS", "DWARVES", "ELVES", "TROLLS", "ORCS", "DARKELVES",
-            "_MERCHANTS", "_HAZIM", "_ELVES_SHIEL", "_WULFGAR"
-        ])
+        self.race_combo.addItems(
+            [
+                "HUMANS",
+                "DWARVES",
+                "ELVES",
+                "TROLLS",
+                "ORCS",
+                "DARKELVES",
+                "_MERCHANTS",
+                "_HAZIM",
+                "_ELVES_SHIEL",
+                "_WULFGAR",
+            ]
+        )
         visual_layout.addRow("Race:", self.race_combo)
 
         self.gender_combo = QComboBox()
-        self.gender_combo.addItems(["MALE", "FEMALE", "MALE_ESSENTIAL", "FEMALE_ESSENTIAL"])
+        self.gender_combo.addItems(
+            ["MALE", "FEMALE", "MALE_ESSENTIAL", "FEMALE_ESSENTIAL"]
+        )
         visual_layout.addRow("Gender:", self.gender_combo)
 
         visual_group.setLayout(visual_layout)
@@ -682,7 +723,7 @@ class AppearanceVoicePage(QWizardPage):
     def initializePage(self):
         """Pre-populate fields from source NPC if in edit/duplicate mode"""
         wizard = self.wizard()
-        if hasattr(wizard, 'source_npc') and wizard.source_npc:
+        if hasattr(wizard, "source_npc") and wizard.source_npc:
             appearance = wizard.source_npc.appearance
             self.head_id_spin.setValue(appearance.head_id)
 
@@ -701,7 +742,10 @@ class AppearanceVoicePage(QWizardPage):
             # Set voice type combo - need to handle enum to display text conversion
             voice_display = appearance.voice_type.value.replace("_", " ").title()
             for i in range(self.voice_type_combo.count()):
-                if self.voice_type_combo.itemText(i).lower().replace(" ", "_") == appearance.voice_type.value:
+                if (
+                    self.voice_type_combo.itemText(i).lower().replace(" ", "_")
+                    == appearance.voice_type.value
+                ):
                     self.voice_type_combo.setCurrentIndex(i)
                     break
 
@@ -784,7 +828,9 @@ class EquipmentSelectionPage(QWizardPage):
             weapon_loader = CFFWeaponLoader()
             self.weapon_items = weapon_loader.load_all_weapons()
 
-            print(f"Loaded {len(self.armor_items)} armor items and {len(self.weapon_items)} weapons")
+            print(
+                f"Loaded {len(self.armor_items)} armor items and {len(self.weapon_items)} weapons"
+            )
 
         except Exception as e:
             print(f"Error loading equipment data: {e}")
@@ -803,19 +849,20 @@ class EquipmentSelectionPage(QWizardPage):
 
         # Filter items based on slot type
         if slot_type in ["helmet", "chest", "legs"]:
-            # Armor items - map slot type to friendly name used by CFFArmorLoader
+            # Armor items - the slot data contains "Slot EquipmentType.XXXXX" format
+            # Map our slot types to the enum string pattern
             slot_map = {
-                "helmet": "Head",      # CFFArmorLoader uses "Head" not "HELMET"
-                "chest": "Chest",      # CFFArmorLoader uses "Chest" not "UPPER"
-                "legs": "Legs"         # CFFArmorLoader uses "Legs" not "LOWER"
+                "helmet": "EquipmentType.HELMET",
+                "chest": "EquipmentType.UPPER",
+                "legs": "EquipmentType.LOWER",
             }
-            target_slot_name = slot_map.get(slot_type, "")
+            target_enum = slot_map.get(slot_type, "")
 
-            # Filter and sort armor by slot (exact match on friendly name)
+            # Filter and sort armor by slot (check if enum string is in slot field)
             filtered_items = [
                 (item_id, item_data)
                 for item_id, item_data in self.armor_items.items()
-                if item_data.get("slot", "") == target_slot_name
+                if target_enum in str(item_data.get("slot", ""))
             ]
 
             # Sort by name
@@ -845,11 +892,11 @@ class EquipmentSelectionPage(QWizardPage):
 
         elif slot_type == "shield":
             # Shields (left hand armor or one-handed weapons)
-            # Add shields from armor (check for Shield in slot string)
+            # Add shields from armor (check for EquipmentType.SHIELD in slot string)
             shield_armor = [
                 (item_id, item_data)
                 for item_id, item_data in self.armor_items.items()
-                if item_data.get("slot", "") == "Shield"
+                if "EquipmentType.SHIELD" in str(item_data.get("slot", ""))
             ]
 
             # Sort by name
@@ -866,16 +913,18 @@ class EquipmentSelectionPage(QWizardPage):
                 for item_id, item_data in self.weapon_items.items()
                 if not item_data.get("two_handed", False)
             ]
-            for item_id, item_data in offhand_weapons[:20]:  # Limit to first 20 for combo length
+            for item_id, item_data in offhand_weapons[
+                :20
+            ]:  # Limit to first 20 for combo length
                 name = item_data.get("name", f"Weapon {item_id}")
                 combo.addItem(f"{item_id}: {name} (Off-hand)", item_id)
 
         elif slot_type == "ring":
-            # Rings (check for Ring in slot string)
+            # Rings (check for EquipmentType.RING in slot string)
             ring_items = [
                 (item_id, item_data)
                 for item_id, item_data in self.armor_items.items()
-                if item_data.get("slot", "") == "Ring"
+                if "EquipmentType.RING" in str(item_data.get("slot", ""))
             ]
 
             # Sort by name
@@ -891,7 +940,7 @@ class EquipmentSelectionPage(QWizardPage):
     def initializePage(self):
         """Pre-populate fields from source NPC if in edit/duplicate mode"""
         wizard = self.wizard()
-        if hasattr(wizard, 'source_npc') and wizard.source_npc:
+        if hasattr(wizard, "source_npc") and wizard.source_npc:
             equipment = wizard.source_npc.equipment
 
             # Set combo boxes to the equipment IDs
@@ -965,7 +1014,7 @@ class BehaviorPage(QWizardPage):
     def initializePage(self):
         """Pre-populate fields from source NPC if in edit/duplicate mode"""
         wizard = self.wizard()
-        if hasattr(wizard, 'source_npc') and wizard.source_npc:
+        if hasattr(wizard, "source_npc") and wizard.source_npc:
             behavior = wizard.source_npc.behavior
 
             # Set movement type combo
@@ -1057,11 +1106,15 @@ class ReviewExportPage(QWizardPage):
         review_text += f"  Melee Attack: {combat_page.melee_attack_spin.value()}\n"
         review_text += f"  Ranged Attack: {combat_page.ranged_attack_spin.value()}\n"
         review_text += f"  Magic Attack: {combat_page.magic_attack_spin.value()}\n"
-        review_text += f"  Physical Defense: {combat_page.physical_defense_spin.value()}\n"
+        review_text += (
+            f"  Physical Defense: {combat_page.physical_defense_spin.value()}\n"
+        )
         review_text += f"  Magic Defense: {combat_page.magic_defense_spin.value()}\n"
         review_text += f"  Fire Resistance: {combat_page.fire_resist_spin.value()}\n"
         review_text += f"  Ice Resistance: {combat_page.ice_resist_spin.value()}\n"
-        review_text += f"  Black Magic Resistance: {combat_page.black_resist_spin.value()}\n"
+        review_text += (
+            f"  Black Magic Resistance: {combat_page.black_resist_spin.value()}\n"
+        )
         review_text += f"  Mind Resistance: {combat_page.mind_resist_spin.value()}\n\n"
 
         # Appearance (page 4: AppearanceVoicePage)
@@ -1078,19 +1131,182 @@ class ReviewExportPage(QWizardPage):
         review_text += f"  Helmet: {equipment_page.helmet_combo.currentText()}\n"
         review_text += f"  Chest: {equipment_page.chest_combo.currentText()}\n"
         review_text += f"  Legs: {equipment_page.legs_combo.currentText()}\n"
-        review_text += f"  Right Hand: {equipment_page.right_hand_combo.currentText()}\n"
+        review_text += (
+            f"  Right Hand: {equipment_page.right_hand_combo.currentText()}\n"
+        )
         review_text += f"  Left Hand: {equipment_page.left_hand_combo.currentText()}\n"
-        review_text += f"  Right Ring: {equipment_page.right_ring_combo.currentText()}\n"
-        review_text += f"  Left Ring: {equipment_page.left_ring_combo.currentText()}\n\n"
+        review_text += (
+            f"  Right Ring: {equipment_page.right_ring_combo.currentText()}\n"
+        )
+        review_text += (
+            f"  Left Ring: {equipment_page.left_ring_combo.currentText()}\n\n"
+        )
 
         # Behavior (page 6: BehaviorPage)
         behavior_page = wizard.page(6)
         review_text += "Behavior:\n"
-        review_text += f"  Movement Type: {behavior_page.movement_combo.currentText()}\n"
-        review_text += f"  Interaction Radius: {behavior_page.interaction_radius_spin.value()}\n"
+        review_text += (
+            f"  Movement Type: {behavior_page.movement_combo.currentText()}\n"
+        )
+        review_text += (
+            f"  Interaction Radius: {behavior_page.interaction_radius_spin.value()}\n"
+        )
         review_text += f"  Spawn Location: ({behavior_page.spawn_x_spin.value()}, {behavior_page.spawn_y_spin.value()})\n"
 
         self.review_text.setPlainText(review_text)
+
+    def export_cff_with_dialog(self, npc_data: NpcCreationData) -> bool:
+        """Export CFF data with file dialog for location and filename selection"""
+        try:
+            import os
+            from datetime import datetime
+
+            from npc_cff_exporter import NpcCFFExporter
+
+            # Generate CFF data first
+            exporter = NpcCFFExporter()
+            cff_data = exporter.export_npc(npc_data)
+
+            # Create safe filename suggestion
+            npc_name_safe = "".join(
+                c for c in npc_data.name if c.isalnum() or c in (" ", "-", "_")
+            ).rstrip()
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            suggested_filename = f"{npc_name_safe}_NPC_CFF_{timestamp}"
+
+            # Get initial directory (previous export location or default)
+            initial_dir = os.path.join(os.path.dirname(__file__), "cff_exports")
+            if not os.path.exists(initial_dir):
+                initial_dir = os.path.expanduser("~")  # Fall back to user home
+
+            # Show file dialog for directory and filename selection
+            dialog = QFileDialog(self)
+            dialog.setFileMode(QFileDialog.AnyFile)
+            dialog.setAcceptMode(QFileDialog.AcceptSave)
+            dialog.setNameFilter("CFF Export Files (*.cff);;All Files (*)")
+            dialog.selectFile(suggested_filename + ".cff")
+            dialog.setDirectory(initial_dir)
+            dialog.setWindowTitle("Export NPC to CFF Files")
+            dialog.setLabelText(QFileDialog.Accept, "Export")
+
+            # Add custom label to explain what will happen
+            dialog.setLabelText(QFileDialog.FileName, "Base name for CFF files:")
+            dialog.setLabelText(QFileDialog.FileType, "Select directory and base name")
+
+            if dialog.exec() != QFileDialog.Accepted:
+                # User cancelled
+                self.status_label.setText(
+                    f"✓ NPC '{npc_data.name}' saved to JSON. CFF export cancelled by user."
+                )
+                self.status_label.setStyleSheet("color: yellow;")
+                return False
+
+            selected_files = dialog.selectedFiles()
+            if not selected_files:
+                self.status_label.setText("No file selected for CFF export.")
+                return False
+
+            base_path = selected_files[0]
+            export_dir = os.path.dirname(base_path)
+
+            # Remove extension if user provided one, we'll use our own naming
+            base_name = os.path.splitext(os.path.basename(base_path))[0]
+            if not base_name:
+                base_name = suggested_filename
+
+            # Ensure directory exists
+            os.makedirs(export_dir, exist_ok=True)
+
+            # Check for existing files and warn about overwriting
+            existing_files = []
+            for category_id in cff_data.keys():
+                filename = f"{base_name}_category{category_id}.bin"
+                filepath = os.path.join(export_dir, filename)
+                if os.path.exists(filepath):
+                    existing_files.append(filename)
+
+            summary_filename = f"{base_name}_export_summary.txt"
+            summary_filepath = os.path.join(export_dir, summary_filename)
+            if os.path.exists(summary_filepath):
+                existing_files.append(summary_filename)
+
+            # Show overwrite confirmation if files exist
+            if existing_files:
+                reply = QMessageBox.question(
+                    self,
+                    "Overwrite Existing Files?",
+                    "The following files already exist and will be overwritten:\n\n"
+                    + "\n".join(
+                        f"• {f}" for f in existing_files[:10]
+                    )  # Show first 10 files
+                    + ("\n..." if len(existing_files) > 10 else "")
+                    + f"\n\nTotal files to overwrite: {len(existing_files)}\n\n"
+                    + "Do you want to continue?",
+                    QMessageBox.Yes | QMessageBox.No,
+                    QMessageBox.No,
+                )
+
+                if reply != QMessageBox.Yes:
+                    self.status_label.setText(
+                        "CFF export cancelled to avoid overwriting files."
+                    )
+                    return False
+
+            # Write CFF category files
+            export_files = []
+            for category_id, binary_data in cff_data.items():
+                filename = f"{base_name}_category{category_id}.bin"
+                filepath = os.path.join(export_dir, filename)
+
+                with open(filepath, "wb") as f:
+                    f.write(binary_data)
+                export_files.append(filename)
+
+            # Write a summary file with integration instructions
+            with open(summary_filepath, "w", encoding="utf-8") as f:
+                f.write("NPC CFF Export Summary\n")
+                f.write("========================\n\n")
+                f.write(f"NPC Name: {npc_data.name}\n")
+                f.write(f"NPC ID: {npc_data.npc_id}\n")
+                f.write(
+                    f"Export Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+                )
+                f.write(f"Export Directory: {export_dir}\n")
+                f.write(f"Base Filename: {base_name}\n\n")
+
+                f.write("Generated Files:\n")
+                for filename in export_files:
+                    f.write(f"  - {filename}\n")
+                f.write(f"  - {summary_filename}\n")
+
+                f.write("\nIntegration Instructions:\n")
+                f.write("1. Backup your original GameData.cff file\n")
+                f.write(
+                    "2. Use a CFF editing tool to integrate these binary categories:\n"
+                )
+                for category_id, filename in [
+                    (cid, f) for cid, f in zip(cff_data.keys(), export_files)
+                ]:
+                    f.write(f"   - Category {category_id}: {filename}\n")
+                f.write("3. Or use the SpellForce Modding Tools to merge the data\n")
+                f.write("\nNote: These are binary CFF category files that can be\n")
+                f.write(
+                    "imported into existing GameData.cff files using appropriate tools.\n"
+                )
+
+            self.status_label.setText(
+                f"✓ NPC '{npc_data.name}' exported to {len(export_files)} CFF files in {export_dir}!"
+            )
+            return True
+
+        except Exception as cff_error:
+            self.status_label.setText(
+                f"✓ NPC saved to JSON, but CFF export failed: {str(cff_error)}"
+            )
+            import traceback
+
+            print(f"CFF export error: {traceback.format_exc()}")
+            return False
 
     def export_npc(self):
         """Export the NPC configuration"""
@@ -1117,25 +1333,12 @@ class ReviewExportPage(QWizardPage):
 
                 # Export to CFF if checkbox is checked
                 if self.export_cff_check.isChecked():
-                    try:
-                        from npc_cff_exporter import NpcCFFExporter
-
-                        exporter = NpcCFFExporter()
-                        cff_data = exporter.export_npc(npc_data)
-
-                        # Note: Actual CFF file writing would go here
-                        # For now, we just generate the binary data
-                        self.status_label.setText(
-                            f"✓ NPC '{npc_data.name}' saved to JSON and prepared for CFF export!"
-                        )
-                    except Exception as cff_error:
-                        self.status_label.setText(
-                            f"✓ NPC saved to JSON, but CFF export failed: {str(cff_error)}"
-                        )
+                    if self.export_cff_with_dialog(npc_data):
+                        self.status_label.setStyleSheet("color: green;")
+                    else:
                         self.status_label.setStyleSheet("color: orange;")
             else:
                 raise ValueError("Failed to save NPC to JSON")
 
         except Exception as e:
             self.status_label.setText(f"✗ Export failed: {str(e)}")
-            self.status_label.setStyleSheet("color: red;")

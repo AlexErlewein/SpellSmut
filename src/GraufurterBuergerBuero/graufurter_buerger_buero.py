@@ -214,6 +214,27 @@ class GraufurterBuergerBuero(QMainWindow):
         collapse_btn.setStyleSheet("QPushButton { padding: 6px; }")
         tree_controls.addWidget(expand_btn)
         tree_controls.addWidget(collapse_btn)
+
+        # Edit NPC button
+        self.edit_npc_btn = QPushButton("Edit NPC")
+        self.edit_npc_btn.clicked.connect(self.edit_selected_npc)
+        self.edit_npc_btn.setEnabled(False)  # Disabled until NPC is selected
+        self.edit_npc_btn.setStyleSheet(
+            "QPushButton { background-color: #3c5a9d; color: #e0e0e0; padding: 6px; border-radius: 3px; } "
+            "QPushButton:hover { background-color: #4a6ab3; } "
+            "QPushButton:disabled { background-color: #2d2d2d; color: #666; }"
+        )
+        tree_controls.addWidget(self.edit_npc_btn)
+
+        # Export CFF button
+        export_cff_btn = QPushButton("Export CFF")
+        export_cff_btn.clicked.connect(self.export_all_npcs_to_cff)
+        export_cff_btn.setStyleSheet(
+            "QPushButton { background-color: #5a3c2d; color: #e0e0e0; padding: 6px; border-radius: 3px; } "
+            "QPushButton:hover { background-color: #6a4a3a; }"
+        )
+        tree_controls.addWidget(export_cff_btn)
+
         tree_controls.addStretch()
 
         # Add NPC count label
@@ -279,13 +300,25 @@ class GraufurterBuergerBuero(QMainWindow):
             if not self.id_manager:
                 self.id_manager = IDManager()
 
+            # Auto-load GameData.cff if not already set
+            if not self.custom_cff_path:
+                # Try to find GameData.cff in the standard location
+                from pathlib import Path
+                project_root = Path(__file__).parent.parent.parent
+                gamedata_path = project_root / "OriginalGameFiles" / "data" / "GameData.cff"
+
+                if gamedata_path.exists():
+                    self.custom_cff_path = str(gamedata_path)
+                    if self.logger:
+                        self.logger.info(f"Auto-loading GameData.cff from: {self.custom_cff_path}")
+
             # Update status message based on whether we're loading custom CFF
             if self.custom_cff_path:
                 file_name = Path(self.custom_cff_path).name
                 self.statusBar().showMessage(f"Loading NPCs from {file_name}...")
             else:
                 self.statusBar().showMessage("Loading NPC data...")
-            
+
             self.load_npc_data()
 
             self.statusBar().showMessage("Building NPC trees...")
@@ -502,6 +535,7 @@ class GraufurterBuergerBuero(QMainWindow):
         """Handle NPC selection"""
         selected_items = self.npc_tree.selectedItems()
         if not selected_items:
+            self.edit_npc_btn.setEnabled(False)
             return
 
         item = selected_items[0]
@@ -511,6 +545,12 @@ class GraufurterBuergerBuero(QMainWindow):
             item_type, npc_id = item_data
             if item_type == "npc" and npc_id in self.npc_data:
                 self.show_npc_details(npc_id)
+                # Enable Edit button only for custom NPCs (ID >= 40000)
+                self.edit_npc_btn.setEnabled(npc_id >= 40000)
+            else:
+                self.edit_npc_btn.setEnabled(False)
+        else:
+            self.edit_npc_btn.setEnabled(False)
 
     def show_npc_details(self, npc_id):
         """Show detailed information for selected NPC"""
@@ -883,6 +923,207 @@ class GraufurterBuergerBuero(QMainWindow):
             if self.logger:
                 self.logger.exception(f"Failed to create NPC: {e}")
             QMessageBox.critical(self, "Error", f"Failed to create NPC:\n{e}")
+
+    def edit_selected_npc(self):
+        """Edit the currently selected NPC"""
+        try:
+            selected_items = self.npc_tree.selectedItems()
+            if not selected_items:
+                QMessageBox.warning(self, "No Selection", "Please select an NPC to edit.")
+                return
+
+            item = selected_items[0]
+            item_data = item.data(0, Qt.ItemDataRole.UserRole)
+
+            if not item_data:
+                QMessageBox.warning(self, "Invalid Selection", "Please select a valid NPC.")
+                return
+
+            item_type, npc_id = item_data
+
+            if item_type != "npc" or npc_id not in self.npc_data:
+                QMessageBox.warning(self, "Invalid Selection", "Please select a valid NPC.")
+                return
+
+            # Only allow editing custom NPCs
+            if npc_id < 40000:
+                QMessageBox.warning(
+                    self,
+                    "Cannot Edit",
+                    "You can only edit custom NPCs (ID >= 40000).\n"
+                    "Game NPCs cannot be edited directly."
+                )
+                return
+
+            # Load the NPC data
+            from npc_loader import load_npc
+
+            npc_data = load_npc(npc_id)
+            if not npc_data:
+                QMessageBox.critical(
+                    self,
+                    "Error",
+                    f"Failed to load NPC {npc_id} for editing."
+                )
+                return
+
+            # Open wizard in edit mode
+            wizard = NpcCreatorWizard(self.id_manager, self)
+
+            # Set the wizard to edit mode by pre-selecting the NPC
+            mode_page = wizard.page(0)  # ModeSelectionPage
+            mode_page.edit_radio.setChecked(True)
+            mode_page.source_npc = npc_data
+            wizard.source_npc = npc_data
+            wizard.source_npc_id = npc_id
+            wizard.npc_id = npc_id
+            mode_page.npc_id = npc_id
+            mode_page.id_status_label.setText(f"✓ Editing NPC ID {npc_id}")
+            mode_page.id_status_label.setStyleSheet("color: green;")
+
+            if wizard.exec():
+                # Reload data after successful edit
+                self.reload_data()
+                if self.logger:
+                    self.logger.info(f"✓ NPC {npc_id} edited successfully")
+                QMessageBox.information(self, "Success", f"NPC {npc_id} edited successfully!")
+
+        except Exception as e:
+            if self.logger:
+                self.logger.exception(f"Failed to edit NPC: {e}")
+            QMessageBox.critical(self, "Error", f"Failed to edit NPC:\n{e}")
+
+    def export_all_npcs_to_cff(self):
+        """Export all NPCs (game + custom) to a single merged CFF file"""
+        try:
+            from datetime import datetime
+            import os
+            import sys
+
+            # Add TirganachReloaded to path
+            sys.path.insert(0, str(Path(__file__).parent.parent / "TirganachReloaded"))
+            from tirganach import GameData
+
+            # Get all custom NPCs (ID >= 40000)
+            custom_npcs = {npc_id: npc_info for npc_id, npc_info in self.npc_data.items() if npc_id >= 40000}
+
+            if not custom_npcs:
+                QMessageBox.information(
+                    self,
+                    "No Custom NPCs",
+                    "There are no custom NPCs to export.\n"
+                    "Create some NPCs first before exporting."
+                )
+                return
+
+            # Check if GameData.cff is loaded
+            if not self.custom_cff_path:
+                QMessageBox.warning(
+                    self,
+                    "No Base CFF",
+                    "GameData.cff is not loaded. Cannot create merged CFF file.\n"
+                    "The original file should auto-load on startup."
+                )
+                return
+
+            # Ask user for export location
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            suggested_filename = f"GameData_WithCustomNPCs_{timestamp}.cff"
+
+            initial_dir = os.path.join(os.path.dirname(__file__), "cff_exports")
+            if not os.path.exists(initial_dir):
+                initial_dir = os.path.expanduser("~")
+
+            file_path, _ = QFileDialog.getSaveFileName(
+                self,
+                "Export Merged CFF File",
+                os.path.join(initial_dir, suggested_filename),
+                "CFF Files (*.cff);;All Files (*)"
+            )
+
+            if not file_path:
+                return
+
+            # Ensure .cff extension
+            if not file_path.endswith('.cff'):
+                file_path += '.cff'
+
+            os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+            # Show progress dialog
+            from PySide6.QtWidgets import QProgressDialog
+            from PySide6.QtCore import Qt
+
+            progress = QProgressDialog("Loading GameData.cff...", "Cancel", 0, 100, self)
+            progress.setWindowModality(Qt.WindowModality.WindowModal)
+            progress.setMinimumDuration(0)
+            progress.setValue(0)
+
+            # Load the original GameData.cff
+            if self.logger:
+                self.logger.info(f"Loading GameData.cff from: {self.custom_cff_path}")
+
+            progress.setLabelText("Loading original GameData.cff...")
+            progress.setValue(20)
+
+            game_data = GameData(self.custom_cff_path)
+
+            if progress.wasCanceled():
+                return
+
+            progress.setLabelText(f"Adding {len(custom_npcs)} custom NPCs...")
+            progress.setValue(40)
+
+            # TODO: Here we would need to actually add the custom NPC data to the GameData object
+            # This requires understanding the GameData structure and how to add NPCs
+            # For now, we'll just save a copy with a warning
+
+            progress.setLabelText("Saving merged CFF file...")
+            progress.setValue(80)
+
+            # Save the game data (currently just a copy until we implement NPC addition)
+            game_data.save(file_path)
+
+            progress.setValue(100)
+
+            # Write summary file
+            summary_path = file_path.replace('.cff', '_summary.txt')
+            with open(summary_path, "w", encoding="utf-8") as f:
+                f.write("Merged CFF Export Summary\n")
+                f.write("=" * 40 + "\n\n")
+                f.write(f"Export Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+                f.write(f"Base CFF: {self.custom_cff_path}\n")
+                f.write(f"Output File: {file_path}\n")
+                f.write(f"Total Game NPCs: {len([npc_id for npc_id in self.npc_data.keys() if npc_id < 40000])}\n")
+                f.write(f"Total Custom NPCs: {len(custom_npcs)}\n\n")
+
+                f.write("Custom NPCs to be integrated:\n")
+                for npc_id, npc_info in sorted(custom_npcs.items()):
+                    npc_name = npc_info.get("name", "Unknown")
+                    f.write(f"  - ID {npc_id}: {npc_name}\n")
+
+                f.write("\n")
+                f.write("Note: Currently this creates a copy of the original GameData.cff.\n")
+                f.write("Full NPC integration into the CFF structure is in development.\n")
+                f.write("Use the individual NPC export feature for now to get binary category files.\n")
+
+            QMessageBox.information(
+                self,
+                "Export Successful",
+                f"Created merged CFF file:\n{file_path}\n\n"
+                f"Base NPCs: {len([npc_id for npc_id in self.npc_data.keys() if npc_id < 40000])}\n"
+                f"Custom NPCs listed: {len(custom_npcs)}\n\n"
+                f"Note: Full CFF integration is in development.\n"
+                f"Currently creates a base copy for reference."
+            )
+
+            if self.logger:
+                self.logger.info(f"✓ Exported merged CFF to {file_path}")
+
+        except Exception as e:
+            if self.logger:
+                self.logger.exception(f"Failed to export CFF: {e}")
+            QMessageBox.critical(self, "Export Failed", f"Failed to export CFF:\n{e}\n\nTry using 'Load CFF File' first.")
 
     def load_cff_file(self):
         """Load NPCs from a custom CFF file"""

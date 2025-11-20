@@ -36,7 +36,8 @@ class NpcCFFExporter:
         exports[3005] = self.export_npc_behavior(npc_data)
 
         # Category 2016: Text entries (name, title, description)
-        exports[2016] = self.export_text_entries(npc_data)
+        text_entries = self.export_text_entries(npc_data)
+        exports[2016] = b''.join(text_entries) if text_entries else b''
 
         return exports
 
@@ -61,9 +62,18 @@ class NpcCFFExporter:
                 CharacterClass.MULTI_CLASS: 3
             }
 
+            # Calculate CFF-safe NPC ID and name ID (must be <= 65535)
+            if npc_data.npc_id is None:
+                cff_npc_id = 1001  # Default ID for NPCs with null ID
+            else:
+                cff_npc_id = npc_data.npc_id % 65535  # Ensure NPC ID fits in unsigned short
+                if cff_npc_id == 0:
+                    cff_npc_id = 1  # Avoid ID 0 which might be reserved
+            name_id = (cff_npc_id % 35000) + 1000  # Keep it in safe range
+
             data = struct.pack('<HHBBBBBBBB',
-                npc_data.npc_id,                                    # NPC ID
-                npc_data.npc_id + 30000,                           # Name ID (offset for text)
+                cff_npc_id,                                        # NPC ID (adjusted for CFF format)
+                name_id,                                           # Name ID (safe range)
                 npc_type_map.get(npc_data.npc_type, 0),           # NPC Type
                 class_type_map.get(npc_data.character_class, 0),  # Character Class
                 npc_data.level,                                    # Level
@@ -82,9 +92,17 @@ class NpcCFFExporter:
     def export_npc_stats(self, npc_data: NpcCreationData) -> bytes:
         """Export to Category 3002 (NPC Base Stats)"""
         try:
+            # Calculate CFF-safe NPC ID
+            if npc_data.npc_id is None:
+                cff_npc_id = 1001  # Default ID for NPCs with null ID
+            else:
+                cff_npc_id = npc_data.npc_id % 65535
+                if cff_npc_id == 0:
+                    cff_npc_id = 1
+
             # Structure: NPCID + base stats (STR, STA, AGI, DEX, INT, WIS, CHA)
             data = struct.pack('<Hiiiiiiii',
-                npc_data.npc_id,
+                cff_npc_id,
                 npc_data.base_stats.strength,
                 npc_data.base_stats.stamina,
                 npc_data.base_stats.agility,
@@ -103,9 +121,17 @@ class NpcCFFExporter:
     def export_npc_combat(self, npc_data: NpcCreationData) -> bytes:
         """Export to Category 3003 (NPC Combat Stats)"""
         try:
+            # Calculate CFF-safe NPC ID
+            if npc_data.npc_id is None:
+                cff_npc_id = 1001  # Default ID for NPCs with null ID
+            else:
+                cff_npc_id = npc_data.npc_id % 65535
+                if cff_npc_id == 0:
+                    cff_npc_id = 1
+
             # Structure: NPCID + combat stats
             data = struct.pack('<Hiiiiiiiiiiii',
-                npc_data.npc_id,
+                cff_npc_id,
                 npc_data.derived_stats.health,
                 npc_data.derived_stats.mana,
                 npc_data.derived_stats.melee_attack,
@@ -128,9 +154,17 @@ class NpcCFFExporter:
     def export_npc_equipment(self, npc_data: NpcCreationData) -> bytes:
         """Export to Category 3004 (NPC Equipment)"""
         try:
+            # Calculate CFF-safe NPC ID
+            if npc_data.npc_id is None:
+                cff_npc_id = 1001  # Default ID for NPCs with null ID
+            else:
+                cff_npc_id = npc_data.npc_id % 65535
+                if cff_npc_id == 0:
+                    cff_npc_id = 1
+
             # Structure: NPCID + equipment item IDs (7 slots)
             data = struct.pack('<HHHHHHHH',
-                npc_data.npc_id,
+                cff_npc_id,
                 npc_data.equipment.helmet_item_id or 0,
                 npc_data.equipment.chest_item_id or 0,
                 npc_data.equipment.legs_item_id or 0,
@@ -158,8 +192,16 @@ class NpcCFFExporter:
             spawn_x = npc_data.behavior.spawn_location[0] if npc_data.behavior.spawn_location else 0
             spawn_y = npc_data.behavior.spawn_location[1] if npc_data.behavior.spawn_location else 0
 
+            # Calculate CFF-safe NPC ID
+            if npc_data.npc_id is None:
+                cff_npc_id = 1001  # Default ID for NPCs with null ID
+            else:
+                cff_npc_id = npc_data.npc_id % 65535
+                if cff_npc_id == 0:
+                    cff_npc_id = 1
+
             data = struct.pack('<HBHhh',
-                npc_data.npc_id,
+                cff_npc_id,
                 movement_type_map.get(npc_data.behavior.movement_type, 0),
                 npc_data.behavior.interaction_radius,
                 spawn_x,
@@ -176,20 +218,28 @@ class NpcCFFExporter:
         entries = []
 
         try:
+            # Calculate CFF-safe NPC ID
+            if npc_data.npc_id is None:
+                cff_npc_id = 1001  # Default ID for NPCs with null ID
+            else:
+                cff_npc_id = npc_data.npc_id % 65535
+                if cff_npc_id == 0:
+                    cff_npc_id = 1
+
             # Name entry
-            name_id = npc_data.npc_id + 30000
+            name_id = cff_npc_id + 30000
             name_entry = self._create_text_entry(name_id, npc_data.name)
             entries.append(name_entry)
 
             # Title entry (if provided)
             if npc_data.title.strip():
-                title_id = npc_data.npc_id + 30001
+                title_id = cff_npc_id + 30001
                 title_entry = self._create_text_entry(title_id, npc_data.title)
                 entries.append(title_entry)
 
             # Description entry (if provided)
             if npc_data.description.strip():
-                desc_id = npc_data.npc_id + 30002
+                desc_id = cff_npc_id + 30002
                 desc_entry = self._create_text_entry(desc_id, npc_data.description)
                 entries.append(desc_entry)
 
