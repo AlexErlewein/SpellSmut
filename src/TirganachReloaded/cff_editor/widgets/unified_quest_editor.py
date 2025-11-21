@@ -675,6 +675,7 @@ class QuestLocationWidget(QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.logger = get_logger(__name__)
         self._setup_ui()
         self._setup_connections()
 
@@ -806,7 +807,7 @@ class QuestLocationWidget(QWidget):
                 self.npc_name_edit.setText(npc.name)
 
                 self.logger.info(f"Selected quest giver: {npc.name} (ID: {npc.npc_id})")
-                self.status_bar.showMessage(f"Quest giver set to: {npc.name}", 3000)
+                # Status message logged above (status_bar belongs to parent window)
         except ImportError as e:
             self.logger.error(f"Failed to import NPC browser: {e}")
             QMessageBox.warning(

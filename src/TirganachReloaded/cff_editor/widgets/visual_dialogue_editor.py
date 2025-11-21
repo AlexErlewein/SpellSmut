@@ -449,12 +449,18 @@ class DialogueGraphicsView(QGraphicsView):
 
     def on_selection_changed(self):
         """Handle scene selection change"""
-        selected_items = self.scene.selectedItems()
-        if selected_items:
-            for item in selected_items:
-                if isinstance(item, DialogueNodeItem):
-                    self.on_node_selected(item.node)
-                    break
+        try:
+            if self.scene is None:
+                return
+            selected_items = self.scene.selectedItems()
+            if selected_items:
+                for item in selected_items:
+                    if isinstance(item, DialogueNodeItem):
+                        self.on_node_selected(item.node)
+                        break
+        except RuntimeError:
+            # Scene was deleted, ignore
+            pass
 
     def wheelEvent(self, event):
         """Handle mouse wheel for zooming"""
@@ -481,7 +487,8 @@ class DialogueGraphicsView(QGraphicsView):
         """Handle mouse press"""
         if event.button() == Qt.LeftButton:
             # Check if clicking on empty space
-            pos = self.mapToScene(event.position())
+            # Convert QPointF to QPoint for mapToScene
+            pos = self.mapToScene(event.position().toPoint())
             item = self.scene.itemAt(pos, self.transform())
 
             if not item:

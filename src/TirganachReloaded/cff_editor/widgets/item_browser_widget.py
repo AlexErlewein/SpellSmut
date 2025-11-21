@@ -688,9 +688,6 @@ class ItemBrowserWidget(QWidget):
 
     def populate_tree(self):
         """Populate the tree with filtered items"""
-        print(
-            f"DEBUG: populate_tree called with {len(self.filtered_items)} filtered items"
-        )
         self.items_tree.clear()
 
         # Group items by type for better organization
@@ -699,10 +696,6 @@ class ItemBrowserWidget(QWidget):
             if item.item_type not in items_by_type:
                 items_by_type[item.item_type] = []
             items_by_type[item.item_type].append(item)
-
-        print(
-            f"DEBUG: Items grouped by type: { {k: len(v) for k, v in items_by_type.items()} }"
-        )
 
         # Add items to tree
         for item_type, items in items_by_type.items():
