@@ -81,8 +81,8 @@ class AnswerIdManager:
         # Reserved IDs (manually assigned or imported)
         self.reserved_ids: Set[int] = set()
         
-        # ID range configuration
-        self.min_id = 1000  # Minimum allowed ID
+        # ID range configuration - match SpellForce game range
+        self.min_id = 1  # Minimum allowed ID (game uses small numbers like 1, 2, 3)
         self.max_id = 99999  # Maximum allowed ID
         
         logger.info(f"AnswerIdManager initialized for quest '{quest_name}' starting at ID {start_id}")
@@ -143,17 +143,16 @@ class AnswerIdManager:
             logger.error(f"AnswerId {answer_id} out of valid range ({self.min_id}-{self.max_id})")
             return False
         
-        # Check for conflicts
+        # Check for conflicts but allow them (we'll detect and resolve later)
         if answer_id in self.id_usage and self.id_usage[answer_id]:
-            # ID already in use
+            # ID already in use - this creates a potential conflict
             existing_usage = self.id_usage[answer_id]
             # Allow if it's the same step/choice (re-assignment)
             if len(existing_usage) == 1 and existing_usage[0] == (step_id, choice_index):
                 logger.debug(f"Re-assigning same ID {answer_id} to step {step_id} choice {choice_index}")
-                return True
             else:
-                logger.warning(f"AnswerId {answer_id} conflicts with existing usage: {existing_usage}")
-                return False
+                logger.info(f"AnswerId {answer_id} will conflict with existing usage: {existing_usage}")
+                # Continue anyway - conflicts will be detected by validate_uniqueness()
         
         # Remove any existing assignment for this step/choice
         self.remove_assignment(step_id, choice_index)
@@ -167,18 +166,18 @@ class AnswerIdManager:
             auto_assigned=False
         )
         
-        # Track assignment
+        # Track assignment (allowing duplicates)
         self.assignments[step_id].append(assignment)
         self.id_usage[answer_id].append((step_id, choice_index))
         self.reserved_ids.add(answer_id)
-        
+
         # Update next_available_id if needed
         if answer_id >= self.next_available_id:
             self.next_available_id = answer_id + 1
-        
+
         logger.info(f"Manually assigned AnswerId {answer_id} to step '{step_id}' choice {choice_index}")
-        
-        return True
+
+        return True  # Always return True if ID is in valid range
     
     def remove_assignment(self, step_id: str, choice_index: int) -> bool:
         """
@@ -411,6 +410,83 @@ class AnswerIdManager:
         self.reserved_ids.clear()
         self.next_available_id = self.start_id
         logger.info("AnswerIdManager reset")
+
+    def resolve_conflicts(self, strategy: str = "keep_first") -> int:
+        """
+        Automatically resolve AnswerId conflicts.
+
+        Args:
+            strategy: Resolution strategy - "keep_first", "keep_last", "reassign_all"
+
+        Returns:
+            Number of conflicts resolved
+        """
+        conflicts = self.validate_uniqueness()
+        resolved_count = 0
+
+        for conflict in conflicts:
+            answer_id = conflict.answer_id
+            conflicting_usages = self.id_usage[answer_id]
+
+            if len(conflicting_usages) <= 1:
+                continue  # No actual conflict
+
+            logger.info(f"Resolving conflict for AnswerId {answer_id}: {len(conflicting_usages)} assignments")
+
+            if strategy == "keep_first":
+                # Keep the first assignment, reassign the rest
+                keep_usage = conflicting_usages[0]
+                reassign_usages = conflicting_usages[1:]
+
+                logger.debug(f"Keeping {answer_id} for {keep_usage[0]}[{keep_usage[1]}]")
+
+                for step_id, choice_index in reassign_usages:
+                    # Remove the conflicting assignment
+                    old_answer_id = self.get_answer_id(step_id, choice_index)
+                    self.remove_assignment(step_id, choice_index)
+
+                    # Assign a new unique AnswerId
+                    new_answer_id = self._get_next_id()
+                    self.assign_answer_id(step_id, choice_index, f"Resolved from conflict {old_answer_id}")
+
+                    logger.debug(f"Reassigned {step_id}[{choice_index}] from {old_answer_id} to {new_answer_id}")
+                    resolved_count += 1
+
+            elif strategy == "keep_last":
+                # Keep the last assignment, reassign the rest
+                keep_usage = conflicting_usages[-1]
+                reassign_usages = conflicting_usages[:-1]
+
+                logger.debug(f"Keeping {answer_id} for {keep_usage[0]}[{keep_usage[1]}]")
+
+                for step_id, choice_index in reassign_usages:
+                    # Remove the conflicting assignment
+                    old_answer_id = self.get_answer_id(step_id, choice_index)
+                    self.remove_assignment(step_id, choice_index)
+
+                    # Assign a new unique AnswerId
+                    new_answer_id = self._get_next_id()
+                    self.assign_answer_id(step_id, choice_index, f"Resolved from conflict {old_answer_id}")
+
+                    logger.debug(f"Reassigned {step_id}[{choice_index}] from {old_answer_id} to {new_answer_id}")
+                    resolved_count += 1
+
+            elif strategy == "reassign_all":
+                # Reassign all conflicting assignments to new unique IDs
+                for step_id, choice_index in conflicting_usages:
+                    # Remove the conflicting assignment
+                    old_answer_id = self.get_answer_id(step_id, choice_index)
+                    self.remove_assignment(step_id, choice_index)
+
+                    # Assign a new unique AnswerId
+                    new_answer_id = self._get_next_id()
+                    self.assign_answer_id(step_id, choice_index, f"Resolved from conflict {old_answer_id}")
+
+                    logger.debug(f"Reassigned {step_id}[{choice_index}] from {old_answer_id} to {new_answer_id}")
+                    resolved_count += 1
+
+        logger.info(f"Conflict resolution complete: {resolved_count} assignments reassigned")
+        return resolved_count
     
     def _get_next_id(self) -> int:
         """

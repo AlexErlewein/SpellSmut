@@ -44,6 +44,7 @@ from PySide6.QtWidgets import (
     QTreeWidgetItem,
     QVBoxLayout,
     QWidget,
+    QTabWidget,
 )
 from PySide6.QtCore import Qt
 
@@ -126,6 +127,12 @@ class DialogueTextHighlighter(QSyntaxHighlighter):
         action_format.setForeground(QColor(230, 126, 34))  # Orange
         self.action_pattern = r"\(Action\):.*"
 
+        # AnswerId format
+        answer_id_format = QTextCharFormat()
+        answer_id_format.setForeground(QColor(52, 152, 219))  # Light blue
+        answer_id_format.setFontWeight(QFont.Weight.Bold)
+        self.answer_id_pattern = r"\[🏷️\d+\]|\[AnswerId=\d+\]"
+
         # Error format
         error_format = QTextCharFormat()
         error_format.setForeground(QColor(231, 76, 60))  # Red
@@ -170,6 +177,13 @@ class DialogueTextHighlighter(QSyntaxHighlighter):
         for match in re.finditer(self.action_pattern, text):
             format = QTextCharFormat()
             format.setForeground(QColor(230, 126, 34))
+            self.setFormat(match.start(), match.end() - match.start(), format)
+
+        # Highlight AnswerIds
+        for match in re.finditer(self.answer_id_pattern, text):
+            format = QTextCharFormat()
+            format.setForeground(QColor(52, 152, 219))
+            format.setFontWeight(QFont.Weight.Bold)
             self.setFormat(match.start(), match.end() - match.start(), format)
 
         # Highlight errors
@@ -315,7 +329,10 @@ class TextModeDialogueOverview(QWidget):
         text_layout.addWidget(self.text_edit)
         splitter.addWidget(text_frame)
 
-        # Right: Node details (optional)
+        # Right: Tabbed panel for details and AnswerId management
+        right_panel = QTabWidget()
+
+        # Node details tab
         details_frame = QFrame()
         details_layout = QVBoxLayout(details_frame)
         details_layout.setContentsMargins(0, 0, 0, 0)
@@ -330,10 +347,39 @@ class TextModeDialogueOverview(QWidget):
         self.details_text.setFont(QFont("Arial", 9))
         details_layout.addWidget(self.details_text)
 
-        splitter.addWidget(details_frame)
+        right_panel.addTab(details_frame, "📝 Details")
+
+        # AnswerId management tab
+        try:
+            from TirganachReloaded.cff_editor.widgets.answer_id_management_panel import AnswerIdManagementPanel
+            from TirganachReloaded.cff_editor.widgets.answer_id_manager import AnswerIdManager
+
+            # Create AnswerId manager for this dialogue
+            self.answer_id_manager = AnswerIdManager(quest_name="Current Dialogue")
+            self.answer_id_panel = AnswerIdManagementPanel(self.answer_id_manager)
+
+            # Connect signals
+            self.answer_id_panel.answer_id_changed.connect(self.on_answer_id_changed)
+            self.answer_id_panel.refresh_requested.connect(self.refresh_view)
+
+            right_panel.addTab(self.answer_id_panel, "🏷️ AnswerIds")
+
+        except ImportError:
+            # If AnswerId management panel not available, create a simple placeholder
+            placeholder_frame = QFrame()
+            placeholder_layout = QVBoxLayout(placeholder_frame)
+
+            placeholder_text = QTextEdit()
+            placeholder_text.setReadOnly(True)
+            placeholder_text.setPlainText("AnswerId Management\n\nThis feature requires the AnswerId Management Panel.\n\nAnswerIds are used to link player choices to NPC responses in the SpellForce dialogue system.")
+            placeholder_layout.addWidget(placeholder_text)
+
+            right_panel.addTab(placeholder_frame, "🏷️ AnswerIds")
+
+        splitter.addWidget(right_panel)
 
         # Set splitter sizes
-        splitter.setSizes([200, 600, 250])
+        splitter.setSizes([200, 600, 300])
 
         # Status bar
         self.status_bar = QStatusBar()
@@ -413,6 +459,11 @@ class TextModeDialogueOverview(QWidget):
                         self.nodes[from_id].next_nodes.append(to_id)
 
         self.refresh_view()
+
+        # Update AnswerId panel if available
+        if hasattr(self, 'answer_id_panel'):
+            self.answer_id_panel.set_dialogue_data(dialogue_data)
+
         self.status_bar.showMessage(f"Loaded {len(self.nodes)} dialogue nodes")
 
     def get_dialogue_data(self) -> Dict[str, Any]:
@@ -552,7 +603,7 @@ class TextModeDialogueOverview(QWidget):
         # Answer ID for OnAnswer patterns
         answer_id_display = ""
         if node.answer_id is not None:
-            answer_id_display = f" [AnswerId={node.answer_id}]"
+            answer_id_display = f" [🏷️ AnswerId={node.answer_id}]"
 
         # Format line
         line = f"{node_id_display}  {speaker_display}{text_preview}{answer_id_display}"
@@ -571,12 +622,18 @@ class TextModeDialogueOverview(QWidget):
                 choice_text = choice.get("text", "")
                 choice_label = chr(65 + i)  # A, B, C, ...
                 next_node = choice.get("next_node", "")
+                choice_answer_id = choice.get("answer_id")
 
                 # Use different symbols for connected vs unconnected choices
                 connector = "└─" if i == len(node.choices) - 1 else "├─"
                 status_icon = "✓" if next_node else "○"
 
-                choice_line = f"\n{indent}    {connector} [{choice_label}] {status_icon} {choice_text[:35]}"
+                # Build choice line with AnswerId if present
+                choice_line = f"\n{indent}    {connector} [{choice_label}] {status_icon}"
+                if choice_answer_id is not None:
+                    choice_line += f" [🏷️{choice_answer_id}]"
+                choice_line += f" {choice_text[:35]}"
+
                 if len(choice_text) > 35:
                     choice_line += "..."
 
@@ -811,6 +868,31 @@ class TextModeDialogueOverview(QWidget):
         """Handle cursor position change"""
         # Could implement node selection based on cursor position
         pass
+
+    def on_answer_id_changed(self, step_id: str, choice_index: int, new_answer_id: int):
+        """Handle AnswerId change from AnswerId management panel"""
+        # Update the local node data
+        if step_id in self.nodes:
+            node = self.nodes[step_id]
+
+            # Convert to list format for choices if needed
+            if not hasattr(node, 'choices') or node.choices is None:
+                node.choices = []
+
+            # Ensure choices list is long enough
+            while len(node.choices) <= choice_index:
+                node.choices.append({"text": f"Choice {len(node.choices) + 1}", "next_node": ""})
+
+            # Update the AnswerId
+            node.choices[choice_index]["answer_id"] = new_answer_id
+
+            # Refresh the view
+            self.refresh_view()
+
+            # Emit signal to notify other components
+            self.node_edited.emit(step_id, node.to_dict())
+
+            self.status_bar.showMessage(f"Updated AnswerId {new_answer_id} for {step_id} choice {choice_index}")
 
     def on_text_clicked(self, position):
         """Handle clicks on the text view to detect choice selection"""
