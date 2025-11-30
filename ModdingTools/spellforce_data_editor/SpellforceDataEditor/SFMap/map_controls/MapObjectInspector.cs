@@ -458,8 +458,9 @@ namespace SpellforceDataEditor.SFMap.map_controls
 
             obj.block_movement_terrain = new_value;
             
-            // Reapply terrain movement flags (visible in terrain view)
-            map.object_manager.ApplyObjectBlockFlags(obj.grid_position, obj.angle, (ushort)obj.game_id, true);
+            // Update TERRAIN_MOVEMENT flags for this object only
+            // We need to set/clear the flag based on the new checkbox value
+            map.object_manager.SetObjectTerrainMovementFlag(obj, new_value);
             map.heightmap.RefreshOverlay();
             MainForm.mapedittool.update_render = true;
         }

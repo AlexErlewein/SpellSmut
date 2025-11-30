@@ -191,23 +191,97 @@ namespace SFEngine.SFMap
             // Find the object to check for terrain movement blocking
             SFMapObject obj = objects.FirstOrDefault(o => o.game_id == id && o.grid_position == pos);
 
-            // block_movement_terrain: when true, sets TERRAIN_MOVEMENT flag on terrain tiles under object
-            // This makes the blocking visible in terrain view
-            bool set_terrain_movement = obj != null && obj.block_movement_terrain;
+            // block_movement_terrain: when true, sets movement blocking flags on terrain tiles under object
+            bool set_blocking = set && obj != null && obj.block_movement_terrain;
 
             if (!object_collision.ContainsKey(id))
             {
-                // Set/clear TERRAIN_MOVEMENT flag based on checkbox - only on the object's position
-                map.heightmap.SetFlag(pos, SFMapHeightMapFlag.TERRAIN_MOVEMENT, set && set_terrain_movement);
+                // Set/clear flags based on checkbox
+                map.heightmap.SetFlag(pos, SFMapHeightMapFlag.TERRAIN_MOVEMENT, set_blocking);
+                map.heightmap.SetFlag(pos, SFMapHeightMapFlag.FLAG_MOVEMENT, set_blocking);
                 return;
             }
 
-            // Set/clear TERRAIN_MOVEMENT flag on all cells covered by the object's collision boundary
+            // Set/clear flags on all cells covered by the object's collision boundary
             SFMapCollisionBoundary bcb = object_collision[(ushort)id];
             foreach (SFCoord p in bcb.GetCells(pos, angle))
             {
-                map.heightmap.SetFlag(p, SFMapHeightMapFlag.TERRAIN_MOVEMENT, set && set_terrain_movement);
+                map.heightmap.SetFlag(p, SFMapHeightMapFlag.TERRAIN_MOVEMENT, set_blocking);
+                map.heightmap.SetFlag(p, SFMapHeightMapFlag.FLAG_MOVEMENT, set_blocking);
             }
+        }
+
+        /// <summary>
+        /// Sets or clears movement blocking flags for a specific object.
+        /// This sets both TERRAIN_MOVEMENT (for editor display) and FLAG_MOVEMENT (for game blocking).
+        /// </summary>
+        public void SetObjectTerrainMovementFlag(SFMapObject obj, bool set)
+        {
+            var tiles = GetObjectBlockingTiles(obj);
+            foreach (SFCoord p in tiles)
+            {
+                // TERRAIN_MOVEMENT: visual display in editor overlay
+                map.heightmap.SetFlag(p, SFMapHeightMapFlag.TERRAIN_MOVEMENT, set);
+                // FLAG_MOVEMENT: actual game movement blocking (saved to chunk 42)
+                map.heightmap.SetFlag(p, SFMapHeightMapFlag.FLAG_MOVEMENT, set);
+            }
+        }
+        
+        /// <summary>
+        /// Gets all tiles that should block movement for an object.
+        /// Used when saving the map to include these tiles in chunk 42.
+        /// </summary>
+        public List<SFCoord> GetObjectBlockingTiles(SFMapObject obj)
+        {
+            List<SFCoord> tiles = new List<SFCoord>();
+            
+            if (!object_collision.ContainsKey((ushort)obj.game_id))
+            {
+                // No collision boundary data available - use a default 3x3 blocking area
+                // This ensures objects block movement even without game data loaded
+                for (int dx = -1; dx <= 1; dx++)
+                {
+                    for (int dy = -1; dy <= 1; dy++)
+                    {
+                        int nx = obj.grid_position.x + dx;
+                        int ny = obj.grid_position.y + dy;
+                        // Bounds check
+                        if (nx >= 0 && ny >= 0 && map != null && 
+                            nx < map.heightmap.width && ny < map.heightmap.height)
+                        {
+                            tiles.Add(new SFCoord((short)nx, (short)ny));
+                        }
+                    }
+                }
+                return tiles;
+            }
+
+            // Get all cells covered by the object's collision boundary
+            SFMapCollisionBoundary bcb = object_collision[(ushort)obj.game_id];
+            foreach (SFCoord p in bcb.GetCells(obj.grid_position, obj.angle))
+            {
+                tiles.Add(p);
+            }
+            
+            // If collision boundary returned no tiles, use default 3x3
+            if (tiles.Count == 0)
+            {
+                for (int dx = -1; dx <= 1; dx++)
+                {
+                    for (int dy = -1; dy <= 1; dy++)
+                    {
+                        int nx = obj.grid_position.x + dx;
+                        int ny = obj.grid_position.y + dy;
+                        if (nx >= 0 && ny >= 0 && map != null && 
+                            nx < map.heightmap.width && ny < map.heightmap.height)
+                        {
+                            tiles.Add(new SFCoord((short)nx, (short)ny));
+                        }
+                    }
+                }
+            }
+            
+            return tiles;
         }
 
         public bool ObjectIDIsReserved(int obj_id)

@@ -55,7 +55,7 @@
             PanelBindstonesList.Controls.Add(ListBindstones);
             PanelBindstonesList.Controls.Add(label1);
             PanelBindstonesList.Controls.Add(ButtonResizeList);
-            PanelBindstonesList.Location = new System.Drawing.Point(4, 233);
+            PanelBindstonesList.Location = new System.Drawing.Point(4, 170);
             PanelBindstonesList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             PanelBindstonesList.Name = "PanelBindstonesList";
             PanelBindstonesList.Size = new System.Drawing.Size(338, 183);
@@ -96,7 +96,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new System.Drawing.Point(4, 70);
+            label6.Location = new System.Drawing.Point(4, 78);
             label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(38, 15);
@@ -106,7 +106,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(4, 37);
+            label4.Location = new System.Drawing.Point(4, 138);
             label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(50, 15);
@@ -116,7 +116,7 @@
             // PosX
             // 
             PosX.Enabled = false;
-            PosX.Location = new System.Drawing.Point(114, 33);
+            PosX.Location = new System.Drawing.Point(114, 135);
             PosX.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             PosX.Name = "PosX";
             PosX.Size = new System.Drawing.Size(53, 23);
@@ -125,7 +125,7 @@
             // PosY
             // 
             PosY.Enabled = false;
-            PosY.Location = new System.Drawing.Point(177, 33);
+            PosY.Location = new System.Drawing.Point(177, 135);
             PosY.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             PosY.Name = "PosY";
             PosY.Size = new System.Drawing.Size(53, 23);
@@ -149,12 +149,12 @@
             PanelProperties.Location = new System.Drawing.Point(4, 0);
             PanelProperties.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             PanelProperties.Name = "PanelProperties";
-            PanelProperties.Size = new System.Drawing.Size(338, 250);
+            PanelProperties.Size = new System.Drawing.Size(338, 165);
             PanelProperties.TabIndex = 21;
             // 
             // Unknown
             // 
-            Unknown.Location = new System.Drawing.Point(114, 75);
+            Unknown.Location = new System.Drawing.Point(114, 105);
             Unknown.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Unknown.Name = "Unknown";
             Unknown.Size = new System.Drawing.Size(116, 23);
@@ -164,7 +164,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new System.Drawing.Point(4, 78);
+            label3.Location = new System.Drawing.Point(4, 108);
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(58, 15);
@@ -221,7 +221,7 @@
             // AngleTrackbar
             // 
             AngleTrackbar.AutoSize = false;
-            AngleTrackbar.Location = new System.Drawing.Point(114, 63);
+            AngleTrackbar.Location = new System.Drawing.Point(114, 75);
             AngleTrackbar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             AngleTrackbar.Maximum = 359;
             AngleTrackbar.Name = "AngleTrackbar";
@@ -235,7 +235,7 @@
             // Angle
             // 
             Angle.Enabled = false;
-            Angle.Location = new System.Drawing.Point(239, 67);
+            Angle.Location = new System.Drawing.Point(239, 75);
             Angle.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Angle.Name = "Angle";
             Angle.Size = new System.Drawing.Size(53, 23);

@@ -548,12 +548,28 @@ namespace SFEngine.SFMap
 
         public SFMapHeightMapChunk GetChunk(SFCoord pos)
         {
+            // Bounds check to prevent IndexOutOfRangeException
+            if (pos.x < 0 || pos.x >= width || pos.y < 0 || pos.y >= height)
+            {
+                LogUtils.Log.Error(LogUtils.LogSource.SFMap, $"GetChunk: Position out of bounds ({pos.x}, {pos.y}), map size is {width}x{height}");
+                // Clamp to valid range
+                pos.x = (short)Math.Max(0, Math.Min(pos.x, width - 1));
+                pos.y = (short)Math.Max(0, Math.Min(pos.y, height - 1));
+            }
             int chunk_count_y = height / SFMapHeightMapMesh.CHUNK_SIZE;
             return chunk_nodes[(chunk_count_y * ((height - pos.y - 1) / SFMapHeightMapMesh.CHUNK_SIZE) + (pos.x / SFMapHeightMapMesh.CHUNK_SIZE))].MapChunk;
         }
 
         public SF3D.SceneSynchro.SceneNodeMapChunk GetChunkNode(SFCoord pos)
         {
+            // Bounds check to prevent IndexOutOfRangeException
+            if (pos.x < 0 || pos.x >= width || pos.y < 0 || pos.y >= height)
+            {
+                LogUtils.Log.Error(LogUtils.LogSource.SFMap, $"GetChunkNode: Position out of bounds ({pos.x}, {pos.y}), map size is {width}x{height}");
+                // Clamp to valid range
+                pos.x = (short)Math.Max(0, Math.Min(pos.x, width - 1));
+                pos.y = (short)Math.Max(0, Math.Min(pos.y, height - 1));
+            }
             int chunk_count_y = height / SFMapHeightMapMesh.CHUNK_SIZE;
             return chunk_nodes[(chunk_count_y * ((height - pos.y - 1) / SFMapHeightMapMesh.CHUNK_SIZE) + (pos.x / SFMapHeightMapMesh.CHUNK_SIZE))];
         }

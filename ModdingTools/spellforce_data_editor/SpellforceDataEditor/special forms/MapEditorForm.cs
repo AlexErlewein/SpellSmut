@@ -3992,7 +3992,9 @@ namespace SpellforceDataEditor.special_forms
             QuickSelect.QsRef = qs_object;
 
             EntityID.Text = "0";
-            map.heightmap.overlay_flags = SFMapHeightMapFlag.ENTITY_OBJECT_COLLISION;
+            map.heightmap.overlay_flags = SFMapHeightMapFlag.ENTITY_OBJECT_COLLISION 
+                | SFMapHeightMapFlag.TERRAIN_MOVEMENT 
+                | SFMapHeightMapFlag.FLAG_MOVEMENT;
             ConfirmPlacementEntity();
         }
 

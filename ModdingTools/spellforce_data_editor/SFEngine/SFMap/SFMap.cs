@@ -238,6 +238,9 @@ namespace SFEngine.SFMap
             {
                 using (BinaryReader br = c29.Open())
                 {
+                    // block_movement_terrain is stored in high bit of unknown1 (bit 15)
+                    const int BLOCK_MOVEMENT_FLAG = 0x8000;
+                    
                     while (br.BaseStream.Position < br.BaseStream.Length)
                     {
                         int x = br.ReadInt16();
@@ -247,16 +250,24 @@ namespace SFEngine.SFMap
                         int angle = br.ReadInt16();
                         int npc_id = br.ReadUInt16();
                         int unk1 = 0;
+                        bool block_movement = false;
+                        
                         if (c29.header.ChunkDataType >= 7)
                         {
-                            // Chunk type 7: read unknown1, then spawn/int field (4 bytes), then collision flags
+                            // Legacy chunk type 7: read unknown1, spawn/int field, collision flags
                             unk1 = br.ReadUInt16();
-                            br.ReadInt32(); // spawn/int field (4 bytes) - skip for now, only used for object_id 2541
+                            br.ReadInt32(); // spawn/int field (4 bytes)
+                            byte collision_flags = br.ReadByte();
+                            br.ReadByte(); // padding
+                            block_movement = (collision_flags & 0x02) != 0;
                         }
                         else if (c29.header.ChunkDataType == 6)
                         {
                             unk1 = br.ReadUInt16();
                             br.ReadBytes(4);
+                            // Extract block_movement_terrain from high bit of unknown1
+                            block_movement = (unk1 & BLOCK_MOVEMENT_FLAG) != 0;
+                            unk1 &= 0x7FFF; // Clear high bit to get actual unknown1 value
                         }
                         else if (c29.header.ChunkDataType == 5)
                         {
@@ -274,21 +285,12 @@ namespace SFEngine.SFMap
                         }
 
                         int obj_index = object_manager.AddObject(object_id, pos, angle, npc_id, unk1);
-
-                        // Load terrain movement blocking flag (chunk type 7)
-                        if (c29.header.ChunkDataType >= 7)
+                        
+                        // Set block_movement_terrain flag and apply terrain flags if enabled
+                        object_manager.objects[obj_index].block_movement_terrain = block_movement;
+                        if (block_movement)
                         {
-                            byte collision_flags = br.ReadByte();
-                            br.ReadByte(); // padding
-
-                            // Bit 1 is terrain movement blocking (draws TERRAIN_MOVEMENT flag on terrain tiles)
-                            object_manager.objects[obj_index].block_movement_terrain = (collision_flags & 0x02) != 0;
-
-                            // Reapply terrain flags if blocking is enabled
-                            if (object_manager.objects[obj_index].block_movement_terrain)
-                            {
-                                object_manager.ApplyObjectBlockFlags(pos, angle, (ushort)object_id, true);
-                            }
+                            object_manager.ApplyObjectBlockFlags(pos, angle, (ushort)object_id, true);
                         }
                     }
                 }
@@ -901,7 +903,7 @@ namespace SFEngine.SFMap
             f.AddChunk(4, 0, true, 4, c4_data);
 
             // preparing for chunks 42 and 56
-            List<SFCoord> flags_movement = new List<SFCoord>();
+            HashSet<SFCoord> flags_movement_set = new HashSet<SFCoord>();
             List<SFCoord> flags_vision = new List<SFCoord>();
             for (int y = 0; y < height; y++)
             {
@@ -910,7 +912,7 @@ namespace SFEngine.SFMap
                     SFCoord pos = new SFCoord(x, y);
                     if (heightmap.IsFlagSet(pos, SFMapHeightMapFlag.FLAG_MOVEMENT))
                     {
-                        flags_movement.Add(pos);
+                        flags_movement_set.Add(pos);
                     }
 
                     if (heightmap.IsFlagSet(pos, SFMapHeightMapFlag.FLAG_VISION))
@@ -919,6 +921,23 @@ namespace SFEngine.SFMap
                     }
                 }
             }
+            
+            // Add movement blocking for objects with block_movement_terrain enabled
+            // This makes the game actually block movement through these objects
+            foreach (var obj in object_manager.objects)
+            {
+                if (obj.block_movement_terrain)
+                {
+                    // Get all tiles covered by this object's collision boundary
+                    var tiles = object_manager.GetObjectBlockingTiles(obj);
+                    foreach (var tile in tiles)
+                    {
+                        flags_movement_set.Add(tile);
+                    }
+                }
+            }
+            
+            List<SFCoord> flags_movement = flags_movement_set.ToList();
 
             // chunk 42
             LogUtils.Log.Info(LogUtils.LogSource.SFMap, "SFMap.Save(): Saving map flags");
@@ -1032,19 +1051,13 @@ namespace SFEngine.SFMap
 
             LogUtils.Log.Info(LogUtils.LogSource.SFMap, "SFMap.Save(): Saving objects");
 
-            // Check if any objects have terrain movement blocking enabled (determines chunk type)
-            bool has_terrain_blocking = false;
-            for (int i = 0; i < object_manager.objects.Count; i++)
-            {
-                if (object_manager.objects[i].block_movement_terrain)
-                {
-                    has_terrain_blocking = true;
-                    break;
-                }
-            }
+            // Always use chunk type 6 for game compatibility
+            // Store block_movement_terrain flag in high bit of unknown1 (bit 15)
+            // The game ignores this bit, but the editor can read it back
+            const int BLOCK_MOVEMENT_FLAG = 0x8000;
             
-            byte[] c29_data;// = new byte[object_manager.objects.Count * 16];
-            using (MemoryStream ms = new MemoryStream(32768 * 16))     // 16384 is max number of objects, doubling that in case there are more flags than anticipated
+            byte[] c29_data;
+            using (MemoryStream ms = new MemoryStream(32768 * 16))
             {
                 using (BinaryWriter bw = new BinaryWriter(ms))
                 {
@@ -1055,42 +1068,36 @@ namespace SFEngine.SFMap
                         bw.Write((short)object_manager.objects[i].game_id);
                         bw.Write((short)object_manager.objects[i].angle);
                         bw.Write((short)object_manager.objects[i].npc_id);
-                        bw.Write((short)object_manager.objects[i].unknown1);
-
-                        // Only write spawn/int field and collision flags for chunk type 7
-                        if (has_terrain_blocking)
+                        
+                        // Store block_movement_terrain in high bit of unknown1
+                        int unk1_with_flag = object_manager.objects[i].unknown1 & 0x7FFF; // Clear high bit
+                        if (object_manager.objects[i].block_movement_terrain)
                         {
-                            if (object_manager.objects[i].game_id != 2541)
+                            unk1_with_flag |= BLOCK_MOVEMENT_FLAG;
+                        }
+                        bw.Write((short)unk1_with_flag);
+                        
+                        // Chunk type 6: write 4 bytes for spawn/coop data
+                        if (object_manager.objects[i].game_id == 2541)
+                        {
+                            SFMapCoopAISpawn coop_spawn = new SFMapCoopAISpawn();
+                            if (metadata.GetCoopAISpawnByObject(object_manager.objects[i], ref coop_spawn))
                             {
-                                bw.Write((int)0);
+                                bw.Write((short)coop_spawn.spawn_id);
+                                bw.Write((short)coop_spawn.spawn_certain);
                             }
                             else
                             {
-                                SFMapCoopAISpawn coop_spawn = new SFMapCoopAISpawn();
-                                if (!metadata.GetCoopAISpawnByObject(object_manager.objects[i], ref coop_spawn))
-                                {
-                                    bw.Write((int)0);
-                                }
-                                else
-                                {
-                                    bw.Write((short)coop_spawn.spawn_id);
-                                    bw.Write((short)coop_spawn.spawn_certain);
-                                }
+                                bw.Write((int)0);
                             }
-
-                            // Terrain movement blocking flags
-                            byte collision_flags = 0;
-                            // Bit 1 is terrain movement blocking (draws TERRAIN_MOVEMENT flag on terrain tiles)
-                            if (object_manager.objects[i].block_movement_terrain)
-                            {
-                                collision_flags |= 0x02;
-                            }
-                            bw.Write(collision_flags);
-                            bw.Write((byte)0); // padding for alignment
+                        }
+                        else
+                        {
+                            bw.Write((int)0);
                         }
                     }
                     // flags type 65
-                    foreach (SFCoord p in flags_movement)//heightmap.chunk42_data)
+                    foreach (SFCoord p in flags_movement)
                     {
                         if (!merged_flags.Contains(p))
                         {
@@ -1105,16 +1112,11 @@ namespace SFEngine.SFMap
                             bw.Write((short)0);
                             bw.Write((short)0);
                             bw.Write((short)0);
-                            if (has_terrain_blocking)
-                            {
-                                bw.Write((int)0);
-                                bw.Write((byte)0); // collision_flags (always 0 for flag objects)
-                                bw.Write((byte)0); // padding
-                            }
+                            bw.Write((int)0);
                         }
                     }
                     // flags type 66
-                    foreach (SFCoord p in flags_vision)//heightmap.chunk56_data)
+                    foreach (SFCoord p in flags_vision)
                     {
                         if (!merged_flags.Contains(p))
                         {
@@ -1129,12 +1131,7 @@ namespace SFEngine.SFMap
                             bw.Write((short)0);
                             bw.Write((short)0);
                             bw.Write((short)0);
-                            if (has_terrain_blocking)
-                            {
-                                bw.Write((int)0);
-                                bw.Write((byte)0); // collision_flags (always 0 for flag objects)
-                                bw.Write((byte)0); // padding
-                            }
+                            bw.Write((int)0);
                         }
                     }
                     // flags type 67
@@ -1151,19 +1148,13 @@ namespace SFEngine.SFMap
                         bw.Write((short)0);
                         bw.Write((short)0);
                         bw.Write((short)0);
-                        if (has_terrain_blocking)
-                        {
-                            bw.Write((int)0);
-                            bw.Write((byte)0); // collision_flags (always 0 for flag objects)
-                            bw.Write((byte)0); // padding
-                        }
+                        bw.Write((int)0);
                     }
                 }
                 c29_data = ms.ToArray();
             }
-            // Use chunk type 6 (game-compatible) if no collision overrides, otherwise type 7
-            short c29_chunk_type = has_terrain_blocking ? (short)7 : (short)6;
-            f.AddChunk(29, 0, true, c29_chunk_type, c29_data);
+            // Always use chunk type 6 for game compatibility
+            f.AddChunk(29, 0, true, 6, c29_data);
 
             // chunk 35
             LogUtils.Log.Info(LogUtils.LogSource.SFMap, "SFMap.Save(): Saving portals");

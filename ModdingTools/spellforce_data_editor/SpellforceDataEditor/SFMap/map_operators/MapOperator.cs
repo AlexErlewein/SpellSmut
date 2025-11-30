@@ -1314,7 +1314,7 @@ namespace SpellforceDataEditor.SFMap.map_operators
                                 break;
                             case MapOperatorEntityProperty.OBJECT_BLOCK_MOVEMENT_TERRAIN:
                                 obj.block_movement_terrain = (bool)prop;
-                                map.object_manager.ApplyObjectBlockFlags(obj.grid_position, obj.angle, (ushort)obj.game_id, true);
+                                map.object_manager.SetObjectTerrainMovementFlag(obj, (bool)prop);
                                 MainForm.mapedittool.op_queue.RefreshOverlay = true;  // Always refresh to show terrain movement changes
                                 break;
                             default:
