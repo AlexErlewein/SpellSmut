@@ -10,7 +10,7 @@ namespace SFEngine.SFMap
         static int max_id = 0;
 
         public int unknown1 = 0;
-        public bool collision_override_value = false;  // When true, sets TERRAIN_MOVEMENT flag underneath object
+        public bool block_movement_terrain = false;  // When true, sets TERRAIN_MOVEMENT flag on terrain tiles underneath object (visible in terrain view)
 
         public override string GetName()
         {
@@ -188,40 +188,24 @@ namespace SFEngine.SFMap
 
         public void ApplyObjectBlockFlags(SFCoord pos, int angle, ushort id, bool set)
         {
-            // Find the object to check for terrain movement override
+            // Find the object to check for terrain movement blocking
             SFMapObject obj = objects.FirstOrDefault(o => o.game_id == id && o.grid_position == pos);
 
-            // Get collision flag from game data
-            bool blocks_terrain = false;
-            bool object_found = SFCFF.SFCategoryManager.gamedata.c2050.GetItemIndex(id, out int object_index);
-            if(object_found)
-            {
-                blocks_terrain = (SFCFF.SFCategoryManager.gamedata.c2050[object_index].Flags & 0b1) == 1;
-            }
-
-            // collision_override_value: when true, sets TERRAIN_MOVEMENT flag under object
-            bool set_terrain_movement = obj != null && obj.collision_override_value;
-
-            // Always set/clear ENTITY_OBJECT_COLLISION and FLAG_MOVEMENT based on game data
-            SFMapHeightMapFlag base_flags = SFMapHeightMapFlag.ENTITY_OBJECT_COLLISION | SFMapHeightMapFlag.FLAG_MOVEMENT;
+            // block_movement_terrain: when true, sets TERRAIN_MOVEMENT flag on terrain tiles under object
+            // This makes the blocking visible in terrain view
+            bool set_terrain_movement = obj != null && obj.block_movement_terrain;
 
             if (!object_collision.ContainsKey(id))
             {
-                // Set/clear base collision flags from game data
-                map.heightmap.SetFlag(pos, base_flags, set & blocks_terrain);
-
-                // Set/clear TERRAIN_MOVEMENT flag based on override checkbox
+                // Set/clear TERRAIN_MOVEMENT flag based on checkbox - only on the object's position
                 map.heightmap.SetFlag(pos, SFMapHeightMapFlag.TERRAIN_MOVEMENT, set && set_terrain_movement);
                 return;
             }
 
+            // Set/clear TERRAIN_MOVEMENT flag on all cells covered by the object's collision boundary
             SFMapCollisionBoundary bcb = object_collision[(ushort)id];
             foreach (SFCoord p in bcb.GetCells(pos, angle))
             {
-                // Set/clear base collision flags from game data
-                map.heightmap.SetFlag(p, base_flags, set & blocks_terrain);
-
-                // Set/clear TERRAIN_MOVEMENT flag based on override checkbox
                 map.heightmap.SetFlag(p, SFMapHeightMapFlag.TERRAIN_MOVEMENT, set && set_terrain_movement);
             }
         }

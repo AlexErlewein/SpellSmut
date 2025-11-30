@@ -275,17 +275,17 @@ namespace SFEngine.SFMap
 
                         int obj_index = object_manager.AddObject(object_id, pos, angle, npc_id, unk1);
 
-                        // Load terrain movement override flag (chunk type 7)
+                        // Load terrain movement blocking flag (chunk type 7)
                         if (c29.header.ChunkDataType >= 7)
                         {
                             byte collision_flags = br.ReadByte();
                             br.ReadByte(); // padding
 
-                            // Bit 0 was collision_override_enabled (removed), bit 1 is terrain movement override
-                            object_manager.objects[obj_index].collision_override_value = (collision_flags & 0x02) != 0;
+                            // Bit 1 is terrain movement blocking (draws TERRAIN_MOVEMENT flag on terrain tiles)
+                            object_manager.objects[obj_index].block_movement_terrain = (collision_flags & 0x02) != 0;
 
-                            // Reapply terrain flags if override is set
-                            if (object_manager.objects[obj_index].collision_override_value)
+                            // Reapply terrain flags if blocking is enabled
+                            if (object_manager.objects[obj_index].block_movement_terrain)
                             {
                                 object_manager.ApplyObjectBlockFlags(pos, angle, (ushort)object_id, true);
                             }
@@ -1032,13 +1032,13 @@ namespace SFEngine.SFMap
 
             LogUtils.Log.Info(LogUtils.LogSource.SFMap, "SFMap.Save(): Saving objects");
 
-            // Check if any objects have terrain movement override enabled (determines chunk type)
-            bool has_collision_override = false;
+            // Check if any objects have terrain movement blocking enabled (determines chunk type)
+            bool has_terrain_blocking = false;
             for (int i = 0; i < object_manager.objects.Count; i++)
             {
-                if (object_manager.objects[i].collision_override_value)
+                if (object_manager.objects[i].block_movement_terrain)
                 {
-                    has_collision_override = true;
+                    has_terrain_blocking = true;
                     break;
                 }
             }
@@ -1058,7 +1058,7 @@ namespace SFEngine.SFMap
                         bw.Write((short)object_manager.objects[i].unknown1);
 
                         // Only write spawn/int field and collision flags for chunk type 7
-                        if (has_collision_override)
+                        if (has_terrain_blocking)
                         {
                             if (object_manager.objects[i].game_id != 2541)
                             {
@@ -1078,11 +1078,10 @@ namespace SFEngine.SFMap
                                 }
                             }
 
-                            // Terrain movement override flags
+                            // Terrain movement blocking flags
                             byte collision_flags = 0;
-                            // Bit 0 was collision_override_enabled (removed)
-                            // Bit 1 is terrain movement override
-                            if (object_manager.objects[i].collision_override_value)
+                            // Bit 1 is terrain movement blocking (draws TERRAIN_MOVEMENT flag on terrain tiles)
+                            if (object_manager.objects[i].block_movement_terrain)
                             {
                                 collision_flags |= 0x02;
                             }
@@ -1106,7 +1105,7 @@ namespace SFEngine.SFMap
                             bw.Write((short)0);
                             bw.Write((short)0);
                             bw.Write((short)0);
-                            if (has_collision_override)
+                            if (has_terrain_blocking)
                             {
                                 bw.Write((int)0);
                                 bw.Write((byte)0); // collision_flags (always 0 for flag objects)
@@ -1130,7 +1129,7 @@ namespace SFEngine.SFMap
                             bw.Write((short)0);
                             bw.Write((short)0);
                             bw.Write((short)0);
-                            if (has_collision_override)
+                            if (has_terrain_blocking)
                             {
                                 bw.Write((int)0);
                                 bw.Write((byte)0); // collision_flags (always 0 for flag objects)
@@ -1152,7 +1151,7 @@ namespace SFEngine.SFMap
                         bw.Write((short)0);
                         bw.Write((short)0);
                         bw.Write((short)0);
-                        if (has_collision_override)
+                        if (has_terrain_blocking)
                         {
                             bw.Write((int)0);
                             bw.Write((byte)0); // collision_flags (always 0 for flag objects)
@@ -1163,7 +1162,7 @@ namespace SFEngine.SFMap
                 c29_data = ms.ToArray();
             }
             // Use chunk type 6 (game-compatible) if no collision overrides, otherwise type 7
-            short c29_chunk_type = has_collision_override ? (short)7 : (short)6;
+            short c29_chunk_type = has_terrain_blocking ? (short)7 : (short)6;
             f.AddChunk(29, 0, true, c29_chunk_type, c29_data);
 
             // chunk 35

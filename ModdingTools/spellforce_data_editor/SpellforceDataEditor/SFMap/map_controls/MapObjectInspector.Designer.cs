@@ -304,7 +304,7 @@
             CheckBoxCollisionValue.Name = "CheckBoxCollisionValue";
             CheckBoxCollisionValue.Size = new System.Drawing.Size(177, 19);
             CheckBoxCollisionValue.TabIndex = 22;
-            CheckBoxCollisionValue.Text = "Block Movement (Terrain Flag)";
+            CheckBoxCollisionValue.Text = "Block Movement (visible in Terrain View)";
             CheckBoxCollisionValue.UseVisualStyleBackColor = true;
             CheckBoxCollisionValue.CheckedChanged += CheckBoxCollisionValue_CheckedChanged;
             // 

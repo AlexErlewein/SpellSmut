@@ -139,8 +139,8 @@ namespace SpellforceDataEditor.SFMap.map_controls
             AngleTrackbar.Value = obj.angle;
             Unknown1.Text = obj.unknown1.ToString();
 
-            // Load terrain block movement flag
-            CheckBoxCollisionValue.Checked = obj.collision_override_value;
+            // Load terrain block movement flag (visible in terrain view)
+            CheckBoxCollisionValue.Checked = obj.block_movement_terrain;
 
             selection_helper.SelectObject(obj);
             if ((move_camera_on_select) || (object_selected_from_list))
@@ -441,7 +441,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
             SFMapObject obj = map.object_manager.objects[ListObjects.SelectedIndex];
             bool new_value = CheckBoxCollisionValue.Checked;
             
-            if (obj.collision_override_value == new_value)
+            if (obj.block_movement_terrain == new_value)
             {
                 return;
             }
@@ -451,16 +451,17 @@ namespace SpellforceDataEditor.SFMap.map_controls
             {
                 type = map_operators.MapOperatorEntityType.OBJECT,
                 index = ListObjects.SelectedIndex,
-                property = map_operators.MapOperatorEntityProperty.OBJECT_COLLISION_OVERRIDE_VALUE,
-                PreChangeProperty = obj.collision_override_value,
+                property = map_operators.MapOperatorEntityProperty.OBJECT_BLOCK_MOVEMENT_TERRAIN,
+                PreChangeProperty = obj.block_movement_terrain,
                 PostChangeProperty = new_value
             });
 
-            obj.collision_override_value = new_value;
+            obj.block_movement_terrain = new_value;
             
-            // Reapply collision flags
+            // Reapply terrain movement flags (visible in terrain view)
             map.object_manager.ApplyObjectBlockFlags(obj.grid_position, obj.angle, (ushort)obj.game_id, true);
             map.heightmap.RefreshOverlay();
+            MainForm.mapedittool.update_render = true;
         }
     }
 }

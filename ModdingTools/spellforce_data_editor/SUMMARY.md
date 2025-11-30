@@ -29,35 +29,42 @@ if (string.IsNullOrEmpty(s))
 
 ---
 
-## 2. Object Collision System Refactor
+## 2. Object Terrain Movement Blocking System
 
 ### Problem
-The collision system had two checkboxes ("Override Collision" and "Blocks Movement") which was confusing. The system needed to be simplified so that only one checkbox controls the TERRAIN_MOVEMENT flag.
+The previous collision system was causing objects to disappear when the "Block Movement" checkbox was checked. The system was incorrectly manipulating multiple collision flags.
 
 ### Solution
-- **Removed** "Override Collision" checkbox entirely
-- **Renamed** "Blocks Movement" checkbox to "Block Movement (Terrain Flag)"
-- **Removed** `collision_override_enabled` field from `SFMapObject`
-- **Simplified** `ApplyObjectBlockFlags()` method:
-  - Base collision flags (ENTITY_OBJECT_COLLISION, FLAG_MOVEMENT) are always controlled by game data (Category 2050)
-  - The checkbox now only controls the TERRAIN_MOVEMENT flag via `collision_override_value`
-- **Updated** map file format loading/saving for backward compatibility
+Completely redesigned the system to only set the `TERRAIN_MOVEMENT` flag on terrain tiles underneath objects:
+
+- **Renamed** `collision_override_value` to `block_movement_terrain` for clarity
+- **Renamed** checkbox to "Block Movement (visible in Terrain View)"
+- **Simplified** `ApplyObjectBlockFlags()` method to ONLY set `TERRAIN_MOVEMENT` flag:
+  - No longer touches `ENTITY_OBJECT_COLLISION` or `FLAG_MOVEMENT` flags
+  - Only sets `TERRAIN_MOVEMENT` on tiles covered by the object's collision boundary
+  - The blocking is now visible when switching to Terrain View in the editor
+- **Updated** undo/redo property enum from `OBJECT_COLLISION_OVERRIDE_VALUE` to `OBJECT_BLOCK_MOVEMENT_TERRAIN`
+
+### How It Works
+1. Check the "Block Movement (visible in Terrain View)" checkbox on an object
+2. The `TERRAIN_MOVEMENT` flag is set on all terrain tiles covered by the object
+3. Switch to Terrain View to see the blocking area (displayed in dark red, color index 2)
+4. The flag is saved/loaded with the map file (chunk type 7)
 
 ### Files Modified
 - `SFEngine/SFMap/SFMapObjectManager.cs`
-  - Modified `collision_override_value` comment (line 13)
-  - Simplified `ApplyObjectBlockFlags()` method (lines 190-228)
+  - Renamed field to `block_movement_terrain`
+  - Simplified `ApplyObjectBlockFlags()` to only set `TERRAIN_MOVEMENT` flag
 - `SpellforceDataEditor/SFMap/map_controls/MapObjectInspector.Designer.cs`
-  - Removed `CheckBoxCollisionOverride` control
-  - Renamed checkbox to "Block Movement (Terrain Flag)" (line 309)
+  - Updated checkbox text to "Block Movement (visible in Terrain View)"
 - `SpellforceDataEditor/SFMap/map_controls/MapObjectInspector.cs`
-  - Removed `CheckBoxCollisionOverride_CheckedChanged` handler
-  - Simplified `CheckBoxCollisionValue_CheckedChanged` (lines 436-499)
+  - Updated to use new field name `block_movement_terrain`
 - `SpellforceDataEditor/SFMap/map_operators/MapOperator.cs`
-  - Removed `OBJECT_COLLISION_OVERRIDE_ENABLED` enum value
+  - Renamed enum value to `OBJECT_BLOCK_MOVEMENT_TERRAIN`
+  - Updated handler to use new field name
 - `SFEngine/SFMap/SFMap.cs`
-  - Updated loading logic (lines 278-292)
-  - Updated saving logic (lines 1035-1091)
+  - Updated loading/saving logic to use `block_movement_terrain`
+  - Renamed `has_collision_override` to `has_terrain_blocking`
 
 ---
 

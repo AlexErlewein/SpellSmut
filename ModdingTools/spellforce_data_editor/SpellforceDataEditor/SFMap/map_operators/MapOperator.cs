@@ -1193,7 +1193,7 @@ namespace SpellforceDataEditor.SFMap.map_operators
         ID, POSITION, NPCID, ANGLE,
         UNITFLAGS, UNITUNKNOWN, UNITGROUP, UNITUNKNOWN2,
         BUILDINGLEVEL, BUILDINGRACE, OBJECTUNKNOWN, COOPCAMPUNKNOWN, BINDSTONEUNKNOWN,
-        OBJECT_COLLISION_OVERRIDE_VALUE
+        OBJECT_BLOCK_MOVEMENT_TERRAIN
     }
 
     public class MapOperatorEntityChangeProperty : IMapOperator
@@ -1312,10 +1312,10 @@ namespace SpellforceDataEditor.SFMap.map_operators
                             case MapOperatorEntityProperty.OBJECTUNKNOWN:
                                 obj.unknown1 = (int)prop;
                                 break;
-                            case MapOperatorEntityProperty.OBJECT_COLLISION_OVERRIDE_VALUE:
-                                obj.collision_override_value = (bool)prop;
+                            case MapOperatorEntityProperty.OBJECT_BLOCK_MOVEMENT_TERRAIN:
+                                obj.block_movement_terrain = (bool)prop;
                                 map.object_manager.ApplyObjectBlockFlags(obj.grid_position, obj.angle, (ushort)obj.game_id, true);
-                                MainForm.mapedittool.op_queue.RefreshOverlay = (map.heightmap.overlay_flags & SFMapHeightMapFlag.ENTITY_OBJECT_COLLISION) == SFMapHeightMapFlag.ENTITY_OBJECT_COLLISION;
+                                MainForm.mapedittool.op_queue.RefreshOverlay = true;  // Always refresh to show terrain movement changes
                                 break;
                             default:
                                 SFEngine.LogUtils.Log.Warning(SFEngine.LogUtils.LogSource.SFMap, "MapOperatorEntityChangeProperty.ChangeProperty(): Invalid property " + property.ToString() + " for entity of type " + type.ToString());
