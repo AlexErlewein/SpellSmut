@@ -486,7 +486,7 @@ class DialogueNode:
                 lines.append(f'        {condition.to_lua()},')
             lines.append('    },')
             lines.append('    Actions = {')
-            lines.append(f'        Say{{Tag = "{self.tag}", String = "{self.text}"}}},')
+            lines.append('        Say{{Tag = "{}", String = "{}"}},'.format(self.tag, self.text))
             for action in self.actions:
                 lines.append(f'        {action.to_lua()},')
             lines.append('    }')

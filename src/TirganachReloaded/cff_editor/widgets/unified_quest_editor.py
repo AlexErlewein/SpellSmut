@@ -164,6 +164,7 @@ try:
 except ImportError:
     QuestValidator = None
 
+
 # Visual dialogue widget will be imported dynamically after directory change
 VISUAL_DIALOGUE_EDITOR_AVAILABLE = True  # Assume available, will verify at runtime
 
@@ -748,8 +749,20 @@ class QuestLocationWidget(QWidget):
                     break
 
         # NPC info
-        self.npc_id_edit.setText(str(quest_data.get("npc_id", "")))
-        self.npc_name_edit.setText(quest_data.get("quest_giver_name", ""))
+        npc_id = quest_data.get("npc_id", "")
+        quest_giver_name = quest_data.get("quest_giver_name", "")
+
+        self.npc_id_edit.setText(str(npc_id))
+        self.npc_name_edit.setText(quest_giver_name)
+
+        # Ensure widgets are enabled (fixes the display issue)
+        self.npc_id_edit.setEnabled(True)
+        self.npc_name_edit.setEnabled(True)
+        self.platform_combo.setEnabled(True)
+        self.additional_locations.setEnabled(True)
+
+        # Force UI update to make sure changes are visible
+        QApplication.processEvents()
 
         # Additional locations
         self.additional_locations.clear()
@@ -1192,6 +1205,7 @@ class UnifiedQuestEditor(QMainWindow):
         self._setup_validation_tab()
         self.quest_editor_tabs.addTab(self.validation_widget, "Validation")
 
+      
         # Initially disable editing until a quest is selected
         self.quest_editor_tabs.setEnabled(False)
 
@@ -1497,6 +1511,16 @@ class UnifiedQuestEditor(QMainWindow):
                 quests = self.data_model.get_elements("quests") or []
                 self.quest_data = {}
 
+                # Import quest data loader for external quest data integration
+                try:
+                    from ..data.quest_data_loader import load_quest_data_for_cff
+                    if self.logger:
+                        self.logger.info("Loading external quest data integration...")
+                except ImportError as e:
+                    if self.logger:
+                        self.logger.warning(f"Could not import quest data loader: {e}")
+                    load_quest_data_for_cff = None
+
                 for quest in quests:
                     quest_id = getattr(quest, "quest_id", None)
                     if quest_id is not None:
@@ -1504,24 +1528,187 @@ class UnifiedQuestEditor(QMainWindow):
                         if not name:
                             name = getattr(quest, "name", f"Quest {quest_id}")
 
-                        self.quest_data[quest_id] = {
+                        # Try to enhance with external quest data
+                        external_quest_data = None
+                        if load_quest_data_for_cff:
+                            try:
+                                external_quest_data = load_quest_data_for_cff(quest)
+                                if self.logger and external_quest_data:
+                                    self.logger.debug(f"Loaded external data for quest {quest_id}: {external_quest_data.quest_name}")
+                            except Exception as e:
+                                if self.logger:
+                                    self.logger.warning(f"Error loading external data for quest {quest_id}: {e}")
+
+                        # Extract basic CFF quest data
+                        quest_info = {
                             "name": name,
                             "description": self.data_model.get_localised_text(
                                 quest, "description"
-                            )
-                            or "",
+                            ) or "",
                             "quest_object": quest,
+                            # Basic CFF quest attributes
+                            "quest_id": quest_id,
+                            "parent_quest_id": getattr(quest, 'parent_quest_id', 0),
+                            "order_index": getattr(quest, 'order_index', 0),
                         }
+
+                        # Enhance with external quest data if available
+                        if external_quest_data:
+                            if external_quest_data.quest_name:
+                                quest_info["name"] = external_quest_data.quest_name
+                            if external_quest_data.quest_description_loc:
+                                quest_info["description"] = external_quest_data.quest_description_loc
+                            elif external_quest_data.quest_description_de:
+                                quest_info["description"] = external_quest_data.quest_description_de
+
+                            # Platform and location data
+                            quest_info["platform"] = external_quest_data.platform_name or ""
+                            quest_info["quest_maps"] = external_quest_data.quest_maps or ""
+
+                            # Quest giver information
+                            quest_info["npc_id"] = external_quest_data.quest_giver_npc_id or 0
+                            quest_info["quest_giver_name"] = external_quest_data.quest_giver_name or ""
+
+                            # Quest structure information
+                            quest_info["parent_quest_id"] = external_quest_data.parent_quest_id or quest_info["parent_quest_id"]
+                            quest_info["order_index"] = external_quest_data.order_index or quest_info["order_index"]
+
+                            # Parse additional locations from quest_maps
+                            additional_locations = []
+                            if external_quest_data.quest_maps:
+                                # Parse platform codes like "P1|P63"
+                                platform_codes = [code.strip() for code in external_quest_data.quest_maps.split('|')]
+                                for code in platform_codes:
+                                    if code:
+                                        additional_locations.append({"code": code, "name": f"Platform {code}"})
+                            quest_info["additional_locations"] = additional_locations
+
+                            # Enhanced reward data
+                            if external_quest_data.rewards:
+                                quest_info["rewards"] = {
+                                    "xp": external_quest_data.rewards.xp,
+                                    "gold": external_quest_data.rewards.gold,
+                                    "silver": external_quest_data.rewards.silver,
+                                    "copper": external_quest_data.rewards.copper,
+                                    "items": external_quest_data.rewards.items_given or [],
+                                    "faction_reputation": {},  # Not available in external data
+                                    "skill_points": 0,  # Not available in external data
+                                }
+
+                            # Set defaults for other fields that aren't in external data
+                            quest_info["requirements"] = []  # For user to set when editing
+                            quest_info["objectives"] = external_quest_data.objectives if external_quest_data.objectives else []    # Load actual objectives from script files
+                            quest_info["flags"] = external_quest_data.flags if external_quest_data.flags else []                   # Load flags from script files
+                            quest_info["dialogues"] = []     # For user to set when editing
+                            quest_info["variables"] = {}     # For user to set when editing
+                            quest_info["map_locations"] = [] # For user to set when editing
+
+                            # Quest metadata
+                            quest_info["priority"] = 5
+                            quest_info["status"] = "Unknown"
+                            quest_info["difficulty"] = "Normal"
+                            quest_info["min_level"] = 1
+                            quest_info["quest_type"] = "Side Quest"
+
+                        else:
+                            # Fallback to defaults when no external data available
+                            quest_info.update({
+                                # These don't exist in CFF quest objects, so set defaults for editing
+                                "platform": "",  # For user to set when editing
+                                "npc_id": 0,  # For user to set when editing
+                                "quest_giver_name": "",  # For user to set when editing
+                                "additional_locations": [],  # For user to set when editing
+                                "requirements": [],  # For user to set when editing
+                                "objectives": [],  # For user to set when editing
+                                "rewards": {
+                                    "xp": 0,
+                                    "gold": 0,
+                                    "silver": 0,
+                                    "copper": 0,
+                                    "items": [],
+                                    "faction_reputation": {},
+                                    "skill_points": 0,
+                                },
+                                "dialogues": [],  # For user to set when editing
+                                "variables": {},  # For user to set when editing
+                                "flags": {},  # For user to set when editing
+                                "map_locations": [],  # For user to set when editing
+
+                                # Quest metadata for display
+                                "priority": 5,  # Default value
+                                "status": "Unknown",  # Default value
+                                "difficulty": "Normal",  # Default value
+                                "min_level": 1,  # Default value
+                                "quest_type": "Side Quest",  # Default value
+                            })
+
+                        self.quest_data[quest_id] = quest_info
             else:
-                # Mock data for testing
+                # Mock data for testing with comprehensive structure
                 self.quest_data = {
                     1: {
                         "name": "Staub der Sterne",
                         "description": "Quest description...",
+                        "quest_id": 1,
+                        "parent_quest_id": 0,
+                        "order_index": 1,
+                        "priority": 5,
+                        "status": "Active",
+                        "difficulty": "Medium",
+                        "min_level": 5,
+                        "quest_type": "Main Quest",
+                        "platform": "P1",
+                        "npc_id": 1001,
+                        "quest_giver_name": "Darius",
+                        "quest_giver_location": "Northern Outpost",
+                        "additional_locations": [{"code": "P2", "name": "Eastern Plains"}],
+                        "requirements": [{"description": "Level 5"}],
+                        "objectives": [{"description": "Collect stardust"}],
+                        "rewards": {
+                            "xp": 500,
+                            "gold": 100,
+                            "silver": 0,
+                            "copper": 0,
+                            "items": [],
+                            "faction_reputation": {},
+                            "skill_points": 2,
+                        },
+                        "dialogues": [],
+                        "variables": {},
+                        "flags": {},
+                        "map_locations": [],
                     },
                     12: {
                         "name": "Darius der Kartograph",
                         "description": "Quest description...",
+                        "quest_id": 12,
+                        "parent_quest_id": 1,
+                        "order_index": 2,
+                        "priority": 3,
+                        "status": "Unknown",
+                        "difficulty": "Easy",
+                        "min_level": 1,
+                        "quest_type": "Side Quest",
+                        "platform": "P1",
+                        "npc_id": 1001,
+                        "quest_giver_name": "Darius",
+                        "quest_giver_location": "Northern Outpost",
+                        "additional_locations": [],
+                        "requirements": [],
+                        "objectives": [{"description": "Map the area"}],
+                        "rewards": {
+                            "xp": 250,
+                            "gold": 50,
+                            "silver": 0,
+                            "copper": 0,
+                            "items": [],
+                            "faction_reputation": {},
+                            "skill_points": 1,
+                        },
+                        "dialogues": [],
+                        "variables": {},
+                        "flags": {},
+                        "map_locations": [],
                     },
                 }
 
@@ -1603,6 +1790,7 @@ class UnifiedQuestEditor(QMainWindow):
                 self.condition_builder.root_condition.children.clear()
                 self.condition_builder.refresh_tree()
 
+      
         # Update preview
         self.preview_widget.update_preview(quest_info)
 
@@ -1712,10 +1900,14 @@ class UnifiedQuestEditor(QMainWindow):
 
     def _load_quest_objectives(self, quest_info: Dict):
         """Load quest objectives with enhanced display"""
+        print(f"OBJECTIVES TAB: _load_quest_objectives called")
+        print(f"OBJECTIVES TAB: quest_info keys: {list(quest_info.keys())}")
+
         self.objectives_list.clear()
         self.requirements_list.clear()
 
         objectives = quest_info.get("objectives", [])
+        print(f"OBJECTIVES TAB: Found {len(objectives)} objectives: {objectives}")
         for obj in objectives:
             if isinstance(obj, dict):
                 # Enhanced objective data
@@ -1771,9 +1963,12 @@ class UnifiedQuestEditor(QMainWindow):
 
     def _load_quest_rewards(self, quest_info: Dict):
         """Load quest rewards"""
+        print(f"REWARDS TAB: _load_quest_rewards called")
         rewards = quest_info.get("rewards", {})
+        print(f"REWARDS TAB: rewards data: {rewards}")
 
         if isinstance(rewards, dict):
+            print(f"REWARDS TAB: Setting XP to {rewards.get('xp', 0)}, Gold to {rewards.get('gold', 0)}")
             self.xp_spin.setValue(rewards.get("xp", 0))
             self.gold_spin.setValue(rewards.get("gold", 0))
             self.silver_spin.setValue(rewards.get("silver", 0))
