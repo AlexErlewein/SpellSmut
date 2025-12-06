@@ -39,20 +39,30 @@ namespace SFEngine.SFMap
                 return;
             }
 
+            // Check if game data is loaded
+            if (SFCFF.SFCategoryManager.gamedata == null || SFCFF.SFCategoryManager.gamedata.c2057 == null)
+            {
+                LogUtils.Log.Warning(LogUtils.LogSource.SFMap, $"AddObjectCollisionBoundary: Game data not loaded for object {id}");
+                return;
+            }
+
             bool outline_found = SFCFF.SFCategoryManager.gamedata.c2057.GetItemIndex(id, out int outline_index);
             if (!outline_found)
             {
+                LogUtils.Log.Info(LogUtils.LogSource.SFMap, $"AddObjectCollisionBoundary: No collision data for object {id}");
                 return;
             }
             int outline_num = SFCFF.SFCategoryManager.gamedata.c2057.GetItemSubItemNum(outline_index);
             outline_index = SFCFF.SFCategoryManager.gamedata.c2057.Indices[outline_index];
 
             SFMapCollisionBoundary cb = new SFMapCollisionBoundary() { origin = Vector2.Zero };
+            int total_vertices = 0;
             for (int i = 0; i < outline_num; i++)
             {
                 Category2057Item outline = SFCFF.SFCategoryManager.gamedata.c2057[outline_index];
 
                 int vertex_count = outline.Coords.Count / 2;
+                total_vertices += vertex_count;
                 Vector2[] vertex_list = new Vector2[vertex_count];
                 for (int j = 0; j < vertex_count; j++)
                 {
@@ -65,7 +75,7 @@ namespace SFEngine.SFMap
                 outline_index++;
             }
 
-            //cb.RebuildModel3D();
+            LogUtils.Log.Info(LogUtils.LogSource.SFMap, $"AddObjectCollisionBoundary: Object {id} has {outline_num} polygons with {total_vertices} total vertices");
 
             object_collision.Add((ushort)id, cb);
         }
@@ -235,35 +245,28 @@ namespace SFEngine.SFMap
         {
             List<SFCoord> tiles = new List<SFCoord>();
             
+            // Try to load collision boundary if not already loaded
             if (!object_collision.ContainsKey((ushort)obj.game_id))
             {
-                // No collision boundary data available - use a default 3x3 blocking area
-                // This ensures objects block movement even without game data loaded
-                for (int dx = -1; dx <= 1; dx++)
-                {
-                    for (int dy = -1; dy <= 1; dy++)
-                    {
-                        int nx = obj.grid_position.x + dx;
-                        int ny = obj.grid_position.y + dy;
-                        // Bounds check
-                        if (nx >= 0 && ny >= 0 && map != null && 
-                            nx < map.heightmap.width && ny < map.heightmap.height)
-                        {
-                            tiles.Add(new SFCoord((short)nx, (short)ny));
-                        }
-                    }
-                }
-                return tiles;
-            }
-
-            // Get all cells covered by the object's collision boundary
-            SFMapCollisionBoundary bcb = object_collision[(ushort)obj.game_id];
-            foreach (SFCoord p in bcb.GetCells(obj.grid_position, obj.angle))
-            {
-                tiles.Add(p);
+                AddObjectCollisionBoundary(obj.game_id);
             }
             
-            // If collision boundary returned no tiles, use default 3x3
+            if (object_collision.ContainsKey((ushort)obj.game_id))
+            {
+                // Get all cells covered by the object's collision boundary
+                SFMapCollisionBoundary bcb = object_collision[(ushort)obj.game_id];
+                foreach (SFCoord p in bcb.GetCells(obj.grid_position, obj.angle))
+                {
+                    // Bounds check
+                    if (p.x >= 0 && p.y >= 0 && map != null && 
+                        p.x < map.heightmap.width && p.y < map.heightmap.height)
+                    {
+                        tiles.Add(p);
+                    }
+                }
+            }
+            
+            // If no collision boundary or it returned no tiles, use default 3x3
             if (tiles.Count == 0)
             {
                 for (int dx = -1; dx <= 1; dx++)
