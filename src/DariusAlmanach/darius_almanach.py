@@ -321,6 +321,7 @@ class SimpleQuestViewer(QMainWindow):
         self.dialogue_loader = None
         self.dialogue_view_mode = "simple"  # Default to simple view
         self.metadata_view_mode = "full"  # Default to full details view
+        self.custom_cff_path = None  # Path to custom CFF file
 
         # Initialize settings for preferences persistence
         self.settings = QSettings("SpellSmut", "QuestViewer")
@@ -468,6 +469,14 @@ class SimpleQuestViewer(QMainWindow):
         export_btn.setEnabled(False)  # Disabled until quest is selected
         self.export_btn = export_btn
         header_layout.addWidget(export_btn)
+
+        # CFF File loading button
+        cff_btn = QPushButton("Load CFF File")
+        cff_btn.clicked.connect(self.load_cff_file)
+        cff_btn.setStyleSheet(
+            "QPushButton { background-color: #2d5a2d; color: #e0e0e0; font-weight: bold; padding: 8px; border-radius: 4px; border: 1px solid #555; } QPushButton:hover { background-color: #3a6a3a; }"
+        )
+        header_layout.addWidget(cff_btn)
 
         reload_btn = QPushButton("Reload Data")
         reload_btn.clicked.connect(self.reload_data)
@@ -636,13 +645,42 @@ class SimpleQuestViewer(QMainWindow):
                 self.quest_service = None
 
             # Step 2: Load GameData.cff file
-            cff_file = Path("OriginalGameFiles/data/GameData.cff")
+            # Use custom CFF file if one has been selected, otherwise use default
+            if self.custom_cff_path:
+                cff_file = Path(self.custom_cff_path)
+            else:
+                cff_file = Path("OriginalGameFiles/data/GameData.cff")
+
             if not cff_file.exists():
+                # If default file doesn't exist, prompt user to select one
                 progress.close()
-                QMessageBox.critical(
-                    self, "Error", f"GameData.cff not found at:\n{cff_file}"
+
+                # Show warning message and ask if user wants to select a file
+                result = QMessageBox.question(
+                    self,
+                    "CFF File Not Found",
+                    f"Default GameData.cff not found at:\n{cff_file}\n\nWould you like to select a CFF file manually?",
+                    QMessageBox.Yes | QMessageBox.No
                 )
-                return
+
+                if result == QMessageBox.Yes:
+                    # Open file dialog to select CFF file
+                    file_path, _ = QFileDialog.getOpenFileName(
+                        self,
+                        "Select CFF File",
+                        str(Path.cwd()),
+                        "CFF Files (*.cff);;All Files (*)"
+                    )
+
+                    if file_path:
+                        self.custom_cff_path = file_path
+                        cff_file = Path(file_path)
+                    else:
+                        # User cancelled, exit the loading process
+                        return
+                else:
+                    # User chose not to select a file, exit the loading process
+                    return
 
             progress.setLabelText("Loading GameData.cff...")
             progress.setValue(2)
@@ -711,10 +749,13 @@ class SimpleQuestViewer(QMainWindow):
             quest_count = len(self.quest_data)
             dialogue_count = sum(1 for q in self.quest_data.values() if q.get("dialogues"))
             total_time = time.time() - start_time
-            status_msg = f"Loaded {quest_count} quests ({dialogue_count} with dialogues) in {total_time:.2f}s"
+
+            # Create status message with file source info
+            file_name = cff_file.name
+            status_msg = f"Loaded {quest_count} quests ({dialogue_count} with dialogues) from {file_name} in {total_time:.2f}s"
             self.statusBar().showMessage(status_msg)
             self.logger.info(
-                f"Successfully loaded {quest_count} quests ({dialogue_count} with dialogues) in {total_time:.2f}s"
+                f"Successfully loaded {quest_count} quests ({dialogue_count} with dialogues) from {file_name} in {total_time:.2f}s"
             )
 
             # Restore preferences that require loaded data
@@ -1583,6 +1624,66 @@ class SimpleQuestViewer(QMainWindow):
         self.quest_data.clear()
         self.data_model = None  # Clear data model to force reload
         self.load_data()
+
+    def load_cff_file(self):
+        """Open a file dialog to select and load a specific CFF file"""
+        try:
+            # Open file dialog for CFF files
+            # Start in current working directory
+            current_dir = Path.cwd()
+            file_path, _ = QFileDialog.getOpenFileName(
+                self,
+                "Select CFF File",
+                str(current_dir),
+                "CFF Files (*.cff);;All Files (*)"
+            )
+
+            if not file_path:
+                # User cancelled the dialog
+                return
+
+            # Validate that the file exists
+            if not Path(file_path).exists():
+                QMessageBox.critical(
+                    self,
+                    "Error",
+                    f"The selected file does not exist:\n{file_path}"
+                )
+                return
+
+            # Set the custom CFF path
+            self.custom_cff_path = file_path
+
+            # Clear current data and reload with new file
+            self.quest_data.clear()
+            self.data_model = None  # Clear data model to force reload
+            self.load_data()
+
+            # Show success message with file info
+            file_name = Path(file_path).name
+            QMessageBox.information(
+                self,
+                "Success",
+                f"Successfully loaded CFF file:\n{file_name}\n\n"
+                f"Path: {file_path}"
+            )
+
+            # Update status bar
+            self.update_status_with_file_info(f"Loaded custom CFF")
+
+        except Exception as e:
+            if self.logger:
+                self.logger.exception(f"Failed to load CFF file: {e}")
+            QMessageBox.critical(self, "Error", f"Failed to load CFF file:\n{e}")
+
+    def update_status_with_file_info(self, prefix=""):
+        """Update status bar with current file information"""
+        if self.custom_cff_path:
+            file_name = Path(self.custom_cff_path).name
+            msg = f"{prefix} - Viewing: {file_name}" if prefix else f"Viewing: {file_name}"
+        else:
+            msg = f"{prefix} - Viewing: Default Game Data" if prefix else "Viewing: Default Game Data"
+        self.statusBar().showMessage(msg)
 
     def rebuild_cache(self):
         """Rebuild quest cache from Lua files"""

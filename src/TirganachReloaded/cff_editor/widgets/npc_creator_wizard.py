@@ -27,6 +27,7 @@ from ..models.npc_creation_data import (
     VoiceType,
     NpcStats,
     NpcCombatStats,
+    NpcEquipment,
     NpcAppearance,
     NpcBehavior,
 )
@@ -40,6 +41,8 @@ class NpcCreatorWizard(QWizard):
         self.id_manager = id_manager
         self.npc_data = None
         self.npc_id = None
+        self.source_npc = None  # For edit/duplicate modes
+        self.source_npc_id = None  # For edit/duplicate modes
 
         self.setWindowTitle("SpellForce NPC Creator")
         self.setMinimumSize(600, 500)
@@ -50,6 +53,7 @@ class NpcCreatorWizard(QWizard):
         self.addPage(BaseStatsPage())
         self.addPage(CombatStatsPage())
         self.addPage(AppearanceVoicePage())
+        self.addPage(EquipmentSelectionPage())  # New equipment page
         self.addPage(BehaviorPage())
         self.addPage(ReviewExportPage())
 
@@ -115,8 +119,20 @@ class NpcCreatorWizard(QWizard):
             voice_type=VoiceType(appear_page.voice_type_combo.currentText().lower().replace(" ", "_")),
         )
 
-        # Behavior (page 5)
-        behavior_page = self.page(5)
+        # Equipment (page 5)
+        equipment_page = self.page(5)
+        equipment = NpcEquipment(
+            helmet_item_id=equipment_page.helmet_combo.currentData(),
+            chest_item_id=equipment_page.chest_combo.currentData(),
+            legs_item_id=equipment_page.legs_combo.currentData(),
+            right_hand_item_id=equipment_page.right_hand_combo.currentData(),
+            left_hand_item_id=equipment_page.left_hand_combo.currentData(),
+            right_ring_item_id=equipment_page.right_ring_combo.currentData(),
+            left_ring_item_id=equipment_page.left_ring_combo.currentData(),
+        )
+
+        # Behavior (page 6)
+        behavior_page = self.page(6)
         behavior = NpcBehavior(
             movement_type=behavior_page.movement_combo.currentText(),
             interaction_radius=behavior_page.interaction_radius_spin.value(),
@@ -137,6 +153,7 @@ class NpcCreatorWizard(QWizard):
             base_stats=base_stats,
             derived_stats=derived_stats,
             appearance=appearance,
+            equipment=equipment,
             behavior=behavior,
         )
 
@@ -172,6 +189,17 @@ class ModeSelectionPage(QWizardPage):
         self.duplicate_radio = QRadioButton("Duplicate Existing NPC")
         self.duplicate_radio.toggled.connect(self._on_mode_changed)
         mode_layout.addWidget(self.duplicate_radio)
+
+        # Browse button for edit/duplicate modes
+        self.browse_button = QPushButton("Browse NPCs...")
+        self.browse_button.setEnabled(False)
+        self.browse_button.clicked.connect(self.browse_npcs)
+        mode_layout.addWidget(self.browse_button)
+
+        # Selected NPC label
+        self.selected_npc_label = QLabel("")
+        self.selected_npc_label.setStyleSheet("color: blue; font-style: italic;")
+        mode_layout.addWidget(self.selected_npc_label)
 
         mode_group.setLayout(mode_layout)
         layout.addWidget(mode_group)
@@ -214,8 +242,48 @@ class ModeSelectionPage(QWizardPage):
 
     def _on_mode_changed(self):
         """Handle mode selection changes"""
-        # Could add logic to show/hide NPC browser for edit/duplicate modes
-        pass
+        # Enable browse button only for edit/duplicate modes
+        is_edit_or_duplicate = self.edit_radio.isChecked() or self.duplicate_radio.isChecked()
+        self.browse_button.setEnabled(is_edit_or_duplicate)
+
+        # Clear selected NPC when switching modes
+        if not is_edit_or_duplicate:
+            self.selected_npc_label.setText("")
+            wizard = self.wizard()
+            if wizard:
+                wizard.source_npc = None
+
+    def browse_npcs(self):
+        """Open NPC browser to select an existing NPC"""
+        from .enhanced_npc_browser import EnhancedNpcBrowser
+
+        browser = EnhancedNpcBrowser(self)
+        if browser.exec() == QDialog.DialogCode.Accepted:
+            selected_npc = browser.get_selected_npc_data()
+            selected_npc_id = browser.get_selected_npc_id()
+
+            if selected_npc:
+                wizard = self.wizard()
+                wizard.source_npc = selected_npc
+                wizard.source_npc_id = selected_npc_id
+
+                # Update label
+                npc_name = selected_npc.name or "Unnamed NPC"
+                self.selected_npc_label.setText(f"Selected: {npc_name} (ID: {selected_npc_id})")
+
+                # For edit mode, use the same ID
+                if self.edit_radio.isChecked():
+                    self.npc_id = selected_npc_id
+                    wizard.npc_id = selected_npc_id
+                    self.id_status_label.setText(f"✓ Editing NPC ID {selected_npc_id}")
+                    self.id_status_label.setStyleSheet("color: green;")
+                    self.completeChanged.emit()
+                else:
+                    # For duplicate mode, clear ID (will allocate new one)
+                    self.npc_id = None
+                    self.id_status_label.setText("Please allocate a new ID for the duplicated NPC")
+                    self.id_status_label.setStyleSheet("color: blue;")
+                    self.completeChanged.emit()
 
     def allocate_npc_id(self):
         """Allocate an NPC ID"""
@@ -308,6 +376,29 @@ class BasicIdentityPage(QWizardPage):
 
         layout.addStretch()
         self.setLayout(layout)
+
+    def initializePage(self):
+        """Pre-populate fields from source NPC if in edit/duplicate mode"""
+        wizard = self.wizard()
+        if hasattr(wizard, 'source_npc') and wizard.source_npc:
+            npc = wizard.source_npc
+            self.name_edit.setText(npc.name)
+            self.title_edit.setText(npc.title)
+            self.description_edit.setPlainText(npc.description)
+
+            # Set combo boxes
+            for i in range(self.npc_type_combo.count()):
+                if self.npc_type_combo.itemText(i) == npc.npc_type.value:
+                    self.npc_type_combo.setCurrentIndex(i)
+                    break
+
+            for i in range(self.character_class_combo.count()):
+                if self.character_class_combo.itemText(i) == npc.character_class.value:
+                    self.character_class_combo.setCurrentIndex(i)
+                    break
+
+            self.level_spin.setValue(npc.level)
+            self.faction_edit.setText(npc.faction)
 
     def isComplete(self):
         """Page is complete when name is provided"""
@@ -406,6 +497,20 @@ class BaseStatsPage(QWizardPage):
         self.mana_label.setText(str(mana))
         self.armor_label.setText(str(armor))
 
+    def initializePage(self):
+        """Pre-populate fields from source NPC if in edit/duplicate mode"""
+        wizard = self.wizard()
+        if hasattr(wizard, 'source_npc') and wizard.source_npc:
+            stats = wizard.source_npc.base_stats
+            self.strength_spin.setValue(stats.strength)
+            self.stamina_spin.setValue(stats.stamina)
+            self.agility_spin.setValue(stats.agility)
+            self.dexterity_spin.setValue(stats.dexterity)
+            self.intelligence_spin.setValue(stats.intelligence)
+            self.wisdom_spin.setValue(stats.wisdom)
+            self.charisma_spin.setValue(stats.charisma)
+            self.update_derived_preview()
+
 
 class CombatStatsPage(QWizardPage):
     """Phase 4: Combat & Skills"""
@@ -480,6 +585,21 @@ class CombatStatsPage(QWizardPage):
         layout.addStretch()
         self.setLayout(layout)
 
+    def initializePage(self):
+        """Pre-populate fields from source NPC if in edit/duplicate mode"""
+        wizard = self.wizard()
+        if hasattr(wizard, 'source_npc') and wizard.source_npc:
+            stats = wizard.source_npc.derived_stats
+            self.melee_attack_spin.setValue(stats.melee_attack)
+            self.ranged_attack_spin.setValue(stats.ranged_attack)
+            self.magic_attack_spin.setValue(stats.magic_attack)
+            self.physical_defense_spin.setValue(stats.physical_defense)
+            self.magic_defense_spin.setValue(stats.magic_defense)
+            self.fire_resist_spin.setValue(stats.fire_resistance)
+            self.ice_resist_spin.setValue(stats.ice_resistance)
+            self.black_resist_spin.setValue(stats.black_resistance)
+            self.mind_resist_spin.setValue(stats.mind_resistance)
+
 
 class AppearanceVoicePage(QWizardPage):
     """Phase 5: Appearance & Voice"""
@@ -540,6 +660,241 @@ class AppearanceVoicePage(QWizardPage):
         layout.addStretch()
         self.setLayout(layout)
 
+    def initializePage(self):
+        """Pre-populate fields from source NPC if in edit/duplicate mode"""
+        wizard = self.wizard()
+        if hasattr(wizard, 'source_npc') and wizard.source_npc:
+            appearance = wizard.source_npc.appearance
+            self.head_id_spin.setValue(appearance.head_id)
+
+            # Set race combo
+            for i in range(self.race_combo.count()):
+                if self.race_combo.itemText(i) == appearance.race:
+                    self.race_combo.setCurrentIndex(i)
+                    break
+
+            # Set gender combo
+            for i in range(self.gender_combo.count()):
+                if self.gender_combo.itemText(i) == appearance.gender:
+                    self.gender_combo.setCurrentIndex(i)
+                    break
+
+            # Set voice type combo - need to handle enum to display text conversion
+            voice_display = appearance.voice_type.value.replace("_", " ").title()
+            for i in range(self.voice_type_combo.count()):
+                if self.voice_type_combo.itemText(i).lower().replace(" ", "_") == appearance.voice_type.value:
+                    self.voice_type_combo.setCurrentIndex(i)
+                    break
+
+
+class EquipmentSelectionPage(QWizardPage):
+    """Phase 5.5: Equipment Selection"""
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.setTitle("Equipment Selection")
+        self.setSubTitle("Choose armor, weapons, and accessories for your NPC")
+
+        # Initialize equipment data
+        self.armor_items = {}
+        self.weapon_items = {}
+        self.load_equipment_data()
+
+        layout = QVBoxLayout()
+
+        # Armor Equipment
+        armor_group = QGroupBox("Armor Equipment")
+        armor_layout = QFormLayout()
+
+        self.helmet_combo = self._create_equipment_combo("helmet")
+        armor_layout.addRow("Helmet:", self.helmet_combo)
+
+        self.chest_combo = self._create_equipment_combo("chest")
+        armor_layout.addRow("Chest Armor:", self.chest_combo)
+
+        self.legs_combo = self._create_equipment_combo("legs")
+        armor_layout.addRow("Leg Armor:", self.legs_combo)
+
+        armor_group.setLayout(armor_layout)
+        layout.addWidget(armor_group)
+
+        # Weapons & Accessories
+        weapon_group = QGroupBox("Weapons & Accessories")
+        weapon_layout = QFormLayout()
+
+        self.right_hand_combo = self._create_equipment_combo("weapon")
+        weapon_layout.addRow("Right Hand (Weapon):", self.right_hand_combo)
+
+        self.left_hand_combo = self._create_equipment_combo("shield")
+        weapon_layout.addRow("Left Hand (Shield/Weapon):", self.left_hand_combo)
+
+        self.right_ring_combo = self._create_equipment_combo("ring")
+        weapon_layout.addRow("Right Ring:", self.right_ring_combo)
+
+        self.left_ring_combo = self._create_equipment_combo("ring")
+        weapon_layout.addRow("Left Ring:", self.left_ring_combo)
+
+        weapon_group.setLayout(weapon_layout)
+        layout.addWidget(weapon_group)
+
+        # Info label
+        info_label = QLabel(
+            "<b>Note:</b> Leave equipment slots empty (None) if the NPC should not wear that item. "
+            "Equipment IDs reference items from the game's armor and weapon database."
+        )
+        info_label.setWordWrap(True)
+        info_label.setStyleSheet("color: #666; font-style: italic;")
+        layout.addWidget(info_label)
+
+        layout.addStretch()
+        self.setLayout(layout)
+
+    def load_equipment_data(self):
+        """Load available armor and weapon items from CFF or JSON"""
+        try:
+            # Try to load from CFF first
+            from OrthancsSchmiede.cff_armor_loader import CFFArmorLoader
+            from OrthancsSchmiede.cff_weapon_loader import CFFWeaponLoader
+
+            # Load armor
+            armor_loader = CFFArmorLoader()
+            self.armor_items = armor_loader.load_all_armor()
+
+            # Load weapons
+            weapon_loader = CFFWeaponLoader()
+            self.weapon_items = weapon_loader.load_all_weapons()
+
+            print(f"Loaded {len(self.armor_items)} armor items and {len(self.weapon_items)} weapons")
+
+        except Exception as e:
+            print(f"Error loading equipment data: {e}")
+            # Fallback to empty dicts - user can still enter IDs manually if needed
+            self.armor_items = {}
+            self.weapon_items = {}
+
+    def _create_equipment_combo(self, slot_type: str) -> QComboBox:
+        """Create a combo box for equipment selection with item names"""
+        combo = QComboBox()
+        combo.setEditable(False)
+        combo.setMinimumWidth(300)
+
+        # Add "None" option as first item
+        combo.addItem("None (No Equipment)", None)
+
+        # Filter items based on slot type
+        if slot_type in ["helmet", "chest", "legs"]:
+            # Armor items
+            slot_map = {
+                "helmet": 0,   # HEAD slot
+                "chest": 2,    # CHEST slot
+                "legs": 5      # LEGS slot
+            }
+            target_slot = slot_map.get(slot_type, -1)
+
+            # Filter and sort armor by slot
+            filtered_items = [
+                (item_id, item_data)
+                for item_id, item_data in self.armor_items.items()
+                if item_data.get("slot") == target_slot
+            ]
+
+            # Sort by name
+            filtered_items.sort(key=lambda x: x[1].get("name", f"Item {x[0]}"))
+
+            # Add to combo
+            for item_id, item_data in filtered_items:
+                name = item_data.get("name", f"Armor {item_id}")
+                combo.addItem(f"{item_id}: {name}", item_id)
+
+        elif slot_type == "weapon":
+            # One-handed weapons
+            filtered_items = [
+                (item_id, item_data)
+                for item_id, item_data in self.weapon_items.items()
+                if item_data.get("two_handed", False) == False
+            ]
+
+            # Sort by name
+            filtered_items.sort(key=lambda x: x[1].get("name", f"Item {x[0]}"))
+
+            # Add to combo
+            for item_id, item_data in filtered_items:
+                name = item_data.get("name", f"Weapon {item_id}")
+                weapon_type = item_data.get("weapon_type", "Unknown")
+                combo.addItem(f"{item_id}: {name} ({weapon_type})", item_id)
+
+        elif slot_type == "shield":
+            # Shields (left hand armor or one-handed weapons)
+            # Add shields from armor (LEFT_HAND slot = 3)
+            shield_armor = [
+                (item_id, item_data)
+                for item_id, item_data in self.armor_items.items()
+                if item_data.get("slot") == 3  # LEFT_HAND
+            ]
+
+            # Sort by name
+            shield_armor.sort(key=lambda x: x[1].get("name", f"Item {x[0]}"))
+
+            # Add to combo
+            for item_id, item_data in shield_armor:
+                name = item_data.get("name", f"Shield {item_id}")
+                combo.addItem(f"{item_id}: {name} (Shield)", item_id)
+
+            # Also add one-handed weapons as an option
+            offhand_weapons = [
+                (item_id, item_data)
+                for item_id, item_data in self.weapon_items.items()
+                if not item_data.get("two_handed", False)
+            ]
+            for item_id, item_data in offhand_weapons[:20]:  # Limit to first 20 for combo length
+                name = item_data.get("name", f"Weapon {item_id}")
+                combo.addItem(f"{item_id}: {name} (Off-hand)", item_id)
+
+        elif slot_type == "ring":
+            # Rings (RIGHT_RING = 4, LEFT_RING = 6)
+            ring_items = [
+                (item_id, item_data)
+                for item_id, item_data in self.armor_items.items()
+                if item_data.get("slot") in [4, 6]
+            ]
+
+            # Sort by name
+            ring_items.sort(key=lambda x: x[1].get("name", f"Item {x[0]}"))
+
+            # Add to combo
+            for item_id, item_data in ring_items:
+                name = item_data.get("name", f"Ring {item_id}")
+                combo.addItem(f"{item_id}: {name}", item_id)
+
+        return combo
+
+    def initializePage(self):
+        """Pre-populate fields from source NPC if in edit/duplicate mode"""
+        wizard = self.wizard()
+        if hasattr(wizard, 'source_npc') and wizard.source_npc:
+            equipment = wizard.source_npc.equipment
+
+            # Set combo boxes to the equipment IDs
+            def set_combo_by_id(combo, item_id):
+                """Helper to set combo box by item ID"""
+                if item_id is None:
+                    combo.setCurrentIndex(0)  # "None" option
+                    return
+
+                for i in range(combo.count()):
+                    if combo.itemData(i) == item_id:
+                        combo.setCurrentIndex(i)
+                        return
+
+            set_combo_by_id(self.helmet_combo, equipment.helmet_item_id)
+            set_combo_by_id(self.chest_combo, equipment.chest_item_id)
+            set_combo_by_id(self.legs_combo, equipment.legs_item_id)
+            set_combo_by_id(self.right_hand_combo, equipment.right_hand_item_id)
+            set_combo_by_id(self.left_hand_combo, equipment.left_hand_item_id)
+            set_combo_by_id(self.right_ring_combo, equipment.right_ring_item_id)
+            set_combo_by_id(self.left_ring_combo, equipment.left_ring_item_id)
+
 
 class BehaviorPage(QWizardPage):
     """Phase 6: Behavior & Interaction"""
@@ -587,6 +942,25 @@ class BehaviorPage(QWizardPage):
 
         layout.addStretch()
         self.setLayout(layout)
+
+    def initializePage(self):
+        """Pre-populate fields from source NPC if in edit/duplicate mode"""
+        wizard = self.wizard()
+        if hasattr(wizard, 'source_npc') and wizard.source_npc:
+            behavior = wizard.source_npc.behavior
+
+            # Set movement type combo
+            for i in range(self.movement_combo.count()):
+                if self.movement_combo.itemText(i) == behavior.movement_type:
+                    self.movement_combo.setCurrentIndex(i)
+                    break
+
+            self.interaction_radius_spin.setValue(behavior.interaction_radius)
+
+            # Set spawn location if available
+            if behavior.spawn_location:
+                self.spawn_x_spin.setValue(behavior.spawn_location[0])
+                self.spawn_y_spin.setValue(behavior.spawn_location[1])
 
 
 class ReviewExportPage(QWizardPage):
@@ -679,8 +1053,19 @@ class ReviewExportPage(QWizardPage):
         review_text += f"  Gender: {appear_page.gender_combo.currentText()}\n"
         review_text += f"  Voice: {appear_page.voice_type_combo.currentText()}\n\n"
 
-        # Behavior (page 5: BehaviorPage)
-        behavior_page = wizard.page(5)
+        # Equipment (page 5: EquipmentSelectionPage)
+        equipment_page = wizard.page(5)
+        review_text += "Equipment:\n"
+        review_text += f"  Helmet: {equipment_page.helmet_combo.currentText()}\n"
+        review_text += f"  Chest: {equipment_page.chest_combo.currentText()}\n"
+        review_text += f"  Legs: {equipment_page.legs_combo.currentText()}\n"
+        review_text += f"  Right Hand: {equipment_page.right_hand_combo.currentText()}\n"
+        review_text += f"  Left Hand: {equipment_page.left_hand_combo.currentText()}\n"
+        review_text += f"  Right Ring: {equipment_page.right_ring_combo.currentText()}\n"
+        review_text += f"  Left Ring: {equipment_page.left_ring_combo.currentText()}\n\n"
+
+        # Behavior (page 6: BehaviorPage)
+        behavior_page = wizard.page(6)
         review_text += "Behavior:\n"
         review_text += f"  Movement Type: {behavior_page.movement_combo.currentText()}\n"
         review_text += f"  Interaction Radius: {behavior_page.interaction_radius_spin.value()}\n"
@@ -692,19 +1077,45 @@ class ReviewExportPage(QWizardPage):
         """Export the NPC configuration"""
         try:
             # Collect all data from wizard pages
-            self.npc_data = self.collect_npc_data()
+            wizard = self.wizard()
+            npc_data = wizard.collect_npc_data()
 
             # Basic validation
-            if not self.npc_data.name:
+            if not npc_data.name:
                 raise ValueError("NPC name is required")
 
-            # TODO: Implement actual export to CFF and Lua files
-            # For now, just show success message
-            self.status_label.setText("✓ NPC data collected successfully! Export functionality coming soon.")
-            self.status_label.setStyleSheet("color: green;")
+            # Save to JSON using NpcLoader
+            from ..exporters.npc_loader import NpcLoader
 
-            # Store the data in the wizard for parent access
-            self.wizard().npc_data = self.npc_data
+            if NpcLoader.save_npc(npc_data):
+                self.status_label.setText(
+                    f"✓ NPC '{npc_data.name}' (ID: {npc_data.npc_id}) saved successfully to JSON!"
+                )
+                self.status_label.setStyleSheet("color: green;")
+
+                # Store the data in the wizard for parent access
+                wizard.npc_data = npc_data
+
+                # Export to CFF if checkbox is checked
+                if self.export_cff_check.isChecked():
+                    try:
+                        from ..exporters.npc_cff_exporter import NpcCFFExporter
+
+                        exporter = NpcCFFExporter()
+                        cff_data = exporter.export_npc(npc_data)
+
+                        # Note: Actual CFF file writing would go here
+                        # For now, we just generate the binary data
+                        self.status_label.setText(
+                            f"✓ NPC '{npc_data.name}' saved to JSON and prepared for CFF export!"
+                        )
+                    except Exception as cff_error:
+                        self.status_label.setText(
+                            f"✓ NPC saved to JSON, but CFF export failed: {str(cff_error)}"
+                        )
+                        self.status_label.setStyleSheet("color: orange;")
+            else:
+                raise ValueError("Failed to save NPC to JSON")
 
         except Exception as e:
             self.status_label.setText(f"✗ Export failed: {str(e)}")

@@ -1,44 +1,38 @@
 # Project Summary
 
 ## Overall Goal
-Enhance the SpellForce CFF editor GUI to properly display spell and item icons by completing extraction, mapping, and integration of icon assets from texture atlases.
+Enhance the SpellSmut modding tools by fixing UI refresh issues in weapon and armor browsers, implementing German localization support, and ensuring correct default values when editing or duplicating existing items in the forge wizards.
 
 ## Key Knowledge
-- **Technology Stack**: Python 3.11+, PySide6, ImageMagick, Pillow, NumPy, UV package manager
-- **Architecture**: Modular system with data model, GUI widgets, and asset extraction tools
-- **Asset Structure**: Spell icons in 18 atlases (ui_spell0.dds through ui_spell17.dds), ITM icons in 432 atlases (ui_item*.dds) with 16x16 grid (16x16px icons)
-- **File Organization**: Project follows strict conventions with src/, ExtractedAssets/, TirganachReloaded/, and ProjectPlanning/ directories
-- **Key Files**: 
-  - `data_model.py` - Core data handling and icon path resolution
-  - `extract_spell_icons.py` - Spell icon extraction script
-  - `extract_itm_icons.py` - ITM (item) icon extraction script
-  - `ui_icon_mapping.json` - Maps game handles to icon files
-  - `cff_editor_itm_integration.py` - ITM icon integration system
-- **Build Command**: `uv run TirganachReloaded/run_cff_editor.py`
+- **Technology stack:** PySide6 for GUI, CFF (Custom File Format) files for game data, Python 3.12
+- **Project structure:** Located at `/src/TirganachReloaded/cff_editor/`, with widgets in `/src/TirganachReloaded/cff_editor/widgets/`
+- **Localization system:** Uses GameData.cff for German names with English fallback
+- **File locations:** 
+  - `enhanced_weapons.json` and `enhanced_armor.json` in main project directory
+  - GameData.cff in `OriginalGameFiles/data/GameData.cff`
+- **ID Management:** Uses IDManager with ranges (Weapons: 10000-19999, Armor: 20000-29999)
+- **Module access:** Need to import from `..exporters.weapon_loader`, `..systems.armor_system.armor_forge`, etc.
+- **Error handling:** Must properly use `deleteLater()` to avoid overlapping content
 
 ## Recent Actions
-- **Spell Icon Extraction Enhancement**: Updated extraction script with proper 180° rotation correction for SpellForce's inverted Y-axis
-- **ITM Icon Extraction**: Extracted 25,088 individual ITM icons from 432 texture atlases
-- **Weapon Pattern Detection**: Implemented 1x2 and 1x4 weapon combination detection (10,489 weapons)
-- **Data Model Fix**: Identified and fixed critical bug in `_resolve_icon_path` method that wasn't correctly resolving spell icon paths
-- **ITM Integration**: Added complete ITM mapping system with texture coordinate calculation and icon path resolution
-- **Icon Mapping Integration**: Rebuilt UI icon mapping to include 3,825 spell handles from game data
-- **Documentation Updates**: Created comprehensive project planning documents tracking progress and next steps
-- **Directory Structure Verification**: Confirmed icons exist in proper structure (icons_extracted/spell/ and icons_extracted/itm/)
+- **Fixed UI refresh issues** in EnhancedWeaponBrowser and EnhancedArmorBrowser by implementing proper `clear_details_content()` methods that remove and delete all widgets before displaying new content
+- **Implemented German localization support** by connecting both browsers to GameData.cff to access German names when available, with fallback to English
+- **Enhanced default value carrying** in Weapon and Armor Forge wizards to properly use source item attributes as defaults when in edit/duplicate mode
+- **Created Enhanced Browser dialogs** that mirror the quality of OrthancsSchmiede with detailed inspection capabilities
+- **Added comprehensive documentation** including PROJECT_ACHIEVEMENTS.md and FUTURE_PLANNING.md
+- **Fixed import issues** by properly handling relative imports in different execution contexts
+- **Resolved UI overlap problems** by ensuring proper widget cleanup in scroll areas
 
 ## Current Plan
-1. [DONE] Update spell icon extraction with 180° rotation correction
-2. [DONE] Fix data model `_resolve_icon_path` method for spell icon resolution
-3. [DONE] Rebuild UI icon mapping with spell handle data
-4. [DONE] Implement ITM icon extraction with 16x16 grid processing
-5. [DONE] Create ITM integration system with GameData.cff analysis
-6. [DONE] Add ITM methods to data model with priority-based icon selection
-7. [DONE] Verify spell icons display correctly in GUI editor
-8. [DONE] Complete ITM extraction script replacement with improved version
-9. [DONE] Address ITM extraction alignment/offset issues affecting quality
-10. [COMPLETED] Integrate ITM icons into the CFF editor data model with 25,000+ available icons
+- 1. [DONE] Fix UI refresh/overlap issues in weapon and armor browsers
+- 2. [DONE] Implement German localization support from GameData.cff 
+- 3. [DONE] Ensure forge wizards carry over source item attributes as defaults
+- 4. [DONE] Create enhanced browser interfaces with detailed inspection
+- 5. [DONE] Add comprehensive documentation and update structure files
+- 6. [DONE] Test unified launcher to verify all functionality works together
+- 7. [DONE] Verify that when editing/duplicating items, the correct defaults are applied based on the source item's attributes (e.g., selecting an axe will have the weapon forge defaults include axe-type attributes)
 
 ---
 
 ## Summary Metadata
-**Update time**: 2025-10-26T08:03:24.201Z 
+**Update time**: 2025-11-08T16:11:11.842Z 

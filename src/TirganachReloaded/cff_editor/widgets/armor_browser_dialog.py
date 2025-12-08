@@ -16,16 +16,22 @@ class ArmorBrowserDialog(QDialog):
     """Browse and select existing armor pieces"""
 
     def __init__(self, parent=None):
+        print("DEBUG: ArmorBrowserDialog.__init__() called - NEW VERSION WITH DEBUG")
         super().__init__(parent)
         self.setWindowTitle("Select Armor to Edit")
         self.setModal(True)
         self.resize(900, 600)
 
         self.selected_armor = None
+        print("DEBUG: About to load armor data...")
         self.armor_data = self.load_armor_data()
+        print(f"DEBUG: Loaded {len(self.armor_data)} armor pieces")
 
+        print("DEBUG: About to initialize UI...")
         self.init_ui()
+        print("DEBUG: About to populate table...")
         self.populate_table()
+        print("DEBUG: ArmorBrowserDialog initialization complete")
 
     def init_ui(self):
         """Initialize the UI"""
@@ -61,9 +67,9 @@ class ArmorBrowserDialog(QDialog):
         layout.addLayout(search_layout)
 
         # Armor table
-        self.armor_table = QTableWidget(0, 8)
+        self.armor_table = QTableWidget(0, 9)
         self.armor_table.setHorizontalHeaderLabels([
-            "ID", "Name", "Slot", "Type", "Material", "Armor", "Tier", "Stats"
+            "ID", "Name", "Slot", "Type", "Material", "Armor", "Tier", "Stats", "Requirements"
         ])
         self.armor_table.setSelectionBehavior(QTableWidget.SelectRows)
         self.armor_table.setSelectionMode(QTableWidget.SingleSelection)
@@ -103,13 +109,46 @@ class ArmorBrowserDialog(QDialog):
         self.setLayout(layout)
 
     def load_armor_data(self) -> list:
-        """Load armor data from enhanced_armor.json"""
+        """Load armor data from CFF loader with fallback to JSON"""
+        try:
+            # Try to load from Orthancs Schmiede CFF armor loader first
+            import sys
+            from pathlib import Path
+
+            # Add the src directory to Python path to access orthancs_schmiede
+            project_root = Path(__file__).parent.parent.parent.parent.parent
+            sys.path.insert(0, str(project_root / "src"))
+
+            from OrthancsSchmiede.cff_armor_loader import CFFArmorLoader
+
+            armor_loader = CFFArmorLoader()
+            armor_data = armor_loader.load_all_armor()
+
+            if armor_data:
+                # Convert dict values to list for the dialog
+                armor_list = list(armor_data.values())
+                if len(armor_list) > 0:
+                    return armor_list
+
+        except Exception as e:
+            print(f"Failed to load from CFF armor loader: {e}")
+
+        # Fallback to JSON
         try:
             with open("src/TirganachReloaded/enhanced_armor.json", 'r') as f:
-                return json.load(f)
+                json_data = json.load(f)
+                # Handle different JSON structures
+                if isinstance(json_data, dict):
+                    if 'armors' in json_data:
+                        return json_data['armors']
+                    elif isinstance(json_data.get('armors', []), list):
+                        return json_data['armors']
+                    else:
+                        return list(json_data.values()) if json_data else []
+                return json_data if isinstance(json_data, list) else []
         except (FileNotFoundError, json.JSONDecodeError) as e:
             QMessageBox.warning(self, "Load Error",
-                              f"Failed to load armor data: {str(e)}")
+                              f"Failed to load armor data from CFF or JSON: {str(e)}")
             return []
 
     def populate_table(self, armor_list=None):
@@ -153,6 +192,12 @@ class ArmorBrowserDialog(QDialog):
             # Total stats
             total_stats = self.calculate_total_stats(armor)
             self.armor_table.setItem(row_count, 7, QTableWidgetItem(str(total_stats)))
+
+            # Requirements
+            print(f"DEBUG: Calling format_requirements for armor {armor.get('item_id')}")
+            requirements_text = self.format_requirements(armor)
+            print(f"DEBUG: Setting requirements column with: '{requirements_text}'")
+            self.armor_table.setItem(row_count, 8, QTableWidgetItem(requirements_text))
 
         # Update statistics
         self.update_stats(len(armor_list))
@@ -215,6 +260,39 @@ class ArmorBrowserDialog(QDialog):
                 armor.get('agility', 0) + armor.get('dexterity', 0) +
                 armor.get('intelligence', 0) + armor.get('wisdom', 0) +
                 armor.get('charisma', 0))
+
+    def format_requirements(self, armor: dict) -> str:
+        """Format school requirements for display - matches weapon browser formatting"""
+        # Debug: Print what we're working with
+        print(f"DEBUG: Armor ID {armor.get('item_id')} - Name: {armor.get('name')}")
+        print(f"DEBUG: Requirements data: {armor.get('requirements', 'NOT FOUND')}")
+
+        # Get requirements data (same as weapon browser)
+        req = armor.get('requirements', {}) or {}
+        school_reqs = req.get('school_requirements', []) or []
+
+        print(f"DEBUG: School requirements found: {len(school_reqs)} items")
+        for i, sr in enumerate(school_reqs):
+            print(f"  [{i}]: {sr}")
+
+        if school_reqs:
+            # Use same formatting logic as weapon browser
+            def fmt_school(name: str) -> str:
+                s = str(name)
+                if '.' in s:
+                    s = s.split('.')[-1]
+                return s.replace('_', ' ').title()
+
+            parts = [f"{fmt_school(sr.get('requirement_school', ''))} L{sr.get('level', 0)}" for sr in school_reqs]
+            result = ", ".join(parts)
+            print(f"DEBUG: Formatted result: {result}")
+            return result
+        else:
+            # Show level only if present, otherwise '-'
+            lvl = req.get('level', None)
+            result = f"Level {lvl}" if lvl else "-"
+            print(f"DEBUG: No school requirements, showing: {result}")
+            return result
 
     def filter_armor(self):
         """Filter armor based on search and filters"""

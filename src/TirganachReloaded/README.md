@@ -38,6 +38,28 @@ Or from project root:
 uv run python src/TirganachReloaded/run_cff_editor.py
 ```
 
+### Developer Imports
+
+For convenience, selected editor components are re-exported via system packages:
+
+```python
+# Re-exported (stable import path)
+from TirganachReloaded.cff_editor.systems.weapon_system import WeaponForgeWizard
+
+# Direct imports (alternative)
+from TirganachReloaded.cff_editor.widgets.weapon_forge_wizard import WeaponForgeWizard
+```
+
+The system package also re-exports models and helpers:
+
+```python
+from TirganachReloaded.cff_editor.systems.weapon_system import (
+    WeaponCreationData,
+    WeaponRequirements,
+    SchoolRequirement,
+)
+```
+
 ### Documentation
 
 - **[CFF Editor Guide](docs/CFF_EDITOR_README.md)** - Complete editor documentation

@@ -95,6 +95,15 @@ class Armor:
         self.special_abilities = []
         self.enchantment_slots = 0
         self.stat_balance_rating = 0.0
+        
+        # Requirements (including school requirements)
+        self.requirements = {
+            "strength": 0,
+            "dexterity": 0,
+            "intelligence": 0,
+            "level": 1,
+            "school_requirements": []
+        }
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert armor object to dictionary for JSON serialization"""
@@ -152,7 +161,10 @@ class Armor:
             'set_bonus': self.set_bonus,
             'special_abilities': self.special_abilities,
             'enchantment_slots': self.enchantment_slots,
-            'stat_balance_rating': self.stat_balance_rating
+            'stat_balance_rating': self.stat_balance_rating,
+            
+            # Requirements
+            'requirements': self.requirements
         }
 
     @classmethod
@@ -214,5 +226,14 @@ class Armor:
         armor.special_abilities = data.get('special_abilities', [])
         armor.enchantment_slots = data.get('enchantment_slots', 0)
         armor.stat_balance_rating = data.get('stat_balance_rating', 0.0)
+        
+        # Requirements (preserve school requirements from CFF data)
+        armor.requirements = data.get('requirements', {
+            "strength": 0,
+            "dexterity": 0,
+            "intelligence": 0,
+            "level": 1,
+            "school_requirements": []
+        })
         
         return armor

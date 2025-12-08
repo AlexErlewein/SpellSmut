@@ -1,970 +1,1096 @@
 """
-Armor Forge Wizard - 7-phase guided armor creation interface
+GUI-based Armor Forge Wizard - Enhanced with ID Management and Better UX
 """
 
-from PySide6.QtWidgets import (QWizard, QWizardPage, QLabel, QLineEdit, QComboBox,
-                               QSpinBox, QDoubleSpinBox, QTextEdit, QVBoxLayout,
-                               QHBoxLayout, QFormLayout, QGroupBox, QRadioButton,
-                               QButtonGroup, QCheckBox, QListWidget, QPushButton,
-                               QColorDialog, QMessageBox, QTableWidget, QTableWidgetItem,
-                               QHeaderView)
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QColor
+from PySide6.QtWidgets import (
+    QComboBox,
+    QDialog,
+    QDoubleSpinBox,
+    QFormLayout,
+    QGroupBox,
+    QHBoxLayout,
+    QLabel,
+    QLineEdit,
+    QMessageBox,
+    QPushButton,
+    QRadioButton,
+    QSpinBox,
+    QTextEdit,
+    QVBoxLayout,
+    QWizard,
+    QWizardPage,
+    QSpinBox,
+    QTableWidget,
+    QTableWidgetItem,
+    QWidget,
+    QTabWidget
+)
+from PySide6.QtCore import QDir
+import json
+from pathlib import Path
+from datetime import datetime
+import os
 
-from ..shared.id_manager import IDManager, ContentType
-from ..models.armor_creation_data import (ArmorCreationData, ArmorSlot, ArmorType,
-                                         ArmorTier, ArmorRequirements)
+from ..systems.armor_system.armor_model import Armor, ARMOR_TYPES, MATERIAL_CATEGORIES, QUALITY_TIERS, CLASS_RESTRICTIONS, SLOT_HEAD, SLOT_CHEST, SLOT_LEGS, SLOT_FEET, SLOT_RIGHT_RING, SLOT_LEFT_RING, SLOT_LEFT_HAND
+from ..shared.id_manager import ContentType, IDManager
 
 
 class ArmorForgeWizard(QWizard):
-    """7-phase wizard for creating custom armor"""
-
     def __init__(self, id_manager: IDManager, parent=None):
         super().__init__(parent)
         self.id_manager = id_manager
-        self.armor_data = ArmorCreationData()
+        self.armor_data = None
+        self.armor_id = None
 
-        self.setWindowTitle("🛡️ Armor Forge - Create Custom Armor")
-        self.setWizardStyle(QWizard.ModernStyle)
-        self.resize(800, 600)
+        self.setWindowTitle("Armor Forge Wizard")
 
-        # Add pages
-        self.addPage(ModeSelectionPage(self.id_manager, self.armor_data))
-        self.addPage(BasicPropertiesPage(self.armor_data))
-        self.addPage(CoreStatsPage(self.armor_data))
-        self.addPage(ResistanceDefensePage(self.armor_data))
-        self.addPage(SpeedMobilityPage(self.armor_data))
-        self.addPage(VisualMaterialsPage(self.armor_data))
-        self.addPage(AdvancedFeaturesPage(self.armor_data))
-        self.addPage(ReviewExportPage(self.armor_data, self.id_manager))
-
-        # Connect signals
-        self.currentIdChanged.connect(self.on_page_changed)
-
-    def on_page_changed(self, page_id):
-        """Handle page changes"""
-        if page_id == 7:  # Review page
-            # Update the review page with current data
-            review_page = self.page(page_id)
-            if hasattr(review_page, 'update_review'):
-                review_page.update_review()
+        self.addPage(ModeSelectionPage(self.id_manager))
+        self.addPage(BasicPropertiesPage())
+        self.addPage(CoreStatsPage())
+        self.addPage(ResistanceDefensePage())
+        self.addPage(SpeedMobilityPage())
+        self.addPage(VisualPropertiesPage())
+        self.addPage(AdvancedFeaturesPage())
+        self.addPage(ReviewExportPage())
 
     def done(self, result):
-        """Handle wizard completion"""
-        if result == QWizard.Rejected and hasattr(self.armor_data, 'armor_id'):
-            # User canceled - release the allocated ID if any
-            if self.armor_data.armor_id >= 20000:  # Only release custom IDs
-                self.id_manager.release_id(ContentType.ARMOR, self.armor_data.armor_id)
-
+        if result == QDialog.DialogCode.Accepted:
+            # Export armor data when user clicks Finish
+            if self.armor_data:
+                success = self.export_armor()
+                if not success:
+                    # Export failed, don't close wizard yet
+                    return
+        elif result == QDialog.DialogCode.Rejected and self.armor_id:
+            # Release ID if cancelled
+            self.id_manager.release_id(ContentType.ARMOR, self.armor_id)
         super().done(result)
+
+    def export_armor(self) -> bool:
+        """Export armor to JSON (and eventually CFF)"""
+        try:
+            # For now, we only support JSON export
+            return self.export_to_json()
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Export Failed",
+                f"Failed to export armor:\n{str(e)}"
+            )
+            return False
+
+    def export_to_json(self) -> bool:
+        """Export armor data to JSON file"""
+        try:
+            # Create armors directory if it doesn't exist
+            armors_dir = Path("custom_armors")
+            armors_dir.mkdir(exist_ok=True)
+
+            # Generate filename from armor name
+            safe_name = "".join(
+                c if c.isalnum() or c in (' ', '-', '_') else '_'
+                for c in self.armor_data.name
+            )
+            safe_name = safe_name.replace(' ', '_').lower()
+            filename = f"armor_{self.armor_data.id}_{safe_name}.json"
+            filepath = armors_dir / filename
+
+            # Add metadata
+            self.armor_data.created_date = datetime.now().isoformat()
+            self.armor_data.modified_date = datetime.now().isoformat()
+            self.armor_data.author = "CFF Editor - Armor Forge"
+
+            # Convert armor data to dict
+            armor_dict = {
+                "id": self.armor_data.id,
+                "name": self.armor_data.name,
+                "display_name": self.armor_data.display_name,
+                "description": self.armor_data.description,
+                
+                # Classification
+                "slot": self.armor_data.slot,
+                "armor_type": self.armor_data.armor_type,
+                "material": self.armor_data.material,
+                "tier": self.armor_data.tier,
+                "level_requirement": self.armor_data.level_requirement,
+                "class_restriction": self.armor_data.class_restriction,
+                
+                # Core stats
+                "strength": self.armor_data.strength,
+                "stamina": self.armor_data.stamina,
+                "agility": self.armor_data.agility,
+                "dexterity": self.armor_data.dexterity,
+                "intelligence": self.armor_data.intelligence,
+                "wisdom": self.armor_data.wisdom,
+                "charisma": self.armor_data.charisma,
+                "health": self.armor_data.health,
+                "mana": self.armor_data.mana,
+                "armor_value": self.armor_data.armor_value,
+                
+                # Resists
+                "resist_fire": self.armor_data.resist_fire,
+                "resist_ice": self.armor_data.resist_ice,
+                "resist_black": self.armor_data.resist_black,
+                "resist_mind": self.armor_data.resist_mind,
+                "physical_resist": self.armor_data.physical_resist,
+                "magic_resist": self.armor_data.magic_resist,
+                "critical_resist": self.armor_data.critical_resist,
+                
+                # Speed modifiers
+                "run_speed": self.armor_data.run_speed,
+                "fight_speed": self.armor_data.fight_speed,
+                "cast_speed": self.armor_data.cast_speed,
+                "stealth_bonus": self.armor_data.stealth_bonus,
+                "swimming_speed": self.armor_data.swimming_speed,
+                "jump_height": self.armor_data.jump_height,
+                
+                # Visual properties
+                "icon_id": self.armor_data.icon_id,
+                "model_ref": self.armor_data.model_ref,
+                "texture": self.armor_data.texture,
+                "normal_map": self.armor_data.normal_map,
+                
+                # Advanced features
+                "set_id": self.armor_data.set_id,
+                "set_bonus": self.armor_data.set_bonus,
+                "special_abilities": self.armor_data.special_abilities,
+                "enchantment_slots": self.armor_data.enchantment_slots,
+                "stat_balance_rating": self.armor_data.stat_balance_rating,
+                
+                # Metadata
+                "created_date": self.armor_data.created_date,
+                "modified_date": self.armor_data.modified_date,
+                "author": self.armor_data.author
+            }
+
+            # Write to file
+            with open(filepath, 'w', encoding='utf-8') as f:
+                json.dump(armor_dict, f, indent=2, ensure_ascii=False)
+
+            # Show success message
+            QMessageBox.information(
+                self,
+                "Export Successful",
+                f"Armor exported successfully!\n\n"
+                f"File: {filepath}\n"
+                f"Armor ID: {self.armor_data.id}\n"
+                f"Name: {self.armor_data.name}\n\n"
+                f"Balance Rating: {self.armor_data.stat_balance_rating:.2f}%"
+            )
+
+            return True
+
+        except Exception as e:
+            QMessageBox.critical(
+                self,
+                "Export Failed",
+                f"Failed to export armor to JSON:\n{str(e)}"
+            )
+            return False
 
 
 class ModeSelectionPage(QWizardPage):
-    """Phase 1: Mode Selection & ID Assignment"""
-
-    def __init__(self, id_manager: IDManager, armor_data: ArmorCreationData, parent=None):
+    def __init__(self, id_manager: IDManager, parent=None):
         super().__init__(parent)
         self.id_manager = id_manager
-        self.armor_data = armor_data
-        self.init_ui()
-
-    def init_ui(self):
-        self.setTitle("Phase 1: Mode Selection & ID Assignment")
-        self.setSubTitle("Choose how to create your armor and assign a unique ID")
+        self.selected_armor_data = None
+        self.setTitle("Mode Selection & ID Assignment")
+        self.setSubTitle("Choose how to create your armor and assign a unique ID.")
 
         layout = QVBoxLayout()
 
-        # Mode selection
+        # Creation Mode
         mode_group = QGroupBox("Creation Mode")
         mode_layout = QVBoxLayout()
-
-        self.mode_buttons = QButtonGroup(self)
-
         self.new_armor_radio = QRadioButton("Create New Armor (blank slate)")
-        self.new_armor_radio.setChecked(True)
-        self.mode_buttons.addButton(self.new_armor_radio, 0)
-
         self.edit_armor_radio = QRadioButton("Edit Existing Armor")
-        self.mode_buttons.addButton(self.edit_armor_radio, 1)
-
-        self.duplicate_armor_radio = QRadioButton("Duplicate Existing Armor")
-        self.mode_buttons.addButton(self.duplicate_armor_radio, 2)
-
+        self.duplicate_armor_radio = QRadioButton("Duplicate & Modify (copy existing, new ID)")
+        self.new_armor_radio.setChecked(True)
         mode_layout.addWidget(self.new_armor_radio)
         mode_layout.addWidget(self.edit_armor_radio)
         mode_layout.addWidget(self.duplicate_armor_radio)
 
         # Browse button for edit/duplicate modes
-        self.browse_btn = QPushButton("Browse Existing Armor...")
-        self.browse_btn.setEnabled(False)
-        self.browse_btn.clicked.connect(self.browse_armor)
-        mode_layout.addWidget(self.browse_btn)
+        browse_layout = QHBoxLayout()
+        self.browse_button = QPushButton("Browse Armors...")
+        self.browse_button.clicked.connect(self.browse_armors)
+        self.browse_button.setEnabled(False)
+        browse_layout.addWidget(self.browse_button)
+        browse_layout.addStretch()
+        mode_layout.addLayout(browse_layout)
+
+        # Selected armor display
+        self.selected_armor_label = QLabel("No armor selected")
+        self.selected_armor_label.setStyleSheet("color: gray; font-style: italic;")
+        mode_layout.addWidget(self.selected_armor_label)
+
+        # Enable browse button when edit/duplicate modes are selected
+        self.edit_armor_radio.toggled.connect(self.on_mode_changed)
+        self.duplicate_armor_radio.toggled.connect(self.on_mode_changed)
 
         mode_group.setLayout(mode_layout)
         layout.addWidget(mode_group)
 
-        # ID assignment
+        # ID Assignment
         id_group = QGroupBox("ID Assignment")
-        id_layout = QFormLayout()
-
-        self.id_buttons = QButtonGroup(self)
-
+        id_layout = QVBoxLayout()
         self.auto_id_radio = QRadioButton("Auto-assign next available ID (recommended)")
+        self.manual_id_radio = QRadioButton("Manual ID entry (with validation)")
         self.auto_id_radio.setChecked(True)
-        self.id_buttons.addButton(self.auto_id_radio, 0)
-
-        self.manual_id_radio = QRadioButton("Manually specify ID")
-        self.id_buttons.addButton(self.manual_id_radio, 1)
-
-        id_layout.addRow(self.auto_id_radio)
-        id_layout.addRow(self.manual_id_radio)
+        id_layout.addWidget(self.auto_id_radio)
+        id_layout.addWidget(self.manual_id_radio)
 
         self.manual_id_spin = QSpinBox()
-        self.manual_id_spin.setRange(20000, 29999)
+        self.manual_id_spin.setRange(20000, 29999)  # Armor range
         self.manual_id_spin.setEnabled(False)
-        self.manual_id_radio.toggled.connect(lambda checked: self.manual_id_spin.setEnabled(checked))
-        id_layout.addRow("Custom ID:", self.manual_id_spin)
+        self.manual_id_radio.toggled.connect(self.manual_id_spin.setEnabled)
+        id_layout.addWidget(self.manual_id_spin)
 
-        # ID status
-        self.id_status_label = QLabel("Next available ID: 20000")
-        self.id_status_label.setStyleSheet("color: blue; font-weight: bold;")
-        id_layout.addRow("Status:", self.id_status_label)
+        available_count = self.id_manager.get_available_count(ContentType.ARMOR)
+        id_status_label = QLabel(f"{available_count} available in range 20000-29999")
+        id_layout.addWidget(id_status_label)
 
         id_group.setLayout(id_layout)
         layout.addWidget(id_group)
 
-        # Mode change connections
-        self.mode_buttons.buttonClicked.connect(self.on_mode_changed)
-
         self.setLayout(layout)
-        self.update_id_status()
 
-    def on_mode_changed(self, button):
-        """Handle mode selection change"""
-        mode_id = self.mode_buttons.id(button)
-        self.browse_btn.setEnabled(mode_id in [1, 2])  # Edit or duplicate
+    def on_mode_changed(self):
+        """Enable/disable browse button based on mode selection"""
+        is_edit_or_duplicate = (
+            self.edit_armor_radio.isChecked()
+            or self.duplicate_armor_radio.isChecked()
+        )
+        self.browse_button.setEnabled(is_edit_or_duplicate)
 
-    def browse_armor(self):
-        """Open armor browser dialog"""
-        # TODO: Implement armor browser
-        QMessageBox.information(self, "Browse Armor", "Armor browser not yet implemented")
+        # Clear selection if switching back to new mode
+        if not is_edit_or_duplicate:
+            self.selected_armor_data = None
+            self.selected_armor_label.setText("No armor selected")
+            self.selected_armor_label.setStyleSheet("color: gray; font-style: italic;")
 
-    def update_id_status(self):
-        """Update ID status display"""
-        try:
-            next_id = self.id_manager.get_next_id(ContentType.ARMOR)
-            self.id_status_label.setText(f"Next available ID: {next_id}")
-            self.id_status_label.setStyleSheet("color: blue; font-weight: bold;")
-        except ValueError as e:
-            self.id_status_label.setText(f"Error: {str(e)}")
-            self.id_status_label.setStyleSheet("color: red; font-weight: bold;")
+    def browse_armors(self):
+        """Open enhanced armor browser dialog"""
+        from .enhanced_armor_browser import EnhancedArmorBrowser
+        dialog = EnhancedArmorBrowser(self)
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            selected_data = dialog.get_selected_armor_data()
+            if selected_data:
+                from ..systems.armor_system.armor_model import Armor
+                # Check if the returned data is already an Armor object or a dict
+                if isinstance(selected_data, Armor):
+                    # It's already an Armor object
+                    self.selected_armor_data = selected_data
+                    # Update the display label
+                    self.selected_armor_label.setText(
+                        f"Selected: {self.selected_armor_data.name} (ID: {self.selected_armor_data.id})"
+                    )
+                else:
+                    # It's a dictionary, convert to an Armor object
+                    self.selected_armor_data = Armor.from_dict(selected_data)
+                    # Update the display label
+                    self.selected_armor_label.setText(
+                        f"Selected: {selected_data['name']} (ID: {selected_data['id']})"
+                    )
+                    
+                self.selected_armor_label.setStyleSheet(
+                    "color: green; font-weight: bold;"
+                )
+            else:
+                self.selected_armor_label.setText("No armor selected")
+                self.selected_armor_label.setStyleSheet("color: gray; font-style: italic;")
 
     def validatePage(self):
-        """Validate page before proceeding"""
-        # Allocate ID
-        try:
-            if self.auto_id_radio.isChecked():
-                armor_id = self.id_manager.allocate_id(ContentType.ARMOR)
-            else:
-                requested_id = self.manual_id_spin.value()
-                armor_id = self.id_manager.allocate_id(ContentType.ARMOR, requested_id)
+        """Validate the page before moving to next"""
+        # Check if edit/duplicate mode requires an armor selection
+        if (
+            self.edit_armor_radio.isChecked()
+            or self.duplicate_armor_radio.isChecked()
+        ):
+            if self.selected_armor_data is None:
+                QMessageBox.warning(
+                    self,
+                    "No Armor Selected",
+                    "Please select an armor to edit or duplicate by clicking 'Browse Armors...'",
+                )
+                return False
 
-            self.armor_data.armor_id = armor_id
+        # Store data in wizard for other pages to access
+        wizard = self.wizard()
 
-            # Set creation mode
-            mode_map = {0: "new", 1: "edit", 2: "duplicate"}
-            self.armor_data.creation_mode = mode_map[self.mode_buttons.checkedId()]
+        # Determine creation mode
+        if self.new_armor_radio.isChecked():
+            wizard.creation_mode = "new"
+            wizard.source_armor = None
+        elif self.edit_armor_radio.isChecked():
+            wizard.creation_mode = "edit"
+            wizard.source_armor = self.selected_armor_data
+        else:  # duplicate
+            wizard.creation_mode = "duplicate"
+            wizard.source_armor = self.selected_armor_data
 
-            return True
+        # Allocate or validate ID
+        if self.auto_id_radio.isChecked():
+            try:
+                wizard.armor_id = self.id_manager.allocate_id(ContentType.ARMOR)
+            except ValueError as e:
+                QMessageBox.critical(self, "ID Allocation Error", str(e))
+                return False
+        else:
+            requested_id = self.manual_id_spin.value()
+            if not self.id_manager.is_valid_id(ContentType.ARMOR, requested_id):
+                QMessageBox.warning(
+                    self,
+                    "Invalid ID",
+                    f"ID {requested_id} is outside the valid range (20000-29999)",
+                )
+                return False
 
-        except ValueError as e:
-            QMessageBox.warning(self, "ID Allocation Failed", str(e))
-            return False
+            if self.id_manager.is_id_used(ContentType.ARMOR, requested_id):
+                QMessageBox.warning(
+                    self,
+                    "ID Already In Use",
+                    f"ID {requested_id} is already allocated. Please choose another ID.",
+                )
+                return False
+
+            try:
+                wizard.armor_id = self.id_manager.allocate_id(
+                    ContentType.ARMOR, requested_id
+                )
+            except ValueError as e:
+                QMessageBox.critical(self, "ID Allocation Error", str(e))
+                return False
+
+        return True
 
 
 class BasicPropertiesPage(QWizardPage):
-    """Phase 2: Basic Properties & Classification"""
-
-    def __init__(self, armor_data: ArmorCreationData, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self.armor_data = armor_data
-        self.init_ui()
+        self.setTitle("Basic Properties & Classification")
+        self.setSubTitle("Define the fundamental characteristics of your armor.")
 
-    def init_ui(self):
-        self.setTitle("Phase 2: Basic Properties & Classification")
-        self.setSubTitle("Define the fundamental properties of your armor")
-
-        layout = QVBoxLayout()
-
-        # Naming section
-        naming_group = QGroupBox("Naming & Identity")
-        naming_layout = QFormLayout()
-
-        self.name_edit = QLineEdit()
-        self.name_edit.setPlaceholderText("e.g., Dragon Scale Helmet")
-        naming_layout.addRow("Armor Name:", self.name_edit)
+        layout = QFormLayout()
+        
+        # Naming & Identity
+        self.armor_name_edit = QLineEdit()
+        layout.addRow("Armor Name:", self.armor_name_edit)
 
         self.display_name_edit = QLineEdit()
-        self.display_name_edit.setPlaceholderText("Optional display name")
-        naming_layout.addRow("Display Name:", self.display_name_edit)
+        layout.addRow("Display Name (Tooltip):", self.display_name_edit)
 
-        self.description_edit = QTextEdit()
-        self.description_edit.setMaximumHeight(60)
-        self.description_edit.setPlaceholderText("Flavor text description")
-        naming_layout.addRow("Description:", self.description_edit)
-
-        naming_group.setLayout(naming_layout)
-        layout.addWidget(naming_group)
-
-        # Classification section
-        class_group = QGroupBox("Slot & Type Classification")
-        class_layout = QFormLayout()
-
+        # Classification
         self.slot_combo = QComboBox()
-        self.slot_combo.addItems([
-            "Helmet (Head)",
-            "Chest Armor (Chest)",
-            "Leg Armor (Legs)",
-            "Boots (Feet)",
-            "Right Ring",
-            "Left Ring",
-            "Shield (Left Hand)"
-        ])
-        class_layout.addRow("Equipment Slot:", self.slot_combo)
+        slot_options = [
+            (SLOT_HEAD, "Head/Helmet"),
+            (SLOT_CHEST, "Chest/Armor"),
+            (SLOT_LEGS, "Legs/Pants"),
+            (SLOT_FEET, "Boots/Feet"),
+            (SLOT_RIGHT_RING, "Right Ring"),
+            (SLOT_LEFT_RING, "Left Ring"),
+            (SLOT_LEFT_HAND, "Left Hand/Shield")
+        ]
+        for slot_id, slot_name in slot_options:
+            self.slot_combo.addItem(slot_name, slot_id)
+        layout.addRow("Equipment Slot:", self.slot_combo)
 
-        self.type_combo = QComboBox()
-        self.type_combo.addItems([
-            "Cloth (light, magic)",
-            "Leather (medium, stealth)",
-            "Chain (medium, balanced)",
-            "Plate (heavy, defense)",
-            "Magic (special, unique)"
-        ])
-        class_layout.addRow("Armor Type:", self.type_combo)
+        self.armor_type_combo = QComboBox()
+        self.armor_type_combo.addItems(ARMOR_TYPES)
+        layout.addRow("Armor Type:", self.armor_type_combo)
 
-        self.material_edit = QLineEdit()
-        self.material_edit.setPlaceholderText("e.g., Iron, Mithril, Dragon Scale")
-        class_layout.addRow("Material:", self.material_edit)
-
-        class_group.setLayout(class_layout)
-        layout.addWidget(class_group)
-
-        # Quality section
-        quality_group = QGroupBox("Quality & Rarity")
-        quality_layout = QFormLayout()
+        self.material_combo = QComboBox()
+        self.material_combo.addItems(MATERIAL_CATEGORIES)
+        layout.addRow("Material Category:", self.material_combo)
 
         self.tier_combo = QComboBox()
-        self.tier_combo.addItems([
-            "Common",
-            "Uncommon",
-            "Rare",
-            "Epic",
-            "Legendary",
-            "Unique"
-        ])
-        quality_layout.addRow("Tier:", self.tier_combo)
+        self.tier_combo.addItems(QUALITY_TIERS)
+        layout.addRow("Quality Tier:", self.tier_combo)
 
         self.level_spin = QSpinBox()
         self.level_spin.setRange(1, 100)
         self.level_spin.setValue(1)
-        quality_layout.addRow("Level Requirement:", self.level_spin)
+        layout.addRow("Level Requirement:", self.level_spin)
 
-        quality_group.setLayout(quality_layout)
-        layout.addWidget(quality_group)
+        self.class_restriction_combo = QComboBox()
+        self.class_restriction_combo.addItems(CLASS_RESTRICTIONS)
+        layout.addRow("Class Restriction:", self.class_restriction_combo)
+
+        # Description
+        self.description_edit = QTextEdit()
+        self.description_edit.setMaximumHeight(100)
+        layout.addRow("Description (Flavor Text):", self.description_edit)
 
         self.setLayout(layout)
 
-    def validatePage(self):
-        """Validate and save data"""
-        if not self.name_edit.text().strip():
-            QMessageBox.warning(self, "Validation Error", "Armor name is required")
-            return False
+    def initializePage(self):
+        """Populate fields from source armor if in edit/duplicate mode"""
+        wizard = self.wizard()
 
-        # Save data
-        self.armor_data.armor_name = self.name_edit.text().strip()
-        self.armor_data.display_name = self.display_name_edit.text().strip()
-        self.armor_data.description = self.description_edit.toPlainText().strip()
+        if hasattr(wizard, "source_armor") and wizard.source_armor is not None:
+            armor = wizard.source_armor
 
-        # Slot mapping
-        slot_map = {
-            0: ArmorSlot.HEAD,
-            1: ArmorSlot.CHEST,
-            2: ArmorSlot.LEGS,
-            3: ArmorSlot.FEET,
-            4: ArmorSlot.RIGHT_RING,
-            5: ArmorSlot.LEFT_RING,
-            6: ArmorSlot.LEFT_HAND
-        }
-        self.armor_data.slot = slot_map[self.slot_combo.currentIndex()]
+            # Populate basic properties from source armor
+            self.armor_name_edit.setText(armor.name)
+            self.display_name_edit.setText(armor.display_name)
 
-        # Type mapping
-        type_map = {
-            0: ArmorType.CLOTH,
-            1: ArmorType.LEATHER,
-            2: ArmorType.CHAIN,
-            3: ArmorType.PLATE,
-            4: ArmorType.MAGIC
-        }
-        self.armor_data.armor_type = type_map[self.type_combo.currentIndex()]
+            # Set slot - find matching slot in combo box
+            for i in range(self.slot_combo.count()):
+                if self.slot_combo.itemData(i) == armor.slot:
+                    self.slot_combo.setCurrentIndex(i)
+                    break
 
-        self.armor_data.material_name = self.material_edit.text().strip()
+            # Set armor type
+            index = self.armor_type_combo.findText(armor.armor_type)
+            if index >= 0:
+                self.armor_type_combo.setCurrentIndex(index)
 
-        # Tier mapping
-        tier_map = {
-            0: ArmorTier.COMMON,
-            1: ArmorTier.UNCOMMON,
-            2: ArmorTier.RARE,
-            3: ArmorTier.EPIC,
-            4: ArmorTier.LEGENDARY,
-            5: ArmorTier.UNIQUE
-        }
-        self.armor_data.tier = tier_map[self.tier_combo.currentIndex()]
+            # Set material
+            index = self.material_combo.findText(armor.material)
+            if index >= 0:
+                self.material_combo.setCurrentIndex(index)
 
-        return True
+            # Set tier
+            index = self.tier_combo.findText(armor.tier)
+            if index >= 0:
+                self.tier_combo.setCurrentIndex(index)
+
+            # Set level requirement
+            self.level_spin.setValue(armor.level_requirement)
+
+            # Set class restriction
+            index = self.class_restriction_combo.findText(armor.class_restriction)
+            if index >= 0:
+                self.class_restriction_combo.setCurrentIndex(index)
+
+            # Set description
+            self.description_edit.setPlainText(armor.description)
 
 
 class CoreStatsPage(QWizardPage):
-    """Phase 3: Core Stat Bonuses"""
-
-    def __init__(self, armor_data: ArmorCreationData, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self.armor_data = armor_data
-        self.init_ui()
+        self.setTitle("Core Stat Bonuses")
+        self.setSubTitle("Define the stat bonuses and core defensive values for your armor.")
 
-    def init_ui(self):
-        self.setTitle("Phase 3: Core Stat Bonuses")
-        self.setSubTitle("Define the primary and derived stat bonuses")
-
-        layout = QVBoxLayout()
+        layout = QFormLayout()
 
         # Primary stats
-        primary_group = QGroupBox("Primary Stats")
-        primary_layout = QFormLayout()
-
         self.strength_spin = QSpinBox()
-        self.strength_spin.setRange(-50, 50)
-        primary_layout.addRow("Strength:", self.strength_spin)
+        self.strength_spin.setRange(-100, 1000)
+        layout.addRow("Strength Bonus:", self.strength_spin)
 
         self.stamina_spin = QSpinBox()
-        self.stamina_spin.setRange(-50, 50)
-        primary_layout.addRow("Stamina:", self.stamina_spin)
+        self.stamina_spin.setRange(-100, 1000)
+        layout.addRow("Stamina Bonus:", self.stamina_spin)
 
         self.agility_spin = QSpinBox()
-        self.agility_spin.setRange(-50, 50)
-        primary_layout.addRow("Agility:", self.agility_spin)
+        self.agility_spin.setRange(-100, 1000)
+        layout.addRow("Agility Bonus:", self.agility_spin)
 
         self.dexterity_spin = QSpinBox()
-        self.dexterity_spin.setRange(-50, 50)
-        primary_layout.addRow("Dexterity:", self.dexterity_spin)
+        self.dexterity_spin.setRange(-100, 1000)
+        layout.addRow("Dexterity Bonus:", self.dexterity_spin)
 
         self.intelligence_spin = QSpinBox()
-        self.intelligence_spin.setRange(-50, 50)
-        primary_layout.addRow("Intelligence:", self.intelligence_spin)
+        self.intelligence_spin.setRange(-100, 1000)
+        layout.addRow("Intelligence Bonus:", self.intelligence_spin)
 
         self.wisdom_spin = QSpinBox()
-        self.wisdom_spin.setRange(-50, 50)
-        primary_layout.addRow("Wisdom:", self.wisdom_spin)
+        self.wisdom_spin.setRange(-100, 1000)
+        layout.addRow("Wisdom Bonus:", self.wisdom_spin)
 
         self.charisma_spin = QSpinBox()
-        self.charisma_spin.setRange(-50, 50)
-        primary_layout.addRow("Charisma:", self.charisma_spin)
-
-        primary_group.setLayout(primary_layout)
-        layout.addWidget(primary_group)
+        self.charisma_spin.setRange(-100, 1000)
+        layout.addRow("Charisma Bonus:", self.charisma_spin)
 
         # Derived stats
-        derived_group = QGroupBox("Derived Stats")
-        derived_layout = QFormLayout()
-
         self.health_spin = QSpinBox()
-        self.health_spin.setRange(0, 1000)
-        derived_layout.addRow("Health Bonus (+HP):", self.health_spin)
+        self.health_spin.setRange(-1000, 10000)
+        layout.addRow("Health Bonus:", self.health_spin)
 
         self.mana_spin = QSpinBox()
-        self.mana_spin.setRange(0, 1000)
-        derived_layout.addRow("Mana Bonus (+MP):", self.mana_spin)
+        self.mana_spin.setRange(-1000, 10000)
+        layout.addRow("Mana Bonus:", self.mana_spin)
 
-        self.armor_spin = QSpinBox()
-        self.armor_spin.setRange(0, 200)
-        derived_layout.addRow("Base Armor (physical defense):", self.armor_spin)
-
-        derived_group.setLayout(derived_layout)
-        layout.addWidget(derived_group)
+        self.armor_value_spin = QSpinBox()
+        self.armor_value_spin.setRange(0, 1000)
+        layout.addRow("Base Armor Value:", self.armor_value_spin)
 
         self.setLayout(layout)
 
-    def validatePage(self):
-        """Save stat data"""
-        self.armor_data.strength = self.strength_spin.value()
-        self.armor_data.stamina = self.stamina_spin.value()
-        self.armor_data.agility = self.agility_spin.value()
-        self.armor_data.dexterity = self.dexterity_spin.value()
-        self.armor_data.intelligence = self.intelligence_spin.value()
-        self.armor_data.wisdom = self.wisdom_spin.value()
-        self.armor_data.charisma = self.charisma_spin.value()
-        self.armor_data.health_bonus = self.health_spin.value()
-        self.armor_data.mana_bonus = self.mana_spin.value()
-        self.armor_data.base_armor = self.armor_spin.value()
+    def initializePage(self):
+        """Populate fields from source armor if in edit/duplicate mode"""
+        wizard = self.wizard()
 
-        return True
+        if hasattr(wizard, "source_armor") and wizard.source_armor is not None:
+            armor = wizard.source_armor
+
+            # Populate core stats from source armor
+            self.strength_spin.setValue(armor.strength)
+            self.stamina_spin.setValue(armor.stamina)
+            self.agility_spin.setValue(armor.agility)
+            self.dexterity_spin.setValue(armor.dexterity)
+            self.intelligence_spin.setValue(armor.intelligence)
+            self.wisdom_spin.setValue(armor.wisdom)
+            self.charisma_spin.setValue(armor.charisma)
+            self.health_spin.setValue(armor.health)
+            self.mana_spin.setValue(armor.mana)
+            self.armor_value_spin.setValue(armor.armor_value)
 
 
 class ResistanceDefensePage(QWizardPage):
-    """Phase 4: Resistance & Defense Systems"""
-
-    def __init__(self, armor_data: ArmorCreationData, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self.armor_data = armor_data
-        self.init_ui()
+        self.setTitle("Resistance & Defense Systems")
+        self.setSubTitle("Configure elemental resistances and defensive properties.")
 
-    def init_ui(self):
-        self.setTitle("Phase 4: Resistance & Defense Systems")
-        self.setSubTitle("Configure elemental resistances and defense mechanics")
-
-        layout = QVBoxLayout()
+        layout = QFormLayout()
 
         # Elemental resistances
-        resist_group = QGroupBox("Elemental Resistances (%)")
-        resist_layout = QFormLayout()
+        self.fire_resist_spin = QSpinBox()
+        self.fire_resist_spin.setRange(-100, 100)
+        self.fire_resist_spin.setSuffix(" %")
+        layout.addRow("Fire Resistance:", self.fire_resist_spin)
 
-        self.fire_resist_spin = QDoubleSpinBox()
-        self.fire_resist_spin.setRange(0, 100)
-        self.fire_resist_spin.setSingleStep(5)
-        resist_layout.addRow("Fire Resistance:", self.fire_resist_spin)
+        self.ice_resist_spin = QSpinBox()
+        self.ice_resist_spin.setRange(-100, 100)
+        self.ice_resist_spin.setSuffix(" %")
+        layout.addRow("Ice Resistance:", self.ice_resist_spin)
 
-        self.ice_resist_spin = QDoubleSpinBox()
-        self.ice_resist_spin.setRange(0, 100)
-        self.ice_resist_spin.setSingleStep(5)
-        resist_layout.addRow("Ice Resistance:", self.ice_resist_spin)
+        self.black_resist_spin = QSpinBox()
+        self.black_resist_spin.setRange(-100, 100)
+        self.black_resist_spin.setSuffix(" %")
+        layout.addRow("Black Magic Resistance:", self.black_resist_spin)
 
-        self.black_resist_spin = QDoubleSpinBox()
-        self.black_resist_spin.setRange(0, 100)
-        self.black_resist_spin.setSingleStep(5)
-        resist_layout.addRow("Black Magic Resistance:", self.black_resist_spin)
-
-        self.mind_resist_spin = QDoubleSpinBox()
-        self.mind_resist_spin.setRange(0, 100)
-        self.mind_resist_spin.setSingleStep(5)
-        resist_layout.addRow("Mind Magic Resistance:", self.mind_resist_spin)
-
-        resist_group.setLayout(resist_layout)
-        layout.addWidget(resist_group)
+        self.mind_resist_spin = QSpinBox()
+        self.mind_resist_spin.setRange(-100, 100)
+        self.mind_resist_spin.setSuffix(" %")
+        layout.addRow("Mind Magic Resistance:", self.mind_resist_spin)
 
         # Defense mechanics
-        defense_group = QGroupBox("Defense Mechanics (%)")
-        defense_layout = QFormLayout()
+        self.physical_resist_spin = QSpinBox()
+        self.physical_resist_spin.setRange(-100, 100)
+        self.physical_resist_spin.setSuffix(" %")
+        layout.addRow("Physical Damage Reduction:", self.physical_resist_spin)
 
-        self.physical_reduction_spin = QDoubleSpinBox()
-        self.physical_reduction_spin.setRange(0, 75)
-        self.physical_reduction_spin.setSingleStep(5)
-        defense_layout.addRow("Physical Damage Reduction:", self.physical_reduction_spin)
+        self.magic_resist_spin = QSpinBox()
+        self.magic_resist_spin.setRange(-100, 100)
+        self.magic_resist_spin.setSuffix(" %")
+        layout.addRow("Magic Damage Reduction:", self.magic_resist_spin)
 
-        self.magic_reduction_spin = QDoubleSpinBox()
-        self.magic_reduction_spin.setRange(0, 75)
-        self.magic_reduction_spin.setSingleStep(5)
-        defense_layout.addRow("Magic Damage Reduction:", self.magic_reduction_spin)
-
-        self.critical_reduction_spin = QDoubleSpinBox()
-        self.critical_reduction_spin.setRange(0, 50)
-        self.critical_reduction_spin.setSingleStep(5)
-        defense_layout.addRow("Critical Hit Reduction:", self.critical_reduction_spin)
-
-        defense_group.setLayout(defense_layout)
-        layout.addWidget(defense_group)
+        self.critical_resist_spin = QSpinBox()
+        self.critical_resist_spin.setRange(-100, 100)
+        self.critical_resist_spin.setSuffix(" %")
+        layout.addRow("Critical Hit Reduction:", self.critical_resist_spin)
 
         self.setLayout(layout)
 
-    def validatePage(self):
-        """Save resistance data"""
-        self.armor_data.resist_fire = self.fire_resist_spin.value()
-        self.armor_data.resist_ice = self.ice_resist_spin.value()
-        self.armor_data.resist_black = self.black_resist_spin.value()
-        self.armor_data.resist_mind = self.mind_resist_spin.value()
-        self.armor_data.physical_reduction = self.physical_reduction_spin.value()
-        self.armor_data.magic_reduction = self.magic_reduction_spin.value()
-        self.armor_data.critical_reduction = self.critical_reduction_spin.value()
+    def initializePage(self):
+        """Populate fields from source armor if in edit/duplicate mode"""
+        wizard = self.wizard()
 
-        return True
+        if hasattr(wizard, "source_armor") and wizard.source_armor is not None:
+            armor = wizard.source_armor
+
+            # Populate resistances from source armor
+            self.fire_resist_spin.setValue(armor.resist_fire)
+            self.ice_resist_spin.setValue(armor.resist_ice)
+            self.black_resist_spin.setValue(armor.resist_black)
+            self.mind_resist_spin.setValue(armor.resist_mind)
+            self.physical_resist_spin.setValue(armor.physical_resist)
+            self.magic_resist_spin.setValue(armor.magic_resist)
+            self.critical_resist_spin.setValue(armor.critical_resist)
 
 
 class SpeedMobilityPage(QWizardPage):
-    """Phase 5: Speed & Mobility Modifiers"""
-
-    def __init__(self, armor_data: ArmorCreationData, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self.armor_data = armor_data
-        self.init_ui()
+        self.setTitle("Speed & Mobility Modifiers")
+        self.setSubTitle("Configure how the armor affects movement and mobility.")
 
-    def init_ui(self):
-        self.setTitle("Phase 5: Speed & Mobility Modifiers")
-        self.setSubTitle("Configure movement and combat speed modifiers")
-
-        layout = QVBoxLayout()
+        layout = QFormLayout()
 
         # Speed modifiers
-        speed_group = QGroupBox("Speed Modifiers (%)")
-        speed_layout = QFormLayout()
+        self.run_speed_spin = QSpinBox()
+        self.run_speed_spin.setRange(-100, 100)
+        self.run_speed_spin.setSuffix(" %")
+        layout.addRow("Run Speed Modifier:", self.run_speed_spin)
 
-        self.run_speed_spin = QDoubleSpinBox()
-        self.run_speed_spin.setRange(-50, 50)
-        self.run_speed_spin.setSingleStep(5)
-        speed_layout.addRow("Run Speed:", self.run_speed_spin)
+        self.fight_speed_spin = QSpinBox()
+        self.fight_speed_spin.setRange(-100, 100)
+        self.fight_speed_spin.setSuffix(" %")
+        layout.addRow("Fight Speed Modifier:", self.fight_speed_spin)
 
-        self.fight_speed_spin = QDoubleSpinBox()
-        self.fight_speed_spin.setRange(-50, 50)
-        self.fight_speed_spin.setSingleStep(5)
-        speed_layout.addRow("Fight Speed (attack speed):", self.fight_speed_spin)
+        self.cast_speed_spin = QSpinBox()
+        self.cast_speed_spin.setRange(-100, 100)
+        self.cast_speed_spin.setSuffix(" %")
+        layout.addRow("Cast Speed Modifier:", self.cast_speed_spin)
 
-        self.cast_speed_spin = QDoubleSpinBox()
-        self.cast_speed_spin.setRange(-50, 50)
-        self.cast_speed_spin.setSingleStep(5)
-        speed_layout.addRow("Cast Speed (spell casting):", self.cast_speed_spin)
+        # Special movement bonuses
+        self.stealth_spin = QSpinBox()
+        self.stealth_spin.setRange(-100, 100)
+        layout.addRow("Stealth Bonus:", self.stealth_spin)
 
-        speed_group.setLayout(speed_layout)
-        layout.addWidget(speed_group)
+        self.swimming_speed_spin = QSpinBox()
+        self.swimming_speed_spin.setRange(-100, 100)
+        layout.addRow("Swimming Speed:", self.swimming_speed_spin)
 
-        # Special bonuses
-        special_group = QGroupBox("Special Movement Bonuses")
-        special_layout = QFormLayout()
-
-        self.stealth_spin = QDoubleSpinBox()
-        self.stealth_spin.setRange(0, 100)
-        self.stealth_spin.setSingleStep(10)
-        special_layout.addRow("Stealth Bonus (% harder to detect):", self.stealth_spin)
-
-        self.swimming_spin = QDoubleSpinBox()
-        self.swimming_spin.setRange(-50, 100)
-        self.swimming_spin.setSingleStep(10)
-        special_layout.addRow("Swimming Speed (%):", self.swimming_spin)
-
-        self.jump_spin = QDoubleSpinBox()
-        self.jump_spin.setRange(-50, 100)
-        self.jump_spin.setSingleStep(10)
-        special_layout.addRow("Jump Height (%):", self.jump_spin)
-
-        special_group.setLayout(special_layout)
-        layout.addWidget(special_group)
+        self.jump_height_spin = QSpinBox()
+        self.jump_height_spin.setRange(-100, 100)
+        layout.addRow("Jump Height Bonus:", self.jump_height_spin)
 
         self.setLayout(layout)
 
-    def validatePage(self):
-        """Save speed data"""
-        self.armor_data.run_speed_modifier = self.run_speed_spin.value()
-        self.armor_data.fight_speed_modifier = self.fight_speed_spin.value()
-        self.armor_data.cast_speed_modifier = self.cast_speed_spin.value()
-        self.armor_data.stealth_bonus = self.stealth_spin.value()
-        self.armor_data.swimming_speed = self.swimming_spin.value()
-        self.armor_data.jump_height = self.jump_spin.value()
+    def initializePage(self):
+        """Populate fields from source armor if in edit/duplicate mode"""
+        wizard = self.wizard()
 
-        return True
+        if hasattr(wizard, "source_armor") and wizard.source_armor is not None:
+            armor = wizard.source_armor
+
+            # Populate speed modifiers from source armor
+            self.run_speed_spin.setValue(armor.run_speed)
+            self.fight_speed_spin.setValue(armor.fight_speed)
+            self.cast_speed_spin.setValue(armor.cast_speed)
+            self.stealth_spin.setValue(armor.stealth_bonus)
+            self.swimming_speed_spin.setValue(armor.swimming_speed)
+            self.jump_height_spin.setValue(armor.jump_height)
 
 
-class VisualMaterialsPage(QWizardPage):
-    """Phase 6: Visual Properties & Materials"""
-
-    def __init__(self, armor_data: ArmorCreationData, parent=None):
+class VisualPropertiesPage(QWizardPage):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self.armor_data = armor_data
-        self.init_ui()
+        self.setTitle("Visual Properties")
+        self.setSubTitle("Configure the visual appearance of your armor.")
 
-    def init_ui(self):
-        self.setTitle("Phase 6: Visual Properties & Materials")
-        self.setSubTitle("Configure appearance, icons, and visual effects")
+        layout = QFormLayout()
 
-        layout = QVBoxLayout()
+        self.icon_id_spin = QSpinBox()
+        self.icon_id_spin.setRange(0, 99999)
+        layout.addRow("Icon ID:", self.icon_id_spin)
 
-        # Visual components
-        visual_group = QGroupBox("Visual Components")
-        visual_layout = QFormLayout()
-
-        # Icon selection with browser
-        icon_layout = QHBoxLayout()
-        self.icon_edit = QLineEdit()
-        self.icon_edit.setPlaceholderText("e.g., ui_item_equip_armor_chest_dragon")
-        icon_layout.addWidget(self.icon_edit)
-        
-        self.icon_browse_btn = QPushButton("🔍 Browse...")
-        self.icon_browse_btn.clicked.connect(self.open_icon_browser)
-        icon_layout.addWidget(self.icon_browse_btn)
-        
-        visual_layout.addRow("Icon Handle:", icon_layout)
-
-        self.mesh_edit = QLineEdit()
-        self.mesh_edit.setPlaceholderText("3D model file path")
-        visual_layout.addRow("3D Model File:", self.mesh_edit)
+        self.model_ref_edit = QLineEdit()
+        layout.addRow("3D Model Reference:", self.model_ref_edit)
 
         self.texture_edit = QLineEdit()
-        self.texture_edit.setPlaceholderText("Diffuse texture file")
-        visual_layout.addRow("Texture File:", self.texture_edit)
+        layout.addRow("Texture File:", self.texture_edit)
 
-        self.normal_edit = QLineEdit()
-        self.normal_edit.setPlaceholderText("Normal map file")
-        visual_layout.addRow("Normal Map:", self.normal_edit)
-
-        visual_group.setLayout(visual_layout)
-        layout.addWidget(visual_group)
-
-        # Material properties
-        material_group = QGroupBox("Material Properties")
-        material_layout = QFormLayout()
-
-        self.color_btn = QPushButton("Choose Material Color")
-        self.color_btn.clicked.connect(self.choose_color)
-        self.current_color = QColor("#808080")
-        self.update_color_button()
-        material_layout.addRow("Material Color:", self.color_btn)
-
-        self.equip_sound_edit = QLineEdit()
-        self.equip_sound_edit.setPlaceholderText("Sound played when equipping")
-        material_layout.addRow("Equip Sound:", self.equip_sound_edit)
-
-        material_group.setLayout(material_layout)
-        layout.addWidget(material_group)
-
-        # Special effects
-        effects_group = QGroupBox("Special Effects")
-        effects_layout = QVBoxLayout()
-
-        self.effects_list = QListWidget()
-        self.effects_list.setMaximumHeight(100)
-        effects_layout.addWidget(self.effects_list)
-
-        effects_btn_layout = QHBoxLayout()
-        add_effect_btn = QPushButton("Add Effect")
-        add_effect_btn.clicked.connect(self.add_effect)
-        remove_effect_btn = QPushButton("Remove Effect")
-        remove_effect_btn.clicked.connect(self.remove_effect)
-
-        effects_btn_layout.addWidget(add_effect_btn)
-        effects_btn_layout.addWidget(remove_effect_btn)
-        effects_layout.addLayout(effects_btn_layout)
-
-        effects_group.setLayout(effects_layout)
-        layout.addWidget(effects_group)
+        self.normal_map_edit = QLineEdit()
+        layout.addRow("Normal Map File:", self.normal_map_edit)
 
         self.setLayout(layout)
 
-    def choose_color(self):
-        """Choose material color"""
-        color = QColorDialog.getColor(self.current_color, self, "Choose Material Color")
-        if color.isValid():
-            self.current_color = color
-            self.update_color_button()
+    def initializePage(self):
+        """Populate fields from source armor if in edit/duplicate mode"""
+        wizard = self.wizard()
 
-    def update_color_button(self):
-        """Update color button appearance"""
-        self.color_btn.setStyleSheet(f"background-color: {self.current_color.name()}; color: white;")
-        self.color_btn.setText(f"Color: {self.current_color.name()}")
+        if hasattr(wizard, "source_armor") and wizard.source_armor is not None:
+            armor = wizard.source_armor
 
-    def add_effect(self):
-        """Add special effect"""
-        # TODO: Implement effect selection dialog
-        self.effects_list.addItem("Glow Effect (placeholder)")
-
-    def remove_effect(self):
-        """Remove selected effect"""
-        current_row = self.effects_list.currentRow()
-        if current_row >= 0:
-            self.effects_list.takeItem(current_row)
-
-    def open_icon_browser(self):
-        """Open icon browser dialog"""
-        try:
-            # Import the icon browser dialog
-            from .icon_browser import IconBrowserDialog
-            
-            # Get the main window to access the data model
-            main_window = self.window()
-            if hasattr(main_window, 'data_model'):
-                dialog = IconBrowserDialog(main_window.data_model, "item", self)
-                dialog.iconSelected.connect(self.on_icon_selected)
-                dialog.exec()
-            else:
-                # Try to get data_model from parent wizard
-                wizard = self.wizard()
-                if wizard and hasattr(wizard, 'parent') and hasattr(wizard.parent(), 'data_model'):
-                    dialog = IconBrowserDialog(wizard.parent().data_model, "item", self)
-                    dialog.iconSelected.connect(self.on_icon_selected)
-                    dialog.exec()
-                else:
-                    QMessageBox.warning(self, "Icon Browser",
-                                      "Data model not available. Cannot open icon browser.")
-        except Exception as e:
-            QMessageBox.critical(self, "Icon Browser Error",
-                              f"Failed to open icon browser:\n{str(e)}")
-
-    def on_icon_selected(self, icon_handle: str):
-        """Handle icon selection from browser"""
-        self.icon_edit.setText(icon_handle)
-
-    def validatePage(self):
-        """Save visual data"""
-        self.armor_data.icon_handle = self.icon_edit.text().strip()
-        self.armor_data.mesh_file = self.mesh_edit.text().strip()
-        self.armor_data.texture_file = self.texture_edit.text().strip()
-        self.armor_data.normal_map = self.normal_edit.text().strip()
-        self.armor_data.material_color = self.current_color.name()
-        self.armor_data.equip_sound = self.equip_sound_edit.text().strip()
-
-        # Save effects
-        self.armor_data.special_effects = []
-        for i in range(self.effects_list.count()):
-            self.armor_data.special_effects.append(self.effects_list.item(i).text())
-
-        return True
+            # Populate visual properties from source armor
+            self.icon_id_spin.setValue(armor.icon_id)
+            self.model_ref_edit.setText(armor.model_ref)
+            self.texture_edit.setText(armor.texture)
+            self.normal_map_edit.setText(armor.normal_map)
 
 
 class AdvancedFeaturesPage(QWizardPage):
-    """Phase 7: Advanced Features & Export"""
-
-    def __init__(self, armor_data: ArmorCreationData, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self.armor_data = armor_data
-        self.init_ui()
-
-    def init_ui(self):
-        self.setTitle("Phase 7: Advanced Features")
-        self.setSubTitle("Configure item sets, special abilities, and enchantments")
+        self.setTitle("Advanced Features")
+        self.setSubTitle("Configure advanced features like sets, enchantments, and special abilities.")
 
         layout = QVBoxLayout()
 
-        # Item set
-        set_group = QGroupBox("Item Set")
+        # Item set assignment
+        set_group = QGroupBox("Item Set Assignment")
         set_layout = QFormLayout()
-
+        
         self.set_id_spin = QSpinBox()
-        self.set_id_spin.setRange(0, 9999)
-        set_layout.addRow("Set ID (0 = not part of set):", self.set_id_spin)
-
+        self.set_id_spin.setRange(0, 99999)
+        set_layout.addRow("Set ID:", self.set_id_spin)
+        
+        self.set_bonus_edit = QTextEdit()
+        self.set_bonus_edit.setMaximumHeight(100)
+        set_layout.addRow("Set Bonus (JSON format):", self.set_bonus_edit)
+        
         set_group.setLayout(set_layout)
         layout.addWidget(set_group)
 
-        # Set bonuses (placeholder for now)
-        bonuses_group = QGroupBox("Set Bonuses (2/3/4-piece bonuses)")
-        bonuses_layout = QVBoxLayout()
-
-        self.bonuses_table = QTableWidget(0, 2)
-        self.bonuses_table.setHorizontalHeaderLabels(["Pieces Required", "Bonus Effect"])
-        self.bonuses_table.horizontalHeader().setStretchLastSection(True)
-        bonuses_layout.addWidget(self.bonuses_table)
-
-        bonuses_btn_layout = QHBoxLayout()
-        add_bonus_btn = QPushButton("Add Set Bonus")
-        add_bonus_btn.clicked.connect(self.add_set_bonus)
-        remove_bonus_btn = QPushButton("Remove Bonus")
-        remove_bonus_btn.clicked.connect(self.remove_set_bonus)
-
-        bonuses_btn_layout.addWidget(add_bonus_btn)
-        bonuses_btn_layout.addWidget(remove_bonus_btn)
-        bonuses_layout.addLayout(bonuses_btn_layout)
-
-        bonuses_group.setLayout(bonuses_layout)
-        layout.addWidget(bonuses_group)
-
-        # Special abilities
-        abilities_group = QGroupBox("Special Abilities")
-        abilities_layout = QVBoxLayout()
-
-        self.abilities_list = QListWidget()
-        self.abilities_list.setMaximumHeight(100)
-        abilities_layout.addWidget(self.abilities_list)
-
-        abilities_btn_layout = QHBoxLayout()
-        add_ability_btn = QPushButton("Add Ability")
-        add_ability_btn.clicked.connect(self.add_ability)
-        remove_ability_btn = QPushButton("Remove Ability")
-        remove_ability_btn.clicked.connect(self.remove_ability)
-
-        abilities_btn_layout.addWidget(add_ability_btn)
-        abilities_btn_layout.addWidget(remove_ability_btn)
-        abilities_layout.addLayout(abilities_btn_layout)
-
-        abilities_group.setLayout(abilities_layout)
-        layout.addWidget(abilities_group)
-
-        # Enchantment slots
-        enchant_group = QGroupBox("Enchantment")
+        # Enchantments
+        enchant_group = QGroupBox("Enchantments & Special Abilities")
         enchant_layout = QFormLayout()
-
+        
         self.enchant_slots_spin = QSpinBox()
-        self.enchant_slots_spin.setRange(0, 5)
+        self.enchant_slots_spin.setRange(0, 20)
         enchant_layout.addRow("Enchantment Slots:", self.enchant_slots_spin)
-
+        
+        self.special_abilities_edit = QTextEdit()
+        self.special_abilities_edit.setMaximumHeight(100)
+        enchant_layout.addRow("Special Abilities (JSON format):", self.special_abilities_edit)
+        
         enchant_group.setLayout(enchant_layout)
         layout.addWidget(enchant_group)
 
         self.setLayout(layout)
 
-    def add_set_bonus(self):
-        """Add set bonus"""
-        # TODO: Implement set bonus dialog
-        row_count = self.bonuses_table.rowCount()
-        self.bonuses_table.insertRow(row_count)
-        self.bonuses_table.setItem(row_count, 0, QTableWidgetItem("2"))
-        self.bonuses_table.setItem(row_count, 1, QTableWidgetItem("Fire Resistance +10%"))
+    def initializePage(self):
+        """Populate fields from source armor if in edit/duplicate mode"""
+        wizard = self.wizard()
 
-    def remove_set_bonus(self):
-        """Remove selected set bonus"""
-        current_row = self.bonuses_table.currentRow()
-        if current_row >= 0:
-            self.bonuses_table.removeRow(current_row)
+        if hasattr(wizard, "source_armor") and wizard.source_armor is not None:
+            armor = wizard.source_armor
 
-    def add_ability(self):
-        """Add special ability"""
-        # TODO: Implement ability selection dialog
-        self.abilities_list.addItem("Passive: Health Regeneration")
-
-    def remove_ability(self):
-        """Remove selected ability"""
-        current_row = self.abilities_list.currentRow()
-        if current_row >= 0:
-            self.abilities_list.takeItem(current_row)
-
-    def validatePage(self):
-        """Save advanced features data"""
-        self.armor_data.item_set_id = self.set_id_spin.value()
-        self.armor_data.enchantment_slots = self.enchant_slots_spin.value()
-
-        # Save set bonuses
-        self.armor_data.set_bonuses = []
-        for row in range(self.bonuses_table.rowCount()):
-            pieces_item = self.bonuses_table.item(row, 0)
-            bonus_item = self.bonuses_table.item(row, 1)
-            if pieces_item and bonus_item:
-                self.armor_data.set_bonuses.append({
-                    "pieces": int(pieces_item.text()),
-                    "bonus": bonus_item.text()
-                })
-
-        # Save abilities
-        self.armor_data.special_abilities = []
-        for i in range(self.abilities_list.count()):
-            self.armor_data.special_abilities.append(self.abilities_list.item(i).text())
-
-        return True
+            # Populate advanced features from source armor
+            self.set_id_spin.setValue(armor.set_id or 0)
+            self.set_bonus_edit.setPlainText(json.dumps(armor.set_bonus, indent=2))
+            self.enchant_slots_spin.setValue(armor.enchantment_slots)
+            self.special_abilities_edit.setPlainText(json.dumps(armor.special_abilities, indent=2))
 
 
 class ReviewExportPage(QWizardPage):
-    """Review & Export page"""
-
-    def __init__(self, armor_data: ArmorCreationData, id_manager: IDManager, parent=None):
+    def __init__(self, parent=None):
         super().__init__(parent)
-        self.armor_data = armor_data
-        self.id_manager = id_manager
-        self.init_ui()
-
-    def init_ui(self):
         self.setTitle("Review & Export")
-        self.setSubTitle("Review your armor configuration and export to game format")
+        self.setSubTitle("Review the final armor and export it to the game data.")
 
         layout = QVBoxLayout()
 
-        # Summary table
-        self.summary_table = QTableWidget(0, 2)
-        self.summary_table.setHorizontalHeaderLabels(["Property", "Value"])
-        self.summary_table.horizontalHeader().setStretchLastSection(True)
-        layout.addWidget(self.summary_table)
+        # Armor Summary Section
+        layout.addWidget(QLabel("Armor Summary:"))
+        self.summary_text = QTextEdit()
+        self.summary_text.setReadOnly(True)
+        self.summary_text.setMinimumHeight(200)
+        layout.addWidget(self.summary_text)
 
-        # Validation results
-        validation_group = QGroupBox("Validation Results")
-        validation_layout = QVBoxLayout()
+        # Validation Results Section
+        layout.addWidget(QLabel("Validation Results:"))
+        self.validation_text = QTextEdit()
+        self.validation_text.setReadOnly(True)
+        self.validation_text.setMinimumHeight(120)
+        layout.addWidget(self.validation_text)
 
-        self.validation_results = QLabel("Validation pending...")
-        validation_layout.addWidget(self.validation_results)
+        # Export Options Section
+        export_group = QGroupBox("Export Options")
+        export_layout = QVBoxLayout()
 
-        validation_group.setLayout(validation_layout)
-        layout.addWidget(validation_group)
+        self.export_json_radio = QRadioButton("Export to JSON only")
+        self.export_json_radio.setChecked(True)
 
-        # Balance rating
-        balance_group = QGroupBox("Balance Analysis")
-        balance_layout = QVBoxLayout()
+        export_layout.addWidget(self.export_json_radio)
 
-        self.balance_label = QLabel("Balance rating: Calculating...")
-        balance_layout.addWidget(self.balance_label)
-
-        balance_group.setLayout(balance_layout)
-        layout.addWidget(balance_group)
+        export_group.setLayout(export_layout)
+        layout.addWidget(export_group)
 
         self.setLayout(layout)
 
-    def update_review(self):
-        """Update the review display with current armor data"""
-        # Clear existing rows
-        self.summary_table.setRowCount(0)
+    def initializePage(self):
+        """Gather all armor data, display summary and validation results"""
+        wizard = self.wizard()
 
-        # Add summary data
-        summary_data = [
-            ("Armor ID", str(self.armor_data.armor_id)),
-            ("Name", self.armor_data.armor_name),
-            ("Slot", self.armor_data.get_slot_name()),
-            ("Type", self.armor_data.armor_type.value.title()),
-            ("Tier", self.armor_data.tier.value.title()),
-            ("Material", self.armor_data.material_name or "None"),
-            ("Base Armor", str(self.armor_data.base_armor)),
-            ("Total Stat Bonuses", str(self.armor_data.get_total_stat_bonuses())),
-            ("Defense Rating", f"{self.armor_data.calculate_defense_rating():.1f}/100"),
-            ("Balance Rating", f"{self.armor_data.calculate_balance_rating()}/100"),
-        ]
+        # Build armor data from all pages
+        armor_data = self.build_armor_data_from_wizard()
 
-        for property_name, value in summary_data:
-            row_count = self.summary_table.rowCount()
-            self.summary_table.insertRow(row_count)
-            self.summary_table.setItem(row_count, 0, QTableWidgetItem(property_name))
-            self.summary_table.setItem(row_count, 1, QTableWidgetItem(value))
+        # Store in wizard for export
+        wizard.armor_data = armor_data
 
-        # Update balance rating
-        balance_rating = self.armor_data.calculate_balance_rating()
-        if balance_rating >= 80:
-            balance_text = f"⚠️ OVERPOWERED ({balance_rating}/100)"
-            balance_color = "red"
-        elif balance_rating >= 60:
-            balance_text = f"✓ STRONG ({balance_rating}/100)"
-            balance_color = "orange"
-        elif balance_rating >= 40:
-            balance_text = f"✓ BALANCED ({balance_rating}/100)"
-            balance_color = "green"
+        # Display summary
+        summary_html = self.format_armor_summary(armor_data)
+        self.summary_text.setHtml(summary_html)
+
+        # Run validation and display results
+        # (For now, we'll use a simple validation)
+        errors, warnings = self.validate_armor(armor_data)
+        validation_html = self.format_validation(errors, warnings)
+        self.validation_text.setHtml(validation_html)
+
+    def build_armor_data_from_wizard(self) -> Armor:
+        """Gather data from all wizard pages and build Armor object"""
+        wizard = self.wizard()
+
+        # Get references to all pages
+        mode_page = wizard.page(0)  # ModeSelectionPage
+        basic_page = wizard.page(1)  # BasicPropertiesPage
+        core_stats_page = wizard.page(2)  # CoreStatsPage
+        resist_page = wizard.page(3)  # ResistanceDefensePage
+        speed_page = wizard.page(4)  # SpeedMobilityPage
+        visual_page = wizard.page(5)  # VisualPropertiesPage
+        advanced_page = wizard.page(6)  # AdvancedFeaturesPage
+
+        # Determine creation mode
+        if mode_page.new_armor_radio.isChecked():
+            creation_mode = "new"
+            source_armor_id = None
+        elif mode_page.edit_armor_radio.isChecked():
+            creation_mode = "edit"
+            source_armor_id = getattr(wizard, 'source_armor', None)
+            source_armor_id = source_armor_id.id if source_armor_id else None
         else:
-            balance_text = f"⚠️ WEAK ({balance_rating}/100)"
-            balance_color = "blue"
+            creation_mode = "duplicate"
+            source_armor_id = getattr(wizard, 'source_armor', None)
+            source_armor_id = source_armor_id.id if source_armor_id else None
 
-        self.balance_label.setText(f'<span style="color: {balance_color};">{balance_text}</span>')
+        # Build armor data
+        armor_data = Armor(
+            # Set the ID
+            armor_id=wizard.armor_id
+        )
 
-        # Basic validation
+        # Basic Properties
+        armor_data.name = basic_page.armor_name_edit.text()
+        armor_data.display_name = basic_page.display_name_edit.text()
+        armor_data.description = basic_page.description_edit.toPlainText()
+        armor_data.slot = basic_page.slot_combo.itemData(basic_page.slot_combo.currentIndex())
+        armor_data.armor_type = basic_page.armor_type_combo.currentText()
+        armor_data.material = basic_page.material_combo.currentText()
+        armor_data.tier = basic_page.tier_combo.currentText()
+        armor_data.level_requirement = basic_page.level_spin.value()
+        armor_data.class_restriction = basic_page.class_restriction_combo.currentText()
+
+        # Core Stats
+        armor_data.strength = core_stats_page.strength_spin.value()
+        armor_data.stamina = core_stats_page.stamina_spin.value()
+        armor_data.agility = core_stats_page.agility_spin.value()
+        armor_data.dexterity = core_stats_page.dexterity_spin.value()
+        armor_data.intelligence = core_stats_page.intelligence_spin.value()
+        armor_data.wisdom = core_stats_page.wisdom_spin.value()
+        armor_data.charisma = core_stats_page.charisma_spin.value()
+        armor_data.health = core_stats_page.health_spin.value()
+        armor_data.mana = core_stats_page.mana_spin.value()
+        armor_data.armor_value = core_stats_page.armor_value_spin.value()
+
+        # Resistances
+        armor_data.resist_fire = resist_page.fire_resist_spin.value()
+        armor_data.resist_ice = resist_page.ice_resist_spin.value()
+        armor_data.resist_black = resist_page.black_resist_spin.value()
+        armor_data.resist_mind = resist_page.mind_resist_spin.value()
+        armor_data.physical_resist = resist_page.physical_resist_spin.value()
+        armor_data.magic_resist = resist_page.magic_resist_spin.value()
+        armor_data.critical_resist = resist_page.critical_resist_spin.value()
+
+        # Speed & Mobility
+        armor_data.run_speed = speed_page.run_speed_spin.value()
+        armor_data.fight_speed = speed_page.fight_speed_spin.value()
+        armor_data.cast_speed = speed_page.cast_speed_spin.value()
+        armor_data.stealth_bonus = speed_page.stealth_spin.value()
+        armor_data.swimming_speed = speed_page.swimming_speed_spin.value()
+        armor_data.jump_height = speed_page.jump_height_spin.value()
+
+        # Visual Properties
+        armor_data.icon_id = visual_page.icon_id_spin.value()
+        armor_data.model_ref = visual_page.model_ref_edit.text()
+        armor_data.texture = visual_page.texture_edit.text()
+        armor_data.normal_map = visual_page.normal_map_edit.text()
+
+        # Advanced Features
+        set_id = advanced_page.set_id_spin.value()
+        armor_data.set_id = set_id if set_id != 0 else None
+        
+        try:
+            armor_data.set_bonus = json.loads(advanced_page.set_bonus_edit.toPlainText()) or {}
+        except json.JSONDecodeError:
+            armor_data.set_bonus = {}
+            
+        armor_data.enchantment_slots = advanced_page.enchant_slots_spin.value()
+        
+        try:
+            armor_data.special_abilities = json.loads(advanced_page.special_abilities_edit.toPlainText()) or []
+        except json.JSONDecodeError:
+            armor_data.special_abilities = []
+
+        # Calculate and set balance rating
+        total_positive_stats = (
+            armor_data.strength + armor_data.stamina + armor_data.agility + armor_data.dexterity +
+            armor_data.intelligence + armor_data.wisdom + armor_data.charisma +
+            armor_data.health + armor_data.mana + armor_data.armor_value +
+            max(0, armor_data.resist_fire) + max(0, armor_data.resist_ice) +
+            max(0, armor_data.resist_black) + max(0, armor_data.resist_mind) +
+            max(0, armor_data.physical_resist) + max(0, armor_data.magic_resist) +
+            max(0, armor_data.run_speed) + max(0, armor_data.fight_speed) + max(0, armor_data.cast_speed)
+        )
+
+        total_negative_stats = (
+            abs(min(0, armor_data.resist_fire)) + abs(min(0, armor_data.resist_ice)) +
+            abs(min(0, armor_data.resist_black)) + abs(min(0, armor_data.resist_mind)) +
+            abs(min(0, armor_data.physical_resist)) + abs(min(0, armor_data.magic_resist)) +
+            abs(min(0, armor_data.run_speed)) + abs(min(0, armor_data.fight_speed)) + abs(min(0, armor_data.cast_speed))
+        )
+
+        # Calculate a rough balance (this is a very simplified calculation)
+        max_possible_stats = 2000  # Arbitrary max for balance calculation
+        total_stats = total_positive_stats + total_negative_stats
+        balance_rating = min(100.0, (total_stats / max_possible_stats) * 100 if max_possible_stats > 0 else 0)
+        armor_data.stat_balance_rating = round(balance_rating, 2)
+
+        return armor_data
+
+    def validate_armor(self, armor: Armor) -> tuple[list, list]:
+        """Simple validation for armor data"""
         errors = []
         warnings = []
 
-        if not self.armor_data.armor_name:
-            errors.append("Armor name is required")
+        # Check for basic issues
+        if not armor.name.strip():
+            errors.append("Armor must have a name")
+        if len(armor.name) > 50:
+            warnings.append("Armor name is quite long (consider shortening)")
 
-        if not self.armor_data.icon_handle:
-            warnings.append("No icon assigned (will use placeholder)")
+        # Check stats are reasonable
+        if armor.armor_value > 500:
+            warnings.append("Armor value is very high - this may be overpowered")
+        if abs(armor.run_speed) > 50:
+            warnings.append("Movement speed modifier is very high")
+        if abs(armor.resist_fire) > 50 or abs(armor.resist_ice) > 50:
+            warnings.append("Elemental resistances are very high")
 
-        if self.armor_data.base_armor == 0 and not self.armor_data.is_magic_armor():
-            warnings.append("Armor provides no physical defense")
+        # Check requirements are reasonable
+        if armor.level_requirement > 50:
+            warnings.append("Level requirement is very high")
+        if armor.level_requirement < 1:
+            errors.append("Level requirement must be at least 1")
 
-        # Display validation results
+        return errors, warnings
+
+    def format_armor_summary(self, armor: Armor) -> str:
+        """Format armor data as HTML summary"""
+        html = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif;">
+            <h2 style="color: #2c3e50;">{armor.name}</h2>
+
+            <h3 style="color: #34495e;">Basic Information</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr><td><b>ID:</b></td><td>{armor.id}</td></tr>
+                <tr><td><b>Slot:</b></td><td>{self._get_slot_name(armor.slot)}</td></tr>
+                <tr><td><b>Type:</b></td><td>{armor.armor_type}</td></tr>
+                <tr><td><b>Material:</b></td><td>{armor.material}</td></tr>
+                <tr><td><b>Tier:</b></td><td style="color: {self._get_tier_color(armor.tier)};">
+                    {armor.tier}</td></tr>
+                <tr><td><b>Class Restriction:</b></td><td>{armor.class_restriction}</td></tr>
+                <tr><td><b>Level Requirement:</b></td><td>{armor.level_requirement}</td></tr>
+            </table>
+
+            <h3 style="color: #34495e;">Core Stats</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr><td><b>Strength:</b></td><td>{armor.strength}</td></tr>
+                <tr><td><b>Stamina:</b></td><td>{armor.stamina}</td></tr>
+                <tr><td><b>Agility:</b></td><td>{armor.agility}</td></tr>
+                <tr><td><b>Dexterity:</b></td><td>{armor.dexterity}</td></tr>
+                <tr><td><b>Intelligence:</b></td><td>{armor.intelligence}</td></tr>
+                <tr><td><b>Wisdom:</b></td><td>{armor.wisdom}</td></tr>
+                <tr><td><b>Charisma:</b></td><td>{armor.charisma}</td></tr>
+                <tr><td><b>Health Bonus:</b></td><td>{armor.health}</td></tr>
+                <tr><td><b>Mana Bonus:</b></td><td>{armor.mana}</td></tr>
+                <tr><td><b>Base Armor:</b></td><td>{armor.armor_value}</td></tr>
+            </table>
+
+            <h3 style="color: #34495e;">Resistances</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr><td><b>Fire:</b></td><td>{armor.resist_fire}%</td></tr>
+                <tr><td><b>Ice:</b></td><td>{armor.resist_ice}%</td></tr>
+                <tr><td><b>Black Magic:</b></td><td>{armor.resist_black}%</td></tr>
+                <tr><td><b>Mind Magic:</b></td><td>{armor.resist_mind}%</td></tr>
+                <tr><td><b>Physical DR:</b></td><td>{armor.physical_resist}%</td></tr>
+                <tr><td><b>Magic DR:</b></td><td>{armor.magic_resist}%</td></tr>
+                <tr><td><b>Critical DR:</b></td><td>{armor.critical_resist}%</td></tr>
+            </table>
+
+            <h3 style="color: #34495e;">Mobility Modifiers</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr><td><b>Run Speed:</b></td><td>{armor.run_speed}%</td></tr>
+                <tr><td><b>Fight Speed:</b></td><td>{armor.fight_speed}%</td></tr>
+                <tr><td><b>Cast Speed:</b></td><td>{armor.cast_speed}%</td></tr>
+                <tr><td><b>Stealth Bonus:</b></td><td>{armor.stealth_bonus}</td></tr>
+            </table>
+
+            <h3 style="color: #34495e;">Advanced Features</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr><td><b>Set ID:</b></td><td>{armor.set_id if armor.set_id is not None else "None"}</td></tr>
+                <tr><td><b>Enchantment Slots:</b></td><td>{armor.enchantment_slots}</td></tr>
+                <tr><td><b>Special Abilities:</b></td><td>{len(armor.special_abilities)} abilities</td></tr>
+            </table>
+
+            <h3 style="color: #34495e;">Balance Assessment</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr><td><b>Balance Rating:</b></td><td>{armor.stat_balance_rating:.2f}%</td></tr>
+                <tr><td><b>Assessment:</b></td><td>{self._balance_assessment(armor.stat_balance_rating)}</td></tr>
+            </table>
+        </body>
+        </html>
+        """
+
+        return html
+
+    def format_validation(self, errors: list[str], warnings: list[str]) -> str:
+        """Format validation results as HTML"""
+        if not errors and not warnings:
+            html = """
+            <html>
+            <body style="font-family: Arial, sans-serif;">
+                <p style="color: #27ae60; font-size: 14pt; font-weight: bold;">
+                    ✓ Armor is valid and ready for export!
+                </p>
+            </body>
+            </html>
+            """
+            return html
+
+        html = "<html><body style='font-family: Arial, sans-serif;'>"
+
         if errors:
-            validation_text = "❌ ERRORS:\n" + "\n".join(f"• {e}" for e in errors)
-            if warnings:
-                validation_text += "\n\n⚠️ WARNINGS:\n" + "\n".join(f"• {w}" for w in warnings)
-        elif warnings:
-            validation_text = "⚠️ WARNINGS:\n" + "\n".join(f"• {w}" for w in warnings)
+            html += "<h3 style='color: #e74c3c;'>❌ Errors (must fix before export):</h3><ul>"
+            for error in errors:
+                html += f"<li style='color: #e74c3c;'>{error}</li>"
+            html += "</ul>"
+
+        if warnings:
+            html += "<h3 style='color: #f39c12;'>⚠️ Warnings (review recommended):</h3><ul>"
+            for warning in warnings:
+                html += f"<li style='color: #f39c12;'>{warning}</li>"
+            html += "</ul>"
+
+        html += "</body></html>"
+        return html
+
+    def _get_slot_name(self, slot_id):
+        """Convert slot ID to name"""
+        slot_map = {
+            SLOT_HEAD: "Head/Helmet",
+            SLOT_CHEST: "Chest/Armor",
+            SLOT_LEGS: "Legs/Pants",
+            SLOT_FEET: "Boots/Feet",
+            SLOT_RIGHT_RING: "Right Ring",
+            SLOT_LEFT_RING: "Left Ring",
+            SLOT_LEFT_HAND: "Left Hand/Shield"
+        }
+        return slot_map.get(slot_id, "Unknown")
+
+    def _get_tier_color(self, tier: str) -> str:
+        """Get color code for tier"""
+        colors = {
+            "Common": "#95a5a6",
+            "Uncommon": "#2ecc71",
+            "Rare": "#3498db",
+            "Epic": "#9b59b6",
+            "Legendary": "#f39c12",
+            "Unique": "#e74c3c"
+        }
+        return colors.get(tier, "#000000")
+
+    def _balance_assessment(self, rating: float) -> str:
+        """Get balance assessment text"""
+        if rating < 20:
+            return "Underpowered"
+        elif rating < 40:
+            return "Weak"
+        elif rating < 60:
+            return "Balanced"
+        elif rating < 80:
+            return "Strong"
         else:
-            validation_text = "✅ All validations passed"
+            return "Overpowered"
 
-        self.validation_results.setText(validation_text)
 
-    def validatePage(self):
-        """Final validation before export"""
-        # Check for critical errors
-        if not self.armor_data.armor_name:
-            QMessageBox.warning(self, "Export Failed", "Armor name is required")
-            return False
-
-        # Export would happen here in the final implementation
-        QMessageBox.information(self, "Export Complete",
-                              f"Armor '{self.armor_data.armor_name}' (ID: {self.armor_data.armor_id}) "
-                              "has been created successfully!\n\n"
-                              "Note: CFF export functionality will be implemented in the next phase.")
-
-        return True
+# This class has been replaced by EnhancedArmorBrowser
+# from .enhanced_armor_browser import EnhancedArmorBrowser

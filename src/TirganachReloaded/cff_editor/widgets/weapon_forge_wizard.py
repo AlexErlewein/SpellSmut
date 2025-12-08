@@ -7,6 +7,7 @@ from PySide6.QtWidgets import (
     QHBoxLayout,
     QLabel,
     QLineEdit,
+    QFileDialog,
     QMessageBox,
     QPushButton,
     QRadioButton,
@@ -16,12 +17,15 @@ from PySide6.QtWidgets import (
     QWizard,
     QWizardPage,
 )
-from PySide6.QtCore import QDir
+from PySide6.QtCore import QDir, Qt, QFileInfo
+from PySide6.QtGui import QPixmap
+from typing import Optional
 import json
 from pathlib import Path
 from datetime import datetime
 
 from ..exporters.weapon_loader import WeaponLoader
+from ..exporters.weapon_cff_exporter import WeaponCFFExporter
 from ..models.weapon_creation_data import (
     DamageCategory,
     DamageType,
@@ -29,10 +33,17 @@ from ..models.weapon_creation_data import (
     WeaponHands,
     WeaponCreationData,
     WeaponRequirements,
+    SchoolRequirement,
 )
 from ..shared.id_manager import ContentType, IDManager
-from .weapon_sound_manager import create_sound_selector_widget, auto_assign_weapon_sounds
+from ..shared.gamedata_resolver import find_gamedata_path
+from .weapon_sound_manager import (
+    create_sound_selector_widget,
+    auto_assign_weapon_sounds,
+)
 from .weapon_validation import WeaponValidator
+from .weapon_browser_dialog import WeaponBrowserDialog
+from .icon_browser import IconBrowserDialog
 
 
 class WeaponForgeWizard(QWizard):
@@ -42,13 +53,22 @@ class WeaponForgeWizard(QWizard):
         self.weapon_data = None
         self.weapon_id = None
 
+        # Get data_model from parent (MainWindow)
+        self.data_model = getattr(parent, "data_model", None)
+
+        # Initialize CFF exporter using unified resolver
+        gamedata_path = find_gamedata_path()
+        self.cff_exporter = WeaponCFFExporter(gamedata_path) if gamedata_path else None
+        # Optional override selected by the user
+        self.custom_gamedata_path = None
+
         self.setWindowTitle("Weapon Forge Wizard")
 
         self.addPage(ModeSelectionPage(self.id_manager))
         self.addPage(BasicPropertiesPage())
         self.addPage(CombatStatsPage())
         self.addPage(RequirementsValuePage())
-        self.addPage(VisualAudioPage())
+        self.addPage(VisualAudioPage(self.data_model))
         self.addPage(ReviewExportPage())
 
     def done(self, result):
@@ -59,32 +79,56 @@ class WeaponForgeWizard(QWizard):
                 if not success:
                     # Export failed, don't close wizard yet
                     return
+                # On success, restart wizard to the beginning instead of closing
+                try:
+                    # Clear transient state for next run
+                    self.weapon_data = None
+                    self.creation_mode = None
+                    self.source_weapon = None
+                    self.weapon_id = None
+                    # Restart to the first page
+                    self.restart()
+                    return  # Keep dialog open
+                except Exception:
+                    # If restart isn't available, fall back to closing
+                    pass
         elif result == QDialog.DialogCode.Rejected and self.weapon_id:
             # Release ID if cancelled
             self.id_manager.release_id(ContentType.WEAPON, self.weapon_id)
         super().done(result)
 
+    def _find_gamedata_path(self) -> Optional[str]:
+        """Deprecated: use shared resolver. Kept for backward compatibility."""
+        return find_gamedata_path()
+
     def export_weapon(self) -> bool:
-        """Export weapon to JSON (and eventually CFF)"""
+        """Export weapon to JSON and/or CFF"""
         try:
             # Get export page to check options
             export_page = self.page(5)  # ReviewExportPage
 
-            # For now, we only support JSON export
+            success = False
+
             if export_page.export_json_radio.isChecked():
-                return self.export_to_json()
+                success = self.export_to_json()
+            elif export_page.export_cff_radio.isChecked():
+                success = self.export_to_cff()
+            elif export_page.export_both_radio.isChecked():
+                # Export both formats
+                json_success = self.export_to_json()
+                cff_success = self.export_to_cff()
+                success = json_success and cff_success
             else:
                 QMessageBox.warning(
-                    self,
-                    "Export Not Available",
-                    "CFF export is not yet implemented. Please use JSON export."
+                    self, "No Export Option Selected", "Please select an export format."
                 )
                 return False
+
+            return success
+
         except Exception as e:
             QMessageBox.critical(
-                self,
-                "Export Failed",
-                f"Failed to export weapon:\n{str(e)}"
+                self, "Export Failed", f"Failed to export weapon:\n{str(e)}"
             )
             return False
 
@@ -97,10 +141,10 @@ class WeaponForgeWizard(QWizard):
 
             # Generate filename from weapon name
             safe_name = "".join(
-                c if c.isalnum() or c in (' ', '-', '_') else '_'
+                c if c.isalnum() or c in (" ", "-", "_") else "_"
                 for c in self.weapon_data.weapon_name
             )
-            safe_name = safe_name.replace(' ', '_').lower()
+            safe_name = safe_name.replace(" ", "_").lower()
             filename = f"weapon_{self.weapon_data.weapon_id}_{safe_name}.json"
             filepath = weapons_dir / filename
 
@@ -136,7 +180,14 @@ class WeaponForgeWizard(QWizard):
                     "strength": self.weapon_data.requirements.strength,
                     "dexterity": self.weapon_data.requirements.dexterity,
                     "intelligence": self.weapon_data.requirements.intelligence,
-                    "level": self.weapon_data.requirements.level
+                    "level": self.weapon_data.requirements.level,
+                    "school_requirements": [
+                        {
+                            "requirement_school": sr.school_name,
+                            "requirement_number": idx,  # Add sequential requirement numbers
+                            "level": sr.level
+                        } for idx, sr in enumerate(self.weapon_data.requirements.school_requirements)
+                    ],
                 },
                 "sell_value": self.weapon_data.sell_value,
                 "buy_value": self.weapon_data.buy_value,
@@ -146,7 +197,7 @@ class WeaponForgeWizard(QWizard):
                         "effect_id": e.effect_id,
                         "effect_name": e.effect_name,
                         "value": e.value,
-                        "duration": e.duration
+                        "duration": e.duration,
                     }
                     for e in self.weapon_data.effects
                 ],
@@ -161,11 +212,11 @@ class WeaponForgeWizard(QWizard):
                 "created_date": self.weapon_data.created_date,
                 "modified_date": self.weapon_data.modified_date,
                 "author": self.weapon_data.author,
-                "version": self.weapon_data.version
+                "version": self.weapon_data.version,
             }
 
             # Write to file
-            with open(filepath, 'w', encoding='utf-8') as f:
+            with open(filepath, "w", encoding="utf-8") as f:
                 json.dump(weapon_dict, f, indent=2, ensure_ascii=False)
 
             # Show success message
@@ -177,16 +228,131 @@ class WeaponForgeWizard(QWizard):
                 f"Weapon ID: {self.weapon_data.weapon_id}\n"
                 f"Name: {self.weapon_data.weapon_name}\n\n"
                 f"DPS: {self.weapon_data.calculate_dps():.1f}\n"
-                f"Balance Rating: {self.weapon_data.get_balance_rating()}/100"
+                f"Balance Rating: {self.weapon_data.get_balance_rating()}/100",
             )
 
             return True
 
         except Exception as e:
             QMessageBox.critical(
+                self, "Export Failed", f"Failed to export weapon to JSON:\n{str(e)}"
+            )
+            return False
+
+    def export_to_cff(self) -> bool:
+        """Export weapon to CFF file"""
+        try:
+            if not self.cff_exporter:
+                # Try to initialize exporter now using resolver
+                gd_path = find_gamedata_path()
+                if gd_path:
+                    self.cff_exporter = WeaponCFFExporter(gd_path)
+
+            if not self.cff_exporter:
+                QMessageBox.warning(
+                    self,
+                    "CFF Export Not Available",
+                    "CFF export is not available. Please ensure GameData.cff is available in the expected location:\n\n"
+                    "• OriginalGameFiles/data/GameData.cff\n"
+                    "• OriginalGameFiles/GameData.cff\n"
+                    "• ~/SpellForce Platinum Edition/data/GameData.cff\n\n"
+                    "Falling back to JSON export.",
+                )
+                return False
+
+            # Suggest a default location and name, but allow user to choose
+            cff_dir = Path("custom_weapons_cff")
+            cff_dir.mkdir(exist_ok=True)
+
+            safe_name = "".join(
+                c if c.isalnum() or c in (" ", "-", "_") else "_" for c in self.weapon_data.weapon_name
+            ).replace(" ", "_").lower()
+
+            default_filename = f"GameData_custom_weapon_{self.weapon_data.weapon_id}_{safe_name}.cff"
+            default_path = cff_dir / default_filename
+
+            # File Save dialog
+            selected_path, _ = QFileDialog.getSaveFileName(
                 self,
-                "Export Failed",
-                f"Failed to export weapon to JSON:\n{str(e)}"
+                "Save CFF As",
+                str(default_path),
+                "CFF Files (*.cff)"
+            )
+
+            if not selected_path:
+                # User cancelled save dialog
+                QMessageBox.information(self, "Export Cancelled", "CFF export cancelled.")
+                return False
+
+            filepath = Path(selected_path)
+            if filepath.suffix.lower() != ".cff":
+                filepath = filepath.with_suffix(".cff")
+
+            # Add metadata
+            self.weapon_data.created_date = datetime.now().isoformat()
+            self.weapon_data.modified_date = datetime.now().isoformat()
+            self.weapon_data.author = "CFF Editor - Weapon Forge"
+
+            # Export to CFF
+            success = self.cff_exporter.export_weapon_to_gamedata(
+                self.weapon_data, str(filepath)
+            )
+
+            if success:
+                QMessageBox.information(
+                    self,
+                    "CFF Export Successful",
+                    f"Weapon exported to CFF format!\n\n"
+                    f"File: {filepath}\n"
+                    f"Weapon ID: {self.weapon_data.weapon_id}\n"
+                    f"Name: {self.weapon_data.weapon_name}\n\n"
+                    f"DPS: {self.weapon_data.calculate_dps():.1f}\n"
+                    f"Balance Rating: {self.weapon_data.get_balance_rating()}/100\n\n"
+                    f"⚠️ Important:\n"
+                    f"• This creates a complete GameData.cff with your weapon added\n"
+                    f"• Backup your original GameData.cff before using\n"
+                    f"• Place this file in your SpellForce data directory to test",
+                )
+                # Automatically switch to the newly exported CFF for subsequent operations
+                try:
+                    self.custom_gamedata_path = str(filepath)
+                    self.cff_exporter = WeaponCFFExporter(str(filepath))
+                    # Update label on first page if available
+                    try:
+                        first_page = self.page(0)
+                        if hasattr(first_page, "gamedata_path_label"):
+                            first_page.gamedata_path_label.setText(f"Using GameData: {Path(filepath).name}")
+                            first_page.gamedata_path_label.setStyleSheet("color: #27ae60;")
+                    except Exception:
+                        pass
+                except Exception:
+                    pass
+            else:
+                # Try to provide more helpful error information
+                try:
+                    from TirganachReloaded.cff_editor.exporters.weapon_cff_exporter import (
+                        TIRGANACH_AVAILABLE,
+                    )
+
+                    if not TIRGANACH_AVAILABLE:
+                        error_msg = "CFF export failed: Tirganach library not available. Please install required dependencies."
+                    else:
+                        error_msg = "CFF export failed. The tirganach library had an error processing the export. Check console for details."
+                except:
+                    error_msg = "CFF export failed: Unknown error with export system."
+
+                QMessageBox.critical(
+                    self,
+                    "CFF Export Failed",
+                    f"{error_msg}\n\n"
+                    f"Falling back to JSON export. Please try JSON format instead.",
+                )
+
+            return success
+
+        except Exception as e:
+            QMessageBox.critical(
+                self, "CFF Export Failed", f"Failed to export weapon to CFF:\n{str(e)}"
             )
             return False
 
@@ -204,6 +370,24 @@ class ModeSelectionPage(QWizardPage):
 
         # Creation Mode
         mode_group = QGroupBox("Creation Mode")
+        mode_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                border: 2px solid #555;
+                border-radius: 8px;
+                margin-top: 1ex;
+                padding-top: 10px;
+                background-color: #2d2d2d;
+                color: #ffffff;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+                background-color: #2d2d2d;
+                color: #ffffff;
+            }
+        """)
         mode_layout = QVBoxLayout()
         self.new_weapon_radio = QRadioButton("Create New Weapon (blank slate)")
         self.edit_weapon_radio = QRadioButton(
@@ -231,6 +415,30 @@ class ModeSelectionPage(QWizardPage):
         self.selected_weapon_label.setStyleSheet("color: gray; font-style: italic;")
         mode_layout.addWidget(self.selected_weapon_label)
 
+        # Import/Reference tools
+        tools_layout = QHBoxLayout()
+        self.load_json_button = QPushButton("Load from JSON...")
+        self.load_json_button.clicked.connect(self.load_from_json)
+        self.choose_cff_button = QPushButton("Choose GameData.cff...")
+        self.choose_cff_button.clicked.connect(self.choose_gamedata_file)
+        self.use_default_cff_button = QPushButton("Use Default GameData")
+        self.use_default_cff_button.clicked.connect(self.use_default_gamedata_file)
+        tools_layout.addWidget(self.load_json_button)
+        tools_layout.addWidget(self.choose_cff_button)
+        tools_layout.addWidget(self.use_default_cff_button)
+        tools_layout.addStretch()
+        mode_layout.addLayout(tools_layout)
+
+        # Current GameData path label
+        try:
+            current_gd = find_gamedata_path()
+            current_gd_text = Path(current_gd).name if current_gd else "Auto (not found)"
+        except Exception:
+            current_gd_text = "Auto (not found)"
+        self.gamedata_path_label = QLabel(f"Using GameData: {current_gd_text}")
+        self.gamedata_path_label.setStyleSheet("color: #a0a0a0;")
+        mode_layout.addWidget(self.gamedata_path_label)
+
         # Enable browse button when edit/duplicate modes are selected
         self.edit_weapon_radio.toggled.connect(self.on_mode_changed)
         self.duplicate_weapon_radio.toggled.connect(self.on_mode_changed)
@@ -240,6 +448,24 @@ class ModeSelectionPage(QWizardPage):
 
         # ID Assignment
         id_group = QGroupBox("ID Assignment")
+        id_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                border: 2px solid #555;
+                border-radius: 8px;
+                margin-top: 1ex;
+                padding-top: 10px;
+                background-color: #2d2d2d;
+                color: #ffffff;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+                background-color: #2d2d2d;
+                color: #ffffff;
+            }
+        """)
         id_layout = QVBoxLayout()
         self.auto_id_radio = QRadioButton("Auto-assign next available ID (recommended)")
         self.manual_id_radio = QRadioButton("Manual ID entry (with validation)")
@@ -262,6 +488,39 @@ class ModeSelectionPage(QWizardPage):
 
         self.setLayout(layout)
 
+    def initializePage(self):
+        """Prompt for GameData.cff on first show, unless already selected."""
+        wizard = self.wizard()
+        if not hasattr(wizard, "_startup_cff_prompt_done"):
+            wizard._startup_cff_prompt_done = False
+
+        if not wizard._startup_cff_prompt_done:
+            wizard._startup_cff_prompt_done = True
+
+            # If no custom path is set, prompt user to choose one; Cancel uses default
+            try:
+                file_path, _ = QFileDialog.getOpenFileName(
+                    self,
+                    "Choose GameData.cff",
+                    str(Path.cwd()),
+                    "CFF Files (*.cff)"
+                )
+                if file_path:
+                    wizard.custom_gamedata_path = file_path
+                    wizard.cff_exporter = WeaponCFFExporter(file_path)
+                    # Update label
+                    self.gamedata_path_label.setText(f"Using GameData: {Path(file_path).name}")
+                    self.gamedata_path_label.setStyleSheet("color: #27ae60;")
+                else:
+                    # Keep or set default
+                    gd_path = find_gamedata_path()
+                    wizard.cff_exporter = WeaponCFFExporter(gd_path) if gd_path else None
+                    current_gd_text = Path(gd_path).name if gd_path else "Auto (not found)"
+                    self.gamedata_path_label.setText(f"Using GameData: {current_gd_text}")
+                    self.gamedata_path_label.setStyleSheet("color: #a0a0a0;")
+            except Exception:
+                pass
+
     def on_mode_changed(self):
         """Enable/disable browse button based on mode selection"""
         is_edit_or_duplicate = (
@@ -277,18 +536,19 @@ class ModeSelectionPage(QWizardPage):
             self.selected_weapon_label.setStyleSheet("color: gray; font-style: italic;")
 
     def browse_weapons(self):
-        """Open weapon browser dialog"""
-        dialog = WeaponBrowserDialog(self)
+        """Open enhanced weapon browser dialog"""
+        from .enhanced_weapon_browser import EnhancedWeaponBrowser
+
+        dialog = EnhancedWeaponBrowser(self, gamedata_path_override=getattr(self.wizard(), "custom_gamedata_path", None))
         if dialog.exec() == QDialog.DialogCode.Accepted:
-            weapon_dict = dialog.get_selected_weapon()
+            weapon_dict = dialog.get_selected_weapon_data()
             if weapon_dict:
                 try:
-                    # Load the weapon using WeaponLoader with GameData path
-                    gamedata_path = Path(__file__).parent.parent.parent.parent.parent / "OriginalGameFiles" / "data" / "GameData.cff"
-                    gamedata_path_str = str(gamedata_path) if gamedata_path.exists() else None
+                    # Load the weapon using WeaponLoader with selected/override GameData path
+                    wiz = self.wizard()
+                    gamedata_path_str = getattr(wiz, "custom_gamedata_path", None) or find_gamedata_path()
                     self.selected_weapon_data = self.weapon_loader.load_weapon(
-                        weapon_dict["item_id"],
-                        gamedata_path=gamedata_path_str
+                        weapon_dict["item_id"], gamedata_path=gamedata_path_str
                     )
 
                     # Update the display label
@@ -306,6 +566,76 @@ class ModeSelectionPage(QWizardPage):
                     self.selected_weapon_data = None
                     self.selected_weapon_label.setText("Error loading weapon")
                     self.selected_weapon_label.setStyleSheet("color: red;")
+
+    def load_from_json(self):
+        """Load a weapon from a previously saved JSON file."""
+        try:
+            file_path, _ = QFileDialog.getOpenFileName(
+                self,
+                "Load Weapon JSON",
+                str(Path.cwd()),
+                "JSON Files (*.json)"
+            )
+            if not file_path:
+                return
+
+            weapon = self.weapon_loader.load_weapon_from_file(file_path)
+            self.selected_weapon_data = weapon
+
+            # Default to Edit mode and keep the same ID
+            self.edit_weapon_radio.setChecked(True)
+            self.manual_id_radio.setChecked(True)
+            if hasattr(self, "manual_id_spin"):
+                self.manual_id_spin.setValue(int(weapon.weapon_id))
+
+            # Update label
+            self.selected_weapon_label.setText(
+                f"Loaded from JSON: {weapon.weapon_name} (ID: {weapon.weapon_id})"
+            )
+            self.selected_weapon_label.setStyleSheet("color: green; font-weight: bold;")
+
+        except Exception as e:
+            QMessageBox.warning(self, "Load JSON Failed", f"Could not load weapon JSON:\n{str(e)}")
+
+    def choose_gamedata_file(self):
+        """Choose a different GameData.cff to use as the reference."""
+        try:
+            file_path, _ = QFileDialog.getOpenFileName(
+                self,
+                "Choose GameData.cff",
+                str(Path.cwd()),
+                "CFF Files (*.cff)"
+            )
+            if not file_path:
+                return
+
+            wiz = self.wizard()
+            wiz.custom_gamedata_path = file_path
+            # Reinitialize exporter to use the new reference
+            wiz.cff_exporter = WeaponCFFExporter(file_path)
+
+            # Update status label
+            self.gamedata_path_label.setText(f"Using GameData: {Path(file_path).name}")
+            self.gamedata_path_label.setStyleSheet("color: #27ae60;")
+
+            QMessageBox.information(self, "GameData Selected", f"Now using:\n{file_path}")
+        except Exception as e:
+            QMessageBox.warning(self, "GameData Selection Failed", f"Could not set GameData:\n{str(e)}")
+
+    def use_default_gamedata_file(self):
+        """Reset to auto-discovered GameData.cff and update exporter/label."""
+        try:
+            wiz = self.wizard()
+            wiz.custom_gamedata_path = None
+            gd_path = find_gamedata_path()
+            wiz.cff_exporter = WeaponCFFExporter(gd_path) if gd_path else None
+
+            current_gd_text = Path(gd_path).name if gd_path else "Auto (not found)"
+            self.gamedata_path_label.setText(f"Using GameData: {current_gd_text}")
+            self.gamedata_path_label.setStyleSheet("color: #a0a0a0;")
+            QMessageBox.information(self, "GameData Reset", f"Using default: {gd_path if gd_path else 'Auto (not found)'}")
+        except Exception as e:
+            QMessageBox.warning(self, "Reset Failed", f"Could not reset GameData:\n{str(e)}")
 
     def validatePage(self):
         """Validate the page before moving to next"""
@@ -336,38 +666,50 @@ class ModeSelectionPage(QWizardPage):
             wizard.creation_mode = "duplicate"
             wizard.source_weapon = self.selected_weapon_data
 
-        # Allocate or validate ID
-        if self.auto_id_radio.isChecked():
-            try:
-                wizard.weapon_id = self.id_manager.allocate_id(ContentType.WEAPON)
-            except ValueError as e:
-                QMessageBox.critical(self, "ID Allocation Error", str(e))
-                return False
+        # Handle ID allocation/validation based on creation mode
+        if wizard.creation_mode == "edit":
+            # In edit mode, use the source weapon's ID
+            wizard.weapon_id = wizard.source_weapon.weapon_id
+            print(f"Edit mode: Using existing weapon ID {wizard.weapon_id}")
         else:
-            requested_id = self.manual_id_spin.value()
-            if not self.id_manager.is_valid_id(ContentType.WEAPON, requested_id):
-                QMessageBox.warning(
-                    self,
-                    "Invalid ID",
-                    f"ID {requested_id} is outside the valid range (10000-19999)",
-                )
-                return False
+            # For new and duplicate modes, allocate or validate ID
+            if self.auto_id_radio.isChecked():
+                try:
+                    wizard.weapon_id = self.id_manager.allocate_id(ContentType.WEAPON)
+                except ValueError as e:
+                    QMessageBox.critical(self, "ID Allocation Error", str(e))
+                    return False
+            else:
+                requested_id = self.manual_id_spin.value()
+                if not self.id_manager.is_valid_id(ContentType.WEAPON, requested_id):
+                    QMessageBox.warning(
+                        self,
+                        "Invalid ID",
+                        f"ID {requested_id} is outside the valid range (10000-19999)",
+                    )
+                    return False
 
-            if self.id_manager.is_id_used(ContentType.WEAPON, requested_id):
-                QMessageBox.warning(
-                    self,
-                    "ID Already In Use",
-                    f"ID {requested_id} is already allocated. Please choose another ID.",
-                )
-                return False
+                if wizard.creation_mode == "new" and self.id_manager.is_id_used(ContentType.WEAPON, requested_id):
+                    QMessageBox.warning(
+                        self,
+                        "ID Already In Use",
+                        f"ID {requested_id} is already allocated. Please choose another ID.",
+                    )
+                    return False
 
-            try:
-                wizard.weapon_id = self.id_manager.allocate_id(
-                    ContentType.WEAPON, requested_id
-                )
-            except ValueError as e:
-                QMessageBox.critical(self, "ID Allocation Error", str(e))
-                return False
+                # For duplicate mode, allow using the same ID as the source if manual
+                if wizard.creation_mode == "duplicate" and requested_id == wizard.source_weapon.weapon_id:
+                    wizard.weapon_id = requested_id
+                else:
+                    wizard.weapon_id = requested_id
+
+                try:
+                    wizard.weapon_id = self.id_manager.allocate_id(
+                        ContentType.WEAPON, requested_id
+                    )
+                except ValueError as e:
+                    QMessageBox.critical(self, "ID Allocation Error", str(e))
+                    return False
 
         return True
 
@@ -383,13 +725,11 @@ class BasicPropertiesPage(QWizardPage):
         layout.addRow("Weapon Name:", self.weapon_name_edit)
 
         self.weapon_type_combo = QComboBox()
-        # This would be populated with existing and new weapon types
-        self.weapon_type_combo.addItems(["1H Sword", "2H Axe", "Dagger"])  # Placeholder
+        self._populate_weapon_types()
         layout.addRow("Weapon Type:", self.weapon_type_combo)
 
         self.weapon_material_combo = QComboBox()
-        # This would be populated with existing and new materials
-        self.weapon_material_combo.addItems(["Metal", "Wood", "Bone"])  # Placeholder
+        self._populate_weapon_materials()
         layout.addRow("Weapon Material:", self.weapon_material_combo)
 
         self.hands_combo = QComboBox()
@@ -405,6 +745,92 @@ class BasicPropertiesPage(QWizardPage):
 
         self.setLayout(layout)
 
+    def _populate_weapon_types(self):
+        """Load real weapon types from the game data mappings"""
+        try:
+            # Load weapon types from mappings file
+            mappings_path = (
+                Path(__file__).parent.parent.parent.parent
+                / "data"
+                / "id_name_mappings.json"
+            )
+            if mappings_path.exists():
+                with open(mappings_path, "r", encoding="utf-8") as f:
+                    mappings = json.load(f)
+
+                weapon_types = []
+                if "weapon_types" in mappings:
+                    for type_id, type_data in mappings["weapon_types"].items():
+                        # Use the display name which includes the ID for clarity
+                        display_name = type_data.get(
+                            "display", type_data.get("name", f"Weapon Type {type_id}")
+                        )
+                        weapon_types.append(display_name)
+
+                # Sort by numeric ID
+                weapon_types.sort(
+                    key=lambda x: int(
+                        x.split("[")[-1].replace("]", "") if "[" in x else 0
+                    )
+                )
+                self.weapon_type_combo.addItems(weapon_types)
+            else:
+                # Fallback to all known weapon types
+                self.weapon_type_combo.addItems(
+                    [
+                        "Default/Fist [0]",
+                        "Mouth/Bite [1]",
+                        "Unarmed/Fist [2]",
+                        "One-handed Dagger [3]",
+                        "One-handed Sword [4]",
+                        "One-handed Axe [5]",
+                        "One-handed Mace (Spiky) [6]",
+                        "One-handed Mace (Blunt) [7]",
+                        "One-handed Hammer [8]",
+                        "One-handed Staff [9]",
+                        "Two-handed Sword [10]",
+                        "Two-handed Axe [11]",
+                        "Two-handed Mace [12]",
+                        "Two-handed Hammer [13]",
+                        "Two-handed Staff [14]",
+                        "Two-handed Spear [15]",
+                        "Two-handed Halberd [16]",
+                        "Two-handed Bow [17]",
+                        "Two-handed Crossbow [18]",
+                        "One-handed Claw [19]",
+                    ]
+                )
+        except Exception:
+            # Ultimate fallback if anything fails
+            self.weapon_type_combo.addItems(
+                [
+                    "One-handed Sword [4]",
+                    "One-handed Axe [5]",
+                    "Two-handed Axe [11]",
+                    "One-handed Dagger [3]",
+                    "Two-handed Bow [17]",
+                    "One-handed Staff [9]",
+                ]
+            )
+
+    def _populate_weapon_materials(self):
+        """Load weapon materials - use common materials as base"""
+        # Weapon materials in SpellForce are typically stored as IDs 0-9
+        # We'll use common material names that map to these IDs
+        materials = [
+            "Metal [1]",  # Most common
+            "Wood [2]",
+            "Bone [3]",
+            "Stone [4]",
+            "Iron [5]",
+            "Steel [6]",
+            "Silver [7]",
+            "Gold [8]",
+            "Diamond [9]",
+            "Crystal [0]",  # Special/default
+        ]
+        self.weapon_material_combo.addItems(materials)
+
     def initializePage(self):
         """Populate fields from source weapon if in edit/duplicate mode"""
         wizard = self.wizard()
@@ -415,15 +841,15 @@ class BasicPropertiesPage(QWizardPage):
             # Populate basic properties from source weapon
             self.weapon_name_edit.setText(weapon.weapon_name)
 
-            # Find and select the weapon type
+            # Find and select the weapon type (smart matching)
             type_text = weapon.weapon_type_name
-            index = self.weapon_type_combo.findText(type_text)
+            index = self._find_best_weapon_type_match(type_text)
             if index >= 0:
                 self.weapon_type_combo.setCurrentIndex(index)
 
-            # Find and select the material
+            # Find and select the material (smart matching)
             material_text = weapon.weapon_material_name
-            index = self.weapon_material_combo.findText(material_text)
+            index = self._find_best_material_match(material_text)
             if index >= 0:
                 self.weapon_material_combo.setCurrentIndex(index)
 
@@ -439,6 +865,165 @@ class BasicPropertiesPage(QWizardPage):
 
             # Set description
             self.description_edit.setPlainText(weapon.description)
+
+    def _find_best_weapon_type_match(self, weapon_type_name: str) -> int:
+        """Find the best matching weapon type in the combo box"""
+        # First try exact match
+        index = self.weapon_type_combo.findText(weapon_type_name)
+        if index >= 0:
+            return index
+
+        # Try partial match (contains the weapon type name)
+        for i in range(self.weapon_type_combo.count()):
+            item_text = self.weapon_type_combo.itemText(i)
+            if weapon_type_name.lower() in item_text.lower():
+                return i
+
+        # Handle "WeaponType X" format from enhanced_weapons.json
+        type_mappings = {
+            # "WeaponType X" format to display names
+            "WeaponType 1HDagger": "One-handed Dagger",
+            "WeaponType 1HSword": "One-handed Sword",
+            "WeaponType 1HAxe": "One-handed Axe",
+            "WeaponType 1HHammer": "One-handed Hammer",
+            "WeaponType 1HMaceSpiky": "One-handed Mace (Spiky)",
+            "WeaponType 1HMaceBlunt": "One-handed Mace (Blunt)",
+            "WeaponType 1HStaff": "One-handed Staff",
+            "WeaponType 2HSword": "Two-handed Sword",
+            "WeaponType 2HAxe": "Two-handed Axe",
+            "WeaponType 2HHammer": "Two-handed Hammer",
+            "WeaponType 2HMace": "Two-handed Mace",
+            "WeaponType 2HStaff": "Two-handed Staff",
+            "WeaponType 2HSpear": "Two-handed Spear",
+            "WeaponType 2HHalberd": "Two-handed Halberd",
+            "WeaponType 2HBow": "Two-handed Bow",
+            "WeaponType 2HCrossbow": "Two-handed Crossbow",
+            "WeaponType Hand": "Unarmed/Fist",
+            "defaultweapontype": "Default/Fist",
+            "Unknown_Type_19": "One-handed Claw",
+            # Short format mappings
+            "1H Sword": "One-handed Sword",
+            "2H Sword": "Two-handed Sword",
+            "1H Axe": "One-handed Axe",
+            "2H Axe": "Two-handed Axe",
+            "1H Dagger": "One-handed Dagger",
+            "1H Hammer": "One-handed Hammer",
+            "2H Hammer": "Two-handed Hammer",
+            "1H Staff": "One-handed Staff",
+            "2H Staff": "Two-handed Staff",
+            "2H Bow": "Two-handed Bow",
+            "2H Crossbow": "Two-handed Crossbow",
+            # Simple names
+            "Sword": "One-handed Sword",
+            "Axe": "One-handed Axe",
+            "Dagger": "One-handed Dagger",
+            "Mace": "One-handed Mace (Spiky)",
+            "Hammer": "One-handed Hammer",
+            "Staff": "One-handed Staff",
+            "Spear": "Two-handed Spear",
+            "Bow": "Two-handed Bow",
+            "Crossbow": "Two-handed Crossbow",
+            "Halberd": "Two-handed Halberd",
+            "Claw": "One-handed Claw",
+        }
+
+        mapped_name = type_mappings.get(weapon_type_name)
+        if mapped_name:
+            for i in range(self.weapon_type_combo.count()):
+                item_text = self.weapon_type_combo.itemText(i)
+                if mapped_name.lower() in item_text.lower():
+                    return i
+
+        # Additional fallback: try to match by weapon type keywords
+        for i in range(self.weapon_type_combo.count()):
+            item_text = self.weapon_type_combo.itemText(i).lower()
+            weapon_type_lower = weapon_type_name.lower()
+
+            # Match by key words
+            if "dagger" in weapon_type_lower and "dagger" in item_text:
+                return i
+            elif "sword" in weapon_type_lower and "sword" in item_text:
+                return i
+            elif "axe" in weapon_type_lower and "axe" in item_text:
+                return i
+            elif "hammer" in weapon_type_lower and "hammer" in item_text:
+                return i
+            elif "staff" in weapon_type_lower and "staff" in item_text:
+                return i
+            elif "bow" in weapon_type_lower and "bow" in item_text:
+                return i
+            elif "crossbow" in weapon_type_lower and "crossbow" in item_text:
+                return i
+
+        return -1  # Not found
+
+    def _find_best_material_match(self, material_name: str) -> int:
+        """Find the best matching material in the combo box"""
+        # First try exact match
+        index = self.weapon_material_combo.findText(material_name)
+        if index >= 0:
+            return index
+
+        # Try partial match (contains the material name)
+        for i in range(self.weapon_material_combo.count()):
+            item_text = self.weapon_material_combo.itemText(i)
+            if material_name.lower() in item_text.lower():
+                return i
+
+        # Try common mappings
+        material_mappings = {
+            "Metal": "Metal",
+            "Wood": "Wood",
+            "Bone": "Bone",
+            "Stone": "Stone",
+            "Iron": "Iron",
+            "Steel": "Steel",
+            "Silver": "Silver",
+            "Gold": "Gold",
+            "Diamond": "Diamond",
+            "Crystal": "Crystal",
+        }
+
+        mapped_name = material_mappings.get(material_name)
+        if mapped_name:
+            for i in range(self.weapon_material_combo.count()):
+                item_text = self.weapon_material_combo.itemText(i)
+                if mapped_name.lower() in item_text.lower():
+                    return i
+
+        return -1  # Not found
+
+    def _extract_weapon_type_id(self, type_text: str) -> int:
+        """Extract weapon type ID from the display text"""
+        if "[" in type_text and "]" in type_text:
+            try:
+                id_str = type_text.split("[")[-1].replace("]", "")
+                return int(id_str)
+            except (ValueError, IndexError):
+                pass
+        return 1  # Default fallback
+
+    def _extract_weapon_type_name(self, type_text: str) -> str:
+        """Extract clean weapon type name without the ID"""
+        if "[" in type_text:
+            return type_text.split("[")[0].strip()
+        return type_text
+
+    def _extract_material_id(self, material_text: str) -> int:
+        """Extract material ID from the display text"""
+        if "[" in material_text and "]" in material_text:
+            try:
+                id_str = material_text.split("[")[-1].replace("]", "")
+                return int(id_str)
+            except (ValueError, IndexError):
+                pass
+        return 1  # Default fallback
+
+    def _extract_material_name(self, material_text: str) -> str:
+        """Extract clean material name without the ID"""
+        if "[" in material_text:
+            return material_text.split("[")[0].strip()
+        return material_text
 
 
 class CombatStatsPage(QWizardPage):
@@ -537,6 +1122,48 @@ class RequirementsValuePage(QWizardPage):
         self.level_spin.setRange(1, 100)
         layout.addRow("Level Required:", self.level_spin)
 
+        # School Requirements Section
+        school_group = QGroupBox("School Requirements")
+        school_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                border: 2px solid #555;
+                border-radius: 8px;
+                margin-top: 1ex;
+                padding-top: 10px;
+                background-color: #2d2d2d;
+                color: #ffffff;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+                background-color: #2d2d2d;
+                color: #ffffff;
+            }
+        """)
+        school_layout = QVBoxLayout()
+
+        # School requirement list widget
+        from PySide6.QtWidgets import QListWidget, QPushButton, QHBoxLayout
+
+        self.school_requirements_list = QListWidget()
+        self.school_requirements_list.setMaximumHeight(120)
+        school_layout.addWidget(self.school_requirements_list)
+
+        # Add/Remove buttons
+        school_button_layout = QHBoxLayout()
+        self.add_school_req_button = QPushButton("Add School Requirement")
+        self.add_school_req_button.clicked.connect(self.add_school_requirement)
+        self.remove_school_req_button = QPushButton("Remove Selected")
+        self.remove_school_req_button.clicked.connect(self.remove_school_requirement)
+        school_button_layout.addWidget(self.add_school_req_button)
+        school_button_layout.addWidget(self.remove_school_req_button)
+        school_layout.addLayout(school_button_layout)
+
+        school_group.setLayout(school_layout)
+        layout.addRow(school_group)
+
         self.sell_value_spin = QSpinBox()
         self.sell_value_spin.setRange(0, 1000000)
         layout.addRow("Sell Value (gold):", self.sell_value_spin)
@@ -554,6 +1181,103 @@ class RequirementsValuePage(QWizardPage):
         layout.addRow("Item Set:", QLabel("Item set placeholder"))
 
         self.setLayout(layout)
+
+    def add_school_requirement(self):
+        """Add a new school requirement"""
+        from PySide6.QtWidgets import (
+            QDialog,
+            QComboBox,
+            QSpinBox,
+            QDialogButtonBox,
+            QVBoxLayout,
+            QHBoxLayout,
+            QLabel,
+        )
+
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Add School Requirement")
+        layout = QVBoxLayout(dialog)
+
+        # School selection
+        school_layout = QHBoxLayout()
+        school_layout.addWidget(QLabel("School:"))
+        school_combo = QComboBox()
+
+        # Add available schools from tirganach types
+        schools = [
+            "LEVEL_ONLY",
+            "LIGHT_COMBAT",
+            "PIERCING_WEAPONS",
+            "LIGHT_BLADE_WEAPONS",
+            "LIGHT_BLUNT_WEAPONS",
+            "LIGHT_ARMOR",
+            "HEAVY_COMBAT",
+            "HEAVY_BLADE_WEAPONS",
+            "HEAVY_BLUNT_WEAPONS",
+            "HEAVY_ARMOR",
+            "SHIELDS",
+            "RANGED_COMBAT",
+            "BOWS",
+            "CROSSBOWS",
+            "WHITE_MAGIC",
+            "LIFE",
+            "NATURE",
+            "BOONS",
+            "ELEMENTAL_MAGIC",
+            "FIRE",
+            "ICE",
+            "EARTH",
+            "MIND_MAGIC",
+            "ENCHANTMENT",
+            "OFFENSIVE",
+            "DEFENSIVE",
+            "BLACK_MAGIC",
+            "DEATH",
+            "NECROMANCY",
+        ]
+        school_combo.addItems(schools)
+        school_layout.addWidget(school_combo)
+        layout.addLayout(school_layout)
+
+        # Level requirement
+        level_layout = QHBoxLayout()
+        level_layout.addWidget(QLabel("Level:"))
+        level_spin = QSpinBox()
+        level_spin.setRange(1, 20)
+        level_layout.addWidget(level_spin)
+        layout.addLayout(level_layout)
+
+        # Dialog buttons
+        buttons = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        buttons.accepted.connect(dialog.accept)
+        buttons.rejected.connect(dialog.reject)
+        layout.addWidget(buttons)
+
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            school_name = school_combo.currentText()
+            level = level_spin.value()
+
+            # Add to list
+            self.school_requirements_list.addItem(f"{school_name} Level {level}")
+
+    def remove_school_requirement(self):
+        """Remove selected school requirement"""
+        current_row = self.school_requirements_list.currentRow()
+        if current_row >= 0:
+            self.school_requirements_list.takeItem(current_row)
+
+    def get_school_requirements(self):
+        """Get list of school requirements from UI"""
+        requirements = []
+        for i in range(self.school_requirements_list.count()):
+            text = self.school_requirements_list.item(i).text()
+            # Parse "SCHOOL_NAME Level X" format
+            if " Level " in text:
+                parts = text.split(" Level ")
+                school_name = parts[0]
+                level = int(parts[1])
+                requirements.append(SchoolRequirement(school_name=school_name, level=level))
+        return requirements
 
     def initializePage(self):
         """Populate fields from source weapon if in edit/duplicate mode"""
@@ -577,65 +1301,197 @@ class RequirementsValuePage(QWizardPage):
             if index >= 0:
                 self.rarity_combo.setCurrentIndex(index)
 
+            # Populate school requirements
+            self.school_requirements_list.clear()
+            for school_req in weapon.requirements.school_requirements:
+                self.school_requirements_list.addItem(
+                    f"{school_req.school_name} Level {school_req.level}"
+                )
+
             # Note: Effects would need to be populated in a more complex way
             # since they're in a list. For now, we'll skip that.
 
 
 class VisualAudioPage(QWizardPage):
-    def __init__(self, parent=None):
+    def __init__(self, data_model=None, parent=None):
         super().__init__(parent)
+        self.data_model = data_model
         self.setTitle("Visual & Audio")
         self.setSubTitle("Assign an icon, sounds, and other visual properties.")
 
+        # Icon selection
+        self.selected_icon_handle = ""
+        self.selected_icon_path = ""
+
         layout = QFormLayout()
-        layout.addRow("Icon:", QLabel("Icon browser placeholder"))
-        
+
+        # Icon selection section
+        icon_row = QHBoxLayout()
+
+        # Icon preview
+        self.icon_preview_label = QLabel()
+        self.icon_preview_label.setFixedSize(64, 64)
+        self.icon_preview_label.setStyleSheet(
+            "border: 2px solid #555; background: #222;"
+        )
+        self.icon_preview_label.setAlignment(Qt.AlignCenter)
+        self.icon_preview_label.setText("🗡️")
+        icon_row.addWidget(self.icon_preview_label)
+
+        # Icon selection button
+        self.icon_button = QPushButton("Browse Icons...")
+        self.icon_button.clicked.connect(self.browse_icons)
+        icon_row.addWidget(self.icon_button)
+
+        # Icon info label
+        self.icon_info_label = QLabel("No icon selected")
+        self.icon_info_label.setStyleSheet("color: #666; font-style: italic;")
+        self.icon_info_label.setWordWrap(True)
+        icon_row.addWidget(self.icon_info_label)
+
+        icon_row.addStretch()
+        layout.addRow("Icon:", icon_row)
+
         # Sound selection widgets (will be populated in initializePage)
         self.sound_selector_widget = None
         layout.addRow(self.sound_selector_widget)
-        
+
+    def browse_icons(self):
+        """Open icon browser dialog"""
+        if not self.data_model:
+            QMessageBox.warning(
+                self,
+                "Icon Browser Unavailable",
+                "Icon browser is not available. The data model is not loaded.",
+            )
+            return
+
+        try:
+            # Create icon browser dialog
+            icon_dialog = IconBrowserDialog(
+                self.data_model, category="itm", parent=self
+            )
+
+            # Connect signal for icon selection
+            icon_dialog.iconSelected.connect(self.on_icon_selected)
+
+            # Show dialog
+            result = icon_dialog.exec()
+
+            if result == QDialog.DialogCode.Accepted:
+                # Icon was selected, signal handler already processed it
+                pass
+
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Icon Browser Error", f"Failed to open icon browser:\n{str(e)}"
+            )
+
+    def on_icon_selected(self, icon_handle: str):
+        """Handle icon selection from browser"""
+        self.selected_icon_handle = icon_handle
+        self.selected_icon_path = ""
+
+        # Update icon preview
+        if self.data_model:
+            try:
+                # Get icon pixmap for preview
+                icon_pixmap = self.data_model.get_icon_pixmap(icon_handle)
+                if icon_pixmap:
+                    # Scale to fit the preview label
+                    scaled_pixmap = icon_pixmap.scaled(
+                        60,
+                        60,  # Slightly smaller than 64x64 to fit border
+                        Qt.AspectRatioMode.KeepAspectRatio,
+                        Qt.TransformationMode.SmoothTransformation,
+                    )
+                    self.icon_preview_label.setPixmap(scaled_pixmap)
+                else:
+                    self.icon_preview_label.setText("❌")
+            except Exception as e:
+                print(f"Error loading icon preview: {e}")
+                self.icon_preview_label.setText("❌")
+
+            # Update info label
+            if icon_handle:
+                # Get file path for the icon
+                icon_path = self.data_model._resolve_icon_path(icon_handle)
+                if icon_path and Path(icon_path).exists():
+                    self.selected_icon_path = icon_path
+                    self.icon_info_label.setText(f"✅ {icon_handle}")
+                    self.icon_info_label.setStyleSheet(
+                        "color: #27ae60; font-weight: bold;"
+                    )
+                else:
+                    self.icon_info_label.setText(f"⚠️ {icon_handle} (file not found)")
+                    self.icon_info_label.setStyleSheet("color: #f39c12;")
+            else:
+                self.icon_info_label.setText("No icon selected")
+                self.icon_info_label.setStyleSheet("color: #666; font-style: italic;")
+
     def _setup_sound_selection(self):
         """Setup sound selection based on current weapon data"""
         wizard = self.wizard()
-        
+
         # Get weapon data from previous pages
         mode_page = wizard.page(0)  # ModeSelectionPage
         basic_page = wizard.page(1)  # BasicPropertiesPage
-        
-        if hasattr(mode_page, 'selected_weapon_data') and mode_page.selected_weapon_data:
+
+        if (
+            hasattr(mode_page, "selected_weapon_data")
+            and mode_page.selected_weapon_data
+        ):
             source_weapon = mode_page.selected_weapon_data
             weapon_type = basic_page.weapon_type_combo.currentText().lower()
             hands = basic_page.hands_combo.currentText()
-            
+
             # Auto-assign sounds based on weapon type
-            auto_sounds = auto_assign_weapon_sounds(weapon_type, source_weapon.weapon_type_name if hasattr(source_weapon, 'weapon_type_name') else weapon_type, hands)
-            
+            auto_sounds = auto_assign_weapon_sounds(
+                weapon_type,
+                source_weapon.weapon_type_name
+                if hasattr(source_weapon, "weapon_type_name")
+                else weapon_type,
+                hands,
+            )
+
             # Create sound selector widget
             self.sound_selector_widget = create_sound_selector_widget(
                 weapon_type,
                 hands,
-                auto_sounds.get('hit', ''),
-                auto_sounds.get('miss', '')
+                auto_sounds.get("hit", ""),
+                auto_sounds.get("miss", ""),
             )
-            
+
             # Replace placeholder with our widget
             # Note: This is a simple replacement - for a real implementation,
             # we'd need to restructure the layout more carefully
             if self.sound_selector_widget:
                 self.current_hit_sound = self.sound_selector_widget.hit_sound
                 self.current_miss_sound = self.sound_selector_widget.miss_sound
-        
+
         # Call the parent initialization
-        if hasattr(super(), 'initializePage'):
+        if hasattr(super(), "initializePage"):
             super().initializePage()
-        
+
     def initializePage(self):
         """Initialize visual and audio page with data from previous wizard pages"""
+        wizard = self.wizard()
+
+        # Check if we have a source weapon with icon data to inherit
+        if hasattr(wizard, "source_weapon") and wizard.source_weapon is not None:
+            weapon = wizard.source_weapon
+
+            # Inherit icon if available (icon system deferred for now)
+            if hasattr(weapon, "icon_handle") and weapon.icon_handle:
+                self.selected_icon_handle = weapon.icon_handle
+                # Icon preview system deferred until icon extraction is prepared
+
+        # Set up sound selection
         self._setup_sound_selection()
-        layout.addRow("3D Model:", QLabel("Model browser placeholder"))
-        layout.addRow("Trail Effect:", QLineEdit())
-        layout.addRow("Impact Effect:", QLineEdit())
-        self.setLayout(layout)
+
+        # Call the parent initialization
+        if hasattr(super(), "initializePage"):
+            super().initializePage()
 
 
 class ReviewExportPage(QWizardPage):
@@ -662,15 +1518,42 @@ class ReviewExportPage(QWizardPage):
 
         # Export Options Section
         export_group = QGroupBox("Export Options")
+        export_group.setStyleSheet("""
+            QGroupBox {
+                font-weight: bold;
+                border: 2px solid #555;
+                border-radius: 8px;
+                margin-top: 1ex;
+                padding-top: 10px;
+                background-color: #2d2d2d;
+                color: #ffffff;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+                background-color: #2d2d2d;
+                color: #ffffff;
+            }
+        """)
         export_layout = QVBoxLayout()
 
         self.export_json_radio = QRadioButton("Export to JSON only")
-        self.export_cff_radio = QRadioButton("Export to CFF only (not yet implemented)")
+        self.export_cff_radio = QRadioButton(
+            "Export to CFF only (creates GameData.cff)"
+        )
         self.export_both_radio = QRadioButton("Export to both JSON and CFF")
 
+        # Default state; will be updated when the page is shown
         self.export_json_radio.setChecked(True)
-        self.export_cff_radio.setEnabled(False)  # Disable until CFF export is implemented
+        self.export_cff_radio.setEnabled(False)
         self.export_both_radio.setEnabled(False)
+
+        # Dynamic CFF availability label (updated in initializePage)
+        self.cff_state_label = QLabel("Checking GameData.cff availability...")
+        self.cff_state_label.setStyleSheet("color: #bdc3c7; font-size: 9pt; margin: 5px;")
+        self.cff_state_label.setWordWrap(True)
+        export_layout.addWidget(self.cff_state_label)
 
         export_layout.addWidget(self.export_json_radio)
         export_layout.addWidget(self.export_cff_radio)
@@ -701,6 +1584,57 @@ class ReviewExportPage(QWizardPage):
         validation_html = self.format_validation(errors, warnings)
         self.validation_text.setHtml(validation_html)
 
+        # Enable/disable CFF export dynamically now that we have access to the wizard
+        self._sync_cff_export_state()
+
+    def _sync_cff_export_state(self):
+        """Enable/disable CFF export based on wizard.cff_exporter and availability."""
+        try:
+            wiz = self.wizard()
+            cff_exp = getattr(wiz, "cff_exporter", None) if wiz else None
+
+            # Try to lazily initialize if missing
+            if wiz and not cff_exp:
+                gd_path = find_gamedata_path()
+                if gd_path:
+                    try:
+                        wiz.cff_exporter = WeaponCFFExporter(gd_path)
+                        cff_exp = wiz.cff_exporter
+                    except Exception:
+                        cff_exp = None
+
+            if cff_exp:
+                self.export_cff_radio.setEnabled(True)
+                self.export_both_radio.setEnabled(True)
+                if hasattr(self, "cff_state_label") and self.cff_state_label:
+                    self.cff_state_label.setText(
+                        "📦 CFF Export available. A complete GameData.cff will be written."
+                    )
+                    self.cff_state_label.setStyleSheet(
+                        "color: #27ae60; font-size: 9pt; margin: 5px;"
+                    )
+            else:
+                self.export_cff_radio.setEnabled(False)
+                self.export_both_radio.setEnabled(False)
+                if hasattr(self, "cff_state_label") and self.cff_state_label:
+                    self.cff_state_label.setText(
+                        "⚠️ CFF export requires GameData.cff. Place it under OriginalGameFiles/data (or documented paths)."
+                    )
+                    self.cff_state_label.setStyleSheet(
+                        "color: #e74c3c; font-size: 9pt; margin: 5px;"
+                    )
+        except Exception:
+            # Keep JSON-only as a safe default on any error
+            self.export_cff_radio.setEnabled(False)
+            self.export_both_radio.setEnabled(False)
+            if hasattr(self, "cff_state_label") and self.cff_state_label:
+                self.cff_state_label.setText(
+                    "⚠️ CFF export temporarily unavailable due to an error. Use JSON."
+                )
+                self.cff_state_label.setStyleSheet(
+                    "color: #e74c3c; font-size: 9pt; margin: 5px;"
+                )
+
     def build_weapon_data_from_wizard(self) -> WeaponCreationData:
         """Gather data from all wizard pages and build WeaponCreationData object"""
         wizard = self.wizard()
@@ -709,7 +1643,7 @@ class ReviewExportPage(QWizardPage):
         mode_page = wizard.page(0)  # ModeSelectionPage
         basic_page = wizard.page(1)  # BasicPropertiesPage
         combat_page = wizard.page(2)  # CombatStatsPage
-        req_page = wizard.page(3)    # RequirementsValuePage
+        req_page = wizard.page(3)  # RequirementsValuePage
         visual_page = wizard.page(4)  # VisualAudioPage
 
         # Determine creation mode
@@ -718,11 +1652,11 @@ class ReviewExportPage(QWizardPage):
             source_weapon_id = None
         elif mode_page.edit_weapon_radio.isChecked():
             creation_mode = "edit"
-            source_weapon_id = getattr(wizard, 'source_weapon', None)
+            source_weapon_id = getattr(wizard, "source_weapon", None)
             source_weapon_id = source_weapon_id.weapon_id if source_weapon_id else None
         else:
             creation_mode = "duplicate"
-            source_weapon_id = getattr(wizard, 'source_weapon', None)
+            source_weapon_id = getattr(wizard, "source_weapon", None)
             source_weapon_id = source_weapon_id.weapon_id if source_weapon_id else None
 
         # Build requirements
@@ -730,7 +1664,8 @@ class ReviewExportPage(QWizardPage):
             strength=req_page.strength_spin.value(),
             dexterity=req_page.dexterity_spin.value(),
             intelligence=req_page.intelligence_spin.value(),
-            level=req_page.level_spin.value()
+            level=req_page.level_spin.value(),
+            school_requirements=req_page.get_school_requirements(),
         )
 
         # Build weapon data
@@ -739,17 +1674,25 @@ class ReviewExportPage(QWizardPage):
             weapon_id=wizard.weapon_id,
             creation_mode=creation_mode,
             source_weapon_id=source_weapon_id,
-
             # Step 2: Basic Properties
             weapon_name=basic_page.weapon_name_edit.text(),
-            weapon_type_id=basic_page.weapon_type_combo.currentIndex() + 1,  # Adjust for 0-based index
-            weapon_type_name=basic_page.weapon_type_combo.currentText(),
-            weapon_material_id=basic_page.weapon_material_combo.currentIndex() + 1,
-            weapon_material_name=basic_page.weapon_material_combo.currentText(),
+            weapon_type_id=basic_page._extract_weapon_type_id(
+                basic_page.weapon_type_combo.currentText()
+            ),
+            weapon_type_name=basic_page._extract_weapon_type_name(
+                basic_page.weapon_type_combo.currentText()
+            ),
+            weapon_material_id=basic_page._extract_material_id(
+                basic_page.weapon_material_combo.currentText()
+            ),
+            weapon_material_name=basic_page._extract_material_name(
+                basic_page.weapon_material_combo.currentText()
+            ),
             hands=WeaponHands(basic_page.hands_combo.currentText()),
-            damage_category=DamageCategory(basic_page.damage_category_combo.currentText()),
+            damage_category=DamageCategory(
+                basic_page.damage_category_combo.currentText()
+            ),
             description=basic_page.description_edit.toPlainText(),
-
             # Step 3: Combat Stats
             min_damage=combat_page.min_damage_spin.value(),
             max_damage=combat_page.max_damage_spin.value(),
@@ -761,22 +1704,26 @@ class ReviewExportPage(QWizardPage):
             critical_chance=combat_page.crit_chance_spin.value(),
             armor_penetration=combat_page.armor_pen_spin.value(),
             knockback_chance=combat_page.knockback_spin.value(),
-
             # Step 4: Requirements & Value
             requirements=requirements,
             sell_value=req_page.sell_value_spin.value(),
             buy_value=req_page.buy_value_spin.value(),
             rarity=Rarity(req_page.rarity_combo.currentText()),
             effects=[],  # TODO: Populate from effects widget when implemented
-
-            # Step 5: Visual & Audio (enhanced with sound selection)
-            icon_handle="",
-            hit_sound=visual_page.current_hit_sound if hasattr(visual_page, 'current_hit_sound') else 'battle_hit_1hsword',
-            miss_sound=visual_page.current_miss_sound if hasattr(visual_page, 'current_miss_sound') else 'battle_miss_sword',
-            equip_sound=visual_page.current_equip_sound if hasattr(visual_page, 'current_equip_sound') else '',
+            # Step 5: Visual & Audio (enhanced with sound selection and icon)
+            icon_handle=getattr(visual_page, "selected_icon_handle", ""),
+            hit_sound=visual_page.current_hit_sound
+            if hasattr(visual_page, "current_hit_sound")
+            else "battle_hit_1hsword",
+            miss_sound=visual_page.current_miss_sound
+            if hasattr(visual_page, "current_miss_sound")
+            else "battle_miss_sword",
+            equip_sound=visual_page.current_equip_sound
+            if hasattr(visual_page, "current_equip_sound")
+            else "",
             model_file="",
             trail_effect="",
-            impact_effect=""
+            impact_effect="",
         )
 
         return weapon_data
@@ -786,10 +1733,38 @@ class ReviewExportPage(QWizardPage):
         dps = weapon.calculate_dps()
         balance = weapon.get_balance_rating()
 
+        # Generate icon HTML for summary
+        icon_html = self._format_icon_for_summary(weapon.icon_handle)
+
+        # Format school requirements (if any)
+        school_reqs_html = ""
+        try:
+            if weapon.requirements and weapon.requirements.school_requirements:
+                items = "".join(
+                    [
+                        f"<li>{sr.school_name.replace('_', ' ').title()} — Level {sr.level}</li>"
+                        for sr in weapon.requirements.school_requirements
+                    ]
+                )
+                school_reqs_html = (
+                    "<h4 style=\"color: #34495e;\">School Requirements</h4>"
+                    f"<ul style=\"margin-top: 0;\">{items}</ul>"
+                )
+        except Exception:
+            school_reqs_html = ""
+
         html = f"""
         <html>
         <body style="font-family: Arial, sans-serif;">
-            <h2 style="color: #2c3e50;">{weapon.weapon_name}</h2>
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                <div style="margin-right: 15px;">
+                    {icon_html}
+                </div>
+                <div>
+                    <h2 style="color: #2c3e50; margin: 0;">{weapon.weapon_name}</h2>
+                    <p style="margin: 5px 0; color: #666;">ID: {weapon.weapon_id} • {weapon.weapon_type_name}</p>
+                </div>
+            </div>
 
             <h3 style="color: #34495e;">Basic Information</h3>
             <table style="width: 100%; border-collapse: collapse;">
@@ -827,6 +1802,7 @@ class ReviewExportPage(QWizardPage):
                 <tr><td><b>Intelligence:</b></td><td>{weapon.requirements.intelligence}</td></tr>
                 <tr><td><b>Level:</b></td><td>{weapon.requirements.level}</td></tr>
             </table>
+            {school_reqs_html}
 
             <h3 style="color: #34495e;">Economy</h3>
             <table style="width: 100%; border-collapse: collapse;">
@@ -868,7 +1844,9 @@ class ReviewExportPage(QWizardPage):
             html += "</ul>"
 
         if warnings:
-            html += "<h3 style='color: #f39c12;'>⚠️ Warnings (review recommended):</h3><ul>"
+            html += (
+                "<h3 style='color: #f39c12;'>⚠️ Warnings (review recommended):</h3><ul>"
+            )
             for warning in warnings:
                 html += f"<li style='color: #f39c12;'>{warning}</li>"
             html += "</ul>"
@@ -883,7 +1861,7 @@ class ReviewExportPage(QWizardPage):
             Rarity.UNCOMMON: "#2ecc71",
             Rarity.RARE: "#3498db",
             Rarity.EPIC: "#9b59b6",
-            Rarity.LEGENDARY: "#f39c12"
+            Rarity.LEGENDARY: "#f39c12",
         }
         return colors.get(rarity, "#000000")
 
@@ -912,3 +1890,34 @@ class ReviewExportPage(QWizardPage):
             return "Strong"
         else:
             return "Overpowered"
+
+    def _format_icon_for_summary(self, icon_handle: str) -> str:
+        """Format icon for HTML summary display"""
+        if not icon_handle:
+            # Return placeholder icon
+            return '<div style="width: 64px; height: 64px; background: #f0f0f0; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; font-size: 24px;">🗡️</div>'
+
+        wizard = self.wizard()
+        if not wizard or not wizard.data_model:
+            # Return fallback if data model is not available
+            return '<div style="width: 64px; height: 64px; background: #f0f0f0; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; font-size: 24px;">❌</div>'
+
+        try:
+            # Get icon path
+            icon_path = wizard.data_model._resolve_icon_path(icon_handle)
+            if not icon_path or not Path(icon_path).exists():
+                # Icon file not found
+                return f'<div style="width: 64px; height: 64px; background: #fff3cd; border: 2px solid #ffeaa7; display: flex; align-items: center; justify-content: center; font-size: 24px;" title="Icon not found: {icon_handle}">⚠️</div>'
+
+            # Convert file path to data URI for HTML display
+            # Note: This is a simplified approach - for production, you might want to cache these
+            icon_abs_path = Path(icon_path).absolute()
+            if icon_abs_path.exists():
+                # For now, we'll use a simple approach with the icon name as tooltip
+                return f'<div style="width: 64px; height: 64px; background: #d4edda; border: 2px solid #c3e6cb; display: flex; align-items: center; justify-content: center; font-size: 10px; text-align: center; overflow: hidden;" title="{icon_handle}">✅ ICON</div>'
+            else:
+                return f'<div style="width: 64px; height: 64px; background: #f8d7da; border: 2px solid #f5c6cb; display: flex; align-items: center; justify-content: center; font-size: 24px;" title="Icon error: {icon_handle}">❌</div>'
+
+        except Exception as e:
+            # Error loading icon
+            return f'<div style="width: 64px; height: 64px; background: #f8d7da; border: 2px solid #f5c6cb; display: flex; align-items: center; justify-content: center; font-size: 24px;" title="Icon error: {str(e)}">❌</div>'

@@ -20,6 +20,8 @@ try:
 except ImportError:
     GAMEDATA_AVAILABLE = False
 
+from ..shared.gamedata_resolver import find_gamedata_path
+
 
 class WeaponBrowserDialog(QDialog):
     """Browse and select existing weapons"""
@@ -72,9 +74,9 @@ class WeaponBrowserDialog(QDialog):
         layout.addLayout(search_layout)
         
         # Weapon table
-        self.weapon_table = QTableWidget(0, 7)
+        self.weapon_table = QTableWidget(0, 8)
         self.weapon_table.setHorizontalHeaderLabels([
-            "ID", "Name", "Type", "Material", "Damage", "Speed", "Rarity"
+            "ID", "Name", "Type", "Material", "Damage", "Speed", "Rarity", "Requirements"
         ])
         self.weapon_table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
         self.weapon_table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
@@ -107,10 +109,10 @@ class WeaponBrowserDialog(QDialog):
         
         # Try to load from GameData.cff for full stats
         if GAMEDATA_AVAILABLE:
-            gamedata_path = Path(__file__).parent.parent.parent.parent.parent / "OriginalGameFiles" / "data" / "GameData.cff"
-            if gamedata_path.exists():
+            gamedata_path_str = find_gamedata_path()
+            if gamedata_path_str:
                 try:
-                    gd = GameData(str(gamedata_path))
+                    gd = GameData(str(gamedata_path_str))
                     weapons = gd.weapons
                     item_ui = gd.item_ui
                     
@@ -130,6 +132,7 @@ class WeaponBrowserDialog(QDialog):
                             'selling_price': weapon.item.selling_price if weapon.item else 0,
                             'buying_price': weapon.item.buying_price if weapon.item else 0,
                             'item_set_id': weapon.item.item_set_id if weapon.item else 0,
+                            'data_source': 'CFF',
                         }
                         
                         # Try to get type and material names
@@ -151,7 +154,35 @@ class WeaponBrowserDialog(QDialog):
                         ui_matches = [ui for ui in item_ui if ui.item_id == weapon.item_id]
                         if ui_matches and ui_matches[0].item_ui_handle:
                             weapon_dict['ui_handle'] = ui_matches[0].item_ui_handle.strip()
-                            
+
+                        # Try to get school requirements from item_requirements
+                        try:
+                            if hasattr(gd, 'item_requirements'):
+                                item_reqs = gd.item_requirements.where(item_id=weapon.item_id)
+                                if item_reqs:
+                                    school_reqs = [
+                                        {
+                                            'requirement_school': str(req.requirement_school),
+                                            'level': getattr(req, 'level', 0)
+                                        }
+                                        for req in item_reqs
+                                    ]
+                                    weapon_dict['requirements'] = {
+                                        'level': max([getattr(req, 'level', 0) for req in item_reqs]) if item_reqs else 1,
+                                        'school_requirements': school_reqs,
+                                    }
+                                else:
+                                    weapon_dict['requirements'] = {
+                                        'level': 1,
+                                        'school_requirements': []
+                                    }
+                        except Exception:
+                            # Ignore requirements if table missing or malformed
+                            weapon_dict['requirements'] = {
+                                'level': 1,
+                                'school_requirements': []
+                            }
+
                         weapon_list.append(weapon_dict)
                     
                     return weapon_list
@@ -168,15 +199,24 @@ class WeaponBrowserDialog(QDialog):
             raise FileNotFoundError(f"Weapons file not found at: {weapons_file}")
         
         with open(weapons_file, 'r') as f:
-            return json.load(f)
+            data = json.load(f)
+            # Ensure a uniform shape and attach requirements if present
+            for w in data:
+                w.setdefault('data_source', 'JSON')
+                if 'requirements' not in w:
+                    w['requirements'] = {
+                        'level': w.get('level', w.get('level_requirement', 1)),
+                        'school_requirements': w.get('school_requirements', []),
+                    }
+            return data
     
     def populate_table(self, weapons=None):
         """Populate weapon table"""
         if weapons is None:
             weapons = self.weapons
-        
+
         self.weapon_table.setRowCount(len(weapons))
-        
+
         for row, weapon in enumerate(weapons):
             self.weapon_table.setItem(row, 0, QTableWidgetItem(str(weapon['item_id'])))
             self.weapon_table.setItem(row, 1, QTableWidgetItem(weapon['name']))
@@ -187,7 +227,25 @@ class WeaponBrowserDialog(QDialog):
             self.weapon_table.setItem(row, 4, QTableWidgetItem(damage_str))
             self.weapon_table.setItem(row, 5, QTableWidgetItem(str(weapon.get('weapon_speed', 0))))
             self.weapon_table.setItem(row, 6, QTableWidgetItem(weapon.get('rarity', 'Common')))
-        
+
+            # Format requirements summary
+            req = weapon.get('requirements', {}) or {}
+            school_reqs = req.get('school_requirements', []) or []
+            if school_reqs:
+                def fmt_school(name: str) -> str:
+                    s = str(name)
+                    if '.' in s:
+                        s = s.split('.')[-1]
+                    return s.replace('_', ' ').title()
+
+                parts = [f"{fmt_school(sr.get('requirement_school', ''))} L{sr.get('level', 0)}" for sr in school_reqs]
+                req_text = ", ".join(parts)
+            else:
+                # Show level only if present, otherwise '-'
+                lvl = req.get('level', None)
+                req_text = f"Level {lvl}" if lvl else "-"
+            self.weapon_table.setItem(row, 7, QTableWidgetItem(req_text))
+
         self.weapon_table.resizeColumnsToContents()
     
     def filter_weapons(self):

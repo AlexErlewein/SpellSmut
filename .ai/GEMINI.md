@@ -19,19 +19,24 @@ This document provides a comprehensive overview of the SpellSmut project, a modd
 
 ## Project Overview
 
-SpellSmut is a Python-based project that provides tools and documentation for modding the SpellForce game. The core of the project is **TirganachReloaded**, a GUI application built with **PySide6** for editing the game's `GameData.cff` file. This file contains a wide range of game data, including spells, items, quests, and more.
+SpellSmut is a mature, Python-based project that provides a full suite of tools and documentation for modding the SpellForce game. While the core of the project is **TirganachReloaded**, a GUI application for editing the game's `GameData.cff` file, it has expanded to include a wide range of content creation wizards, asset management systems, and a 3D map viewer.
 
-The project also includes an extensive set of documentation, asset extraction tools, and other resources to support the modding community.
+The project uses **beads** for task tracking.
 
 ### Key Components
 
-*   **TirganachReloaded (CFF Editor):** A powerful GUI tool for editing `GameData.cff` files. It features:
-    *   A 3-panel layout for navigating categories, elements, and properties.
-    *   Multi-language support for viewing and editing game data.
-    *   A dark theme for improved usability.
-    *   An integrated Quest Editor for creating and modifying quests.
-*   **Asset Extraction System:** A suite of Python scripts for extracting game assets (icons, textures, etc.) from the game's PAK archives.
-*   **Icon System:** A system for extracting and mapping over 32,000 game icons to their corresponding items and spells.
+*   **TirganachReloaded (CFF Editor):** A powerful GUI tool for editing `GameData.cff` files. It features a 3-panel layout, multi-language support, a dark theme, and an integrated Quest Editor. The data layer has been significantly accelerated with a cache/DB backend to improve performance.
+*   **Content Creator Suite:** A collection of wizard-style tools that enable users to create complex game content without writing code. All creators are integrated with a shared **ID Management System** to prevent conflicts. Completed creators include:
+    *   Quest Creator
+    *   Spell Wizard
+    *   Weapon Forge
+    *   Armor Forge
+    *   NPC Workshop
+    *   Race Creator
+*   **Map Viewer:** An in-progress 3D map viewer built with PyOpenGL capable of rendering game maps. Core rendering, camera controls, and basic texture support are implemented.
+*   **Asset Extraction System:** A suite of Python scripts for extracting over 59,500 game assets (icons, textures, models, audio, etc.) from the game's PAK archives.
+*   **Icon System:** A system for extracting and mapping over 32,000 game icons. While technical extraction is complete, a critical blocker remains in mapping item handles from game data to the correct texture atlases.
+*   **Universal Savefile System:** A plan for standardized `.quest`, `.spell`, `.weapon` file formats for sharing work-in-progress content.
 *   **Documentation:** A comprehensive set of guides and tutorials covering all aspects of SpellForce modding.
 
 ## Building and Running
@@ -52,10 +57,10 @@ This project uses `uv` for dependency management and `hatchling` for building.
 
 ### Running the CFF Editor
 
-To run the CFF Editor GUI application:
+The editor now has a convenient entry point. To run the GUI application:
 
 ```bash
-uv run python src/TirganachReloaded/run_cff_editor.py
+uv run tirganach
 ```
 
 ### Running Helper Tools
@@ -75,15 +80,19 @@ The project includes several helper tools in the `src/helper_tools` directory. Y
 
 *   **Code Style:** The project uses **Black** for code formatting and **isort** for import sorting.
 *   **Type Checking:** **mypy** is used for static type checking.
-*   **Testing:** **pytest** is the testing framework of choice. Tests are located in the `src/tests` directory.
+*   **Testing:** **pytest** is the testing framework. Tests are located in the `src/tests` directory.
+*   **Task Tracking:** The project uses **beads** for task and issue tracking.
 
 ### Configuration Files
 
 *   `pyproject.toml`: Defines project metadata, dependencies, and build settings.
 *   `uv.lock`: Locks the versions of all project dependencies.
 *   `pytest.ini`: Configures the pytest testing framework.
+*   `.beads/`: Contains task tracking data.
 
 ## Project Structure
+
+The project has been reorganized for clarity and maintainability.
 
 ```
 /
@@ -91,13 +100,15 @@ The project includes several helper tools in the `src/helper_tools` directory. Y
 ├── ExtractedAssets/       # Game assets extracted by the tools
 ├── ModdedGameFiles/       # Modified game files created by the CFF Editor
 ├── OriginalGameFiles/     # Original game files for reference
-├── ProjectPlanning/       # Project planning and overview documents
-├── src/                   # Source code for the CFF Editor and helper tools
-│   ├── TirganachReloaded/ # The main CFF Editor application
-│   ├── helper_tools/      # Additional scripts and tools
+├── ProjectPlanning/       # Development plans, status reports, and architecture docs
+├── src/                   # All Python source code
+│   ├── TirganachReloaded/ # The main CFF Editor application and its components
+│   ├── helper_tools/      # Standalone scripts and utilities
 │   └── tests/             # Unit and integration tests
+├── .beads/                # Task tracking data
 ├── .gitignore             # Git ignore file
-├── GEMINI.md              # This file
+├── .ai/                   # AI assistant context files
+│   └── GEMINI.md          # This file
 ├── pyproject.toml         # Python project configuration
 └── README.md              # Project README
 ```

@@ -41,15 +41,19 @@ class CFFArmorLoader(QObject):
         )
         self.gamedata = None
 
-    def load_all_armor(self) -> Dict[int, Dict[str, Any]]:
+    def load_all_armor(self, cff_file_path: Optional[str] = None) -> Dict[int, Dict[str, Any]]:
         """Load all armor from CFF file"""
         armor = {}
 
+        # Use custom CFF file path if provided, otherwise use default
+        gamedata_path = cff_file_path or self.gamedata_path
+
         # Try to load from GameData.cff for complete stats
-        if GameData and Path(self.gamedata_path).exists():
+        if GameData and Path(gamedata_path).exists():
             try:
-                self.progress_updated.emit(10, "Loading GameData.cff...")
-                self.gamedata = GameData(self.gamedata_path)
+                file_name = Path(gamedata_path).name
+                self.progress_updated.emit(10, f"Loading {file_name}...")
+                self.gamedata = GameData(gamedata_path)
 
                 # Get all armor directly from the armor table
                 all_armor = list(self.gamedata.armor)  # Convert to list
@@ -75,8 +79,11 @@ class CFFArmorLoader(QObject):
                 print(f"Error loading from GameData: {e}")
                 # Fall back to enhanced_armor.json if CFF loading fails
                 armor = self._load_from_enhanced_json()
-        else:
-            # If GameData.cff doesn't exist or Tirganach is not available, fall back to JSON
+        elif not GameData:
+            print("Warning: Tirganach library not available")
+            armor = self._load_from_enhanced_json()
+        elif not Path(gamedata_path).exists():
+            print(f"Warning: CFF file not found: {gamedata_path}")
             armor = self._load_from_enhanced_json()
 
         return armor

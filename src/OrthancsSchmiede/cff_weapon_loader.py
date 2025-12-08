@@ -41,15 +41,19 @@ class CFFWeaponLoader(QObject):
         )
         self.gamedata = None
 
-    def load_all_weapons(self) -> Dict[int, Dict[str, Any]]:
+    def load_all_weapons(self, cff_file_path: Optional[str] = None) -> Dict[int, Dict[str, Any]]:
         """Load all weapons from CFF file"""
         weapons = {}
 
+        # Use custom CFF file path if provided, otherwise use default
+        gamedata_path = cff_file_path or self.gamedata_path
+
         # Try to load from GameData.cff for complete stats
-        if GameData and Path(self.gamedata_path).exists():
+        if GameData and Path(gamedata_path).exists():
             try:
-                self.progress_updated.emit(10, "Loading GameData.cff...")
-                self.gamedata = GameData(self.gamedata_path)
+                file_name = Path(gamedata_path).name
+                self.progress_updated.emit(10, f"Loading {file_name}...")
+                self.gamedata = GameData(gamedata_path)
 
                 # Get all weapons from the GameData
                 all_weapons = list(self.gamedata.weapons)  # Convert to list
@@ -67,6 +71,10 @@ class CFFWeaponLoader(QObject):
 
             except Exception as e:
                 print(f"Error loading from GameData: {e}")
+        elif not GameData:
+            print("Warning: Tirganach library not available")
+        elif not Path(gamedata_path).exists():
+            print(f"Warning: CFF file not found: {gamedata_path}")
 
         return weapons
 
@@ -134,6 +142,10 @@ class CFFWeaponLoader(QObject):
             "damage_category": "Melee",  # Will be determined from range
             "damage_type": "Slashing",  # Will be determined from weapon type
             "rarity": "Common",  # Default rarity
+            # Audio fields - will be populated with smart defaults based on weapon type
+            "hit_sound": "",  # Will be set based on weapon type
+            "miss_sound": "",  # Will be set based on weapon type
+            "equip_sound": "",  # Will be set based on weapon type
         }
 
         # Try to get more specific information if available
@@ -249,6 +261,9 @@ class CFFWeaponLoader(QObject):
         # Add item subtype based on the weapon type
         weapon_data["item_subtype"] = "WEAPON"
 
+        # Determine appropriate sounds based on weapon type
+        self._set_weapon_sounds(weapon_data)
+
         return weapon_data
 
     def _determine_hands_from_type(self, weapon_type_name: str) -> str:
@@ -296,6 +311,82 @@ class CFFWeaponLoader(QObject):
             return "Ranged"
         else:
             return "Melee"
+
+    def _set_weapon_sounds(self, weapon_data: Dict[str, Any]) -> None:
+        """Set appropriate hit, miss, and equip sounds based on weapon type"""
+        weapon_type = weapon_data.get("weapon_type_name", "").lower()
+        hands = weapon_data.get("hands", "").lower()
+
+        # Default sounds
+        default_hit = "battle_hit_1hsword"
+        default_miss = "battle_miss_sword"
+
+        # Determine sounds based on weapon type and hands
+        if "sword" in weapon_type or "blade" in weapon_type:
+            if "two" in hands or "2h" in hands:
+                weapon_data["hit_sound"] = "battle_hit_2hsword"
+                weapon_data["miss_sound"] = "battle_miss_sword"
+                weapon_data["equip_sound"] = "weapon_equip_2hsword"
+            else:
+                weapon_data["hit_sound"] = "battle_hit_1hsword"
+                weapon_data["miss_sound"] = "battle_miss_sword"
+                weapon_data["equip_sound"] = "weapon_equip_1hsword"
+
+        elif "axe" in weapon_type:
+            if "two" in hands or "2h" in hands:
+                weapon_data["hit_sound"] = "battle_hit_2haxe"
+                weapon_data["miss_sound"] = "battle_miss_hammer"
+                weapon_data["equip_sound"] = "weapon_equip_2haxe"
+            else:
+                weapon_data["hit_sound"] = "battle_hit_1haxe"
+                weapon_data["miss_sound"] = "battle_miss_hammer"
+                weapon_data["equip_sound"] = "weapon_equip_1haxe"
+
+        elif "hammer" in weapon_type or "mace" in weapon_type:
+            if "two" in hands or "2h" in hands:
+                weapon_data["hit_sound"] = "battle_hit_2hhammer"
+                weapon_data["miss_sound"] = "battle_miss_hammer"
+                weapon_data["equip_sound"] = "weapon_equip_2hhammer"
+            else:
+                weapon_data["hit_sound"] = "battle_hit_1hhammer"
+                weapon_data["miss_sound"] = "battle_miss_hammer"
+                weapon_data["equip_sound"] = "weapon_equip_1hhammer"
+
+        elif "dagger" in weapon_type:
+            weapon_data["hit_sound"] = "battle_hit_1hdagger"
+            weapon_data["miss_sound"] = "battle_miss_sword"
+            weapon_data["equip_sound"] = "weapon_equip_dagger"
+
+        elif "staff" in weapon_type:
+            weapon_data["hit_sound"] = "battle_hit_1hstaff"
+            weapon_data["miss_sound"] = "battle_miss_staff"
+            weapon_data["equip_sound"] = "weapon_equip_staff"
+
+        elif "spear" in weapon_type:
+            weapon_data["hit_sound"] = "battle_hit_2hspear"
+            weapon_data["miss_sound"] = "battle_miss_staff"
+            weapon_data["equip_sound"] = "weapon_equip_spear"
+
+        elif "bow" in weapon_type:
+            weapon_data["hit_sound"] = "battle_hit_2hbow"
+            weapon_data["miss_sound"] = "battle_miss_bow"
+            weapon_data["equip_sound"] = "weapon_equip_bow"
+
+        elif "crossbow" in weapon_type:
+            weapon_data["hit_sound"] = "battle_hit_2hcrossbow"
+            weapon_data["miss_sound"] = "battle_miss_bow"
+            weapon_data["equip_sound"] = "weapon_equip_crossbow"
+
+        elif "wand" in weapon_type:
+            weapon_data["hit_sound"] = "magic_hit_staff"
+            weapon_data["miss_sound"] = "magic_miss"
+            weapon_data["equip_sound"] = "magic_equip"
+
+        else:
+            # Fallback to default sword sounds
+            weapon_data["hit_sound"] = default_hit
+            weapon_data["miss_sound"] = default_miss
+            weapon_data["equip_sound"] = "weapon_equip_default"
 
     def _load_from_enhanced_json(self) -> Dict[int, Dict[str, Any]]:
         """Fallback to load from enhanced_weapons.json"""
