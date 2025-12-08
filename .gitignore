@@ -56,3 +56,7 @@ test_cff_export/
 OriginalGameFiles/*
 !OriginalGameFiles/data/
 !OriginalGameFiles/script/
+
+# Auto-generated Kanban board (regenerated on every commit)
+kanban.md
+extracted_spells

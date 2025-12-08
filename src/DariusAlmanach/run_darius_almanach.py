@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+d#!/usr/bin/env python3
 """
 Darius Almanach - Launcher Script
 =================================
