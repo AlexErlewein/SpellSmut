@@ -17,6 +17,7 @@
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -275,7 +276,8 @@
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { fileToolStripMenuItem, editToolStripMenuItem, toolsToolStripMenuItem });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[]
+                { fileToolStripMenuItem, editToolStripMenuItem, toolsToolStripMenuItem });
             menuStrip1.Location = new System.Drawing.Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -285,7 +287,11 @@
             // 
             // fileToolStripMenuItem
             // 
-            fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { createNewMapToolStripMenuItem, loadToolStripMenuItem, saveMapToolStripMenuItem, closeMapToolStripMenuItem, exitToolStripMenuItem });
+            fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[]
+            {
+                createNewMapToolStripMenuItem, loadToolStripMenuItem, saveMapToolStripMenuItem,
+                closeMapToolStripMenuItem, exitToolStripMenuItem
+            });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             fileToolStripMenuItem.Text = "File";
@@ -327,7 +333,8 @@
             // 
             // editToolStripMenuItem
             // 
-            editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { undoToolStripMenuItem, redoToolStripMenuItem, operationHistoryToolStripMenuItem });
+            editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[]
+                { undoToolStripMenuItem, redoToolStripMenuItem, operationHistoryToolStripMenuItem });
             editToolStripMenuItem.Name = "editToolStripMenuItem";
             editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             editToolStripMenuItem.Text = "Edit";
@@ -357,7 +364,10 @@
             // 
             // toolsToolStripMenuItem
             // 
-            toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { importHeightmapToolStripMenuItem, exportHeightmapToolStripMenuItem, visibilitySettingsToolStripMenuItem });
+            toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[]
+            {
+                importHeightmapToolStripMenuItem, exportHeightmapToolStripMenuItem, visibilitySettingsToolStripMenuItem
+            });
             toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             toolsToolStripMenuItem.Text = "Tools";
@@ -396,7 +406,8 @@
             // StatusStrip
             // 
             StatusStrip.Dock = System.Windows.Forms.DockStyle.Bottom;
-            StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { StatusText, toolStripSeparator1, UpdatesText, toolStripSeparator2, SpecificText });
+            StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[]
+                { StatusText, toolStripSeparator1, UpdatesText, toolStripSeparator2, SpecificText });
             StatusStrip.Location = new System.Drawing.Point(0, 746);
             StatusStrip.Name = "StatusStrip";
             StatusStrip.Size = new System.Drawing.Size(1283, 25);
@@ -1440,13 +1451,13 @@
             BrushSizeTrackbar.AutoSize = false;
             BrushSizeTrackbar.Location = new System.Drawing.Point(128, 21);
             BrushSizeTrackbar.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            BrushSizeTrackbar.Maximum = 15;
+            BrushSizeTrackbar.Maximum = 60;
             BrushSizeTrackbar.Minimum = 1;
             BrushSizeTrackbar.Name = "BrushSizeTrackbar";
             BrushSizeTrackbar.Size = new System.Drawing.Size(121, 23);
             BrushSizeTrackbar.TabIndex = 8;
             BrushSizeTrackbar.TickFrequency = 2;
-            BrushSizeTrackbar.Value = 3;
+            BrushSizeTrackbar.Value = 20;
             BrushSizeTrackbar.ValueChanged += BrushSizeTrackbar_ValueChanged;
             // 
             // PanelTerrainSettings
@@ -2226,7 +2237,8 @@
             // ComboMaskAttribute
             // 
             ComboMaskAttribute.FormattingEnabled = true;
-            ComboMaskAttribute.Items.AddRange(new object[] { "Terrain block", "Object block", "Building block", "Manual block", "Lake", "Shore" });
+            ComboMaskAttribute.Items.AddRange(new object[]
+                { "Terrain block", "Object block", "Building block", "Manual block", "Lake", "Shore" });
             ComboMaskAttribute.Location = new System.Drawing.Point(140, 3);
             ComboMaskAttribute.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ComboMaskAttribute.Name = "ComboMaskAttribute";
@@ -2259,7 +2271,8 @@
             // ComboMaskSourceComparison
             // 
             ComboMaskSourceComparison.FormattingEnabled = true;
-            ComboMaskSourceComparison.Items.AddRange(new object[] { "Equal", "Greater or equal", "Greater than", "Not equal", "Less than", "Less or equal" });
+            ComboMaskSourceComparison.Items.AddRange(new object[]
+                { "Equal", "Greater or equal", "Greater than", "Not equal", "Less than", "Less or equal" });
             ComboMaskSourceComparison.Location = new System.Drawing.Point(136, 3);
             ComboMaskSourceComparison.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ComboMaskSourceComparison.Name = "ComboMaskSourceComparison";
@@ -2332,7 +2345,11 @@
             // ComboSelectionOperation
             // 
             ComboSelectionOperation.FormattingEnabled = true;
-            ComboSelectionOperation.Items.AddRange(new object[] { "Do nothing", "Set mask", "Intersect with mask", "Join with mask", "Either-or with mask", "Exclude from mask" });
+            ComboSelectionOperation.Items.AddRange(new object[]
+            {
+                "Do nothing", "Set mask", "Intersect with mask", "Join with mask", "Either-or with mask",
+                "Exclude from mask"
+            });
             ComboSelectionOperation.Location = new System.Drawing.Point(163, 70);
             ComboSelectionOperation.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ComboSelectionOperation.Name = "ComboSelectionOperation";
@@ -2344,7 +2361,11 @@
             // ComboSelectionSource
             // 
             ComboSelectionSource.FormattingEnabled = true;
-            ComboSelectionSource.Items.AddRange(new object[] { "All", "Paint", "Mask", "Terrain texture", "Terrain height", "Terrain slope", "Terrain attribute", "Feature" });
+            ComboSelectionSource.Items.AddRange(new object[]
+            {
+                "All", "Paint", "Mask", "Terrain texture", "Terrain height", "Terrain slope", "Terrain attribute",
+                "Feature"
+            });
             ComboSelectionSource.Location = new System.Drawing.Point(163, 9);
             ComboSelectionSource.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ComboSelectionSource.Name = "ComboSelectionSource";
