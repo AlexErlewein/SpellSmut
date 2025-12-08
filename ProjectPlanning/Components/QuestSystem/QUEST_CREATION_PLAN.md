@@ -4,9 +4,60 @@
 
 This plan defines a comprehensive **Quest Creation System** - an end-to-end workflow from concept to in-game testing. The system will provide a wizard-style interface for non-coders to create fully functional SpellForce quests with minimal technical knowledge.
 
-**Status**: 🟡 Planning Phase  
-**Priority**: High  
+**Status**: 🟢 In Development - Dialogue System Complete
+**Priority**: High
 **Dependencies**: Quest Editor Enhancements (✅ Completed)
+
+---
+
+## ✅ Completed Features: Dialogue System
+
+### Dialogue Builder Implementation (November 2025)
+
+**Status**: ✅ **COMPLETE**
+
+The dialogue system has been fully implemented with the following key features:
+
+#### 1. Step-by-Step Guided Interface
+- **Top-down tree view** instead of complex node-based editing
+- **Guided workflow** with "Next Part" button system
+- **Single-step editing** - right panel shows only currently selected step
+- **Step type selection** - users choose what type of step comes next
+
+#### 2. Enhanced Step Types
+- **START** - Beginning of dialogue
+- **NPC_SPEECH** - NPC dialogue with speaker name
+- **PLAYER_CHOICE** - Multiple choice options with visual connection indicators
+- **PLAYER_SPEECH** - Single option player speech (distinct from choices)
+- **NPC_RESPONSE** - NPC responses that can be linked to specific player choices
+- **END** - Conversation endpoint
+
+#### 3. Choice-to-Response Mapping System
+- **Visual connection indicators**:
+  - 🟢 **Green border** = Choice connected to NPC response
+  - 🔴 **Red border** = Choice needs connection
+- **Clear labels** showing "Leads to: [step_id]" or connection status
+- **Grouped choice editing** with individual response mapping
+- **Smart branching** support for complex dialogue trees
+
+#### 4. User Experience Improvements
+- **Clean visual design** with proper contrast (fixed white text on bright background)
+- **Intuitive workflow** - click step → edit → add next step → select type
+- **Real-time validation** showing connection status
+- **Auto-save functionality** preserving work progress
+- **Error handling** for UI widget lifecycle issues
+
+#### 5. Technical Implementation
+- **File**: `src/TirganachReloaded/cff_editor/widgets/simple_dialogue_builder.py`
+- **Architecture**: Step-based data structure with choice-specific response mapping
+- **Data Model**: Enhanced `DialogueStep` with `choices` containing `next_step_id` mapping
+- **UI Framework**: PySide6 with Qt layouts and signal/slot patterns
+
+#### 6. Launch System
+- **Single launcher**: `quest_creator.py` (cleaned up multiple confusing launchers)
+- **Dependency management**: Uses `uv` virtual environment
+- **Python compatibility**: Works with Python 3.13
+- **Error recovery**: Fixed QLabel deletion issues and import errors
 
 ---
 
@@ -829,7 +880,61 @@ src/TirganachReloaded/cff_editor/
 
 ---
 
-**Document Version**: 1.0  
+## Current Quest Editor Enhancement Tasks
+
+### High Priority Tasks
+
+1. **Location & NPC Tab Enhancement**
+   - Add dropdown menu for Quest giver selection with existing NPCs (ID and name)
+   - Research and test if object NPCs (gravestones, etc.) are included in NPC IDs or need separate handling
+   - **Task ID**: `quest_npc_giver_dropdown`
+
+2. **Objectives Tab Data Research**
+   - Investigate game's objective/requirement data format
+   - Determine correct data structure needed for game compatibility
+   - Plan UI improvements (dropdown menus, predefined elements) based on findings
+   - **Task ID**: `quest_objectives_data_research`
+
+### Medium Priority Tasks
+
+3. **Rewards Tab Item Browser**
+   - Create comprehensive item browser showing all obtainable items (weapons, armor, spells, etc.) with names and IDs
+   - Research if existing weapon/armor/spell browsers can be reused or if new browser is needed
+   - **Task ID**: `quest_rewards_item_browser`
+
+4. **Preview Tab Visual Fix**
+   - Remove white background fillings in preview tab for better readability and visual consistency
+   - **Task ID**: `quest_preview_visual_fix`
+
+### Low Priority Tasks
+
+5. **Original Quest Loading**
+   - Implement ability to load original game quests into editor for editing and analysis
+   - Analyze existing quest structure (NPC locations, rewards, requirements, etc.)
+   - **Task ID**: `quest_original_loading`
+
+### Dialogue System Enhancement (Based on George from Jungle Example)
+
+**Reference**: `ModdingTools/SpellForceLUASources/script/P213/n10983.lua`
+
+**Key Elements Identified**:
+- Player choices with unique `AnswerId` system
+- Conditional responses using `IsNpcFlagTrue/False`, `IsGlobalFlagTrue/False`
+- Complex branching with `OnAnswer{Id; ...}` blocks
+- State management through NPC flags
+- Multiple choice options with `OfferAnswer` vs `Answer` distinction
+
+**Planned Dialogue Enhancements**:
+- Enhanced choice management system
+- Conditional logic builder for dialogue availability
+- State flag management interface
+- Improved dialogue tree visualization
+- Import/export compatibility with LUA dialogue format
+
+---
+
+**Document Version**: 1.1  
 **Created**: 2025-10-27  
+**Updated**: 2025-11-14  
 **Author**: SpellSmut Development Team  
-**Status**: 🟡 Planning Complete - Ready for Implementation
+**Status**: 🟢 Active Development - Enhancement Tasks Defined

@@ -76,7 +76,7 @@ OnPlatformOneTimeEvent
 		SetNpcFlagTrue{Name = "BitteUmspawnen"},
 	}
 }
---OnOneTimeEvent	-- gleich wieder löschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
+--OnOneTimeEvent	-- gleich wieder lschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
 NewState{Name = "AvoidUmspawnAfterMapStartCutscene"}
 AddTransition
 {
@@ -102,9 +102,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 		IsGlobalFlagTrue {Name = "g_sP201UriasFollow"}, 
@@ -200,7 +198,7 @@ OnOneTimeEvent
 }
 
 
---Urias verwandelt sich in einen Schwertkämpfer, mit Follow.
+--Urias verwandelt sich in einen Schwertkmpfer, mit Follow.
 OnPlatformOneTimeEvent
 {
 	Conditions = 
@@ -261,7 +259,7 @@ OnOneTimeEvent
 	}
 }
 		
---Urias in der Nähe des Outposts.
+--Urias in der Nhe des Outposts.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -276,7 +274,7 @@ OnOneTimeEvent
 	}
 }
 
---Urias in der Nähe der Leutnantleiche.
+--Urias in der Nhe der Leutnantleiche.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -290,7 +288,7 @@ OnOneTimeEvent
 	}
 }
 
---Urias in der Nähe des Portals.
+--Urias in der Nhe des Portals.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -304,7 +302,7 @@ OnOneTimeEvent
 	}
 }
 
---Urias wenn ein Ordensritter getötet wurde und zum Bösen übergewechselt ist.
+--Urias wenn ein Ordensritter gettet wurde und zum Bsen bergewechselt ist.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -313,12 +311,12 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{ 
-		Outcry {NpcId = 8404, String = "Da! Teufellei! Seine Seele dient nun dem Grabräuber!" , Tag = "oca2uriasP201_009" , Delay = TRUE , Color = ColorWhite},
+		Outcry {NpcId = 8404, String = "Da! Teufellei! Seine Seele dient nun dem Grabruber!" , Tag = "oca2uriasP201_009" , Delay = TRUE , Color = ColorWhite},
 		
 	}
 }
 
---Urias wenn ein Ordensritter getötet wurde und zum Bösen übergewechselt ist.
+--Urias wenn ein Ordensritter gettet wurde und zum Bsen bergewechselt ist.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -356,7 +354,7 @@ Despawn
 	
 
 	-- 3 globale flags steuern das an/abschalten eines NPC Dialogs
-	-- die flags lösen die entspr. aktion aus und werden dabei wieder auf false gesetzt
+	-- die flags lsen die entspr. aktion aus und werden dabei wieder auf false gesetzt
 	-- dies sind die flags, nach dem underscore kommt die NpcId:
 	-- SetGlobalFlagTrue{Name = "PleaseRemoveDialog_1234"},
 	-- SetGlobalFlagTrue{Name = "PleaseEnableMainQuestDialog_5678"},
@@ -384,7 +382,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "urias201_004", String = "Nein, er hat mich nur in einem Brief hierher gebeten! Als er schrieb, ihr würdet ebenfalls hier sein, dachte ich dem alten Narren gehen die Sinne durch!"},
+			Say{Tag = "urias201_004", String = "Nein, er hat mich nur in einem Brief hierher gebeten! Als er schrieb, ihr wrdet ebenfalls hier sein, dachte ich dem alten Narren gehen die Sinne durch!"},
 			Answer{Tag = "", String = "", AnswerId = 3},
 		}}
 
@@ -392,8 +390,8 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "urias201_005", String = "Aber als wir hier ankamen fehlte von Darius jede Spur! Die ganze Bevölkerung scheint aus diesem Landstrich geflohen zu sein!"},
-			Answer{Tag = "urias201_006PC", String = "Wenn ich diese Untoten betrachte, weiß ich, was mit der Bevölkerung geschehen ist!", AnswerId = 4},
+			Say{Tag = "urias201_005", String = "Aber als wir hier ankamen fehlte von Darius jede Spur! Die ganze Bevlkerung scheint aus diesem Landstrich geflohen zu sein!"},
+			Answer{Tag = "urias201_006PC", String = "Wenn ich diese Untoten betrachte, wei ich, was mit der Bevlkerung geschehen ist!", AnswerId = 4},
 		}}
 
 	OnAnswer{4;
@@ -408,8 +406,8 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "urias201_008", String = "Sagt Freund, habt Ihr noch den Phönixstein, wie man sich erzählt?"},
-			Answer{Tag = "urias201_009PC", String = "Ja. Als ich sah, wie der junge Rohen druch das Zeitportal floh, begriff ich, dass niemand ihm folgen und ihn aufhalten durfte! Sonst wäre er nie asl alter Mann unserer Rettung gewesen!", AnswerId = 6},
+			Say{Tag = "urias201_008", String = "Sagt Freund, habt Ihr noch den Phnixstein, wie man sich erzhlt?"},
+			Answer{Tag = "urias201_009PC", String = "Ja. Als ich sah, wie der junge Rohen druch das Zeitportal floh, begriff ich, dass niemand ihm folgen und ihn aufhalten durfte! Sonst wre er nie asl alter Mann unserer Rettung gewesen!", AnswerId = 6},
 		}}
 
 	OnAnswer{6;
@@ -417,14 +415,14 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			Answer{Tag = "urias201_010PC", String = "Ich habe den Phönixstein aus dem Zeitportal genommen. Das Portal zerfiel ... und ich floh. Ich zog durch ferne Lande, hoffend, dass nie mehr jemand nach der Macht des Phönix trachten würde! Ich hoffte auch, das meine Zeit des Kampfes vorbei sei.", AnswerId = 7},
+			Answer{Tag = "urias201_010PC", String = "Ich habe den Phnixstein aus dem Zeitportal genommen. Das Portal zerfiel ... und ich floh. Ich zog durch ferne Lande, hoffend, dass nie mehr jemand nach der Macht des Phnix trachten wrde! Ich hoffte auch, das meine Zeit des Kampfes vorbei sei.", AnswerId = 7},
 		}}
 
 	OnAnswer{7;
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "urias201_011", String = "Ich weiß, Ihr wünscht Euch Frieden. Aber Darius hätte uns nicht gerufen, wenn es nicht wichtig wäre! Kommt, meine Ritter haben in einem verlassenen Dorf Quartier bezogen. Dort sind wir in Sicherheit. Es liegt südlich, den Weg entlang!"},
+			Say{Tag = "urias201_011", String = "Ich wei, Ihr wnscht Euch Frieden. Aber Darius htte uns nicht gerufen, wenn es nicht wichtig wre! Kommt, meine Ritter haben in einem verlassenen Dorf Quartier bezogen. Dort sind wir in Sicherheit. Es liegt sdlich, den Weg entlang!"},
 			Answer{Tag = "", String = "", AnswerId = 8},
 		}}
 

@@ -124,7 +124,7 @@ class CFFDataModel(QObject):
                 logger.warning("ITM Integration: Original GameData.cff not found, skipping initialization")
         except ImportError:
             self.itm_integration = None
-            logger.warning("ITM Integration: cff_editor_itm_integration module not available")
+            logger.info("ITM Integration: Optional cff_editor_itm_integration module not available (this is normal for most installations)")
         except Exception as e:
             self.itm_integration = None
             logger.error(f"ITM Integration: Error initializing - {e}")

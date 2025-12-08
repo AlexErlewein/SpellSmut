@@ -3,7 +3,7 @@ function CreateStateMachine(_Type,_PlatformId,_NpcId,_X,_Y)
 BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 
 -----------------------------------------------------------
--- Spawnen, wenn Alyha durch die Höhlen verschwunden ist --
+-- Spawnen, wenn Alyha durch die Hhlen verschwunden ist --
 -----------------------------------------------------------
 
 SpawnOnlyWhen
@@ -13,9 +13,7 @@ SpawnOnlyWhen
 	NoSpawnEffect = TRUE,
 	Conditions = 
 	{
-		UND
-		(
-		IsGlobalTimeElapsed {Name = "g_p207_first_attack_wave_on_base", Seconds = 1220},
+		UND(		IsGlobalTimeElapsed {Name = "g_p207_first_attack_wave_on_base", Seconds = 1220},
 		Negated(IsGlobalFlagTrue {Name = "g_p207_Hoehle05_versperrt"}),
 		Negated(IsGlobalFlagTrue {Name = "g_P207_Erste_Festung_Eingenommen"})
 		),

@@ -15,7 +15,7 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{
-		Outcry { NpcId = 6800, String = "Willkommen in Tirganach, Schülerin. Diese Mauern werden dich und deine Freunde schützen." , Tag = "ocElune_P105_001" , Color = ColorWhite},
+		Outcry { NpcId = 6800, String = "Willkommen in Tirganach, Schlerin. Diese Mauern werden dich und deine Freunde schtzen." , Tag = "ocElune_P105_001" , Color = ColorWhite},
 		QuestSolve{QuestId = 681},
 		QuestBegin{QuestId = 696},
 		SetGlobalFlagTrue {Name ="P105_LenaKannSprechen"},
@@ -79,7 +79,7 @@ OnToggleEvent
 		},
 		Actions = {
 			Say{Tag = "elune105_001", String = "Willkommen in Tirganach, Runenkrieger."},
-			Answer{Tag = "elune105_002PC", String = "Ich danke Euch für den Schutz, den Ihr uns gewährt.", AnswerId = 2},
+			Answer{Tag = "elune105_002PC", String = "Ich danke Euch fr den Schutz, den Ihr uns gewhrt.", AnswerId = 2},
 		}}
 
 	OnAnswer{1;
@@ -130,7 +130,7 @@ OnToggleEvent
 			QuestState{QuestId = 688 , State = StateActive},
 		},
 		Actions = {
-			Say{Tag = "elune105_004", String = "Nun seid Ihr bereit für einen Angriff auf das rote Imperium. Die Schattengrenze erwartet Euch."},
+			Say{Tag = "elune105_004", String = "Nun seid Ihr bereit fr einen Angriff auf das rote Imperium. Die Schattengrenze erwartet Euch."},
 			Answer{Tag = "", String = "", AnswerId = 6},
 		}}
 
@@ -147,7 +147,7 @@ OnToggleEvent
 			Negated(QuestState{QuestId = 608 , State = StateActive}),
 		},
 		Actions = {
-			Say{Tag = "elune105_006", String = "Was wünscht Ihr?"},
+			Say{Tag = "elune105_006", String = "Was wnscht Ihr?"},
 			Answer{Tag = "", String = "", AnswerId = 9},
 		}}
 
@@ -156,7 +156,7 @@ OnToggleEvent
 			QuestState{QuestId = 608 , State = StateActive},
 		},
 		Actions = {
-			Say{Tag = "elune105_005", String = "Habt Ihr den Feuerbann erringen können?"},
+			Say{Tag = "elune105_005", String = "Habt Ihr den Feuerbann erringen knnen?"},
 			Answer{Tag = "", String = "", AnswerId = 8},
 		}}
 
@@ -179,14 +179,12 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			QuestState{QuestId = 687 , State = StateActive},
 			QuestState{QuestId = 690 , State = StateActive},
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
@@ -195,21 +193,19 @@ OnToggleEvent
 			OfferAnswer{Tag = "elune105_007PC", String = "Was ist nun wirklich geschehen?", AnswerId = 11},
 			OfferAnswer{Tag = "elune105_014PC", String = "Was ist nun zu tun?", AnswerId = 19},
 			OfferAnswer{Tag = "elune105_023PC", String = "Ich habe den Feuerbann, das geheime Wissen der Zwerge!", AnswerId = 27},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 			OfferAnswer{Tag = "elune105_036PC", String = "Warum, glaubt Ihr, hat der Fial Darg Cenwen geraubt?", AnswerId = 40},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			QuestState{QuestId = 687 , State = StateActive},
 			QuestState{QuestId = 690 , State = StateActive},
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
@@ -218,20 +214,18 @@ OnToggleEvent
 			OfferAnswer{Tag = "elune105_007PC", String = "Was ist nun wirklich geschehen?", AnswerId = 11},
 			OfferAnswer{Tag = "elune105_014PC", String = "Was ist nun zu tun?", AnswerId = 19},
 			OfferAnswer{Tag = "elune105_023PC", String = "Ich habe den Feuerbann, das geheime Wissen der Zwerge!", AnswerId = 27},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			QuestState{QuestId = 687 , State = StateActive},
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
@@ -246,14 +240,12 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			QuestState{QuestId = 687 , State = StateActive},
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
@@ -267,14 +259,12 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			QuestState{QuestId = 690 , State = StateActive},
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
@@ -282,21 +272,19 @@ OnToggleEvent
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "elune105_007PC", String = "Was ist nun wirklich geschehen?", AnswerId = 11},
 			OfferAnswer{Tag = "elune105_014PC", String = "Was ist nun zu tun?", AnswerId = 19},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 			OfferAnswer{Tag = "elune105_036PC", String = "Warum, glaubt Ihr, hat der Fial Darg Cenwen geraubt?", AnswerId = 40},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			QuestState{QuestId = 690 , State = StateActive},
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
@@ -304,20 +292,18 @@ OnToggleEvent
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "elune105_007PC", String = "Was ist nun wirklich geschehen?", AnswerId = 11},
 			OfferAnswer{Tag = "elune105_014PC", String = "Was ist nun zu tun?", AnswerId = 19},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
@@ -331,14 +317,12 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
@@ -351,14 +335,12 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			QuestState{QuestId = 687 , State = StateActive},
 			QuestState{QuestId = 690 , State = StateActive},
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
@@ -366,21 +348,19 @@ OnToggleEvent
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "elune105_007PC", String = "Was ist nun wirklich geschehen?", AnswerId = 11},
 			OfferAnswer{Tag = "elune105_023PC", String = "Ich habe den Feuerbann, das geheime Wissen der Zwerge!", AnswerId = 27},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 			OfferAnswer{Tag = "elune105_036PC", String = "Warum, glaubt Ihr, hat der Fial Darg Cenwen geraubt?", AnswerId = 40},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			QuestState{QuestId = 687 , State = StateActive},
 			QuestState{QuestId = 690 , State = StateActive},
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
@@ -388,20 +368,18 @@ OnToggleEvent
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "elune105_007PC", String = "Was ist nun wirklich geschehen?", AnswerId = 11},
 			OfferAnswer{Tag = "elune105_023PC", String = "Ich habe den Feuerbann, das geheime Wissen der Zwerge!", AnswerId = 27},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			QuestState{QuestId = 687 , State = StateActive},
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
@@ -415,14 +393,12 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			QuestState{QuestId = 687 , State = StateActive},
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
@@ -435,55 +411,49 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			QuestState{QuestId = 690 , State = StateActive},
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "elune105_007PC", String = "Was ist nun wirklich geschehen?", AnswerId = 11},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 			OfferAnswer{Tag = "elune105_036PC", String = "Warum, glaubt Ihr, hat der Fial Darg Cenwen geraubt?", AnswerId = 40},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			QuestState{QuestId = 690 , State = StateActive},
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "elune105_007PC", String = "Was ist nun wirklich geschehen?", AnswerId = 11},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
@@ -496,14 +466,12 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			IsNpcFlagFalse{Name = "QuestionWhatHappened"},
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
@@ -515,14 +483,12 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			QuestState{QuestId = 687 , State = StateActive},
 			QuestState{QuestId = 690 , State = StateActive},
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
@@ -530,21 +496,19 @@ OnToggleEvent
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "elune105_014PC", String = "Was ist nun zu tun?", AnswerId = 19},
 			OfferAnswer{Tag = "elune105_023PC", String = "Ich habe den Feuerbann, das geheime Wissen der Zwerge!", AnswerId = 27},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 			OfferAnswer{Tag = "elune105_036PC", String = "Warum, glaubt Ihr, hat der Fial Darg Cenwen geraubt?", AnswerId = 40},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			QuestState{QuestId = 687 , State = StateActive},
 			QuestState{QuestId = 690 , State = StateActive},
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
@@ -552,20 +516,18 @@ OnToggleEvent
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "elune105_014PC", String = "Was ist nun zu tun?", AnswerId = 19},
 			OfferAnswer{Tag = "elune105_023PC", String = "Ich habe den Feuerbann, das geheime Wissen der Zwerge!", AnswerId = 27},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			QuestState{QuestId = 687 , State = StateActive},
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
@@ -579,14 +541,12 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			QuestState{QuestId = 687 , State = StateActive},
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
@@ -599,55 +559,49 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			QuestState{QuestId = 690 , State = StateActive},
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "elune105_014PC", String = "Was ist nun zu tun?", AnswerId = 19},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 			OfferAnswer{Tag = "elune105_036PC", String = "Warum, glaubt Ihr, hat der Fial Darg Cenwen geraubt?", AnswerId = 40},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			QuestState{QuestId = 690 , State = StateActive},
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "elune105_014PC", String = "Was ist nun zu tun?", AnswerId = 19},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
@@ -660,14 +614,12 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 ),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
@@ -679,55 +631,49 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			QuestState{QuestId = 687 , State = StateActive},
 			QuestState{QuestId = 690 , State = StateActive},
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "elune105_023PC", String = "Ich habe den Feuerbann, das geheime Wissen der Zwerge!", AnswerId = 27},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 			OfferAnswer{Tag = "elune105_036PC", String = "Warum, glaubt Ihr, hat der Fial Darg Cenwen geraubt?", AnswerId = 40},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			QuestState{QuestId = 687 , State = StateActive},
 			QuestState{QuestId = 690 , State = StateActive},
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "elune105_023PC", String = "Ich habe den Feuerbann, das geheime Wissen der Zwerge!", AnswerId = 27},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			QuestState{QuestId = 687 , State = StateActive},
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
@@ -740,14 +686,12 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			QuestState{QuestId = 687 , State = StateActive},
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
@@ -759,53 +703,47 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			QuestState{QuestId = 690 , State = StateActive},
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 			OfferAnswer{Tag = "elune105_036PC", String = "Warum, glaubt Ihr, hat der Fial Darg Cenwen geraubt?", AnswerId = 40},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			QuestState{QuestId = 690 , State = StateActive},
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlüssel gefunden!", AnswerId = 36},
+			OfferAnswer{Tag = "elune105_033PC", String = "Ich habe bei den Geistern einen Schlssel gefunden!", AnswerId = 36},
 		}}
 
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ,
 		},
@@ -817,14 +755,12 @@ OnToggleEvent
 	OnAnswer{10;
 		Conditions = {
 			Negated(IsNpcFlagFalse{Name = "QuestionWhatHappened"}),
-			Negated(UND
-			(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
+			Negated(UND(IsNpcFlagTrue{Name = "QuestionWhatHappened"} ,
 			 IsNpcFlagFalse{Name = "QuestionWhatNow"}
 			 )),
 			Negated(QuestState{QuestId = 687 , State = StateActive}),
 			Negated(QuestState{QuestId = 690 , State = StateActive}),
-			Negated(UND
-							(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
+			Negated(UND(IsNpcFlagFalse{Name = "QuestionWhyStolen"},
  							IsNpcFlagTrue{Name = "QuestionWhatHappened"})
  						  ),
 		},
@@ -837,14 +773,14 @@ OnToggleEvent
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			Answer{Tag = "elune105_008PC", String = "War alles nur eine Lüge? Keine geraubte Königin? Kein Drache, der erwacht?", AnswerId = 12},
+			Answer{Tag = "elune105_008PC", String = "War alles nur eine Lge? Keine geraubte Knigin? Kein Drache, der erwacht?", AnswerId = 12},
 		}}
 
 	OnAnswer{12;
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_009", String = "Der Feuerdiener hat Euch nicht gänzlich belogen. Die Königin unter dem Eis wurde tatsächlich geraubt!"},
+			Say{Tag = "elune105_009", String = "Der Feuerdiener hat Euch nicht gnzlich belogen. Die Knigin unter dem Eis wurde tatschlich geraubt!"},
 			Answer{Tag = "", String = "", AnswerId = 13},
 		}}
 
@@ -852,7 +788,7 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_010", String = "Der Fial Darg stahl sie mit Hilfe seiner Täuschkunst. Dann floh er nach Mirraw Thur, um bei seinen Orkdienern Unterschlupf zu finden."},
+			Say{Tag = "elune105_010", String = "Der Fial Darg stahl sie mit Hilfe seiner Tuschkunst. Dann floh er nach Mirraw Thur, um bei seinen Orkdienern Unterschlupf zu finden."},
 			Answer{Tag = "", String = "", AnswerId = 14},
 		}}
 
@@ -860,7 +796,7 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_011", String = "Wir verfolgten ihn! Der weißen Priesterin gelang es, ihn mit einem Bann zu belegen. Doch die Königin war verschwunden."},
+			Say{Tag = "elune105_011", String = "Wir verfolgten ihn! Der weien Priesterin gelang es, ihn mit einem Bann zu belegen. Doch die Knigin war verschwunden."},
 			Answer{Tag = "", String = "", AnswerId = 15},
 		}}
 
@@ -876,7 +812,7 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_013", String = "Dieser Grim muss derweil die Königin unbemerkt aus dem Land gebracht haben. Dann hat er Euch getäuscht, um seinen Herrn zu befreien und dem roten Imperium die Pforten zu öffnen."},
+			Say{Tag = "elune105_013", String = "Dieser Grim muss derweil die Knigin unbemerkt aus dem Land gebracht haben. Dann hat er Euch getuscht, um seinen Herrn zu befreien und dem roten Imperium die Pforten zu ffnen."},
 			Answer{Tag = "", String = "", AnswerId = 17},
 		}}
 
@@ -901,7 +837,7 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_015", String = "Die Königin muss befreit werden! Wenn wir alle vergehen, aber sie muss zu Aryn zurückkehren!"},
+			Say{Tag = "elune105_015", String = "Die Knigin muss befreit werden! Wenn wir alle vergehen, aber sie muss zu Aryn zurckkehren!"},
 			Answer{Tag = "elune105_016PC", String = "Oder er wird ausziehen, um sie zu suchen ...", AnswerId = 20},
 		}}
 
@@ -909,15 +845,15 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_017", String = "Und mit ihm käme der ewige Winter über die Welt! Noch ist er schwach, aber wir spüren bereits seinen Zorn!"},
-			Answer{Tag = "elune105_018PC", String = "Aber wie finden wir die Königin?", AnswerId = 21},
+			Say{Tag = "elune105_017", String = "Und mit ihm kme der ewige Winter ber die Welt! Noch ist er schwach, aber wir spren bereits seinen Zorn!"},
+			Answer{Tag = "elune105_018PC", String = "Aber wie finden wir die Knigin?", AnswerId = 21},
 		}}
 
 	OnAnswer{21;
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_019", String = "Oh, sie zu finden, wird einfach sein. Aber kein Lichtgläubiger gelangt lebend zu ihr. Die Feuer des roten Imperiums würden Euch verzehren!"},
+			Say{Tag = "elune105_019", String = "Oh, sie zu finden, wird einfach sein. Aber kein Lichtglubiger gelangt lebend zu ihr. Die Feuer des roten Imperiums wrden Euch verzehren!"},
 			Answer{Tag = "", String = "", AnswerId = 22},
 		}}
 
@@ -925,7 +861,7 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_020", String = "Selbst unsere Winterwacht könnte nicht bis nach Shal´Dun vordringen, dem brennenden Fels, auf dem der Fial Darg regiert."},
+			Say{Tag = "elune105_020", String = "Selbst unsere Winterwacht knnte nicht bis nach ShalDun vordringen, dem brennenden Fels, auf dem der Fial Darg regiert."},
 			Answer{Tag = "", String = "", AnswerId = 23},
 		}}
 
@@ -933,7 +869,7 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_021", String = "Wir müssen einen Weg finden, den Flammen zu widerstehen. Ich erinnere mich, dass die Zwerge einst Mittel kannten, um vom Feuer verschont zu werden."},
+			Say{Tag = "elune105_021", String = "Wir mssen einen Weg finden, den Flammen zu widerstehen. Ich erinnere mich, dass die Zwerge einst Mittel kannten, um vom Feuer verschont zu werden."},
 			Answer{Tag = "", String = "", AnswerId = 24},
 		}}
 
@@ -977,7 +913,7 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_025", String = "Meine Schwestern und ich müssen hier verweilen. Aedale ist von uns gegangen, eine neue Priesterin muss bestimmt werden."},
+			Say{Tag = "elune105_025", String = "Meine Schwestern und ich mssen hier verweilen. Aedale ist von uns gegangen, eine neue Priesterin muss bestimmt werden."},
 			Answer{Tag = "", String = "", AnswerId = 29},
 		}}
 
@@ -986,7 +922,7 @@ OnToggleEvent
 		},
 		Actions = {
 			Say{Tag = "elune105_026", String = "Ihr aber solltet nicht rasten! Wir wissen nicht, wie viel Zeit noch bleibt, und der Weg in die Feuerstadt ist beschwerlich!"},
-			Answer{Tag = "elune105_027PC", String = "Wie gelange ich nach Shal´Dun?", AnswerId = 30},
+			Answer{Tag = "elune105_027PC", String = "Wie gelange ich nach ShalDun?", AnswerId = 30},
 		}}
 
 	OnAnswer{30;
@@ -1009,7 +945,7 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_031", String = "Sie haben diese Tore erbaut! Wir hoffen, in den Gräbern etwas zu finden, mit dem man das Tor öffnen kann."},
+			Say{Tag = "elune105_031", String = "Sie haben diese Tore erbaut! Wir hoffen, in den Grbern etwas zu finden, mit dem man das Tor ffnen kann."},
 			Answer{Tag = "", String = "", AnswerId = 33},
 		}}
 
@@ -1017,7 +953,7 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_032", String = "Begebt Euch des Nachts zu den Höhlen nahe der Westbrücke. Dort steigen sie manchmal aus den eisigen Tiefen herauf."},
+			Say{Tag = "elune105_032", String = "Begebt Euch des Nachts zu den Hhlen nahe der Westbrcke. Dort steigen sie manchmal aus den eisigen Tiefen herauf."},
 			Answer{Tag = "", String = "", AnswerId = 34},
 		}}
 
@@ -1047,7 +983,7 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_034", String = "Öffnet damit das Tor im Südosten, dahinter liegt der Pfad in die brennenden Lande der Dunklen."},
+			Say{Tag = "elune105_034", String = "ffnet damit das Tor im Sdosten, dahinter liegt der Pfad in die brennenden Lande der Dunklen."},
 			Answer{Tag = "", String = "", AnswerId = 37},
 		}}
 
@@ -1055,7 +991,7 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_035", String = "Mögen die Götter des Lichts Euch begleiten! Eilt Euch!"},
+			Say{Tag = "elune105_035", String = "Mgen die Gtter des Lichts Euch begleiten! Eilt Euch!"},
 			Answer{Tag = "", String = "", AnswerId = 38},
 		}}
 
@@ -1091,7 +1027,7 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_038", String = "Bedenkt, Cenwen ist etwas ganz Besonderes. Sie ist ein Gottkind, eine Erstgeborene, eine der ersten Elfen, die über das Weltenrund wanderten."},
+			Say{Tag = "elune105_038", String = "Bedenkt, Cenwen ist etwas ganz Besonderes. Sie ist ein Gottkind, eine Erstgeborene, eine der ersten Elfen, die ber das Weltenrund wanderten."},
 			Answer{Tag = "", String = "", AnswerId = 42},
 		}}
 
@@ -1099,7 +1035,7 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_039", String = "Das Blut der Erstgeborenen trägt noch die Magie der Götter ... und Rituale, die mit diesem Blut vollführt werden, haben göttliche Macht!"},
+			Say{Tag = "elune105_039", String = "Das Blut der Erstgeborenen trgt noch die Magie der Gtter ... und Rituale, die mit diesem Blut vollfhrt werden, haben gttliche Macht!"},
 			Answer{Tag = "", String = "", AnswerId = 43},
 		}}
 
@@ -1123,7 +1059,7 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_042", String = "Die dunklen Götter wieder auf Eo zurückzurufen! Was aus uns, Aryn oder sogar seinen eigenen Dienern wird, schert diese Kreatur nicht!"},
+			Say{Tag = "elune105_042", String = "Die dunklen Gtter wieder auf Eo zurckzurufen! Was aus uns, Aryn oder sogar seinen eigenen Dienern wird, schert diese Kreatur nicht!"},
 			Answer{Tag = "", String = "", AnswerId = 46},
 		}}
 
@@ -1166,7 +1102,7 @@ OnToggleEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "elune105_045", String = "Tot? Ihr Götter! Warum sie? Warum ... ?"},
+			Say{Tag = "elune105_045", String = "Tot? Ihr Gtter! Warum sie? Warum ... ?"},
 			Answer{Tag = "elune105_046", String = "Nicht ich?", AnswerId = 50},
 		}}
 
@@ -1175,7 +1111,7 @@ OnToggleEvent
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			Answer{Tag = "elune105_047", String = "Glaubt mir, ich wäre ebenso für sie gestorben. Aber ich bin an dieses Leben gefesselt, ich kann nur mit ansehen, wie meine Freunde sterben!", AnswerId = 51},
+			Answer{Tag = "elune105_047", String = "Glaubt mir, ich wre ebenso fr sie gestorben. Aber ich bin an dieses Leben gefesselt, ich kann nur mit ansehen, wie meine Freunde sterben!", AnswerId = 51},
 		}}
 
 	OnAnswer{51;

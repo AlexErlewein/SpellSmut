@@ -96,7 +96,7 @@ OnPlatformOneTimeEvent
 		SetNpcFlagTrue{Name = "BitteUmspawnen"},
 	}
 }
---OnOneTimeEvent	-- gleich wieder löschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
+--OnOneTimeEvent	-- gleich wieder lschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
 NewState{Name = "AvoidUmspawnAfterMapStartCutscene"}
 AddTransition
 {
@@ -123,9 +123,7 @@ Umspawn
 	Conditions = 
 	{
 		
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		)
 		
@@ -234,10 +232,10 @@ OnOneTimeEvent
 	Actions =
 	{
 		
-		Outcry {Delay = FALSE, NpcId = 6311, String = "Janina ... Den Namen habe ich lange nicht mehr gehört. Wir dachten alle sie sei tot.", Tag = "ocLenaP001_001" },
+		Outcry {Delay = FALSE, NpcId = 6311, String = "Janina ... Den Namen habe ich lange nicht mehr gehrt. Wir dachten alle sie sei tot.", Tag = "ocLenaP001_001" },
 		Outcry {Delay = FALSE, NpcId = 6311, String = "Ihretwegen hat Dunhan den Widerstand verlassen.", Tag = "ocLenaP001_002" },
 		Outcry {Delay = FALSE, NpcId = 5951, String = "Narretei!", Tag = "ocGrimP001_001" },
-		Outcry {Delay = FALSE, NpcId = 6311, String = "Liebe, mein großer Krieger. Wir sollten versuchen sie zu befreien, aber wir werden Verstärkung brauchen.", Tag = "ocLenaP001_003" },
+		Outcry {Delay = FALSE, NpcId = 6311, String = "Liebe, mein groer Krieger. Wir sollten versuchen sie zu befreien, aber wir werden Verstrkung brauchen.", Tag = "ocLenaP001_003" },
 	}
 }
 
@@ -250,7 +248,7 @@ OnOneTimeEvent
 	},
 	Actions =
 	{
-		Outcry { NpcId = 6311 , String = "Die Skerg stellen uns ihre Siedlung zur Verfügung! Damit können wir unsere Truppen verstärken! Schickt Arbeiter in die Häuser!" , Tag = "ocLenaP001_004" },
+		Outcry { NpcId = 6311 , String = "Die Skerg stellen uns ihre Siedlung zur Verfgung! Damit knnen wir unsere Truppen verstrken! Schickt Arbeiter in die Huser!" , Tag = "ocLenaP001_004" },
 	}
 }
 

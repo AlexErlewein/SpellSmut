@@ -60,7 +60,7 @@ OnPlatformOneTimeEvent
 	}
 }
 
---OnOneTimeEvent	-- gleich wieder löschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
+--OnOneTimeEvent	-- gleich wieder lschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
 NewState{Name = "AvoidUmspawnAfterMapStartCutscene"}
 AddTransition
 {
@@ -86,9 +86,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 		IsNpcFlagFalse {Name = "LenaNichtUmspawnen"},
@@ -394,9 +392,9 @@ Despawn
 }
 ----------------------------------------------------------------------------
 --
--- Sterben und Dialoge Block, der wird etwas größer, weil für jede Dialog-
+-- Sterben und Dialoge Block, der wird etwas grer, weil fr jede Dialog-
 -- bedingung, auch wenn es sie schon als Event in n0 gibt, ein extra Script 
--- nötig ist, damit der Dialog immer an ist so lange die Bedingungen gelten
+-- ntig ist, damit der Dialog immer an ist so lange die Bedingungen gelten
 --
 -----------------------------------------------------------------------------
 --
@@ -469,10 +467,10 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -490,10 +488,10 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -510,10 +508,10 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -530,10 +528,10 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -549,8 +547,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
@@ -569,8 +567,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
@@ -588,8 +586,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -607,8 +605,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 		}}
 
@@ -625,9 +623,9 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -645,9 +643,9 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -664,9 +662,9 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -683,9 +681,9 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -701,8 +699,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -720,8 +718,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -738,8 +736,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -756,8 +754,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 		}}
 
 	OnBeginDialog{
@@ -773,9 +771,9 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -793,9 +791,9 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -812,9 +810,9 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -831,9 +829,9 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -849,7 +847,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
@@ -868,7 +866,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
@@ -886,7 +884,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -904,7 +902,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 		}}
 
@@ -921,8 +919,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -940,8 +938,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -958,8 +956,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -976,8 +974,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -993,7 +991,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -1011,7 +1009,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -1028,7 +1026,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -1045,7 +1043,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 		}}
 
 	OnBeginDialog{
@@ -1061,9 +1059,9 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -1081,9 +1079,9 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -1100,9 +1098,9 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -1119,9 +1117,9 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -1137,7 +1135,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
@@ -1156,7 +1154,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
@@ -1174,7 +1172,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -1192,7 +1190,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 		}}
 
@@ -1209,8 +1207,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -1228,8 +1226,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -1246,8 +1244,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -1264,8 +1262,8 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -1281,7 +1279,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -1299,7 +1297,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -1316,7 +1314,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -1333,7 +1331,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 		}}
 
 	OnBeginDialog{
@@ -1350,7 +1348,7 @@ Despawn
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -1369,7 +1367,7 @@ Despawn
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -1387,7 +1385,7 @@ Despawn
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -1405,7 +1403,7 @@ Despawn
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -1489,7 +1487,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -1507,7 +1505,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -1524,7 +1522,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -1541,7 +1539,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -1620,10 +1618,10 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -1640,10 +1638,10 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -1659,10 +1657,10 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -1678,10 +1676,10 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -1696,8 +1694,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
@@ -1715,8 +1713,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
@@ -1733,8 +1731,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -1751,8 +1749,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 		}}
 
@@ -1768,9 +1766,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -1787,9 +1785,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -1805,9 +1803,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -1823,9 +1821,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -1840,8 +1838,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -1858,8 +1856,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -1875,8 +1873,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -1892,8 +1890,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 		}}
 
 	OnBeginDialog{
@@ -1908,9 +1906,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -1927,9 +1925,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -1945,9 +1943,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -1963,9 +1961,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -1980,7 +1978,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
@@ -1998,7 +1996,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
@@ -2015,7 +2013,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -2032,7 +2030,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 		}}
 
@@ -2048,8 +2046,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -2066,8 +2064,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -2083,8 +2081,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -2100,8 +2098,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -2116,7 +2114,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -2133,7 +2131,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -2149,7 +2147,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -2165,7 +2163,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 		}}
 
 	OnBeginDialog{
@@ -2180,9 +2178,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -2199,9 +2197,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -2217,9 +2215,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -2235,9 +2233,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -2252,7 +2250,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
@@ -2270,7 +2268,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
@@ -2287,7 +2285,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -2304,7 +2302,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 		}}
 
@@ -2320,8 +2318,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -2338,8 +2336,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -2355,8 +2353,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -2372,8 +2370,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -2388,7 +2386,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -2405,7 +2403,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -2421,7 +2419,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -2437,7 +2435,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 		}}
 
 	OnBeginDialog{
@@ -2453,7 +2451,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -2471,7 +2469,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -2488,7 +2486,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -2505,7 +2503,7 @@ Despawn
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -2584,7 +2582,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -2601,7 +2599,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -2617,7 +2615,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -2633,7 +2631,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_001", String = "Freund?"},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnBeginDialog{
@@ -2708,7 +2706,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "lea104_004", String = "Hoffen wir, dass die Torgs nicht schon alles geplündert haben. Sobald wir einen Stützpunkt haben, können wir den Flüchtlingen Schutz gewähren."},
+			Say{Tag = "lea104_004", String = "Hoffen wir, dass die Torgs nicht schon alles geplndert haben. Sobald wir einen Sttzpunkt haben, knnen wir den Flchtlingen Schutz gewhren."},
 			Answer{Tag = "", String = "", AnswerId = 3},
 		}}
 
@@ -2740,15 +2738,15 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "lea104_007", String = "Die Leute sind völlig erschöpft! Die meisten waren nie gut genährt und die letzten Tage haben es auch nicht besser gemacht."},
-			Answer{Tag = "lea104_008PC", String = "Was können wir tun?", AnswerId = 6},
+			Say{Tag = "lea104_007", String = "Die Leute sind vllig erschpft! Die meisten waren nie gut genhrt und die letzten Tage haben es auch nicht besser gemacht."},
+			Answer{Tag = "lea104_008PC", String = "Was knnen wir tun?", AnswerId = 6},
 		}}
 
 	OnAnswer{6;
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "lea104_009", String = "Wir müssen den Leuten Nahrung besorgen, sonst brechen sie uns zusammen. So schaffen sie den Weg in die Berge nie!"},
+			Say{Tag = "lea104_009", String = "Wir mssen den Leuten Nahrung besorgen, sonst brechen sie uns zusammen. So schaffen sie den Weg in die Berge nie!"},
 			Answer{Tag = "lea104_010PC", String = "Sie sollen sich aus meinen Lagern nehmen, was sie brauchen.", AnswerId = 7},
 		}}
 
@@ -2756,7 +2754,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "lea104_011", String = "Ich werde es ihnen sagen. Sobald sie wieder gestärkt sind, können wir weiterziehen."},
+			Say{Tag = "lea104_011", String = "Ich werde es ihnen sagen. Sobald sie wieder gestrkt sind, knnen wir weiterziehen."},
 			Answer{Tag = "lea104_012PC", String = "Sie sollen sich beeilen, hier sind wir nicht sicher!", AnswerId = 8},
 		}}
 
@@ -2788,7 +2786,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "lea104_014", String = "Das müssen wir! Noch plündern die Imperialen das Orkdorf, aber sie werden nicht lange zögern, um uns nachzusetzen."},
+			Say{Tag = "lea104_014", String = "Das mssen wir! Noch plndern die Imperialen das Orkdorf, aber sie werden nicht lange zgern, um uns nachzusetzen."},
 			Answer{Tag = "", String = "", AnswerId = 11},
 		}}
 
@@ -2796,7 +2794,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "lea104_015", String = "Ich werde die Flüchtlinge den Berg hinauf führen. Halte die Imperialen auf, so lange du kannst! Benutze das Monument und die Befestigungen der Elfen ... damit solltest du sie eine Weile aufhalten können!"},
+			Say{Tag = "lea104_015", String = "Ich werde die Flchtlinge den Berg hinauf fhren. Halte die Imperialen auf, so lange du kannst! Benutze das Monument und die Befestigungen der Elfen ... damit solltest du sie eine Weile aufhalten knnen!"},
 			Answer{Tag = "", String = "", AnswerId = 12},
 		}}
 
@@ -2829,22 +2827,22 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "lea104_017", String = "Der Weg ins Eis ist verschlossen! Verflucht seien die Elfen und ihre Tore!"},
-			Answer{Tag = "lea104_018PC", String = "Was tun wir jetzt? Jemand aus der Feste muss es doch öffnen können!", AnswerId = 15},
+			Answer{Tag = "lea104_018PC", String = "Was tun wir jetzt? Jemand aus der Feste muss es doch ffnen knnen!", AnswerId = 15},
 		}}
 
 	OnAnswer{15;
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "lea104_019", String = "Nein, die Schlüsselbewahrerin der Feste ist gefallen! Es gibt aber noch einen Außenposten der Winterwacht, einige Meilen westlich von hier. Dort gibt es eine weitere Schlüsselbewahrerin!"},
-			Answer{Tag = "lea104_020PC", String = "Genau, was wir jetzt brauchen ... noch mehr Verzögerungen! Also gut, bleib hier bei den Flüchtlingen, ich werde nach der zweiten Bewahrerin suchen!", AnswerId = 16},
+			Say{Tag = "lea104_019", String = "Nein, die Schlsselbewahrerin der Feste ist gefallen! Es gibt aber noch einen Auenposten der Winterwacht, einige Meilen westlich von hier. Dort gibt es eine weitere Schlsselbewahrerin!"},
+			Answer{Tag = "lea104_020PC", String = "Genau, was wir jetzt brauchen ... noch mehr Verzgerungen! Also gut, bleib hier bei den Flchtlingen, ich werde nach der zweiten Bewahrerin suchen!", AnswerId = 16},
 		}}
 
 	OnAnswer{16;
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "lea104_021", String = "Nimm ein paar Leute der Winterwacht mit, diese Berge sind auch ohne die Imperialen gefährlich!"},
+			Say{Tag = "lea104_021", String = "Nimm ein paar Leute der Winterwacht mit, diese Berge sind auch ohne die Imperialen gefhrlich!"},
 			Answer{Tag = "", String = "", AnswerId = 17},
 		}}
 
@@ -2876,8 +2874,8 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "lea104_023", String = "Ein paar Kinder sind fortgelaufen! Ihre Eltern suchen sie bereits, aber wir können nicht mehr warten! Wenn sie sich doch nur beeilen würden!"},
-			Answer{Tag = "lea104_024PC", String = "Zieht weiter! Ich kümmere mich darum!", AnswerId = 20},
+			Say{Tag = "lea104_023", String = "Ein paar Kinder sind fortgelaufen! Ihre Eltern suchen sie bereits, aber wir knnen nicht mehr warten! Wenn sie sich doch nur beeilen wrden!"},
+			Answer{Tag = "lea104_024PC", String = "Zieht weiter! Ich kmmere mich darum!", AnswerId = 20},
 		}}
 
 	OnAnswer{20;
@@ -2916,7 +2914,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "lea104_029", String = "Halte sie fern, so lange du kannst! Die Elfen der Garnison werden dich unterstützen!"},
+			Say{Tag = "lea104_029", String = "Halte sie fern, so lange du kannst! Die Elfen der Garnison werden dich untersttzen!"},
 			Answer{Tag = "", String = "", AnswerId = 24},
 		}}
 
@@ -2956,7 +2954,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "lea104_032", String = "Einer ist gleich hier beim Portal. Oben in den Bergen gibt es weitere und noch einen hier im Sumpf, auf der großen Insel im Osten."},
+			Say{Tag = "lea104_032", String = "Einer ist gleich hier beim Portal. Oben in den Bergen gibt es weitere und noch einen hier im Sumpf, auf der groen Insel im Osten."},
 			Answer{Tag = "", String = "", AnswerId = 28},
 		}}
 
@@ -2982,10 +2980,10 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -3003,10 +3001,10 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -3023,10 +3021,10 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -3043,10 +3041,10 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;
@@ -3062,8 +3060,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
@@ -3082,8 +3080,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
@@ -3101,8 +3099,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -3120,8 +3118,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 		}}
 
@@ -3138,9 +3136,9 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -3158,9 +3156,9 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -3177,9 +3175,9 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -3196,9 +3194,9 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;
@@ -3214,8 +3212,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -3233,8 +3231,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -3251,8 +3249,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -3269,8 +3267,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 		}}
 
 	OnAnswer{29;
@@ -3286,9 +3284,9 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -3306,9 +3304,9 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -3325,9 +3323,9 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -3344,9 +3342,9 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;
@@ -3362,7 +3360,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
@@ -3381,7 +3379,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
@@ -3399,7 +3397,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -3417,7 +3415,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 		}}
 
@@ -3434,8 +3432,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -3453,8 +3451,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -3471,8 +3469,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -3489,8 +3487,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;
@@ -3506,7 +3504,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -3524,7 +3522,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -3541,7 +3539,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -3558,7 +3556,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 		}}
 
 	OnAnswer{29;
@@ -3574,9 +3572,9 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -3594,9 +3592,9 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -3613,9 +3611,9 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -3632,9 +3630,9 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;
@@ -3650,7 +3648,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
@@ -3669,7 +3667,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
@@ -3687,7 +3685,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -3705,7 +3703,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 		}}
 
@@ -3722,8 +3720,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -3741,8 +3739,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -3759,8 +3757,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -3777,8 +3775,8 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;
@@ -3794,7 +3792,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -3812,7 +3810,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -3829,7 +3827,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -3846,7 +3844,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 		}}
 
 	OnAnswer{29;
@@ -3863,7 +3861,7 @@ Despawn
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -3882,7 +3880,7 @@ Despawn
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -3900,7 +3898,7 @@ Despawn
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -3918,7 +3916,7 @@ Despawn
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;
@@ -4002,7 +4000,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -4020,7 +4018,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -4037,7 +4035,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -4054,7 +4052,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_002PC", String = "Holen wir uns diese Orksiedlung!", AnswerId = 1},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;
@@ -4133,10 +4131,10 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -4153,10 +4151,10 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -4172,10 +4170,10 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -4191,10 +4189,10 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;
@@ -4209,8 +4207,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
@@ -4228,8 +4226,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
@@ -4246,8 +4244,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -4264,8 +4262,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 		}}
 
@@ -4281,9 +4279,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -4300,9 +4298,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -4318,9 +4316,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -4336,9 +4334,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;
@@ -4353,8 +4351,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -4371,8 +4369,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -4388,8 +4386,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -4405,8 +4403,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 		}}
 
 	OnAnswer{29;
@@ -4421,9 +4419,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -4440,9 +4438,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -4458,9 +4456,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -4476,9 +4474,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;
@@ -4493,7 +4491,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
@@ -4511,7 +4509,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
@@ -4528,7 +4526,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -4545,7 +4543,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 		}}
 
@@ -4561,8 +4559,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -4579,8 +4577,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -4596,8 +4594,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -4613,8 +4611,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;
@@ -4629,7 +4627,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -4646,7 +4644,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -4662,7 +4660,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -4678,7 +4676,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir können hier nicht lange aushalten!", AnswerId = 5},
+			OfferAnswer{Tag = "lea104_006PC", String = "Das Land ist zu offen. Wir knnen hier nicht lange aushalten!", AnswerId = 5},
 		}}
 
 	OnAnswer{29;
@@ -4693,9 +4691,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -4712,9 +4710,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -4730,9 +4728,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -4748,9 +4746,9 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;
@@ -4765,7 +4763,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
@@ -4783,7 +4781,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
@@ -4800,7 +4798,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -4817,7 +4815,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
 		}}
 
@@ -4833,8 +4831,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -4851,8 +4849,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -4868,8 +4866,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -4885,8 +4883,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;
@@ -4901,7 +4899,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -4918,7 +4916,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -4934,7 +4932,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -4950,7 +4948,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_013PC", String = "Können wir diese Festung für uns einsetzen?", AnswerId = 10},
+			OfferAnswer{Tag = "lea104_013PC", String = "Knnen wir diese Festung fr uns einsetzen?", AnswerId = 10},
 		}}
 
 	OnAnswer{29;
@@ -4966,7 +4964,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -4984,7 +4982,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -5001,7 +4999,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -5018,7 +5016,7 @@ Despawn
 		Actions = {
 			Say{Tag = "", String = ""},
 			OfferAnswer{Tag = "lea104_016PC", String = "Worauf wartet Ihr?", AnswerId = 14},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;
@@ -5097,7 +5095,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
@@ -5114,7 +5112,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_028PC", String = "Schaff die Leute durch das Portal! Sie werden bald hier sein!", AnswerId = 23},
 		}}
 
@@ -5130,7 +5128,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 			OfferAnswer{Tag = "lea104_031PC", String = "Gibt es hier Seelenfelsen?", AnswerId = 27},
 		}}
 
@@ -5146,7 +5144,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir müssen weiter!", AnswerId = 19},
+			OfferAnswer{Tag = "lea104_022PC", String = "Warum seid Ihr noch hier? Wir mssen weiter!", AnswerId = 19},
 		}}
 
 	OnAnswer{29;

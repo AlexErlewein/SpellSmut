@@ -19,9 +19,7 @@ OnToggleEvent
 	OnConditions =
 	{
 		IsGlobalFlagTrue {Name = "g_p88_dont_hold_spot_01"},
-		ODER
-		(
-			PlayerUnitInRange {X = 27, Y = 65, Range = 6, FigureType = FigureAvatar},
+		ODER(			PlayerUnitInRange {X = 27, Y = 65, Range = 6, FigureType = FigureAvatar},
 			PlayerUnitInRange {X = 27, Y = 65, Range = 6, FigureType = FigureHero}
 		),
 	},
@@ -93,18 +91,12 @@ OnToggleEvent
 {
 	OnConditions =
 	{
-		ODER
-		(	
-			IsGlobalFlagTrue {Name = "g_p88_hold_spot_01"},
-			ODER
-			(
-				Negated(PlayerUnitInRange {X = 27, Y = 65, Range = 6, FigureType = FigureAvatar}),
+		ODER(			IsGlobalFlagTrue {Name = "g_p88_hold_spot_01"},
+			ODER(				Negated(PlayerUnitInRange {X = 27, Y = 65, Range = 6, FigureType = FigureAvatar}),
 				Negated(PlayerUnitInRange {X = 27, Y = 65, Range = 6, FigureType = FigureHero})
 			),
 			IsGlobalFlagTrue {Name = "g_p88_hold_spot_01"},
-			UND
-			(
-				Negated(PlayerUnitInRange {X = 27, Y = 65, Range = 6, FigureType = FigureAvatar}),
+			UND(				Negated(PlayerUnitInRange {X = 27, Y = 65, Range = 6, FigureType = FigureAvatar}),
 				Negated(PlayerUnitInRange {X = 27, Y = 65, Range = 6, FigureType = FigureHero})
 			)
 		),

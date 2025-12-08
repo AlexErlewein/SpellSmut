@@ -37,7 +37,7 @@ OnPlatformOneTimeEvent
 		SetNpcFlagTrue{Name = "BitteUmspawnen"},
 	}
 }
---OnOneTimeEvent	-- gleich wieder löschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
+--OnOneTimeEvent	-- gleich wieder lschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
 NewState{Name = "AvoidUmspawnAfterMapStartCutscene"}
 AddTransition
 {
@@ -63,9 +63,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 		IsGlobalFlagTrue {Name = "g_sP209KhalFollow"}, 
@@ -131,7 +129,7 @@ OnIdleGoHome
 	},
 }
 
---Khal begibt sich nach seinem Dialog mit dem Spieler, nach dem 1 Dialog mit Uru, oder bei Erfüllung aller vorhandener Quests des 1 Akts zu Uru.
+--Khal begibt sich nach seinem Dialog mit dem Spieler, nach dem 1 Dialog mit Uru, oder bei Erfllung aller vorhandener Quests des 1 Akts zu Uru.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -147,7 +145,7 @@ OnOneTimeEvent
 	}
 }
 
---Wenn Khal am 1 Zielpunkt angekommen ist läuft er weiter zum 2.
+--Wenn Khal am 1 Zielpunkt angekommen ist luft er weiter zum 2.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -318,7 +316,7 @@ Despawn
 	
 
 	-- 3 globale flags steuern das an/abschalten eines NPC Dialogs
-	-- die flags lösen die entspr. aktion aus und werden dabei wieder auf false gesetzt
+	-- die flags lsen die entspr. aktion aus und werden dabei wieder auf false gesetzt
 	-- dies sind die flags, nach dem underscore kommt die NpcId:
 	-- SetGlobalFlagTrue{Name = "PleaseRemoveDialog_1234"},
 	-- SetGlobalFlagTrue{Name = "PleaseEnableMainQuestDialog_5678"},
@@ -338,7 +336,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "khalP209_003", String = "Ja! Ihr müsst der Sturmbote sein, den uns die Uru prophezeit hat! Der Runenkrieger aus dem Norden! Die Uru sagte Ihr würdet uns befreien!"},
+			Say{Tag = "khalP209_003", String = "Ja! Ihr msst der Sturmbote sein, den uns die Uru prophezeit hat! Der Runenkrieger aus dem Norden! Die Uru sagte Ihr wrdet uns befreien!"},
 			Answer{Tag = "khalP209_004PC", String = "Die Uru! Wo ist sie?", AnswerId = 2},
 		}}
 
@@ -346,7 +344,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "khalP209_005", String = "Sie hat die Überlebenden meines Volkes nach Osten gebracht, dort wollen sie ein zweite Verteidigung aufbauen! Aber ich fürchte, sie sind bereits umzingelt!"},
+			Say{Tag = "khalP209_005", String = "Sie hat die berlebenden meines Volkes nach Osten gebracht, dort wollen sie ein zweite Verteidigung aufbauen! Aber ich frchte, sie sind bereits umzingelt!"},
 			Answer{Tag = "khalP209_006PC", String = "Euer Volk? Warum seid Ihr dann noch hier?", AnswerId = 3},
 		}}
 
@@ -354,15 +352,15 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "khalP209_007", String = "Ich bin der Khal, Führer der Kinder des Windes, die Ihr auch Kathai nennt. Die ist meine Stadt und ich werde sie zurückholen! Meine Ahnen und die Winde werden mir die Kraft geben!"},
-			Answer{Tag = "khalP209_008PC", String = "Ich werde Eure Stadt beschützen, Khal. Geht zu Eurem Volk, es braucht Euren Schutz mehr, als diese Gemäuer!", AnswerId = 4},
+			Say{Tag = "khalP209_007", String = "Ich bin der Khal, Fhrer der Kinder des Windes, die Ihr auch Kathai nennt. Die ist meine Stadt und ich werde sie zurckholen! Meine Ahnen und die Winde werden mir die Kraft geben!"},
+			Answer{Tag = "khalP209_008PC", String = "Ich werde Eure Stadt beschtzen, Khal. Geht zu Eurem Volk, es braucht Euren Schutz mehr, als diese Gemuer!", AnswerId = 4},
 		}}
 
 	OnAnswer{4;
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "khalP209_009", String = "Hathai! Ihr seid wahrlich der Sturmbote! Hört: Sucht die Uru auf, sie wird Euch die Jäger Ihrer Wache als Unterstützung geben! Mit ihnen soltlet Ihr es leichter haben, die Stadt zurück zu nehmen!"},
+			Say{Tag = "khalP209_009", String = "Hathai! Ihr seid wahrlich der Sturmbote! Hrt: Sucht die Uru auf, sie wird Euch die Jger Ihrer Wache als Untersttzung geben! Mit ihnen soltlet Ihr es leichter haben, die Stadt zurck zu nehmen!"},
 			Answer{Tag = "", String = "", AnswerId = 5},
 		}}
 
@@ -370,15 +368,15 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "khalP209_010", String = "Hier in der Nähe gibt es auch eine Heldenstätte der Rune! Vielleicht könnt Ihr sie nutzen!"},
-			Answer{Tag = "khalP209_011PC", String = "Eure Stadt gehört bald wieder Euch, Khal!", AnswerId = 6},
+			Say{Tag = "khalP209_010", String = "Hier in der Nhe gibt es auch eine Heldensttte der Rune! Vielleicht knnt Ihr sie nutzen!"},
+			Answer{Tag = "khalP209_011PC", String = "Eure Stadt gehrt bald wieder Euch, Khal!", AnswerId = 6},
 		}}
 
 	OnAnswer{6;
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "khalP209_012", String = "Gut! Ich werde meinem Volk von Euch berichten! Viel Glück Sturmbote, möge sich Euer Schicksal erfüllen!"},
+			Say{Tag = "khalP209_012", String = "Gut! Ich werde meinem Volk von Euch berichten! Viel Glck Sturmbote, mge sich Euer Schicksal erfllen!"},
 			Answer{Tag = "", String = "", AnswerId = 7},
 		}}
 

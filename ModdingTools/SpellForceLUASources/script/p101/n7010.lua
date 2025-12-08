@@ -73,12 +73,10 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
-		IsGlobalFlagFalse{Name = "P101Gelöst", UpdateInterval = 3},
+		IsGlobalFlagFalse{Name = "P101Gelst", UpdateInterval = 3},
 		IsGlobalFlagTrue{Name = "P101RebirthFollowLea1An", UpdateInterval = 3},
 		IsGlobalFlagFalse{Name = "P101RebirthFollowLea2An", UpdateInterval = 3},
 		
@@ -109,7 +107,7 @@ Umspawn
 --			AvatarLocalTeleport{},
 --			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 --		),
---		IsGlobalFlagFalse{Name = "P101Gelöst", UpdateInterval = 30},
+--		IsGlobalFlagFalse{Name = "P101Gelst", UpdateInterval = 30},
 --		IsGlobalFlagTrue{Name = "P101RebirthFollowLea2An", UpdateInterval = 3},
 --		IsGlobalFlagFalse{Name = "P101RebirthFollowLea1An", UpdateInterval = 3},
 --		
@@ -135,12 +133,10 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},         
+		ODER(			AvatarLocalTeleport{},         
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
-		IsGlobalFlagFalse{Name = "P101Gelöst", UpdateInterval = 30},
+		IsGlobalFlagFalse{Name = "P101Gelst", UpdateInterval = 30},
 		IsGlobalFlagFalse{Name = "P101RebirthFollowLea1An", UpdateInterval = 3},
 		IsGlobalFlagFalse{Name = "P101RebirthFollowLea2An", UpdateInterval = 3},
 		
@@ -189,7 +185,7 @@ OnOneTimeEvent
 }
 
 
----- Ende Follow auf Avatar bei Begin Cutscene Gefängnis, Umspawn Avatar-Follow aus
+---- Ende Follow auf Avatar bei Begin Cutscene Gefngnis, Umspawn Avatar-Follow aus
 --
 --OnOneTimeEvent
 --{

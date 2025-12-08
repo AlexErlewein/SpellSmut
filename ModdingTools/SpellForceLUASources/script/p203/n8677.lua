@@ -2,7 +2,7 @@ function CreateStateMachine(_Type,_PlatformId,_NpcId,_X,_Y)
 
 BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 
--- Nur für den Phoenixsteinspieler gibt es einen Urias, dieser folgt dem Spieler
+-- Nur fr den Phoenixsteinspieler gibt es einen Urias, dieser folgt dem Spieler
 SpawnOnlyWhen
 {
 	X = _X, Y = _Y,
@@ -71,7 +71,7 @@ OnPlatformOneTimeEvent
 	}
 }
 
---OnOneTimeEvent	-- gleich wieder löschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
+--OnOneTimeEvent	-- gleich wieder lschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
 NewState{Name = "AvoidUmspawnAfterMapStartCutscene"}
 AddTransition
 {
@@ -97,9 +97,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 	}, 

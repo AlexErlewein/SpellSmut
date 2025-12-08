@@ -20,6 +20,7 @@ class Dialogue:
     """Quest dialogue information"""
 
     text: str  # German text
+    speaker: str = "NPC"  # Speaker name (NPC name or "Player")
     translation: Optional[str] = None  # English translation
     source_file: str = ""  # Lua file path
     dialogue_type: str = "Dialog"  # Say, Answer, Outcry, Dialog, OfferAnswer

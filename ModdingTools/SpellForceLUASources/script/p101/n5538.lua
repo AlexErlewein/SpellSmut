@@ -18,7 +18,7 @@ OnOneTimeEvent
 	},
 }
 
---Dialog an, wenn Cutscene gelaufen und Aedar bekannt; aus, wenn Dialog geführt
+--Dialog an, wenn Cutscene gelaufen und Aedar bekannt; aus, wenn Dialog gefhrt
 OnToggleEvent
 {
 NotInDialog = FALSE , UpdateInterval = 60 ,
@@ -35,9 +35,7 @@ NotInDialog = FALSE , UpdateInterval = 60 ,
 	},
 	OffConditions = 
 	{  
-		ODER
-		(
-		IsGlobalFlagTrue{Name = "IchWarAufRune1", UpdateInterval = 30},
+		ODER(		IsGlobalFlagTrue{Name = "IchWarAufRune1", UpdateInterval = 30},
 		IsGlobalFlagTrue{Name = "P101DialogWillitEnded", UpdateInterval = 30}
 		)
 	},
@@ -92,15 +90,15 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "willit101_001", String = "Oh! Runenkrieger spricht mit Willit! Große Ehre für Willit!"},
-			Answer{Tag = "willit101_002PC", String = "Aedar hat mir erzählt, dass Ihr ein Gefolgsmann Dunhans wart und wüsstet, wo er zu finden ist?", AnswerId = 1},
+			Say{Tag = "willit101_001", String = "Oh! Runenkrieger spricht mit Willit! Groe Ehre fr Willit!"},
+			Answer{Tag = "willit101_002PC", String = "Aedar hat mir erzhlt, dass Ihr ein Gefolgsmann Dunhans wart und wsstet, wo er zu finden ist?", AnswerId = 1},
 		}}
 
 	OnAnswer{1;
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "willit101_003", String = "Dunhan! Ja! Willit sein Diener gewesen! Großer Krieger und König! Und Runenkrieger, so wie Ihr!"},
+			Say{Tag = "willit101_003", String = "Dunhan! Ja! Willit sein Diener gewesen! Groer Krieger und Knig! Und Runenkrieger, so wie Ihr!"},
 			Answer{Tag = "willit101_004PC", String = "Wo finde ich ihn?", AnswerId = 2},
 		}}
 
@@ -108,7 +106,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "willit101_005", String = "Oh ... Dunhan war böse auf Reowys, böse auf Aedar, böse auf Willit! Armer Willit ..."},
+			Say{Tag = "willit101_005", String = "Oh ... Dunhan war bse auf Reowys, bse auf Aedar, bse auf Willit! Armer Willit ..."},
 			Answer{Tag = "", String = "", AnswerId = 3},
 		}}
 
@@ -124,7 +122,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "willit101_008", String = "In die Sturmfelsen, zu den Kithar, dorthin er gegangen ist! Dem Weg nach Norden Ihr folgen müsst! Dann nach Westen."},
+			Say{Tag = "willit101_008", String = "In die Sturmfelsen, zu den Kithar, dorthin er gegangen ist! Dem Weg nach Norden Ihr folgen msst! Dann nach Westen."},
 			Answer{Tag = "", String = "", AnswerId = 5},
 		}}
 
@@ -136,7 +134,7 @@ Despawn
 	RevealUnExplored{X = 28, Y = 420, Range = 15} ,
 	SetGlobalFlagTrue{Name = "HabeMitWillitGesprochen"}
 	,
-			Say{Tag = "willit101_009", String = "Dort oben Ihr finden ein Portal! Das bringt Euch in die Sturmfelsen! Aber langer gefährlicher Weg durch den Sumpf bis dahin!"},
+			Say{Tag = "willit101_009", String = "Dort oben Ihr finden ein Portal! Das bringt Euch in die Sturmfelsen! Aber langer gefhrlicher Weg durch den Sumpf bis dahin!"},
 			Answer{Tag = "", String = "", AnswerId = 6},
 		}}
 

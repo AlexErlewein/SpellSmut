@@ -66,7 +66,7 @@ OnPlatformOneTimeEvent
 }
 
 --Umspawn, wenn Spieler tot / Kartenwechsel / Bindstonereise ohne Follow
---(nach Zerstörung des HQ; Grim rennt zum Gefängnis, folgt nicht mehr)
+--(nach Zerstrung des HQ; Grim rennt zum Gefngnis, folgt nicht mehr)
 Umspawn 
 {
 	UnitId = self , 
@@ -78,9 +78,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER
-		(
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 		IsGlobalFlagFalse{Name = "P101GrimInFireCity", UpdateInterval = 3},
@@ -108,9 +106,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER
-		(
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 		IsGlobalFlagFalse{Name = "P101GrimInFireCity", UpdateInterval = 30},
@@ -148,7 +144,7 @@ OnOneTimeEvent
 
 ---------------------------------------------
 	
--- Grim läuft dem Avatar voraus zum Angriff ElfenHQ
+-- Grim luft dem Avatar voraus zum Angriff ElfenHQ
 OnFollowMe
 {	
 	X = 318, Y = 218, 
@@ -166,7 +162,7 @@ OnFollowMe
 
 
 
--- Grim läuft nach erstem Angriff auf Eiselfen dem Avatar hinterher
+-- Grim luft nach erstem Angriff auf Eiselfen dem Avatar hinterher
 
 OnOneTimeEvent
 {
@@ -273,7 +269,7 @@ Umspawn
 	},
 }
 
---Grim umspawnen, für Cutscene Gefängnis Teil II
+--Grim umspawnen, fr Cutscene Gefngnis Teil II
 Umspawn
 {
 	UnitId = self, X = 341 , Y = 245, NoSpawnEffect = TRUE,

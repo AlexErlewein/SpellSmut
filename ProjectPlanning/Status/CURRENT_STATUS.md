@@ -1,6 +1,6 @@
 # Current Project Status
 
-**Last Updated**: November 6, 2025
+**Last Updated**: November 17, 2025
 **Overall Status**: 🟢 ACTIVE DEVELOPMENT
 **Current Focus**: Map Viewer multi-layer texture blending, Resolving Icon System mapping.
 
@@ -16,10 +16,12 @@
 | **Weapon Forge** | ✅ COMPLETE | Phase 7/7 | In production use |
 | **Armor Forge** | ✅ COMPLETE | Phase 5/5 | In production use |
 | **NPC Creator** | ✅ COMPLETE | Phase 7/7 | In production use |
+| **Item Browser** | ✅ COMPLETE | Full CFF Integration | Real game data loaded |
 | **ID Manager** | ✅ COMPLETE | Shared System | Active & working |
 | **Asset Extraction**| ✅ COMPLETE | Phase 3/3 | Maintenance only |
 | **Map Viewer** | 🔄 IN PROGRESS | 75% (Phase 2/5) | Multi-layer texture blending |
 | **Icon System** | ⚠️ MAPPING REQ. | 85% | **Resolve Handle-to-Atlas Mapping** |
+| **Visual Dialogue Widget** | ✅ COMPLETE | Toolbar & Node Creation | Integration testing |
 | **Documentation** | ✅ COMPLETE | Comprehensive | Regular updates |
 
 ---
@@ -59,20 +61,73 @@
 
 ---
 
-### ⚠️ Icon System: Handle-to-Atlas Mapping (CRITICAL PRIORITY)
+### ✅ Quest Editor: CFF Integration System (COMPLETED)
 
-**Status**: Extraction is complete, but a critical data gap prevents full integration.
-**Blocker**: GameData exports provide an icon's `item_ui_handle` and its `item_ui_index` within an atlas, but **do not specify which atlas file** (e.g., `ui_item18.dds`) contains the icon.
+**Status**: FULLY FUNCTIONAL - Quests can now be saved directly to GameData.cff
+**Implementation**: Integrated `create_quest()` method with unified quest editor save functionality
+**Features**: Quest ID conflict handling, automatic localization, CFF file persistence
+
+#### Recently Completed
+- ✅ **CFF Save Integration**: Modified `_save_quest()` method to use `data_model.create_quest()`
+- ✅ **Quest Data Mapping**: Properly maps quest editor fields to CFF quest structure
+- ✅ **Error Handling**: Comprehensive error checking for data model availability and save failures
+- ✅ **User Feedback**: Clear success/error messages with quest details and file paths
+- ✅ **Testing Verified**: Successfully created and saved test quest (ID 9999) to GameData.cff
+
+#### Technical Details
+- **Quest Creation**: Uses `CFFDataModel.create_quest()` with proper field mapping
+- **Localization**: Automatically generates name/description IDs and adds to localisation table
+- **File Persistence**: Calls `data_model.save_file()` to write changes to GameData.cff
+- **ID Management**: Handles quest ID conflicts and parent quest relationships
+
+**Impact**: Quest editor now has complete CFF integration - created quests persist in game data files
+
+---
+
+### ✅ Item Browser Data Expansion (COMPLETED)
+
+**Status**: FULLY FUNCTIONAL - Item browser now loads 11,000+ real SpellForce items
+**Implementation**: Complete CFF data integration with comprehensive item loading and filtering
+**Features**: Real game data, proper categorization, icon support, integrated across all quest workflows
+
+#### Recently Completed
+- ✅ **CFF Data Loading**: Successfully loads 721 weapons, 635 armor, 7101 items, 2617 creatures from GameData.cff
+- ✅ **Category Filtering**: Fixed filtering system to properly select and display item categories
+- ✅ **Data Model Integration**: All objective editors now pass data model for real item access
+- ✅ **CFF Path Resolution**: Fixed file path calculation to reliably locate GameData.cff
+- ✅ **Icon System Integration**: Connected with existing 6237+ icon mappings for visual display
+- ✅ **Comprehensive Testing**: Verified loading and filtering across all item types
+
+#### Technical Details
+- **Data Sources**: Direct loading from GameData.cff with full item stats and properties
+- **Performance**: Efficient loading with proper caching and error handling
+- **UI Integration**: Seamless integration with existing quest creation workflows
+- **Data Completeness**: All item types supported: weapons, armor, consumables, quest items, materials, creatures
+
+**Impact**: Quest creators can now select from actual SpellForce items instead of sample data, enabling accurate and authentic quest design
+
+---
+
+### ✅ Icon System: Handle-to-Atlas Mapping (RESOLVED)
+
+**Status**: FULLY FUNCTIONAL - Icon resolution system working correctly
+**Solution**: Implemented file-existence-based mapping system that resolves handles to actual icon files
+**Architecture**: Pre-built handle-to-path mapping with filesystem verification for accuracy
 
 #### Recently Completed
 - ✅ **ITM Icon Extraction**: 4,096+ icons from 16 atlases, including reassembly of 969 multi-part weapons.
 - ✅ **Spell Icon Extraction**: 657 icons from 18 spell atlases with correct 180° rotation.
 - ✅ **Data Model Fix**: The `_resolve_icon_path` method was fixed and can now find spell icons on the filesystem.
+- ✅ **Handle-to-Path Mapping**: Built comprehensive mapping system with 873 handles and filesystem validation.
+- ✅ **GUI Integration**: Icon resolution tested and working - handles successfully resolve to PNG files.
 
-#### Next Steps
-1.  **Find Real Mapping**: Search original game files or reverse-engineer the game's logic to find the link between an item handle and its atlas file.
-2.  **Alternative Approaches**: If no direct mapping is found, develop a fallback system (e.g., manual mapping tool, pattern inference).
-3.  **GUI Testing**: Verify that the recently fixed spell icon path resolution correctly displays spell icons in the GUI.
+#### Technical Solution
+- **Mapping Strategy**: Pre-computed handle-to-path mapping with file existence checks
+- **Performance**: 0.72s to build mapping for 6,237 items across 873 unique handles
+- **Accuracy**: File-based validation ensures only existing icons are returned
+- **Coverage**: Successfully resolves spell and item icons for GUI display
+
+**Impact**: Critical visual integration blocker resolved - icons now display correctly in the editor
 
 ---
 
@@ -92,6 +147,13 @@ The following creator tools are feature-complete, integrated with the shared **I
 - **Asset Extraction**: All 59,500+ game assets have been extracted and categorized.
 - **GUI Editor**: The core CFF editor is stable and feature-complete.
 - **Data Layer Acceleration**: 17x faster loading via dual cache system (pickle + SQLite) with automatic validation, progress UI, and cache management.
+- **Visual Dialogue Widget**: Complete toolbar-based dialogue editor with automatic node linking and creation.
+
+### ✅ Visual Dialogue Widget
+- **Toolbar Actions**: "Add Response" and "Add Choice" buttons that automatically create and connect new dialogue nodes
+- **Node Creation Logic**: Smart positioning and automatic connection of NPC responses and player choices
+- **Selection Management**: Dynamic toolbar state that enables/disables actions based on current selection
+- **Type Safety**: Proper NodeType enum usage and DialogueNode dataclass field defaults
 
 ---
 

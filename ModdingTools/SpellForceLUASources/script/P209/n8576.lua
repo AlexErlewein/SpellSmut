@@ -36,7 +36,7 @@ OnPlatformOneTimeEvent
 		SetNpcFlagTrue{Name = "BitteUmspawnen"},
 	}
 }
---OnOneTimeEvent	-- gleich wieder löschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
+--OnOneTimeEvent	-- gleich wieder lschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
 NewState{Name = "AvoidUmspawnAfterMapStartCutscene"}
 AddTransition
 {
@@ -62,9 +62,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 		IsGlobalFlagTrue {Name = "g_sP209JenquaiFollow"}, 
@@ -120,7 +118,7 @@ Umspawn
 
 }
 
---Jenquai lösst den FollowMode auf und begibt sich zur Arena.
+--Jenquai lsst den FollowMode auf und begibt sich zur Arena.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -135,7 +133,7 @@ OnOneTimeEvent
 	}
 }
 
---Jenquai wurde als Mitstreiter auserwählt.
+--Jenquai wurde als Mitstreiter auserwhlt.
 OnPlatformOneTimeEvent
 {
 	Conditions = 
@@ -237,7 +235,7 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{ 
-		Outcry {NpcId = 8576, String = "Der Khal ist in Not! Wir müssen ihm helfen!" , Tag = "oca2jenquaiP209_003" , Delay = TRUE , Color = ColorWhite},
+		Outcry {NpcId = 8576, String = "Der Khal ist in Not! Wir mssen ihm helfen!" , Tag = "oca2jenquaiP209_003" , Delay = TRUE , Color = ColorWhite},
 	}
 }
 
@@ -284,7 +282,7 @@ Despawn
 }
 
 --Outcries.
---Jenquai ist in der Nähe des geheimen Portals.
+--Jenquai ist in der Nhe des geheimen Portals.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -293,11 +291,11 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{ 
-		Outcry {NpcId = 8576, String = "Hier ist das Portal! Es führt direkt in die Stadt!" , Tag = "oca2jenquaiP209_001" , Delay = TRUE , Color = ColorWhite},
+		Outcry {NpcId = 8576, String = "Hier ist das Portal! Es fhrt direkt in die Stadt!" , Tag = "oca2jenquaiP209_001" , Delay = TRUE , Color = ColorWhite},
 	}
 }
 
---Der Spieler ist in der Nähe der Mantis.
+--Der Spieler ist in der Nhe der Mantis.
 OnOneTimeEvent
 {
 	Conditions = 
@@ -306,7 +304,7 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{ 
-		Outcry {NpcId = 8576, String = "Das sind Sensenläufer! Sie sind sehr stark, aber anfällig gegen Bezauberung!" , Tag = "oca2jenquaiP209_002" , Delay = TRUE , Color = ColorWhite},
+		Outcry {NpcId = 8576, String = "Das sind Sensenlufer! Sie sind sehr stark, aber anfllig gegen Bezauberung!" , Tag = "oca2jenquaiP209_002" , Delay = TRUE , Color = ColorWhite},
 		SetGlobalTimeStamp {Name = "g_tnP209OutcryStartAlyah"},
 	}
 }
@@ -323,7 +321,7 @@ OnOneTimeEvent
 	
 
 	-- 3 globale flags steuern das an/abschalten eines NPC Dialogs
-	-- die flags lösen die entspr. aktion aus und werden dabei wieder auf false gesetzt
+	-- die flags lsen die entspr. aktion aus und werden dabei wieder auf false gesetzt
 	-- dies sind die flags, nach dem underscore kommt die NpcId:
 	-- SetGlobalFlagTrue{Name = "PleaseRemoveDialog_1234"},
 	-- SetGlobalFlagTrue{Name = "PleaseEnableMainQuestDialog_5678"},
@@ -336,7 +334,7 @@ OnOneTimeEvent
 			IsNpcFlagFalse{Name = "known"},
 		},
 		Actions = {
-			Say{Tag = "jenquaiP209_001", String = "Ihr habt Euch gut geschlagen! Ich bin stolz, mit Euch gekämpft zu haben!"},
+			Say{Tag = "jenquaiP209_001", String = "Ihr habt Euch gut geschlagen! Ich bin stolz, mit Euch gekmpft zu haben!"},
 			Answer{Tag = "jenquaiP209_002PC", String = "Wie es scheint, sind nicht alle Eures Volkes so feundlich.", AnswerId = 1},
 		}}
 
@@ -353,7 +351,7 @@ OnOneTimeEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "jenquaiP209_003", String = "Ihr meint den Zweikampf? Ich kämpfe gerne ein zweites Mal an Eurer Seite! Wählt mich als Mitstreiter!"},
+			Say{Tag = "jenquaiP209_003", String = "Ihr meint den Zweikampf? Ich kmpfe gerne ein zweites Mal an Eurer Seite! Whlt mich als Mitstreiter!"},
 			Answer{Tag = "", String = "", AnswerId = 2},
 		}}
 
@@ -388,8 +386,8 @@ OnOneTimeEvent
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "jenquaiP209_005PC", String = "Ich möchte Euch als meinen Mitstreiter bestimmen!", AnswerId = 6},
-			OfferAnswer{Tag = "jenquaiP209_008PC", String = "Ich bin noch unentschlossen, welchen Mitstreiter ich auswählen soll.", AnswerId = 9},
+			OfferAnswer{Tag = "jenquaiP209_005PC", String = "Ich mchte Euch als meinen Mitstreiter bestimmen!", AnswerId = 6},
+			OfferAnswer{Tag = "jenquaiP209_008PC", String = "Ich bin noch unentschlossen, welchen Mitstreiter ich auswhlen soll.", AnswerId = 9},
 		}}
 
 	OnAnswer{5;
@@ -398,15 +396,15 @@ OnOneTimeEvent
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "jenquaiP209_008PC", String = "Ich bin noch unentschlossen, welchen Mitstreiter ich auswählen soll.", AnswerId = 9},
+			OfferAnswer{Tag = "jenquaiP209_008PC", String = "Ich bin noch unentschlossen, welchen Mitstreiter ich auswhlen soll.", AnswerId = 9},
 		}}
 
 	OnAnswer{6;
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "jenquaiP209_006", String = "Es ist mir eine Ehre! Mein Schwert und meine Magie gehören Euch!"},
-			Answer{Tag = "jenquaiP209_007PC", String = "Dann lasst uns Xalabar gegenüber treten!", AnswerId = 7},
+			Say{Tag = "jenquaiP209_006", String = "Es ist mir eine Ehre! Mein Schwert und meine Magie gehren Euch!"},
+			Answer{Tag = "jenquaiP209_007PC", String = "Dann lasst uns Xalabar gegenber treten!", AnswerId = 7},
 		}}
 
 	OnAnswer{7;
@@ -429,7 +427,7 @@ OnOneTimeEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "jenquaiP209_009", String = "Zögert nicht zu lange, Ihr werdet in den Augen der Krieger schwach erscheinen!"},
+			Say{Tag = "jenquaiP209_009", String = "Zgert nicht zu lange, Ihr werdet in den Augen der Krieger schwach erscheinen!"},
 			Answer{Tag = "", String = "", AnswerId = 10},
 		}}
 

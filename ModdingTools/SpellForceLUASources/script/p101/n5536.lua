@@ -10,7 +10,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 WatchStateMachine()
 
 
---Despawn, wenn Rune 1 gelöst, Austausch gegen Grim 7011
+--Despawn, wenn Rune 1 gelst, Austausch gegen Grim 7011
 Despawn
 {
 	Conditions =
@@ -50,7 +50,7 @@ OnPlatformOneTimeEvent
 		SetNpcFlagTrue{Name = "BitteUmspawnen"},
 	}
 }
---OnOneTimeEvent	-- gleich wieder löschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
+--OnOneTimeEvent	-- gleich wieder lschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
 NewState{Name = "AvoidUmspawnAfterMapStartCutscene"}
 AddTransition
 {
@@ -78,9 +78,7 @@ Umspawn
 	 Conditions = 
      {
 		
-		ODER
-		(
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 		IsGlobalFlagFalse{Name = "P101GrimInFireCity", UpdateInterval = 30},
@@ -109,9 +107,7 @@ Umspawn
 	 Conditions = 
 	{
 		
-		ODER
-		(
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 				
@@ -136,7 +132,7 @@ OnOneTimeEvent
 	NotInDialog = FALSE, UpdateInterval = 20,
 	Conditions = 
 	{ 
-		IsGlobalFlagTrue {Name = "P101GrimLäuftVoraus", UpdateInterval = 20},
+		IsGlobalFlagTrue {Name = "P101GrimLuftVoraus", UpdateInterval = 20},
 		
 	},
 	Actions = 
@@ -159,7 +155,7 @@ OnOneTimeEvent
 	{ 
 		Follow {Target = Avatar, NpcId = self},
 		SetGlobalFlagTrue {Name = "P101GrimFollowAvatar"},
-		SetGlobalFlagFalse {Name = "P101GrimLäuftVoraus"},
+		SetGlobalFlagFalse {Name = "P101GrimLuftVoraus"},
 	}
 }
 

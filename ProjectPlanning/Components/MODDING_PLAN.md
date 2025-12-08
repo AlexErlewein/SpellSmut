@@ -40,9 +40,52 @@ A comprehensive modding toolkit and documentation project for SpellForce: The Or
 
 ---
 
+### Phase 3: Quest Creator Development (Recently Completed - November 2025)
+
+**Status**: ✅ **DIALOGUE SYSTEM COMPLETE - SIMPLIFIED TEXT-BASED APPROACH WITH ENHANCED CHOICE SELECTION**
+
+The Quest Creator's dialogue system has been fully implemented with a clean, text-based tree view interface and intelligent choice-to-response linking system.
+
+#### Key Achievements:
+- ✅ **Text-Based Tree View**: Clean, readable dialogue structure visualization using QTreeWidget
+- ✅ **Automatic Choice-to-Response Linking**: Smart system that automatically connects player choices to NPC responses
+- ✅ **Manual Choice Assignment**: Dropdown selector for NPC Response steps to specify which choice they respond to
+- ✅ **Enhanced UI Contrast**: Fixed white background issues throughout the interface for optimal readability
+- ✅ **Simplified Workflow**: Streamlined interface that focuses on content creation over complex graphical manipulation
+- ✅ **Improved Step Types**: Including new PLAYER_SPEECH type for single-option player dialogue
+- ✅ **Real-time Choice Mapping**: Automatic creation of choice connections when new NPC responses are added
+- ✅ **Clean UI Design**: Professional appearance with proper contrast and readable text
+- ✅ **Single Launcher System**: Cleaned up multiple confusing launch scripts to single entry point
+- ✅ **Error Handling**: Fixed QLabel deletion issues and improved stability
+
+#### Technical Implementation:
+- **File**: `src/TirganachReloaded/cff_editor/widgets/simple_dialogue_builder.py`
+- **Architecture**: Simplified text-based interface with intelligent data structure management
+- **UI Framework**: PySide6 with QTreeWidget for dialogue structure visualization
+- **Choice Management**: Automatic linking system with manual override capabilities via dropdown selectors
+- **Data Model**: Enhanced DialogueStep dataclass with response_to_choice field for tracking connections
+- **Launch System**: `quest_creator.py` with uv virtual environment support
+
+#### User Features:
+- **Intuitive Workflow**: Click step → edit → add next step → select type
+- **Automatic Branching**: Player Choice steps automatically create connected NPC Response steps
+- **Manual Control**: Option to override automatic connections using choice selector dropdowns
+- **Auto-save**: Preserves work progress automatically
+- **Clean Interface**: Readable text-based view that works well for all users regardless of visual abilities
+
+#### Recent Improvements:
+Based on user feedback, the system was simplified from a graphical flow chart approach to a more practical text-based tree view that:
+- Eliminates complex manual connection drawing mode
+- Fixes all white background/readability issues throughout the interface
+- Provides automatic choice-to-response linking that just works
+- Maintains full functionality while being much easier to use
+- Focuses on content creation rather than UI manipulation
+
+---
+
 ## 🔄 In Progress Tasks
 
-_(Currently no active tasks - focus is on resolving the Icon System mapping blocker.)_
+_(Currently no active tasks - Quest Creator dialogue system is complete, focus shifting to full quest wizard implementation.)_
 
 ---
 

@@ -9,9 +9,7 @@ SpawnOnlyWhen
 	NoSpawnEffect = TRUE,
 	Conditions = 
 	{
-		UND
-		(
-		IsGlobalTimeElapsed {Name = "g_p207_first_attack_wave_on_base", Seconds = 1180},
+		UND(		IsGlobalTimeElapsed {Name = "g_p207_first_attack_wave_on_base", Seconds = 1180},
 		Negated(IsGlobalFlagTrue {Name = "g_p207_Hoehle04_versperrt"}),
 		Negated(IsGlobalFlagTrue {Name = "g_P207_Erste_Festung_Eingenommen"})
 		), 
@@ -26,7 +24,7 @@ OnIdleEvent
 {
 	Conditions = 
 	{
-		FigureAlive {NpcId = 10529},  -- Anführer lebt noch
+		FigureAlive {NpcId = 10529},  -- Anfhrer lebt noch
 		IsNpcFlagFalse {Name = "FollowModeAlreadySet"},
 	},
 	Actions = 
@@ -59,8 +57,8 @@ OnIdleEvent
 --		}
 
 
--- wenn der anführer tot ist, bricht panik aus!
--- alle stürzen sich auf das  Monument des Spielers weil ihnen die "strategie" fehlt...
+-- wenn der anfhrer tot ist, bricht panik aus!
+-- alle strzen sich auf das  Monument des Spielers weil ihnen die "strategie" fehlt...
 
 OnIdleGoHome
 {

@@ -40,7 +40,7 @@ OnIdleGoHome
 	
 }
 
--- NIcht über Home Actions zählen, da dann evtl mehrfach gezählt wird
+-- NIcht ber Home Actions zhlen, da dann evtl mehrfach gezhlt wird
 OnOneTimeEvent
 {
 	Conditions =
@@ -70,7 +70,7 @@ OnIdleGoHome
 	
 }
 
--- NIcht über Home Actions zählen, da dann evtl mehrfach gezählt wird
+-- NIcht ber Home Actions zhlen, da dann evtl mehrfach gezhlt wird
 OnOneTimeEvent
 {
 	Conditions =
@@ -100,7 +100,7 @@ OnIdleGoHome
 	
 }
 
--- NIcht über Home Actions zählen, da dann evtl mehrfach gezählt wird
+-- NIcht ber Home Actions zhlen, da dann evtl mehrfach gezhlt wird
 OnOneTimeEvent
 {
 	Conditions =
@@ -114,7 +114,7 @@ OnOneTimeEvent
 	
 }
 
--- Ist der Unterhändler erst mal angesprochen geht er los den Lagerchefs bescheid sagen
+-- Ist der Unterhndler erst mal angesprochen geht er los den Lagerchefs bescheid sagen
 OnIdleGoHome
 {
 	X = 358, Y = 323, WalkMode = Run, Direction = 0,
@@ -134,7 +134,7 @@ OnIdleGoHome
 	
 }
 
--- NIcht über Home Actions zählen, da dann evtl mehrfach gezählt wird
+-- NIcht ber Home Actions zhlen, da dann evtl mehrfach gezhlt wird
 OnOneTimeEvent
 {
 	Conditions =
@@ -147,7 +147,7 @@ OnOneTimeEvent
 	}
 	
 }
--- Der Erste Chef weiß bescheid weiter geht es zum zweiten Bruder
+-- Der Erste Chef wei bescheid weiter geht es zum zweiten Bruder
 OnIdleGoHome
 {
 	X = 80, Y = 307, WalkMode = Run, Direction = 0,
@@ -177,7 +177,7 @@ OnOneTimeEvent
 	}
 }
 
--- NIcht über Home Actions zählen, da dann evtl mehrfach gezählt wird
+-- NIcht ber Home Actions zhlen, da dann evtl mehrfach gezhlt wird
 OnOneTimeEvent
 {
 	Conditions =
@@ -210,9 +210,7 @@ Despawn
 {
 	Conditions =
 	{ 
-		ODER
-		(
-			IsGlobalFlagTrue {Name = "g_P206_AlleBenachrichtigt"},
+		ODER(			IsGlobalFlagTrue {Name = "g_P206_AlleBenachrichtigt"},
 			QuestState {QuestId = 886, State = StateActive}
 		)
 		
@@ -231,7 +229,7 @@ Despawn
 	
 
 	-- 3 globale flags steuern das an/abschalten eines NPC Dialogs
-	-- die flags lösen die entspr. aktion aus und werden dabei wieder auf false gesetzt
+	-- die flags lsen die entspr. aktion aus und werden dabei wieder auf false gesetzt
 	-- dies sind die flags, nach dem underscore kommt die NpcId:
 	-- SetGlobalFlagTrue{Name = "PleaseRemoveDialog_1234"},
 	-- SetGlobalFlagTrue{Name = "PleaseEnableMainQuestDialog_5678"},
@@ -244,14 +242,14 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "azyo_001", String = "Bario schickt Euch?"},
-			Answer{Tag = "azyo_002PC", String = "Ja! Er sagt es ist soweit, Ihr sollt die Gazeda-Anführer zum Steinfeld locken.", AnswerId = 1},
+			Answer{Tag = "azyo_002PC", String = "Ja! Er sagt es ist soweit, Ihr sollt die Gazeda-Anfhrer zum Steinfeld locken.", AnswerId = 1},
 		}}
 
 	OnAnswer{1;
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "azyo_003", String = "Dann geht es also los ... wohlan denn, dann werde ich diese Schlangen mal aus Ihren Körben locken!"},
+			Say{Tag = "azyo_003", String = "Dann geht es also los ... wohlan denn, dann werde ich diese Schlangen mal aus Ihren Krben locken!"},
 			Answer{Tag = "azyo_004PC", String = "Tut das, ich erwarte sie beim Steinfeld.", AnswerId = 2},
 		}}
 

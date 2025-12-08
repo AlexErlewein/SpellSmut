@@ -54,7 +54,7 @@ OnPlatformOneTimeEvent
 	}
 }
 
---OnOneTimeEvent	-- gleich wieder löschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
+--OnOneTimeEvent	-- gleich wieder lschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
 NewState{Name = "AvoidUmspawnAfterMapStartCutscene"}
 AddTransition
 {
@@ -80,9 +80,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 		IsGlobalFlagFalse{Name = "P113LeaTot", UpdateInterval = 30},
@@ -155,7 +153,7 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{
-		Outcry{NpcId = 6654, String = "Der Fial Darg ist nahe! Rüste dich mit der Schattenklinge!" , Tag = "ocLena_P113_002" , Color = ColorWhite},
+		Outcry{NpcId = 6654, String = "Der Fial Darg ist nahe! Rste dich mit der Schattenklinge!" , Tag = "ocLena_P113_002" , Color = ColorWhite},
 	
 	}
 }

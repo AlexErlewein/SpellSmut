@@ -46,16 +46,9 @@ Our documentation includes detailed guides for:
 
 Comprehensive visual tools for creating mod content:
 
-### Recently Enhanced Tools
-- **Enhanced Weapon & Armor Browser:** Detailed item inspection with German localization support when available
-- **Weapon Forge Wizard:** Now properly carries over attributes from source weapons as defaults
-- **Armor Forge Wizard:** Now properly carries over attributes from source armor as defaults
-- **Fixed UI Issues:** Resolved overlapping content problems in item detail views
-- **Unified Launcher:** Single access point for all creator tools
-
-### Current Features:
-
-- **Quest Creator** - 6-phase wizard for custom quests with test maps
+- **Quest Creator** - Complete quest creation system with text-based dialogue editor, automatic choice-to-response linking, and branching dialogue support
+- **Visual Dialogue Editor** - Clean text-based tree view dialogue builder with intelligent choice mapping and step-by-step guidance
+- **Unified Quest Editor** - Integrated quest creation suite with browser, immediate quest creation, and simplified dialogue editing
 - **Spell Creator** - 7-phase "Spell Wizard" with 1-15 level progression system
 - **Weapon Creator** - 7-phase "Weapon Forge" with edit-existing feature (719 weapons to modify)
 - **Armor Creator** - 7-phase "Armor Forge" for custom armor pieces with stat bonuses
@@ -102,9 +95,23 @@ SpellSmut/
 
 ## 🚀 Quick Start
 
+### 🎯 Launch the Quest Creator
+
+The Quest Creator is now ready to use! Launch it with:
+
+```bash
+# Install dependencies (once)
+uv add PySide6
+
+# Launch the quest creator
+uv run python quest_creator.py
+```
+
+### 📚 Getting Started
+
 1. **Read the documentation**: Visit the [documentation site](https://alexerlewein.github.io/SpellSmut/)
 2. **Start with basics**: Begin with the Quest System Guide
-3. **Experiment**: Try creating simple quests and spells
+3. **Experiment**: Try creating simple quests and spells with the tools
 4. **Build up**: Gradually work towards more complex mods
 
 ## 📋 Project Plan

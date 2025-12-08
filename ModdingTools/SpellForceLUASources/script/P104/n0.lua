@@ -1,56 +1,56 @@
 -- P04 ... Flucht in die Eis-Stadt
 
--- Coords für eingangsportal Dunkelelfen
+-- Coords fr eingangsportal Dunkelelfen
 PortalX = 461
 PortalY = 160
 
--- Coords für eingangsportal Flüchtlinge
+-- Coords fr eingangsportal Flchtlinge
 FugeePortalX = 466
 FugeePortalY = 53
 
--- Flüchtlinge warten hier wegen Cutscene
+-- Flchtlinge warten hier wegen Cutscene
 Punkt1X = 404
 Punkt1Y = 104
 
---Flüchtlingscamp 1 (beim Aufbau) coords
+--Flchtlingscamp 1 (beim Aufbau) coords
 Flucht1X = 340
 Flucht1Y = 170
---zum Flüchtlingscamp 2 vor Tor, damit das Tor geöffnet wird, wenn die Units da sind
+--zum Flchtlingscamp 2 vor Tor, damit das Tor geffnet wird, wenn die Units da sind
 Flucht2X = 297
 Flucht2Y = 218
 --(Pass) coords
 Flucht2Xend = 308
 Flucht2Yend = 275
---Flüchtlingscamp 3 (2. Lager) coords
+--Flchtlingscamp 3 (2. Lager) coords
 Flucht3X = 435
 Flucht3Y = 332
---Flüchtlingscamp 4 (Garnison) coords
+--Flchtlingscamp 4 (Garnison) coords
 Flucht4X = 240
 Flucht4Y = 445
---Flüchtlingscamp 5 (Portal) coords
+--Flchtlingscamp 5 (Portal) coords
 Flucht5X = 162
 Flucht5Y = 358
 
--- die flüchtigen jungs haben 5 verschiedene anführer:
+-- die flchtigen jungs haben 5 verschiedene anfhrer:
 Anfuehrer1 = 5354
 Anfuehrer2 = 5359
 Anfuehrer3 = 5364
 Anfuehrer4 = 5369
 Anfuehrer5 = 5374
 
--- Die Wipetruppen haben zwei Führer
+-- Die Wipetruppen haben zwei Fhrer
 
 Trupp1 = 5484 
 Trupp2 = 5499
 
--- food menge für flüchtlinge, damit sie zum pass weiterlaufen können
--- trigger für dunkelelfen attacken ist fix auf 2/3tel dieses werts... (s.u.)
+-- food menge fr flchtlinge, damit sie zum pass weiterlaufen knnen
+-- trigger fr dunkelelfen attacken ist fix auf 2/3tel dieses werts... (s.u.)
 FoodNeeded = 1000
 
--- anzahl sekunden nach monument claim bis die ersten flüchtlinge eintreffen sollen
+-- anzahl sekunden nach monument claim bis die ersten flchtlinge eintreffen sollen
 FugitiveAppearDelay = 600
 
--- für interne zwecke: fugitive gruppen counter
+-- fr interne zwecke: fugitive gruppen counter
 CurrentFugitiveGroupNumber = 0
 
 
@@ -104,7 +104,7 @@ JunctionPlateauY = 130
 JunctionNorthEastOrcCampX = 452
 JunctionNorthEastOrcCampY = 209
 
--- Spawnposition für den zweiten Teil der Karte
+-- Spawnposition fr den zweiten Teil der Karte
 SecondSpawnX = 388
 SecondSpawnY = 144
 
@@ -124,7 +124,7 @@ JunctionEbeneNordY = 353
 -- Tiere respawnen im Spawngebiet etwas schneller, damit der SPieler schneller Nahrung fangen kann
 SchratSpawnTime = 150
 
--- Die Eiselfenführer
+-- Die Eiselfenfhrer
 Gruppe1 = 5645
 Gruppe2 = 5652
 Gruppe3 = 5659
@@ -190,7 +190,7 @@ OnOneTimeEvent
 	},
 }
 
--- setze delay für dracon army, die sollen ja nicht gleich am portal mit den flüchtlingen zusammenprallen
+-- setze delay fr dracon army, die sollen ja nicht gleich am portal mit den flchtlingen zusammenprallen
 OnOneTimeEvent
 {
 	Conditions = 
@@ -203,7 +203,7 @@ OnOneTimeEvent
 	},
 }
 
--- treffen alle bedingungen für das spawnen der dracon armee zu?
+-- treffen alle bedingungen fr das spawnen der dracon armee zu?
 OnOneTimeEvent
 {
 	Conditions = 
@@ -213,12 +213,12 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{
-		Outcry {Tag = "ocArachP004_001", NpcId = 5379, String = "Schickt Späher in den Sumpf! Scheucht das Gewürm heraus!", Color = ColorWhite}, 
+		Outcry {Tag = "ocArachP004_001", NpcId = 5379, String = "Schickt Spher in den Sumpf! Scheucht das Gewrm heraus!", Color = ColorWhite}, 
 		SetGlobalFlagTrue{Name = "DraconArmyBeginsAttackingFromPortal"},
 	},
 }
 
--- treffen alle bedingungen für das spawnen der dracon armee zu?
+-- treffen alle bedingungen fr das spawnen der dracon armee zu?
 OnOneTimeEvent
 {
 	Conditions = 
@@ -237,16 +237,10 @@ OnOneTimeEvent
 {
 	Conditions =
 	{
-		ODER 
-		(
-			ODER 
-			(
-				FigureInRange {X = 431, Y = 149, NpcId = 5484, Range = 10}, 
+		ODER(			ODER(				FigureInRange {X = 431, Y = 149, NpcId = 5484, Range = 10}, 
 				FigureInRange {X = 407, Y = 107, NpcId = 5484, Range = 10}
 			),
-			ODER 
-			(
-				FigureInRange {X = 431, Y = 149, NpcId = 5485, Range = 10}, 
+			ODER(				FigureInRange {X = 431, Y = 149, NpcId = 5485, Range = 10}, 
 				FigureInRange {X = 407, Y = 107, NpcId = 5485, Range = 10}
 			)
 		),
@@ -268,7 +262,7 @@ OnOneTimeEvent
 	},
 	Actions =
 	{
-		Outcry {Tag = "ocLenaP004_008", NpcId = 5428, String = "Sie kommen! Die Garde greift an! Halte sie auf, bis die Flüchtlinge die Festung erreicht haben!", Color = ColorWhite}, 
+		Outcry {Tag = "ocLenaP004_008", NpcId = 5428, String = "Sie kommen! Die Garde greift an! Halte sie auf, bis die Flchtlinge die Festung erreicht haben!", Color = ColorWhite}, 
 	}
 }
 
@@ -288,7 +282,7 @@ OnOneTimeEvent
 }
 
 
--- Der Spieler ist jetzt mit dem zweiten Aufbau beschäftigt
+-- Der Spieler ist jetzt mit dem zweiten Aufbau beschftigt
 OnOneTimeEvent
 {
 	Conditions =
@@ -299,7 +293,7 @@ OnOneTimeEvent
 	{
 		SetGlobalTimeStamp {Name = "AttackTargetII"},
 		SetGlobalFlagTrue {Name = "NewSpawn"},
-		Outcry {Tag = "ocArachP004_004", NpcId = 5379, String = "Hört auf zu plündern ihr Narren! Das Pack ist zur Feste geflohen, ihnen nach!", Color = ColorWhite}, 
+		Outcry {Tag = "ocArachP004_004", NpcId = 5379, String = "Hrt auf zu plndern ihr Narren! Das Pack ist zur Feste geflohen, ihnen nach!", Color = ColorWhite}, 
 		IncreaseGlobalCounter {Name = "DraconWanderCounter"},
 		RemoveDialog {NpcId = 5428},
 	}
@@ -314,11 +308,11 @@ OnOneTimeEvent
 	},
 	Actions =
 	{
-		Outcry {Tag = "ocArachP004_005", NpcId = 5379, String = "Neu formieren! Ich will diese Festung fallen sehen! Stürmt sie!", Color = ColorWhite}, 
+		Outcry {Tag = "ocArachP004_005", NpcId = 5379, String = "Neu formieren! Ich will diese Festung fallen sehen! Strmt sie!", Color = ColorWhite}, 
 	}
 }
 
--- Jetzt hatte er Zeit genug, also mal das Flag für den zweiten Angriff setzen
+-- Jetzt hatte er Zeit genug, also mal das Flag fr den zweiten Angriff setzen
 OnOneTimeEvent
 {
 	Conditions =
@@ -390,7 +384,7 @@ OnOneTimeEvent
 		SetGlobalTimeStamp {Name = "SuperQALetsGo"},
 	}
 }
--- Jetzt gehts um die Wurst Dunkelelfen greifen die Flüchtlinge in der Grenzfestung an
+-- Jetzt gehts um die Wurst Dunkelelfen greifen die Flchtlinge in der Grenzfestung an
 OnOneTimeEvent
 {
 	Conditions =
@@ -405,7 +399,7 @@ OnOneTimeEvent
 		SetGlobalFlagFalse {Name = "APWO4"},
 		SetGlobalFlagTrue {Name = "Last3"},
 		SetGlobalFlagFalse {Name = "AP01"},
-		Outcry {Tag = "ocArachP004_006", NpcId = 5379, String = "Ein Trupp den Berg hinauf! Sie können noch nicht weit sein!", Color = ColorWhite}, 
+		Outcry {Tag = "ocArachP004_006", NpcId = 5379, String = "Ein Trupp den Berg hinauf! Sie knnen noch nicht weit sein!", Color = ColorWhite}, 
 		SetGlobalTimeStamp {Name = "DenBergRauf"},
 	}
 }
@@ -440,10 +434,10 @@ OnOneTimeEvent
 }
 
 ------------------------------------------------------------------------------------------------
--- Flüchtlinge & Co. ---------------------------------------------------------------------------
+-- Flchtlinge & Co. ---------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------
 
--- TRIGGER 1: die ersten eintreffenden flüchtlinge (sobald spieler halt etwas nahrung hat)...
+-- TRIGGER 1: die ersten eintreffenden flchtlinge (sobald spieler halt etwas nahrung hat)...
 OnOneTimeEvent
 {
 	Conditions = 
@@ -513,7 +507,7 @@ OnOneTimeEvent
 	},
 	Actions =
 	{
-		Outcry {Tag = "ocLenaP004_009", NpcId = 5428, String = "Zieh dich zurück! Es sind zu viele! Zurück! Zur Wehrfeste, schnell!", Color = ColorWhite}, 
+		Outcry {Tag = "ocLenaP004_009", NpcId = 5428, String = "Zieh dich zurck! Es sind zu viele! Zurck! Zur Wehrfeste, schnell!", Color = ColorWhite}, 
 		SetGlobalFlagTrue {Name = "LeaGehtZumPass"},
 		SetNpcFlagFalse {Name = "LeaBlocker"},
 	}
@@ -536,7 +530,7 @@ OnOneTimeEvent
 
 
 
--- TRIGGER 3: flüchtlinge sollen sich vom pass zum 2. lager bewegen
+-- TRIGGER 3: flchtlinge sollen sich vom pass zum 2. lager bewegen
 OnOneTimeEvent
 {
 	Conditions = 
@@ -552,7 +546,7 @@ OnOneTimeEvent
 	},
 }
 
--- Leas Outcry für das Elfenlager
+-- Leas Outcry fr das Elfenlager
 OnOneTimeEvent
 {
 	Conditions =
@@ -562,16 +556,16 @@ OnOneTimeEvent
 	Actions =
 	{
 		QuestSolve {QuestId = 614},
-		Outcry {Tag = "ocLenaP004_011", NpcId = 5428, String = "Zurück! Lass sie die Festung plündern! Komm hier herauf!", Color = ColorWhite}, 
+		Outcry {Tag = "ocLenaP004_011", NpcId = 5428, String = "Zurck! Lass sie die Festung plndern! Komm hier herauf!", Color = ColorWhite}, 
 	}
 }
 
--- TRIGGER 4: flüchtlinge sollen sich vom 2. lager in die garnison bewegen
+-- TRIGGER 4: flchtlinge sollen sich vom 2. lager in die garnison bewegen
 OnOneTimeEvent
 {
 	Conditions = {
 		IsGlobalFlagTrue{Name = "FugitivesReachedPosition3"},
-		-- TEMPORÄR: -- normalerweise: wenn tor offen
+		-- TEMPORR: -- normalerweise: wenn tor offen
 		IsGlobalFlagTrue {Name = "TorAufLeaLos"},
 	},
 	Actions = {
@@ -580,7 +574,7 @@ OnOneTimeEvent
 	},
 }
 
--- TRIGGER 5: flüchtlinge sollen sich vom pass zum 2. lager bewegen
+-- TRIGGER 5: flchtlinge sollen sich vom pass zum 2. lager bewegen
 OnOneTimeEvent
 {
 	Conditions = 
@@ -596,7 +590,7 @@ OnOneTimeEvent
 }
 
 
--- Übergabe der Orkgebäude, wenn die Stadt befreit ist 
+-- bergabe der Orkgebude, wenn die Stadt befreit ist 
 OnOneTimeEvent
 {
 	Conditions =
@@ -619,7 +613,7 @@ OnOneTimeEvent
 		SetGlobalFlagTrue {Name = "LeaDorfBefreit"},
 		SetGlobalFlagTrue {Name = "FugeesHabenHunger"},
 		SetGlobalFlagTrue {Name = "FugeesHabenHungerDialogReon"},
-		SetGlobalTimeStamp {Name = "CutsceneVerzögerer"},
+		SetGlobalTimeStamp {Name = "CutsceneVerzgerer"},
 	}
 }
 
@@ -627,15 +621,15 @@ OnOneTimeEvent
 {
 	Conditions =
 	{
-		IsGlobalTimeElapsed{Name = "CutsceneVerzögerer", Seconds = 30, UpdateInterval = 10},	
+		IsGlobalTimeElapsed{Name = "CutsceneVerzgerer", Seconds = 30, UpdateInterval = 10},	
 	},
 	Actions =
 	{
-		Outcry {Tag = "ocLenaP004_001", NpcId = 5428, String = "Die Siedlung gehört uns! Schick deine Arbeiter zu den Häusern!", Color = ColorWhite}, 
+		Outcry {Tag = "ocLenaP004_001", NpcId = 5428, String = "Die Siedlung gehrt uns! Schick deine Arbeiter zu den Husern!", Color = ColorWhite}, 
 	}
 }
 
--- Übergabe der Elfengebäude, wenn der Spieler das Monument am Pass übernommen hat
+-- bergabe der Elfengebude, wenn der Spieler das Monument am Pass bernommen hat
 OnOneTimeEvent
 {
 	Conditions =
@@ -663,25 +657,17 @@ OnOneTimeEvent
 	}
 }
 
--- Lea mahnt zur Weiterreise an, Spieler soll zu den Flüchtlingen stoßen
---!!! Nicht sehr sauber, vielleicht gibt es da eine bessere Lösung als auf irgendwelche Figuren abzufragen, die evtl. schon tot sind
+-- Lea mahnt zur Weiterreise an, Spieler soll zu den Flchtlingen stoen
+--!!! Nicht sehr sauber, vielleicht gibt es da eine bessere Lsung als auf irgendwelche Figuren abzufragen, die evtl. schon tot sind
 OnOneTimeEvent
 {
 	Conditions =
 	{
-		ODER
-		(
-			FigureInRange {NpcId = 5392, X = 295, Y = 226, Range = 5},
-			ODER
-			(
-				ODER 
-				(	
-					FigureInRange {NpcId = 5384, X = 295, Y = 226, Range = 5},
+		ODER(			FigureInRange {NpcId = 5392, X = 295, Y = 226, Range = 5},
+			ODER(				ODER(					FigureInRange {NpcId = 5384, X = 295, Y = 226, Range = 5},
 					FigureInRange {NpcId = 5380, X = 295, Y = 226, Range = 5}
 				),
-				ODER
-				(
-					FigureInRange {NpcId = 5483, X = 295, Y = 226, Range = 5},
+				ODER(					FigureInRange {NpcId = 5483, X = 295, Y = 226, Range = 5},
 					FigureInRange {NpcId = 5486, X = 295, Y = 226, Range = 5}
 				)
 			)
@@ -697,7 +683,7 @@ OnOneTimeEvent
 	}
 }
 
--- Flag für Lea setzen, mit dem sie den Elfenübergebendialog starten kann
+-- Flag fr Lea setzen, mit dem sie den Elfenbergebendialog starten kann
 OnOneTimeEvent
 {
 	Conditions =
@@ -725,7 +711,7 @@ OnOneTimeEvent
 	}
 }
 
--- Die Dunkelelfen die das Tor angreifen sind tot und die Schlüsselmeisterin ist am tor
+-- Die Dunkelelfen die das Tor angreifen sind tot und die Schlsselmeisterin ist am tor
 OnOneTimeEvent
 {
 	Conditions =
@@ -753,12 +739,12 @@ OnOneTimeEvent
 	},
 	Actions =
 	{
-		Outcry {Tag = "ocLenaP004_012", NpcId = 5428, String = "Sie setzen uns nach! Übernimm das Kommando über die verbliebenen Elfen, versuche ihren Angriff abzuwehren!", Color = ColorWhite}, 
+		Outcry {Tag = "ocLenaP004_012", NpcId = 5428, String = "Sie setzen uns nach! bernimm das Kommando ber die verbliebenen Elfen, versuche ihren Angriff abzuwehren!", Color = ColorWhite}, 
 	}
 	
 }
 
--- Sclüsselmeisterin tot, aber TOr zu
+-- Sclsselmeisterin tot, aber TOr zu
 OnOneTimeEvent
 {
 	Conditions =
@@ -768,12 +754,12 @@ OnOneTimeEvent
 	}, 
 	Actions =
 	{
-		Outcry {Tag = "ocAedarP004_002", NpcId = 7305, String = "Sie ist tot! Wollen wir hoffen, dass Ihr beim Außenposten noch jemanden findet, der dieses Tor öffnen kann!", Color = ColorWhite}, 
+		Outcry {Tag = "ocAedarP004_002", NpcId = 7305, String = "Sie ist tot! Wollen wir hoffen, dass Ihr beim Auenposten noch jemanden findet, der dieses Tor ffnen kann!", Color = ColorWhite}, 
 	}
 }
 
 
--- Flüchtlinge durchs Portal
+-- Flchtlinge durchs Portal
 OnOneTimeEvent
 {
 	Conditions =
@@ -782,7 +768,7 @@ OnOneTimeEvent
 	},
 	Actions =
 	{
-		Outcry {Tag = "ocLenaP004_013", NpcId = 5428, String = "Die Flüchtlinge sind durch! Komm! Wir können hier nicht siegen!", Color = ColorWhite}, 
+		Outcry {Tag = "ocLenaP004_013", NpcId = 5428, String = "Die Flchtlinge sind durch! Komm! Wir knnen hier nicht siegen!", Color = ColorWhite}, 
 	}
 }
 
@@ -796,7 +782,7 @@ OnOneTimeEvent
 	},
 	Actions =
 	{
-		Outcry {Tag = "ocLenaP004_014", NpcId = 5428, String = "Schützen! Nehmt Ziel!", Color = ColorWhite}, 
+		Outcry {Tag = "ocLenaP004_014", NpcId = 5428, String = "Schtzen! Nehmt Ziel!", Color = ColorWhite}, 
 		SetGlobalTimeStamp {Name = "Endkampf"},
 	}
 }
@@ -841,7 +827,7 @@ OnOneTimeEvent
 	},
 	Actions =
 	{
-		Outcry {Tag = "ocLenaP004_016", NpcId = 5428, String = "Schießt!", Color = ColorWhite},
+		Outcry {Tag = "ocLenaP004_016", NpcId = 5428, String = "Schiet!", Color = ColorWhite},
 		AttackTarget {NpcId = 6529, Target = 7664},
 		AttackTarget {NpcId = 6530, Target = 7664},
 		AttackTarget {NpcId = 6531, Target = 7664},
@@ -904,7 +890,7 @@ OnOneTimeEvent
 	Actions =
 	{
 		SetGlobalFlagTrue {Name = "LenaGeht"},
-		-- Reward für die Flüchtlinge
+		-- Reward fr die Flchtlinge
 		SetGlobalFlagTrue {Name = "BelohnungJetzt"},
 		
 	}

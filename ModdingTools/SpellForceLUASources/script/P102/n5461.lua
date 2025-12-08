@@ -51,7 +51,7 @@ OnPlatformOneTimeEvent
 		SetNpcFlagTrue{Name = "BitteUmspawnen"},
 	}
 }
---OnOneTimeEvent	-- gleich wieder löschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
+--OnOneTimeEvent	-- gleich wieder lschen beim allerersten mal (verhindert vor- bzw. nach-cutscene umspawn-problem)
 NewState{Name = "AvoidUmspawnAfterMapStartCutscene"}
 AddTransition
 {
@@ -93,9 +93,7 @@ Umspawn
 	OnlyOnce = FALSE,
 	Conditions = 
 	{
-		ODER                                       
-		(                                  
-			AvatarLocalTeleport{},
+		ODER(			AvatarLocalTeleport{},
 			IsNpcFlagTrue{Name = "BitteUmspawnen", UpdateInterval = 3}
 		),
 		IsGlobalFlagTrue {Name = "DialogJaninaEnded"}, 
@@ -217,7 +215,7 @@ Despawn
 	
 
 	-- 3 globale flags steuern das an/abschalten eines NPC Dialogs
-	-- die flags lösen die entspr. aktion aus und werden dabei wieder auf false gesetzt
+	-- die flags lsen die entspr. aktion aus und werden dabei wieder auf false gesetzt
 	-- dies sind die flags, nach dem underscore kommt die NpcId:
 	-- SetGlobalFlagTrue{Name = "PleaseRemoveDialog_1234"},
 	-- SetGlobalFlagTrue{Name = "PleaseEnableMainQuestDialog_5678"},
@@ -239,7 +237,7 @@ Despawn
 			Negated(IsPlayerFlagTrue{Name = "Q560_JaninaKnown"}),
 		},
 		Actions = {
-			Say{Tag = "janina102_003", String = "Habt Dank für Eure Hilfe. Eure Begleiter kenne ich, aber Euch nicht."},
+			Say{Tag = "janina102_003", String = "Habt Dank fr Eure Hilfe. Eure Begleiter kenne ich, aber Euch nicht."},
 			Answer{Tag = "janina102_004PC", String = "Ich bin ein Runenkrieger. Wir sind auf der Suche nach Dunhan.", AnswerId = 5},
 		}}
 
@@ -275,8 +273,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 			OfferAnswer{Tag = "janina102_017PC", String = "Kommt, wir bringen Euch zu Eurem Heiler!", AnswerId = 26},
 		}}
 
@@ -288,8 +286,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 		}}
 
 	OnAnswer{4;
@@ -300,7 +298,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
 			OfferAnswer{Tag = "janina102_017PC", String = "Kommt, wir bringen Euch zu Eurem Heiler!", AnswerId = 26},
 		}}
 
@@ -312,7 +310,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
 		}}
 
 	OnAnswer{4;
@@ -323,7 +321,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 			OfferAnswer{Tag = "janina102_017PC", String = "Kommt, wir bringen Euch zu Eurem Heiler!", AnswerId = 26},
 		}}
 
@@ -335,7 +333,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 		}}
 
 	OnAnswer{4;
@@ -367,8 +365,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "janina102_005", String = "Dunhan dieser Narr. Es wird Euch nicht gefallen, was ihr finden werdet."},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 			OfferAnswer{Tag = "janina102_017PC", String = "Kommt, wir bringen Euch zu Eurem Heiler!", AnswerId = 26},
 		}}
 
@@ -380,8 +378,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "janina102_005", String = "Dunhan dieser Narr. Es wird Euch nicht gefallen, was ihr finden werdet."},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 		}}
 
 	OnAnswer{5;
@@ -392,7 +390,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "janina102_005", String = "Dunhan dieser Narr. Es wird Euch nicht gefallen, was ihr finden werdet."},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
 			OfferAnswer{Tag = "janina102_017PC", String = "Kommt, wir bringen Euch zu Eurem Heiler!", AnswerId = 26},
 		}}
 
@@ -404,7 +402,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "janina102_005", String = "Dunhan dieser Narr. Es wird Euch nicht gefallen, was ihr finden werdet."},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
 		}}
 
 	OnAnswer{5;
@@ -415,7 +413,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "janina102_005", String = "Dunhan dieser Narr. Es wird Euch nicht gefallen, was ihr finden werdet."},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 			OfferAnswer{Tag = "janina102_017PC", String = "Kommt, wir bringen Euch zu Eurem Heiler!", AnswerId = 26},
 		}}
 
@@ -427,7 +425,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "janina102_005", String = "Dunhan dieser Narr. Es wird Euch nicht gefallen, was ihr finden werdet."},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 		}}
 
 	OnAnswer{5;
@@ -463,7 +461,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "janina102_008", String = "Zwei Brüder warben einst um mich, der eine ein stolzer Krieger, der andere ein stiller Zauberer. Aus ihrem Ringen um meine Gunst wurde Streit und schließlich Hass."},
+			Say{Tag = "janina102_008", String = "Zwei Brder warben einst um mich, der eine ein stolzer Krieger, der andere ein stiller Zauberer. Aus ihrem Ringen um meine Gunst wurde Streit und schlielich Hass."},
 			Answer{Tag = "", String = "", AnswerId = 8},
 		}}
 
@@ -471,7 +469,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "janina102_009", String = "Ihr Streit riss den Widerstand entzwei und drohte uns alle zu vernichten. Viele Leben hat er gekostet und schließlich auch meines."},
+			Say{Tag = "janina102_009", String = "Ihr Streit riss den Widerstand entzwei und drohte uns alle zu vernichten. Viele Leben hat er gekostet und schlielich auch meines."},
 			Answer{Tag = "", String = "", AnswerId = 9},
 		}}
 
@@ -479,7 +477,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "janina102_010", String = "Ich stehe nur hier vor Euch, weil einer jener Brüder einen dunklen Magier beauftragte, meine Seele aus dem Totenreich zurück zu holen...doch dafür hat er die seine geopfert."},
+			Say{Tag = "janina102_010", String = "Ich stehe nur hier vor Euch, weil einer jener Brder einen dunklen Magier beauftragte, meine Seele aus dem Totenreich zurck zu holen...doch dafr hat er die seine geopfert."},
 			Answer{Tag = "", String = "", AnswerId = 10},
 		}}
 
@@ -487,7 +485,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "janina102_011", String = "Nun ist er eine verblendete Kreatur voller Hass ... und ich bin zwar am Leben, aber von jenseits der Schwelle des Todes ist ein fremdes Wesen mit mir zurückgekehrt, ein Geist, der sich an meine Seele klammert."},
+			Say{Tag = "janina102_011", String = "Nun ist er eine verblendete Kreatur voller Hass ... und ich bin zwar am Leben, aber von jenseits der Schwelle des Todes ist ein fremdes Wesen mit mir zurckgekehrt, ein Geist, der sich an meine Seele klammert."},
 			Answer{Tag = "", String = "", AnswerId = 11},
 		}}
 
@@ -495,7 +493,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "janina102_012", String = "Nun raunt mir dieses Wesen Tag und Nacht seine Mordgelüste zu. Es stiehlt meine Träume und suhlt sich in meiner Angst. Hätte er mich nur im Reich der Toten belassen!"},
+			Say{Tag = "janina102_012", String = "Nun raunt mir dieses Wesen Tag und Nacht seine Mordgelste zu. Es stiehlt meine Trume und suhlt sich in meiner Angst. Htte er mich nur im Reich der Toten belassen!"},
 			Answer{Tag = "", String = "", AnswerId = 12},
 		}}
 
@@ -541,8 +539,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 			OfferAnswer{Tag = "janina102_017PC", String = "Kommt, wir bringen Euch zu Eurem Heiler!", AnswerId = 26},
 		}}
 
@@ -554,8 +552,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 		}}
 
 	OnAnswer{16;
@@ -566,7 +564,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
 			OfferAnswer{Tag = "janina102_017PC", String = "Kommt, wir bringen Euch zu Eurem Heiler!", AnswerId = 26},
 		}}
 
@@ -578,7 +576,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
 		}}
 
 	OnAnswer{16;
@@ -589,7 +587,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 			OfferAnswer{Tag = "janina102_017PC", String = "Kommt, wir bringen Euch zu Eurem Heiler!", AnswerId = 26},
 		}}
 
@@ -601,7 +599,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 		}}
 
 	OnAnswer{16;
@@ -629,7 +627,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "janina102_014", String = "Ja, er war es, der mir dieses Schicksal auferlegte. Er ist ein Hitzkopf, aber ein guter Kämpfer. Sein Bruder Setrius ist sein stilles Gegenteil."},
+			Say{Tag = "janina102_014", String = "Ja, er war es, der mir dieses Schicksal auferlegte. Er ist ein Hitzkopf, aber ein guter Kmpfer. Sein Bruder Setrius ist sein stilles Gegenteil."},
 			Answer{Tag = "", String = "", AnswerId = 18},
 		}}
 
@@ -637,7 +635,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "janina102_015", String = "Einst kämpften wir drei gemeinsam mit Reowys für den Widerstand. Dunhan ist der geborene Anführer und die Waldläufer waren ihm treu ergeben."},
+			Say{Tag = "janina102_015", String = "Einst kmpften wir drei gemeinsam mit Reowys fr den Widerstand. Dunhan ist der geborene Anfhrer und die Waldlufer waren ihm treu ergeben."},
 			Answer{Tag = "", String = "", AnswerId = 19},
 		}}
 
@@ -645,7 +643,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "janina102_016", String = "Doch nun verschanzt er sich hier hinter Mauern und Söldnern. Widerstand und Freiheit bedeuten ihm nichts mehr. Selbst seinen Runenbruder Reowys hat er vertrieben!"},
+			Say{Tag = "janina102_016", String = "Doch nun verschanzt er sich hier hinter Mauern und Sldnern. Widerstand und Freiheit bedeuten ihm nichts mehr. Selbst seinen Runenbruder Reowys hat er vertrieben!"},
 			Answer{Tag = "", String = "", AnswerId = 20},
 		}}
 
@@ -698,8 +696,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 			OfferAnswer{Tag = "janina102_017PC", String = "Kommt, wir bringen Euch zu Eurem Heiler!", AnswerId = 26},
 		}}
 
@@ -711,8 +709,8 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 		}}
 
 	OnAnswer{25;
@@ -723,7 +721,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
 			OfferAnswer{Tag = "janina102_017PC", String = "Kommt, wir bringen Euch zu Eurem Heiler!", AnswerId = 26},
 		}}
 
@@ -735,7 +733,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzählten von einer Krankheit, die Euch plagt?", AnswerId = 6},
+			OfferAnswer{Tag = "janina102_006PC", String = "Die Skergs erzhlten von einer Krankheit, die Euch plagt?", AnswerId = 6},
 		}}
 
 	OnAnswer{25;
@@ -746,7 +744,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 			OfferAnswer{Tag = "janina102_017PC", String = "Kommt, wir bringen Euch zu Eurem Heiler!", AnswerId = 26},
 		}}
 
@@ -758,7 +756,7 @@ Despawn
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brüder?", AnswerId = 17},
+			OfferAnswer{Tag = "janina102_013PC", String = "War Dunhan einer dieser Brder?", AnswerId = 17},
 		}}
 
 	OnAnswer{25;
@@ -786,7 +784,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "janina102_018", String = "Meine Krankheit ist keine wie ihr sie kennt. Etwas wohnt in mir ... wer weiß, vielleicht ist der Tod der beste Ausweg für mich."},
+			Say{Tag = "janina102_018", String = "Meine Krankheit ist keine wie ihr sie kennt. Etwas wohnt in mir ... wer wei, vielleicht ist der Tod der beste Ausweg fr mich."},
 			Answer{Tag = "janina102_019PC", String = "Es wird Euch nichts geschehen. Wir werden Euch sicher zu Eurem Heiler bringen, er soll entscheiden, was zu tun ist.", AnswerId = 27},
 		}}
 
@@ -794,7 +792,7 @@ Despawn
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "janina102_020", String = "Hulus Dorf liegt östlich von hier, jenseits der Krallenschlucht. Das ist ein gutes Stück Weg ... und die Kithar sind auf Raubzug! Aber geht nur voran, ich werde Euch folgen."},
+			Say{Tag = "janina102_020", String = "Hulus Dorf liegt stlich von hier, jenseits der Krallenschlucht. Das ist ein gutes Stck Weg ... und die Kithar sind auf Raubzug! Aber geht nur voran, ich werde Euch folgen."},
 			Answer{Tag = "", String = "", AnswerId = 28},
 		}}
 

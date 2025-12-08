@@ -20,7 +20,7 @@ dofile("script/p101/n32005_CutsceneSklavenlager.lua")
 dofile("script/p101/n32006_CutsceneGefaengnis.lua")	
 
 -----------------------------------------
---!!! Fake Spawning für Goblins nach Flüchtlingslager
+--!!! Fake Spawning fr Goblins nach Flchtlingslager
 -----------------------------------------
 OnOneTimeEvent
 {
@@ -58,7 +58,7 @@ OnOneTimeEvent
 ----------------------------------------------
 ----------------------------------------------
 
--- Flag für Fial Darg Gefängnis-Effekt
+-- Flag fr Fial Darg Gefngnis-Effekt
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 60,
@@ -69,7 +69,7 @@ OnOneTimeEvent
 	},
 }
 
---Flag für Respawn-Stop Lena nach Lösen der Map
+--Flag fr Respawn-Stop Lena nach Lsen der Map
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 60,
@@ -79,7 +79,7 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{ 
-		SetGlobalFlagTrue{Name = "P101Gelöst"},
+		SetGlobalFlagTrue{Name = "P101Gelst"},
 	},
 }
 
@@ -139,7 +139,7 @@ OnOneTimeEvent
 }
 
 -------------------
-----Notfall-Flags, falls Dialoge Aedar/ Willit nicht geführt wurden
+----Notfall-Flags, falls Dialoge Aedar/ Willit nicht gefhrt wurden
 --------------------
 --
 ---- Abschalten der Quest 571 Aedar, falls nicht mit Aedar geredet
@@ -198,7 +198,7 @@ OnOneTimeEvent
 	},
 }
 
--- Abschalten der Quest 753: Gehe zurück nach Mirraw Thur
+-- Abschalten der Quest 753: Gehe zurck nach Mirraw Thur
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 60,
@@ -231,7 +231,7 @@ OnOneTimeEvent
 	{ 
 		--QuestBegin {QuestId = 570},
 		--QuestBegin {QuestId = 601},
-		SetGlobalTimeStamp{Name = "AbRückkehrVonRune1"},
+		SetGlobalTimeStamp{Name = "AbRckkehrVonRune1"},
 	},
 }
 
@@ -248,21 +248,19 @@ OnOneTimeEvent
 		
  	Actions = 
 	{ 
-		SetGlobalTimeStamp{Name = "AbRückkehrVonRune2"},
+		SetGlobalTimeStamp{Name = "AbRckkehrVonRune2"},
 	},
 }
 
 
---Outcrywechsel lena und Grim nach Willitgespräch
+--Outcrywechsel lena und Grim nach Willitgesprch
 
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 10,
 	Conditions = 
 	{
-		ODER
-		(
-		IsGlobalFlagTrue {Name = "HabeMitWillitGesprochen"},
+		ODER(		IsGlobalFlagTrue {Name = "HabeMitWillitGesprochen"},
 		FigureInRange {X = 141, Y = 141, NpcId = 5537, Range = 10}
 		)
 	},
@@ -275,7 +273,7 @@ OnOneTimeEvent
 
 -----------------------------------------------------
 
--- Baum-Blockade zu Portal Rune 2 wird gefällt
+-- Baum-Blockade zu Portal Rune 2 wird gefllt
 
 OnOneTimeEvent
 {
@@ -320,13 +318,13 @@ OnOneTimeEvent
 
 
 
--- Sklaven werden nach Cutscene dem Spieler übergeben
+-- Sklaven werden nach Cutscene dem Spieler bergeben
 OnPlatformOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 10,
 	Conditions = 
 	{
-		IsGlobalFlagTrue {Name = "SklavenÜbergeben"},
+		IsGlobalFlagTrue {Name = "Sklavenbergeben"},
 	},
 	Actions = 
 	{
@@ -359,7 +357,7 @@ OnPlatformOneTimeEvent
 
 
 ----------------------------------------------
---nach Zerstörung des Elfenhauptquartiers
+--nach Zerstrung des Elfenhauptquartiers
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 60,
@@ -371,14 +369,14 @@ OnOneTimeEvent
 	},
 	Actions = 
 	{
-		SetGlobalFlagTrue {Name = "HQistZerstört"}, -- Trigger für Spawning Elune und Statthalterin, Umspawnen von Grim und Lea; Starten Cutscene
+		SetGlobalFlagTrue {Name = "HQistZerstrt"}, -- Trigger fr Spawning Elune und Statthalterin, Umspawnen von Grim und Lea; Starten Cutscene
 		QuestSolve{QuestId = 586, ActivateNextQuest = FALSE }, -- QAngriff auf Eiselfen solved
 		SetRewardFlagTrue { Name = "HQBefreien" },
 		
 	},
 }
 
---alle Eiselfen werden lieb, nach Cutscene Gefängnis
+--alle Eiselfen werden lieb, nach Cutscene Gefngnis
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 60,
@@ -453,7 +451,7 @@ OnOneTimeEvent
 		ChangeRace {Race = 192, NpcId = 8172},
 		ChangeRace {Race = 192, NpcId = 8173},
 		
-		ChangeRace {Race = 192, NpcId = 5706}, --Bogenschützen hinten
+		ChangeRace {Race = 192, NpcId = 5706}, --Bogenschtzen hinten
 		ChangeRace {Race = 192, NpcId = 5705},
 		ChangeRace {Race = 192, NpcId = 5704},
 		
@@ -469,11 +467,11 @@ OnOneTimeEvent
 	Conditions = 
 	{
 		FigureInRange {X = 378, Y = 425, NpcId = Avatar, Range = 10},
-		--IsNpcCounter {Name = "CounterFlüchtlingeGerettet", Value = 10, Operator = IsGreaterOrEqual, UpdateInterval = 30},
+		--IsNpcCounter {Name = "CounterFlchtlingeGerettet", Value = 10, Operator = IsGreaterOrEqual, UpdateInterval = 30},
 	},
 	Actions = 
 	{
-		SetGlobalFlagTrue {Name = "p101AlleFlüchtlingeGerettet" },
+		SetGlobalFlagTrue {Name = "p101AlleFlchtlingeGerettet" },
 		--QuestSolve{QuestId = 644, ActivateNextQuest = FALSE},
 		--QuestSolve{QuestId = 717, ActivateNextQuest = FALSE},
 		SetRewardFlagTrue { Name = "FluechtlingeNachNorden" },
@@ -481,13 +479,13 @@ OnOneTimeEvent
 }
 
 
----- Flag + Timer für Feuerarmee-Überrun, wenn  alle Flüchtlinge gerettet
+---- Flag + Timer fr Feuerarmee-berrun, wenn  alle Flchtlinge gerettet
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 60,
 	Conditions = 
 	{
-		IsGlobalFlagTrue {Name = "p101AlleFlüchtlingeGerettet", UpdateInterval = 3},
+		IsGlobalFlagTrue {Name = "p101AlleFlchtlingeGerettet", UpdateInterval = 3},
 		IsMonumentInUse{X = 455, Y = 450, Range = 1, UpdateInterval = 30},
 		
 		
@@ -499,13 +497,13 @@ OnOneTimeEvent
 	},
 }
 
----- Flag, wenn Bindstone in Use (für Questsolve auf P104)
+---- Flag, wenn Bindstone in Use (fr Questsolve auf P104)
 OnOneTimeEvent
 {
 	NotInDialog = FALSE, UpdateInterval = 10,
 	Conditions = 
 	{
-		--IsGlobalFlagTrue {Name = "p101AlleFlüchtlingeGerettet", UpdateInterval = 3},
+		--IsGlobalFlagTrue {Name = "p101AlleFlchtlingeGerettet", UpdateInterval = 3},
 		IsMonumentInUse{X = 455, Y = 450, Range = 5, UpdateInterval = 10},
 		
 	},
@@ -519,7 +517,7 @@ OnOneTimeEvent
 -----------------------------------------------
 --Knochenwaffenquest
 -----------------------------------------------
------ Rückeroberung Mirraw Thur solven, wen Dracon tot
+----- Rckeroberung Mirraw Thur solven, wen Dracon tot
 ----- Berichtet Ashgork begin
 OnOneTimeEvent
 {
@@ -533,7 +531,7 @@ OnOneTimeEvent
 		QuestBegin{QuestId = 736}, --berichtet Ashgork
 	},
 }
----- Sobald Ashgork getötet und seine Fragmente erbeutet, Questbucheintrag: Schmiede ein Set am Altar
+---- Sobald Ashgork gettet und seine Fragmente erbeutet, Questbucheintrag: Schmiede ein Set am Altar
 OnOneTimeEvent
 {
 	Conditions = {

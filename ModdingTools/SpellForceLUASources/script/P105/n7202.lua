@@ -31,7 +31,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "totemmugwar105_002", String = "(In den Rücken der Statue ist ein Trichter eingelassen.)"},
+			Say{Tag = "totemmugwar105_002", String = "(In den Rcken der Statue ist ein Trichter eingelassen.)"},
 			Answer{Tag = "", String = "", AnswerId = 2},
 		}}
 
@@ -65,7 +65,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 			IsGlobalFlagFalse{ Name = "P105_TrollsNightFever"},
 		},
 		Actions = {
-			Say{Tag = "totemmugwar105_004", String = "(Das Lager ist leer. Niemand würde die Worte jetzt hören können.)"},
+			Say{Tag = "totemmugwar105_004", String = "(Das Lager ist leer. Niemand wrde die Worte jetzt hren knnen.)"},
 			Answer{Tag = "", String = "", AnswerId = 5},
 		}}
 
@@ -97,7 +97,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 			IsGlobalFlagTrue{ Name = "P105_TrollsWorkingForMugwar"},
 		},
 		Actions = {
-			Say{Tag = "totemmugwar105_005", String = "(Die Trolle erhielten bereits eine Aufgabe, die sie noch nicht erfüllt haben.)"},
+			Say{Tag = "totemmugwar105_005", String = "(Die Trolle erhielten bereits eine Aufgabe, die sie noch nicht erfllt haben.)"},
 			Answer{Tag = "", String = "", AnswerId = 7},
 		}}
 
@@ -117,9 +117,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 
 	OnAnswer{8;
 		Conditions = {
-			UND
-							(
-							FigureAlive{NpcId = 7231},
+			UND(							FigureAlive{NpcId = 7231},
 							FigureAlive{NpcId = 7205}
 							),
 			UND(
@@ -130,7 +128,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "totemmugwar105_007PC", String = "(Die Trolle gegen die Wölfe schicken)", AnswerId = 9},
+			OfferAnswer{Tag = "totemmugwar105_007PC", String = "(Die Trolle gegen die Wlfe schicken)", AnswerId = 9},
 			OfferAnswer{Tag = "totemmugwar105_010PC", String = "(Von den Trollen einen Gegenstand fordern.)", AnswerId = 13},
 			OfferAnswer{Tag = "totemmugwar105_012PC", String = "(Die Trolle die Gegner in Richtung Osten angreifen lassen.)", AnswerId = 16},
 			OfferAnswer{Tag = "totemmugwar105_015PC", String = "(Die Trolle in ihren Untergang schicken.)", AnswerId = 19},
@@ -138,9 +136,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 
 	OnAnswer{8;
 		Conditions = {
-			UND
-							(
-							FigureAlive{NpcId = 7231},
+			UND(							FigureAlive{NpcId = 7231},
 							FigureAlive{NpcId = 7205}
 							),
 			UND(
@@ -151,16 +147,14 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "totemmugwar105_007PC", String = "(Die Trolle gegen die Wölfe schicken)", AnswerId = 9},
+			OfferAnswer{Tag = "totemmugwar105_007PC", String = "(Die Trolle gegen die Wlfe schicken)", AnswerId = 9},
 			OfferAnswer{Tag = "totemmugwar105_010PC", String = "(Von den Trollen einen Gegenstand fordern.)", AnswerId = 13},
 			OfferAnswer{Tag = "totemmugwar105_015PC", String = "(Die Trolle in ihren Untergang schicken.)", AnswerId = 19},
 		}}
 
 	OnAnswer{8;
 		Conditions = {
-			UND
-							(
-							FigureAlive{NpcId = 7231},
+			UND(							FigureAlive{NpcId = 7231},
 							FigureAlive{NpcId = 7205}
 							),
 			Negated(UND(
@@ -171,16 +165,14 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "totemmugwar105_007PC", String = "(Die Trolle gegen die Wölfe schicken)", AnswerId = 9},
+			OfferAnswer{Tag = "totemmugwar105_007PC", String = "(Die Trolle gegen die Wlfe schicken)", AnswerId = 9},
 			OfferAnswer{Tag = "totemmugwar105_012PC", String = "(Die Trolle die Gegner in Richtung Osten angreifen lassen.)", AnswerId = 16},
 			OfferAnswer{Tag = "totemmugwar105_015PC", String = "(Die Trolle in ihren Untergang schicken.)", AnswerId = 19},
 		}}
 
 	OnAnswer{8;
 		Conditions = {
-			UND
-							(
-							FigureAlive{NpcId = 7231},
+			UND(							FigureAlive{NpcId = 7231},
 							FigureAlive{NpcId = 7205}
 							),
 			Negated(UND(
@@ -191,15 +183,13 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			OfferAnswer{Tag = "totemmugwar105_007PC", String = "(Die Trolle gegen die Wölfe schicken)", AnswerId = 9},
+			OfferAnswer{Tag = "totemmugwar105_007PC", String = "(Die Trolle gegen die Wlfe schicken)", AnswerId = 9},
 			OfferAnswer{Tag = "totemmugwar105_015PC", String = "(Die Trolle in ihren Untergang schicken.)", AnswerId = 19},
 		}}
 
 	OnAnswer{8;
 		Conditions = {
-			Negated(UND
-							(
-							FigureAlive{NpcId = 7231},
+			Negated(UND(							FigureAlive{NpcId = 7231},
 							FigureAlive{NpcId = 7205}
 							)),
 			UND(
@@ -217,9 +207,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 
 	OnAnswer{8;
 		Conditions = {
-			Negated(UND
-							(
-							FigureAlive{NpcId = 7231},
+			Negated(UND(							FigureAlive{NpcId = 7231},
 							FigureAlive{NpcId = 7205}
 							)),
 			UND(
@@ -236,9 +224,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 
 	OnAnswer{8;
 		Conditions = {
-			Negated(UND
-							(
-							FigureAlive{NpcId = 7231},
+			Negated(UND(							FigureAlive{NpcId = 7231},
 							FigureAlive{NpcId = 7205}
 							)),
 			Negated(UND(
@@ -255,9 +241,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 
 	OnAnswer{8;
 		Conditions = {
-			Negated(UND
-							(
-							FigureAlive{NpcId = 7231},
+			Negated(UND(							FigureAlive{NpcId = 7231},
 							FigureAlive{NpcId = 7205}
 							)),
 			Negated(UND(
@@ -276,7 +260,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			Answer{Tag = "totemmugwar105_008PC", String = "Hört mich Krieger! Ich gebiete Euch, mir ein weißes Wolfsfell darzubringen!", AnswerId = 10},
+			Answer{Tag = "totemmugwar105_008PC", String = "Hrt mich Krieger! Ich gebiete Euch, mir ein weies Wolfsfell darzubringen!", AnswerId = 10},
 		}}
 
 	OnAnswer{10;
@@ -284,7 +268,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			Answer{Tag = "totemmugwar105_009PC", String = "Es soll das Fell des größten weißen Wolfes sein, der in diesen Bergen lebt!", AnswerId = 11},
+			Answer{Tag = "totemmugwar105_009PC", String = "Es soll das Fell des grten weien Wolfes sein, der in diesen Bergen lebt!", AnswerId = 11},
 		}}
 
 	OnAnswer{11;
@@ -316,7 +300,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			Answer{Tag = "totemmugwar105_011PC", String = "Hört mich Krieger! Ich gebiete Euch, mir ein mächtiges Artefakt darzubringen!", AnswerId = 14},
+			Answer{Tag = "totemmugwar105_011PC", String = "Hrt mich Krieger! Ich gebiete Euch, mir ein mchtiges Artefakt darzubringen!", AnswerId = 14},
 		}}
 
 	OnAnswer{14;
@@ -348,7 +332,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			Answer{Tag = "totemmugwar105_013PC", String = "Hört mich Krieger! Der Ostberg ist mir ein heiliger Ort!", AnswerId = 17},
+			Answer{Tag = "totemmugwar105_013PC", String = "Hrt mich Krieger! Der Ostberg ist mir ein heiliger Ort!", AnswerId = 17},
 		}}
 
 	OnAnswer{17;
@@ -381,7 +365,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 		},
 		Actions = {
 			Say{Tag = "", String = ""},
-			Answer{Tag = "totemmugwar105_016PC", String = "Hört mich Krieger! Die Elfen entweihen mein Land!", AnswerId = 20},
+			Answer{Tag = "totemmugwar105_016PC", String = "Hrt mich Krieger! Die Elfen entweihen mein Land!", AnswerId = 20},
 		}}
 
 	OnAnswer{20;
@@ -391,7 +375,7 @@ BeginDefinition(_Type,_PlatformId,_NpcId,_X,_Y)
 			SetGlobalFlagTrue{ Name = "P105_TrollsWorkingForMugwar"},
 							SetGlobalFlagTrue{Name = "P105_TrollsGoToElfMassacre"},
 			Say{Tag = "", String = ""},
-			Answer{Tag = "totemmugwar105_017PC", String = "Sie sind mächtige Gegner, aber mit meinem Segen werdet ihr siegreich bleiben! Geht hin und vernichtet sie!", AnswerId = 21},
+			Answer{Tag = "totemmugwar105_017PC", String = "Sie sind mchtige Gegner, aber mit meinem Segen werdet ihr siegreich bleiben! Geht hin und vernichtet sie!", AnswerId = 21},
 		}}
 
 	OnAnswer{21;

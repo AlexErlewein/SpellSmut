@@ -9,9 +9,7 @@ SpawnOnlyWhen
 	NoSpawnEffect = TRUE,
 	Conditions = 
 	{
-		UND
-		(
-		IsGlobalTimeElapsed {Name = "g_p207_first_attack_wave_on_base", Seconds = 960}, -- 6 Minuten
+		UND(		IsGlobalTimeElapsed {Name = "g_p207_first_attack_wave_on_base", Seconds = 960}, -- 6 Minuten
 		Negated(IsGlobalFlagTrue {Name = "g_p207_Hoehle01_versperrt"}),
 		Negated(IsGlobalFlagTrue {Name = "g_P207_Erste_Festung_Eingenommen"})
 		),

@@ -32,6 +32,7 @@ from .widgets.progress_dialog import ProgressDialog
 from .widgets.property_editor import PropertyEditorWidget
 from .widgets.quest_details_viewer import QuestDetailsViewer
 from .widgets.quest_hierarchy_tree import QuestHierarchyTreeWidget
+from .widgets.quest_viewer_integration import QuestViewerWidget, QuestViewerIntegration
 
 
 class MainWindow(QMainWindow):
@@ -123,12 +124,29 @@ class MainWindow(QMainWindow):
         self.quest_details.hide()  # Hidden by default
         self.quest_details.setMinimumWidth(400)  # Wider for enhanced details
         splitter.addWidget(self.quest_details)
-        
+
+        # 5th panel - Quest Viewer with Enhanced Editor (initially hidden)
+        self.logger.debug("About to create QuestViewerWidget...")
+        try:
+            self.quest_viewer = QuestViewerWidget(self.data_model)
+            self.logger.debug(f"Created quest_viewer widget: {type(self.quest_viewer).__name__}")
+            self.quest_viewer.hide()  # Hidden by default
+            self.quest_viewer.setMinimumWidth(800)  # Wide for editor
+            splitter.addWidget(self.quest_viewer)
+
+            # Set up quest viewer integration
+            self.quest_viewer_integration = self.quest_viewer.viewer_integration
+
+        except Exception as e:
+            self.logger.error(f"Failed to create QuestViewerWidget: {e}")
+            self.quest_viewer = None
+            self.quest_viewer_integration = None
+
         # Force show quest details panel for testing
         # self.quest_details.show()  # TEMPORARY: Always show for testing
 
-        # Set initial sizes (15%, 25%, 25%, 35% for enhanced quest details)
-        splitter.setSizes([200, 350, 300, 500])
+        # Set initial sizes (15%, 25%, 25%, 35% for enhanced quest details, with space for quest viewer)
+        splitter.setSizes([200, 350, 300, 500, 800])
 
         main_layout.addWidget(splitter)
 
@@ -197,6 +215,24 @@ class MainWindow(QMainWindow):
         # View menu
         view_menu = menubar.addMenu("&View")
 
+        # Quest viewer toggle
+        quest_viewer_action = QAction("Quest &Viewer", self)
+        quest_viewer_action.setShortcut("Ctrl+Shift+Q")
+        quest_viewer_action.setStatusTip("Show/hide the enhanced Quest Viewer panel")
+        quest_viewer_action.setCheckable(True)
+        quest_viewer_action.triggered.connect(self.toggle_quest_viewer)
+        view_menu.addAction(quest_viewer_action)
+
+        view_menu.addSeparator()
+
+        # Quest details toggle
+        quest_details_action = QAction("Quest &Details", self)
+        quest_details_action.setShortcut("Ctrl+Shift+D")
+        quest_details_action.setStatusTip("Show/hide the Quest Details panel")
+        quest_details_action.setCheckable(True)
+        quest_details_action.triggered.connect(self.toggle_quest_details)
+        view_menu.addAction(quest_details_action)
+
         # Tools menu
         tools_menu = menubar.addMenu("&Tools")
 
@@ -205,6 +241,12 @@ class MainWindow(QMainWindow):
         quest_editor_action.setStatusTip("Edit quests with the integrated Quest Editor")
         quest_editor_action.triggered.connect(self.show_quest_editor)
         tools_menu.addAction(quest_editor_action)
+
+        quest_viewer_action = QAction("Quest &Viewer", self)
+        quest_viewer_action.setShortcut("Ctrl+Q, V")
+        quest_viewer_action.setStatusTip("View existing quests in the enhanced Quest Editor")
+        quest_viewer_action.triggered.connect(self.show_quest_viewer)
+        tools_menu.addAction(quest_viewer_action)
 
         load_lua_quests_action = QAction("Load &Lua Quest Scripts...", self)
         load_lua_quests_action.setShortcut("Ctrl+L, Q")
@@ -821,6 +863,21 @@ class MainWindow(QMainWindow):
         if category == "quests":
             # Update quest details with selected quest
             self.quest_details.on_element_selected(category, element_index)
+
+            # Load quest into enhanced viewer if available
+            if self.quest_viewer_integration and element_index >= 0:
+                quests = self.data_model.get_elements("quests")
+                if element_index < len(quests):
+                    quest = quests[element_index]
+                    quest_id = getattr(quest, 'quest_id', None)
+                    if quest_id is not None:
+                        # Load quest into viewer
+                        success = self.quest_viewer_integration.load_quest_for_viewing(quest_id)
+                        if success:
+                            self.logger.debug(f"Loaded quest {quest_id} into quest viewer")
+                        else:
+                            self.logger.warning(f"Failed to load quest {quest_id} into quest viewer")
+
             self.logger.debug(f"Selected quest at index {element_index}")
 
     def adjust_splitter_for_quests(self):
@@ -897,6 +954,103 @@ class MainWindow(QMainWindow):
         except Exception as e:
             QMessageBox.critical(
                 self, "Quest Editor Error", f"Failed to open Quest Editor:\n{str(e)}"
+            )
+
+    def show_quest_viewer(self):
+        """Show or hide the quest viewer panel"""
+        try:
+            if not self.quest_viewer:
+                QMessageBox.warning(
+                    self, "Quest Viewer Error",
+                    "Quest Viewer is not available. Please ensure all components are properly installed."
+                )
+                return
+
+            # Toggle visibility of quest viewer panel
+            if self.quest_viewer.isVisible():
+                # Hide the quest viewer
+                self.quest_viewer.hide()
+                self.statusBar.showMessage("Quest Viewer hidden", 2000)
+
+                # Adjust splitter back to normal sizes
+                self.adjust_splitter_for_normal()
+            else:
+                # Show the quest viewer
+                self.quest_viewer.show()
+
+                # Hide quest details and element table temporarily
+                self.element_table.hide()
+                self.quest_details.hide()
+
+                # Adjust splitter for quest viewer
+                self.adjust_splitter_for_quest_viewer()
+
+                self.statusBar.showMessage("Quest Viewer active - Select a quest from the sidebar", 3000)
+
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Quest Viewer Error", f"Failed to show Quest Viewer:\n{str(e)}"
+            )
+
+    def adjust_splitter_for_quest_viewer(self):
+        """Adjust splitter sizes when showing quest viewer"""
+        # Find the splitter containing our widgets
+        for child in self.findChildren(QSplitter):
+            if self.category_tree in [child.widget(i) for i in range(child.count())]:
+                # Set sizes: categories, properties, quest viewer (hide element table and quest details)
+                child.setSizes([200, 300, 1000])
+                break
+
+    def toggle_quest_viewer(self):
+        """Toggle the quest viewer panel"""
+        try:
+            if not self.quest_viewer:
+                QMessageBox.warning(
+                    self, "Quest Viewer Error",
+                    "Quest Viewer is not available. Please ensure all components are properly installed."
+                )
+                return
+
+            # Show quest viewer if not visible
+            if not self.quest_viewer.isVisible():
+                self.show_quest_viewer()
+            else:
+                # Hide quest viewer and restore normal view
+                self.quest_viewer.hide()
+                self.element_table.show()
+                self.adjust_splitter_for_normal()
+                self.statusBar.showMessage("Quest Viewer hidden", 2000)
+
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Quest Viewer Error", f"Failed to toggle Quest Viewer:\n{str(e)}"
+            )
+
+    def toggle_quest_details(self):
+        """Toggle the quest details panel"""
+        try:
+            if self.quest_details.isVisible():
+                # Hide quest details
+                self.quest_details.hide()
+                self.statusBar.showMessage("Quest Details hidden", 2000)
+
+                # Adjust splitter back to normal sizes
+                self.adjust_splitter_for_normal()
+            else:
+                # Show quest details
+                self.quest_details.show()
+
+                # Hide element table temporarily to show quest details
+                self.element_table.hide()
+
+                # Adjust splitter for quest details
+                self.adjust_splitter_for_quests()
+
+                self.statusBar.showMessage("Quest Details visible", 2000)
+
+        except Exception as e:
+            QMessageBox.critical(
+                self, "Quest Details Error", f"Failed to toggle Quest Details:\n{str(e)}"
             )
 
     def load_lua_quest_directory(self):

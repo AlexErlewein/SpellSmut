@@ -47,7 +47,7 @@ OnOneTimeEvent
 	},
 	Actions =
 	{
-		Outcry {NpcId = 11464, String = "Ihr habt verloren und seid als Lügner überführt. Tuomi ist die rechtmäßige Erbin unseres Vermächtnisses!", Tag = "oca2zerbiteghostP208_018"},
+		Outcry {NpcId = 11464, String = "Ihr habt verloren und seid als Lgner berfhrt. Tuomi ist die rechtmige Erbin unseres Vermchtnisses!", Tag = "oca2zerbiteghostP208_018"},
 	}
 }
 
@@ -92,7 +92,7 @@ OnOneTimeEvent
 	},
 	Actions =
 	{
-		Outcry {NpcId = 11464, String = "Also gebührt auch keinem von Euch Zugang zu unserem Vermächtnis!", Tag = "oca2zerbiteghostP208_020"},	
+		Outcry {NpcId = 11464, String = "Also gebhrt auch keinem von Euch Zugang zu unserem Vermchtnis!", Tag = "oca2zerbiteghostP208_020"},	
 	}
 }
 
@@ -146,9 +146,7 @@ OnOneTimeEvent
 {
 	Conditions =
 	{
-		ODER
-			(
-			ODER9
+		ODER(			ODER9
 			{	
 				IsGlobalCounter{Name = "g_Mastergame_Spalte1Gruen", Value = 2, Operator = IsEqualOrGreater},
 		  		IsGlobalCounter{Name = "g_Mastergame_Spalte2Gruen", Value = 2, Operator = IsEqualOrGreater},
@@ -177,9 +175,7 @@ OnOneTimeEvent
 {
 	Conditions =
 	{
-		ODER
-			(
-			ODER9
+		ODER(			ODER9
 			{	
 				IsGlobalCounter{Name = "g_Mastergame_Spalte1Gelb", Value = 2, Operator = IsEqualOrGreater},
 		  		IsGlobalCounter{Name = "g_Mastergame_Spalte2Gelb", Value = 2, Operator = IsEqualOrGreater},
@@ -208,9 +204,7 @@ OnOneTimeEvent
 {
 	Conditions =
 	{
-		ODER
-			(
-			ODER9
+		ODER(			ODER9
 			{	
 				IsGlobalCounter{Name = "g_Mastergame_Spalte1Rot", Value = 2, Operator = IsEqualOrGreater},
 		  		IsGlobalCounter{Name = "g_Mastergame_Spalte2Rot", Value = 2, Operator = IsEqualOrGreater},
@@ -238,9 +232,7 @@ OnOneTimeEvent
 {
 	Conditions =
 	{
-		ODER
-			(
-			ODER9
+		ODER(			ODER9
 			{	
 				IsGlobalCounter{Name = "g_Mastergame_Spalte1Weiss", Value = 2, Operator = IsEqualOrGreater},
 		  		IsGlobalCounter{Name = "g_Mastergame_Spalte2Weiss", Value = 2, Operator = IsEqualOrGreater},
@@ -268,9 +260,7 @@ OnOneTimeEvent
 {
 	Conditions =
 	{
-		ODER
-			(
-			ODER9
+		ODER(			ODER9
 			{	
 				IsGlobalCounter{Name = "g_Mastergame_Spalte1Braun", Value = 2, Operator = IsEqualOrGreater},
 		  		IsGlobalCounter{Name = "g_Mastergame_Spalte2Braun", Value = 2, Operator = IsEqualOrGreater},
@@ -307,7 +297,7 @@ OnOneTimeEvent
 	
 
 	-- 3 globale flags steuern das an/abschalten eines NPC Dialogs
-	-- die flags lösen die entspr. aktion aus und werden dabei wieder auf false gesetzt
+	-- die flags lsen die entspr. aktion aus und werden dabei wieder auf false gesetzt
 	-- dies sind die flags, nach dem underscore kommt die NpcId:
 	-- SetGlobalFlagTrue{Name = "PleaseRemoveDialog_1234"},
 	-- SetGlobalFlagTrue{Name = "PleaseEnableMainQuestDialog_5678"},
@@ -352,7 +342,7 @@ OnOneTimeEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "zerbiteghostP208_003", String = "Ihr seht auf dem Feld fünfundzwanzig geschlossene Augen. Von Runde zu Runde werden sich all diese Augen öffnen."},
+			Say{Tag = "zerbiteghostP208_003", String = "Ihr seht auf dem Feld fnfundzwanzig geschlossene Augen. Von Runde zu Runde werden sich all diese Augen ffnen."},
 			Answer{Tag = "", String = "", AnswerId = 5},
 		}}
 
@@ -360,7 +350,7 @@ OnOneTimeEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "zerbiteghostP208_004", String = "In jeder Runde öffnen sich fünf Augen und Ihr erhaltet fünf Spielfiguren."},
+			Say{Tag = "zerbiteghostP208_004", String = "In jeder Runde ffnen sich fnf Augen und Ihr erhaltet fnf Spielfiguren."},
 			Answer{Tag = "", String = "", AnswerId = 6},
 		}}
 
@@ -368,7 +358,7 @@ OnOneTimeEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "zerbiteghostP208_005", String = "Auf jedes der geöffneten Augen müsst Ihr eine Spielfigur platzieren. Das Licht zeigt, auf welches offene Auge die nächste Spielfigur zu stellen ist."},
+			Say{Tag = "zerbiteghostP208_005", String = "Auf jedes der geffneten Augen msst Ihr eine Spielfigur platzieren. Das Licht zeigt, auf welches offene Auge die nchste Spielfigur zu stellen ist."},
 			Answer{Tag = "", String = "", AnswerId = 7},
 		}}
 
@@ -376,7 +366,7 @@ OnOneTimeEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "zerbiteghostP208_006", String = "Die Spielfiguren haben verschiedene Farben: grün, gelb, rot, braun und weiß."},
+			Say{Tag = "zerbiteghostP208_006", String = "Die Spielfiguren haben verschiedene Farben: grn, gelb, rot, braun und wei."},
 			Answer{Tag = "", String = "", AnswerId = 8},
 		}}
 
@@ -384,7 +374,7 @@ OnOneTimeEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "zerbiteghostP208_007", String = "Beim Platzieren müsst Ihr darauf achten, dass niemals zwei Spielfiguren derselben Farbe in ein und derselben Reihe oder ein und derselben Spalte stehen dürfen."},
+			Say{Tag = "zerbiteghostP208_007", String = "Beim Platzieren msst Ihr darauf achten, dass niemals zwei Spielfiguren derselben Farbe in ein und derselben Reihe oder ein und derselben Spalte stehen drfen."},
 			Answer{Tag = "", String = "", AnswerId = 9},
 		}}
 
@@ -392,7 +382,7 @@ OnOneTimeEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "zerbiteghostP208_008", String = "Derjenige Spieler, der diese Regel bricht oder aufgrund des Spielverlaufs nicht mehr erfüllen kann, hat das Spiel verloren."},
+			Say{Tag = "zerbiteghostP208_008", String = "Derjenige Spieler, der diese Regel bricht oder aufgrund des Spielverlaufs nicht mehr erfllen kann, hat das Spiel verloren."},
 			Answer{Tag = "zerbiteghostP208_009PC", String = "Das klingt nicht allzu schwierig.", AnswerId = 10},
 		}}
 
@@ -400,7 +390,7 @@ OnOneTimeEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "zerbiteghostP208_010", String = "Generationen von Zerbiten schärften mit diesem Rätsel ihren Geist. Die Reihenfolge, in der sich die Augen öffnen, nennen wir Stellung. Es gibt Hunderte davon, jede von Ihnen bietet eine neue Herausforderung."},
+			Say{Tag = "zerbiteghostP208_010", String = "Generationen von Zerbiten schrften mit diesem Rtsel ihren Geist. Die Reihenfolge, in der sich die Augen ffnen, nennen wir Stellung. Es gibt Hunderte davon, jede von Ihnen bietet eine neue Herausforderung."},
 			Answer{Tag = "", String = "", AnswerId = 11},
 		}}
 
@@ -408,7 +398,7 @@ OnOneTimeEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "zerbiteghostP208_011", String = "Ich werde die passende für Euch heraussuchen."},
+			Say{Tag = "zerbiteghostP208_011", String = "Ich werde die passende fr Euch heraussuchen."},
 			Answer{Tag = "", String = "", AnswerId = 12},
 		}}
 
@@ -440,7 +430,7 @@ OnOneTimeEvent
 		Conditions = {
 		},
 		Actions = {
-			Say{Tag = "zerbiteghostP208_013", String = "Wohlan denn! Prüft die Wahrheit Eurer Worte und siegt!"},
+			Say{Tag = "zerbiteghostP208_013", String = "Wohlan denn! Prft die Wahrheit Eurer Worte und siegt!"},
 			Answer{Tag = "", String = "", AnswerId = 16},
 		}}
 

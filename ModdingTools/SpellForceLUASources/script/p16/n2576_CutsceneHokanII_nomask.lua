@@ -44,9 +44,7 @@ CreateCutScene
 	{
 		-- bedingungen, die angeben, wann die cutscene gestartet werden soll:
 		FigureInRange { X = 405, Y = 415, Range = 10, NpcId = 0,  UpdateInterval = 5},
-		ODER
-		(
-			Negated (PlayerHasItem {ItemId = 2337, Amount = 1}),
+		ODER(			Negated (PlayerHasItem {ItemId = 2337, Amount = 1}),
 			Negated (PlayerHasItem {ItemId = 2615, Amount = 1})
 		),
 		Negated(QuestState{QuestId = 210 , State = StateSolved}),			
@@ -84,7 +82,7 @@ CreateCutScene
 			LookAtFigure{NpcId = 0, Target = 2576},		
 			LookAtFigure{NpcId = 2576, Target = 0},				
 			ExecuteCameraScript{Script = CameraHokanI},	
-			CutSceneSay {Tag = "cuthokanWhis005", NpcId = 2576, String = "Habt Ihr sie? Ah, ich spüre Euer Versagen! Ohne die Maske wird es keine Rettung für Eure Völker geben!"},
+			CutSceneSay {Tag = "cuthokanWhis005", NpcId = 2576, String = "Habt Ihr sie? Ah, ich spre Euer Versagen! Ohne die Maske wird es keine Rettung fr Eure Vlker geben!"},
 		},
 		[210] = 
 		{
