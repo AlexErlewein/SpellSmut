@@ -118,12 +118,12 @@
             // 
             // PosX
             // 
-            PosX.Enabled = false;
             PosX.Location = new System.Drawing.Point(114, 83);
             PosX.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             PosX.Name = "PosX";
             PosX.Size = new System.Drawing.Size(53, 23);
             PosX.TabIndex = 5;
+            PosX.Validated += PosX_Validated;
             // 
             // label5
             // 
@@ -156,12 +156,12 @@
             // 
             // PosY
             // 
-            PosY.Enabled = false;
             PosY.Location = new System.Drawing.Point(177, 83);
             PosY.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             PosY.Name = "PosY";
             PosY.Size = new System.Drawing.Size(53, 23);
             PosY.TabIndex = 15;
+            PosY.Validated += PosY_Validated;
             // 
             // Angle
             // 

@@ -1432,9 +1432,12 @@ namespace SpellforceDataEditor.special_forms
                     return DialogResult.No;
                 }
                 StatusText.Text = DialogSaveMap.FileName + " saved successfully";
-                if (MainForm.data != null)
+                // Save gamedata (texts, etc.) along with the map
+                if (SFCategoryManager.gamedata != null)
                 {
-                    // save gamedata if it was changed
+                    string gamedataPath = SFUnPak.game_directory_name + "\\data\\GameData.cff";
+                    SFCategoryManager.gamedata.Save(gamedataPath);
+                    SFEngine.LogUtils.Log.Info(SFEngine.LogUtils.LogSource.SFMap, "MapEditorForm.SaveMap(): GameData.cff saved to " + gamedataPath);
                 }
             }
 
@@ -3556,17 +3559,22 @@ namespace SpellforceDataEditor.special_forms
 
         private void TimerTreeEntityFilter_Tick(object sender, EventArgs e)
         {
-            if (RadioEntityModeUnit.Checked)
+            if (TabEditorModes.SelectedIndex == 2) // Entities tab
             {
-                GetUnitNodesByName(TreeEntitytFilter.Text);
+                if (RadioEntityModeUnit.Checked)
+                {
+                    GetUnitNodesByName(TreeEntitytFilter.Text);
+                }
+                else if (RadioEntityModeBuilding.Checked)
+                {
+                    GetBuildingNodesByName(TreeEntitytFilter.Text);
+                }
+                else if (RadioEntityModeObject.Checked)
+                {
+                    GetObjectNodesByName(TreeEntitytFilter.Text);
+                }
             }
-
-            if (RadioEntityModeBuilding.Checked)
-            {
-                GetBuildingNodesByName(TreeEntitytFilter.Text);
-            }
-
-            if (RadioEntityModeObject.Checked)
+            else if (TabEditorModes.SelectedIndex == 3) // Decorations tab
             {
                 GetObjectNodesByName(TreeEntitytFilter.Text);
             }
@@ -3595,7 +3603,11 @@ namespace SpellforceDataEditor.special_forms
 
             PanelObjectSelector.Visible = true;
             InspectorSet(new SFMap.map_controls.MapUnitInspector());
-            GenerateUnitTree();
+            // Apply filter if text exists, otherwise show full tree
+            if (string.IsNullOrEmpty(TreeEntitytFilter.Text))
+                GenerateUnitTree();
+            else
+                GetUnitNodesByName(TreeEntitytFilter.Text);
 
             selected_editor = new MapUnitEditor()
             {
@@ -3749,7 +3761,11 @@ namespace SpellforceDataEditor.special_forms
 
             PanelObjectSelector.Visible = true;
             InspectorSet(new SFMap.map_controls.MapBuildingInspector());
-            GenerateBuildingTree();
+            // Apply filter if text exists, otherwise show full tree
+            if (string.IsNullOrEmpty(TreeEntitytFilter.Text))
+                GenerateBuildingTree();
+            else
+                GetBuildingNodesByName(TreeEntitytFilter.Text);
 
             selected_editor = new MapBuildingEditor()
             {
@@ -3976,7 +3992,11 @@ namespace SpellforceDataEditor.special_forms
 
             PanelObjectSelector.Visible = true;
             InspectorSet(new SFMap.map_controls.MapObjectInspector());
-            GenerateObjectTree();
+            // Apply filter if text exists, otherwise show full tree
+            if (string.IsNullOrEmpty(TreeEntitytFilter.Text))
+                GenerateObjectTree();
+            else
+                GetObjectNodesByName(TreeEntitytFilter.Text);
 
             selected_editor = new MapObjectEditor()
             {
@@ -4290,7 +4310,11 @@ namespace SpellforceDataEditor.special_forms
                 map = map
             };
             InspectorSet(new SFMap.map_controls.MapDecorationInspector());
-            GenerateObjectTree();
+            // Apply filter if text exists, otherwise show full tree
+            if (string.IsNullOrEmpty(TreeEntitytFilter.Text))
+                GenerateObjectTree();
+            else
+                GetObjectNodesByName(TreeEntitytFilter.Text);
 
             PanelBrushShape.Visible = true;
             PanelBrushShape.Location = new Point(3, 3);

@@ -328,6 +328,108 @@ namespace SpellforceDataEditor.SFMap.map_controls
             map.metadata.spawns[player].unknown = SFEngine.Utility.TryParseInt16(Unknown.Text, map.metadata.spawns[player].unknown);
         }
 
+        private void PosX_Validated(object sender, EventArgs e)
+        {
+            if (ListBindstones.SelectedIndex == SFEngine.Utility.NO_INDEX)
+            {
+                return;
+            }
+
+            SFMapInteractiveObject bindstone = map.int_object_manager.int_objects[map.int_object_manager.bindstones_index[ListBindstones.SelectedIndex]];
+            int player = GetPlayerIndexByBindstoneIndex(ListBindstones.SelectedIndex);
+            if (player == SFEngine.Utility.NO_INDEX)
+            {
+                return;
+            }
+
+            ushort new_x = SFEngine.Utility.TryParseUInt16(PosX.Text, (ushort)bindstone.grid_position.x);
+            
+            // Validate bounds
+            if (new_x >= map.width)
+            {
+                new_x = (ushort)(map.width - 1);
+                PosX.Text = new_x.ToString();
+            }
+
+            if (new_x == bindstone.grid_position.x)
+            {
+                return;
+            }
+
+            SFCoord old_pos = bindstone.grid_position;
+            SFCoord new_pos = new SFCoord(new_x, bindstone.grid_position.y);
+
+            // undo/redo
+            MainForm.mapedittool.op_queue.Push(new map_operators.MapOperatorEntityChangeProperty()
+            {
+                type = map_operators.MapOperatorEntityType.BINDSTONE,
+                index = ListBindstones.SelectedIndex,
+                property = map_operators.MapOperatorEntityProperty.POSITION,
+                PreChangeProperty = old_pos,
+                PostChangeProperty = new_pos
+            });
+
+            int int_obj_index = map.int_object_manager.bindstones_index[ListBindstones.SelectedIndex];
+            map.int_object_manager.MoveInteractiveObject(int_obj_index, new_pos);
+            map.metadata.spawns[player].pos = new_pos;
+
+            // Update list display and view
+            ListBindstones.Items[ListBindstones.SelectedIndex] = GetBindstoneString(bindstone);
+            selection_helper.SelectInteractiveObject(bindstone);
+            MainForm.mapedittool.update_render = true;
+        }
+
+        private void PosY_Validated(object sender, EventArgs e)
+        {
+            if (ListBindstones.SelectedIndex == SFEngine.Utility.NO_INDEX)
+            {
+                return;
+            }
+
+            SFMapInteractiveObject bindstone = map.int_object_manager.int_objects[map.int_object_manager.bindstones_index[ListBindstones.SelectedIndex]];
+            int player = GetPlayerIndexByBindstoneIndex(ListBindstones.SelectedIndex);
+            if (player == SFEngine.Utility.NO_INDEX)
+            {
+                return;
+            }
+
+            ushort new_y = SFEngine.Utility.TryParseUInt16(PosY.Text, (ushort)bindstone.grid_position.y);
+            
+            // Validate bounds
+            if (new_y >= map.height)
+            {
+                new_y = (ushort)(map.height - 1);
+                PosY.Text = new_y.ToString();
+            }
+
+            if (new_y == bindstone.grid_position.y)
+            {
+                return;
+            }
+
+            SFCoord old_pos = bindstone.grid_position;
+            SFCoord new_pos = new SFCoord(bindstone.grid_position.x, new_y);
+
+            // undo/redo
+            MainForm.mapedittool.op_queue.Push(new map_operators.MapOperatorEntityChangeProperty()
+            {
+                type = map_operators.MapOperatorEntityType.BINDSTONE,
+                index = ListBindstones.SelectedIndex,
+                property = map_operators.MapOperatorEntityProperty.POSITION,
+                PreChangeProperty = old_pos,
+                PostChangeProperty = new_pos
+            });
+
+            int int_obj_index = map.int_object_manager.bindstones_index[ListBindstones.SelectedIndex];
+            map.int_object_manager.MoveInteractiveObject(int_obj_index, new_pos);
+            map.metadata.spawns[player].pos = new_pos;
+
+            // Update list display and view
+            ListBindstones.Items[ListBindstones.SelectedIndex] = GetBindstoneString(bindstone);
+            selection_helper.SelectInteractiveObject(bindstone);
+            MainForm.mapedittool.update_render = true;
+        }
+
         private void TextID_MouseDown(object sender, MouseEventArgs e)
         {
             if(e.Button == MouseButtons.Right)

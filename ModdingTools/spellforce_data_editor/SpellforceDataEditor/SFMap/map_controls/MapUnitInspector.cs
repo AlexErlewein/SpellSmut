@@ -326,6 +326,92 @@ namespace SpellforceDataEditor.SFMap.map_controls
             unit.unknown2 = SFEngine.Utility.TryParseUInt16(Unknown2.Text);
         }
 
+        private void PosX_Validated(object sender, EventArgs e)
+        {
+            if (ListUnits.SelectedIndex == SFEngine.Utility.NO_INDEX)
+            {
+                return;
+            }
+
+            SFMapUnit unit = map.unit_manager.units[ListUnits.SelectedIndex];
+            ushort new_x = SFEngine.Utility.TryParseUInt16(PosX.Text, (ushort)unit.grid_position.x);
+            
+            // Validate bounds
+            if (new_x >= map.width)
+            {
+                new_x = (ushort)(map.width - 1);
+                PosX.Text = new_x.ToString();
+            }
+
+            if (new_x == unit.grid_position.x)
+            {
+                return;
+            }
+
+            SFCoord old_pos = unit.grid_position;
+            SFCoord new_pos = new SFCoord(new_x, unit.grid_position.y);
+
+            // undo/redo
+            MainForm.mapedittool.op_queue.Push(new map_operators.MapOperatorEntityChangeProperty()
+            {
+                type = map_operators.MapOperatorEntityType.UNIT,
+                index = ListUnits.SelectedIndex,
+                property = map_operators.MapOperatorEntityProperty.POSITION,
+                PreChangeProperty = old_pos,
+                PostChangeProperty = new_pos
+            });
+
+            map.unit_manager.MoveUnit(ListUnits.SelectedIndex, new_pos);
+
+            // Update list display and view
+            ListUnits.Items[ListUnits.SelectedIndex] = SFCategoryManager.GetUnitName((ushort)unit.game_id, true) + " " + unit.grid_position.ToString();
+            selection_helper.SelectUnit(unit);
+            MainForm.mapedittool.update_render = true;
+        }
+
+        private void PosY_Validated(object sender, EventArgs e)
+        {
+            if (ListUnits.SelectedIndex == SFEngine.Utility.NO_INDEX)
+            {
+                return;
+            }
+
+            SFMapUnit unit = map.unit_manager.units[ListUnits.SelectedIndex];
+            ushort new_y = SFEngine.Utility.TryParseUInt16(PosY.Text, (ushort)unit.grid_position.y);
+            
+            // Validate bounds
+            if (new_y >= map.height)
+            {
+                new_y = (ushort)(map.height - 1);
+                PosY.Text = new_y.ToString();
+            }
+
+            if (new_y == unit.grid_position.y)
+            {
+                return;
+            }
+
+            SFCoord old_pos = unit.grid_position;
+            SFCoord new_pos = new SFCoord(unit.grid_position.x, new_y);
+
+            // undo/redo
+            MainForm.mapedittool.op_queue.Push(new map_operators.MapOperatorEntityChangeProperty()
+            {
+                type = map_operators.MapOperatorEntityType.UNIT,
+                index = ListUnits.SelectedIndex,
+                property = map_operators.MapOperatorEntityProperty.POSITION,
+                PreChangeProperty = old_pos,
+                PostChangeProperty = new_pos
+            });
+
+            map.unit_manager.MoveUnit(ListUnits.SelectedIndex, new_pos);
+
+            // Update list display and view
+            ListUnits.Items[ListUnits.SelectedIndex] = SFCategoryManager.GetUnitName((ushort)unit.game_id, true) + " " + unit.grid_position.ToString();
+            selection_helper.SelectUnit(unit);
+            MainForm.mapedittool.update_render = true;
+        }
+
         private void SearchUnitNext_Click(object sender, EventArgs e)
         {
             string search_phrase = SearchUnitText.Text.Trim().ToLower();

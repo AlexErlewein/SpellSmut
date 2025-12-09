@@ -168,6 +168,92 @@ namespace SpellforceDataEditor.SFMap.map_controls
             map.metadata.coop_spawns[ListCoopCamps.SelectedIndex].spawn_certain = SFEngine.Utility.TryParseUInt8(Unknown1.Text);
         }
 
+        private void PosX_Validated(object sender, EventArgs e)
+        {
+            if (ListCoopCamps.SelectedIndex == SFEngine.Utility.NO_INDEX)
+            {
+                return;
+            }
+
+            SFMapCoopAISpawn spawn = map.metadata.coop_spawns[ListCoopCamps.SelectedIndex];
+            ushort new_x = SFEngine.Utility.TryParseUInt16(PosX.Text, (ushort)spawn.spawn_obj.grid_position.x);
+            
+            // Validate bounds
+            if (new_x >= map.width)
+            {
+                new_x = (ushort)(map.width - 1);
+                PosX.Text = new_x.ToString();
+            }
+
+            if (new_x == spawn.spawn_obj.grid_position.x)
+            {
+                return;
+            }
+
+            SFCoord old_pos = spawn.spawn_obj.grid_position;
+            SFCoord new_pos = new SFCoord(new_x, spawn.spawn_obj.grid_position.y);
+
+            // undo/redo
+            MainForm.mapedittool.op_queue.Push(new map_operators.MapOperatorEntityChangeProperty()
+            {
+                type = map_operators.MapOperatorEntityType.COOPCAMP,
+                index = ListCoopCamps.SelectedIndex,
+                property = map_operators.MapOperatorEntityProperty.POSITION,
+                PreChangeProperty = old_pos,
+                PostChangeProperty = new_pos
+            });
+
+            int obj_index = map.object_manager.objects.IndexOf(spawn.spawn_obj);
+            map.object_manager.MoveObject(obj_index, new_pos);
+
+            // Update list display
+            ListCoopCamps.Items[ListCoopCamps.SelectedIndex] = GetCoopSpawnString(spawn);
+            MainForm.mapedittool.update_render = true;
+        }
+
+        private void PosY_Validated(object sender, EventArgs e)
+        {
+            if (ListCoopCamps.SelectedIndex == SFEngine.Utility.NO_INDEX)
+            {
+                return;
+            }
+
+            SFMapCoopAISpawn spawn = map.metadata.coop_spawns[ListCoopCamps.SelectedIndex];
+            ushort new_y = SFEngine.Utility.TryParseUInt16(PosY.Text, (ushort)spawn.spawn_obj.grid_position.y);
+            
+            // Validate bounds
+            if (new_y >= map.height)
+            {
+                new_y = (ushort)(map.height - 1);
+                PosY.Text = new_y.ToString();
+            }
+
+            if (new_y == spawn.spawn_obj.grid_position.y)
+            {
+                return;
+            }
+
+            SFCoord old_pos = spawn.spawn_obj.grid_position;
+            SFCoord new_pos = new SFCoord(spawn.spawn_obj.grid_position.x, new_y);
+
+            // undo/redo
+            MainForm.mapedittool.op_queue.Push(new map_operators.MapOperatorEntityChangeProperty()
+            {
+                type = map_operators.MapOperatorEntityType.COOPCAMP,
+                index = ListCoopCamps.SelectedIndex,
+                property = map_operators.MapOperatorEntityProperty.POSITION,
+                PreChangeProperty = old_pos,
+                PostChangeProperty = new_pos
+            });
+
+            int obj_index = map.object_manager.objects.IndexOf(spawn.spawn_obj);
+            map.object_manager.MoveObject(obj_index, new_pos);
+
+            // Update list display
+            ListCoopCamps.Items[ListCoopCamps.SelectedIndex] = GetCoopSpawnString(spawn);
+            MainForm.mapedittool.update_render = true;
+        }
+
         private void ButtonResizeList_Click(object sender, EventArgs e)
         {
             if (ButtonResizeList.Text == "-")

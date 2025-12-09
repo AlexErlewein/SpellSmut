@@ -353,6 +353,94 @@ namespace SpellforceDataEditor.SFMap.map_controls
             obj.unknown1 = SFEngine.Utility.TryParseUInt16(Unknown1.Text);
         }
 
+        private void PosX_Validated(object sender, EventArgs e)
+        {
+            if (ListObjects.SelectedIndex == SFEngine.Utility.NO_INDEX)
+            {
+                return;
+            }
+
+            SFMapObject obj = map.object_manager.objects[ListObjects.SelectedIndex];
+            ushort new_x = SFEngine.Utility.TryParseUInt16(PosX.Text, (ushort)obj.grid_position.x);
+            
+            // Validate bounds
+            if (new_x >= map.width)
+            {
+                new_x = (ushort)(map.width - 1);
+                PosX.Text = new_x.ToString();
+            }
+
+            if (new_x == obj.grid_position.x)
+            {
+                return;
+            }
+
+            SFCoord old_pos = obj.grid_position;
+            SFCoord new_pos = new SFCoord(new_x, obj.grid_position.y);
+
+            // undo/redo
+            MainForm.mapedittool.op_queue.Push(new map_operators.MapOperatorEntityChangeProperty()
+            {
+                type = map_operators.MapOperatorEntityType.OBJECT,
+                index = ListObjects.SelectedIndex,
+                property = map_operators.MapOperatorEntityProperty.POSITION,
+                PreChangeProperty = old_pos,
+                PostChangeProperty = new_pos
+            });
+
+            map.object_manager.MoveObject(ListObjects.SelectedIndex, new_pos);
+
+            // Update list display and view
+            ListObjects.Items[ListObjects.SelectedIndex] = SFCategoryManager.GetObjectName((ushort)obj.game_id) + " " + obj.grid_position.ToString();
+            selection_helper.SelectObject(obj);
+            map.heightmap.RefreshOverlay();
+            MainForm.mapedittool.update_render = true;
+        }
+
+        private void PosY_Validated(object sender, EventArgs e)
+        {
+            if (ListObjects.SelectedIndex == SFEngine.Utility.NO_INDEX)
+            {
+                return;
+            }
+
+            SFMapObject obj = map.object_manager.objects[ListObjects.SelectedIndex];
+            ushort new_y = SFEngine.Utility.TryParseUInt16(PosY.Text, (ushort)obj.grid_position.y);
+            
+            // Validate bounds
+            if (new_y >= map.height)
+            {
+                new_y = (ushort)(map.height - 1);
+                PosY.Text = new_y.ToString();
+            }
+
+            if (new_y == obj.grid_position.y)
+            {
+                return;
+            }
+
+            SFCoord old_pos = obj.grid_position;
+            SFCoord new_pos = new SFCoord(obj.grid_position.x, new_y);
+
+            // undo/redo
+            MainForm.mapedittool.op_queue.Push(new map_operators.MapOperatorEntityChangeProperty()
+            {
+                type = map_operators.MapOperatorEntityType.OBJECT,
+                index = ListObjects.SelectedIndex,
+                property = map_operators.MapOperatorEntityProperty.POSITION,
+                PreChangeProperty = old_pos,
+                PostChangeProperty = new_pos
+            });
+
+            map.object_manager.MoveObject(ListObjects.SelectedIndex, new_pos);
+
+            // Update list display and view
+            ListObjects.Items[ListObjects.SelectedIndex] = SFCategoryManager.GetObjectName((ushort)obj.game_id) + " " + obj.grid_position.ToString();
+            selection_helper.SelectObject(obj);
+            map.heightmap.RefreshOverlay();
+            MainForm.mapedittool.update_render = true;
+        }
+
         private void SearchObjectNext_Click(object sender, EventArgs e)
         {
             string search_phrase = SearchObjectText.Text.Trim().ToLower();

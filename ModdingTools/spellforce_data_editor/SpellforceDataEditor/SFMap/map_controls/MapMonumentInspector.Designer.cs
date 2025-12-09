@@ -93,19 +93,19 @@
             // 
             // PosX
             // 
-            this.PosX.Enabled = false;
             this.PosX.Location = new System.Drawing.Point(98, 3);
             this.PosX.Name = "PosX";
             this.PosX.Size = new System.Drawing.Size(46, 20);
             this.PosX.TabIndex = 5;
+            this.PosX.Validated += new System.EventHandler(this.PosX_Validated);
             // 
             // PosY
             // 
-            this.PosY.Enabled = false;
             this.PosY.Location = new System.Drawing.Point(152, 3);
             this.PosY.Name = "PosY";
             this.PosY.Size = new System.Drawing.Size(46, 20);
             this.PosY.TabIndex = 15;
+            this.PosY.Validated += new System.EventHandler(this.PosY_Validated);
             // 
             // PanelProperties
             // 
