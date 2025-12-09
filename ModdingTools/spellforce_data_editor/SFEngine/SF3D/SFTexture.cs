@@ -104,7 +104,7 @@ namespace SFEngine.SF3D
 
         public void CalculateMipmapLevel(int start_w, int start_h, uint allowed_mipmaps)
         {
-            if(ignore_mipmap_settings_on_load)
+            if (ignore_mipmap_settings_on_load)
             {
                 mipMapStart = 0;
                 mipMapCount = allowed_mipmaps;
@@ -122,10 +122,10 @@ namespace SFEngine.SF3D
                 mipMapCount = allowed_mipmaps - mipMapStart;
             }
 
-            for(int i = 0; i < mipMapStart; i++) 
+            for (int i = 0; i < mipMapStart; i++)
             {
                 start_w /= 2;
-                start_h /= 2; 
+                start_h /= 2;
             }
             while ((start_w > Settings.MaximumAllowedTextureSize) || (start_h > Settings.MaximumAllowedTextureSize))
             {
@@ -162,13 +162,13 @@ namespace SFEngine.SF3D
                 // texture arrays are handled separately
                 if (texture_target == TextureTarget.Texture2DArray)
                 {
-                    if(mipMapStart != 0)
+                    if (mipMapStart != 0)
                     {
                         LogUtils.Log.Error(LogUtils.LogSource.SF3D, "SFTexture.Init(): Mip starts at " + mipMapStart.ToString() + ", which is invalid for 2D texture array");
                         throw new Exception("SFTexture.Init(): Mip starts at " + mipMapStart.ToString() + ", which is invalid for 2D texture array");
                     }
                     GL.TexStorage3D(TextureTarget3d.Texture2DArray, (int)mipMapCount, (SizedInternalFormat)internal_format, width, height, depth);
-                    for(int level = 0; level < mipMapCount; ++level)
+                    for (int level = 0; level < mipMapCount; ++level)
                     {
                         size = w * h * InternalFormatSizeBits[internal_format] / 8;
                         DeviceSize += size;
@@ -234,7 +234,7 @@ namespace SFEngine.SF3D
                 }
             }
 
-            if(free_on_init)
+            if (free_on_init)
             {
                 FreeMemory();
             }
@@ -273,7 +273,7 @@ namespace SFEngine.SF3D
                 }
             }
 
-            if(custom_data != null)
+            if (custom_data != null)
             {
                 free_on_init = ((SFTextureLoadArgs)custom_data).FreeOnInit;
             }
@@ -486,7 +486,7 @@ namespace SFEngine.SF3D
 
             data = pixels;
             data_offset = 0;
-            width = isp_w; 
+            width = isp_w;
             height = isp_h;
             depth = 1;
             CalculateMipmapLevel(width, height, 1);
@@ -548,13 +548,13 @@ namespace SFEngine.SF3D
             data = br.ReadBytes(expected_size);
             data_offset = 0;
             read_size = data.Length;
-            if(read_size != expected_size)
+            if (read_size != expected_size)
             {
                 data = null;
                 LogUtils.Log.Warning(LogUtils.LogSource.SF3D, "SFTexture.LoadUncompressedRGBA(): Data length is not valid");
                 return -612;
             }
-            width = w; 
+            width = w;
             height = h;
             depth = 1;
             CalculateMipmapLevel(width, height, 1);
@@ -599,13 +599,13 @@ namespace SFEngine.SF3D
                 sampleCount = 0,
             };
             tex.CalculateMipmapLevel(w, h, 1);
-            tex.RAMSize = (own_memory? tex.data.Length: 0);
+            tex.RAMSize = (own_memory ? tex.data.Length : 0);
             return tex;
         }
 
         static public SFTexture FrameBufferAttachment(ushort w, ushort h, uint sample_count, uint mipstart, uint mipcount, InternalFormat ifmt, PixelFormat pfmt, PixelType ptp, int minf, int magf, int ws, int wt, Vector4 wbcol, int an)
         {
-            if(sample_count > 1)
+            if (sample_count > 1)
             {
                 mipstart = 0;
                 mipcount = 1;
@@ -648,7 +648,7 @@ namespace SFEngine.SF3D
             {
                 GL.TexImage2D(texture_target, lvl, (PixelInternalFormat)internal_format, width, height, 0, pixel_format, pixel_type, new IntPtr(idata_ptr.ToInt64() + idata_offset));
             }
-            else if(texture_target == TextureTarget.Texture2DArray)
+            else if (texture_target == TextureTarget.Texture2DArray)
             {
                 GL.TexSubImage3D(texture_target, lvl, 0, 0, d, width, height, 1, pixel_format, pixel_type, new IntPtr(idata_ptr.ToInt64() + idata_offset));
             }
@@ -664,7 +664,7 @@ namespace SFEngine.SF3D
         // assumes texture is already initialized
         public void Uncompress()
         {
-            if(tex_id == SFEngine.Utility.NO_INDEX)
+            if (tex_id == SFEngine.Utility.NO_INDEX)
             {
                 LogUtils.Log.Info(LogUtils.LogSource.SF3D, "SFTexture.Uncompress(): Texture is not initialized!");
                 return;
@@ -786,9 +786,9 @@ namespace SFEngine.SF3D
                         int red = 0;
                         int green = 0;
                         int blue = 0;
-                        for(int y = 0; y < skip; y++)
+                        for (int y = 0; y < skip; y++)
                         {
-                            for(int x = 0; x < skip; x++)
+                            for (int x = 0; x < skip; x++)
                             {
                                 red += data[4 * ((j + y) * default_width + i + x) + 0];
                                 green += data[4 * ((j + y) * default_width + i + x) + 1];
@@ -914,10 +914,14 @@ namespace SFEngine.SF3D
                 LogUtils.Log.Error(LogUtils.LogSource.SF3D, "SFTexture.MixUncompressed(): Texture(s) are not uncompressed!");
                 throw new Exception("SFTexture.MixUncompressed(): Texture(s) are not uncompressed!");
             }
-            if (w1 + w2 + w3 == 0)
+            // Weights are now interpreted as percentages (0-100)
+            // They are normalized by their sum for proper blending
+            int weightSum = w1 + w2 + w3;
+            if (weightSum == 0)
             {
-                LogUtils.Log.Warning(LogUtils.LogSource.SF3D, "SFTexture.MixUncompressed(): Texture weights are both 0! Using weight 85 for all weights");
-                w1 = 85; w2 = 85; w3 = 85;
+                LogUtils.Log.Warning(LogUtils.LogSource.SF3D, "SFTexture.MixUncompressed(): All texture weights are 0! Using weight 100 for all weights");
+                w1 = 100; w2 = 100; w3 = 100;
+                weightSum = 300;
             }
 
 
@@ -945,7 +949,7 @@ namespace SFEngine.SF3D
 
             for (int i = 0; i < tex1.data.Length; i++)
             {
-                new_tex.data[i] = (byte)((w1 * tex1.data[i] + w2 * tex2.data[i] + w3 * tex3.data[i]) / 255);
+                new_tex.data[i] = (byte)((w1 * tex1.data[i] + w2 * tex2.data[i] + w3 * tex3.data[i]) / weightSum);
             }
         }
     }
