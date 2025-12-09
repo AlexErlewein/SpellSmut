@@ -117,4 +117,48 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="building_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>building_icon.png;System.Drawing.Bitmap, System.Drawing</value>
+    <comment>Icon for Building Icon editor</comment>
+  </data>
+  <data name="decoration_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>decoration_icon.png;System.Drawing.Bitmap, System.Drawing</value>
+    <comment>Icon for Decoration Icon editor</comment>
+  </data>
+  <data name="flag_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>flag_icon.png;System.Drawing.Bitmap, System.Drawing</value>
+    <comment>Icon for Flag Icon editor</comment>
+  </data>
+  <data name="hmap_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>hmap_icon.png;System.Drawing.Bitmap, System.Drawing</value>
+    <comment>Icon for Hmap Icon editor</comment>
+  </data>
+  <data name="lake_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>lake_icon.png;System.Drawing.Bitmap, System.Drawing</value>
+    <comment>Icon for Lake Icon editor</comment>
+  </data>
+  <data name="metadata_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>metadata_icon.png;System.Drawing.Bitmap, System.Drawing</value>
+    <comment>Icon for Metadata Icon editor</comment>
+  </data>
+  <data name="monument_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>monument_icon.png;System.Drawing.Bitmap, System.Drawing</value>
+    <comment>Icon for Monument Icon editor</comment>
+  </data>
+  <data name="npc_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>npc_icon.png;System.Drawing.Bitmap, System.Drawing</value>
+    <comment>Icon for Npc Icon editor</comment>
+  </data>
+  <data name="object_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>object_icon.png;System.Drawing.Bitmap, System.Drawing</value>
+    <comment>Icon for Object Icon editor</comment>
+  </data>
+  <data name="texture_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>texture_icon.png;System.Drawing.Bitmap, System.Drawing</value>
+    <comment>Icon for Texture Icon editor</comment>
+  </data>
+  <data name="unit_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>unit_icon.png;System.Drawing.Bitmap, System.Drawing</value>
+    <comment>Icon for Unit Icon editor</comment>
+  </data>
 </root>

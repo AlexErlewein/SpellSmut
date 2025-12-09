@@ -98,6 +98,19 @@
             PanelLakeMode = new System.Windows.Forms.Panel();
             RadioLakeSelect = new System.Windows.Forms.RadioButton();
             RadioLakeFlood = new System.Windows.Forms.RadioButton();
+
+            // Icon buttons for editing modes
+            ButtonHeightmapMode = new System.Windows.Forms.Button();
+            ButtonFlagsMode = new System.Windows.Forms.Button();
+            ButtonLakesMode = new System.Windows.Forms.Button();
+            ButtonTextureMode = new System.Windows.Forms.Button();
+            ButtonUnitMode = new System.Windows.Forms.Button();
+            ButtonBuildingMode = new System.Windows.Forms.Button();
+            ButtonObjectMode = new System.Windows.Forms.Button();
+            ButtonMonumentMode = new System.Windows.Forms.Button();
+            ButtonDecorationMode = new System.Windows.Forms.Button();
+            ButtonNpcMode = new System.Windows.Forms.Button();
+            ButtonMetadataMode = new System.Windows.Forms.Button();
             label38 = new System.Windows.Forms.Label();
             PanelAtmoPreview = new System.Windows.Forms.Panel();
             label37 = new System.Windows.Forms.Label();
@@ -2766,6 +2779,18 @@
         private System.Windows.Forms.Panel PanelMaskBorderType;
         private System.Windows.Forms.RadioButton RadioMaskBorderInner;
         private System.Windows.Forms.RadioButton RadioMaskBorderOuter;
+
+        private System.Windows.Forms.Button ButtonHeightmapMode;
+        private System.Windows.Forms.Button ButtonFlagsMode;
+        private System.Windows.Forms.Button ButtonLakesMode;
+        private System.Windows.Forms.Button ButtonTextureMode;
+        private System.Windows.Forms.Button ButtonUnitMode;
+        private System.Windows.Forms.Button ButtonBuildingMode;
+        private System.Windows.Forms.Button ButtonObjectMode;
+        private System.Windows.Forms.Button ButtonMonumentMode;
+        private System.Windows.Forms.Button ButtonDecorationMode;
+        private System.Windows.Forms.Button ButtonNpcMode;
+        private System.Windows.Forms.Button ButtonMetadataMode;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Panel PanelMaskAttribute;
         private System.Windows.Forms.ComboBox ComboMaskAttribute;
