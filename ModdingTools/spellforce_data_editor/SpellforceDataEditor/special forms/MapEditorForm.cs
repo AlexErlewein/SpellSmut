@@ -1118,12 +1118,11 @@ namespace SpellforceDataEditor.special_forms
 
         private void MapEditorForm_Resize(object sender, EventArgs e)
         {
-            TabEditorModes.Width = Width - 22;
+            // TabEditorModes width is now handled by Anchor, just update tab item sizes
             TabEditorModes.ItemSize = new Size((TabEditorModes.Width - 80) / TabEditorModes.TabPages.Count,
                 TabEditorModes.ItemSize.Height);
             ResizeWindow();
-
-            PanelUtility.Location = new Point(Width - PanelUtility.Width, StatusStrip.Location.Y);
+            // PanelUtility position is now handled by Anchor
         }
 
         private void MapEditorForm_Deactivate(object sender, EventArgs e)
@@ -1532,7 +1531,8 @@ namespace SpellforceDataEditor.special_forms
                 {
                     string gamedataPath = SFUnPak.game_directory_name + "\\data\\GameData.cff";
                     SFCategoryManager.gamedata.Save(gamedataPath);
-                    SFEngine.LogUtils.Log.Info(SFEngine.LogUtils.LogSource.SFMap, "MapEditorForm.SaveMap(): GameData.cff saved to " + gamedataPath);
+                    SFEngine.LogUtils.Log.Info(SFEngine.LogUtils.LogSource.SFMap,
+                        "MapEditorForm.SaveMap(): GameData.cff saved to " + gamedataPath);
                 }
             }
 
@@ -2289,7 +2289,8 @@ namespace SpellforceDataEditor.special_forms
 
         private void ResizeWindow()
         {
-            int ystart = PanelObjectSelector.Location.Y;
+            // Calculate render area based on tab control bottom and status strip top
+            int ystart = TabEditorModes.Location.Y + TabEditorModes.Height + 3;
             int yend = StatusStrip.Location.Y;
             int w_height = Math.Max(100, yend - ystart - 3);
             int w_width = Math.Max(100, Width - 22 - (PanelInspector.Visible ? PanelInspector.Width : 0)
@@ -2297,9 +2298,11 @@ namespace SpellforceDataEditor.special_forms
             int xstart = (PanelObjectSelector.Visible
                 ? PanelObjectSelector.Location.X + PanelObjectSelector.Width + 3
                 : 0);
+
+            // Update PanelObjectSelector position and size (anchoring handles height, but we need to set Y)
+            PanelObjectSelector.Location = new Point(PanelObjectSelector.Location.X, ystart);
             PanelObjectSelector.Height = w_height;
-            TreeEntities.Height = w_height - 32;
-            TreeEntitytFilter.Location = new Point(TreeEntitytFilter.Location.X, w_height - 23);
+            // TreeEntities and TreeEntitytFilter now use anchoring, no manual positioning needed
 
             if (!initialized_view)
             {
@@ -2308,9 +2311,12 @@ namespace SpellforceDataEditor.special_forms
 
             RenderWindow.Location = new Point(xstart, ystart);
             RenderWindow.Size = new Size(w_width, w_height);
-            PanelInspector.Location =
-                new Point(6 + RenderWindow.Width + (PanelObjectSelector.Visible ? PanelObjectSelector.Width : 0),
-                    ystart);
+
+            // Update PanelInspector position (anchoring handles height)
+            PanelInspector.Location = new Point(
+                6 + RenderWindow.Width + (PanelObjectSelector.Visible ? PanelObjectSelector.Width : 0),
+                ystart);
+            PanelInspector.Height = w_height;
 
             ResizeView();
         }
@@ -5715,9 +5721,7 @@ namespace SpellforceDataEditor.special_forms
                 map.metadata.new_minimap = mmsf.new_minimap;
             }
         }
-    
 
-        
 
         // Simple icon button click handlers
         private void ButtonHeightmapMode_Click(object sender, EventArgs e)
@@ -5751,6 +5755,7 @@ namespace SpellforceDataEditor.special_forms
                             break;
                         }
                     }
+
                     break;
                 }
             }
@@ -5792,6 +5797,7 @@ namespace SpellforceDataEditor.special_forms
                             break;
                         }
                     }
+
                     break;
                 }
             }
@@ -5819,6 +5825,7 @@ namespace SpellforceDataEditor.special_forms
                             break;
                         }
                     }
+
                     break;
                 }
             }

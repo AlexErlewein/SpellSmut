@@ -454,10 +454,12 @@
             // 
             // PanelInspector
             // 
-            PanelInspector.Location = new System.Drawing.Point(959, 198);
+            PanelInspector.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom |
+                                    System.Windows.Forms.AnchorStyles.Right;
+            PanelInspector.Location = new System.Drawing.Point(959, 167);
             PanelInspector.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             PanelInspector.Name = "PanelInspector";
-            PanelInspector.Size = new System.Drawing.Size(320, 539);
+            PanelInspector.Size = new System.Drawing.Size(320, 570);
             PanelInspector.TabIndex = 8;
             // 
             // TabPageDecorations
@@ -468,7 +470,7 @@
             TabPageDecorations.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             TabPageDecorations.Name = "TabPageDecorations";
             TabPageDecorations.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            TabPageDecorations.Size = new System.Drawing.Size(1275, 136);
+            TabPageDecorations.Size = new System.Drawing.Size(1275, 111);
             TabPageDecorations.TabIndex = 4;
             TabPageDecorations.Text = "Decorations";
             TabPageDecorations.UseVisualStyleBackColor = true;
@@ -505,7 +507,7 @@
             TabPageEntities.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             TabPageEntities.Name = "TabPageEntities";
             TabPageEntities.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            TabPageEntities.Size = new System.Drawing.Size(1275, 136);
+            TabPageEntities.Size = new System.Drawing.Size(1275, 111);
             TabPageEntities.TabIndex = 2;
             TabPageEntities.Text = "Entities";
             TabPageEntities.UseVisualStyleBackColor = true;
@@ -885,7 +887,7 @@
             TabPageTextures.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             TabPageTextures.Name = "TabPageTextures";
             TabPageTextures.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            TabPageTextures.Size = new System.Drawing.Size(1275, 136);
+            TabPageTextures.Size = new System.Drawing.Size(1275, 111);
             TabPageTextures.TabIndex = 1;
             TabPageTextures.Text = "Textures";
             TabPageTextures.UseVisualStyleBackColor = true;
@@ -963,7 +965,7 @@
             TabPageTerrain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             TabPageTerrain.Name = "TabPageTerrain";
             TabPageTerrain.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            TabPageTerrain.Size = new System.Drawing.Size(1275, 136);
+            TabPageTerrain.Size = new System.Drawing.Size(1275, 111);
             TabPageTerrain.TabIndex = 0;
             TabPageTerrain.Text = "Terrain";
             TabPageTerrain.UseVisualStyleBackColor = true;
@@ -1736,6 +1738,8 @@
             // 
             // TabEditorModes
             // 
+            TabEditorModes.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left |
+                                    System.Windows.Forms.AnchorStyles.Right;
             TabEditorModes.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             TabEditorModes.Controls.Add(TabPageTerrain);
             TabEditorModes.Controls.Add(TabPageTextures);
@@ -1745,12 +1749,12 @@
             TabEditorModes.Controls.Add(TabPageMask);
             TabEditorModes.Enabled = false;
             TabEditorModes.ItemSize = new System.Drawing.Size(160, 21);
-            TabEditorModes.Location = new System.Drawing.Point(0, 31);
+            TabEditorModes.Location = new System.Drawing.Point(0, 24);
             TabEditorModes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             TabEditorModes.Name = "TabEditorModes";
             TabEditorModes.Padding = new System.Drawing.Point(3, 3);
             TabEditorModes.SelectedIndex = 0;
-            TabEditorModes.Size = new System.Drawing.Size(1283, 165);
+            TabEditorModes.Size = new System.Drawing.Size(1283, 140);
             TabEditorModes.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             TabEditorModes.TabIndex = 7;
             TabEditorModes.SelectedIndexChanged += TabEditorModes_SelectedIndexChanged;
@@ -1764,7 +1768,7 @@
             TabPageMetadata.Location = new System.Drawing.Point(4, 25);
             TabPageMetadata.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             TabPageMetadata.Name = "TabPageMetadata";
-            TabPageMetadata.Size = new System.Drawing.Size(1275, 136);
+            TabPageMetadata.Size = new System.Drawing.Size(1275, 111);
             TabPageMetadata.TabIndex = 6;
             TabPageMetadata.Text = "Metadata";
             TabPageMetadata.UseVisualStyleBackColor = true;
@@ -2086,7 +2090,7 @@
             TabPageMask.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             TabPageMask.Name = "TabPageMask";
             TabPageMask.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            TabPageMask.Size = new System.Drawing.Size(1275, 136);
+            TabPageMask.Size = new System.Drawing.Size(1275, 111);
             TabPageMask.TabIndex = 7;
             TabPageMask.Text = "Mask/selection";
             TabPageMask.UseVisualStyleBackColor = true;
@@ -2421,6 +2425,7 @@
             // 
             // PanelUtility
             // 
+            PanelUtility.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
             PanelUtility.Controls.Add(TrackbarCameraSpeed);
             PanelUtility.Controls.Add(label25);
             PanelUtility.Location = new System.Drawing.Point(959, 741);
@@ -2460,18 +2465,23 @@
             // 
             // PanelObjectSelector
             // 
+            PanelObjectSelector.Anchor = System.Windows.Forms.AnchorStyles.Top |
+                                         System.Windows.Forms.AnchorStyles.Bottom |
+                                         System.Windows.Forms.AnchorStyles.Left;
             PanelObjectSelector.Controls.Add(TreeEntitytFilter);
             PanelObjectSelector.Controls.Add(TreeEntities);
-            PanelObjectSelector.Location = new System.Drawing.Point(5, 198);
+            PanelObjectSelector.Location = new System.Drawing.Point(5, 167);
             PanelObjectSelector.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             PanelObjectSelector.Name = "PanelObjectSelector";
-            PanelObjectSelector.Size = new System.Drawing.Size(298, 539);
+            PanelObjectSelector.Size = new System.Drawing.Size(298, 570);
             PanelObjectSelector.TabIndex = 10;
             PanelObjectSelector.Visible = false;
             // 
             // TreeEntitytFilter
             // 
-            TreeEntitytFilter.Location = new System.Drawing.Point(7, 512);
+            TreeEntitytFilter.Anchor = System.Windows.Forms.AnchorStyles.Bottom |
+                                       System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            TreeEntitytFilter.Location = new System.Drawing.Point(7, 543);
             TreeEntitytFilter.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             TreeEntitytFilter.Name = "TreeEntitytFilter";
             TreeEntitytFilter.Size = new System.Drawing.Size(286, 23);
@@ -2480,10 +2490,12 @@
             // 
             // TreeEntities
             // 
+            TreeEntities.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom |
+                                  System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             TreeEntities.Location = new System.Drawing.Point(7, 3);
             TreeEntities.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             TreeEntities.Name = "TreeEntities";
-            TreeEntities.Size = new System.Drawing.Size(286, 501);
+            TreeEntities.Size = new System.Drawing.Size(286, 534);
             TreeEntities.TabIndex = 0;
             TreeEntities.NodeMouseClick += TreeEntities_NodeMouseClick;
             // 
@@ -2510,7 +2522,7 @@
             KeyPreview = true;
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            MinimumSize = new System.Drawing.Size(1170, 809);
+            MinimumSize = new System.Drawing.Size(900, 600);
             Name = "MapEditorForm";
             Text = "Map Editor";
             Activated += MapEditorForm_Activated;
