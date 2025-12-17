@@ -1741,6 +1741,7 @@
             TabEditorModes.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left |
                                     System.Windows.Forms.AnchorStyles.Right;
             TabEditorModes.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            TabEditorModes.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             TabEditorModes.Controls.Add(TabPageTerrain);
             TabEditorModes.Controls.Add(TabPageTextures);
             TabEditorModes.Controls.Add(TabPageEntities);
@@ -1757,6 +1758,7 @@
             TabEditorModes.Size = new System.Drawing.Size(1283, 140);
             TabEditorModes.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             TabEditorModes.TabIndex = 7;
+            TabEditorModes.DrawItem += TabEditorModes_DrawItem;
             TabEditorModes.SelectedIndexChanged += TabEditorModes_SelectedIndexChanged;
             // 
             // TabPageMetadata

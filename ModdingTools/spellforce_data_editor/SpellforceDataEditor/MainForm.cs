@@ -58,6 +58,8 @@ namespace SpellforceDataEditor
 #if DEBUG
             bSaveData.Visible = true;
 #endif
+            ThemeManager.SetTheme(Theme.Dark);
+            ThemeManager.ApplyTheme(this);
         }
 
         async void CheckNewVersionAvailable()

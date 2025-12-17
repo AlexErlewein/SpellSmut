@@ -1082,6 +1082,8 @@ namespace SpellforceDataEditor.special_forms
             TimerAnimation.Start();
 
             InspectorHide();
+
+            ThemeManager.ApplyTheme(this);
         }
 
         private void MapEditorForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -2723,6 +2725,63 @@ namespace SpellforceDataEditor.special_forms
             TabEditorModes.Enabled = true;
             TabEditorModes.SelectedIndex = -1;
             TabEditorModes.SelectedIndex = 0;
+        }
+
+        private void TabEditorModes_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            var tabControl = sender as TabControl;
+            if (tabControl == null)
+            {
+                return;
+            }
+
+            if ((e.Index < 0) || (e.Index >= tabControl.TabPages.Count))
+            {
+                return;
+            }
+
+            var page = tabControl.TabPages[e.Index];
+
+            bool selected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
+            bool dark = ThemeManager.CurrentTheme == Theme.Dark;
+
+            Color backColor;
+            Color foreColor;
+            Color borderColor;
+
+            if (dark)
+            {
+                backColor = selected ? Color.FromArgb(45, 45, 45) : Color.FromArgb(32, 32, 32);
+                foreColor = Color.Gainsboro;
+                borderColor = Color.FromArgb(70, 70, 70);
+            }
+            else
+            {
+                backColor = selected ? SystemColors.ControlLightLight : SystemColors.Control;
+                foreColor = SystemColors.ControlText;
+                borderColor = SystemColors.ControlDark;
+            }
+
+            using (var backBrush = new SolidBrush(backColor))
+            {
+                e.Graphics.FillRectangle(backBrush, e.Bounds);
+            }
+
+            TextRenderer.DrawText(
+                e.Graphics,
+                page.Text,
+                tabControl.Font,
+                e.Bounds,
+                foreColor,
+                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+
+            using (var borderPen = new Pen(borderColor))
+            {
+                var rect = e.Bounds;
+                rect.Width -= 1;
+                rect.Height -= 1;
+                e.Graphics.DrawRectangle(borderPen, rect);
+            }
         }
 
         private void TabEditorModes_SelectedIndexChanged(object sender, EventArgs e)
