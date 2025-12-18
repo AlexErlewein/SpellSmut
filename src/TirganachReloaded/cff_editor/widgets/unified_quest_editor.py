@@ -18,72 +18,51 @@ Features:
 """
 
 import sys
-import os
-import re
 from pathlib import Path
-from typing import Dict, List, Optional, Any, Tuple, Union
+from typing import Any, Dict, List, Optional
 
-from PySide6.QtWidgets import (
-    QApplication,
-    QMainWindow,
-    QWidget,
-    QVBoxLayout,
-    QHBoxLayout,
-    QTabWidget,
-    QSplitter,
-    QTreeWidget,
-    QTreeWidgetItem,
-    QTextEdit,
-    QLineEdit,
-    QSpinBox,
-    QComboBox,
-    QPushButton,
-    QLabel,
-    QGroupBox,
-    QFormLayout,
-    QListWidget,
-    QListWidgetItem,
-    QMessageBox,
-    QProgressBar,
-    QStatusBar,
-    QMenuBar,
-    QToolBar,
-    QDialog,
-    QDialogButtonBox,
-    QCheckBox,
-    QRadioButton,
-    QButtonGroup,
-    QFrame,
-    QScrollArea,
-    QTableWidget,
-    QTableWidgetItem,
-    QHeaderView,
-    QAbstractItemView,
-    QTreeWidgetItemIterator,
-    QInputDialog,
-)
 from PySide6.QtCore import (
-    Qt,
-    Signal,
-    Slot,
-    QThread,
-    QTimer,
     QSettings,
-    QSize,
-    QPoint,
-    QSortFilterProxyModel,
-    QItemSelectionModel,
+    Qt,
+    QTimer,
+    Signal,
 )
 from PySide6.QtGui import (
-    QFont,
-    QPixmap,
-    QIcon,
     QAction,
-    QKeySequence,
-    QPalette,
     QColor,
-    QTextCursor,
+    QFont,
     QIntValidator,
+    QKeySequence,
+)
+from PySide6.QtWidgets import (
+    QApplication,
+    QButtonGroup,
+    QCheckBox,
+    QComboBox,
+    QDialog,
+    QDialogButtonBox,
+    QFormLayout,
+    QFrame,
+    QGroupBox,
+    QHBoxLayout,
+    QInputDialog,
+    QLabel,
+    QLineEdit,
+    QListWidget,
+    QListWidgetItem,
+    QMainWindow,
+    QMessageBox,
+    QPushButton,
+    QRadioButton,
+    QSpinBox,
+    QSplitter,
+    QTabWidget,
+    QTextEdit,
+    QTreeWidget,
+    QTreeWidgetItem,
+    QTreeWidgetItemIterator,
+    QVBoxLayout,
+    QWidget,
 )
 
 # Add to path with better error handling
@@ -108,8 +87,6 @@ except Exception as e:
     print(f"Warning: Could not set up Python path: {e}")
     # Try fallback
     try:
-        import os
-
         # Add parent directories to path as fallback
         current_dir = Path(__file__).parent
         for _ in range(4):  # Go up 4 levels
@@ -128,10 +105,10 @@ try:
         get_logger,
     )
     from TirganachReloaded.cff_editor.models.quest_models import (
-        EnhancedQuestData,
-        QuestReward,
         Dialogue,
+        EnhancedQuestData,
         MapLocation,
+        QuestReward,
     )
 
     CFF_AVAILABLE = True
@@ -149,6 +126,7 @@ except ImportError as e:
 DIALOGUE_EDITOR_AVAILABLE = False
 QUEST_VALIDATOR_AVAILABLE = False
 VISUAL_DIALOGUE_EDITOR_AVAILABLE = False
+ANSWERID_MANAGER_AVAILABLE = False
 
 try:
     from .dialogue_editor import DialogueTreeEditor
@@ -163,6 +141,17 @@ try:
     QUEST_VALIDATOR_AVAILABLE = True
 except ImportError:
     QuestValidator = None
+
+try:
+    from .answer_id_management_panel import AnswerIdManagementPanel
+    from .answer_id_manager import AnswerIdAssignment, AnswerIdConflict, AnswerIdManager
+
+    ANSWERID_MANAGER_AVAILABLE = True
+except ImportError:
+    AnswerIdManager = None
+    AnswerIdAssignment = None
+    AnswerIdConflict = None
+    AnswerIdManagementPanel = None
 
 
 # Visual dialogue widget will be imported dynamically after directory change
@@ -1019,6 +1008,13 @@ class UnifiedQuestEditor(QMainWindow):
         self.validator = None
         self.next_custom_quest_id = 10000  # Start custom quests at 10000
 
+        # Initialize AnswerId Manager for dialogue system
+        self.answer_id_manager = None
+        if ANSWERID_MANAGER_AVAILABLE and AnswerIdManager:
+            self.answer_id_manager = AnswerIdManager(
+                start_id=1000, quest_name="Unified Quest Editor"
+            )
+
         # Initialize settings
         self.settings = QSettings("SpellSmut", "UnifiedQuestEditor")
 
@@ -1118,8 +1114,8 @@ class UnifiedQuestEditor(QMainWindow):
 
         # Tab 3.5: Conditions & Flags - NEW
         try:
-            from .flag_manager import FlagManagerWidget
             from .condition_builder import ConditionBuilderWidget
+            from .flag_manager import FlagManagerWidget
 
             # Create a combined widget for conditions and flags
             conditions_flags_widget = QWidget()
@@ -1191,21 +1187,32 @@ class UnifiedQuestEditor(QMainWindow):
                     self.dialogue_widget, "Dialogues (Simple)"
                 )
 
-        # Tab 6: Rewards
+        # Tab 6: AnswerId Management
+        self.answerid_widget = None
+        if ANSWERID_MANAGER_AVAILABLE and AnswerIdManagementPanel:
+            try:
+                self.answerid_widget = AnswerIdManagementPanel(
+                    answer_id_manager=self.answer_id_manager
+                )
+                self.quest_editor_tabs.addTab(self.answerid_widget, "🔢 AnswerIds")
+            except Exception as e:
+                print(f"Warning: AnswerId Management panel not available: {e}")
+                self.answerid_widget = None
+
+        # Tab 7: Rewards
         self.rewards_widget = QWidget()
         self._setup_rewards_tab()
         self.quest_editor_tabs.addTab(self.rewards_widget, "Rewards")
 
-        # Tab 7: Preview
+        # Tab 8: Preview
         self.preview_widget = QuestPreviewWidget(self.item_loader)
         self.quest_editor_tabs.addTab(self.preview_widget, "Preview")
 
-        # Tab 8: Validation
+        # Tab 9: Validation
         self.validation_widget = QWidget()
         self._setup_validation_tab()
         self.quest_editor_tabs.addTab(self.validation_widget, "Validation")
 
-      
         # Initially disable editing until a quest is selected
         self.quest_editor_tabs.setEnabled(False)
 
@@ -1514,6 +1521,7 @@ class UnifiedQuestEditor(QMainWindow):
                 # Import quest data loader for external quest data integration
                 try:
                     from ..data.quest_data_loader import load_quest_data_for_cff
+
                     if self.logger:
                         self.logger.info("Loading external quest data integration...")
                 except ImportError as e:
@@ -1534,22 +1542,27 @@ class UnifiedQuestEditor(QMainWindow):
                             try:
                                 external_quest_data = load_quest_data_for_cff(quest)
                                 if self.logger and external_quest_data:
-                                    self.logger.debug(f"Loaded external data for quest {quest_id}: {external_quest_data.quest_name}")
+                                    self.logger.debug(
+                                        f"Loaded external data for quest {quest_id}: {external_quest_data.quest_name}"
+                                    )
                             except Exception as e:
                                 if self.logger:
-                                    self.logger.warning(f"Error loading external data for quest {quest_id}: {e}")
+                                    self.logger.warning(
+                                        f"Error loading external data for quest {quest_id}: {e}"
+                                    )
 
                         # Extract basic CFF quest data
                         quest_info = {
                             "name": name,
                             "description": self.data_model.get_localised_text(
                                 quest, "description"
-                            ) or "",
+                            )
+                            or "",
                             "quest_object": quest,
                             # Basic CFF quest attributes
                             "quest_id": quest_id,
-                            "parent_quest_id": getattr(quest, 'parent_quest_id', 0),
-                            "order_index": getattr(quest, 'order_index', 0),
+                            "parent_quest_id": getattr(quest, "parent_quest_id", 0),
+                            "order_index": getattr(quest, "order_index", 0),
                         }
 
                         # Enhance with external quest data if available
@@ -1557,30 +1570,55 @@ class UnifiedQuestEditor(QMainWindow):
                             if external_quest_data.quest_name:
                                 quest_info["name"] = external_quest_data.quest_name
                             if external_quest_data.quest_description_loc:
-                                quest_info["description"] = external_quest_data.quest_description_loc
+                                quest_info["description"] = (
+                                    external_quest_data.quest_description_loc
+                                )
                             elif external_quest_data.quest_description_de:
-                                quest_info["description"] = external_quest_data.quest_description_de
+                                quest_info["description"] = (
+                                    external_quest_data.quest_description_de
+                                )
 
                             # Platform and location data
-                            quest_info["platform"] = external_quest_data.platform_name or ""
-                            quest_info["quest_maps"] = external_quest_data.quest_maps or ""
+                            quest_info["platform"] = (
+                                external_quest_data.platform_name or ""
+                            )
+                            quest_info["quest_maps"] = (
+                                external_quest_data.quest_maps or ""
+                            )
 
                             # Quest giver information
-                            quest_info["npc_id"] = external_quest_data.quest_giver_npc_id or 0
-                            quest_info["quest_giver_name"] = external_quest_data.quest_giver_name or ""
+                            quest_info["npc_id"] = (
+                                external_quest_data.quest_giver_npc_id or 0
+                            )
+                            quest_info["quest_giver_name"] = (
+                                external_quest_data.quest_giver_name or ""
+                            )
 
                             # Quest structure information
-                            quest_info["parent_quest_id"] = external_quest_data.parent_quest_id or quest_info["parent_quest_id"]
-                            quest_info["order_index"] = external_quest_data.order_index or quest_info["order_index"]
+                            quest_info["parent_quest_id"] = (
+                                external_quest_data.parent_quest_id
+                                or quest_info["parent_quest_id"]
+                            )
+                            quest_info["order_index"] = (
+                                external_quest_data.order_index
+                                or quest_info["order_index"]
+                            )
 
                             # Parse additional locations from quest_maps
                             additional_locations = []
                             if external_quest_data.quest_maps:
                                 # Parse platform codes like "P1|P63"
-                                platform_codes = [code.strip() for code in external_quest_data.quest_maps.split('|')]
+                                platform_codes = [
+                                    code.strip()
+                                    for code in external_quest_data.quest_maps.split(
+                                        "|"
+                                    )
+                                ]
                                 for code in platform_codes:
                                     if code:
-                                        additional_locations.append({"code": code, "name": f"Platform {code}"})
+                                        additional_locations.append(
+                                            {"code": code, "name": f"Platform {code}"}
+                                        )
                             quest_info["additional_locations"] = additional_locations
 
                             # Enhanced reward data
@@ -1590,18 +1628,31 @@ class UnifiedQuestEditor(QMainWindow):
                                     "gold": external_quest_data.rewards.gold,
                                     "silver": external_quest_data.rewards.silver,
                                     "copper": external_quest_data.rewards.copper,
-                                    "items": external_quest_data.rewards.items_given or [],
+                                    "items": external_quest_data.rewards.items_given
+                                    or [],
                                     "faction_reputation": {},  # Not available in external data
                                     "skill_points": 0,  # Not available in external data
                                 }
 
                             # Set defaults for other fields that aren't in external data
-                            quest_info["requirements"] = []  # For user to set when editing
-                            quest_info["objectives"] = external_quest_data.objectives if external_quest_data.objectives else []    # Load actual objectives from script files
-                            quest_info["flags"] = external_quest_data.flags if external_quest_data.flags else []                   # Load flags from script files
-                            quest_info["dialogues"] = []     # For user to set when editing
-                            quest_info["variables"] = {}     # For user to set when editing
-                            quest_info["map_locations"] = [] # For user to set when editing
+                            quest_info[
+                                "requirements"
+                            ] = []  # For user to set when editing
+                            quest_info["objectives"] = (
+                                external_quest_data.objectives
+                                if external_quest_data.objectives
+                                else []
+                            )  # Load actual objectives from script files
+                            quest_info["flags"] = (
+                                external_quest_data.flags
+                                if external_quest_data.flags
+                                else []
+                            )  # Load flags from script files
+                            quest_info["dialogues"] = []  # For user to set when editing
+                            quest_info["variables"] = {}  # For user to set when editing
+                            quest_info[
+                                "map_locations"
+                            ] = []  # For user to set when editing
 
                             # Quest metadata
                             quest_info["priority"] = 5
@@ -1612,35 +1663,36 @@ class UnifiedQuestEditor(QMainWindow):
 
                         else:
                             # Fallback to defaults when no external data available
-                            quest_info.update({
-                                # These don't exist in CFF quest objects, so set defaults for editing
-                                "platform": "",  # For user to set when editing
-                                "npc_id": 0,  # For user to set when editing
-                                "quest_giver_name": "",  # For user to set when editing
-                                "additional_locations": [],  # For user to set when editing
-                                "requirements": [],  # For user to set when editing
-                                "objectives": [],  # For user to set when editing
-                                "rewards": {
-                                    "xp": 0,
-                                    "gold": 0,
-                                    "silver": 0,
-                                    "copper": 0,
-                                    "items": [],
-                                    "faction_reputation": {},
-                                    "skill_points": 0,
-                                },
-                                "dialogues": [],  # For user to set when editing
-                                "variables": {},  # For user to set when editing
-                                "flags": {},  # For user to set when editing
-                                "map_locations": [],  # For user to set when editing
-
-                                # Quest metadata for display
-                                "priority": 5,  # Default value
-                                "status": "Unknown",  # Default value
-                                "difficulty": "Normal",  # Default value
-                                "min_level": 1,  # Default value
-                                "quest_type": "Side Quest",  # Default value
-                            })
+                            quest_info.update(
+                                {
+                                    # These don't exist in CFF quest objects, so set defaults for editing
+                                    "platform": "",  # For user to set when editing
+                                    "npc_id": 0,  # For user to set when editing
+                                    "quest_giver_name": "",  # For user to set when editing
+                                    "additional_locations": [],  # For user to set when editing
+                                    "requirements": [],  # For user to set when editing
+                                    "objectives": [],  # For user to set when editing
+                                    "rewards": {
+                                        "xp": 0,
+                                        "gold": 0,
+                                        "silver": 0,
+                                        "copper": 0,
+                                        "items": [],
+                                        "faction_reputation": {},
+                                        "skill_points": 0,
+                                    },
+                                    "dialogues": [],  # For user to set when editing
+                                    "variables": {},  # For user to set when editing
+                                    "flags": {},  # For user to set when editing
+                                    "map_locations": [],  # For user to set when editing
+                                    # Quest metadata for display
+                                    "priority": 5,  # Default value
+                                    "status": "Unknown",  # Default value
+                                    "difficulty": "Normal",  # Default value
+                                    "min_level": 1,  # Default value
+                                    "quest_type": "Side Quest",  # Default value
+                                }
+                            )
 
                         self.quest_data[quest_id] = quest_info
             else:
@@ -1661,7 +1713,9 @@ class UnifiedQuestEditor(QMainWindow):
                         "npc_id": 1001,
                         "quest_giver_name": "Darius",
                         "quest_giver_location": "Northern Outpost",
-                        "additional_locations": [{"code": "P2", "name": "Eastern Plains"}],
+                        "additional_locations": [
+                            {"code": "P2", "name": "Eastern Plains"}
+                        ],
                         "requirements": [{"description": "Level 5"}],
                         "objectives": [{"description": "Collect stardust"}],
                         "rewards": {
@@ -1758,6 +1812,13 @@ class UnifiedQuestEditor(QMainWindow):
         self.current_quest_id = quest_id
         quest_info = self.quest_data[quest_id]
 
+        # Update AnswerId manager for the selected quest
+        if self.answer_id_manager:
+            quest_name = quest_info.get("name", f"Quest {quest_id}")
+            self.answer_id_manager.quest_name = quest_name
+            # Reset assignments for new quest (they'll be loaded from dialogue data)
+            self.answer_id_manager.reset()
+
         # Load quest data into all editor tabs
         self.basic_info_widget.load_quest(quest_info)
         self.location_widget.load_quest_data(quest_info)
@@ -1790,9 +1851,14 @@ class UnifiedQuestEditor(QMainWindow):
                 self.condition_builder.root_condition.children.clear()
                 self.condition_builder.refresh_tree()
 
-      
         # Update preview
         self.preview_widget.update_preview(quest_info)
+
+        # Update AnswerId panel with dialogue data
+        if hasattr(self, "answerid_widget") and self.answerid_widget:
+            dialogue_data = quest_info.get("dialogue_data", {})
+            if dialogue_data:
+                self._sync_answerid_panel(dialogue_data)
 
         # Auto-validate if enabled
         if self.auto_validate_check.isChecked():
@@ -1900,7 +1966,7 @@ class UnifiedQuestEditor(QMainWindow):
 
     def _load_quest_objectives(self, quest_info: Dict):
         """Load quest objectives with enhanced display"""
-        print(f"OBJECTIVES TAB: _load_quest_objectives called")
+        print("OBJECTIVES TAB: _load_quest_objectives called")
         print(f"OBJECTIVES TAB: quest_info keys: {list(quest_info.keys())}")
 
         self.objectives_list.clear()
@@ -1963,12 +2029,14 @@ class UnifiedQuestEditor(QMainWindow):
 
     def _load_quest_rewards(self, quest_info: Dict):
         """Load quest rewards"""
-        print(f"REWARDS TAB: _load_quest_rewards called")
+        print("REWARDS TAB: _load_quest_rewards called")
         rewards = quest_info.get("rewards", {})
         print(f"REWARDS TAB: rewards data: {rewards}")
 
         if isinstance(rewards, dict):
-            print(f"REWARDS TAB: Setting XP to {rewards.get('xp', 0)}, Gold to {rewards.get('gold', 0)}")
+            print(
+                f"REWARDS TAB: Setting XP to {rewards.get('xp', 0)}, Gold to {rewards.get('gold', 0)}"
+            )
             self.xp_spin.setValue(rewards.get("xp", 0))
             self.gold_spin.setValue(rewards.get("gold", 0))
             self.silver_spin.setValue(rewards.get("silver", 0))
@@ -2503,7 +2571,7 @@ end
     def _add_objective(self):
         """Add new objective with enhanced editor"""
         try:
-            from .objective_editor_simple import ObjectiveEditorDialog, ObjectiveData
+            from .objective_editor_simple import ObjectiveData, ObjectiveEditorDialog
 
             dialog = ObjectiveEditorDialog(self, data_model=self.data_model)
             if dialog.exec() == QDialog.DialogCode.Accepted:
@@ -2517,7 +2585,7 @@ end
 
                     self._on_data_changed()
 
-        except ImportError as e:
+        except ImportError:
             # Fallback to simple dialog if enhanced editor not available
             from PySide6.QtWidgets import QInputDialog
 
@@ -2734,7 +2802,7 @@ end
     # Dialogue management methods
     def _add_dialogue(self):
         """Add new dialogue"""
-        from PySide6.QtWidgets import QInputDialog, QDialog, QDialogButtonBox
+        from PySide6.QtWidgets import QDialog, QDialogButtonBox
 
         dialog = QDialog(self)
         dialog.setWindowTitle("Add Dialogue")
@@ -2861,9 +2929,22 @@ end
         if hasattr(self, "text_mode_overview") and self.text_mode_overview:
             self.text_mode_overview.set_dialogue_data(dialogue_data)
 
+        # Sync to AnswerId management panel
+        self._sync_answerid_panel(dialogue_data)
+
         # Trigger data change
         self._on_data_changed()
         self.status_bar.showMessage("Dialogue updated in visual editor")
+
+    def _sync_answerid_panel(self, dialogue_data: dict):
+        """Sync dialogue data to AnswerId management panel"""
+        if hasattr(self, "answerid_widget") and self.answerid_widget:
+            try:
+                self.answerid_widget.set_dialogue_data(dialogue_data)
+                self.answerid_widget.refresh_from_dialogue()
+            except Exception as e:
+                if self.logger:
+                    self.logger.debug(f"Could not sync AnswerId panel: {e}")
 
     def _on_flags_changed(self):
         """Handle flag changes"""

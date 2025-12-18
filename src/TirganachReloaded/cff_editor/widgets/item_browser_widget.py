@@ -7,26 +7,27 @@ Author: Quest Editor Team
 Date: November 17, 2025
 """
 
+from typing import Any, Dict, List, Optional
+
+from PySide6.QtCore import Qt, Signal
+from PySide6.QtGui import QColor
 from PySide6.QtWidgets import (
-    QWidget,
-    QVBoxLayout,
-    QHBoxLayout,
-    QTreeWidget,
-    QTreeWidgetItem,
-    QLineEdit,
-    QLabel,
-    QPushButton,
     QComboBox,
-    QGroupBox,
-    QHeaderView,
-    QMessageBox,
     QDialog,
     QDialogButtonBox,
+    QGroupBox,
+    QHBoxLayout,
+    QHeaderView,
+    QLabel,
+    QLineEdit,
+    QPushButton,
+    QTreeWidget,
+    QTreeWidgetItem,
+    QVBoxLayout,
+    QWidget,
 )
-from PySide6.QtCore import Qt, Signal
-from PySide6.QtGui import QFont, QColor
-from typing import Dict, List, Optional, Any
-import json
+
+from ..logging_config import get_logger
 
 
 class ItemData:
@@ -85,6 +86,7 @@ class ItemBrowserWidget(QWidget):
 
     def __init__(self, parent=None, data_model=None):
         super().__init__(parent)
+        self.logger = get_logger(__name__)
         self.items_data: List[ItemData] = []
         self.filtered_items: List[ItemData] = []
         self.data_model = data_model
@@ -191,7 +193,7 @@ class ItemBrowserWidget(QWidget):
     def load_from_data_model(self):
         """Load comprehensive item data from CFF data model"""
         if not self.data_model:
-            print("DEBUG: No data model provided, loading sample data")
+            self.logger.debug("No data model provided, loading sample data")
             self.load_sample_data()
             return
 
@@ -886,6 +888,7 @@ class ItemBrowserDialog(QDialog):
 
 if __name__ == "__main__":
     import sys
+
     from PySide6.QtWidgets import QApplication
 
     app = QApplication(sys.argv)

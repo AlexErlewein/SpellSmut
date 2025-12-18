@@ -3,35 +3,41 @@ Armor Browser Dialog - Browse and select existing armor for editing
 """
 
 import json
-from PySide6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QLabel,
-                               QLineEdit, QComboBox, QPushButton, QTableWidget,
-                               QTableWidgetItem, QHeaderView, QMessageBox)
-from PySide6.QtCore import Qt
 from typing import Optional
 
-from ..models.armor_creation_data import ArmorSlot, ArmorType, ArmorTier
+from PySide6.QtWidgets import (
+    QComboBox,
+    QDialog,
+    QHBoxLayout,
+    QHeaderView,
+    QLabel,
+    QLineEdit,
+    QMessageBox,
+    QPushButton,
+    QTableWidget,
+    QTableWidgetItem,
+    QVBoxLayout,
+)
+
+from ..logging_config import get_logger
 
 
 class ArmorBrowserDialog(QDialog):
     """Browse and select existing armor pieces"""
 
     def __init__(self, parent=None):
-        print("DEBUG: ArmorBrowserDialog.__init__() called - NEW VERSION WITH DEBUG")
         super().__init__(parent)
+        self.logger = get_logger(__name__)
         self.setWindowTitle("Select Armor to Edit")
         self.setModal(True)
         self.resize(900, 600)
 
         self.selected_armor = None
-        print("DEBUG: About to load armor data...")
         self.armor_data = self.load_armor_data()
-        print(f"DEBUG: Loaded {len(self.armor_data)} armor pieces")
+        self.logger.debug(f"Loaded {len(self.armor_data)} armor pieces")
 
-        print("DEBUG: About to initialize UI...")
         self.init_ui()
-        print("DEBUG: About to populate table...")
         self.populate_table()
-        print("DEBUG: ArmorBrowserDialog initialization complete")
 
     def init_ui(self):
         """Initialize the UI"""
@@ -48,19 +54,24 @@ class ArmorBrowserDialog(QDialog):
         search_layout.addWidget(QLabel("Slot:"))
         self.slot_filter = QComboBox()
         self.slot_filter.addItem("All Slots")
-        self.slot_filter.addItems([
-            "Helmet", "Chest Armor", "Leg Armor", "Boots",
-            "Right Ring", "Left Ring", "Shield"
-        ])
+        self.slot_filter.addItems(
+            [
+                "Helmet",
+                "Chest Armor",
+                "Leg Armor",
+                "Boots",
+                "Right Ring",
+                "Left Ring",
+                "Shield",
+            ]
+        )
         self.slot_filter.currentTextChanged.connect(self.filter_armor)
         search_layout.addWidget(self.slot_filter)
 
         search_layout.addWidget(QLabel("Type:"))
         self.type_filter = QComboBox()
         self.type_filter.addItem("All Types")
-        self.type_filter.addItems([
-            "Cloth", "Leather", "Chain", "Plate", "Magic"
-        ])
+        self.type_filter.addItems(["Cloth", "Leather", "Chain", "Plate", "Magic"])
         self.type_filter.currentTextChanged.connect(self.filter_armor)
         search_layout.addWidget(self.type_filter)
 
@@ -68,9 +79,19 @@ class ArmorBrowserDialog(QDialog):
 
         # Armor table
         self.armor_table = QTableWidget(0, 9)
-        self.armor_table.setHorizontalHeaderLabels([
-            "ID", "Name", "Slot", "Type", "Material", "Armor", "Tier", "Stats", "Requirements"
-        ])
+        self.armor_table.setHorizontalHeaderLabels(
+            [
+                "ID",
+                "Name",
+                "Slot",
+                "Type",
+                "Material",
+                "Armor",
+                "Tier",
+                "Stats",
+                "Requirements",
+            ]
+        )
         self.armor_table.setSelectionBehavior(QTableWidget.SelectRows)
         self.armor_table.setSelectionMode(QTableWidget.SingleSelection)
         self.armor_table.doubleClicked.connect(self.accept)
@@ -131,24 +152,27 @@ class ArmorBrowserDialog(QDialog):
                     return armor_list
 
         except Exception as e:
-            print(f"Failed to load from CFF armor loader: {e}")
+            self.logger.warning(f"Failed to load from CFF armor loader: {e}")
 
         # Fallback to JSON
         try:
-            with open("src/TirganachReloaded/enhanced_armor.json", 'r') as f:
+            with open("src/TirganachReloaded/enhanced_armor.json", "r") as f:
                 json_data = json.load(f)
                 # Handle different JSON structures
                 if isinstance(json_data, dict):
-                    if 'armors' in json_data:
-                        return json_data['armors']
-                    elif isinstance(json_data.get('armors', []), list):
-                        return json_data['armors']
+                    if "armors" in json_data:
+                        return json_data["armors"]
+                    elif isinstance(json_data.get("armors", []), list):
+                        return json_data["armors"]
                     else:
                         return list(json_data.values()) if json_data else []
                 return json_data if isinstance(json_data, list) else []
         except (FileNotFoundError, json.JSONDecodeError) as e:
-            QMessageBox.warning(self, "Load Error",
-                              f"Failed to load armor data from CFF or JSON: {str(e)}")
+            QMessageBox.warning(
+                self,
+                "Load Error",
+                f"Failed to load armor data from CFF or JSON: {str(e)}",
+            )
             return []
 
     def populate_table(self, armor_list=None):
@@ -163,12 +187,14 @@ class ArmorBrowserDialog(QDialog):
             self.armor_table.insertRow(row_count)
 
             # ID
-            self.armor_table.setItem(row_count, 0,
-                                   QTableWidgetItem(str(armor.get('item_id', 0))))
+            self.armor_table.setItem(
+                row_count, 0, QTableWidgetItem(str(armor.get("item_id", 0)))
+            )
 
             # Name
-            self.armor_table.setItem(row_count, 1,
-                                   QTableWidgetItem(armor.get('name', 'Unknown')))
+            self.armor_table.setItem(
+                row_count, 1, QTableWidgetItem(armor.get("name", "Unknown"))
+            )
 
             # Slot (map from item_subtype or infer from context)
             slot_name = self.get_slot_name(armor)
@@ -182,7 +208,7 @@ class ArmorBrowserDialog(QDialog):
             self.armor_table.setItem(row_count, 4, QTableWidgetItem("Unknown"))
 
             # Armor value
-            armor_value = armor.get('armor', 0)
+            armor_value = armor.get("armor", 0)
             self.armor_table.setItem(row_count, 5, QTableWidgetItem(str(armor_value)))
 
             # Tier (infer from armor value and other factors)
@@ -194,9 +220,7 @@ class ArmorBrowserDialog(QDialog):
             self.armor_table.setItem(row_count, 7, QTableWidgetItem(str(total_stats)))
 
             # Requirements
-            print(f"DEBUG: Calling format_requirements for armor {armor.get('item_id')}")
             requirements_text = self.format_requirements(armor)
-            print(f"DEBUG: Setting requirements column with: '{requirements_text}'")
             self.armor_table.setItem(row_count, 8, QTableWidgetItem(requirements_text))
 
         # Update statistics
@@ -204,24 +228,24 @@ class ArmorBrowserDialog(QDialog):
 
     def get_slot_name(self, armor: dict) -> str:
         """Get human-readable slot name from armor data"""
-        subtype = armor.get('item_subtype', '')
+        subtype = armor.get("item_subtype", "")
 
         # Map subtypes to slots
         slot_map = {
-            'HEAD': 'Helmet',
-            'CHEST': 'Chest Armor',
-            'LEGS': 'Leg Armor',
-            'FEET': 'Boots',
-            'RIGHT_RING': 'Right Ring',
-            'LEFT_RING': 'Left Ring',
-            'SHIELD': 'Shield'
+            "HEAD": "Helmet",
+            "CHEST": "Chest Armor",
+            "LEGS": "Leg Armor",
+            "FEET": "Boots",
+            "RIGHT_RING": "Right Ring",
+            "LEFT_RING": "Left Ring",
+            "SHIELD": "Shield",
         }
 
-        return slot_map.get(subtype, 'Unknown')
+        return slot_map.get(subtype, "Unknown")
 
     def infer_armor_type(self, armor: dict) -> str:
         """Infer armor type from stats"""
-        armor_value = armor.get('armor', 0)
+        armor_value = armor.get("armor", 0)
 
         if armor_value >= 50:
             return "Plate"
@@ -233,15 +257,18 @@ class ArmorBrowserDialog(QDialog):
             return "Cloth"
         else:
             # Check for magic stats
-            magic_stats = (armor.get('intelligence', 0) + armor.get('wisdom', 0) +
-                          armor.get('mana', 0))
+            magic_stats = (
+                armor.get("intelligence", 0)
+                + armor.get("wisdom", 0)
+                + armor.get("mana", 0)
+            )
             if magic_stats > 0:
                 return "Magic"
             return "Cloth"
 
     def infer_tier(self, armor: dict) -> str:
         """Infer armor tier from stats"""
-        armor_value = armor.get('armor', 0)
+        armor_value = armor.get("armor", 0)
         total_stats = self.calculate_total_stats(armor)
 
         # Simple tier inference
@@ -256,43 +283,39 @@ class ArmorBrowserDialog(QDialog):
 
     def calculate_total_stats(self, armor: dict) -> int:
         """Calculate total stat bonuses"""
-        return (armor.get('strength', 0) + armor.get('stamina', 0) +
-                armor.get('agility', 0) + armor.get('dexterity', 0) +
-                armor.get('intelligence', 0) + armor.get('wisdom', 0) +
-                armor.get('charisma', 0))
+        return (
+            armor.get("strength", 0)
+            + armor.get("stamina", 0)
+            + armor.get("agility", 0)
+            + armor.get("dexterity", 0)
+            + armor.get("intelligence", 0)
+            + armor.get("wisdom", 0)
+            + armor.get("charisma", 0)
+        )
 
     def format_requirements(self, armor: dict) -> str:
         """Format school requirements for display - matches weapon browser formatting"""
-        # Debug: Print what we're working with
-        print(f"DEBUG: Armor ID {armor.get('item_id')} - Name: {armor.get('name')}")
-        print(f"DEBUG: Requirements data: {armor.get('requirements', 'NOT FOUND')}")
-
         # Get requirements data (same as weapon browser)
-        req = armor.get('requirements', {}) or {}
-        school_reqs = req.get('school_requirements', []) or []
-
-        print(f"DEBUG: School requirements found: {len(school_reqs)} items")
-        for i, sr in enumerate(school_reqs):
-            print(f"  [{i}]: {sr}")
+        req = armor.get("requirements", {}) or {}
+        school_reqs = req.get("school_requirements", []) or []
 
         if school_reqs:
             # Use same formatting logic as weapon browser
             def fmt_school(name: str) -> str:
                 s = str(name)
-                if '.' in s:
-                    s = s.split('.')[-1]
-                return s.replace('_', ' ').title()
+                if "." in s:
+                    s = s.split(".")[-1]
+                return s.replace("_", " ").title()
 
-            parts = [f"{fmt_school(sr.get('requirement_school', ''))} L{sr.get('level', 0)}" for sr in school_reqs]
-            result = ", ".join(parts)
-            print(f"DEBUG: Formatted result: {result}")
-            return result
+            parts = [
+                f"{fmt_school(sr.get('requirement_school', ''))} L{sr.get('level', 0)}"
+                for sr in school_reqs
+            ]
+            return ", ".join(parts)
         else:
             # Show level only if present, otherwise '-'
-            lvl = req.get('level', None)
-            result = f"Level {lvl}" if lvl else "-"
-            print(f"DEBUG: No school requirements, showing: {result}")
-            return result
+            lvl = req.get("level", None)
+            return f"Level {lvl}" if lvl else "-"
 
     def filter_armor(self):
         """Filter armor based on search and filters"""
@@ -304,7 +327,7 @@ class ArmorBrowserDialog(QDialog):
 
         for armor in self.armor_data:
             # Text search
-            if search_text and search_text not in armor.get('name', '').lower():
+            if search_text and search_text not in armor.get("name", "").lower():
                 continue
 
             # Slot filter
@@ -347,7 +370,7 @@ class ArmorBrowserDialog(QDialog):
 
         # Find the armor in our data
         for armor in self.armor_data:
-            if armor.get('item_id') == armor_id:
+            if armor.get("item_id") == armor_id:
                 return armor
 
         return None
@@ -358,5 +381,6 @@ class ArmorBrowserDialog(QDialog):
         if self.selected_armor:
             super().accept()
         else:
-            QMessageBox.warning(self, "No Selection",
-                              "Please select an armor piece to edit.")
+            QMessageBox.warning(
+                self, "No Selection", "Please select an armor piece to edit."
+            )

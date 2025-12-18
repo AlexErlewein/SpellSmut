@@ -31,7 +31,6 @@ from PySide6.QtWidgets import (
     QLabel,
     QMainWindow,
     QMessageBox,
-    QPushButton,
     QVBoxLayout,
     QWidget,
 )
@@ -40,44 +39,117 @@ from PySide6.QtWidgets import (
 BASE_DIR = Path(__file__).parent
 
 
-class ToolButton(QPushButton):
-    """Custom styled button for launching tools"""
+class ToolButton(QFrame):
+    """Custom styled button widget for launching tools with large icon/title and smaller description"""
 
     def __init__(self, title: str, description: str, parent=None):
         super().__init__(parent)
         self.title = title
         self.description = description
+        self._callback = None
+        self._is_hovered = False
+        self._is_pressed = False
         self.setup_ui()
 
     def setup_ui(self):
         """Setup the button appearance"""
-        self.setText(f"{self.title}\n{self.description}")
-        self.setMinimumSize(QSize(280, 100))
-        self.setMaximumSize(QSize(350, 120))
+        self.setMinimumSize(QSize(280, 120))
+        self.setMaximumSize(QSize(350, 150))
         self.setCursor(Qt.PointingHandCursor)
+        self.setFrameStyle(QFrame.StyledPanel | QFrame.Raised)
 
-        font = QFont()
-        font.setPointSize(11)
-        self.setFont(font)
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(15, 15, 15, 15)
+        layout.setSpacing(8)
 
-        self.setStyleSheet("""
-            QPushButton {
-                background-color: #3c3c3c;
-                color: #e0e0e0;
-                font-weight: bold;
-                padding: 15px;
-                border-radius: 8px;
-                border: 2px solid #555;
-                text-align: left;
-            }
-            QPushButton:hover {
-                background-color: #4a4a4a;
-                border-color: #6fb3d2;
-            }
-            QPushButton:pressed {
-                background-color: #2d2d2d;
-            }
-        """)
+        # Title label (large, with emoji)
+        self.title_label = QLabel(self.title)
+        title_font = QFont()
+        title_font.setPointSize(22)
+        title_font.setBold(True)
+        self.title_label.setFont(title_font)
+        self.title_label.setStyleSheet("color: #e0e0e0; background: transparent;")
+        layout.addWidget(self.title_label)
+
+        # Description label (smaller)
+        self.desc_label = QLabel(self.description)
+        desc_font = QFont()
+        desc_font.setPointSize(11)
+        self.desc_label.setFont(desc_font)
+        self.desc_label.setStyleSheet("color: #aaa; background: transparent;")
+        layout.addWidget(self.desc_label)
+
+        layout.addStretch()
+
+        self._update_style()
+
+    def _update_style(self):
+        """Update the widget style based on hover/pressed state"""
+        if self._is_pressed:
+            self.setStyleSheet("""
+                ToolButton {
+                    background-color: #2d2d2d;
+                    border-radius: 8px;
+                    border: 2px solid #6fb3d2;
+                }
+                ToolButton QLabel {
+                    background: transparent;
+                }
+            """)
+        elif self._is_hovered:
+            self.setStyleSheet("""
+                ToolButton {
+                    background-color: #4a4a4a;
+                    border-radius: 8px;
+                    border: 2px solid #6fb3d2;
+                }
+                ToolButton QLabel {
+                    background: transparent;
+                }
+            """)
+        else:
+            self.setStyleSheet("""
+                ToolButton {
+                    background-color: #3c3c3c;
+                    border-radius: 8px;
+                    border: 2px solid #555;
+                }
+                ToolButton QLabel {
+                    background: transparent;
+                }
+            """)
+
+    def enterEvent(self, event):
+        """Handle mouse enter"""
+        self._is_hovered = True
+        self._update_style()
+        super().enterEvent(event)
+
+    def leaveEvent(self, event):
+        """Handle mouse leave"""
+        self._is_hovered = False
+        self._is_pressed = False
+        self._update_style()
+        super().leaveEvent(event)
+
+    def mousePressEvent(self, event):
+        """Handle mouse press"""
+        self._is_pressed = True
+        self._update_style()
+        super().mousePressEvent(event)
+
+    def mouseReleaseEvent(self, event):
+        """Handle mouse release and trigger callback"""
+        was_pressed = self._is_pressed
+        self._is_pressed = False
+        self._update_style()
+        if was_pressed and self._callback and self.rect().contains(event.pos()):
+            self._callback()
+        super().mouseReleaseEvent(event)
+
+    def clicked_connect(self, callback):
+        """Connect a callback to the click event"""
+        self._callback = callback
 
 
 class SpellSmutLauncher(QMainWindow):
@@ -154,14 +226,14 @@ class SpellSmutLauncher(QMainWindow):
         self.darius_btn = ToolButton(
             "📜 Darius Almanach", "Browse and export SpellForce quests"
         )
-        self.darius_btn.clicked.connect(self.launch_darius_almanach)
+        self.darius_btn.clicked_connect(self.launch_darius_almanach)
         row1_layout.addWidget(self.darius_btn)
 
         # Graufurter Bürger Büro button
         self.graufurter_btn = ToolButton(
             "👤 Graufurter Bürger Büro", "NPC browser and creation suite"
         )
-        self.graufurter_btn.clicked.connect(self.launch_graufurter_buerger_buero)
+        self.graufurter_btn.clicked_connect(self.launch_graufurter_buerger_buero)
         row1_layout.addWidget(self.graufurter_btn)
 
         main_layout.addLayout(row1_layout)
@@ -172,14 +244,14 @@ class SpellSmutLauncher(QMainWindow):
 
         # Orthancs Schmiede button
         self.orthancs_btn = ToolButton("⚔️ Orthancs Schmiede", "Weapon & Armor browser")
-        self.orthancs_btn.clicked.connect(self.launch_orthancs_schmiede)
+        self.orthancs_btn.clicked_connect(self.launch_orthancs_schmiede)
         row2_layout.addWidget(self.orthancs_btn)
 
         # Mulandirs Zauberschule button
         self.mulandirs_btn = ToolButton(
             "✨ Mulandirs Zauberschule", "Spell browser and forge"
         )
-        self.mulandirs_btn.clicked.connect(self.launch_mulandirs_zauberschule)
+        self.mulandirs_btn.clicked_connect(self.launch_mulandirs_zauberschule)
         row2_layout.addWidget(self.mulandirs_btn)
 
         main_layout.addLayout(row2_layout)
@@ -190,12 +262,12 @@ class SpellSmutLauncher(QMainWindow):
 
         # CFF Editor button
         self.cff_btn = ToolButton("🔧 CFF Editor", "Edit SpellForce GameData.cff files")
-        self.cff_btn.clicked.connect(self.launch_cff_editor)
+        self.cff_btn.clicked_connect(self.launch_cff_editor)
         row3_layout.addWidget(self.cff_btn)
 
         # Icon Browser button
         self.icon_btn = ToolButton("🖼️ Icon Browser", "Browse game icons and assets")
-        self.icon_btn.clicked.connect(self.launch_icon_browser)
+        self.icon_btn.clicked_connect(self.launch_icon_browser)
         row3_layout.addWidget(self.icon_btn)
 
         main_layout.addLayout(row3_layout)
