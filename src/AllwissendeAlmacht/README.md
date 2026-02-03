@@ -1,12 +1,12 @@
-# Weapon Forge Icon System Guide
+# Allwissende Almacht System Guide
 
 ## Overview
 
-The Weapon Forge now includes a **comprehensive icon system** that allows users to browse, select, and assign custom icons to their created weapons. This guide explains how to use the icon system and how it integrates with the weapon creation workflow.
+The Weapon Forge now includes **Allwissende Almacht**, a comprehensive icon system that allows users to browse, select, and assign custom icons to their created weapons. This guide explains how to use the system and how it integrates with the weapon creation workflow.
 
 ## Features Implemented
 
-### ✅ **Complete Icon Browser**
+### ✅ **Allwissende Almacht (Icon Browser)**
 
 - **4,258 Icons Available**: Extracted from SpellForce game assets
 - **Multiple Categories**: Items, spells, UI elements, backgrounds, buttons, etc.
@@ -32,23 +32,27 @@ The Weapon Forge now includes a **comprehensive icon system** that allows users 
 
 ### For Users
 
-#### **Step 1: Access Icon Browser**
+#### **Step 1: Access Allwissende Almacht**
+
 1. Create a new weapon in the Weapon Forge
 2. Navigate to the "Visual & Audio" step (Step 5)
 3. Click the "Browse Icons..." button next to the icon preview
 
 #### **Step 2: Browse and Select Icons**
+
 1. **Search**: Type in the search box to filter by name or handle
 2. **Category Filter**: Select from dropdown to show specific icon types
 3. **Preview**: Click any icon to see a large preview and details
 4. **Select**: Double-click or click "Select Icon" to choose
 
 #### **Step 3: Review Selection**
+
 1. The selected icon appears in the preview box
 2. The icon handle is displayed next to the preview
 3. A green checkmark confirms successful selection
 
 #### **Step 4: Complete Weapon Creation**
+
 1. Continue through the remaining wizard steps
 2. The icon appears in the final summary page
 3. Export the weapon (JSON and/or CFF format)
@@ -56,13 +60,13 @@ The Weapon Forge now includes a **comprehensive icon system** that allows users 
 
 ### For Developers
 
-#### **Icon Browser Integration**
+#### **Allwissende Almacht Integration**
 
 ```python
-from widgets.icon_browser import IconBrowserDialog
+from AllwissendeAlmacht.allwissende_almacht import AllwissendeAlmachtDialog
 
-# Create icon browser dialog
-icon_dialog = IconBrowserDialog(data_model, category="itm", parent=self)
+# Create Allwissende Almacht dialog
+icon_dialog = AllwissendeAlmachtDialog(data_model, category="itm", parent=self)
 
 # Connect signal for icon selection
 icon_dialog.iconSelected.connect(self.on_icon_selected)
@@ -86,38 +90,31 @@ icon_pixmap = data_model.get_icon_pixmap(icon_handle)
 
 #### **Icon Categories**
 
-| Category | Handle Prefix | Use Case | Count |
-|----------|---------------|----------|-------|
-| Items | `ui_item_equip_weapon_*` | Weapon icons | 432 |
-| Spells | `ui_spell_*` | Spell icons | 73 |
-| UI | Various | Interface elements | 1161 |
-| Backgrounds | `bgr_*` | Background tiles | 1161 |
-| Buttons | `btn_*` | UI buttons | 77 |
-| Content | `cnt_*` | Content markers | 37 |
+| Category    | Handle Prefix            | Use Case           | Count |
+| ----------- | ------------------------ | ------------------ | ----- |
+| Items       | `ui_item_equip_weapon_*` | Weapon icons       | 432   |
+| Spells      | `ui_spell_*`             | Spell icons        | 73    |
+| UI          | Various                  | Interface elements | 1161  |
+| Backgrounds | `bgr_*`                  | Background tiles   | 1161  |
+| Buttons     | `btn_*`                  | UI buttons         | 77    |
+| Content     | `cnt_*`                  | Content markers    | 37    |
 
 ## File Structure
 
-### Icon Storage
+### Allwissende Almacht
+
 ```
-ExtractedAssets/UI/icons_extracted/
-├── itm/                    # Item icons (32x32, 8x8 grid)
-│   ├── atlas_0/
-│   │   ├── icon_001.png   # First icon in atlas 0
-│   │   └── ...
-│   └── atlas_23/
-├── spell/                  # Spell icons (64x64, 4x4 grid)
-│   ├── atlas_0/
-│   └── atlas_17/
-├── icon_index.json         # Master icon index
-├── weapon_icon_mapping.json # Weapon-specific mappings
-└── ui_icon_mapping.json    # Comprehensive UI mappings
+src/AllwissendeAlmacht/
+├── allwissende_almacht.py     # Main widget logic
+├── run_allwissende_almacht.py # Standalone launcher
+└── README.md                  # This documentation
 ```
 
 ### Code Integration
+
 ```
 src/TirganachReloaded/cff_editor/
 ├── widgets/
-│   ├── icon_browser.py           # Icon browser widget
 │   └── weapon_forge_wizard.py    # Weapon forge with icon integration
 ├── models/
 │   └── weapon_creation_data.py   # Weapon data model with icon support
@@ -139,7 +136,7 @@ src/TirganachReloaded/cff_editor/
 ### **Data Flow**
 
 ```
-Icon Browser → Icon Selection → Handle Storage → CFF Export
+Allwissende Almacht → Icon Selection → Handle Storage → CFF Export
      ↓              ↓                ↓              ↓
   Icon Preview   Weapon Data    Icon Resolution   Game Import
      ↓              ↓                ↓              ↓
@@ -167,7 +164,7 @@ Icon Browser → Icon Selection → Handle Storage → CFF Export
    - **Cause**: Icon handle not found in mapping
    - **Solution**: Verify handle spelling and mapping files
 
-3. **Icon Browser Unavailable**
+3. **Allwissende Almacht Unavailable**
    - **Symptom**: Warning dialog when clicking "Browse Icons"
    - **Cause**: Data model not loaded or icon index missing
    - **Solution**: Ensure game data is loaded first
@@ -260,17 +257,17 @@ def debug_icon_resolution(data_model, icon_handle):
 
 ## Conclusion
 
-The icon system provides a **robust, user-friendly interface** for weapon customization in the Weapon Forge. With over 4,000 available icons and sophisticated handling for resolution and caching, users can create visually unique weapons that stand out in-game.
+Allwissende Almacht provides a **robust, user-friendly interface** for weapon customization in the Weapon Forge. With over 4,000 available icons and sophisticated handling for resolution and caching, users can create visually unique weapons that stand out in-game.
 
-The system is designed to be **extensible** and **maintainable**, with clear separation of concerns between the icon browser, data model, and weapon creation workflow. Future enhancements can be added without disrupting the existing functionality.
+The system is designed to be **extensible** and **maintainable**, with clear separation of concerns between the browser, data model, and weapon creation workflow. Future enhancements can be added without disrupting the existing functionality.
 
 ### **Quick Start Checklist**
 
 - [ ] Ensure `ExtractedAssets/UI/icons_extracted/` directory exists
 - [ ] Verify icon index files are present
-- [ ] Test icon browser functionality
+- [ ] Test Allwissende Almacht functionality
 - [ ] Confirm icon preview works in wizard
 - [ ] Validate export includes icon data
 - [ ] Test final weapons in-game
 
-The icon system is ready for **production use** and provides a solid foundation for weapon customization in SpellForce modding.
+Allwissende Almacht is ready for **production use** and provides a solid foundation for weapon customization in SpellForce modding.

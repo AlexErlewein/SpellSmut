@@ -19,7 +19,7 @@ from ..models.race_creation_data import (
     RaceCreationData, RaceType, UnitType, UnitData, UnitStats, 
     UnitCombat, UnitAppearance, BuildingData
 )
-from .icon_browser import IconBrowserDialog
+from AllwissendeAlmacht.allwissende_almacht import AllwissendeAlmachtDialog
 from .race_validation import RaceValidator
 
 

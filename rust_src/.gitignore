@@ -1,0 +1,14 @@
+# Rust build artifacts
+target/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store

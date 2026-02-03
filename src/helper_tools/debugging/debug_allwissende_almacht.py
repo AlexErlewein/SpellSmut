@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Debug Icon Browser Tool
-=======================
+Debug Allwissende Almacht Tool
+==============================
 
 Debug version to check why icons aren't loading.
 """
@@ -18,7 +18,7 @@ from TirganachReloaded.cff_editor.data_model import CFFDataModel
 
 def main():
     """Debug the icon loading"""
-    print("=== Icon Browser Debug ===")
+    print("=== Allwissende Almacht Debug ===")
     
     # Create data model
     data_model = CFFDataModel()
@@ -49,7 +49,7 @@ def main():
         print("No 'icons' key in icon_index!")
         print(f"Icon index content: {data_model.icon_index}")
     
-    # Test the get_all_icons method from icon browser
+    # Test the get_all_icons method from Allwissende Almacht
     print("\n=== Testing get_all_icons logic ===")
     
     # Get item icons

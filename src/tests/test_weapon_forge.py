@@ -319,7 +319,7 @@ def main():
                     "for the Weapon Forge wizard.\n\n"
                     "Features available:\n"
                     "• Weapon creation/editing/duplication\n"
-                    "• Icon browser (if data loaded)\n"
+                    "• Allwissende Almacht (if data loaded)\n"
                     "• Sound preview (if pygame installed)\n"
                     "• CFF export (if tirganach available)\n"
                     "• Dark theme styling\n"

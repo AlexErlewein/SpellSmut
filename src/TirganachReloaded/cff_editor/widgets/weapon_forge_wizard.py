@@ -43,7 +43,7 @@ from .weapon_sound_manager import (
 )
 from .weapon_validation import WeaponValidator
 from .weapon_browser_dialog import WeaponBrowserDialog
-from .icon_browser import IconBrowserDialog
+from AllwissendeAlmacht.allwissende_almacht import AllwissendeAlmachtDialog
 
 
 class WeaponForgeWizard(QWizard):
@@ -1357,18 +1357,18 @@ class VisualAudioPage(QWizardPage):
         layout.addRow(self.sound_selector_widget)
 
     def browse_icons(self):
-        """Open icon browser dialog"""
+        """Open Allwissende Almacht dialog"""
         if not self.data_model:
             QMessageBox.warning(
                 self,
-                "Icon Browser Unavailable",
-                "Icon browser is not available. The data model is not loaded.",
+                "Allwissende Almacht Unavailable",
+                "Allwissende Almacht is not available. The data model is not loaded.",
             )
             return
 
         try:
-            # Create icon browser dialog
-            icon_dialog = IconBrowserDialog(
+            # Create Allwissende Almacht dialog
+            icon_dialog = AllwissendeAlmachtDialog(
                 self.data_model, category="itm", parent=self
             )
 
@@ -1384,7 +1384,7 @@ class VisualAudioPage(QWizardPage):
 
         except Exception as e:
             QMessageBox.critical(
-                self, "Icon Browser Error", f"Failed to open icon browser:\n{str(e)}"
+                self, "Allwissende Almacht Error", f"Failed to open Allwissende Almacht:\n{str(e)}"
             )
 
     def on_icon_selected(self, icon_handle: str):

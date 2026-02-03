@@ -5,6 +5,7 @@ This directory contains all the helper scripts and tools for working with SpellF
 ## Directory Structure
 
 ### 📁 extraction/
+
 Scripts for extracting assets from game files (PAK archives, DDS textures, etc.)
 
 - `bulk_extract_paks.py` - Extract all PAK files using QuickBMS
@@ -20,6 +21,7 @@ Scripts for extracting assets from game files (PAK archives, DDS textures, etc.)
 - `SpellForce_PAK_script.bms` - QuickBMS script for PAK extraction
 
 ### 📁 conversion/
+
 Scripts for converting file formats
 
 - `convert_dds_to_png.py` - Convert DDS textures to PNG
@@ -27,6 +29,7 @@ Scripts for converting file formats
 - `rotate_ui_pngs.py` - Rotate PNG files for UI assets
 
 ### 📁 organization/
+
 Scripts for organizing and categorizing extracted files
 
 - `organize_all_extracted_files.py` - Comprehensive file organization
@@ -36,6 +39,7 @@ Scripts for organizing and categorizing extracted files
 - `filter_empty_icons.py` - Filter out empty icons
 
 ### 📁 analysis/
+
 Scripts for analyzing, debugging, and testing
 
 - `analyze_ui_categories.py` - Analyze UI categories
@@ -50,11 +54,13 @@ Scripts for analyzing, debugging, and testing
 - `visual_category_inspector.py` - Visual inspection helper
 
 ### 📁 utils/
+
 Utility modules and shared code
 
 - `icon_split_utils.py` - Utilities for split icon file system
 
 ### 📁 batch/
+
 Windows batch files and shell scripts
 
 - `bulk_extract_paks.bat` - Windows launcher for PAK extraction
@@ -65,6 +71,7 @@ Windows batch files and shell scripts
 - `run_ui_icon_integration.sh` - Linux/Mac UI pipeline
 
 ### 📁 docs/
+
 Documentation and guides
 
 - `README_SPLIT_FILES.md` - Guide for split file system
@@ -72,6 +79,7 @@ Documentation and guides
 - `DDS_CONVERTER_README.md` - DDS conversion guide
 
 ### 📁 quest_extraction/
+
 Quest-specific extraction and analysis tools:
 
 - `extract_cff_quest_data.py` - Extract CFF quest data
@@ -82,13 +90,15 @@ Quest-specific extraction and analysis tools:
 - `extract_quest_dialogues.py` - Extract quest dialogues
 
 ### 📁 debugging/
+
 Debugging and diagnostic utilities:
 
 - `debug_gui.py` - GUI debugging tools
-- `debug_icon_browser.py` - Icon browser debugging
+- `debug_allwissende_almacht.py` - Allwissende Almacht debugging
 - `debug_item_ui_mapping.py` - Item-UI mapping debugging
 
 ### 📁 integration/
+
 System integration tools:
 
 - `cff_editor_itm_integration.py` - CFF editor ITM integration
@@ -98,7 +108,7 @@ System integration tools:
 These frequently used tools are kept at the root level for easy access:
 
 - `launch_tirganach.sh` - Launch script for TirganachReloaded application
-- `run_icon_browser.py` - Icon browser utility
+- `AllwissendeAlmacht/run_allwissende_almacht.py` - Allwissende Almacht utility
 - `update_with_maps.py` - Update utilities for mappings
 - `create_final_documentation.py` - Documentation generator
 - `final_status.py` - Status reporting tool
@@ -140,6 +150,7 @@ uv run analysis/demo_split_usage.py
 ## Contributing
 
 When adding new scripts:
+
 - Place them in the appropriate subfolder
 - Update this README if adding new categories
 - Add tests in `src/tests/` if applicable

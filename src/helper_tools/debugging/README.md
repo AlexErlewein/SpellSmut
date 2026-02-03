@@ -5,7 +5,7 @@ This directory contains debugging and diagnostic utilities for troubleshooting v
 ## Tools
 
 - **debug_gui.py** - GUI debugging utilities and diagnostics
-- **debug_icon_browser.py** - Icon browser debugging and testing
+- **debug_allwissende_almacht.py** - Allwissende Almacht debugging and testing
 - **debug_item_ui_mapping.py** - Item-UI mapping debugging tools
 
 ## Usage
@@ -19,6 +19,7 @@ uv run python src/helper_tools/debugging/debug_gui.py
 ## Purpose
 
 These tools help diagnose and fix issues with:
+
 - GUI applications
 - Icon loading and display
 - Item-UI mapping resolution

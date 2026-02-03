@@ -1,5 +1,5 @@
 """
-Icon Browser Widget - Browse and select game icons for armor, weapons, and spells
+Allwissende Almacht - Browse and select game icons for armor, weapons, and spells
 """
 
 from pathlib import Path
@@ -15,8 +15,8 @@ from PySide6.QtCore import Qt, Signal
 from PySide6.QtGui import QPixmap, QIcon
 
 
-class IconBrowserDialog(QDialog):
-    """Browse and select game icons"""
+class AllwissendeAlmachtDialog(QDialog):
+    """Browse and select game icons (Allwissende Almacht)"""
 
     iconSelected = Signal(str)  # Emit the selected icon handle/path
 
@@ -26,7 +26,7 @@ class IconBrowserDialog(QDialog):
         self.category = category  # "item", "spell", etc.
         self.selected_icon = None
         
-        self.setWindowTitle("Icon Browser")
+        self.setWindowTitle("Allwissende Almacht")
         self.setModal(True)
         self.resize(1000, 700)
         
