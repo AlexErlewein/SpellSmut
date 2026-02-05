@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Final status report for ITM icon extraction and icon browser integration.
+Final status report for ITM icon extraction and Allwissende Almacht integration.
 """
 
 import json
@@ -52,13 +52,13 @@ def show_final_status():
             print(f"    {atlas.name}: {len(icons)} icons, {len(weapons)} weapons")
     
     print(f"\n✅ Integration Status:")
-    print(f"  ✓ Icon browser updated with dynamic category detection")
+    print(f"  ✓ Allwissende Almacht updated with dynamic category detection")
     print(f"  ✓ Filter statistics implemented")
     print(f"  ✓ ITM icons available at: {itm_dir.relative_to(project_root)}")
     print(f"  ✓ Icon index updated with {categories.get('itm', 0):,} ITM entries")
     
     print(f"\n🚀 Ready for:")
-    print(f"  1. Icon browser testing (requires PySide6 installation)")
+    print(f"  1. Allwissende Almacht testing (requires PySide6 installation)")
     print(f"  2. CFF editor integration")
     print(f"  3. Item icon mapping to GameData.cff")
     

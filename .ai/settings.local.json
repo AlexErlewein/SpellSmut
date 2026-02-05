@@ -10,7 +10,9 @@
       "Bash(/tmp/wizard_before_methods.py)",
       "Bash(/Users/alex/Desktop/code/Others/SpellSmut/src/GraufurterBuergerBuero/npc_creator_wizard.py)",
       "Bash(python3:*)",
-      "Bash(pkill:*)"
+      "Bash(pkill:*)",
+      "Bash(cargo build:*)",
+      "Bash(./rust-src/target/release/spellsmut-tools:*)"
     ],
     "deny": [],
     "ask": []

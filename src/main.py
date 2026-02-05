@@ -15,7 +15,7 @@ Available Tools:
 - Orthancs Schmiede: Weapon & Armor browser
 - Mulandirs Zauberschule: Spell browser and forge
 - CFF Editor: SpellForce GameData.cff editor
-- Icon Browser: Game icon browser tool
+- Allwissende Almacht: Game icon browser tool
 """
 
 import subprocess
@@ -265,9 +265,9 @@ class SpellSmutLauncher(QMainWindow):
         self.cff_btn.clicked_connect(self.launch_cff_editor)
         row3_layout.addWidget(self.cff_btn)
 
-        # Icon Browser button
-        self.icon_btn = ToolButton("🖼️ Icon Browser", "Browse game icons and assets")
-        self.icon_btn.clicked_connect(self.launch_icon_browser)
+        # Allwissende Almacht button
+        self.icon_btn = ToolButton("�️ Allwissende Almacht", "Browse game icons and assets")
+        self.icon_btn.clicked_connect(self.launch_allwissende_almacht)
         row3_layout.addWidget(self.icon_btn)
 
         main_layout.addLayout(row3_layout)
@@ -337,10 +337,10 @@ class SpellSmutLauncher(QMainWindow):
         script_path = BASE_DIR / "TirganachReloaded" / "run_cff_editor.py"
         self.launch_tool(script_path, "CFF Editor")
 
-    def launch_icon_browser(self):
-        """Launch Icon Browser"""
-        script_path = BASE_DIR / "helper_tools" / "run_icon_browser.py"
-        self.launch_tool(script_path, "Icon Browser")
+    def launch_allwissende_almacht(self):
+        """Launch Allwissende Almacht"""
+        script_path = BASE_DIR / "AllwissendeAlmacht" / "run_allwissende_almacht.py"
+        self.launch_tool(script_path, "Allwissende Almacht")
 
     def show_error(self, tool_name: str, error_message: str):
         """Show an error dialog"""

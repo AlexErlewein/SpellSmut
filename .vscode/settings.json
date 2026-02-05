@@ -24,22 +24,14 @@
     "**/pytest_cache": true,
     "**/.coverage": true,
     "**/test_outputs": true,
-    "**/ModdedGameFiles": true,
-    "**/OriginalGameFiles": true,
-    "**/ExtractedAssets": true
   },
   "files.watcherExclude": {
     "**/__pycache__/**": true,
     "**/test_outputs/**": true,
-    "**/ModdedGameFiles/**": true,
-    "**/OriginalGameFiles/**": true,
-    "**/ExtractedAssets/**": true
   },
   "search.exclude": {
     "**/test_outputs": true,
-    "**/ModdedGameFiles": true,
-    "**/OriginalGameFiles": true,
-    "**/ExtractedAssets": true
+
   },
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {

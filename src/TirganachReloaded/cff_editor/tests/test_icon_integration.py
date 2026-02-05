@@ -1,17 +1,15 @@
 #!/usr/bin/env python3
 """
-Test Icon Integration in Weapon Forge
-====================================
+Test Allwissende Almacht Integration in Weapon Forge
+===================================================
 
-This script tests the icon browser integration with the Weapon Forge wizard.
+This script tests the Allwissende Almacht integration with the Weapon Forge wizard.
 It verifies that:
-1. Icon browser can be opened successfully
+1. Allwissende Almacht can be opened successfully
 2. Icons can be selected and applied to weapons
 3. Icon preview works in the wizard
 4. Icon data is properly saved to weapon creation data
-
-Usage:
-    python test_icon_integration.py
+5. Navigation between Allwissende Almacht and the wizard is stable
 """
 
 import sys
@@ -27,13 +25,13 @@ from PySide6.QtCore import QTimer
 from test_logging import test_header, test_success, test_error, test_info, get_test_logger
 
 
-def test_icon_browser_alone():
-    """Test the icon browser standalone"""
-    test_header("Testing Icon Browser Standalone...")
+def test_allwissende_almacht_alone():
+    """Test Allwissende Almacht standalone"""
+    test_header("Testing Allwissende Almacht Standalone...")
 
     try:
         from data_model import CFFDataModel
-        from widgets.icon_browser import IconBrowserDialog
+        from AllwissendeAlmacht.allwissende_almacht import AllwissendeAlmachtDialog
 
         # Create application
         app = QApplication(sys.argv)
@@ -44,19 +42,19 @@ def test_icon_browser_alone():
 
         # Check if icon data is available
         if not data_model.icon_index:
-            test_error("No icon data loaded in data model")
+            test_error("Icon index not loaded")
             return False
 
         test_success(f"Loaded {len(data_model.icon_index.get('icons', {}))} icons")
 
-        # Create icon browser dialog
-        test_info("Creating icon browser dialog...")
-        browser = IconBrowserDialog(data_model, category="itm")
+        # Create Allwissende Almacht dialog
+        test_info("Creating Allwissende Almacht dialog...")
+        browser = AllwissendeAlmachtDialog(data_model, category="itm")
 
         # Schedule a quick test (don't show UI in automated test)
         def quick_test():
-            test_info("Icon browser created successfully")
-            test_success("✓ Icon browser instantiation works")
+            test_info("Allwissende Almacht created successfully")
+            test_success("✓ Allwissende Almacht instantiation works")
             app.quit()
 
         # Quick test after UI initializes
@@ -71,7 +69,7 @@ def test_icon_browser_alone():
         test_error(f"Import error: {e}")
         return False
     except Exception as e:
-        test_error(f"Error testing icon browser: {e}")
+        test_error(f"Error testing Allwissende Almacht: {e}")
         return False
 
 
@@ -127,9 +125,9 @@ def test_icon_resolution():
         return False
 
 
-def test_icon_browser_categories():
-    """Test different icon categories"""
-    test_header("Testing Icon Categories...")
+def test_allwissende_almacht_categories():
+    """Test different Allwissende Almacht categories"""
+    test_header("Testing Allwissende Almacht Categories...")
 
     try:
         from data_model import CFFDataModel
@@ -275,12 +273,12 @@ def main():
     # Run tests
     tests = [
         test_icon_resolution,
-        test_icon_browser_categories,
+        test_allwissende_almacht_categories,
         test_weapon_icon_assignment,
         test_cff_export_with_icon,
     ]
 
-    # Note: test_icon_browser_alone is skipped in automated testing
+    # Note: test_allwissende_almacht_alone is skipped in automated testing
     # because it requires a full GUI session. Add it manually if needed.
 
     passed = 0
@@ -298,10 +296,10 @@ def main():
     # Summary
     print("\n" + "=" * 50)
     if passed == total:
-        test_success(f"🎉 All {total}/{total} icon integration tests passed!")
-        print("\n✅ Icon integration is working correctly!")
+        test_success(f"🎉 All {total}/{total} Allwissende Almacht integration tests passed!")
+        print("\n✅ Allwissende Almacht integration is working correctly!")
         print("✅ Weapon Forge supports full icon selection and assignment")
-        print("✅ Icon browser is ready for production use")
+        print("✅ Allwissende Almacht is ready for production use")
         return True
     else:
         test_error(f"❌ {total - passed}/{total} icon integration tests failed")

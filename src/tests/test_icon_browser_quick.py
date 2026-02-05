@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Quick ITM Icon Browser Test
-===========================
+Quick Allwissende Almacht Test
+==============================
 
-Test the icon browser components and ITM integration without launching the full GUI.
+Test the Allwissende Almacht components and ITM integration without launching the full GUI.
 """
 
 import sys
@@ -13,9 +13,9 @@ from pathlib import Path
 src_path = Path(__file__).parent / "src"
 sys.path.insert(0, str(src_path))
 
-def test_icon_browser_components():
-    """Test icon browser data loading and ITM integration"""
-    print("🧪 Testing Icon Browser Components...")
+def test_allwissende_almacht_components():
+    """Test Allwissende Almacht data loading and ITM integration"""
+    print("🧪 Testing Allwissende Almacht Components...")
     
     try:
         from TirganachReloaded.cff_editor.data_model import CFFDataModel
@@ -88,13 +88,13 @@ def test_itm_specific_functionality():
 
 def main():
     """Run all tests"""
-    print("🚀 ITM Icon Browser Test Suite")
+    print("🚀 Allwissende Almacht Test Suite")
     print("=" * 50)
     
     success = True
     
     # Test components
-    if not test_icon_browser_components():
+    if not test_allwissende_almacht_components():
         success = False
     
     # Test ITM functionality
@@ -103,8 +103,8 @@ def main():
     
     print("\n" + "=" * 50)
     if success:
-        print("🎉 Icon browser is ready for ITM icons!")
-        print("📱 Run 'python3 run_icon_browser.py' to launch the GUI")
+        print("🎉 Allwissende Almacht is ready for ITM icons!")
+        print("📱 Run 'python3 AllwissendeAlmacht/run_allwissende_almacht.py' to launch the GUI")
     else:
         print("❌ Some tests failed")
     
