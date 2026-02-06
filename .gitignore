@@ -52,11 +52,9 @@ test_cff_export/
 # Use git add -f to force add if needed
 .rsworktree/
 
-# Original game files - ignore everything except specific folders
-OriginalGameFiles/*
-!OriginalGameFiles/data/
-!OriginalGameFiles/script/
+# emdash created
+.emdash.*
+.emdash
 
-# Auto-generated Kanban board (regenerated on every commit)
-kanban.md
-extracted_spells
+
+
