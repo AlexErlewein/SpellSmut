@@ -8,6 +8,7 @@ namespace SpellforceDataEditor.special_forms.utility_forms
         public ShowCodeForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         private void ButtonOk_Click(object sender, EventArgs e)

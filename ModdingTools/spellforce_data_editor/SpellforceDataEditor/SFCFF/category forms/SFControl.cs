@@ -16,6 +16,7 @@ namespace SpellforceDataEditor.SFCFF.category_forms
         public SFControl()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         //sets current element displayed

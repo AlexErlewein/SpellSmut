@@ -99,6 +99,7 @@ namespace SpellforceDataEditor.SFCFF.helper_forms
         public ReferencesForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         public void FindElementReferences(int cat_id, int elem_index)

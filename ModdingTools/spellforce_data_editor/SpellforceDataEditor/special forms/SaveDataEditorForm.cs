@@ -14,6 +14,7 @@ namespace SpellforceDataEditor.special_forms
         public SaveDataEditorForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         private string GetFileChunkDescription(SFChunkFileChunk sfcfc)

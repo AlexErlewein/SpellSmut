@@ -14,6 +14,7 @@ namespace SpellforceDataEditor.special_forms
         public TextureRepairForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         private void ButtonTexDirectorySource_Click(object sender, EventArgs e)

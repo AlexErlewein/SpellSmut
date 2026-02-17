@@ -15,6 +15,7 @@ namespace SpellforceDataEditor.SFMap.map_dialog
         public MapVisibilitySettings()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
             checkBox1.Checked = SFEngine.Settings.UnitsVisible;
             checkBox2.Checked = SFEngine.Settings.BuildingsVisible;
             checkBox3.Checked = SFEngine.Settings.ObjectsVisible;

@@ -13,6 +13,7 @@ namespace SpellforceDataEditor.SFLua.lua_sql_forms
         public SFLuaSQLRtsCoopSpawnForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
 
             foreach (string s in Enum.GetNames(typeof(LuaEnumAiGoal)))
             {

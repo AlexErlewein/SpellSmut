@@ -10,6 +10,7 @@ namespace SpellforceDataEditor.SFCFF.helper_forms
         public SaveGamedataForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         private void LoadGamedataForm_Load(object sender, EventArgs e)

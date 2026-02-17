@@ -8,6 +8,7 @@ namespace SpellforceDataEditor.special_forms
         public ExtractionSettingsForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         private void ExtractionSettingsForm_Load(object sender, EventArgs e)

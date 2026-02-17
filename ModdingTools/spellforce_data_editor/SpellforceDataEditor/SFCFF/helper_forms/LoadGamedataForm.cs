@@ -16,6 +16,7 @@ namespace SpellforceDataEditor.SFCFF.helper_forms
         public LoadGamedataForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         private void LoadGamedataForm_Load(object sender, EventArgs e)

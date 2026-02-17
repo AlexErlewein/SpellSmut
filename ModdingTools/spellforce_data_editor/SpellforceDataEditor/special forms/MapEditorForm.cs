@@ -1070,6 +1070,9 @@ namespace SpellforceDataEditor.special_forms
 
         public MapEditorOperatorQueue op_queue { get; private set; } = null;
 
+        private Panel editor_modes_overlay = null;
+        private Label editor_modes_overlay_label = null;
+
         public MapEditorForm()
         {
             InitializeComponent();
@@ -1084,6 +1087,9 @@ namespace SpellforceDataEditor.special_forms
             InspectorHide();
 
             ThemeManager.ApplyTheme(this);
+            InitializeEditorModesOverlay();
+            SetEditorModesInteractive((map != null) && ready);
+            MapEditorForm_Resize(this, EventArgs.Empty);
         }
 
         private void MapEditorForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -1121,10 +1127,69 @@ namespace SpellforceDataEditor.special_forms
         private void MapEditorForm_Resize(object sender, EventArgs e)
         {
             // TabEditorModes width is now handled by Anchor, just update tab item sizes
-            TabEditorModes.ItemSize = new Size((TabEditorModes.Width - 80) / TabEditorModes.TabPages.Count,
-                TabEditorModes.ItemSize.Height);
+            int tabPadding = ThemeManager.ScaleDpi(80, this);
+            int tabHeight = ThemeManager.ScaleDpi(28, this);
+            int tabWidth = Math.Max(80, (TabEditorModes.Width - tabPadding) / TabEditorModes.TabPages.Count);
+            TabEditorModes.ItemSize = new Size(tabWidth, tabHeight);
+            UpdateEditorModesOverlayBounds();
             ResizeWindow();
-            // PanelUtility position is now handled by Anchor
+            // PanelUtility is positioned in ResizeWindow to keep it above the status strip
+        }
+
+        private void InitializeEditorModesOverlay()
+        {
+            if (editor_modes_overlay != null)
+            {
+                return;
+            }
+
+            editor_modes_overlay = new Panel();
+            editor_modes_overlay.Name = "EditorModesOverlay";
+            editor_modes_overlay.BorderStyle = BorderStyle.FixedSingle;
+            editor_modes_overlay.Anchor = TabEditorModes.Anchor;
+
+            editor_modes_overlay_label = new Label();
+            editor_modes_overlay_label.AutoSize = true;
+            editor_modes_overlay_label.Location = new Point(ThemeManager.ScaleDpi(12, this), ThemeManager.ScaleDpi(8, this));
+            editor_modes_overlay_label.Text = "Open or create a map to enable editor controls.";
+
+            editor_modes_overlay.Controls.Add(editor_modes_overlay_label);
+            Controls.Add(editor_modes_overlay);
+            UpdateEditorModesOverlayBounds();
+        }
+
+        private void UpdateEditorModesOverlayBounds()
+        {
+            if (editor_modes_overlay == null)
+            {
+                return;
+            }
+
+            editor_modes_overlay.Location = TabEditorModes.Location;
+            editor_modes_overlay.Size = TabEditorModes.Size;
+        }
+
+        private void SetEditorModesInteractive(bool interactive)
+        {
+            // Keep controls visually enabled so dark theme text stays readable.
+            TabEditorModes.Enabled = true;
+
+            if ((editor_modes_overlay == null) || (editor_modes_overlay_label == null))
+            {
+                return;
+            }
+
+            bool dark = ThemeManager.CurrentTheme == Theme.Dark;
+            editor_modes_overlay.BackColor = dark ? Color.FromArgb(32, 32, 32) : SystemColors.Control;
+            editor_modes_overlay_label.BackColor = editor_modes_overlay.BackColor;
+            editor_modes_overlay_label.ForeColor = dark ? Color.Gainsboro : SystemColors.ControlText;
+
+            editor_modes_overlay.Visible = !interactive;
+            if (editor_modes_overlay.Visible)
+            {
+                UpdateEditorModesOverlayBounds();
+                editor_modes_overlay.BringToFront();
+            }
         }
 
         private void MapEditorForm_Deactivate(object sender, EventArgs e)
@@ -1595,7 +1660,7 @@ namespace SpellforceDataEditor.special_forms
                 undohistory_form.Close();
             }
 
-            TabEditorModes.Enabled = false;
+            SetEditorModesInteractive(false);
             InspectorClear();
 
             RenderWindow.Enabled = false;
@@ -2291,14 +2356,26 @@ namespace SpellforceDataEditor.special_forms
 
         private void ResizeWindow()
         {
+            // DPI-scaled margins
+            int margin = ThemeManager.ScaleDpi(3, this);
+            int rightPad = ThemeManager.ScaleDpi(22, this);
+            int inspectorGap = ThemeManager.ScaleDpi(6, this);
+            int utilityPad = ThemeManager.ScaleDpi(4, this);
+
             // Calculate render area based on tab control bottom and status strip top
-            int ystart = TabEditorModes.Location.Y + TabEditorModes.Height + 3;
+            int ystart = TabEditorModes.Location.Y + TabEditorModes.Height + margin;
             int yend = StatusStrip.Location.Y;
-            int w_height = Math.Max(100, yend - ystart - 3);
-            int w_width = Math.Max(100, Width - 22 - (PanelInspector.Visible ? PanelInspector.Width : 0)
+
+            // Keep camera speed controls above the status strip instead of overlapping it.
+            PanelUtility.Location = new Point(
+                ClientSize.Width - PanelUtility.Width - utilityPad,
+                Math.Max(0, yend - PanelUtility.Height - utilityPad));
+
+            int w_height = Math.Max(100, yend - ystart - margin);
+            int w_width = Math.Max(100, Width - rightPad - (PanelInspector.Visible ? PanelInspector.Width : 0)
                                         - (PanelObjectSelector.Visible ? PanelObjectSelector.Width : 0));
             int xstart = (PanelObjectSelector.Visible
-                ? PanelObjectSelector.Location.X + PanelObjectSelector.Width + 3
+                ? PanelObjectSelector.Location.X + PanelObjectSelector.Width + margin
                 : 0);
 
             // Update PanelObjectSelector position and size (anchoring handles height, but we need to set Y)
@@ -2316,7 +2393,7 @@ namespace SpellforceDataEditor.special_forms
 
             // Update PanelInspector position (anchoring handles height)
             PanelInspector.Location = new Point(
-                6 + RenderWindow.Width + (PanelObjectSelector.Visible ? PanelObjectSelector.Width : 0),
+                inspectorGap + RenderWindow.Width + (PanelObjectSelector.Visible ? PanelObjectSelector.Width : 0),
                 ystart);
             PanelInspector.Height = w_height;
 
@@ -2722,71 +2799,14 @@ namespace SpellforceDataEditor.special_forms
 
         private void InitEditorMode()
         {
-            TabEditorModes.Enabled = true;
+            SetEditorModesInteractive(true);
             TabEditorModes.SelectedIndex = -1;
             TabEditorModes.SelectedIndex = 0;
         }
 
-        private void TabEditorModes_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            var tabControl = sender as TabControl;
-            if (tabControl == null)
-            {
-                return;
-            }
-
-            if ((e.Index < 0) || (e.Index >= tabControl.TabPages.Count))
-            {
-                return;
-            }
-
-            var page = tabControl.TabPages[e.Index];
-
-            bool selected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
-            bool dark = ThemeManager.CurrentTheme == Theme.Dark;
-
-            Color backColor;
-            Color foreColor;
-            Color borderColor;
-
-            if (dark)
-            {
-                backColor = selected ? Color.FromArgb(45, 45, 45) : Color.FromArgb(32, 32, 32);
-                foreColor = Color.Gainsboro;
-                borderColor = Color.FromArgb(70, 70, 70);
-            }
-            else
-            {
-                backColor = selected ? SystemColors.ControlLightLight : SystemColors.Control;
-                foreColor = SystemColors.ControlText;
-                borderColor = SystemColors.ControlDark;
-            }
-
-            using (var backBrush = new SolidBrush(backColor))
-            {
-                e.Graphics.FillRectangle(backBrush, e.Bounds);
-            }
-
-            TextRenderer.DrawText(
-                e.Graphics,
-                page.Text,
-                tabControl.Font,
-                e.Bounds,
-                foreColor,
-                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
-
-            using (var borderPen = new Pen(borderColor))
-            {
-                var rect = e.Bounds;
-                rect.Width -= 1;
-                rect.Height -= 1;
-                e.Graphics.DrawRectangle(borderPen, rect);
-            }
-        }
-
         private void TabEditorModes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (TabEditorModes.SelectedIndex == -1)
+            if ((TabEditorModes.SelectedIndex == -1) || (map == null) || !ready)
             {
                 return;
             }

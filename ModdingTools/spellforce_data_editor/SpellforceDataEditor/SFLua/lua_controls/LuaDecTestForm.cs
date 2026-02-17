@@ -11,6 +11,7 @@ namespace SpellforceDataEditor.SFLua.lua_controls
         public LuaDecompilerForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
 

@@ -246,6 +246,7 @@ namespace SpellforceDataEditor.special_forms
         public SFAssetManagerForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         // on form open

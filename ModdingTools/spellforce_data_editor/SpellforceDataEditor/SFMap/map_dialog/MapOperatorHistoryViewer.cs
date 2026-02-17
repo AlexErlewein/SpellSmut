@@ -9,6 +9,7 @@ namespace SpellforceDataEditor.SFMap.map_dialog
         public MapOperatorHistoryViewer()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
 
             var queue = MainForm.mapedittool.op_queue;
             if (queue == null)

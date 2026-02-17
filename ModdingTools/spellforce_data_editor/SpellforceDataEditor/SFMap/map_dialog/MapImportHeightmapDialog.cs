@@ -53,6 +53,7 @@ namespace SpellforceDataEditor.SFMap.map_dialog
         public MapImportHeightmapDialog()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         private void MapImportHeightmapDialog_Load(object sender, EventArgs e)

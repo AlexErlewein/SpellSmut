@@ -7,6 +7,7 @@ namespace SpellforceDataEditor.SFLua.lua_controls
         public LuaDialogBuilderForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
     }
 }

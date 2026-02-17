@@ -8,6 +8,7 @@ namespace SpellforceDataEditor.special_forms
         public SQLModifierForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         private void ButtonRtsCoopSpawnGroups_Click(object sender, EventArgs e)

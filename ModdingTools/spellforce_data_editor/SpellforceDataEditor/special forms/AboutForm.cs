@@ -12,6 +12,7 @@ namespace SpellforceDataEditor.special_forms
         public AboutForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
 
             link_wiki = new LinkLabel();
             link_wiki.Text = "SpellForce Editor manual";

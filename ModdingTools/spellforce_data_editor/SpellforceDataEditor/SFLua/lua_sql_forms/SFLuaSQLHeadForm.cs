@@ -9,6 +9,7 @@ namespace SpellforceDataEditor.SFLua.lua_sql_forms
         public SFLuaSQLHeadForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         private void SFLuaSQLHeadForm_Load(object sender, EventArgs e)

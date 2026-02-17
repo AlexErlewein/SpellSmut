@@ -29,6 +29,7 @@ namespace SpellforceDataEditor.SFMap.map_dialog
         public MapTextEditorDialog()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         private void MapTextEditorDialog_Load(object sender, EventArgs e)

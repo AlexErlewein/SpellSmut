@@ -12,6 +12,7 @@ namespace SpellforceDataEditor.SFMap.map_dialog
         public MapPromptNewMap()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

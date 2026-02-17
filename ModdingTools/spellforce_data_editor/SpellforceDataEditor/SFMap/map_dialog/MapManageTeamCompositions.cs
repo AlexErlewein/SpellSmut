@@ -13,6 +13,7 @@ namespace SpellforceDataEditor.SFMap.map_dialog
         public MapManageTeamCompositions()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         private void MapManageTeamCompositions_Load(object sender, EventArgs e)

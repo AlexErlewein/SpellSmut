@@ -15,6 +15,7 @@ namespace SpellforceDataEditor.SFLua.lua_sql_forms
         public SFLuaSQLItemForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         private void SFLuaSQLItemForm_Load(object sender, EventArgs e)

@@ -13,12 +13,14 @@ namespace SpellforceDataEditor.SFMap.map_dialog
         public MapModifyTextureSet()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         public MapModifyTextureSet(SFEngine.SFMap.SFMap m)
         {
             map = m;
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
             LoadTextures();
         }
 

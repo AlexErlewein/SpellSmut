@@ -14,6 +14,7 @@ namespace SpellforceDataEditor.SFMap.map_dialog
         public MapMinimapSettingsForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
         private void MapMinimapSettingsForm_Shown(object sender, EventArgs e)
         {

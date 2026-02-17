@@ -11,6 +11,7 @@ namespace SpellforceDataEditor.special_forms.utility_forms
         public GetStringForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         public void SetDescription(string title, string label, string default_str)

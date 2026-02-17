@@ -14,6 +14,7 @@ namespace SpellforceDataEditor.SFMap.map_dialog
         public MapSelectTile()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         public MapSelectTile(SFEngine.SFMap.SFMap m, MapTileSelectType t)
@@ -21,6 +22,7 @@ namespace SpellforceDataEditor.SFMap.map_dialog
             map = m;
             SelectionType = t;
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
 
             if (SelectionType == MapTileSelectType.BASE)
             {

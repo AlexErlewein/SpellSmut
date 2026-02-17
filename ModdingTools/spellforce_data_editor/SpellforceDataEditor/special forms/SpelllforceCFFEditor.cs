@@ -55,6 +55,7 @@ namespace SpellforceDataEditor.special_forms
         public SpelllforceCFFEditor()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
 
             if ((MainForm.mapedittool != null) && (MainForm.mapedittool.ready))    // gamedata is already loaded by this point
             {

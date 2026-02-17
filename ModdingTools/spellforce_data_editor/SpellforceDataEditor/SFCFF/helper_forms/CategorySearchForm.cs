@@ -20,6 +20,7 @@ namespace SpellforceDataEditor.SFCFF.helper_forms
         public CategorySearchForm()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
         }
 
         public void Clear()

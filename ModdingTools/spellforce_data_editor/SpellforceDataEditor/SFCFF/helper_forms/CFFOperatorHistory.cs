@@ -11,6 +11,7 @@ namespace SpellforceDataEditor.SFCFF.helper_forms
         public CFFOperatorHistory()
         {
             InitializeComponent();
+            ThemeManager.ApplyTheme(this);
 
             var queue = MainForm.data.urq;
             if (queue == null)
