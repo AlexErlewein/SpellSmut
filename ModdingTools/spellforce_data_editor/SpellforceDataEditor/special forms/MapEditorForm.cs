@@ -2386,7 +2386,25 @@ namespace SpellforceDataEditor.special_forms
             // Update PanelObjectSelector position and size (anchoring handles height, but we need to set Y)
             PanelObjectSelector.Location = new Point(PanelObjectSelector.Location.X, ystart);
             PanelObjectSelector.Height = w_height;
-            // TreeEntities and TreeEntitytFilter now use anchoring, no manual positioning needed
+
+            if (PanelObjectSelector.Visible)
+            {
+                int innerPad = ThemeManager.ScaleDpi(7, this);
+                int filterHeight = Math.Max(ThemeManager.ScaleDpi(23, this), TreeEntitytFilter.Height);
+                int innerWidth = Math.Max(10, PanelObjectSelector.ClientSize.Width - (innerPad * 2));
+                int filterY = Math.Max(innerPad, PanelObjectSelector.ClientSize.Height - innerPad - filterHeight);
+
+                TreeEntitytFilter.Location = new Point(innerPad, filterY);
+                TreeEntitytFilter.Width = innerWidth;
+                TreeEntitytFilter.Height = filterHeight;
+
+                int treeTop = innerPad;
+                int treeBottom = Math.Max(treeTop, filterY - innerPad);
+                int treeHeight = Math.Max(10, treeBottom - treeTop);
+
+                TreeEntities.Location = new Point(innerPad, treeTop);
+                TreeEntities.Size = new Size(innerWidth, treeHeight);
+            }
 
             if (!initialized_view)
             {
@@ -2395,6 +2413,7 @@ namespace SpellforceDataEditor.special_forms
 
             RenderWindow.Location = new Point(xstart, ystart);
             RenderWindow.Size = new Size(w_width, w_height);
+            RenderWindow.SendToBack();
 
             // Update PanelInspector position (anchoring handles height)
             PanelInspector.Location = new Point(
@@ -2771,15 +2790,19 @@ namespace SpellforceDataEditor.special_forms
 
         private void ShowObjectSelector()
         {
-            bool wasVisible = PanelObjectSelector.Visible;
             PanelObjectSelector.Visible = true;
             ThemeManager.ApplyTheme(PanelObjectSelector);
+            ResizeWindow();
 
-            // Ensure render/inspector layout is recalculated whenever selector is shown.
-            if (!wasVisible)
-            {
-                ResizeWindow();
-            }
+            PanelObjectSelector.BorderStyle = BorderStyle.FixedSingle;
+            TreeEntities.BorderStyle = BorderStyle.FixedSingle;
+            TreeEntitytFilter.BorderStyle = BorderStyle.FixedSingle;
+            TreeEntitytFilter.PlaceholderText = "Search...";
+
+            TreeEntities.Visible = true;
+            TreeEntitytFilter.Visible = true;
+            TreeEntities.BringToFront();
+            TreeEntitytFilter.BringToFront();
 
             // Keep selector above the GL render control.
             PanelObjectSelector.BringToFront();
@@ -3615,8 +3638,6 @@ namespace SpellforceDataEditor.special_forms
             {
                 RadioEntityModeUnit.Checked = true;
             }
-
-            // Invoke the appropriate handler directly so the selector/tree are always set up
             if (RadioEntityModeUnit.Checked)
             {
                 RadioEntityModeUnit_CheckedChanged(RadioEntityModeUnit, EventArgs.Empty);
@@ -4035,6 +4056,13 @@ namespace SpellforceDataEditor.special_forms
             if ((TreeEntities.Nodes.Count == 0) && (!string.IsNullOrWhiteSpace(TreeEntitytFilter.Text)))
             {
                 GenerateUnitTree();
+            }
+
+            if (TreeEntities.Nodes.Count == 0)
+            {
+                ForceSetStatusText(
+                    $"No unit entries loaded (races={SFCategoryManager.gamedata.c2022.GetNumOfItems()}, units={SFCategoryManager.gamedata.c2024.GetNumOfItems()}).",
+                    Color.DarkOrange);
             }
 
             selected_editor = new MapUnitEditor()
