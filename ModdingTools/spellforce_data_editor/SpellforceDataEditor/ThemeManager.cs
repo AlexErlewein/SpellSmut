@@ -199,7 +199,7 @@ namespace SpellforceDataEditor
         {
             // Containers
             if (control is Form || control is Panel || control is GroupBox ||
-                control is TabControl || control is TabPage || control is SplitContainer)
+                control is TabControl || control is TabPage || control is SplitContainer || control is UserControl)
             {
                 control.BackColor = Color.FromArgb(32, 32, 32);
                 control.ForeColor = Color.Gainsboro;
@@ -317,7 +317,7 @@ namespace SpellforceDataEditor
         {
             // Containers
             if (control is Form || control is Panel || control is GroupBox ||
-                control is TabControl || control is TabPage || control is SplitContainer)
+                control is TabControl || control is TabPage || control is SplitContainer || control is UserControl)
             {
                 control.BackColor = SystemColors.Control;
                 control.ForeColor = SystemColors.ControlText;
