@@ -1143,14 +1143,18 @@ namespace SpellforceDataEditor.special_forms
                 return;
             }
 
+            int pad = ThemeManager.ScaleDpi(12, this);
+
             editor_modes_overlay = new Panel();
             editor_modes_overlay.Name = "EditorModesOverlay";
             editor_modes_overlay.BorderStyle = BorderStyle.FixedSingle;
             editor_modes_overlay.Anchor = TabEditorModes.Anchor;
+            editor_modes_overlay.Padding = new Padding(pad);
 
             editor_modes_overlay_label = new Label();
-            editor_modes_overlay_label.AutoSize = true;
-            editor_modes_overlay_label.Location = new Point(ThemeManager.ScaleDpi(12, this), ThemeManager.ScaleDpi(8, this));
+            editor_modes_overlay_label.AutoSize = false;
+            editor_modes_overlay_label.Dock = DockStyle.Fill;
+            editor_modes_overlay_label.TextAlign = ContentAlignment.MiddleCenter;
             editor_modes_overlay_label.Text = "Open or create a map to enable editor controls.";
 
             editor_modes_overlay.Controls.Add(editor_modes_overlay_label);
@@ -1165,8 +1169,11 @@ namespace SpellforceDataEditor.special_forms
                 return;
             }
 
-            editor_modes_overlay.Location = TabEditorModes.Location;
-            editor_modes_overlay.Size = TabEditorModes.Size;
+            Rectangle content = TabEditorModes.DisplayRectangle;
+            editor_modes_overlay.Location = new Point(
+                TabEditorModes.Location.X + content.X,
+                TabEditorModes.Location.Y + content.Y);
+            editor_modes_overlay.Size = content.Size;
         }
 
         private void SetEditorModesInteractive(bool interactive)
@@ -2929,7 +2936,18 @@ namespace SpellforceDataEditor.special_forms
         {
             map.heightmap.overlay_flags &= SFMapHeightMapFlag.EDITOR_MASK; // only mask visible
             PanelBrushShape.Parent = TabEditorModes.TabPages[0];
-            PanelBrushShape.Location = new Point(219, 3);
+
+            int pad = ThemeManager.ScaleDpi(3, this);
+            int y = ThemeManager.ScaleDpi(3, this);
+
+            panel1.Location = new Point(pad, y);
+            PanelBrushShape.Location = new Point(panel1.Location.X + panel1.Width + pad, y);
+            PanelStrength.Location = new Point(PanelBrushShape.Location.X, PanelBrushShape.Location.Y + PanelBrushShape.Height + pad);
+            PanelTerrainSettings.Location = new Point(PanelBrushShape.Location.X + PanelBrushShape.Width + pad, y);
+            PanelFlags.Location = new Point(PanelTerrainSettings.Location.X + PanelTerrainSettings.Width + pad, y);
+            PanelWeather.Location = new Point(PanelFlags.Location.X + PanelFlags.Width + pad, y);
+            PanelAtmoPreview.Location = new Point(PanelWeather.Location.X + PanelWeather.Width + pad, y);
+            PanelLakeMode.Location = PanelTerrainSettings.Location;
             update_render = true;
 
             if (RadioHMap.Checked)
@@ -3546,7 +3564,13 @@ namespace SpellforceDataEditor.special_forms
         {
             PanelBrushShape.Parent = TabEditorModes.TabPages[1];
             PanelBrushShape.Visible = true;
-            PanelBrushShape.Location = new Point(124, 3);
+
+            int pad = ThemeManager.ScaleDpi(3, this);
+            int y = ThemeManager.ScaleDpi(3, this);
+            ButtonModifyTextureSet.Location = new Point(pad, y);
+            int x = ButtonModifyTextureSet.Location.X + ButtonModifyTextureSet.Width + pad;
+            PanelBrushShape.Location = new Point(x, y);
+            PanelTileType.Location = new Point(PanelBrushShape.Location.X + PanelBrushShape.Width + pad, y);
 
             InspectorSet(new SFMap.map_controls.MapTerrainTextureInspector());
             ((SFMap.map_controls.MapTerrainTextureInspector)selected_inspector).SetInspectorType(GetTileType());
@@ -3618,14 +3642,86 @@ namespace SpellforceDataEditor.special_forms
 
         // ENTITIES
 
+        private void LayoutEntitiesTopRow()
+        {
+            int pad = ThemeManager.ScaleDpi(3, this);
+            int y = ThemeManager.ScaleDpi(3, this);
+
+            int x = pad;
+
+            panel5.Location = new Point(x, y);
+            x += panel5.Width + pad;
+
+            if (PanelEntityPlacementSelect.Visible)
+            {
+                PanelEntityPlacementSelect.Location = new Point(x, y);
+                x += PanelEntityPlacementSelect.Width + pad;
+            }
+
+            if (EditCoopCampTypes.Visible)
+            {
+                EditCoopCampTypes.Location = new Point(x, y);
+                x += EditCoopCampTypes.Width + pad;
+            }
+
+            if (PanelMonumentType.Visible)
+            {
+                PanelMonumentType.Location = new Point(x, y);
+                x += PanelMonumentType.Width + pad;
+            }
+
+            if (QuickSelect.Visible)
+            {
+                QuickSelect.Location = new Point(x, y);
+                int maxWidth = TabPageEntities.ClientSize.Width - x - pad;
+                if (maxWidth > 0)
+                {
+                    QuickSelect.Width = maxWidth;
+                }
+                x += QuickSelect.Width + pad;
+            }
+
+            int rowHeight = panel5.Height;
+            if (PanelEntityPlacementSelect.Visible)
+            {
+                rowHeight = Math.Max(rowHeight, PanelEntityPlacementSelect.Height);
+            }
+            if (EditCoopCampTypes.Visible)
+            {
+                rowHeight = Math.Max(rowHeight, EditCoopCampTypes.Height);
+            }
+            if (PanelMonumentType.Visible)
+            {
+                rowHeight = Math.Max(rowHeight, PanelMonumentType.Height);
+            }
+            if (QuickSelect.Visible)
+            {
+                rowHeight = Math.Max(rowHeight, QuickSelect.Height);
+            }
+
+            Control anchor = panel5;
+            if (QuickSelect.Visible)
+            {
+                anchor = QuickSelect;
+            }
+            else if (PanelMonumentType.Visible)
+            {
+                anchor = PanelMonumentType;
+            }
+            else if (EditCoopCampTypes.Visible)
+            {
+                anchor = EditCoopCampTypes;
+            }
+            else if (PanelEntityPlacementSelect.Visible)
+            {
+                anchor = PanelEntityPlacementSelect;
+            }
+
+            EntityHidePreview.Location = new Point(anchor.Location.X, y + rowHeight - EntityHidePreview.Height);
+        }
+
         private void ReselectEntityMode()
         {
-            EditCoopCampTypes.Location = PanelEntityPlacementSelect.Location;
-            PanelMonumentType.Location = PanelEntityPlacementSelect.Location;
-            EntityHidePreview.Location = new Point(567, 114);
-            QuickSelect.Location =
-                new Point(PanelEntityPlacementSelect.Location.X + PanelEntityPlacementSelect.Width + 6,
-                    PanelEntityPlacementSelect.Location.Y);
             QuickSelect.QsRef = null;
             InspectorSelect(null);
 
@@ -3676,6 +3772,7 @@ namespace SpellforceDataEditor.special_forms
             }
 
             QuickSelect.UpdateIDs();
+            LayoutEntitiesTopRow();
         }
 
         // quick select utilities
@@ -4079,6 +4176,7 @@ namespace SpellforceDataEditor.special_forms
             QuickSelect.QsRef = qs_unit;
 
             EntityID.Text = "0";
+            LayoutEntitiesTopRow();
             ConfirmPlacementEntity();
         }
 
@@ -4281,6 +4379,7 @@ namespace SpellforceDataEditor.special_forms
             EntityID.Text = "0";
             map.heightmap.overlay_flags =
                 SFMapHeightMapFlag.ENTITY_BUILDING_COLLISION | SFMapHeightMapFlag.ENTITY_BUILDING;
+            LayoutEntitiesTopRow();
             ConfirmPlacementEntity();
         }
 
@@ -4559,6 +4658,7 @@ namespace SpellforceDataEditor.special_forms
             map.heightmap.overlay_flags = SFMapHeightMapFlag.ENTITY_OBJECT_COLLISION
                                           | SFMapHeightMapFlag.TERRAIN_MOVEMENT
                                           | SFMapHeightMapFlag.FLAG_MOVEMENT;
+            LayoutEntitiesTopRow();
             ConfirmPlacementEntity();
         }
 
@@ -4585,6 +4685,7 @@ namespace SpellforceDataEditor.special_forms
             PanelMonumentType.Visible = false;
             PanelObjectAngle.Visible = false;
 
+            LayoutEntitiesTopRow();
             ConfirmPlacementEntity();
         }
 
@@ -4617,6 +4718,7 @@ namespace SpellforceDataEditor.special_forms
             PanelMonumentType.Visible = false;
             PanelObjectAngle.Visible = false;
 
+            LayoutEntitiesTopRow();
             ConfirmPlacementEntity();
         }
 
@@ -4644,6 +4746,7 @@ namespace SpellforceDataEditor.special_forms
             PanelMonumentType.Visible = false;
             PanelObjectAngle.Visible = false;
 
+            LayoutEntitiesTopRow();
             ConfirmPlacementEntity();
         }
 
@@ -4706,6 +4809,7 @@ namespace SpellforceDataEditor.special_forms
             PanelMonumentType.Visible = true;
             PanelObjectAngle.Visible = false;
 
+            LayoutEntitiesTopRow();
             ConfirmPlacementEntity();
         }
 
