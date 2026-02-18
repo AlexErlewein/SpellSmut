@@ -57,7 +57,9 @@ namespace SpellforceDataEditor
         {
             foreach (string tn in src.Keys)
             {
-                dst.Add(src[tn]);
+                // Clone nodes before adding so cached source nodes stay detached from UI collections.
+                // This avoids stale/empty trees when TreeView clears or mutates attached nodes.
+                dst.Add((TreeNode)src[tn].Clone());
             }
         }
     }

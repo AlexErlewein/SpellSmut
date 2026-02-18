@@ -24,6 +24,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
         {
             ReloadList();
             ResizeList();
+            SetInspectorPanelEditable(PanelProperties, false);
         }
 
         private void ReloadList()
@@ -72,7 +73,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
         {
             if (ListObjects.SelectedIndex == index)
             {
-                PanelProperties.Enabled = false;
+                SetInspectorPanelEditable(PanelProperties, false);
             }
 
             ListObjects.Items.RemoveAt(index);
@@ -103,7 +104,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
             if (o == null)
             {
                 selection_helper.CancelSelection();
-                PanelProperties.Enabled = false;
+                SetInspectorPanelEditable(PanelProperties, false);
             }
             else
             {
@@ -130,7 +131,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
                 return;
             }
 
-            PanelProperties.Enabled = true;
+            SetInspectorPanelEditable(PanelProperties, true);
             SFMapObject obj = map.object_manager.objects[ListObjects.SelectedIndex];
             ObjectID.Text = obj.game_id.ToString();
             NPCID.Text = obj.npc_id.ToString();

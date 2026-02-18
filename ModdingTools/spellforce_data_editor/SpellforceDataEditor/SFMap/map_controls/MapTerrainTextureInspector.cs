@@ -116,13 +116,13 @@ namespace SpellforceDataEditor.SFMap.map_controls
             if (ID == 0)
             {
                 ((MapEdit.MapTerrainTextureEditor)MainForm.mapedittool.selected_editor).SelectedTile = 0;
-                PanelTileProperties.Enabled = false;
-                PanelTileMixer.Enabled = false;
-                PanelButtons.Enabled = false;
+                SetInspectorPanelEditable(PanelTileProperties, false);
+                SetInspectorPanelEditable(PanelTileMixer, false);
+                SetInspectorPanelEditable(PanelButtons, false);
                 return;
             }
             ((MapEdit.MapTerrainTextureEditor)MainForm.mapedittool.selected_editor).SelectedTile = ID + 223;
-            PanelTileProperties.Enabled = true;
+            SetInspectorPanelEditable(PanelTileProperties, true);
             TileBlocksMovement.Checked = map.heightmap.texture_manager.texture_tiledata[ID + 223].blocks_movement;
             TileBlocksVision.Checked = map.heightmap.texture_manager.texture_tiledata[ID + 223].blocks_vision;
         }
@@ -130,8 +130,8 @@ namespace SpellforceDataEditor.SFMap.map_controls
         public void OnCustomTexturePress(int ID)
         {
             ((MapEdit.MapTerrainTextureEditor)MainForm.mapedittool.selected_editor).SelectedTile = ID;
-            PanelTileProperties.Enabled = true;
-            PanelTileMixer.Enabled = true;
+            SetInspectorPanelEditable(PanelTileProperties, true);
+            SetInspectorPanelEditable(PanelTileMixer, true);
             TileBlocksMovement.Checked = map.heightmap.texture_manager.texture_tiledata[ID].blocks_movement;
             TileBlocksVision.Checked = map.heightmap.texture_manager.texture_tiledata[ID].blocks_vision;
 
@@ -155,7 +155,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
         {
             PanelTileMixer.Visible = false;
             PanelButtons.Visible = false;
-            PanelTiles.Size = new Size(280, 379);
+            PanelTiles.Size = new Size(430, 520);
             PanelTiles.Controls.Clear();
 
             for (int i = 1; i < 32; i++)
@@ -165,18 +165,18 @@ namespace SpellforceDataEditor.SFMap.map_controls
                 mttc.delegate_onpress = OnBaseTexturePress;
                 mttc.SetImage(map.heightmap.texture_manager.texture_tile_image[i], i);
                 PanelTiles.Controls.Add(mttc);
-                mttc.ResizeWidth(46);
-                mttc.Location = new Point(((i - 1) % 6) * 46, ((i - 1) / 6) * 62);
+                mttc.ResizeWidth(70);
+                mttc.Location = new Point(((i - 1) % 6) * 70, ((i - 1) / 6) * 90);
             }
 
-            PanelTileProperties.Enabled = false;
+            SetInspectorPanelEditable(PanelTileProperties, false);
         }
 
         public void LoadCustomTextures()
         {
             PanelTileMixer.Visible = true;
             PanelButtons.Visible = true;
-            PanelTiles.Size = new Size(280, 277);
+            PanelTiles.Size = new Size(430, 520);
             PanelTiles.Controls.Clear();
             int cur_i = 0;
             for (int i = 32; i < 224; i++)
@@ -188,14 +188,14 @@ namespace SpellforceDataEditor.SFMap.map_controls
                     mttc.delegate_onpress = OnCustomTexturePress;
                     mttc.SetImage(map.heightmap.texture_manager.texture_tile_image[i], i);
                     PanelTiles.Controls.Add(mttc);
-                    mttc.ResizeWidth(46);
-                    mttc.Location = new Point((cur_i % 6) * 46, (cur_i / 6) * 62);
+                    mttc.ResizeWidth(70);
+                    mttc.Location = new Point((cur_i % 6) * 70, (cur_i / 6) * 90);
                     cur_i += 1;
                 }
             }
 
-            PanelTileMixer.Enabled = false;
-            PanelTileProperties.Enabled = false;
+            SetInspectorPanelEditable(PanelTileMixer, false);
+            SetInspectorPanelEditable(PanelTileProperties, false);
         }
 
         public void SetInspectorType(TerrainTileType type)

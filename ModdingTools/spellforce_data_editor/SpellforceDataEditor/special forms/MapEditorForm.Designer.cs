@@ -454,8 +454,6 @@
             // 
             // PanelInspector
             // 
-            PanelInspector.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom |
-                                    System.Windows.Forms.AnchorStyles.Right;
             PanelInspector.Location = new System.Drawing.Point(959, 167);
             PanelInspector.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             PanelInspector.Name = "PanelInspector";
@@ -1755,7 +1753,7 @@
             TabEditorModes.Name = "TabEditorModes";
             TabEditorModes.Padding = new System.Drawing.Point(3, 3);
             TabEditorModes.SelectedIndex = 0;
-            TabEditorModes.Size = new System.Drawing.Size(1283, 156);
+            TabEditorModes.Size = new System.Drawing.Size(1283, 120);
             TabEditorModes.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             TabEditorModes.TabIndex = 7;
             TabEditorModes.SelectedIndexChanged += TabEditorModes_SelectedIndexChanged;
@@ -2466,9 +2464,6 @@
             // 
             // PanelObjectSelector
             // 
-            PanelObjectSelector.Anchor = System.Windows.Forms.AnchorStyles.Top |
-                                         System.Windows.Forms.AnchorStyles.Bottom |
-                                         System.Windows.Forms.AnchorStyles.Left;
             PanelObjectSelector.Controls.Add(TreeEntitytFilter);
             PanelObjectSelector.Controls.Add(TreeEntities);
             PanelObjectSelector.Location = new System.Drawing.Point(5, 167);

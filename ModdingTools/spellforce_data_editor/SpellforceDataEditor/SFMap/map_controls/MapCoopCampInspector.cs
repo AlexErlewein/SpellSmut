@@ -18,6 +18,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
         {
             ReloadList();
             ResizeList();
+            SetInspectorPanelEditable(PanelProperties, false);
         }
 
         private void ReloadList()
@@ -66,7 +67,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
         {
             if (ListCoopCamps.SelectedIndex == index)
             {
-                PanelProperties.Enabled = false;
+                SetInspectorPanelEditable(PanelProperties, false);
             }
 
             ListCoopCamps.Items.RemoveAt(index);
@@ -97,7 +98,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
             if (o == null)
             {
                 selection_helper.CancelSelection();
-                PanelProperties.Enabled = false;
+                SetInspectorPanelEditable(PanelProperties, false);
             }
             else
             {
@@ -112,7 +113,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
                 return;
             }
 
-            PanelProperties.Enabled = true;
+            SetInspectorPanelEditable(PanelProperties, true);
             SFMapCoopAISpawn spawn = map.metadata.coop_spawns[ListCoopCamps.SelectedIndex];
             CampID.Text = spawn.spawn_id.ToString();
             PosX.Text = spawn.spawn_obj.grid_position.x.ToString();

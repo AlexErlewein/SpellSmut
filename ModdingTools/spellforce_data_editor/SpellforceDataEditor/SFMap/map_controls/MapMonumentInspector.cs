@@ -22,6 +22,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
         {
             ReloadList();
             ResizeList();
+            SetInspectorPanelEditable(PanelProperties, false);
         }
 
         private void ReloadList()
@@ -73,7 +74,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
         {
             if (ListMonuments.SelectedIndex == index)
             {
-                PanelProperties.Enabled = false;
+                SetInspectorPanelEditable(PanelProperties, false);
             }
 
             ListMonuments.Items.RemoveAt(index);
@@ -105,7 +106,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
             if (o == null)
             {
                 selection_helper.CancelSelection();
-                PanelProperties.Enabled = false;
+                SetInspectorPanelEditable(PanelProperties, false);
             }
             else
             {
@@ -120,7 +121,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
                 return;
             }
 
-            PanelProperties.Enabled = true;
+            SetInspectorPanelEditable(PanelProperties, true);
             SFMapInteractiveObject monument = map.int_object_manager.int_objects[map.int_object_manager.monuments_index[ListMonuments.SelectedIndex]];
             PosX.Text = monument.grid_position.x.ToString();
             PosY.Text = monument.grid_position.y.ToString();

@@ -22,6 +22,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
         {
             ReloadList();
             ResizeList();
+            SetInspectorPanelEditable(PanelProperties, false);
         }
 
         private void ReloadList()
@@ -69,7 +70,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
         {
             if (ListPortals.SelectedIndex == index)
             {
-                PanelProperties.Enabled = false;
+                SetInspectorPanelEditable(PanelProperties, false);
             }
 
             ListPortals.Items.RemoveAt(index);
@@ -102,7 +103,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
             if (o == null)
             {
                 selection_helper.CancelSelection();
-                PanelProperties.Enabled = false;
+                SetInspectorPanelEditable(PanelProperties, false);
             }
             else
             {
@@ -117,7 +118,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
                 return;
             }
 
-            PanelProperties.Enabled = true;
+            SetInspectorPanelEditable(PanelProperties, true);
             SFMapPortal portal = map.portal_manager.portals[ListPortals.SelectedIndex];
             PortalID.Text = portal.game_id.ToString();
             PosX.Text = portal.grid_position.x.ToString();

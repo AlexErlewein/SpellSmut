@@ -65,7 +65,8 @@ namespace SFEngine
 
             try
             {
-                string[] settings = File.ReadAllLines("config.txt");
+                string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.txt");
+                string[] settings = File.ReadAllLines(configPath);
                 bool ignore_rest = false;
                 foreach (string s in settings)
                 {
@@ -313,7 +314,8 @@ namespace SFEngine
 
             try
             {
-                string[] settings = File.ReadAllLines("config.txt");
+                string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.txt");
+                string[] settings = File.ReadAllLines(configPath);
                 List<string> new_settings = new List<string>();
                 foreach (string s in settings)
                 {
@@ -456,7 +458,7 @@ namespace SFEngine
                     string s2 = string.Join(" ", words);
                     new_settings.Add(s2);
                 }
-                File.WriteAllLines("config.txt", new_settings.ToArray());
+                File.WriteAllLines(configPath, new_settings.ToArray());
             }
             catch (Exception)
             {

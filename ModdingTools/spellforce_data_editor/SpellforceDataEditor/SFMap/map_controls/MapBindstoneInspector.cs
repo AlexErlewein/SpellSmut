@@ -22,6 +22,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
         {
             ReloadList();
             ResizeList();
+            SetInspectorPanelEditable(PanelProperties, false);
         }
 
         private void ReloadList()
@@ -96,7 +97,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
         {
             if (ListBindstones.SelectedIndex == index)
             {
-                PanelProperties.Enabled = false;
+                SetInspectorPanelEditable(PanelProperties, false);
             }
 
             ListBindstones.Items.RemoveAt(index);
@@ -128,7 +129,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
             if (o == null)
             {
                 selection_helper.CancelSelection();
-                PanelProperties.Enabled = false;
+                SetInspectorPanelEditable(PanelProperties, false);
             }
             else
             {
@@ -143,7 +144,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
                 return;
             }
 
-            PanelProperties.Enabled = true;
+            SetInspectorPanelEditable(PanelProperties, true);
             SFMapInteractiveObject bindstone = map.int_object_manager.int_objects[map.int_object_manager.bindstones_index[ListBindstones.SelectedIndex]];
             int player = GetPlayerIndexByBindstoneIndex(ListBindstones.SelectedIndex);
             if (player == -1)

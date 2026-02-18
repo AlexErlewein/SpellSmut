@@ -1,6 +1,7 @@
 ﻿using SFEngine.SFCFF;
 using SFEngine.SFLua;
 using SFEngine.SFMap;
+using SpellforceDataEditor; // for ThemeManager
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -21,6 +22,30 @@ namespace SpellforceDataEditor.SFMap.map_controls
         {
             ReloadList();
             ResizeList();
+            SetInspectorPanelEditable(PanelProperties, false);
+
+            // Ensure readable text colors in dark theme, even if designer defaults were black.
+            if (ThemeManager.CurrentTheme == Theme.Dark)
+            {
+                ApplyDarkTextColors();
+            }
+        }
+
+        private void ApplyDarkTextColors()
+        {
+            Color textColor = Color.Gainsboro;
+
+            UnitID.ForeColor = textColor;
+            NPCID.ForeColor = textColor;
+            PosX.ForeColor = textColor;
+            PosY.ForeColor = textColor;
+            Flags.ForeColor = textColor;
+            Unknown1.ForeColor = textColor;
+            Group.ForeColor = textColor;
+            Unknown2.ForeColor = textColor;
+
+            ListUnits.ForeColor = textColor;
+            SearchUnitText.ForeColor = textColor;
         }
 
         private void ReloadList()
@@ -69,7 +94,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
         {
             if (ListUnits.SelectedIndex == index)
             {
-                PanelProperties.Enabled = false;
+                SetInspectorPanelEditable(PanelProperties, false);
             }
 
             ListUnits.Items.RemoveAt(index);
@@ -100,7 +125,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
             if (o == null)
             {
                 selection_helper.CancelSelection();
-                PanelProperties.Enabled = false;
+                SetInspectorPanelEditable(PanelProperties, false);
             }
             else
             {
@@ -127,7 +152,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
                 return;
             }
 
-            PanelProperties.Enabled = true;
+            SetInspectorPanelEditable(PanelProperties, true);
             SFMapUnit unit = map.unit_manager.units[ListUnits.SelectedIndex];
             UnitID.Text = unit.game_id.ToString();
             NPCID.Text = unit.npc_id.ToString();

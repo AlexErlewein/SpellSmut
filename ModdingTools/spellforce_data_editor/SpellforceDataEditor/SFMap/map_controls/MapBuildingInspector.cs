@@ -25,6 +25,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
         {
             ReloadList();
             ResizeList();
+            SetInspectorPanelEditable(PanelProperties, false);
         }
 
         private void ReloadList()
@@ -73,7 +74,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
         {
             if (ListBuildings.SelectedIndex == index)
             {
-                PanelProperties.Enabled = false;
+                SetInspectorPanelEditable(PanelProperties, false);
             }
 
             ListBuildings.Items.RemoveAt(index);
@@ -105,7 +106,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
             {
                 selection_helper.CancelSelection();
                 ((MapEdit.MapBuildingEditor)MainForm.mapedittool.selected_editor).selected_building = -1;
-                PanelProperties.Enabled = false;
+                SetInspectorPanelEditable(PanelProperties, false);
             }
             else
             {
@@ -132,7 +133,7 @@ namespace SpellforceDataEditor.SFMap.map_controls
                 return;
             } ((MapEdit.MapBuildingEditor)MainForm.mapedittool.selected_editor).selected_building = ListBuildings.SelectedIndex;
 
-            PanelProperties.Enabled = true;
+            SetInspectorPanelEditable(PanelProperties, true);
             SFMapBuilding building = map.building_manager.buildings[ListBuildings.SelectedIndex];
             BuildingID.Text = building.game_id.ToString();
             NPCID.Text = building.npc_id.ToString();

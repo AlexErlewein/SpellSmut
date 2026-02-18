@@ -1667,6 +1667,7 @@ namespace SpellforceDataEditor.special_forms
 
             TreeEntities.Nodes.Clear();
             unit_tree = null;
+            building_tree = null;
             obj_tree = null;
 
             map.Unload();
@@ -2366,17 +2367,21 @@ namespace SpellforceDataEditor.special_forms
             int ystart = TabEditorModes.Location.Y + TabEditorModes.Height + margin;
             int yend = StatusStrip.Location.Y;
 
-            // Keep camera speed controls above the status strip instead of overlapping it.
-            PanelUtility.Location = new Point(
-                ClientSize.Width - PanelUtility.Width - utilityPad,
-                Math.Max(0, yend - PanelUtility.Height - utilityPad));
-
             int w_height = Math.Max(100, yend - ystart - margin);
             int w_width = Math.Max(100, Width - rightPad - (PanelInspector.Visible ? PanelInspector.Width : 0)
                                         - (PanelObjectSelector.Visible ? PanelObjectSelector.Width : 0));
             int xstart = (PanelObjectSelector.Visible
                 ? PanelObjectSelector.Location.X + PanelObjectSelector.Width + margin
                 : 0);
+
+            // Keep camera speed controls above the status strip and inside the render area,
+            // so they do not cover inspector controls (e.g. entities search/list widgets).
+            int renderRight = xstart + w_width;
+            int utilityX = Math.Min(
+                ClientSize.Width - PanelUtility.Width - utilityPad,
+                renderRight - PanelUtility.Width - utilityPad);
+            int utilityY = Math.Max(0, yend - PanelUtility.Height - utilityPad);
+            PanelUtility.Location = new Point(Math.Max(0, utilityX), utilityY);
 
             // Update PanelObjectSelector position and size (anchoring handles height, but we need to set Y)
             PanelObjectSelector.Location = new Point(PanelObjectSelector.Location.X, ystart);
@@ -2396,6 +2401,19 @@ namespace SpellforceDataEditor.special_forms
                 inspectorGap + RenderWindow.Width + (PanelObjectSelector.Visible ? PanelObjectSelector.Width : 0),
                 ystart);
             PanelInspector.Height = w_height;
+
+            // GLControl can otherwise overlap sibling controls depending on z-order.
+            if (PanelObjectSelector.Visible)
+            {
+                PanelObjectSelector.BringToFront();
+            }
+
+            if (PanelInspector.Visible)
+            {
+                PanelInspector.BringToFront();
+            }
+
+            PanelUtility.BringToFront();
 
             ResizeView();
         }
@@ -2751,6 +2769,22 @@ namespace SpellforceDataEditor.special_forms
             ResizeWindow();
         }
 
+        private void ShowObjectSelector()
+        {
+            bool wasVisible = PanelObjectSelector.Visible;
+            PanelObjectSelector.Visible = true;
+            ThemeManager.ApplyTheme(PanelObjectSelector);
+
+            // Ensure render/inspector layout is recalculated whenever selector is shown.
+            if (!wasVisible)
+            {
+                ResizeWindow();
+            }
+
+            // Keep selector above the GL render control.
+            PanelObjectSelector.BringToFront();
+        }
+
         private void InspectorSet(SFMap.map_controls.MapInspector inspector)
         {
             if (selected_inspector != null)
@@ -2764,9 +2798,11 @@ namespace SpellforceDataEditor.special_forms
                 inspector.selection_helper = selection_helper;
                 selected_inspector = inspector;
                 PanelInspector.Controls.Add(inspector);
+                ThemeManager.ApplyTheme(inspector);
                 inspector.Location = new Point(0, 0);
                 InspectorResize(inspector.Width);
                 InspectorShow();
+                PanelInspector.BringToFront();
             }
         }
 
@@ -3569,22 +3605,29 @@ namespace SpellforceDataEditor.special_forms
                     PanelEntityPlacementSelect.Location.Y);
             QuickSelect.QsRef = null;
             InspectorSelect(null);
-            if (RadioEntityModeUnit.Checked)
+
+            // Ensure one of the main entity modes is selected
+            bool anyEntityModeChecked = RadioEntityModeUnit.Checked
+                                        || RadioEntityModeBuilding.Checked
+                                        || RadioEntityModeObject.Checked;
+
+            if (!anyEntityModeChecked)
             {
-                RadioEntityModeUnit.Checked = false;
                 RadioEntityModeUnit.Checked = true;
             }
 
-            if (RadioEntityModeBuilding.Checked)
+            // Invoke the appropriate handler directly so the selector/tree are always set up
+            if (RadioEntityModeUnit.Checked)
             {
-                RadioEntityModeBuilding.Checked = false;
-                RadioEntityModeBuilding.Checked = true;
+                RadioEntityModeUnit_CheckedChanged(RadioEntityModeUnit, EventArgs.Empty);
             }
-
-            if (RadioEntityModeObject.Checked)
+            else if (RadioEntityModeBuilding.Checked)
             {
-                RadioEntityModeObject.Checked = false;
-                RadioEntityModeObject.Checked = true;
+                RadioEntityModeBuilding_CheckedChanged(RadioEntityModeBuilding, EventArgs.Empty);
+            }
+            else if (RadioEntityModeObject.Checked)
+            {
+                RadioEntityModeObject_CheckedChanged(RadioEntityModeObject, EventArgs.Empty);
             }
 
             if (RadioModeCoopCamps.Checked)
@@ -3651,13 +3694,33 @@ namespace SpellforceDataEditor.special_forms
 
 
         // load object picker tree
+        private static void AddNodeWithUniqueKey(Dictionary<string, TreeNode> dict, string preferredKey, TreeNode node)
+        {
+            string key = preferredKey;
+            int suffix = 1;
+            while (dict.ContainsKey(key))
+            {
+                key = $"{preferredKey} [{suffix}]";
+                suffix += 1;
+            }
+
+            dict.Add(key, node);
+        }
+
         private void GenerateUnitTree()
         {
             TreeEntities.Nodes.Clear();
             if (unit_tree != null)
             {
                 WinFormsUtility.TreeShallowCopy(unit_tree, TreeEntities.Nodes);
-                return;
+                if (TreeEntities.Nodes.Count != 0)
+                {
+                    return;
+                }
+
+                // Stale empty cache - rebuild from source categories.
+                unit_tree = null;
+                TreeEntities.Nodes.Clear();
             }
 
             unit_tree = new Dictionary<string, TreeNode>();
@@ -3667,7 +3730,10 @@ namespace SpellforceDataEditor.special_forms
                 byte race_id = SFCategoryManager.gamedata.c2022[i].RaceID;
                 string race_name = $"{race_id}. {SFCategoryManager.GetRaceName(race_id)}";
 
-                unit_tree.Add(race_name, new TreeNode(race_name));
+                if (!unit_tree.ContainsKey(race_name))
+                {
+                    unit_tree.Add(race_name, new TreeNode(race_name));
+                }
             }
 
             // generate unit nodes
@@ -3679,14 +3745,14 @@ namespace SpellforceDataEditor.special_forms
                 ushort stats_id = SFCategoryManager.gamedata.c2024[i].StatsID;
                 if (!SFCategoryManager.gamedata.c2005.GetItemIndex(stats_id, out int stats_index))
                 {
-                    unit_tree.Add(unit_name, new TreeNode(unit_name) { Tag = unit_id });
+                    AddNodeWithUniqueKey(unit_tree, unit_name, new TreeNode(unit_name) { Tag = unit_id });
                     continue;
                 }
 
                 byte unit_race_id = SFCategoryManager.gamedata.c2005[stats_index].UnitRace;
                 if (!SFCategoryManager.gamedata.c2022.GetItemIndex(unit_race_id, out int race_index))
                 {
-                    unit_tree.Add(unit_name, new TreeNode(unit_name) { Tag = unit_id });
+                    AddNodeWithUniqueKey(unit_tree, unit_name, new TreeNode(unit_name) { Tag = unit_id });
                     continue;
                 }
 
@@ -3700,7 +3766,7 @@ namespace SpellforceDataEditor.special_forms
                 }
                 else
                 {
-                    unit_tree.Add(unit_name, new TreeNode(unit_name) { Tag = unit_id });
+                    AddNodeWithUniqueKey(unit_tree, unit_name, new TreeNode(unit_name) { Tag = unit_id });
                 }
             }
 
@@ -3720,18 +3786,31 @@ namespace SpellforceDataEditor.special_forms
             }
 
             WinFormsUtility.TreeShallowCopy(unit_tree, TreeEntities.Nodes);
+
+            // Last-resort fallback: if grouped tree still ended up empty, show flat unit entries.
+            if ((TreeEntities.Nodes.Count == 0) && (SFCategoryManager.gamedata.c2024.GetNumOfItems() > 0))
+            {
+                for (int i = 0; i < SFCategoryManager.gamedata.c2024.GetNumOfItems(); i++)
+                {
+                    ushort unit_id = SFCategoryManager.gamedata.c2024[i].UnitID;
+                    string unit_name = unit_id.ToString() + ". " + SFCategoryManager.GetUnitName(unit_id, true);
+                    TreeEntities.Nodes.Add(new TreeNode(unit_name) { Tag = unit_id });
+                }
+            }
+
             GC.Collect();
         }
 
         private void GetUnitNodesByName(string txt)
         {
-            if (txt == "")
+            txt = (txt ?? string.Empty).Trim();
+            if (txt.Length == 0)
             {
                 GenerateUnitTree();
                 return;
             }
 
-            txt = txt.ToLower();
+            txt = txt.ToLowerInvariant();
 
             TreeEntities.Nodes.Clear();
             // generate race nodes
@@ -3741,7 +3820,10 @@ namespace SpellforceDataEditor.special_forms
                 ushort race_name_index = SFCategoryManager.gamedata.c2022[i].TextID;
 
                 string race_name = $"{race_id}. {SFCategoryManager.GetRaceName(race_id)}";
-                TreeEntities.Nodes.Add(race_name, race_name);
+                if (!TreeEntities.Nodes.ContainsKey(race_name))
+                {
+                    TreeEntities.Nodes.Add(race_name, race_name);
+                }
             }
 
             // generate unit nodes
@@ -3764,7 +3846,11 @@ namespace SpellforceDataEditor.special_forms
                 byte unit_race_id = SFCategoryManager.gamedata.c2005[stats_index].UnitRace;
                 if (!SFCategoryManager.gamedata.c2022.GetItemIndex(unit_race_id, out int race_index))
                 {
-                    unit_tree.Add(unit_name, new TreeNode(unit_name) { Tag = unit_id });
+                    if (unit_name.ToLowerInvariant().Contains(txt))
+                    {
+                        TreeEntities.Nodes.Add(new TreeNode(unit_name) { Tag = unit_id });
+                    }
+
                     continue;
                 }
 
@@ -3932,13 +4018,24 @@ namespace SpellforceDataEditor.special_forms
                 return;
             }
 
-            PanelObjectSelector.Visible = true;
+            // Rebuild stale empty cache (can happen if entities were opened before gamedata finished loading).
+            if ((unit_tree != null) && (unit_tree.Count == 0) && (SFCategoryManager.gamedata.c2024.GetNumOfItems() > 0))
+            {
+                unit_tree = null;
+            }
+
+            ShowObjectSelector();
             InspectorSet(new SFMap.map_controls.MapUnitInspector());
             // Apply filter if text exists, otherwise show full tree
-            if (string.IsNullOrEmpty(TreeEntitytFilter.Text))
+            if (string.IsNullOrWhiteSpace(TreeEntitytFilter.Text))
                 GenerateUnitTree();
             else
                 GetUnitNodesByName(TreeEntitytFilter.Text);
+
+            if ((TreeEntities.Nodes.Count == 0) && (!string.IsNullOrWhiteSpace(TreeEntitytFilter.Text)))
+            {
+                GenerateUnitTree();
+            }
 
             selected_editor = new MapUnitEditor()
             {
@@ -3970,7 +4067,14 @@ namespace SpellforceDataEditor.special_forms
             if (building_tree != null)
             {
                 WinFormsUtility.TreeShallowCopy(building_tree, TreeEntities.Nodes);
-                return;
+                if (TreeEntities.Nodes.Count != 0)
+                {
+                    return;
+                }
+
+                // Stale empty cache - rebuild from source categories.
+                building_tree = null;
+                TreeEntities.Nodes.Clear();
             }
 
             building_tree = new Dictionary<string, TreeNode>();
@@ -3981,7 +4085,10 @@ namespace SpellforceDataEditor.special_forms
                 string race_name = SFCategoryManager.GetRaceName(race_id);
 
                 race_name = race_id.ToString() + ". " + race_name;
-                building_tree.Add(race_name, new TreeNode(race_name));
+                if (!building_tree.ContainsKey(race_name))
+                {
+                    building_tree.Add(race_name, new TreeNode(race_name));
+                }
             }
 
             // generate building nodes
@@ -4000,7 +4107,7 @@ namespace SpellforceDataEditor.special_forms
                 }
                 else
                 {
-                    building_tree.Add(building_name, new TreeNode(building_name) { Tag = building_id });
+                    AddNodeWithUniqueKey(building_tree, building_name, new TreeNode(building_name) { Tag = building_id });
                 }
             }
 
@@ -4020,18 +4127,31 @@ namespace SpellforceDataEditor.special_forms
             }
 
             WinFormsUtility.TreeShallowCopy(building_tree, TreeEntities.Nodes);
+
+            // Last-resort fallback: if grouped tree still ended up empty, show flat building entries.
+            if ((TreeEntities.Nodes.Count == 0) && (SFCategoryManager.gamedata.c2029.GetNumOfItems() > 0))
+            {
+                for (int i = 0; i < SFCategoryManager.gamedata.c2029.GetNumOfItems(); i++)
+                {
+                    ushort building_id = SFCategoryManager.gamedata.c2029[i].BuildingID;
+                    string building_name = building_id.ToString() + ". " + SFCategoryManager.GetBuildingName(building_id);
+                    TreeEntities.Nodes.Add(new TreeNode(building_name) { Tag = building_id });
+                }
+            }
+
             GC.Collect();
         }
 
         private void GetBuildingNodesByName(string txt)
         {
-            if (txt == "")
+            txt = (txt ?? string.Empty).Trim();
+            if (txt.Length == 0)
             {
                 GenerateBuildingTree();
                 return;
             }
 
-            txt = txt.ToLower();
+            txt = txt.ToLowerInvariant();
 
             TreeEntities.Nodes.Clear();
 
@@ -4042,7 +4162,10 @@ namespace SpellforceDataEditor.special_forms
                 string race_name = SFCategoryManager.GetRaceName(race_id);
 
                 race_name = race_id.ToString() + ". " + race_name;
-                TreeEntities.Nodes.Add(race_name, race_name);
+                if (!TreeEntities.Nodes.ContainsKey(race_name))
+                {
+                    TreeEntities.Nodes.Add(race_name, race_name);
+                }
             }
 
             // generate building nodes
@@ -4095,13 +4218,24 @@ namespace SpellforceDataEditor.special_forms
                 return;
             }
 
-            PanelObjectSelector.Visible = true;
+            // Rebuild stale empty cache (can happen if entities were opened before gamedata finished loading).
+            if ((building_tree != null) && (building_tree.Count == 0) && (SFCategoryManager.gamedata.c2029.GetNumOfItems() > 0))
+            {
+                building_tree = null;
+            }
+
+            ShowObjectSelector();
             InspectorSet(new SFMap.map_controls.MapBuildingInspector());
             // Apply filter if text exists, otherwise show full tree
-            if (string.IsNullOrEmpty(TreeEntitytFilter.Text))
+            if (string.IsNullOrWhiteSpace(TreeEntitytFilter.Text))
                 GenerateBuildingTree();
             else
                 GetBuildingNodesByName(TreeEntitytFilter.Text);
+
+            if ((TreeEntities.Nodes.Count == 0) && (!string.IsNullOrWhiteSpace(TreeEntitytFilter.Text)))
+            {
+                GenerateBuildingTree();
+            }
 
             selected_editor = new MapBuildingEditor()
             {
@@ -4129,7 +4263,14 @@ namespace SpellforceDataEditor.special_forms
             if (obj_tree != null)
             {
                 WinFormsUtility.TreeShallowCopy(obj_tree, TreeEntities.Nodes);
-                return;
+                if (TreeEntities.Nodes.Count != 0)
+                {
+                    return;
+                }
+
+                // Stale empty cache - rebuild from source categories.
+                obj_tree = null;
+                TreeEntities.Nodes.Clear();
             }
 
             obj_tree = new Dictionary<string, TreeNode>();
@@ -4168,7 +4309,7 @@ namespace SpellforceDataEditor.special_forms
                 // add entry
                 if (path_items.Length == 0)
                 {
-                    obj_tree.Add(name, new TreeNode(name) { Tag = id });
+                    AddNodeWithUniqueKey(obj_tree, name, new TreeNode(name) { Tag = id });
                     continue;
                 }
 
@@ -4194,18 +4335,46 @@ namespace SpellforceDataEditor.special_forms
             }
 
             WinFormsUtility.TreeShallowCopy(obj_tree, TreeEntities.Nodes);
+
+            // Last-resort fallback: if grouped tree still ended up empty, show flat object entries.
+            if ((TreeEntities.Nodes.Count == 0) && (SFCategoryManager.gamedata.c2050.GetNumOfItems() > 0))
+            {
+                for (int i = 0; i < SFCategoryManager.gamedata.c2050.GetNumOfItems(); i++)
+                {
+                    ushort id = SFCategoryManager.gamedata.c2050[i].ObjectID;
+                    if ((id > 64) && (id < 128))
+                    {
+                        continue;
+                    }
+
+                    if ((id >= 771) && (id <= 778))
+                    {
+                        continue;
+                    }
+
+                    if ((id == 769) || (id == 2541))
+                    {
+                        continue;
+                    }
+
+                    string name = id.ToString() + ". " + SFCategoryManager.GetObjectName(id);
+                    TreeEntities.Nodes.Add(new TreeNode(name) { Tag = id });
+                }
+            }
+
             GC.Collect();
         }
 
         private void GetObjectNodesByName(string txt)
         {
-            if (txt == "")
+            txt = (txt ?? string.Empty).Trim();
+            if (txt.Length == 0)
             {
                 GenerateObjectTree();
                 return;
             }
 
-            txt = txt.ToLower();
+            txt = txt.ToLowerInvariant();
 
             TreeEntities.Nodes.Clear();
 
@@ -4332,13 +4501,18 @@ namespace SpellforceDataEditor.special_forms
                 return;
             }
 
-            PanelObjectSelector.Visible = true;
+            ShowObjectSelector();
             InspectorSet(new SFMap.map_controls.MapObjectInspector());
             // Apply filter if text exists, otherwise show full tree
-            if (string.IsNullOrEmpty(TreeEntitytFilter.Text))
+            if (string.IsNullOrWhiteSpace(TreeEntitytFilter.Text))
                 GenerateObjectTree();
             else
                 GetObjectNodesByName(TreeEntitytFilter.Text);
+
+            if ((TreeEntities.Nodes.Count == 0) && (!string.IsNullOrWhiteSpace(TreeEntitytFilter.Text)))
+            {
+                GenerateObjectTree();
+            }
 
             selected_editor = new MapObjectEditor()
             {
@@ -4646,7 +4820,7 @@ namespace SpellforceDataEditor.special_forms
                 ResetDecGroups();
             }
 
-            PanelObjectSelector.Visible = true;
+            ShowObjectSelector();
             selected_editor = new MapDecorationEditor
             {
                 Brush = terrain_brush,
@@ -4654,10 +4828,15 @@ namespace SpellforceDataEditor.special_forms
             };
             InspectorSet(new SFMap.map_controls.MapDecorationInspector());
             // Apply filter if text exists, otherwise show full tree
-            if (string.IsNullOrEmpty(TreeEntitytFilter.Text))
+            if (string.IsNullOrWhiteSpace(TreeEntitytFilter.Text))
                 GenerateObjectTree();
             else
                 GetObjectNodesByName(TreeEntitytFilter.Text);
+
+            if ((TreeEntities.Nodes.Count == 0) && (!string.IsNullOrWhiteSpace(TreeEntitytFilter.Text)))
+            {
+                GenerateObjectTree();
+            }
 
             PanelBrushShape.Visible = true;
             PanelBrushShape.Location = new Point(3, 3);
