@@ -1131,6 +1131,7 @@ namespace SpellforceDataEditor.special_forms
             int tabHeight = ThemeManager.ScaleDpi(28, this);
             int tabWidth = Math.Max(80, (TabEditorModes.Width - tabPadding) / TabEditorModes.TabPages.Count);
             TabEditorModes.ItemSize = new Size(tabWidth, tabHeight);
+            UpdateEditorModesHeight();
             UpdateEditorModesOverlayBounds();
             ResizeWindow();
             // PanelUtility is positioned in ResizeWindow to keep it above the status strip
@@ -1174,6 +1175,42 @@ namespace SpellforceDataEditor.special_forms
                 TabEditorModes.Location.X + content.X,
                 TabEditorModes.Location.Y + content.Y);
             editor_modes_overlay.Size = content.Size;
+        }
+
+        private void UpdateEditorModesHeight()
+        {
+            if (TabEditorModes == null)
+            {
+                return;
+            }
+
+            TabPage page = TabEditorModes.SelectedTab;
+            if (page == null)
+            {
+                return;
+            }
+
+            int pad = ThemeManager.ScaleDpi(6, this);
+            int requiredBottom = 0;
+
+            foreach (Control c in page.Controls)
+            {
+                if (!c.Visible)
+                {
+                    continue;
+                }
+
+                requiredBottom = Math.Max(requiredBottom, c.Bottom);
+            }
+
+            Rectangle content = TabEditorModes.DisplayRectangle;
+            int minHeight = ThemeManager.ScaleDpi(120, this);
+            int desiredHeight = Math.Max(minHeight, content.Y + requiredBottom + (pad * 2));
+
+            if (TabEditorModes.Height != desiredHeight)
+            {
+                TabEditorModes.Height = desiredHeight;
+            }
         }
 
         private void SetEditorModesInteractive(bool interactive)
@@ -2928,6 +2965,10 @@ namespace SpellforceDataEditor.special_forms
 
             EntityID.Text = "0";
             ConfirmPlacementEntity();
+
+            UpdateEditorModesHeight();
+            UpdateEditorModesOverlayBounds();
+            ResizeWindow();
         }
 
         //TERRAIN EDIT
