@@ -501,9 +501,9 @@
             ButtonElemCopy.Text = "Copy";
             ButtonElemCopy.UseVisualStyleBackColor = true;
             ButtonElemCopy.Click += ButtonElemCopy_Click;
-            // 
+            //
             // SpelllforceCFFEditor
-            // 
+            //
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1101, 689);

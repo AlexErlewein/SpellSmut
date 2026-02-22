@@ -38,7 +38,10 @@ namespace SpellforceDataEditor
             SFEngine.LogUtils.Log.Info(SFEngine.LogUtils.LogSource.Main, "Program.Main(): session start time: " + DateTime.Now.ToLongTimeString());
             SFEngine.Settings.Load();
             //Application.SetDefaultFont()
-            Application.SetHighDpiMode(HighDpiMode.PerMonitor);  // without this, TabControl crashes when reparenting controls
+
+            // Set DPI mode to PerMonitorV2 for Windows 10/11, with fallback to PerMonitor
+            // This works together with app.manifest dpiAwareness settings
+            Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);  // Best for modern Windows versions
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

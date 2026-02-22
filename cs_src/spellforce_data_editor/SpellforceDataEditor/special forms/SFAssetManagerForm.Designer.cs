@@ -306,9 +306,9 @@
             ButtonToggleBoneDisplay.UseVisualStyleBackColor = true;
             ButtonToggleBoneDisplay.Visible = false;
             ButtonToggleBoneDisplay.Click += ButtonToggleBoneDisplay_Click;
-            // 
+            //
             // SFAssetManagerForm
-            // 
+            //
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(899, 528);

@@ -878,7 +878,7 @@
             RadioModePortals.CheckedChanged += RadioModePortals_CheckedChanged;
             // 
             // TabPageTextures
-            // 
+            //
             TabPageTextures.Controls.Add(ButtonModifyTextureSet);
             TabPageTextures.Controls.Add(PanelTileType);
             TabPageTextures.Location = new System.Drawing.Point(4, 25);
@@ -889,9 +889,9 @@
             TabPageTextures.TabIndex = 1;
             TabPageTextures.Text = "Textures";
             TabPageTextures.UseVisualStyleBackColor = true;
-            // 
+            //
             // ButtonModifyTextureSet
-            // 
+            //
             ButtonModifyTextureSet.Location = new System.Drawing.Point(7, 7);
             ButtonModifyTextureSet.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             ButtonModifyTextureSet.Name = "ButtonModifyTextureSet";
@@ -900,9 +900,9 @@
             ButtonModifyTextureSet.Text = "Modify texture set...";
             ButtonModifyTextureSet.UseVisualStyleBackColor = true;
             ButtonModifyTextureSet.Click += ButtonModifyTextureSet_Click;
-            // 
+            //
             // PanelTileType
-            // 
+            //
             PanelTileType.Controls.Add(RadioTileTypeCustom);
             PanelTileType.Controls.Add(RadioTileTypeBase);
             PanelTileType.Controls.Add(label9);
@@ -911,9 +911,9 @@
             PanelTileType.Name = "PanelTileType";
             PanelTileType.Size = new System.Drawing.Size(84, 118);
             PanelTileType.TabIndex = 18;
-            // 
+            //
             // RadioTileTypeCustom
-            // 
+            //
             RadioTileTypeCustom.AutoSize = true;
             RadioTileTypeCustom.Location = new System.Drawing.Point(7, 52);
             RadioTileTypeCustom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -923,9 +923,9 @@
             RadioTileTypeCustom.Text = "Custom";
             RadioTileTypeCustom.UseVisualStyleBackColor = true;
             RadioTileTypeCustom.CheckedChanged += RadioTileTypeCustom_CheckedChanged;
-            // 
+            //
             // RadioTileTypeBase
-            // 
+            //
             RadioTileTypeBase.AutoSize = true;
             RadioTileTypeBase.Checked = true;
             RadioTileTypeBase.Location = new System.Drawing.Point(7, 25);
@@ -937,9 +937,9 @@
             RadioTileTypeBase.Text = "Base";
             RadioTileTypeBase.UseVisualStyleBackColor = true;
             RadioTileTypeBase.CheckedChanged += RadioTileTypeBase_CheckedChanged;
-            // 
+            //
             // label9
-            // 
+            //
             label9.AutoSize = true;
             label9.Location = new System.Drawing.Point(4, 7);
             label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -2503,9 +2503,9 @@
             // TimerAnimation
             // 
             TimerAnimation.Tick += TimerAnimation_Tick;
-            // 
+            //
             // MapEditorForm
-            // 
+            //
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1283, 771);

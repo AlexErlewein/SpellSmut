@@ -198,9 +198,9 @@
             // 
             TimerCheckUpdateStatus.Interval = 1000;
             TimerCheckUpdateStatus.Tick += TimerCheckUpdateStatus_Tick;
-            // 
+            //
             // MainForm
-            // 
+            //
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(440, 182);

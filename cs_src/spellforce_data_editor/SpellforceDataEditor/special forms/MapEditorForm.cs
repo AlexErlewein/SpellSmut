@@ -1080,6 +1080,9 @@ namespace SpellforceDataEditor.special_forms
 
         private void MapEditorForm_Load(object sender, EventArgs e)
         {
+            // Log DPI info for debugging
+            DpiHelper.LogDpiInfo();
+
             TimerAnimation.Enabled = true;
             TimerAnimation.Interval = 1000 / SFRenderEngine.scene.frames_per_second;
             TimerAnimation.Start();
