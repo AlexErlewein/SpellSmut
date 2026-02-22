@@ -1,7 +1,8 @@
 # SpellSmut Project Structure - Quick Reference
 
-**Last Updated:** October 2025  
+**Last Updated:** February 22, 2026
 **Status:** ✅ Current
+**Location:** `.rules/STRUCTURE.md` (Project rules directory)
 
 ---
 
@@ -10,7 +11,6 @@
 ```
 SpellSmut/
 ├── README.md              # Main project documentation
-├── STRUCTURE.md           # This file - quick reference
 ├── pyproject.toml         # Python project configuration
 ├── pytest.ini             # Pytest configuration
 ├── uv.lock                # UV dependency lock file
@@ -23,6 +23,7 @@ SpellSmut/
 ```
 
 **Rule:** Only essential configuration files belong in root!
+**Note:** `STRUCTURE.md` lives in `.rules/` directory
 
 ---
 
@@ -94,10 +95,72 @@ docs/
 ├── CRUSH.md                      # Crush assistant config
 ├── GEMINI.md                     # Gemini assistant config
 ├── QWEN.md                       # Qwen assistant config
-└── RULES.md                      # ⚠️ CRITICAL: Folder structure rules
+├── WINDSURF.md                   # Windsurf AI assistant config
+├── RULES.md                      # ⚠️ CRITICAL: Folder structure rules
+├── WORKFLOW.md                   # Beads issue tracking workflow
+├── shortcuts.md                  # Keyboard shortcuts reference
+└── settings.local.json           # Local AI settings (gitignored)
 ```
 
 **Purpose:** Configuration files for AI assistants working on the project.
+
+---
+
+## ⚙️ Project Rules (`.rules/`)
+
+```
+.rules/
+├── RULES.md                      # ⚠️ CRITICAL: Folder structure rules
+└── STRUCTURE.md                  # This file - Project structure reference
+```
+
+**Purpose:** Project structure and organization rules.
+
+---
+
+## 📋 Project Planning (`ProjectPlanning/`)
+
+```
+ProjectPlanning/
+├── README.md                     # Planning documentation index
+├── PROJECT_OVERVIEW.md           # Overall project overview
+├── COMPREHENSIVE_PROJECT_PLAN.md # Detailed project plan
+├── TODO.md                       # Project-wide TODO list
+│
+├── Components/                   # Component-specific planning
+│   ├── QUEST_CREATION_PLAN.md
+│   ├── SPELL_CREATION_PLAN.md
+│   ├── WEAPON_CREATION_PLAN.md
+│   ├── LAUNCH_QUEST_EDITOR.md
+│   ├── QuestViewerDocumentation.md
+│   ├── Spell_Icon_Mapping.md
+│   └── [other component plans]
+│
+├── Status/                       # Current status documents
+│   ├── BLOCKERS.md
+│   ├── CURRENT_STATUS.md
+│   ├── COMPLETED_WORK.md
+│   ├── QUEST_CREATION_STATUS.md
+│   ├── CurrentStatusQuestEditor.md
+│   ├── QUEST_EDITOR_FIXES_TODO.md
+│   ├── SPELL_CREATION_STATUS.md
+│   ├── WEAPON_CREATION_STATUS.md
+│   ├── SESSION_RESUME_NOTES.md
+│   ├── SESSION_SUMMARY.md
+│   ├── ITM_EXTRACTION_COMPLETE.md
+│   ├── ITM_INTEGRATION_COMPLETE.md
+│   ├── QUEST_INTEGRATION_SUMMARY.md
+│   └── WEAPON_CREATOR_STATUS.md
+│
+├── Research/                     # Research and analysis
+│   ├── SpellForce_Quest_Modding_Example_Quest.md
+│   ├── SpellForce_Quest_Modding_Workflow.md
+│   ├── SpellForce_P1_Quest_Script_Index.md
+│   └── [other research documents]
+│
+└── Archive/                      # Archived planning documents
+    └── [obsolete plans]
+```
 
 ---
 
@@ -109,6 +172,7 @@ src/
 │   ├── README.md                # Main README (updated)
 │   ├── LICENSE                  # Project license
 │   ├── run_cff_editor.py       # Launch GUI editor
+│   ├── run_map_viewer.py       # Launch map viewer
 │   │
 │   ├── cff_editor/              # CFF Editor GUI application
 │   │   ├── main_window.py
@@ -117,6 +181,9 @@ src/
 │   │   │   ├── quest_editor.py
 │   │   │   ├── spell_creator_wizard.py
 │   │   │   ├── weapon_forge_wizard.py
+│   │   │   ├── armor_forge_wizard.py
+│   │   │   ├── enhanced_weapon_browser.py
+│   │   │   ├── enhanced_armor_browser.py
 │   │   │   └── docs/            # Widget-specific documentation
 │   │   ├── models/              # Data models
 │   │   ├── exporters/           # Export functionality
@@ -150,9 +217,32 @@ src/
 │   ├── examples/                # Example scripts & utilities
 │   │   ├── README.md
 │   │   ├── cff_modding_examples.py
+│   │   ├── analyze_events.py   # Quest event analysis
 │   │   ├── export_to_json.py
 │   │   ├── export_to_xml.py
 │   │   └── [other examples]
+│   │
+│   ├── scripts/                 # Utility scripts
+│   │   ├── json_utils.py
+│   │   ├── split_json.py
+│   │   ├── check_end.py
+│   │   ├── count_lines.py
+│   │   ├── find_tab_methods.py
+│   │   └── find_tab_pages.py
+│   │
+│   ├── map_viewer/              # Map Viewer application
+│   │   ├── README.md
+│   │   ├── QUICKSTART.md
+│   │   ├── PHASE2_PROGRESS.md
+│   │   ├── IMPLEMENTATION_PLAN.md
+│   │   ├── MAP_FORMAT_DISCOVERED.md
+│   │   ├── map_viewer_window.py
+│   │   ├── chunk_map_loader.py
+│   │   ├── simple_map_loader.py
+│   │   ├── camera.py
+│   │   ├── dds_loader.py
+│   │   ├── analyze_map.py       # Map analysis utility
+│   │   └── [other map viewer files]
 │   │
 │   ├── tests/                   # TirganachReloaded-specific tests
 │   │   ├── README.md
@@ -170,6 +260,15 @@ src/
 │   ├── enhanced_armor.json      # Active armor database (656 KB)
 │   └── enhanced_weapons.json    # Active weapon database (349 KB)
 │
+├── OrthancsSchmiede/            # Standalone item browser application
+│   ├── README.md               # Application documentation (updated Nov 2025)
+│   ├── run_orthancs_schmiede.py # Launcher script
+│   ├── orthancs_schmiede.py    # Main application window
+│   ├── cff_weapon_loader.py    # Enhanced weapon data extraction from CFF
+│   ├── cff_armor_loader.py     # Enhanced armor data extraction from CFF
+│   ├── cff_npc_loader.py       # NPC data extraction from CFF
+│   └── custom_weapons/         # Custom weapon data
+│
 └── tests/                        # Main test suite (see Tests section)
 ```
 
@@ -184,7 +283,6 @@ ExtractedAssets/                 # Extracted game assets
 ├── UI/                          # User interface assets
 └── [other asset types]
 ModdingTools/                    # Third-party modding tools
-ProjectPlanning/                 # Planning and strategy documents
 ```
 
 ---
@@ -197,6 +295,18 @@ ProjectPlanning/                 # Planning and strategy documents
 ```bash
 cd SpellSmut/src/TirganachReloaded
 uv run python run_cff_editor.py
+```
+
+**Run the Map Viewer?**
+```bash
+cd SpellSmut/src/TirganachReloaded
+uv run python run_map_viewer.py
+```
+
+**Run OrthancsSchmiede (Item Browser)?**
+```bash
+cd SpellSmut/src/OrthancsSchmiede
+uv run python run_orthancs_schmiede.py
 ```
 
 **Run tests?**
@@ -221,10 +331,12 @@ uv run pytest src/tests/test_weapon_names.py -v
 - User guides → `docs/Guides/`
 - Widget docs → `src/TirganachReloaded/cff_editor/widgets/docs/`
 - Test docs → `src/tests/docs/`
+- Planning docs → `ProjectPlanning/`
+- Status docs → `ProjectPlanning/Status/`
 
 **Configure AI assistant?**
 - Edit files in `.ai/`
-- Follow rules in `.ai/RULES.md`
+- Follow rules in `.ai/RULES.md` or `.rules/RULES.md`
 
 ---
 
@@ -240,8 +352,14 @@ uv run pytest src/tests/test_weapon_names.py -v
 | Dev notes | `docs/Development/` | `SESSION_SUMMARY.md` |
 | Widget docs | `src/.../widgets/docs/` | `WEAPON_FORGE_TODO.md` |
 | AI configs | `.ai/` | `CLAUDE.md` |
+| Project rules | `.rules/` | `RULES.md`, `STRUCTURE.md` |
 | Planning | `ProjectPlanning/` | `FEATURE_PLAN.md` |
+| Status | `ProjectPlanning/Status/` | `CURRENT_STATUS.md` |
+| Research | `ProjectPlanning/Research/` | `QUEST_RESEARCH.md` |
 | Config files | Root | `pyproject.toml` |
+| Utility scripts | `src/TirganachReloaded/scripts/` | `count_lines.py` |
+| Example scripts | `src/TirganachReloaded/examples/` | `analyze_events.py` |
+| Map utilities | `src/TirganachReloaded/map_viewer/` | `analyze_map.py` |
 
 ---
 
@@ -250,26 +368,31 @@ uv run pytest src/tests/test_weapon_names.py -v
 ### ❌ NEVER Place in Root:
 - Test files (`test_*.py`)
 - Test data files (`test_*.json`)
-- Documentation files (except README.md and STRUCTURE.md)
+- Documentation files (except README.md)
 - Session summaries
 - Planning documents
 - AI instruction files
 - Widget documentation
 - Temporary files
 - Export outputs
+- Structure documentation
+- Utility/helper scripts
 
 ### ✅ ALWAYS:
 - Put tests in `src/tests/`
 - Put user docs in `docs/`
 - Put dev notes in `docs/Development/`
 - Put AI configs in `.ai/`
+- Put project rules in `.rules/`
+- Put planning in `ProjectPlanning/`
+- Put utility scripts in `src/TirganachReloaded/scripts/`
 - Keep root directory clean!
 
 ---
 
 ## 🧹 Post-Merge Cleanup Checklist
 
- - **Ensure root whitelist is clean.** Allowed files: `README.md`, `STRUCTURE.md`, `pyproject.toml`, `pytest.ini`, `uv.lock`, `.gitignore`, `.gitattributes`, `.luarc.json`, `package.json`, `package-lock.json`, `_config.yml`.
+ - **Ensure root whitelist is clean.** Allowed files: `README.md`, `pyproject.toml`, `pytest.ini`, `uv.lock`, `.gitignore`, `.gitattributes`, `.luarc.json`, `package.json`, `package-lock.json`, `_config.yml`.
  - **Move any stray tests/docs/AI files.** Follow the "File Placement Rules" table above.
  - **Re-run tests.** `uv run pytest src/tests/`
  - **Commit cleanup if needed.** Use a message like: `chore: post-merge cleanup (structure compliance)`.
@@ -293,26 +416,34 @@ find src/TirganachReloaded/cff_editor/widgets/docs -name "*.md"
 # Find AI configs
 ls .ai/*.md
 
+# Find project rules
+ls .rules/*.md
+
+# Find planning documents
+find ProjectPlanning -name "*.md"
+
 # Check root is clean
-ls -1 *.py *.json *.md 2>/dev/null | grep -v README.md | grep -v STRUCTURE.md
+ls -1 *.py *.json *.md 2>/dev/null | grep -v README.md
 ```
 
 ---
 
 ## 📊 Project Statistics
 
-- **Root files:** 12 (config files only)
+- **Root files:** 10 (config files only)
 - **Test modules:** 20+
 - **Test organization:** Fully structured
 - **Documentation:** Categorized by purpose
-- **AI configs:** Separate hidden directory
+- **AI configs:** Separate .ai directory
+- **Project rules:** Separate .rules directory
+- **Planning:** Organized in ProjectPlanning/
 
 ---
 
 ## 🚀 Getting Started
 
 1. **Read this file** for quick orientation
-2. **Check `.ai/RULES.md`** for complete folder structure rules
+2. **Check `.rules/RULES.md`** for complete folder structure rules
 3. **See `README.md`** for project overview
 4. **Browse `docs/`** for guides and documentation
 5. **Run tests** to verify setup: `uv run pytest src/tests/`
@@ -321,19 +452,20 @@ ls -1 *.py *.json *.md 2>/dev/null | grep -v README.md | grep -v STRUCTURE.md
 
 ## 📮 More Information
 
-- **Complete folder rules:** `.ai/RULES.md`
+- **Complete folder rules:** `.rules/RULES.md`
 - **Testing guide:** `src/tests/README.md`
 - **AI setup:** `.ai/README.md`
 - **Development docs:** `docs/Development/`
 - **Project main:** `README.md`
+- **Planning docs:** `ProjectPlanning/README.md`
 
 ---
 
-**Questions?** Check the docs or relevant README files.  
-**Adding files?** Follow `.ai/RULES.md` for proper placement.  
+**Questions?** Check the docs or relevant README files.
+**Adding files?** Follow `.rules/RULES.md` for proper placement.
 **Running code?** Always use `uv run` for Python scripts.
 
 ---
 
-**Maintained by:** SpellSmut Development Team  
-**Version:** 1.0
+**Maintained by:** SpellSmut Development Team
+**Version:** 1.1 (February 2026)

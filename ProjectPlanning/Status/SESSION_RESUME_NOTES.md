@@ -1,11 +1,22 @@
 # Session Resume Notes
 
-**Last Updated**: November 6, 2025
-**Session End Status**: Ready to resume multi-layer texture blending implementation
+**Last Updated**: February 22, 2026
+**Session End Status**: Map Viewer with tile rendering operational, texture improvements in progress
 
 ---
 
 ## Current Project State
+
+### Recent Achievements (January-February 2026)
+- ✅ **PR #26 Merged**: SpellForceEditorMap with tile rendering improvements
+- ✅ **"MapEditor good!"**: Major milestone for map viewer
+- ✅ **"tiles look good"**: Improved tile rendering
+- ✅ **Searchbar**: Added with changeable positions
+- ✅ **3x3 Terrain Flags**: Proper terrain type handling
+- ✅ **Entity/Unit Listing**: Recovery of unit display
+- ✅ **Dark Mode**: Properly working
+
+### Map Viewer Status
 
 ### Map Viewer Status
 - **Phase**: Phase 2 - Visual Fidelity
@@ -299,3 +310,27 @@ uv run python src/TirganachReloaded/run_map_viewer.py
 ---
 
 **Ready to resume!** 🚀
+
+---
+
+## Recent Progress Update (February 22, 2026)
+
+The Map Viewer has made significant progress since the original session notes:
+
+### Completed Features ✅
+- Tile rendering with visual improvements
+- 3x3 terrain flag implementation
+- Searchbar with changeable positions
+- Entity/unit listing recovery
+- Dark mode properly working
+
+### Current Focus
+The Map Viewer is approximately **85% complete** with the main focus now on:
+1. Multi-layer texture blending for improved visual fidelity
+2. Shadow mapping for dynamic lighting
+3. Map editing capabilities
+
+### Git Activity
+- PR #26: SpellForceEditorMap improvements merged
+- Recent commits: "MapEditor good!", "tiles look good"
+- Active development continues
