@@ -57,18 +57,18 @@ logger = get_logger(__name__)
 
 class NumericTreeWidgetItem(QTreeWidgetItem):
     """QTreeWidgetItem subclass that sorts numeric columns correctly"""
-    
+
     def __lt__(self, other):
         """Custom comparison for sorting"""
         column = self.treeWidget().sortColumn()
-        
+
         # For Level (column 3) and ID (column 4), sort numerically
         if column in (3, 4):
             try:
                 return int(self.text(column)) < int(other.text(column))
             except ValueError:
                 return self.text(column) < other.text(column)
-        
+
         # For other columns, sort alphabetically
         return self.text(column).lower() < other.text(column).lower()
 
@@ -168,10 +168,12 @@ class GraufurterBuergerBuero(QMainWindow):
         self.npc_tree = QTreeWidget()
         self.npc_tree.setHeaderLabels(["Name", "Type", "Race", "Level", "ID"])
         self.npc_tree.itemSelectionChanged.connect(self.on_npc_selection_changed)
-        
+
         # Enable sorting by clicking column headers
         self.npc_tree.setSortingEnabled(True)
-        self.npc_tree.sortByColumn(0, Qt.SortOrder.AscendingOrder)  # Default sort by Name
+        self.npc_tree.sortByColumn(
+            0, Qt.SortOrder.AscendingOrder
+        )  # Default sort by Name
 
         # Dark theme tree styling
         self.npc_tree.setStyleSheet("""
@@ -303,14 +305,17 @@ class GraufurterBuergerBuero(QMainWindow):
             # Auto-load GameData.cff if not already set
             if not self.custom_cff_path:
                 # Try to find GameData.cff in the standard location
-                from pathlib import Path
                 project_root = Path(__file__).parent.parent.parent
-                gamedata_path = project_root / "OriginalGameFiles" / "data" / "GameData.cff"
+                gamedata_path = (
+                    project_root / "OriginalGameFiles" / "data" / "GameData.cff"
+                )
 
                 if gamedata_path.exists():
                     self.custom_cff_path = str(gamedata_path)
                     if self.logger:
-                        self.logger.info(f"Auto-loading GameData.cff from: {self.custom_cff_path}")
+                        self.logger.info(
+                            f"Auto-loading GameData.cff from: {self.custom_cff_path}"
+                        )
 
             # Update status message based on whether we're loading custom CFF
             if self.custom_cff_path:
@@ -353,13 +358,19 @@ class GraufurterBuergerBuero(QMainWindow):
             if self.custom_cff_path:
                 try:
                     if self.logger:
-                        self.logger.info(f"Loading NPCs from CFF: {self.custom_cff_path}")
-                    
+                        self.logger.info(
+                            f"Loading NPCs from CFF: {self.custom_cff_path}"
+                        )
+
                     cff_loader = CFFNpcLoader()
-                    game_npcs = cff_loader.load_all_npcs(cff_file_path=self.custom_cff_path)
-                    
+                    game_npcs = cff_loader.load_all_npcs(
+                        cff_file_path=self.custom_cff_path
+                    )
+
                     if self.logger:
-                        self.logger.info(f"✓ Loaded {len(game_npcs)} game NPCs from CFF")
+                        self.logger.info(
+                            f"✓ Loaded {len(game_npcs)} game NPCs from CFF"
+                        )
                 except Exception as cff_error:
                     if self.logger:
                         self.logger.error(f"Failed to load CFF NPCs: {cff_error}")
@@ -367,9 +378,11 @@ class GraufurterBuergerBuero(QMainWindow):
 
             # Merge both datasets (custom NPCs override game NPCs if same ID)
             self.npc_data = {**game_npcs, **custom_npcs}
-            
+
             if self.logger:
-                self.logger.info(f"✓ Total NPCs available: {len(self.npc_data)} ({len(custom_npcs)} custom + {len(game_npcs)} game)")
+                self.logger.info(
+                    f"✓ Total NPCs available: {len(self.npc_data)} ({len(custom_npcs)} custom + {len(game_npcs)} game)"
+                )
 
         except Exception as e:
             if self.logger:
@@ -394,22 +407,26 @@ class GraufurterBuergerBuero(QMainWindow):
 
         if not self.npc_data:
             if self.logger:
-                self.logger.info("No custom NPCs found. Click 'Create NPC' to create your first NPC!")
+                self.logger.info(
+                    "No custom NPCs found. Click 'Create NPC' to create your first NPC!"
+                )
             # Show helpful message in tree
-            placeholder = QTreeWidgetItem(self.npc_tree, ["No NPCs created yet", "", "", "", ""])
+            placeholder = QTreeWidgetItem(
+                self.npc_tree, ["No NPCs created yet", "", "", "", ""]
+            )
             placeholder.setForeground(0, Qt.GlobalColor.gray)
             return
 
         # Separate custom and game NPCs
         custom_npcs = {}
         game_npcs = {}
-        
+
         for npc_id, npc_info in self.npc_data.items():
             # Skip if npc_id is None or not an integer
             if npc_id is None or not isinstance(npc_id, int):
                 logger.warning(f"Skipping NPC with invalid ID: {npc_id}")
                 continue
-            
+
             # Custom NPCs have ID >= 40000
             if npc_id >= 40000:
                 custom_npcs[npc_id] = npc_info
@@ -418,14 +435,18 @@ class GraufurterBuergerBuero(QMainWindow):
 
         # Create Custom NPCs section
         if custom_npcs:
-            custom_root = QTreeWidgetItem(self.npc_tree, [f"Custom NPCs ({len(custom_npcs)})", "", "", "", ""])
+            custom_root = QTreeWidgetItem(
+                self.npc_tree, [f"Custom NPCs ({len(custom_npcs)})", "", "", "", ""]
+            )
             custom_root.setFont(0, QFont("", -1, QFont.Weight.Bold))
             self._populate_npc_categories(custom_root, custom_npcs)
             custom_root.setExpanded(True)
 
         # Create Game NPCs section
         if game_npcs:
-            game_root = QTreeWidgetItem(self.npc_tree, [f"Game NPCs ({len(game_npcs)})", "", "", "", ""])
+            game_root = QTreeWidgetItem(
+                self.npc_tree, [f"Game NPCs ({len(game_npcs)})", "", "", "", ""]
+            )
             game_root.setFont(0, QFont("", -1, QFont.Weight.Bold))
             self._populate_npc_categories(game_root, game_npcs)
             game_root.setExpanded(False)  # Collapsed by default
@@ -438,7 +459,9 @@ class GraufurterBuergerBuero(QMainWindow):
         self.npc_tree.resizeColumnToContents(4)
 
         if self.logger:
-            self.logger.info(f"✓ NPC tree populated: {len(custom_npcs)} custom, {len(game_npcs)} game")
+            self.logger.info(
+                f"✓ NPC tree populated: {len(custom_npcs)} custom, {len(game_npcs)} game"
+            )
 
         # Re-apply any active search filter after repopulating
         if hasattr(self, "search_edit") and self.search_edit is not None:
@@ -475,7 +498,7 @@ class GraufurterBuergerBuero(QMainWindow):
                 npc_type = npc_info.get("npc_type", "Unknown")
                 race = npc_info.get("appearance", {}).get("race", "Unknown")
                 level = npc_info.get("level", 0)
-                
+
                 item = NumericTreeWidgetItem(
                     category_node, [name, npc_type, race, str(level), str(npc_id)]
                 )
@@ -906,6 +929,101 @@ class GraufurterBuergerBuero(QMainWindow):
 
             self.details_content_layout.addWidget(rewards_group)
 
+        # Merchant Section
+        merchant_data = npc_info.get("merchant_data")
+        if merchant_data:
+            merchant_group = QGroupBox("MERCHANT DATA")
+            merchant_group.setStyleSheet("""
+                QGroupBox {
+                    font-weight: bold;
+                    color: #d26f8f;
+                    border: 2px solid #d26f8f;
+                    border-radius: 5px;
+                    margin-top: 1ex;
+                    padding-top: 10px;
+                }
+                QGroupBox::title {
+                    subcontrol-origin: margin;
+                    left: 10px;
+                    padding: 0 5px 0 5px;
+                }
+            """)
+            merchant_layout = QVBoxLayout(merchant_group)
+
+            basic_info = [
+                ("Merchant ID", str(merchant_data.get("merchant_id", "N/A"))),
+                ("Linked NPC ID", str(merchant_data.get("linked_npc_id", "N/A"))),
+            ]
+
+            for label, value in basic_info:
+                row_layout = QHBoxLayout()
+                label_widget = QLabel(f"<strong>{label}:</strong>")
+                label_widget.setStyleSheet("color: #a0a0a0; min-width: 120px;")
+                value_widget = QLabel(str(value))
+                value_widget.setStyleSheet("color: #e0e0e0;")
+                row_layout.addWidget(label_widget)
+                row_layout.addWidget(value_widget)
+                row_layout.addStretch()
+                merchant_layout.addLayout(row_layout)
+
+            inventory = merchant_data.get("inventory", [])
+            if inventory:
+                inv_label = QLabel(
+                    f"<strong>Inventory ({len(inventory)} items):</strong>"
+                )
+                inv_label.setStyleSheet("color: #a0a0a0; margin-top: 10px;")
+                merchant_layout.addWidget(inv_label)
+
+                for item in inventory[:10]:
+                    item_id = item.get("item_id", 0)
+                    stock = item.get("stock", 0)
+                    row_layout = QHBoxLayout()
+                    item_label = QLabel(f"  Item {item_id}")
+                    item_label.setStyleSheet("color: #e0e0e0;")
+                    stock_label = QLabel(f"x{stock}")
+                    stock_label.setStyleSheet("color: #888888;")
+                    row_layout.addWidget(item_label)
+                    row_layout.addWidget(stock_label)
+                    row_layout.addStretch()
+                    merchant_layout.addLayout(row_layout)
+
+                if len(inventory) > 10:
+                    more_label = QLabel(
+                        f"<i>... and {len(inventory) - 10} more items</i>"
+                    )
+                    more_label.setStyleSheet("color: #808080; font-style: italic;")
+                    merchant_layout.addWidget(more_label)
+
+            price_mods = merchant_data.get("price_modifiers", [])
+            if price_mods:
+                pm_label = QLabel(f"<strong>Price Modifiers:</strong>")
+                pm_label.setStyleSheet("color: #a0a0a0; margin-top: 10px;")
+                merchant_layout.addWidget(pm_label)
+
+                for pm in price_mods:
+                    item_type = pm.get("item_type", 0)
+                    multiplier = pm.get("multiplier", 100)
+                    type_names = {
+                        1: "Equipment",
+                        2: "Inventory Rune",
+                        3: "Installed Rune",
+                        4: "Quest Item",
+                        5: "Usable Item",
+                        6: "Book/Scroll",
+                    }
+                    type_name = type_names.get(item_type, f"Type {item_type}")
+                    row_layout = QHBoxLayout()
+                    type_label = QLabel(f"  {type_name}:")
+                    type_label.setStyleSheet("color: #a0a0a0;")
+                    value_label = QLabel(f"{multiplier}%")
+                    value_label.setStyleSheet("color: #e0e0e0;")
+                    row_layout.addWidget(type_label)
+                    row_layout.addWidget(value_label)
+                    row_layout.addStretch()
+                    merchant_layout.addLayout(row_layout)
+
+            self.details_content_layout.addWidget(merchant_group)
+
         # Add stretch to push everything to the top
         self.details_content_layout.addStretch()
 
@@ -929,20 +1047,26 @@ class GraufurterBuergerBuero(QMainWindow):
         try:
             selected_items = self.npc_tree.selectedItems()
             if not selected_items:
-                QMessageBox.warning(self, "No Selection", "Please select an NPC to edit.")
+                QMessageBox.warning(
+                    self, "No Selection", "Please select an NPC to edit."
+                )
                 return
 
             item = selected_items[0]
             item_data = item.data(0, Qt.ItemDataRole.UserRole)
 
             if not item_data:
-                QMessageBox.warning(self, "Invalid Selection", "Please select a valid NPC.")
+                QMessageBox.warning(
+                    self, "Invalid Selection", "Please select a valid NPC."
+                )
                 return
 
             item_type, npc_id = item_data
 
             if item_type != "npc" or npc_id not in self.npc_data:
-                QMessageBox.warning(self, "Invalid Selection", "Please select a valid NPC.")
+                QMessageBox.warning(
+                    self, "Invalid Selection", "Please select a valid NPC."
+                )
                 return
 
             # Only allow editing custom NPCs
@@ -951,7 +1075,7 @@ class GraufurterBuergerBuero(QMainWindow):
                     self,
                     "Cannot Edit",
                     "You can only edit custom NPCs (ID >= 40000).\n"
-                    "Game NPCs cannot be edited directly."
+                    "Game NPCs cannot be edited directly.",
                 )
                 return
 
@@ -961,9 +1085,7 @@ class GraufurterBuergerBuero(QMainWindow):
             npc_data = load_npc(npc_id)
             if not npc_data:
                 QMessageBox.critical(
-                    self,
-                    "Error",
-                    f"Failed to load NPC {npc_id} for editing."
+                    self, "Error", f"Failed to load NPC {npc_id} for editing."
                 )
                 return
 
@@ -986,7 +1108,9 @@ class GraufurterBuergerBuero(QMainWindow):
                 self.reload_data()
                 if self.logger:
                     self.logger.info(f"✓ NPC {npc_id} edited successfully")
-                QMessageBox.information(self, "Success", f"NPC {npc_id} edited successfully!")
+                QMessageBox.information(
+                    self, "Success", f"NPC {npc_id} edited successfully!"
+                )
 
         except Exception as e:
             if self.logger:
@@ -1005,14 +1129,18 @@ class GraufurterBuergerBuero(QMainWindow):
             from tirganach import GameData
 
             # Get all custom NPCs (ID >= 40000)
-            custom_npcs = {npc_id: npc_info for npc_id, npc_info in self.npc_data.items() if npc_id >= 40000}
+            custom_npcs = {
+                npc_id: npc_info
+                for npc_id, npc_info in self.npc_data.items()
+                if npc_id >= 40000
+            }
 
             if not custom_npcs:
                 QMessageBox.information(
                     self,
                     "No Custom NPCs",
                     "There are no custom NPCs to export.\n"
-                    "Create some NPCs first before exporting."
+                    "Create some NPCs first before exporting.",
                 )
                 return
 
@@ -1022,7 +1150,7 @@ class GraufurterBuergerBuero(QMainWindow):
                     self,
                     "No Base CFF",
                     "GameData.cff is not loaded. Cannot create merged CFF file.\n"
-                    "The original file should auto-load on startup."
+                    "The original file should auto-load on startup.",
                 )
                 return
 
@@ -1038,15 +1166,15 @@ class GraufurterBuergerBuero(QMainWindow):
                 self,
                 "Export Merged CFF File",
                 os.path.join(initial_dir, suggested_filename),
-                "CFF Files (*.cff);;All Files (*)"
+                "CFF Files (*.cff);;All Files (*)",
             )
 
             if not file_path:
                 return
 
             # Ensure .cff extension
-            if not file_path.endswith('.cff'):
-                file_path += '.cff'
+            if not file_path.endswith(".cff"):
+                file_path += ".cff"
 
             os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
@@ -1054,7 +1182,9 @@ class GraufurterBuergerBuero(QMainWindow):
             from PySide6.QtWidgets import QProgressDialog
             from PySide6.QtCore import Qt
 
-            progress = QProgressDialog("Loading GameData.cff...", "Cancel", 0, 100, self)
+            progress = QProgressDialog(
+                "Loading GameData.cff...", "Cancel", 0, 100, self
+            )
             progress.setWindowModality(Qt.WindowModality.WindowModal)
             progress.setMinimumDuration(0)
             progress.setValue(0)
@@ -1087,14 +1217,18 @@ class GraufurterBuergerBuero(QMainWindow):
             progress.setValue(100)
 
             # Write summary file
-            summary_path = file_path.replace('.cff', '_summary.txt')
+            summary_path = file_path.replace(".cff", "_summary.txt")
             with open(summary_path, "w", encoding="utf-8") as f:
                 f.write("Merged CFF Export Summary\n")
                 f.write("=" * 40 + "\n\n")
-                f.write(f"Export Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+                f.write(
+                    f"Export Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+                )
                 f.write(f"Base CFF: {self.custom_cff_path}\n")
                 f.write(f"Output File: {file_path}\n")
-                f.write(f"Total Game NPCs: {len([npc_id for npc_id in self.npc_data.keys() if npc_id < 40000])}\n")
+                f.write(
+                    f"Total Game NPCs: {len([npc_id for npc_id in self.npc_data.keys() if npc_id < 40000])}\n"
+                )
                 f.write(f"Total Custom NPCs: {len(custom_npcs)}\n\n")
 
                 f.write("Custom NPCs to be integrated:\n")
@@ -1103,9 +1237,15 @@ class GraufurterBuergerBuero(QMainWindow):
                     f.write(f"  - ID {npc_id}: {npc_name}\n")
 
                 f.write("\n")
-                f.write("Note: Currently this creates a copy of the original GameData.cff.\n")
-                f.write("Full NPC integration into the CFF structure is in development.\n")
-                f.write("Use the individual NPC export feature for now to get binary category files.\n")
+                f.write(
+                    "Note: Currently this creates a copy of the original GameData.cff.\n"
+                )
+                f.write(
+                    "Full NPC integration into the CFF structure is in development.\n"
+                )
+                f.write(
+                    "Use the individual NPC export feature for now to get binary category files.\n"
+                )
 
             QMessageBox.information(
                 self,
@@ -1114,7 +1254,7 @@ class GraufurterBuergerBuero(QMainWindow):
                 f"Base NPCs: {len([npc_id for npc_id in self.npc_data.keys() if npc_id < 40000])}\n"
                 f"Custom NPCs listed: {len(custom_npcs)}\n\n"
                 f"Note: Full CFF integration is in development.\n"
-                f"Currently creates a base copy for reference."
+                f"Currently creates a base copy for reference.",
             )
 
             if self.logger:
@@ -1123,7 +1263,11 @@ class GraufurterBuergerBuero(QMainWindow):
         except Exception as e:
             if self.logger:
                 self.logger.exception(f"Failed to export CFF: {e}")
-            QMessageBox.critical(self, "Export Failed", f"Failed to export CFF:\n{e}\n\nTry using 'Load CFF File' first.")
+            QMessageBox.critical(
+                self,
+                "Export Failed",
+                f"Failed to export CFF:\n{e}\n\nTry using 'Load CFF File' first.",
+            )
 
     def load_cff_file(self):
         """Load NPCs from a custom CFF file"""
@@ -1145,28 +1289,40 @@ class GraufurterBuergerBuero(QMainWindow):
         """Update status bar with current file information"""
         if self.custom_cff_path:
             file_name = Path(self.custom_cff_path).name
-            msg = f"{prefix} - Viewing: {file_name}" if prefix else f"Viewing: {file_name}"
+            msg = (
+                f"{prefix} - Viewing: {file_name}"
+                if prefix
+                else f"Viewing: {file_name}"
+            )
         else:
-            msg = f"{prefix} - Viewing: Default Game Data" if prefix else "Viewing: Default Game Data"
+            msg = (
+                f"{prefix} - Viewing: Default Game Data"
+                if prefix
+                else "Viewing: Default Game Data"
+            )
         self.statusBar().showMessage(msg)
 
 
 def main():
     """Main entry point"""
-    parser = argparse.ArgumentParser(description="Graufurter Bürger Büro - NPC Creation Suite")
+    parser = argparse.ArgumentParser(
+        description="Graufurter Bürger Büro - NPC Creation Suite"
+    )
     parser.add_argument("--debug", action="store_true", help="Enable debug logging")
-    parser.add_argument("--rebuild-cache", action="store_true", help="Rebuild game data cache")
+    parser.add_argument(
+        "--rebuild-cache", action="store_true", help="Rebuild game data cache"
+    )
     args = parser.parse_args()
 
     app = QApplication(sys.argv)
-    
+
     # Set application style
     app.setStyle("Fusion")
-    
+
     # Create and show main window
     window = GraufurterBuergerBuero()
     window.show()
-    
+
     sys.exit(app.exec())
 
 

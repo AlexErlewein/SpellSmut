@@ -1,6 +1,11 @@
+from typing import Any, Dict
 from id_manager import ContentType, IDManager
 from npc_creation_data import (
     CharacterClass,
+    ItemType,
+    MerchantData,
+    MerchantItem,
+    MerchantPriceModifier,
     NpcAppearance,
     NpcBehavior,
     NpcCombatStats,
@@ -11,18 +16,24 @@ from npc_creation_data import (
     VoiceType,
 )
 from PySide6.QtWidgets import (
+    QAbstractItemView,
     QCheckBox,
     QComboBox,
     QDialog,
+    QDialogButtonBox,
     QFileDialog,
     QFormLayout,
     QGroupBox,
+    QHBoxLayout,
+    QHeaderView,
     QLabel,
     QLineEdit,
     QMessageBox,
     QPushButton,
     QRadioButton,
     QSpinBox,
+    QTableWidget,
+    QTableWidgetItem,
     QTextEdit,
     QVBoxLayout,
     QWizard,
@@ -44,15 +55,160 @@ class NpcCreatorWizard(QWizard):
         self.setWindowTitle("SpellForce NPC Creator")
         self.setMinimumSize(600, 500)
 
+        self.setStyleSheet("""
+            QWizard {
+                background-color: #1e1e1e;
+                color: #e0e0e0;
+            }
+            QWizard * {
+                background-color: #1e1e1e;
+                color: #e0e0e0;
+                font-family: "Segoe UI", Arial, sans-serif;
+                font-size: 10pt;
+            }
+            QWizard QLabel {
+                color: #e0e0e0;
+                background-color: transparent;
+            }
+            QWizard QGroupBox {
+                font-weight: bold;
+                border: 2px solid #3c3c3c;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+                color: #e0e0e0;
+                background-color: transparent;
+            }
+            QWizard QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+            QWizard QPushButton {
+                background-color: #3c5a9d;
+                color: #e0e0e0;
+                padding: 6px 12px;
+                border-radius: 3px;
+                border: none;
+            }
+            QWizard QPushButton:hover {
+                background-color: #4a6ab3;
+            }
+            QWizard QPushButton:disabled {
+                background-color: #2d2d2d;
+                color: #666;
+            }
+            QWizard QLineEdit, QWizard QTextEdit {
+                background-color: #252525;
+                color: #e0e0e0;
+                border: 1px solid #3c3c3c;
+                padding: 3px;
+                border-radius: 3px;
+            }
+            QWizard QSpinBox, QWizard QDoubleSpinBox {
+                background-color: #252525;
+                color: #e0e0e0;
+                border: 1px solid #3c3c3c;
+                padding: 3px;
+                border-radius: 3px;
+            }
+            QWizard QComboBox {
+                background-color: #252525;
+                color: #e0e0e0;
+                border: 1px solid #3c3c3c;
+                padding: 3px;
+                border-radius: 3px;
+            }
+            QWizard QComboBox::drop-down {
+                background-color: #3c3c3c;
+                border: none;
+            }
+            QWizard QComboBox QAbstractItemView {
+                background-color: #252525;
+                color: #e0e0e0;
+                selection-background-color: #094771;
+            }
+            QWizard QRadioButton {
+                color: #e0e0e0;
+                background-color: transparent;
+            }
+            QWizard QRadioButton::indicator {
+                background-color: #252525;
+                border: 1px solid #3c3c3c;
+            }
+            QWizard QCheckBox {
+                color: #e0e0e0;
+                background-color: transparent;
+            }
+            QWizard QTableWidget {
+                background-color: #252525;
+                color: #e0e0e0;
+                gridline-color: #3c3c3c;
+                border: 1px solid #3c3c3c;
+            }
+            QWizard QTableWidget::item {
+                background-color: #252525;
+                color: #e0e0e0;
+            }
+            QWizard QTableWidget::item:selected {
+                background-color: #094771;
+            }
+            QWizard QHeaderView::section {
+                background-color: #2b2b2b;
+                color: #e0e0e0;
+                padding: 5px;
+                border: 1px solid #3c3c3c;
+            }
+            QWizard QFormLayout::label {
+                color: #a0a0a0;
+                background-color: transparent;
+            }
+            QWizard QFormLayout {
+                background-color: transparent;
+            }
+            QWizard QVBoxLayout, QWizard QHBoxLayout, QWizard QGridLayout {
+                background-color: transparent;
+            }
+            QWizardPage {
+                background-color: #1e1e1e;
+            }
+            QWizardPage * {
+                background-color: #1e1e1e;
+                color: #e0e0e0;
+            }
+        """)
+
         # Add wizard pages
         self.addPage(ModeSelectionPage(self.id_manager))
         self.addPage(BasicIdentityPage())
         self.addPage(BaseStatsPage())
         self.addPage(CombatStatsPage())
         self.addPage(AppearanceVoicePage())
-        self.addPage(EquipmentSelectionPage())  # New equipment page
+        self.addPage(EquipmentSelectionPage())
         self.addPage(BehaviorPage())
+        self.addPage(MerchantPage())
         self.addPage(ReviewExportPage())
+
+    def nextId(self) -> int:
+        current = self.currentId()
+
+        # Check if NPC type is merchant
+        def is_merchant() -> bool:
+            identity_page = self.page(1)
+            npc_type_text = identity_page.npc_type_combo.currentText()
+            return npc_type_text.lower() == "merchant"
+
+        # Going forward from BehaviorPage (6) to MerchantPage (7) or ReviewExportPage (8)
+        if current == 6:
+            if not is_merchant():
+                return 8  # Skip Merchant page, go directly to ReviewExportPage
+
+        # Going back from ReviewExportPage (8) to MerchantPage (7) or BehaviorPage (6)
+        if current == 8:
+            if not is_merchant():
+                return 6  # Skip Merchant page, go back to BehaviorPage
+
+        return super().nextId()
 
     def done(self, result):
         """Handle wizard completion/cancellation"""
@@ -75,6 +231,7 @@ class NpcCreatorWizard(QWizard):
         if self.npc_id is None:
             # Fallback ID allocation if not properly allocated
             from shared.id_manager import IDManager, ContentType
+
             id_manager = IDManager()
             self.npc_id = id_manager.allocate_id(ContentType.NPC)
             print(f"Warning: NPC ID was None, allocated fallback ID: {self.npc_id}")
@@ -151,6 +308,12 @@ class NpcCreatorWizard(QWizard):
             ),
         )
 
+        # Merchant data (page 7) - only if NPC type is merchant
+        merchant_data = None
+        if npc_type == NpcType.MERCHANT:
+            merchant_page = self.page(7)
+            merchant_data = merchant_page.get_merchant_data(self.npc_id)
+
         # Create the complete NPC data object
         npc_data = NpcCreationData(
             npc_id=self.npc_id,
@@ -167,6 +330,7 @@ class NpcCreatorWizard(QWizard):
             appearance=appearance,
             equipment=equipment,
             behavior=behavior,
+            merchant_data=merchant_data,
         )
 
         return npc_data
@@ -1029,6 +1193,396 @@ class BehaviorPage(QWizardPage):
             if behavior.spawn_location:
                 self.spawn_x_spin.setValue(behavior.spawn_location[0])
                 self.spawn_y_spin.setValue(behavior.spawn_location[1])
+
+
+class MerchantPage(QWizardPage):
+    """Phase 7: Merchant Configuration"""
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        self.setTitle("Merchant Configuration")
+        self.setSubTitle("Configure merchant inventory and pricing")
+
+        self.item_loader = None
+        self.inventory = []
+
+        layout = QVBoxLayout()
+
+        info_label = QLabel(
+            "This page only appears for Merchant-type NPCs. "
+            "Configure what items this merchant will sell."
+        )
+        info_label.setStyleSheet("color: #888; font-style: italic;")
+        info_label.setWordWrap(True)
+        layout.addWidget(info_label)
+
+        inventory_group = QGroupBox("Merchant Inventory")
+        inventory_layout = QVBoxLayout()
+
+        from PySide6.QtWidgets import (
+            QTableWidget,
+            QTableWidgetItem,
+            QHeaderView,
+            QAbstractItemView,
+        )
+
+        self.inventory_table = QTableWidget()
+        self.inventory_table.setColumnCount(4)
+        self.inventory_table.setHorizontalHeaderLabels(
+            ["Item ID", "Stock", "Item Name", "Actions"]
+        )
+        self.inventory_table.horizontalHeader().setStretchLastSection(True)
+        self.inventory_table.setSelectionBehavior(
+            QAbstractItemView.SelectionBehavior.SelectRows
+        )
+        self.inventory_table.setSelectionMode(
+            QAbstractItemView.SelectionMode.SingleSelection
+        )
+        self.inventory_table.setEditTriggers(
+            QAbstractItemView.EditTrigger.NoEditTriggers
+        )
+        inventory_layout.addWidget(self.inventory_table)
+
+        btn_layout = QHBoxLayout()
+        self.add_item_btn = QPushButton("Add Item...")
+        self.add_item_btn.clicked.connect(self.add_item)
+        btn_layout.addWidget(self.add_item_btn)
+
+        self.remove_item_btn = QPushButton("Remove Selected")
+        self.remove_item_btn.clicked.connect(self.remove_item)
+        self.remove_item_btn.setEnabled(False)
+        btn_layout.addWidget(self.remove_item_btn)
+
+        btn_layout.addStretch()
+        inventory_layout.addLayout(btn_layout)
+
+        inventory_group.setLayout(inventory_layout)
+        layout.addWidget(inventory_group)
+
+        self.inventory_table.selectionModel().selectionChanged.connect(
+            lambda: self.remove_item_btn.setEnabled(
+                len(self.inventory_table.selectedIndexes()) > 0
+            )
+        )
+
+        price_group = QGroupBox("Price Modifiers (Optional)")
+        price_layout = QFormLayout()
+
+        self.equipment_price_spin = QSpinBox()
+        self.equipment_price_spin.setRange(0, 500)
+        self.equipment_price_spin.setValue(100)
+        self.equipment_price_spin.setSuffix(" %")
+        price_layout.addRow("Equipment:", self.equipment_price_spin)
+
+        self.rune_price_spin = QSpinBox()
+        self.rune_price_spin.setRange(0, 500)
+        self.rune_price_spin.setValue(100)
+        self.rune_price_spin.setSuffix(" %")
+        price_layout.addRow("Runes:", self.rune_price_spin)
+
+        self.consumable_price_spin = QSpinBox()
+        self.consumable_price_spin.setRange(0, 500)
+        self.consumable_price_spin.setValue(100)
+        self.consumable_price_spin.setSuffix(" %")
+        price_layout.addRow("Consumables:", self.consumable_price_spin)
+
+        price_group.setLayout(price_layout)
+        layout.addWidget(price_group)
+
+        layout.addStretch()
+        self.setLayout(layout)
+
+        self.setStyleSheet("""
+            QWidget {
+                background-color: #1e1e1e;
+                color: #e0e0e0;
+            }
+            QGroupBox {
+                font-weight: bold;
+                border: 2px solid #3c3c3c;
+                border-radius: 5px;
+                margin-top: 1ex;
+                padding-top: 10px;
+                color: #e0e0e0;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 5px 0 5px;
+            }
+            QTableWidget {
+                background-color: #252525;
+                color: #e0e0e0;
+                gridline-color: #3c3c3c;
+                border: 1px solid #3c3c3c;
+            }
+            QTableWidget::item {
+                padding: 3px;
+            }
+            QTableWidget::item:selected {
+                background-color: #094771;
+                color: #e0e0e0;
+            }
+            QHeaderView::section {
+                background-color: #2b2b2b;
+                color: #e0e0e0;
+                padding: 5px;
+                border: 1px solid #3c3c3c;
+                font-weight: bold;
+            }
+            QPushButton {
+                background-color: #3c5a9d;
+                color: #e0e0e0;
+                padding: 6px 12px;
+                border-radius: 3px;
+                border: none;
+            }
+            QPushButton:hover {
+                background-color: #4a6ab3;
+            }
+            QPushButton:disabled {
+                background-color: #2d2d2d;
+                color: #666;
+            }
+            QSpinBox {
+                background-color: #252525;
+                color: #e0e0e0;
+                border: 1px solid #3c3c3c;
+                padding: 3px;
+                border-radius: 3px;
+            }
+            QSpinBox::up-button, QSpinBox::down-button {
+                background-color: #3c3c3c;
+                border-radius: 2px;
+            }
+            QLabel {
+                color: #e0e0e0;
+            }
+            QFormLayout::label {
+                color: #a0a0a0;
+            }
+        """)
+
+    def initializePage(self):
+        wizard = self.wizard()
+
+        identity_page = wizard.page(1)
+        npc_type_text = identity_page.npc_type_combo.currentText()
+
+        if npc_type_text.lower() != "merchant":
+            self.setVisible(False)
+            return
+
+        self.setVisible(True)
+
+        if (
+            hasattr(wizard, "source_npc")
+            and wizard.source_npc
+            and wizard.source_npc.merchant_data
+        ):
+            self.load_merchant_data(wizard.source_npc.merchant_data)
+
+    def load_merchant_data(self, merchant_data: MerchantData):
+        self.inventory = []
+        for item in merchant_data.inventory:
+            self.inventory.append({"item_id": item.item_id, "stock": item.stock})
+        self.refresh_inventory_table()
+
+        for pm in merchant_data.price_modifiers:
+            if pm.item_type == ItemType.EQUIPMENT:
+                self.equipment_price_spin.setValue(pm.multiplier)
+            elif pm.item_type == ItemType.INVENTORY_RUNE:
+                self.rune_price_spin.setValue(pm.multiplier)
+            elif pm.item_type == ItemType.INSTALLED_RUNE:
+                self.rune_price_spin.setValue(pm.multiplier)
+            elif pm.item_type in (ItemType.USABLE_ITEM, ItemType.BOOK_SCROLL):
+                self.consumable_price_spin.setValue(pm.multiplier)
+
+    def get_merchant_data(self, npc_id: int) -> MerchantData:
+        merchant_id = npc_id
+
+        inventory = []
+        for item_dict in self.inventory:
+            inventory.append(
+                MerchantItem(item_id=item_dict["item_id"], stock=item_dict["stock"])
+            )
+
+        price_modifiers = [
+            MerchantPriceModifier(
+                ItemType.EQUIPMENT, self.equipment_price_spin.value()
+            ),
+            MerchantPriceModifier(
+                ItemType.INVENTORY_RUNE, self.rune_price_spin.value()
+            ),
+            MerchantPriceModifier(
+                ItemType.INSTALLED_RUNE, self.rune_price_spin.value()
+            ),
+            MerchantPriceModifier(
+                ItemType.USABLE_ITEM, self.consumable_price_spin.value()
+            ),
+            MerchantPriceModifier(
+                ItemType.BOOK_SCROLL, self.consumable_price_spin.value()
+            ),
+        ]
+
+        return MerchantData(
+            merchant_id=merchant_id,
+            linked_npc_id=npc_id,
+            inventory=inventory,
+            price_modifiers=price_modifiers,
+        )
+
+    def add_item(self):
+        from PySide6.QtWidgets import QDialog, QDialogButtonBox
+
+        dialog = QDialog(self)
+        dialog.setWindowTitle("Select Item")
+        dialog.setMinimumSize(500, 400)
+        layout = QVBoxLayout(dialog)
+
+        search_layout = QFormLayout()
+        self.search_edit = QLineEdit()
+        self.search_edit.setPlaceholderText("Search items...")
+        search_layout.addRow("Search:", self.search_edit)
+        layout.addLayout(search_layout)
+
+        self.item_table = QTableWidget()
+        self.item_table.setColumnCount(3)
+        self.item_table.setHorizontalHeaderLabels(["Item ID", "Name", "Type"])
+        self.item_table.horizontalHeader().setStretchLastSection(True)
+        self.item_table.setSelectionBehavior(
+            QAbstractItemView.SelectionBehavior.SelectRows
+        )
+        self.item_table.setSelectionMode(
+            QAbstractItemView.SelectionMode.SingleSelection
+        )
+        self.item_table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        layout.addWidget(self.item_table)
+
+        stock_layout = QFormLayout()
+        stock_label = QLabel("Stock quantity:")
+        self.stock_spin = QSpinBox()
+        self.stock_spin.setRange(1, 999)
+        self.stock_spin.setValue(1)
+        stock_layout.addRow(stock_label, self.stock_spin)
+        layout.addLayout(stock_layout)
+
+        buttons = QDialogButtonBox(
+            QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel
+        )
+        buttons.accepted.connect(dialog.accept)
+        buttons.rejected.connect(dialog.reject)
+        layout.addWidget(buttons)
+
+        self.search_edit.textChanged.connect(self.filter_items)
+        self.search_edit.returnPressed.connect(self.filter_items)
+        self.load_items()
+
+        if dialog.exec() == QDialog.Accepted:
+            selected_rows = self.item_table.selectedIndexes()
+            if selected_rows:
+                row = selected_rows[0].row()
+                item_id = int(self.item_table.item(row, 0).text())
+                stock = self.stock_spin.value()
+
+                for existing in self.inventory:
+                    if existing["item_id"] == item_id:
+                        existing["stock"] = stock
+                        break
+                else:
+                    self.inventory.append({"item_id": item_id, "stock": stock})
+
+                self.refresh_inventory_table()
+
+    def load_items(self):
+        if self.item_loader is None:
+            try:
+                from item_loader import ItemLoader
+
+                self.item_loader = ItemLoader()
+            except Exception as e:
+                print(f"Error loading item loader: {e}")
+                return
+
+        items = self.item_loader.load_all_items()
+        self.all_items = items
+        self._populate_item_table(items)
+
+    def _populate_item_table(self, items: Dict[int, Dict[str, Any]]):
+        self.item_table.setRowCount(0)
+        count = 0
+        for item_id, item_data in sorted(items.items()):
+            row = self.item_table.rowCount()
+            self.item_table.insertRow(row)
+            self.item_table.setItem(row, 0, QTableWidgetItem(str(item_id)))
+            self.item_table.setItem(
+                row, 1, QTableWidgetItem(item_data.get("name", f"Item {item_id}"))
+            )
+            self.item_table.setItem(
+                row, 2, QTableWidgetItem(item_data.get("type_display", ""))
+            )
+            count += 1
+            if count >= 500:
+                break
+
+    def filter_items(self, query: str):
+        if self.item_loader is None or not hasattr(self, "all_items"):
+            return
+
+        if not query:
+            self._populate_item_table(self.all_items)
+            return
+
+        query_lower = query.lower()
+        filtered = {}
+        count = 0
+        for item_id, item_data in self.all_items.items():
+            name = item_data.get("name", "").lower()
+            if query_lower in name or str(item_id).startswith(query):
+                filtered[item_id] = item_data
+                count += 1
+                if count >= 500:
+                    break
+
+        self._populate_item_table(filtered)
+
+    def remove_item(self):
+        selected_rows = self.inventory_table.selectedIndexes()
+        if selected_rows:
+            row = selected_rows[0].row()
+            if 0 <= row < len(self.inventory):
+                self.inventory.pop(row)
+                self.refresh_inventory_table()
+
+    def refresh_inventory_table(self):
+        self.inventory_table.setRowCount(0)
+
+        if self.item_loader is None:
+            try:
+                from item_loader import ItemLoader
+
+                self.item_loader = ItemLoader()
+            except Exception:
+                pass
+
+        for item_dict in self.inventory:
+            row = self.inventory_table.rowCount()
+            self.inventory_table.insertRow(row)
+
+            item_id = item_dict["item_id"]
+            stock = item_dict["stock"]
+
+            self.inventory_table.setItem(row, 0, QTableWidgetItem(str(item_id)))
+            self.inventory_table.setItem(row, 1, QTableWidgetItem(str(stock)))
+
+            item_name = f"Item {item_id}"
+            if self.item_loader and self.item_loader.items_cache:
+                item_data = self.item_loader.items_cache.get(item_id)
+                if item_data:
+                    item_name = item_data.get("name", item_name)
+
+            self.inventory_table.setItem(row, 2, QTableWidgetItem(item_name))
 
 
 class ReviewExportPage(QWizardPage):

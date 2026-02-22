@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SpellforceDataEditor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a61c6860146a80b9c52d46f0b0b3aebe3d146863")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ebc14aab6f7dfa6da37c96631acced3aa5428e23")]
 [assembly: System.Reflection.AssemblyProductAttribute("SpellforceDataEditor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SpellforceDataEditor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

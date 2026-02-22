@@ -53,8 +53,8 @@ class ToolButton(QFrame):
 
     def setup_ui(self):
         """Setup the button appearance"""
-        self.setMinimumSize(QSize(280, 120))
-        self.setMaximumSize(QSize(350, 150))
+        self.setMinimumSize(QSize(240, 90))
+        self.setMaximumSize(QSize(300, 110))
         self.setCursor(Qt.PointingHandCursor)
         self.setFrameStyle(QFrame.StyledPanel | QFrame.Raised)
 
@@ -62,10 +62,10 @@ class ToolButton(QFrame):
         layout.setContentsMargins(15, 15, 15, 15)
         layout.setSpacing(8)
 
-        # Title label (large, with emoji)
+        # Title label (with emoji)
         self.title_label = QLabel(self.title)
         title_font = QFont()
-        title_font.setPointSize(22)
+        title_font.setPointSize(14)
         title_font.setBold(True)
         self.title_label.setFont(title_font)
         self.title_label.setStyleSheet("color: #e0e0e0; background: transparent;")
@@ -74,7 +74,7 @@ class ToolButton(QFrame):
         # Description label (smaller)
         self.desc_label = QLabel(self.description)
         desc_font = QFont()
-        desc_font.setPointSize(11)
+        desc_font.setPointSize(10)
         self.desc_label.setFont(desc_font)
         self.desc_label.setStyleSheet("color: #aaa; background: transparent;")
         layout.addWidget(self.desc_label)
@@ -266,7 +266,9 @@ class SpellSmutLauncher(QMainWindow):
         row3_layout.addWidget(self.cff_btn)
 
         # Allwissende Almacht button
-        self.icon_btn = ToolButton("�️ Allwissende Almacht", "Browse game icons and assets")
+        self.icon_btn = ToolButton(
+            "🔍 Allwissende Almacht", "Browse game icons and assets"
+        )
         self.icon_btn.clicked_connect(self.launch_allwissende_almacht)
         row3_layout.addWidget(self.icon_btn)
 

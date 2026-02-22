@@ -1,0 +1,25 @@
+
+Sample Campaign
+===============
+
+A sample custom campaign for testing the campaign launcher.
+
+Maps:
+- P100_Introduction.map: Introduction to the campaign
+- P101_FirstTown.map: First town with NPCs
+- P102_ForestBattle.map: Battle in the forest
+- P103_MountainPass.map: Mountain pass challenge
+- P104_FinalBoss.map: Final boss battle
+
+Scripts:
+- Each map has corresponding Lua scripts in src/custom_scripts/P[i]/
+- Basic AI and quest scripts included
+
+To play:
+1. Launch the Campaign Launcher from the main tool launcher
+2. Select "SampleCampaign" 
+3. Click "Launch Campaign"
+4. (Implementation needed: actual game launching)
+
+Note: This is a demonstration. The .map files are empty placeholders.
+Real campaigns would need actual map data created with the map editor.

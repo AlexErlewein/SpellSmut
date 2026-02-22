@@ -4,7 +4,7 @@ NPC CFF Exporter - Export NPCs to GameData.cff format
 
 import struct
 from typing import Dict, List, Any
-from npc_creation_data import NpcCreationData, NpcType, CharacterClass
+from npc_creation_data import NpcCreationData, NpcType, CharacterClass, ItemType
 
 
 class NpcCFFExporter:
@@ -37,7 +37,13 @@ class NpcCFFExporter:
 
         # Category 2016: Text entries (name, title, description)
         text_entries = self.export_text_entries(npc_data)
-        exports[2016] = b''.join(text_entries) if text_entries else b''
+        exports[2016] = b"".join(text_entries) if text_entries else b""
+
+        # Merchant categories (if NPC type is merchant)
+        if npc_data.npc_type == NpcType.MERCHANT and npc_data.merchant_data:
+            exports[2041] = self.export_merchant_definition(npc_data)
+            exports[2042] = self.export_merchant_inventory(npc_data)
+            exports[2047] = self.export_merchant_prices(npc_data)
 
         return exports
 
@@ -52,36 +58,41 @@ class NpcCFFExporter:
                 NpcType.FRIENDLY: 0,
                 NpcType.MERCHANT: 1,
                 NpcType.GUARD: 2,
-                NpcType.HOSTILE: 3
+                NpcType.HOSTILE: 3,
             }
 
             class_type_map = {
                 CharacterClass.WARRIOR: 0,
                 CharacterClass.MAGE: 1,
                 CharacterClass.ROGUE: 2,
-                CharacterClass.MULTI_CLASS: 3
+                CharacterClass.MULTI_CLASS: 3,
             }
 
             # Calculate CFF-safe NPC ID and name ID (must be <= 65535)
             if npc_data.npc_id is None:
                 cff_npc_id = 1001  # Default ID for NPCs with null ID
             else:
-                cff_npc_id = npc_data.npc_id % 65535  # Ensure NPC ID fits in unsigned short
+                cff_npc_id = (
+                    npc_data.npc_id % 65535
+                )  # Ensure NPC ID fits in unsigned short
                 if cff_npc_id == 0:
                     cff_npc_id = 1  # Avoid ID 0 which might be reserved
             name_id = (cff_npc_id % 35000) + 1000  # Keep it in safe range
 
-            data = struct.pack('<HHBBBBBBBB',
-                cff_npc_id,                                        # NPC ID (adjusted for CFF format)
-                name_id,                                           # Name ID (safe range)
-                npc_type_map.get(npc_data.npc_type, 0),           # NPC Type
+            data = struct.pack(
+                "<HHBBBBBBBB",
+                cff_npc_id,  # NPC ID (adjusted for CFF format)
+                name_id,  # Name ID (safe range)
+                npc_type_map.get(npc_data.npc_type, 0),  # NPC Type
                 class_type_map.get(npc_data.character_class, 0),  # Character Class
-                npc_data.level,                                    # Level
-                0,                                                 # Faction ID (placeholder)
-                npc_data.appearance.head_id,                      # Head ID
-                0,                                                 # Race ID (placeholder)
-                1 if npc_data.appearance.gender == "FEMALE" else 0, # Gender (0=male, 1=female)
-                0                                                  # Voice Type (placeholder)
+                npc_data.level,  # Level
+                0,  # Faction ID (placeholder)
+                npc_data.appearance.head_id,  # Head ID
+                0,  # Race ID (placeholder)
+                1
+                if npc_data.appearance.gender == "FEMALE"
+                else 0,  # Gender (0=male, 1=female)
+                0,  # Voice Type (placeholder)
             )
 
             return data
@@ -101,7 +112,8 @@ class NpcCFFExporter:
                     cff_npc_id = 1
 
             # Structure: NPCID + base stats (STR, STA, AGI, DEX, INT, WIS, CHA)
-            data = struct.pack('<Hiiiiiiii',
+            data = struct.pack(
+                "<Hiiiiiiii",
                 cff_npc_id,
                 npc_data.base_stats.strength,
                 npc_data.base_stats.stamina,
@@ -110,7 +122,7 @@ class NpcCFFExporter:
                 npc_data.base_stats.intelligence,
                 npc_data.base_stats.wisdom,
                 npc_data.base_stats.charisma,
-                0  # Padding
+                0,  # Padding
             )
 
             return data
@@ -130,7 +142,8 @@ class NpcCFFExporter:
                     cff_npc_id = 1
 
             # Structure: NPCID + combat stats
-            data = struct.pack('<Hiiiiiiiiiiii',
+            data = struct.pack(
+                "<Hiiiiiiiiiiii",
                 cff_npc_id,
                 npc_data.derived_stats.health,
                 npc_data.derived_stats.mana,
@@ -143,7 +156,7 @@ class NpcCFFExporter:
                 npc_data.derived_stats.ice_resistance,
                 npc_data.derived_stats.black_resistance,
                 npc_data.derived_stats.mind_resistance,
-                0  # Padding
+                0,  # Padding
             )
 
             return data
@@ -163,7 +176,8 @@ class NpcCFFExporter:
                     cff_npc_id = 1
 
             # Structure: NPCID + equipment item IDs (7 slots)
-            data = struct.pack('<HHHHHHHH',
+            data = struct.pack(
+                "<HHHHHHHH",
                 cff_npc_id,
                 npc_data.equipment.helmet_item_id or 0,
                 npc_data.equipment.chest_item_id or 0,
@@ -171,7 +185,7 @@ class NpcCFFExporter:
                 npc_data.equipment.right_hand_item_id or 0,
                 npc_data.equipment.left_hand_item_id or 0,
                 npc_data.equipment.right_ring_item_id or 0,
-                npc_data.equipment.left_ring_item_id or 0
+                npc_data.equipment.left_ring_item_id or 0,
             )
 
             return data
@@ -183,14 +197,18 @@ class NpcCFFExporter:
         """Export to Category 3005 (NPC Behavior)"""
         try:
             # Structure: NPCID + behavior settings
-            movement_type_map = {
-                "stationary": 0,
-                "patrol": 1,
-                "wander": 2
-            }
+            movement_type_map = {"stationary": 0, "patrol": 1, "wander": 2}
 
-            spawn_x = npc_data.behavior.spawn_location[0] if npc_data.behavior.spawn_location else 0
-            spawn_y = npc_data.behavior.spawn_location[1] if npc_data.behavior.spawn_location else 0
+            spawn_x = (
+                npc_data.behavior.spawn_location[0]
+                if npc_data.behavior.spawn_location
+                else 0
+            )
+            spawn_y = (
+                npc_data.behavior.spawn_location[1]
+                if npc_data.behavior.spawn_location
+                else 0
+            )
 
             # Calculate CFF-safe NPC ID
             if npc_data.npc_id is None:
@@ -200,12 +218,13 @@ class NpcCFFExporter:
                 if cff_npc_id == 0:
                     cff_npc_id = 1
 
-            data = struct.pack('<HBHhh',
+            data = struct.pack(
+                "<HBHhh",
                 cff_npc_id,
                 movement_type_map.get(npc_data.behavior.movement_type, 0),
                 npc_data.behavior.interaction_radius,
                 spawn_x,
-                spawn_y
+                spawn_y,
             )
 
             return data
@@ -251,9 +270,80 @@ class NpcCFFExporter:
     def _create_text_entry(self, text_id: int, text: str) -> bytes:
         """Create a text entry in CFF format"""
         # Encode text as UTF-16LE (SpellForce standard)
-        text_bytes = text.encode('utf-16le')
+        text_bytes = text.encode("utf-16le")
         text_length = len(text_bytes) // 2  # Length in UTF-16 code units
 
         # Structure: TextID (uint), Length (ushort), Text (UTF-16LE bytes)
-        header = struct.pack('<IH', text_id, text_length)
+        header = struct.pack("<IH", text_id, text_length)
         return header + text_bytes
+
+    def export_merchant_definition(self, npc_data: NpcCreationData) -> bytes:
+        """Export to Category 2041 (Merchant Definition - links to unit)"""
+        if not npc_data.merchant_data:
+            return b""
+
+        try:
+            merchant = npc_data.merchant_data
+            cff_merchant_id = merchant.merchant_id % 65535
+            if cff_merchant_id == 0:
+                cff_merchant_id = 1
+
+            cff_unit_id = merchant.linked_npc_id % 65535
+            if cff_unit_id == 0:
+                cff_unit_id = 1
+
+            data = struct.pack("<HH", cff_merchant_id, cff_unit_id)
+            return data
+
+        except struct.error as e:
+            raise ValueError(f"Failed to pack merchant definition: {e}")
+
+    def export_merchant_inventory(self, npc_data: NpcCreationData) -> bytes:
+        """Export to Category 2042 (Merchant Inventory - items for sale)"""
+        if not npc_data.merchant_data:
+            return b""
+
+        try:
+            merchant = npc_data.merchant_data
+            cff_merchant_id = merchant.merchant_id % 65535
+            if cff_merchant_id == 0:
+                cff_merchant_id = 1
+
+            records = []
+            for item in merchant.inventory:
+                item_id = item.item_id % 65535
+                if item_id == 0:
+                    item_id = 1
+                stock = min(item.stock, 65535)
+
+                record = struct.pack("<HHH", cff_merchant_id, item_id, stock)
+                records.append(record)
+
+            return b"".join(records)
+
+        except struct.error as e:
+            raise ValueError(f"Failed to pack merchant inventory: {e}")
+
+    def export_merchant_prices(self, npc_data: NpcCreationData) -> bytes:
+        """Export to Category 2047 (Merchant Price Multipliers)"""
+        if not npc_data.merchant_data:
+            return b""
+
+        try:
+            merchant = npc_data.merchant_data
+            cff_merchant_id = merchant.merchant_id % 65535
+            if cff_merchant_id == 0:
+                cff_merchant_id = 1
+
+            records = []
+            for pm in merchant.price_modifiers:
+                item_type = pm.item_type.value
+                multiplier = min(pm.multiplier, 65535)
+
+                record = struct.pack("<HBH", cff_merchant_id, item_type, multiplier)
+                records.append(record)
+
+            return b"".join(records)
+
+        except struct.error as e:
+            raise ValueError(f"Failed to pack merchant prices: {e}")

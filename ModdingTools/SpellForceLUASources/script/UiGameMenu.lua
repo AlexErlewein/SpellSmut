@@ -1,5 +1,9 @@
 -- this file initializes the in game user interface
 
+print("[SpellSmutTest] UiGameMenu.lua loaded")
+-- Ensure SpellSmut campaign helpers are available when the in-game UI is active
+doscript("SpellSmutCampaign")
+
 function CharInfo_OnClick()
 
 end -- CharInfo_OnClick
@@ -107,7 +111,8 @@ MainForm =
 		{ 812, 0, 38, 31; Type = "UiButton", Name = "<ctrl>btElf",				Hint = "Elf Civilians", 	MeshGfx = "ui_btn_qs_elf.msh"},
 		{ 853, 0, 38, 31; Type = "UiButton", Name = "<ctrl>btOrc",				Hint = "Orc Civilians", 	MeshGfx = "ui_btn_qs_orc.msh"},
 		{ 894, 0, 38, 31; Type = "UiButton", Name = "<ctrl>btTroll",			Hint = "Troll Civilians", 	MeshGfx = "ui_btn_qs_troll.msh"},
-		{ 935, 0, 38, 31; Type = "UiButton", Name = "<ctrl>btDarkElf", 			Hint = "Darkelf Civilians",	MeshGfx = "ui_btn_qs_darkelf.msh"}
+		{ 894, 0, 38, 31; Type = "UiButton", Name = "<ctrl>btDarkElf", 			Hint = "Darkelf Civilians",	MeshGfx = "ui_btn_qs_darkelf_warrior.msh"},
+		{ 986, 0, 38, 31; Type = "UiButton", Name = "<ctrl>btSpellSmutCampaign", Hint = "SpellSmut Campaign", MeshGfx = "ui_btn_dummy_color.msh", OnClick = "SpellSmutCampaign_Shortcut"},
 	
 		-- build button
 		--{ 986, 0, 38, 31; Type = "UiButton", Name = "<ctrl>btBuild", 	Hint = "Building menu", 	MeshGfx = "ui_btn_build_pick.msh", 	OnClick = "BtnBuild_OnClick"},
@@ -158,6 +163,24 @@ SubDebug1 =
 
 
 -- obsolete
+
+-- SpellSmut test: keyboard shortcut from in-game UI
+function SpellSmutCampaign_Shortcut()
+	print("[SpellSmutTest] UiGameMenu shortcut pressed")
+	if SpellSmutCampaign_OnClick ~= nil then
+		SpellSmutCampaign_OnClick()
+	else
+		-- simple fallback: try to load the intro map directly
+		if Application and Application.LoadMap then
+			Application:LoadMap("map\\CustomCampaign\\P100_Introduction.map")
+		end
+	end
+end
+
+if UiCreateGlobalShortcutShort ~= nil then
+	print("[SpellSmutTest] Registering Ctrl+Shift+C from UiGameMenu")
+	UiCreateGlobalShortcutShort("Ctrl+Shift+C", "SpellSmutCampaign_Shortcut", 0, "SpellSmut Campaign")
+end
 SubMain_Minimap =
 {
 	0, 0, 161, 161;
@@ -283,6 +306,11 @@ if not UiGameMenu_executed then -- only run once - not on reload
 
 	UiCreateForm (SubDebug1)
 	--xUiCreateForm (MouseInfoForm)
+
+	-- SpellSmut: create HUD button once the in-game UI is initialized
+	if SpellSmutCampaign_InitUI ~= nil then
+		SpellSmutCampaign_InitUI()
+	end
 
 	-- this callback hides the build menu
 	Application:GetGameControl().OnClick = Application:MakeCallbackNotify("GameControl_OnClick")

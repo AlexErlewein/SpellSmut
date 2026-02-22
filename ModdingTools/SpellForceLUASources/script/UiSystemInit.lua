@@ -2,7 +2,12 @@
 -- it first installs some useful functions and then calls another file in which the first
 -- user interface is declared
 
--------------------------------------------------------------------------------------------------------------
+print("[SpellSmutTest] UiSystemInit.lua loaded")
+
+-- Try to load SpellSmut campaign helpers early so we can show a main-menu button
+doscript("SpellSmutCampaign")
+
+--------------------------------------------------------------------------------------------------------------
 -- constants
 --------------------------------------------------------------------------------------------------------------
 
@@ -729,6 +734,64 @@ end
 function UiDeleteGlobalShortcut(aDefinition)
 	Screen:DelGlobalShortcut(aDefinition[1], aDefinition[2], aDefinition[4])
 end
+
+
+--------------------------------------------------------------------------------------------------------------
+-- SpellSmut main-menu integration
+--------------------------------------------------------------------------------------------------------------
+
+function SpellSmut_MainMenuButton_OnClick()
+	print("[SpellSmutCampaign] Main-menu button pressed")
+	if SpellSmutCampaign_OnClick ~= nil then
+		SpellSmutCampaign_OnClick()
+	else
+		-- fallback: try to load the intro map directly
+		if Application and Application.LoadMap then
+			Application:LoadMap("map\\CustomCampaign\\P100_Introduction.map")
+		end
+	end
+end
+
+function SpellSmut_MainMenu_InitUI()
+	print("[SpellSmutCampaign] Main-menu InitUI called")
+	if not UiCreateForm then
+		print("[SpellSmutCampaign] UiCreateForm not available in UiSystemInit")
+		return
+	end
+	if Screen and Screen:ControlByName("<cont>SpellSmutCampaign") ~= nil then
+		print("[SpellSmutCampaign] Main-menu UI already exists, skipping")
+		return
+	end
+	local form = {
+		800, 40, 220, 32;
+		Name = "<cont>SpellSmutCampaign";
+		AddTo = "Screen";
+		HandleIfTransparent = true;
+		Controls = {
+			{ 0, 0, 200, 28; Type = "GfxButton", Name = "<ctrl>btSpellSmutCampaign", Caption = "SpellSmut Campaign", MeshGfx = "ui_btn_dummy_color.msh", OnClick = "SpellSmut_MainMenuButton_OnClick" }
+		}
+	}
+	UiCreateForm(form)
+	print("[SpellSmutCampaign] Main-menu UI form created")
+end
+
+local function SpellSmut_MainMenu_Install()
+	print("[SpellSmutCampaign] Installing main-menu integration")
+	if UiCreateGlobalShortcutShort ~= nil then
+		UiCreateGlobalShortcutShort("Ctrl+Shift+C", "SpellSmutCampaign_OnShortcut", 0, "SpellSmut Campaign")
+	else
+		print("[SpellSmutCampaign] UiCreateGlobalShortcutShort not available in UiSystemInit")
+	end
+	if SpellSmutCampaign_InitUI ~= nil then
+		-- Reuse the generic UI overlay (will add to Screen on main menu as well)
+		SpellSmutCampaign_InitUI()
+	else
+		-- Fallback: create a dedicated main-menu form here
+		SpellSmut_MainMenu_InitUI()
+	end
+end
+
+SpellSmut_MainMenu_Install()
 
 
 --------------------------------------------------------------------------------------------------------------

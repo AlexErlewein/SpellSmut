@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spellforce Category Relationship Visualizer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #e0e0e0;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #4fc3f7;
+            margin-bottom: 30px;
+        }
+        
+        .main-content {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .sidebar {
+            width: 300px;
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 8px;
+            height: fit-content;
+        }
+        
+        .visualization {
+            flex: 1;
+            background: #2d2d2d;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 600px;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            background: #3d3d3d;
+            border: 1px solid #555;
+            border-radius: 4px;
+            color: #e0e0e0;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        
+        .category-list {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .category-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: #3d3d3d;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .category-item:hover {
+            background: #4d4d4d;
+        }
+        
+        .category-item.selected {
+            background: #1976d2;
+        }
+        
+        .category-id {
+            color: #81c784;
+            font-weight: bold;
+        }
+        
+        .category-name {
+            color: #e0e0e0;
+            font-size: 0.9em;
+        }
+        
+        .tree {
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .tree-node {
+            margin: 2px 0;
+        }
+        
+        .tree-toggle {
+            cursor: pointer;
+            user-select: none;
+            color: #ffb74d;
+        }
+        
+        .tree-content {
+            margin-left: 20px;
+        }
+        
+        .tree-leaf {
+            color: #e0e0e0;
+        }
+        
+        .tree-id {
+            color: #81c784;
+        }
+        
+        .tree-link {
+            color: #64b5f6;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        
+        .tree-link:hover {
+            color: #90caf9;
+        }
+        
+        .legend {
+            margin-top: 20px;
+            padding: 15px;
+            background: #3d3d3d;
+            border-radius: 4px;
+        }
+        
+        .legend-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #4fc3f7;
+        }
+        
+        .legend-item {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+        
+        .controls {
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            background: #1976d2;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .btn:hover {
+            background: #1565c0;
+        }
+        
+        .info-panel {
+            margin-top: 20px;
+            padding: 15px;
+            background: #3d3d3d;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Spellforce Category Relationship Visualizer</h1>
+        
+        <div class="main-content">
+            <div class="sidebar">
+                <h3>Categories</h3>
+                <input type="text" class="search-box" id="searchBox" placeholder="Search categories...">
+                
+                <div class="controls">
+                    <button class="btn" onclick="expandAll()">Expand All</button>
+                    <button class="btn" onclick="collapseAll()">Collapse All</button>
+                </div>
+                
+                <div class="category-list" id="categoryList"></div>
+                
+                <div class="legend">
+                    <div class="legend-title">Legend</div>
+                    <div class="legend-item"><span class="category-id">ID</span> - Category Number</div>
+                    <div class="legend-item"><span class="tree-link">→ Link</span> - Relationship</div>
+                    <div class="legend-item"><span class="tree-id">[ID]</span> - Foreign Key</div>
+                </div>
+            </div>
+            
+            <div class="visualization">
+                <h3 id="vizTitle">Select a category to view relationships</h3>
+                <div class="tree" id="treeView"></div>
+                
+                <div class="info-panel" id="infoPanel">
+                    <strong>Usage:</strong> Select a category from the left to see its relationships. 
+                    Click on the arrows (→) to navigate between linked categories. 
+                    Use the search box to find specific categories.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Category data structure
+        const categories = {
+            2001: {
+                name: "Army unit building requirements",
+                type: "multiple",
+                links: {
+                    ArmyUnitID: { to: "unit_data", description: "Unit general data" },
+                    BuildingID: { to: 2030, description: "Building collision data" }
+                }
+            },
+            2002: {
+                name: "Spell data",
+                type: "single",
+                links: {
+                    SpellLineID: { to: "spell_lines", description: "Spell line definitions" },
+                    "SkillReq[0-11]": { to: "skill_data", description: "Skill requirements" }
+                }
+            },
+            2003: {
+                name: "Item general info",
+                type: "single",
+                links: {
+                    NameID: { to: "text_data", description: "Item names/descriptions" },
+                    UnitStatsID: { to: 2005, description: "Unit/hero stats" },
+                    ArmyUnitID: { to: 2001, description: "Army unit requirements" },
+                    BuildingID: { to: "building_data", description: "Building data" }
+                }
+            },
+            2004: {
+                name: "Item armor data",
+                type: "single",
+                links: {
+                    ItemID: { to: 2003, description: "Item general info" }
+                }
+            },
+            2005: {
+                name: "Unit/hero stats",
+                type: "single",
+                links: {
+                    HeadID: { to: "visual_data", description: "Head/appearance data" },
+                    EquipmentMode: { to: "equipment_rules", description: "Equipment mode rules" }
+                }
+            },
+            2006: {
+                name: "Hero/worker skills",
+                type: "multiple",
+                links: {
+                    UnitStatsID: { to: 2005, description: "Unit/hero stats" },
+                    SkillMajorID: { to: "skill_definitions", description: "Major skill definitions" },
+                    SkillMinorID: { to: "skill_definitions", description: "Minor skill definitions" }
+                }
+            },
+            2012: {
+                name: "Item UI data",
+                type: "multiple",
+                links: {
+                    ItemID: { to: 2003, description: "Item general info" }
+                }
+            },
+            2013: {
+                name: "Inventory spell scroll link",
+                type: "single",
+                links: {
+                    ItemID: { to: 2003, description: "Item general info" },
+                    InstalledScrollItemID: { to: 2003, description: "Installed scroll item" }
+                }
+            },
+            2014: {
+                name: "Item weapon effects",
+                type: "single",
+                links: {
+                    ItemID: { to: 2003, description: "Item general info" }
+                }
+            },
+            2015: {
+                name: "Item weapon data",
+                type: "single",
+                links: {
+                    ItemID: { to: 2003, description: "Item general info" }
+                }
+            },
+            2030: {
+                name: "Building collision data",
+                type: "custom",
+                links: {
+                    BuildingID: { to: "building_data", description: "Building general data" }
+                }
+            },
+            2031: {
+                name: "Building resource requirements",
+                type: "multiple",
+                links: {
+                    BuildingID: { to: "building_data", description: "Building general data" },
+                    ResourceID: { to: "resource_data", description: "Resource definitions" }
+                }
+            },
+            2041: {
+                name: "Merchants link with unit data",
+                type: "single",
+                links: {
+                    MerchantID: { to: "merchant_system", description: "Merchant system hub" },
+                    UnitID: { to: "unit_data", description: "Unit general data" }
+                }
+            },
+            2042: {
+                name: "Merchant inventory",
+                type: "multiple",
+                links: {
+                    MerchantID: { to: 2041, description: "Merchant definition" },
+                    ItemID: { to: 2003, description: "Item general info" }
+                }
+            },
+            2047: {
+                name: "Merchant sell/buy rate",
+                type: "multiple",
+                links: {
+                    MerchantID: { to: 2041, description: "Merchant definition" }
+                }
+            },
+            2051: {
+                name: "NPC link with text data",
+                type: "single",
+                links: {
+                    NPCID: { to: "npc_entities", description: "NPC entity definitions" },
+                    TextID: { to: "text_data", description: "Dialogue/text data" }
+                }
+            }
+        };
+
+        let selectedCategory = null;
+        let expandedNodes = new Set();
+
+        function initializeCategoryList() {
+            const categoryList = document.getElementById('categoryList');
+            categoryList.innerHTML = '';
+            
+            Object.keys(categories).sort((a, b) => parseInt(a) - parseInt(b)).forEach(id => {
+                const category = categories[id];
+                const item = document.createElement('div');
+                item.className = 'category-item';
+                item.innerHTML = `
+                    <div class="category-id">${id}</div>
+                    <div class="category-name">${category.name}</div>
+                `;
+                item.onclick = () => selectCategory(id);
+                categoryList.appendChild(item);
+            });
+        }
+
+        function selectCategory(categoryId) {
+            selectedCategory = categoryId;
+            
+            // Update UI
+            document.querySelectorAll('.category-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            
+            // Update visualization
+            updateVisualization();
+        }
+
+        function updateVisualization() {
+            const vizTitle = document.getElementById('vizTitle');
+            const treeView = document.getElementById('treeView');
+            const infoPanel = document.getElementById('infoPanel');
+            
+            if (!selectedCategory) {
+                vizTitle.textContent = 'Select a category to view relationships';
+                treeView.innerHTML = '';
+                return;
+            }
+            
+            const category = categories[selectedCategory];
+            vizTitle.innerHTML = `<span class="category-id">${selectedCategory}</span> - ${category.name}`;
+            
+            // Build tree
+            let treeHTML = buildRelationshipTree(selectedCategory, 0);
+            treeView.innerHTML = treeHTML;
+            
+            // Update info panel
+            infoPanel.innerHTML = `
+                <strong>Category ${selectedCategory}:</strong> ${category.name}<br>
+                <strong>Type:</strong> ${category.type}<br>
+                <strong>Relationships:</strong> ${Object.keys(category.links).length} links<br>
+                <br>
+                <strong>Navigation:</strong> Click on <span class="tree-link">→ category links</span> to navigate between related categories.
+            `;
+        }
+
+        function buildRelationshipTree(categoryId, depth, path = []) {
+            if (depth > 3 || path.includes(categoryId)) return ''; // Prevent infinite recursion
+            
+            const category = categories[categoryId];
+            if (!category) return '';
+            
+            let html = '';
+            const nodeId = `${categoryId}_${depth}`;
+            const isExpanded = expandedNodes.has(nodeId);
+            
+            // Category header
+            html += `<div class="tree-node">`;
+            html += `<span class="tree-toggle" onclick="toggleNode('${nodeId}')">${isExpanded ? '▼' : '▶'}</span> `;
+            html += `<span class="tree-leaf"><span class="category-id">${categoryId}</span> - ${category.name}</span>`;
+            html += `</div>`;
+            
+            if (isExpanded && Object.keys(category.links).length > 0) {
+                html += `<div class="tree-content">`;
+                
+                Object.entries(category.links).forEach(([linkField, linkInfo]) => {
+                    html += `<div class="tree-node">`;
+                    html += `├── <span class="tree-id">[${linkField}]</span> `;
+                    
+                    if (typeof linkInfo.to === 'number' && categories[linkInfo.to]) {
+                        html += `<span class="tree-link" onclick="navigateToCategory(${linkInfo.to})">→ ${linkInfo.to}</span> - ${linkInfo.description}`;
+                        
+                        // Recursively show linked category
+                        const subTree = buildRelationshipTree(linkInfo.to, depth + 1, [...path, categoryId]);
+                        if (subTree) {
+                            html += subTree;
+                        }
+                    } else {
+                        html += `→ ${linkInfo.to} - ${linkInfo.description}`;
+                    }
+                    
+                    html += `</div>`;
+                });
+                
+                html += `</div>`;
+            }
+            
+            return html;
+        }
+
+        function toggleNode(nodeId) {
+            if (expandedNodes.has(nodeId)) {
+                expandedNodes.delete(nodeId);
+            } else {
+                expandedNodes.add(nodeId);
+            }
+            updateVisualization();
+        }
+
+        function navigateToCategory(categoryId) {
+            selectedCategory = categoryId;
+            
+            // Update category list selection
+            document.querySelectorAll('.category-item').forEach((item, index) => {
+                const categoryIdFromList = Object.keys(categories).sort((a, b) => parseInt(a) - parseInt(b))[index];
+                item.classList.toggle('selected', categoryIdFromList === categoryId.toString());
+            });
+            
+            updateVisualization();
+        }
+
+        function expandAll() {
+            Object.keys(categories).forEach(id => {
+                for (let depth = 0; depth <= 3; depth++) {
+                    expandedNodes.add(`${id}_${depth}`);
+                }
+            });
+            updateVisualization();
+        }
+
+        function collapseAll() {
+            expandedNodes.clear();
+            updateVisualization();
+        }
+
+        function searchCategories() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            const categoryItems = document.querySelectorAll('.category-item');
+            
+            categoryItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeCategoryList();
+            document.getElementById('searchBox').addEventListener('input', searchCategories);
+            
+            // Auto-expand merchant example
+            selectedCategory = 2041;
+            expandedNodes.add('2041_0');
+            expandedNodes.add('2042_1');
+            expandedNodes.add('2003_2');
+            updateVisualization();
+            
+            // Update category list selection
+            document.querySelectorAll('.category-item').forEach(item => {
+                if (item.textContent.includes('2041')) {
+                    item.classList.add('selected');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
