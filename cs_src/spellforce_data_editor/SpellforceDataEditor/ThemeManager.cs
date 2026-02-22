@@ -293,6 +293,11 @@ namespace SpellforceDataEditor
             {
                 control.BackColor = Color.FromArgb(32, 32, 32);
             }
+            else if (control is TrackBar)
+            {
+                control.BackColor = Color.FromArgb(32, 32, 32);
+                control.ForeColor = Color.Gainsboro;
+            }
 
             if (control is TabPage darkTabPage)
             {
@@ -410,6 +415,11 @@ namespace SpellforceDataEditor
             else if (control is PictureBox)
             {
                 control.BackColor = SystemColors.Control;
+            }
+            else if (control is TrackBar)
+            {
+                control.BackColor = SystemColors.Control;
+                control.ForeColor = SystemColors.ControlText;
             }
 
             if (control is TabPage lightTabPage)
