@@ -161,11 +161,8 @@ function UiCreateForm (FormDefinition)
 			Screen:AddControl (CurForm)
 		else
 			local PContainer = tolua.cast(Screen:ControlByName(FormDefinition.AddBehind), "CMnuContainer")
-			assert (PContainer, "!! PContainer null !!")
 			PContainer:AddControl (CurForm, true, false) 
 		end
-	else
-		assert (0, "!! Not a existing Container/Screen to add to !!")
 	end
 
 	-- ADD CONTROLS TO THE FORM

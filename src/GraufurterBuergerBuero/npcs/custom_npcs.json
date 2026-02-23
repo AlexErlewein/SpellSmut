@@ -262,5 +262,111 @@
     "special_abilities": [],
     "skills": [],
     "spells": []
+  },
+  {
+    "npc_id": 40044,
+    "creation_mode": "new",
+    "source_npc_id": null,
+    "name": "WurstPeter",
+    "title": "",
+    "description": "",
+    "npc_type": "merchant",
+    "character_class": "mage",
+    "level": 12,
+    "faction": "HUMANS",
+    "base_stats": {
+      "strength": 10,
+      "stamina": 10,
+      "agility": 10,
+      "dexterity": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "derived_stats": {
+      "health": 100,
+      "mana": 50,
+      "melee_attack": 10,
+      "ranged_attack": 0,
+      "magic_attack": 0,
+      "physical_defense": 5,
+      "magic_defense": 5,
+      "fire_resistance": 0,
+      "ice_resistance": 0,
+      "black_resistance": 0,
+      "mind_resistance": 0
+    },
+    "appearance": {
+      "head_id": 4,
+      "race": "ELVES",
+      "gender": "MALE",
+      "voice_type": "main_male"
+    },
+    "behavior": {
+      "movement_type": "stationary",
+      "interaction_radius": 5,
+      "spawn_location": [
+        0,
+        0
+      ],
+      "spawn_conditions": {}
+    },
+    "equipment": {
+      "helmet_item_id": null,
+      "chest_item_id": 586,
+      "legs_item_id": 3754,
+      "right_hand_item_id": 2147,
+      "left_hand_item_id": null,
+      "right_ring_item_id": null,
+      "left_ring_item_id": null
+    },
+    "rewards": {
+      "experience": 0,
+      "gold": 0,
+      "items": []
+    },
+    "special_abilities": [],
+    "skills": [],
+    "spells": [],
+    "merchant_data": {
+      "merchant_id": 40044,
+      "linked_npc_id": 40044,
+      "inventory": [
+        {
+          "item_id": 80,
+          "stock": 13
+        },
+        {
+          "item_id": 2162,
+          "stock": 1
+        },
+        {
+          "item_id": 129,
+          "stock": 1
+        }
+      ],
+      "price_modifiers": [
+        {
+          "item_type": 1,
+          "multiplier": 100
+        },
+        {
+          "item_type": 2,
+          "multiplier": 100
+        },
+        {
+          "item_type": 3,
+          "multiplier": 100
+        },
+        {
+          "item_type": 5,
+          "multiplier": 100
+        },
+        {
+          "item_type": 6,
+          "multiplier": 100
+        }
+      ]
+    }
   }
 ]

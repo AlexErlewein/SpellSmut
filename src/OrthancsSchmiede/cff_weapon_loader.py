@@ -9,6 +9,7 @@ Based on the existing weapon_loader.py from TirganachReloaded.
 """
 
 import json
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
@@ -27,6 +28,11 @@ except ImportError:
     print("Warning: Tirganach library not available. Weapon data will be limited.")
 
 
+CACHE_FILE = Path(__file__).parent / "weapon_cache.json"
+RUST_TOOL_PATH = project_root / "rust_src" / "target" / "release" / "cff-tool.exe"
+DEFAULT_CFF = project_root / "OriginalGameFiles" / "data" / "GameData.cff"
+
+
 class CFFWeaponLoader(QObject):
     """Load weapon data directly from CFF files"""
 
@@ -36,47 +42,152 @@ class CFFWeaponLoader(QObject):
 
     def __init__(self, gamedata_path: Optional[str] = None):
         super().__init__()
-        self.gamedata_path = gamedata_path or str(
-            project_root / "OriginalGameFiles/data/GameData.cff"
-        )
+        self.gamedata_path = gamedata_path or str(DEFAULT_CFF)
         self.gamedata = None
 
-    def load_all_weapons(self, cff_file_path: Optional[str] = None) -> Dict[int, Dict[str, Any]]:
+    def load_all_weapons(
+        self, cff_file_path: Optional[str] = None, force_rebuild: bool = False
+    ) -> Dict[int, Dict[str, Any]]:
         """Load all weapons from CFF file"""
         weapons = {}
 
         # Use custom CFF file path if provided, otherwise use default
         gamedata_path = cff_file_path or self.gamedata_path
 
-        # Try to load from GameData.cff for complete stats
-        if GameData and Path(gamedata_path).exists():
+        # Try cache first
+        if not force_rebuild and CACHE_FILE.exists():
             try:
-                file_name = Path(gamedata_path).name
-                self.progress_updated.emit(10, f"Loading {file_name}...")
-                self.gamedata = GameData(gamedata_path)
-
-                # Get all weapons from the GameData
-                all_weapons = list(self.gamedata.weapons)  # Convert to list
-                total_weapons = len(all_weapons)
-
-                for i, weapon in enumerate(all_weapons):
-                    weapon_data = self._convert_weapon_from_gamedata(weapon)
-                    weapons[weapon_data["item_id"]] = weapon_data
-
-                    # Update progress
-                    progress = int((i + 1) / total_weapons * 90) + 10  # 10-100%
-                    self.progress_updated.emit(
-                        progress, f"Loading weapon {i + 1}/{total_weapons}"
-                    )
-
+                with open(CACHE_FILE, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    weapons = {int(k): v for k, v in data.items()}
+                    if weapons:
+                        self.progress_updated.emit(
+                            100, f"Loaded {len(weapons)} weapons from cache"
+                        )
+                        self.loading_complete.emit(len(weapons))
+                        return weapons
             except Exception as e:
-                print(f"Error loading from GameData: {e}")
-        elif not GameData:
-            print("Warning: Tirganach library not available")
-        elif not Path(gamedata_path).exists():
-            print(f"Warning: CFF file not found: {gamedata_path}")
+                print(f"Failed to load weapon cache: {e}")
+
+        # Try Rust first
+        weapons = self._load_from_rust(gamedata_path)
+        if weapons:
+            # Save to cache
+            try:
+                with open(CACHE_FILE, "w", encoding="utf-8") as f:
+                    json.dump(weapons, f)
+            except Exception as e:
+                print(f"Failed to save weapon cache: {e}")
+            self.progress_updated.emit(100, f"Loaded {len(weapons)} weapons from Rust")
+            self.loading_complete.emit(len(weapons))
+            return weapons
+
+        # Fall back to Python/Tirganach
+        print("Rust tool failed, falling back to Python/Tirganach...")
+        weapons = self._load_from_python(gamedata_path)
 
         return weapons
+
+    def _load_from_rust(self, gamedata_path: str) -> Dict[int, Dict[str, Any]]:
+        """Load weapons using the Rust CLI tool (much faster)"""
+        weapons = {}
+
+        # Check if Rust tool exists
+        if not RUST_TOOL_PATH.exists():
+            print("Rust tool not found, building...")
+            try:
+                result = subprocess.run(
+                    ["cargo", "build", "--release"],
+                    cwd=str(project_root / "rust_src"),
+                    capture_output=True,
+                    text=True,
+                    timeout=300,
+                )
+                if result.returncode != 0:
+                    print(f"Failed to build Rust tool: {result.stderr}")
+                    return {}
+            except Exception as e:
+                print(f"Failed to build Rust tool: {e}")
+                return {}
+
+        if not RUST_TOOL_PATH.exists():
+            return {}
+
+        try:
+            self.progress_updated.emit(10, "Loading weapons from Rust...")
+            result = subprocess.run(
+                [str(RUST_TOOL_PATH), gamedata_path, "weapons"],
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+
+            if result.returncode != 0:
+                print(f"Rust tool error: {result.stderr}")
+                return {}
+
+            # Parse JSON output
+            stdout = result.stdout
+            json_start = stdout.find("{")
+            data = {}
+            if json_start >= 0:
+                json_str = stdout[json_start:]
+                data = json.loads(json_str)
+
+            weapon_list = data.get("weapons", [])
+
+            for weapon in weapon_list:
+                weapon_id = weapon.get("item_id", 0)
+                if weapon_id == 0:
+                    continue
+
+                weapons[weapon_id] = {
+                    "item_id": weapon_id,
+                    "weapon_id": weapon_id,
+                    "name": weapon.get("name", f"Weapon {weapon_id}"),
+                    "weapon_name": weapon.get("name", f"Weapon {weapon_id}"),
+                    "name_id": weapon.get("name_id", 0),
+                    "weapon_type_id": weapon.get("weapon_type", 0),
+                    "weapon_material_id": weapon.get("material", 0),
+                    "min_damage": weapon.get("min_damage", 0),
+                    "max_damage": weapon.get("max_damage", 0),
+                    "attack_speed": weapon.get("speed", 100),
+                    "weapon_speed": weapon.get("speed", 100),
+                    "min_range": weapon.get("min_range", 0),
+                    "max_range": weapon.get("max_range", 2),
+                    "damage_category": "Melee"
+                    if weapon.get("max_range", 2) <= 5
+                    else "Ranged",
+                    "sell_value": 0,
+                    "buy_value": 0,
+                    "item_type": "WEAPON",
+                    "item_subtype": "WEAPON",
+                    "rarity": "Common",
+                    "requirements": {
+                        "strength": 0,
+                        "dexterity": 0,
+                        "intelligence": 0,
+                        "level": 1,
+                        "school_requirements": [],
+                    },
+                    "effects": [],
+                    "icon_handle": "",
+                }
+
+            print(f"Loaded {len(weapons)} weapons from Rust")
+
+        except subprocess.TimeoutExpired:
+            print("Rust tool timed out")
+            return {}
+        except Exception as e:
+            print(f"Error running Rust tool: {e}")
+            return {}
+
+        return weapons
+
+    def _load_from_python(self, gamedata_path: str) -> Dict[int, Dict[str, Any]]:
+        """Load weapons using Python/Tirganach (slower fallback)"""
+        weapons = {}
 
     def _convert_weapon_from_gamedata(self, weapon) -> Dict[str, Any]:
         """Convert from GameData Weapon entity to standard dict format"""
@@ -95,7 +206,7 @@ class CFFWeaponLoader(QObject):
         army_unit_id = 0
         building_id = 0
         unknown1 = 0
-        
+
         if item:
             weapon_name = getattr(item, "name", weapon_name)
             sell_value = getattr(item, "selling_price", 0)
@@ -151,8 +262,10 @@ class CFFWeaponLoader(QObject):
         # Try to get more specific information if available
         try:
             # Get requirements from item_requirements table
-            if hasattr(self.gamedata, 'item_requirements'):
-                item_reqs = self.gamedata.item_requirements.where(item_id=weapon.item_id)
+            if hasattr(self.gamedata, "item_requirements"):
+                item_reqs = self.gamedata.item_requirements.where(
+                    item_id=weapon.item_id
+                )
                 if item_reqs:
                     # For SpellForce, requirements are school-based rather than stat-based
                     # We'll create a basic requirements structure
@@ -160,14 +273,17 @@ class CFFWeaponLoader(QObject):
                         "strength": 0,
                         "dexterity": 0,
                         "intelligence": 0,
-                        "level": max([req.level for req in item_reqs]) if item_reqs else 1,
+                        "level": max([req.level for req in item_reqs])
+                        if item_reqs
+                        else 1,
                         "school_requirements": [
                             {
                                 "requirement_number": req.requirement_number,
                                 "requirement_school": str(req.requirement_school),
-                                "level": req.level
-                            } for req in item_reqs
-                        ]
+                                "level": req.level,
+                            }
+                            for req in item_reqs
+                        ],
                     }
                 else:
                     weapon_data["requirements"] = {
@@ -175,7 +291,7 @@ class CFFWeaponLoader(QObject):
                         "dexterity": 0,
                         "intelligence": 0,
                         "level": 1,
-                        "school_requirements": []
+                        "school_requirements": [],
                     }
             else:
                 weapon_data["requirements"] = {
@@ -183,7 +299,7 @@ class CFFWeaponLoader(QObject):
                     "dexterity": 0,
                     "intelligence": 0,
                     "level": 1,
-                    "school_requirements": []
+                    "school_requirements": [],
                 }
         except Exception:
             # If we can't get requirements data, continue with defaults
@@ -192,7 +308,7 @@ class CFFWeaponLoader(QObject):
                 "dexterity": 0,
                 "intelligence": 0,
                 "level": 1,
-                "school_requirements": []
+                "school_requirements": [],
             }
 
         # Try to get weapon type name
@@ -227,7 +343,7 @@ class CFFWeaponLoader(QObject):
 
         # Get UI handle for icons
         try:
-            if hasattr(self.gamedata, 'item_ui'):
+            if hasattr(self.gamedata, "item_ui"):
                 item_uis = self.gamedata.item_ui.where(item_id=weapon.item_id)
                 if item_uis and item_uis[0].item_ui_handle:
                     weapon_data["icon_handle"] = item_uis[0].item_ui_handle.strip()
@@ -240,13 +356,11 @@ class CFFWeaponLoader(QObject):
 
         # Get item effects
         try:
-            if hasattr(self.gamedata, 'item_effects'):
+            if hasattr(self.gamedata, "item_effects"):
                 item_effects = self.gamedata.item_effects.where(item_id=weapon.item_id)
                 weapon_data["effects"] = [
-                    {
-                        "effect_index": eff.effect_index,
-                        "effect_id": eff.effect_id
-                    } for eff in item_effects
+                    {"effect_index": eff.effect_index, "effect_id": eff.effect_id}
+                    for eff in item_effects
                 ]
             else:
                 weapon_data["effects"] = []

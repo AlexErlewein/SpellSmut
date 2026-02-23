@@ -92,6 +92,48 @@ class GraufurterBuergerBuero(QMainWindow):
         self.setWindowTitle("Graufurter Bürger Büro - NPC Creation Suite")
         self.setMinimumSize(QSize(1600, 1000))
 
+        # Apply dark mode stylesheet
+        self.setStyleSheet("""
+            QMainWindow {
+                background-color: #1e1e1e;
+                color: #e0e0e0;
+            }
+            QWidget {
+                background-color: #1e1e1e;
+                color: #e0e0e0;
+            }
+            QStatusBar {
+                background-color: #252525;
+                color: #e0e0e0;
+            }
+            QLabel {
+                color: #e0e0e0;
+                background-color: transparent;
+            }
+            QCheckBox {
+                color: #e0e0e0;
+                background-color: transparent;
+            }
+            QCheckBox::indicator {
+                background-color: #2d2d2d;
+                border: 1px solid #3c3c3c;
+                width: 16px;
+                height: 16px;
+                border-radius: 3px;
+            }
+            QCheckBox::indicator:checked {
+                background-color: #094771;
+                border: 1px solid #4fc3f7;
+            }
+            QCheckBox::indicator:checked::after {
+                content: "✓";
+                color: #4fc3f7;
+                font-size: 14px;
+                font-weight: bold;
+                padding-left: 1px;
+            }
+        """)
+
         # Central widget
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
@@ -1318,6 +1360,38 @@ def main():
 
     # Set application style
     app.setStyle("Fusion")
+
+    # Application-wide dark mode stylesheet for common widgets
+    app.setStyleSheet("""
+        QCheckBox {
+            color: #e0e0e0;
+            background-color: transparent;
+        }
+        QCheckBox::indicator {
+            background-color: #2d2d2d;
+            border: 2px solid #4a4a4a;
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+        }
+        QCheckBox::indicator:checked {
+            background-color: #4fc3f7;
+            border: 2px solid #4fc3f7;
+        }
+        QCheckBox::indicator:unchecked:hover {
+            border: 2px solid #6a6a6a;
+        }
+        QCheckBox::indicator:checked:hover {
+            background-color: #5fd3f7;
+        }
+        QStatusBar {
+            background-color: #252525;
+            color: #e0e0e0;
+        }
+        QWizard {
+            background-color: #1e1e1e;
+        }
+    """)
 
     # Create and show main window
     window = GraufurterBuergerBuero()

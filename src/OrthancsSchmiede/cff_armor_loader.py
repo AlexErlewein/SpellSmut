@@ -1,6 +1,6 @@
 """
 CFF-based Armor Loader for Orthancs Schmiede
-============================================
+===========================================
 
 This module provides functionality to load armor data directly from CFF files,
 ensuring access to the most complete and up-to-date armor information.
@@ -9,6 +9,7 @@ Based on the existing armor_loader.py from TirganachReloaded.
 """
 
 import json
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
@@ -27,6 +28,11 @@ except ImportError:
     print("Warning: Tirganach library not available. Armor data will be limited.")
 
 
+CACHE_FILE = Path(__file__).parent / "armor_cache.json"
+RUST_TOOL_PATH = project_root / "rust_src" / "target" / "release" / "cff-tool.exe"
+DEFAULT_CFF = project_root / "OriginalGameFiles" / "data" / "GameData.cff"
+
+
 class CFFArmorLoader(QObject):
     """Load armor data directly from CFF files"""
 
@@ -36,57 +42,170 @@ class CFFArmorLoader(QObject):
 
     def __init__(self, gamedata_path: Optional[str] = None):
         super().__init__()
-        self.gamedata_path = gamedata_path or str(
-            project_root / "OriginalGameFiles/data/GameData.cff"
-        )
+        self.gamedata_path = gamedata_path or str(DEFAULT_CFF)
         self.gamedata = None
 
-    def load_all_armor(self, cff_file_path: Optional[str] = None) -> Dict[int, Dict[str, Any]]:
+    def load_all_armor(
+        self, cff_file_path: Optional[str] = None, force_rebuild: bool = False
+    ) -> Dict[int, Dict[str, Any]]:
         """Load all armor from CFF file"""
         armor = {}
 
         # Use custom CFF file path if provided, otherwise use default
         gamedata_path = cff_file_path or self.gamedata_path
 
-        # Try to load from GameData.cff for complete stats
-        if GameData and Path(gamedata_path).exists():
+        # Try cache first
+        if not force_rebuild and CACHE_FILE.exists():
             try:
-                file_name = Path(gamedata_path).name
-                self.progress_updated.emit(10, f"Loading {file_name}...")
-                self.gamedata = GameData(gamedata_path)
-
-                # Get all armor directly from the armor table
-                all_armor = list(self.gamedata.armor)  # Convert to list
-                total_armor = len(all_armor)
-
-                for i, armor_entry in enumerate(all_armor):
-                    armor_data = self._convert_armor_from_gamedata(armor_entry)
-                    armor_id = armor_data["item_id"]  # Use item_id instead of id
-                    armor[armor_id] = armor_data
-
-                    # Update progress
-                    progress = int((i + 1) / total_armor * 90) + 10  # 10-100%
-                    self.progress_updated.emit(
-                        progress, f"Loading armor {i + 1}/{total_armor}"
-                    )
-
-                self.progress_updated.emit(
-                    100, f"Loaded {len(armor)} armor pieces from CFF"
-                )
-                self.loading_complete.emit(len(armor))
-
+                with open(CACHE_FILE, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    armor = {int(k): v for k, v in data.items()}
+                    if armor:
+                        self.progress_updated.emit(
+                            100, f"Loaded {len(armor)} armor from cache"
+                        )
+                        self.loading_complete.emit(len(armor))
+                        return armor
             except Exception as e:
-                print(f"Error loading from GameData: {e}")
-                # Fall back to enhanced_armor.json if CFF loading fails
-                armor = self._load_from_enhanced_json()
-        elif not GameData:
-            print("Warning: Tirganach library not available")
-            armor = self._load_from_enhanced_json()
-        elif not Path(gamedata_path).exists():
-            print(f"Warning: CFF file not found: {gamedata_path}")
-            armor = self._load_from_enhanced_json()
+                print(f"Failed to load armor cache: {e}")
+
+        # Try Rust first
+        armor = self._load_from_rust(gamedata_path)
+        if armor:
+            # Save to cache
+            try:
+                with open(CACHE_FILE, "w", encoding="utf-8") as f:
+                    json.dump(armor, f)
+            except Exception as e:
+                print(f"Failed to save armor cache: {e}")
+            self.progress_updated.emit(100, f"Loaded {len(armor)} armor from Rust")
+            self.loading_complete.emit(len(armor))
+            return armor
+
+        # Fall back to Python/Tirganach
+        print("Rust tool failed, falling back to Python/Tirganach...")
+        armor = self._load_from_python(gamedata_path)
 
         return armor
+
+    def _load_from_rust(self, gamedata_path: str) -> Dict[int, Dict[str, Any]]:
+        """Load armor using the Rust CLI tool (much faster)"""
+        armor = {}
+
+        # Check if Rust tool exists
+        if not RUST_TOOL_PATH.exists():
+            print("Rust tool not found, building...")
+            try:
+                result = subprocess.run(
+                    ["cargo", "build", "--release"],
+                    cwd=str(project_root / "rust_src"),
+                    capture_output=True,
+                    text=True,
+                    timeout=300,
+                )
+                if result.returncode != 0:
+                    print(f"Failed to build Rust tool: {result.stderr}")
+                    return {}
+            except Exception as e:
+                print(f"Failed to build Rust tool: {e}")
+                return {}
+
+        if not RUST_TOOL_PATH.exists():
+            return {}
+
+        try:
+            self.progress_updated.emit(10, "Loading armor from Rust...")
+            result = subprocess.run(
+                [str(RUST_TOOL_PATH), gamedata_path, "armor"],
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+
+            if result.returncode != 0:
+                print(f"Rust tool error: {result.stderr}")
+                return {}
+
+            # Parse JSON output
+            stdout = result.stdout
+            json_start = stdout.find("{")
+            data = {}
+            if json_start >= 0:
+                json_str = stdout[json_start:]
+                data = json.loads(json_str)
+
+            armor_list = data.get("armor", [])
+
+            for armor_item in armor_list:
+                armor_id = armor_item.get("item_id", 0)
+                if armor_id == 0:
+                    continue
+
+                armor[armor_id] = {
+                    "item_id": armor_id,
+                    "armor_id": armor_id,
+                    "name": armor_item.get("name", f"Armor {armor_id}"),
+                    "armor_name": armor_item.get("name", f"Armor {armor_id}"),
+                    "name_id": armor_item.get("name_id", 0),
+                    "item_type": "EQUIPMENT",
+                    "item_subtype": "UNKNOWN",
+                    # Stats from Rust
+                    "strength": armor_item.get("strength", 0),
+                    "stamina": armor_item.get("stamina", 0),
+                    "agility": armor_item.get("agility", 0),
+                    "dexterity": armor_item.get("dexterity", 0),
+                    "health": armor_item.get("health", 0),
+                    "charisma": armor_item.get("charisma", 0),
+                    "intelligence": armor_item.get("intelligence", 0),
+                    "wisdom": armor_item.get("wisdom", 0),
+                    "mana": armor_item.get("mana", 0),
+                    "armor_value": armor_item.get("armor_value", 0),
+                    "base_armor": armor_item.get("armor_value", 0),
+                    "resist_fire": armor_item.get("resist_fire", 0),
+                    "resist_ice": armor_item.get("resist_ice", 0),
+                    "resist_black": armor_item.get("resist_black", 0),
+                    "resist_mind": armor_item.get("resist_mind", 0),
+                    "run_speed": armor_item.get("speed_run", 0),
+                    "fight_speed": armor_item.get("speed_fight", 0),
+                    "cast_speed": armor_item.get("speed_cast", 0),
+                    "move_speed_bonus": armor_item.get("speed_run", 0),
+                    "fight_speed_bonus": armor_item.get("speed_fight", 0),
+                    "cast_speed_bonus": armor_item.get("speed_cast", 0),
+                    "health_bonus": armor_item.get("health", 0),
+                    "mana_bonus": armor_item.get("mana", 0),
+                    "magic_resistance": armor_item.get("resist_black", 0),
+                    "physical_resistance": armor_item.get("armor_value", 0),
+                    "sell_value": 0,
+                    "buy_value": 0,
+                    "rarity": "Common",
+                    "requirements": {
+                        "strength": 0,
+                        "dexterity": 0,
+                        "intelligence": 0,
+                        "level": 1,
+                        "school_requirements": [],
+                    },
+                    "effects": [],
+                    "icon_handle": "",
+                    "slot": "Unknown",
+                    "armor_type": "Unknown",
+                    "tier": "Common",
+                }
+
+            print(f"Loaded {len(armor)} armor from Rust")
+
+        except subprocess.TimeoutExpired:
+            print("Rust tool timed out")
+            return {}
+        except Exception as e:
+            print(f"Error running Rust tool: {e}")
+            return {}
+
+        return armor
+
+    def _load_from_python(self, gamedata_path: str) -> Dict[int, Dict[str, Any]]:
+        """Load armor using Python/Tirganach (slower fallback)"""
+        armor = {}
 
     def _convert_armor_from_gamedata(self, armor) -> Dict[str, Any]:
         """Convert from GameData Armor entity to standard dict format"""
@@ -105,7 +224,7 @@ class CFFArmorLoader(QObject):
         army_unit_id = 0
         building_id = 0
         unknown1 = 0
-        
+
         if item:
             armor_name = getattr(item, "name", armor_name)
             sell_value = getattr(item, "selling_price", 0)
@@ -149,16 +268,26 @@ class CFFArmorLoader(QObject):
             # Special properties - map to UI expected fields
             "health_bonus": getattr(armor, "health", 0),  # UI expects "health_bonus"
             "mana_bonus": getattr(armor, "mana", 0),  # UI expects "mana_bonus"
-            "move_speed_bonus": getattr(armor, "speed_run", 0),  # UI expects "move_speed_bonus"
-            "fight_speed_bonus": getattr(armor, "speed_fight", 0),  # UI expects "fight_speed_bonus"
-            "cast_speed_bonus": getattr(armor, "speed_cast", 0),  # UI expects "cast_speed_bonus"
+            "move_speed_bonus": getattr(
+                armor, "speed_run", 0
+            ),  # UI expects "move_speed_bonus"
+            "fight_speed_bonus": getattr(
+                armor, "speed_fight", 0
+            ),  # UI expects "fight_speed_bonus"
+            "cast_speed_bonus": getattr(
+                armor, "speed_cast", 0
+            ),  # UI expects "cast_speed_bonus"
             # Resistances - map to UI expected fields
             "resist_fire": getattr(armor, "resist_fire", 0),
             "resist_ice": getattr(armor, "resist_ice", 0),
             "resist_black": getattr(armor, "resist_black", 0),
             "resist_mind": getattr(armor, "resist_mind", 0),
-            "magic_resistance": getattr(armor, "resist_black", 0),  # UI expects "magic_resistance"
-            "physical_resistance": getattr(armor, "armor", 0),  # UI expects "physical_resistance" - use armor value as approximation
+            "magic_resistance": getattr(
+                armor, "resist_black", 0
+            ),  # UI expects "magic_resistance"
+            "physical_resistance": getattr(
+                armor, "armor", 0
+            ),  # UI expects "physical_resistance" - use armor value as approximation
             # Speed modifiers (keep original names for CFF data section)
             "run_speed": getattr(armor, "speed_run", 0),
             "fight_speed": getattr(armor, "speed_fight", 0),
@@ -174,38 +303,53 @@ class CFFArmorLoader(QObject):
 
         # Get requirements from item_requirements table
         try:
-            if hasattr(self.gamedata, 'item_requirements'):
+            if hasattr(self.gamedata, "item_requirements"):
                 item_reqs = self.gamedata.item_requirements.where(item_id=armor.item_id)
                 if item_reqs:
                     armor_data["requirements"] = {
                         "strength": 0,
                         "dexterity": 0,
                         "intelligence": 0,
-                        "level": max([req.level for req in item_reqs]) if item_reqs else 1,
+                        "level": max([req.level for req in item_reqs])
+                        if item_reqs
+                        else 1,
                         "school_requirements": [
                             {
                                 "requirement_number": req.requirement_number,
                                 "requirement_school": str(req.requirement_school),
-                                "level": req.level
-                            } for req in item_reqs
-                        ]
+                                "level": req.level,
+                            }
+                            for req in item_reqs
+                        ],
                     }
                 else:
                     armor_data["requirements"] = {
-                        "strength": 0, "dexterity": 0, "intelligence": 0, "level": 1, "school_requirements": []
+                        "strength": 0,
+                        "dexterity": 0,
+                        "intelligence": 0,
+                        "level": 1,
+                        "school_requirements": [],
                     }
             else:
                 armor_data["requirements"] = {
-                    "strength": 0, "dexterity": 0, "intelligence": 0, "level": 1, "school_requirements": []
+                    "strength": 0,
+                    "dexterity": 0,
+                    "intelligence": 0,
+                    "level": 1,
+                    "school_requirements": [],
                 }
         except Exception:
             armor_data["requirements"] = {
-                "strength": 0, "dexterity": 0, "intelligence": 0, "level": 1, "school_requirements": []
+                "strength": 0,
+                "dexterity": 0,
+                "intelligence": 0,
+                "level": 1,
+                "school_requirements": [],
             }
 
         # Get UI handle for icons
         try:
-            if hasattr(self.gamedata, 'item_ui'):
+            if hasattr(self.gamedata, "item_ui"):
                 item_uis = self.gamedata.item_ui.where(item_id=armor.item_id)
                 if item_uis and item_uis[0].item_ui_handle:
                     armor_data["icon_handle"] = item_uis[0].item_ui_handle.strip()
@@ -218,13 +362,11 @@ class CFFArmorLoader(QObject):
 
         # Get item effects
         try:
-            if hasattr(self.gamedata, 'item_effects'):
+            if hasattr(self.gamedata, "item_effects"):
                 item_effects = self.gamedata.item_effects.where(item_id=armor.item_id)
                 armor_data["effects"] = [
-                    {
-                        "effect_index": eff.effect_index,
-                        "effect_id": eff.effect_id
-                    } for eff in item_effects
+                    {"effect_index": eff.effect_index, "effect_id": eff.effect_id}
+                    for eff in item_effects
                 ]
             else:
                 armor_data["effects"] = []
@@ -232,7 +374,9 @@ class CFFArmorLoader(QObject):
             armor_data["effects"] = []
 
         # Determine armor type based on slot and stats
-        armor_data["armor_type"] = self._determine_armor_type(armor_data["slot"], armor_data["armor_value"])
+        armor_data["armor_type"] = self._determine_armor_type(
+            armor_data["slot"], armor_data["armor_value"]
+        )
         armor_data["tier"] = self._determine_tier(armor_data["armor_value"])
         armor_data["material"] = "Unknown"  # Would need material mapping table
 
@@ -244,7 +388,7 @@ class CFFArmorLoader(QObject):
         if isinstance(subtype, str):
             subtype_map = {
                 "EquipmentType.HELMET": "Head",
-                "EquipmentType.UPPER": "Chest", 
+                "EquipmentType.UPPER": "Chest",
                 "EquipmentType.LOWER": "Legs",
                 "EquipmentType.BOOTS": "Feet",
                 "EquipmentType.GLOVES": "Hands",
@@ -259,7 +403,7 @@ class CFFArmorLoader(QObject):
             # Handle numeric subtypes
             slot_map = {
                 1: "Head",
-                2: "Chest", 
+                2: "Chest",
                 3: "Shield",
                 4: "Hands",
                 5: "Legs",

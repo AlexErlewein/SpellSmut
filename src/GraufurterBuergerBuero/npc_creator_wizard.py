@@ -55,22 +55,36 @@ class NpcCreatorWizard(QWizard):
         self.setWindowTitle("SpellForce NPC Creator")
         self.setMinimumSize(600, 500)
 
+        # Force dark palette at application level
+        from PySide6.QtGui import QPalette, QColor
+
+        palette = QPalette()
+        palette.setColor(QPalette.Window, QColor("#1e1e1e"))
+        palette.setColor(QPalette.WindowText, QColor("#e0e0e0"))
+        palette.setColor(QPalette.Base, QColor("#252525"))
+        palette.setColor(QPalette.AlternateBase, QColor("#2d2d2d"))
+        palette.setColor(QPalette.ToolTipBase, QColor("#1e1e1e"))
+        palette.setColor(QPalette.ToolTipText, QColor("#e0e0e0"))
+        palette.setColor(QPalette.Text, QColor("#e0e0e0"))
+        palette.setColor(QPalette.Button, QColor("#2d2d2d"))
+        palette.setColor(QPalette.ButtonText, QColor("#e0e0e0"))
+        palette.setColor(QPalette.BrightText, QColor("#ffffff"))
+        palette.setColor(QPalette.Highlight, QColor("#094771"))
+        palette.setColor(QPalette.HighlightedText, QColor("#e0e0e0"))
+        self.setPalette(palette)
+
         self.setStyleSheet("""
-            QWizard {
-                background-color: #1e1e1e;
-                color: #e0e0e0;
-            }
-            QWizard * {
+            QWizard, QWizardPage, QWidget, QDialog {
                 background-color: #1e1e1e;
                 color: #e0e0e0;
                 font-family: "Segoe UI", Arial, sans-serif;
                 font-size: 10pt;
             }
-            QWizard QLabel {
+            QLabel {
                 color: #e0e0e0;
                 background-color: transparent;
             }
-            QWizard QGroupBox {
+            QGroupBox {
                 font-weight: bold;
                 border: 2px solid #3c3c3c;
                 border-radius: 5px;
@@ -79,100 +93,108 @@ class NpcCreatorWizard(QWizard):
                 color: #e0e0e0;
                 background-color: transparent;
             }
-            QWizard QGroupBox::title {
+            QGroupBox::title {
                 subcontrol-origin: margin;
                 left: 10px;
                 padding: 0 5px 0 5px;
             }
-            QWizard QPushButton {
+            QPushButton {
                 background-color: #3c5a9d;
                 color: #e0e0e0;
                 padding: 6px 12px;
                 border-radius: 3px;
                 border: none;
             }
-            QWizard QPushButton:hover {
+            QPushButton:hover {
                 background-color: #4a6ab3;
             }
-            QWizard QPushButton:disabled {
+            QPushButton:disabled {
                 background-color: #2d2d2d;
                 color: #666;
             }
-            QWizard QLineEdit, QWizard QTextEdit {
+            QLineEdit, QTextEdit {
                 background-color: #252525;
                 color: #e0e0e0;
                 border: 1px solid #3c3c3c;
                 padding: 3px;
                 border-radius: 3px;
             }
-            QWizard QSpinBox, QWizard QDoubleSpinBox {
+            QSpinBox, QDoubleSpinBox {
                 background-color: #252525;
                 color: #e0e0e0;
                 border: 1px solid #3c3c3c;
                 padding: 3px;
                 border-radius: 3px;
             }
-            QWizard QComboBox {
+            QComboBox {
                 background-color: #252525;
                 color: #e0e0e0;
                 border: 1px solid #3c3c3c;
                 padding: 3px;
                 border-radius: 3px;
             }
-            QWizard QComboBox::drop-down {
+            QComboBox::drop-down {
                 background-color: #3c3c3c;
                 border: none;
             }
-            QWizard QComboBox QAbstractItemView {
+            QComboBox QAbstractItemView {
                 background-color: #252525;
                 color: #e0e0e0;
                 selection-background-color: #094771;
             }
-            QWizard QRadioButton {
+            QRadioButton {
                 color: #e0e0e0;
                 background-color: transparent;
             }
-            QWizard QRadioButton::indicator {
+            QRadioButton::indicator {
                 background-color: #252525;
                 border: 1px solid #3c3c3c;
+                width: 14px;
+                height: 14px;
+                border-radius: 7px;
             }
-            QWizard QCheckBox {
+            QRadioButton::indicator:checked {
+                background-color: #4fc3f7;
+                border: 1px solid #4fc3f7;
+            }
+            QCheckBox {
                 color: #e0e0e0;
                 background-color: transparent;
             }
-            QWizard QTableWidget {
+            QCheckBox::indicator {
+                background-color: #2d2d2d;
+                border: 2px solid #4a4a4a;
+                width: 14px;
+                height: 14px;
+                border-radius: 3px;
+            }
+            QCheckBox::indicator:checked {
+                background-color: #4fc3f7;
+                border: 2px solid #4fc3f7;
+            }
+            QCheckBox::indicator:unchecked:hover {
+                border: 2px solid #6a6a6a;
+            }
+            QTableWidget {
                 background-color: #252525;
                 color: #e0e0e0;
                 gridline-color: #3c3c3c;
                 border: 1px solid #3c3c3c;
             }
-            QWizard QTableWidget::item {
+            QTableWidget::item {
                 background-color: #252525;
                 color: #e0e0e0;
             }
-            QWizard QTableWidget::item:selected {
+            QTableWidget::item:selected {
                 background-color: #094771;
             }
-            QWizard QHeaderView::section {
+            QHeaderView::section {
                 background-color: #2b2b2b;
                 color: #e0e0e0;
                 padding: 5px;
                 border: 1px solid #3c3c3c;
             }
-            QWizard QFormLayout::label {
-                color: #a0a0a0;
-                background-color: transparent;
-            }
-            QWizard QFormLayout {
-                background-color: transparent;
-            }
-            QWizard QVBoxLayout, QWizard QHBoxLayout, QWizard QGridLayout {
-                background-color: transparent;
-            }
-            QWizardPage {
-                background-color: #1e1e1e;
-            }
-            QWizardPage * {
+            QScrollArea, QFrame {
                 background-color: #1e1e1e;
                 color: #e0e0e0;
             }
@@ -1439,6 +1461,85 @@ class MerchantPage(QWizardPage):
         dialog = QDialog(self)
         dialog.setWindowTitle("Select Item")
         dialog.setMinimumSize(500, 400)
+
+        # Apply dark mode stylesheet to dialog
+        dialog.setStyleSheet("""
+            QDialog {
+                background-color: #1e1e1e;
+                color: #e0e0e0;
+            }
+            QLabel {
+                color: #e0e0e0;
+                background-color: transparent;
+            }
+            QLineEdit {
+                background-color: #2d2d2d;
+                color: #e0e0e0;
+                border: 1px solid #3c3c3c;
+                padding: 4px;
+                border-radius: 3px;
+            }
+            QTableWidget {
+                background-color: #252525;
+                color: #e0e0e0;
+                gridline-color: #3c3c3c;
+                border: 1px solid #3c3c3c;
+            }
+            QTableWidget::item {
+                background-color: #252525;
+                color: #e0e0e0;
+            }
+            QTableWidget::item:selected {
+                background-color: #094771;
+                color: #e0e0e0;
+            }
+            QHeaderView::section {
+                background-color: #2b2b2b;
+                color: #e0e0e0;
+                padding: 5px;
+                border: 1px solid #3c3c3c;
+            }
+            QSpinBox {
+                background-color: #2d2d2d;
+                color: #e0e0e0;
+                border: 1px solid #3c3c3c;
+                padding: 4px;
+                border-radius: 3px;
+            }
+            QCheckBox {
+                color: #e0e0e0;
+                background-color: transparent;
+            }
+            QCheckBox::indicator {
+                background-color: #2d2d2d;
+                border: 2px solid #4a4a4a;
+                width: 14px;
+                height: 14px;
+                border-radius: 3px;
+            }
+            QCheckBox::indicator:checked {
+                background-color: #4fc3f7;
+                border: 2px solid #4fc3f7;
+            }
+            QCheckBox::indicator:unchecked {
+                background-color: #2d2d2d;
+                border: 2px solid #4a4a4a;
+            }
+            QPushButton {
+                background-color: #3c5a9d;
+                color: #e0e0e0;
+                padding: 6px 12px;
+                border-radius: 3px;
+                border: none;
+            }
+            QPushButton:hover {
+                background-color: #4a6db5;
+            }
+            QPushButton:pressed {
+                background-color: #2d4a8d;
+            }
+        """)
+
         layout = QVBoxLayout(dialog)
 
         search_layout = QFormLayout()
@@ -1496,15 +1597,9 @@ class MerchantPage(QWizardPage):
                 self.refresh_inventory_table()
 
     def load_items(self):
-        if self.item_loader is None:
-            try:
-                from item_loader import ItemLoader
+        from item_loader import get_item_loader
 
-                self.item_loader = ItemLoader()
-            except Exception as e:
-                print(f"Error loading item loader: {e}")
-                return
-
+        self.item_loader = get_item_loader()
         items = self.item_loader.load_all_items()
         self.all_items = items
         self._populate_item_table(items)
@@ -1559,12 +1654,9 @@ class MerchantPage(QWizardPage):
         self.inventory_table.setRowCount(0)
 
         if self.item_loader is None:
-            try:
-                from item_loader import ItemLoader
+            from item_loader import get_item_loader
 
-                self.item_loader = ItemLoader()
-            except Exception:
-                pass
+            self.item_loader = get_item_loader()
 
         for item_dict in self.inventory:
             row = self.inventory_table.rowCount()
@@ -1607,10 +1699,44 @@ class ReviewExportPage(QWizardPage):
 
         self.export_cff_check = QCheckBox("Export to CFF format")
         self.export_cff_check.setChecked(True)
+        self.export_cff_check.setStyleSheet("""
+            QCheckBox {
+                color: #e0e0e0;
+                background-color: transparent;
+            }
+            QCheckBox::indicator {
+                background-color: #2d2d2d;
+                border: 2px solid #4a4a4a;
+                width: 14px;
+                height: 14px;
+                border-radius: 3px;
+            }
+            QCheckBox::indicator:checked {
+                background-color: #4fc3f7;
+                border: 2px solid #4fc3f7;
+            }
+        """)
         export_layout.addWidget(self.export_cff_check)
 
         self.export_lua_check = QCheckBox("Export Lua behavior scripts")
         self.export_lua_check.setChecked(True)
+        self.export_lua_check.setStyleSheet("""
+            QCheckBox {
+                color: #e0e0e0;
+                background-color: transparent;
+            }
+            QCheckBox::indicator {
+                background-color: #2d2d2d;
+                border: 2px solid #4a4a4a;
+                width: 14px;
+                height: 14px;
+                border-radius: 3px;
+            }
+            QCheckBox::indicator:checked {
+                background-color: #4fc3f7;
+                border: 2px solid #4fc3f7;
+            }
+        """)
         export_layout.addWidget(self.export_lua_check)
 
         export_group.setLayout(export_layout)
